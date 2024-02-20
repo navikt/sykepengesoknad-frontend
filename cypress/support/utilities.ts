@@ -4,11 +4,8 @@ export const setPeriodeFraTil = (fom: number, tom: number, periodeIndex = 0) => 
     // velger sa riktig kalender dato popup button for dag i mnd
 
     cy.get(`[data-cy="periode"]`).eq(periodeIndex).find('.navds-date__field-button').eq(0).click()
-    cy.get('.rdp-day').contains(fom.toString()).click()
-    cy.get(`[data-cy="periode"]`).eq(periodeIndex).find('.navds-date__field-button').eq(0).click() // klikk igjen for å lukke
-
-    cy.get(`[data-cy="periode"]`).eq(periodeIndex).find('.navds-date__field-button').eq(1).click()
-    cy.get('.rdp-day').contains(tom.toString()).click()
+    cy.get(`[data-cy="periode"]`).eq(periodeIndex).find('.rdp-cell').contains(fom.toString()).click()
+    cy.get(`[data-cy="periode"]`).eq(periodeIndex).find('.rdp-cell').contains(tom.toString()).click()
 }
 
 export function svarFritekst(name: string, verdi: string) {

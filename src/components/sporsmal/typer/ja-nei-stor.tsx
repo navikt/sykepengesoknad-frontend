@@ -134,7 +134,7 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
                 )}
             </div>
 
-            <div aria-live="assertive">
+            <div>
                 <AnimateOnMount
                     mounted={watchJaNei === sporsmal.kriterieForVisningAvUndersporsmal}
                     enter="undersporsmal--vis"
