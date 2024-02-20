@@ -12,9 +12,6 @@ describe('Tester korrigering av ferie', () => {
         cy.visit('/syk/sykepengesoknad/soknader/5b769c04-e171-47c9-b79b-23ab8fce331e')
         svarCheckboxPanel()
         klikkGaVidere()
-        cy.contains('Fravær før sykmeldingen')
-        svarNeiHovedsporsmal()
-        klikkGaVidere()
         cy.contains('Tilbake i fullt arbeid')
         svarNeiHovedsporsmal()
         klikkGaVidere()
@@ -63,10 +60,6 @@ describe('Tester korrigering av ferie', () => {
         cy.contains(
             'Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene jeg gir ikke er riktige eller fullstendige. Jeg vet også at NAV kan holde igjen eller kreve tilbake penger, og at å gi feil opplysninger kan være straffbart.',
         ).click()
-        klikkGaVidere()
-        cy.contains('Fravær før sykmeldingen')
-
-        svarNeiHovedsporsmal()
         klikkGaVidere()
         cy.contains('Tilbake i fullt arbeid')
 

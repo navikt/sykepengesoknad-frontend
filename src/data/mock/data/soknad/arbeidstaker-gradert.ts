@@ -66,32 +66,6 @@ export const arbeidstakerGradert: RSSoknad = {
             undersporsmal: [],
         },
         {
-            id: '687296',
-            tag: 'FRAVAR_FOR_SYKMELDINGEN',
-            sporsmalstekst: 'Var du syk og borte fra jobb før du ble sykmeldt, i perioden 16. - 31. mars 2020?',
-            undertekst: null,
-            svartype: 'JA_NEI',
-            min: null,
-            max: null,
-            kriterieForVisningAvUndersporsmal: 'JA',
-            svar: [],
-            undersporsmal: [
-                {
-                    id: '687299',
-                    tag: 'FRAVAR_FOR_SYKMELDINGEN_NAR',
-                    sporsmalstekst:
-                        'Hvilke dager var du syk og borte fra jobb, før du ble sykmeldt? Du trenger bare oppgi dager før 1. april 2020.',
-                    undertekst: null,
-                    svartype: 'PERIODER',
-                    min: '2019-10-01',
-                    max: '2020-03-31',
-                    kriterieForVisningAvUndersporsmal: null,
-                    svar: [],
-                    undersporsmal: [],
-                },
-            ],
-        },
-        {
             id: '687302',
             tag: 'TILBAKE_I_ARBEID',
             sporsmalstekst:
