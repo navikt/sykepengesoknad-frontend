@@ -82,15 +82,15 @@ describe('Tester feilmeldinger', () => {
     })
 
     it('JA_NEI ingen valg', () => {
-        gaTilSoknad(arbeidstakerGradert, '3')
+        gaTilSoknad(arbeidstakerGradert, '2')
         gaVidere()
 
         feilmeldingHandtering(
             'Du må velge et alternativ',
             'Du må oppgi om du var tilbake i arbeid før friskmeldingsperioden utløp',
-            arbeidstakerGradert.sporsmal[2].id + '_0',
+            arbeidstakerGradert.sporsmal[1].id + '_0',
         )
-        cy.focused().should('have.attr', 'name', arbeidstakerGradert.sporsmal[2].id).click()
+        cy.focused().should('have.attr', 'name', arbeidstakerGradert.sporsmal[1].id).click()
 
         ingenFeilmeldinger()
     })
@@ -100,7 +100,7 @@ describe('Tester feilmeldinger', () => {
         feilmeldingHandtering(
             'Datoen følger ikke formatet dd.mm.åååå',
             'Datoen følger ikke formatet dd.mm.åååå',
-            arbeidstakerGradert.sporsmal[2].undersporsmal[0].id,
+            arbeidstakerGradert.sporsmal[1].undersporsmal[0].id,
         )
     })
 
@@ -110,7 +110,7 @@ describe('Tester feilmeldinger', () => {
         feilmeldingHandtering(
             'Datoen kan ikke være før 01.04.2020',
             'Datoen kan ikke være før 01.04.2020',
-            arbeidstakerGradert.sporsmal[2].undersporsmal[0].id,
+            arbeidstakerGradert.sporsmal[1].undersporsmal[0].id,
         )
     })
 
@@ -121,7 +121,7 @@ describe('Tester feilmeldinger', () => {
         feilmeldingHandtering(
             'Datoen kan ikke være etter 24.04.2020',
             'Datoen kan ikke være etter 24.04.2020',
-            arbeidstakerGradert.sporsmal[2].undersporsmal[0].id,
+            arbeidstakerGradert.sporsmal[1].undersporsmal[0].id,
         )
     })
 
@@ -132,7 +132,7 @@ describe('Tester feilmeldinger', () => {
         feilmeldingHandtering(
             'Datoen følger ikke formatet dd.mm.åååå',
             'Datoen følger ikke formatet dd.mm.åååå',
-            arbeidstakerGradert.sporsmal[2].undersporsmal[0].id,
+            arbeidstakerGradert.sporsmal[1].undersporsmal[0].id,
         )
     })
 
@@ -143,19 +143,19 @@ describe('Tester feilmeldinger', () => {
         feilmeldingHandtering(
             'Datoen følger ikke formatet dd.mm.åååå',
             'Datoen følger ikke formatet dd.mm.åååå',
-            arbeidstakerGradert.sporsmal[2].undersporsmal[0].id,
+            arbeidstakerGradert.sporsmal[1].undersporsmal[0].id,
         )
     })
 
     it('PERIODER ingen fom', () => {
-        gaTilSoknad(arbeidstakerGradert, '4')
+        gaTilSoknad(arbeidstakerGradert, '3')
         cy.get('input[value=JA]').click()
 
         gaVidere()
         feilmeldingHandtering(
             'Du må oppgi en fra og med dato i formatet dd.mm.åååå',
             'Du må oppgi en fra og med dato i formatet dd.mm.åååå',
-            arbeidstakerGradert.sporsmal[3].undersporsmal[0].id + '_0_fom',
+            arbeidstakerGradert.sporsmal[2].undersporsmal[0].id + '_0_fom',
         )
     })
 
@@ -167,7 +167,7 @@ describe('Tester feilmeldinger', () => {
         feilmeldingHandtering(
             'Du må oppgi en til og med dato i formatet dd.mm.åååå',
             'Du må oppgi en til og med dato i formatet dd.mm.åååå',
-            arbeidstakerGradert.sporsmal[3].undersporsmal[0].id + '_0_tom',
+            arbeidstakerGradert.sporsmal[2].undersporsmal[0].id + '_0_tom',
         )
     })
 
@@ -180,7 +180,7 @@ describe('Tester feilmeldinger', () => {
         feilmeldingHandtering(
             'Fra og med kan ikke være før 01.04.2020',
             'Fra og med kan ikke være før 01.04.2020',
-            arbeidstakerGradert.sporsmal[3].undersporsmal[0].id + '_0_fom',
+            arbeidstakerGradert.sporsmal[2].undersporsmal[0].id + '_0_fom',
         )
     })
 
@@ -193,7 +193,7 @@ describe('Tester feilmeldinger', () => {
         feilmeldingHandtering(
             'Til og med kan ikke være etter 24.04.2020',
             'Til og med kan ikke være etter 24.04.2020',
-            arbeidstakerGradert.sporsmal[3].undersporsmal[0].id + '_0_tom',
+            arbeidstakerGradert.sporsmal[2].undersporsmal[0].id + '_0_tom',
         )
     })
 
@@ -206,7 +206,7 @@ describe('Tester feilmeldinger', () => {
         feilmeldingHandtering(
             'Du må oppgi en til og med dato i formatet dd.mm.åååå',
             'Du må oppgi en til og med dato i formatet dd.mm.åååå',
-            arbeidstakerGradert.sporsmal[3].undersporsmal[0].id + '_0_tom',
+            arbeidstakerGradert.sporsmal[2].undersporsmal[0].id + '_0_tom',
         )
     })
 
@@ -219,7 +219,7 @@ describe('Tester feilmeldinger', () => {
         feilmeldingHandtering(
             'Til og med må være etter fra og med',
             'Til og med må være etter fra og med',
-            arbeidstakerGradert.sporsmal[3].undersporsmal[0].id + '_0_tom',
+            arbeidstakerGradert.sporsmal[2].undersporsmal[0].id + '_0_tom',
         )
     })
 
@@ -233,7 +233,7 @@ describe('Tester feilmeldinger', () => {
         feilmeldingHandtering(
             'Du må oppgi en fra og med dato i formatet dd.mm.åååå',
             'Du må oppgi en fra og med dato i formatet dd.mm.åååå',
-            arbeidstakerGradert.sporsmal[3].undersporsmal[0].id + '_1_fom',
+            arbeidstakerGradert.sporsmal[2].undersporsmal[0].id + '_1_fom',
         )
     })
 
@@ -248,7 +248,7 @@ describe('Tester feilmeldinger', () => {
         feilmeldingHandtering(
             'Du kan ikke legge inn perioder som overlapper med hverandre',
             'Du kan ikke legge inn perioder som overlapper med hverandre',
-            arbeidstakerGradert.sporsmal[3].undersporsmal[0].id + '_1_tom',
+            arbeidstakerGradert.sporsmal[2].undersporsmal[0].id + '_1_tom',
         )
     })
 
@@ -259,16 +259,16 @@ describe('Tester feilmeldinger', () => {
     })
 
     it('TALL ingen valg', () => {
-        gaTilSoknad(arbeidstakerGradert, '6')
+        gaTilSoknad(arbeidstakerGradert, '5')
         cy.get('input[value=JA]').click()
         cy.get('.undersporsmal input[value=Prosent]').click()
-        cy.get(`input[name=${arbeidstakerGradert.sporsmal[5].undersporsmal[0].id}]`).type('37.5')
+        cy.get(`input[name=${arbeidstakerGradert.sporsmal[4].undersporsmal[0].id}]`).type('37.5')
         gaVidere()
 
         feilmeldingHandteringMedLokalFeilmelding(
             'Du må oppgi en verdi',
             'Du må svare på hvor mye du jobbet totalt',
-            arbeidstakerGradert.sporsmal[5].undersporsmal[1].undersporsmal[0].undersporsmal[0].id,
+            arbeidstakerGradert.sporsmal[4].undersporsmal[1].undersporsmal[0].undersporsmal[0].id,
         )
     })
 
@@ -278,7 +278,7 @@ describe('Tester feilmeldinger', () => {
         feilmeldingHandteringMedLokalFeilmelding(
             'Må være minimum 51',
             'Vennligst fyll ut et tall mellom 51 og 99',
-            arbeidstakerGradert.sporsmal[5].undersporsmal[1].undersporsmal[0].undersporsmal[0].id,
+            arbeidstakerGradert.sporsmal[4].undersporsmal[1].undersporsmal[0].undersporsmal[0].id,
         )
     })
 
@@ -289,20 +289,20 @@ describe('Tester feilmeldinger', () => {
         feilmeldingHandteringMedLokalFeilmelding(
             'Må være maksimum 99',
             'Vennligst fyll ut et tall mellom 51 og 99',
-            arbeidstakerGradert.sporsmal[5].undersporsmal[1].undersporsmal[0].undersporsmal[0].id,
+            arbeidstakerGradert.sporsmal[4].undersporsmal[1].undersporsmal[0].undersporsmal[0].id,
         )
     })
 
     it('TALL grad mindre enn sykmeldingsgrad', () => {
         cy.get('.undersporsmal input[value=Timer]').click()
         cy.get(
-            `input[name=${arbeidstakerGradert.sporsmal[5].undersporsmal[1].undersporsmal[1].undersporsmal[0].id}]`,
+            `input[name=${arbeidstakerGradert.sporsmal[4].undersporsmal[1].undersporsmal[1].undersporsmal[0].id}]`,
         ).type('1')
         gaVidere()
         feilmeldingHandteringMedLokalFeilmelding(
             'Timene utgjør mindre enn 50 %.',
             'Antall timer du skrev inn, betyr at du har jobbet 2 % av det du gjør når du er frisk. Du må enten svare nei på øverste spørsmålet eller endre antall timer totalt.',
-            arbeidstakerGradert.sporsmal[5].undersporsmal[1].undersporsmal[1].undersporsmal[0].id,
+            arbeidstakerGradert.sporsmal[4].undersporsmal[1].undersporsmal[1].undersporsmal[0].id,
         )
     })
 
@@ -313,13 +313,13 @@ describe('Tester feilmeldinger', () => {
     })
 
     it('CHECKBOX_GRUPPE ingen valgt', () => {
-        gaTilSoknad(arbeidstakerGradert, '9')
+        gaTilSoknad(arbeidstakerGradert, '8')
         cy.get('input[value=JA]').click()
         gaVidere()
         feilmeldingHandtering(
             'Du må velge minst et alternativ',
             'Du må oppgi hvilke inntektskilder du har',
-            arbeidstakerGradert.sporsmal[8].undersporsmal[0].undersporsmal[0].id,
+            arbeidstakerGradert.sporsmal[7].undersporsmal[0].undersporsmal[0].id,
         )
     })
 

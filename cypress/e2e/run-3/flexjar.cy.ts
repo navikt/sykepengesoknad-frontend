@@ -29,9 +29,6 @@ describe('Tester flexjar', () => {
         heading('Hjelp oss med å gjøre søknaden bedre').should('not.exist')
 
         klikkGaVidere()
-        svarNeiHovedsporsmal()
-        heading('Hjelp oss med å gjøre søknaden bedre').should('exist')
-        klikkGaVidere()
     })
 
     it('Test å gi feedback', function () {

@@ -18,7 +18,6 @@ describe('Tester ettersending og korrigering', () => {
         klikkGaVidere()
 
         neiOgVidere([
-            'Fravær før sykmeldingen',
             'Tilbake i fullt arbeid',
             'Ferie',
             'Permisjon',
@@ -82,7 +81,6 @@ describe('Tester ettersending og korrigering', () => {
         cy.get('.navds-checkbox__input[type=checkbox]').should('be.checked')
         klikkGaVidere()
 
-        klikkGaVidere()
         klikkGaVidere()
         klikkGaVidere()
         klikkGaVidere()

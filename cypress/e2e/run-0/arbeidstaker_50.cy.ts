@@ -37,21 +37,8 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
         cy.contains('Gå videre').click()
     })
 
-    it('Søknad FRAVAR FOR SYKMELDINGEN', function () {
-        cy.url().should('include', `${soknad.id}/2`)
-
-        // Test spørsmål
-        cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click()
-
-        cy.contains(
-            'Hvilke dager var du syk og borte fra jobb, før du ble sykmeldt? Du trenger bare oppgi dager før 1. april 2020.',
-        )
-        setPeriodeFraTil(11, 12)
-        cy.contains('Gå videre').click()
-    })
-
     it('Søknad TILBAKE_I_ARBEID', function () {
-        cy.url().should('include', `${soknad.id}/3`)
+        cy.url().should('include', `${soknad.id}/2`)
 
         // Test spørsmål
         cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click()
@@ -63,7 +50,7 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
     })
 
     it('Søknad FERIE_V2', function () {
-        cy.url().should('include', `${soknad.id}/4`)
+        cy.url().should('include', `${soknad.id}/3`)
 
         // Test spørsmål
         cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click()
@@ -75,7 +62,7 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
     })
 
     it('Søknad PERMISJON_V2', function () {
-        cy.url().should('include', `${soknad.id}/5`)
+        cy.url().should('include', `${soknad.id}/4`)
 
         // Test spørsmål
         cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click()
@@ -87,7 +74,7 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
     })
 
     it('Søknad JOBBET_DU_GRADERT', function () {
-        cy.url().should('include', `${soknad.id}/6`)
+        cy.url().should('include', `${soknad.id}/5`)
 
         // Test spørsmål
         cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click()
@@ -129,7 +116,7 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
     })
 
     it('Søknad ARBEID_UTENFOR_NORGE', function () {
-        cy.url().should('include', `${soknad.id}/7`)
+        cy.url().should('include', `${soknad.id}/6`)
 
         // Test spørsmål
         cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click()
@@ -139,12 +126,12 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
     })
 
     it('Kjente inntektskilder', function () {
-        cy.url().should('include', `${soknad.id}/8`)
+        cy.url().should('include', `${soknad.id}/7`)
         besvarKjenteInntektskilder()
     })
 
     it('Søknad ANDRE_INNTEKTSKILDER_V2', function () {
-        cy.url().should('include', `${soknad.id}/9`)
+        cy.url().should('include', `${soknad.id}/8`)
 
         cy.contains('Har du andre inntektskilder enn nevnt over?')
 
@@ -160,7 +147,7 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
     })
 
     it('Søknad UTLAND_V2', function () {
-        cy.url().should('include', `${soknad.id}/10`)
+        cy.url().should('include', `${soknad.id}/9`)
 
         // Test spørsmål
         cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click()
@@ -171,7 +158,7 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
     })
 
     it('Søknad ANSVARSERKLARING ', function () {
-        cy.url().should('include', `${soknad.id}/11`)
+        cy.url().should('include', `${soknad.id}/10`)
         cy.contains('Til slutt')
         cy.contains(
             'Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.',
