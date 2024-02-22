@@ -203,6 +203,7 @@ const OpplastingForm = ({ valgtSoknad, setOpenModal, openModal }: OpplastingFrom
 
                 <div className="mt-8 flex gap-4">
                     <Button variant="primary" type="button" onClick={onSubmit} loading={laster}>
+                    <Button variant="primary" type="button" onClick={onSubmit} loading={laster} autoFocus >
                         {tekst('opplasting_modal.bekreft')}
                     </Button>
 
