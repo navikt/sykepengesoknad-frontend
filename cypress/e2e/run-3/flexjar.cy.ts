@@ -10,6 +10,7 @@ describe('Tester flexjar', () => {
     const soknad = arbeidstakerGradert
 
     before(() => {
+        cy.clearCookies()
         cy.visit('/syk/sykepengesoknad')
     })
 
