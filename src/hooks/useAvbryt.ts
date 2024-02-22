@@ -40,8 +40,8 @@ export function useAvbryt() {
                 variables.valgtSoknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND ||
                 variables.valgtSoknad.status === RSSoknadstatus.UTKAST_TIL_KORRIGERING
             ) {
+                await queryClient.invalidateQueries(['soknad', variables.valgtSoknad.id], { refetchType: 'none' })
                 await queryClient.invalidateQueries(['soknader'])
-                queryClient.removeQueries({ queryKey: ['soknad', variables.valgtSoknad.id] })
                 await router.push('/')
             } else {
                 await queryClient.invalidateQueries(['soknad', variables.valgtSoknad.id])

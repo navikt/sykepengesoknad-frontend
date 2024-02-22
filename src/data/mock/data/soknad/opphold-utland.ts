@@ -1,5 +1,6 @@
 import { RSSoknad } from '../../../../types/rs-types/rs-soknad'
 import { nyVærKlarOverAt } from '../sporsmal/vaer-klar-over-at'
+import { deepcopyMedNyId } from '../../deepcopyMedNyId'
 
 export const oppholdUtland: RSSoknad = {
     id: 'b9d67b0d-b1f8-44a5-bcbd-6010b60b90ce',
@@ -87,3 +88,5 @@ export const oppholdUtland: RSSoknad = {
     opprettetAvInntektsmelding: false,
     klippet: false,
 }
+
+export const oppholdUtland2: RSSoknad = deepcopyMedNyId(oppholdUtland, 'ed9a449d-bf3d-40ad-81bf-7c8bcada6f32')

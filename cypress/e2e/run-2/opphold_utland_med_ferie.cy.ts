@@ -1,8 +1,8 @@
 import { klikkGaVidere, setPeriodeFraTil } from '../../support/utilities'
-import { oppholdUtland } from '../../../src/data/mock/data/soknad/opphold-utland'
+import { oppholdUtland2 } from '../../../src/data/mock/data/soknad/opphold-utland'
 
 describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
-    const soknad = oppholdUtland
+    const soknad = oppholdUtland2
 
     before(() => {
         cy.visit('/syk/sykepengesoknad?testperson=bare-utland')
@@ -10,8 +10,11 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
 
     it('Laster startside', function () {
         cy.get('.navds-heading--large').should('be.visible').and('have.text', 'Søknader')
-        cy.get(`a[href*=${soknad.id}]`).should('include.text', 'Søknad om å beholde sykepenger utenfor EØS')
-        cy.get(`a[href*=${soknad.id}]`).click()
+        cy.get('[data-cy="Nye søknader"]')
+            .children('a')
+            .get(`a[href*=${soknad.id}]`)
+            .should('include.text', 'Søknad om å beholde sykepenger utenfor EØS')
+            .click()
     })
 
     it('PERIODEUTLAND - steg 1', function () {
@@ -32,7 +35,8 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
         cy.findAllByRole('combobox', { name: 'Hvilket land skal du reise til?' }).type('Sør')
         cy.findByRole('option', { name: 'Søre franske territorier' }).click()
 
-        cy.get('.navds-combobox__button-toggle-list').click()
+        cy.get('.navds-combobox__button-toggle-list').click({ force: true })
+        cy.get('.navds-combobox__button-toggle-list').should('have.attr', 'aria-expanded', 'false')
         klikkGaVidere()
     })
 
