@@ -1,6 +1,6 @@
 /* eslint-disable cypress/unsafe-to-chain-command */
 import { RSSoknad } from '../../../src/types/rs-types/rs-soknad'
-import { svarCombobox, svarFritekst } from '../../support/utilities'
+import { klikkGaVidere, svarCombobox, svarFritekst } from '../../support/utilities'
 import 'cypress-real-events'
 import { arbeidstakerGradert } from '../../../src/data/mock/data/soknad/arbeidstaker-gradert'
 
@@ -67,9 +67,14 @@ describe('Tester feilmeldinger', () => {
         cy.get('[data-cy="perioder"]').find('.navds-text-field__input').eq(index).type(datestring)
     }
 
+    before(() => {
+        cy.clearCookies()
+    })
+
     it('CHECKBOX_PANEL ingen valg', () => {
         gaTilSoknad(arbeidstakerGradert, '1')
-        gaVidere()
+        cy.get('[data-cy="bekreftCheckboksPanel"]').should('have.attr', 'value', 'false')
+        klikkGaVidere(true)
 
         feilmeldingHandtering(
             'Du må bekrefte dette',
