@@ -26,6 +26,7 @@ import { behandlingsdager } from '../soknad/behandlingsdager'
 import { nyttReisetilskudd } from '../soknad/arbeidstaker-reisetilskudd'
 import { gradertReisetilskudd } from '../soknad/arbeidstaker-reisetilskudd-gradert'
 import { fremtidigSoknad } from '../soknad/arbeidstaker-fremtidig'
+import { jsonDeepCopy } from '../../../../utils/json-deep-copy'
 
 import { brukertestSoknad, brukertestSykmelding } from './brukertest'
 
@@ -139,6 +140,18 @@ export const integration: Persona = {
     soknader: soknaderIntegration,
     sykmeldinger: sykmeldinger,
     beskrivelse: 'God mix med søknader som brukes til integrasjons tester',
+}
+
+export function over70(): Persona {
+    const sykmeldingOver70 = jsonDeepCopy(arbeidsledig100Syk)
+    sykmeldingOver70.pasient = {
+        overSyttiAar: true,
+    }
+    return jsonDeepCopy({
+        soknader: [deepcopyMedNyId(arbeidsledig, 'df1371a4-2773-41c2-a895-49f56142496c')],
+        sykmeldinger: [sykmeldingOver70],
+        beskrivelse: 'Person som er over 70',
+    })
 }
 
 export function tilbakedateringer(): Persona {
