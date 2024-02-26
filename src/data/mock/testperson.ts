@@ -19,6 +19,7 @@ import {
     harIkkeKontonummer,
     harKontonummer,
     integration,
+    over70,
     Persona,
     reisetilskuddPerson,
     tilbakedateringer,
@@ -48,6 +49,7 @@ type PersonaKey =
     | 'yrkesskade'
     | 'yrkesskade-v2'
     | 'medlemskap'
+    | 'over-70'
     | 'integrasjon-soknader'
     | 'en-usendt-sykmelding'
     | 'to-usendte-sykmeldinger'
@@ -106,6 +108,7 @@ export function testpersonerGruppert(): PersonaGroup {
         },
 
         ['testing']: {
+            ['over-70']: over70(),
             ['korrigeringsfrist-utlopt']: jsonDeepCopy(korrigeringsfristUtloptPerson),
             ['har-kontonummer']: jsonDeepCopy(harKontonummer),
             ['har-ikke-kontonummer']: jsonDeepCopy(harIkkeKontonummer),

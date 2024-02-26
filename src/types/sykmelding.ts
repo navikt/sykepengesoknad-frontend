@@ -142,6 +142,9 @@ class SykmeldingStatus {
         this.brukerSvar = sykmeldingStatus.brukerSvar
     }
 }
+interface Pasient {
+    overSyttiAar?: boolean
+}
 
 export class Sykmelding {
     id: string
@@ -150,6 +153,7 @@ export class Sykmelding {
     sykmeldingStatus: SykmeldingStatus
     behandletTidspunkt: Date
     syketilfelleStartDato: Date
+    pasient?: Pasient
 
     constructor(sykmelding: any) {
         this.id = sykmelding.id
@@ -158,6 +162,7 @@ export class Sykmelding {
         this.sykmeldingStatus = new SykmeldingStatus(sykmelding.sykmeldingStatus)
         this.behandletTidspunkt = dayjsToDate(sykmelding.behandletTidspunkt)!
         this.syketilfelleStartDato = dayjsToDate(sykmelding.syketilfelleStartDato)!
+        this.pasient = sykmelding.pasient
     }
 }
 

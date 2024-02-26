@@ -22,6 +22,7 @@ import { useToggle } from '../../toggles/context'
 import { SkeletonSporsmalForm } from '../sporsmal/sporsmal-form/skeleton-sporsmal-form'
 import { SlikBehandlerNavPersonopplysningene } from '../soknad-intro/slik-behandler-nav-personopplysningene'
 import { FeilStateView } from '../feil/refresh-hvis-feil-state'
+import { Over70Aar } from '../soknad-intro/over-70'
 
 import { urlTilSoknad } from './soknad-link'
 import { SporsmalTittel } from './sporsmal-tittel'
@@ -29,8 +30,17 @@ import { SoknadHeader } from './soknad-header'
 
 export const Soknaden = () => {
     const router = useRouter()
-    const { erUtenlandssoknad, stegId, stegNo, valgtSoknad, soknader, sykmeldinger, spmIndex, valgtSoknadError } =
-        useSoknadMedDetaljer()
+    const {
+        erUtenlandssoknad,
+        stegId,
+        stegNo,
+        valgtSoknad,
+        valgtSykmelding,
+        soknader,
+        sykmeldinger,
+        spmIndex,
+        valgtSoknadError,
+    } = useSoknadMedDetaljer()
 
     useUpdateBreadcrumbs(() => [{ ...soknadBreadcrumb, handleInApp: true }], [])
 
@@ -93,6 +103,7 @@ export const Soknaden = () => {
 
             {!erForstesiden && <Fremdriftsbar />}
             {erForstesiden && <ViktigInformasjon />}
+            {erForstesiden && valgtSykmelding?.pasient?.overSyttiAar && <Over70Aar />}
             {erForstesiden && erGradertReisetilskuddsoknad && <SoknadMedToDeler />}
             {erForstesiden && valgtSoknad?.opprettetAvInntektsmelding && <EgenmeldingsdagerArbeidsgiver />}
             {erForstesiden && <Opplysninger ekspandert={true} />}
