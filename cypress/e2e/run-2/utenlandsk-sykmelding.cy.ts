@@ -1,11 +1,9 @@
 import {
-    klikkGaVidere,
     neiOgVidere,
     svarCheckboxPanel,
     svarCombobox,
     svarFritekst,
     svarJaHovedsporsmal,
-    svarRadioGruppe,
     velgDato,
 } from '../../support/utilities'
 import 'cypress-real-events'
@@ -105,25 +103,11 @@ describe('Tester søknad til utenlandsk sykmelding', () => {
             'Arbeid utenfor Norge',
         ])
 
-        svarRadioGruppe('Har du sluttet hos Ruter før du ble sykmeldt 8. september', 'Nei')
-        svarRadioGruppe('Har du utført noe arbeid ved Ruter i perioden 24. august - 7. september 2022?', 'Ja')
-
-        svarRadioGruppe('Har du sluttet hos Blomsterbutikken før du ble sykmeldt 8. september', 'Nei')
-        svarRadioGruppe(
-            'Har du utført noe arbeid ved Blomsterbutikken i perioden 24. august - 7. september 2022?',
-            'Ja',
-        )
-
-        svarRadioGruppe('Har du sluttet hos Bensinstasjonen før du ble sykmeldt 8. september', 'Nei')
-        svarRadioGruppe('Har du utført noe arbeid ved Bensinstasjonen i perioden 24. august - 7. september 2022?', 'Ja')
-
-        klikkGaVidere()
-
         neiOgVidere(['Andre inntektskilder', 'Opphold i utlandet'])
     })
 
     it('Vær klar over at', function () {
-        cy.url().should('include', `${id}/13`)
+        cy.url().should('include', `${id}/12`)
         cy.contains('Til slutt')
         cy.get('section[aria-label="Oppsummering fra søknaden"] button').click()
         cy.contains('Danmark')

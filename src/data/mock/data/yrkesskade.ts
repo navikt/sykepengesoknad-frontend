@@ -23,7 +23,7 @@ export const yrkesskadePerson: Persona = {
 
 const yrkesskadeSoknad = deepcopyMedNyId(brukertestSoknad, '04247ad5-9c15-4b7d-ae55-f238003db133')
 const sporsmalene: RSSporsmal[] = []
-const splittSted = 9
+const splittSted = 8
 sporsmalene.push(...yrkesskadeSoknad.sporsmal.slice(0, splittSted))
 sporsmalene.push(yrkesskadeV2Sporsmal)
 sporsmalene.push(...yrkesskadeSoknad.sporsmal.slice(splittSted))

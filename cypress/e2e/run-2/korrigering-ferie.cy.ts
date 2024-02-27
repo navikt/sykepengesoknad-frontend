@@ -4,7 +4,6 @@ import {
     svarCheckboxPanel,
     setPeriodeFraTil,
     klikkGaVidere,
-    besvarKjenteInntektskilder,
 } from '../../support/utilities'
 
 describe('Tester korrigering av ferie', () => {
@@ -38,7 +37,6 @@ describe('Tester korrigering av ferie', () => {
         cy.contains('Arbeid utenfor Norge')
         svarNeiHovedsporsmal()
         klikkGaVidere()
-        besvarKjenteInntektskilder()
         cy.contains('Andre inntektskilder')
         cy.contains('Har du andre inntektskilder enn nevnt over?')
         cy.contains('Spørsmålet forklart').click()

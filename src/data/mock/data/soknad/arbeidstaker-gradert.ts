@@ -2,7 +2,6 @@ import { RSSoknad } from '../../../../types/rs-types/rs-soknad'
 import { arbeidstaker50Syk } from '../sykmeldinger'
 import { værKlarOverAt } from '../sporsmal/vaer-klar-over-at'
 import { bekreftOpplysninger } from '../sporsmal/bekreft-opplysninger'
-import { kjenteInntektskilder } from '../sporsmal/kjente-inntektskilder'
 import { ArbeidsforholdFraInntektskomponenten } from '../../../../types/rs-types/rs-arbeidsforholdfrainntektskomponenten'
 
 const inntektskilderDataFraInntektskomponenten: ArbeidsforholdFraInntektskomponenten[] = [
@@ -243,8 +242,6 @@ export const arbeidstakerGradert: RSSoknad = {
             svar: [],
             undersporsmal: [],
         },
-        kjenteInntektskilder(inntektskilderDataFraInntektskomponenten.map((a) => a.navn)),
-
         {
             id: 'ed62a3b3-4203-3b61-a684-2300bea2ffac',
             tag: 'ANDRE_INNTEKTSKILDER_V2',
