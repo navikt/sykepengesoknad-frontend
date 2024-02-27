@@ -1,4 +1,4 @@
-import { besvarKjenteInntektskilder, klikkGaVidere, neiOgVidere, svarCheckboxPanel } from '../../support/utilities'
+import { klikkGaVidere, neiOgVidere, svarCheckboxPanel } from '../../support/utilities'
 import { arbeidstakerGradert } from '../../../src/data/mock/data/soknad/arbeidstaker-gradert'
 
 describe('Tester ettersending og korrigering', () => {
@@ -24,7 +24,6 @@ describe('Tester ettersending og korrigering', () => {
             'Jobb underveis i sykefraværet',
             'Arbeid utenfor Norge',
         ])
-        besvarKjenteInntektskilder()
         neiOgVidere(['Andre inntektskilder', 'Opphold i utlandet'])
 
         cy.contains('Til slutt')

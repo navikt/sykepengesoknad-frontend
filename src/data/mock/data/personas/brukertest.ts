@@ -5,7 +5,6 @@ import { Sykmelding } from '../../../../types/sykmelding'
 import { tilLesbarPeriodeMedArstall } from '../../../../utils/dato-utils'
 import { nyVærKlarOverAt } from '../sporsmal/vaer-klar-over-at'
 import { ArbeidsforholdFraInntektskomponenten } from '../../../../types/rs-types/rs-arbeidsforholdfrainntektskomponenten'
-import { kjenteInntektskilder } from '../sporsmal/kjente-inntektskilder'
 
 import { Persona } from './personas'
 
@@ -387,7 +386,6 @@ export const brukertestSoknad: RSSoknad = {
             svar: [],
             undersporsmal: [],
         },
-        kjenteInntektskilder(inntektskilderDataFraInntektskomponenten.map((a) => a.navn)),
         {
             id: 'ed62a3b3-4203-3b61-a684-2300bea2ffac',
             tag: 'ANDRE_INNTEKTSKILDER_V2',
