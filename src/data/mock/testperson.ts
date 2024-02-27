@@ -34,6 +34,7 @@ import { selvstendigNaringsdrivende, selvstendigNaringsdrivendeSendt } from './d
 import { korrigeringsfristUtloptPerson } from './data/personas/korrigeringsfrist-utlopt'
 import { medlemskapPerson } from './data/personas/medlemskap'
 import { fiskePerson } from './data/personas/fisker'
+import { kjenteInntektskilderPerson } from './data/personas/kjente-inntektskilder'
 
 type PersonaKey =
     | 'uten-data'
@@ -66,6 +67,7 @@ type PersonaKey =
     | 'http-404-ved-put-soknad'
     | 'http-500-ved-send-soknad'
     | 'korrigeringsfrist-utlopt'
+    | 'kjente-inntektskilder'
     | 'cummulative-layout-shift'
     | 'tilbakedateringer'
     | 'selvstendig-naringsdrivende-sendt'
@@ -99,6 +101,7 @@ export function testpersonerGruppert(): PersonaGroup {
         },
         ['soknad-sporsmal']: {
             ['medlemskap']: jsonDeepCopy(medlemskapPerson),
+            ['kjente-inntektskilder']: jsonDeepCopy(kjenteInntektskilderPerson),
             ['yrkesskade']: jsonDeepCopy(yrkesskadePerson),
             ['yrkesskade-v2']: jsonDeepCopy(yrkesskadeV2Person),
             ['utenlandsk-sykmelding']: jsonDeepCopy(utenlandskSykmelding),

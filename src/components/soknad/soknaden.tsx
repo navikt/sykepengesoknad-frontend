@@ -113,9 +113,7 @@ export const Soknaden = () => {
             {sporsmal && <SporsmalForm sporsmal={sporsmal} key={sporsmal.id} />}
             {!sporsmal && <SkeletonSporsmalForm />}
             {erForstesiden && !erUtenlandssoknad && <SlikBehandlerNavPersonopplysningene />}
-            {(flexjarToggle.enabled ||
-                sporsmal?.tag == 'KJENTE_INNTEKTSKILDER' ||
-                sporsmal?.tag == 'INNTEKTSOPPLYSNINGER_DRIFT_VIRKSOMHETEN') && (
+            {(flexjarToggle.enabled || sporsmal?.tag == 'INNTEKTSOPPLYSNINGER_DRIFT_VIRKSOMHETEN') && (
                 <FlexjarSporsmal soknad={valgtSoknad} sporsmal={sporsmal} steg={stegNo} />
             )}
         </>

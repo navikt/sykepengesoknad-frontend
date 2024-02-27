@@ -88,7 +88,6 @@ describe('Tester ettersending og korrigering', () => {
         klikkGaVidere()
         klikkGaVidere()
         klikkGaVidere()
-        klikkGaVidere()
         cy.get('.navds-checkbox__label').click()
         cy.contains('Send endringene').click()
 
