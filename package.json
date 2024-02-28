@@ -12,7 +12,7 @@
         "@navikt/ds-react": "^5.15.1",
         "@navikt/ds-tailwind": "^5.15.1",
         "@navikt/ds-tokens": "^5.15.1",
-        "@navikt/nav-dekoratoren-moduler": "^2.1.5",
+        "@navikt/nav-dekoratoren-moduler": "^2.1.6",
         "@navikt/next-api-proxy": "^3.4.0",
         "@navikt/next-logger": "^1.21.0",
         "@tanstack/react-query": "^4.33.0",
