@@ -6,7 +6,6 @@ const OpplastingTekster = {
     'opplasting_modal.tittel': 'Beløp',
     'opplasting_modal.nytt-utlegg.tittel': 'Legg til reiseutgift',
     'opplasting_modal.endre-utlegg.tittel': 'Endre reiseutgift',
-    'opplasting_modal.belop.feilmelding': 'Du må skrive inn beløp',
     'opplasting_modal.dato': 'Dato for utgift',
     'opplasting_modal.dagensdato.feilmelding': 'Du må velge dato før dagens dato',
     'opplasting_modal.filopplasting.feilmelding': 'Du må laste opp kvittering',
