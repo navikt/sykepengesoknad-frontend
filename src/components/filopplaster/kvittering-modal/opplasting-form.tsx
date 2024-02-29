@@ -61,6 +61,14 @@ const OpplastingForm = ({ valgtSoknad, setOpenModal, openModal }: OpplastingFrom
             setFeilmelding(undefined)
 
             const valid = await methods.trigger()
+
+            if (!valgtFil) {
+                methods.setError('fil_input', {
+                    type: 'manual',
+                    message: tekst('opplasting_modal.filopplasting.feilmelding'),
+                })
+                return
+            }
             if (!valid) return
 
             const opplastingResponse: OpplastetKvittering = await lastOppKvittering()
