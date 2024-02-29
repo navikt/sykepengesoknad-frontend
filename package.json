@@ -14,7 +14,7 @@
         "@navikt/ds-tokens": "^5.15.1",
         "@navikt/nav-dekoratoren-moduler": "^2.1.6",
         "@navikt/next-api-proxy": "^3.4.0",
-        "@navikt/next-logger": "^1.21.0",
+        "@navikt/next-logger": "^1.23.0",
         "@tanstack/react-query": "^4.33.0",
         "@tanstack/react-query-devtools": "^4.36.1",
         "@types/smoothscroll-polyfill": "^0.3.1",
