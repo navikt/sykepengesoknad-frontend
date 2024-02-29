@@ -61,13 +61,8 @@ const DragAndDrop = ({ valgtFil, setValgtFil }: DragAndDropProps) => {
                     }}
                     {...register('fil_input', {
                         validate: {
-                            fil_valgt: () => {
-                                if (!valgtFil) {
-                                    return tekst('opplasting_modal.filopplasting.feilmelding')
-                                }
-                            },
                             fil_type: () => {
-                                if (valgtFil && !tillatteFiltyper.split(',').includes(valgtFil.type)) {
+                                if (valgtFil !== undefined && !tillatteFiltyper.split(',').includes(valgtFil.type)) {
                                     return getLedetekst(tekst('drag_and_drop.filtype'), {
                                         '%FILNAVN%': valgtFil.name,
                                         '%TILLATTEFILTYPER%': formattertFiltyper,
@@ -75,7 +70,7 @@ const DragAndDrop = ({ valgtFil, setValgtFil }: DragAndDropProps) => {
                                 }
                             },
                             fil_storrelse: () => {
-                                if (valgtFil && valgtFil.size > maxFilstørrelse) {
+                                if (valgtFil !== undefined && valgtFil.size > maxFilstørrelse) {
                                     return getLedetekst(tekst('drag_and_drop.maks'), {
                                         '%FILNAVN%': valgtFil.name,
                                         '%MAKSSTOR%': maks,
