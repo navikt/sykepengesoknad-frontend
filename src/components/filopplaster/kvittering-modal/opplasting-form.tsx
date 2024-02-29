@@ -2,7 +2,7 @@ import { Alert, BodyLong, BodyShort, Button, Label, ReadMore, Select, TextField 
 import { logger } from '@navikt/next-logger'
 import dayjs from 'dayjs'
 import React, { useEffect, useState } from 'react'
-import { FormProvider, useForm } from 'react-hook-form'
+import { Controller, FormProvider, useForm } from 'react-hook-form'
 import { useQueryClient } from '@tanstack/react-query'
 
 import { RSSvar } from '../../../types/rs-types/rs-svar'
@@ -161,34 +161,43 @@ const OpplastingForm = ({ valgtSoknad, setOpenModal, openModal }: OpplastingFrom
                     ))}
                 </Select>
 
-                <TextField
-                    className="mt-4"
-                    label={tekst('opplasting_modal.tittel')}
-                    description={tekst('soknad.undertekst.OFFENTLIG_TRANSPORT_BELOP')}
-                    type="number"
-                    id="belop_input"
-                    {...methods.register('belop_input', {
-                        required: tekst('opplasting_modal.belop.feilmelding'),
-                        min: {
-                            value: 0,
-                            message: 'Beløp kan ikke være negativt',
-                        },
-                        max: {
-                            value: 10000,
-                            message: 'Beløp kan ikke være større enn 10 000',
-                        },
+                <Controller
+                    name="belop_input"
+                    control={methods.control}
+                    rules={{
                         validate: (val) => {
-                            let belop = val.toString()
-                            belop = Number(belop.replace(',', '.').replace(/ /g, ''))
-                            belop = Math.round(belop * 100) / 100
-                            methods.setValue('belop_input', belop)
+                            if (!val) return 'Du må skrive inn beløp'
+                            if (val < 0) return 'Beløp kan ikke være negativt'
+                            if (val > 10000) return 'Beløp kan ikke være større enn 10 000'
                             return true
                         },
-                    })}
-                    error={methods.formState.errors['belop_input']?.message?.toString()}
-                    inputMode="decimal"
-                    step={0.01}
-                    autoComplete="off"
+                    }}
+                    render={({ field: { onChange, onBlur, value, ref } }) => (
+                        <TextField
+                            className="mt-4"
+                            label={tekst('opplasting_modal.tittel')}
+                            description={tekst('soknad.undertekst.OFFENTLIG_TRANSPORT_BELOP')}
+                            type="number"
+                            inputMode="decimal"
+                            step={0.01}
+                            autoComplete="off"
+                            name="belop_input"
+                            error={methods.formState.errors['belop_input']?.message?.toString()}
+                            value={value}
+                            onChange={(e) => {
+                                const val = e.target.value?.toString()
+                                if (!val) {
+                                    onChange('')
+                                } else {
+                                    const valNum = Number(val.replace(',', '.').replace(/ /g, ''))
+                                    const valRound = Math.round(valNum * 100) / 100
+                                    onChange(valRound)
+                                }
+                            }}
+                            onBlur={onBlur}
+                            ref={ref}
+                        />
+                    )}
                 />
 
                 <div className="mt-4">
