@@ -101,9 +101,9 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
         })
 
         it('Fyller ut', () => {
-            cy.get('[aria-label="4. januar (mandag)"]').click()
-            cy.get('[aria-label="5. januar (tirsdag)"]').click()
-            cy.get('[aria-label="6. januar (onsdag)"]').click()
+            cy.get('[aria-label="mandag 4"]').click()
+            cy.get('[aria-label="tirsdag 5"]').click()
+            cy.get('[aria-label="onsdag 6"]').click()
 
             cy.get('input[type=radio]#1566446_0').click()
             cy.get('#1566447').type('1000')
@@ -117,10 +117,10 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
             cy.contains('Tilbake').click()
 
             cy.url().should('include', `${nyttReisetilskudd.id}/3`)
-            cy.get('[aria-label="4. januar (mandag)"]').should('have.class', 'rdp-day_selected')
-            cy.get('[aria-label="5. januar (tirsdag)"]').should('have.class', 'rdp-day_selected')
-            cy.get('[aria-label="6. januar (onsdag)"]').should('have.class', 'rdp-day_selected')
-            cy.get('[aria-label="7. januar (torsdag)"]').should('not.have.class', 'rdp-day_selected')
+            cy.get('[aria-label="mandag 4"]').should('have.class', 'rdp-day_selected')
+            cy.get('[aria-label="tirsdag 5"]').should('have.class', 'rdp-day_selected')
+            cy.get('[aria-label="onsdag 6"]').should('have.class', 'rdp-day_selected')
+            cy.get('[aria-label="torsdag 7"]').should('not.have.class', 'rdp-day_selected')
 
             cy.get('#1566447').should('have.value', '1000')
 

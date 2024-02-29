@@ -27,6 +27,7 @@ const BehDager = ({ sporsmal }: SpmProps) => {
                     <>
                         <DatePicker.Standalone
                             {...inputProps}
+                            className="axe-exclude"
                             locale="nb"
                             selected={field.value}
                             mode="multiple"
