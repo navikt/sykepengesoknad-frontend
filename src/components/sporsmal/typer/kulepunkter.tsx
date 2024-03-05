@@ -17,7 +17,6 @@ import BekreftelsespunkterBehandlingsdagerTekster from '../bekreftelsespunkter/b
 import BekreftelsespunkterArbeidsledigTekster from '../bekreftelsespunkter/bekreftelsespunkter-arbeidsledig-tekster'
 import BekreftelsespunkterSelvstendigNaeringsdrivendeTekster from '../bekreftelsespunkter/bekreftelsespunkter-selvstendig-naeringsdrivende-tekster'
 import BekreftelsespunkterOppholdutlandTekster from '../bekreftelsespunkter/bekreftelsespunkter-opphold-utland-tekster'
-import { hentSporsmal } from '../../../utils/soknad-utils'
 import BekreftelsespunkterAnnetArbeidsforholdTekster from '../bekreftelsespunkter/bekreftelsespunkter-annet-arbeidsforhold-tekster'
 
 const Kulepunkter = ({ sporsmal }: SpmProps) => {
@@ -30,11 +29,7 @@ const Kulepunkter = ({ sporsmal }: SpmProps) => {
         [RSSoknadstype.ANNET_ARBEIDSFORHOLD]: Object.values(BekreftelsespunkterAnnetArbeidsforholdTekster),
         [RSSoknadstype.BEHANDLINGSDAGER]: Object.values(BekreftelsespunkterBehandlingsdagerTekster),
         [RSSoknadstype.REISETILSKUDD]: Object.values(BekreftelsespunkterReisetilskuddTekster),
-        [RSSoknadstype.OPPHOLD_UTLAND]: Object.values(
-            BekreftelsespunkterOppholdutlandTekster(
-                hentSporsmal(valgtSoknad!, 'ARBEIDSGIVER')?.svarliste?.svar[0]?.verdi === 'JA',
-            ),
-        ),
+        [RSSoknadstype.OPPHOLD_UTLAND]: Object.values(BekreftelsespunkterOppholdutlandTekster),
         [RSSoknadstype.GRADERT_REISETILSKUDD]: Object.values(BekreftelsespunkterGradertReisetilskuddTekster),
         [RSSoknadstype.SELVSTENDIGE_OG_FRILANSERE]: Object.values(
             BekreftelsespunkterSelvstendigNaeringsdrivendeTekster,

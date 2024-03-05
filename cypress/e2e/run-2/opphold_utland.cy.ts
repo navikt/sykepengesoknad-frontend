@@ -130,7 +130,7 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
             .and('have.attr', 'aria-valuemax', '4')
             .and('have.attr', 'aria-valuetext', '4 av 4 steg')
 
-        cy.contains('Før du reiser ber vi deg bekrefte')
+        cy.contains('Viktig å være klar over:')
         cy.contains(
             'Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.',
         ).click()
