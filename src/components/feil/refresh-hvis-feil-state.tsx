@@ -7,7 +7,8 @@ interface FeilStateProps {
     feilmelding?: number
 }
 export function FeilStateView({ feilmelding }: FeilStateProps) {
-    const visReload = feilmelding !== 404
+    const visReload = feilmelding ? ![404, 403].includes(feilmelding) : true
+
     return (
         <div aria-live="polite">
             <Alert variant="error" className="mt-4">

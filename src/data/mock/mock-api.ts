@@ -219,12 +219,15 @@ export async function mockApi(req: NextApiRequest, res: NextApiResponse) {
         return soknaden.sporsmal.find((spm) => spm.id === sporsmalId)
     }
 
-    function getSoknadOr404(soknadId: string | null) {
-        const soknad = findSoknadById(soknadId)
-        if (!soknad) {
+    function getSoknadEllerFeilmld(soknadId: string | null) {
+        if (soknadId === '5a7d403b-df78-491e-86f0-bf3f25408765') {
             return sendJson({}, 404)
         }
-        if (soknadId === '5a7d403b-df78-491e-86f0-bf3f25408765') {
+        if (soknadId === '3fa85f64-5717-4562-b3fc-2c963f67afa3') {
+            return sendJson({}, 403)
+        }
+        const soknad = findSoknadById(soknadId)
+        if (!soknad) {
             return sendJson({}, 404)
         }
         return soknad
@@ -240,7 +243,7 @@ export async function mockApi(req: NextApiRequest, res: NextApiResponse) {
         },
         [ENDPOINTS.HENT_SYKMELDINGER]: () => sendJson(testperson.sykmeldinger),
         [ENDPOINTS.GET_SOKNAD]: async () => {
-            const soknaden = await getSoknadOr404(soknadId)
+            const soknaden = getSoknadEllerFeilmld(soknadId)
             if (!soknaden) return
             return sendJson(soknaden)
         },
@@ -272,19 +275,19 @@ export async function mockApi(req: NextApiRequest, res: NextApiResponse) {
             return sendJson(soknad, 200)
         },
         [ENDPOINTS.ETTERSEND_TIL_NAV]: async () => {
-            const soknad = await getSoknadOr404(soknadId)
+            const soknad = getSoknadEllerFeilmld(soknadId)
             if (!soknad) return
             soknad.sendtTilNAVDato = dayjs().toJSON()
             return sendJson()
         },
         [ENDPOINTS.ETTERSEND_TIL_ARBEIDSGIVER]: async () => {
-            const soknad = await getSoknadOr404(soknadId)
+            const soknad = getSoknadEllerFeilmld(soknadId)
             if (!soknad) return
             soknad.sendtTilArbeidsgiverDato = dayjs().toJSON()
             return sendJson()
         },
         [ENDPOINTS.AVBRYT_SOKNAD]: async () => {
-            const soknad = await getSoknadOr404(soknadId)
+            const soknad = getSoknadEllerFeilmld(soknadId)
             if (!soknad) return
             if (soknad.soknadstype == 'OPPHOLD_UTLAND' || soknad.status == 'UTKAST_TIL_KORRIGERING') {
                 testperson.soknader.splice(testperson.soknader.indexOf(soknad), 1)
@@ -295,14 +298,14 @@ export async function mockApi(req: NextApiRequest, res: NextApiResponse) {
             return sendJson()
         },
         [ENDPOINTS.GJENAPNE_SOKNAD]: async () => {
-            const soknad = await getSoknadOr404(soknadId)
+            const soknad = getSoknadEllerFeilmld(soknadId)
             if (!soknad) return
             soknad.status = 'NY'
             soknad.avbruttDato = null
             return sendJson()
         },
         [ENDPOINTS.UPDATE_SPORSMAL]: async () => {
-            const soknaden = await getSoknadOr404(soknadId)
+            const soknaden = getSoknadEllerFeilmld(soknadId)
             if (!soknaden) return
             const spm = findSporsmalById(soknaden, sporsmalId)
             if (!spm) {
@@ -366,7 +369,7 @@ export async function mockApi(req: NextApiRequest, res: NextApiResponse) {
             if (soknadId === '2a9196c7-306f-4b4f-afdc-891d8a564e42') {
                 return sendJson({ status: 500 }, 500)
             }
-            const soknaden = await getSoknadOr404(soknadId)
+            const soknaden = getSoknadEllerFeilmld(soknadId)
             if (!soknaden) return
             const sendesTil = mottaker(soknadId!)
             const tidspunkt = dayjs().toJSON()
@@ -411,7 +414,7 @@ export async function mockApi(req: NextApiRequest, res: NextApiResponse) {
             return sendJson({}, 204)
         },
         [ENDPOINTS.SLETT_SVAR]: async () => {
-            const soknad = await getSoknadOr404(soknadId)
+            const soknad = getSoknadEllerFeilmld(soknadId)
             if (!soknad) return
             if (soknadId === feilVedSlettingAvKvittering.id) {
                 return sendJson({}, 500)
@@ -428,7 +431,7 @@ export async function mockApi(req: NextApiRequest, res: NextApiResponse) {
             return sendJson({ status: 204 }, 204)
         },
         [ENDPOINTS.OPPRETT_UNDERSPORSMAL]: async () => {
-            const soknaden = await getSoknadOr404(soknadId)
+            const soknaden = getSoknadEllerFeilmld(soknadId)
             if (!soknaden) return
             const spm = findSporsmalById(soknaden, sporsmalId)
             if (!spm) {
@@ -449,7 +452,7 @@ export async function mockApi(req: NextApiRequest, res: NextApiResponse) {
             return sendJson({ oppdatertSporsmal: spm }, 200)
         },
         [ENDPOINTS.SLETT_UNDERSPORSMAL]: async () => {
-            const soknaden = getSoknadOr404(soknadId)
+            const soknaden = getSoknadEllerFeilmld(soknadId)
             if (!soknaden) return
             const spm = findSporsmalById(soknaden, sporsmalId)
             if (!spm) {
