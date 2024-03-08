@@ -14,6 +14,7 @@ import {
     fremtidigPerson,
     frilanserPerson,
     får400vedSendSoknad,
+    får403vedGetSoknad,
     får404vedPutOgGetSoknad,
     får500vedSendSoknad,
     harIkkeKontonummer,
@@ -64,6 +65,7 @@ type PersonaKey =
     | 'egenmeldingsdager-arbeidsgiver'
     | 'sykmelding-med-egenmeldingsdager'
     | 'http-400-ved-send-soknad'
+    | 'http-403-ved-get-soknad'
     | 'http-404-ved-put-soknad'
     | 'http-500-ved-send-soknad'
     | 'korrigeringsfrist-utlopt'
@@ -122,6 +124,7 @@ export function testpersonerGruppert(): PersonaGroup {
             ['en-eldre-usendt-soknad']: jsonDeepCopy(eldreUsendtSoknad),
             ['to-eldre-usendte-soknader']: jsonDeepCopy(flereEldreUsendteSoknader),
             ['http-400-ved-send-soknad']: jsonDeepCopy(får400vedSendSoknad),
+            ['http-403-ved-get-soknad']: jsonDeepCopy(får403vedGetSoknad),
             ['http-404-ved-put-soknad']: jsonDeepCopy(får404vedPutOgGetSoknad),
             ['http-500-ved-send-soknad']: jsonDeepCopy(får500vedSendSoknad),
             ['cummulative-layout-shift']: jsonDeepCopy(clsPerson),

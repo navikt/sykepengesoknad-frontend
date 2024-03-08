@@ -113,6 +113,24 @@ describe('Tester feilsituasjoner ', () => {
         })
     })
 
+    describe('Tester 403 ved get av en annen persons søknad', () => {
+        before(() => {
+            cy.visit(`/syk/sykepengesoknad?testperson=http-403-ved-get-soknad`)
+            cy.get('.navds-heading--large').should('be.visible').and('contain.text', 'Søknader')
+        })
+        it('Når vi laster inn søknad som får 403, får de en alert med knapp om å gå tilbake til listen over alle søknader', function () {
+            cy.contains('Nye søknader').parent().parent().find('a').eq(0).click()
+            cy.url().should('include', `3fa85f64-5717-4562-b3fc-2c963f67afa3/1`)
+
+            cy.contains('Ooops! Her har det skjedd noe rart')
+            cy.contains('Last inn siden på nytt').should('not.exist')
+
+            cy.contains('Gå tilbake til listen over alle søknader').click()
+            cy.get('.navds-heading--large').should('be.visible').and('have.text', 'Søknader')
+            cy.url().should('include', '/syk/sykepengesoknad')
+        })
+    })
+
     describe('Tester 404 ved PUT av søknad som ble klippet bort mens brukeren svarte på den', () => {
         before(() => {
             cy.visit(
@@ -134,7 +152,8 @@ describe('Tester feilsituasjoner ', () => {
 
     describe('Tester 404 ved GET av søknad som ble klippet bort mens brukeren svarte på den', () => {
         before(() => {
-            cy.visit(`/syk/sykepengesoknad/soknader?testperson=http-404-ved-put-soknad`)
+            cy.visit(`/syk/sykepengesoknad?testperson=http-404-ved-put-soknad`)
+            cy.get('.navds-heading--large').should('be.visible').and('contain.text', 'Søknader')
         })
         it('Når vi laster inn søknad som får 404, får de en alert med knapp om å gå tilbake til listen over alle søknader', function () {
             cy.contains('Nye søknader').parent().parent().find('a').eq(1).click()
