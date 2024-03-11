@@ -64,7 +64,10 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
         <li id={id} data-cy="periode">
             <fieldset className="axe-exclude p-0">
                 <legend className="sr-only">Periodevelger</legend>
-                <DatePicker
+                Verdier: {JSON.stringify(field)}
+                <br/>
+                Feilmelding: {JSON.stringify(fieldState)}
+                    <DatePicker
                     {...datepickerProps}
                     locale="nb"
                     dropdownCaption={kalenderMedDropdownCaption(sporsmal.min, sporsmal.max)}
