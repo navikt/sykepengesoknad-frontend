@@ -11,7 +11,7 @@ interface Opts {
     tillatteApier: string[]
     backend: string
     hostname: string
-    backendClientId: string // is it safe to make this non optional?
+    backendClientId: string
     https: boolean
 }
 
