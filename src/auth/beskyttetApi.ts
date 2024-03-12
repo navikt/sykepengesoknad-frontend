@@ -1,11 +1,10 @@
 import { logger } from '@navikt/next-logger'
 import { NextApiRequest, NextApiResponse } from 'next'
+import { validateIdportenToken } from '@navikt/oasis'
 
 import metrics, { cleanPathForMetric } from '../metrics'
 import { isMockBackend } from '../utils/environment'
 import { mockApi } from '../data/mock/mock-api'
-
-import { verifyIdportenAccessToken } from './verifyIdportenAccessToken'
 
 type ApiHandler = (req: NextApiRequest, res: NextApiResponse) => void | Promise<void>
 
@@ -27,10 +26,9 @@ export function beskyttetApi(handler: ApiHandler): ApiHandler {
         if (!bearerToken) {
             return send401()
         }
-        try {
-            await verifyIdportenAccessToken(bearerToken)
-        } catch (e) {
-            logger.warn(`Kunne ikke validere token fra ID-porten i beskyttetApi. Error: ${e}.`)
+        const result = await validateIdportenToken(bearerToken)
+        if (!result.ok) {
+            logger.warn(`Kunne ikke validere token fra ID-porten i beskyttetApi. Error: ${result.error}.`)
             return send401()
         }
         metrics.apiAuthorized.inc({ path: cleanPath }, 1)
