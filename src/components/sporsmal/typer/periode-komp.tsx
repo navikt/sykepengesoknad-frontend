@@ -1,5 +1,7 @@
 import { Button, DatePicker, RangeValidationT, useRangeDatepicker } from '@navikt/ds-react'
 import dayjs from 'dayjs'
+import { format } from 'date-fns'
+import { nb } from 'date-fns/locale'
 import React, { useState } from 'react'
 import { useController, useFormContext } from 'react-hook-form'
 
@@ -37,25 +39,27 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
         },
     })
 
-    const { datepickerProps, toInputProps, fromInputProps } = useRangeDatepicker({
+    const { datepickerProps, toInputProps, fromInputProps, selectedRange } = useRangeDatepicker({
         fromDate: sporsmal.min ? new Date(sporsmal.min) : new Date('1900'),
         toDate: sporsmal.max ? new Date(sporsmal.max) : new Date('2100'),
         defaultMonth: maanedKalenderApnesPa(sporsmal.min, sporsmal.max),
         openOnFocus: false,
         allowTwoDigitYear: false,
-        defaultSelected: field.value
-            ? {
-                  from: dayjs(field.value.fom).toDate(),
-                  to: dayjs(field.value.tom).toDate(),
-              }
-            : undefined,
+        // defaultSelected: field.value
+        //     ? {
+        //           from: dayjs(field.value.fom).toDate(),
+        //           to: dayjs(field.value.tom).toDate(),
+        //       }
+        //     : undefined,
         onRangeChange: (range) => {
             const fom = range?.from ? dayjs(range.from).format('YYYY-MM-DD') : ''
             const tom = range?.to ? dayjs(range.to).format('YYYY-MM-DD') : ''
             const nyPeriode = { fom: fom, tom: tom }
+            console.log('onRangeChange', range, nyPeriode)
             field.onChange(nyPeriode)
         },
         onValidate: (validate) => {
+            console.log('onValidate', validate, selectedRange)
             setRangeValidation(validate)
         },
     })
@@ -65,9 +69,9 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
             <fieldset className="axe-exclude p-0">
                 <legend className="sr-only">Periodevelger</legend>
                 Verdier: {JSON.stringify(field)}
-                <br/>
+                <br />
                 Feilmelding: {JSON.stringify(fieldState)}
-                    <DatePicker
+                <DatePicker
                     {...datepickerProps}
                     locale="nb"
                     dropdownCaption={kalenderMedDropdownCaption(sporsmal.min, sporsmal.max)}
@@ -81,6 +85,7 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
                             error={fieldState.error?.type === 'fom' && fieldState.error.message}
                             aria-label={`${sporsmal.sporsmalstekst} ${tekst('sykepengesoknad.periodevelger.fom')}`}
                         />
+                        From: {JSON.stringify(fromInputProps)}
                         <DatePicker.Input
                             {...toInputProps}
                             label={tekst('sykepengesoknad.periodevelger.tom')}
@@ -92,6 +97,17 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
                             }
                             aria-label={`${sporsmal.sporsmalstekst} ${tekst('sykepengesoknad.periodevelger.tom')}`}
                         />
+                        To: {JSON.stringify(toInputProps)}
+                        <br />
+                        DatepickerProps: {JSON.stringify(datepickerProps)}
+                        {selectedRange && (
+                            <div className="pt-4">
+                                <div>
+                                    {selectedRange?.from && format(selectedRange.from, 'dd.MM.yyyy', { locale: nb })}
+                                </div>
+                                <div>{selectedRange?.to && format(selectedRange.to, 'dd.MM.yyyy', { locale: nb })}</div>
+                            </div>
+                        )}
                     </div>
                 </DatePicker>
             </fieldset>
