@@ -35,7 +35,7 @@
         "react-dom": "^18.2.0",
         "react-dropzone": "^14.2.3",
         "react-hook-form": "^7.50.1",
-        "remeda": "^1.36.0",
+        "remeda": "^1.47.2",
         "smoothscroll-polyfill": "^0.4.4",
         "tailwind-merge": "^2.2.1",
         "use-force-update": "^1.0.11",
