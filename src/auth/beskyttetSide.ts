@@ -1,13 +1,11 @@
 import { logger } from '@navikt/next-logger'
 import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next/types'
 import { IToggle } from '@unleash/nextjs'
+import { getToken, validateIdportenToken } from '@navikt/oasis'
 
 import metrics, { cleanPathForMetric, shouldLogMetricForPath } from '../metrics'
 import { isMockBackend } from '../utils/environment'
-import { AuthenticationError } from '../utils/fetch'
 import { getFlagsServerSide } from '../toggles/ssr'
-
-import { verifyIdportenAccessToken } from './verifyIdportenAccessToken'
 
 type PageHandler = (context: GetServerSidePropsContext) => Promise<GetServerSidePropsResult<ServerSidePropsResult>>
 
@@ -40,22 +38,29 @@ function beskyttetSide(handler: PageHandler) {
                 permanent: false,
             },
         }
-        const bearerToken: string | null | undefined = request.headers['authorization']
-        if (!bearerToken) {
+        const token = getToken(context.req)
+        if (token == null) {
             if (shouldLogMetricForPath(cleanPath)) {
                 metrics.wonderwallRedirect.inc({ path: cleanPath }, 1)
             }
             return wonderwallRedirect
         }
-        try {
-            await verifyIdportenAccessToken(bearerToken)
-        } catch (e) {
+        const validationResult = await validateIdportenToken(token)
+        if (!validationResult.ok) {
+            const error = new Error(
+                `Invalid JWT token found (cause: ${validationResult.error.message}, redirecting to login.`,
+                { cause: validationResult.error },
+            )
+
+            if (validationResult.errorType === 'token expired') {
+                logger.warn(error)
+            } else {
+                logger.error(error)
+            }
             if (shouldLogMetricForPath(cleanPath)) {
                 metrics.wonderwallRedirect.inc({ path: cleanPath }, 1)
             }
-            if (!(e instanceof AuthenticationError)) {
-                logger.warn(`Kunne ikke validere token fra ID-porten i beskyttetSide. Error: ${e}.`)
-            }
+
             return wonderwallRedirect
         }
         return handler(context)
