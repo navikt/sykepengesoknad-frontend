@@ -21,7 +21,9 @@ type validEventNames =
     | 'skjema spørsmål åpnet'
     | 'skjema spørsmål besvart'
     | 'modal åpnet'
-    | 'modal lukket' //Bruk kun navn fra taksonomien
+    | 'modal lukket'
+    | 'expansioncard åpnet'
+    | 'expansioncard lukket' //Bruk kun navn fra taksonomien
 
 export const logEvent = (eventName: validEventNames, eventData: Record<string, string | boolean | undefined>) => {
     if (window) {
