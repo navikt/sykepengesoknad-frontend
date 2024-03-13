@@ -157,7 +157,11 @@ const SporsmalForm = ({ sporsmal }: SpmProps) => {
 
                     {erSiste && !erUtenlandssoknad && valgtSoknad && nesteSporsmal && (
                         <>
-                            <Oppsummering ekspandert={false} sporsmal={valgtSoknad.sporsmal} />
+                            <Oppsummering
+                                ekspandert={false}
+                                sporsmal={valgtSoknad.sporsmal}
+                                parent="sporsmal-form-vanlig"
+                            />
                             <Opplysninger ekspandert={false} />
                             <CheckboxPanel sporsmal={nesteSporsmal} />
                         </>
@@ -167,7 +171,11 @@ const SporsmalForm = ({ sporsmal }: SpmProps) => {
 
                     {erSiste && sporsmal.tag === 'BEKREFT_OPPLYSNINGER_UTLAND_INFO' && valgtSoknad && sporsmal && (
                         <>
-                            <Oppsummering ekspandert={false} sporsmal={valgtSoknad.sporsmal} />
+                            <Oppsummering
+                                ekspandert={false}
+                                sporsmal={valgtSoknad.sporsmal}
+                                parent="sporsmal-form-utland"
+                            />
                             <CheckboxPanel sporsmal={sporsmal} />
                         </>
                     )}

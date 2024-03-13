@@ -4,6 +4,7 @@ import { ExpansionCard, Heading } from '@navikt/ds-react'
 import { RSSvartype } from '../../types/rs-types/rs-svartype'
 import { Sporsmal } from '../../types/types'
 import { tekst } from '../../utils/tekster'
+import { logEvent } from '../amplitude/amplitude'
 
 import Behandlingsdager from './utdrag/behandlingsdager'
 import CheckboxGruppe from './utdrag/checkbox-gruppe'
@@ -22,7 +23,15 @@ export interface OppsummeringProps {
     sporsmal: Sporsmal
 }
 
-const Oppsummering = ({ ekspandert, sporsmal }: { ekspandert: boolean; sporsmal: ReadonlyArray<Sporsmal> }) => {
+const Oppsummering = ({
+    ekspandert,
+    sporsmal,
+    parent,
+}: {
+    ekspandert: boolean
+    sporsmal: ReadonlyArray<Sporsmal>
+    parent: string
+}) => {
     const tittel = tekst('sykepengesoknad.oppsummering.tittel')
     const [erApen, setErApen] = useState<boolean>(ekspandert)
 
@@ -33,7 +42,15 @@ const Oppsummering = ({ ekspandert, sporsmal }: { ekspandert: boolean; sporsmal:
             data-cy="oppsummering-fra-søknaden"
             aria-label={tittel}
         >
-            <ExpansionCard.Header onClick={() => setErApen(!erApen)}>
+            <ExpansionCard.Header
+                onClick={() => {
+                    logEvent(erApen ? 'expansioncard lukket' : 'expansioncard åpnet', {
+                        component: tittel,
+                        parent: parent,
+                    })
+                    setErApen(!erApen)
+                }}
+            >
                 <Heading size="small" level="2" className="flex h-full items-center">
                     {tittel}
                 </Heading>

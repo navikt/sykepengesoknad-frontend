@@ -30,6 +30,7 @@ const Kvittering = () => {
                     valgtSoknad.sendtTilNAVDato,
                 )}
                 sporsmal={valgtSoknad.sporsmal}
+                parent="kvittering"
             />
 
             <Vis
