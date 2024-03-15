@@ -1,3 +1,5 @@
+import { lukkModalKnapp } from './utilities'
+
 export const inlineForklaringer = () => {
     cy.findByRole('button', { name: '16 kalenderdager' }).click()
     cy.findByRole('dialog', { name: 'Hvorfor går det et skille ved 16 dager?' })
@@ -6,12 +8,9 @@ export const inlineForklaringer = () => {
             'contain',
             'Arbeidsgiveren skal betale sykepenger i en periode på opptil 16 kalenderdager, også kalt arbeidsgiverperioden. ',
         )
-        .findByRole('button', { name: 'Lukk' })
-        .click()
+    lukkModalKnapp()
 
-    cy.findByRole('button', { name: 'inntektsmelding' }).click()
-    cy.findByRole('dialog', { name: 'Hva er en inntektsmelding?' })
-        .should('contain', 'Hva er en inntektsmelding')
-        .findByRole('button', { name: 'Lukk' })
-        .click()
+    cy.get('button').contains('inntektsmelding').click()
+    cy.findByRole('dialog', { name: 'Hva er en inntektsmelding?' }).should('contain', 'Hva er en inntektsmelding')
+    lukkModalKnapp()
 }

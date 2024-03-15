@@ -1,3 +1,5 @@
+import { lukkModalKnapp } from '../../support/utilities'
+
 describe('Tester endrefrist 12 måneder', () => {
     it('Viser popup med info om at endrefristen er ute', () => {
         cy.visit(`/syk/sykepengesoknad/sendt/46cd957d-0d62-4091-81ec-7bac2bf6a628?testperson=korrigeringsfrist-utlopt`)
@@ -8,8 +10,8 @@ describe('Tester endrefrist 12 måneder', () => {
         )
             .and('be.visible')
             .click()
-        cy.findByRole('button', { name: 'Lukk' }).and('be.visible').click()
-        cy.findByRole('button', { name: 'Lukk' }).should('not.exist')
+        lukkModalKnapp()
+        lukkModalKnapp(false, false, true)
     })
 })
 

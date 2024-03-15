@@ -168,3 +168,14 @@ export function svarCheckboxSporsmal(sporsmal: string, svar: string) {
             })
     })
 }
+
+export function lukkModalKnapp(klikk = true, force = false, erLukket = false) {
+    if (erLukket) {
+        return cy.get('dialog.navds-modal').filter('[open]').should('not.exist')
+    }
+    if (klikk) {
+        cy.get('dialog.navds-modal').filter('[open]').first().contains('button', 'Lukk').click({ force: force })
+    } else {
+        return cy.get('dialog.navds-modal').filter('[open]').first().contains('button', 'Lukk')
+    }
+}
