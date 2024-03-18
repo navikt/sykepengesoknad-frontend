@@ -23,7 +23,6 @@ function DatoInput(props: SpmProps) {
         fromDate: sporsmal.min ? new Date(sporsmal.min) : new Date('1900'),
         toDate: sporsmal.max ? new Date(sporsmal.max) : new Date('2100'),
         defaultMonth: maanedKalenderApnesPa(sporsmal.min, sporsmal.max),
-        openOnFocus: false,
         allowTwoDigitYear: false,
         defaultSelected: field.value,
         onDateChange: field.onChange,

@@ -43,11 +43,11 @@ describe('Tester behandlingsdagersøknad', () => {
         cy.contains(
             'Hvilke dager måtte du være helt borte fra jobben på grunn av behandling mellom 1. - 24. april 2020?',
         )
-        cy.get('button[aria-label="1. april (onsdag)"]').click()
-        cy.get('button[aria-label="10. april (fredag)"]').click()
-        cy.get('button[aria-label="16. april (torsdag)"]').click()
-        cy.get('button[aria-label="15. april (onsdag)"]').click()
-        cy.get('button[aria-label="1. april (onsdag)"]').click()
+        cy.get('button[aria-label="onsdag 1"]').click()
+        cy.get('button[aria-label="fredag 10"]').click()
+        cy.get('button[aria-label="torsdag 16"]').click()
+        cy.get('button[aria-label="onsdag 15"]').click()
+        cy.get('button[aria-label="onsdag 1"]').click()
 
         cy.contains('Gå videre').click()
     })

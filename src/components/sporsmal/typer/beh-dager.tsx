@@ -13,9 +13,7 @@ const BehDager = ({ sporsmal }: SpmProps) => {
     const minDate = dayjs(sporsmal.undersporsmal[0].min).toDate()
     const maxDate = dayjs(sporsmal.undersporsmal[sporsmal.undersporsmal.length - 1].max).toDate()
 
-    const { inputProps } = useDatepicker({
-        openOnFocus: false,
-    })
+    const { inputProps } = useDatepicker()
 
     return (
         <>
@@ -29,6 +27,7 @@ const BehDager = ({ sporsmal }: SpmProps) => {
                     <>
                         <DatePicker.Standalone
                             {...inputProps}
+                            className="axe-exclude"
                             locale="nb"
                             selected={field.value}
                             mode="multiple"

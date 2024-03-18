@@ -35,7 +35,7 @@ const Endreknapp = () => {
             </Button>
             <Modal
                 open={aapen}
-                header={{ heading: endreKnappTekst, closeButton: true }}
+                header={{ heading: endreKnappTekst, closeButton: !valgtSoknad.korrigeringsfristUtlopt }}
                 onClose={() => {
                     logEvent('modal lukket', {
                         component: 'Endre søknad popup',

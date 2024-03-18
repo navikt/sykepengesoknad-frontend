@@ -30,7 +30,10 @@ describe('Tester arbeidstakersøknad', () => {
         cy.contains(
             'NAV innhenter opplysninger om deg når du sender inn en søknad. Det er nødvendig for at du skal kunne få det du har krav på. For å behandle søknaden din henter vi inn opplysninger både fra deg og fra offentlige registre.',
         )
-        cy.findByRole('button', { name: 'Lukk' }).click()
+
+        cy.get('[data-cy="modal-footer-med-lukk-knapp"]').within(() => {
+            cy.findByRole('button', { name: 'Lukk' }).click()
+        })
 
         // Sykmelding
         cy.contains('1. april - 24. april 2020 (24 dager)')

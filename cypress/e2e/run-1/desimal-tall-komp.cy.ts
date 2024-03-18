@@ -27,7 +27,7 @@ describe('Tester at riktig antall desimaler sendes til backend', () => {
 
         cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click()
 
-        cy.get('[aria-label="8. april (onsdag)"]').click()
+        cy.get('[aria-label="onsdag 8"]').click()
 
         cy.get('input[type=radio]#1547263_0').click()
         cy.get('input#1547264').type('500.321') // maks 2 desimaler tas med på BELOP

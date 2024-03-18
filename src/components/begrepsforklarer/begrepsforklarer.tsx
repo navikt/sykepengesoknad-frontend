@@ -27,7 +27,7 @@ export const Begrepsforklarer = (props: BegrepsforklarerProps) => {
                 {inlinetekst}
             </BodyShort>
 
-            <Modal open={open} header={{ heading: tittel, closeButton: true }} onClose={() => setOpen(false)}>
+            <Modal open={open} header={{ heading: tittel, closeButton: false }} onClose={() => setOpen(false)}>
                 <Modal.Body>{children}</Modal.Body>
                 <ModalFooterMedLukk setOpen={setOpen} />
             </Modal>

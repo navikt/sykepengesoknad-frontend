@@ -23,7 +23,7 @@ describe('Tester støtte for gamle spørsmål', () => {
     let steg = 1
 
     function velgKalenderdag() {
-        cy.get('[aria-label="13. april (mandag)"]').click()
+        cy.get('[aria-label="mandag 13"]').click()
     }
 
     function velgTimer() {

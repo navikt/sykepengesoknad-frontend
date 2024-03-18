@@ -12,7 +12,7 @@ const DagerKomp = ({ sporsmal }: SpmProps) => {
         <>
             <Label as="h3">{sporsmal.sporsmalstekst}</Label>
 
-            <div className="dagerKalender">
+            <div className="dagerKalender axe-exclude">
                 <Controller
                     name={sporsmal.id}
                     rules={{
