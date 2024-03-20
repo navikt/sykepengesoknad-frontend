@@ -44,13 +44,9 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
 
         svarCombobox('Hvilket land skal du reise til?', 'Afg', 'Afghanistan')
 
-        /*
-            Kjent akselbug, må innkommenteres når det fikses etter 6.2.0 en gang
-
         svarCombobox('Hvilket land skal du reise til?', 'Fransk', 'Fransk Polynesia')
         cy.contains('.navds-chips__chip-text', 'Fransk Polynesia').parent('button').click()
 
-    */
         cy.findAllByRole('combobox', { name: 'Hvilket land skal du reise til?' }).type('Sør-')
         cy.findByRole('option', { name: 'Sør-Korea' }).click()
 
