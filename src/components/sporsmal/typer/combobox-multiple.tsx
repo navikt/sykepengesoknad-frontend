@@ -32,7 +32,7 @@ const ComboboxMultiple = ({ sporsmal }: SpmProps) => {
                     options={options}
                     className="mt-4 w-full md:w-1/2"
                     shouldShowSelectedOptions={true}
-                    shouldAutocomplete={false}
+                    shouldAutocomplete={true}
                     selectedOptions={field.value}
                     onKeyDownCapture={(event) => {
                         if (event.key === 'Enter') {
