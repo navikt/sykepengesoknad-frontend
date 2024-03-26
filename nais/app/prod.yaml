@@ -10,7 +10,7 @@ env:
   DECORATOR_ENV: prod
   ASSET_PREFIX: https://cdn.nav.no/flex/sykepengesoknad-frontend
   VEDLIKEHOLD: false
-  SYKMELDINGER_BACKEND_CLIENT_ID: prod-gcp:teamsykmelding:sykmeldinger-backend
+  SYKMELDINGER_BACKEND_CLIENT_ID: prod-gcp:teamsykmelding:sykmeldinger-backend # it seems like it does talk to sykmeldinger-backend
   SYKEPENGESOKNAD_BACKEND_CLIENT_ID: prod-gcp:flex:sykepengesoknad-backend
   SYKEPENGESOKNAD_KVITTERINGER_CLIENT_ID: prod-gcp:flex:sykepengesoknad-kvitteringer
   SOKOS_KONTOREGISTER_PERSON_CLIENT_ID: prod-gcp:okonomi:sokos-kontoregister-person

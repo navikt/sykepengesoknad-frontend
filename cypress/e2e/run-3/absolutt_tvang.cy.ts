@@ -9,7 +9,7 @@ describe('Tester at åpne sykmeldinger må sendes inn', () => {
         it('Viser advarsel om at det finnes sykmelding', function () {
             cy.url().should('include', `5d0bd29f-7803-4945-8426-49921284435e/1`)
 
-            cy.contains('Du har en sykmelding du må velge om du skal bruke, før du kan begynne på denne søknaden.')
+            cy.contains('Du har en sykmelding du må velge om du skal bruke, før du kan begynne på denne søknaden.') // blokket
 
             cy.contains('Gå til sykmeldingen')
         })

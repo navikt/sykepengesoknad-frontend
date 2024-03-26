@@ -5,6 +5,9 @@ import { Sykmelding } from '../types/sykmelding'
 
 import { useTestpersonQuery } from './useTestpersonQuery'
 
+
+
+// her er api kallet etter sykmledinger
 export default function useSykmeldinger() {
     const testpersonQuery = useTestpersonQuery()
 
@@ -12,7 +15,7 @@ export default function useSykmeldinger() {
         queryKey: ['sykmeldinger'],
         queryFn: () =>
             fetchJsonMedRequestId(
-                `/syk/sykepengesoknad/api/sykmeldinger-backend/api/v2/sykmeldinger${testpersonQuery.query()}`,
+                    `/syk/sykepengesoknad/api/sykmeldinger-backend/api/v2/sykmeldinger${testpersonQuery.query()}`, // sykmeldinger-backend ... team sykmelding owns this, https://github.com/navikt/sykmeldinger-backend
                 {
                     method: 'GET',
                     credentials: 'include',

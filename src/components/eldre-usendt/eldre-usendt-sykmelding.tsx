@@ -24,6 +24,7 @@ export const EldreUsendtSykmelding = ({ usendteSykmeldinger }: UsendtSykmeldingP
         return tekst('eldre.usendt.sykmelding.gaa-til-sykmeldingene')
     }
 
+    // her
     return (
         <GuidepanelMedKnapp
             heading={tekst('eldre.usendt.header')}

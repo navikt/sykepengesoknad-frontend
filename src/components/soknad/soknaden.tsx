@@ -37,7 +37,7 @@ export const Soknaden = () => {
         valgtSoknad,
         valgtSykmelding,
         soknader,
-        sykmeldinger,
+        sykmeldinger , // hvor kommer sykmeldinger fra?
         spmIndex,
         valgtSoknadError,
     } = useSoknadMedDetaljer()
@@ -77,8 +77,9 @@ export const Soknaden = () => {
 
     if (!erUtenlandssoknad) {
         const eldreUsendtSoknad = harEldreUsendtSoknad(valgtSoknad, soknader)
-        const usendteSm = eldreUsendteSykmeldinger(sykmeldinger, valgtSoknad?.tom)
+        const usendteSm = eldreUsendteSykmeldinger(sykmeldinger, valgtSoknad?.tom) // hvor komemr sykmeldinger fra?
         if (usendteSm.length > 0) {
+            // her kommer den inn
             return <EldreUsendtSykmelding usendteSykmeldinger={usendteSm} />
         }
         if (eldreUsendtSoknad.eldsteSoknad) {

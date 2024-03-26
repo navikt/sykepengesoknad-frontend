@@ -1,7 +1,7 @@
 import dayjs from 'dayjs'
 
 import { getSykmeldingStartDate, Sykmelding } from '../../types/sykmelding'
-
+// her er sjekken for om vih har noen
 export function eldreUsendteSykmeldinger(
     sykmeldinger: Sykmelding[] | undefined,
     soknadTom: Date | undefined,
