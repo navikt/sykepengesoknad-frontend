@@ -73,7 +73,7 @@
         "start-server-and-test": "^2.0.3",
         "tailwindcss": "^3.4.1",
         "ts-loader": "^9.5.1",
-        "typescript": "^5.4.2"
+        "typescript": "^5.4.3"
     },
     "scripts": {
         "dev": "MOCK_BACKEND=true next dev -p 8080  | pino-pretty",
