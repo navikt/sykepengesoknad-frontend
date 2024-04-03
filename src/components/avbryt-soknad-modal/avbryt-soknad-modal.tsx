@@ -77,6 +77,7 @@ const AvbrytSoknadModal = () => {
                 open={aapen}
                 header={{ heading: tekst('avbryt.popup.tittel') }}
                 onClose={() => {
+                    setAapen(false)
                     logEvent('modal lukket', {
                         component: tekst('avbryt.popup.tittel'),
                         soknadstype: valgtSoknad?.soknadstype,
