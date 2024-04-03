@@ -20,7 +20,7 @@ interface FlexjarFellesProps {
     flexjarsporsmal: string
     flexjartittel: string
     feedbackProps: Record<string, string | undefined | boolean>
-    sekundaerEffekt: () => void
+    sekundaerEffekt?: () => void
 }
 
 export function FlexjarFelles({
@@ -160,7 +160,9 @@ export function FlexjarFelles({
                                     onClick={async (e) => {
                                         e.preventDefault()
                                         await handleSend(() => reset())
-                                        sekundaerEffekt()
+                                        if (sekundaerEffekt) {
+                                            sekundaerEffekt()
+                                        }
                                     }}
                                 >
                                     {sendTilbakemelding}
