@@ -5,32 +5,25 @@ import { useSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
 
 import { FeedbackButton, FlexjarFelles } from './flexjar-felles'
 
-enum AvbrytTilbakemelding {
-    AGP = 'Arbeidsgiverperioden',
-    FS = 'Fullføre senere',
-    ANNET = 'ANNET',
+interface FlexjarSurveyProps {
+    tittel: string
+    flexjarSporsmal: string
+    svarAlternativer: string[]
+    onSubmit: () => void
 }
 
-export const FlexjarSurvey = ({ onSubmit }: { onSubmit: () => void }) => {
+export const FlexjarSurvey = ({ tittel, flexjarSporsmal, svarAlternativer, onSubmit }: FlexjarSurveyProps) => {
     const [activeState, setActiveState] = useState<string | number | null>(null)
     const [thanksFeedback, setThanksFeedback] = useState<boolean>(false)
     const { valgtSoknad } = useSoknadMedDetaljer()
+    const feedbackId = 'sykepengesoknad-sporsmal'
+    const fritekstPakrevd = activeState === 'Annet'
 
     const getPlaceholder = (): string => {
         if (!activeState && typeof activeState != 'string') {
             throw new Error('Ugyldig tilbakemeldingstype')
         }
-        return 'Er det noe du vil trekke frem? (valgfritt)'
-        // switch (activeState) {
-        //     case AvbrytTilbakemelding.AGP:
-        //         return 'Er det noe du vil trekke frem? (valgfritt)'
-        //     case AvbrytTilbakemelding.FS:
-        //         return 'Er det noe du vil trekke frem? (valgfritt)'
-        //     case AvbrytTilbakemelding.ANNET:
-        //         return 'Hva er utfordringen din med dette spørsmålet?'
-        //     default:
-        //         throw new Error('Ugyldig tilbakemeldingstype')
-        // }
+        return 'Er det noe du vil trekke frem?'
     }
 
     const feedbackButtonProps = {
@@ -41,7 +34,18 @@ export const FlexjarSurvey = ({ onSubmit }: { onSubmit: () => void }) => {
         erModal: true,
     }
 
-    const feedbackId = 'sykepengesoknad-sporsmal'
+    const alternativer = svarAlternativer.map((alternativ, index) => {
+        return (
+            <FeedbackButton
+                key={index}
+                feedbackId={feedbackId}
+                tekst={alternativ}
+                svar={alternativ}
+                {...feedbackButtonProps}
+            />
+        )
+    })
+
     return (
         <>
             <FlexjarFelles
@@ -50,35 +54,16 @@ export const FlexjarSurvey = ({ onSubmit }: { onSubmit: () => void }) => {
                 activeState={activeState}
                 thanksFeedback={thanksFeedback}
                 setThanksFeedback={setThanksFeedback}
-                getPlaceholder={getPlaceholder}
+                getPlaceholder={() => getPlaceholder().valueOf() + (fritekstPakrevd ? '' : ' (valgfritt)')}
                 feedbackProps={{
                     soknadstype: valgtSoknad?.soknadstype.toString(),
                 }}
-                textRequired={activeState === AvbrytTilbakemelding.ANNET}
-                flexjartittel="Hjelp oss med å gjøre søknaden bedre"
-                flexjarsporsmal="Hvorfor ønsker du å avbryte denne søknaden?"
+                textRequired={fritekstPakrevd}
+                flexjartittel={tittel}
+                flexjarsporsmal={flexjarSporsmal}
                 sekundaerEffekt={() => onSubmit()}
             >
-                <div className="flex flex-col w-full gap-3">
-                    <FeedbackButton
-                        feedbackId={feedbackId}
-                        tekst="Arbeidsgiveren min betaler hele sykefraværet"
-                        svar={AvbrytTilbakemelding.AGP.valueOf()}
-                        {...feedbackButtonProps}
-                    />
-                    <FeedbackButton
-                        feedbackId={feedbackId}
-                        tekst="Jeg skal svare på søknaden senere"
-                        svar={AvbrytTilbakemelding.FS.valueOf()}
-                        {...feedbackButtonProps}
-                    />
-                    <FeedbackButton
-                        feedbackId={feedbackId}
-                        tekst="Annet"
-                        svar={AvbrytTilbakemelding.ANNET.valueOf()}
-                        {...feedbackButtonProps}
-                    />
-                </div>
+                <div className="flex flex-col w-full gap-3">{alternativer}</div>
             </FlexjarFelles>
             <Button
                 variant="tertiary"

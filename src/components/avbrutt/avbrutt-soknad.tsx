@@ -48,6 +48,12 @@ const AvbruttSoknad = () => {
 
     const gjenstaendeSoknader = hentGjenstaendeSoknader(soknader, valgtSoknad)
 
+    const flexjarAlternativer = [
+        'Arbeidsgiveren min betaler hele sykefraværet',
+        'Jeg skal svare på søknaden senere',
+        'Annet',
+    ]
+
     return (
         <>
             <SoknadHeader />
@@ -62,7 +68,12 @@ const AvbruttSoknad = () => {
             <BodyLong spacing>{tekst('sykepengesoknad.avbrutt.informasjon-innhold-3')}</BodyLong>
             <BodyLong spacing>{tekst('sykepengesoknad.avbrutt.informasjon-innhold-4')}</BodyLong>
 
-            <FlexjarSurvey onSubmit={() => {}}></FlexjarSurvey>
+            <FlexjarSurvey
+                onSubmit={() => {}}
+                tittel="Hvorfor avbrøt du søknaden?"
+                flexjarSporsmal="Hvorfor ønsker du å avbryte denne søknaden?"
+                svarAlternativer={flexjarAlternativer}
+            ></FlexjarSurvey>
             <Opplysninger ekspandert={false} steg="avbrutt-søknad" />
             <FristSykepenger />
 
