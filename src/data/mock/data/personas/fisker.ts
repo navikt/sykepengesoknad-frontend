@@ -337,7 +337,7 @@ const soknad: RSSoknad = {
         {
             id: '1a92915e-42bb-3651-b9e5-2675d331ca03',
             tag: 'INNTEKTSOPPLYSNINGER_DRIFT_VIRKSOMHETEN',
-            sporsmalstekst: 'Har det vært drift i virksomheten frem til du ble sykmeldt?',
+            sporsmalstekst: 'Har det vært drift i virksomheten din fram til dagen du ble sykmeldt?',
             undertekst: null,
             svartype: 'RADIO_GRUPPE',
             min: null,
