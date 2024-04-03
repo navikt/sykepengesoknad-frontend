@@ -20,6 +20,7 @@ interface FlexjarFellesProps {
     flexjarsporsmal: string
     flexjartittel: string
     feedbackProps: Record<string, string | undefined | boolean>
+    sekundaerEffekt: () => void
 }
 
 export function FlexjarFelles({
@@ -34,6 +35,7 @@ export function FlexjarFelles({
     children,
     textRequired,
     feedbackProps,
+    sekundaerEffekt,
 }: FlexjarFellesProps) {
     const [textValue, setTextValue] = useState('')
     const [errorMsg, setErrorMsg] = useState<string | null>(null)
@@ -104,14 +106,14 @@ export function FlexjarFelles({
     }
 
     return (
-        <section>
-            <div className="w:full mt-16 md:w-3/4">
+        <section className="w-full">
+            <div className="w-full mt-16 mx-auto">
                 <div className="mt-1 border-4 border-surface-subtle rounded-medium">
                     <div className="bg-surface-subtle p-6 flex gap-4 items-center">
                         <div className="bg-gray-900 w-10 h-10 rounded-full flex justify-center items-center">
                             <MagnifyingGlassIcon aria-hidden={true} className="text-white axe-exclude" />
                         </div>
-                        <div>
+                        <div className="!ml-0">
                             <Label as="h3" className="mb-2">
                                 {flexjartittel}
                             </Label>
@@ -158,6 +160,7 @@ export function FlexjarFelles({
                                     onClick={async (e) => {
                                         e.preventDefault()
                                         await handleSend(() => reset())
+                                        sekundaerEffekt()
                                     }}
                                 >
                                     {sendTilbakemelding}
@@ -188,6 +191,7 @@ interface FeedbackButtonProps {
     setThanksFeedback: (b: boolean) => void
     setActiveState: (s: string | null | number) => void
     feedbackId: string
+    erModal?: boolean
 }
 
 export function FeedbackButton(props: FeedbackButtonProps) {
@@ -198,9 +202,11 @@ export function FeedbackButton(props: FeedbackButtonProps) {
             className={cn({
                 'bg-surface-neutral-active text-text-on-inverted hover:bg-surface-neutral-active':
                     props.activeState === props.svar,
+                '!ml-0': props.erModal,
             })}
             aria-pressed={props.activeState === props.svar}
-            onClick={() => {
+            onClick={(e) => {
+                e.preventDefault()
                 logEvent('knapp klikket', {
                     komponent: 'flexjar',
                     feedbackId: props.feedbackId,

@@ -17,6 +17,7 @@ import QueryStatusPanel from '../queryStatusPanel/QueryStatusPanel'
 import { soknadBreadcrumb, useUpdateBreadcrumbs } from '../../hooks/useBreadcrumbs'
 import { SoknadHeader } from '../soknad/soknad-header'
 import { useSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
+import { FlexjarSurvey } from '../flexjar/flexjar-survey'
 
 import GjenapneSoknad from './gjenapneknapp'
 
@@ -61,6 +62,7 @@ const AvbruttSoknad = () => {
             <BodyLong spacing>{tekst('sykepengesoknad.avbrutt.informasjon-innhold-3')}</BodyLong>
             <BodyLong spacing>{tekst('sykepengesoknad.avbrutt.informasjon-innhold-4')}</BodyLong>
 
+            <FlexjarSurvey onSubmit={() => {}}></FlexjarSurvey>
             <Opplysninger ekspandert={false} steg="avbrutt-søknad" />
             <FristSykepenger />
 
