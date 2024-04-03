@@ -1,6 +1,6 @@
 import { BodyShort } from '@navikt/ds-react'
 
-// http://localhost:8080/syk/sykepengesoknad/soknader/a8e40578-682b-4a04-bfda-b7768af2ae55/7?testperson=selvstendig-naringsdrivende
+
 export const DriftIVirksomhet = () => {
     return (
         <>
