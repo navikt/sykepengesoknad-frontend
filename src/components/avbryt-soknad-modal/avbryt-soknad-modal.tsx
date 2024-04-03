@@ -8,6 +8,7 @@ import { EndringUtenEndringModal } from '../sporsmal/endring-uten-endring/endrin
 import { useAvbryt } from '../../hooks/useAvbryt'
 import { useSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
 import { cn } from '../../utils/tw-utils'
+import { FlexjarSurvey } from '../flexjar/flexjar-survey'
 
 const AvbrytKorrigering = () => {
     const { valgtSoknad, stegId } = useSoknadMedDetaljer()
@@ -47,10 +48,20 @@ const AvbrytSoknadModal = () => {
     const { mutate: avbrytMutation, isLoading: avbryter, error: avbrytError } = useAvbryt()
 
     const [aapen, setAapen] = useState<boolean>(false)
+    const [visSurvey, setVisSurvey] = useState<boolean>(false)
 
     if (valgtSoknad?.status == RSSoknadstatus.UTKAST_TIL_KORRIGERING) {
         return <AvbrytKorrigering />
     }
+
+    const svarAlternativer = [
+        'Jeg har allerede sendt inn søknaden på papir',
+        'Jeg vil lage en ny søknad',
+        'Arbeidsgiveren min betaler for hele sykefraværet',
+        'Jeg skal svare på søknaden senere',
+        'Jeg vil ikke søke',
+        'Annet',
+    ]
 
     return (
         <>
@@ -78,6 +89,7 @@ const AvbrytSoknadModal = () => {
                 header={{ heading: tekst('avbryt.popup.tittel') }}
                 onClose={() => {
                     setAapen(false)
+                    setVisSurvey(false)
                     logEvent('modal lukket', {
                         component: tekst('avbryt.popup.tittel'),
                         soknadstype: valgtSoknad?.soknadstype,
@@ -101,6 +113,7 @@ const AvbrytSoknadModal = () => {
                         type="button"
                         className="mr-4 mt-4"
                         loading={avbryter}
+                        disabled={visSurvey}
                         onClick={() => {
                             logEvent('knapp klikket', {
                                 tekst: tekst('avbryt.popup.ja'),
@@ -108,13 +121,7 @@ const AvbrytSoknadModal = () => {
                                 component: tekst('avbryt.popup.tittel'),
                                 steg: stegId,
                             })
-                            if (valgtSoknad)
-                                avbrytMutation({
-                                    valgtSoknad: valgtSoknad,
-                                    onSuccess: () => {
-                                        setAapen(false)
-                                    },
-                                })
+                            setVisSurvey(true)
                         }}
                     >
                         {tekst('avbryt.popup.ja')}
@@ -135,6 +142,21 @@ const AvbrytSoknadModal = () => {
                     >
                         {tekst('avbryt.popup.nei')}
                     </Button>
+                    {visSurvey && (
+                        <FlexjarSurvey
+                            surveySporsmal="Hvorfor ønsker du å avbryte denne søknaden?"
+                            svarAlternativer={svarAlternativer}
+                            onSubmit={() => {
+                                if (valgtSoknad)
+                                    avbrytMutation({
+                                        valgtSoknad: valgtSoknad,
+                                        onSuccess: () => {
+                                            setAapen(false)
+                                        },
+                                    })
+                            }}
+                        ></FlexjarSurvey>
+                    )}
                 </Modal.Footer>
             </Modal>
         </>
