@@ -121,7 +121,7 @@ export const EkspanderbarHjelp = ({ sporsmal, mb }: { sporsmal: Sporsmal; mb?: s
         return null
     }
 
-    const tittel = // eksapnderbarhjelp tekster her
+    const tittel = 
         EkspanderbarHjelpTekster[
             `ekspanderbarhjelp.${nokkel.toLowerCase()}.tittel` as keyof typeof EkspanderbarHjelpTekster
         ] || 'Spørsmålet forklart'
