@@ -71,7 +71,7 @@ const AvbruttSoknad = () => {
             <FlexjarSurvey
                 onSubmit={() => {}}
                 tittel="Hvorfor avbrøt du søknaden?"
-                flexjarSporsmal="Hvorfor ønsker du å avbryte denne søknaden?"
+                surveySporsmal="Hvorfor ønsker du å avbryte denne søknaden?"
                 svarAlternativer={flexjarAlternativer}
             ></FlexjarSurvey>
             <Opplysninger ekspandert={false} steg="avbrutt-søknad" />

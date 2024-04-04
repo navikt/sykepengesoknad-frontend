@@ -6,13 +6,13 @@ import { useSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
 import { FeedbackButton, FlexjarFelles } from './flexjar-felles'
 
 interface FlexjarSurveyProps {
-    tittel: string
-    flexjarSporsmal: string
+    tittel?: string
+    surveySporsmal: string
     svarAlternativer: string[]
     onSubmit: () => void
 }
 
-export const FlexjarSurvey = ({ tittel, flexjarSporsmal, svarAlternativer, onSubmit }: FlexjarSurveyProps) => {
+export const FlexjarSurvey = ({ tittel, surveySporsmal, svarAlternativer, onSubmit }: FlexjarSurveyProps) => {
     const [activeState, setActiveState] = useState<string | number | null>(null)
     const [thanksFeedback, setThanksFeedback] = useState<boolean>(false)
     const { valgtSoknad } = useSoknadMedDetaljer()
@@ -59,8 +59,8 @@ export const FlexjarSurvey = ({ tittel, flexjarSporsmal, svarAlternativer, onSub
                     soknadstype: valgtSoknad?.soknadstype.toString(),
                 }}
                 textRequired={fritekstPakrevd}
-                flexjartittel={tittel}
-                flexjarsporsmal={flexjarSporsmal}
+                flexjartittel={tittel || 'Hjelp oss å gjøre denne tjenesten bedre'}
+                flexjarsporsmal={surveySporsmal}
                 sekundaerEffekt={() => onSubmit()}
             >
                 <div className="flex flex-col w-full gap-3">{alternativer}</div>

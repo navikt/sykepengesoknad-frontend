@@ -41,8 +41,7 @@ export const GjenapneModal = (props: GjenapneModalProps) => {
                     </BodyShort>
 
                     <FlexjarSurvey
-                        tittel="Hjelp oss å gjøre denne tjenesten bedre"
-                        flexjarSporsmal="Hvorfor ønsker du å gjenåpne denne søknaden?"
+                        surveySporsmal="Hvorfor ønsker du å gjenåpne denne søknaden?"
                         svarAlternativer={flexjarAlternativer}
                         onSubmit={() => {
                             if (valgtSoknad) props.gjenAApne
