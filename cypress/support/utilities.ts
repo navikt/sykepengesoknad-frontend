@@ -8,6 +8,10 @@ export const setPeriodeFraTil = (fom: number, tom: number, periodeIndex = 0) => 
     cy.get(`[data-cy="periode"]`).eq(periodeIndex).find('.rdp-cell').contains(tom.toString()).click()
 }
 
+/**
+ * @param name Navn på inputfeltet, tekst fra label tilhørende inputfeltet
+ * @param verdi
+ */
 export function svarFritekst(name: string, verdi: string) {
     cy.findByRole('textbox', { name: name }).clear()
     cy.findByRole('textbox', { name: name }).type(verdi)
