@@ -18,7 +18,13 @@ export const GjenapneModal = (props: GjenapneModalProps) => {
 
     if (!valgtSoknad || !soknader) return null
 
-    const flexjarAlternativer = ['Jeg trykket feil', 'Fikk beskjed av veileder', 'Annet']
+    const flexjarAlternativer = [
+        'Jeg trengte mer tid og ville fortsette senere',
+        'Jeg trykket feil',
+        'Jeg fikk beskjed av veileder om å sende likevel',
+        'Jeg fikk beskjed av arbeidsgiver om å sende søknaden',
+        'Annet',
+    ]
 
     return (
         <>
