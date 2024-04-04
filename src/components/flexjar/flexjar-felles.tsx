@@ -87,7 +87,7 @@ export function FlexjarFelles({
     const handleSend = async (p: () => void) => {
         if (textRequired && textValue === '') {
             setErrorMsg('Tilbakemeldingen kan ikke være tom. Legg til tekst i feltet.')
-            return
+            return false
         }
         logEvent('knapp klikket', {
             komponent: 'flexjar',
@@ -102,18 +102,19 @@ export function FlexjarFelles({
             setActiveState(null)
             setTextValue('')
             setThanksFeedback(true)
+            return true
         }
     }
 
     return (
-        <section className="w-full">
-            <div className="w-full mt-16 mx-auto">
+        <section className="w-full mt-16">
+            <div>
                 <div className="mt-1 border-4 border-surface-subtle rounded-medium">
                     <div className="bg-surface-subtle p-6 flex gap-4 items-center">
                         <div className="bg-gray-900 w-10 h-10 rounded-full flex justify-center items-center">
                             <MagnifyingGlassIcon aria-hidden={true} className="text-white axe-exclude" />
                         </div>
-                        <div className="!ml-0">
+                        <div>
                             <Label as="h3" className="mb-2">
                                 {flexjartittel}
                             </Label>
@@ -159,8 +160,8 @@ export function FlexjarFelles({
                                     variant="secondary-neutral"
                                     onClick={async (e) => {
                                         e.preventDefault()
-                                        await handleSend(() => reset())
-                                        if (sekundaerEffekt) {
+                                        const kanSendes = await handleSend(() => reset())
+                                        if (sekundaerEffekt && kanSendes) {
                                             sekundaerEffekt()
                                         }
                                     }}
@@ -204,7 +205,6 @@ export function FeedbackButton(props: FeedbackButtonProps) {
             className={cn({
                 'bg-surface-neutral-active text-text-on-inverted hover:bg-surface-neutral-active':
                     props.activeState === props.svar,
-                '!ml-0': props.erModal,
             })}
             aria-pressed={props.activeState === props.svar}
             onClick={(e) => {

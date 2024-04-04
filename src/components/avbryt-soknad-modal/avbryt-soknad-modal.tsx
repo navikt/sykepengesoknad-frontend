@@ -98,9 +98,7 @@ const AvbrytSoknadModal = () => {
                 }}
             >
                 <Modal.Body>
-                    <BodyLong spacing size="medium">
-                        {tekst('avbryt.popup.sporsmal')}
-                    </BodyLong>
+                    <BodyLong size="medium">{tekst('avbryt.popup.sporsmal')}</BodyLong>
                     {avbrytError && (
                         <Alert variant="error" className="mt-4">
                             {tekst('avbryt.feilet')}
@@ -142,8 +140,11 @@ const AvbrytSoknadModal = () => {
                     >
                         {tekst('avbryt.popup.nei')}
                     </Button>
-                    {visSurvey && (
+                </Modal.Footer>
+                {visSurvey && (
+                    <div className="flex flex-row-reverse flex-wrap gap-4 p-6 pt-4 -mt-12">
                         <FlexjarSurvey
+                            feedbackId="sykpengesoknad-gjenapne-survey"
                             surveySporsmal="Hvorfor ønsker du å avbryte denne søknaden?"
                             svarAlternativer={svarAlternativer}
                             onSubmit={() => {
@@ -156,8 +157,8 @@ const AvbrytSoknadModal = () => {
                                     })
                             }}
                         ></FlexjarSurvey>
-                    )}
-                </Modal.Footer>
+                    </div>
+                )}
             </Modal>
         </>
     )

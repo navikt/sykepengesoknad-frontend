@@ -36,19 +36,20 @@ export const GjenapneModal = (props: GjenapneModalProps) => {
                 header={{ heading: 'Du er i ferd med å gjenåpne denne søknaden' }}
             >
                 <Modal.Body>
-                    <BodyShort spacing>
+                    <BodyShort>
                         Vennligst gi tilbakemelding eller trykk på knappen nederst for å gjenåpne søknaden.
                     </BodyShort>
-
+                </Modal.Body>
+                <div className="flex flex-row-reverse flex-wrap gap-4 p-6 pt-4 -mt-12">
                     <FlexjarSurvey
+                        feedbackId="sykpengesoknad-avbryt-survey"
                         surveySporsmal="Hvorfor ønsker du å gjenåpne denne søknaden?"
                         svarAlternativer={flexjarAlternativer}
                         onSubmit={() => {
-                            if (valgtSoknad) props.gjenAApne
-                            props.setAapen(false)
+                            if (valgtSoknad) props.gjenAApne()
                         }}
                     ></FlexjarSurvey>
-                </Modal.Body>
+                </div>
             </Modal>
         </>
     )

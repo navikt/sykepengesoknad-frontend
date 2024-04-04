@@ -10,13 +10,19 @@ interface FlexjarSurveyProps {
     surveySporsmal: string
     svarAlternativer: string[]
     onSubmit: () => void
+    feedbackId: string
 }
 
-export const FlexjarSurvey = ({ tittel, surveySporsmal, svarAlternativer, onSubmit }: FlexjarSurveyProps) => {
+export const FlexjarSurvey = ({
+    tittel,
+    surveySporsmal,
+    svarAlternativer,
+    onSubmit,
+    feedbackId,
+}: FlexjarSurveyProps) => {
     const [activeState, setActiveState] = useState<string | number | null>(null)
     const [thanksFeedback, setThanksFeedback] = useState<boolean>(false)
     const { valgtSoknad } = useSoknadMedDetaljer()
-    const feedbackId = 'sykepengesoknad-sporsmal'
     const fritekstPakrevd = activeState === 'Annet'
 
     const getPlaceholder = (): string => {

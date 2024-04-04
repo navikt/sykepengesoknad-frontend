@@ -42,7 +42,13 @@ const GjenapneSoknad = () => {
             <GjenapneModal
                 aapen={aapneSurvey}
                 setAapen={setAapneSurvey}
-                gjenAApne={() => gjenapneMutation(valgtSoknad.id)}
+                gjenAApne={() => {
+                    if (!gjenapner) {
+                        setTimeout(() => {
+                            gjenapneMutation(valgtSoknad.id)
+                        }, 1000)
+                    }
+                }}
             ></GjenapneModal>
         </>
     )
