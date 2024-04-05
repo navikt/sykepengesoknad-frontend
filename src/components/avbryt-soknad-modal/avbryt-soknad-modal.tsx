@@ -144,7 +144,7 @@ const AvbrytSoknadModal = () => {
                 {visSurvey && (
                     <div className="flex flex-row-reverse flex-wrap gap-4 p-6 pt-4 -mt-12">
                         <FlexjarSurvey
-                            feedbackId="sykpengesoknad-gjenapne-survey"
+                            feedbackId="sykpengesoknad-avbryt-survey"
                             surveySporsmal="Hvorfor ønsker du å avbryte denne søknaden?"
                             svarAlternativer={svarAlternativer}
                             onSubmit={() => {

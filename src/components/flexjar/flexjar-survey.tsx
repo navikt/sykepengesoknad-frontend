@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Button } from '@navikt/ds-react'
 
 import { useSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
+import { logEvent } from '../amplitude/amplitude'
 
 import { FeedbackButton, FlexjarFelles } from './flexjar-felles'
 
@@ -23,13 +24,12 @@ export const FlexjarSurvey = ({
     const [activeState, setActiveState] = useState<string | number | null>(null)
     const [thanksFeedback, setThanksFeedback] = useState<boolean>(false)
     const { valgtSoknad } = useSoknadMedDetaljer()
-    const fritekstPakrevd = activeState === 'Annet'
 
     const getPlaceholder = (): string => {
         if (!activeState && typeof activeState != 'string') {
             throw new Error('Ugyldig tilbakemeldingstype')
         }
-        return 'Er det noe du vil trekke frem?'
+        return 'Er det noe du vil trekke frem? (valgfritt)'
     }
 
     const feedbackButtonProps = {
@@ -37,7 +37,6 @@ export const FlexjarSurvey = ({
         activeState,
         setThanksFeedback,
         setActiveState,
-        erModal: true,
     }
 
     const alternativer = svarAlternativer.map((alternativ, index) => {
@@ -60,11 +59,11 @@ export const FlexjarSurvey = ({
                 activeState={activeState}
                 thanksFeedback={thanksFeedback}
                 setThanksFeedback={setThanksFeedback}
-                getPlaceholder={() => getPlaceholder().valueOf() + (fritekstPakrevd ? '' : ' (valgfritt)')}
+                getPlaceholder={getPlaceholder}
                 feedbackProps={{
                     soknadstype: valgtSoknad?.soknadstype.toString(),
                 }}
-                textRequired={fritekstPakrevd}
+                textRequired={false}
                 flexjartittel={tittel || 'Hjelp oss å gjøre denne tjenesten bedre'}
                 flexjarsporsmal={surveySporsmal}
                 sekundaerEffekt={() => onSubmit()}
@@ -75,6 +74,11 @@ export const FlexjarSurvey = ({
                 variant="tertiary"
                 className="px-6 mt-8"
                 onClick={(e) => {
+                    logEvent('knapp klikket', {
+                        tekst: 'Jeg vil ikke gi tilbakemelding',
+                        soknadstype: valgtSoknad?.soknadstype,
+                        component: feedbackId,
+                    })
                     e.preventDefault()
                     onSubmit()
                 }}

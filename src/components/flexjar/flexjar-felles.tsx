@@ -87,7 +87,7 @@ export function FlexjarFelles({
     const handleSend = async (p: () => void) => {
         if (textRequired && textValue === '') {
             setErrorMsg('Tilbakemeldingen kan ikke være tom. Legg til tekst i feltet.')
-            return false
+            return
         }
         logEvent('knapp klikket', {
             komponent: 'flexjar',
@@ -102,7 +102,7 @@ export function FlexjarFelles({
             setActiveState(null)
             setTextValue('')
             setThanksFeedback(true)
-            return true
+            return
         }
     }
 
@@ -160,9 +160,12 @@ export function FlexjarFelles({
                                     variant="secondary-neutral"
                                     onClick={async (e) => {
                                         e.preventDefault()
-                                        const kanSendes = await handleSend(() => reset())
-                                        if (sekundaerEffekt && kanSendes) {
-                                            sekundaerEffekt()
+                                        await handleSend(() => reset())
+                                        if (sekundaerEffekt) {
+                                            //Timeout for å vise at tilbakemeldingen er sendt
+                                            setTimeout(() => {
+                                                sekundaerEffekt()
+                                            }, 1000)
                                         }
                                     }}
                                 >
@@ -194,7 +197,6 @@ interface FeedbackButtonProps {
     setThanksFeedback: (b: boolean) => void
     setActiveState: (s: string | null | number) => void
     feedbackId: string
-    erModal?: boolean
 }
 
 export function FeedbackButton(props: FeedbackButtonProps) {

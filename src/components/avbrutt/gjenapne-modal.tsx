@@ -42,7 +42,7 @@ export const GjenapneModal = (props: GjenapneModalProps) => {
                 </Modal.Body>
                 <div className="flex flex-row-reverse flex-wrap gap-4 p-6 pt-4 -mt-12">
                     <FlexjarSurvey
-                        feedbackId="sykpengesoknad-avbryt-survey"
+                        feedbackId="sykpengesoknad-gjenapne-survey"
                         surveySporsmal="Hvorfor ønsker du å gjenåpne denne søknaden?"
                         svarAlternativer={flexjarAlternativer}
                         onSubmit={() => {

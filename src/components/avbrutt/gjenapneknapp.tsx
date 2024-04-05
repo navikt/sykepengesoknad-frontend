@@ -44,9 +44,7 @@ const GjenapneSoknad = () => {
                 setAapen={setAapneSurvey}
                 gjenAApne={() => {
                     if (!gjenapner) {
-                        setTimeout(() => {
-                            gjenapneMutation(valgtSoknad.id)
-                        }, 1000)
+                        gjenapneMutation(valgtSoknad.id)
                     }
                 }}
             ></GjenapneModal>
