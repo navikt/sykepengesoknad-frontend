@@ -29,6 +29,7 @@ import { MedlemskapOppholdUtenforNorgeHjelpBody } from './medlemskap-opphold-ute
 import { MedlemskapOppholdstillatelseHjelpBody } from './medlemskap-oppholdstillatelse-hjelp-body'
 import { KjenteInntektkilderHjelpBody } from './kjente-inntektkilder'
 import { VarigEndring25prosent } from './varig-endring-25prosent'
+import { DriftIVirksomhet } from './drift-i-virksomhet'
 
 export const EkspanderbarHjelp = ({ sporsmal, mb }: { sporsmal: Sporsmal; mb?: string }) => {
     const { valgtSoknad } = useSoknadMedDetaljer()
@@ -101,6 +102,8 @@ export const EkspanderbarHjelp = ({ sporsmal, mb }: { sporsmal: Sporsmal; mb?: s
                 return <KjenteInntektkilderHjelpBody />
             case 'INNTEKTSOPPLYSNINGER_VARIG_ENDRING_25_PROSENT':
                 return <VarigEndring25prosent />
+            case 'INNTEKTSOPPLYSNINGER_DRIFT_VIRKSOMHETEN':
+                return <DriftIVirksomhet />
             default:
                 if (harInnhold) {
                     return (

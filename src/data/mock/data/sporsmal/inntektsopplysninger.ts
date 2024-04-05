@@ -5,7 +5,7 @@ import { RSSporsmal } from '../../../../types/rs-types/rs-sporsmal'
 export const inntektsopplysninger: RSSporsmal = {
     id: v4().toString(),
     tag: 'INNTEKTSOPPLYSNINGER_DRIFT_VIRKSOMHETEN',
-    sporsmalstekst: 'Har det vært drift i virksomheten frem til du ble sykmeldt?',
+    sporsmalstekst: 'Har det vært drift i virksomheten din fram til dagen du ble sykmeldt?',
     undertekst: null,
     svartype: 'RADIO_GRUPPE',
     min: null,
