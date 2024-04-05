@@ -1,6 +1,5 @@
 import { BodyShort } from '@navikt/ds-react'
 
-
 export const DriftIVirksomhet = () => {
     return (
         <>
