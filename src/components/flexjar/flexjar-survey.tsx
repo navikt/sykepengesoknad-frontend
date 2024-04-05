@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
-import { Button } from '@navikt/ds-react'
+import { Button, Modal } from '@navikt/ds-react'
 
 import { useSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
 import { logEvent } from '../amplitude/amplitude'
+import { tekst } from '../../utils/tekster'
 
 import { FeedbackButton, FlexjarFelles } from './flexjar-felles'
 
@@ -85,6 +86,51 @@ export const FlexjarSurvey = ({
             >
                 Jeg vil ikke gi tilbakemelding
             </Button>
+        </>
+    )
+}
+
+interface FlexjarSurveyModalProps {
+    tittel?: string
+    surveySporsmal: string
+    svarAlternativer: string[]
+    onSubmit: () => void
+    feedbackId: string
+    visSurvey: boolean
+}
+export const FlexjarSurveyModal = ({
+    tittel,
+    surveySporsmal,
+    svarAlternativer,
+    onSubmit,
+    feedbackId,
+    visSurvey,
+}: FlexjarSurveyModalProps) => {
+    return (
+        <>
+            <Modal
+                open={visSurvey}
+                header={{ heading: tekst('avbryt.popup.tittel') }}
+                onClose={() => {
+                    // logEvent('modal lukket', {
+                    //     component: tekst('avbryt.popup.tittel'),
+                    //     soknadstype: valgtSoknad?.soknadstype,
+                    //     steg: stegId!,
+                    // })
+                }}
+            >
+                {visSurvey && (
+                    <div className="flex flex-row-reverse flex-wrap gap-4 p-6 pt-4 -mt-12">
+                        <FlexjarSurvey
+                            tittel={tittel}
+                            feedbackId={feedbackId}
+                            surveySporsmal={surveySporsmal}
+                            svarAlternativer={svarAlternativer}
+                            onSubmit={() => {}}
+                        ></FlexjarSurvey>
+                    </div>
+                )}
+            </Modal>
         </>
     )
 }

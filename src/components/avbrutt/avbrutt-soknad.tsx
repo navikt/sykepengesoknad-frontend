@@ -17,6 +17,7 @@ import QueryStatusPanel from '../queryStatusPanel/QueryStatusPanel'
 import { soknadBreadcrumb, useUpdateBreadcrumbs } from '../../hooks/useBreadcrumbs'
 import { SoknadHeader } from '../soknad/soknad-header'
 import { useSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
+import { FlexjarSurveyModal } from '../flexjar/flexjar-survey'
 
 import GjenapneSoknad from './gjenapneknapp'
 
@@ -24,6 +25,16 @@ const AvbruttSoknad = () => {
     const router = useRouter()
     const { data: soknader } = useSoknader()
     const { valgtSoknad, soknadId } = useSoknadMedDetaljer()
+    const visSurvey = router.query.visSurvey === 'true'
+
+    const svarAlternativer = [
+        'Jeg har allerede sendt inn søknaden på papir',
+        'Jeg vil lage en ny søknad',
+        'Arbeidsgiveren min betaler for hele sykefraværet',
+        'Jeg skal svare på søknaden senere',
+        'Jeg vil ikke søke',
+        'Annet',
+    ]
 
     useUpdateBreadcrumbs(() => [{ ...soknadBreadcrumb, handleInApp: true }], [])
 
@@ -74,6 +85,13 @@ const AvbruttSoknad = () => {
                 )}
             />
             <GjenapneSoknad />
+            <FlexjarSurveyModal
+                visSurvey={visSurvey}
+                surveySporsmal="Hvorfor ønsker du å avbryte denne søknaden?"
+                svarAlternativer={svarAlternativer}
+                onSubmit={() => {}}
+                feedbackId="sykpengesoknad-avbryt-survey"
+            ></FlexjarSurveyModal>
         </>
     )
 }

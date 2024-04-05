@@ -1,18 +1,15 @@
 import { Alert, Button } from '@navikt/ds-react'
-import React, { useState } from 'react'
+import React from 'react'
 
 import { logEvent } from '../amplitude/amplitude'
 import { useGjenapne } from '../../hooks/useGjenapne'
 import Vis from '../vis'
 import { useSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
 
-import { GjenapneModal } from './gjenapne-modal'
-
 const GjenapneSoknad = () => {
     const { valgtSoknad } = useSoknadMedDetaljer()
 
     const { mutate: gjenapneMutation, isLoading: gjenapner, error: gjenapneError } = useGjenapne()
-    const [aapneSurvey, setAapneSurvey] = useState(false)
 
     if (!valgtSoknad) return null
 
@@ -34,20 +31,11 @@ const GjenapneSoknad = () => {
                         soknadstype: valgtSoknad.soknadstype,
                         component: 'Avbrutt søknad visning',
                     })
-                    setAapneSurvey(true)
+                    gjenapneMutation(valgtSoknad.id)
                 }}
             >
                 Jeg vil bruke denne søknaden likevel
             </Button>
-            <GjenapneModal
-                aapen={aapneSurvey}
-                setAapen={setAapneSurvey}
-                gjenAApne={() => {
-                    if (!gjenapner) {
-                        gjenapneMutation(valgtSoknad.id)
-                    }
-                }}
-            ></GjenapneModal>
         </>
     )
 }

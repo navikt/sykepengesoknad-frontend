@@ -8,7 +8,6 @@ import { EndringUtenEndringModal } from '../sporsmal/endring-uten-endring/endrin
 import { useAvbryt } from '../../hooks/useAvbryt'
 import { useSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
 import { cn } from '../../utils/tw-utils'
-import { FlexjarSurvey } from '../flexjar/flexjar-survey'
 
 const AvbrytKorrigering = () => {
     const { valgtSoknad, stegId } = useSoknadMedDetaljer()
@@ -53,15 +52,6 @@ const AvbrytSoknadModal = () => {
     if (valgtSoknad?.status == RSSoknadstatus.UTKAST_TIL_KORRIGERING) {
         return <AvbrytKorrigering />
     }
-
-    const svarAlternativer = [
-        'Jeg har allerede sendt inn søknaden på papir',
-        'Jeg vil lage en ny søknad',
-        'Arbeidsgiveren min betaler for hele sykefraværet',
-        'Jeg skal svare på søknaden senere',
-        'Jeg vil ikke søke',
-        'Annet',
-    ]
 
     return (
         <>
@@ -119,7 +109,13 @@ const AvbrytSoknadModal = () => {
                                 component: tekst('avbryt.popup.tittel'),
                                 steg: stegId,
                             })
-                            setVisSurvey(true)
+                            if (valgtSoknad)
+                                avbrytMutation({
+                                    valgtSoknad: valgtSoknad,
+                                    onSuccess: () => {
+                                        setAapen(false)
+                                    },
+                                })
                         }}
                     >
                         {tekst('avbryt.popup.ja')}
@@ -141,24 +137,6 @@ const AvbrytSoknadModal = () => {
                         {tekst('avbryt.popup.nei')}
                     </Button>
                 </Modal.Footer>
-                {visSurvey && (
-                    <div className="flex flex-row-reverse flex-wrap gap-4 p-6 pt-4 -mt-12">
-                        <FlexjarSurvey
-                            feedbackId="sykpengesoknad-avbryt-survey"
-                            surveySporsmal="Hvorfor ønsker du å avbryte denne søknaden?"
-                            svarAlternativer={svarAlternativer}
-                            onSubmit={() => {
-                                if (valgtSoknad)
-                                    avbrytMutation({
-                                        valgtSoknad: valgtSoknad,
-                                        onSuccess: () => {
-                                            setAapen(false)
-                                        },
-                                    })
-                            }}
-                        ></FlexjarSurvey>
-                    </div>
-                )}
             </Modal>
         </>
     )

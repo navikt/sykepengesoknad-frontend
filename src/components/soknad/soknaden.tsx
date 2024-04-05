@@ -23,6 +23,7 @@ import { SkeletonSporsmalForm } from '../sporsmal/sporsmal-form/skeleton-sporsma
 import { SlikBehandlerNavPersonopplysningene } from '../soknad-intro/slik-behandler-nav-personopplysningene'
 import { FeilStateView } from '../feil/refresh-hvis-feil-state'
 import { Over70Aar } from '../soknad-intro/over-70'
+import { FlexjarSurveyModal } from '../flexjar/flexjar-survey'
 
 import { urlTilSoknad } from './soknad-link'
 import { SporsmalTittel } from './sporsmal-tittel'
@@ -96,6 +97,16 @@ export const Soknaden = () => {
     }
     const erForstesiden = stegNo === 1 && !erUtenlandssoknad
     const erForstesidenMedReisetilskudd = stegNo === 1 && (erReisetilskuddsoknad || erGradertReisetilskuddsoknad)
+
+    const visSurvey = router.query.visSurvey === 'true'
+    const flexjarSurveyAlternativer = [
+        'Jeg trengte mer tid og ville fortsette senere',
+        'Jeg trykket feil',
+        'Jeg fikk beskjed av veileder om å sende likevel',
+        'Jeg fikk beskjed av arbeidsgiver om å sende søknaden',
+        'Annet',
+    ]
+
     return (
         <>
             {valgtSoknadError && <FeilStateView feilmelding={valgtSoknadError?.status}></FeilStateView>}
@@ -116,6 +127,13 @@ export const Soknaden = () => {
             {(flexjarToggle.enabled || sporsmal?.tag == 'INNTEKTSOPPLYSNINGER_DRIFT_VIRKSOMHETEN') && (
                 <FlexjarSporsmal soknad={valgtSoknad} sporsmal={sporsmal} steg={stegNo} />
             )}
+            <FlexjarSurveyModal
+                visSurvey={visSurvey}
+                surveySporsmal="Hvorfor ønsker du å gjenåpne denne søknaden?"
+                svarAlternativer={flexjarSurveyAlternativer}
+                onSubmit={() => {}}
+                feedbackId="sykpengesoknad-avbryt-survey"
+            ></FlexjarSurveyModal>
         </>
     )
 }
