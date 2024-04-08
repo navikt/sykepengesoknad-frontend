@@ -12,21 +12,24 @@ interface SoknadLinkProps {
     className: string
 }
 
-export const urlTilSoknad = (soknad: Soknad | RSSoknadmetadata) => {
+export const urlTilSoknad = (soknad: Soknad | RSSoknadmetadata, medQueryParams = true) => {
+    // Store the query parameters in a variable, adding condition to include them based on medQueryParams flag
+    const queryParams = medQueryParams ? window.location.search : ''
+
     switch (soknad.status) {
         case RSSoknadstatus.SENDT:
-            return `/sendt/${soknad.id}${window.location.search}`
+            return `/sendt/${soknad.id}${queryParams}`
         case RSSoknadstatus.AVBRUTT:
-            return `/avbrutt/${soknad.id}${window.location.search}`
+            return `/avbrutt/${soknad.id}${queryParams}`
         case RSSoknadstatus.UTKAST_TIL_KORRIGERING:
-            return `/soknader/${soknad.id}/1${window.location.search}`
+            return `/soknader/${soknad.id}/1${queryParams}`
     }
 
     const soknaderUrl = `/soknader/${soknad.id}`
 
     return soknad instanceof Soknad && erDelvisUtfylt(soknad)
-        ? `${soknaderUrl}/${finnPosisjonPaSisteBesvarteSporsmal(soknad) + 1}${window.location.search}`
-        : `${soknaderUrl}/1${window.location.search}`
+        ? `${soknaderUrl}/${finnPosisjonPaSisteBesvarteSporsmal(soknad) + 1}${queryParams}`
+        : `${soknaderUrl}/1${queryParams}`
 }
 
 const erDelvisUtfylt = (soknad: Soknad): boolean => {

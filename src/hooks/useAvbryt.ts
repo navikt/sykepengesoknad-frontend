@@ -6,6 +6,7 @@ import fetchMedRequestId, { AuthenticationError, FetchError } from '../utils/fet
 import { Soknad } from '../types/types'
 import { RSSoknadstype } from '../types/rs-types/rs-soknadstype'
 import { RSSoknadstatus } from '../types/rs-types/rs-soknadstatus'
+import { visFlexjarSurvey } from '../components/flexjar/utils'
 
 import { useTestpersonQuery } from './useTestpersonQuery'
 
@@ -47,14 +48,7 @@ export function useAvbryt() {
             } else {
                 await queryClient.invalidateQueries(['soknad', variables.valgtSoknad.id])
                 queryClient.invalidateQueries(['soknader']).catch()
-                await router.replace(
-                    {
-                        pathname: router.pathname,
-                        query: { ...router.query, visSurvey: 'true' },
-                    },
-                    undefined,
-                    { shallow: true },
-                )
+                await visFlexjarSurvey(router)
             }
         },
         onError: (e) => {

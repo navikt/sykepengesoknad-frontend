@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 
 import OmReisetilskudd from '../../components/om-reisetilskudd/om-reisetilskudd'
@@ -24,6 +24,7 @@ import { SlikBehandlerNavPersonopplysningene } from '../soknad-intro/slik-behand
 import { FeilStateView } from '../feil/refresh-hvis-feil-state'
 import { Over70Aar } from '../soknad-intro/over-70'
 import { FlexjarSurveyModal } from '../flexjar/flexjar-survey'
+import { skjulFlexjarSurvey } from '../flexjar/utils'
 
 import { urlTilSoknad } from './soknad-link'
 import { SporsmalTittel } from './sporsmal-tittel'
@@ -42,6 +43,7 @@ export const Soknaden = () => {
         spmIndex,
         valgtSoknadError,
     } = useSoknadMedDetaljer()
+    const [visSurvey, setVisSurvey] = useState(router.query.visSurvey === 'true')
 
     useUpdateBreadcrumbs(() => [{ ...soknadBreadcrumb, handleInApp: true }], [])
 
@@ -98,7 +100,6 @@ export const Soknaden = () => {
     const erForstesiden = stegNo === 1 && !erUtenlandssoknad
     const erForstesidenMedReisetilskudd = stegNo === 1 && (erReisetilskuddsoknad || erGradertReisetilskuddsoknad)
 
-    const visSurvey = router.query.visSurvey === 'true'
     const flexjarSurveyAlternativer = [
         'Jeg trengte mer tid og ville fortsette senere',
         'Jeg trykket feil',
@@ -128,10 +129,13 @@ export const Soknaden = () => {
                 <FlexjarSporsmal soknad={valgtSoknad} sporsmal={sporsmal} steg={stegNo} />
             )}
             <FlexjarSurveyModal
+                modalTittel="Du har gjenåpnet søknaden"
                 visSurvey={visSurvey}
                 surveySporsmal="Hvorfor ønsker du å gjenåpne denne søknaden?"
                 svarAlternativer={flexjarSurveyAlternativer}
-                onSubmit={() => {}}
+                onSubmit={() => {
+                    skjulFlexjarSurvey(router).then(() => setVisSurvey(false))
+                }}
                 feedbackId="sykpengesoknad-avbryt-survey"
             ></FlexjarSurveyModal>
         </>

@@ -3,6 +3,7 @@ import { logger } from '@navikt/next-logger'
 import { useRouter } from 'next/router'
 
 import fetchMedRequestId, { AuthenticationError, FetchError } from '../utils/fetch'
+import { visFlexjarSurvey } from '../components/flexjar/utils'
 
 import { useTestpersonQuery } from './useTestpersonQuery'
 
@@ -25,14 +26,7 @@ export function useGjenapne() {
         onSuccess: async (data, id) => {
             await queryClient.invalidateQueries(['soknad', id])
             queryClient.invalidateQueries(['soknader']).catch()
-            await router.replace(
-                {
-                    pathname: router.pathname,
-                    query: { ...router.query, visSurvey: 'true' },
-                },
-                undefined,
-                { shallow: true },
-            )
+            await visFlexjarSurvey(router)
         },
         onError: (e) => {
             if (!(e instanceof AuthenticationError)) {

@@ -162,10 +162,7 @@ export function FlexjarFelles({
                                         e.preventDefault()
                                         await handleSend(() => reset())
                                         if (sekundaerEffekt) {
-                                            //Timeout for å vise at tilbakemeldingen er sendt
-                                            setTimeout(() => {
-                                                sekundaerEffekt()
-                                            }, 1000)
+                                            sekundaerEffekt()
                                         }
                                     }}
                                 >

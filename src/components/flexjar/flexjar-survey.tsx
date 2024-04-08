@@ -3,7 +3,6 @@ import { Button, Modal } from '@navikt/ds-react'
 
 import { useSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
 import { logEvent } from '../amplitude/amplitude'
-import { tekst } from '../../utils/tekster'
 
 import { FeedbackButton, FlexjarFelles } from './flexjar-felles'
 
@@ -67,7 +66,12 @@ export const FlexjarSurvey = ({
                 textRequired={false}
                 flexjartittel={tittel || 'Hjelp oss å gjøre denne tjenesten bedre'}
                 flexjarsporsmal={surveySporsmal}
-                sekundaerEffekt={() => onSubmit()}
+                sekundaerEffekt={() => {
+                    //Timeout for å vise at tilbakemeldingen er sendt
+                    setTimeout(() => {
+                        onSubmit()
+                    }, 1000)
+                }}
             >
                 <div className="flex flex-col w-full gap-3">{alternativer}</div>
             </FlexjarFelles>
@@ -92,6 +96,7 @@ export const FlexjarSurvey = ({
 
 interface FlexjarSurveyModalProps {
     tittel?: string
+    modalTittel: string
     surveySporsmal: string
     svarAlternativer: string[]
     onSubmit: () => void
@@ -100,6 +105,7 @@ interface FlexjarSurveyModalProps {
 }
 export const FlexjarSurveyModal = ({
     tittel,
+    modalTittel,
     surveySporsmal,
     svarAlternativer,
     onSubmit,
@@ -108,17 +114,7 @@ export const FlexjarSurveyModal = ({
 }: FlexjarSurveyModalProps) => {
     return (
         <>
-            <Modal
-                open={visSurvey}
-                header={{ heading: tekst('avbryt.popup.tittel') }}
-                onClose={() => {
-                    // logEvent('modal lukket', {
-                    //     component: tekst('avbryt.popup.tittel'),
-                    //     soknadstype: valgtSoknad?.soknadstype,
-                    //     steg: stegId!,
-                    // })
-                }}
-            >
+            <Modal open={visSurvey} header={{ heading: modalTittel }} onClose={() => {}}>
                 {visSurvey && (
                     <div className="flex flex-row-reverse flex-wrap gap-4 p-6 pt-4 -mt-12">
                         <FlexjarSurvey
@@ -126,7 +122,9 @@ export const FlexjarSurveyModal = ({
                             feedbackId={feedbackId}
                             surveySporsmal={surveySporsmal}
                             svarAlternativer={svarAlternativer}
-                            onSubmit={() => {}}
+                            onSubmit={() => {
+                                onSubmit()
+                            }}
                         ></FlexjarSurvey>
                     </div>
                 )}

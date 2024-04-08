@@ -1,6 +1,6 @@
 import { Alert, BodyLong, BodyShort } from '@navikt/ds-react'
 import dayjs from 'dayjs'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
@@ -18,6 +18,7 @@ import { soknadBreadcrumb, useUpdateBreadcrumbs } from '../../hooks/useBreadcrum
 import { SoknadHeader } from '../soknad/soknad-header'
 import { useSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
 import { FlexjarSurveyModal } from '../flexjar/flexjar-survey'
+import { skjulFlexjarSurvey } from '../flexjar/utils'
 
 import GjenapneSoknad from './gjenapneknapp'
 
@@ -25,7 +26,7 @@ const AvbruttSoknad = () => {
     const router = useRouter()
     const { data: soknader } = useSoknader()
     const { valgtSoknad, soknadId } = useSoknadMedDetaljer()
-    const visSurvey = router.query.visSurvey === 'true'
+    const [visSurvey, setVisSurvey] = useState(router.query.visSurvey === 'true')
 
     const svarAlternativer = [
         'Jeg har allerede sendt inn søknaden på papir',
@@ -86,10 +87,13 @@ const AvbruttSoknad = () => {
             />
             <GjenapneSoknad />
             <FlexjarSurveyModal
+                modalTittel="Du har avbrutt søknaden"
                 visSurvey={visSurvey}
-                surveySporsmal="Hvorfor ønsker du å avbryte denne søknaden?"
+                surveySporsmal="Hvorfor ønsket du å avbryte denne søknaden?"
                 svarAlternativer={svarAlternativer}
-                onSubmit={() => {}}
+                onSubmit={() => {
+                    skjulFlexjarSurvey(router).then(() => setVisSurvey(false))
+                }}
                 feedbackId="sykpengesoknad-avbryt-survey"
             ></FlexjarSurveyModal>
         </>
