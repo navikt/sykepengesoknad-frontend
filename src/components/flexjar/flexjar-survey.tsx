@@ -66,7 +66,13 @@ export const FlexjarSurvey = ({
                 textRequired={false}
                 flexjartittel={tittel || 'Hjelp oss å gjøre denne tjenesten bedre'}
                 flexjarsporsmal={surveySporsmal}
-                sekundaerEffekt={() => onSubmit()}
+                sekundaerEffekt={() => {
+                    //Timeout for å vise at tilbakemeldingen er sendt
+                    setTimeout(() => {
+                        onSubmit()
+                    }, 1000)
+                }}
+                fullBredde={true}
             >
                 <div className="flex flex-col w-full gap-3">{alternativer}</div>
             </FlexjarFelles>
