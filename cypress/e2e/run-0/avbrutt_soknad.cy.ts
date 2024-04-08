@@ -39,20 +39,16 @@ describe('Tester avbryting av søknad', () => {
         cy.contains('Frist for å søke')
     })
 
-    //Følgende er for gjenåpning uten survey modal
-    // it('Søknad kan gjenåpnes', function () {
-    //     cy.get('button[data-cy="bruk-soknad-likevel"]').click()
-    //     cy.url().should('include', `${avbruttSoknad.id}/1`)
-    //     cy.contains('Gå videre')
-    // })
-
     it('Søknad kan gjenåpnes med survey, som ikke besvares', () => {
         cy.get('button[data-cy="bruk-soknad-likevel"]').click()
-        modalAktiv()
-        cy.contains('Du er i ferd med å gjenåpne denne søknaden')
+        cy.url().should('include', 'visSurvey=true')
 
+        modalAktiv()
+        cy.contains('Du har gjenåpnet søknaden')
         cy.contains('Jeg vil ikke gi tilbakemelding').click()
-        cy.url().should('include', `${avbruttSoknad.id}/1`)
+        modalIkkeAktiv()
+
+        cy.url().should('include', `${avbruttSoknad.id}/1`).and('include', 'visSurvey=false')
         cy.contains('Gå videre')
     })
 
@@ -63,50 +59,36 @@ describe('Tester avbryting av søknad', () => {
         cy.contains('Nei').click()
     })
 
-    //Følgende er for å avbryte søknad uten survey modal
-    // it('Søknad kan avbrytes ', function () {
-    //     // Avbryt dialog vises
-    //     cy.contains('Jeg vil ikke bruke denne søknaden').click()
-    //     modalAktiv()
-    //     cy.contains('Nei, jeg vil bruke søknaden').should('be.visible')
-    //     cy.findByRole('button', { name: 'Nei, jeg vil bruke søknaden' }).click()
-    //     modalIkkeAktiv()
-    //     cy.contains('Nei, jeg vil bruke søknaden').should('not.be.visible')
-    //     cy.contains('Jeg vil ikke bruke denne søknaden').should('be.visible').click()
-    //     modalAktiv()
-    //     cy.contains('Ja, jeg er sikker').should('be.visible')
-    //
-    //     cy.findByRole('button', { name: 'Ja, jeg er sikker' }).click()
-    //     modalIkkeAktiv()
-    //     cy.url().should('include', `avbrutt/${avbruttSoknad.id}`)
-    //     cy.contains('Jeg vil bruke denne søknaden likevel')
-    // })
-
     it('Søknad avbrytes, med survey som besvares ', function () {
         // Avbryt dialog vises
         cy.contains('Jeg vil ikke bruke denne søknaden').click()
         modalAktiv()
         cy.contains('Ja, jeg er sikker').should('be.visible')
         cy.findByRole('button', { name: 'Ja, jeg er sikker' }).click()
+        cy.url().should('include', 'visSurvey=true')
 
-        cy.contains('Hvorfor ønsker du å avbryte denne søknaden?')
+        cy.contains('Hvorfor ønsket du å avbryte denne søknaden?')
         cy.contains('Arbeidsgiveren min betaler for hele sykefraværet').click()
         svarFritekst('Er det noe du vil trekke frem? (valgfritt)', 'Trenger ikke sykemelding da vel')
 
         cy.contains('Send tilbakemelding').click()
         modalIkkeAktiv()
-        cy.url().should('include', `avbrutt/${avbruttSoknad.id}`)
+        cy.url().should('include', `avbrutt/${avbruttSoknad.id}`).and('include', 'visSurvey=false')
         cy.contains('Jeg vil bruke denne søknaden likevel')
     })
 
     it('Søknad gjenåpnes med survey, som besvares', () => {
         cy.get('button[data-cy="bruk-soknad-likevel"]').click()
+        cy.url().should('include', 'visSurvey=true')
+
         modalAktiv()
-        cy.contains('Du er i ferd med å gjenåpne denne søknaden')
+        cy.contains('Du har gjenåpnet søknaden')
         cy.contains('Jeg trengte mer tid og ville fortsette senere').click()
         svarFritekst('Er det noe du vil trekke frem? (valgfritt)', 'Trodde jeg kunne fortsette søknaden senere')
         cy.contains('Send tilbakemelding').click()
-        cy.url().should('include', `${avbruttSoknad.id}/1`)
+        modalIkkeAktiv()
+
+        cy.url().should('include', `${avbruttSoknad.id}/1`).and('include', 'visSurvey=false')
         cy.contains('Gå videre')
     })
 
@@ -116,12 +98,13 @@ describe('Tester avbryting av søknad', () => {
         modalAktiv()
         cy.contains('Ja, jeg er sikker').should('be.visible')
         cy.findByRole('button', { name: 'Ja, jeg er sikker' }).click()
+        cy.url().should('include', 'visSurvey=true')
 
-        cy.contains('Hvorfor ønsker du å avbryte denne søknaden?')
+        cy.contains('Hvorfor ønsket du å avbryte denne søknaden?')
         cy.contains('Jeg vil ikke gi tilbakemelding').click()
         modalIkkeAktiv()
 
-        cy.url().should('include', `avbrutt/${avbruttSoknad.id}`)
+        cy.url().should('include', `avbrutt/${avbruttSoknad.id}`).and('include', 'visSurvey=false')
         cy.contains('Jeg vil bruke denne søknaden likevel')
     })
 })

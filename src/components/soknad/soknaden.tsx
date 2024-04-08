@@ -131,7 +131,7 @@ export const Soknaden = () => {
             <FlexjarSurveyModal
                 modalTittel="Du har gjenåpnet søknaden"
                 visSurvey={visSurvey}
-                surveySporsmal="Hvorfor ønsker du å gjenåpne denne søknaden?"
+                surveySporsmal="Hvorfor ønsket du å gjenåpne denne søknaden?"
                 svarAlternativer={flexjarSurveyAlternativer}
                 onSubmit={() => {
                     skjulFlexjarSurvey(router).then(() => setVisSurvey(false))

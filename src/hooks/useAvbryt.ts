@@ -43,8 +43,11 @@ export function useAvbryt() {
             ) {
                 await queryClient.invalidateQueries(['soknad', variables.valgtSoknad.id], { refetchType: 'none' })
                 await queryClient.invalidateQueries(['soknader'])
-                await router.push('/?visSurvey=true')
-                //TODO: vis survey her og
+                if (variables.valgtSoknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND) {
+                    await router.push('/?visSurvey=true')
+                } else {
+                    await router.push('/')
+                }
             } else {
                 await queryClient.invalidateQueries(['soknad', variables.valgtSoknad.id])
                 queryClient.invalidateQueries(['soknader']).catch()

@@ -1,4 +1,4 @@
-import { klikkGaVidere, setPeriodeFraTil } from '../../support/utilities'
+import { klikkGaVidere, modalIkkeAktiv, setPeriodeFraTil, svarFritekst } from '../../support/utilities'
 import { oppholdUtland2 } from '../../../src/data/mock/data/soknad/opphold-utland'
 
 describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
@@ -72,10 +72,18 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
         cy.contains('Gå videre').should('not.exist')
     })
 
-    it('Vi avbryter søknaden og havner på forsiden, søknaden er borte', function () {
+    it('Vi avbryter søknaden og havner på forsiden, søknaden er borte, viser og svarer på survey', function () {
         cy.get('button[data-cy="avbryt-soknad"]').click()
 
-        cy.url().should('equal', Cypress.config().baseUrl + '/syk/sykepengesoknad')
+        cy.url().should('equal', Cypress.config().baseUrl + '/syk/sykepengesoknad' + '?visSurvey=true')
+
+        cy.contains('Hvorfor ønsket du å avbryte denne søknaden?')
+        cy.contains('Arbeidsgiveren min betaler for hele sykefraværet').click()
+        svarFritekst('Er det noe du vil trekke frem? (valgfritt)', 'Trenger ikke sykemelding da vel')
+
+        cy.contains('Send tilbakemelding').click()
+        modalIkkeAktiv()
+        cy.url().should('equal', Cypress.config().baseUrl + '/syk/sykepengesoknad' + '?visSurvey=false')
 
         cy.get('.navds-heading--large').should('be.visible').and('have.text', 'Søknader')
         cy.get(`a[href*=${soknad.id}]`).should('not.exist')
