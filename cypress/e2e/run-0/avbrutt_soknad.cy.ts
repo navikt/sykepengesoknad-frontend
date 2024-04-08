@@ -44,7 +44,7 @@ describe('Tester avbryting av søknad', () => {
         cy.url().should('include', 'visSurvey=true')
 
         modalAktiv()
-        cy.get('dialog').get('section').should('have.class', 'w-full mt-16').and('not.have.class', 'md:w-3/4')
+        cy.get('dialog').get('section').should('have.class', 'w-full').and('not.have.class', 'mt-16 md:w-3/4')
         cy.contains('Du har gjenåpnet søknaden')
         cy.contains('Jeg vil ikke gi tilbakemelding').click()
         modalIkkeAktiv()
@@ -69,7 +69,7 @@ describe('Tester avbryting av søknad', () => {
         cy.url().should('include', 'visSurvey=true')
 
         modalAktiv()
-        cy.get('dialog').get('section').should('have.class', 'w-full mt-16').and('not.have.class', 'md:w-3/4')
+        cy.get('dialog').get('section').should('have.class', 'w-full').and('not.have.class', 'mt-16 md:w-3/4')
         cy.contains('Hvorfor ønsket du å avbryte denne søknaden?')
         cy.contains('Arbeidsgiveren min betaler for hele sykefraværet').click()
         svarFritekst('Er det noe du vil trekke frem? (valgfritt)', 'Trenger ikke sykemelding da vel')

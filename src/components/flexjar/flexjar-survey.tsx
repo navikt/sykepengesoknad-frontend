@@ -115,9 +115,15 @@ export const FlexjarSurveyModal = ({
 }: FlexjarSurveyModalProps) => {
     return (
         <>
-            <Modal open={visSurvey} header={{ heading: modalTittel }} onClose={() => {}}>
+            <Modal
+                open={visSurvey}
+                header={{ heading: modalTittel }}
+                onClose={() => {
+                    onSubmit()
+                }}
+            >
                 {visSurvey && (
-                    <div className="flex flex-row-reverse flex-wrap gap-4 p-6 pt-4 -mt-12">
+                    <div className="flex flex-row-reverse flex-wrap gap-4 p-6 pt-4">
                         <FlexjarSurvey
                             tittel={tittel}
                             feedbackId={feedbackId}
