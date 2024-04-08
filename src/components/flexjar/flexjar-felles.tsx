@@ -21,6 +21,7 @@ interface FlexjarFellesProps {
     flexjartittel: string
     feedbackProps: Record<string, string | undefined | boolean>
     sekundaerEffekt?: () => void
+    fullBredde?: boolean
 }
 
 export function FlexjarFelles({
@@ -36,6 +37,7 @@ export function FlexjarFelles({
     textRequired,
     feedbackProps,
     sekundaerEffekt,
+    fullBredde,
 }: FlexjarFellesProps) {
     const [textValue, setTextValue] = useState('')
     const [errorMsg, setErrorMsg] = useState<string | null>(null)
@@ -107,7 +109,7 @@ export function FlexjarFelles({
     }
 
     return (
-        <section className="w-full mt-16">
+        <section className={`w-full mt-16 ${fullBredde ? '' : 'md:w-3/4'}`}>
             <div>
                 <div className="mt-1 border-4 border-surface-subtle rounded-medium">
                     <div className="bg-surface-subtle p-6 flex gap-4 items-center">

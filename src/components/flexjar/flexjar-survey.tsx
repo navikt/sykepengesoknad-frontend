@@ -72,6 +72,7 @@ export const FlexjarSurvey = ({
                         onSubmit()
                     }, 1000)
                 }}
+                fullBredde={true}
             >
                 <div className="flex flex-col w-full gap-3">{alternativer}</div>
             </FlexjarFelles>
