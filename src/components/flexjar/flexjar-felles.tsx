@@ -20,6 +20,8 @@ interface FlexjarFellesProps {
     flexjarsporsmal: string
     flexjartittel: string
     feedbackProps: Record<string, string | undefined | boolean>
+    sekundaerEffekt?: () => void
+    fullBredde?: boolean
 }
 
 export function FlexjarFelles({
@@ -34,6 +36,8 @@ export function FlexjarFelles({
     children,
     textRequired,
     feedbackProps,
+    sekundaerEffekt,
+    fullBredde,
 }: FlexjarFellesProps) {
     const [textValue, setTextValue] = useState('')
     const [errorMsg, setErrorMsg] = useState<string | null>(null)
@@ -100,12 +104,13 @@ export function FlexjarFelles({
             setActiveState(null)
             setTextValue('')
             setThanksFeedback(true)
+            return
         }
     }
 
     return (
-        <section>
-            <div className="w:full mt-16 md:w-3/4">
+        <section className={`w-full ${fullBredde ? '' : 'mt-16 md:w-3/4'}`}>
+            <div>
                 <div className="mt-1 border-4 border-surface-subtle rounded-medium">
                     <div className="bg-surface-subtle p-6 flex gap-4 items-center">
                         <div className="bg-gray-900 w-10 h-10 rounded-full flex justify-center items-center">
@@ -158,6 +163,9 @@ export function FlexjarFelles({
                                     onClick={async (e) => {
                                         e.preventDefault()
                                         await handleSend(() => reset())
+                                        if (sekundaerEffekt) {
+                                            sekundaerEffekt()
+                                        }
                                     }}
                                 >
                                     {sendTilbakemelding}
@@ -200,7 +208,8 @@ export function FeedbackButton(props: FeedbackButtonProps) {
                     props.activeState === props.svar,
             })}
             aria-pressed={props.activeState === props.svar}
-            onClick={() => {
+            onClick={(e) => {
+                e.preventDefault()
                 logEvent('knapp klikket', {
                     komponent: 'flexjar',
                     feedbackId: props.feedbackId,
