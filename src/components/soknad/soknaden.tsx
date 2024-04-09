@@ -136,7 +136,7 @@ export const Soknaden = () => {
                 onSubmit={() => {
                     skjulFlexjarSurvey(router).then(() => setVisSurvey(false))
                 }}
-                feedbackId="sykpengesoknad-avbryt-survey"
+                feedbackId="sykpengesoknad-gjenapne-survey"
             ></FlexjarSurveyModal>
         </>
     )
