@@ -133,6 +133,7 @@ export const Soknaden = () => {
                 visSurvey={visSurvey}
                 surveySporsmal="Hvorfor ønsket du å gjenåpne denne søknaden?"
                 svarAlternativer={flexjarSurveyAlternativer}
+                inkluderAmplitude={true}
                 onSubmit={() => {
                     skjulFlexjarSurvey(router).then(() => setVisSurvey(false))
                 }}

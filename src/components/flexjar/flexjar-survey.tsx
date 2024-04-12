@@ -12,6 +12,7 @@ interface FlexjarSurveyProps {
     svarAlternativer: string[]
     onSubmit: () => void
     feedbackId: string
+    inkluderAmplitude?: boolean
 }
 
 export const FlexjarSurvey = ({
@@ -20,6 +21,7 @@ export const FlexjarSurvey = ({
     svarAlternativer,
     onSubmit,
     feedbackId,
+    inkluderAmplitude,
 }: FlexjarSurveyProps) => {
     const [activeState, setActiveState] = useState<string | number | null>(null)
     const [thanksFeedback, setThanksFeedback] = useState<boolean>(false)
@@ -37,6 +39,27 @@ export const FlexjarSurvey = ({
         activeState,
         setThanksFeedback,
         setActiveState,
+    }
+
+    function amplitudeMetadata() {
+        if (inkluderAmplitude) {
+            const cookies = document.cookie
+            const amplitudeCookie = cookies.split(';').find((cookie) => cookie.includes('amp_defaul'))
+            if (amplitudeCookie) {
+                const strings = amplitudeCookie.split('=')
+                if (strings.length == 2) {
+                    const amplitudeCookieValue = strings[1]
+                    if (amplitudeCookieValue.includes('...')) {
+                        const deviceId = amplitudeCookieValue.split('...')[0]
+                        return {
+                            amplitudeDeviceId: deviceId,
+                        }
+                    }
+                }
+            }
+        }
+
+        return {}
     }
 
     const alternativer = svarAlternativer.map((alternativ, index) => {
@@ -63,6 +86,7 @@ export const FlexjarSurvey = ({
                 feedbackProps={{
                     soknadstype: valgtSoknad?.soknadstype.toString(),
                 }}
+                feedbackPropsFunction={amplitudeMetadata}
                 textRequired={false}
                 flexjartittel={tittel || 'Hjelp oss å gjøre denne tjenesten bedre'}
                 flexjarsporsmal={surveySporsmal}
@@ -103,7 +127,9 @@ interface FlexjarSurveyModalProps {
     onSubmit: () => void
     feedbackId: string
     visSurvey: boolean
+    inkluderAmplitude?: boolean
 }
+
 export const FlexjarSurveyModal = ({
     tittel,
     modalTittel,
@@ -112,6 +138,7 @@ export const FlexjarSurveyModal = ({
     onSubmit,
     feedbackId,
     visSurvey,
+    inkluderAmplitude,
 }: FlexjarSurveyModalProps) => {
     return (
         <>
@@ -127,6 +154,7 @@ export const FlexjarSurveyModal = ({
                         <FlexjarSurvey
                             tittel={tittel}
                             feedbackId={feedbackId}
+                            inkluderAmplitude={inkluderAmplitude}
                             surveySporsmal={surveySporsmal}
                             svarAlternativer={svarAlternativer}
                             onSubmit={() => {
