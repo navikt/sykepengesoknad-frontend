@@ -20,6 +20,7 @@ interface FlexjarFellesProps {
     flexjarsporsmal: string
     flexjartittel: string
     feedbackProps: Record<string, string | undefined | boolean>
+    feedbackPropsFunction?: () => Record<string, string | undefined | number | boolean>
     sekundaerEffekt?: () => void
     fullBredde?: boolean
 }
@@ -38,6 +39,7 @@ export function FlexjarFelles({
     feedbackProps,
     sekundaerEffekt,
     fullBredde,
+    feedbackPropsFunction,
 }: FlexjarFellesProps) {
     const [textValue, setTextValue] = useState('')
     const [errorMsg, setErrorMsg] = useState<string | null>(null)
@@ -56,6 +58,9 @@ export function FlexjarFelles({
                 svar: activeState,
                 ...feedbackProps,
             }
+            if (feedbackPropsFunction) {
+                Object.assign(body, feedbackPropsFunction())
+            }
             if (data?.id) {
                 oppdaterFeedback({ body, id: data.id, cb: knappeklikk })
                 return true
@@ -64,7 +69,16 @@ export function FlexjarFelles({
                 return false
             }
         },
-        [activeState, data?.id, feedbackId, feedbackProps, giFeedback, oppdaterFeedback, textValue],
+        [
+            activeState,
+            data?.id,
+            feedbackId,
+            feedbackProps,
+            feedbackPropsFunction,
+            giFeedback,
+            oppdaterFeedback,
+            textValue,
+        ],
     )
     useEffect(() => {
         setErrorMsg(null)
