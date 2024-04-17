@@ -47,7 +47,6 @@ const AvbrytSoknadModal = () => {
     const { mutate: avbrytMutation, isLoading: avbryter, error: avbrytError } = useAvbryt()
 
     const [aapen, setAapen] = useState<boolean>(false)
-    const [visSurvey, setVisSurvey] = useState<boolean>(false)
 
     if (valgtSoknad?.status == RSSoknadstatus.UTKAST_TIL_KORRIGERING) {
         return <AvbrytKorrigering />
@@ -79,7 +78,6 @@ const AvbrytSoknadModal = () => {
                 header={{ heading: tekst('avbryt.popup.tittel') }}
                 onClose={() => {
                     setAapen(false)
-                    setVisSurvey(false)
                     logEvent('modal lukket', {
                         component: tekst('avbryt.popup.tittel'),
                         soknadstype: valgtSoknad?.soknadstype,
@@ -88,7 +86,9 @@ const AvbrytSoknadModal = () => {
                 }}
             >
                 <Modal.Body>
-                    <BodyLong size="medium">{tekst('avbryt.popup.sporsmal')}</BodyLong>
+                    <BodyLong spacing size="medium">
+                        {tekst('avbryt.popup.sporsmal')}
+                    </BodyLong>
                     {avbrytError && (
                         <Alert variant="error" className="mt-4">
                             {tekst('avbryt.feilet')}
@@ -101,7 +101,6 @@ const AvbrytSoknadModal = () => {
                         type="button"
                         className="mr-4 mt-4"
                         loading={avbryter}
-                        disabled={visSurvey}
                         onClick={() => {
                             logEvent('knapp klikket', {
                                 tekst: tekst('avbryt.popup.ja'),

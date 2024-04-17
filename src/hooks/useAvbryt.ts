@@ -6,7 +6,6 @@ import fetchMedRequestId, { AuthenticationError, FetchError } from '../utils/fet
 import { Soknad } from '../types/types'
 import { RSSoknadstype } from '../types/rs-types/rs-soknadstype'
 import { RSSoknadstatus } from '../types/rs-types/rs-soknadstatus'
-import { visFlexjarSurvey } from '../components/flexjar/utils'
 
 import { useTestpersonQuery } from './useTestpersonQuery'
 
@@ -43,15 +42,10 @@ export function useAvbryt() {
             ) {
                 await queryClient.invalidateQueries(['soknad', variables.valgtSoknad.id], { refetchType: 'none' })
                 await queryClient.invalidateQueries(['soknader'])
-                if (variables.valgtSoknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND) {
-                    await router.push('/?visSurvey=true')
-                } else {
-                    await router.push('/')
-                }
+                await router.push('/')
             } else {
                 await queryClient.invalidateQueries(['soknad', variables.valgtSoknad.id])
                 queryClient.invalidateQueries(['soknader']).catch()
-                await visFlexjarSurvey(router)
             }
         },
         onError: (e) => {

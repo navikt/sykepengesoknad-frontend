@@ -20,9 +20,6 @@ interface FlexjarFellesProps {
     flexjarsporsmal: string
     flexjartittel: string
     feedbackProps: Record<string, string | undefined | boolean>
-    feedbackPropsFunction?: () => Record<string, string | undefined | number | boolean>
-    sekundaerEffekt?: () => void
-    fullBredde?: boolean
 }
 
 export function FlexjarFelles({
@@ -37,9 +34,6 @@ export function FlexjarFelles({
     children,
     textRequired,
     feedbackProps,
-    sekundaerEffekt,
-    fullBredde,
-    feedbackPropsFunction,
 }: FlexjarFellesProps) {
     const [textValue, setTextValue] = useState('')
     const [errorMsg, setErrorMsg] = useState<string | null>(null)
@@ -58,9 +52,6 @@ export function FlexjarFelles({
                 svar: activeState,
                 ...feedbackProps,
             }
-            if (feedbackPropsFunction) {
-                Object.assign(body, feedbackPropsFunction())
-            }
             if (data?.id) {
                 oppdaterFeedback({ body, id: data.id, cb: knappeklikk })
                 return true
@@ -69,16 +60,7 @@ export function FlexjarFelles({
                 return false
             }
         },
-        [
-            activeState,
-            data?.id,
-            feedbackId,
-            feedbackProps,
-            feedbackPropsFunction,
-            giFeedback,
-            oppdaterFeedback,
-            textValue,
-        ],
+        [activeState, data?.id, feedbackId, feedbackProps, giFeedback, oppdaterFeedback, textValue],
     )
     useEffect(() => {
         setErrorMsg(null)
@@ -118,13 +100,12 @@ export function FlexjarFelles({
             setActiveState(null)
             setTextValue('')
             setThanksFeedback(true)
-            return
         }
     }
 
     return (
-        <section className={`w-full ${fullBredde ? '' : 'mt-16 md:w-3/4'}`}>
-            <div>
+        <section>
+            <div className="w:full mt-16 md:w-3/4">
                 <div className="mt-1 border-4 border-surface-subtle rounded-medium">
                     <div className="bg-surface-subtle p-6 flex gap-4 items-center">
                         <div className="bg-gray-900 w-10 h-10 rounded-full flex justify-center items-center">
@@ -177,9 +158,6 @@ export function FlexjarFelles({
                                     onClick={async (e) => {
                                         e.preventDefault()
                                         await handleSend(() => reset())
-                                        if (sekundaerEffekt) {
-                                            sekundaerEffekt()
-                                        }
                                     }}
                                 >
                                     {sendTilbakemelding}
@@ -222,8 +200,7 @@ export function FeedbackButton(props: FeedbackButtonProps) {
                     props.activeState === props.svar,
             })}
             aria-pressed={props.activeState === props.svar}
-            onClick={(e) => {
-                e.preventDefault()
+            onClick={() => {
                 logEvent('knapp klikket', {
                     komponent: 'flexjar',
                     feedbackId: props.feedbackId,
