@@ -1,6 +1,6 @@
 import { Alert, BodyLong, BodyShort } from '@navikt/ds-react'
 import dayjs from 'dayjs'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useRouter } from 'next/router'
 
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
@@ -17,8 +17,6 @@ import QueryStatusPanel from '../queryStatusPanel/QueryStatusPanel'
 import { soknadBreadcrumb, useUpdateBreadcrumbs } from '../../hooks/useBreadcrumbs'
 import { SoknadHeader } from '../soknad/soknad-header'
 import { useSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
-import { FlexjarSurveyModal } from '../flexjar/flexjar-survey'
-import { skjulFlexjarSurvey } from '../flexjar/utils'
 
 import GjenapneSoknad from './gjenapneknapp'
 
@@ -26,16 +24,6 @@ const AvbruttSoknad = () => {
     const router = useRouter()
     const { data: soknader } = useSoknader()
     const { valgtSoknad, soknadId } = useSoknadMedDetaljer()
-    const [visSurvey, setVisSurvey] = useState(router.query.visSurvey === 'true')
-
-    const svarAlternativer = [
-        'Jeg har allerede sendt inn søknaden på papir',
-        'Jeg vil lage en ny søknad',
-        'Arbeidsgiveren min betaler for hele sykefraværet',
-        'Jeg skal svare på søknaden senere',
-        'Jeg vil ikke søke',
-        'Annet',
-    ]
 
     useUpdateBreadcrumbs(() => [{ ...soknadBreadcrumb, handleInApp: true }], [])
 
@@ -86,16 +74,6 @@ const AvbruttSoknad = () => {
                 )}
             />
             <GjenapneSoknad />
-            <FlexjarSurveyModal
-                modalTittel="Du har avbrutt søknaden"
-                visSurvey={visSurvey}
-                surveySporsmal="Hvorfor ønsket du å avbryte denne søknaden?"
-                svarAlternativer={svarAlternativer}
-                onSubmit={() => {
-                    skjulFlexjarSurvey(router).then(() => setVisSurvey(false))
-                }}
-                feedbackId="sykpengesoknad-avbryt-survey"
-            ></FlexjarSurveyModal>
         </>
     )
 }
