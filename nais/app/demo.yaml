@@ -11,6 +11,12 @@ spec:
   port: 8080
   ingresses:
     - {{ ingress }}
+  resources:
+    limits:
+      memory: 800Mi
+    requests:
+      cpu: 200m
+      memory: 256Mi
   replicas:
     min: {{ replicas }}
     max: {{ replicas }}
