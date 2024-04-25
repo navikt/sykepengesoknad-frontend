@@ -62,6 +62,8 @@ export function getSession(req: NextApiRequest, res: NextApiResponse): session {
             httpOnly: false,
             path: '/',
             expires: new Date(Date.now() + 60 * 60 * 1000),
+            sameSite: 'none',
+            secure: true,
         })
         res.setHeader('Set-Cookie', cookie)
 
