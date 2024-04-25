@@ -9,9 +9,9 @@ import React, { ReactElement, useEffect, useRef } from 'react'
 import { QueryCache, QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { useRouter } from 'next/router'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+import dynamic from 'next/dynamic'
 
 import { useHandleDecoratorClicks } from '../hooks/useBreadcrumbs'
-import { LabsWarning } from '../components/labs-warning/LabsWarning'
 import { basePath } from '../utils/environment'
 import { getFaro, initInstrumentation, pinoLevelToFaroLevel } from '../faro/faro'
 import { AuthenticationError } from '../utils/fetch'
@@ -57,6 +57,12 @@ function MyApp({ Component, pageProps }: AppProps<ServerSidePropsResult>): React
 
     const router = useRouter()
     const isFirst = useRef(true)
+    const DemoWarning = () => {
+        const DemoWarning = dynamic(() => import('../components/demo-warning/DemoWarning'), {
+            ssr: false,
+        })
+        return <DemoWarning />
+    }
 
     useEffect(() => {
         if (isFirst.current) {
@@ -80,7 +86,7 @@ function MyApp({ Component, pageProps }: AppProps<ServerSidePropsResult>): React
             <FlagProvider toggles={pageProps.toggles}>
                 <QueryClientProvider client={queryClient}>
                     <div id="root" className="mx-auto max-w-2xl p-4 pb-32">
-                        <LabsWarning />
+                        <DemoWarning />
                         <main id="maincontent" role="main" tabIndex={-1} className="outline-none">
                             <Component {...pageProps} />
                         </main>
