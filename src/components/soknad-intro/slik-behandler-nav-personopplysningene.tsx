@@ -161,9 +161,7 @@ export const SlikBehandlerNavPersonopplysningene = () => {
                         innhente noen flere opplysninger i saken din.
                     </BodyLong>
 
-                    <Label as="p">
-                        Flere eksempler:
-                    </Label>
+                    <Label as="p">Flere eksempler:</Label>
                     <BodyLong spacing>
                         Vi kan innhente informasjon om du har roller i selskaper eller om du er eier av
                         enkeltpersonforetak. Med roller mener vi for eksempel daglig leder eller styreleder.
