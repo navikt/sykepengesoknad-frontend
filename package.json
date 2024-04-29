@@ -37,7 +37,7 @@
         "react-hook-form": "^7.51.3",
         "remeda": "^1.53.0",
         "smoothscroll-polyfill": "^0.4.4",
-        "tailwind-merge": "^2.2.2",
+        "tailwind-merge": "^2.3.0",
         "use-force-update": "^1.0.11",
         "uuid": "^9.0.1"
     },
