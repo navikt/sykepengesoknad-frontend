@@ -1,43 +1,8 @@
-import { BodyShort, Link, Skeleton } from '@navikt/ds-react'
+import { BodyShort, Skeleton } from '@navikt/ds-react'
 import React from 'react'
-import { ArrowLeftIcon } from '@navikt/aksel-icons'
-import NextLink from 'next/link'
 
-import { SEPARATOR } from '../../../utils/constants'
-import { logEvent } from '../../amplitude/amplitude'
-import { tekst } from '../../../utils/tekster'
 import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype'
 import { useSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
-import { useTestpersonQuery } from '../../../hooks/useTestpersonQuery'
-
-const TilbakeKnapp = () => {
-    const { valgtSoknad: soknad, stegNo, soknadId } = useSoknadMedDetaljer()
-    const testperson = useTestpersonQuery()
-    if (stegNo == 1 || !soknad) {
-        return <div></div> //Tom div pga flex justify-between på parent
-    }
-
-    return (
-        <NextLink legacyBehavior passHref href={`/soknader/${soknadId}${SEPARATOR}${stegNo - 1}${testperson.query()}`}>
-            <Link
-                className="cursor-pointer"
-                onClick={() => {
-                    if (!soknad) return
-                    logEvent('navigere', {
-                        lenketekst: tekst('soknad.tilbakeknapp'),
-                        fra: soknad.sporsmal[stegNo - 1].tag,
-                        til: soknad.sporsmal[stegNo - 2].tag,
-                        soknadstype: soknad?.soknadstype,
-                        stegId: `${stegNo}`,
-                    })
-                }}
-            >
-                <ArrowLeftIcon aria-hidden={true} />
-                <BodyShort as="span">{tekst('soknad.tilbakeknapp')}</BodyShort>
-            </Link>
-        </NextLink>
-    )
-}
 
 const Fremdriftsbar = () => {
     const { valgtSoknad, stegNo } = useSoknadMedDetaljer()
@@ -80,7 +45,6 @@ const Fremdriftsbar = () => {
                 />
             </div>
             <div className="mt-4 flex justify-between">
-                <TilbakeKnapp />
                 <BodyShort as={valgtSoknad ? 'span' : Skeleton}>{valueText}</BodyShort>
             </div>
         </div>
