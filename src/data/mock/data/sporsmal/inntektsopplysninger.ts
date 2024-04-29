@@ -220,9 +220,6 @@ export const inntektsopplysningerLegacy: RSSporsmal = {
     ],
 }
 
-// Har du registrert virksomheten din som avviklet og slettet i Altinn før du ble sykmeldt?
-// https://trello.com/c/Enx57DXL
-
 export const inntektsopplysninger: RSSporsmal = {
     id: v4().toString(),
     tag: 'INNTEKTSOPPLYSNINGER_VIRKSOMHETEN_AVVIKLET',
