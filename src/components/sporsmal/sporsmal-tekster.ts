@@ -277,6 +277,11 @@ const SporsmalTekster = {
     'soknad.feilmelding.INNTEKTSOPPLYSNINGER_DRIFT_VIRKSOMHETEN_JA': '',
     'soknad.feilmelding.INNTEKTSOPPLYSNINGER_DRIFT_VIRKSOMHETEN_NEI': '',
     'soknad.feilmelding.INNTEKTSOPPLYSNINGER_DRIFT_VIRKSOMHETEN_OPPHORT': '',
+    'soknad.feilmelding.INNTEKTSOPPLYSNINGER_VIRKSOMHETEN_AVVIKLET':
+        'Du må svare på om virksomheten har blitt avviklet og slettet',
+    'soknad.feilmelding.INNTEKTSOPPLYSNINGER_VIRKSOMHETEN_AVVIKLET_JA': '',
+    'soknad.feilmelding.INNTEKTSOPPLYSNINGER_VIRKSOMHETEN_AVVIKLET_NEI': '',
+    'soknad.feilmelding.INNTEKTSOPPLYSNINGER_VIRKSOMHETEN_AVVIKLET_OPPHORT': '',
 }
 
 export default SporsmalTekster
