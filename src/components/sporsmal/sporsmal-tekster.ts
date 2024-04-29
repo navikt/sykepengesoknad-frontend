@@ -281,7 +281,7 @@ const SporsmalTekster = {
         'Du må svare på om virksomheten har blitt avviklet og slettet',
     'soknad.feilmelding.INNTEKTSOPPLYSNINGER_VIRKSOMHETEN_AVVIKLET_JA': '',
     'soknad.feilmelding.INNTEKTSOPPLYSNINGER_VIRKSOMHETEN_AVVIKLET_NEI': '',
-    'soknad.feilmelding.INNTEKTSOPPLYSNINGER_VIRKSOMHETEN_AVVIKLET_OPPHORT': '',
+    'soknad.feilmelding.INNTEKTSOPPLYSNINGER_VIRKSOMHETEN_AVVIKLET_NAR': '',
 }
 
 export default SporsmalTekster

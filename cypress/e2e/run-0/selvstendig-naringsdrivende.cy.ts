@@ -35,7 +35,7 @@ describe('Tester selvstendig naringsdrivende søknad', () => {
         klikkGaVidere(true)
         harFeilISkjemaet('Du må svare på om virksomheten har blitt avviklet og slettet')
         svarJaHovedsporsmal()
-        cy.contains('Når opphørte driften i virksomheten?')
+        cy.contains('Når ble virksomheten avviklet?')
         klikkGaVidere(true)
         harFeilISkjemaet('Datoen følger ikke formatet dd.mm.åååå')
         svarNeiHovedsporsmal()
