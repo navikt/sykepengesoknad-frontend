@@ -245,8 +245,8 @@ export const inntektsopplysninger: RSSporsmal = {
             undersporsmal: [
                 {
                     id: v4().toString(),
-                    tag: 'INNTEKTSOPPLYSNINGER_VIRKSOMHETEN_AVVIKLET_OPPHORT',
-                    sporsmalstekst: 'Når opphørte driften i virksomheten?',
+                    tag: 'INNTEKTSOPPLYSNINGER_VIRKSOMHETEN_AVVIKLET_NAR',
+                    sporsmalstekst: 'Når ble virksomheten avviklet?',
                     undertekst: null,
                     svartype: 'DATO',
                     min: null,
