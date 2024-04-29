@@ -1,7 +1,7 @@
 import { RSSoknad } from '../../../../types/rs-types/rs-soknad'
 import { nyVærKlarOverAt } from '../sporsmal/vaer-klar-over-at'
 import { naringsdrivende100syk } from '../sykmeldinger'
-import { inntektsopplysningerLegacy } from '../sporsmal/inntektsopplysninger'
+import { inntektsopplysninger } from '../sporsmal/inntektsopplysninger'
 
 export const naringsdrivendeSoknad: RSSoknad = {
     id: 'a8e40578-682b-4a04-bfda-b7768af2ae55',
@@ -336,7 +336,7 @@ export const naringsdrivendeSoknad: RSSoknad = {
             svar: [],
             undersporsmal: [],
         },
-        inntektsopplysningerLegacy,
+        inntektsopplysninger,
         nyVærKlarOverAt(),
     ],
     egenmeldtSykmelding: false,
