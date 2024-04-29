@@ -33,12 +33,12 @@ describe('Tester selvstendig naringsdrivende søknad', () => {
 
     it('Virksomheten din', function () {
         klikkGaVidere(true)
-        harFeilISkjemaet('Du må svare på om det har vært drift i virksomheten')
-        svarNeiHovedsporsmal()
+        harFeilISkjemaet('Du må svare på om virksomheten har blitt avviklet og slettet')
+        svarJaHovedsporsmal()
         cy.contains('Når opphørte driften i virksomheten?')
         klikkGaVidere(true)
         harFeilISkjemaet('Datoen følger ikke formatet dd.mm.åååå')
-        svarJaHovedsporsmal()
+        svarNeiHovedsporsmal()
         klikkGaVidere(true)
         harFeilISkjemaet('Du må svare på om du er ny i arbeidslivet')
         svarRadioSporsmal('Er du ny i arbeidslivet etter 1.1.2019?', 'Ja')

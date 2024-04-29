@@ -152,7 +152,11 @@ function handterNaringsdrivendeOpplysninger(soknaden: RSSoknad) {
     if (!soknaden.forstegangssoknad) {
         return
     }
-    const erNyKvittering = soknaden.sporsmal.some((spm) => spm.tag === 'INNTEKTSOPPLYSNINGER_DRIFT_VIRKSOMHETEN')
+    const erNyKvittering = soknaden.sporsmal.some(
+        (spm) =>
+            spm.tag === 'INNTEKTSOPPLYSNINGER_DRIFT_VIRKSOMHETEN' ||
+            spm.tag === 'INNTEKTSOPPLYSNINGER_VIRKSOMHETEN_AVVIKLET',
+    )
     const maaDokumentere = maaDokumentereInntektsopplysninger(soknaden)
     soknaden.inntektsopplysningerNyKvittering = erNyKvittering
     soknaden.inntektsopplysningerInnsendingId = maaDokumentere ? uuid.v4() : undefined
