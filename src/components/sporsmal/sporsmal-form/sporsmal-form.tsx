@@ -114,15 +114,12 @@ const SporsmalForm = ({ sporsmal }: SpmProps) => {
                     })
                     sendSoknad(oppdatertSoknad)
                 } else {
-                    const oppdatertSpm = oppdatertSoknad.sporsmal.find((spm) => spm.id === sporsmal.id)
-                    if (oppdatertSpm) {
-                        logEvent('skjema spørsmål besvart', {
-                            soknadstype: oppdatertSoknad.soknadstype,
-                            skjemanavn: 'sykepengesoknad',
-                            spørsmål: sporsmal.tag,
-                            svar: hentAnnonymisertSvar(oppdatertSpm),
-                        })
-                    }
+                    logEvent('skjema spørsmål besvart', {
+                        soknadstype: oppdatertSoknad.soknadstype,
+                        skjemanavn: 'sykepengesoknad',
+                        spørsmål: sporsmal.tag,
+                        svar: hentAnnonymisertSvar(sporsmal),
+                    })
 
                     await router.push(
                         pathUtenSteg(router.asPath) + SEPARATOR + (spmIndex + 2) + testpersonQuery.query(),
@@ -157,11 +154,6 @@ const SporsmalForm = ({ sporsmal }: SpmProps) => {
                         erSisteSporsmal={erSiste}
                         erHovedsporsmal={true}
                     />
-                    {erSiste && !erUtenlandssoknad && valgtSoknad && (
-                        <div className="mt-4">
-                            <SendesTil soknad={valgtSoknad} />
-                        </div>
-                    )}
 
                     {erSiste && !erUtenlandssoknad && valgtSoknad && nesteSporsmal && (
                         <>
@@ -171,7 +163,7 @@ const SporsmalForm = ({ sporsmal }: SpmProps) => {
                                 parent="sporsmal-form-vanlig"
                             />
                             <Opplysninger ekspandert={false} />
-
+                            {erSiste && !erUtenlandssoknad && valgtSoknad && <SendesTil soknad={valgtSoknad} />}
                             <CheckboxPanel sporsmal={nesteSporsmal} />
                         </>
                     )}
