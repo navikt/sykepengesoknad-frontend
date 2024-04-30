@@ -1,5 +1,5 @@
 import { BodyLong, BodyShort, Button, Label, List, Modal } from '@navikt/ds-react'
-import React, { MouseEvent, useState } from 'react'
+import React, { MouseEvent, ReactNode, useState } from 'react'
 
 import { logEvent } from '../amplitude/amplitude'
 import { LenkeMedIkon } from '../lenke-med-ikon/LenkeMedIkon'
@@ -37,7 +37,7 @@ export const SlikBehandlerNavPersonopplysningene = () => {
             </List.Item>
         )
     }
-    const PlainListItem = ({ children }: { children: string; classname?: string }) => {
+    const PlainListItem = ({ children }: { children: ReactNode[] | ReactNode; classname?: string }) => {
         return (
             <List.Item>
                 <BodyShort>{children}</BodyShort>
@@ -48,7 +48,7 @@ export const SlikBehandlerNavPersonopplysningene = () => {
     const avsnitt1Del1 =
         'Når du har blitt syk eller skadet og ikke kan jobbe, kan du ha rett til sykepenger. Du må oppfylle noen generelle vilkår for å få sykepenger. Du kan lese om vilkårene på '
     const avsintt1Del2 =
-        '. For å behandle søknaden din henter vi inn opplysninger både fra deg og fra offentlige registre. Det er nødvendig for at du skal få det du har rett til. Ved korte sykefravær går søknaden bare til arbeidsgiveren din. En saksbehandler i NAV vil likevel kunne lese søknaden og benytte den i fremtidig saksbehandling. Ved hjelp av særlige kategorier av personopplysninger slik det er definert i personvernforordningen, kan NAV gjøre et vedtak i saken din basert på automatisk behandling av personopplysninger Når NAV behandler disse opplysningene, må vi sikre at vi følger reglene for forsvarlig saksbehandling og at vi ivaretar personvernrettighetene. En automatisk behandling følger klare regler og tar ikke beslutninger som krever at en saksbehandler vurderer dem. (Se NAV-loven § 4a).'
+        '. For å behandle søknaden din henter vi inn opplysninger både fra deg og fra offentlige registre. Det er nødvendig for at du skal få det du har rett til. Ved korte sykefravær går søknaden bare til arbeidsgiveren din. En saksbehandler i NAV vil likevel kunne lese søknaden og benytte den i fremtidig saksbehandling. Ved hjelp av særlige kategorier av personopplysninger slik det er definert i personvernforordningen, kan NAV gjøre et vedtak i saken din basert på automatisk behandling av personopplysninger Når NAV behandler disse opplysningene, må vi sikre at vi følger reglene for forsvarlig saksbehandling og at vi ivaretar personvernrettighetene. En automatisk behandling følger klare regler og tar ikke beslutninger som krever at en saksbehandler vurderer dem.'
     return (
         <>
             <Button variant="tertiary" onClick={handleAapen} type="button" className="-ml-5 text-left">
@@ -67,6 +67,8 @@ export const SlikBehandlerNavPersonopplysningene = () => {
                         {avsnitt1Del1}
                         <LenkeMedIkon href="https://nav.no/sykepenger" text="nav.no/sykepenger" />
                         {avsintt1Del2}
+                        <br />
+                        (Se NAV-loven § 4a).
                     </BodyLong>
                     <Label spacing as="p">
                         En automatisk behandling av en sykepengesak baserer seg på følgende opplysninger:
@@ -106,17 +108,22 @@ export const SlikBehandlerNavPersonopplysningene = () => {
                     <List as="ul">
                         <PlainListItem>
                             Om du oppfyller kravet til minste inntektsgrunnlag Kravet er som hovedregel at du har et
-                            sykepengegrunnlag tilsvarende minst et halvt grunnbeløp. (Se folketrygdloven § 8-3.)
+                            sykepengegrunnlag tilsvarende minst et halvt grunnbeløp.
+                            <br />
+                            (Se folketrygdloven § 8-3.)
                         </PlainListItem>
                         <PlainListItem>
                             Om du er medlem av folketrygdloven. Dette gjøres ved oppslag i interne registre, sammen med
-                            at en saksbehandler også vurderer det. (Se folketrygdloven § 2-1.)
+                            at en saksbehandler også vurderer det.
+                            <br />
+                            (Se folketrygdloven § 2-1.)
                         </PlainListItem>
                         <PlainListItem>
                             Om det er mer enn 25 prosent avvik mellom den innteksten som er innrapportert i a-ordningen
                             og inntekten som er oppgitt i inntektsmelding fra arbeidsgiveren. Dette er en del av
-                            beregningen av hva sykegrunnlaget skal være når NAV utbetaler sykepenger. (Se
-                            folketrygdloven § 8-30)
+                            beregningen av hva sykegrunnlaget skal være når NAV utbetaler sykepenger.
+                            <br />
+                            (Se folketrygdloven § 8-30)
                         </PlainListItem>
                         <PlainListItem>
                             Om du mottar andre trygdeytelser, som omsorgspenger, foreldrepenger, opplæringspenger,
