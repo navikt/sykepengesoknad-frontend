@@ -163,11 +163,10 @@ const SporsmalForm = ({ sporsmal }: SpmProps) => {
                                 parent="sporsmal-form-vanlig"
                             />
                             <Opplysninger ekspandert={false} />
+                            {erSiste && !erUtenlandssoknad && valgtSoknad && <SendesTil soknad={valgtSoknad} />}
                             <CheckboxPanel sporsmal={nesteSporsmal} />
                         </>
                     )}
-
-                    {erSiste && !erUtenlandssoknad && valgtSoknad && <SendesTil soknad={valgtSoknad} />}
 
                     {erSiste && sporsmal.tag === 'BEKREFT_OPPLYSNINGER_UTLAND_INFO' && valgtSoknad && sporsmal && (
                         <>
