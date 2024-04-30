@@ -61,6 +61,7 @@ const nextConfig = {
         // Will be available on both server and client
         basePath: '/syk/sykepengesoknad',
         mockBackend: process.env.MOCK_BACKEND,
+        localBackend: process.env.LOCAL_BACKEND,
         opplaering: process.env.OPPLAERING,
         sykefravaerUrl: process.env.SYKEFRAVAER_URL,
         sykmeldingerUrl: process.env.SYKMELDINGER_URL,

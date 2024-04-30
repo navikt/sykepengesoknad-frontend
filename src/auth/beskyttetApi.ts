@@ -3,7 +3,7 @@ import { NextApiRequest, NextApiResponse } from 'next'
 import { validateIdportenToken } from '@navikt/oasis'
 
 import metrics, { cleanPathForMetric } from '../metrics'
-import { isMockBackend } from '../utils/environment'
+import { isLocalBackend, isMockBackend } from '../utils/environment'
 import { mockApi } from '../data/mock/mock-api'
 
 type ApiHandler = (req: NextApiRequest, res: NextApiResponse) => void | Promise<void>
@@ -20,6 +20,10 @@ export function beskyttetApi(handler: ApiHandler): ApiHandler {
 
         if (isMockBackend()) {
             return mockApi(req, res)
+        }
+
+        if (isLocalBackend()) {
+            return handler(req, res)
         }
 
         const bearerToken: string | null | undefined = req.headers['authorization']
