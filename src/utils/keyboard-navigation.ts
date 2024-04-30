@@ -14,10 +14,36 @@ function aktivtElementErInputEllerTextarea() {
     if (aktivtElement.tagName.toLowerCase() === 'input' && aktivtElement.getAttribute('type') !== 'radio') {
         return true
     }
-    if (aktivtElement.tagName.toLowerCase() === 'textarea') {
-        return true
-    }
-    return false
+    return aktivtElement.tagName.toLowerCase() === 'textarea'
+}
+
+export function useEnterKeyNavigation(soknadId: string | undefined, stegNo: number) {
+    useEffect(() => {
+        if (isProd()) {
+            return
+        }
+
+        const handleKeyDown = (event: KeyboardEvent) => {
+            event.preventDefault()
+
+            if (event.key === 'Enter') {
+                const goVidereButton = document.querySelector('[data-cy="videre-knapp"]') as HTMLButtonElement
+                if (goVidereButton) {
+                    goVidereButton.click()
+                }
+            } else if (event.key === 'Backspace') {
+                const tilbakeButton = document.querySelector('[data-cy="tilbake-knapp"]') as HTMLButtonElement
+                if (tilbakeButton) {
+                    tilbakeButton.click()
+                }
+            }
+        }
+
+        document.addEventListener('keydown', handleKeyDown)
+        return () => {
+            document.removeEventListener('keydown', handleKeyDown)
+        }
+    }, [soknadId, stegNo])
 }
 
 export function useJaNeiKeyboardNavigation(sporsmal: Sporsmal) {
