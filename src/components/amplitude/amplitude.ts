@@ -2,7 +2,7 @@ import { logAmplitudeEvent } from '@navikt/nav-dekoratoren-moduler'
 import { logger } from '@navikt/next-logger'
 
 import { Kvittering, Sporsmal } from '../../types/types'
-import { amplitudeEnabled } from '../../utils/environment'
+import { amplitudeEnabled, isLocalBackend } from '../../utils/environment'
 import { hentSvar } from '../sporsmal/hent-svar'
 
 type validEventNames =
@@ -39,6 +39,23 @@ export const logEvent = (eventName: validEventNames, eventData: Record<string, s
         } else {
             // eslint-disable-next-line no-console
             console.log(`Logger ${eventName} - Event properties: ${JSON.stringify(cleanedEventData)}`)
+
+            if (isLocalBackend()) {
+                cleanedEventData['url'] = window.location.href
+                fetch('http://localhost/api/amplitude', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        event_name: eventName,
+                        client_event_time: new Date().toISOString(),
+                        event_properties: cleanedEventData,
+                    }),
+                }).catch((e) => {
+                    logger.warn(`Feil ved lokal amplitude logging`, e)
+                })
+            }
         }
     }
 }
