@@ -41,14 +41,20 @@ export const logEvent = (eventName: validEventNames, eventData: Record<string, s
             console.log(`Logger ${eventName} - Event properties: ${JSON.stringify(cleanedEventData)}`)
 
             if (isLocalBackend()) {
-                cleanedEventData['url'] = window.location.href
+                let url = window.location.href
+                url = url.replace('http://localhost:3000', 'www.nav.no')
+                // replace uuid with [redacted]
+                url = url.replace(/\/[a-f0-9-]{36}/g, '/[redacted]')
+
+                cleanedEventData['url'] = url
+
                 fetch('http://localhost/api/amplitude', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify({
-                        event_name: eventName,
+                        event_type: eventName,
                         client_event_time: new Date().toISOString(),
                         event_properties: cleanedEventData,
                     }),
