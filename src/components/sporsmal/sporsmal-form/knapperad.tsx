@@ -65,6 +65,7 @@ const Knapperad = ({ poster }: { poster: boolean }) => {
                         variant="secondary"
                         type="button"
                         className="mb-12 mt-6 inline-flex"
+                        data-cy="tilbake-knapp"
                         onClick={(e) => {
                             e.preventDefault()
                             if (!soknad) return
