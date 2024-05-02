@@ -6,7 +6,6 @@ import { ArrowLeftIcon, ArrowRightIcon } from '@navikt/aksel-icons'
 
 import { useSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
 import { useTestpersonQuery } from '../../../hooks/useTestpersonQuery'
-import { useEnterKeyNavigation } from '../../../utils/keyboard-navigation'
 import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype'
 import { hentSporsmal } from '../../../utils/soknad-utils'
 import { tekst } from '../../../utils/tekster'
@@ -20,7 +19,6 @@ const Knapperad = ({ poster }: { poster: boolean }) => {
     const { valgtSoknad: soknad, sporsmal, stegNo, soknadId } = useSoknadMedDetaljer()
     const testperson = useTestpersonQuery()
     const router = useRouter()
-    useEnterKeyNavigation(soknadId, stegNo)
 
     const { getValues } = useFormContext()
     const oppholdUtland = soknad?.soknadstype === RSSoknadstype.OPPHOLD_UTLAND
@@ -61,8 +59,8 @@ const Knapperad = ({ poster }: { poster: boolean }) => {
                 {aktivtSteg > 0 && (
                     <Button
                         variant="secondary"
+                        type="button"
                         className="mb-12 mt-6 inline-flex"
-                        data-cy="tilbake-knapp"
                         onClick={(e) => {
                             e.preventDefault()
                             if (!soknad) return
@@ -87,7 +85,6 @@ const Knapperad = ({ poster }: { poster: boolean }) => {
                     loading={poster}
                     className="mb-12 mt-6 inline-flex"
                     iconPosition="right"
-                    data-cy="videre-knapp"
                     icon={knappetekst() !== tekst('sykepengesoknad.send') && <ArrowRightIcon aria-hidden />}
                 >
                     {knappetekst()}
