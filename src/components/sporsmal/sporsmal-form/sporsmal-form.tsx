@@ -114,12 +114,15 @@ const SporsmalForm = ({ sporsmal }: SpmProps) => {
                     })
                     sendSoknad(oppdatertSoknad)
                 } else {
-                    logEvent('skjema spørsmål besvart', {
-                        soknadstype: oppdatertSoknad.soknadstype,
-                        skjemanavn: 'sykepengesoknad',
-                        spørsmål: sporsmal.tag,
-                        svar: hentAnnonymisertSvar(sporsmal),
-                    })
+                    const oppdatertSpm = oppdatertSoknad.sporsmal.find((spm) => spm.id === sporsmal.id)
+                    if (oppdatertSpm) {
+                        logEvent('skjema spørsmål besvart', {
+                            soknadstype: oppdatertSoknad.soknadstype,
+                            skjemanavn: 'sykepengesoknad',
+                            spørsmål: sporsmal.tag,
+                            svar: hentAnnonymisertSvar(oppdatertSpm),
+                        })
+                    }
 
                     await router.push(
                         pathUtenSteg(router.asPath) + SEPARATOR + (spmIndex + 2) + testpersonQuery.query(),
