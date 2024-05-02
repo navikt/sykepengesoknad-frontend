@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 
 import OmReisetilskudd from '../../components/om-reisetilskudd/om-reisetilskudd'
@@ -44,6 +44,9 @@ export const Soknaden = () => {
 
     useUpdateBreadcrumbs(() => [{ ...soknadBreadcrumb, handleInApp: true }], [])
 
+    const [hasLoggedSkjemaApnet, setHasLoggedSkjemaApnet] = useState([] as string[])
+    const [hasLoggedSkjemaSporsmalApnet, setHasLoggedSkjemaSporsmalApnet] = useState([] as string[])
+
     useEffect(() => {
         if (!valgtSoknad || stegId !== '1') return
 
@@ -64,12 +67,29 @@ export const Soknaden = () => {
             return
         }
 
-        logEvent('skjema åpnet', {
-            skjemanavn: 'sykepengesoknad',
-            soknadstype: valgtSoknad.soknadstype,
-            soknadstatus: valgtSoknad.status,
-        })
-    }, [router, stegId, valgtSoknad])
+        if (!hasLoggedSkjemaApnet.includes(`${valgtSoknad.id}-${valgtSoknad.status}`)) {
+            setHasLoggedSkjemaApnet([...hasLoggedSkjemaApnet, `${valgtSoknad.id}-${valgtSoknad.status}`])
+            logEvent('skjema åpnet', {
+                skjemanavn: 'sykepengesoknad',
+                soknadstype: valgtSoknad.soknadstype,
+                soknadstatus: valgtSoknad.status,
+            })
+        }
+
+        const sporsmal = valgtSoknad.sporsmal[spmIndex]
+
+        if (stegNo > 0 && sporsmal) {
+            if (!hasLoggedSkjemaSporsmalApnet.includes(`${valgtSoknad.id}-${sporsmal.id}`)) {
+                setHasLoggedSkjemaSporsmalApnet([...hasLoggedSkjemaSporsmalApnet, `${valgtSoknad.id}-${sporsmal.id}`])
+
+                logEvent('skjema spørsmål åpnet', {
+                    soknadstype: valgtSoknad.soknadstype,
+                    skjemanavn: 'sykepengesoknad',
+                    spørsmål: sporsmal.tag,
+                })
+            }
+        }
+    }, [router, stegId, valgtSoknad, hasLoggedSkjemaApnet, spmIndex, stegNo, hasLoggedSkjemaSporsmalApnet])
     const flexjarToggle = useToggle('flexjar-sykepengesoknad-frontend-sporsmal')
 
     const erReisetilskuddsoknad = valgtSoknad?.soknadstype === RSSoknadstype.REISETILSKUDD
@@ -87,13 +107,6 @@ export const Soknaden = () => {
     }
     const sporsmal = valgtSoknad?.sporsmal[spmIndex]
 
-    if (valgtSoknad && stegNo > 1) {
-        logEvent('skjema spørsmål åpnet', {
-            soknadstype: valgtSoknad.soknadstype,
-            skjemanavn: 'sykepengesoknad',
-            spørsmål: sporsmal?.tag,
-        })
-    }
     const erForstesiden = stegNo === 1 && !erUtenlandssoknad
     const erForstesidenMedReisetilskudd = stegNo === 1 && (erReisetilskuddsoknad || erGradertReisetilskuddsoknad)
     return (
