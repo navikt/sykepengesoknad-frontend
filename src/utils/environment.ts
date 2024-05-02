@@ -41,6 +41,10 @@ export function vedlikehold(): boolean {
     return publicRuntimeConfig.vedlikehold === 'true'
 }
 
+export function isLocalBackend(): boolean {
+    return publicRuntimeConfig.localBackend === 'true'
+}
+
 export function telemetryCollectorURL() {
     return publicRuntimeConfig.telemetryCollectorURL
 }

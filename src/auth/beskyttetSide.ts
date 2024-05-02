@@ -4,7 +4,7 @@ import { IToggle } from '@unleash/nextjs'
 import { getToken, validateIdportenToken } from '@navikt/oasis'
 
 import metrics, { cleanPathForMetric, shouldLogMetricForPath } from '../metrics'
-import { isMockBackend } from '../utils/environment'
+import { isLocalBackend, isMockBackend } from '../utils/environment'
 import { getFlagsServerSide } from '../toggles/ssr'
 
 type PageHandler = (context: GetServerSidePropsContext) => Promise<GetServerSidePropsResult<ServerSidePropsResult>>
@@ -17,7 +17,7 @@ function beskyttetSide(handler: PageHandler) {
     return async function withBearerTokenHandler(
         context: GetServerSidePropsContext,
     ): Promise<ReturnType<typeof handler>> {
-        if (isMockBackend()) {
+        if (isMockBackend() || isLocalBackend()) {
             return handler(context)
         }
 
