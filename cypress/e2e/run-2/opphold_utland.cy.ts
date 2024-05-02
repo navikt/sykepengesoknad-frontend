@@ -56,7 +56,7 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
     })
 
     it('Går tilbake og frem', function () {
-        cy.get('body').findByRole('link', { name: 'Tilbake' }).click()
+        cy.get('[data-cy="tilbake-knapp"]').click()
         sjekkMainContentFokus()
         klikkGaVidere()
     })
