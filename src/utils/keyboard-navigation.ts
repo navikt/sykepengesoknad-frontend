@@ -14,10 +14,7 @@ function aktivtElementErInputEllerTextarea() {
     if (aktivtElement.tagName.toLowerCase() === 'input' && aktivtElement.getAttribute('type') !== 'radio') {
         return true
     }
-    if (aktivtElement.tagName.toLowerCase() === 'textarea') {
-        return true
-    }
-    return false
+    return aktivtElement.tagName.toLowerCase() === 'textarea'
 }
 
 export function useJaNeiKeyboardNavigation(sporsmal: Sporsmal) {

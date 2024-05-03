@@ -157,6 +157,11 @@ const SporsmalForm = ({ sporsmal }: SpmProps) => {
                         erSisteSporsmal={erSiste}
                         erHovedsporsmal={true}
                     />
+                    {erSiste && !erUtenlandssoknad && valgtSoknad && (
+                        <div className="mt-4">
+                            <SendesTil soknad={valgtSoknad} />
+                        </div>
+                    )}
 
                     {erSiste && !erUtenlandssoknad && valgtSoknad && nesteSporsmal && (
                         <>
@@ -166,11 +171,10 @@ const SporsmalForm = ({ sporsmal }: SpmProps) => {
                                 parent="sporsmal-form-vanlig"
                             />
                             <Opplysninger ekspandert={false} />
+
                             <CheckboxPanel sporsmal={nesteSporsmal} />
                         </>
                     )}
-
-                    {erSiste && !erUtenlandssoknad && valgtSoknad && <SendesTil soknad={valgtSoknad} />}
 
                     {erSiste && sporsmal.tag === 'BEKREFT_OPPLYSNINGER_UTLAND_INFO' && valgtSoknad && sporsmal && (
                         <>

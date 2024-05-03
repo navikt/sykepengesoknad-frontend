@@ -27,7 +27,7 @@ export default function SendesTil({ soknad }: { soknad: Soknad }) {
     }
 
     return (
-        <BodyShort as="div" className="mt-8 border-t border-gray-400 py-8 text-left">
+        <BodyShort as="div" className="mb-8 text-left">
             {soknad.arbeidsgiver !== undefined
                 ? parserWithReplace(
                       getLedetekst(tekst(nokkel), {
