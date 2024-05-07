@@ -42,7 +42,7 @@ describe('Tester arbeidstakersøknad', () => {
 
         // Avbryt dialog vises
         cy.contains('Jeg har ikke behov for denne søknaden').click()
-        cy.findByRole('button', { name: 'Nei, jeg vil bruke søknaden' }).click()
+        cy.findByRole('button', { name: 'Nei, jeg har behov for søknaden' }).click()
 
         // Må godkjenne ANSVARSERKLARING først
         cy.contains('Gå videre').click()
