@@ -8,14 +8,12 @@ import { Soknad, Sporsmal } from '../../../types/types'
 import { SEPARATOR } from '../../../utils/constants'
 import { hentAnnonymisertSvar, logEvent } from '../../amplitude/amplitude'
 import FeilOppsummering from '../../feil/feil-oppsummering'
-import Oppsummering from '../../oppsummering/oppsummering'
 import GuidepanelOverSporsmalstekst from '../guidepanel/GuidepanelOverSporsmalstekst'
 import { EndringUtenEndringModal } from '../endring-uten-endring/endring-uten-endring-modal'
 import { hentFormState } from '../hent-svar'
 import { settSvar } from '../sett-svar'
 import SporsmalSwitch from '../sporsmal-switch'
 import { pathUtenSteg } from '../sporsmal-utils'
-import CheckboxPanel from '../typer/checkbox-panel'
 import useSoknad from '../../../hooks/useSoknad'
 import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus'
 import { harLikeSvar } from '../endring-uten-endring/har-like-svar'
@@ -24,10 +22,8 @@ import { useTestpersonQuery } from '../../../hooks/useTestpersonQuery'
 import { useOppdaterSporsmal } from '../../../hooks/useOppdaterSporsmal'
 import { FeilStateView } from '../../feil/refresh-hvis-feil-state'
 import { useSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
-import Opplysninger from '../../opplysninger-fra-sykmelding/opplysninger'
 
 import Knapperad from './knapperad'
-import SendesTil from './sendes-til'
 
 export interface SpmProps {
     sporsmal: Sporsmal
@@ -154,35 +150,6 @@ const SporsmalForm = ({ sporsmal }: SpmProps) => {
                         erSisteSporsmal={erSiste}
                         erHovedsporsmal={true}
                     />
-                    {erSiste && !erUtenlandssoknad && valgtSoknad && (
-                        <div className="mt-4">
-                            <SendesTil soknad={valgtSoknad} />
-                        </div>
-                    )}
-
-                    {erSiste && !erUtenlandssoknad && valgtSoknad && nesteSporsmal && (
-                        <>
-                            <Oppsummering
-                                ekspandert={false}
-                                sporsmal={valgtSoknad.sporsmal}
-                                parent="sporsmal-form-vanlig"
-                            />
-                            <Opplysninger ekspandert={false} />
-
-                            <CheckboxPanel sporsmal={nesteSporsmal} />
-                        </>
-                    )}
-
-                    {erSiste && sporsmal.tag === 'BEKREFT_OPPLYSNINGER_UTLAND_INFO' && valgtSoknad && sporsmal && (
-                        <>
-                            <Oppsummering
-                                ekspandert={false}
-                                sporsmal={valgtSoknad.sporsmal}
-                                parent="sporsmal-form-utland"
-                            />
-                            <CheckboxPanel sporsmal={sporsmal} />
-                        </>
-                    )}
 
                     {(valgtSoknad?.soknadstype === RSSoknadstype.REISETILSKUDD &&
                         sporsmal.svartype !== RSSvartype.KVITTERING) ||
