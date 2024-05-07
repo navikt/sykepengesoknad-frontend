@@ -18,6 +18,7 @@ import BekreftelsespunkterArbeidsledigTekster from '../bekreftelsespunkter/bekre
 import BekreftelsespunkterSelvstendigNaeringsdrivendeTekster from '../bekreftelsespunkter/bekreftelsespunkter-selvstendig-naeringsdrivende-tekster'
 import BekreftelsespunkterOppholdutlandTekster from '../bekreftelsespunkter/bekreftelsespunkter-opphold-utland-tekster'
 import BekreftelsespunkterAnnetArbeidsforholdTekster from '../bekreftelsespunkter/bekreftelsespunkter-annet-arbeidsforhold-tekster'
+import SendesTil from '../sporsmal-form/sendes-til'
 
 const Kulepunkter = ({ sporsmal }: SpmProps) => {
     const { setValue } = useFormContext()
@@ -64,7 +65,12 @@ const Kulepunkter = ({ sporsmal }: SpmProps) => {
             </div>
             {sporsmal.undertekst && <BodyLong as="div">{parserWithReplace(sporsmal.undertekst)}</BodyLong>}
             <Oppsummering ekspandert={false} sporsmal={valgtSoknad!.sporsmal} parent="kulepunkter" />
-            {valgtSoknad?.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND && <Opplysninger ekspandert={false} />}
+            {valgtSoknad?.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND && (
+                <>
+                    <Opplysninger ekspandert={false} />
+                    <SendesTil soknad={valgtSoknad!} />
+                </>
+            )}
             <UndersporsmalListe oversporsmal={sporsmal} />
         </>
     )
