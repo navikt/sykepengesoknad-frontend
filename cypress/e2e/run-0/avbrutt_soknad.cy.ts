@@ -54,13 +54,13 @@ describe('Tester avbryting av søknad', () => {
 
     it('Søknad kan avbrytes ', function () {
         // Avbryt dialog vises
-        cy.contains('Jeg vil ikke bruke denne søknaden').click()
+        cy.contains('Jeg har ikke behov for denne søknaden').click()
         modalAktiv()
         cy.contains('Nei, jeg vil bruke søknaden').should('be.visible')
         cy.findByRole('button', { name: 'Nei, jeg vil bruke søknaden' }).click()
         modalIkkeAktiv()
         cy.contains('Nei, jeg vil bruke søknaden').should('not.be.visible')
-        cy.contains('Jeg vil ikke bruke denne søknaden').should('be.visible').click()
+        cy.contains('Jeg har ikke behov for denne søknaden').should('be.visible').click()
         modalAktiv()
         cy.contains('Ja, jeg er sikker').should('be.visible')
 

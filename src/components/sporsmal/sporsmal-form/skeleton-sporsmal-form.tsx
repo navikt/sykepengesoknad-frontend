@@ -16,10 +16,10 @@ export const SkeletonSporsmalForm = () => {
                         Gå videre
                     </Button>
                     <Button as={Skeleton} variant="tertiary" type="button" className="flex">
-                        Avslutt og fortsett senere
+                        Lagre søknad og fortsett senere
                     </Button>
                     <Button as={Skeleton} variant="tertiary" type="button" className="flex">
-                        Jeg vil ikke bruke denne søknaden
+                        Jeg har ikke behov for denne søknaden
                     </Button>
                 </div>
             </>
@@ -39,10 +39,10 @@ export const SkeletonSporsmalForm = () => {
                     Gå videre
                 </Button>
                 <Button as={Skeleton} variant="tertiary" type="button" className="flex">
-                    Avslutt og fortsett senere
+                    Lagre søknad og fortsett senere
                 </Button>
                 <Button as={Skeleton} variant="tertiary" type="button" className="flex">
-                    Jeg vil ikke bruke denne søknaden
+                    Jeg har ikke behov for denne søknaden
                 </Button>
             </div>
         </>
