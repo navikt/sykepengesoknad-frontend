@@ -5,6 +5,7 @@ import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 import { tekst } from '../../utils/tekster'
 import { tilLesbarPeriodeMedArstall } from '../../utils/dato-utils'
 import { Banner } from '../banner/banner'
+import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 
 export const SoknadHeader = () => {
     const { valgtSoknad } = useSoknadMedDetaljer()
@@ -19,6 +20,9 @@ export const SoknadHeader = () => {
             }
             if (valgtSoknad.soknadstype === RSSoknadstype.GRADERT_REISETILSKUDD) {
                 return tekst('gradert-reisetilskuddsoknad.tittel')
+            }
+            if (valgtSoknad.status === RSSoknadstatus.AVBRUTT) {
+                return tekst('sykepengesoknad.avbrutt.tittel')
             }
         }
         return tekst('sykepengesoknad.sidetittel')

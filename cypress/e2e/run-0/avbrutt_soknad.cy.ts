@@ -22,9 +22,9 @@ describe('Tester avbryting av søknad', () => {
     })
 
     it('Avbrutt tekster stemmer', function () {
-        cy.contains('Søknaden ble avbrutt av deg')
+        cy.contains('Søknaden ble avbrutt og fjernet av deg')
         cy.contains('12. juni 2020')
-        cy.contains('Det betyr at du ikke vil få sykepenger basert på denne søknaden')
+        cy.contains('Du har fjernet søknaden, som betyr at du ikke vil få sykepenger basert på denne søknaden')
         cy.contains(
             'For å få sykepenger fra NAV, må du søke. Så hvis du ikke har sendt inn søknad som gjelder samme periode og samme arbeidsgiver på papir, vil du ikke få sykepenger fra NAV for denne perioden.',
         )
