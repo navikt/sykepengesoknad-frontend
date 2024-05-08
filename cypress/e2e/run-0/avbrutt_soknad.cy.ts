@@ -22,9 +22,9 @@ describe('Tester avbryting av søknad', () => {
     })
 
     it('Avbrutt tekster stemmer', function () {
-        cy.contains('Søknaden ble avbrutt av deg')
+        cy.contains('Søknaden ble avbrutt og fjernet av deg')
         cy.contains('12. juni 2020')
-        cy.contains('Det betyr at du ikke vil få sykepenger basert på denne søknaden')
+        cy.contains('Du har fjernet søknaden, som betyr at du ikke vil få sykepenger basert på denne søknaden')
         cy.contains(
             'For å få sykepenger fra NAV, må du søke. Så hvis du ikke har sendt inn søknad som gjelder samme periode og samme arbeidsgiver på papir, vil du ikke få sykepenger fra NAV for denne perioden.',
         )
@@ -54,14 +54,15 @@ describe('Tester avbryting av søknad', () => {
 
     it('Søknad kan avbrytes ', function () {
         // Avbryt dialog vises
-        cy.contains('Jeg vil ikke bruke denne søknaden').click()
+        cy.contains('Jeg har ikke behov for denne søknaden').click()
         modalAktiv()
-        cy.contains('Nei, jeg vil bruke søknaden').should('be.visible')
-        cy.findByRole('button', { name: 'Nei, jeg vil bruke søknaden' }).click()
+        cy.contains('Nei, jeg har behov for søknaden').should('be.visible')
+        cy.findByRole('button', { name: 'Nei, jeg har behov for søknaden' }).click()
         modalIkkeAktiv()
-        cy.contains('Nei, jeg vil bruke søknaden').should('not.be.visible')
-        cy.contains('Jeg vil ikke bruke denne søknaden').should('be.visible').click()
+        cy.contains('Nei, jeg har behov for søknaden').should('not.be.visible')
+        cy.contains('Jeg har ikke behov for denne søknaden').should('be.visible').click()
         modalAktiv()
+        cy.contains('Fjerner du søknaden vil du ikke få sykepenger basert på denne søknaden.').should('be.visible')
         cy.contains('Ja, jeg er sikker').should('be.visible')
 
         cy.findByRole('button', { name: 'Ja, jeg er sikker' }).click()

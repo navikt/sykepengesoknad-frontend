@@ -1,5 +1,5 @@
 const AvsluttOgFortsettSenereTekster = {
-    'avslutt.popup.tittel': 'Avslutt og fortsett senere',
+    'avslutt.popup.tittel': 'Lagre søknad og fortsett senere',
     'avslutt.popup.innhold': 'Vi lagrer søknaden din på Ditt sykefravær i listen med søknader om sykepenger.',
     'avslutt.popup.sporsmal': 'Vil du avslutte nå og fortsette senere?',
     'avslutt.popup.ja': 'Ja, fortsett senere',

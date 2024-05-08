@@ -28,8 +28,8 @@ I din `.bashrc` eller `.zshrc`, sett følgende miljøvariabel:
 | Åpne/lukke "Frist for å søke" samt eksemplet               |            |             |               |             |       |              |       x       |
 | Åpne hjelpetekst i alle spørsmål untatt noen få            |            |             |               |      x      |       |              |       x       |
 | Åpne/lukke "Slik behandler NAV personopplysningene dine"   |            |      x      |               |             |   x   |              |       x       |
-| Åpne/lukke "Avslutt og fortsett senere"                    |            |      x      |               |             |       |              |       x       |
-| Åpne/lukke "Jeg vil ikke bruke denne søknaden"             |            |      x      |               |             |       |              |       x       |
+| Åpne/lukke "Lagre søknad og fortsett senere"                    |            |      x      |               |             |       |              |       x       |
+| Åpne/lukke "Jeg har ikke behov for denne søknaden"             |            |      x      |               |             |       |              |       x       |
 | Åpne/lukke "Jeg vil endre svarene i søknaden"              |            |             |               |             |   x   |              |               |
 | Navigering i brødsmulesti                                  |            |             |               |             |   x   |              |               |
 | Navigering fra/til andre spørsmål via "tilbake" knappen    |            |      x      |               |      x      |   x   |              |               |

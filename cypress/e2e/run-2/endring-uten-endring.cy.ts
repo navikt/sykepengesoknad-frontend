@@ -26,7 +26,7 @@ describe('Tester endring uten en endringer', () => {
         cy.contains('Andre inntektskilder')
 
         cy.contains('Avslutt uten å endre søknaden')
-        cy.contains('Jeg vil ikke bruke denne søknaden').should('not.exist')
+        cy.contains('Jeg har ikke behov for denne søknaden').should('not.exist')
 
         cy.contains('Gå videre').click()
         cy.contains('Var du på reise utenfor EØS')

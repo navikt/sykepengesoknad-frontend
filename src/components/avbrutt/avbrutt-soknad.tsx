@@ -17,6 +17,7 @@ import QueryStatusPanel from '../queryStatusPanel/QueryStatusPanel'
 import { soknadBreadcrumb, useUpdateBreadcrumbs } from '../../hooks/useBreadcrumbs'
 import { SoknadHeader } from '../soknad/soknad-header'
 import { useSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
+import { parserWithReplace } from '../../utils/html-react-parser-utils'
 
 import GjenapneSoknad from './gjenapneknapp'
 
@@ -56,7 +57,9 @@ const AvbruttSoknad = () => {
                     {tekst('sykepengesoknad.avbrutt.tidspunkt')} {tilLesbarDatoMedArstall(valgtSoknad.avbruttDato)}.
                 </BodyShort>
             </Alert>
-            <BodyLong spacing>{tekst('sykepengesoknad.avbrutt.informasjon-innhold-1')}</BodyLong>
+            <BodyLong size="large" spacing weight="semibold">
+                {parserWithReplace(tekst('sykepengesoknad.avbrutt.informasjon-innhold-1'))}
+            </BodyLong>
             <BodyLong spacing>{tekst('sykepengesoknad.avbrutt.informasjon-innhold-2')}</BodyLong>
             <BodyLong spacing>{tekst('sykepengesoknad.avbrutt.informasjon-innhold-3')}</BodyLong>
             <BodyLong spacing>{tekst('sykepengesoknad.avbrutt.informasjon-innhold-4')}</BodyLong>

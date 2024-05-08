@@ -41,8 +41,8 @@ describe('Tester arbeidstakersøknad', () => {
         cy.get('section[aria-label="Opplysninger fra sykmeldingen"] button').click()
 
         // Avbryt dialog vises
-        cy.contains('Jeg vil ikke bruke denne søknaden').click()
-        cy.findByRole('button', { name: 'Nei, jeg vil bruke søknaden' }).click()
+        cy.contains('Jeg har ikke behov for denne søknaden').click()
+        cy.findByRole('button', { name: 'Nei, jeg har behov for søknaden' }).click()
 
         // Må godkjenne ANSVARSERKLARING først
         cy.contains('Gå videre').click()
