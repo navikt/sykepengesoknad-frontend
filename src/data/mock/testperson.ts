@@ -36,6 +36,7 @@ import { korrigeringsfristUtloptPerson } from './data/personas/korrigeringsfrist
 import { medlemskapPerson } from './data/personas/medlemskap'
 import { fiskePerson } from './data/personas/fisker'
 import { kjenteInntektskilderPerson } from './data/personas/kjente-inntektskilder'
+import { innenforAgPerioden } from './data/personas/innenfor-ag-periode'
 
 type PersonaKey =
     | 'uten-data'
@@ -73,6 +74,7 @@ type PersonaKey =
     | 'cummulative-layout-shift'
     | 'tilbakedateringer'
     | 'selvstendig-naringsdrivende-sendt'
+    | 'innenfor-arbeidsgiver-perioden'
 export type PersonaData = Partial<Record<PersonaKey, Persona>>
 
 export type PersonaGroupKey = 'soknad-typer' | 'soknad-sporsmal' | 'testing'
@@ -100,6 +102,7 @@ export function testpersonerGruppert(): PersonaGroup {
             ['bare-utland']: jsonDeepCopy(utlandPerson),
             ['fremtidig']: jsonDeepCopy(fremtidigPerson),
             ['uten-data']: jsonDeepCopy(utenData),
+            ['innenfor-arbeidsgiver-perioden']: jsonDeepCopy(innenforAgPerioden),
         },
         ['soknad-sporsmal']: {
             ['medlemskap']: jsonDeepCopy(medlemskapPerson),

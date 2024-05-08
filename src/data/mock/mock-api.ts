@@ -42,6 +42,7 @@ import { arbeidstakerGradert } from './data/soknad/arbeidstaker-gradert'
 import { oppholdUtland } from './data/soknad/opphold-utland'
 import { deepcopyMedNyId } from './deepcopyMedNyId'
 import { mockApiValiderSporsmal } from './mockApiValiderSporsmal'
+import { soknadInnenforArbeidsgiverperioden } from './data/personas/innenfor-ag-periode'
 
 type session = {
     expires: dayjs.Dayjs
@@ -512,7 +513,8 @@ const mottaker = (soknadId: string): RSMottaker => {
     if (
         soknadId === arbeidstakerGradert.id ||
         soknadId === arbeidstakerInnenforArbeidsgiverperiodeKvittering.id ||
-        soknadId === sok6.id
+        soknadId === sok6.id ||
+        soknadId === soknadInnenforArbeidsgiverperioden.id
     ) {
         return RSMottaker.ARBEIDSGIVER
     }
