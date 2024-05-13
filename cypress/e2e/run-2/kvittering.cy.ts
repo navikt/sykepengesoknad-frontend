@@ -19,6 +19,7 @@ import {
     svarCheckboxPanel,
     svarNeiHovedsporsmal,
     svarCombobox,
+    svarJaHovedsporsmal,
 } from '../../support/utilities'
 import { inlineForklaringer } from '../../support/sjekkInlineForklaringKvittering'
 import 'cypress-real-events'
@@ -36,8 +37,11 @@ describe('Tester kvittering', () => {
                 'Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene jeg gir ikke er riktige eller fullstendige. Jeg vet også at NAV kan holde igjen eller kreve tilbake penger, og at å gi feil opplysninger kan være straffbart.',
             ).click()
             klikkGaVidere()
-
-            cy.get('[data-cy="bekreftCheckboksPanel"]').click()
+            svarJaHovedsporsmal()
+            klikkGaVidere()
+            cy.contains(
+                'Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.',
+            ).click()
             cy.contains('Send søknaden').click()
 
             // Sendt datoer
@@ -187,6 +191,8 @@ describe('Tester kvittering', () => {
             cy.contains(
                 'Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene jeg gir ikke er riktige eller fullstendige. Jeg vet også at NAV kan holde igjen eller kreve tilbake penger, og at å gi feil opplysninger kan være straffbart.',
             ).click()
+            klikkGaVidere()
+            svarNeiHovedsporsmal()
             klikkGaVidere()
             cy.get('[data-cy="bekreftCheckboksPanel"]').click()
             cy.contains('Send søknaden').click()

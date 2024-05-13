@@ -1,5 +1,5 @@
 import { RSSoknad } from '../../../../types/rs-types/rs-soknad'
-import { nyVærKlarOverAt } from '../sporsmal/vaer-klar-over-at'
+import { bekreftelse } from '../sporsmal/vaer-klar-over-at'
 import { naringsdrivende100syk } from '../sykmeldinger'
 import { inntektsopplysninger } from '../sporsmal/inntektsopplysninger'
 
@@ -337,7 +337,7 @@ export const naringsdrivendeSoknad: RSSoknad = {
             undersporsmal: [],
         },
         inntektsopplysninger,
-        nyVærKlarOverAt(),
+        bekreftelse(),
     ],
     egenmeldtSykmelding: false,
     opprettetAvInntektsmelding: false,

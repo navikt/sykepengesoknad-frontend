@@ -1,6 +1,6 @@
 import { RSSoknad } from '../../../../types/rs-types/rs-soknad'
 import { arbeidstakerBehandlingsdagSyk } from '../sykmeldinger'
-import { nyVærKlarOverAt } from '../sporsmal/vaer-klar-over-at'
+import { bekreftelse } from '../sporsmal/vaer-klar-over-at'
 
 export const behandlingsdager: RSSoknad = {
     id: 'bcb032ac-b6dd-4ae7-8e73-9e64f1b35182',
@@ -294,7 +294,7 @@ export const behandlingsdager: RSSoknad = {
                 },
             ],
         },
-        nyVærKlarOverAt(),
+        bekreftelse(),
     ],
     egenmeldtSykmelding: false,
     opprettetAvInntektsmelding: false,
