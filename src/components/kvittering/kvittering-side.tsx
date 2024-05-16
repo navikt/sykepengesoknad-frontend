@@ -76,7 +76,10 @@ const KvitteringSide = () => {
         erSelvstendigNaeringsdrivende(valgtSoknad, soknader)
     const skalViseUxSignals =
         !skalViseSelvstendigNaeringsdrivendeUxSignals && defaultStudyActive && gjenstaendeSoknader.length === 0
-    const skalViseFlexjar = !skalViseSelvstendigNaeringsdrivendeUxSignals && !skalViseUxSignals && flexjarToggle.enabled
+    const skalViseFlexjar =
+        !skalViseSelvstendigNaeringsdrivendeUxSignals &&
+        !skalViseUxSignals &&
+        (flexjarToggle.enabled || valgtSoknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND)
 
     return (
         <>
