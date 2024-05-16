@@ -53,10 +53,14 @@ const Knapperad = ({ poster }: { poster: boolean }) => {
         return tekst('sykepengesoknad.ga-videre')
     }
 
+    function skalViseTilbakeKnapp() {
+        return oppholdUtland ? aktivtSteg > 1 : aktivtSteg > 0
+    }
+
     return (
         <div className="my-8 border-t border-gray-400" data-cy="knapperad">
             <div className="flex w-full justify-between">
-                {aktivtSteg > 0 && (
+                {skalViseTilbakeKnapp() && (
                     <Button
                         variant="secondary"
                         type="button"
