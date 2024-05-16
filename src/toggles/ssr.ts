@@ -5,6 +5,7 @@ import { IToggle, getDefinitions, evaluateFlags } from '@unleash/nextjs'
 import { logger } from '@navikt/next-logger'
 import { GetServerSidePropsContext } from 'next/types'
 import * as R from 'remeda'
+import NodeCache from 'node-cache'
 
 import { isIntegrationtest, isLocalBackend, isMockBackend } from '../utils/environment'
 
@@ -48,15 +49,26 @@ export async function getFlagsServerSide(
     }
 }
 
+const unleashCache = new NodeCache({ stdTTL: 15 })
+
 /**
  * If there are any toggles defined in EXPECTED_TOGGLES that are not returned by Unleash, something is out of sync.
  */
 async function getAndValidateDefinitions(): Promise<ReturnType<typeof getDefinitions>> {
+    if (unleashCache.has('toggles')) {
+        const cachedToggles = unleashCache.get<ReturnType<typeof getDefinitions>>('toggles')
+        if (cachedToggles != null) {
+            logger.info('Using cached unleash definitions')
+            return cachedToggles
+        }
+    }
     const definitions = await getDefinitions({
         url: process.env.UNLEASH_SERVER_API_URL + '/api/client/features',
         token: process.env.UNLEASH_SERVER_API_TOKEN,
         appName: 'sykepengesoknad-frontend',
     })
+
+    unleashCache.set('toggles', definitions)
 
     const diff = R.difference(
         EXPECTED_TOGGLES,
