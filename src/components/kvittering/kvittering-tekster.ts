@@ -57,8 +57,8 @@ export const KvitteringTekster = {
     'kvittering.utenlands.overskrift1': 'Du får svar på om du kan reise',
     'kvittering.utenlands.brodtekst1':
         'NAV vurderer om reisen vil forlenge sykefraværet ditt eller hindre planlagte aktiviteter.',
-    'kvittering.utenlands.overskrift2': 'Risiko ved reise før du har mottatt svar',
-    'kvittering.utenlands.liste1': 'Du kan risikere at sykepengene stanses i perioden du er på Reise.',
+    'kvittering.utenlands.overskrift2': 'Risiko ved å reise før du har mottatt svar',
+    'kvittering.utenlands.liste1': 'Du kan risikere at sykepengene stanses i perioden du er på reise.',
     'kvittering.utenlands.liste2': 'Sykepengene kan beregnes etter et lavere grunnlag når du er tilbake.',
     'kvittering.utenlands.liste3': 'Du kan få avslag på videre sykepenger hvis reisen varer fire uker eller mer.',
     'kvittering.utenlands.lenke': 'Les mer om sykepenger når du er på reise',
