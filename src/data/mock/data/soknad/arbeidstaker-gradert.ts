@@ -1,7 +1,6 @@
 import { RSSoknad } from '../../../../types/rs-types/rs-soknad'
 import { arbeidstaker50Syk } from '../sykmeldinger'
-import { værKlarOverAt } from '../sporsmal/vaer-klar-over-at'
-import { bekreftOpplysninger } from '../sporsmal/bekreft-opplysninger'
+import { bekreftelse } from '../sporsmal/vaer-klar-over-at'
 import { ArbeidsforholdFraInntektskomponenten } from '../../../../types/rs-types/rs-arbeidsforholdfrainntektskomponenten'
 
 const inntektskilderDataFraInntektskomponenten: ArbeidsforholdFraInntektskomponenten[] = [
@@ -390,8 +389,7 @@ export const arbeidstakerGradert: RSSoknad = {
                 },
             ],
         },
-        værKlarOverAt(),
-        bekreftOpplysninger(),
+        bekreftelse(),
     ],
     egenmeldtSykmelding: false,
     opprettetAvInntektsmelding: false,

@@ -1,6 +1,6 @@
 import { RSSoknad } from '../../../../types/rs-types/rs-soknad'
 import { arbeidstaker100Syk } from '../sykmeldinger'
-import { nyVærKlarOverAt } from '../sporsmal/vaer-klar-over-at'
+import { bekreftelse } from '../sporsmal/vaer-klar-over-at'
 import {
     medlemskapOppholdstillatelseSporsmal,
     medlemskapOppholdUtenforEøsSporsmal,
@@ -2334,7 +2334,7 @@ export const veldigLangSoknad: RSSoknad = {
         kjenteInntektskilder(['Rema']),
         inntektsopplysninger,
         inntektsopplysningerLegacy,
-        nyVærKlarOverAt(),
+        bekreftelse(),
     ],
     egenmeldtSykmelding: false,
     opprettetAvInntektsmelding: false,

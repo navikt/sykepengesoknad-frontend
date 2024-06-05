@@ -1,6 +1,6 @@
 import { RSSoknad } from '../../../../types/rs-types/rs-soknad'
 import { sykmeldingMedEgenmeldingsdager } from '../sykmeldinger'
-import { nyVærKlarOverAt } from '../sporsmal/vaer-klar-over-at'
+import { bekreftelse } from '../sporsmal/vaer-klar-over-at'
 
 import { Persona } from './personas'
 
@@ -375,7 +375,7 @@ export const soknadUtenEgenmeldingSporsmal: RSSoknad = {
                 },
             ],
         },
-        nyVærKlarOverAt(),
+        bekreftelse(),
     ],
     egenmeldtSykmelding: false,
     opprettetAvInntektsmelding: false,
