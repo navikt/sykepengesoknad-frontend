@@ -13,7 +13,7 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
         cy.get('[data-cy="Nye søknader"]')
             .children('a')
             .get(`a[href*=${soknad.id}]`)
-            .should('include.text', 'Søknad om å beholde sykepenger utenfor EØS')
+            .should('include.text', 'Søknad om å beholde sykepenger utenfor EU/EØS')
             .click()
     })
 

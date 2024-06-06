@@ -11,7 +11,7 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
 
     it('Går til søknad som har påfølgende søknader som må fylles ut', function () {
         cy.get('.navds-heading--large').should('be.visible').and('have.text', 'Søknader')
-        cy.get(`a[href*=${soknad.id}]`).should('include.text', 'Søknad om å beholde sykepenger utenfor EØS')
+        cy.get(`a[href*=${soknad.id}]`).should('include.text', 'Søknad om å beholde sykepenger utenfor EU/EØS')
         cy.get(`a[href*=${soknad.id}]`).click()
     })
 

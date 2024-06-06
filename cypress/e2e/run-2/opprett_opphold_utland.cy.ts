@@ -50,12 +50,12 @@ describe('Tester opprettelse av søknad om å beholde sykepenger utenfor EØS', 
 
     it('Vi åpner opprettelse av søknad siden', function () {
         cy.visit('/syk/sykepengesoknad/sykepengesoknad-utland')
-        cy.contains('Søknad om å beholde sykepenger utenfor EØS')
+        cy.contains('Søknad om å beholde sykepenger utenfor EU/EØS')
         cy.contains('Fortsett til søknaden').click()
     })
 
     it('Vi er på søknaden for å beholde søknader', function () {
-        cy.contains('Søknad om å beholde sykepenger utenfor EØS')
+        cy.contains('Søknad om å beholde sykepenger utenfor EU/EØS')
         cy.url().should('not.include', arbeidstakersoknadMedUtenlandsoppholdSoktSykepenger.id)
         cy.url().should('include', `/1`)
         cy.contains('Når skal du reise?')
