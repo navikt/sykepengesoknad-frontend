@@ -189,7 +189,8 @@ const SporsmalTekster = {
     'soknad.feilmelding.MEDLEMSKAP_OPPHOLD_UTENFOR_EOS':
         'Du må svare på om du har oppholdt deg utenfor EU/EØS-området i løpet av de siste 12 månedene',
     'soknad.feilmelding.MEDLEMSKAP_OPPHOLD_UTENFOR_EOS_HVOR': 'Du må oppgi landet du har oppholdt deg i',
-    'soknad.feilmelding.MEDLEMSKAP_OPPHOLD_UTENFOR_EOS_BEGRUNNELSE': 'Du må oppgi grunn for ditt opphold utenfor EU/EØS',
+    'soknad.feilmelding.MEDLEMSKAP_OPPHOLD_UTENFOR_EOS_BEGRUNNELSE':
+        'Du må oppgi grunn for ditt opphold utenfor EU/EØS',
     'soknad.feilmelding.MEDLEMSKAP_OPPHOLD_UTENFOR_EOS_BEGRUNNELSE_ANNET_FRITEKST':
         'Du må oppgi hva du gjorde i utlandet',
     'soknad.feilmelding.MEDLEMSKAP_OPPHOLD_UTENFOR_EOS_NAAR': 'Du må oppgi perioden du har oppholdt deg utenfor EU/EØS',
