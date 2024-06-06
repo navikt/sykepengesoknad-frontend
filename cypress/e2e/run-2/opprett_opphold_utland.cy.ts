@@ -25,7 +25,7 @@ describe('Tester opprettelse av søknad om å beholde sykepenger utenfor EØS', 
         cy.url().should('include', `${arbeidstakersoknadMedUtenlandsoppholdSoktSykepenger.id}/2`)
 
         // Test spørsmål
-        cy.get('[data-cy="sporsmal-tittel"]').should('have.text', 'Sykepenger utenfor EØS')
+        cy.get('[data-cy="sporsmal-tittel"]').should('have.text', 'Sykepenger utenfor EU/EØS')
         cy.contains('Har du søkt om å beholde sykepengene for de dagene du var utenfor EØS?')
         cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click()
 
