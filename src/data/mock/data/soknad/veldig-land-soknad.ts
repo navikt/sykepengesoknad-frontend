@@ -1187,7 +1187,7 @@ export const veldigLangSoknad: RSSoknad = {
         {
             id: '687422',
             tag: 'ARBEIDSLEDIG_UTLAND',
-            sporsmalstekst: 'Var du på reise utenfor EØS mens du var sykmeldt 1. - 24. april 2020?',
+            sporsmalstekst: 'Var du på reise utenfor EU/EØS mens du var sykmeldt 1. - 24. april 2020?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -1198,7 +1198,7 @@ export const veldigLangSoknad: RSSoknad = {
                 {
                     id: '687423',
                     tag: 'UTLAND_NAR',
-                    sporsmalstekst: 'Når var du utenfor EØS?',
+                    sporsmalstekst: 'Når var du utenfor EU/EØS?',
                     undertekst: null,
                     svartype: 'PERIODER',
                     min: '2020-04-01',
@@ -1223,7 +1223,7 @@ export const veldigLangSoknad: RSSoknad = {
                             tag: 'IKKE_SOKT_UTENLANDSOPPHOLD_INFORMASJON',
                             sporsmalstekst: null,
                             undertekst:
-                                "<p>DENNE SKAL IKKE VISES  I! utgangspunktet kan du bare få sykepenger mens du er i et land innenfor EØS. Du kan likevel <a target='_blank' href='https://tjenester.nav.no/sykefravaer/sykepengesoknad-utland'>søke NAV om å få reise ut av EØS</a> og beholde sykepengene i en begrenset periode.</p>",
+                                "<p>DENNE SKAL IKKE VISES  I! utgangspunktet kan du bare få sykepenger mens du er i et land innenfor EU/EØS. Du kan likevel <a target='_blank' href='https://tjenester.nav.no/sykefravaer/sykepengesoknad-utland'>søke NAV om å få reise ut av EU/EØS</a> og beholde sykepengene i en begrenset periode.</p>",
                             svartype: 'IKKE_RELEVANT',
                             min: null,
                             max: null,

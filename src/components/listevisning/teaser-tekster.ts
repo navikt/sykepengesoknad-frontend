@@ -14,7 +14,7 @@ const TeaserTekster = {
     'soknader.teaser.fremtidig.modal.utvidbar.tittel': 'Hvorfor kan jeg ikke søke nå?',
     'soknader.teaser.fremtidig.modal.utvidbar.tekst':
         'For å utbetale riktig trenger vi å vite hva som skjedde i løpet av sykefraværet, for eksempel om du jobbet mer enn sykmeldingen sier, eller om du gjorde noe annet som har betydning for sykepengene dine.',
-    'soknad.utland.teaser.tittel': 'Søknad om å beholde sykepenger utenfor EØS',
+    'soknad.utland.teaser.tittel': 'Søknad om å beholde sykepenger utenfor EU/EØS',
     'soknad.teaser.tittel': 'Søknad om sykepenger',
     'soknad.teaser.periode': 'Gjelder perioden %PERIODE%',
     'soknad.teaser.sykmeldt': '%GRAD%% sykmeldt',

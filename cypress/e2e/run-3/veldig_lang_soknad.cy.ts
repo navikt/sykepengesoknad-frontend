@@ -312,7 +312,7 @@ describe('Tester støtte for gamle spørsmål', () => {
         svarFritekst('Oppgi nærmere opplysninger om arbeid/virksomhet utenfor Norge', 'Britiske staten')
         gaVidere()
     })
-    it('Sykepenger i andre EØS-land', () => {
+    it('Sykepenger i andre EU/EØS-land', () => {
         svarNeiHovedsporsmal()
         gaVidere()
     })

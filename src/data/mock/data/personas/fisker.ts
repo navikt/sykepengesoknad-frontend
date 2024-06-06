@@ -300,7 +300,7 @@ const soknad: RSSoknad = {
         {
             id: '58f48c4f-3bc2-3f17-a642-a24383db8e6c',
             tag: 'UTLAND',
-            sporsmalstekst: 'Har du vært utenfor EØS mens du var sykmeldt 16. - 22. januar 2024?',
+            sporsmalstekst: 'Har du vært utenfor EU/EØS mens du var sykmeldt 16. - 22. januar 2024?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -311,7 +311,7 @@ const soknad: RSSoknad = {
                 {
                     id: 'c03398c6-55ac-3e90-a809-79a63f106260',
                     tag: 'PERIODER',
-                    sporsmalstekst: 'Når var du utenfor EØS?',
+                    sporsmalstekst: 'Når var du utenfor EU/EØS?',
                     undertekst: null,
                     svartype: 'PERIODER',
                     min: '2024-01-16',

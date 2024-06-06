@@ -367,7 +367,7 @@ export const arbeidstakerGradert: RSSoknad = {
         {
             id: '687308',
             tag: 'UTLAND_V2',
-            sporsmalstekst: 'Var du på reise utenfor EØS mens du var sykmeldt 1. - 24. april 2020?',
+            sporsmalstekst: 'Var du på reise utenfor EU/EØS mens du var sykmeldt 1. - 24. april 2020?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -378,7 +378,7 @@ export const arbeidstakerGradert: RSSoknad = {
                 {
                     id: '687309',
                     tag: 'UTLAND_NAR_V2',
-                    sporsmalstekst: 'Når var du utenfor EØS?',
+                    sporsmalstekst: 'Når var du utenfor EU/EØS?',
                     undertekst: null,
                     svartype: 'PERIODER',
                     min: '2020-04-01',

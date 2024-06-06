@@ -146,7 +146,7 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
 
         // Test spørsmål
         cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click()
-        cy.contains('Når var du utenfor EØS?')
+        cy.contains('Når var du utenfor EU/EØS?')
 
         setPeriodeFraTil(14, 22)
         cy.contains('Gå videre').click()

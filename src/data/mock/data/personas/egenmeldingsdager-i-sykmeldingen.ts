@@ -353,7 +353,7 @@ export const soknadUtenEgenmeldingSporsmal: RSSoknad = {
         {
             id: '9f5ead98-b8ef-3ed0-8804-1ba1b8c9c4ac',
             tag: 'UTLAND_V2',
-            sporsmalstekst: 'Var du på reise utenfor EØS mens du var sykmeldt 17. - 23. mars 2023?',
+            sporsmalstekst: 'Var du på reise utenfor EU/EØS mens du var sykmeldt 17. - 23. mars 2023?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -364,7 +364,7 @@ export const soknadUtenEgenmeldingSporsmal: RSSoknad = {
                 {
                     id: '5339c2a7-ba97-3a2c-bb2a-2df2acad56b5',
                     tag: 'UTLAND_NAR_V2',
-                    sporsmalstekst: 'Når var du utenfor EØS?',
+                    sporsmalstekst: 'Når var du utenfor EU/EØS?',
                     undertekst: null,
                     svartype: 'PERIODER',
                     min: '2023-03-17',

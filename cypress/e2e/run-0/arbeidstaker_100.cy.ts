@@ -172,7 +172,7 @@ describe('Tester arbeidstakersøknad', () => {
 
         // Test spørsmål
         cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click()
-        cy.contains('Når var du utenfor EØS?')
+        cy.contains('Når var du utenfor EU/EØS?')
 
         setPeriodeFraTil(14, 22)
 

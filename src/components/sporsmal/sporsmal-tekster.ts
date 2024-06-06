@@ -17,7 +17,7 @@ const SporsmalTekster = {
     'soknad.feilmelding.BEKREFT_OPPLYSNINGER':
         'Du må bekrefte at du har lest informasjonen du har fått i søknaden og at opplysningene du har gitt er korrekte.',
     'soknad.feilmelding.BEKREFT_OPPLYSNINGER_UTLAND':
-        'Du må bekrefte at du oppfyller punktene over for å søke om å beholde sykepenger utenfor EØS',
+        'Du må bekrefte at du oppfyller punktene over for å søke om å beholde sykepenger utenfor EU/EØS',
     'soknad.feilmelding.BETALER_ARBEIDSGIVER': 'Du må svare på om arbeidsgiveren betaler lønnen din når du er syk',
     'soknad.feilmelding.FRAVER_FOR_BEHANDLING':
         'Du må svare på om du brukte egenmeldinger eller var sykmeldt i denne perioden',
@@ -123,12 +123,12 @@ const SporsmalTekster = {
     'soknad.feilmelding.UTDANNING': 'Du må svare på om du har vært under utdanning i denne perioden',
     'soknad.feilmelding.UTDANNING_START': 'Du må svare på når du startet på utdanningen',
     'soknad.feilmelding.UTLAND': 'Du må svare på om du har oppholdt deg i utlandet i denne perioden',
-    'soknad.feilmelding.UTLAND_V2': 'Du må svare på om du har vært utenfor EØS i denne perioden',
+    'soknad.feilmelding.UTLAND_V2': 'Du må svare på om du har vært utenfor EU/EØS i denne perioden',
     'soknad.feilmelding.UTLAND_NAR': 'Du må svare på om du har oppholdt deg i utlandet i denne perioden',
-    'soknad.feilmelding.UTLAND_NAR_V2': 'Du må svare på om du har vært utenfor EØS i denne perioden',
-    'soknad.feilmelding.PERIODER': 'Du må svare på om du har vært utenfor EØS i denne perioden',
+    'soknad.feilmelding.UTLAND_NAR_V2': 'Du må svare på om du har vært utenfor EU/EØS i denne perioden',
+    'soknad.feilmelding.PERIODER': 'Du må svare på om du har vært utenfor EU/EØS i denne perioden',
     'soknad.feilmelding.PERIODEUTLAND': 'Du må oppgi når du skal reise',
-    'soknad.feilmelding.ARBEIDSLEDIG_UTLAND': 'Du må svare på om du har vært utenfor EØS i denne perioden',
+    'soknad.feilmelding.ARBEIDSLEDIG_UTLAND': 'Du må svare på om du har vært utenfor EU/EØS i denne perioden',
     'soknad.feilmelding.UTLANDSOPPHOLD_SOKT_SYKEPENGER':
         'Du må svare på om du har søkt om å beholde sykepenger under dette oppholdet utenfor Norge',
     'soknad.feilmelding.ENKELTSTAENDE_BEHANDLINGSDAGER_UKE': 'Du må oppgi hvilke dager du var til behandling',
@@ -165,9 +165,9 @@ const SporsmalTekster = {
     'soknad.feilmelding.UTENLANDSK_SYKMELDING_LONNET_ARBEID_UTENFOR_NORGE_FRITEKST':
         'Du må oppgi nærmere opplysninger om arbeidet',
     'soknad.feilmelding.UTENLANDSK_SYKMELDING_TRYGD_UTENFOR_NORGE':
-        'Du må svare på om du har mottatt sykepenger eller lignende i andre EØS-land',
+        'Du må svare på om du har mottatt sykepenger eller lignende i andre EU/EØS-land',
     'soknad.feilmelding.UTENLANDSK_SYKMELDING_TRYGD_HVILKET_LAND':
-        'Du må velge alle andre EØS-land bortsett fra Norge hvor du har mottatt sykepenger eller lignende i løpet av de siste tre årene',
+        'Du må velge alle andre EU/EØS-land bortsett fra Norge hvor du har mottatt sykepenger eller lignende i løpet av de siste tre årene',
     'soknad.feilmelding.UTENLANDSK_SYKMELDING_GYLDIGHET_ADRESSE': 'Du må oppgi hvor lenge denne adressen skal brukes',
     'soknad.feilmelding.YRKESSKADE': 'Du må svare på om sykdommen er relatert til en yrkesskade',
     'soknad.feilmelding.YRKESSKADE_V2': 'Du må svare på om sykdommen er relatert til en godkjent yrkesskade',
@@ -187,12 +187,12 @@ const SporsmalTekster = {
     'soknad.feilmelding.MEDLEMSKAP_OPPHOLDSTILLATELSE_MIDLERTIDIG_PERIODE':
         'Du må oppgi hvilken periode du fått oppholdstillatelse for',
     'soknad.feilmelding.MEDLEMSKAP_OPPHOLD_UTENFOR_EOS':
-        'Du må svare på om du har oppholdt deg utenfor EØS-området i løpet av de siste 12 månedene',
+        'Du må svare på om du har oppholdt deg utenfor EU/EØS-området i løpet av de siste 12 månedene',
     'soknad.feilmelding.MEDLEMSKAP_OPPHOLD_UTENFOR_EOS_HVOR': 'Du må oppgi landet du har oppholdt deg i',
-    'soknad.feilmelding.MEDLEMSKAP_OPPHOLD_UTENFOR_EOS_BEGRUNNELSE': 'Du må oppgi grunn for ditt opphold utenfor EØS',
+    'soknad.feilmelding.MEDLEMSKAP_OPPHOLD_UTENFOR_EOS_BEGRUNNELSE': 'Du må oppgi grunn for ditt opphold utenfor EU/EØS',
     'soknad.feilmelding.MEDLEMSKAP_OPPHOLD_UTENFOR_EOS_BEGRUNNELSE_ANNET_FRITEKST':
         'Du må oppgi hva du gjorde i utlandet',
-    'soknad.feilmelding.MEDLEMSKAP_OPPHOLD_UTENFOR_EOS_NAAR': 'Du må oppgi perioden du har oppholdt deg utenfor EØS',
+    'soknad.feilmelding.MEDLEMSKAP_OPPHOLD_UTENFOR_EOS_NAAR': 'Du må oppgi perioden du har oppholdt deg utenfor EU/EØS',
     'soknad.feilmelding.MEDLEMSKAP_OPPHOLD_UTENFOR_NORGE':
         'Du må svare på om du har oppholdt deg utenfor Norge i løpet av de siste 12 månedene',
     'soknad.feilmelding.MEDLEMSKAP_OPPHOLD_UTENFOR_NORGE_HVOR': 'Du må oppgi landet du har oppholdt deg i',
@@ -212,7 +212,7 @@ const SporsmalTekster = {
     'soknad.infotekst.utlandsopphold_sokt_sykepenger.ja':
         'Du må ha sendt en egen <a target="_blank" href="%URL%">utenlandssøknad</a> for å svare ja på dette spørsmålet. Husk at du også må fullføre denne søknaden om sykepenger.',
     'soknad.infotekst.utlandsopphold_sokt_sykepenger.nei':
-        'I utgangspunktet kan du bare få sykepenger mens du er i et land innenfor EØS. Du kan likevel <a href="%URL%" target="_blank">søke NAV om å få reise ut av EØS</a> og beholde sykepengene i en begrenset periode.',
+        'I utgangspunktet kan du bare få sykepenger mens du er i et land innenfor EU/EØS. Du kan likevel <a href="%URL%" target="_blank">søke NAV om å få reise ut av EU/EØS</a> og beholde sykepengene i en begrenset periode.',
 
     'sykepengesoknad.periodevelger.legg-til-ekstra': 'Legg til ekstra periode',
     'sykepengesoknad.periodevelger.slett': 'Slett periode',

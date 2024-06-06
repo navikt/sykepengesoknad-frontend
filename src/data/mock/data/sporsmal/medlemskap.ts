@@ -203,7 +203,7 @@ export const medlemskapUtførtArbeidUtenforNorgeSporsmal: RSSporsmal = {
 export const medlemskapOppholdUtenforEøsSporsmal: RSSporsmal = {
     id: '57bd4bc9-cae6-3f82-91d5-4f25296729de',
     tag: 'MEDLEMSKAP_OPPHOLD_UTENFOR_EOS',
-    sporsmalstekst: 'Har du oppholdt deg utenfor EØS i løpet av de siste 12 månedene før du ble syk?',
+    sporsmalstekst: 'Har du oppholdt deg utenfor EU/EØS i løpet av de siste 12 månedene før du ble syk?',
     undertekst: null,
     svartype: 'JA_NEI',
     min: null,
@@ -225,7 +225,7 @@ export const medlemskapOppholdUtenforEøsSporsmal: RSSporsmal = {
                 {
                     id: '3b5ef1fb-0fb9-3f6a-876b-d971c1cc9ae3',
                     tag: 'MEDLEMSKAP_OPPHOLD_UTENFOR_EOS_HVOR_0',
-                    sporsmalstekst: 'I hvilket land utenfor EØS har du oppholdt deg?',
+                    sporsmalstekst: 'I hvilket land utenfor EU/EØS har du oppholdt deg?',
                     undertekst: null,
                     svartype: 'COMBOBOX_SINGLE',
                     min: null,

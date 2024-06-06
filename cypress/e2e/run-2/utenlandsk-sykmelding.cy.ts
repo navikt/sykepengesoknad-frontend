@@ -78,16 +78,16 @@ describe('Tester søknad til utenlandsk sykmelding', () => {
 
     it('Sykepenger i andre EØS-land', function () {
         cy.url().should('include', `${id}/4`)
-        cy.contains('Sykepenger i andre EØS-land')
-        cy.contains('Har du mottatt sykepenger eller lignende i andre EØS-land i løpet av de siste tre årene?')
+        cy.contains('Sykepenger i andre EU/EØS-land')
+        cy.contains('Har du mottatt sykepenger eller lignende i andre EU/EØS-land i løpet av de siste tre årene?')
 
         cy.contains('Gå videre').click()
-        cy.contains('Du må svare på om du har mottatt sykepenger eller lignende i andre EØS-land')
+        cy.contains('Du må svare på om du har mottatt sykepenger eller lignende i andre EU/EØS-land')
         svarJaHovedsporsmal()
         cy.contains('I hvilket land?')
         cy.contains('Gå videre').click()
         cy.contains(
-            'Du må velge alle andre EØS-land bortsett fra Norge hvor du har mottatt sykepenger eller lignende i løpet av de siste tre årene',
+            'Du må velge alle andre EU/EØS-land bortsett fra Norge hvor du har mottatt sykepenger eller lignende i løpet av de siste tre årene',
         )
         svarCombobox('I hvilket land?', 'Dan', 'Danmark')
         cy.get('.navds-combobox__button-toggle-list').click()
