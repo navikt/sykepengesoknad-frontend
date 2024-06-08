@@ -178,6 +178,8 @@ const SporsmalTekster = {
         'Du må svare på det er en sammenheng mellom dette sykefraværet og tidligere yrkesskade',
     'soknad.feilmelding.MEDLEMSKAP_OPPHOLDSTILLATELSE':
         'Du må svare på om du har oppholdstillatelse fra utlendingsdirektoratet',
+    'soknad.feilmelding.MEDLEMSKAP_OPPHOLDSTILLATELSE_V2':
+        'Du må svare på om du har en tidligere oppholdstillatelse fra utlendingsdirektoratet',
     'soknad.feilmelding.MEDLEMSKAP_OPPHOLDSTILLATELSE_GRUPPE':
         'Du må svare på om du har fått permanent eller midlertidig oppholdstillatelse',
     'soknad.feilmelding.MEDLEMSKAP_OPPHOLDSTILLATELSE_VEDTAKSDATO':
@@ -186,6 +188,8 @@ const SporsmalTekster = {
         'Du må oppgi hvilken dato oppholdstillatelse gjelder fra',
     'soknad.feilmelding.MEDLEMSKAP_OPPHOLDSTILLATELSE_MIDLERTIDIG_PERIODE':
         'Du må oppgi hvilken periode du fått oppholdstillatelse for',
+    'soknad.feilmelding.MEDLEMSKAP_OPPHOLDSTILLATELSE_PERIODE':
+        'Du må oppgi hvilken periode den tidligere oppholdstillatelsen var for',
     'soknad.feilmelding.MEDLEMSKAP_OPPHOLD_UTENFOR_EOS':
         'Du må svare på om du har oppholdt deg utenfor EØS-området i løpet av de siste 12 månedene',
     'soknad.feilmelding.MEDLEMSKAP_OPPHOLD_UTENFOR_EOS_HVOR': 'Du må oppgi landet du har oppholdt deg i',

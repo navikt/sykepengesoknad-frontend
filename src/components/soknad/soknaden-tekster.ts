@@ -112,6 +112,7 @@ const SoknadenTekster = {
     'sykepengesoknad.yrkesskade.tittel': 'Yrkesskade',
     'sykepengesoknad.yrkesskade_v2.tittel': 'Yrkesskade',
     'sykepengesoknad.medlemskap_oppholdstillatelse.tittel': 'Oppholdstillatelse',
+    'sykepengesoknad.medlemskap_oppholdstillatelse_v2.tittel': 'Oppholdstillatelse',
     'sykepengesoknad.medlemskap_opphold_utenfor_eos.tittel': 'Opphold utenfor EØS',
     'sykepengesoknad.medlemskap_opphold_utenfor_norge.tittel': 'Opphold utenfor Norge',
     'sykepengesoknad.medlemskap_utfort_arbeid_utenfor_norge.tittel': 'Arbeid utenfor Norge',

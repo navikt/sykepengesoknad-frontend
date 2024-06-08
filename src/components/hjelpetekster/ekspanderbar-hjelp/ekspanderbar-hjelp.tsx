@@ -26,7 +26,10 @@ import { EndringSNHjelpBody } from './endring-sn-hjelp-body'
 import { MedlemskapArbeidUtenforNorgeHjelpBody } from './medlemskap-arbeid-utenfor-norge-hjelp-body'
 import { MedlemskapOppholdUtenforEOSHjelpBody } from './medlemskap-opphold-utenfor-eos-hjelp-body'
 import { MedlemskapOppholdUtenforNorgeHjelpBody } from './medlemskap-opphold-utenfor-Norge-hjelp-body'
-import { MedlemskapOppholdstillatelseHjelpBody } from './medlemskap-oppholdstillatelse-hjelp-body'
+import {
+    MedlemskapOppholdstillatelseHjelpBody,
+    MedlemskapOppholdstillatelseV2HjelpBody,
+} from './medlemskap-oppholdstillatelse-hjelp-body'
 import { KjenteInntektkilderHjelpBody } from './kjente-inntektkilder'
 import { VarigEndring25prosent } from './varig-endring-25prosent'
 import { DriftIVirksomhet } from './drift-i-virksomhet'
@@ -99,6 +102,8 @@ export const EkspanderbarHjelp = ({ sporsmal, mb }: { sporsmal: Sporsmal; mb?: s
                 return <MedlemskapArbeidUtenforNorgeHjelpBody />
             case 'MEDLEMSKAP_OPPHOLDSTILLATELSE':
                 return <MedlemskapOppholdstillatelseHjelpBody />
+            case 'MEDLEMSKAP_OPPHOLDSTILLATELSE_V2':
+                return <MedlemskapOppholdstillatelseV2HjelpBody />
             case 'KJENTE_INNTEKTSKILDER':
                 return <KjenteInntektkilderHjelpBody />
             case 'INNTEKTSOPPLYSNINGER_VARIG_ENDRING_25_PROSENT':

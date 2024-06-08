@@ -90,7 +90,7 @@ export function neiOgVidere(titler: string[]) {
 export function velgDato(dato = 10) {
     const className = '.navds-date__field-button'
 
-    cy.get(className).click()
+    cy.get(className).first().click()
     cy.get('.rdp-day').contains(dato).first().click()
 }
 

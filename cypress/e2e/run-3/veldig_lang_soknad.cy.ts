@@ -101,6 +101,10 @@ describe('Tester støtte for gamle spørsmål', () => {
         svarNeiHovedsporsmal()
         gaVidere()
     })
+    it('MEDLEMSKAP_OPPHOLDSTILLATELSE_V2', () => {
+        svarNeiHovedsporsmal()
+        gaVidere()
+    })
     it('MEDLEMSKAP_OPPHOLD_UTENFOR_EOS', () => {
         svarNeiHovedsporsmal()
         gaVidere()
