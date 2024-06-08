@@ -17,7 +17,9 @@ if (!oppholdUtlandSpm) {
     throw new Error('Søknad mangler spørsmål UTLAND_V2 eller OPPHOLD_UTENFOR_EOS')
 }
 medlemskapSoknad.sporsmal = medlemskapSoknad.sporsmal
+    // ARBEID_UTENFOR_NORGE stilles ikke når det stilles spørsmål om medlemskap.
     .filter((spm) => spm.tag !== 'ARBEID_UTENFOR_NORGE')
+    // Fjerner spørsmålet sånn at det kan settes inn etter medlemskapspørsmål om opphold utenfor EØS.
     .filter((spm) => spm.tag !== 'UTLAND_V2')
     .filter((spm) => spm.tag !== 'OPPHOLD_UTENFOR_EOS')
 const splittSted = medlemskapSoknad.sporsmal.findIndex((spm) => spm.tag === 'ANDRE_INNTEKTSKILDER_V2')
@@ -34,9 +36,9 @@ medlemskapSoknad.sporsmal = [
     ...medlemskapSoknad.sporsmal.slice(splittSted + 1),
 ]
 
-export const medlemskapPerson: Persona = {
+export const opprinnneligMedlemskapPerson: Persona = {
     soknader: [medlemskapSoknad],
     sykmeldinger: [brukertestSykmelding],
     kontonummer: '12340000000',
-    beskrivelse: 'Søknad med alle medlemskap spørsmålene',
+    beskrivelse: 'Opprinnelige spørsmål om medlemskap',
 }

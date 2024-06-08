@@ -111,16 +111,19 @@ function PersonGruppeVisning({ gruppe, personer }: { gruppe: PersonaGroupKey; pe
     function heading() {
         switch (gruppe) {
             case 'soknad-typer': {
-                return 'Søknad typer'
+                return 'Søknadstyper'
             }
             case 'soknad-sporsmal': {
-                return 'Spørsmål i søknaden'
+                return 'Spørsmålsvarianter'
+            }
+            case 'medlemskap-sporsmal': {
+                return 'Spørsmål om Medlemskap'
             }
             case 'testing': {
-                return 'Diverse personer for testing'
+                return 'Forskjellige Testscenarios'
             }
             default: {
-                throw Error(`mangler testperson gruppe heading for ${gruppe}`)
+                throw Error(`Ukjent testpersongruppe ${gruppe}.`)
             }
         }
     }
