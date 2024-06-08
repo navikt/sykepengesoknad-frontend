@@ -33,7 +33,7 @@ import { yrkesskadePerson, yrkesskadeV2Person } from './data/yrkesskade'
 import { egenmeldingSykmeldingaPerson } from './data/personas/egenmeldingsdager-i-sykmeldingen'
 import { selvstendigNaringsdrivende, selvstendigNaringsdrivendeSendt } from './data/personas/naringsdrivende'
 import { korrigeringsfristUtloptPerson } from './data/personas/korrigeringsfrist-utlopt'
-import { opprinnneligMedlemskapPerson } from './data/personas/medlemskap'
+import { medlemskapPerson } from './data/personas/medlemskap'
 import { fiskePerson } from './data/personas/fisker'
 import { kjenteInntektskilderPerson } from './data/personas/kjente-inntektskilder'
 import { innenforAgPerioden } from './data/personas/innenfor-ag-periode'
@@ -118,7 +118,7 @@ export function testpersonerGruppert(): PersonaGroup {
             ['sykmelding-med-egenmeldingsdager']: jsonDeepCopy(egenmeldingSykmeldingaPerson),
         },
         ['medlemskap-sporsmal']: {
-            ['medlemskap']: jsonDeepCopy(opprinnneligMedlemskapPerson),
+            ['medlemskap']: jsonDeepCopy(medlemskapPerson),
         },
         ['testing']: {
             ['over-70']: over70(),

@@ -1,6 +1,7 @@
 import { deepcopyMedNyId } from '../../deepcopyMedNyId'
 import {
     medlemskapOppholdstillatelseSporsmal,
+    medlemskapOppholdstillatelseV2Sporsmal,
     medlemskapOppholdUtenforEøsSporsmal,
     medlemskapOppholdUtenforNorgeSporsmal,
     medlemskapUtførtArbeidUtenforNorgeSporsmal,
@@ -36,9 +37,26 @@ medlemskapSoknad.sporsmal = [
     ...medlemskapSoknad.sporsmal.slice(splittSted + 1),
 ]
 
-export const opprinnneligMedlemskapPerson: Persona = {
-    soknader: [medlemskapSoknad],
+const medlemskapSoknadOppholdstillatelseV2 = deepcopyMedNyId(medlemskapSoknad, '15035122-1f22-4231-be4b-c9e46131d53d')
+
+const oppholdstillatelseIndex = medlemskapSoknadOppholdstillatelseV2.sporsmal.findIndex(
+    (spm) => spm.tag === 'MEDLEMSKAP_OPPHOLDSTILLATELSE',
+)
+
+medlemskapSoknadOppholdstillatelseV2.sporsmal = medlemskapSoknadOppholdstillatelseV2.sporsmal.filter(
+    (spm) => spm.tag !== 'MEDLEMSKAP_OPPHOLDSTILLATELSE',
+)
+
+// Setter inn nytt spørsmål om oppholdstllatelse der hvor det gamle var.
+medlemskapSoknadOppholdstillatelseV2.sporsmal = [
+    ...medlemskapSoknadOppholdstillatelseV2.sporsmal.slice(0, oppholdstillatelseIndex),
+    medlemskapOppholdstillatelseV2Sporsmal,
+    ...medlemskapSoknadOppholdstillatelseV2.sporsmal.slice(oppholdstillatelseIndex),
+]
+
+export const medlemskapPerson: Persona = {
+    soknader: [medlemskapSoknad, medlemskapSoknadOppholdstillatelseV2],
     sykmeldinger: [brukertestSykmelding],
     kontonummer: '12340000000',
-    beskrivelse: 'Opprinnelige spørsmål om medlemskap',
+    beskrivelse: 'Person med søknader med forskjellig spørsmål om medlemskap',
 }

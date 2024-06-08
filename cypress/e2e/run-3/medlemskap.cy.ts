@@ -1,4 +1,4 @@
-import { opprinnneligMedlemskapPerson } from '../../../src/data/mock/data/personas/medlemskap'
+import { medlemskapPerson } from '../../../src/data/mock/data/personas/medlemskap'
 import 'cypress-real-events'
 import {
     klikkGaVidere,
@@ -11,8 +11,8 @@ import {
     velgDato,
 } from '../../support/utilities'
 
-describe('Tester medlemskap spørsmål', () => {
-    const soknad = opprinnneligMedlemskapPerson.soknader[0]
+describe('Søknad med opprinngelige spørsmål om medlemskap', () => {
+    const soknad = medlemskapPerson.soknader[0]
 
     before(() => {
         cy.visit(`/syk/sykepengesoknad/soknader/${soknad.id}/7?testperson=medlemskap`)
@@ -94,6 +94,44 @@ describe('Tester medlemskap spørsmål', () => {
             cy.contains('I hvilket land arbeidet du?').siblings().should('contain', 'Frankrike')
             cy.contains('Hvilken arbeidsgiver jobbet du for?').siblings().should('contain', 'Croissant AS')
             cy.contains('I hvilken periode arbeidet du i utlandet?').siblings().should('contain', '12. – 20.')
+        })
+    })
+})
+
+describe('Søknad med versjon to av spørsmål om opppholdstillatelse', () => {
+    const soknad = medlemskapPerson.soknader[1]
+
+    before(() => {
+        cy.visit(`/syk/sykepengesoknad/soknader/${soknad.id}/11?testperson=medlemskap`)
+        cy.get('.navds-heading--large')
+            .should('be.visible')
+            .and('have.text', 'Søknad om sykepenger8. – 21. september 2022')
+    })
+
+    it('Oppholdstillatelse V2', () => {
+        cy.contains('Oppholdstillatelse')
+        cy.contains(
+            'Har du hatt en oppholdstillatelse fra Utlendingsdirektoratet som gjelder en periode før tillatelsen som gjelder nå?',
+        )
+
+        svarJaHovedsporsmal()
+        velgDato(1)
+        setPeriodeFraTil(10, 20)
+        klikkGaVidere()
+    })
+
+    it('Oppsumering av søknad', () => {
+        cy.contains('Til slutt')
+
+        cy.findByRole('region', { name: 'Oppsummering fra søknaden' }).click()
+        cy.findByRole('region', { name: 'Oppsummering fra søknaden' }).within(() => {
+            cy.contains(
+                'Har du hatt en oppholdstillatelse fra Utlendingsdirektoratet som gjelder en periode før tillatelsen som gjelder nå?',
+            )
+                .siblings()
+                .should('contain', 'Ja')
+            cy.contains('Hvilken dato fikk du denne oppholdstillatelsen?').siblings().should('contain', '01.')
+            cy.contains('Hvilken periode gjelder denne oppholdstillatelsen?').siblings().should('contain', '10. – 20.')
         })
     })
 })
