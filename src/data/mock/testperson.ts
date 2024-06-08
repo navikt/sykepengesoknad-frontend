@@ -33,7 +33,7 @@ import { yrkesskadePerson, yrkesskadeV2Person } from './data/yrkesskade'
 import { egenmeldingSykmeldingaPerson } from './data/personas/egenmeldingsdager-i-sykmeldingen'
 import { selvstendigNaringsdrivende, selvstendigNaringsdrivendeSendt } from './data/personas/naringsdrivende'
 import { korrigeringsfristUtloptPerson } from './data/personas/korrigeringsfrist-utlopt'
-import { medlemskapPerson } from './data/personas/medlemskap'
+import { opprinnneligMedlemskapPerson } from './data/personas/medlemskap'
 import { fiskePerson } from './data/personas/fisker'
 import { kjenteInntektskilderPerson } from './data/personas/kjente-inntektskilder'
 import { innenforAgPerioden } from './data/personas/innenfor-ag-periode'
@@ -75,9 +75,10 @@ type PersonaKey =
     | 'tilbakedateringer'
     | 'selvstendig-naringsdrivende-sendt'
     | 'innenfor-arbeidsgiver-perioden'
+
 export type PersonaData = Partial<Record<PersonaKey, Persona>>
 
-export type PersonaGroupKey = 'soknad-typer' | 'soknad-sporsmal' | 'testing'
+export type PersonaGroupKey = 'soknad-typer' | 'soknad-sporsmal' | 'medlemskap-sporsmal' | 'testing'
 type PersonaGroup = Record<PersonaGroupKey, PersonaData>
 
 export function testpersoner(): PersonaData {
@@ -105,7 +106,6 @@ export function testpersonerGruppert(): PersonaGroup {
             ['innenfor-arbeidsgiver-perioden']: jsonDeepCopy(innenforAgPerioden),
         },
         ['soknad-sporsmal']: {
-            ['medlemskap']: jsonDeepCopy(medlemskapPerson),
             ['kjente-inntektskilder']: jsonDeepCopy(kjenteInntektskilderPerson),
             ['yrkesskade']: jsonDeepCopy(yrkesskadePerson),
             ['yrkesskade-v2']: jsonDeepCopy(yrkesskadeV2Person),
@@ -114,7 +114,9 @@ export function testpersonerGruppert(): PersonaGroup {
             ['egenmeldingsdager-arbeidsgiver']: jsonDeepCopy(opprettetAvInntektsmelding),
             ['sykmelding-med-egenmeldingsdager']: jsonDeepCopy(egenmeldingSykmeldingaPerson),
         },
-
+        ['medlemskap-sporsmal']: {
+            ['medlemskap']: jsonDeepCopy(opprinnneligMedlemskapPerson),
+        },
         ['testing']: {
             ['over-70']: over70(),
             ['korrigeringsfrist-utlopt']: jsonDeepCopy(korrigeringsfristUtloptPerson),
