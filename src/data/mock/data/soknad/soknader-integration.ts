@@ -64,7 +64,7 @@ export const arbeidstakersoknadMedUtenlandsoppholdSoktSykepenger: RSSoknad = {
         {
             id: '655',
             tag: 'UTLANDSOPPHOLD_SOKT_SYKEPENGER',
-            sporsmalstekst: 'Har du søkt om å beholde sykepengene for de dagene du var utenfor EØS?',
+            sporsmalstekst: 'Har du søkt om å beholde sykepengene for de dagene du var utenfor EU/EØS?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -441,7 +441,7 @@ export const sendtArbeidsledigKvittering: RSSoknad = {
         {
             id: '120',
             tag: 'ARBEIDSLEDIG_UTLAND',
-            sporsmalstekst: 'Var du på reise utenfor EØS mens du var sykmeldt 1. - 10. januar 2020?',
+            sporsmalstekst: 'Var du på reise utenfor EU/EØS mens du var sykmeldt 1. - 10. januar 2020?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -456,7 +456,7 @@ export const sendtArbeidsledigKvittering: RSSoknad = {
                 {
                     id: '121',
                     tag: 'UTLAND_NAR',
-                    sporsmalstekst: 'Når var du utenfor EØS?',
+                    sporsmalstekst: 'Når var du utenfor EU/EØS?',
                     undertekst: null,
                     svartype: 'PERIODER',
                     min: '2020-01-01',

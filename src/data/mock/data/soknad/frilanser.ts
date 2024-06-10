@@ -286,7 +286,7 @@ export const frilanser: RSSoknad = {
         {
             id: '687447',
             tag: 'UTLAND',
-            sporsmalstekst: 'Har du vært utenfor EØS mens du var sykmeldt 1. - 24. april 2020?',
+            sporsmalstekst: 'Har du vært utenfor EU/EØS mens du var sykmeldt 1. - 24. april 2020?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -297,7 +297,7 @@ export const frilanser: RSSoknad = {
                 {
                     id: '687448',
                     tag: 'PERIODER',
-                    sporsmalstekst: 'Når var du utenfor EØS?',
+                    sporsmalstekst: 'Når var du utenfor EU/EØS?',
                     undertekst: null,
                     svartype: 'PERIODER',
                     min: '2020-04-01',

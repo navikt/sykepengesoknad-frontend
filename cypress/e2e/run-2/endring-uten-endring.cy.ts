@@ -29,7 +29,7 @@ describe('Tester endring uten en endringer', () => {
         cy.contains('Jeg har ikke behov for denne søknaden').should('not.exist')
 
         cy.contains('Gå videre').click()
-        cy.contains('Var du på reise utenfor EØS')
+        cy.contains('Var du på reise utenfor EU/EØS')
 
         cy.contains('Gå videre').click()
         cy.contains('Arbeid utenfor Norge')

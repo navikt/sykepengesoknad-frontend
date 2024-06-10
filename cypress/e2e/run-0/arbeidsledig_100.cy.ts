@@ -71,11 +71,11 @@ describe('Tester arbeidsledigsøknad', () => {
         cy.url().should('include', `${soknad.id}/4`)
 
         // Test spørsmål
-        cy.contains('Var du på reise utenfor EØS mens du var sykmeldt 1. - 24. april 2020?')
+        cy.contains('Var du på reise utenfor EU/EØS mens du var sykmeldt 1. - 24. april 2020?')
         cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click()
 
         // Underspørsmål 1
-        cy.contains('Når var du utenfor EØS?')
+        cy.contains('Når var du utenfor EU/EØS?')
         setPeriodeFraTil(17, 24)
 
         // Underspørsmål 2

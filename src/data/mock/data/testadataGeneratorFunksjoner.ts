@@ -518,7 +518,7 @@ export function skapSoknad(opts: {
             {
                 id: '1623814',
                 tag: 'UTLAND_V2',
-                sporsmalstekst: `Var du på reise utenfor EØS mens du var sykmeldt ${periodeTekst}?`,
+                sporsmalstekst: `Var du på reise utenfor EU/EØS mens du var sykmeldt ${periodeTekst}?`,
                 undertekst: null,
                 svartype: 'JA_NEI',
                 min: null,
@@ -529,7 +529,7 @@ export function skapSoknad(opts: {
                     {
                         id: '1623815',
                         tag: 'UTLAND_NAR_V2',
-                        sporsmalstekst: 'Når var du utenfor EØS?',
+                        sporsmalstekst: 'Når var du utenfor EU/EØS?',
                         undertekst: null,
                         svartype: 'PERIODER',
                         min: fom,

@@ -25,8 +25,8 @@ describe('Tester opprettelse av søknad om å beholde sykepenger utenfor EØS', 
         cy.url().should('include', `${arbeidstakersoknadMedUtenlandsoppholdSoktSykepenger.id}/2`)
 
         // Test spørsmål
-        cy.get('[data-cy="sporsmal-tittel"]').should('have.text', 'Sykepenger utenfor EØS')
-        cy.contains('Har du søkt om å beholde sykepengene for de dagene du var utenfor EØS?')
+        cy.get('[data-cy="sporsmal-tittel"]').should('have.text', 'Sykepenger utenfor EU/EØS')
+        cy.contains('Har du søkt om å beholde sykepengene for de dagene du var utenfor EU/EØS?')
         cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click()
 
         cy.get('.utland_infotekst')
@@ -42,7 +42,7 @@ describe('Tester opprettelse av søknad om å beholde sykepenger utenfor EØS', 
         cy.get('.utland_infotekst')
             .should(
                 'include.text',
-                'I utgangspunktet kan du bare få sykepenger mens du er i et land innenfor EØS. Du kan likevel søke NAV om å få reise ut av EØS og beholde sykepengene i en begrenset periode.',
+                'I utgangspunktet kan du bare få sykepenger mens du er i et land innenfor EU/EØS. Du kan likevel søke NAV om å få reise ut av EU/EØS og beholde sykepengene i en begrenset periode.',
             )
             .find('a')
             .should('have.attr', 'href', '/syk/sykepengesoknad/sykepengesoknad-utland')
@@ -50,12 +50,12 @@ describe('Tester opprettelse av søknad om å beholde sykepenger utenfor EØS', 
 
     it('Vi åpner opprettelse av søknad siden', function () {
         cy.visit('/syk/sykepengesoknad/sykepengesoknad-utland')
-        cy.contains('Søknad om å beholde sykepenger utenfor EØS')
+        cy.contains('Søknad om å beholde sykepenger utenfor EU/EØS')
         cy.contains('Fortsett til søknaden').click()
     })
 
     it('Vi er på søknaden for å beholde søknader', function () {
-        cy.contains('Søknad om å beholde sykepenger utenfor EØS')
+        cy.contains('Søknad om å beholde sykepenger utenfor EU/EØS')
         cy.url().should('not.include', arbeidstakersoknadMedUtenlandsoppholdSoktSykepenger.id)
         cy.url().should('include', `/1`)
         cy.contains('Når skal du reise?')

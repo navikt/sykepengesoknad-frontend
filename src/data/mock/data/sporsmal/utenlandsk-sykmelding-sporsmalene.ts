@@ -138,7 +138,7 @@ export const utenlandskSykmeldingSporsmalene: RSSporsmal[] = [
     {
         id: '6371316d-07d3-4819-9f77-da01c9dfea57',
         tag: 'UTENLANDSK_SYKMELDING_TRYGD_UTENFOR_NORGE',
-        sporsmalstekst: `Har du mottatt sykepenger eller lignende i andre EØS-land i løpet av de siste tre årene?`,
+        sporsmalstekst: `Har du mottatt sykepenger eller lignende i andre EU/EØS-land i løpet av de siste tre årene?`,
         undertekst: null,
         svartype: 'JA_NEI',
         min: null,

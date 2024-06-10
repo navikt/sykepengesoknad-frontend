@@ -4,7 +4,7 @@ const GuidepanelTekster = {
     'soknad.bjorn.fraver_for_behandling':
         'Vi trenger å vite om du har brukt egenmeldinger eller en papirsykmelding noen dager før denne sykmeldingen. Det er for å kunne beregne sykepengene dine riktig.',
     'soknad.bjorn.periodeutland':
-        'Vil du beholde sykepengene mens du er utenfor EØS, kan du ikke være borte i mer enn 28 kalenderdager i løpet av en 12 måneders periode.',
+        'Vil du beholde sykepengene mens du er utenfor EU/EØS, kan du ikke være borte i mer enn 28 kalenderdager i løpet av en 12 måneders periode.',
     'bekreft-sykmelding.skal-opprettes-soknad.bjorn':
         '<p>Du lurer kanskje på hvorfor du må søke som sykepenger på papir?</p>\n<p>Vi jobber med å digitalisere søknaden om sykepenger for selvstendig næringsdrivende og frilansere, men vi er dessverre ikke helt ferdige ennå.</p>',
     'sykepengesoknad.angi-tid.bjorn':
@@ -16,7 +16,7 @@ const GuidepanelTekster = {
     'sykepengesoknad-utland.skjema.bjorn':
         'Det er ikke mulig å ta ut ferie de dagene eller timene du skulle arbeidet og få utbetalt sykepenger for de andre. Men har du spart opp fleksitid, kan du avspasere dagene eller timene du skulle jobbet og få sykepenger for de andre dagene. Eksempel: Er du 50 prosent sykmeldt og ønsker å reise til utlandet noen dager, kan du avspasere halvparten av dagene. Har du ikke nok fleksitid å avspasere, må du ta ut hele feriedager.',
     'sykepengesoknad-utland.kvittering.sendt.bjorn':
-        'Nå har du bare søkt om å dra utenfor EØS, ikke om selve sykepengene. Det gjør du på vanlig måte senere, enten på papir eller digitalt.',
+        'Nå har du bare søkt om å dra utenfor EU/EØS, ikke om selve sykepengene. Det gjør du på vanlig måte senere, enten på papir eller digitalt.',
     'sykepengesoknad-utland.skjema.ferie-sporsmal-bjorn':
         'Du får ikke sykepenger mens du har ferie. Det betyr at du ikke trenger å sende denne søknaden. God tur!',
 }

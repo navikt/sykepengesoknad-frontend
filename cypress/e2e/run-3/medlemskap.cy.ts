@@ -41,16 +41,16 @@ describe('Tester medlemskap spørsmål', () => {
     })
 
     it('Opphold utenfor EØS', () => {
-        cy.contains('Opphold utenfor EØS')
+        cy.contains('Opphold utenfor EU/EØS')
 
         svarJaHovedsporsmal()
-        svarCombobox('I hvilket land utenfor EØS har du oppholdt deg?', 'Fra', 'Fransk Polynesia')
+        svarCombobox('I hvilket land utenfor EU/EØS har du oppholdt deg?', 'Fra', 'Fransk Polynesia')
         svarRadioGruppe('Hva gjorde du i utlandet?', 'Jeg var på ferie')
         setPeriodeFraTil(12, 20, 0)
 
         cy.contains('Legg til nytt opphold').click()
 
-        cy.findAllByRole('combobox', { name: 'I hvilket land utenfor EØS har du oppholdt deg?' })
+        cy.findAllByRole('combobox', { name: 'I hvilket land utenfor EU/EØS har du oppholdt deg?' })
             .should('have.length', 2)
             .last()
             .type('Ba')
@@ -67,8 +67,8 @@ describe('Tester medlemskap spørsmål', () => {
         klikkGaVidere()
     })
 
-    it('Var du på reise utenfor EØS mens du var sykmeldt', () => {
-        cy.contains('Var du på reise utenfor EØS mens du var sykmeldt')
+    it('Var du på reise utenfor EU/EØS mens du var sykmeldt', () => {
+        cy.contains('Var du på reise utenfor EU/EØS mens du var sykmeldt')
         svarNeiHovedsporsmal()
         klikkGaVidere()
     })
