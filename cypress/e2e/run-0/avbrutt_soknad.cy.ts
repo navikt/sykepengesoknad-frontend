@@ -1,5 +1,5 @@
 import { avbruttSoknad } from '../../../src/data/mock/data/soknad/arbeidstaker-avbrutt'
-import { modalAktiv, modalIkkeAktiv, svarFritekst } from '../../support/utilities'
+import { modalAktiv, modalIkkeAktiv } from '../../support/utilities'
 
 describe('Tester avbryting av søknad', () => {
     before(() => {
@@ -39,17 +39,9 @@ describe('Tester avbryting av søknad', () => {
         cy.contains('Frist for å søke')
     })
 
-    it('Søknad kan gjenåpnes med survey, som ikke besvares', () => {
+    it('Søknad kan gjenåpnes', function () {
         cy.get('button[data-cy="bruk-soknad-likevel"]').click()
-        cy.url().should('include', 'visSurvey=true')
-
-        modalAktiv()
-        cy.get('dialog').get('section').should('have.class', 'w-full').and('not.have.class', 'mt-16 md:w-3/4')
-        cy.contains('Du har gjenåpnet søknaden')
-        cy.contains('Jeg vil ikke gi tilbakemelding').click()
-        modalIkkeAktiv()
-
-        cy.url().should('include', `${avbruttSoknad.id}/1`).and('include', 'visSurvey=false')
+        cy.url().should('include', `${avbruttSoknad.id}/1`)
         cy.contains('Gå videre')
     })
 
@@ -77,21 +69,5 @@ describe('Tester avbryting av søknad', () => {
         modalIkkeAktiv()
         cy.url().should('include', `avbrutt/${avbruttSoknad.id}`)
         cy.contains('Jeg vil bruke denne søknaden likevel')
-    })
-
-    it('Søknad gjenåpnes med survey, som besvares', () => {
-        cy.get('button[data-cy="bruk-soknad-likevel"]').click()
-        cy.url().should('include', 'visSurvey=true')
-
-        modalAktiv()
-        cy.contains('Du har gjenåpnet søknaden')
-        cy.contains('Jeg trengte mer tid og ville fortsette senere').click()
-        svarFritekst('Er det noe du vil trekke frem? (valgfritt)', 'Trodde jeg kunne fortsette søknaden senere')
-        cy.contains('Send tilbakemelding').click()
-        modalIkkeAktiv()
-        cy.contains('Jeg har ikke behov for denne søknaden').should('be.visible').click()
-
-        cy.url().should('include', `${avbruttSoknad.id}/1`).and('include', 'visSurvey=false')
-        cy.contains('Gå videre')
     })
 })
