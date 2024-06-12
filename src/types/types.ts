@@ -19,6 +19,11 @@ export interface Arbeidsgiver {
     orgnummer: string
 }
 
+export interface KjentOppholdstillatelse {
+    fom: Date
+    tom: Date | undefined
+}
+
 export class Soknad extends ObjectCopier {
     constructor(
         readonly id: string,
@@ -46,6 +51,7 @@ export class Soknad extends ObjectCopier {
         readonly inntektsopplysningerNyKvittering?: boolean,
         readonly inntektsopplysningerInnsendingId?: string,
         readonly inntektsopplysningerInnsendingDokumenter?: string[],
+        readonly kjentOppholdstillatelse?: KjentOppholdstillatelse,
     ) {
         super()
     }
