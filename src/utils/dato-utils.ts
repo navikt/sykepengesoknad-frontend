@@ -90,6 +90,10 @@ export const dayjsToDate = (dato: string) => {
     return dato !== null ? dayjs(dato).toDate() : undefined
 }
 
+export const parseDate = (dato: string) => {
+    return dayjs(dato).toDate()
+}
+
 export const sendtForMerEnn30DagerSiden = (sendtTilArbeidsgiverDato?: Date, sendtTilNAVDato?: Date) => {
     let dagerSidenArb = true
     let dagerSidenNav = true
