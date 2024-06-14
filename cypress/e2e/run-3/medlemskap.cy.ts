@@ -44,13 +44,13 @@ describe('Tester medlemskap spørsmål', () => {
         cy.contains('Opphold utenfor EU/EØS')
 
         svarJaHovedsporsmal()
-        svarCombobox('I hvilket land utenfor EU/EØS har du oppholdt deg?', 'Fra', 'Fransk Polynesia')
+        svarCombobox('I hvilket land utenfor EU/EØS eller Sveits har du oppholdt deg?', 'Fra', 'Fransk Polynesia')
         svarRadioGruppe('Hva gjorde du i utlandet?', 'Jeg var på ferie')
         setPeriodeFraTil(12, 20, 0)
 
         cy.contains('Legg til nytt opphold').click()
 
-        cy.findAllByRole('combobox', { name: 'I hvilket land utenfor EU/EØS har du oppholdt deg?' })
+        cy.findAllByRole('combobox', { name: 'I hvilket land utenfor EU/EØS eller Sveits har du oppholdt deg?' })
             .should('have.length', 2)
             .last()
             .type('Ba')
