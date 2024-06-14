@@ -68,11 +68,12 @@ const OpprettUtland = () => {
                 </ul>
             </GuidePanel>
 
-            <Alert variant={"info"}>
+            <Alert variant={'info'}>
                 <Heading spacing size="small" level="3">
                     Har du allerede vært på reise?
                 </Heading>
-                I utgangspunktet burde man søke før man reiser til land utenfor EU/EØS. Du kan likevel søke NAV om å få beholde sykepengene etter du har reist.
+                I utgangspunktet burde man søke før man reiser til land utenfor EU/EØS. Du kan likevel søke NAV om å få
+                beholde sykepengene etter du har reist.
             </Alert>
 
             <Panel border className="mt-16">
