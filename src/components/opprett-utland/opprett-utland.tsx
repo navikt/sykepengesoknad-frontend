@@ -68,7 +68,7 @@ const OpprettUtland = () => {
                 </ul>
             </GuidePanel>
 
-            <Alert variant={'info'}>
+            <Alert variant="info">
                 <Heading spacing size="small" level="3">
                     Har du allerede vært på reise?
                 </Heading>
