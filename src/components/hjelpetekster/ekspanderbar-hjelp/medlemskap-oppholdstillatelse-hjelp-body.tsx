@@ -19,13 +19,15 @@ export const MedlemskapOppholdstillatelseV2HjelpBody = () => {
         <>
             <BodyShort spacing>
                 Når du ikke er norsk statsborger, må du ha oppholdstillatelse i Norge for å være medlem i folketrygden
-                og ha rett til sykepenger.
+                og ha rett til sykepenger
             </BodyShort>
             <BodyShort spacing>
-                Hvis du har hatt en annen oppholdstillatelse før den som gjelder nå, svarer du ja. Vi ber deg oppgi
-                datoen du fikk denne oppholdstillatelsen og perioden for oppholdstillatelsen.
+                Har du fått flere oppholdstillatelser før den vi har registrert, ønsker vi å vite om den som har vært
+                før denne.
             </BodyShort>
-            <BodyShort spacing>Hvis du ikke har en oppholdstillatelse før den som gjelder nå, svarer du nei.</BodyShort>
+            <BodyShort spacing>
+                Hvis du ikke har en oppholdstillatelse før den vi har registert, svarer du nei.
+            </BodyShort>
         </>
     )
 }
