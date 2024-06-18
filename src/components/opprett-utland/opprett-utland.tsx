@@ -1,4 +1,4 @@
-import { Alert, BodyShort, Button, GuidePanel, Heading, Panel } from '@navikt/ds-react'
+import { Alert, BodyShort, Button, Heading, Panel } from '@navikt/ds-react'
 import { logger } from '@navikt/next-logger'
 import React, { useState } from 'react'
 import { useQueryClient } from '@tanstack/react-query'
