@@ -51,8 +51,7 @@ const OpprettUtland = () => {
 
     return (
         <>
-
-                  <Panel border className="mt-16">
+            <Panel border className="mt-16">
                 <Heading spacing size="large" level="1">
                     {tekst('opprett-utland.tittel')}
                 </Heading>
@@ -98,8 +97,6 @@ const OpprettUtland = () => {
                 I utgangspunktet bør du søke før du reiser til land utenfor EU/EØS. Du kan likevel søke NAV om å få
                 beholde sykepengene etter du har reist.
             </Alert>
-
-
 
             <Button variant="primary" type="button" onClick={opprett} className="mb-8 mt-16">
                 {tekst('opprett-utland.fortsett')}
