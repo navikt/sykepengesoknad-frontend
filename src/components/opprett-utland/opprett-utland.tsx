@@ -82,7 +82,7 @@ const OpprettUtland = () => {
             </Alert>
 
             <Panel>
-                <Heading size={'small'} level={'3'} spacing>
+                <Heading size="small" level="3" spacing>
                     Er du statsborger i et land utenfor EU/EØS?
                 </Heading>
 
