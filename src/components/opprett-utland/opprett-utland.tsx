@@ -1,4 +1,4 @@
-import { Alert, BodyShort, Box, Button, Heading } from '@navikt/ds-react'
+import { Alert, BodyShort, Box, Button, ExpansionCard, Heading } from '@navikt/ds-react'
 import { logger } from '@navikt/next-logger'
 import React, { useState } from 'react'
 import { useQueryClient } from '@tanstack/react-query'
@@ -81,24 +81,25 @@ const OpprettUtland = () => {
                 beholde sykepengene etter du har reist.
             </Box>
 
-            <Box>
-                <Heading size="small" level="3" spacing>
-                    Er du statsborger i et land utenfor EU/EØS?
-                </Heading>
-
-                <ul>
-                    <BodyShort as="li" spacing>
-                        Skal du reise innenfor Norden, trenger du ikke å søke.
-                    </BodyShort>
-                    <BodyShort as="li" spacing>
-                        Skal du reise til et annet land innenfor EU/EØS, må du benytte{' '}
-                        <LenkeMedIkon
-                            href="https://www.nav.no/soknader/nb/person/til-eller-fra-norge/opphold-eller-arbeid-utenfor-norge/NAV%2008-09.07/brev"
-                            text="søknaden på papir."
-                        ></LenkeMedIkon>
-                    </BodyShort>
-                </ul>
-            </Box>
+            <ExpansionCard aria-label="TODO hva skal vi ha her?">
+                <ExpansionCard.Header>
+                    <ExpansionCard.Title>Er du statsborger i et land utenfor EU/EØS?</ExpansionCard.Title>
+                </ExpansionCard.Header>
+                <ExpansionCard.Content>
+                    <ul>
+                        <BodyShort as="li" spacing>
+                            Skal du reise innenfor Norden, trenger du ikke å søke.
+                        </BodyShort>
+                        <BodyShort as="li" spacing>
+                            Skal du reise til et annet land innenfor EU/EØS, må du benytte{' '}
+                            <LenkeMedIkon
+                                href="https://www.nav.no/soknader/nb/person/til-eller-fra-norge/opphold-eller-arbeid-utenfor-norge/NAV%2008-09.07/brev"
+                                text="søknaden på papir."
+                            ></LenkeMedIkon>
+                        </BodyShort>
+                    </ul>
+                </ExpansionCard.Content>
+            </ExpansionCard>
 
             <Button variant="primary" type="button" onClick={opprett} className="mb-8 mt-16">
                 {tekst('opprett-utland.fortsett')}
