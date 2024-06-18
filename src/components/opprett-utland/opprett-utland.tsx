@@ -51,6 +51,29 @@ const OpprettUtland = () => {
 
     return (
         <>
+
+                  <Panel border className="mt-16">
+                <Heading spacing size="large" level="1">
+                    {tekst('opprett-utland.tittel')}
+                </Heading>
+                <BodyShort spacing>Du trenger ikke søke hvis du enten</BodyShort>
+
+                <ul>
+                    <BodyShort spacing as="li">
+                        har avtalt med arbeidsgiveren din at du tar ut lovbestemt ferie
+                    </BodyShort>
+                    <BodyShort spacing as="li">
+                        er sykmeldt på grunn av godkjent yrkesskade
+                    </BodyShort>
+                </ul>
+                <BodyShort>
+                    <LenkeMedIkon
+                        href="https://www.nav.no/no/Person/Arbeid/Sykmeldt%2C+arbeidsavklaringspenger+og+yrkesskade/Sykepenger/sykepenger-ved-utenlandsopphold"
+                        text="Se regler om sykepenger når du er på reise."
+                    />
+                </BodyShort>
+            </Panel>
+
             <GuidePanel poster={true}>
                 <BodyShort spacing>Er du statsborger i et land utenfor EU/EØS?</BodyShort>
 
@@ -76,27 +99,7 @@ const OpprettUtland = () => {
                 beholde sykepengene etter du har reist.
             </Alert>
 
-            <Panel border className="mt-16">
-                <Heading spacing size="medium" level="1">
-                    {tekst('opprett-utland.tittel')}
-                </Heading>
-                <BodyShort spacing>Du trenger ikke søke hvis du enten</BodyShort>
 
-                <ul>
-                    <BodyShort spacing as="li">
-                        har avtalt med arbeidsgiveren din at du tar ut lovbestemt ferie
-                    </BodyShort>
-                    <BodyShort spacing as="li">
-                        er sykmeldt på grunn av godkjent yrkesskade
-                    </BodyShort>
-                </ul>
-                <BodyShort>
-                    <LenkeMedIkon
-                        href="https://www.nav.no/no/Person/Arbeid/Sykmeldt%2C+arbeidsavklaringspenger+og+yrkesskade/Sykepenger/sykepenger-ved-utenlandsopphold"
-                        text="Se regler om sykepenger når du er på reise."
-                    />
-                </BodyShort>
-            </Panel>
 
             <Button variant="primary" type="button" onClick={opprett} className="mb-8 mt-16">
                 {tekst('opprett-utland.fortsett')}
