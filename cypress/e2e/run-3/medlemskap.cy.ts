@@ -110,9 +110,7 @@ describe('Søknad med versjon to av spørsmål om opppholdstillatelse', () => {
 
     it('Oppholdstillatelse V2', () => {
         cy.contains('Oppholdstillatelse')
-        cy.contains(
-            'Har du hatt en oppholdstillatelse fra Utlendingsdirektoratet som gjelder en periode før tillatelsen som gjelder nå?',
-        )
+        cy.contains('Har Utlendingsdirektoratet gitt deg en oppholdstillatelse før 1. mai 2024?')
 
         svarJaHovedsporsmal()
         velgDato(1)
@@ -125,9 +123,7 @@ describe('Søknad med versjon to av spørsmål om opppholdstillatelse', () => {
 
         cy.findByRole('region', { name: 'Oppsummering fra søknaden' }).click()
         cy.findByRole('region', { name: 'Oppsummering fra søknaden' }).within(() => {
-            cy.contains(
-                'Har du hatt en oppholdstillatelse fra Utlendingsdirektoratet som gjelder en periode før tillatelsen som gjelder nå?',
-            )
+            cy.contains('Har Utlendingsdirektoratet gitt deg en oppholdstillatelse før 1. mai 2024?')
                 .siblings()
                 .should('contain', 'Ja')
             cy.contains('Hvilken dato fikk du denne oppholdstillatelsen?').siblings().should('contain', '01.')

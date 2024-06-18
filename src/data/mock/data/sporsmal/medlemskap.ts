@@ -429,8 +429,7 @@ export const medlemskapOppholdstillatelseSporsmal: RSSporsmal = {
 export const medlemskapOppholdstillatelseV2Sporsmal: RSSporsmal = {
     id: '17e3eda5-3895-3258-b2ee-6cb44510c7fb',
     tag: 'MEDLEMSKAP_OPPHOLDSTILLATELSE_V2',
-    sporsmalstekst:
-        'Har du hatt en oppholdstillatelse fra Utlendingsdirektoratet som gjelder en periode før tillatelsen som gjelder nå?',
+    sporsmalstekst: 'Har Utlendingsdirektoratet gitt deg en oppholdstillatelse før 1. mai 2024?',
     undertekst: null,
     svartype: 'JA_NEI',
     min: null,
