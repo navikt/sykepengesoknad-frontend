@@ -1,4 +1,4 @@
-import { Alert, BodyShort, Button, Heading, Panel } from '@navikt/ds-react'
+import { Alert, BodyShort, Box, Button, Heading, Panel } from '@navikt/ds-react'
 import { logger } from '@navikt/next-logger'
 import React, { useState } from 'react'
 import { useQueryClient } from '@tanstack/react-query'
@@ -73,15 +73,15 @@ const OpprettUtland = () => {
                 </BodyShort>
             </Panel>
 
-            <Alert variant="info" className="mt-16">
+            <Box className="mt-16">
                 <Heading spacing size="small" level="3">
                     Har du allerede vært på reise?
                 </Heading>
                 I utgangspunktet bør du søke før du reiser til land utenfor EU/EØS. Du kan likevel søke NAV om å få
                 beholde sykepengene etter du har reist.
-            </Alert>
+            </Box>
 
-            <Panel>
+            <Box>
                 <Heading size="small" level="3" spacing>
                     Er du statsborger i et land utenfor EU/EØS?
                 </Heading>
@@ -98,7 +98,7 @@ const OpprettUtland = () => {
                         ></LenkeMedIkon>
                     </BodyShort>
                 </ul>
-            </Panel>
+            </Box>
 
             <Button variant="primary" type="button" onClick={opprett} className="mb-8 mt-16">
                 {tekst('opprett-utland.fortsett')}
