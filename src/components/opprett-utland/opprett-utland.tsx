@@ -67,7 +67,7 @@ const OpprettUtland = () => {
                 </ul>
                 <BodyShort>
                     <LenkeMedIkon
-                        href="https://www.nav.no/no/Person/Arbeid/Sykmeldt%2C+arbeidsavklaringspenger+og+yrkesskade/Sykepenger/sykepenger-ved-utenlandsopphold"
+                        href="https://www.nav.no/sykepenger#utland"
                         text="Se regler om sykepenger når du er på reise."
                     />
                 </BodyShort>
