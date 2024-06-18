@@ -73,8 +73,18 @@ const OpprettUtland = () => {
                 </BodyShort>
             </Panel>
 
-            <GuidePanel poster={true}>
-                <BodyShort spacing>Er du statsborger i et land utenfor EU/EØS?</BodyShort>
+            <Alert variant="info" className="mt-16">
+                <Heading spacing size="small" level="3">
+                    Har du allerede vært på reise?
+                </Heading>
+                I utgangspunktet bør du søke før du reiser til land utenfor EU/EØS. Du kan likevel søke NAV om å få
+                beholde sykepengene etter du har reist.
+            </Alert>
+
+            <Panel>
+                <Heading size={'small'} level={'3'} spacing>
+                    Er du statsborger i et land utenfor EU/EØS?
+                </Heading>
 
                 <ul>
                     <BodyShort as="li" spacing>
@@ -88,15 +98,7 @@ const OpprettUtland = () => {
                         ></LenkeMedIkon>
                     </BodyShort>
                 </ul>
-            </GuidePanel>
-
-            <Alert variant="info" className="mt-16">
-                <Heading spacing size="small" level="3">
-                    Har du allerede vært på reise?
-                </Heading>
-                I utgangspunktet bør du søke før du reiser til land utenfor EU/EØS. Du kan likevel søke NAV om å få
-                beholde sykepengene etter du har reist.
-            </Alert>
+            </Panel>
 
             <Button variant="primary" type="button" onClick={opprett} className="mb-8 mt-16">
                 {tekst('opprett-utland.fortsett')}
