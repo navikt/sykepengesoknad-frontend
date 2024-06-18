@@ -15,7 +15,7 @@ import { PaskeferieInfo } from '../../hjelpetekster/paaskeferie/paskeferie-info'
 import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus'
 import { YrkesskadeInfo } from '../../hjelpetekster/yrkesskade-info'
 import { useJaNeiKeyboardNavigation } from '../../../utils/keyboard-navigation'
-import { Inntektsbulletpoints } from '../inntektsbulletpoints'
+import { Inntektsbulletpoints, KjentOppholdstillatelse } from '../inntektsbulletpoints'
 import { Yrkesskadebulletpoints } from '../yrkesskade-bulletpoints'
 import { InntektsopplysningerErKonfidensielleInfo } from '../inntektsopplysninger-er-konfidensielle-info'
 import { useSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
@@ -56,7 +56,8 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
 
     const skalHaInntektsbulletpoints =
         sporsmal.tag === 'ANDRE_INNTEKTSKILDER_V2' && valgtSoknad.inntektskilderDataFraInntektskomponenten
-
+    const skalViseKjentOppholdstillatelse =
+        sporsmal.tag === 'MEDLEMSKAP_OPPHOLDSTILLATELSE_V2' && valgtSoknad.kjentOppholdstillatelse
     function sporsmalstekst() {
         if (skalHaInntektsbulletpoints) {
             return 'Har du andre inntektskilder enn nevnt over?'
@@ -68,6 +69,7 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
         <>
             <div>
                 {skalHaInntektsbulletpoints && <Inntektsbulletpoints soknad={valgtSoknad} />}
+                {skalViseKjentOppholdstillatelse && <KjentOppholdstillatelse soknad={valgtSoknad} />}
 
                 <Controller
                     name={sporsmal.id}
