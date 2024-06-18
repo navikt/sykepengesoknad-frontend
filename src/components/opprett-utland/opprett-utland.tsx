@@ -51,7 +51,7 @@ const OpprettUtland = () => {
 
     return (
         <>
-            <Panel border className="mt-16">
+            <Box className="mt-16">
                 <Heading spacing size="large" level="1">
                     {tekst('opprett-utland.tittel')}
                 </Heading>
@@ -71,7 +71,7 @@ const OpprettUtland = () => {
                         text="Se regler om sykepenger når du er på reise."
                     />
                 </BodyShort>
-            </Panel>
+            </Box>
 
             <Box className="mt-16">
                 <Heading spacing size="small" level="3">
