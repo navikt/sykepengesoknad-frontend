@@ -81,7 +81,10 @@ const OpprettUtland = () => {
                 beholde sykepengene etter du har reist.
             </Box>
 
-            <ExpansionCard aria-label="Informasjon om reise og søknadskrav for statsborgere utenfor EU/EØS" className="mt-16">
+            <ExpansionCard
+                aria-label="Informasjon om reise og søknadskrav for statsborgere utenfor EU/EØS"
+                className="mt-16"
+            >
                 <ExpansionCard.Header>
                     <ExpansionCard.Title>Er du statsborger i et land utenfor EU/EØS?</ExpansionCard.Title>
                 </ExpansionCard.Header>
