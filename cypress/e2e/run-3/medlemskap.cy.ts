@@ -11,7 +11,7 @@ import {
     velgDato,
 } from '../../support/utilities'
 
-describe('Søknad med opprinngelige spørsmål om medlemskap', () => {
+describe('Søknad med alle opprinnelige spørsmål om medlemskap', () => {
     const soknad = medlemskapPerson.soknader[0]
 
     before(() => {
@@ -98,7 +98,7 @@ describe('Søknad med opprinngelige spørsmål om medlemskap', () => {
     })
 })
 
-describe('Søknad med versjon to av spørsmål om opppholdstillatelse', () => {
+describe('Søknad med nytt spørsmål om oppholdstillatelse og kjent permanent oppholdstillatelse', () => {
     const soknad = medlemskapPerson.soknader[1]
 
     before(() => {
@@ -108,8 +108,48 @@ describe('Søknad med versjon to av spørsmål om opppholdstillatelse', () => {
             .and('have.text', 'Søknad om sykepenger8. – 21. september 2022')
     })
 
-    it('Oppholdstillatelse V2', () => {
+    it('Har kjent permanent oppholdstillatelse', () => {
         cy.contains('Oppholdstillatelse')
+        cy.contains('NAV har registert følgende oppholdstillatelse:')
+        cy.contains('Permanent oppholdstillatelse')
+        cy.contains('Fra 1. mai 2024.')
+        cy.contains('Har Utlendingsdirektoratet gitt deg en oppholdstillatelse før 1. mai 2024?')
+
+        svarJaHovedsporsmal()
+        velgDato(1)
+        setPeriodeFraTil(10, 20)
+        klikkGaVidere()
+    })
+
+    it('Oppsumering av søknad', () => {
+        cy.contains('Til slutt')
+
+        cy.findByRole('region', { name: 'Oppsummering fra søknaden' }).click()
+        cy.findByRole('region', { name: 'Oppsummering fra søknaden' }).within(() => {
+            cy.contains('Har Utlendingsdirektoratet gitt deg en oppholdstillatelse før 1. mai 2024?')
+                .siblings()
+                .should('contain', 'Ja')
+            cy.contains('Hvilken dato fikk du denne oppholdstillatelsen?').siblings().should('contain', '01.')
+            cy.contains('Hvilken periode gjelder denne oppholdstillatelsen?').siblings().should('contain', '10. – 20.')
+        })
+    })
+})
+
+describe('Søknad med nytt spørsmål om oppholdstillatelse og kjent midlertidig oppholdstillatelse', () => {
+    const soknad = medlemskapPerson.soknader[2]
+
+    before(() => {
+        cy.visit(`/syk/sykepengesoknad/soknader/${soknad.id}/11?testperson=medlemskap`)
+        cy.get('.navds-heading--large')
+            .should('be.visible')
+            .and('have.text', 'Søknad om sykepenger8. – 21. september 2022')
+    })
+
+    it('Har kjent midlertidig oppholdstillatelse', () => {
+        cy.contains('Oppholdstillatelse')
+        cy.contains('NAV har registert følgende oppholdstillatelse:')
+        cy.contains('Midlertidig oppholdstillatelse')
+        cy.contains('Fra 1. mai 2024 til 31. desember 2024.')
         cy.contains('Har Utlendingsdirektoratet gitt deg en oppholdstillatelse før 1. mai 2024?')
 
         svarJaHovedsporsmal()
