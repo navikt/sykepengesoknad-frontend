@@ -15,10 +15,11 @@ import { PaskeferieInfo } from '../../hjelpetekster/paaskeferie/paskeferie-info'
 import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus'
 import { YrkesskadeInfo } from '../../hjelpetekster/yrkesskade-info'
 import { useJaNeiKeyboardNavigation } from '../../../utils/keyboard-navigation'
-import { Inntektsbulletpoints, KjentOppholdstillatelse } from '../inntektsbulletpoints'
+import { Inntektsbulletpoints } from '../inntektsbulletpoints'
 import { Yrkesskadebulletpoints } from '../yrkesskade-bulletpoints'
 import { InntektsopplysningerErKonfidensielleInfo } from '../inntektsopplysninger-er-konfidensielle-info'
 import { useSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
+import { KjentOppholdstillatelse } from '../kjent-oppholdstillatelse'
 
 import { jaNeiStorStyle, JaNeiStyle } from './ja-nei-stor-style'
 

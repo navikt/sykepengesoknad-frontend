@@ -96,7 +96,7 @@ export function rsToSoknad(soknad: RSSoknad): Soknad {
     if (soknad.kjentOppholdstillatelse) {
         kjentOppholdstillatelse = {
             fom: parseDate(soknad.kjentOppholdstillatelse.fom),
-            tom: dayjsToDate(soknad.kjentOppholdstillatelse.fom),
+            tom: soknad.kjentOppholdstillatelse.tom ? dayjsToDate(soknad.kjentOppholdstillatelse.tom) : undefined,
         }
     }
 
