@@ -23,21 +23,12 @@ export const KjentOppholdstillatelse = ({ soknad }: { soknad: Soknad }) => {
             <Label as="p" className="mb-4">
                 NAV har registert følgende oppholdstillatelse:
             </Label>
-            <Boks title={title} periode={periode} />
+            <p className="mb-6 p-3 rounded bg-surface-info-subtle">
+                <Label as="p" className="mb-1">
+                    {title}
+                </Label>
+                <BodyShort>{periode}</BodyShort>
+            </p>
         </>
     )
 }
-
-interface BoksProps {
-    title: string
-    periode: string
-}
-
-const Boks = ({ title, periode }: BoksProps) => (
-    <p className="mb-6 p-3 rounded bg-surface-info-subtle">
-        <Label as="p" className="mb-1">
-            {title}
-        </Label>
-        <BodyShort>{periode}</BodyShort>
-    </p>
-)
