@@ -51,11 +51,11 @@ const OpprettUtland = () => {
 
     return (
         <>
-            <Box className="mt-32">
+            <Box className="mt-16">
                 <Heading spacing size="large" level="1">
                     {tekst('opprett-utland.tittel')}
                 </Heading>
-                <BodyShort spacing>Du trenger ikke søke hvis du enten</BodyShort>
+                <BodyShort spacing className="mt-8">Du trenger ikke søke hvis du enten</BodyShort>
 
                 <ul>
                     <BodyShort spacing as="li">
