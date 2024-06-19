@@ -23,12 +23,16 @@ export const KjentOppholdstillatelse = ({ soknad }: { soknad: Soknad }) => {
             <Label as="p" className="mb-4">
                 NAV har registert følgende oppholdstillatelse:
             </Label>
-            <div className="mb-6 p-3 rounded bg-surface-info-subtle">
+            <InfoBoks>
                 <Label as="p" className="mb-1">
                     {title}
                 </Label>
                 <BodyShort>{periode}</BodyShort>
-            </div>
+            </InfoBoks>
         </>
     )
 }
+
+const InfoBoks = ({ children }: { children: React.ReactNode }) => (
+    <p className="mb-6 p-3 rounded bg-surface-info-subtle">{children}</p>
+)
