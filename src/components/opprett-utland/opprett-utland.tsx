@@ -55,7 +55,9 @@ const OpprettUtland = () => {
                 <Heading spacing size="large" level="1">
                     {tekst('opprett-utland.tittel')}
                 </Heading>
-                <BodyShort spacing className="mt-8">Du trenger ikke søke hvis du enten</BodyShort>
+                <BodyShort spacing className="mt-8">
+                    Du trenger ikke søke hvis du enten
+                </BodyShort>
 
                 <ul>
                     <BodyShort spacing as="li">
