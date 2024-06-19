@@ -74,7 +74,7 @@ const OpprettUtland = () => {
             </Box>
 
             <Box className="mt-16">
-                <Heading spacing size="small" level="3">
+                <Heading spacing size="small" level="2">
                     Har du allerede vært på reise?
                 </Heading>
                 I utgangspunktet bør du søke før du reiser til land utenfor EU/EØS. Du kan likevel søke NAV om å få
