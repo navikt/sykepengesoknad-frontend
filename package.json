@@ -24,7 +24,7 @@
         "cookie": "^0.6.0",
         "dayjs": "^1.11.11",
         "html-react-parser": "^5.1.10",
-        "jose": "^5.4.0",
+        "jose": "^5.4.1",
         "next-logger": "^4.0.0",
         "nextleton": "^0.6.1",
         "node-cache": "^5.1.2",
