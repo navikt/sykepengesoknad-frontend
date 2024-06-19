@@ -51,7 +51,7 @@ const OpprettUtland = () => {
 
     return (
         <>
-            <Box className="mt-16">
+            <Box className="mt-32">
                 <Heading spacing size="large" level="1">
                     {tekst('opprett-utland.tittel')}
                 </Heading>
