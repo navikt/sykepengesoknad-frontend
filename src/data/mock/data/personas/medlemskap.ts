@@ -65,7 +65,7 @@ const medlemskapOppholdstillatelseMidlertidig = deepcopyMedNyId(
 )
 
 medlemskapOppholdstillatelsePermanent.kjentOppholdstillatelse = { fom: '2024-11-01' }
-medlemskapOppholdstillatelseMidlertidig.kjentOppholdstillatelse = { fom: '2024-05-01', tom: '2024-11-31' }
+medlemskapOppholdstillatelseMidlertidig.kjentOppholdstillatelse = { fom: '2024-05-01', tom: '2024-12-31' }
 
 export const medlemskapPerson: Persona = {
     soknader: [
