@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
+import { Button } from '@navikt/ds-react'
 
 import OmReisetilskudd from '../../components/om-reisetilskudd/om-reisetilskudd'
 import Opplysninger from '../../components/opplysninger-fra-sykmelding/opplysninger'
@@ -20,7 +21,6 @@ import { FlexjarSporsmal } from '../flexjar/flexjar-sporsmal'
 import { useSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
 import { useToggle } from '../../toggles/context'
 import { SkeletonSporsmalForm } from '../sporsmal/sporsmal-form/skeleton-sporsmal-form'
-import { SlikBehandlerNavPersonopplysningene } from '../soknad-intro/slik-behandler-nav-personopplysningene'
 import { FeilStateView } from '../feil/refresh-hvis-feil-state'
 import { Over70Aar } from '../soknad-intro/over-70'
 
@@ -125,7 +125,17 @@ export const Soknaden = () => {
             {!erForstesiden && <SporsmalTittel />}
             {sporsmal && <SporsmalForm sporsmal={sporsmal} key={sporsmal.id} />}
             {!sporsmal && <SkeletonSporsmalForm />}
-            {erForstesiden && !erUtenlandssoknad && <SlikBehandlerNavPersonopplysningene />}
+            {erForstesiden && !erUtenlandssoknad && (
+                <Button
+                    variant="tertiary"
+                    target="_blank"
+                    as="a"
+                    href="https://www.nav.no/sykepenger-og-personopplysninger"
+                    className="-ml-5 text-left"
+                >
+                    Slik behandler NAV personopplysningene dine
+                </Button>
+            )}
             {(flexjarToggle.enabled ||
                 sporsmal?.tag == 'INNTEKTSOPPLYSNINGER_DRIFT_VIRKSOMHETEN' ||
                 sporsmal?.tag == 'INNTEKTSOPPLYSNINGER_VIRKSOMHETEN_AVVIKLET' ||

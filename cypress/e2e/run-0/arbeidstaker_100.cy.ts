@@ -27,11 +27,6 @@ describe('Tester arbeidstakersøknad', () => {
         // Personvern erklæring
         cy.get('.frist-sykepenger').click()
         cy.contains('Slik behandler NAV personopplysningene dine').click()
-        cy.contains('For å behandle søknaden din henter vi inn opplysninger både fra deg og fra offentlige registre')
-
-        cy.get('[data-cy="modal-footer-med-lukk-knapp"]').within(() => {
-            cy.findByRole('button', { name: 'Lukk' }).click()
-        })
 
         // Sykmelding
         cy.contains('1. april - 24. april 2020 (24 dager)')
