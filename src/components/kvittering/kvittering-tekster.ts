@@ -93,7 +93,7 @@ export const KvitteringTekster = {
 
     'kvittering.kontonummer.tittel': 'Kontonummer for utbetaling',
     'kvittering.kontonummer.mangler':
-        'Vi har ikke registrert noe kontonummer på deg, og anbefaler at du legger det inn på <a target="_blank" href="https://www.nav.no/person/personopplysninger/#utbetaling">Min side</a>',
+        'Vi har ikke registrert noe kontonummer på deg, og anbefaler at du legger det inn på <a target="_blank" href="https://www.nav.no/person/personopplysninger/#utbetaling">Min side</a>', // i bruk
     'kvittering.kontonummer.endre':
         'Dersom du vil benytte et annet kontonummer for utbetaling fra NAV, kan du endre det på <a target="_blank" href="https://www.nav.no/person/personopplysninger/#utbetaling">Min side</a>',
     'kvittering.ferdig': 'Ferdig',
