@@ -1,4 +1,4 @@
-import { Alert, BodyShort, Button, GuidePanel, Heading, Panel } from '@navikt/ds-react'
+import { Alert, BodyShort, Box, Button, ExpansionCard, Heading } from '@navikt/ds-react'
 import { logger } from '@navikt/next-logger'
 import React, { useState } from 'react'
 import { useQueryClient } from '@tanstack/react-query'
@@ -51,28 +51,13 @@ const OpprettUtland = () => {
 
     return (
         <>
-            <GuidePanel poster={true}>
-                <BodyShort spacing>Er du statsborger i et land utenfor EU/EØS?</BodyShort>
-
-                <ul>
-                    <BodyShort as="li" spacing>
-                        Skal du reise innenfor Norden, trenger du ikke å søke.
-                    </BodyShort>
-                    <BodyShort as="li" spacing>
-                        Skal du reise til et annet land innenfor EU/EØS, må du benytte{' '}
-                        <LenkeMedIkon
-                            href="https://www.nav.no/soknader/nb/person/til-eller-fra-norge/opphold-eller-arbeid-utenfor-norge/NAV%2008-09.07/brev"
-                            text="søknaden på papir."
-                        ></LenkeMedIkon>
-                    </BodyShort>
-                </ul>
-            </GuidePanel>
-
-            <Panel border className="mt-16">
-                <Heading spacing size="medium" level="1">
+            <Box className="mt-16">
+                <Heading spacing size="large" level="1">
                     {tekst('opprett-utland.tittel')}
                 </Heading>
-                <BodyShort spacing>Du trenger ikke søke hvis du enten</BodyShort>
+                <BodyShort spacing className="mt-8">
+                    Du trenger ikke søke hvis du enten
+                </BodyShort>
 
                 <ul>
                     <BodyShort spacing as="li">
@@ -84,11 +69,42 @@ const OpprettUtland = () => {
                 </ul>
                 <BodyShort>
                     <LenkeMedIkon
-                        href="https://www.nav.no/no/Person/Arbeid/Sykmeldt%2C+arbeidsavklaringspenger+og+yrkesskade/Sykepenger/sykepenger-ved-utenlandsopphold"
+                        href="https://www.nav.no/sykepenger#utland"
                         text="Se regler om sykepenger når du er på reise."
                     />
                 </BodyShort>
-            </Panel>
+            </Box>
+
+            <Box className="mt-16">
+                <Heading spacing size="small" level="2">
+                    Har du allerede vært på reise?
+                </Heading>
+                I utgangspunktet bør du søke før du reiser til land utenfor EU/EØS. Du kan likevel søke NAV om å få
+                beholde sykepengene etter du har reist.
+            </Box>
+
+            <ExpansionCard
+                aria-label="Informasjon om reise og søknadskrav for statsborgere utenfor EU/EØS"
+                className="mt-16"
+            >
+                <ExpansionCard.Header>
+                    <ExpansionCard.Title>Er du statsborger i et land utenfor EU/EØS?</ExpansionCard.Title>
+                </ExpansionCard.Header>
+                <ExpansionCard.Content>
+                    <ul>
+                        <BodyShort as="li" spacing>
+                            Skal du reise innenfor Norden, trenger du ikke å søke.
+                        </BodyShort>
+                        <BodyShort as="li" spacing>
+                            Skal du reise til et annet land innenfor EU/EØS, må du benytte{' '}
+                            <LenkeMedIkon
+                                href="https://www.nav.no/soknader/nb/person/til-eller-fra-norge/opphold-eller-arbeid-utenfor-norge/NAV%2008-09.07/brev"
+                                text="søknaden på papir."
+                            ></LenkeMedIkon>
+                        </BodyShort>
+                    </ul>
+                </ExpansionCard.Content>
+            </ExpansionCard>
 
             <Button variant="primary" type="button" onClick={opprett} className="mb-8 mt-16">
                 {tekst('opprett-utland.fortsett')}
