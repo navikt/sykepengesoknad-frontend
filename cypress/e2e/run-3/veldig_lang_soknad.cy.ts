@@ -151,7 +151,7 @@ describe('Tester støtte for gamle spørsmål', () => {
         svarRadio('Har du avtalt med arbeidsgiveren din at du skal ta ut feriedager i hele perioden?', 'JA')
         gaVidere()
     })
-    it('OPPHOLD_UTENFOR_EOS', () => {
+    it('ARBEIDSLEDIG_UTLAND', () => {
         svarJaHovedsporsmal()
         setPeriodeFraTil(12, 15)
         svarRadio('Har du søkt om å beholde sykepengene for disse dagene?', 'JA')
@@ -255,13 +255,18 @@ describe('Tester støtte for gamle spørsmål', () => {
         svarRadio('Er utdanningen et fulltidsstudium?', 'JA')
         gaVidere()
     })
+    it('OPPHOLD_UTENFOR_EOS', () => {
+        svarJaHovedsporsmal()
+        setPeriodeFraTil(12, 15)
+        gaVidere()
+    })
     it('UTLAND', () => {
         svarJaHovedsporsmal()
         setPeriodeFraTil(12, 15)
         svarRadio('Har du søkt om å beholde sykepengene for disse dagene?', 'JA')
         gaVidere()
     })
-    it('OPPHOLD_UTENFOR_EOS', () => {
+    it('UTLAND_V2', () => {
         svarJaHovedsporsmal()
         setPeriodeFraTil(12, 15)
         gaVidere()

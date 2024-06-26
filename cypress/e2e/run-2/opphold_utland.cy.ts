@@ -147,7 +147,5 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
             .and('contain', 'Risiko ved å reise før du har mottatt svar')
             .and('contain', 'Les mer om sykepenger når du er på reise.')
             .and('contain', 'Du søker om sykepenger')
-
-        cy.contains('Ferdig')
     })
 })
