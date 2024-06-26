@@ -80,3 +80,11 @@ export const getLedetekst = (text: string, data: any): string => {
     })
     return newtext
 }
+
+export function forsteBokstavStor(tekst: string): string {
+    return tekst.charAt(0).toUpperCase() + tekst.slice(1).toLowerCase()
+}
+
+export function forsteBokstavLiten(tekst: string): string {
+    return tekst.charAt(0).toLowerCase() + tekst.slice(1)
+}

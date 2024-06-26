@@ -1,4 +1,10 @@
-import { klikkGaVidere, setPeriodeFraTil, sjekkMainContentFokus, svarCombobox } from '../../support/utilities'
+import {
+    avbryterSoknad,
+    klikkGaVidere,
+    setPeriodeFraTil,
+    sjekkMainContentFokus,
+    svarCombobox,
+} from '../../support/utilities'
 import { oppholdUtland } from '../../../src/data/mock/data/soknad/opphold-utland'
 import 'cypress-real-events'
 
@@ -20,6 +26,18 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
         cy.contains('Du trenger ikke søke hvis du enten')
         cy.contains('Har du allerede vært på reise?')
         cy.findByRole('button', { name: 'Start søknaden' }).should('exist').click()
+    })
+
+    it('Avbryter søknaden og havner på avbrutt-siden', () => {
+        avbryterSoknad()
+        cy.url().should('include', `avbrutt/${soknad.id}`)
+        cy.contains('Fjernet søknad om å beholde sykepenger utenfor EU/EØS')
+    })
+
+    it('Gjenåpner søknaden', () => {
+        cy.get('button[data-cy="bruk-soknad-likevel"]').click()
+        cy.url().should('include', `${soknad.id}/1`)
+        cy.contains('Gå videre')
     })
 
     it('Velger periode for utenlandsopphold', function () {

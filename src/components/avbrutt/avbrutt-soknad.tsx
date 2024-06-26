@@ -18,6 +18,7 @@ import { soknadBreadcrumb, useUpdateBreadcrumbs } from '../../hooks/useBreadcrum
 import { SoknadHeader } from '../soknad/soknad-header'
 import { useSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
 import { parserWithReplace } from '../../utils/html-react-parser-utils'
+import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 
 import GjenapneSoknad from './gjenapneknapp'
 
@@ -47,11 +48,11 @@ const AvbruttSoknad = () => {
     if (!valgtSoknad || !soknader) return <QueryStatusPanel valgSoknadId={soknadId} />
 
     const gjenstaendeSoknader = hentGjenstaendeSoknader(soknader, valgtSoknad)
+    const erOppHoldUtland = valgtSoknad.soknadstype == RSSoknadstype.OPPHOLD_UTLAND
 
     return (
         <>
             <SoknadHeader />
-
             <Alert variant="warning" style={{ marginBottom: '1rem' }}>
                 <BodyShort>
                     {tekst('sykepengesoknad.avbrutt.tidspunkt')} {tilLesbarDatoMedArstall(valgtSoknad.avbruttDato)}.
@@ -60,13 +61,15 @@ const AvbruttSoknad = () => {
             <BodyLong size="large" spacing weight="semibold">
                 {parserWithReplace(tekst('sykepengesoknad.avbrutt.informasjon-innhold-1'))}
             </BodyLong>
-            <BodyLong spacing>{tekst('sykepengesoknad.avbrutt.informasjon-innhold-2')}</BodyLong>
-            <BodyLong spacing>{tekst('sykepengesoknad.avbrutt.informasjon-innhold-3')}</BodyLong>
+            {!erOppHoldUtland && (
+                <>
+                    <BodyLong spacing>{tekst('sykepengesoknad.avbrutt.informasjon-innhold-2')}</BodyLong>
+                    <BodyLong spacing>{tekst('sykepengesoknad.avbrutt.informasjon-innhold-3')}</BodyLong>
+                </>
+            )}
             <BodyLong spacing>{tekst('sykepengesoknad.avbrutt.informasjon-innhold-4')}</BodyLong>
-
-            <Opplysninger ekspandert={false} steg="avbrutt-søknad" />
+            {!erOppHoldUtland && <Opplysninger ekspandert={false} steg="avbrutt-søknad" />}
             <FristSykepenger />
-
             <Vis
                 hvis={dayjs(valgtSoknad.avbruttDato).isAfter(dayjs().subtract(2, 'seconds'))}
                 render={() => (

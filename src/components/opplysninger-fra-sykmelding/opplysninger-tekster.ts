@@ -9,7 +9,6 @@ const OpplysningerTekster = {
     'din-sykmelding.arbeidssituasjon.alternativ.arbeidsledig': 'Jeg er arbeidsledig eller permittert',
     'din-sykmelding.arbeidssituasjon.alternativ.arbeidstaker': 'Jeg er ansatt',
     'sykepengesoknad.sykmelding-utdrag.dato-sykmeldingen-ble-skrevet': 'Dato sykmeldingen ble skrevet',
-    'sykepengesoknad.avbrutt.tittel': 'Fjernet søknad om sykepenger',
     'sykepengesoknad.avbrutt.tidspunkt': 'Søknaden ble avbrutt og fjernet av deg',
     'sykepengesoknad.avbrutt.informasjon-innhold-1':
         'Du har fjernet søknaden, som betyr at du ikke vil få sykepenger basert på denne søknaden.',

@@ -76,12 +76,10 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
         cy.contains('Gå videre').should('not.exist')
     })
 
-    it('Vi avbryter søknaden og havner på forsiden, søknaden er borte', function () {
+    it('Avbryter søknaden og havner på avbrutt-siden', () => {
         cy.get('button[data-cy="avbryt-soknad"]').click()
 
-        cy.url().should('equal', Cypress.config().baseUrl + '/syk/sykepengesoknad')
-
-        cy.get('.navds-heading--large').should('be.visible').and('have.text', 'Søknader')
-        cy.get(`a[href*=${soknad.id}]`).should('not.exist')
+        cy.url().should('include', `avbrutt/${soknad.id}`)
+        cy.contains('Fjernet søknad om å beholde sykepenger utenfor EU/EØS')
     })
 })
