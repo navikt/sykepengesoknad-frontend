@@ -17,7 +17,7 @@ describe('Tester andre inntektskilder bulletpoints', () => {
     })
 
     it('Viser liste med en hvis vi har data fra inntektskomponenten, men ingen ekstra', () => {
-        cy.visit(`/syk/sykepengesoknad/soknader/faba11f5-c4f2-4647-8c8a-58b28ce2f3ef/6`)
+        cy.visit(`/syk/sykepengesoknad/soknader/d9ac193d-9b67-4a51-80c2-fe4289214878/6`)
 
         cy.contains('Arbeidsforhold vi har registrert på deg:').and('be.visible')
         cy.contains('Har du andre inntektskilder enn nevnt over?').and('be.visible')

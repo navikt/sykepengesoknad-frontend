@@ -100,23 +100,6 @@ describe('Tester frilansersøknad', () => {
 
         setPeriodeFraTil(14, 22)
 
-        // Underspørsmål 2 - Ja
-        cy.contains('Har du søkt om å beholde sykepengene for disse dagene?')
-        cy.get('input[type=radio]#687449_0').click()
-        cy.contains(
-            'Du må ha sendt en egen utenlandssøknad for å svare ja på dette spørsmålet. Husk at du også må fullføre denne søknaden om sykepenger.',
-        )
-            .find('a')
-            .should('have.attr', 'href', '/syk/sykepengesoknad/sykepengesoknad-utland')
-
-        // Underspørsmål 2 - Nei
-        cy.get('input[type=radio]#687449_1').click()
-        cy.contains(
-            'I utgangspunktet kan du bare få sykepenger mens du er i et land innenfor EU/EØS. Du kan likevel søke NAV om å få reise ut av EU/EØS og beholde sykepengene i en begrenset periode.',
-        )
-            .find('a')
-            .should('have.attr', 'href', '/syk/sykepengesoknad/sykepengesoknad-utland')
-
         cy.contains('Gå videre').click()
     })
 

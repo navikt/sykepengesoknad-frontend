@@ -37,6 +37,7 @@ import { medlemskapPerson } from './data/personas/medlemskap'
 import { fiskePerson } from './data/personas/fisker'
 import { kjenteInntektskilderPerson } from './data/personas/kjente-inntektskilder'
 import { innenforAgPerioden } from './data/personas/innenfor-ag-periode'
+import { oppholdUtenforEOS } from './data/personas/opphold-utenfor-eos'
 
 type PersonaKey =
     | 'uten-data'
@@ -52,6 +53,7 @@ type PersonaKey =
     | 'yrkesskade'
     | 'yrkesskade-v2'
     | 'medlemskap'
+    | 'opphold-utenfor-eos'
     | 'over-70'
     | 'integrasjon-soknader'
     | 'en-usendt-sykmelding'
@@ -106,6 +108,7 @@ export function testpersonerGruppert(): PersonaGroup {
         },
         ['soknad-sporsmal']: {
             ['medlemskap']: jsonDeepCopy(medlemskapPerson),
+            ['opphold-utenfor-eos']: jsonDeepCopy(oppholdUtenforEOS),
             ['kjente-inntektskilder']: jsonDeepCopy(kjenteInntektskilderPerson),
             ['yrkesskade']: jsonDeepCopy(yrkesskadePerson),
             ['yrkesskade-v2']: jsonDeepCopy(yrkesskadeV2Person),

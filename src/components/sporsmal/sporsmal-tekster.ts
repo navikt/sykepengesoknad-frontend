@@ -124,6 +124,8 @@ const SporsmalTekster = {
     'soknad.feilmelding.UTDANNING_START': 'Du må svare på når du startet på utdanningen',
     'soknad.feilmelding.UTLAND': 'Du må svare på om du har oppholdt deg i utlandet i denne perioden',
     'soknad.feilmelding.UTLAND_V2': 'Du må svare på om du har vært utenfor EU/EØS i denne perioden',
+    'soknad.feilmelding.OPPHOLD_UTENFOR_EOS': 'Du må svare på om du har vært utenfor EU/EØS i denne perioden',
+    'soknad.feilmelding.OPPHOLD_UTENFOR_EOS_NAR': 'Du må svare på om du har vært utenfor EU/EØS i denne perioden',
     'soknad.feilmelding.UTLAND_NAR': 'Du må svare på om du har oppholdt deg i utlandet i denne perioden',
     'soknad.feilmelding.UTLAND_NAR_V2': 'Du må svare på om du har vært utenfor EU/EØS i denne perioden',
     'soknad.feilmelding.PERIODER': 'Du må svare på om du har vært utenfor EU/EØS i denne perioden',

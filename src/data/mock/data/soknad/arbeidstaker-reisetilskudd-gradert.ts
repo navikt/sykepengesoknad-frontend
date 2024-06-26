@@ -369,7 +369,7 @@ export const gradertReisetilskudd: RSSoknad = {
         },
         {
             id: '1547222',
-            tag: 'UTLAND_V2',
+            tag: 'OPPHOLD_UTENFOR_EOS',
             sporsmalstekst: 'Var du på reise utenfor EU/EØS mens du var sykmeldt 1. - 24. april 2020?',
             undertekst: null,
             svartype: 'JA_NEI',
@@ -380,7 +380,7 @@ export const gradertReisetilskudd: RSSoknad = {
             undersporsmal: [
                 {
                     id: '1547223',
-                    tag: 'UTLAND_NAR_V2',
+                    tag: 'OPPHOLD_UTENFOR_EOS_NAR',
                     sporsmalstekst: 'Når var du utenfor EU/EØS?',
                     undertekst: null,
                     svartype: 'PERIODER',

@@ -255,6 +255,11 @@ describe('Tester støtte for gamle spørsmål', () => {
         svarRadio('Er utdanningen et fulltidsstudium?', 'JA')
         gaVidere()
     })
+    it('OPPHOLD_UTENFOR_EOS', () => {
+        svarJaHovedsporsmal()
+        setPeriodeFraTil(12, 15)
+        gaVidere()
+    })
     it('UTLAND', () => {
         svarJaHovedsporsmal()
         setPeriodeFraTil(12, 15)
