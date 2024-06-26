@@ -70,7 +70,12 @@ export const GjenstaendeSoknader = ({ soknader, style }: Props) => {
 
 export function hentGjenstaendeSoknader(soknader: RSSoknadmetadata[], valgtSoknad: Soknad) {
     return soknader
-        .filter((s) => s.id !== valgtSoknad.id)
-        .filter((s) => s.status === RSSoknadstatus.NY)
-        .sort((a, b) => a.fom!.getTime() - b.fom!.getTime())
+        .filter(s => s.id !== valgtSoknad.id)
+        .filter(s => s.status === RSSoknadstatus.NY)
+        .sort((a, b) => {
+            const fomA = a.fom ? a.fom.getTime() : Number.MAX_SAFE_INTEGER
+            const fomB = b.fom ? b.fom.getTime() : Number.MAX_SAFE_INTEGER
+            return fomA - fomB
+        })
 }
+

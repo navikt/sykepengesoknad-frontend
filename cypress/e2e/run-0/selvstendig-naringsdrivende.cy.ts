@@ -26,7 +26,7 @@ describe('Tester selvstendig naringsdrivende søknad', () => {
             'Tilbake i fullt arbeid',
             'Jobb underveis i sykefraværet',
             'Andre inntektskilder',
-            'Utenlandsopphold',
+            'Reise til utlandet',
             'Arbeid utenfor Norge',
         ])
     })
