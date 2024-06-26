@@ -1,8 +1,4 @@
 describe('Tester opprettelse av søknad om å beholde sykepenger utenfor EØS', () => {
-    // before(() => {
-    //     cy.visit('/syk/sykepengesoknad?testperson=integrasjon-soknader');
-    // });
-
     it('Søknad ANSVARSERKLARING - steg 1', function () {
         cy.visit('/syk/sykepengesoknad/sykepengesoknad-utland')
 
