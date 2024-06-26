@@ -67,7 +67,7 @@ describe('Tester arbeidsledigsøknad', () => {
         cy.contains('Gå videre').click()
     })
 
-    it('Søknad ARBEIDSLEDIG_UTLAND', () => {
+    it('Søknad OPPHOLD_UTENFOR_EOS', () => {
         cy.url().should('include', `${soknad.id}/4`)
 
         // Test spørsmål
@@ -77,10 +77,6 @@ describe('Tester arbeidsledigsøknad', () => {
         // Underspørsmål 1
         cy.contains('Når var du utenfor EU/EØS?')
         setPeriodeFraTil(17, 24)
-
-        // Underspørsmål 2
-        cy.contains('Har du søkt om å beholde sykepengene for disse dagene?')
-        cy.get('input[type=radio]#687424_0').click()
 
         cy.contains('Gå videre').click()
     })

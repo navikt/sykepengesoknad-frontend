@@ -77,6 +77,8 @@ export const EkspanderbarHjelp = ({ sporsmal, mb }: { sporsmal: Sporsmal; mb?: s
                 return <PermisjonHjelpBody />
             case 'UTLAND_V2':
                 return <UtlandHjelpBody />
+            case 'OPPHOLD_UTENFOR_EOS':
+                return <UtlandHjelpBody />
             case 'ARBEID_UNDERVEIS_100_PROSENT':
                 return <ArbeidUnderveisHjelpBody />
             case 'ARBEID_UTENFOR_NORGE':

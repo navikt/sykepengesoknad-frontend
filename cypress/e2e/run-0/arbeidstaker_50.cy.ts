@@ -141,7 +141,7 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
         cy.contains('Gå videre').click()
     })
 
-    it('Søknad UTLAND_V2', function () {
+    it('Søknad OPPHOLD_UTENFOR_EOS', function () {
         cy.url().should('include', `${soknad.id}/8`)
 
         // Test spørsmål

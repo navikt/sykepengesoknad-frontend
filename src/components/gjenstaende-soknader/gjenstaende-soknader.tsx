@@ -3,7 +3,6 @@ import React, { CSSProperties } from 'react'
 import { useRouter } from 'next/router'
 
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
-import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 import { tallTilSpråk } from '../../utils/tallTilSpraak'
 import { getLedetekst, tekst } from '../../utils/tekster'
 import { logEvent } from '../amplitude/amplitude'
@@ -73,6 +72,5 @@ export function hentGjenstaendeSoknader(soknader: RSSoknadmetadata[], valgtSokna
     return soknader
         .filter((s) => s.id !== valgtSoknad.id)
         .filter((s) => s.status === RSSoknadstatus.NY)
-        .filter((s) => s.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND)
         .sort((a, b) => a.fom!.getTime() - b.fom!.getTime())
 }

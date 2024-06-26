@@ -32,6 +32,7 @@ const SoknadenTekster = {
     'sykepengesoknad.permisjon_v2.tittel': 'Permisjon',
     'sykepengesoknad.utland.tittel': 'Utenlandsopphold',
     'sykepengesoknad.utland_v2.tittel': 'Opphold i utlandet',
+    'sykepengesoknad.opphold_utenfor_eos.tittel': 'Reise til utlandet',
     'sykepengesoknad.utlandsopphold_sokt_sykepenger.tittel': 'Sykepenger utenfor EU/EØS',
     'sykepengesoknad.egenmeldinger.tittel': 'Fravær før sykmeldingen',
     'sykepengesoknad.fravar_for_sykmeldingen.tittel': 'Fravær før sykmeldingen',

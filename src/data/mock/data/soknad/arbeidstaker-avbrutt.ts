@@ -428,7 +428,7 @@ export const avbruttSoknad: RSSoknad = {
         },
         {
             id: '101',
-            tag: 'UTLAND_V2',
+            tag: 'OPPHOLD_UTENFOR_EOS',
             sporsmalstekst: 'Var du på reise utenfor EU/EØS mens du var sykmeldt 20. mai - 5. juni 2020?',
             undertekst: null,
             svartype: 'JA_NEI',
@@ -439,7 +439,7 @@ export const avbruttSoknad: RSSoknad = {
             undersporsmal: [
                 {
                     id: '102',
-                    tag: 'UTLAND_NAR_V2',
+                    tag: 'OPPHOLD_UTENFOR_EOS_NAR',
                     sporsmalstekst: 'Når var du utenfor EU/EØS?',
                     undertekst: null,
                     svartype: 'PERIODER',

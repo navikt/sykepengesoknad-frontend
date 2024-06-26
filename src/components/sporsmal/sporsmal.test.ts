@@ -247,6 +247,7 @@ const kjenteTags = [
     'UTLAND_NAR',
     'UTLAND_NAR_V2',
     'UTLAND_V2',
+    'OPPHOLD_UTENFOR_EOS',
     'VAER_KLAR_OVER_AT',
     'TIL_SLUTT',
     'BRUKTE_REISETILSKUDDET',
