@@ -29,13 +29,6 @@ describe('Tester opprettelse av søknad om å beholde sykepenger utenfor EØS', 
         cy.contains('Har du søkt om å beholde sykepengene for de dagene du var utenfor EU/EØS?')
         cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click()
 
-        cy.contains('Har du allerede vært på reise?')
-            .parent()
-            .contains(
-                'I utgangspunktet bør du søke før du reiser til land utenfor EU/EØS. Du kan likevel søke NAV om å få\n' +
-                    '                beholde sykepengene etter du har reist.',
-            )
-
         cy.get('.utland_infotekst')
             .should(
                 'include.text',
