@@ -110,14 +110,21 @@ describe('Søknad med nytt spørsmål om oppholdstillatelse og kjent permanent o
 
     it('Har kjent permanent oppholdstillatelse', () => {
         cy.contains('Oppholdstillatelse')
-        cy.contains('NAV har registert følgende oppholdstillatelse:')
+        cy.contains('Vi har mottatt denne oppholdstillatelsen fra Utlendingsdirektoratet:')
         cy.contains('Permanent oppholdstillatelse')
         cy.contains('Fra 1. mai 2024.')
         cy.contains('Har Utlendingsdirektoratet gitt deg en oppholdstillatelse før 1. mai 2024?')
 
+        // Viser "Fra" og "Til" i stedet for "Fra og med" og "Til og med" for å matche
+        // datoer fra UDI (på forespørsel fra Team LovMe).
+        cy.contains('Fra og med').should('not.exist')
+        cy.contains('Til og med').should('not.exist')
+        cy.contains('Til')
+        cy.contains('Fra')
+
         svarJaHovedsporsmal()
         velgDato(1)
-        setPeriodeFraTil(10, 20)
+        setPeriodeFraTil(10, 25)
         klikkGaVidere()
     })
 
@@ -130,7 +137,7 @@ describe('Søknad med nytt spørsmål om oppholdstillatelse og kjent permanent o
                 .siblings()
                 .should('contain', 'Ja')
             cy.contains('Hvilken dato fikk du denne oppholdstillatelsen?').siblings().should('contain', '01.')
-            cy.contains('Hvilken periode gjelder denne oppholdstillatelsen?').siblings().should('contain', '10. – 20.')
+            cy.contains('Hvilken periode gjelder denne oppholdstillatelsen?').siblings().should('contain', '10. – 25.')
         })
     })
 })
@@ -147,10 +154,26 @@ describe('Søknad med nytt spørsmål om oppholdstillatelse og kjent midlertidig
 
     it('Har kjent midlertidig oppholdstillatelse', () => {
         cy.contains('Oppholdstillatelse')
-        cy.contains('NAV har registert følgende oppholdstillatelse:')
+        cy.contains('Vi har mottatt denne oppholdstillatelsen fra Utlendingsdirektoratet:')
         cy.contains('Midlertidig oppholdstillatelse')
         cy.contains('Fra 1. mai 2024 til 31. desember 2024.')
         cy.contains('Har Utlendingsdirektoratet gitt deg en oppholdstillatelse før 1. mai 2024?')
+
+        cy.contains('Fra og med').should('not.exist')
+        cy.contains('Til og med').should('not.exist')
+        cy.contains('Til')
+        cy.contains('Fra')
+
+        cy.contains('Spørsmålet forklart').click()
+        cy.contains(
+            'Når du ikke er norsk statsborger, må du ha oppholdstillatelse i Norge for å være medlem i folketrygden og ha rett til sykepenger.',
+        )
+        cy.contains(
+            'Har du ikke hatt en oppholdstillatelse som gjelder for en periode før den vi har mottatt fra Utlendingsdirektoratet, svarer du nei.',
+        )
+        cy.contains(
+            'Har du hatt én eller flere tidligere oppholdstillatelser, svarer du ja. Vi ber deg oppgi den siste tillatelsen før perioden vi har mottatt fra Utlendingsdirektoratet.',
+        )
 
         svarJaHovedsporsmal()
         velgDato(1)

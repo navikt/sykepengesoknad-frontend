@@ -22,10 +22,12 @@ export const MedlemskapOppholdstillatelseV2HjelpBody = () => {
                 og ha rett til sykepenger.
             </BodyShort>
             <BodyShort spacing>
-                Hvis du ikke har en oppholdstillatelse før den vi har registert, svarer du nei.
+                Har du ikke hatt en oppholdstillatelse som gjelder for en periode før den vi har mottatt fra
+                Utlendingsdirektoratet, svarer du nei.
             </BodyShort>
             <BodyShort spacing>
-                Har du fått flere oppholdstillatelser før den vi har registrert, ønsker vi å vite om den nyeste.
+                Har du hatt én eller flere tidligere oppholdstillatelser, svarer du ja. Vi ber deg oppgi den siste
+                tillatelsen før perioden vi har mottatt fra Utlendingsdirektoratet.
             </BodyShort>
         </>
     )

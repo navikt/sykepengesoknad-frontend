@@ -14,18 +14,17 @@ export const KjentOppholdstillatelse = ({ soknad }: { soknad: Soknad }) => {
         ? dayjs(soknad.kjentOppholdstillatelse?.tom).format('D. MMMM YYYY')
         : null
 
-    const title = tomDato === null ? `Permanent oppholdstillatelse` : `Midlertidig oppholdstillatelse`
-
+    const tittel = tomDato === null ? `Permanent oppholdstillatelse` : `Midlertidig oppholdstillatelse`
     const periode = tomDato === null ? `Fra ${fomDato}.` : `Fra ${fomDato} til ${tomDato}.`
 
     return (
         <>
             <Label as="p" className="mb-4">
-                NAV har registert følgende oppholdstillatelse:
+                Vi har mottatt denne oppholdstillatelsen fra Utlendingsdirektoratet:
             </Label>
             <InfoBoks>
                 <Label as="p" className="mb-1">
-                    {title}
+                    {tittel}
                 </Label>
                 <BodyShort>{periode}</BodyShort>
             </InfoBoks>

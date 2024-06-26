@@ -223,7 +223,9 @@ const SporsmalTekster = {
 
     'sykepengesoknad.periodevelger.legg-til-ekstra': 'Legg til ekstra periode',
     'sykepengesoknad.periodevelger.slett': 'Slett periode',
+    'sykepengesoknad.periodevelger.fra': 'Fra',
     'sykepengesoknad.periodevelger.fom': 'Fra og med',
+    'sykepengesoknad.periodevelger.til': 'Til',
     'sykepengesoknad.periodevelger.tom': 'Til og med',
 
     'soknad.presisering.INNTEKTSKILDE_ARBEIDSFORHOLD_ER_DU_SYKMELDT':
