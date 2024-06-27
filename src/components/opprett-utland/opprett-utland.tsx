@@ -98,7 +98,7 @@ const OpprettUtland = () => {
                         <BodyShort as="li" spacing>
                             Skal du reise til et annet land innenfor EU/EØS, må du benytte{' '}
                             <LenkeMedIkon
-                                href="https://www.nav.no/soknader/nb/person/til-eller-fra-norge/opphold-eller-arbeid-utenfor-norge/NAV%2008-09.07/brev"
+                                href="https://www.nav.no/fyllut/nav080907?sub=paper"
                                 text="søknaden på papir."
                             ></LenkeMedIkon>
                         </BodyShort>
