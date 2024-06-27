@@ -1,7 +1,7 @@
 import { BodyLong, Heading, Label } from '@navikt/ds-react'
 import React from 'react'
 
-import { parserWithReplace } from '../../../utils/html-react-parser-utils'
+import { tekstMedHtml } from '../../../utils/html-react-parser-utils'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 
 const IkkeRelevant = ({ sporsmal }: SpmProps) => {
@@ -17,7 +17,7 @@ const IkkeRelevant = ({ sporsmal }: SpmProps) => {
             <Label as="h2" className="mb-4">
                 {sporsmal.sporsmalstekst}
             </Label>
-            {sporsmal.undertekst && <BodyLong as="div">{parserWithReplace(sporsmal.undertekst)}</BodyLong>}
+            {sporsmal.undertekst && <BodyLong as="div">{tekstMedHtml(sporsmal.undertekst)}</BodyLong>}
         </div>
     )
 }

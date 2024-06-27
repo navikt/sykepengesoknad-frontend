@@ -32,6 +32,7 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
         avbryterSoknad()
         cy.url().should('include', `avbrutt/${soknad.id}`)
         cy.contains('Fjernet søknad om å beholde sykepenger utenfor EU/EØS')
+        cy.findByRole('link', { name: 'nav.no/sykepenger#sok-opphold-utland' })
     })
 
     it('Gjenåpner søknaden', () => {

@@ -3,7 +3,7 @@ import parser, { DOMNode, domToReact, Element, HTMLReactParserOptions } from 'ht
 import React from 'react'
 import { ExternalLinkIcon } from '@navikt/aksel-icons'
 
-export const parserWithReplace = (html: string) => parser(html, htmlParserOptionsWithReplace)
+export const tekstMedHtml = (html: string) => parser(html, htmlParserOptionsWithReplace)
 
 const htmlParserOptionsWithReplace: HTMLReactParserOptions = {
     replace: (domNode) => {

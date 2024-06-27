@@ -5,7 +5,7 @@ import { RSArbeidssituasjon } from '../../../types/rs-types/rs-arbeidssituasjon'
 import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype'
 import { tekst } from '../../../utils/tekster'
 import { logEvent } from '../../amplitude/amplitude'
-import { parserWithReplace } from '../../../utils/html-react-parser-utils'
+import { tekstMedHtml } from '../../../utils/html-react-parser-utils'
 import { useSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
 import { Sporsmal } from '../../../types/types'
 
@@ -113,7 +113,7 @@ export const EkspanderbarHjelp = ({ sporsmal, mb }: { sporsmal: Sporsmal; mb?: s
                 if (harInnhold) {
                     return (
                         <BodyLong>
-                            {parserWithReplace(tekst(`ekspanderbarhjelp.${nokkel?.toLowerCase()}.innhold` as any))}
+                            {tekstMedHtml(tekst(`ekspanderbarhjelp.${nokkel?.toLowerCase()}.innhold` as any))}
                         </BodyLong>
                     )
                 }

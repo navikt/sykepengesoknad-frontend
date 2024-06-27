@@ -10,7 +10,7 @@ import { EkspanderbarHjelp } from '../../hjelpetekster/ekspanderbar-hjelp/ekspan
 import { hentFeilmelding, sporsmalIdListe } from '../sporsmal-utils'
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
-import { parserWithReplace } from '../../../utils/html-react-parser-utils'
+import { tekstMedHtml } from '../../../utils/html-react-parser-utils'
 import { PaskeferieInfo } from '../../hjelpetekster/paaskeferie/paskeferie-info'
 import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus'
 import { YrkesskadeInfo } from '../../hjelpetekster/yrkesskade-info'
@@ -121,7 +121,7 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
 
                 {sporsmal?.tag === 'UTLANDSOPPHOLD_SOKT_SYKEPENGER' && watchJaNei && (
                     <BodyLong spacing className="utland_infotekst">
-                        {parserWithReplace(
+                        {tekstMedHtml(
                             getLedetekst(
                                 tekst(
                                     ('soknad.infotekst.utlandsopphold_sokt_sykepenger.' +

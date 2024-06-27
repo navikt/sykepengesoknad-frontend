@@ -17,7 +17,7 @@ import QueryStatusPanel from '../queryStatusPanel/QueryStatusPanel'
 import { soknadBreadcrumb, useUpdateBreadcrumbs } from '../../hooks/useBreadcrumbs'
 import { SoknadHeader } from '../soknad/soknad-header'
 import { useSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
-import { parserWithReplace } from '../../utils/html-react-parser-utils'
+import { tekstMedHtml } from '../../utils/html-react-parser-utils'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 
 import GjenapneSoknad from './gjenapneknapp'
@@ -59,7 +59,7 @@ const AvbruttSoknad = () => {
                 </BodyShort>
             </Alert>
             <BodyLong size="large" spacing weight="semibold">
-                {parserWithReplace(tekst('sykepengesoknad.avbrutt.informasjon-innhold-1'))}
+                {tekstMedHtml(tekst('sykepengesoknad.avbrutt.informasjon-innhold-1'))}
             </BodyLong>
             {!erOppHoldUtland && (
                 <>
@@ -68,8 +68,15 @@ const AvbruttSoknad = () => {
                 </>
             )}
             <BodyLong spacing>{tekst('sykepengesoknad.avbrutt.informasjon-innhold-4')}</BodyLong>
-            {!erOppHoldUtland && <Opplysninger ekspandert={false} steg="avbrutt-søknad" />}
-            <FristSykepenger />
+            {!erOppHoldUtland && (
+                <>
+                    <Opplysninger ekspandert={false} steg="avbrutt-søknad" />
+                    <FristSykepenger />
+                </>
+            )}
+            {erOppHoldUtland && (
+                <BodyLong spacing>{tekstMedHtml(tekst('sykepengesoknad.avbrutt.informasjon.eos'))}</BodyLong>
+            )}
             <Vis
                 hvis={dayjs(valgtSoknad.avbruttDato).isAfter(dayjs().subtract(2, 'seconds'))}
                 render={() => (

@@ -4,7 +4,7 @@ import React from 'react'
 import { tekst } from '../../../utils/tekster'
 import Vis from '../../vis'
 import { UseKontonummer } from '../../../hooks/useKontonummer'
-import { parserWithReplace } from '../../../utils/html-react-parser-utils'
+import { tekstMedHtml } from '../../../utils/html-react-parser-utils'
 
 const Kontonummer = () => {
     const { data: kontonummer, isSuccess } = UseKontonummer()
@@ -24,7 +24,7 @@ const Kontonummer = () => {
 
             <Vis
                 hvis={!kontonummer}
-                render={() => <BodyShort>{parserWithReplace(tekst('kvittering.kontonummer.mangler'))}</BodyShort>}
+                render={() => <BodyShort>{tekstMedHtml(tekst('kvittering.kontonummer.mangler'))}</BodyShort>}
             />
 
             <Vis
@@ -34,7 +34,7 @@ const Kontonummer = () => {
                         <BodyShort>
                             <strong>{formatterKontonr(kontonummer!)}</strong>
                         </BodyShort>
-                        <BodyShort>{parserWithReplace(tekst('kvittering.kontonummer.endre'))}</BodyShort>
+                        <BodyShort>{tekstMedHtml(tekst('kvittering.kontonummer.endre'))}</BodyShort>
                     </>
                 )}
             />

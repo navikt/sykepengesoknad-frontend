@@ -5,7 +5,7 @@ import { tekst } from '../../../utils/tekster'
 import Vis from '../../vis'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { ProgressivtGuidePanel } from '../../guidepanel/ProgressivtGuidePanel'
-import { parserWithReplace } from '../../../utils/html-react-parser-utils'
+import { tekstMedHtml } from '../../../utils/html-react-parser-utils'
 
 const GuidepanelUnderSporsmalstekst = ({ sporsmal }: SpmProps) => {
     const bjornTekst = `soknad.bjorn.${sporsmal.tag.toLowerCase()}`
@@ -17,7 +17,7 @@ const GuidepanelUnderSporsmalstekst = ({ sporsmal }: SpmProps) => {
             hvis={bjornVeileder(sporsmal.tag)}
             render={() => (
                 <ProgressivtGuidePanel className="my-8">
-                    <BodyShort>{parserWithReplace(tekst(bjornTekst as any))}</BodyShort>
+                    <BodyShort>{tekstMedHtml(tekst(bjornTekst as any))}</BodyShort>
                 </ProgressivtGuidePanel>
             )}
         />

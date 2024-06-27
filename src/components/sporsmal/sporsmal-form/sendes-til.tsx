@@ -4,7 +4,7 @@ import React from 'react'
 import { RSMottaker } from '../../../types/rs-types/rs-mottaker'
 import { getLedetekst, tekst } from '../../../utils/tekster'
 import { Soknad } from '../../../types/types'
-import { parserWithReplace } from '../../../utils/html-react-parser-utils'
+import { tekstMedHtml } from '../../../utils/html-react-parser-utils'
 import useMottakerSoknad from '../../../hooks/useMottakerSoknad'
 import SoknadenTekster from '../../soknad/soknaden-tekster'
 
@@ -29,12 +29,12 @@ export default function SendesTil({ soknad }: { soknad: Soknad }) {
     return (
         <BodyShort as="div" className="mb-8 text-left">
             {soknad.arbeidsgiver !== undefined
-                ? parserWithReplace(
+                ? tekstMedHtml(
                       getLedetekst(tekst(nokkel), {
                           '%ARBEIDSGIVER%': soknad.arbeidsgiver.navn,
                       }),
                   )
-                : parserWithReplace(tekst(nokkel))}
+                : tekstMedHtml(tekst(nokkel))}
         </BodyShort>
     )
 }

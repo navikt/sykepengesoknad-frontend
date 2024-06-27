@@ -1,7 +1,7 @@
 import { BodyLong, ExpansionCard, Heading, Label } from '@navikt/ds-react'
 import React, { useState } from 'react'
 
-import { parserWithReplace } from '../../utils/html-react-parser-utils'
+import { tekstMedHtml } from '../../utils/html-react-parser-utils'
 import { tekst } from '../../utils/tekster'
 import { logEvent } from '../amplitude/amplitude'
 import { LenkeMedIkon } from '../lenke-med-ikon/LenkeMedIkon'
@@ -28,7 +28,7 @@ const OmReisetilskudd = () => {
                 <Label as="h3" spacing>
                     {tekst('tilskudd.start.hva-dekker')}
                 </Label>
-                <BodyLong spacing>{parserWithReplace(tekst('tilskudd.start.hva-dekker-tekst'))}</BodyLong>
+                <BodyLong spacing>{tekstMedHtml(tekst('tilskudd.start.hva-dekker-tekst'))}</BodyLong>
 
                 <Label as="h3" spacing>
                     {tekst('tilskudd.start.forste-16')}

@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 
 import { tekst } from '../../utils/tekster'
 import { logEvent } from '../amplitude/amplitude'
-import { parserWithReplace } from '../../utils/html-react-parser-utils'
+import { tekstMedHtml } from '../../utils/html-react-parser-utils'
 import { useSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
 
 import EksempelFrist from './eksempel-frist'
@@ -36,8 +36,8 @@ const FristSykepenger = () => {
             </ExpansionCard.Header>
             <ExpansionCard.Content>
                 <BodyShort spacing>{tekst('frist-sykepenger.innsending')}</BodyShort>
-                <BodyShort spacing>{parserWithReplace(tekst('frist-sykepenger.hovedregel'))}</BodyShort>
-                <BodyShort spacing>{parserWithReplace(tekst('frist-sykepenger.ulike.måneder'))}</BodyShort>
+                <BodyShort spacing>{tekstMedHtml(tekst('frist-sykepenger.hovedregel'))}</BodyShort>
+                <BodyShort spacing>{tekstMedHtml(tekst('frist-sykepenger.ulike.måneder'))}</BodyShort>
                 <BodyShort>{tekst('frist-sykepenger.husk')}</BodyShort>
 
                 <ReadMore header="Vis eksempler" className="my-4">

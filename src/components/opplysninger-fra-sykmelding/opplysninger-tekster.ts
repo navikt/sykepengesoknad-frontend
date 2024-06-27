@@ -9,6 +9,7 @@ const OpplysningerTekster = {
     'din-sykmelding.arbeidssituasjon.alternativ.arbeidsledig': 'Jeg er arbeidsledig eller permittert',
     'din-sykmelding.arbeidssituasjon.alternativ.arbeidstaker': 'Jeg er ansatt',
     'sykepengesoknad.sykmelding-utdrag.dato-sykmeldingen-ble-skrevet': 'Dato sykmeldingen ble skrevet',
+
     'sykepengesoknad.avbrutt.tidspunkt': 'Søknaden ble avbrutt og fjernet av deg',
     'sykepengesoknad.avbrutt.informasjon-innhold-1':
         'Du har fjernet søknaden, som betyr at du ikke vil få sykepenger basert på denne søknaden.',
@@ -18,6 +19,9 @@ const OpplysningerTekster = {
         'Hvis du er sykmeldt fra flere arbeidsgivere, må du sende én søknad for hver arbeidsgiver.',
     'sykepengesoknad.avbrutt.informasjon-innhold-4':
         'Hvis du vil søke om sykepenger basert på denne søknaden likevel, må du gjenåpne søknaden, fylle den ut og sende den inn.',
+    'sykepengesoknad.avbrutt.informasjon.eos':
+        'Hvis du skal reise utenfor EØS når du er sykmeldt, kan du miste retten til sykepenger. Du kan søke NAV om å beholde sykepengene dine mens du er på reise. Du må sende søknaden på forhånd, og jo før du søker, jo bedre. Les mer om reise utenfor EØS og send søknad på <a href="https://www.nav.no/sykepenger#sok-opphold-utland">nav.no/sykepenger#sok-opphold-utland</a>',
+
     'sykepengesoknad.sykmelding-utdrag.forsikring-ja': 'Ja',
     'sykepengesoknad.sykmelding-utdrag.forsikring-nei':
         'Har ikke forsikring som gjelder de første 16 dagene av sykefraværet',

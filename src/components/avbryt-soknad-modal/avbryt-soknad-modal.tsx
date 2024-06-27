@@ -8,7 +8,7 @@ import { EndringUtenEndringModal } from '../sporsmal/endring-uten-endring/endrin
 import { useAvbryt } from '../../hooks/useAvbryt'
 import { useSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
 import { cn } from '../../utils/tw-utils'
-import { parserWithReplace } from '../../utils/html-react-parser-utils'
+import { tekstMedHtml } from '../../utils/html-react-parser-utils'
 
 const AvbrytKorrigering = () => {
     const { valgtSoknad, stegId } = useSoknadMedDetaljer()
@@ -88,7 +88,7 @@ const AvbrytSoknadModal = () => {
             >
                 <Modal.Body>
                     <BodyLong spacing size="medium">
-                        {parserWithReplace(tekst('avbryt.popup.sporsmal'))}
+                        {tekstMedHtml(tekst('avbryt.popup.sporsmal'))}
                     </BodyLong>
                     {avbrytError && (
                         <Alert variant="error" className="mt-4">
