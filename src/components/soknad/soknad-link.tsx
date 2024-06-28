@@ -12,8 +12,7 @@ interface SoknadLinkProps {
     className: string
 }
 
-export const urlTilSoknad = (soknad: Soknad | RSSoknadmetadata, medQueryParams = true) => {
-    // Store the query parameters in a variable, adding condition to include them based on medQueryParams flag
+export const urlTilSoknad = (soknad: Soknad | RSSoknadmetadata, medQueryParams = true, forsteSporsmal = 1) => {
     const queryParams = medQueryParams ? window.location.search : ''
 
     switch (soknad.status) {
@@ -29,7 +28,7 @@ export const urlTilSoknad = (soknad: Soknad | RSSoknadmetadata, medQueryParams =
 
     return soknad instanceof Soknad && erDelvisUtfylt(soknad)
         ? `${soknaderUrl}/${finnPosisjonPaSisteBesvarteSporsmal(soknad) + 1}${queryParams}`
-        : `${soknaderUrl}/1${queryParams}`
+        : `${soknaderUrl}/${forsteSporsmal}${queryParams}`
 }
 
 const erDelvisUtfylt = (soknad: Soknad): boolean => {

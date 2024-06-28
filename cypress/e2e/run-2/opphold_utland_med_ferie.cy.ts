@@ -17,8 +17,15 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
             .click()
     })
 
+    it('Viser infoside om søknad om å beholde sykepenger utenfor EU/EØS, og starter søknaden', () => {
+        cy.contains('Du trenger ikke søke hvis du enten')
+        cy.contains('Har du allerede vært på reise?')
+
+        klikkGaVidere()
+    })
+
     it('PERIODEUTLAND - steg 1', function () {
-        cy.url().should('include', `${soknad.id}/1`)
+        cy.url().should('include', `${soknad.id}/2`)
 
         cy.contains('Opplysninger fra sykmeldingen').should('not.exist')
         cy.contains('Når skal du reise?')
@@ -29,7 +36,7 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
     })
 
     it('LAND - steg 2', function () {
-        cy.url().should('include', `${soknad.id}/2`)
+        cy.url().should('include', `${soknad.id}/3`)
 
         cy.contains('Hvilket land skal du reise til?')
         cy.findAllByRole('combobox', { name: 'Hvilket land skal du reise til?' }).type('Sør')
@@ -41,7 +48,7 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
     })
 
     it('Vi svarer Ja på arbeidsgiverspørsmålet', function () {
-        cy.url().should('include', `${soknad.id}/3`)
+        cy.url().should('include', `${soknad.id}/4`)
         cy.contains('Har du arbeidsgiver?')
         cy.get('#acd5a489-2624-40c3-8dd1-a651b41b25aa_0').click()
         cy.contains('Er du 100 % sykmeldt?')

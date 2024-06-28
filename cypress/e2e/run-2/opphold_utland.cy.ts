@@ -15,8 +15,14 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
         cy.get(`a[href*=${soknad.id}]`).click()
     })
 
+    it('Viser infoside om søknad om å beholde sykepenger utenfor EU/EØS, og starter søknaden', () => {
+        cy.contains('Du trenger ikke søke hvis du enten')
+        cy.contains('Har du allerede vært på reise?')
+        klikkGaVidere()
+    })
+
     it('Velger periode for utenlandsopphold', function () {
-        cy.url().should('include', `${soknad.id}/1`)
+        cy.url().should('include', `${soknad.id}/2`)
 
         cy.findByRole('progressbar', { name: 'Søknadssteg' })
             .should('have.attr', 'aria-valuenow', '1')
@@ -34,7 +40,7 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
     })
 
     it('Velger land', function () {
-        cy.url().should('include', `${soknad.id}/2`)
+        cy.url().should('include', `${soknad.id}/3`)
         cy.get('[data-cy="tilbake-knapp"]').should('exist')
 
         klikkGaVidere(true)
@@ -62,7 +68,7 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
     })
 
     it('Oppgir arbeidsgiver', function () {
-        cy.url().should('include', `${soknad.id}/3`)
+        cy.url().should('include', `${soknad.id}/4`)
 
         cy.contains('Har du arbeidsgiver?').get('[data-cy="ja-nei-stor"] input[value=JA]').click()
 
@@ -84,7 +90,7 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
     })
 
     it('Søknad TIL_SLUTT', () => {
-        cy.url().should('include', `${soknad.id}/4`)
+        cy.url().should('include', `${soknad.id}/5`)
         it('Bekreftelsespunktene er riktige', () => {
             const punkter = [
                 'Jeg har avklart med legen at reisen ikke vil forlenge sykefraværet',
@@ -99,7 +105,7 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
     })
 
     it('Oppsummering fra søknaden', function () {
-        cy.url().should('include', `${soknad.id}/4`)
+        cy.url().should('include', `${soknad.id}/5`)
 
         cy.get('section[aria-label="Oppsummering fra søknaden"] button').click()
 
@@ -122,7 +128,7 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
     })
 
     it('Sender søknaden', function () {
-        cy.url().should('include', `${soknad.id}/4`)
+        cy.url().should('include', `${soknad.id}/5`)
 
         cy.findByRole('progressbar', { name: 'Søknadssteg' })
             .should('have.attr', 'aria-valuenow', '4')

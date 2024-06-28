@@ -55,6 +55,9 @@ function validerAntallSvar(sporsmal: RSSporsmal): void {
             case 'KVITTERING':
                 return antall >= 0
 
+            case 'INFO_OPPHOLD_UTLAND':
+                return antall === 0
+
             default:
                 return false
         }

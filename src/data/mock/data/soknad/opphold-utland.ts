@@ -22,6 +22,18 @@ export const oppholdUtland: RSSoknad = {
     soknadPerioder: [],
     sporsmal: [
         {
+            id: '687336',
+            tag: 'INFO_OPPHOLD_UTLAND',
+            sporsmalstekst: '',
+            undertekst: null,
+            svartype: 'INFO_OPPHOLD_UTLAND',
+            min: null,
+            max: null,
+            kriterieForVisningAvUndersporsmal: null,
+            svar: [],
+            undersporsmal: [],
+        },
+        {
             id: 'f1a37307-c8e9-4370-9de1-98845088919c',
             tag: 'PERIODEUTLAND',
             sporsmalstekst: 'Når skal du reise?',

@@ -13,7 +13,7 @@ import { LenkeMedIkon } from '../lenke-med-ikon/LenkeMedIkon'
 import { rsToSoknad } from '../../types/mapping'
 import { useTestpersonQuery } from '../../hooks/useTestpersonQuery'
 
-const OpprettUtland = () => {
+const InfoOppholdUtland = ({ nySoknad = true }: { nySoknad: boolean }) => {
     const queryClient = useQueryClient()
     const [feilmeldingTekst, setFeilmeldingTekst] = useState<string>()
     const router = useRouter()
@@ -45,16 +45,18 @@ const OpprettUtland = () => {
 
         const soknad = rsToSoknad(data)
         queryClient.setQueriesData(['soknad', soknad.id], soknad)
-        queryClient.invalidateQueries(['soknader'])
-        router.push(urlTilSoknad(soknad))
+        await queryClient.invalidateQueries(['soknader'])
+        await router.push(urlTilSoknad(soknad, true, 2))
     }
 
     return (
         <>
-            <Box className="mt-16">
-                <Heading spacing size="large" level="1">
-                    {tekst('opprett-utland.tittel')}
-                </Heading>
+            <Box>
+                {nySoknad && (
+                    <Heading spacing size="large" level="1">
+                        {tekst('opprett-utland.tittel')}
+                    </Heading>
+                )}
                 <BodyShort spacing className="mt-8">
                     Du trenger ikke søke hvis du enten
                 </BodyShort>
@@ -106,20 +108,24 @@ const OpprettUtland = () => {
                 </ExpansionCard.Content>
             </ExpansionCard>
 
-            <Button variant="primary" type="button" onClick={opprett} className="mb-8 mt-16">
-                {tekst('opprett-utland.fortsett')}
-            </Button>
+            {nySoknad && (
+                <>
+                    <Button variant="primary" type="button" onClick={opprett} className="mb-8 mt-16">
+                        {tekst('opprett-utland.fortsett')}
+                    </Button>
+                    <div aria-live="polite">
+                        <Vis hvis={feilmeldingTekst} render={() => <Alert variant="error">{feilmeldingTekst}</Alert>} />
+                    </div>
 
-            <div aria-live="polite">
-                <Vis hvis={feilmeldingTekst} render={() => <Alert variant="error">{feilmeldingTekst}</Alert>} />
-            </div>
-            <LenkeMedIkon
-                className="mt-8"
-                href="https://www.nav.no/no/NAV+og+samfunn/Om+NAV/personvern-i-arbeids-og-velferdsetaten"
-                text={tekst('opprett-utland.personvern')}
-            />
+                    <LenkeMedIkon
+                        className="mt-8"
+                        href="https://www.nav.no/no/NAV+og+samfunn/Om+NAV/personvern-i-arbeids-og-velferdsetaten"
+                        text={tekst('opprett-utland.personvern')}
+                    />
+                </>
+            )}
         </>
     )
 }
 
-export default OpprettUtland
+export default InfoOppholdUtland

@@ -15,7 +15,7 @@ import { KvitteringTekster } from '../components/kvittering/kvittering-tekster'
 import OmReisetilskuddTekster from '../components/om-reisetilskudd/om-reisetilskudd-tekster'
 import OmSykepengerTekster from '../components/om-sykepenger/om-sykepenger-tekster'
 import OpplysningerTekster from '../components/opplysninger-fra-sykmelding/opplysninger-tekster'
-import OpprettUtlandTekster from '../components/opprett-utland/opprett-utland-tekster'
+import OppholdUtlandTekster from '../components/opphold-utland/opphold-utland-tekster'
 import OppsummeringTekster from '../components/oppsummering/oppsummering-tekster'
 import SoknadenTekster from '../components/soknad/soknaden-tekster'
 import SoknadMedToDelerTekster from '../components/soknad-med-to-deler/soknad-med-to-deler-tekster'
@@ -45,7 +45,7 @@ const tekster = {
     ...EndringUtenEndringTekster,
     ...OmSykepengerTekster,
     ...OppsummeringTekster,
-    ...OpprettUtlandTekster,
+    ...OppholdUtlandTekster,
     ...RefreshHvisFeilStateTekster,
     ...OmReisetilskuddTekster,
     ...FilListeTekster,

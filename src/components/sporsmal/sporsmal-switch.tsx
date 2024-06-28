@@ -22,6 +22,7 @@ import ComboboxSingle from './typer/combobox-single'
 import ComboboxMultiple from './typer/combobox-multiple'
 import GruppeAvUndersporsmal from './typer/gruppe-av-undersporsmal'
 import Kulepunkter from './typer/kulepunkter'
+import Info from './typer/info'
 
 interface SporsmalSwitchProps {
     sporsmal: Sporsmal
@@ -100,6 +101,9 @@ const SporsmalSwitch = ({ sporsmal, sporsmalIndex, erSisteSporsmal, erHovedspors
 
         case RSSvartype.BEKREFTELSESPUNKTER:
             return <Kulepunkter sporsmal={sporsmal} />
+
+        case RSSvartype.INFO_OPPHOLD_UTLAND:
+            return <Info sporsmal={sporsmal} />
 
         default:
             return <UkjentSporsmal sporsmal={sporsmal} />

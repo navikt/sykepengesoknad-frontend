@@ -1,15 +1,12 @@
 import { BodyShort, Skeleton } from '@navikt/ds-react'
 import React from 'react'
 
-import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype'
 import { useSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
 
 const Fremdriftsbar = () => {
     const { valgtSoknad, stegNo } = useSoknadMedDetaljer()
 
-    const oppholdUtland = valgtSoknad?.soknadstype == RSSoknadstype.OPPHOLD_UTLAND
-
-    const aktivtSteg = oppholdUtland ? stegNo : stegNo - 1
+    const aktivtSteg = stegNo - 1
     if (valgtSoknad && aktivtSteg == 0) return null
 
     if (aktivtSteg == 0) {
@@ -17,9 +14,8 @@ const Fremdriftsbar = () => {
         return null
     }
 
-    const antallSporsmål =
+    const antallSteg =
         valgtSoknad?.sporsmal.filter((s) => s.tag !== 'VAER_KLAR_OVER_AT' && s.tag !== 'TIL_SLUTT').length || 9
-    const antallSteg = oppholdUtland ? antallSporsmål + 1 : antallSporsmål
 
     const bredde = valgtSoknad ? (100 / antallSteg) * aktivtSteg : 0
 

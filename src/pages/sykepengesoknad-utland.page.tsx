@@ -1,10 +1,10 @@
 import React from 'react'
 
 import { beskyttetSideUtenProps } from '../auth/beskyttetSide'
-import OpprettUtland from '../components/opprett-utland/opprett-utland'
+import InfoOppholdUtland from '../components/opphold-utland/info-opphold-utland'
 
 export default function Page() {
-    return <OpprettUtland />
+    return <InfoOppholdUtland nySoknad={true} />
 }
 
 export const getServerSideProps = beskyttetSideUtenProps

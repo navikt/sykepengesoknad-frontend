@@ -120,6 +120,10 @@ describe('Tester kvittering', () => {
 
             // Velg søknad
             cy.get(`a[href*=${oppholdUtlandKvittering.id}]`).click()
+            cy.url().should('include', '/1')
+
+            //Start søknaden
+            klikkGaVidere()
 
             // Svar og send
             setPeriodeFraTil(14, 22)

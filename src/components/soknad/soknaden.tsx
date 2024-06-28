@@ -23,6 +23,7 @@ import { useToggle } from '../../toggles/context'
 import { SkeletonSporsmalForm } from '../sporsmal/sporsmal-form/skeleton-sporsmal-form'
 import { FeilStateView } from '../feil/refresh-hvis-feil-state'
 import { Over70Aar } from '../soknad-intro/over-70'
+import InfoOppholdUtland from '../opphold-utland/info-opphold-utland'
 
 import { urlTilSoknad } from './soknad-link'
 import { SporsmalTittel } from './sporsmal-tittel'
@@ -107,25 +108,31 @@ export const Soknaden = () => {
     }
     const sporsmal = valgtSoknad?.sporsmal[spmIndex]
 
-    const erForstesiden = stegNo === 1 && !erUtenlandssoknad
-    const erForstesidenMedReisetilskudd = stegNo === 1 && (erReisetilskuddsoknad || erGradertReisetilskuddsoknad)
+    const erForstesiden = stegNo === 1
+    const harReisetilskudd = erReisetilskuddsoknad || erGradertReisetilskuddsoknad
+
     return (
         <>
-            {valgtSoknadError && <FeilStateView feilmelding={valgtSoknadError?.status}></FeilStateView>}
+            {valgtSoknadError && <FeilStateView feilmelding={valgtSoknadError?.status} />}
             <SoknadHeader />
 
             {!erForstesiden && <Fremdriftsbar />}
-            {erForstesiden && <ViktigInformasjon />}
-            {erForstesiden && valgtSykmelding?.pasient?.overSyttiAar && <Over70Aar />}
-            {erForstesiden && erGradertReisetilskuddsoknad && <SoknadMedToDeler />}
-            {erForstesiden && valgtSoknad?.opprettetAvInntektsmelding && <EgenmeldingsdagerArbeidsgiver />}
-            {erForstesiden && <Opplysninger ekspandert={true} />}
-            {erForstesiden && <FristSykepenger />}
-            {erForstesidenMedReisetilskudd && <OmReisetilskudd />}
+            {erForstesiden && (
+                <>
+                    <ViktigInformasjon />
+                    {valgtSykmelding?.pasient?.overSyttiAar && <Over70Aar />}
+                    {erGradertReisetilskuddsoknad && <SoknadMedToDeler />}
+                    {valgtSoknad?.opprettetAvInntektsmelding && <EgenmeldingsdagerArbeidsgiver />}
+                    {!erUtenlandssoknad && <Opplysninger ekspandert={true} />}
+                    {!erUtenlandssoknad && <FristSykepenger />}
+                    {harReisetilskudd && <OmReisetilskudd />}
+                    {erUtenlandssoknad && <InfoOppholdUtland nySoknad={false} />}
+                </>
+            )}
             {!erForstesiden && <SporsmalTittel />}
             {sporsmal && <SporsmalForm sporsmal={sporsmal} key={sporsmal.id} />}
             {!sporsmal && <SkeletonSporsmalForm />}
-            {erForstesiden && !erUtenlandssoknad && (
+            {erForstesiden && (
                 <Button
                     variant="tertiary"
                     target="_blank"

@@ -574,6 +574,18 @@ export const oppholdUtlandKvittering: RSSoknad = {
     soknadPerioder: [],
     sporsmal: [
         {
+            id: '687336',
+            tag: 'INFO_OPPHOLD_UTLAND',
+            sporsmalstekst: '',
+            undertekst: null,
+            svartype: 'INFO_OPPHOLD_UTLAND',
+            min: null,
+            max: null,
+            kriterieForVisningAvUndersporsmal: null,
+            svar: [],
+            undersporsmal: [],
+        },
+        {
             id: '1',
             tag: 'PERIODEUTLAND',
             sporsmalstekst: 'Når skal du reise?',
