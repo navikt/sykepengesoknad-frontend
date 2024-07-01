@@ -12,7 +12,7 @@ import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { hentFeilmelding } from '../sporsmal-utils'
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
 import { ProgressivtGuidePanel } from '../../guidepanel/ProgressivtGuidePanel'
-import { parserWithReplace } from '../../../utils/html-react-parser-utils'
+import { tekstMedHtml } from '../../../utils/html-react-parser-utils'
 import { EkspanderbarHjelp } from '../../hjelpetekster/ekspanderbar-hjelp/ekspanderbar-hjelp'
 import { VarigEndringEksempler } from '../../hjelpetekster/varig-endring-eksempler'
 import { VarigEndringAlert } from '../../hjelpetekster/varig-endring-alert'
@@ -35,7 +35,7 @@ const JaNeiLiten = ({ sporsmal }: SpmProps) => {
                         : 'soknad.infotekst.utlandsopphold_sokt_sykepenger.nei'
                 return (
                     <Alert variant="info">
-                        {parserWithReplace(
+                        {tekstMedHtml(
                             getLedetekst(tekst(utenlandsopphold), {
                                 '%URL%': utlandssoknadUrl,
                             }),
@@ -49,7 +49,7 @@ const JaNeiLiten = ({ sporsmal }: SpmProps) => {
             if (spm.tag === 'INNTEKTSKILDE_SELVSTENDIG_ER_DU_SYKMELDT' && watchJaNei === 'NEI') {
                 return (
                     <Alert variant="info">
-                        {parserWithReplace(
+                        {tekstMedHtml(
                             getLedetekst(tekst(('soknad.presisering.' + spm.tag + '_NEI') as any), {
                                 '%URL%': tekst('soknad.presisering.INNTEKTSKILDE_SELVSTENDIG_ER_DU_SYKMELDT_NEI.url'),
                             }),
@@ -100,7 +100,7 @@ const JaNeiLiten = ({ sporsmal }: SpmProps) => {
                 hvis={sporsmal.tag === 'SYKMELDINGSGRAD' && watchJaNei === 'NEI'}
                 render={() => (
                     <ProgressivtGuidePanel className="mb-8">
-                        <BodyShort>{parserWithReplace(tekst('sykepengesoknad-utland.skjema.bjorn'))}</BodyShort>
+                        <BodyShort>{tekstMedHtml(tekst('sykepengesoknad-utland.skjema.bjorn'))}</BodyShort>
                     </ProgressivtGuidePanel>
                 )}
             />
@@ -111,7 +111,7 @@ const JaNeiLiten = ({ sporsmal }: SpmProps) => {
                     <>
                         <ProgressivtGuidePanel className="mb-8">
                             <BodyShort>
-                                {parserWithReplace(tekst('sykepengesoknad-utland.skjema.ferie-sporsmal-bjorn'))}
+                                {tekstMedHtml(tekst('sykepengesoknad-utland.skjema.ferie-sporsmal-bjorn'))}
                             </BodyShort>
                         </ProgressivtGuidePanel>
 

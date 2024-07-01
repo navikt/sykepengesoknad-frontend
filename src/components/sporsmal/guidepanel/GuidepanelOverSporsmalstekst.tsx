@@ -3,7 +3,7 @@ import { BodyShort } from '@navikt/ds-react'
 
 import { tekst } from '../../../utils/tekster'
 import { ProgressivtGuidePanel } from '../../guidepanel/ProgressivtGuidePanel'
-import { parserWithReplace } from '../../../utils/html-react-parser-utils'
+import { tekstMedHtml } from '../../../utils/html-react-parser-utils'
 import { useSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
 
 const GuidepanelOverSporsmalstekst = () => {
@@ -16,7 +16,7 @@ const GuidepanelOverSporsmalstekst = () => {
 
     return (
         <ProgressivtGuidePanel className="my-8">
-            <BodyShort>{parserWithReplace(tekst(bjornTekst as any))}</BodyShort>
+            <BodyShort>{tekstMedHtml(tekst(bjornTekst as any))}</BodyShort>
         </ProgressivtGuidePanel>
     )
 }

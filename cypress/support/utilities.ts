@@ -172,3 +172,20 @@ export function svarCheckboxSporsmal(sporsmal: string, svar: string) {
             })
     })
 }
+
+export function avbryterSoknad() {
+    // Avbryt dialog vises
+    cy.contains('Jeg har ikke behov for denne søknaden').click()
+    modalAktiv()
+    cy.contains('Nei, jeg har behov for søknaden').should('be.visible')
+    cy.findByRole('button', { name: 'Nei, jeg har behov for søknaden' }).click()
+    modalIkkeAktiv()
+    cy.contains('Nei, jeg har behov for søknaden').should('not.be.visible')
+    cy.contains('Jeg har ikke behov for denne søknaden').should('be.visible').click()
+    modalAktiv()
+    cy.contains('Fjerner du søknaden vil du ikke få sykepenger basert på denne søknaden.').should('be.visible')
+    cy.contains('Ja, jeg er sikker').should('be.visible')
+
+    cy.findByRole('button', { name: 'Ja, jeg er sikker' }).click()
+    modalIkkeAktiv()
+}

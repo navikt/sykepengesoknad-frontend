@@ -2,7 +2,7 @@ import { Alert, BodyShort, Button, Modal } from '@navikt/ds-react'
 import React, { useState } from 'react'
 
 import { tekst } from '../../utils/tekster'
-import { parserWithReplace } from '../../utils/html-react-parser-utils'
+import { tekstMedHtml } from '../../utils/html-react-parser-utils'
 import { useEttersendNav } from '../../hooks/useEttersendNav'
 import Vis from '../vis'
 import { useEttersendArbeidsgiver } from '../../hooks/useEttersendArbeidsgiver'
@@ -74,7 +74,7 @@ const Ettersending = ({ gjelder }: EttersendingProps) => {
                 header={{ heading: knappeTekst, size: 'small' }}
             >
                 <Modal.Body>
-                    <BodyShort spacing>{parserWithReplace(hentTekst('kvittering.info.send-til'))}</BodyShort>
+                    <BodyShort spacing>{tekstMedHtml(hentTekst('kvittering.info.send-til'))}</BodyShort>
                     <Vis
                         hvis={ettersendNavError || ettersendArbeidsgiverError}
                         render={() => <Alert variant="error">Beklager, klarte ikke ettersende søknaden din</Alert>}

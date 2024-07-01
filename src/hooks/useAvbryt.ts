@@ -4,7 +4,6 @@ import { useRouter } from 'next/router'
 
 import fetchMedRequestId, { AuthenticationError, FetchError } from '../utils/fetch'
 import { Soknad } from '../types/types'
-import { RSSoknadstype } from '../types/rs-types/rs-soknadstype'
 import { RSSoknadstatus } from '../types/rs-types/rs-soknadstatus'
 
 import { useTestpersonQuery } from './useTestpersonQuery'
@@ -36,10 +35,7 @@ export function useAvbryt() {
                 variables.onSuccess()
             }
 
-            if (
-                variables.valgtSoknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND ||
-                variables.valgtSoknad.status === RSSoknadstatus.UTKAST_TIL_KORRIGERING
-            ) {
+            if (variables.valgtSoknad.status === RSSoknadstatus.UTKAST_TIL_KORRIGERING) {
                 await queryClient.invalidateQueries(['soknad', variables.valgtSoknad.id], { refetchType: 'none' })
                 await queryClient.invalidateQueries(['soknader'])
                 await router.push('/')

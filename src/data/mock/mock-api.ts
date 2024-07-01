@@ -296,7 +296,7 @@ export async function mockApi(req: NextApiRequest, res: NextApiResponse) {
         [ENDPOINTS.AVBRYT_SOKNAD]: async () => {
             const soknad = getSoknadEllerFeilmld(soknadId)
             if (!soknad) return
-            if (soknad.soknadstype == 'OPPHOLD_UTLAND' || soknad.status == 'UTKAST_TIL_KORRIGERING') {
+            if (soknad.status == 'UTKAST_TIL_KORRIGERING') {
                 testperson.soknader.splice(testperson.soknader.indexOf(soknad), 1)
                 return sendJson()
             }

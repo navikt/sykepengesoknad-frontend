@@ -2,7 +2,7 @@ import { BodyShort, Label } from '@navikt/ds-react'
 import React from 'react'
 
 import { tekst } from '../../../../../utils/tekster'
-import { parserWithReplace } from '../../../../../utils/html-react-parser-utils'
+import { tekstMedHtml } from '../../../../../utils/html-react-parser-utils'
 
 function UtbetalingAvPenger() {
     return (
@@ -11,9 +11,9 @@ function UtbetalingAvPenger() {
                 {tekst('kvittering.naar-blir-pengene')}
             </Label>
             <BodyShort spacing>
-                {parserWithReplace(tekst('kvittering.arbeidstaker.over16.utbetaling-arbeidsgiver'))}
+                {tekstMedHtml(tekst('kvittering.arbeidstaker.over16.utbetaling-arbeidsgiver'))}
             </BodyShort>
-            <BodyShort spacing>{parserWithReplace(tekst('kvittering.arbeidstaker.over16.utbetaling-NAV'))}</BodyShort>
+            <BodyShort spacing>{tekstMedHtml(tekst('kvittering.arbeidstaker.over16.utbetaling-NAV'))}</BodyShort>
         </div>
     )
 }

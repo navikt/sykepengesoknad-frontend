@@ -2,7 +2,7 @@ import { BodyLong, Label, List } from '@navikt/ds-react'
 import React, { useEffect } from 'react'
 import { useFormContext } from 'react-hook-form'
 
-import { parserWithReplace } from '../../../utils/html-react-parser-utils'
+import { tekstMedHtml } from '../../../utils/html-react-parser-utils'
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import BekreftelsespunkterArbeidstakereTekster from '../bekreftelsespunkter/bekreftelsespunkter-arbeidstakere-tekster'
@@ -59,11 +59,11 @@ const Kulepunkter = ({ sporsmal }: SpmProps) => {
                 </Label>
                 <List as="ul">
                     {kulepunkterTekster.map((tekst, index) => (
-                        <List.Item key={tekst + index}>{parserWithReplace(tekst)}</List.Item>
+                        <List.Item key={tekst + index}>{tekstMedHtml(tekst)}</List.Item>
                     ))}
                 </List>
             </div>
-            {sporsmal.undertekst && <BodyLong as="div">{parserWithReplace(sporsmal.undertekst)}</BodyLong>}
+            {sporsmal.undertekst && <BodyLong as="div">{tekstMedHtml(sporsmal.undertekst)}</BodyLong>}
             <Oppsummering ekspandert={false} sporsmal={valgtSoknad!.sporsmal} parent="kulepunkter" />
             {valgtSoknad?.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND && (
                 <>

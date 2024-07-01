@@ -7,7 +7,7 @@ import { sendtForMerEnn30DagerSiden } from '../../../utils/dato-utils'
 import { tekst } from '../../../utils/tekster'
 import Vis from '../../vis'
 import Kontonummer from '../kontonummer/kontonummer'
-import { parserWithReplace } from '../../../utils/html-react-parser-utils'
+import { tekstMedHtml } from '../../../utils/html-react-parser-utils'
 import { LenkeMedIkon } from '../../lenke-med-ikon/LenkeMedIkon'
 import { useSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
 import { KvtteringPanel } from '../kvittering-panel'
@@ -66,7 +66,7 @@ const KvitteringVidere = () => {
                         <div className="mb-4">
                             <Label as="h2">{tekst('kvittering.naar-blir-pengene')}</Label>
                             <BodyLong as="span">
-                                {parserWithReplace(tekst('kvittering.arbeidstaker.over16.utbetaling'))}
+                                {tekstMedHtml(tekst('kvittering.arbeidstaker.over16.utbetaling'))}
                             </BodyLong>
                         </div>
                     )}
