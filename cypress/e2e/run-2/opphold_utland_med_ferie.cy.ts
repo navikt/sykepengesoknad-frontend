@@ -81,6 +81,9 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
 
         cy.url().should('include', `avbrutt/${soknad.id}`)
         cy.contains('Fjernet søknad om å beholde sykepenger utenfor EU/EØS')
-        cy.findByRole('link', { name: 'nav.no/sykepenger#sok-opphold-utland' })
+        cy.findByRole('link', { name: 'nav.no/sykepenger#utland' })
+        cy.contains(
+            'I utgangspunktet bør du søke før du reiser til land utenfor EU/EØS. Du kan likevel søke om å få beholde sykepengene etter du har reist.',
+        )
     })
 })

@@ -19,8 +19,13 @@ const OpplysningerTekster = {
         'Hvis du er sykmeldt fra flere arbeidsgivere, må du sende én søknad for hver arbeidsgiver.',
     'sykepengesoknad.avbrutt.informasjon-innhold-4':
         'Hvis du vil søke om sykepenger basert på denne søknaden likevel, må du gjenåpne søknaden, fylle den ut og sende den inn.',
-    'sykepengesoknad.avbrutt.informasjon.eos':
-        'Hvis du skal reise utenfor EØS når du er sykmeldt, kan du miste retten til sykepenger. Du kan søke NAV om å beholde sykepengene dine mens du er på reise. Du må sende søknaden på forhånd, og jo før du søker, jo bedre. Les mer om reise utenfor EØS og send søknad på <a href="https://www.nav.no/sykepenger#sok-opphold-utland">nav.no/sykepenger#sok-opphold-utland</a>',
+    'sykepengesoknad.avbrutt.informasjon-innhold-eos-1':
+        'Hvis du vil likevel vil søke om å beholde sykepenger når du er på reise utenfor EU/EØS, gjenåpner du denne søknaden, fyller ut og sender inn.',
+    'sykepengesoknad.avbrutt.informasjon-innhold-eos-2':
+        'Les mer om reise utenfor EU/EØS mens du er sykemeldt her <a href="https://www.nav.no/sykepenger#utland">nav.no/sykepenger#utland</a>',
+    'sykepengesoknad.avbrutt.informasjon-innhold-eos-3': 'Har du allerede vært på reise?',
+    'sykepengesoknad.avbrutt.informasjon-innhold-eos-4':
+        'I utgangspunktet bør du søke før du reiser til land utenfor EU/EØS. Du kan likevel søke om å få beholde sykepengene etter du har reist.',
 
     'sykepengesoknad.sykmelding-utdrag.forsikring-ja': 'Ja',
     'sykepengesoknad.sykmelding-utdrag.forsikring-nei':

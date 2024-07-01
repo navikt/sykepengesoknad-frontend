@@ -33,7 +33,7 @@ const AvbruttSoknad = () => {
         if (!valgtSoknad) return
 
         if (valgtSoknad.status !== RSSoknadstatus.AVBRUTT) {
-            router.push(urlTilSoknad(valgtSoknad))
+            router.push(urlTilSoknad(valgtSoknad, true, true))
             return
         }
 
@@ -65,17 +65,24 @@ const AvbruttSoknad = () => {
                 <>
                     <BodyLong spacing>{tekst('sykepengesoknad.avbrutt.informasjon-innhold-2')}</BodyLong>
                     <BodyLong spacing>{tekst('sykepengesoknad.avbrutt.informasjon-innhold-3')}</BodyLong>
-                </>
-            )}
-            <BodyLong spacing>{tekst('sykepengesoknad.avbrutt.informasjon-innhold-4')}</BodyLong>
-            {!erOppHoldUtland && (
-                <>
+                    <BodyLong spacing>{tekst('sykepengesoknad.avbrutt.informasjon-innhold-4')}</BodyLong>
                     <Opplysninger ekspandert={false} steg="avbrutt-søknad" />
                     <FristSykepenger />
                 </>
             )}
             {erOppHoldUtland && (
-                <BodyLong spacing>{tekstMedHtml(tekst('sykepengesoknad.avbrutt.informasjon.eos'))}</BodyLong>
+                <>
+                    <BodyLong spacing>{tekst('sykepengesoknad.avbrutt.informasjon-innhold-eos-1')}</BodyLong>
+                    <BodyLong spacing>
+                        {tekstMedHtml(tekst('sykepengesoknad.avbrutt.informasjon-innhold-eos-2'))}
+                    </BodyLong>
+                    <BodyLong weight="semibold">
+                        {tekstMedHtml(tekst('sykepengesoknad.avbrutt.informasjon-innhold-eos-3'))}
+                    </BodyLong>
+                    <BodyLong spacing>
+                        {tekstMedHtml(tekst('sykepengesoknad.avbrutt.informasjon-innhold-eos-4'))}
+                    </BodyLong>
+                </>
             )}
             <Vis
                 hvis={dayjs(valgtSoknad.avbruttDato).isAfter(dayjs().subtract(2, 'seconds'))}
