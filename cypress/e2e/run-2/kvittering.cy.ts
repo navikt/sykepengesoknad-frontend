@@ -7,7 +7,6 @@ import {
     arbeidstakerUtenforArbeidsgiverperiodeKvittering,
     arbeidstakerUtenOppholdForsteUtenforArbeidsgiverperiodeKvittering,
     arbeidstakerUtenOppholdKvittering,
-    oppholdUtlandKvittering,
     selvstendigKvittering,
     sendtArbeidsledigKvittering,
 } from '../../../src/data/mock/data/soknad/soknader-integration'
@@ -119,7 +118,12 @@ describe('Tester kvittering', () => {
             cy.visit('/syk/sykepengesoknad?testperson=integrasjon-soknader')
 
             // Velg søknad
-            cy.get(`a[href*=${oppholdUtlandKvittering.id}]`).click()
+            cy.get('[data-cy="Nye søknader"]')
+                .findByRole('link', { name: 'Søknad om å beholde sykepenger utenfor EU/EØS' })
+                .click()
+
+            //Start søknad
+            cy.findByRole('button', { name: 'Start søknaden' }).should('exist').click()
 
             // Svar og send
             setPeriodeFraTil(14, 22)

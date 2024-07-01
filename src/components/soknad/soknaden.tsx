@@ -51,7 +51,7 @@ export const Soknaden = () => {
         if (!valgtSoknad || stegId !== '1') return
 
         // finn posisjon på siste besvarte spørsmål
-        router.push(urlTilSoknad(valgtSoknad), undefined, { shallow: true })
+        router.push(urlTilSoknad(valgtSoknad, true, true), undefined, { shallow: true })
         // eslint-disable-next-line
     }, [valgtSoknad?.id])
 
@@ -62,7 +62,7 @@ export const Soknaden = () => {
             !stegId ||
             (valgtSoknad.status !== RSSoknadstatus.NY && valgtSoknad.status !== RSSoknadstatus.UTKAST_TIL_KORRIGERING)
         ) {
-            const url = urlTilSoknad(valgtSoknad).replace('/sendt/', '/kvittering/')
+            const url = urlTilSoknad(valgtSoknad, true, true).replace('/sendt/', '/kvittering/')
             router.push(url, undefined, { shallow: true })
             return
         }

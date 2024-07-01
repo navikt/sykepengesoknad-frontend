@@ -5,6 +5,7 @@ import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { RSSvartype } from '../../types/rs-types/rs-svartype'
 import { Soknad } from '../../types/types'
 import { RSSoknadmetadata } from '../../types/rs-types/rs-soknadmetadata'
+import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 
 interface SoknadLinkProps {
     soknad: RSSoknadmetadata
@@ -12,9 +13,12 @@ interface SoknadLinkProps {
     className: string
 }
 
-export const urlTilSoknad = (soknad: Soknad | RSSoknadmetadata, medQueryParams = true) => {
-    // Store the query parameters in a variable, adding condition to include them based on medQueryParams flag
+export const urlTilSoknad = (soknad: Soknad | RSSoknadmetadata, medQueryParams = true, skipUtlandInfo = false) => {
     const queryParams = medQueryParams ? window.location.search : ''
+
+    if (soknad.soknadstype == RSSoknadstype.OPPHOLD_UTLAND && !skipUtlandInfo) {
+        return utlandsoknadPath + queryParams
+    }
 
     switch (soknad.status) {
         case RSSoknadstatus.SENDT:
@@ -65,7 +69,8 @@ const SoknadLink = ({ soknad, children, className }: SoknadLinkProps) => {
     )
 }
 
-export const utlandssoknadUrl = '/syk/sykepengesoknad/sykepengesoknad-utland'
+const utlandsoknadPath = '/sykepengesoknad-utland'
+export const utlandssoknadUrl = `/syk/sykepengesoknad${utlandsoknadPath}`
 
 export const oversiktside = '/'
 

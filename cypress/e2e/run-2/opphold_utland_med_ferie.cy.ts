@@ -1,8 +1,8 @@
 import { klikkGaVidere, setPeriodeFraTil } from '../../support/utilities'
-import { oppholdUtland2 } from '../../../src/data/mock/data/soknad/opphold-utland'
+import { oppholdUtland } from '../../../src/data/mock/data/soknad/opphold-utland'
 
 describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
-    const soknad = oppholdUtland2
+    const soknad = oppholdUtland
 
     before(() => {
         cy.visit('/syk/sykepengesoknad?testperson=bare-utland')
@@ -11,10 +11,14 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
     it('Laster startside', function () {
         cy.get('.navds-heading--large').should('be.visible').and('have.text', 'Søknader')
         cy.get('[data-cy="Nye søknader"]')
-            .children('a')
-            .get(`a[href*=${soknad.id}]`)
-            .should('include.text', 'Søknad om å beholde sykepenger utenfor EU/EØS')
+            .findByRole('link', { name: 'Søknad om å beholde sykepenger utenfor EU/EØS' })
             .click()
+    })
+
+    it('Viser infoside om søknad om å beholde sykepenger utenfor EU/EØS, og starter søknaden', () => {
+        cy.contains('Du trenger ikke søke hvis du enten')
+        cy.contains('Har du allerede vært på reise?')
+        cy.findByRole('button', { name: 'Start søknaden' }).should('exist').click()
     })
 
     it('PERIODEUTLAND - steg 1', function () {
