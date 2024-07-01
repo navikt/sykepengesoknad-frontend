@@ -16,7 +16,7 @@ import {
     sykmeldinger,
 } from '../sykmeldinger'
 import { deepcopyMedNyId } from '../../deepcopyMedNyId'
-import { oppholdUtland, oppholdUtland2 } from '../soknad/opphold-utland'
+import { oppholdUtland } from '../soknad/opphold-utland'
 import { kortSoknadMedID } from '../../kort-soknad-med-id'
 import { arbeidstakerGradert } from '../soknad/arbeidstaker-gradert'
 import { arbeidstaker } from '../soknad/arbeidstaker'
@@ -125,7 +125,7 @@ export const behandlingsdagerPerson: Persona = {
 }
 
 export const utlandPerson: Persona = {
-    soknader: [oppholdUtland, oppholdUtland2],
+    soknader: [oppholdUtland],
     sykmeldinger: [],
     beskrivelse: 'Opphold utland søknad',
 }

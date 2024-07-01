@@ -11,8 +11,15 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
 
     it('Går til søknad som har påfølgende søknader som må fylles ut', function () {
         cy.get('.navds-heading--large').should('be.visible').and('have.text', 'Søknader')
-        cy.get(`a[href*=${soknad.id}]`).should('include.text', 'Søknad om å beholde sykepenger utenfor EU/EØS')
-        cy.get(`a[href*=${soknad.id}]`).click()
+        cy.get('[data-cy="Nye søknader"]')
+            .findByRole('link', { name: 'Søknad om å beholde sykepenger utenfor EU/EØS' })
+            .click()
+    })
+
+    it('Viser infoside om søknad om å beholde sykepenger utenfor EU/EØS, og starter søknaden', () => {
+        cy.contains('Du trenger ikke søke hvis du enten')
+        cy.contains('Har du allerede vært på reise?')
+        cy.findByRole('button', { name: 'Start søknaden' }).should('exist').click()
     })
 
     it('Velger periode for utenlandsopphold', function () {

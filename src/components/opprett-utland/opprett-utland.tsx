@@ -21,7 +21,7 @@ const OpprettUtland = () => {
 
     useUpdateBreadcrumbs(() => [{ ...{ title: tekst('opprett-utland.tittel') }, handleInApp: true }], [])
 
-    const opprett = async () => {
+    const opprettEllerFinnEksisterende = async () => {
         // TODO: Gjør om til mutation
         let data
         try {
@@ -45,8 +45,8 @@ const OpprettUtland = () => {
 
         const soknad = rsToSoknad(data)
         queryClient.setQueriesData(['soknad', soknad.id], soknad)
-        queryClient.invalidateQueries(['soknader'])
-        router.push(urlTilSoknad(soknad))
+        await queryClient.invalidateQueries(['soknader'])
+        await router.push(urlTilSoknad(soknad, true, true))
     }
 
     return (
@@ -106,7 +106,7 @@ const OpprettUtland = () => {
                 </ExpansionCard.Content>
             </ExpansionCard>
 
-            <Button variant="primary" type="button" onClick={opprett} className="mb-8 mt-16">
+            <Button variant="primary" type="button" onClick={opprettEllerFinnEksisterende} className="mb-8 mt-16">
                 {tekst('opprett-utland.fortsett')}
             </Button>
 
