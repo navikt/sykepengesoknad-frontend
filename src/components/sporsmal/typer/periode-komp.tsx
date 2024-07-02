@@ -60,15 +60,8 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
         },
     })
 
-    const fraTekst =
-        sporsmal.tag === 'MEDLEMSKAP_OPPHOLDSTILLATELSE_PERIODE'
-            ? tekst('sykepengesoknad.periodevelger.fra')
-            : tekst('sykepengesoknad.periodevelger.fom')
-
-    const tilTekst =
-        sporsmal.tag === 'MEDLEMSKAP_OPPHOLDSTILLATELSE_PERIODE'
-            ? tekst('sykepengesoknad.periodevelger.til')
-            : tekst('sykepengesoknad.periodevelger.tom')
+    const fraTekst = tekst('sykepengesoknad.periodevelger.fom')
+    const tilTekst = tekst('sykepengesoknad.periodevelger.tom')
 
     return (
         <li id={id} data-cy="periode">

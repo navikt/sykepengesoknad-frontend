@@ -159,11 +159,6 @@ describe('Søknad med nytt spørsmål om oppholdstillatelse og kjent midlertidig
         cy.contains('Fra 1. mai 2024 til 31. desember 2024.')
         cy.contains('Har Utlendingsdirektoratet gitt deg en oppholdstillatelse før 1. mai 2024?')
 
-        cy.contains('Fra og med').should('not.exist')
-        cy.contains('Til og med').should('not.exist')
-        cy.contains('Til')
-        cy.contains('Fra')
-
         cy.contains('Spørsmålet forklart').click()
         cy.contains(
             'Når du ikke er norsk statsborger, må du ha oppholdstillatelse i Norge for å være medlem i folketrygden og ha rett til sykepenger.',
@@ -176,8 +171,12 @@ describe('Søknad med nytt spørsmål om oppholdstillatelse og kjent midlertidig
         )
 
         svarJaHovedsporsmal()
+        cy.contains('Fra og med')
+        cy.contains('Til og med')
+
         velgDato(1)
         setPeriodeFraTil(10, 20)
+
         klikkGaVidere()
     })
 
