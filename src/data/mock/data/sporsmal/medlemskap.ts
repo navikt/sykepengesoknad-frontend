@@ -425,3 +425,41 @@ export const medlemskapOppholdstillatelseSporsmal: RSSporsmal = {
         },
     ],
 }
+
+export const medlemskapOppholdstillatelseV2Sporsmal: RSSporsmal = {
+    id: '17e3eda5-3895-3258-b2ee-6cb44510c7fb',
+    tag: 'MEDLEMSKAP_OPPHOLDSTILLATELSE_V2',
+    sporsmalstekst: 'Har Utlendingsdirektoratet gitt deg en oppholdstillatelse før 1. mai 2024?',
+    undertekst: null,
+    svartype: 'JA_NEI',
+    min: null,
+    max: null,
+    kriterieForVisningAvUndersporsmal: 'JA',
+    svar: [],
+    undersporsmal: [
+        {
+            id: 'b32e971e-6ed3-3ec2-ab7a-30da9b8727f7',
+            tag: 'MEDLEMSKAP_OPPHOLDSTILLATELSE_VEDTAKSDATO',
+            sporsmalstekst: 'Hvilken dato fikk du denne oppholdstillatelsen?',
+            undertekst: null,
+            svartype: 'DATO',
+            min: '2013-10-31',
+            max: '2023-10-31',
+            kriterieForVisningAvUndersporsmal: null,
+            svar: [],
+            undersporsmal: [],
+        },
+        {
+            id: '2daa21bf-20ee-3b5a-97d3-37a90c593fa0',
+            tag: 'MEDLEMSKAP_OPPHOLDSTILLATELSE_PERIODE',
+            sporsmalstekst: 'Hvilken periode gjelder denne oppholdstillatelsen?',
+            undertekst: null,
+            svartype: 'PERIODE',
+            min: '2013-10-31',
+            max: '2033-10-31',
+            kriterieForVisningAvUndersporsmal: null,
+            svar: [],
+            undersporsmal: [],
+        },
+    ],
+}

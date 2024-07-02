@@ -3,6 +3,7 @@ import { arbeidstaker100Syk } from '../sykmeldinger'
 import { bekreftelse } from '../sporsmal/vaer-klar-over-at'
 import {
     medlemskapOppholdstillatelseSporsmal,
+    medlemskapOppholdstillatelseV2Sporsmal,
     medlemskapOppholdUtenforEøsSporsmal,
     medlemskapOppholdUtenforNorgeSporsmal,
     medlemskapUtførtArbeidUtenforNorgeSporsmal,
@@ -58,6 +59,7 @@ export const veldigLangSoknad: RSSoknad = {
         yrkesskadeV1Sporsmal,
         yrkesskadeV2Sporsmal,
         medlemskapOppholdstillatelseSporsmal,
+        medlemskapOppholdstillatelseV2Sporsmal,
         medlemskapOppholdUtenforEøsSporsmal,
         medlemskapOppholdUtenforNorgeSporsmal,
         medlemskapUtførtArbeidUtenforNorgeSporsmal,

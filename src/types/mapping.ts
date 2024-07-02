@@ -1,4 +1,4 @@
-import { dayjsToDate } from '../utils/dato-utils'
+import { dayjsToDate, parseDate } from '../utils/dato-utils'
 
 import { RSSporsmal } from './rs-types/rs-sporsmal'
 import { RSVisningskriterieType } from './rs-types/rs-visningskriterie'
@@ -83,6 +83,7 @@ export function rsToSporsmal(
 export function rsToSoknad(soknad: RSSoknad): Soknad {
     const stat = soknad.status as keyof typeof RSSoknadstatus
     const type = soknad.soknadstype as keyof typeof RSSoknadstype
+
     let arbeidsgiver = undefined
     if (soknad.arbeidsgiver) {
         arbeidsgiver = {
@@ -90,6 +91,15 @@ export function rsToSoknad(soknad: RSSoknad): Soknad {
             orgnummer: soknad.arbeidsgiver.orgnummer,
         }
     }
+
+    let kjentOppholdstillatelse = undefined
+    if (soknad.kjentOppholdstillatelse) {
+        kjentOppholdstillatelse = {
+            fom: parseDate(soknad.kjentOppholdstillatelse.fom),
+            tom: soknad.kjentOppholdstillatelse.tom ? dayjsToDate(soknad.kjentOppholdstillatelse.tom) : undefined,
+        }
+    }
+
     return new Soknad(
         soknad.id,
         soknad.sykmeldingId || undefined,
@@ -116,5 +126,6 @@ export function rsToSoknad(soknad: RSSoknad): Soknad {
         soknad.inntektsopplysningerNyKvittering,
         soknad.inntektsopplysningerInnsendingId,
         soknad.inntektsopplysningerInnsendingDokumenter,
+        kjentOppholdstillatelse,
     )
 }

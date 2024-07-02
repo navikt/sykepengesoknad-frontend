@@ -19,6 +19,7 @@ import { Inntektsbulletpoints } from '../inntektsbulletpoints'
 import { Yrkesskadebulletpoints } from '../yrkesskade-bulletpoints'
 import { InntektsopplysningerErKonfidensielleInfo } from '../inntektsopplysninger-er-konfidensielle-info'
 import { useSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
+import { KjentOppholdstillatelse } from '../kjent-oppholdstillatelse'
 
 import { jaNeiStorStyle, JaNeiStyle } from './ja-nei-stor-style'
 
@@ -56,7 +57,8 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
 
     const skalHaInntektsbulletpoints =
         sporsmal.tag === 'ANDRE_INNTEKTSKILDER_V2' && valgtSoknad.inntektskilderDataFraInntektskomponenten
-
+    const skalViseKjentOppholdstillatelse =
+        sporsmal.tag === 'MEDLEMSKAP_OPPHOLDSTILLATELSE_V2' && valgtSoknad.kjentOppholdstillatelse
     function sporsmalstekst() {
         if (skalHaInntektsbulletpoints) {
             return 'Har du andre inntektskilder enn nevnt over?'
@@ -68,6 +70,7 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
         <>
             <div>
                 {skalHaInntektsbulletpoints && <Inntektsbulletpoints soknad={valgtSoknad} />}
+                {skalViseKjentOppholdstillatelse && <KjentOppholdstillatelse soknad={valgtSoknad} />}
 
                 <Controller
                     name={sporsmal.id}
