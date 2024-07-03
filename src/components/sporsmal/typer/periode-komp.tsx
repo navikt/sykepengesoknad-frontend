@@ -13,6 +13,7 @@ interface PeriodeProps {
     index: number
     slettPeriode: (e: any, idx: number) => void
 }
+
 export interface FormPeriode {
     fom: string
     tom: string
@@ -59,6 +60,9 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
         },
     })
 
+    const fraTekst = tekst('sykepengesoknad.periodevelger.fom')
+    const tilTekst = tekst('sykepengesoknad.periodevelger.tom')
+
     return (
         <li id={id} data-cy="periode">
             <fieldset className="axe-exclude p-0">
@@ -71,22 +75,22 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
                     <div>
                         <DatePicker.Input
                             {...fromInputProps}
-                            label={tekst('sykepengesoknad.periodevelger.fom')}
+                            label={fraTekst}
                             id={sporsmal.id + '_' + index + '_fom'}
                             className="mt-4"
                             error={fieldState.error?.type === 'fom' && fieldState.error.message}
-                            aria-label={`${sporsmal.sporsmalstekst} ${tekst('sykepengesoknad.periodevelger.fom')}`}
+                            aria-label={`${sporsmal.sporsmalstekst} ${fraTekst}`}
                         />
                         <DatePicker.Input
                             {...toInputProps}
-                            label={tekst('sykepengesoknad.periodevelger.tom')}
+                            label={tilTekst}
                             id={sporsmal.id + '_' + index + '_tom'}
                             className="mt-4"
                             error={
                                 (fieldState.error?.type === 'tom' || fieldState.error?.type === 'periode') &&
                                 fieldState.error.message
                             }
-                            aria-label={`${sporsmal.sporsmalstekst} ${tekst('sykepengesoknad.periodevelger.tom')}`}
+                            aria-label={`${sporsmal.sporsmalstekst} ${tilTekst}`}
                         />
                     </div>
                 </DatePicker>

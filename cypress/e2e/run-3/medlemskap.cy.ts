@@ -11,7 +11,7 @@ import {
     velgDato,
 } from '../../support/utilities'
 
-describe('Tester medlemskap spørsmål', () => {
+describe('Søknad med alle opprinnelige spørsmål om medlemskap', () => {
     const soknad = medlemskapPerson.soknader[0]
 
     before(() => {
@@ -94,6 +94,98 @@ describe('Tester medlemskap spørsmål', () => {
             cy.contains('I hvilket land arbeidet du?').siblings().should('contain', 'Frankrike')
             cy.contains('Hvilken arbeidsgiver jobbet du for?').siblings().should('contain', 'Croissant AS')
             cy.contains('I hvilken periode arbeidet du i utlandet?').siblings().should('contain', '12. – 20.')
+        })
+    })
+})
+
+describe('Søknad med nytt spørsmål om oppholdstillatelse og kjent permanent oppholdstillatelse', () => {
+    const soknad = medlemskapPerson.soknader[1]
+
+    before(() => {
+        cy.visit(`/syk/sykepengesoknad/soknader/${soknad.id}/11?testperson=medlemskap`)
+        cy.get('.navds-heading--large')
+            .should('be.visible')
+            .and('have.text', 'Søknad om sykepenger8. – 21. september 2022')
+    })
+
+    it('Har kjent permanent oppholdstillatelse', () => {
+        cy.contains('Oppholdstillatelse')
+        cy.contains('Vi har mottatt denne oppholdstillatelsen fra Utlendingsdirektoratet:')
+        cy.contains('Permanent oppholdstillatelse')
+        cy.contains('Fra 1. mai 2024.')
+        cy.contains('Har Utlendingsdirektoratet gitt deg en oppholdstillatelse før 1. mai 2024?')
+
+        svarJaHovedsporsmal()
+        cy.contains('Fra og med')
+        cy.contains('Til og med')
+
+        velgDato(1)
+        setPeriodeFraTil(10, 25)
+        klikkGaVidere()
+    })
+
+    it('Oppsumering av søknad', () => {
+        cy.contains('Til slutt')
+
+        cy.findByRole('region', { name: 'Oppsummering fra søknaden' }).click()
+        cy.findByRole('region', { name: 'Oppsummering fra søknaden' }).within(() => {
+            cy.contains('Har Utlendingsdirektoratet gitt deg en oppholdstillatelse før 1. mai 2024?')
+                .siblings()
+                .should('contain', 'Ja')
+            cy.contains('Hvilken dato fikk du denne oppholdstillatelsen?').siblings().should('contain', '01.')
+            cy.contains('Hvilken periode gjelder denne oppholdstillatelsen?').siblings().should('contain', '10. – 25.')
+        })
+    })
+})
+
+describe('Søknad med nytt spørsmål om oppholdstillatelse og kjent midlertidig oppholdstillatelse', () => {
+    const soknad = medlemskapPerson.soknader[2]
+
+    before(() => {
+        cy.visit(`/syk/sykepengesoknad/soknader/${soknad.id}/11?testperson=medlemskap`)
+        cy.get('.navds-heading--large')
+            .should('be.visible')
+            .and('have.text', 'Søknad om sykepenger8. – 21. september 2022')
+    })
+
+    it('Har kjent midlertidig oppholdstillatelse', () => {
+        cy.contains('Oppholdstillatelse')
+        cy.contains('Vi har mottatt denne oppholdstillatelsen fra Utlendingsdirektoratet:')
+        cy.contains('Midlertidig oppholdstillatelse')
+        cy.contains('Fra 1. mai 2024 til 31. desember 2024.')
+        cy.contains('Har Utlendingsdirektoratet gitt deg en oppholdstillatelse før 1. mai 2024?')
+
+        cy.contains('Spørsmålet forklart').click()
+        cy.contains(
+            'Når du ikke er norsk statsborger, må du ha oppholdstillatelse i Norge for å være medlem i folketrygden og ha rett til sykepenger.',
+        )
+        cy.contains(
+            'Har du ikke hatt en oppholdstillatelse som gjelder for en periode før den vi har mottatt fra Utlendingsdirektoratet, svarer du nei.',
+        )
+        cy.contains(
+            'Har du hatt én eller flere tidligere oppholdstillatelser, svarer du ja. Vi ber deg oppgi den siste tillatelsen før perioden vi har mottatt fra Utlendingsdirektoratet.',
+        )
+
+        svarJaHovedsporsmal()
+        cy.contains('Fra og med')
+        cy.contains('Til og med')
+
+        velgDato(1)
+        setPeriodeFraTil(10, 20)
+
+        klikkGaVidere()
+    })
+
+    it('Oppsumering av søknad', () => {
+        cy.contains('Til slutt')
+
+        cy.findByRole('region', { name: 'Oppsummering fra søknaden' }).click()
+        cy.findByRole('region', { name: 'Oppsummering fra søknaden' }).within(() => {
+            cy.contains('Har Utlendingsdirektoratet gitt deg en oppholdstillatelse før 1. mai 2024?')
+                .siblings()
+                .should('contain', 'Ja')
+            cy.contains('Hvilken dato fikk du denne oppholdstillatelsen?').siblings().should('contain', '01.')
+            cy.contains('Hvilken periode gjelder denne oppholdstillatelsen?').siblings().should('contain', '10. – 20.')
         })
     })
 })

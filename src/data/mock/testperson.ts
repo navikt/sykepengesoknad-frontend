@@ -77,9 +77,10 @@ type PersonaKey =
     | 'tilbakedateringer'
     | 'selvstendig-naringsdrivende-sendt'
     | 'innenfor-arbeidsgiver-perioden'
+
 export type PersonaData = Partial<Record<PersonaKey, Persona>>
 
-export type PersonaGroupKey = 'soknad-typer' | 'soknad-sporsmal' | 'testing'
+export type PersonaGroupKey = 'soknad-typer' | 'soknad-sporsmal' | 'medlemskap-sporsmal' | 'testing'
 type PersonaGroup = Record<PersonaGroupKey, PersonaData>
 
 export function testpersoner(): PersonaData {
@@ -107,7 +108,6 @@ export function testpersonerGruppert(): PersonaGroup {
             ['innenfor-arbeidsgiver-perioden']: jsonDeepCopy(innenforAgPerioden),
         },
         ['soknad-sporsmal']: {
-            ['medlemskap']: jsonDeepCopy(medlemskapPerson),
             ['opphold-utenfor-eos']: jsonDeepCopy(oppholdUtenforEOS),
             ['kjente-inntektskilder']: jsonDeepCopy(kjenteInntektskilderPerson),
             ['yrkesskade']: jsonDeepCopy(yrkesskadePerson),
@@ -117,7 +117,9 @@ export function testpersonerGruppert(): PersonaGroup {
             ['egenmeldingsdager-arbeidsgiver']: jsonDeepCopy(opprettetAvInntektsmelding),
             ['sykmelding-med-egenmeldingsdager']: jsonDeepCopy(egenmeldingSykmeldingaPerson),
         },
-
+        ['medlemskap-sporsmal']: {
+            ['medlemskap']: jsonDeepCopy(medlemskapPerson),
+        },
         ['testing']: {
             ['over-70']: over70(),
             ['korrigeringsfrist-utlopt']: jsonDeepCopy(korrigeringsfristUtloptPerson),
