@@ -115,14 +115,10 @@ describe('Søknad med nytt spørsmål om oppholdstillatelse og kjent permanent o
         cy.contains('Fra 1. mai 2024.')
         cy.contains('Har Utlendingsdirektoratet gitt deg en oppholdstillatelse før 1. mai 2024?')
 
-        // Viser "Fra" og "Til" i stedet for "Fra og med" og "Til og med" for å matche
-        // datoer fra UDI (på forespørsel fra Team LovMe).
-        cy.contains('Fra og med').should('not.exist')
-        cy.contains('Til og med').should('not.exist')
-        cy.contains('Til')
-        cy.contains('Fra')
-
         svarJaHovedsporsmal()
+        cy.contains('Fra og med')
+        cy.contains('Til og med')
+
         velgDato(1)
         setPeriodeFraTil(10, 25)
         klikkGaVidere()
