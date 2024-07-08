@@ -62,8 +62,7 @@ export const KvitteringTekster = {
     'kvittering.utenlands.liste2': 'Sykepengene kan beregnes etter et lavere grunnlag når du er tilbake.',
     'kvittering.utenlands.liste3': 'Du kan få avslag på videre sykepenger hvis reisen varer fire uker eller mer.',
     'kvittering.utenlands.lenke': 'Les mer om sykepenger når du er på reise',
-    'kvittering.utenlands.lenke.url':
-        'https://www.nav.no/no/person/arbeid/sykmeldt-arbeidsavklaringspenger-og-yrkesskade/sykepenger/sykepenger-ved-utenlandsopphold',
+    'kvittering.utenlands.lenke.url': 'https://www.nav.no/sykepenger#utland',
     'kvittering.utenlands.overskrift3': 'Du søker om sykepenger',
     'kvittering.utenlands.brodtekst3':
         'Etter at sykefraværsperioden er over, søker du om sykepenger på vanlig måte. Du får en melding fra NAV når søknaden er klar til å fylles ut.',
