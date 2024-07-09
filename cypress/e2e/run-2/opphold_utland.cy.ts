@@ -62,7 +62,23 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
         klikkGaVidere()
     })
 
-    it('Velger land', function () {
+    it('Velger land innenfor EU/EØS og får warning om å ikke søke', function () {
+        cy.url().should('include', `${soknad.id}/2`)
+        cy.get('[data-cy="tilbake-knapp"]').should('exist')
+
+        klikkGaVidere(true)
+        cy.contains('Du må velge minst et alternativ fra menyen')
+        cy.contains('Det er 1 feil i skjemaet')
+        cy.contains('Du må oppgi hvilket land du skal reise til')
+
+        svarCombobox('Hvilket land skal du reise til?', 'Hel', 'Hellas', true)
+
+        cy.get('.navds-alert').should('contain.text', 'Hellas ligger innenfor EU/EØS og du trenger ikke søke.')
+
+        klikkGaVidere(true)
+    })
+
+    it('Velger land utenfor EU/EØS', function () {
         cy.url().should('include', `${soknad.id}/2`)
         cy.get('[data-cy="tilbake-knapp"]').should('exist')
 
