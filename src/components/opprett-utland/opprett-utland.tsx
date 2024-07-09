@@ -12,12 +12,23 @@ import { useUpdateBreadcrumbs } from '../../hooks/useBreadcrumbs'
 import { LenkeMedIkon } from '../lenke-med-ikon/LenkeMedIkon'
 import { rsToSoknad } from '../../types/mapping'
 import { useTestpersonQuery } from '../../hooks/useTestpersonQuery'
+import useSoknader from '../../hooks/useSoknader'
+import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
+import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
+import useSoknad from '../../hooks/useSoknad'
+import AvbrytOppholdUtlandSoknadModal from '../avbryt-soknad-modal/avbryt-opphold-utland-soknad-modal'
 
 const OpprettUtland = () => {
     const queryClient = useQueryClient()
     const [feilmeldingTekst, setFeilmeldingTekst] = useState<string>()
     const router = useRouter()
     const testpersonQuery = useTestpersonQuery()
+    const { data: soknader } = useSoknader()
+    const hentSisteUtlandSoknad = soknader?.find(
+        (soknad) => soknad.status === RSSoknadstatus.NY && soknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND,
+    )
+
+    const { data: soknad } = useSoknad(hentSisteUtlandSoknad?.id, hentSisteUtlandSoknad?.id !== undefined)
 
     useUpdateBreadcrumbs(() => [{ ...{ title: tekst('opprett-utland.tittel') }, handleInApp: true }], [])
 
@@ -113,6 +124,8 @@ const OpprettUtland = () => {
             <div aria-live="polite">
                 <Vis hvis={feilmeldingTekst} render={() => <Alert variant="error">{feilmeldingTekst}</Alert>} />
             </div>
+
+            <AvbrytOppholdUtlandSoknadModal soknad={soknad} />
             <LenkeMedIkon
                 className="mt-8"
                 href="https://www.nav.no/no/NAV+og+samfunn/Om+NAV/personvern-i-arbeids-og-velferdsetaten"
