@@ -7,7 +7,7 @@ import { hentFeilmelding } from '../sporsmal-utils'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 
 const ComboboxMultiple = ({ sporsmal }: SpmProps) => {
-    const [infoBoks, setInfoBoks] = useState<string | undefined>(undefined)
+    const [valgtLandIEOS, setValgtLandIEOS] = useState<string[]>([])
     const feilmelding = hentFeilmelding(sporsmal)
 
     const options = useMemo(() => {
@@ -20,11 +20,22 @@ const ComboboxMultiple = ({ sporsmal }: SpmProps) => {
         throw new Error('Ugyldig tag for landvelger: ' + sporsmal.tag)
     }, [sporsmal])
 
+    const infoBoksMelding = (): string => {
+        if (valgtLandIEOS.length > 1) {
+            if (valgtLandIEOS.length === 2) {
+                return `${valgtLandIEOS.join(' og ')} ligger innenfor EU/EØS, så du trenger ikke søke for disse landene.`
+            }
+            return `${valgtLandIEOS.slice(0, valgtLandIEOS.length - 1).join(', ')} og ${valgtLandIEOS[valgtLandIEOS.length - 1]} ligger innenfor EU/EØS, så du trenger ikke søke for disse landene.`
+        } else {
+            return `${valgtLandIEOS[0]} ligger innenfor EU/EØS, så du trenger ikke søke for dette landet. `
+        }
+    }
+
     return (
         <>
-            {infoBoks && (
-                <Alert variant="warning" closeButton={true} onClose={() => setInfoBoks(undefined)}>
-                    {infoBoks}
+            {valgtLandIEOS.length > 0 && (
+                <Alert variant="info" closeButton={true} onClose={() => setValgtLandIEOS([])}>
+                    {infoBoksMelding()}
                 </Alert>
             )}
             <Controller
@@ -52,14 +63,15 @@ const ComboboxMultiple = ({ sporsmal }: SpmProps) => {
                                 const valgtLand = options.find((land) => optionLowerCase === land.toLowerCase())
                                 if (valgtLand) {
                                     if (landlisteEøs.includes(valgtLand) && sporsmal.tag == 'LAND') {
-                                        setInfoBoks(`${valgtLand} ligger innenfor EU/EØS og du trenger ikke søke.`)
+                                        const alleLand = [...valgtLandIEOS, valgtLand]
+                                        setValgtLandIEOS(alleLand)
                                     } else {
                                         field.onChange([...field.value, valgtLand])
                                     }
                                 }
                             } else {
                                 field.onChange(field.value.filter((item: string) => item !== option))
-                                setInfoBoks(undefined)
+                                setValgtLandIEOS([])
                             }
                         }}
                     />
