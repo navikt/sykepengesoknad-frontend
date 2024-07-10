@@ -1,14 +1,28 @@
 import { Controller } from 'react-hook-form'
 import { Alert, UNSAFE_Combobox } from '@navikt/ds-react'
-import React, { useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 
 import { landlisteEøs, landlisteUtenforEøs } from '../landliste'
 import { hentFeilmelding } from '../sporsmal-utils'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
+import useKlikkUtenfor from '../../../hooks/useKlikkUtenfor'
 
 const ComboboxMultiple = ({ sporsmal }: SpmProps) => {
     const [valgtLandIEOS, setValgtLandIEOS] = useState<string[]>([])
+    const [apneListe, setApneListe] = useState(false)
+    const { ref, erKlikketUtenfor, settErKlikketUtenfor, erBokstavEllerMellomrom } = useKlikkUtenfor(false)
     const feilmelding = hentFeilmelding(sporsmal)
+
+    const handleToggle = () => {
+        setApneListe(!apneListe)
+        settErKlikketUtenfor(false) // Tilbakestill klikk utenfor tilstand når du veksler
+    }
+
+    useEffect(() => {
+        if (erKlikketUtenfor) {
+            setApneListe(false)
+        }
+    }, [erKlikketUtenfor])
 
     const options = useMemo(() => {
         if (sporsmal.tag == 'LAND') {
@@ -32,12 +46,7 @@ const ComboboxMultiple = ({ sporsmal }: SpmProps) => {
     }
 
     return (
-        <>
-            {valgtLandIEOS.length > 0 && (
-                <Alert variant="info" closeButton={true} onClose={() => setValgtLandIEOS([])}>
-                    {infoBoksMelding()}
-                </Alert>
-            )}
+        <div ref={ref}>
             <Controller
                 name={sporsmal.id}
                 rules={{ required: feilmelding.global }}
@@ -45,6 +54,7 @@ const ComboboxMultiple = ({ sporsmal }: SpmProps) => {
                     <UNSAFE_Combobox
                         id={sporsmal.id}
                         isMultiSelect
+                        isListOpen={apneListe}
                         label={sporsmal.sporsmalstekst}
                         error={fieldState.error && feilmelding.lokal}
                         options={options}
@@ -52,9 +62,14 @@ const ComboboxMultiple = ({ sporsmal }: SpmProps) => {
                         shouldShowSelectedOptions={true}
                         shouldAutocomplete={true}
                         selectedOptions={field.value}
+                        onFocus={handleToggle}
                         onKeyDownCapture={(event) => {
-                            if (event.key === 'Enter') {
+                            if (erBokstavEllerMellomrom(event.key)) {
+                                setApneListe(true)
+                            } else if (event.key === 'Enter') {
                                 event.preventDefault()
+                            } else if (event.key === 'Tab') {
+                                setApneListe(false)
                             }
                         }}
                         onToggleSelected={(option, isSelected) => {
@@ -65,6 +80,7 @@ const ComboboxMultiple = ({ sporsmal }: SpmProps) => {
                                     if (landlisteEøs.includes(valgtLand) && sporsmal.tag == 'LAND') {
                                         const alleLand = [...valgtLandIEOS, valgtLand]
                                         setValgtLandIEOS(alleLand)
+                                        setApneListe(false)
                                     } else {
                                         field.onChange([...field.value, valgtLand])
                                     }
@@ -77,7 +93,12 @@ const ComboboxMultiple = ({ sporsmal }: SpmProps) => {
                     />
                 )}
             />
-        </>
+            {valgtLandIEOS.length > 0 && (
+                <Alert className="mt-8" variant="info" closeButton={true} onClose={() => setValgtLandIEOS([])}>
+                    {infoBoksMelding()}
+                </Alert>
+            )}
+        </div>
     )
 }
 
