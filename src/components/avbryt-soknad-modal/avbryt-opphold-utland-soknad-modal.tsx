@@ -1,6 +1,5 @@
 import { Alert, BodyLong, Button, Modal } from '@navikt/ds-react'
 import React, { useState } from 'react'
-import { useRouter } from 'next/router'
 
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { tekst } from '../../utils/tekster'
@@ -8,7 +7,7 @@ import { logEvent } from '../amplitude/amplitude'
 import { EndringUtenEndringModal } from '../sporsmal/endring-uten-endring/endring-uten-endring-modal'
 import { useAvbryt } from '../../hooks/useAvbryt'
 import { Soknad } from '../../types/types'
-import { sykefravaerUrl } from '../../utils/environment'
+import { tekstMedHtml } from '../../utils/html-react-parser-utils'
 
 interface SoknadProps {
     soknad?: Soknad
@@ -44,8 +43,6 @@ const AvbrytKorrigeringOppholdutland = ({ soknad }: SoknadProps) => {
 
 const AvbrytOppholdUtlandSoknadModal = ({ soknad }: SoknadProps) => {
     const { mutate: avbrytMutation, isLoading: avbryter, error: avbrytError } = useAvbryt()
-    const router = useRouter()
-
     const [aapen, setAapen] = useState<boolean>(false)
 
     if (soknad?.status == RSSoknadstatus.UTKAST_TIL_KORRIGERING) {
@@ -85,7 +82,7 @@ const AvbrytOppholdUtlandSoknadModal = ({ soknad }: SoknadProps) => {
             >
                 <Modal.Body>
                     <BodyLong spacing size="medium">
-                        Er du sikker på at du vil fjerne søknaden?
+                        {tekstMedHtml(tekst('avbryt.popup.sporsmal'))}
                     </BodyLong>
                     {avbrytError && (
                         <Alert variant="error" className="mt-4">
@@ -110,11 +107,6 @@ const AvbrytOppholdUtlandSoknadModal = ({ soknad }: SoknadProps) => {
                                 avbrytMutation({
                                     valgtSoknad: soknad,
                                     onSuccess: () => {
-                                        if (soknad === undefined) {
-                                            window.location.href = sykefravaerUrl()
-                                        } else {
-                                            router.push(`/avbrutt/${soknad.id}`)
-                                        }
                                         setAapen(false)
                                     },
                                 })

@@ -1,4 +1,4 @@
-import { modalAktiv, modalIkkeAktiv } from '../../support/utilities'
+import { avbryterSoknad } from '../../support/utilities'
 
 describe('Tester opprettelse av søknad om å beholde sykepenger utenfor EØS', () => {
     it('Søknad ANSVARSERKLARING - steg 1', () => {
@@ -20,19 +20,7 @@ describe('Tester opprettelse av søknad om å beholde sykepenger utenfor EØS', 
     })
 
     it('Avbryter søknaden og havner på avbrutt-siden', () => {
-        cy.visit('/syk/sykepengesoknad/sykepengesoknad-utland')
-        cy.contains('Jeg har ikke behov for denne søknaden').click()
-        modalAktiv()
-        cy.contains('Nei, jeg har behov for søknaden').should('be.visible')
-        cy.findByRole('button', { name: 'Nei, jeg har behov for søknaden' }).click()
-        modalIkkeAktiv()
-        cy.contains('Nei, jeg har behov for søknaden').should('not.be.visible')
-        cy.contains('Jeg har ikke behov for denne søknaden').should('be.visible').click()
-        modalAktiv()
-        cy.contains('Ja, jeg er sikker').should('be.visible')
-
-        cy.findByRole('button', { name: 'Ja, jeg er sikker' }).click()
-        modalIkkeAktiv()
+        avbryterSoknad()
         cy.url().should('include', `avbrutt/`)
         cy.contains('Fjernet søknad om å beholde sykepenger utenfor EU/EØS')
         cy.findByRole('link', { name: 'nav.no/sykepenger#utland' })
