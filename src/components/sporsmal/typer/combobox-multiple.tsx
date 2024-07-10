@@ -56,6 +56,7 @@ const ComboboxMultiple = ({ sporsmal }: SpmProps) => {
                         isMultiSelect
                         isListOpen={apneListe}
                         label={sporsmal.sporsmalstekst}
+                        description={sporsmal.undertekst}
                         error={fieldState.error && feilmelding.lokal}
                         options={options}
                         className="mt-4 w-full md:w-1/2"

@@ -71,6 +71,9 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
         cy.contains('Det er 1 feil i skjemaet')
         cy.contains('Du må oppgi hvilket land du skal reise til')
 
+        cy.contains('Hvilke(t) land skal du reise til?')
+        cy.contains('Du kan velge flere.')
+
         svarCombobox('Hvilke(t) land skal du reise til?', 'Hel', 'Hellas', true)
         cy.get('.navds-alert').should(
             'contain.text',
@@ -103,6 +106,9 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
         cy.contains('Du må velge minst et alternativ fra menyen')
         cy.contains('Det er 1 feil i skjemaet')
         cy.contains('Du må oppgi hvilket land du skal reise til')
+
+        cy.contains('Hvilke(t) land skal du reise til?')
+        cy.contains('Du kan velge flere.')
 
         //Velger land med tastatur
         svarCombobox('Hvilke(t) land skal du reise til?', 'Afg', 'Afghanistan')
