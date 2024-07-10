@@ -7,7 +7,7 @@ import { logEvent } from '../amplitude/amplitude'
 import { EndringUtenEndringModal } from '../sporsmal/endring-uten-endring/endring-uten-endring-modal'
 import { useAvbryt } from '../../hooks/useAvbryt'
 import { Soknad } from '../../types/types'
-import { tekstMedHtml } from '../../utils/html-react-parser-utils'
+import { sykefravaerUrl } from '../../utils/environment'
 
 interface SoknadProps {
     soknad?: Soknad
@@ -43,6 +43,7 @@ const AvbrytKorrigeringOppholdutland = ({ soknad }: SoknadProps) => {
 
 const AvbrytOppholdUtlandSoknadModal = ({ soknad }: SoknadProps) => {
     const { mutate: avbrytMutation, isLoading: avbryter, error: avbrytError } = useAvbryt()
+
     const [aapen, setAapen] = useState<boolean>(false)
 
     if (soknad?.status == RSSoknadstatus.UTKAST_TIL_KORRIGERING) {
@@ -82,7 +83,7 @@ const AvbrytOppholdUtlandSoknadModal = ({ soknad }: SoknadProps) => {
             >
                 <Modal.Body>
                     <BodyLong spacing size="medium">
-                        {tekstMedHtml(tekst('avbryt.popup.sporsmal'))}
+                        Er du sikker på at du vil fjerne søknaden?
                     </BodyLong>
                     {avbrytError && (
                         <Alert variant="error" className="mt-4">
@@ -103,13 +104,16 @@ const AvbrytOppholdUtlandSoknadModal = ({ soknad }: SoknadProps) => {
                                 component: tekst('avbryt.popup.tittel'),
                                 steg: '0',
                             })
-                            if (soknad)
+                            if (soknad) {
                                 avbrytMutation({
                                     valgtSoknad: soknad,
                                     onSuccess: () => {
                                         setAapen(false)
                                     },
                                 })
+                            } else {
+                                window.location.replace(sykefravaerUrl())
+                            }
                         }}
                     >
                         {tekst('avbryt.popup.ja')}
