@@ -8,6 +8,7 @@ import { EndringUtenEndringModal } from '../sporsmal/endring-uten-endring/endrin
 import { useAvbryt } from '../../hooks/useAvbryt'
 import { Soknad } from '../../types/types'
 import { sykefravaerUrl } from '../../utils/environment'
+import { tekstMedHtml } from "../../utils/html-react-parser-utils";
 
 interface SoknadProps {
     soknad?: Soknad
@@ -83,7 +84,7 @@ const AvbrytOppholdUtlandSoknadModal = ({ soknad }: SoknadProps) => {
             >
                 <Modal.Body>
                     <BodyLong spacing size="medium">
-                        Er du sikker på at du vil fjerne søknaden?
+                        {tekstMedHtml(tekst('avbryt.popup.sporsmal'))}
                     </BodyLong>
                     {avbrytError && (
                         <Alert variant="error" className="mt-4">
