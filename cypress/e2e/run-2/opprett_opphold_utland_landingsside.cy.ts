@@ -1,6 +1,10 @@
 import { avbryterSoknad } from '../../support/utilities'
 
 describe('Tester opprettelse av søknad om å beholde sykepenger utenfor EØS', () => {
+    before(() => {
+        cy.clearCookies()
+    })
+
     it('Søknad ANSVARSERKLARING - steg 1', () => {
         cy.visit('/syk/sykepengesoknad/sykepengesoknad-utland')
 
@@ -9,14 +13,8 @@ describe('Tester opprettelse av søknad om å beholde sykepenger utenfor EØS', 
         cy.findByRole('heading', { level: 2, name: 'Har du allerede vært på reise?' }).should('exist')
         cy.findByRole('heading', { level: 3, name: 'Er du statsborger i et land utenfor EU/EØS?' }).should('exist')
         cy.findByRole('button', { name: 'Start søknaden' }).should('exist').click()
-    })
 
-    it('Går til side for ny søknad', () => {
-        // Havner på side 2 for søknad som er ny, og dermed ikke finnes i mock-api (gir 404)
-        cy.url().should('include', `/1`)
-        cy.intercept('GET', '/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknad/', (req) => {
-            req.reply(404)
-        })
+        cy.url().should('include', `b4de172d-863d-4069-b357-76019a9d9537/1`)
     })
 
     it('Avbryter søknaden og havner på avbrutt-siden', () => {
@@ -30,6 +28,13 @@ describe('Tester opprettelse av søknad om å beholde sykepenger utenfor EØS', 
     })
 
     it('Avbryter en ikke-opprettet opphold utland søknad', () => {
+        // Ignorerer eventuelle feil fra demosiden
+        cy.origin('https://demo.ekstern.dev.nav.no', () => {
+            cy.on('uncaught:exception', () => {
+                return false
+            })
+        })
+
         cy.visit('/syk/sykepengesoknad/sykepengesoknad-utland')
         avbryterSoknad()
         cy.url().should('include', `/syk/sykefravaer`)

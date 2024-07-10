@@ -9,6 +9,10 @@ import { oppholdUtland } from '../../../src/data/mock/data/soknad/opphold-utland
 import 'cypress-real-events'
 
 describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
+    before(() => {
+        cy.clearCookies()
+    })
+
     const soknad = oppholdUtland
 
     before(() => {
