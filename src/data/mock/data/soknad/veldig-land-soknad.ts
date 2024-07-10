@@ -1818,7 +1818,7 @@ export const veldigLangSoknad: RSSoknad = {
         {
             id: '2',
             tag: 'LAND',
-            sporsmalstekst: 'Hvilket land skal du reise til?',
+            sporsmalstekst: 'Hvilke(t) land skal du reise til?',
             undertekst: null,
             svartype: 'LAND',
             min: null,
@@ -1830,7 +1830,7 @@ export const veldigLangSoknad: RSSoknad = {
         {
             id: '926',
             tag: 'LAND',
-            sporsmalstekst: 'Hvilket land skal du reise til?',
+            sporsmalstekst: 'Hvilke(t) land skal du reise til?',
             undertekst: null,
             svartype: 'COMBOBOX_MULTI',
             min: null,

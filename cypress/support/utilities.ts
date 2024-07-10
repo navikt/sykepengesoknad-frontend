@@ -16,7 +16,12 @@ export function svarFritekst(name: string, verdi: string) {
     cy.findByRole('textbox', { name: name }).type(verdi)
 }
 
-export function svarCombobox(name: string, verdi: string, autocompleteVerdi: string = verdi) {
+export function svarCombobox(
+    name: string,
+    verdi: string,
+    autocompleteVerdi: string = verdi,
+    fjernVerdi: boolean = false,
+) {
     // Autocomplete
     cy.findByRole('combobox', { name: name }).type(verdi)
     cy.findByRole('combobox', { name: name }).should('have.value', autocompleteVerdi)
@@ -24,7 +29,9 @@ export function svarCombobox(name: string, verdi: string, autocompleteVerdi: str
     // Valgt land vises
     cy.findByRole('combobox', { name: name }).realPress('Enter')
     cy.findByRole('combobox', { name: name }).should('have.value', '')
-    cy.get('.navds-combobox__selected-options').contains(autocompleteVerdi)
+    if (!fjernVerdi) {
+        cy.get('.navds-combobox__selected-options').contains(autocompleteVerdi)
+    }
 }
 
 export function svarRadioGruppe(groupName: string, radioName: string) {

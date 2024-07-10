@@ -10,7 +10,7 @@ const SoknadenTekster = {
         'Sykepenger utbetales etter at NAV har innvilget søknaden. <a class="navds-link" href="https://www.nav.no/saksbehandlingstider#sykepenger" target="_blank">Les om sykepenger og saksbehandlingstider.</a>',
 
     'sykepengesoknad.periodeutland.tittel': 'Når skal du reise',
-    'sykepengesoknad.land.tittel': 'Hvilket land skal du reise til',
+    'sykepengesoknad.land.tittel': 'Destinasjon for reisen',
     'sykepengesoknad.arbeidsgiver.tittel': 'Har du arbeidsgiver',
 
     'sykepengesoknad.permittert_naa.tittel': 'Permittert av arbeidsgiveren',

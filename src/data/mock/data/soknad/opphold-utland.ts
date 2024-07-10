@@ -35,8 +35,8 @@ export const oppholdUtland: RSSoknad = {
         {
             id: 'eafa7256-2486-419c-96d9-d077418fa8a2',
             tag: 'LAND',
-            sporsmalstekst: 'Hvilket land skal du reise til?',
-            undertekst: null,
+            sporsmalstekst: 'Hvilke(t) land skal du reise til?',
+            undertekst: 'Du kan velge flere.',
             svartype: 'COMBOBOX_MULTI',
             min: null,
             max: '50',

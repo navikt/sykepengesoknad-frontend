@@ -588,7 +588,7 @@ export const oppholdUtlandKvittering: RSSoknad = {
         {
             id: '2',
             tag: 'LAND',
-            sporsmalstekst: 'Hvilket land skal du reise til?',
+            sporsmalstekst: 'Hvilke(t) land skal du reise til?',
             undertekst: null,
             svartype: 'COMBOBOX_MULTI',
             min: null,

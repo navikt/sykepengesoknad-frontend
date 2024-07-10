@@ -129,7 +129,7 @@ describe('Tester kvittering', () => {
             setPeriodeFraTil(14, 22)
 
             klikkGaVidere()
-            svarCombobox('Hvilket land skal du reise til?', 'Søre', 'Søre franske territorier')
+            svarCombobox('Hvilke(t) land skal du reise til?', 'Søre', 'Søre franske territorier')
             cy.get('.navds-combobox__button-toggle-list').click()
             klikkGaVidere()
             svarNeiHovedsporsmal()

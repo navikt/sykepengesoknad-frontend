@@ -62,7 +62,7 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
         klikkGaVidere()
     })
 
-    it('Velger land', function () {
+    it('Velger land innenfor EU/EØS og får info om å ikke søke', function () {
         cy.url().should('include', `${soknad.id}/2`)
         cy.get('[data-cy="tilbake-knapp"]').should('exist')
 
@@ -71,15 +71,61 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
         cy.contains('Det er 1 feil i skjemaet')
         cy.contains('Du må oppgi hvilket land du skal reise til')
 
-        svarCombobox('Hvilket land skal du reise til?', 'Afg', 'Afghanistan')
+        cy.contains('Hvilke(t) land skal du reise til?')
+        cy.contains('Du kan velge flere.')
 
-        svarCombobox('Hvilket land skal du reise til?', 'Fransk', 'Fransk Polynesia')
+        svarCombobox('Hvilke(t) land skal du reise til?', 'Hel', 'Hellas', true)
+        cy.get('.navds-alert').should(
+            'contain.text',
+            'Hellas ligger innenfor EU/EØS, så du trenger ikke søke for dette landet.',
+        )
+        cy.get('.navds-combobox__button-toggle-list').should('have.attr', 'aria-expanded', 'false')
+
+        svarCombobox('Hvilke(t) land skal du reise til?', 'Svei', 'Sveits', true)
+        cy.get('.navds-alert').should(
+            'contain.text',
+            'Hellas og Sveits ligger innenfor EU/EØS, så du trenger ikke søke for disse landene.',
+        )
+        cy.get('.navds-combobox__button-toggle-list').should('have.attr', 'aria-expanded', 'false')
+
+        svarCombobox('Hvilke(t) land skal du reise til?', 'Lit', 'Litauen', true)
+        cy.get('.navds-alert').should(
+            'contain.text',
+            'Hellas, Sveits og Litauen ligger innenfor EU/EØS, så du trenger ikke søke for disse landene.',
+        )
+        cy.get('.navds-combobox__button-toggle-list').should('have.attr', 'aria-expanded', 'false')
+
+        klikkGaVidere(true)
+    })
+
+    it('Velger land utenfor EU/EØS', function () {
+        cy.url().should('include', `${soknad.id}/2`)
+        cy.get('[data-cy="tilbake-knapp"]').should('exist')
+
+        klikkGaVidere(true)
+        cy.contains('Du må velge minst et alternativ fra menyen')
+        cy.contains('Det er 1 feil i skjemaet')
+        cy.contains('Du må oppgi hvilket land du skal reise til')
+
+        cy.contains('Hvilke(t) land skal du reise til?')
+        cy.contains('Du kan velge flere.')
+
+        //Velger land med tastatur
+        svarCombobox('Hvilke(t) land skal du reise til?', 'Afg', 'Afghanistan')
+        cy.get('.navds-combobox__button-toggle-list').should('have.attr', 'aria-expanded', 'true')
+
+        //Velger land med tastatur, og lukker listen manuelt
+        svarCombobox('Hvilke(t) land skal du reise til?', 'Fransk', 'Fransk Polynesia')
         cy.contains('.navds-chips__chip-text', 'Fransk Polynesia').parent('button').click()
+        cy.get('.navds-combobox__button-toggle-list').should('have.attr', 'aria-expanded', 'false')
 
-        cy.findAllByRole('combobox', { name: 'Hvilket land skal du reise til?' }).type('Sør-')
+        //bruker kun musepeker til å velge land, da lukker listen seg
+        cy.findAllByRole('combobox', { name: 'Hvilke(t) land skal du reise til?' }).type('Sør-')
         cy.findByRole('option', { name: 'Sør-Korea' }).click()
+        cy.get('.navds-combobox__button-toggle-list').should('have.attr', 'aria-expanded', 'false')
 
         cy.get('.navds-combobox__button-toggle-list').click()
+        cy.get('.navds-combobox__button-toggle-list').should('have.attr', 'aria-expanded', 'true')
 
         klikkGaVidere()
     })
@@ -135,7 +181,7 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
         cy.get('.oppsummering').contains('Når skal du reise?').siblings().should('contain', '17. – 24. desember 2020')
 
         cy.get('.oppsummering')
-            .contains('Hvilket land skal du reise til?')
+            .contains('Hvilke(t) land skal du reise til?')
             .siblings()
             .should('contain', 'Afghanistan')
             .and('contain', 'Sør-Korea')
