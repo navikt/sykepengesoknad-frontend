@@ -20,7 +20,7 @@ export function useGjenapne() {
                 },
             )
         },
-        onSuccess: async (data, id) => {
+        onSuccess: async (_data, id) => {
             await queryClient.invalidateQueries(['soknad', id])
             queryClient.invalidateQueries(['soknader']).catch()
         },

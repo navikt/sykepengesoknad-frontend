@@ -8,7 +8,7 @@ import { EndringUtenEndringModal } from '../sporsmal/endring-uten-endring/endrin
 import { useAvbryt } from '../../hooks/useAvbryt'
 import { Soknad } from '../../types/types'
 import { sykefravaerUrl } from '../../utils/environment'
-import { tekstMedHtml } from "../../utils/html-react-parser-utils";
+import { tekstMedHtml } from '../../utils/html-react-parser-utils'
 
 interface SoknadProps {
     soknad?: Soknad

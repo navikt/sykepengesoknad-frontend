@@ -28,4 +28,10 @@ describe('Tester opprettelse av søknad om å beholde sykepenger utenfor EØS', 
             'I utgangspunktet bør du søke før du reiser til land utenfor EU/EØS. Du kan likevel søke om å få beholde sykepengene etter du har reist.',
         )
     })
+
+    it('Avbryter en ikke-opprettet opphold utland søknad', () => {
+        cy.visit('/syk/sykepengesoknad/sykepengesoknad-utland')
+        avbryterSoknad()
+        cy.url().should('include', `/syk/sykefravaer`)
+    })
 })
