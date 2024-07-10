@@ -216,16 +216,16 @@ describe('Tester støtte for gamle spørsmål', () => {
         gaVidere()
     })
     it('LAND', () => {
-        cy.contains('Hvilket land skal du reise til?')
-        cy.findByRole('combobox', { name: 'Hvilket land skal du reise til?' }).type('Sør')
+        cy.contains('Hvilke(t) land skal du reise til?')
+        cy.findByRole('combobox', { name: 'Hvilke(t) land skal du reise til?' }).type('Sør')
         cy.findByRole('option', { name: 'Søre franske territorier' }).click()
 
         cy.get('.navds-combobox__button-toggle-list').click()
         gaVidere()
     })
     it('LAND_COMBOBOX', () => {
-        cy.contains('Hvilket land skal du reise til?')
-        svarCombobox('Hvilket land skal du reise til?', 'Søre', 'Søre franske territorier')
+        cy.contains('Hvilke(t) land skal du reise til?')
+        svarCombobox('Hvilke(t) land skal du reise til?', 'Søre', 'Søre franske territorier')
         cy.get('.navds-combobox__button-toggle-list').click()
         gaVidere()
     })
