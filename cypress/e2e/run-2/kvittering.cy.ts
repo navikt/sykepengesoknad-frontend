@@ -126,12 +126,14 @@ describe('Tester kvittering', () => {
             cy.findByRole('button', { name: 'Start søknaden' }).should('exist').click()
 
             // Svar og send
-            setPeriodeFraTil(14, 22)
-
-            klikkGaVidere()
             svarCombobox('Hvilke(t) land skal du reise til?', 'Søre', 'Søre franske territorier')
             cy.get('.navds-combobox__button-toggle-list').click()
             klikkGaVidere()
+
+            setPeriodeFraTil(14, 22)
+
+            klikkGaVidere()
+
             svarNeiHovedsporsmal()
             klikkGaVidere()
             cy.contains(

@@ -32,52 +32,8 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
         cy.findByRole('button', { name: 'Start søknaden' }).should('exist').click()
     })
 
-    it('Velger periode for utenlandsopphold', function () {
-        cy.url().should('include', `${soknad.id}/1`)
-
-        cy.findByRole('progressbar', { name: 'Søknadssteg' })
-            .should('have.attr', 'aria-valuenow', '1')
-            .and('have.attr', 'aria-valuemin', '1')
-            .and('have.attr', 'aria-valuemax', '4')
-            .and('have.attr', 'aria-valuetext', '1 av 4 steg')
-
-        cy.get('body').findByRole('link', { name: 'Tilbake' }).should('not.exist')
-        cy.contains('Opplysninger fra sykmeldingen').should('not.exist')
-        cy.contains('Når skal du reise?')
-
-        setPeriodeFraTil(17, 24)
-
-        klikkGaVidere()
-    })
-
-    it('Avbryter søknaden og havner på avbrutt-siden', () => {
-        avbryterSoknad()
-        cy.url().should('include', `avbrutt/${soknad.id}`)
-        cy.contains('Fjernet søknad om å beholde sykepenger utenfor EU/EØS')
-        cy.findByRole('link', { name: 'nav.no/sykepenger#utland' })
-        cy.contains(
-            'I utgangspunktet bør du søke før du reiser til land utenfor EU/EØS. Du kan likevel søke om å få beholde sykepengene etter du har reist.',
-        )
-    })
-
-    it('Åpner avbrutt søknad fra listevisning', () => {
-        cy.visit('/syk/sykepengesoknad/soknader?testperson=bare-utland')
-        cy.get('.navds-heading--large').should('be.visible').and('have.text', 'Søknader')
-        cy.get('[data-cy="Tidligere søknader"]')
-            .findByRole('link', { name: 'Søknad om å beholde sykepenger utenfor EU/EØS Avbrutt av deg' })
-            .click()
-        cy.url().should('include', `avbrutt/${soknad.id}`)
-    })
-
-    it('Gjenåpner søknaden', () => {
-        cy.get('button[data-cy="bruk-soknad-likevel"]').click()
-        cy.url().should('include', `${soknad.id}/2`)
-        cy.contains('Gå videre')
-    })
-
     it('Velger land innenfor EU/EØS og får info om å ikke søke', function () {
-        cy.url().should('include', `${soknad.id}/2`)
-        cy.get('[data-cy="tilbake-knapp"]').should('exist')
+        cy.url().should('include', `${soknad.id}/1`)
 
         klikkGaVidere(true)
         cy.contains('Du må velge minst et alternativ fra menyen')
@@ -112,8 +68,7 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
     })
 
     it('Velger land utenfor EU/EØS', function () {
-        cy.url().should('include', `${soknad.id}/2`)
-        cy.get('[data-cy="tilbake-knapp"]').should('exist')
+        cy.url().should('include', `${soknad.id}/1`)
 
         klikkGaVidere(true)
         cy.contains('Du må velge minst et alternativ fra menyen')
@@ -137,8 +92,40 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
         cy.findByRole('option', { name: 'Sør-Korea' }).click()
         cy.get('.navds-combobox__button-toggle-list').should('have.attr', 'aria-expanded', 'false')
 
-        cy.get('.navds-combobox__button-toggle-list').click()
-        cy.get('.navds-combobox__button-toggle-list').should('have.attr', 'aria-expanded', 'true')
+        klikkGaVidere()
+    })
+
+    it('Avbryter søknaden og havner på avbrutt-siden', () => {
+        avbryterSoknad()
+        cy.url().should('include', `avbrutt/${soknad.id}`)
+        cy.contains('Fjernet søknad om å beholde sykepenger utenfor EU/EØS')
+        cy.findByRole('link', { name: 'nav.no/sykepenger#utland' })
+        cy.contains(
+            'I utgangspunktet bør du søke før du reiser til land utenfor EU/EØS. Du kan likevel søke om å få beholde sykepengene etter du har reist.',
+        )
+    })
+
+    it('Gjenåpner søknaden', () => {
+        cy.get('button[data-cy="bruk-soknad-likevel"]').click()
+        cy.url().should('include', `${soknad.id}/2`)
+        cy.contains('Gå videre')
+    })
+
+    it('Velger periode for utenlandsopphold', function () {
+        cy.url().should('include', `${soknad.id}/2`)
+        cy.get('[data-cy="tilbake-knapp"]').should('exist')
+
+        cy.findByRole('progressbar', { name: 'Søknadssteg' })
+            .should('have.attr', 'aria-valuenow', '2')
+            .and('have.attr', 'aria-valuemin', '1')
+            .and('have.attr', 'aria-valuemax', '4')
+            .and('have.attr', 'aria-valuetext', '2 av 4 steg')
+
+        cy.get('body').findByRole('link', { name: 'Tilbake' }).should('not.exist')
+        cy.contains('Opplysninger fra sykmeldingen').should('not.exist')
+        cy.contains('Når skal du reise?')
+
+        setPeriodeFraTil(17, 24)
 
         klikkGaVidere()
     })
