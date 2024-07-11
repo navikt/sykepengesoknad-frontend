@@ -364,7 +364,7 @@ export async function mockApi(req: NextApiRequest, res: NextApiResponse) {
             if (soknad) {
                 return sendJson(soknad)
             }
-            const soknadOriginal = deepcopyMedNyId(oppholdUtland, uuid.v4())
+            const soknadOriginal = deepcopyMedNyId(oppholdUtland, 'b4de172d-863d-4069-b357-76019a9d9537')
             soknadOriginal.status = RSSoknadstatus.NY
             testperson.soknader.push(soknadOriginal)
             return sendJson(soknadOriginal)

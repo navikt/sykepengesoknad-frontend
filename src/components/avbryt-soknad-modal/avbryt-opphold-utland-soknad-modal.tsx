@@ -1,6 +1,5 @@
 import { Alert, BodyLong, Button, Modal } from '@navikt/ds-react'
 import React, { useState } from 'react'
-import { useRouter } from 'next/router'
 
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { tekst } from '../../utils/tekster'
@@ -9,6 +8,7 @@ import { EndringUtenEndringModal } from '../sporsmal/endring-uten-endring/endrin
 import { useAvbryt } from '../../hooks/useAvbryt'
 import { Soknad } from '../../types/types'
 import { sykefravaerUrl } from '../../utils/environment'
+import { tekstMedHtml } from '../../utils/html-react-parser-utils'
 
 interface SoknadProps {
     soknad?: Soknad
@@ -44,7 +44,6 @@ const AvbrytKorrigeringOppholdutland = ({ soknad }: SoknadProps) => {
 
 const AvbrytOppholdUtlandSoknadModal = ({ soknad }: SoknadProps) => {
     const { mutate: avbrytMutation, isLoading: avbryter, error: avbrytError } = useAvbryt()
-    const router = useRouter()
 
     const [aapen, setAapen] = useState<boolean>(false)
 
@@ -85,7 +84,7 @@ const AvbrytOppholdUtlandSoknadModal = ({ soknad }: SoknadProps) => {
             >
                 <Modal.Body>
                     <BodyLong spacing size="medium">
-                        Er du sikker på at du vil fjerne søknaden?
+                        {tekstMedHtml(tekst('avbryt.popup.sporsmal'))}
                     </BodyLong>
                     {avbrytError && (
                         <Alert variant="error" className="mt-4">
@@ -106,18 +105,16 @@ const AvbrytOppholdUtlandSoknadModal = ({ soknad }: SoknadProps) => {
                                 component: tekst('avbryt.popup.tittel'),
                                 steg: '0',
                             })
-                            if (soknad)
+                            if (soknad) {
                                 avbrytMutation({
                                     valgtSoknad: soknad,
                                     onSuccess: () => {
-                                        if (soknad === undefined) {
-                                            window.location.href = sykefravaerUrl()
-                                        } else {
-                                            router.push(`/avbrutt/${soknad.id}`)
-                                        }
                                         setAapen(false)
                                     },
                                 })
+                            } else {
+                                window.location.replace(sykefravaerUrl())
+                            }
                         }}
                     >
                         {tekst('avbryt.popup.ja')}

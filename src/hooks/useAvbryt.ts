@@ -5,6 +5,7 @@ import { useRouter } from 'next/router'
 import fetchMedRequestId, { AuthenticationError, FetchError } from '../utils/fetch'
 import { Soknad } from '../types/types'
 import { RSSoknadstatus } from '../types/rs-types/rs-soknadstatus'
+import { RSSoknadstype } from '../types/rs-types/rs-soknadstype'
 
 import { useTestpersonQuery } from './useTestpersonQuery'
 
@@ -30,7 +31,7 @@ export function useAvbryt() {
                 },
             )
         },
-        onSuccess: async (data, variables) => {
+        onSuccess: async (_data, variables) => {
             if (variables.onSuccess) {
                 variables.onSuccess()
             }
@@ -42,6 +43,9 @@ export function useAvbryt() {
             } else {
                 await queryClient.invalidateQueries(['soknad', variables.valgtSoknad.id])
                 queryClient.invalidateQueries(['soknader']).catch()
+            }
+            if (variables.valgtSoknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND) {
+                await router.push(`/avbrutt/${variables.valgtSoknad.id}`)
             }
         },
         onError: (e) => {

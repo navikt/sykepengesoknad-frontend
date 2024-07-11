@@ -1,6 +1,10 @@
-import { modalAktiv, modalIkkeAktiv } from '../../support/utilities'
+import { avbryterSoknad } from '../../support/utilities'
 
 describe('Tester opprettelse av søknad om å beholde sykepenger utenfor EØS', () => {
+    before(() => {
+        cy.clearCookies()
+    })
+
     it('Søknad ANSVARSERKLARING - steg 1', () => {
         cy.visit('/syk/sykepengesoknad/sykepengesoknad-utland')
 
@@ -9,35 +13,30 @@ describe('Tester opprettelse av søknad om å beholde sykepenger utenfor EØS', 
         cy.findByRole('heading', { level: 2, name: 'Har du allerede vært på reise?' }).should('exist')
         cy.findByRole('heading', { level: 3, name: 'Er du statsborger i et land utenfor EU/EØS?' }).should('exist')
         cy.findByRole('button', { name: 'Start søknaden' }).should('exist').click()
-    })
 
-    it('Går til side for ny søknad', () => {
-        // Havner på side 2 for søknad som er ny, og dermed ikke finnes i mock-api (gir 404)
-        cy.url().should('include', `/1`)
-        cy.intercept('GET', '/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknad/', (req) => {
-            req.reply(404)
-        })
+        cy.url().should('include', `b4de172d-863d-4069-b357-76019a9d9537/1`)
     })
 
     it('Avbryter søknaden og havner på avbrutt-siden', () => {
-        cy.visit('/syk/sykepengesoknad/sykepengesoknad-utland')
-        cy.contains('Jeg har ikke behov for denne søknaden').click()
-        modalAktiv()
-        cy.contains('Nei, jeg har behov for søknaden').should('be.visible')
-        cy.findByRole('button', { name: 'Nei, jeg har behov for søknaden' }).click()
-        modalIkkeAktiv()
-        cy.contains('Nei, jeg har behov for søknaden').should('not.be.visible')
-        cy.contains('Jeg har ikke behov for denne søknaden').should('be.visible').click()
-        modalAktiv()
-        cy.contains('Ja, jeg er sikker').should('be.visible')
-
-        cy.findByRole('button', { name: 'Ja, jeg er sikker' }).click()
-        modalIkkeAktiv()
+        avbryterSoknad()
         cy.url().should('include', `avbrutt/`)
         cy.contains('Fjernet søknad om å beholde sykepenger utenfor EU/EØS')
         cy.findByRole('link', { name: 'nav.no/sykepenger#utland' })
         cy.contains(
             'I utgangspunktet bør du søke før du reiser til land utenfor EU/EØS. Du kan likevel søke om å få beholde sykepengene etter du har reist.',
         )
+    })
+
+    it('Avbryter en ikke-opprettet opphold utland søknad', () => {
+        // Ignorerer eventuelle feil fra demosiden
+        cy.origin('https://demo.ekstern.dev.nav.no', () => {
+            cy.on('uncaught:exception', () => {
+                return false
+            })
+        })
+
+        cy.visit('/syk/sykepengesoknad/sykepengesoknad-utland')
+        avbryterSoknad()
+        cy.url().should('include', `/syk/sykefravaer`)
     })
 })
