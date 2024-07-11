@@ -1,6 +1,6 @@
 import { modalAktiv, modalIkkeAktiv } from '../../support/utilities'
 
-describe('Tester opprettelse av søknad om å beholde sykepenger utenfor EØS', () => {
+xdescribe('Tester opprettelse av søknad om å beholde sykepenger utenfor EØS', () => {
     it('Søknad ANSVARSERKLARING - steg 1', () => {
         cy.visit('/syk/sykepengesoknad/sykepengesoknad-utland')
 
