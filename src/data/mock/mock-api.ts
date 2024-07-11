@@ -39,8 +39,7 @@ import {
 import { feilVedSlettingAvKvittering } from './data/personas/reisetilskuddTestPerson'
 import { arbeidstaker } from './data/soknad/arbeidstaker'
 import { arbeidstakerGradert } from './data/soknad/arbeidstaker-gradert'
-import { oppholdUtland } from './data/soknad/opphold-utland'
-import { deepcopyMedNyId } from './deepcopyMedNyId'
+import { avbruttOppholdUtland } from './data/soknad/opphold-utland'
 import { mockApiValiderSporsmal } from './mockApiValiderSporsmal'
 import { soknadInnenforArbeidsgiverperioden } from './data/personas/innenfor-ag-periode'
 
@@ -251,8 +250,7 @@ export async function mockApi(req: NextApiRequest, res: NextApiResponse) {
         [ENDPOINTS.HENT_SYKMELDINGER]: () => sendJson(testperson.sykmeldinger),
         [ENDPOINTS.GET_SOKNAD]: async () => {
             const soknaden = getSoknadEllerFeilmld(soknadId)
-            if (!soknaden) return
-            return sendJson(soknaden)
+            if (soknaden) return sendJson(soknaden)
         },
         [ENDPOINTS.KORRIGER_SOKNAD]: async () => {
             const original = findSoknadById(soknadId)
@@ -358,16 +356,13 @@ export async function mockApi(req: NextApiRequest, res: NextApiResponse) {
             return sendJson({ mottaker: skalSendesTil })
         },
         [ENDPOINTS.OPPRETT_SOKNAD_UTLAND]: () => {
-            const soknad = testperson.soknader.find(
+            const eksisterendeSoknad = testperson.soknader.find(
                 (sok: RSSoknad) => sok.soknadstype === RSSoknadstype.OPPHOLD_UTLAND && sok.status === RSSoknadstatus.NY,
             )
-            if (soknad) {
-                return sendJson(soknad)
+            if (eksisterendeSoknad) {
+                return sendJson(eksisterendeSoknad)
             }
-            const soknadOriginal = deepcopyMedNyId(oppholdUtland, 'b4de172d-863d-4069-b357-76019a9d9537')
-            soknadOriginal.status = RSSoknadstatus.NY
-            testperson.soknader.push(soknadOriginal)
-            return sendJson(soknadOriginal)
+            return sendJson({ ...avbruttOppholdUtland, status: RSSoknadstatus.NY })
         },
         [ENDPOINTS.SEND_SOKNAD]: async () => {
             if (soknadId === '9157b65a-0372-4657-864c-195037349df5') {
