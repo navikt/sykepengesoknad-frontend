@@ -22,8 +22,10 @@ describe('Tester opprettelse av søknad om å beholde sykepenger utenfor EØS', 
         cy.findByRole('heading', { level: 2, name: 'Har du allerede vært på reise?' }).should('exist')
         cy.findByRole('heading', { level: 3, name: 'Er du statsborger i et land utenfor EU/EØS?' }).should('exist')
         cy.findByRole('button', { name: 'Start søknaden' }).should('exist').click()
+
         cy.url().should('include', `b4de172d-863d-4069-b357-76019a9d9537/1`)
-        cy.contains('Når skal du reise?')
+        cy.contains('Hvilke(t) land skal du reise til?')
+        cy.contains('Du kan velge flere.')
     })
 
     it('Avbryter søknaden og havner på avbrutt-siden', () => {
