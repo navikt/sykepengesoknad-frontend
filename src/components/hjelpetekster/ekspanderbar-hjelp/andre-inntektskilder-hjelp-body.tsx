@@ -2,45 +2,74 @@ import { BodyShort, List } from '@navikt/ds-react'
 
 import { Begrepsforklarer } from '../../begrepsforklarer/begrepsforklarer'
 
-import { AndreInntektskilderHjelpTekster } from './andre-inntektskilder-hjelp-tekst'
-
 export const AndreInntektskilderHjelpBody = () => {
     return (
         <>
-            <BodyShort spacing>{AndreInntektskilderHjelpTekster['hjelpetekst.del1']}</BodyShort>
-            {AndreInntektskilderHjelpTekster['hjelpetekst.del2']}
-            <Begrepsforklarer
-                inlinetekst={AndreInntektskilderHjelpTekster['modal1.inlinetekst']}
-                tittel={AndreInntektskilderHjelpTekster['modal1.tittel']}
-            >
-                <BodyShort className="pt-3">{AndreInntektskilderHjelpTekster['modal1.del1']}</BodyShort>
-
-                <BodyShort className="pt-3">{AndreInntektskilderHjelpTekster['modal1.del2']}</BodyShort>
-            </Begrepsforklarer>
-            {AndreInntektskilderHjelpTekster['hjelpetekst.del3']}{' '}
-            <Begrepsforklarer
-                inlinetekst={AndreInntektskilderHjelpTekster['modal2.inlinetekst']}
-                tittel={AndreInntektskilderHjelpTekster['modal2.tittel']}
-            >
-                <BodyShort spacing>{AndreInntektskilderHjelpTekster['modal2.tekst']}</BodyShort>
-            </Begrepsforklarer>{' '}
-            {AndreInntektskilderHjelpTekster['hjelpetekst.del4']}
-            <BodyShort className="pt-3"> {AndreInntektskilderHjelpTekster['liste.tittel']} </BodyShort>
+            <BodyShort spacing>
+                Kun pensjonsgivende inntekt gir rett til sykepenger. NAV trenger å vite om din pensjonsgivende inntekt
+                for å beregne riktig utbetaling. Arbeidsforholdene dine henter NAV fra offentlige registre.
+            </BodyShort>
+            <BodyShort className="pt-3">Svar ja hvis du har:</BodyShort>
             <List as="ul" size="small" className="[&>ul]:mt-2">
                 <List.Item>
-                    <BodyShort>{AndreInntektskilderHjelpTekster['liste.listepunkt0']}</BodyShort>
+                    <BodyShort>Begynt i ny jobb</BodyShort>
                 </List.Item>
                 <List.Item>
-                    <BodyShort>{AndreInntektskilderHjelpTekster['liste.listepunkt1']}</BodyShort>
+                    <BodyShort>Jobbet mer i en annen jobb etter at du ble sykmeldt</BodyShort>
                 </List.Item>
                 <List.Item>
-                    <BodyShort>{AndreInntektskilderHjelpTekster['liste.listepunkt2']}</BodyShort>
+                    <BodyShort>Inntekt som selvstendig næringsdrivende</BodyShort>
                 </List.Item>
                 <List.Item>
-                    <BodyShort>{AndreInntektskilderHjelpTekster['liste.listepunkt3']}</BodyShort>
+                    <Begrepsforklarer inlinetekst="Jobbet frilans" tittel="Hva menes med frilans">
+                        <>
+                            <BodyShort spacing>
+                                Du er frilanser når du mottar inntekt uten å være ansatt hos den du utfører oppdraget
+                                for, eller har et enkeltpersonsforetak.
+                            </BodyShort>
+                            <BodyShort>
+                                Eksempler på frilans inntekter kan være: Kommunal omsorgsstønad,
+                                Fosterhjemsgodtgjørelse, Dagmamma, Styreverv.
+                            </BodyShort>
+                        </>
+                    </Begrepsforklarer>
                 </List.Item>
                 <List.Item>
-                    <BodyShort>{AndreInntektskilderHjelpTekster['liste.listepunkt4']}</BodyShort>
+                    <BodyShort>
+                        {'Fått annen '}
+                        <Begrepsforklarer inlinetekst="pensjonsgivende inntekt" tittel="Hva menes med frilans">
+                            <BodyShort>
+                                Pensjonsgivende inntekt er som oftest inntekt du har mottatt for arbeid du har utført og
+                                betalt skatt av.
+                            </BodyShort>
+                        </Begrepsforklarer>
+                        {' under sykmeldingen som ikke er registrert ennå'}
+                    </BodyShort>
+                </List.Item>
+            </List>
+
+            <BodyShort className="pt-3">Svar nei hvis du mottar:</BodyShort>
+            <List as="ul" size="small" className="[&>ul]:mt-2">
+                <List.Item>
+                    <BodyShort>
+                        Kapitalinntekt (utleie/salg av bolig utenom enkeltpersonforetak, aksjeselskap eller annen
+                        selskapsform, renteinntekter, leieinntekter, kapitalgevinster)
+                    </BodyShort>
+                </List.Item>
+                <List.Item>
+                    <BodyShort>Stønader fra folketrygden (uføretrygd, foreldrepenger, AAP, pleiepenger osv.)</BodyShort>
+                </List.Item>
+                <List.Item>
+                    <BodyShort>Utbetalinger fra forsikringsordninger (som AFP)</BodyShort>
+                </List.Item>
+                <List.Item>
+                    <BodyShort>Inntekt fra salg av personlige gjenstander</BodyShort>
+                </List.Item>
+                <List.Item>
+                    <BodyShort>Lotterigevinster</BodyShort>
+                </List.Item>
+                <List.Item>
+                    <BodyShort>Pensjon</BodyShort>
                 </List.Item>
             </List>
         </>

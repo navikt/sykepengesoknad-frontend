@@ -29,7 +29,6 @@ export const SoknadHeader = () => {
         if (valgtSoknad?.status === RSSoknadstatus.AVBRUTT) {
             tittel = 'Fjernet ' + forsteBokstavLiten(tittel)
         }
-        console.log(tittel, valgtSoknad)
         return tittel
     }
     if (!valgtSoknad) return <Banner overskrift={tittel()} underoverskrift="placeholder tekst" skeleton={true} />
