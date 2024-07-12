@@ -23,7 +23,7 @@ const Fremdriftsbar = () => {
 
     const bredde = valgtSoknad ? (100 / antallSteg) * aktivtSteg : 0
 
-    const valueText = `${aktivtSteg} av ${antallSteg} steg`
+    const valueText = aktivtSteg && antallSteg ? `${aktivtSteg} av ${antallSteg} steg` : ''
 
     return (
         <div
