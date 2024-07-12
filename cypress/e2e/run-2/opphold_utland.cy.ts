@@ -60,6 +60,15 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
         )
     })
 
+    it('Åpner avbrutt søknad fra listevisning', () => {
+        cy.visit('/syk/sykepengesoknad/soknader?testperson=bare-utland')
+        cy.get('.navds-heading--large').should('be.visible').and('have.text', 'Søknader')
+        cy.get('[data-cy="Tidligere søknader"]')
+            .findByRole('link', { name: 'Søknad om å beholde sykepenger utenfor EU/EØS Avbrutt av deg' })
+            .click()
+        cy.url().should('include', `avbrutt/${soknad.id}`)
+    })
+
     it('Gjenåpner søknaden', () => {
         cy.get('button[data-cy="bruk-soknad-likevel"]').click()
         cy.url().should('include', `${soknad.id}/2`)

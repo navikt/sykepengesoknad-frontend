@@ -14,16 +14,10 @@ import { getLedetekst, tekst } from '../../utils/tekster'
 import { periodeListevisning, teaserTittel } from './teaser-util'
 
 export const ListevisningLenkepanel = ({ soknad, onClick }: { soknad: RSSoknadmetadata; onClick?: () => void }) => {
-    const orange = () => {
-        if (soknad.status == 'NY') {
-            return true
-        }
-
-        if (soknad.status == 'UTKAST_TIL_KORRIGERING') {
-            return true
-        }
-        return false
+    const orange = (): boolean => {
+        return soknad.status === 'NY' || soknad.status === 'UTKAST_TIL_KORRIGERING'
     }
+
     const StyletLinkPanel = ({ paddingBottom }: { paddingBottom: boolean }) => {
         return (
             <LinkPanel
@@ -68,8 +62,9 @@ export const ListevisningLenkepanel = ({ soknad, onClick }: { soknad: RSSoknadme
             </Button>
         )
     }
+    const avbruttOppholdUtland = soknad.status == 'AVBRUTT' && soknad.soknadstype == 'OPPHOLD_UTLAND'
     return (
-        <Link href={urlTilSoknad(soknad)} data-cy={`link-listevisning-${soknad.id}`}>
+        <Link href={urlTilSoknad(soknad, true, avbruttOppholdUtland)} data-cy={`link-listevisning-${soknad.id}`}>
             <StyletLinkPanel paddingBottom={true}></StyletLinkPanel>
         </Link>
     )

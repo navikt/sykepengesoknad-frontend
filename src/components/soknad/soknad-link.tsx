@@ -13,10 +13,10 @@ interface SoknadLinkProps {
     className: string
 }
 
-export const urlTilSoknad = (soknad: Soknad | RSSoknadmetadata, medQueryParams = true, skipUtlandInfo = false) => {
+export const urlTilSoknad = (soknad: Soknad | RSSoknadmetadata, medQueryParams = true, skipUtlandInfoside = false) => {
     const queryParams = medQueryParams ? window.location.search : ''
 
-    if (soknad.soknadstype == RSSoknadstype.OPPHOLD_UTLAND && !skipUtlandInfo) {
+    if (soknad.soknadstype == RSSoknadstype.OPPHOLD_UTLAND && !skipUtlandInfoside) {
         return utlandsoknadPath + queryParams
     }
 
