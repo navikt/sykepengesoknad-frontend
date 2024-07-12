@@ -21,7 +21,7 @@ export const AndreInntektskilderHjelpBody = () => {
                     <BodyShort>Inntekt som selvstendig næringsdrivende</BodyShort>
                 </List.Item>
                 <List.Item>
-                    <Begrepsforklarer inlinetekst="Jobbet frilans" tittel="Hva menes med frilans">
+                    <Begrepsforklarer inlinetekst="Jobbet frilans" tittel="Hva menes med frilans?">
                         <>
                             <BodyShort spacing>
                                 Du er frilanser når du mottar inntekt uten å være ansatt hos den du utfører oppdraget
@@ -37,7 +37,10 @@ export const AndreInntektskilderHjelpBody = () => {
                 <List.Item>
                     <BodyShort>
                         {'Fått annen '}
-                        <Begrepsforklarer inlinetekst="pensjonsgivende inntekt" tittel="Hva menes med frilans">
+                        <Begrepsforklarer
+                            inlinetekst="pensjonsgivende inntekt"
+                            tittel="Hva er pensjonsgivende inntekt?"
+                        >
                             <BodyShort>
                                 Pensjonsgivende inntekt er som oftest inntekt du har mottatt for arbeid du har utført og
                                 betalt skatt av.
