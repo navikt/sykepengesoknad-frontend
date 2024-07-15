@@ -1,13 +1,12 @@
 import { BodyShort, List } from '@navikt/ds-react'
 
-import { Begrepsforklarer } from '../../begrepsforklarer/begrepsforklarer'
-
 export const AndreInntektskilderHjelpBody = () => {
     return (
         <>
             <BodyShort spacing>
-                Kun pensjonsgivende inntekt gir rett til sykepenger. NAV trenger å vite om din pensjonsgivende inntekt
-                for å beregne riktig utbetaling. Arbeidsforholdene dine henter NAV fra offentlige registre.
+                Kun pensjonsgivende inntekt gir rett til sykepenger, som oftest inntekt du har mottatt for arbeid du har
+                utført og betalt skatt av. NAV trenger å vite om din pensjonsgivende inntekt for å beregne riktig
+                utbetaling. Arbeidsforholdene dine henter NAV fra offentlige registre.
             </BodyShort>
             <BodyShort className="pt-3">Svar ja hvis du har:</BodyShort>
             <List as="ul" size="small" className="[&>ul]:mt-2">
@@ -21,33 +20,14 @@ export const AndreInntektskilderHjelpBody = () => {
                     <BodyShort>Inntekt som selvstendig næringsdrivende</BodyShort>
                 </List.Item>
                 <List.Item>
-                    <Begrepsforklarer inlinetekst="Jobbet frilans" tittel="Hva menes med frilans?">
-                        <>
-                            <BodyShort spacing>
-                                Du er frilanser når du mottar inntekt uten å være ansatt hos den du utfører oppdraget
-                                for, eller har et enkeltpersonsforetak.
-                            </BodyShort>
-                            <BodyShort>
-                                Eksempler på frilans inntekter kan være: Kommunal omsorgsstønad,
-                                Fosterhjemsgodtgjørelse, Dagmamma, Styreverv.
-                            </BodyShort>
-                        </>
-                    </Begrepsforklarer>
+                    <BodyShort>
+                        Jobbet frilans, som vil si at du mottar lønn for enkeltstående oppdrag uten å være fast eller
+                        midlertidig ansatt hos den du utfører arbeidet for, men heller ikke er selvstendig
+                        næringsdrivende. For eksempel: kommunal omsorgsstønad, dagmamma, styreverv
+                    </BodyShort>
                 </List.Item>
                 <List.Item>
-                    <BodyShort>
-                        {'Fått annen '}
-                        <Begrepsforklarer
-                            inlinetekst="pensjonsgivende inntekt"
-                            tittel="Hva er pensjonsgivende inntekt?"
-                        >
-                            <BodyShort>
-                                Pensjonsgivende inntekt er som oftest inntekt du har mottatt for arbeid du har utført og
-                                betalt skatt av.
-                            </BodyShort>
-                        </Begrepsforklarer>
-                        {' under sykmeldingen som ikke er registrert ennå'}
-                    </BodyShort>
+                    <BodyShort>Fått annen pensjonsgivende inntekt</BodyShort>
                 </List.Item>
             </List>
 
