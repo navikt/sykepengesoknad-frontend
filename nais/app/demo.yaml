@@ -29,6 +29,7 @@ spec:
       rules:
         - application: nav-dekoratoren
           namespace: personbruker
+  ttl: 168h # 7*24h
   env:
     - name: FLEX_GATEWAY_ROOT
       value: "https://flex-gateway.dev.nav.no"
