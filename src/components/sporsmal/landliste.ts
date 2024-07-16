@@ -56,6 +56,7 @@ export const landlisteUtenforEøs = [
     'Fiji',
     'Filippinene',
     'Fransk Polynesia',
+    'Færøyene',
     'Gabon',
     'Gambia',
     'Georgia',
