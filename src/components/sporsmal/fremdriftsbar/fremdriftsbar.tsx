@@ -7,6 +7,7 @@ import { useSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
 import { tekst } from '../../../utils/tekster'
 import { SEPARATOR } from '../../../utils/constants'
 import { useTestpersonQuery } from '../../../hooks/useTestpersonQuery'
+import { basePath } from '../../../utils/environment'
 
 const Fremdriftsbar = () => {
     const { valgtSoknad, stegNo } = useSoknadMedDetaljer()
@@ -27,63 +28,48 @@ const Fremdriftsbar = () => {
         valgtSoknad?.sporsmal.filter((s) => s.tag !== 'VAER_KLAR_OVER_AT' && s.tag !== 'TIL_SLUTT').length || 9
     const antallSteg = oppholdUtland ? antallSporsmål + 1 : antallSporsmål
 
-    const stegene =
-        valgtSoknad?.sporsmal
-            .filter((s) => !['VAER_KLAR_OVER_AT', 'ANSVARSERKLARING'].includes(s.tag))
-            .map((s) => s.tag) || []
+    function skapSteg() {
+        let harUbesvart = false
+        return (
+            valgtSoknad?.sporsmal
+                .filter((s) => !['VAER_KLAR_OVER_AT', 'ANSVARSERKLARING'].includes(s.tag))
+                .map((s) => {
+                    if (s.svarliste.svar.length == 0) {
+                        harUbesvart = true
+                    }
+                    // TODO fikse besvart logikken for rare spørsmål
+                    const nokkel = s.tag.toLowerCase()
+
+                    const tittel = tekst(`sykepengesoknad.${nokkel}.tittel` as any)
+
+                    return { tag: s.tag, tittel, besvart: !harUbesvart }
+                }) || []
+        )
+    }
 
     return (
         <FormProgress totalSteps={antallSteg} activeStep={aktivtSteg}>
-            {stegene.map((tag, i) => {
-                const nokkel = tag.toLowerCase()
-                const tittel = tekst(`sykepengesoknad.${nokkel}.tittel` as any)
-                const completed = i < aktivtSteg - 1
+            {skapSteg().map((s, i) => {
                 const url = `/soknader/${valgtSoknad?.id}${SEPARATOR}${i + 2}${testperson.query()}`
                 return (
                     <FormProgress.Step
                         onClick={(e) => {
-                            if (completed) {
+                            if (s.besvart) {
                                 e.preventDefault()
                                 router.push(url)
                             }
                         }}
-                        href={'/syk/sykepengesoknad' + url}
-                        key={i + ' ' + tag}
-                        completed={completed}
-                        interactive={completed}
+                        href={basePath() + url}
+                        key={i + ' ' + s.tag}
+                        completed={s.besvart}
+                        interactive={s.besvart}
                     >
-                        {tittel}
+                        {s.tittel}
                     </FormProgress.Step>
                 )
             })}
         </FormProgress>
     )
-
-    /*
-        return (
-            <div
-                className="my-4 md:my-6"
-                role="progressbar"
-                aria-valuenow={aktivtSteg}
-                aria-valuemin={1}
-                aria-valuemax={antallSteg}
-                aria-valuetext={valueText}
-                aria-label="Søknadssteg"
-            >
-                <div className="relative mx-auto mt-4">
-                    <div className="h-3 rounded-lg bg-gray-200" />
-                    <div
-                        className="-mt-3 h-3 rounded-lg bg-gray-900"
-                        style={{
-                            width: `${bredde}%`,
-                        }}
-                    />
-                </div>
-                <div className="mt-4 flex justify-between">
-                    <BodyShort as={valgtSoknad ? 'span' : Skeleton}>{valueText}</BodyShort>
-                </div>
-            </div>
-        )*/
 }
 
 export default Fremdriftsbar
