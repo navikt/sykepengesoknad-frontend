@@ -8,7 +8,14 @@ import { tekst } from '../../../utils/tekster'
 import { SEPARATOR } from '../../../utils/constants'
 import { useTestpersonQuery } from '../../../hooks/useTestpersonQuery'
 import { basePath } from '../../../utils/environment'
+import { Sporsmal } from '../../../types/types'
 
+function erBesvart(spm: Sporsmal): boolean {
+    if (spm.svarliste.svar.length > 0) {
+        return true
+    }
+    return spm.undersporsmal.some((s) => erBesvart(s))
+}
 const Fremdriftsbar = () => {
     const { valgtSoknad, stegNo } = useSoknadMedDetaljer()
 
@@ -34,10 +41,11 @@ const Fremdriftsbar = () => {
             valgtSoknad?.sporsmal
                 .filter((s) => !['VAER_KLAR_OVER_AT', 'ANSVARSERKLARING'].includes(s.tag))
                 .map((s) => {
-                    if (s.svarliste.svar.length == 0) {
+                    if (!erBesvart(s)) {
                         harUbesvart = true
                     }
-                    // TODO fikse besvart logikken for rare spørsmål
+                    // TODO neste steg kan naviger til oppsummering hvis alt før er besvart!
+
                     const nokkel = s.tag.toLowerCase()
 
                     const tittel = tekst(`sykepengesoknad.${nokkel}.tittel` as any)
