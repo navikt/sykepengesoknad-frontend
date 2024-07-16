@@ -57,18 +57,19 @@ const Fremdriftsbar = () => {
         <FormProgress totalSteps={antallSteg} activeStep={aktivtSteg}>
             {skapSteg().map((s, i) => {
                 const url = `/soknader/${valgtSoknad?.id}${SEPARATOR}${i + 2}${testperson.query()}`
+                const klikkbart = i != aktivtSteg - 1 && s.alleTidligereErBesvart
                 return (
                     <FormProgress.Step
                         onClick={(e) => {
-                            if (s.alleTidligereErBesvart) {
+                            if (klikkbart) {
                                 e.preventDefault()
                                 router.push(url)
                             }
                         }}
                         href={basePath() + url}
-                        key={i + ' ' + s.tag}
+                        key={`${i} ${s.tag}`}
                         completed={s.besvart}
-                        interactive={s.alleTidligereErBesvart} // OG i ikke er lik aktiv steg?
+                        interactive={klikkbart}
                     >
                         {s.tittel}
                     </FormProgress.Step>
