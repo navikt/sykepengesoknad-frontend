@@ -36,21 +36,19 @@ const Fremdriftsbar = () => {
     const antallSteg = oppholdUtland ? antallSporsmål + 1 : antallSporsmål
 
     function skapSteg() {
-        let harUbesvart = false
+        let alleErBesvart = true
         return (
             valgtSoknad?.sporsmal
                 .filter((s) => !['VAER_KLAR_OVER_AT', 'ANSVARSERKLARING'].includes(s.tag))
                 .map((s) => {
-                    if (!erBesvart(s)) {
-                        harUbesvart = true
+                    const alleTidligereErBesvart = alleErBesvart
+                    const denneErBesvart = erBesvart(s)
+                    if (!denneErBesvart) {
+                        alleErBesvart = false
                     }
-                    // TODO neste steg kan naviger til oppsummering hvis alt før er besvart!
-
                     const nokkel = s.tag.toLowerCase()
-
                     const tittel = tekst(`sykepengesoknad.${nokkel}.tittel` as any)
-
-                    return { tag: s.tag, tittel, besvart: !harUbesvart }
+                    return { tag: s.tag, tittel, besvart: denneErBesvart, alleTidligereErBesvart }
                 }) || []
         )
     }
@@ -62,7 +60,7 @@ const Fremdriftsbar = () => {
                 return (
                     <FormProgress.Step
                         onClick={(e) => {
-                            if (s.besvart) {
+                            if (s.alleTidligereErBesvart) {
                                 e.preventDefault()
                                 router.push(url)
                             }
@@ -70,7 +68,7 @@ const Fremdriftsbar = () => {
                         href={basePath() + url}
                         key={i + ' ' + s.tag}
                         completed={s.besvart}
-                        interactive={s.besvart}
+                        interactive={s.alleTidligereErBesvart} // OG i ikke er lik aktiv steg?
                     >
                         {s.tittel}
                     </FormProgress.Step>
