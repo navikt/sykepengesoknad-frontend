@@ -22,7 +22,7 @@ const OpplysningerTekster = {
     'sykepengesoknad.avbrutt.informasjon-innhold-eos-1':
         'Hvis du vil likevel vil søke om å beholde sykepenger når du er på reise utenfor EU/EØS, gjenåpner du denne søknaden, fyller ut og sender inn.',
     'sykepengesoknad.avbrutt.informasjon-innhold-eos-2':
-        'Les mer om reise utenfor EU/EØS mens du er sykemeldt her <a href="https://www.nav.no/sykepenger#utland">nav.no/sykepenger#utland</a>',
+        'Les mer om reise utenfor EU/EØS mens du er sykmeldt her <a href="https://www.nav.no/sykepenger#utland">nav.no/sykepenger#utland</a>',
     'sykepengesoknad.avbrutt.informasjon-innhold-eos-3': 'Har du allerede vært på reise?',
     'sykepengesoknad.avbrutt.informasjon-innhold-eos-4':
         'I utgangspunktet bør du søke før du reiser til land utenfor EU/EØS. Du kan likevel søke om å få beholde sykepengene etter du har reist.',
