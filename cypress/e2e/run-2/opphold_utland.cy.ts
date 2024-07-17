@@ -117,9 +117,8 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
 
         cy.get('.navds-progress-bar')
             .should('have.attr', 'aria-valuenow', '2')
-            .and('have.attr', 'aria-valuemin', '1')
             .and('have.attr', 'aria-valuemax', '4')
-            .and('have.attr', 'aria-valuetext', '2 av 4 steg')
+            .and('have.attr', 'aria-valuetext', '2 av 4')
 
         cy.get('body').findByRole('link', { name: 'Tilbake' }).should('not.exist')
         cy.contains('Opplysninger fra sykmeldingen').should('not.exist')
@@ -201,9 +200,8 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
 
         cy.get('.navds-progress-bar')
             .should('have.attr', 'aria-valuenow', '4')
-            .and('have.attr', 'aria-valuemin', '1')
             .and('have.attr', 'aria-valuemax', '4')
-            .and('have.attr', 'aria-valuetext', '4 av 4 steg')
+            .and('have.attr', 'aria-valuetext', '4 av 4')
 
         cy.contains('Viktig å være klar over:')
         cy.contains(

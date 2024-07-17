@@ -84,7 +84,7 @@ describe('Tester behandlingsdagersøknad', () => {
 
     it('Tilbake og videre', function () {
         cy.contains('Oppsummering')
-        cy.contains('Tilbake').click()
+        cy.findByRole('button', { name: 'Tilbake' }).click()
 
         cy.contains('Andre inntektskilder')
         cy.contains('Gå videre').click()

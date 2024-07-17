@@ -18,7 +18,7 @@ describe('Tester delvis utfylt søknad', () => {
     })
 
     it('Forrige spørsmål er besvart', () => {
-        cy.contains('Tilbake').click()
+        cy.findByRole('button', { name: 'Tilbake' }).click()
         cy.url().should('include', `${delvisUtfyltSoknad.id}/2`)
         cy.contains('Arbeid utenfor Norge')
         cy.get('[data-cy="ja-nei-stor"] input[value=NEI]').should('be.checked')
