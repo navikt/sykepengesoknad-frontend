@@ -113,13 +113,12 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
 
     it('Velger periode for utenlandsopphold', function () {
         cy.url().should('include', `${soknad.id}/2`)
-        cy.get('[data-cy="tilbake-knapp"]').should('exist')
+        cy.findByRole('button', { name: 'Tilbake' }).should('exist')
 
-        cy.findByRole('progressbar', { name: 'Søknadssteg' })
+        cy.get('.navds-progress-bar')
             .should('have.attr', 'aria-valuenow', '2')
-            .and('have.attr', 'aria-valuemin', '1')
             .and('have.attr', 'aria-valuemax', '4')
-            .and('have.attr', 'aria-valuetext', '2 av 4 steg')
+            .and('have.attr', 'aria-valuetext', '2 av 4')
 
         cy.get('body').findByRole('link', { name: 'Tilbake' }).should('not.exist')
         cy.contains('Opplysninger fra sykmeldingen').should('not.exist')
@@ -131,7 +130,8 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
     })
 
     it('Går tilbake og frem', function () {
-        cy.get('[data-cy="tilbake-knapp"]').click()
+        cy.findByRole('button', { name: 'Tilbake' }).click()
+
         sjekkMainContentFokus()
         klikkGaVidere()
     })
@@ -199,11 +199,10 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
     it('Sender søknaden', function () {
         cy.url().should('include', `${soknad.id}/4`)
 
-        cy.findByRole('progressbar', { name: 'Søknadssteg' })
+        cy.get('.navds-progress-bar')
             .should('have.attr', 'aria-valuenow', '4')
-            .and('have.attr', 'aria-valuemin', '1')
             .and('have.attr', 'aria-valuemax', '4')
-            .and('have.attr', 'aria-valuetext', '4 av 4 steg')
+            .and('have.attr', 'aria-valuetext', '4 av 4')
 
         cy.contains('Viktig å være klar over:')
         cy.contains(

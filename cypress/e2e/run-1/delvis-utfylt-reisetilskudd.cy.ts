@@ -4,6 +4,7 @@ describe('Tester delvis utfylt søknad med reisetilskudd', () => {
     const delvisUtfyltSoknad = delvisUtfyltReisetilskudd
 
     before(() => {
+        cy.clearCookies()
         cy.visit('/syk/sykepengesoknad?testperson=reisetilskudd-test')
     })
 
@@ -18,13 +19,13 @@ describe('Tester delvis utfylt søknad med reisetilskudd', () => {
     })
 
     it('Forrige spørsmål er besvart', () => {
-        cy.contains('Tilbake').click()
+        cy.findByRole('button', { name: 'Tilbake' }).click()
         cy.url().should('include', `${delvisUtfyltSoknad.id}/5`)
         cy.get('[data-cy="ja-nei-stor"] input[value=NEI]').should('be.checked')
     })
 
     it('Side for opplasting av kvitteringer er ikke besvart', () => {
-        cy.contains('Tilbake').click()
+        cy.findByRole('button', { name: 'Tilbake' }).click()
         cy.url().should('include', `${delvisUtfyltSoknad.id}/4`)
         cy.get('.belop').should('not.exist')
     })

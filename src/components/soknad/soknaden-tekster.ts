@@ -5,7 +5,7 @@ const SoknadenTekster = {
     'soknad.tilbakeknapp': 'Tilbake',
     'statuspanel.status': 'Status',
     'sykepengesoknad.start.tittel': 'Ansvarserklæring',
-    'sykepengesoknad.til_slutt.tittel': 'Til slutt',
+    'sykepengesoknad.til_slutt.tittel': 'Oppsummering',
     'sykepengesoknad.sykepengeinfo.til-nav':
         'Sykepenger utbetales etter at NAV har innvilget søknaden. <a class="navds-link" href="https://www.nav.no/saksbehandlingstider#sykepenger" target="_blank">Les om sykepenger og saksbehandlingstider.</a>',
 

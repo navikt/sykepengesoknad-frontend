@@ -20,6 +20,7 @@ import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { RSSvar } from '../../types/rs-types/rs-svar'
 import { RSArbeidssituasjon } from '../../types/rs-types/rs-arbeidssituasjon'
+import { RSOppdaterSporsmalResponse } from '../../types/rs-types/rest-response/rs-oppdatersporsmalresponse'
 
 import { arbeidstakerSoknadOpprettetAvInntektsmelding } from './data/personas/opprettet-av-inntektsmelding'
 import { Persona } from './data/personas/personas'
@@ -349,7 +350,34 @@ export async function mockApi(req: NextApiRequest, res: NextApiResponse) {
             const spmIdx = soknaden.sporsmal.findIndex((body) => body.id === sporsmalId)
             soknaden.sporsmal.splice(spmIdx, 1, body)
 
-            return sendJson({ oppdatertSporsmal: body }, 200)
+            const json: RSOppdaterSporsmalResponse = { oppdatertSporsmal: body }
+
+            if (body.tag == 'TILBAKE_I_ARBEID') {
+                if (body.svar.length == 1 && body.undersporsmal[0].svar.length == 1) {
+                    if (
+                        body.svar[0].verdi == 'JA' &&
+                        body.undersporsmal[0].svar[0].verdi.includes(
+                            body.undersporsmal[0].min || Math.random().toString(),
+                        )
+                    ) {
+                        soknaden.sporsmal = soknaden.sporsmal.filter((spm) => {
+                            const tagsSomForsvinner = [
+                                'FERIE_V2',
+                                'PERMISJON_V2',
+                                'UTLAND_V2',
+                                'OPPHOLD_UTENFOR_EOS',
+                                'JOBBET_DU_GRADERT',
+                                'JOBBET_DU_100_PROSENT',
+                                'ARBEID_UNDERVEIS_100_PROSENT',
+                            ]
+                            return !tagsSomForsvinner.some((tag) => spm.tag.includes(tag))
+                        })
+                        json.mutertSoknad = soknaden
+                    }
+                }
+            }
+
+            return sendJson(json, 200)
         },
         [ENDPOINTS.GET_MOTTAKER]: () => {
             const skalSendesTil = mottaker(soknadId!)

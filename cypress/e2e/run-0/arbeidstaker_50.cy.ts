@@ -32,7 +32,7 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
 
     it('Tilbake til ANSVARSERKLARING og frem igjen', function () {
         cy.url().should('include', `${soknad.id}/2`)
-        cy.get('[data-cy="tilbake-knapp"]').click()
+        cy.findByRole('button', { name: 'Tilbake' }).click()
         cy.url().should('include', `${soknad.id}/1`)
         cy.contains('Gå videre').click()
     })
@@ -154,7 +154,7 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
 
     it('Søknad ANSVARSERKLARING ', function () {
         cy.url().should('include', `${soknad.id}/9`)
-        cy.contains('Til slutt')
+        cy.contains('Oppsummering')
         cy.contains(
             'Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.',
         )

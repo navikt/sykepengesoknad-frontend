@@ -67,7 +67,7 @@ export function svarCheckboxPanel() {
 export function checkViStolerPåDeg(gåVidere = true) {
     cy.get('form')
         .findByRole('checkbox', {
-            name: 'Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene jeg gir ikke er riktige eller fullstendige. Jeg vet også at NAV kan holde igjen eller kreve tilbake penger, og at å gi feil opplysninger kan være straffbart.',
+            name: /Jeg vet at jeg kan miste retten til/i,
         })
         .click()
     if (gåVidere) {
@@ -87,7 +87,7 @@ export function checkJegHarLestOgSend() {
 
 export function neiOgVidere(titler: string[]) {
     for (let i = 0; i < titler.length; i++) {
-        cy.contains(titler[i]).should('be.visible')
+        cy.get('h2').contains(titler[i]).should('be.visible')
         svarNeiHovedsporsmal()
         klikkGaVidere()
     }

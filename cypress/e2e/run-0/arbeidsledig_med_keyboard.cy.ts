@@ -39,6 +39,7 @@ describe('Tester arbeidsledigsøknad', () => {
         cy.get('form').findAllByRole('radio', { name: 'Nei' }).should('have.length', 1)
         cy.realPress('Tab')
         cy.realPress('Tab')
+        cy.realPress('Tab')
         cy.realPress('Space')
         cy.realPress('Tab')
         cy.realPress('Tab')
@@ -47,6 +48,7 @@ describe('Tester arbeidsledigsøknad', () => {
 
         cy.contains('Andre inntektskilder')
         cy.contains('Hva mener vi med andre inntektskilder?')
+        cy.realPress('Tab')
         cy.realPress('Tab')
         cy.realPress('Tab')
         cy.realPress('Tab')
@@ -62,6 +64,7 @@ describe('Tester arbeidsledigsøknad', () => {
         cy.realPress('Tab')
         cy.realPress('Tab')
         cy.realPress('Tab')
+        cy.realPress('Tab')
         cy.realPress('Space')
         cy.realPress('{rightarrow}')
         cy.realPress('Tab')
@@ -70,7 +73,8 @@ describe('Tester arbeidsledigsøknad', () => {
         cy.realPress('Enter')
         sjekkMainContentFokus()
 
-        cy.contains('Til slutt')
+        cy.contains('Oppsummering')
+        cy.realPress('Tab')
         cy.realPress('Tab')
         cy.realPress('Tab')
         cy.realPress('Tab')

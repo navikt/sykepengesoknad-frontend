@@ -74,7 +74,7 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
 
         it('Beløpet er riktig når vi går frem og tilbake', () => {
             cy.url().should('include', `${nyttReisetilskudd.id}/3`)
-            cy.contains('Tilbake').click()
+            cy.findByRole('button', { name: 'Tilbake' }).click()
             cy.url().should('include', `${nyttReisetilskudd.id}/2`)
             cy.get('#1566427').should('have.value', '1000')
 
@@ -115,7 +115,7 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
 
         it('Beløpet er riktig når vi går frem og tilbake', () => {
             cy.url().should('include', `${nyttReisetilskudd.id}/4`)
-            cy.contains('Tilbake').click()
+            cy.findByRole('button', { name: 'Tilbake' }).click()
 
             cy.url().should('include', `${nyttReisetilskudd.id}/3`)
             cy.get('[aria-label="mandag 4"]').should('have.class', 'rdp-day_selected')
@@ -197,7 +197,7 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
             it('Går frem og tilbake', () => {
                 klikkGaVidere()
 
-                cy.contains('Tilbake').click()
+                cy.findByRole('button', { name: 'Tilbake' }).click()
                 sjekkMainContentFokus()
                 cy.url().should('include', `/soknader/${nyttReisetilskudd.id}/4`)
                 cy.get('.navds-table').within(() => {
@@ -223,10 +223,10 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
         })
     })
 
-    describe('Til slutt - Reisetilskudd', () => {
+    describe('Oppsummering - Reisetilskudd', () => {
         it('URL er riktig', () => {
             cy.url().should('include', `/soknader/${nyttReisetilskudd.id}/6`)
-            cy.get('[data-cy="sporsmal-tittel"]').should('have.text', 'Til slutt')
+            cy.get('[data-cy="sporsmal-tittel"]').should('have.text', 'Oppsummering')
         })
 
         it('Bekreftelsespunktene er riktige', () => {
