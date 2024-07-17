@@ -199,6 +199,7 @@ export function svarCheckboxSporsmal(sporsmal: string, svar: string) {
 
 export function avbryterSoknad() {
     // Avbryt dialog vises
+    modalIkkeAktiv()
     cy.contains('Jeg har ikke behov for denne søknaden').as('avbrytSoknad').should('be.visible')
     cy.get('@avbrytSoknad').click()
     modalAktiv()
