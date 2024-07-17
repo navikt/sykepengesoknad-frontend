@@ -1,4 +1,4 @@
-import { klikkGaVidere, sjekkMainContentFokus } from '../../support/utilities'
+import { klikkGaVidere, klikkTilbake, sjekkMainContentFokus } from '../../support/utilities'
 import { gradertReisetilskudd } from '../../../src/data/mock/data/soknad/arbeidstaker-reisetilskudd-gradert'
 
 describe('Tester at riktig antall desimaler sendes til backend', () => {
@@ -13,7 +13,7 @@ describe('Tester at riktig antall desimaler sendes til backend', () => {
 
         klikkGaVidere()
         cy.url().should('include', `${gradertReisetilskudd.id}/7`)
-        cy.findByRole('button', { name: 'Tilbake' }).click()
+        klikkTilbake()
         sjekkMainContentFokus()
 
         cy.url().should('include', `${gradertReisetilskudd.id}/6`)
@@ -36,7 +36,7 @@ describe('Tester at riktig antall desimaler sendes til backend', () => {
 
         klikkGaVidere()
         cy.url().should('include', `${gradertReisetilskudd.id}/13`)
-        cy.findByRole('button', { name: 'Tilbake' }).click()
+        klikkTilbake()
         sjekkMainContentFokus()
 
         cy.url().should('include', `${gradertReisetilskudd.id}/12`)
@@ -57,7 +57,7 @@ describe('Tester at riktig antall desimaler sendes til backend', () => {
 
         klikkGaVidere()
         cy.url().should('include', `${gradertReisetilskudd.id}/7`)
-        cy.findByRole('button', { name: 'Tilbake' }).click()
+        klikkTilbake()
         sjekkMainContentFokus()
 
         cy.url().should('include', `${gradertReisetilskudd.id}/6`)
@@ -78,7 +78,7 @@ describe('Tester at riktig antall desimaler sendes til backend', () => {
 
         klikkGaVidere()
         cy.url().should('include', `${gradertReisetilskudd.id}/7`)
-        cy.findByRole('button', { name: 'Tilbake' }).click()
+        klikkTilbake()
         sjekkMainContentFokus()
 
         cy.url().should('include', `${gradertReisetilskudd.id}/6`)

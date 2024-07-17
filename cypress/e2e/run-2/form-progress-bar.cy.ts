@@ -1,4 +1,4 @@
-import { checkViStolerPåDeg, neiOgVidere } from '../../support/utilities'
+import { checkViStolerPåDeg, klikkTilbake, neiOgVidere } from '../../support/utilities'
 import 'cypress-real-events'
 
 describe('Tester form progress bar', () => {
@@ -42,9 +42,9 @@ describe('Tester form progress bar', () => {
     })
 
     it('Vi går tilbake en med å klikke tilbake knappen', function () {
-        cy.findByRole('button', { name: 'Tilbake' }).click()
+        klikkTilbake()
         cy.contains('Steg 6 av 14')
-        cy.findByRole('button', { name: 'Tilbake' }).click()
+        klikkTilbake()
         cy.contains('Steg 5 av 14')
 
         cy.get('.navds-stepper').within(() => {

@@ -1,5 +1,5 @@
 import { behandlingsdager } from '../../../src/data/mock/data/soknad/behandlingsdager'
-import { klikkGaVidere, svarNeiHovedsporsmal } from '../../support/utilities'
+import { klikkGaVidere, klikkTilbake, svarNeiHovedsporsmal } from '../../support/utilities'
 
 describe('Tester behandlingsdagersøknad', () => {
     //-----
@@ -84,7 +84,7 @@ describe('Tester behandlingsdagersøknad', () => {
 
     it('Tilbake og videre', function () {
         cy.contains('Oppsummering')
-        cy.findByRole('button', { name: 'Tilbake' }).click()
+        klikkTilbake()
 
         cy.contains('Andre inntektskilder')
         cy.contains('Gå videre').click()

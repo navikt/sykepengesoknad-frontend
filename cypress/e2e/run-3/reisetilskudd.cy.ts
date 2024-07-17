@@ -1,4 +1,4 @@
-import { klikkGaVidere, sjekkMainContentFokus } from '../../support/utilities'
+import { klikkGaVidere, klikkTilbake, sjekkMainContentFokus } from '../../support/utilities'
 import { nyttReisetilskudd } from '../../../src/data/mock/data/soknad/arbeidstaker-reisetilskudd'
 
 describe('Teste førsteside i reisetilskuddsøknaden', () => {
@@ -74,7 +74,7 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
 
         it('Beløpet er riktig når vi går frem og tilbake', () => {
             cy.url().should('include', `${nyttReisetilskudd.id}/3`)
-            cy.findByRole('button', { name: 'Tilbake' }).click()
+            klikkTilbake()
             cy.url().should('include', `${nyttReisetilskudd.id}/2`)
             cy.get('#1566427').should('have.value', '1000')
 
@@ -115,7 +115,7 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
 
         it('Beløpet er riktig når vi går frem og tilbake', () => {
             cy.url().should('include', `${nyttReisetilskudd.id}/4`)
-            cy.findByRole('button', { name: 'Tilbake' }).click()
+            klikkTilbake()
 
             cy.url().should('include', `${nyttReisetilskudd.id}/3`)
             cy.get('[aria-label="mandag 4"]').should('have.class', 'rdp-day_selected')
@@ -197,7 +197,7 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
             it('Går frem og tilbake', () => {
                 klikkGaVidere()
 
-                cy.findByRole('button', { name: 'Tilbake' }).click()
+                klikkTilbake()
                 sjekkMainContentFokus()
                 cy.url().should('include', `/soknader/${nyttReisetilskudd.id}/4`)
                 cy.get('.navds-table').within(() => {

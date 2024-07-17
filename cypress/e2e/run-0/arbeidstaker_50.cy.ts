@@ -1,4 +1,4 @@
-import { setPeriodeFraTil } from '../../support/utilities'
+import { klikkTilbake, setPeriodeFraTil } from '../../support/utilities'
 import { arbeidstakerGradert } from '../../../src/data/mock/data/soknad/arbeidstaker-gradert'
 
 describe('Tester arbeidstakersøknad - gradert 50%', () => {
@@ -32,7 +32,7 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
 
     it('Tilbake til ANSVARSERKLARING og frem igjen', function () {
         cy.url().should('include', `${soknad.id}/2`)
-        cy.findByRole('button', { name: 'Tilbake' }).click()
+        klikkTilbake()
         cy.url().should('include', `${soknad.id}/1`)
         cy.contains('Gå videre').click()
     })
