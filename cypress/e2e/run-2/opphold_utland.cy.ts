@@ -113,7 +113,7 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
 
     it('Velger periode for utenlandsopphold', function () {
         cy.url().should('include', `${soknad.id}/2`)
-        cy.get('[data-cy="tilbake-knapp"]').should('exist')
+        cy.findByRole('button', { name: 'Tilbake' }).should('exist')
 
         cy.get('.navds-progress-bar')
             .should('have.attr', 'aria-valuenow', '2')
@@ -130,7 +130,8 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
     })
 
     it('Går tilbake og frem', function () {
-        cy.get('[data-cy="tilbake-knapp"]').click()
+        cy.findByRole('button', { name: 'Tilbake' }).click()
+
         sjekkMainContentFokus()
         klikkGaVidere()
     })

@@ -1,4 +1,4 @@
-import { FormProgress } from '@navikt/ds-react'
+import { FormProgress, Skeleton } from '@navikt/ds-react'
 import React from 'react'
 import { useRouter } from 'next/router'
 
@@ -30,6 +30,9 @@ const Fremdriftsbar = () => {
     if (aktivtSteg == 0) {
         // ingen progressbar på første side
         return null
+    }
+    if (!valgtSoknad) {
+        return <Skeleton variant="rectangle" width="100%" height="56px" />
     }
 
     const antallSpm =
