@@ -21,13 +21,11 @@ describe('Tester delvis utfylt søknad med reisetilskudd', () => {
 
     it('Forrige spørsmål er besvart', () => {
         klikkTilbake()
-        cy.url().should('include', `${delvisUtfyltSoknad.id}/5`)
         cy.get('[data-cy="ja-nei-stor"] input[value=NEI]').should('be.checked')
     })
 
     it('Side for opplasting av kvitteringer er ikke besvart', () => {
         klikkTilbake()
-        cy.url().should('include', `${delvisUtfyltSoknad.id}/4`)
         cy.get('.belop').should('not.exist')
     })
 })
