@@ -31,7 +31,7 @@ const Fremdriftsbar = () => {
         // ingen progressbar på første side
         return null
     }
-    if (!valgtSoknad) {
+    if (!valgtSoknad || isNaN(aktivtSteg)) {
         return <Skeleton variant="rectangle" width="100%" height="56px" />
     }
 
