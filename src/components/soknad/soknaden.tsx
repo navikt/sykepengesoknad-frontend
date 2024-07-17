@@ -139,6 +139,7 @@ export const Soknaden = () => {
             {(flexjarToggle.enabled ||
                 sporsmal?.tag == 'INNTEKTSOPPLYSNINGER_DRIFT_VIRKSOMHETEN' ||
                 sporsmal?.tag == 'INNTEKTSOPPLYSNINGER_VIRKSOMHETEN_AVVIKLET' ||
+                sporsmal?.tag == 'MEDLEMSKAP_OPPHOLDSTILLATELSE_V2' ||
                 valgtSoknad?.soknadstype === RSSoknadstype.OPPHOLD_UTLAND) && (
                 <FlexjarSporsmal soknad={valgtSoknad} sporsmal={sporsmal} steg={stegNo} />
             )}
