@@ -41,7 +41,7 @@ export const YrkesskadeHjelpBody = () => {
             </BodyShort>
             <BodyShort spacing>
                 Sammenhengen mellom en yrkesskade og sykefraværet har ofte en nær tilknytning til hverandre og er kjent
-                for den sykemeldte.
+                for den sykmeldte.
             </BodyShort>
             <BodyShort spacing> Svar ja, hvis du har en godkjent yrkesskade som påvirker dette sykefraværet.</BodyShort>
             <BodyShort spacing>

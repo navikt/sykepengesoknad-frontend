@@ -4,7 +4,7 @@ export const AvvikletVirksomhet = () => {
     return (
         <>
             <BodyShort spacing>
-                Registrerte du selv virksomheten din som avviklet via Altinn før du ble sykemeldt svarer du ja.
+                Registrerte du selv virksomheten din som avviklet via Altinn før du ble sykmeldt svarer du ja.
             </BodyShort>
             <BodyShort spacing>
                 Hvis den fortsatt er i drift, eller du planlegger å ta opp driften når du blir frisk nok, svarer du nei.
