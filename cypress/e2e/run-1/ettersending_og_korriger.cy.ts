@@ -26,7 +26,7 @@ describe('Tester ettersending og korrigering', () => {
         ])
         neiOgVidere(['Andre inntektskilder', 'Reise til utlandet'])
 
-        cy.contains('Til slutt')
+        cy.contains('Oppsummering')
         svarCheckboxPanel()
         cy.contains('Send søknaden').click()
     })

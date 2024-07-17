@@ -46,7 +46,7 @@ describe('Tester korrigering av ferie', () => {
         cy.contains('Reise til utlandet')
         svarNeiHovedsporsmal()
         klikkGaVidere()
-        cy.contains('Til slutt')
+        cy.contains('Oppsummering')
         svarCheckboxPanel()
         cy.contains('Send søknaden').click()
     })

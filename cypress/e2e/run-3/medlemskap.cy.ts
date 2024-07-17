@@ -84,7 +84,7 @@ describe('Søknad med alle opprinnelige spørsmål om medlemskap', () => {
     })
 
     it('Oppsumering av søknad', () => {
-        cy.contains('Til slutt')
+        cy.contains('Oppsummering')
 
         cy.findByRole('region', { name: 'Oppsummering fra søknaden' }).click()
         cy.findByRole('region', { name: 'Oppsummering fra søknaden' }).within(() => {
@@ -125,7 +125,7 @@ describe('Søknad med nytt spørsmål om oppholdstillatelse og kjent permanent o
     })
 
     it('Oppsumering av søknad', () => {
-        cy.contains('Til slutt')
+        cy.contains('Oppsummering')
 
         cy.findByRole('region', { name: 'Oppsummering fra søknaden' }).click()
         cy.findByRole('region', { name: 'Oppsummering fra søknaden' }).within(() => {
@@ -177,7 +177,7 @@ describe('Søknad med nytt spørsmål om oppholdstillatelse og kjent midlertidig
     })
 
     it('Oppsumering av søknad', () => {
-        cy.contains('Til slutt')
+        cy.contains('Oppsummering')
 
         cy.findByRole('region', { name: 'Oppsummering fra søknaden' }).click()
         cy.findByRole('region', { name: 'Oppsummering fra søknaden' }).within(() => {

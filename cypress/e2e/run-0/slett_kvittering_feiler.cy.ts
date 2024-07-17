@@ -8,7 +8,7 @@ describe('Test sletting av kvittering som feiler', () => {
     describe('Sletting', () => {
         it('URL er riktig', () => {
             cy.url().should('include', `/syk/sykepengesoknad/soknader/${feilVedSlettingAvKvittering.id}/4`)
-            cy.contains('Kvittering').and('be.visible')
+            cy.get('h2').contains('Kvittering').and('be.visible')
         })
 
         it('Laster opp Taxi-kvittering', () => {

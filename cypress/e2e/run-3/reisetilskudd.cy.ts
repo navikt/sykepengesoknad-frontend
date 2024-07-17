@@ -223,10 +223,10 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
         })
     })
 
-    describe('Til slutt - Reisetilskudd', () => {
+    describe('Oppsummering - Reisetilskudd', () => {
         it('URL er riktig', () => {
             cy.url().should('include', `/soknader/${nyttReisetilskudd.id}/6`)
-            cy.get('[data-cy="sporsmal-tittel"]').should('have.text', 'Til slutt')
+            cy.get('[data-cy="sporsmal-tittel"]').should('have.text', 'Oppsummering')
         })
 
         it('Bekreftelsespunktene er riktige', () => {

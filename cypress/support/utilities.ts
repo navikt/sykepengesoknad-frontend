@@ -87,7 +87,7 @@ export function checkJegHarLestOgSend() {
 
 export function neiOgVidere(titler: string[]) {
     for (let i = 0; i < titler.length; i++) {
-        cy.contains(titler[i]).should('be.visible')
+        cy.get('h2').contains(titler[i]).should('be.visible')
         svarNeiHovedsporsmal()
         klikkGaVidere()
     }

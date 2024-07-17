@@ -19,9 +19,11 @@ describe('Tester selvstendig naringsdrivende søknad', () => {
         )
     })
 
-    it('Svarer på spørsmål', function () {
+    it('Svarer på vi stoler på deg', function () {
         checkViStolerPåDeg()
+    })
 
+    it('Svarer på spørsmål', function () {
         neiOgVidere([
             'Tilbake i fullt arbeid',
             'Jobb underveis i sykefraværet',
@@ -89,7 +91,7 @@ describe('Tester selvstendig naringsdrivende søknad', () => {
         klikkGaVidere()
     })
 
-    it('Til slutt ', function () {
+    it('Oppsummering ', function () {
         checkJegHarLestOgSend()
     })
 

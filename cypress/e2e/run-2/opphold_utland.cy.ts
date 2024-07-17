@@ -115,7 +115,7 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
         cy.url().should('include', `${soknad.id}/2`)
         cy.get('[data-cy="tilbake-knapp"]').should('exist')
 
-        cy.findByRole('progressbar', { name: 'Søknadssteg' })
+        cy.get('.navds-progress-bar')
             .should('have.attr', 'aria-valuenow', '2')
             .and('have.attr', 'aria-valuemin', '1')
             .and('have.attr', 'aria-valuemax', '4')
@@ -199,7 +199,7 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
     it('Sender søknaden', function () {
         cy.url().should('include', `${soknad.id}/4`)
 
-        cy.findByRole('progressbar', { name: 'Søknadssteg' })
+        cy.get('.navds-progress-bar')
             .should('have.attr', 'aria-valuenow', '4')
             .and('have.attr', 'aria-valuemin', '1')
             .and('have.attr', 'aria-valuemax', '4')

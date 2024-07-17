@@ -51,11 +51,10 @@ describe('Tester arbeidstakersøknad', () => {
 
     it('Søknad TILBAKE_I_ARBEID ', function () {
         cy.url().should('include', `${soknad.id}/2`)
-        cy.findByRole('progressbar', { name: 'Søknadssteg' })
+        cy.get('.navds-progress-bar')
             .should('have.attr', 'aria-valuenow', '1')
-            .and('have.attr', 'aria-valuemin', '1')
             .and('have.attr', 'aria-valuemax', '7')
-            .and('have.attr', 'aria-valuetext', '1 av 7 steg')
+            .and('have.attr', 'aria-valuetext', '1 av 7')
 
         // Test spørsmål
         cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click()
@@ -177,11 +176,10 @@ describe('Tester arbeidstakersøknad', () => {
     it('Søknad ANSVARSERKLARING', function () {
         cy.url().should('include', `${soknad.id}/8`)
 
-        cy.findByRole('progressbar', { name: 'Søknadssteg' })
+        cy.get('.navds-progress-bar')
             .should('have.attr', 'aria-valuenow', '7')
-            .and('have.attr', 'aria-valuemin', '1')
             .and('have.attr', 'aria-valuemax', '7')
-            .and('have.attr', 'aria-valuetext', '7 av 7 steg')
+            .and('have.attr', 'aria-valuetext', '7 av 7')
 
         it('Bekreftelsespunktene er riktige', () => {
             const bekreftelser = [

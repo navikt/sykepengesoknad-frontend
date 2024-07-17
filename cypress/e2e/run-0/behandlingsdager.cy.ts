@@ -83,7 +83,7 @@ describe('Tester behandlingsdagersøknad', () => {
     })
 
     it('Tilbake og videre', function () {
-        cy.contains('Til slutt')
+        cy.contains('Oppsummering')
         cy.contains('Tilbake').click()
 
         cy.contains('Andre inntektskilder')
@@ -92,7 +92,7 @@ describe('Tester behandlingsdagersøknad', () => {
 
     it('Søknad TIL_SLUTT - steg 4', function () {
         cy.url().should('include', `${soknad.id}/5`)
-        cy.contains('Til slutt')
+        cy.contains('Oppsummering')
         it('Bekreftelsespunktene er riktige', () => {
             const punkter = [
                 'Denne søknaden gjelder hvis selve behandlingen har en slik virkning på deg at du ikke kan jobbe resten av dagen. Grunnen er altså behandlingens effekt, og ikke at du for eksempel måtte bruke arbeidstid.',
