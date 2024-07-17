@@ -1,4 +1,5 @@
 import { delvisUtfyltReisetilskudd } from '../../../src/data/mock/data/personas/reisetilskuddTestPerson'
+import { klikkTilbake } from '../../support/utilities'
 
 describe('Tester delvis utfylt søknad med reisetilskudd', () => {
     const delvisUtfyltSoknad = delvisUtfyltReisetilskudd
@@ -19,14 +20,12 @@ describe('Tester delvis utfylt søknad med reisetilskudd', () => {
     })
 
     it('Forrige spørsmål er besvart', () => {
-        cy.findByRole('button', { name: 'Tilbake' }).click()
-        cy.url().should('include', `${delvisUtfyltSoknad.id}/5`)
+        klikkTilbake()
         cy.get('[data-cy="ja-nei-stor"] input[value=NEI]').should('be.checked')
     })
 
     it('Side for opplasting av kvitteringer er ikke besvart', () => {
-        cy.findByRole('button', { name: 'Tilbake' }).click()
-        cy.url().should('include', `${delvisUtfyltSoknad.id}/4`)
+        klikkTilbake()
         cy.get('.belop').should('not.exist')
     })
 })

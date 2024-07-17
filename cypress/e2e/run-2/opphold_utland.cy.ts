@@ -1,6 +1,7 @@
 import {
     avbryterSoknad,
     klikkGaVidere,
+    klikkTilbake,
     setPeriodeFraTil,
     sjekkMainContentFokus,
     svarCombobox,
@@ -130,7 +131,7 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
     })
 
     it('Går tilbake og frem', function () {
-        cy.findByRole('button', { name: 'Tilbake' }).click()
+        klikkTilbake()
 
         sjekkMainContentFokus()
         klikkGaVidere()

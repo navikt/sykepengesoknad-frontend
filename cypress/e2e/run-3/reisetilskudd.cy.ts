@@ -1,4 +1,4 @@
-import { klikkGaVidere, sjekkMainContentFokus } from '../../support/utilities'
+import { klikkGaVidere, klikkTilbake } from '../../support/utilities'
 import { nyttReisetilskudd } from '../../../src/data/mock/data/soknad/arbeidstaker-reisetilskudd'
 
 describe('Teste førsteside i reisetilskuddsøknaden', () => {
@@ -73,9 +73,7 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
         })
 
         it('Beløpet er riktig når vi går frem og tilbake', () => {
-            cy.url().should('include', `${nyttReisetilskudd.id}/3`)
-            cy.findByRole('button', { name: 'Tilbake' }).click()
-            cy.url().should('include', `${nyttReisetilskudd.id}/2`)
+            klikkTilbake()
             cy.get('#1566427').should('have.value', '1000')
 
             cy.contains('Gå videre').click()
@@ -114,10 +112,8 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
         })
 
         it('Beløpet er riktig når vi går frem og tilbake', () => {
-            cy.url().should('include', `${nyttReisetilskudd.id}/4`)
-            cy.findByRole('button', { name: 'Tilbake' }).click()
+            klikkTilbake()
 
-            cy.url().should('include', `${nyttReisetilskudd.id}/3`)
             cy.get('[aria-label="mandag 4"]').should('have.class', 'rdp-day_selected')
             cy.get('[aria-label="tirsdag 5"]').should('have.class', 'rdp-day_selected')
             cy.get('[aria-label="onsdag 6"]').should('have.class', 'rdp-day_selected')
@@ -196,10 +192,7 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
         describe('Beholder verdier når vi går frem og tilbake', () => {
             it('Går frem og tilbake', () => {
                 klikkGaVidere()
-
-                cy.findByRole('button', { name: 'Tilbake' }).click()
-                sjekkMainContentFokus()
-                cy.url().should('include', `/soknader/${nyttReisetilskudd.id}/4`)
+                klikkTilbake()
                 cy.get('.navds-table').within(() => {
                     cy.contains('Parkering')
                     cy.contains('99 kr')

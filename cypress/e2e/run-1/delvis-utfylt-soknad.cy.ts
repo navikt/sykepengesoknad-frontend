@@ -1,4 +1,5 @@
 import { delvisUtfylltArbeidsledig } from '../../../src/data/mock/data/soknad/soknader-integration'
+import { klikkTilbake } from '../../support/utilities'
 
 describe('Tester delvis utfylt søknad', () => {
     const delvisUtfyltSoknad = delvisUtfylltArbeidsledig
@@ -18,8 +19,7 @@ describe('Tester delvis utfylt søknad', () => {
     })
 
     it('Forrige spørsmål er besvart', () => {
-        cy.findByRole('button', { name: 'Tilbake' }).click()
-        cy.url().should('include', `${delvisUtfyltSoknad.id}/2`)
+        klikkTilbake()
         cy.contains('Arbeid utenfor Norge')
         cy.get('[data-cy="ja-nei-stor"] input[value=NEI]').should('be.checked')
     })

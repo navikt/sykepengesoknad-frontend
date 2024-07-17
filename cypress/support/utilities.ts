@@ -120,6 +120,24 @@ export function klikkGaVidere(forventFeil = false) {
         sjekkMainContentFokus()
     })
 }
+export function klikkTilbake() {
+    // Få nåværende URL
+    cy.url().then((currentUrl) => {
+        // Trekke ut det nåværende path parameteret
+        const currentPathParam = parseInt(currentUrl.split('/').pop()!)
+
+        cy.findByRole('button', { name: 'Tilbake' }).click()
+        // Vent til URL har endret seg
+        cy.url().should('not.eq', currentUrl)
+
+        // Sjekke om path parameteret er sunket med 1
+        cy.url().then((newUrl) => {
+            const newPathParam = parseInt(newUrl.split('/').pop()!)
+            expect(newPathParam).to.eq(currentPathParam - 1)
+        })
+        sjekkMainContentFokus()
+    })
+}
 
 export function sjekkMainContentFokus() {
     // eslint-disable-next-line cypress/unsafe-to-chain-command
