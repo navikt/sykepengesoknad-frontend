@@ -16,6 +16,7 @@ function erBesvart(spm: Sporsmal): boolean {
     }
     return spm.undersporsmal.some((s) => erBesvart(s))
 }
+
 const Fremdriftsbar = () => {
     const { valgtSoknad, stegNo } = useSoknadMedDetaljer()
 
@@ -31,19 +32,20 @@ const Fremdriftsbar = () => {
         return null
     }
 
-    const antallSporsmål =
+    const antallSpm =
         valgtSoknad?.sporsmal.filter((s) => s.tag !== 'VAER_KLAR_OVER_AT' && s.tag !== 'TIL_SLUTT').length || 9
-    const antallSteg = oppholdUtland ? antallSporsmål + 1 : antallSporsmål
+    const antallSteg = oppholdUtland ? antallSpm + 1 : antallSpm
 
     function skapSteg() {
         let alleErBesvart = true
         return (
             valgtSoknad?.sporsmal
-                .filter((s) => !['VAER_KLAR_OVER_AT', 'ANSVARSERKLARING'].includes(s.tag))
+                .filter((s) => 'ANSVARSERKLARING' != s.tag)
                 .map((s) => {
                     const alleTidligereErBesvart = alleErBesvart
                     const denneErBesvart = erBesvart(s)
-                    if (!denneErBesvart) {
+                    if (!denneErBesvart && s.tag != 'KVITTERINGER') {
+                        // Kvitteringerer aksepterer null svar
                         alleErBesvart = false
                     }
                     const nokkel = s.tag.toLowerCase()
