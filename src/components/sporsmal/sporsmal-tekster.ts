@@ -289,6 +289,9 @@ const SporsmalTekster = {
     'soknad.feilmelding.INNTEKTSOPPLYSNINGER_VIRKSOMHETEN_AVVIKLET_JA': '',
     'soknad.feilmelding.INNTEKTSOPPLYSNINGER_VIRKSOMHETEN_AVVIKLET_NEI': '',
     'soknad.feilmelding.INNTEKTSOPPLYSNINGER_VIRKSOMHETEN_AVVIKLET_NAR': '',
+    'soknad.feilmelding.TILKOMMEN_INNTEKT_FORSTEGANG': 'TODO',
+    'soknad.feilmelding.TILKOMMEN_INNTEKT_FORSTEGANG_FORSTE_ARBEIDSDAG': 'TODO',
+    'soknad.feilmelding.TILKOMMEN_INNTEKT_FORSTEGANG_BRUTTO': 'TODO',
 }
 
 export default SporsmalTekster
