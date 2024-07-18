@@ -49,6 +49,7 @@ export function skapSporsmal(spm: RSSporsmal, kriterie: RSVisningskriterieType |
         kriterie,
         erHovedsporsmal,
         spm.tittel,
+        spm.metadata,
     )
 }
 
