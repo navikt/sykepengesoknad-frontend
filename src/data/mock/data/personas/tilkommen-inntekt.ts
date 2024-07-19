@@ -25,5 +25,5 @@ export const tilkommenInntektForstegangs: Persona = {
     soknader: [soknad],
     sykmeldinger: [brukertestSykmelding],
     kontonummer: '12340000000',
-    beskrivelse: 'Søknad med førstegangsspørsmål om tilkommen inntekt',
+    beskrivelse: 'Førstegangsspørsmål om tilkommen inntekt',
 }
