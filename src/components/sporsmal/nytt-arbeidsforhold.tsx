@@ -12,7 +12,7 @@ export const NyttArbeidsforhold = ({ spm }: { spm: Sporsmal }) => {
             <Label as="p" className="mb-4">
                 Vi har funnet et nytt arbeidsforhold:
             </Label>
-            <Label as="p" className="bg-bg-subtle p-4 mb-4 rounded inline-block">
+            <Label as="p" className="bg-bg-subtle p-4 mb-10 rounded inline-block">
                 {spm.metadata?.orgnavn}
             </Label>
         </>

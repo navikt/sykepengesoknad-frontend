@@ -45,7 +45,7 @@ export const tilkommenInntektForstegangSporsmal = ({
                 tag: 'TILKOMMEN_INNTEKT_FORSTEGANG_BRUTTO',
                 sporsmalstekst: `Hvor mye har du tjent i perioden fra den første arbeidsdagen frem til ${tomLesbar}?`,
                 undertekst:
-                    'Oppgi det du har tjent brutto (før skatt) Se på lønnslippen eller kontrakten hvor mye du har tjent eller skal tjene.',
+                    'Oppgi det du har tjent brutto (før skatt). Se på lønnslippen eller kontrakten hvor mye du har tjent eller skal tjene.',
                 svartype: 'BELOP',
                 min: null,
                 max: null,
