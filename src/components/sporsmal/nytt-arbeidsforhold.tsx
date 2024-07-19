@@ -5,7 +5,7 @@ import { Sporsmal } from '../../types/types'
 
 export const NyttArbeidsforhold = ({ spm }: { spm: Sporsmal }) => {
     if (!spm.metadata?.orgnavn) {
-        return <b>ingen ar</b>
+        return null
     }
     return (
         <>
