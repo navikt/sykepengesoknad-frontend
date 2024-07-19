@@ -38,6 +38,7 @@ import { fiskePerson } from './data/personas/fisker'
 import { kjenteInntektskilderPerson } from './data/personas/kjente-inntektskilder'
 import { innenforAgPerioden } from './data/personas/innenfor-ag-periode'
 import { oppholdUtenforEOS } from './data/personas/opphold-utenfor-eos'
+import { tilkommenInntektForstegangs } from './data/personas/tilkommen-inntekt'
 
 type PersonaKey =
     | 'uten-data'
@@ -75,12 +76,18 @@ type PersonaKey =
     | 'kjente-inntektskilder'
     | 'cummulative-layout-shift'
     | 'tilbakedateringer'
+    | 'tilkommen-inntekt-forstegangs'
     | 'selvstendig-naringsdrivende-sendt'
     | 'innenfor-arbeidsgiver-perioden'
 
 export type PersonaData = Partial<Record<PersonaKey, Persona>>
 
-export type PersonaGroupKey = 'soknad-typer' | 'soknad-sporsmal' | 'medlemskap-sporsmal' | 'testing'
+export type PersonaGroupKey =
+    | 'soknad-typer'
+    | 'soknad-sporsmal'
+    | 'medlemskap-sporsmal'
+    | 'testing'
+    | 'Tilkommen inntekt'
 type PersonaGroup = Record<PersonaGroupKey, PersonaData>
 
 export function testpersoner(): PersonaData {
@@ -119,6 +126,9 @@ export function testpersonerGruppert(): PersonaGroup {
         },
         ['medlemskap-sporsmal']: {
             ['medlemskap']: jsonDeepCopy(medlemskapPerson),
+        },
+        ['Tilkommen inntekt']: {
+            ['tilkommen-inntekt-forstegangs']: jsonDeepCopy(tilkommenInntektForstegangs),
         },
         ['testing']: {
             ['over-70']: over70(),

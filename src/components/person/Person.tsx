@@ -123,7 +123,7 @@ function PersonGruppeVisning({ gruppe, personer }: { gruppe: PersonaGroupKey; pe
                 return 'Forskjellige Testscenarios'
             }
             default: {
-                throw Error(`Ukjent testpersongruppe ${gruppe}.`)
+                return gruppe
             }
         }
     }

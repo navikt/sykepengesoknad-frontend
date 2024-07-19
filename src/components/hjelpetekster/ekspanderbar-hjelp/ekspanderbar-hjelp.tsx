@@ -34,6 +34,7 @@ import { KjenteInntektkilderHjelpBody } from './kjente-inntektkilder'
 import { VarigEndring25prosent } from './varig-endring-25prosent'
 import { DriftIVirksomhet } from './drift-i-virksomhet'
 import { AvvikletVirksomhet } from './avviklet-virksomhet'
+import { TilkommenInntektHjelpBody } from './tilkommen-inntekt-hjep-body'
 
 export const EkspanderbarHjelp = ({ sporsmal, mb }: { sporsmal: Sporsmal; mb?: string }) => {
     const { valgtSoknad } = useSoknadMedDetaljer()
@@ -76,6 +77,8 @@ export const EkspanderbarHjelp = ({ sporsmal, mb }: { sporsmal: Sporsmal; mb?: s
                 return <FerieHjelpBody />
             case 'ANDRE_INNTEKTSKILDER_V2':
                 return <AndreInntektskilderHjelpBody />
+            case 'TILKOMMEN_INNTEKT_FORSTEGANG':
+                return <TilkommenInntektHjelpBody />
             case 'PERMISJON_V2':
                 return <PermisjonHjelpBody />
             case 'UTLAND_V2':
