@@ -7,7 +7,6 @@ import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import BekreftelsespunkterArbeidstakereTekster from '../bekreftelsespunkter/bekreftelsespunkter-arbeidstakere-tekster'
 import Oppsummering from '../../oppsummering/oppsummering'
-import Opplysninger from '../../opplysninger-fra-sykmelding/opplysninger'
 import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype'
 import BekreftelsespunkterReisetilskuddTekster from '../bekreftelsespunkter/bekreftelsespunkter-reisetilskudd-tekster'
 import { useSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
@@ -67,7 +66,6 @@ const Kulepunkter = ({ sporsmal }: SpmProps) => {
             <Oppsummering ekspandert={false} sporsmal={valgtSoknad!.sporsmal} parent="kulepunkter" />
             {valgtSoknad?.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND && (
                 <>
-                    <Opplysninger ekspandert={false} />
                     <SendesTil soknad={valgtSoknad!} />
                 </>
             )}
