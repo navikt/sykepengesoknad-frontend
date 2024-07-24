@@ -6,7 +6,6 @@ describe('Tester søknad med fisker som arbeidssituasjon', () => {
 
     it('Viser arbeidssituasjon fra sykmeldinga', () => {
         cy.contains('Søknad om sykepenger').click()
-        cy.contains('Opplysninger fra sykmeldingen')
         cy.get('section').contains('Jeg er sykmeldt som').siblings().first().contains('Fisker')
         cy.get('section').contains('Valgt blad').siblings().first().contains('A')
         cy.get('section').contains('Mottar du lott eller er du på hyre?').siblings().first().contains('Begge')

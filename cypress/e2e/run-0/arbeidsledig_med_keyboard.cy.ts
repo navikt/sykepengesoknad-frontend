@@ -17,9 +17,6 @@ describe('Tester arbeidsledigsøknad', () => {
 
     it('Navigerer søknaden', () => {
         cy.url().should('include', `${soknad.id}/1`)
-        cy.contains('1. april - 24. april 2020 (24 dager)')
-        cy.contains('100% sykmeldt')
-        cy.contains('Opplysninger fra sykmeldingen')
         cy.realPress('Tab')
         cy.realPress('Tab')
         cy.realPress('Tab')
@@ -74,7 +71,6 @@ describe('Tester arbeidsledigsøknad', () => {
         sjekkMainContentFokus()
 
         cy.contains('Oppsummering')
-        cy.realPress('Tab')
         cy.realPress('Tab')
         cy.realPress('Tab')
         cy.realPress('Tab')

@@ -39,7 +39,6 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS med ferie', () =>
     it('PERIODEUTLAND - steg 2', function () {
         cy.url().should('include', `${soknad.id}/2`)
 
-        cy.contains('Opplysninger fra sykmeldingen').should('not.exist')
         cy.contains('Når skal du reise?')
 
         setPeriodeFraTil(17, 24)

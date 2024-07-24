@@ -33,8 +33,6 @@ describe('Tester arbeidstakersøknad', () => {
         cy.contains('Posten Norge AS, Bærum')
         cy.contains('100% sykmeldt')
 
-        cy.get('section[aria-label="Opplysninger fra sykmeldingen"] button').click()
-
         // Avbryt dialog vises
         cy.contains('Jeg har ikke behov for denne søknaden').click()
         cy.findByRole('button', { name: 'Nei, jeg har behov for søknaden' }).click()
