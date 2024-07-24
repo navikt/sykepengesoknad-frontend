@@ -15,7 +15,16 @@ describe('Test sletting av kvittering som feiler', () => {
             cy.get('button').contains('Legg til reiseutgift').click()
             cy.get('select[name=transportmiddel]').select('TAXI')
             cy.get('input[name=belop_input]').type('1234')
-            cy.get('[data-cy="filopplasteren"] input[type=file]').attachFile('kvittering.jpg')
+
+            // fileUpload-rk
+            // cy.get('[data-cy="filopplasteren"] input[type=file]').attachFile('kvittering.jpg')
+            // cy.get('[id="fileUpload-rk"] input[type=file]').attachFile('kvittering.jpg')
+            // cy get by id fileUpload-rk
+            // cy.get('#fileUpload-rk')
+            // cy.get('#fileUpload-rk').attachFile('kvittering.jpg')
+            //cy.get('[id="fileUpload-rk"] input[type=file]').attachFile('kvittering.jpg')
+            cy.get('[data-cy="filopplasteren"]').find('input[type=file]').attachFile('kvittering.jpg')
+            // cy.get('input[type="file"]').attachFile('kvittering.jpg')
             cy.get('button').contains('Bekreft').click()
         })
 
