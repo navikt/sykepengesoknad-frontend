@@ -25,7 +25,7 @@ const FilOpplaster = ({ valgtFil, setValgtFil }: FilOpplasterProps) => {
 
     const {
         formState: { errors },
-        // register,
+        register,
     } = useFormContext()
 
     return (
