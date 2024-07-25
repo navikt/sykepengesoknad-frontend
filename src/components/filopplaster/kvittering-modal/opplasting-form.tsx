@@ -4,13 +4,11 @@ import dayjs from 'dayjs'
 import React, { useEffect, useState } from 'react'
 import { Controller, FormProvider, useForm } from 'react-hook-form'
 import { useQueryClient } from '@tanstack/react-query'
-
 import { RSSvar } from '../../../types/rs-types/rs-svar'
 import { Kvittering, Soknad, UtgiftTyper } from '../../../types/types'
 import { AuthenticationError, fetchJsonMedRequestId } from '../../../utils/fetch'
 import { formaterFilstørrelse, formattertFiltyper, maxFilstørrelse, tillatteFiltyper } from '../../../utils/fil-utils'
 import { getLedetekst, tekst } from '../../../utils/tekster'
-// import DragAndDrop from '../drag-and-drop/drag-and-drop'
 import { useTestpersonQuery } from '../../../hooks/useTestpersonQuery'
 import { useSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
 import FilOpplaster from '../fil-opplaster/fil-opplaster'
@@ -92,7 +90,6 @@ const OpplastingForm = ({ valgtSoknad, setOpenModal, openModal }: OpplastingFrom
             if (valgtFil.length > 1) {
                 methods.setError('fil_input', {
                     type: 'manual',
-                    // message: tekst('opplasting_modal.filopplasting.feilmelding'),
                     message: 'du kan maks laste opp en fil',
                 })
                 return
