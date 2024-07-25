@@ -13,7 +13,7 @@ import { getLedetekst, tekst } from '../../../utils/tekster'
 // import DragAndDrop from '../drag-and-drop/drag-and-drop'
 import { useTestpersonQuery } from '../../../hooks/useTestpersonQuery'
 import { useSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
-import FilOpplaster from '../drag-and-drop/fil-opplaster'
+import FilOpplaster from '../fil-opplaster/fil-opplaster'
 
 import OpplastingTekster from './opplasting-tekster'
 
