@@ -35,7 +35,7 @@ const OpplastingForm = ({ valgtSoknad, setOpenModal, openModal }: OpplastingFrom
     const [laster, setLaster] = useState<boolean>(false)
     const [feilmelding, setFeilmelding] = useState<string>()
 
-        const [valgtFil, setValgtFil] = useState<FileObject[]>([])
+    const [valgtFil, setValgtFil] = useState<FileObject[]>([])
 
     const MAX_FILE_SIZE_IN_MEGA_BYTES = 5
 
