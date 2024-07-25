@@ -4,6 +4,7 @@ import dayjs from 'dayjs'
 import React, { useEffect, useState } from 'react'
 import { Controller, FormProvider, useForm } from 'react-hook-form'
 import { useQueryClient } from '@tanstack/react-query'
+
 import { RSSvar } from '../../../types/rs-types/rs-svar'
 import { Kvittering, Soknad, UtgiftTyper } from '../../../types/types'
 import { AuthenticationError, fetchJsonMedRequestId } from '../../../utils/fetch'
@@ -34,8 +35,7 @@ const OpplastingForm = ({ valgtSoknad, setOpenModal, openModal }: OpplastingFrom
     const [laster, setLaster] = useState<boolean>(false)
     const [feilmelding, setFeilmelding] = useState<string>()
 
-    //   const [files, setFiles] = useState<FileObject[]>([]);
-    const [valgtFil, setValgtFil] = useState<FileObject[]>([])
+        const [valgtFil, setValgtFil] = useState<FileObject[]>([])
 
     const MAX_FILE_SIZE_IN_MEGA_BYTES = 5
 
@@ -71,7 +71,6 @@ const OpplastingForm = ({ valgtSoknad, setOpenModal, openModal }: OpplastingFrom
                 methods.setError('fil_input', {
                     type: 'manual',
                     message: tekst('opplasting_modal.filopplasting.feilmelding'),
-                    // message: 'ikke noen fil'
                 })
                 return
             }
