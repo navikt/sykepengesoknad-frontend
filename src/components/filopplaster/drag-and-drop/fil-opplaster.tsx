@@ -8,7 +8,9 @@ import React, { Dispatch, SetStateAction } from 'react'
 // import { getLedetekst, tekst } from '../../../utils/tekster'
 
 import Vis from '../../vis'
-import { tekst } from '../../../utils/tekster'
+import { getLedetekst, tekst } from "../../../utils/tekster";
+import { useFormContext } from "react-hook-form";
+import { formattertFiltyper, maxFilstørrelse, tillatteFiltyper } from "../../../utils/fil-utils";
 
 // const maks = formaterFilstørrelse(maxFilstørrelse)
 
@@ -22,6 +24,10 @@ const FilOpplaster = ({ valgtFil, setValgtFil }: FilOpplasterProps) => {
 
     const MAX_FILE_SIZE_IN_BYTES = MAX_FILE_SIZE_IN_MEGA_BYTES * 1024 * 1024
 
+        const {
+        formState: { errors },
+        register,
+    } = useFormContext()
 
 
     /*
@@ -39,18 +45,39 @@ const FilOpplaster = ({ valgtFil, setValgtFil }: FilOpplasterProps) => {
     return (
         <VStack gap="6" data-cy="filopplasteren">
             <UNSAFE_FileUpload.Dropzone
-                accept=".png,.jpg,.jpeg"
-                maxSizeInBytes={MAX_FILE_SIZE_IN_BYTES}
+                accept=".png,.jpeg" // do we allow jpg as well? it's more common according to chatgpt
+                // maxSizeInBytes={MAX_FILE_SIZE_IN_BYTES}
                 label={tekst('drag_and_drop.label')}
-                fileLimit={{ max: 1, current: valgtFil.length }}
+                fileLimit={{ max: 1, current: valgtFil.length }} // TODO det går an å laste opp to
                 multiple={false}
                 onSelect={setValgtFil}
             />
-            <div>{valgtFil.length > 0 && valgtFil[0].file.size.toString()}</div>
+      {/*      <div>{valgtFil.length > 0 && valgtFil[0].file.size.toString()}</div>
             <div>{MAX_FILE_SIZE_IN_BYTES}</div>
             <div>
                 {valgtFil.length > 0 && valgtFil[0].file?.size > MAX_FILE_SIZE_IN_BYTES && <>the file is to large</>}
             </div>
+*/}
+            {/*{...register('fil_input', {*/}
+            {/*            validate: {*/}
+            {/*                fil_type: () => {*/}
+            {/*                    if (valgtFil !== undefined && !tillatteFiltyper.split(',').includes(file.file.type)) {*/}
+            {/*                        return getLedetekst(tekst('drag_and_drop.filtype'), {*/}
+            {/*                            '%FILNAVN%': file.file.name,*/}
+            {/*                            '%TILLATTEFILTYPER%': formattertFiltyper,*/}
+            {/*                        })*/}
+            {/*                    }*/}
+            {/*                },*/}
+            {/*                fil_storrelse: () => {*/}
+            {/*                    if (valgtFil !== undefined && file.file.size > maxFilstørrelse) {*/}
+            {/*                        return getLedetekst(tekst('drag_and_drop.maks'), {*/}
+            {/*                            '%FILNAVN%': file.file.name,*/}
+            {/*                            '%MAKSSTOR%': MAX_FILE_SIZE_IN_BYTES,*/}
+            {/*                        })*/}
+            {/*                    }*/}
+            {/*                },*/}
+            {/*            },*/}
+            {/*        })}*/}
 
             {valgtFil.map((file) => (
                 <UNSAFE_FileUpload.Item
