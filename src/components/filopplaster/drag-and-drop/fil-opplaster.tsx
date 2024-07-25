@@ -1,18 +1,10 @@
 import { BodyShort, FileObject, UNSAFE_FileUpload, VStack } from '@navikt/ds-react'
 import React, { Dispatch, SetStateAction } from 'react'
 
-// import {
-//     formaterFilstørrelse,
-//     maxFilstørrelse,
-// } from '../../../utils/fil-utils'
-// import { getLedetekst, tekst } from '../../../utils/tekster'
-
 import Vis from '../../vis'
-import { getLedetekst, tekst } from "../../../utils/tekster";
+import { tekst } from "../../../utils/tekster";
 import { useFormContext } from "react-hook-form";
-import { formattertFiltyper, maxFilstørrelse, tillatteFiltyper } from "../../../utils/fil-utils";
 
-// const maks = formaterFilstørrelse(maxFilstørrelse)
 
 export interface FilOpplasterProps {
     valgtFil: FileObject[]
