@@ -89,7 +89,7 @@ const OpplastingForm = ({ valgtSoknad, setOpenModal, openModal }: OpplastingFrom
             if (valgtFil.length > 1) {
                 methods.setError('fil_input', {
                     type: 'manual',
-                    message: 'du kan maks laste opp en fil',
+                    message: 'Du kan ikke laste opp mer enn en fil',
                 })
                 return
             }
