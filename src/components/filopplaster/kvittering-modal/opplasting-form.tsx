@@ -42,9 +42,9 @@ const OpplastingForm = ({ valgtSoknad, setOpenModal, openModal }: OpplastingFrom
     //   const [files, setFiles] = useState<FileObject[]>([]);
     const [valgtFil, setValgtFil] = useState<FileObject[]>([])
 
-    // const MAX_FILE_SIZE_IN_MEGA_BYTES = 5
+    const MAX_FILE_SIZE_IN_MEGA_BYTES = 5
 
-    // const MAX_FILE_SIZE_IN_BYTES = MAX_FILE_SIZE_IN_MEGA_BYTES * 1024 * 1024
+    const MAX_FILE_SIZE_IN_BYTES = MAX_FILE_SIZE_IN_MEGA_BYTES * 1024 * 1024
 
     const methods = useForm({
         mode: 'onBlur',
@@ -72,13 +72,38 @@ const OpplastingForm = ({ valgtSoknad, setOpenModal, openModal }: OpplastingFrom
 
             const valid = await methods.trigger()
 
-            if (valgtFil.length > 0) {
+            if (valgtFil.length < 1) {
                 methods.setError('fil_input', {
                     type: 'manual',
                     message: tekst('opplasting_modal.filopplasting.feilmelding'),
+                    // message: 'ikke noen fil'
                 })
                 return
             }
+
+            if (valgtFil.length > 1) {
+                methods.setError('fil_input', {
+                    type: 'manual',
+                    // message: tekst('opplasting_modal.filopplasting.feilmelding'),
+                    message: 'du kan maks laste opp en fil'
+                })
+                return
+            }
+
+            if (valgtFil.length > 0 && valgtFil[0].file.size > MAX_FILE_SIZE_IN_BYTES  ) {
+                console.log("tester")
+                methods.setError('fil_input', {
+                    type: 'manual',
+                    message: getLedetekst(tekst('drag_and_drop.maks'), {
+                                        '%FILNAVN%': valgtFil[0].file.name,
+                                        '%MAKSSTOR%': maks,
+                                    })
+                })
+                return
+            }
+
+
+
             if (!valid) return
 
             const opplastingResponse: OpplastetKvittering = await lastOppKvittering()
@@ -219,7 +244,6 @@ const OpplastingForm = ({ valgtSoknad, setOpenModal, openModal }: OpplastingFrom
                 />
 
                 <div className="mt-4">
-                    <Label as="p">{tekst('drag_and_drop.label')}</Label>
                     <FilOpplaster valgtFil={valgtFil} setValgtFil={setValgtFil} />
                 </div>
                 {feilmelding && (
