@@ -1,4 +1,4 @@
-const DragAndDropTekster = {
+const FilOpplasterTekster = {
     'drag_and_drop.maks': 'Filen %FILNAVN% er for stor. Maks filstørrelse er %MAKSSTOR%',
     'drag_and_drop.filtype': 'Filtypen til %FILNAVN% er ugyldig. Gyldige typer er %TILLATTEFILTYPER%',
     'drag_and_drop.dragtekst.endre': 'Endre kvittering',
@@ -8,4 +8,4 @@ const DragAndDropTekster = {
     'fil.feilmelding': 'Det skjedde noe feil ved opplastingen av filen din. Vennligst prøv på nytt',
 }
 
-export default DragAndDropTekster
+export default FilOpplasterTekster
