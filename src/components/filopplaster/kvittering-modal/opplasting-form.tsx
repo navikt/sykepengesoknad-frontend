@@ -1,4 +1,4 @@
-import { Alert, BodyLong, BodyShort, Button, FileObject, Label, ReadMore, Select, TextField } from "@navikt/ds-react";
+import { Alert, BodyLong, BodyShort, Button, FileObject, ReadMore, Select, TextField } from '@navikt/ds-react'
 import { logger } from '@navikt/next-logger'
 import dayjs from 'dayjs'
 import React, { useEffect, useState } from 'react'
@@ -8,14 +8,14 @@ import { useQueryClient } from '@tanstack/react-query'
 import { RSSvar } from '../../../types/rs-types/rs-svar'
 import { Kvittering, Soknad, UtgiftTyper } from '../../../types/types'
 import { AuthenticationError, fetchJsonMedRequestId } from '../../../utils/fetch'
-import { formaterFilstørrelse, formattertFiltyper, maxFilstørrelse, tillatteFiltyper } from "../../../utils/fil-utils";
+import { formaterFilstørrelse, formattertFiltyper, maxFilstørrelse, tillatteFiltyper } from '../../../utils/fil-utils'
 import { getLedetekst, tekst } from '../../../utils/tekster'
 // import DragAndDrop from '../drag-and-drop/drag-and-drop'
 import { useTestpersonQuery } from '../../../hooks/useTestpersonQuery'
 import { useSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
+import FilOpplaster from '../drag-and-drop/fil-opplaster'
 
 import OpplastingTekster from './opplasting-tekster'
-import FilOpplaster from "../drag-and-drop/fil-opplaster";
 
 interface OpplastetKvittering {
     id: string
@@ -28,9 +28,6 @@ export interface OpplastingFromProps {
 }
 
 const OpplastingForm = ({ valgtSoknad, setOpenModal, openModal }: OpplastingFromProps) => {
-
-
-
     const { stegId } = useSoknadMedDetaljer()
 
     const queryClient = useQueryClient()
@@ -81,44 +78,36 @@ const OpplastingForm = ({ valgtSoknad, setOpenModal, openModal }: OpplastingFrom
                 return
             }
 
-            if (valgtFil !== undefined && !tillatteFiltyper.split(',').includes(valgtFil[ 0 ].file.type)) {
+            if (valgtFil !== undefined && !tillatteFiltyper.split(',').includes(valgtFil[0].file.type)) {
                 methods.setError('fil_input', {
                     type: 'manual',
                     message: getLedetekst(tekst('drag_and_drop.filtype'), {
-                        '%FILNAVN%': valgtFil[ 0 ].file.name,
+                        '%FILNAVN%': valgtFil[0].file.name,
                         '%TILLATTEFILTYPER%': formattertFiltyper,
-                    })
+                    }),
                 })
                 return
             }
-
-
-
 
             if (valgtFil.length > 1) {
                 methods.setError('fil_input', {
                     type: 'manual',
                     // message: tekst('opplasting_modal.filopplasting.feilmelding'),
-                    message: 'du kan maks laste opp en fil'
+                    message: 'du kan maks laste opp en fil',
                 })
                 return
             }
 
-
-
-            if (valgtFil.length > 0 && valgtFil[0].file.size > MAX_FILE_SIZE_IN_BYTES  ) {
-                console.log("tester")
+            if (valgtFil.length > 0 && valgtFil[0].file.size > MAX_FILE_SIZE_IN_BYTES) {
                 methods.setError('fil_input', {
                     type: 'manual',
                     message: getLedetekst(tekst('drag_and_drop.maks'), {
-                                        '%FILNAVN%': valgtFil[0].file.name,
-                                        '%MAKSSTOR%': maks,
-                                    })
+                        '%FILNAVN%': valgtFil[0].file.name,
+                        '%MAKSSTOR%': maks,
+                    }),
                 })
                 return
             }
-
-
 
             if (!valid) return
 
@@ -271,7 +260,6 @@ const OpplastingForm = ({ valgtSoknad, setOpenModal, openModal }: OpplastingFrom
                 <div className="mt-8 flex gap-4">
                     <Button variant="primary" type="button" onClick={onSubmit} loading={laster}>
                         {tekst('opplasting_modal.bekreft')}
-
                     </Button>
 
                     <Button
