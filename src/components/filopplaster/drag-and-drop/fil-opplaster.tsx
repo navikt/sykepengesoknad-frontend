@@ -6,7 +6,6 @@ import React, { Dispatch, SetStateAction } from 'react'
 //     maxFilstørrelse,
 // } from '../../../utils/fil-utils'
 // import { getLedetekst, tekst } from '../../../utils/tekster'
-import { useFormContext } from 'react-hook-form'
 
 import Vis from '../../vis'
 import { tekst } from '../../../utils/tekster'
@@ -23,10 +22,19 @@ const FilOpplaster = ({ valgtFil, setValgtFil }: FilOpplasterProps) => {
 
     const MAX_FILE_SIZE_IN_BYTES = MAX_FILE_SIZE_IN_MEGA_BYTES * 1024 * 1024
 
-    const {
-        formState: { errors },
-        register,
-    } = useFormContext()
+
+
+    /*
+
+    https://youtu.be/cc_xmawJ8Kg?t=420
+    what register does
+
+    but how do I register this component? maybe sync it with a hidden file input?
+
+    write your own onsubmit:
+    https://youtu.be/cc_xmawJ8Kg?t=467
+
+     */
 
     return (
         <VStack gap="6" data-cy="filopplasteren">
@@ -48,6 +56,7 @@ const FilOpplaster = ({ valgtFil, setValgtFil }: FilOpplasterProps) => {
                 <UNSAFE_FileUpload.Item
                     key={file.file.name}
                     file={file.file}
+
                     button={{
                         action: 'delete',
                         onClick: () => setValgtFil([]),

@@ -23,7 +23,7 @@ before(() => {
 })
 
 afterEach(() => {
-    setupAxe()
+    // setupAxe()
 })
 
 function setupAxe() {

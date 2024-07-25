@@ -72,7 +72,7 @@ const OpplastingForm = ({ valgtSoknad, setOpenModal, openModal }: OpplastingFrom
 
             const valid = await methods.trigger()
 
-            if (!valgtFil) {
+            if (valgtFil.length > 0) {
                 methods.setError('fil_input', {
                     type: 'manual',
                     message: tekst('opplasting_modal.filopplasting.feilmelding'),
