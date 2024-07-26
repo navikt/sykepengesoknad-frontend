@@ -1,24 +1,19 @@
-import { BodyShort, Label } from '@navikt/ds-react'
+import { FormSummary } from '@navikt/ds-react'
 import dayjs from 'dayjs'
 import React from 'react'
 
-import Vis from '../../vis'
 import { OppsummeringProps } from '../oppsummering'
+import { RSSvar } from '../../../types/rs-types/rs-svar'
 
 const DatoSum = ({ sporsmal }: OppsummeringProps) => {
+    const datoString = (svarverdi: RSSvar) => dayjs(svarverdi?.verdi.toString()).format('DD.MM.YYYY')
     return (
-        <>
-            <Label as="h3">{sporsmal.sporsmalstekst}</Label>
-            <>
-                {sporsmal.svarliste.svar.map((svarverdi, index) => (
-                    <Vis
-                        hvis={svarverdi.verdi}
-                        key={index}
-                        render={() => <BodyShort>{dayjs(svarverdi.verdi.toString()).format('DD.MM.YYYY')}</BodyShort>}
-                    />
-                ))}
-            </>
-        </>
+        <FormSummary.Answer>
+            <FormSummary.Label>{sporsmal.sporsmalstekst}</FormSummary.Label>
+            {sporsmal.svarliste.svar.map((svarverdi, index) => (
+                <FormSummary.Value key={index}>{datoString(svarverdi)}</FormSummary.Value>
+            ))}
+        </FormSummary.Answer>
     )
 }
 

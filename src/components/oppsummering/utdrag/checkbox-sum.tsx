@@ -1,24 +1,28 @@
 import React from 'react'
+import { FormSummary } from '@navikt/ds-react'
 
-import { SvarEnums } from '../../../types/enums'
-import Vis from '../../vis'
 import { OppsummeringProps } from '../oppsummering'
+import { hentSvar } from '../../sporsmal/hent-svar'
 
-import Avkrysset from './avkrysset'
 import UndersporsmalSum from './undersporsmal-sum'
 
 const CheckboxSum = ({ sporsmal }: OppsummeringProps) => {
-    const uspm = sporsmal.undersporsmal
+    const svarErChecked: boolean = hentSvar(sporsmal)
     return (
-        <Vis
-            hvis={sporsmal.svarliste.svar[0]?.verdi === SvarEnums.CHECKED}
-            render={() => (
-                <>
-                    <Avkrysset tekst={sporsmal.sporsmalstekst} />
-                    <UndersporsmalSum sporsmalsliste={uspm} />
-                </>
+        <>
+            {svarErChecked && (
+                <FormSummary.Answer>
+                    <FormSummary.Value>
+                        {sporsmal.sporsmalstekst}
+                        {sporsmal.undersporsmal.length > 0 && (
+                            <FormSummary.Answers>
+                                <UndersporsmalSum sporsmalsliste={sporsmal.undersporsmal} />
+                            </FormSummary.Answers>
+                        )}
+                    </FormSummary.Value>
+                </FormSummary.Answer>
             )}
-        />
+        </>
     )
 }
 

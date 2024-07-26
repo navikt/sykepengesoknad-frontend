@@ -212,7 +212,7 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
     describe('Oppsummering - Reisetilskudd', () => {
         it('URL er riktig', () => {
             cy.url().should('include', `/soknader/${nyttReisetilskudd.id}/6`)
-            cy.get('[data-cy="sporsmal-tittel"]').should('have.text', 'Oppsummering')
+            cy.get('[data-cy="sporsmal-tittel"]').should('have.text', 'Oppsummering fra søknaden')
         })
 
         it('Bekreftelsespunktene er riktige', () => {
@@ -235,15 +235,10 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
         })
 
         it('Oppsummering inneholder riktig informasjon', () => {
-            cy.get('.oppsummering').click()
-            cy.get('.navds-expansioncard__content-inner > :nth-child(4)').should(
-                'include.text',
-                'Last opp kvitteringer for reiser til og fra jobben mellom 1. - 24. april 2020.',
-            )
-            cy.get('.navds-expansioncard__content-inner > :nth-child(4)').should(
-                'include.text',
-                'Du lastet opp 1 kvittering på 99 kr',
-            )
+            cy.get('[data-cy="oppsummering-fra-søknaden"]').within(() => {
+                cy.contains('Last opp kvitteringer for reiser til og fra jobben mellom 1. - 24. april 2020.')
+                cy.contains('Du lastet opp 1 kvittering på 99 kr')
+            })
             cy.get('.navds-checkbox__label').should(
                 'contain',
                 'Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.',

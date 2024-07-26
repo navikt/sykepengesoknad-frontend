@@ -110,7 +110,7 @@ describe('Tester søknad til utenlandsk sykmelding', () => {
     it('Vær klar over at', function () {
         cy.url().should('include', `${id}/12`)
         cy.contains('Oppsummering')
-        cy.get('section[aria-label="Oppsummering fra søknaden"] button').click()
+
         cy.contains('Danmark')
         cy.contains('Statsminister i UK')
         cy.contains('Downing Street 10')

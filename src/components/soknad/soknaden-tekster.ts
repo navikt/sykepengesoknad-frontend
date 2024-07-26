@@ -5,7 +5,7 @@ const SoknadenTekster = {
     'soknad.tilbakeknapp': 'Tilbake',
     'statuspanel.status': 'Status',
     'sykepengesoknad.start.tittel': 'Ansvarserklæring',
-    'sykepengesoknad.til_slutt.tittel': 'Oppsummering',
+    'sykepengesoknad.til_slutt.tittel': 'Oppsummering fra søknaden',
     'sykepengesoknad.tilkommen_inntekt_forstegang.tittel': 'Nytt arbeidsforhold',
     'sykepengesoknad.tilkommen_inntekt_pafolgende.tittel': 'Inntekt fra annet arbeidsforhold',
     'sykepengesoknad.sykepengeinfo.til-nav':

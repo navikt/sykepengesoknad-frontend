@@ -1,4 +1,4 @@
-import { Label } from '@navikt/ds-react'
+import { FormSummary } from '@navikt/ds-react'
 import React from 'react'
 
 import { Kvittering } from '../../../types/types'
@@ -6,8 +6,6 @@ import { getLedetekst, tekst } from '../../../utils/tekster'
 import { formatterTall } from '../../../utils/utils'
 import { hentSvar } from '../../sporsmal/hent-svar'
 import { OppsummeringProps } from '../oppsummering'
-
-import Avkrysset from './avkrysset'
 
 const OpplastingSum = ({ sporsmal }: OppsummeringProps) => {
     const svar: Kvittering[] = hentSvar(sporsmal)
@@ -31,12 +29,10 @@ const OpplastingSum = ({ sporsmal }: OppsummeringProps) => {
     }
 
     return (
-        <>
-            <Label as="h3" className="mb-2">
-                {sporsmal.sporsmalstekst}
-            </Label>
-            <Avkrysset tekst={svartekst} />
-        </>
+        <FormSummary.Answer>
+            <FormSummary.Label>{sporsmal.sporsmalstekst}</FormSummary.Label>
+            <FormSummary.Value>{svartekst} </FormSummary.Value>
+        </FormSummary.Answer>
     )
 }
 

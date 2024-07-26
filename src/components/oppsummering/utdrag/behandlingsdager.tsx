@@ -1,12 +1,9 @@
-import { Label } from '@navikt/ds-react'
+import { FormSummary } from '@navikt/ds-react'
 import React from 'react'
 
 import { RSSvar } from '../../../types/rs-types/rs-svar'
 import { tilLesbarDatoUtenAarstall, tilLesbarPeriodeUtenArstall } from '../../../utils/dato-utils'
-import Vis from '../../vis'
 import { OppsummeringProps } from '../oppsummering'
-
-import Avkrysset from './avkrysset'
 
 const datoEllerIkkeTilBehandling = (svar: RSSvar): string => {
     if (svar === undefined || svar.verdi === '' || svar.verdi === 'Ikke til behandling') {
@@ -17,29 +14,23 @@ const datoEllerIkkeTilBehandling = (svar: RSSvar): string => {
 
 const Behandlingsdager = ({ sporsmal }: OppsummeringProps) => {
     return (
-        <>
-            <Vis
-                hvis={sporsmal.undersporsmal}
-                render={() => (
-                    <>
-                        <Label as="h3">{sporsmal.sporsmalstekst}</Label>
-                        <Vis
-                            hvis={sporsmal.undersporsmal.length > 0}
-                            render={() => (
-                                <>
-                                    {sporsmal.undersporsmal.map((uspm, idx) => (
-                                        <div data-cy="oppsummering__behandlingsdager" key={idx}>
-                                            <Label as="h3">{tilLesbarPeriodeUtenArstall(uspm.min, uspm.max)}</Label>
-                                            <Avkrysset tekst={datoEllerIkkeTilBehandling(uspm.svarliste.svar[0])} />
-                                        </div>
-                                    ))}
-                                </>
-                            )}
-                        />
-                    </>
+        <FormSummary.Answer>
+            <FormSummary.Label>{sporsmal.sporsmalstekst}</FormSummary.Label>
+            <FormSummary.Value>
+                {sporsmal.undersporsmal.length > 0 && (
+                    <FormSummary.Answers className={`antall-svar-${sporsmal.undersporsmal.length}`}>
+                        {sporsmal.undersporsmal.map((uspm, idx) => (
+                            <FormSummary.Answer data-cy="oppsummering__behandlingsdager" key={idx}>
+                                <FormSummary.Label>{tilLesbarPeriodeUtenArstall(uspm.min, uspm.max)}</FormSummary.Label>
+                                <FormSummary.Value>
+                                    {datoEllerIkkeTilBehandling(uspm.svarliste.svar[0])}{' '}
+                                </FormSummary.Value>
+                            </FormSummary.Answer>
+                        ))}
+                    </FormSummary.Answers>
                 )}
-            />
-        </>
+            </FormSummary.Value>
+        </FormSummary.Answer>
     )
 }
 
