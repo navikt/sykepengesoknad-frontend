@@ -85,8 +85,6 @@ describe('Søknad med alle opprinnelige spørsmål om medlemskap', () => {
 
     it('Oppsumering av søknad', () => {
         cy.contains('Oppsummering')
-
-        cy.findByRole('region', { name: 'Oppsummering fra søknaden' }).click()
         cy.findByRole('region', { name: 'Oppsummering fra søknaden' }).within(() => {
             cy.contains('Har du arbeidet utenfor Norge i løpet av de siste 12 månedene før du ble syk?')
                 .siblings()
@@ -127,7 +125,6 @@ describe('Søknad med nytt spørsmål om oppholdstillatelse og kjent permanent o
     it('Oppsumering av søknad', () => {
         cy.contains('Oppsummering')
 
-        cy.findByRole('region', { name: 'Oppsummering fra søknaden' }).click()
         cy.findByRole('region', { name: 'Oppsummering fra søknaden' }).within(() => {
             cy.contains('Har Utlendingsdirektoratet gitt deg en oppholdstillatelse før 1. mai 2024?')
                 .siblings()
@@ -178,8 +175,6 @@ describe('Søknad med nytt spørsmål om oppholdstillatelse og kjent midlertidig
 
     it('Oppsumering av søknad', () => {
         cy.contains('Oppsummering')
-
-        cy.findByRole('region', { name: 'Oppsummering fra søknaden' }).click()
         cy.findByRole('region', { name: 'Oppsummering fra søknaden' }).within(() => {
             cy.contains('Har Utlendingsdirektoratet gitt deg en oppholdstillatelse før 1. mai 2024?')
                 .siblings()

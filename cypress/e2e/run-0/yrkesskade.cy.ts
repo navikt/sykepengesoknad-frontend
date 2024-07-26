@@ -91,10 +91,8 @@ describe('Tester yrkesskadesspørsmål', () => {
         cy.realPress('Enter')
     })
 
-    it('Vi ser de valgte skadedatoene i oppsymmeringa', function () {
-        cy.get('form').findByRole('region', { name: 'Oppsummering fra søknaden' }).click()
-
-        cy.findByRole('region', { name: 'Oppsummering fra søknaden' }).within(() => {
+    it('Vi ser de valgte skadedatoene i oppsummeringa', function () {
+        cy.get('[data-cy="oppsummering-fra-søknaden"]').within(() => {
             cy.findByText('Skadedato 2. april 1997 (Vedtaksdato 3. desember 1999)')
             cy.findByText('Skadedato 1. januar 2020 (Vedtaksdato 5. april 2021)')
         })

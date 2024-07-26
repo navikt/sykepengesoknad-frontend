@@ -63,7 +63,7 @@ const Kulepunkter = ({ sporsmal }: SpmProps) => {
                 </List>
             </div>
             {sporsmal.undertekst && <BodyLong as="div">{tekstMedHtml(sporsmal.undertekst)}</BodyLong>}
-            <Oppsummering ekspandert={false} sporsmal={valgtSoknad!.sporsmal} parent="kulepunkter" />
+            <Oppsummering sporsmal={valgtSoknad!.sporsmal} />
             {valgtSoknad?.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND && (
                 <>
                     <SendesTil soknad={valgtSoknad!} />

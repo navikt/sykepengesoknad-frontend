@@ -1,29 +1,38 @@
-import { Label } from '@navikt/ds-react'
+import { FormSummary } from '@navikt/ds-react'
 import React from 'react'
 
-import { SvarEnums } from '../../../types/enums'
-import { Sporsmal } from '../../../types/types'
-import Vis from '../../vis'
 import { OppsummeringProps } from '../oppsummering'
+import { hentSvar } from '../../sporsmal/hent-svar'
+import { SvarEnums } from '../../../types/enums'
 
-import Avkrysset from './avkrysset'
 import UndersporsmalSum from './undersporsmal-sum'
 
 const RadioGruppe = ({ sporsmal }: OppsummeringProps) => {
-    const besvartUndersporsmal: Sporsmal = sporsmal.undersporsmal.find((s) => {
-        return s.svarliste.svar.length > 0 && s.svarliste.svar[0].verdi === SvarEnums.CHECKED
-    })!
+    const svar: string = hentSvar(sporsmal)
+    const undersporsmal = sporsmal.undersporsmal.filter(
+        (undersporsmal) => undersporsmal.parentKriterie === SvarEnums.CHECKED,
+    )
+
+    if (!svar) {
+        return <UndersporsmalSum sporsmalsliste={undersporsmal}></UndersporsmalSum>
+    }
+
+    const undersporsmalMedSporsmalTekst = sporsmal.undersporsmal.filter(
+        (undersporsmal) => undersporsmal.sporsmalstekst !== '',
+    )
+
     return (
-        <Vis
-            hvis={besvartUndersporsmal}
-            render={() => (
-                <>
-                    <Label as="h3">{sporsmal.sporsmalstekst}</Label>
-                    <Avkrysset tekst={besvartUndersporsmal.sporsmalstekst} />
-                    <UndersporsmalSum sporsmalsliste={besvartUndersporsmal.undersporsmal} />
-                </>
-            )}
-        />
+        <FormSummary.Answer>
+            <FormSummary.Label className="radio-label">{sporsmal.sporsmalstekst}</FormSummary.Label>
+            <FormSummary.Value>
+                {svar}
+                {undersporsmalMedSporsmalTekst.length > 0 && (
+                    <FormSummary.Answers className={`antall-svar-${sporsmal.undersporsmal.length}`}>
+                        <UndersporsmalSum sporsmalsliste={undersporsmalMedSporsmalTekst} />
+                    </FormSummary.Answers>
+                )}
+            </FormSummary.Value>
+        </FormSummary.Answer>
     )
 }
 

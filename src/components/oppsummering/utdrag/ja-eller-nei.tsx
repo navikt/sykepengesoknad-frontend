@@ -1,12 +1,10 @@
-import { Label } from '@navikt/ds-react'
+import { FormSummary } from '@navikt/ds-react'
 import React from 'react'
 
 import { Sporsmal } from '../../../types/types'
 import { tekst } from '../../../utils/tekster'
-import Vis from '../../vis'
 import { OppsummeringProps } from '../oppsummering'
 
-import Avkrysset from './avkrysset'
 import UndersporsmalSum from './undersporsmal-sum'
 
 const erUndersporsmalStilt = (sporsmal: Sporsmal): boolean => {
@@ -27,14 +25,17 @@ const JaEllerNei = ({ sporsmal }: OppsummeringProps) => {
 
     const svartekst = tekst(`soknad.${svar.verdi.toLowerCase()}` as any)
     return (
-        <>
-            <Label as="h3">{sporsmal.sporsmalstekst}</Label>
-            <Avkrysset tekst={svartekst} />
-            <Vis
-                hvis={erUndersporsmalStilt(sporsmal)}
-                render={() => <UndersporsmalSum sporsmalsliste={sporsmal.undersporsmal} />}
-            />
-        </>
+        <FormSummary.Answer>
+            <FormSummary.Label className="ja-nei-label">{sporsmal.sporsmalstekst}</FormSummary.Label>
+            <FormSummary.Value>
+                {svartekst}
+                {erUndersporsmalStilt(sporsmal) && (
+                    <FormSummary.Answers>
+                        <UndersporsmalSum sporsmalsliste={sporsmal.undersporsmal} />
+                    </FormSummary.Answers>
+                )}
+            </FormSummary.Value>
+        </FormSummary.Answer>
     )
 }
 

@@ -175,9 +175,6 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
 
     it('Oppsummering fra søknaden', function () {
         cy.url().should('include', `${soknad.id}/4`)
-
-        cy.get('section[aria-label="Oppsummering fra søknaden"] button').click()
-
         cy.get('.oppsummering').contains('Når skal du reise?').siblings().should('contain', '17. – 24. desember 2020')
 
         cy.get('.oppsummering')
