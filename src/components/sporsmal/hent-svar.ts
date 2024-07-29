@@ -44,10 +44,12 @@ export const hentSvar = (sporsmal: Sporsmal): any => {
 
         case RSSvartype.LAND:
         case RSSvartype.COMBOBOX_MULTI:
-        case RSSvartype.COMBOBOX_SINGLE:
         case RSSvartype.PERIODE:
         case RSSvartype.PERIODER:
             return svarliste.svar.map((svar: RSSvar) => svar.verdi)
+
+        case RSSvartype.COMBOBOX_SINGLE:
+            return svarliste.svar[0]?.verdi || ''
 
         case RSSvartype.KVITTERING:
             return svarliste.svar.map((s) => svarverdiToKvittering(s.verdi))
