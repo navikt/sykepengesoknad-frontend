@@ -7,7 +7,13 @@ import { hentSvar } from '../../sporsmal/hent-svar'
 import UndersporsmalSum from './undersporsmal-sum'
 
 const LandSum = ({ sporsmal }: OppsummeringProps) => {
-    const landliste: string[] = hentSvar(sporsmal)
+    const landsvar = hentSvar(sporsmal)
+    let landliste: string[]
+    if (typeof landsvar === 'string') {
+        landliste = [landsvar]
+    } else {
+        landliste = landsvar
+    }
 
     return (
         <FormSummary.Answer>
