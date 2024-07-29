@@ -9,7 +9,9 @@ const PerioderSum = ({ sporsmal }: OppsummeringProps) => {
     const periodeListe = hentPeriodeListe(sporsmal)
     return (
         <FormSummary.Answer>
-            <FormSummary.Label className="periode-label">{sporsmal.sporsmalstekst}</FormSummary.Label>
+            {sporsmal.sporsmalstekst && (
+                <FormSummary.Label className="periode-label">{sporsmal.sporsmalstekst}</FormSummary.Label>
+            )}
             {periodeListe.map((periode, index) => {
                 return (
                     <FormSummary.Value key={index}>

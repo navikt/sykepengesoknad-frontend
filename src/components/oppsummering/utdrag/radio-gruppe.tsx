@@ -17,18 +17,19 @@ const RadioGruppe = ({ sporsmal }: OppsummeringProps) => {
         return <UndersporsmalSum sporsmalsliste={undersporsmal}></UndersporsmalSum>
     }
 
-    const undersporsmalMedSporsmalTekst = sporsmal.undersporsmal.filter(
-        (undersporsmal) => undersporsmal.sporsmalstekst !== '',
-    )
-
+    const undersporsmalSomErBesvartOgHarUndersporsmal = sporsmal.undersporsmal.filter((undersporsmal) => {
+        return undersporsmal.svarliste.svar[0]?.verdi === SvarEnums.CHECKED && undersporsmal.undersporsmal.length > 0
+    })
     return (
         <FormSummary.Answer>
             <FormSummary.Label className="radio-label">{sporsmal.sporsmalstekst}</FormSummary.Label>
             <FormSummary.Value>
                 {svar}
-                {undersporsmalMedSporsmalTekst.length > 0 && (
-                    <FormSummary.Answers className={`antall-svar-${sporsmal.undersporsmal.length}`}>
-                        <UndersporsmalSum sporsmalsliste={undersporsmalMedSporsmalTekst} />
+                {undersporsmalSomErBesvartOgHarUndersporsmal.length > 0 && (
+                    <FormSummary.Answers
+                        className={`antall-besvarte-${undersporsmalSomErBesvartOgHarUndersporsmal.length}`}
+                    >
+                        <UndersporsmalSum sporsmalsliste={undersporsmalSomErBesvartOgHarUndersporsmal} />
                     </FormSummary.Answers>
                 )}
             </FormSummary.Value>

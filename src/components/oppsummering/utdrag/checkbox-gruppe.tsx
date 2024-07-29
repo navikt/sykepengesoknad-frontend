@@ -8,7 +8,7 @@ import UndersporsmalSum from './undersporsmal-sum'
 const CheckboxGruppe = ({ sporsmal }: OppsummeringProps) => {
     return (
         <FormSummary.Answer>
-            <FormSummary.Label>{sporsmal.sporsmalstekst}</FormSummary.Label>
+            <FormSummary.Label className="checkbox-label">{sporsmal.sporsmalstekst}</FormSummary.Label>
             <FormSummary.Value>
                 {sporsmal.undersporsmal.length > 0 && (
                     <FormSummary.Answers>
