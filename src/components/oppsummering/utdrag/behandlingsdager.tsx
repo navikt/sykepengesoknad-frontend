@@ -15,13 +15,15 @@ const datoEllerIkkeTilBehandling = (svar: RSSvar): string => {
 const Behandlingsdager = ({ sporsmal }: OppsummeringProps) => {
     return (
         <FormSummary.Answer>
-            <FormSummary.Label>{sporsmal.sporsmalstekst}</FormSummary.Label>
+            <FormSummary.Label className="behandling-label">{sporsmal.sporsmalstekst}</FormSummary.Label>
             <FormSummary.Value>
                 {sporsmal.undersporsmal.length > 0 && (
                     <FormSummary.Answers className={`antall-svar-${sporsmal.undersporsmal.length}`}>
                         {sporsmal.undersporsmal.map((uspm, idx) => (
                             <FormSummary.Answer data-cy="oppsummering__behandlingsdager" key={idx}>
-                                <FormSummary.Label>{tilLesbarPeriodeUtenArstall(uspm.min, uspm.max)}</FormSummary.Label>
+                                <FormSummary.Label className="behandlingsdager-label">
+                                    {tilLesbarPeriodeUtenArstall(uspm.min, uspm.max)}
+                                </FormSummary.Label>
                                 <FormSummary.Value>
                                     {datoEllerIkkeTilBehandling(uspm.svarliste.svar[0])}{' '}
                                 </FormSummary.Value>

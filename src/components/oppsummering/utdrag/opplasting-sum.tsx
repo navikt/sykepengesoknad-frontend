@@ -13,7 +13,7 @@ const OpplastingSum = ({ sporsmal }: OppsummeringProps) => {
     const kr = svar.reduce((prev, cur) => prev + cur.belop, 0)
     const sum = kr / 100
 
-    let svartekst = ''
+    let svartekst: string
     if (svar.length === 0) {
         svartekst = tekst('oppsummering.opplasting.tom')
     } else if (svar.length === 1) {
@@ -30,7 +30,7 @@ const OpplastingSum = ({ sporsmal }: OppsummeringProps) => {
 
     return (
         <FormSummary.Answer>
-            <FormSummary.Label>{sporsmal.sporsmalstekst}</FormSummary.Label>
+            <FormSummary.Label className="opplasting-label">{sporsmal.sporsmalstekst}</FormSummary.Label>
             <FormSummary.Value>{svartekst} </FormSummary.Value>
         </FormSummary.Answer>
     )

@@ -9,7 +9,7 @@ const Fritekst = ({ sporsmal }: OppsummeringProps) => {
     if (!sporsmal.svarliste.svar[0].verdi) return null
     return (
         <FormSummary.Answer>
-            <FormSummary.Label>{sporsmal.sporsmalstekst}</FormSummary.Label>
+            <FormSummary.Label className="fritekst-label">{sporsmal.sporsmalstekst}</FormSummary.Label>
             <FormSummary.Value>{hentSvar(sporsmal)}</FormSummary.Value>
         </FormSummary.Answer>
     )
