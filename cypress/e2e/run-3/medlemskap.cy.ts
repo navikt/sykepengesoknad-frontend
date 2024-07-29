@@ -83,7 +83,7 @@ describe('Søknad med alle opprinnelige spørsmål om medlemskap', () => {
         klikkGaVidere()
     })
 
-    it('Oppsumering av søknad', () => {
+    it('Oppsummering av søknad', () => {
         cy.contains('Oppsummering')
         cy.get('[data-cy="oppsummering-fra-søknaden"]').within(() => {
             cy.contains('Har du arbeidet utenfor Norge i løpet av de siste 12 månedene før du ble syk?')
@@ -122,7 +122,7 @@ describe('Søknad med nytt spørsmål om oppholdstillatelse og kjent permanent o
         klikkGaVidere()
     })
 
-    it('Oppsumering av søknad', () => {
+    it('Oppsummering av søknad', () => {
         cy.contains('Oppsummering')
 
         cy.get('[data-cy="oppsummering-fra-søknaden"]').within(() => {
@@ -173,7 +173,7 @@ describe('Søknad med nytt spørsmål om oppholdstillatelse og kjent midlertidig
         klikkGaVidere()
     })
 
-    it('Oppsumering av søknad', () => {
+    it('Oppsummering av søknad', () => {
         cy.contains('Oppsummering')
         cy.get('[data-cy="oppsummering-fra-søknaden"]').within(() => {
             cy.contains('Har Utlendingsdirektoratet gitt deg en oppholdstillatelse før 1. mai 2024?')
