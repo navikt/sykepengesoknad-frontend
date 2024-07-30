@@ -23,7 +23,7 @@ const Kvittering = () => {
         <div data-cy="kvittering">
             {arbeidstakerKvittering ? <Arbeidstaker /> : <AlleAndre />}
 
-            <Oppsummering sporsmal={valgtSoknad.sporsmal} />
+            <Oppsummering />
 
             <Vis
                 hvis={valgtSoknad.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND}
