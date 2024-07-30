@@ -187,6 +187,10 @@ describe('Tester arbeidstakersøknad', () => {
 
         cy.get('[data-cy="oppsummering-fra-søknaden"]').within(() => {
             sporsmalOgSvar('Søknaden sendes til', 'NAV').and('contain', 'Posten Norge AS, Bærum')
+            sporsmalOgSvar(
+                'Ansvarserklæring',
+                'Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene jeg gir ikke er riktige eller fullstendige. Jeg vet også at NAV kan holde igjen eller kreve tilbake penger, og at å gi feil opplysninger kan være straffbart.',
+            )
             //Arbeid underveis i sykefravær
             sporsmalOgSvar('Oppgi arbeidsmengde i timer eller prosent:', 'Timer')
                 .children()

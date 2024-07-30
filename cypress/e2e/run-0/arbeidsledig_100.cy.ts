@@ -85,6 +85,10 @@ describe('Tester arbeidsledigsøknad', () => {
         )
 
         cy.get('[data-cy="oppsummering-fra-søknaden"]').within(() => {
+            sporsmalOgSvar(
+                'Ansvarserklæring',
+                'Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene jeg gir ikke er riktige eller fullstendige. Jeg vet også at NAV kan holde igjen eller kreve tilbake penger, og at å gi feil opplysninger kan være straffbart.',
+            )
             sporsmalOgSvar('Brukte du hele sykmeldingen fram til 24. april 2020?', 'Nei')
                 .children()
                 .within(() => {
