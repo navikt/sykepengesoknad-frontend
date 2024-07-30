@@ -12,6 +12,7 @@ const CheckboxSum = ({ sporsmal }: OppsummeringProps) => {
         <>
             {svarErChecked && (
                 <FormSummary.Answer>
+                    {sporsmal.tag === 'ANSVARSERKLARING' && <FormSummary.Label>Ansvarserklæring</FormSummary.Label>}
                     <FormSummary.Value>
                         {sporsmal.sporsmalstekst}
                         {sporsmal.undersporsmal.length > 0 && (
