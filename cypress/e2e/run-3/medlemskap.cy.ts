@@ -180,10 +180,6 @@ describe('Søknad med nytt spørsmål om oppholdstillatelse og kjent midlertidig
     it('Oppsummering av søknad', () => {
         cy.contains('Oppsummering')
         cy.get('[data-cy="oppsummering-fra-søknaden"]').within(() => {
-            sporsmalOgSvar(
-                'Ansvarserklæring',
-                'Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene jeg gir ikke er riktige eller fullstendige. Jeg vet også at NAV kan holde igjen eller kreve tilbake penger, og at å gi feil opplysninger kan være straffbart.',
-            )
             sporsmalOgSvar('Har Utlendingsdirektoratet gitt deg en oppholdstillatelse før 1. mai 2024?', 'Ja')
             sporsmalOgSvar('Hvilken dato fikk du denne oppholdstillatelsen?', '01.')
             sporsmalOgSvar('Hvilken periode gjelder denne oppholdstillatelsen?', '10. – 20.')
