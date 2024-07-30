@@ -97,10 +97,10 @@ describe('Tester behandlingsdagersøknad', () => {
         cy.contains(
             'Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.',
         )
-        cy.contains('Søknaden sendes til NAV.')
 
         cy.contains('Oppsummering fra søknaden')
         cy.get('[data-cy="oppsummering-fra-søknaden"]').within(() => {
+            sporsmalOgSvar('Søknaden sendes til', 'NAV')
             sporsmalOgSvar('1. – 3. april', 'Ikke til behandling')
             sporsmalOgSvar('6. – 10. april', '10. april')
             sporsmalOgSvar('13. – 17. april', '15. april')

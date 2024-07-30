@@ -88,11 +88,6 @@ const SoknadenTekster = {
     'sykepengesoknad.jobb-underveis-timer-i-prosent':
         'Antall timer du skrev inn, betyr at du har jobbet %PROSENT%% av det du gjør når du er frisk.',
 
-    'sykepengesoknad.oppsummering.nav-som-mottaker': 'Søknaden sendes til NAV.',
-    'sykepengesoknad.oppsummering.arbeidsgiver-som-mottaker': 'Søknaden sendes til %ARBEIDSGIVER% med kopi til NAV.',
-    'sykepengesoknad.oppsummering.nav-arbeidsgiver-som-mottaker':
-        'Søknaden sendes til NAV. Kopi av søknaden sendes til %ARBEIDSGIVER%.',
-
     'sykepengesoknad.kvittering.tekst':
         '<p>Søknaden er sendt til arbeidsgiveren din via Altinn. Det vil kunne ta noe tid før meldingen ligger i din arbeidsgivers innboks. Arbeidsgiveren vil ved behov videresende søknaden til NAV. Si gjerne fra til arbeidsgiveren din at du har sendt søknaden siden dette foreløpig er nytt for alle.</p><p>Du trenger ikke å sende inn del D av sykmeldingen på papir, med mindre arbeidsgiveren eller NAV senere ber deg om det.</p>',
     'sykepengesoknad.kvittering.til-nav-arbeidsgiver.tekst':

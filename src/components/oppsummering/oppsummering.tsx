@@ -4,6 +4,9 @@ import { FormSummary } from '@navikt/ds-react'
 import { RSSvartype } from '../../types/rs-types/rs-svartype'
 import { Sporsmal } from '../../types/types'
 import { tekst } from '../../utils/tekster'
+import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
+import SendesTil from '../sporsmal/sporsmal-form/sendes-til'
+import { useSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
 
 import Behandlingsdager from './utdrag/behandlingsdager'
 import CheckboxGruppe from './utdrag/checkbox-gruppe'
@@ -22,8 +25,13 @@ export interface OppsummeringProps {
     sporsmal: Sporsmal
 }
 
-const Oppsummering = ({ sporsmal }: { sporsmal: ReadonlyArray<Sporsmal> }) => {
+const Oppsummering = () => {
     const tittel = tekst('sykepengesoknad.oppsummering.tittel')
+    const { valgtSoknad } = useSoknadMedDetaljer()
+    if (!valgtSoknad) return null
+
+    const sporsmal: ReadonlyArray<Sporsmal> = valgtSoknad.sporsmal
+    const visSendTil = valgtSoknad?.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND
 
     return (
         <FormSummary className="oppsummering my-8" data-cy="oppsummering-fra-søknaden" aria-label={tittel}>
@@ -34,7 +42,8 @@ const Oppsummering = ({ sporsmal }: { sporsmal: ReadonlyArray<Sporsmal> }) => {
             </FormSummary.Header>
 
             <FormSummary.Answers>
-                {sporsmal.filter(skalVisesIOppsummering).map((sporsmal, index) => {
+                {visSendTil && <SendesTil soknad={valgtSoknad} />}
+                {sporsmal?.filter(skalVisesIOppsummering).map((sporsmal, index) => {
                     return <SporsmalVarianter sporsmal={sporsmal} key={index} />
                 })}
             </FormSummary.Answers>
