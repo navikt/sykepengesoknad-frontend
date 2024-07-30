@@ -215,3 +215,11 @@ export function avbryterSoknad() {
     cy.findByRole('button', { name: 'Ja, jeg er sikker' }).click()
     modalIkkeAktiv()
 }
+
+/**
+ * Sjekker spørsmål og svar i oppsummeringen av søknaden
+ * @returns svarElement som kan benyttes i underspørsmål
+ */
+export function sporsmalOgSvar(sporsmal: string, svar: string) {
+    return cy.contains(sporsmal).siblings().should('contain', svar)
+}

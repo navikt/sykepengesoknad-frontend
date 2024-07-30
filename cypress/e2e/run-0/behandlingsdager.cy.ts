@@ -1,5 +1,5 @@
 import { behandlingsdager } from '../../../src/data/mock/data/soknad/behandlingsdager'
-import { klikkGaVidere, klikkTilbake, svarNeiHovedsporsmal } from '../../support/utilities'
+import { klikkGaVidere, klikkTilbake, sporsmalOgSvar, svarNeiHovedsporsmal } from '../../support/utilities'
 
 describe('Tester behandlingsdagersøknad', () => {
     //-----
@@ -86,7 +86,7 @@ describe('Tester behandlingsdagersøknad', () => {
 
     it('Søknad TIL_SLUTT - steg 4', function () {
         cy.url().should('include', `${soknad.id}/5`)
-        cy.contains('Oppsummering')
+        cy.contains('Oppsummering fra søknaden')
         it('Bekreftelsespunktene er riktige', () => {
             const punkter = [
                 'Denne søknaden gjelder hvis selve behandlingen har en slik virkning på deg at du ikke kan jobbe resten av dagen. Grunnen er altså behandlingens effekt, og ikke at du for eksempel måtte bruke arbeidstid.',
@@ -109,21 +109,13 @@ describe('Tester behandlingsdagersøknad', () => {
         )
         cy.contains('Søknaden sendes til NAV.')
 
-        cy.get('.oppsummering').click()
-        cy.get('[data-cy="oppsummering__behandlingsdager"]')
-            .contains('1. – 3. april')
-            .siblings()
-            .should('contain', 'Ikke til behandling')
-        cy.get('[data-cy="oppsummering__behandlingsdager"]')
-            .contains('6. – 10. april')
-            .siblings()
-            .should('contain', '10. april')
-        cy.get('[data-cy="oppsummering__behandlingsdager"]')
-            .contains('13. – 17. april')
-            .siblings()
-            .should('contain', '15. april')
-        cy.get('[data-cy="oppsummering__behandlingsdager"]').contains('20. – 24. april')
-        cy.get('[data-cy="oppsummering__behandlingsdager"]').contains('Ikke til behandling')
+        cy.contains('Oppsummering fra søknaden')
+        cy.get('[data-cy="oppsummering-fra-søknaden"]').within(() => {
+            sporsmalOgSvar('1. – 3. april', 'Ikke til behandling')
+            sporsmalOgSvar('6. – 10. april', '10. april')
+            sporsmalOgSvar('13. – 17. april', '15. april')
+            sporsmalOgSvar('20. – 24. april', 'Ikke til behandling')
+        })
 
         cy.contains('Send søknaden').click()
     })

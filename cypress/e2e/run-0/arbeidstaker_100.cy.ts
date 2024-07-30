@@ -1,4 +1,4 @@
-import { setPeriodeFraTil } from '../../support/utilities'
+import { setPeriodeFraTil, sporsmalOgSvar } from '../../support/utilities'
 import { inlineForklaringer } from '../../support/sjekkInlineForklaringKvittering'
 import { arbeidstaker } from '../../../src/data/mock/data/soknad/arbeidstaker'
 
@@ -214,9 +214,29 @@ describe('Tester arbeidstakersøknad', () => {
             'Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene jeg gir ikke er riktige eller fullstendige. Jeg vet også at NAV kan holde igjen eller kreve tilbake penger, og at å gi feil opplysninger kan være straffbart.',
         )
 
-        cy.get('.oppsummering').within(() => {
-            cy.contains('Jobber du vanligvis 37,5 timer i uka')
-            cy.contains('21 timer')
+        cy.get('[data-cy="oppsummering-fra-søknaden"]').within(() => {
+            //Arbeid underveis i sykefravær
+            sporsmalOgSvar('Oppgi arbeidsmengde i timer eller prosent:', 'Timer')
+                .children()
+                .within(() => {
+                    sporsmalOgSvar(
+                        'Oppgi totalt antall timer du jobbet i perioden 1. - 24. april 2020 hos Posten Norge AS, Bærum',
+                        '21 timer',
+                    )
+                })
+            sporsmalOgSvar('Jobber du vanligvis 37,5 timer i uka', 'Ja')
+
+            //Andre inntektskilder
+            sporsmalOgSvar('Har du andre inntektskilder enn Butikken?', 'Ja')
+            sporsmalOgSvar('Velg inntektskildene som passer for deg:', 'Ansatt andre steder enn nevnt over')
+                .children()
+                .within(() => {
+                    sporsmalOgSvar(
+                        'Har du jobbet for eller mottatt inntekt fra én eller flere av disse arbeidsgiverne de siste 14 dagene før du ble sykmeldt?',
+                        'Ja',
+                    )
+                })
+            sporsmalOgSvar('Velg inntektskildene som passer for deg:', 'Selvstendig næringsdrivende')
         })
 
         cy.contains('Det er 1 feil i skjemaet').should('not.exist')
