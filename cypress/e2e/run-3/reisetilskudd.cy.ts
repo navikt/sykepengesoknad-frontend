@@ -1,4 +1,4 @@
-import { klikkGaVidere, klikkTilbake } from '../../support/utilities'
+import { klikkGaVidere, klikkTilbake, sporsmalOgSvar } from '../../support/utilities'
 import { nyttReisetilskudd } from '../../../src/data/mock/data/soknad/arbeidstaker-reisetilskudd'
 
 describe('Teste førsteside i reisetilskuddsøknaden', () => {
@@ -236,8 +236,48 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
 
         it('Oppsummering inneholder riktig informasjon', () => {
             cy.get('[data-cy="oppsummering-fra-søknaden"]').within(() => {
-                cy.contains('Last opp kvitteringer for reiser til og fra jobben mellom 1. - 24. april 2020.')
-                cy.contains('Du lastet opp 1 kvittering på 99 kr')
+                sporsmalOgSvar('Brukte du bil eller offentlig transport til og fra jobben før du ble sykmeldt?', 'Ja')
+                    .children()
+                    .within(() => {
+                        sporsmalOgSvar('Hva slags type transport brukte du?', 'Offentlig transport')
+                            .children()
+                            .within(() => {
+                                sporsmalOgSvar(
+                                    'Hvor mye betaler du vanligvis i måneden for offentlig transport?',
+                                    '1000 kroner',
+                                )
+                            })
+                    })
+                sporsmalOgSvar(
+                    'Reiste du med egen bil, leiebil eller kollega til jobben mellom 23. desember 2020 - 7. januar 2021?',
+                    'Ja',
+                )
+                    .children()
+                    .within(() => {
+                        sporsmalOgSvar(
+                            'Hvilke dager reiste du med bil i perioden 23. desember 2020 - 7. januar 2021?',
+                            '04.01.2021',
+                        )
+                            .and('contain', '05.01.2021')
+                            .and('contain', '06.01.2021')
+                        sporsmalOgSvar('Hadde du utgifter til bompenger?', 'Ja')
+                            .children()
+                            .within(() => {
+                                sporsmalOgSvar(
+                                    'Hvor mye betalte du i bompenger mellom hjemmet ditt og jobben?',
+                                    '1000 kroner',
+                                )
+                            })
+                        sporsmalOgSvar(
+                            'Hvor mange kilometer er kjøreturen mellom hjemmet ditt og jobben én vei?',
+                            '42 kilometer',
+                        )
+                    })
+                sporsmalOgSvar(
+                    'Last opp kvitteringer for reiser til og fra jobben mellom 1. - 24. april 2020.',
+                    'Du lastet opp 1 kvittering på 99 kr',
+                )
+                sporsmalOgSvar('Legger arbeidsgiveren din ut for reisene?', 'Ja')
             })
             cy.get('.navds-checkbox__label').should(
                 'contain',

@@ -247,3 +247,11 @@ export function sjekkIntroside() {
         'https://www.nav.no/endringer',
     )
 }
+
+/**
+ * Sjekker spørsmål og svar i oppsummeringen av søknaden
+ * @returns svarElement som kan benyttes i underspørsmål
+ */
+export function sporsmalOgSvar(sporsmal: string, svar: string) {
+    return cy.contains(sporsmal).siblings().should('contain', svar)
+}

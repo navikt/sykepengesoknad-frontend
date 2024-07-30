@@ -1,4 +1,4 @@
-import { klikkGaVidere, klikkTilbake } from '../../support/utilities'
+import { klikkGaVidere, klikkTilbake, sporsmalOgSvar } from '../../support/utilities'
 import { gradertReisetilskudd } from '../../../src/data/mock/data/soknad/arbeidstaker-reisetilskudd-gradert'
 
 describe('Tester at riktig antall desimaler sendes til backend', () => {
@@ -69,5 +69,25 @@ describe('Tester at riktig antall desimaler sendes til backend', () => {
 
         cy.get('input#495730df-717d-3774-bd19-e6bcf76e3ba2').should('have.value', '36')
         cy.get('input#13acfccb-3f39-3893-8054-058270add6ab').should('have.value', '50')
+    })
+
+    it('Sjekker oppsummering fra søknaden', () => {
+        cy.visit(`/syk/sykepengesoknad/soknader/${gradertReisetilskudd.id}/15?testperson=reisetilskudd`)
+        cy.get('[data-cy="oppsummering-fra-søknaden"]').within(() => {
+            sporsmalOgSvar(
+                'Sykmeldingen sier du kunne jobbe 40 % i jobben din hos Posten Norge AS, Bærum. Jobbet du mer enn det?',
+                'Ja',
+            )
+                .children()
+                .within(() => {
+                    sporsmalOgSvar(
+                        'Hvor mange timer i uken jobber du vanligvis når du er frisk? Varierer det, kan du oppgi gjennomsnittet.',
+                        '36 timer',
+                    )
+                    sporsmalOgSvar('Hvor mye jobbet du tilsammen 1. - 24. april 2020?', 'Prosent')
+                        .children()
+                        .should('contain', '50 prosent')
+                })
+        })
     })
 })

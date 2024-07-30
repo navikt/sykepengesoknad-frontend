@@ -10,6 +10,7 @@ import {
     svarCheckboxSporsmal,
     svarDato,
     checkJegHarLestOgSend,
+    sporsmalOgSvar,
 } from '../../support/utilities'
 
 describe('Tester selvstendig naringsdrivende søknad', () => {
@@ -92,6 +93,37 @@ describe('Tester selvstendig naringsdrivende søknad', () => {
     })
 
     it('Oppsummering ', function () {
+        sporsmalOgSvar(
+            'Har du registrert virksomheten din som avviklet og slettet i Altinn før du ble sykmeldt?',
+            'Nei',
+        )
+            .children()
+            .within(() => {
+                sporsmalOgSvar('Er du ny i arbeidslivet etter 1.1.2019?', 'Nei')
+                    .children()
+                    .within(() => {
+                        sporsmalOgSvar(
+                            'Har det skjedd en varig endring i arbeidssituasjonen eller virksomheten din i mellom 1.1.2019 og frem til sykmeldingstidspunktet?',
+                            'Ja',
+                        )
+                            .children()
+                            .within(() => {
+                                sporsmalOgSvar(
+                                    'Hvilken endring har skjedd i din arbeidssituasjon eller virksomhet?',
+                                    'Endret markedssituasjon',
+                                )
+                                sporsmalOgSvar(
+                                    'Har du hatt mer enn 25 prosent endring i årsinntekten din som følge av den varige endringen?',
+                                    'Ja',
+                                )
+                                    .children()
+                                    .within(() => {
+                                        sporsmalOgSvar('Når skjedde den siste varige endringen?', '12.03.2020')
+                                    })
+                            })
+                    })
+            })
+
         checkJegHarLestOgSend()
     })
 

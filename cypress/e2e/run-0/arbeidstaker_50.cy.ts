@@ -147,7 +147,7 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
 
     it('Søknad ANSVARSERKLARING ', function () {
         cy.url().should('include', `${soknad.id}/9`)
-        cy.contains('Oppsummering')
+        cy.contains('Oppsummering fra søknaden')
         cy.contains(
             'Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.',
         )

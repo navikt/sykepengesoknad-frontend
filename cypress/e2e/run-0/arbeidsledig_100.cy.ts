@@ -1,4 +1,10 @@
-import { checkViStolerPaDeg, klikkGaVidere, setPeriodeFraTil, sjekkIntroside } from '../../support/utilities'
+import {
+    checkViStolerPaDeg,
+    klikkGaVidere,
+    setPeriodeFraTil,
+    sjekkIntroside,
+    sporsmalOgSvar,
+} from '../../support/utilities'
 import { arbeidsledig } from '../../../src/data/mock/data/soknad/arbeidsledig'
 
 describe('Tester arbeidsledigsøknad', () => {
@@ -106,6 +112,23 @@ describe('Tester arbeidsledigsøknad', () => {
             lenkerMedTekst.forEach(({ tekst, url }) => {
                 cy.contains(tekst).find('a').should('have.attr', 'href', url)
             })
+        })
+
+        cy.get('[data-cy="oppsummering-fra-søknaden"]').within(() => {
+            sporsmalOgSvar('Brukte du hele sykmeldingen fram til 24. april 2020?', 'Nei')
+                .children()
+                .within(() => {
+                    sporsmalOgSvar('Fra hvilken dato trengte du ikke lenger sykmeldingen?', '10.04.2020')
+                })
+            sporsmalOgSvar('Har du hatt inntekt mens du har vært sykmeldt i perioden 1. - 24. april 2020?', 'Ja')
+                .children()
+                .within(() => {
+                    sporsmalOgSvar('Hvilke inntektskilder har du hatt?', 'andre arbeidsforhold')
+                        .children()
+                        .within(() => {
+                            sporsmalOgSvar('Er du sykmeldt fra dette?', 'Ja')
+                        })
+                })
         })
         cy.contains(
             'Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.',

@@ -77,7 +77,7 @@ describe('Tester arbeidsledigsøknad', () => {
         cy.realPress('Enter')
         sjekkMainContentFokus()
 
-        cy.contains('Oppsummering')
+        cy.contains('Oppsummering fra søknaden')
         cy.realPress('Tab')
         cy.realPress('Tab')
         cy.realPress('Tab')

@@ -4,6 +4,7 @@ import {
     klikkTilbake,
     setPeriodeFraTil,
     sjekkMainContentFokus,
+    sporsmalOgSvar,
     svarCombobox,
 } from '../../support/utilities'
 import { oppholdUtland } from '../../../src/data/mock/data/soknad/opphold-utland'
@@ -175,21 +176,12 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
 
     it('Oppsummering fra søknaden', function () {
         cy.url().should('include', `${soknad.id}/4`)
-        cy.get('.oppsummering').contains('Når skal du reise?').siblings().should('contain', '17. – 24. desember 2020')
-
-        cy.get('.oppsummering')
-            .contains('Hvilke(t) land skal du reise til?')
-            .siblings()
-            .should('contain', 'Afghanistan')
-            .and('contain', 'Sør-Korea')
-
-        cy.get('.oppsummering').contains('Har du arbeidsgiver?').siblings().should('contain', 'Ja')
-        cy.get('.oppsummering').within(() => {
-            cy.contains('Er du 100 % sykmeldt?').siblings().should('contain', 'Ja')
-
-            cy.contains('Har du avtalt med arbeidsgiveren din at du skal ta ut feriedager i hele perioden?')
-                .siblings()
-                .should('contain', 'Nei')
+        cy.get('[data-cy="oppsummering-fra-søknaden"]').within(() => {
+            sporsmalOgSvar('Når skal du reise?', '17. – 24. desember 2020')
+            sporsmalOgSvar('Hvilke(t) land skal du reise til?', 'Afghanistan').and('contain', 'Sør-Korea')
+            sporsmalOgSvar('Har du arbeidsgiver?', 'Ja')
+            sporsmalOgSvar('Er du 100 % sykmeldt?', 'Ja')
+            sporsmalOgSvar('Har du avtalt med arbeidsgiveren din at du skal ta ut feriedager i hele perioden?', 'Nei')
         })
     })
 
