@@ -543,7 +543,7 @@ const soknad: RSSoknad = {
             tag: 'TIL_SLUTT',
             sporsmalstekst: 'Viktig å være klar over:',
             undertekst: null,
-            svartype: 'BEKREFTELSESPUNKTER',
+            svartype: 'OPPSUMMERING',
             min: null,
             max: null,
             kriterieForVisningAvUndersporsmal: null,

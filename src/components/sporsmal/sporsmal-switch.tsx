@@ -98,7 +98,7 @@ const SporsmalSwitch = ({ sporsmal, sporsmalIndex, erSisteSporsmal, erHovedspors
         case RSSvartype.IKKE_RELEVANT:
             return <IkkeRelevant sporsmal={sporsmal} />
 
-        case RSSvartype.BEKREFTELSESPUNKTER:
+        case RSSvartype.OPPSUMMERING:
             return <Kulepunkter sporsmal={sporsmal} />
 
         default:

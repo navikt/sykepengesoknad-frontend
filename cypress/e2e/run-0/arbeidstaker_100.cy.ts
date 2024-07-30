@@ -178,36 +178,9 @@ describe('Tester arbeidstakersøknad', () => {
             .and('have.attr', 'aria-valuemax', '7')
             .and('have.attr', 'aria-valuetext', '7 av 7')
 
-        it('Bekreftelsespunktene er riktige', () => {
-            const bekreftelser = [
-                'Du kan bare få sykepenger hvis det er din egen sykdom eller skade som hindrer deg i å jobbe. Sosiale eller økonomiske problemer gir ikke rett til sykepenger.',
-                'Du kan miste retten til sykepenger hvis du nekter å opplyse om din egen arbeidsevne, eller hvis du ikke tar imot behandling eller tilrettelegging.',
-                'Retten til sykepenger gjelder bare pensjonsgivende inntekt du har på sykmeldingstidspunktet.',
-                'NAV kan innhente opplysninger som er nødvendige for å behandle søknaden.',
-                'Fristen for å søke sykepenger er som hovedregel 3 måneder',
-                'Du kan endre svarene i denne søknaden opp til 12 måneder etter du sendte den inn første gangen.',
-            ]
-
-            bekreftelser.forEach((bekreftelse) => {
-                cy.contains(bekreftelse)
-            })
-
-            cy.contains(
-                'Du må melde fra til NAV hvis du satt i varetekt, sonet straff eller var under forvaring i sykmeldingsperioden.',
-            )
-                .find('a')
-                .should('have.attr', 'href', 'https://www.nav.no/skriv-til-oss')
-
-            cy.contains(
-                'Du må melde fra om studier som er påbegynt etter at du ble sykmeldt, og som ikke er avklart med NAV. Det samme gjelder hvis du begynner å studere mer enn du gjorde før du ble sykmeldt.',
-            )
-                .find('a')
-                .should('have.attr', 'href', 'https://www.nav.no/skriv-til-oss')
-
-            cy.contains('Du kan lese mer om rettigheter og plikter på')
-                .find('a')
-                .should('have.attr', 'href', 'https://www.nav.no/sykepenger')
-        })
+        cy.get('.navds-guide-panel__content').contains(
+            'Nå kan du se over at alt er riktig før du sender inn søknaden. Ved behov kan du endre opplysningene inntil 12 måneder etter innsending.',
+        )
 
         cy.get('section[aria-label="Oppsummering fra søknaden"] button').click()
         cy.contains('Jeg vil svare så godt jeg kan på spørsmålene i søknaden.')

@@ -81,9 +81,6 @@ describe('Tester arbeidsledigsøknad', () => {
         cy.realPress('Tab')
         cy.realPress('Tab')
         cy.realPress('Tab')
-        cy.realPress('Tab')
-        cy.realPress('Tab')
-        cy.realPress('Tab')
         cy.focused()
             .parent()
             .contains(
