@@ -161,21 +161,10 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
 
     it('Søknad TIL_SLUTT', () => {
         cy.url().should('include', `${soknad.id}/4`)
-        it('Bekreftelsespunktene er riktige', () => {
-            const punkter = [
-                'Jeg har avklart med legen at reisen ikke vil forlenge sykefraværet',
-                'Reisen hindrer ikke planlagt behandling eller avtaler med NAV',
-                'Reisen er avklart med arbeidsgiveren min',
-            ]
+        cy.get('.navds-guide-panel__content').contains(
+            'Nå kan du se over at alt er riktig før du sender inn søknaden. Ved behov kan du endre opplysningene inntil 12 måneder etter innsending.',
+        )
 
-            punkter.forEach((punkt) => {
-                cy.contains(punkt)
-            })
-        })
-    })
-
-    it('Oppsummering fra søknaden', function () {
-        cy.url().should('include', `${soknad.id}/4`)
         cy.get('[data-cy="oppsummering-fra-søknaden"]').within(() => {
             sporsmalOgSvar('Når skal du reise?', '17. – 24. desember 2020')
             sporsmalOgSvar('Hvilke(t) land skal du reise til?', 'Afghanistan').and('contain', 'Sør-Korea')
@@ -193,7 +182,6 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
             .and('have.attr', 'aria-valuemax', '4')
             .and('have.attr', 'aria-valuetext', '4 av 4')
 
-        cy.contains('Viktig å være klar over:')
         cy.contains(
             'Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.',
         ).click()

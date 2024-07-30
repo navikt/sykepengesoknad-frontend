@@ -23,6 +23,7 @@ import { useToggle } from '../../toggles/context'
 import { SkeletonSporsmalForm } from '../sporsmal/sporsmal-form/skeleton-sporsmal-form'
 import { FeilStateView } from '../feil/refresh-hvis-feil-state'
 import { Over70Aar } from '../soknad-intro/over-70'
+import { erSisteSide } from '../sporsmal/sporsmal-utils'
 
 import { urlTilSoknad } from './soknad-link'
 import { SporsmalTittel } from './sporsmal-tittel'
@@ -108,6 +109,7 @@ export const Soknaden = () => {
     const sporsmal = valgtSoknad?.sporsmal[spmIndex]
 
     const erForstesiden = stegNo === 1 && !erUtenlandssoknad
+    const erSistesiden = valgtSoknad && sporsmal ? erSisteSide(valgtSoknad, stegNo) : false
     const erForstesidenMedReisetilskudd = stegNo === 1 && (erReisetilskuddsoknad || erGradertReisetilskuddsoknad)
     return (
         <>
@@ -122,7 +124,7 @@ export const Soknaden = () => {
             {erForstesiden && <Opplysninger ekspandert={true} />}
             {erForstesiden && <FristSykepenger />}
             {erForstesidenMedReisetilskudd && <OmReisetilskudd />}
-            {!erForstesiden && <SporsmalTittel />}
+            {!erForstesiden && !erSistesiden && <SporsmalTittel />}
             {sporsmal && <SporsmalForm sporsmal={sporsmal} key={sporsmal.id} />}
             {!sporsmal && <SkeletonSporsmalForm />}
             {erForstesiden && !erUtenlandssoknad && (

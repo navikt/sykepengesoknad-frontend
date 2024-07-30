@@ -51,18 +51,13 @@ const SporsmalForm = ({ sporsmal }: SpmProps) => {
     })
 
     const erSisteSpm = () => {
-        const snartSlutt = [
-            RSSvartype.IKKE_RELEVANT,
-            RSSvartype.CHECKBOX_PANEL,
-            RSSvartype.BEKREFTELSESPUNKTER,
-        ].includes(sporsmal!.svartype)
+        const snartSlutt = [RSSvartype.IKKE_RELEVANT, RSSvartype.CHECKBOX_PANEL, RSSvartype.OPPSUMMERING].includes(
+            sporsmal!.svartype,
+        )
         if (!snartSlutt) {
             return false
         }
-        if (
-            sporsmal!.svartype === RSSvartype.BEKREFTELSESPUNKTER ||
-            sporsmal!.tag === 'BEKREFT_OPPLYSNINGER_UTLAND_INFO'
-        ) {
+        if (sporsmal!.svartype === RSSvartype.OPPSUMMERING || sporsmal!.tag === 'BEKREFT_OPPLYSNINGER_UTLAND_INFO') {
             return valgtSoknad?.sporsmal?.length === stegNo
         }
         return valgtSoknad?.sporsmal?.length === stegNo + 1
