@@ -68,7 +68,7 @@
         "jest-environment-jsdom": "^29.7.0",
         "jsdom": "^24.1.1",
         "next": "^14.2.5",
-        "postcss": "^8.4.39",
+        "postcss": "^8.4.40",
         "prettier": "^3.3.3",
         "prettier-plugin-tailwindcss": "^0.6.5",
         "start-server-and-test": "^2.0.4",
