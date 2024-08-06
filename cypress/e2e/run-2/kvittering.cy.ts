@@ -176,9 +176,6 @@ describe('Tester kvittering', () => {
                 'false',
             )
 
-            // Opplysninger finnes ikke
-            cy.contains('Opplysninger fra sykmeldingen').should('not.exist')
-
             // Knapperad finnes ikke
             cy.contains('Jeg vil endre svarene i søknaden').should('not.exist')
             cy.contains('Jeg vil at søknaden skal behandles av NAV').should('not.exist')

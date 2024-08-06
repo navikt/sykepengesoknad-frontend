@@ -16,11 +16,6 @@ describe('Tester arbeidsledigsøknad', () => {
     it('Søknad ANSVARSERKLARING', () => {
         cy.url().should('include', `${soknad.id}/1`)
 
-        // Sykmelding
-        cy.contains('1. april - 24. april 2020 (24 dager)')
-        cy.contains('100% sykmeldt')
-        cy.get('section[aria-label="Opplysninger fra sykmeldingen"] button').click()
-
         // Godkjenne ANSVARSERKLARING
         cy.contains(
             'Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene jeg gir ikke er riktige eller fullstendige. Jeg vet også at NAV kan holde igjen eller kreve tilbake penger, og at å gi feil opplysninger kan være straffbart.',

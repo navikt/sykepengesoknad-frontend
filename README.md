@@ -23,9 +23,7 @@ I din `.bashrc` eller `.zshrc`, sett følgende miljøvariabel:
 | Åpne/lukke "Om sykepenger"                                 |            |             |               |             |   x   |              |       x       |
 | Åpne/lukke "For Arbeidstakere"                             |            |             |               |             |   x   |              |       x       |
 | Åpne/lukke "For selvstendig næringsdrivende og frilansere" |            |             |               |             |   x   |              |       x       |
-| Åpne/lukke "Opplysninger fra sykmeldingen"                 |            |             |               |      x      |       |              |       x       |
 | Åpne/lukke "Oppsummering fra søknaden"                     |            |             |               |             |       |              |       x       |
-| Åpne/lukke "Frist for å søke" samt eksemplet               |            |             |               |             |       |              |       x       |
 | Åpne hjelpetekst i alle spørsmål untatt noen få            |            |             |               |      x      |       |              |       x       |
 | Åpne/lukke "Slik behandler NAV personopplysningene dine"   |            |      x      |               |             |   x   |              |       x       |
 | Åpne/lukke "Lagre søknad og fortsett senere"                    |            |      x      |               |             |       |              |       x       |

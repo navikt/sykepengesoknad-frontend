@@ -3,7 +3,6 @@ import { useRouter } from 'next/router'
 import { Button } from '@navikt/ds-react'
 
 import OmReisetilskudd from '../../components/om-reisetilskudd/om-reisetilskudd'
-import Opplysninger from '../../components/opplysninger-fra-sykmelding/opplysninger'
 import SoknadMedToDeler from '../../components/soknad-med-to-deler/soknad-med-to-deler'
 import SporsmalForm from '../../components/sporsmal/sporsmal-form/sporsmal-form'
 import Fremdriftsbar from '../sporsmal/fremdriftsbar/fremdriftsbar'
@@ -13,8 +12,7 @@ import { logEvent } from '../amplitude/amplitude'
 import { EldreUsendtSoknad, harEldreUsendtSoknad } from '../eldre-usendt/eldre-usendt-soknad'
 import { EldreUsendtSykmelding } from '../eldre-usendt/eldre-usendt-sykmelding'
 import { eldreUsendteSykmeldinger } from '../eldre-usendt/eldreUsendteSykmeldinger'
-import FristSykepenger from '../frist-sykepenger/frist-sykepenger'
-import { ViktigInformasjon } from '../soknad-intro/viktig-informasjon'
+import { InfoOmTilbakedatering } from '../soknad-intro/info-om-tilbakedatering'
 import { soknadBreadcrumb, useUpdateBreadcrumbs } from '../../hooks/useBreadcrumbs'
 import EgenmeldingsdagerArbeidsgiver from '../egenmeldingsdager-arbeidsgiver/egenmeldingsdager-arbeidsgiver'
 import { FlexjarSporsmal } from '../flexjar/flexjar-sporsmal'
@@ -115,12 +113,14 @@ export const Soknaden = () => {
             <SoknadHeader />
 
             {!erForstesiden && <Fremdriftsbar />}
-            {erForstesiden && <ViktigInformasjon />}
-            {erForstesiden && valgtSykmelding?.pasient?.overSyttiAar && <Over70Aar />}
-            {erForstesiden && erGradertReisetilskuddsoknad && <SoknadMedToDeler />}
-            {erForstesiden && valgtSoknad?.opprettetAvInntektsmelding && <EgenmeldingsdagerArbeidsgiver />}
-            {erForstesiden && <Opplysninger ekspandert={true} />}
-            {erForstesiden && <FristSykepenger />}
+            {erForstesiden && (
+                <>
+                    <InfoOmTilbakedatering />
+                    {valgtSykmelding?.pasient?.overSyttiAar && <Over70Aar />}
+                    {erGradertReisetilskuddsoknad && <SoknadMedToDeler />}
+                    {valgtSoknad?.opprettetAvInntektsmelding && <EgenmeldingsdagerArbeidsgiver />}
+                </>
+            )}
             {erForstesidenMedReisetilskudd && <OmReisetilskudd />}
             {!erForstesiden && <SporsmalTittel />}
             {sporsmal && <SporsmalForm sporsmal={sporsmal} key={sporsmal.id} />}
