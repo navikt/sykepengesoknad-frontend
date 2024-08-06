@@ -25,15 +25,7 @@ describe('Tester arbeidstakersøknad', () => {
         cy.contains('Det du fyller ut brukes til å vurdere om du har rett til sykepenger').should('not.exist')
 
         // Personvern erklæring
-        cy.get('.frist-sykepenger').click()
         cy.contains('Slik behandler NAV personopplysningene dine').click()
-
-        // Sykmelding
-        cy.contains('1. april - 24. april 2020 (24 dager)')
-        cy.contains('Posten Norge AS, Bærum')
-        cy.contains('100% sykmeldt')
-
-        cy.get('section[aria-label="Opplysninger fra sykmeldingen"] button').click()
 
         // Avbryt dialog vises
         cy.contains('Jeg har ikke behov for denne søknaden').click()

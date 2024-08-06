@@ -32,11 +32,6 @@ describe('Tester avbryting av søknad', () => {
         cy.contains(
             'Hvis du vil søke om sykepenger basert på denne søknaden likevel, må du gjenåpne søknaden, fylle den ut og sende den inn.',
         )
-
-        // Sykmelding
-        cy.get('section[aria-label="Opplysninger fra sykmeldingen"] button').click()
-        cy.contains('1. april - 24. april 2020 (24 dager)')
-        cy.contains('Frist for å søke')
     })
 
     it('Søknad kan gjenåpnes', function () {

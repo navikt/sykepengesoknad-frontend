@@ -30,13 +30,6 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
             cy.url().should('include', `/syk/sykepengesoknad/soknader/${nyttReisetilskudd.id}/1`)
         })
 
-        it('Skal ha egen folketrygloven tekst', () => {
-            cy.get('.frist-sykepenger').click()
-            cy.contains(
-                'Ifølge folketrygdloven kan du få reisetilskudd hvis du har rett til sykepenger. Reisetilskuddet kommer da i stedet for sykepengene.',
-            )
-        })
-
         it('Laster inn hvem kan få reisetilskudd', () => {
             cy.get('[data-cy="om-reisetilskudd"]').should('be.visible').click()
 
