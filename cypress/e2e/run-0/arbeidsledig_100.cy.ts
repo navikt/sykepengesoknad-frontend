@@ -1,4 +1,4 @@
-import { setPeriodeFraTil } from '../../support/utilities'
+import { setPeriodeFraTil, sjekkIntroside } from '../../support/utilities'
 import { arbeidsledig } from '../../../src/data/mock/data/soknad/arbeidsledig'
 
 describe('Tester arbeidsledigsøknad', () => {
@@ -15,6 +15,7 @@ describe('Tester arbeidsledigsøknad', () => {
 
     it('Søknad ANSVARSERKLARING', () => {
         cy.url().should('include', `${soknad.id}/1`)
+        sjekkIntroside()
 
         // Godkjenne ANSVARSERKLARING
         cy.contains(

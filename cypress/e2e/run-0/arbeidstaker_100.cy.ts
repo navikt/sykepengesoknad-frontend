@@ -1,4 +1,4 @@
-import { setPeriodeFraTil } from '../../support/utilities'
+import { setPeriodeFraTil, sjekkIntroside } from '../../support/utilities'
 import { inlineForklaringer } from '../../support/sjekkInlineForklaringKvittering'
 import { arbeidstaker } from '../../../src/data/mock/data/soknad/arbeidstaker'
 
@@ -21,8 +21,7 @@ describe('Tester arbeidstakersøknad', () => {
     it('Søknad ANSVARSERKLARING', function () {
         cy.url().should('include', `${soknad.id}/1`)
 
-        cy.contains('Før du begynner').should('not.exist')
-        cy.contains('Det du fyller ut brukes til å vurdere om du har rett til sykepenger').should('not.exist')
+        sjekkIntroside()
 
         // Personvern erklæring
         cy.contains('Slik behandler NAV personopplysningene dine').click()

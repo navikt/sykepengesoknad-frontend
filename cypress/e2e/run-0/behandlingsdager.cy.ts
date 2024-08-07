@@ -1,5 +1,5 @@
 import { behandlingsdager } from '../../../src/data/mock/data/soknad/behandlingsdager'
-import { klikkGaVidere, klikkTilbake, svarNeiHovedsporsmal } from '../../support/utilities'
+import { klikkGaVidere, klikkTilbake, sjekkIntroside, svarNeiHovedsporsmal } from '../../support/utilities'
 
 describe('Tester behandlingsdagersøknad', () => {
     //-----
@@ -19,6 +19,8 @@ describe('Tester behandlingsdagersøknad', () => {
 
     it('Søknad ANSVARSERKLARING - steg 1', function () {
         cy.url().should('include', `${soknad.id}/1`)
+
+        sjekkIntroside()
 
         // Godkjenne ANSVARSERKLARING
         cy.contains(

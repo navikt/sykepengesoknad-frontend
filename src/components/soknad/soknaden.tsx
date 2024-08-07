@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
-import { Button } from '@navikt/ds-react'
+import { BodyLong, Button } from '@navikt/ds-react'
 
 import OmReisetilskudd from '../../components/om-reisetilskudd/om-reisetilskudd'
 import SoknadMedToDeler from '../../components/soknad-med-to-deler/soknad-med-to-deler'
@@ -21,6 +21,10 @@ import { useToggle } from '../../toggles/context'
 import { SkeletonSporsmalForm } from '../sporsmal/sporsmal-form/skeleton-sporsmal-form'
 import { FeilStateView } from '../feil/refresh-hvis-feil-state'
 import { Over70Aar } from '../soknad-intro/over-70'
+import { IntroGuide } from '../soknad-intro/intro-guide'
+import { ForDuSoker } from '../soknad-intro/for-du-soker'
+import { IntroAccordion } from '../soknad-intro/intro-accordion'
+import { LenkeMedIkon } from '../lenke-med-ikon/LenkeMedIkon'
 
 import { urlTilSoknad } from './soknad-link'
 import { SporsmalTittel } from './sporsmal-tittel'
@@ -115,10 +119,20 @@ export const Soknaden = () => {
             {!erForstesiden && <Fremdriftsbar />}
             {erForstesiden && (
                 <>
+                    <IntroGuide />
+                    <ForDuSoker />
+                    <IntroAccordion />
                     <InfoOmTilbakedatering />
                     {valgtSykmelding?.pasient?.overSyttiAar && <Over70Aar />}
                     {erGradertReisetilskuddsoknad && <SoknadMedToDeler />}
                     {valgtSoknad?.opprettetAvInntektsmelding && <EgenmeldingsdagerArbeidsgiver />}
+                    <BodyLong spacing>
+                        Det er viktig at du gir oss riktige opplysninger slik at vi kan behandle saken din.
+                        <LenkeMedIkon
+                            href="https://www.nav.no/sykepenger-og-personopplysninger"
+                            text="Les mer om viktigheten av å gi riktige opplysninger."
+                        />
+                    </BodyLong>
                 </>
             )}
             {erForstesidenMedReisetilskudd && <OmReisetilskudd />}
