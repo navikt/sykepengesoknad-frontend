@@ -10,7 +10,7 @@ export const SkeletonSporsmalForm = () => {
         // Checkboxpanel
         return (
             <>
-                <Skeleton variant="rectangle" className="rounded" height="130px"></Skeleton>
+                <Skeleton variant="rectangle" className="rounded" height="131px"></Skeleton>
                 <div className="my-8">
                     <Button as={Skeleton} variant="primary" type="submit" className="mb-12 mt-6 inline-flex">
                         Gå videre

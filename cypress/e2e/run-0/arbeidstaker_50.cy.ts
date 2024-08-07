@@ -1,4 +1,4 @@
-import { klikkTilbake, setPeriodeFraTil } from '../../support/utilities'
+import { klikkTilbake, setPeriodeFraTil, sjekkIntroside } from '../../support/utilities'
 import { arbeidstakerGradert } from '../../../src/data/mock/data/soknad/arbeidstaker-gradert'
 
 describe('Tester arbeidstakersøknad - gradert 50%', () => {
@@ -15,6 +15,8 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
 
     it('Søknad ANSVARSERKLARING', function () {
         cy.url().should('include', `${soknad.id}/1`)
+
+        sjekkIntroside()
 
         // Godkjenne ANSVARSERKLARING
         cy.contains(

@@ -85,7 +85,7 @@
         "test:ci": "vitest --run",
         "cy:open": "cypress open --e2e",
         "cy:headless-parallel": "node cypress/headless-parallel.js",
-        "e2e": "start-test dev-ingen-dekorator http://localhost:8080/syk/sykepengesoknad cy:open",
+        "e2e": "caffeinate -i start-test dev-ingen-dekorator http://localhost:8080/syk/sykepengesoknad cy:open",
         "headless": "MOCK_BACKEND=true start-test dev-ingen-dekorator http://localhost:8080/syk/sykepengesoknad cy:headless-parallel",
         "prettier:write": "prettier --write .",
         "prettier:check": "prettier --check .",

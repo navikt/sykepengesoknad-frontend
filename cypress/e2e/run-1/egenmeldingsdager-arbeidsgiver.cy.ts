@@ -8,7 +8,7 @@ describe('Tester søknad som er opprettet fra egenmeldingsdager i inntektsmeldin
         cy.contains('Søknad om sykepenger').and('be.visible')
 
         cy.get('.navds-guide-panel')
-            .first()
+            .eq(1)
             .within(() => {
                 cy.contains('Du må søke om sykepenger')
                 cy.contains('Siden sykefraværet ditt er på mer enn 16 dager må du søke om sykepenger.')
