@@ -204,9 +204,7 @@ describe('Tester arbeidstakersøknad', () => {
         })
 
         cy.get('section[aria-label="Oppsummering fra søknaden"] button').click()
-        cy.contains(
-            'Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene jeg gir ikke er riktige eller fullstendige. Jeg vet også at NAV kan holde igjen eller kreve tilbake penger, og at å gi feil opplysninger kan være straffbart.',
-        )
+        cy.contains('Jeg vil svare så godt jeg kan på spørsmålene i søknaden.')
 
         cy.get('.oppsummering').within(() => {
             cy.contains('Jobber du vanligvis 37,5 timer i uka')

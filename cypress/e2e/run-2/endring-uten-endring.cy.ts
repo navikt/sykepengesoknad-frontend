@@ -18,7 +18,7 @@ describe('Tester endring uten en endringer', () => {
     })
 
     it('Svarer det samme søknaden', function () {
-        cy.contains('kan være straffbart').click()
+        cy.contains('Jeg vil svare så godt jeg kan på spørsmålene i søknaden.').click()
         cy.contains('Gå videre').click()
         cy.contains('Friskmeldt')
 
