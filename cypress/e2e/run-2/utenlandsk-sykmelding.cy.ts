@@ -19,7 +19,7 @@ describe('Tester søknad til utenlandsk sykmelding', () => {
         cy.url().should('include', `${id}/1`)
 
         cy.contains('Frist for å søke').should('not.exist')
-        cy.contains('Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene ').click()
+        cy.contains('Jeg vil svare så godt jeg kan på spørsmålene i søknaden.').click()
         cy.contains('Gå videre').click()
     })
 

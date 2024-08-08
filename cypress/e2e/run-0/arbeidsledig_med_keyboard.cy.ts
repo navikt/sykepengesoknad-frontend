@@ -28,7 +28,7 @@ describe('Tester arbeidsledigsøknad', () => {
         cy.focused()
             .parent()
             .parent()
-            .contains('Jeg vet at jeg kan miste retten til sykepenger')
+            .contains('Jeg vil svare så godt jeg kan på spørsmålene i søknaden.')
             .should('have.css', 'box-shadow')
         cy.realPress('Space')
         cy.realPress('Tab')
