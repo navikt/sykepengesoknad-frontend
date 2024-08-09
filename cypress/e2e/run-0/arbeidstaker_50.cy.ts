@@ -1,4 +1,4 @@
-import { klikkTilbake, setPeriodeFraTil } from '../../support/utilities'
+import { klikkTilbake, setPeriodeFraTil, sporsmalOgSvar } from '../../support/utilities'
 import { arbeidstakerGradert } from '../../../src/data/mock/data/soknad/arbeidstaker-gradert'
 
 describe('Tester arbeidstakersøknad - gradert 50%', () => {
@@ -15,12 +15,6 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
 
     it('Søknad ANSVARSERKLARING', function () {
         cy.url().should('include', `${soknad.id}/1`)
-
-        // Sykmelding
-        cy.contains('1. april - 24. april 2020 (24 dager)')
-        cy.contains('Posten Norge AS, Bærum')
-        cy.contains('50% sykmeldt')
-        cy.get('section[aria-label="Opplysninger fra sykmeldingen"] button').click()
 
         // Godkjenne ANSVARSERKLARING
         cy.contains(
@@ -152,12 +146,14 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
 
     it('Søknad ANSVARSERKLARING ', function () {
         cy.url().should('include', `${soknad.id}/9`)
-        cy.contains('Oppsummering')
+        cy.contains('Oppsummering fra søknaden')
+        cy.get('[data-cy="oppsummering-fra-søknaden"]').within(() => {
+            sporsmalOgSvar('Søknaden sendes til', 'Posten Norge AS, Bærum')
+        })
         cy.contains(
             'Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.',
         )
         cy.get('.navds-checkbox__label').click()
-        cy.contains('Søknaden sendes til Posten Norge AS, Bærum med kopi til NAV.')
 
         cy.contains('Send søknaden').click()
     })

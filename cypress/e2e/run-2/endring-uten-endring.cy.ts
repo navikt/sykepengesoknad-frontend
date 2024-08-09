@@ -35,7 +35,7 @@ describe('Tester endring uten en endringer', () => {
         cy.contains('Arbeid utenfor Norge')
 
         cy.contains('Gå videre').click()
-        cy.contains('Oppsummering')
+        cy.contains('Oppsummering fra søknaden')
     })
 
     it('Vi ser en popup og lander på listevisninga', function () {

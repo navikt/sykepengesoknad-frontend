@@ -1,10 +1,12 @@
-import React, { useState } from 'react'
-import { ExpansionCard, Heading } from '@navikt/ds-react'
+import React from 'react'
+import { FormSummary } from '@navikt/ds-react'
 
 import { RSSvartype } from '../../types/rs-types/rs-svartype'
 import { Sporsmal } from '../../types/types'
 import { tekst } from '../../utils/tekster'
-import { logEvent } from '../amplitude/amplitude'
+import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
+import SendesTil from '../sporsmal/sporsmal-form/sendes-til'
+import { useSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
 
 import Behandlingsdager from './utdrag/behandlingsdager'
 import CheckboxGruppe from './utdrag/checkbox-gruppe'
@@ -23,51 +25,29 @@ export interface OppsummeringProps {
     sporsmal: Sporsmal
 }
 
-const Oppsummering = ({
-    ekspandert,
-    sporsmal,
-    parent,
-}: {
-    ekspandert: boolean
-    sporsmal: ReadonlyArray<Sporsmal>
-    parent: string
-}) => {
+const Oppsummering = () => {
     const tittel = tekst('sykepengesoknad.oppsummering.tittel')
-    const [erApen, setErApen] = useState<boolean>(ekspandert)
+    const { valgtSoknad } = useSoknadMedDetaljer()
+    if (!valgtSoknad) return null
+
+    const sporsmal: ReadonlyArray<Sporsmal> = valgtSoknad.sporsmal
+    const visSendTil = valgtSoknad?.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND
 
     return (
-        <ExpansionCard
-            open={erApen}
-            className="oppsummering my-8"
-            data-cy="oppsummering-fra-søknaden"
-            aria-label={tittel}
-        >
-            <ExpansionCard.Header
-                onClick={() => {
-                    logEvent(erApen ? 'expansioncard lukket' : 'expansioncard åpnet', {
-                        component: tittel,
-                        parent: parent,
-                    })
-                    setErApen(!erApen)
-                }}
-            >
-                <Heading size="small" level="2" className="flex h-full items-center">
+        <FormSummary className="oppsummering my-8" data-cy="oppsummering-fra-søknaden" aria-label={tittel}>
+            <FormSummary.Header>
+                <FormSummary.Heading level="2" className="flex h-full items-center">
                     {tittel}
-                </Heading>
-            </ExpansionCard.Header>
+                </FormSummary.Heading>
+            </FormSummary.Header>
 
-            <ExpansionCard.Content>
-                {sporsmal.filter(skalVisesIOppsummering).map((sporsmal, index) => {
-                    const isFirstSection = index === 0
-
-                    return (
-                        <section key={index} className={isFirstSection ? '' : 'mt-8 border-t border-gray-300 pt-8'}>
-                            <SporsmalVarianter sporsmal={sporsmal} />
-                        </section>
-                    )
+            <FormSummary.Answers>
+                {visSendTil && <SendesTil soknad={valgtSoknad} />}
+                {sporsmal?.filter(skalVisesIOppsummering).map((sporsmal, index) => {
+                    return <SporsmalVarianter sporsmal={sporsmal} key={index} />
                 })}
-            </ExpansionCard.Content>
-        </ExpansionCard>
+            </FormSummary.Answers>
+        </FormSummary>
     )
 }
 
@@ -121,6 +101,7 @@ export const SporsmalVarianter = ({ sporsmal }: OppsummeringProps) => {
             return <TallSum sporsmal={sporsmal} />
         }
 
+        case RSSvartype.RADIO:
         case RSSvartype.RADIO_GRUPPE_TIMER_PROSENT:
         case RSSvartype.RADIO_GRUPPE: {
             return <RadioGruppe sporsmal={sporsmal} />

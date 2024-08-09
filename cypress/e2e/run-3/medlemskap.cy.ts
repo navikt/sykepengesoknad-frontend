@@ -3,6 +3,7 @@ import 'cypress-real-events'
 import {
     klikkGaVidere,
     setPeriodeFraTil,
+    sporsmalOgSvar,
     svarCombobox,
     svarFritekst,
     svarJaHovedsporsmal,
@@ -83,17 +84,21 @@ describe('Søknad med alle opprinnelige spørsmål om medlemskap', () => {
         klikkGaVidere()
     })
 
-    it('Oppsumering av søknad', () => {
+    it('Oppsummering av søknad', () => {
         cy.contains('Oppsummering')
+        cy.get('[data-cy="oppsummering-fra-søknaden"]').within(() => {
+            //Arbeid utenfor Norge
+            sporsmalOgSvar('Har du arbeidet utenfor Norge i løpet av de siste 12 månedene før du ble syk?', 'Ja')
+            sporsmalOgSvar('I hvilket land arbeidet du?', 'Frankrike')
+            sporsmalOgSvar('Hvilken arbeidsgiver jobbet du for?', 'Croissant AS')
+            sporsmalOgSvar('I hvilken periode arbeidet du i utlandet?', '12. – 20.')
 
-        cy.findByRole('region', { name: 'Oppsummering fra søknaden' }).click()
-        cy.findByRole('region', { name: 'Oppsummering fra søknaden' }).within(() => {
-            cy.contains('Har du arbeidet utenfor Norge i løpet av de siste 12 månedene før du ble syk?')
-                .siblings()
-                .should('contain', 'Ja')
-            cy.contains('I hvilket land arbeidet du?').siblings().should('contain', 'Frankrike')
-            cy.contains('Hvilken arbeidsgiver jobbet du for?').siblings().should('contain', 'Croissant AS')
-            cy.contains('I hvilken periode arbeidet du i utlandet?').siblings().should('contain', '12. – 20.')
+            //Oppholdstillatelse
+            sporsmalOgSvar('Har du oppholdstillatelse fra Utlendingsdirektoratet?', 'Ja')
+            sporsmalOgSvar('Hvilken dato fikk du denne oppholdstillatelsen?', '22.10.2023')
+            sporsmalOgSvar('Er oppholdstillatelsen midlertidig eller permanent?', 'Midlertidig')
+                .children()
+                .should('contain', '12. – 24. juli 2024')
         })
     })
 })
@@ -124,16 +129,12 @@ describe('Søknad med nytt spørsmål om oppholdstillatelse og kjent permanent o
         klikkGaVidere()
     })
 
-    it('Oppsumering av søknad', () => {
+    it('Oppsummering av søknad', () => {
         cy.contains('Oppsummering')
-
-        cy.findByRole('region', { name: 'Oppsummering fra søknaden' }).click()
-        cy.findByRole('region', { name: 'Oppsummering fra søknaden' }).within(() => {
-            cy.contains('Har Utlendingsdirektoratet gitt deg en oppholdstillatelse før 1. mai 2024?')
-                .siblings()
-                .should('contain', 'Ja')
-            cy.contains('Hvilken dato fikk du denne oppholdstillatelsen?').siblings().should('contain', '01.')
-            cy.contains('Hvilken periode gjelder denne oppholdstillatelsen?').siblings().should('contain', '10. – 25.')
+        cy.get('[data-cy="oppsummering-fra-søknaden"]').within(() => {
+            sporsmalOgSvar('Har Utlendingsdirektoratet gitt deg en oppholdstillatelse før 1. mai 2024?', 'Ja')
+            sporsmalOgSvar('Hvilken dato fikk du denne oppholdstillatelsen?', '01.')
+            sporsmalOgSvar('Hvilken periode gjelder denne oppholdstillatelsen?', '10. – 25.')
         })
     })
 })
@@ -176,16 +177,12 @@ describe('Søknad med nytt spørsmål om oppholdstillatelse og kjent midlertidig
         klikkGaVidere()
     })
 
-    it('Oppsumering av søknad', () => {
+    it('Oppsummering av søknad', () => {
         cy.contains('Oppsummering')
-
-        cy.findByRole('region', { name: 'Oppsummering fra søknaden' }).click()
-        cy.findByRole('region', { name: 'Oppsummering fra søknaden' }).within(() => {
-            cy.contains('Har Utlendingsdirektoratet gitt deg en oppholdstillatelse før 1. mai 2024?')
-                .siblings()
-                .should('contain', 'Ja')
-            cy.contains('Hvilken dato fikk du denne oppholdstillatelsen?').siblings().should('contain', '01.')
-            cy.contains('Hvilken periode gjelder denne oppholdstillatelsen?').siblings().should('contain', '10. – 20.')
+        cy.get('[data-cy="oppsummering-fra-søknaden"]').within(() => {
+            sporsmalOgSvar('Har Utlendingsdirektoratet gitt deg en oppholdstillatelse før 1. mai 2024?', 'Ja')
+            sporsmalOgSvar('Hvilken dato fikk du denne oppholdstillatelsen?', '01.')
+            sporsmalOgSvar('Hvilken periode gjelder denne oppholdstillatelsen?', '10. – 20.')
         })
     })
 })

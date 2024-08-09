@@ -18,23 +18,23 @@ export const hentSvar = (sporsmal: Sporsmal): any => {
                 .map((uspm) => uspm.svarliste.svar[0]?.verdi)
                 .filter((v) => v !== undefined && v !== 'Ikke til behandling')
                 .map((s) => dayjs(s).toDate())
+
         case RSSvartype.CHECKBOX_PANEL:
-            return svar?.verdi === 'CHECKED'
+        case RSSvartype.CHECKBOX:
+            return svar?.verdi === SvarEnums.CHECKED
 
         case RSSvartype.CHECKBOX_GRUPPE:
             return sporsmal.undersporsmal
-                .map((spm: Sporsmal) => {
-                    return spm.svarliste.svar[0]?.verdi === SvarEnums.CHECKED ? spm.sporsmalstekst : undefined
-                })
-                .filter((spm) => spm !== undefined)
+                .filter((spm: Sporsmal) => spm.svarliste.svar[0]?.verdi === SvarEnums.CHECKED)
+                .map((spm: Sporsmal) => spm.sporsmalstekst)
+
+        case RSSvartype.RADIO:
         case RSSvartype.RADIO_GRUPPE:
         case RSSvartype.RADIO_GRUPPE_TIMER_PROSENT:
         case RSSvartype.RADIO_GRUPPE_UKEKALENDER:
-            return (
-                sporsmal.undersporsmal.find((spm: Sporsmal) => {
-                    return spm.svarliste.svar[0]?.verdi === SvarEnums.CHECKED
-                })?.sporsmalstekst || undefined
-            )
+            return sporsmal.undersporsmal.find((spm: Sporsmal) => {
+                return spm.svarliste.svar[0]?.verdi === SvarEnums.CHECKED
+            })?.sporsmalstekst
 
         case RSSvartype.DATO:
             return svar?.verdi ? dayjs(svar.verdi).toDate() : undefined
@@ -48,8 +48,14 @@ export const hentSvar = (sporsmal: Sporsmal): any => {
         case RSSvartype.PERIODER:
             return svarliste.svar.map((svar: RSSvar) => svar.verdi)
 
+        case RSSvartype.COMBOBOX_SINGLE:
+            return svarliste.svar[0]?.verdi || ''
+
         case RSSvartype.KVITTERING:
             return svarliste.svar.map((s) => svarverdiToKvittering(s.verdi))
+
+        case RSSvartype.FRITEKST:
+            return svarliste.svar[0]?.verdi
     }
 
     if (svar === undefined) {

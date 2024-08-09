@@ -1,4 +1,4 @@
-import { setPeriodeFraTil } from '../../support/utilities'
+import { setPeriodeFraTil, sporsmalOgSvar } from '../../support/utilities'
 import { inlineForklaringer } from '../../support/sjekkInlineForklaringKvittering'
 import { arbeidstaker } from '../../../src/data/mock/data/soknad/arbeidstaker'
 
@@ -32,8 +32,6 @@ describe('Tester arbeidstakersøknad', () => {
         cy.contains('1. april - 24. april 2020 (24 dager)')
         cy.contains('Posten Norge AS, Bærum')
         cy.contains('100% sykmeldt')
-
-        cy.get('section[aria-label="Opplysninger fra sykmeldingen"] button').click()
 
         // Avbryt dialog vises
         cy.contains('Jeg har ikke behov for denne søknaden').click()
@@ -181,45 +179,42 @@ describe('Tester arbeidstakersøknad', () => {
             .and('have.attr', 'aria-valuemax', '7')
             .and('have.attr', 'aria-valuetext', '7 av 7')
 
-        it('Bekreftelsespunktene er riktige', () => {
-            const bekreftelser = [
-                'Du kan bare få sykepenger hvis det er din egen sykdom eller skade som hindrer deg i å jobbe. Sosiale eller økonomiske problemer gir ikke rett til sykepenger.',
-                'Du kan miste retten til sykepenger hvis du nekter å opplyse om din egen arbeidsevne, eller hvis du ikke tar imot behandling eller tilrettelegging.',
-                'Retten til sykepenger gjelder bare pensjonsgivende inntekt du har på sykmeldingstidspunktet.',
-                'NAV kan innhente opplysninger som er nødvendige for å behandle søknaden.',
-                'Fristen for å søke sykepenger er som hovedregel 3 måneder',
-                'Du kan endre svarene i denne søknaden opp til 12 måneder etter du sendte den inn første gangen.',
-            ]
+        cy.get('.navds-guide-panel__content').contains(
+            'Nå kan du se over at alt er riktig før du sender inn søknaden. Ved behov kan du endre opplysningene inntil 12 måneder etter innsending.',
+        )
 
-            bekreftelser.forEach((bekreftelse) => {
-                cy.contains(bekreftelse)
-            })
-
-            cy.contains(
-                'Du må melde fra til NAV hvis du satt i varetekt, sonet straff eller var under forvaring i sykmeldingsperioden.',
-            )
-                .find('a')
-                .should('have.attr', 'href', 'https://www.nav.no/skriv-til-oss')
-
-            cy.contains(
-                'Du må melde fra om studier som er påbegynt etter at du ble sykmeldt, og som ikke er avklart med NAV. Det samme gjelder hvis du begynner å studere mer enn du gjorde før du ble sykmeldt.',
-            )
-                .find('a')
-                .should('have.attr', 'href', 'https://www.nav.no/skriv-til-oss')
-
-            cy.contains('Du kan lese mer om rettigheter og plikter på')
-                .find('a')
-                .should('have.attr', 'href', 'https://www.nav.no/sykepenger')
-        })
-
-        cy.get('section[aria-label="Oppsummering fra søknaden"] button').click()
         cy.contains(
             'Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene jeg gir ikke er riktige eller fullstendige. Jeg vet også at NAV kan holde igjen eller kreve tilbake penger, og at å gi feil opplysninger kan være straffbart.',
         )
 
-        cy.get('.oppsummering').within(() => {
-            cy.contains('Jobber du vanligvis 37,5 timer i uka')
-            cy.contains('21 timer')
+        cy.get('[data-cy="oppsummering-fra-søknaden"]').within(() => {
+            sporsmalOgSvar('Søknaden sendes til', 'NAV').and('contain', 'Posten Norge AS, Bærum')
+            sporsmalOgSvar(
+                'Ansvarserklæring',
+                'Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene jeg gir ikke er riktige eller fullstendige. Jeg vet også at NAV kan holde igjen eller kreve tilbake penger, og at å gi feil opplysninger kan være straffbart.',
+            )
+            //Arbeid underveis i sykefravær
+            sporsmalOgSvar('Oppgi arbeidsmengde i timer eller prosent:', 'Timer')
+                .children()
+                .within(() => {
+                    sporsmalOgSvar(
+                        'Oppgi totalt antall timer du jobbet i perioden 1. - 24. april 2020 hos Posten Norge AS, Bærum',
+                        '21 timer',
+                    )
+                })
+            sporsmalOgSvar('Jobber du vanligvis 37,5 timer i uka', 'Ja')
+
+            //Andre inntektskilder
+            sporsmalOgSvar('Har du andre inntektskilder enn Butikken?', 'Ja')
+            sporsmalOgSvar('Velg inntektskildene som passer for deg:', 'Ansatt andre steder enn nevnt over')
+                .children()
+                .within(() => {
+                    sporsmalOgSvar(
+                        'Har du jobbet for eller mottatt inntekt fra én eller flere av disse arbeidsgiverne de siste 14 dagene før du ble sykmeldt?',
+                        'Ja',
+                    )
+                })
+            sporsmalOgSvar('Velg inntektskildene som passer for deg:', 'Selvstendig næringsdrivende')
         })
 
         cy.contains('Det er 1 feil i skjemaet').should('not.exist')
@@ -228,7 +223,6 @@ describe('Tester arbeidstakersøknad', () => {
         cy.contains(
             'Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.',
         )
-        cy.contains('Søknaden sendes til NAV. Kopi av søknaden sendes til Posten Norge AS, Bærum.')
 
         cy.contains('Send søknaden').click()
     })
