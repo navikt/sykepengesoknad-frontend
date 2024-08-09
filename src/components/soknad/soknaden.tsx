@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
-import { Button } from '@navikt/ds-react'
+import { BodyLong, Button } from '@navikt/ds-react'
 
 import OmReisetilskudd from '../../components/om-reisetilskudd/om-reisetilskudd'
-import Opplysninger from '../../components/opplysninger-fra-sykmelding/opplysninger'
 import SoknadMedToDeler from '../../components/soknad-med-to-deler/soknad-med-to-deler'
 import SporsmalForm from '../../components/sporsmal/sporsmal-form/sporsmal-form'
 import Fremdriftsbar from '../sporsmal/fremdriftsbar/fremdriftsbar'
@@ -13,8 +12,7 @@ import { logEvent } from '../amplitude/amplitude'
 import { EldreUsendtSoknad, harEldreUsendtSoknad } from '../eldre-usendt/eldre-usendt-soknad'
 import { EldreUsendtSykmelding } from '../eldre-usendt/eldre-usendt-sykmelding'
 import { eldreUsendteSykmeldinger } from '../eldre-usendt/eldreUsendteSykmeldinger'
-import FristSykepenger from '../frist-sykepenger/frist-sykepenger'
-import { ViktigInformasjon } from '../soknad-intro/viktig-informasjon'
+import { InfoOmTilbakedatering } from '../soknad-intro/info-om-tilbakedatering'
 import { soknadBreadcrumb, useUpdateBreadcrumbs } from '../../hooks/useBreadcrumbs'
 import EgenmeldingsdagerArbeidsgiver from '../egenmeldingsdager-arbeidsgiver/egenmeldingsdager-arbeidsgiver'
 import { FlexjarSporsmal } from '../flexjar/flexjar-sporsmal'
@@ -23,6 +21,10 @@ import { useToggle } from '../../toggles/context'
 import { SkeletonSporsmalForm } from '../sporsmal/sporsmal-form/skeleton-sporsmal-form'
 import { FeilStateView } from '../feil/refresh-hvis-feil-state'
 import { Over70Aar } from '../soknad-intro/over-70'
+import { IntroGuide } from '../soknad-intro/intro-guide'
+import { ForDuSoker } from '../soknad-intro/for-du-soker'
+import { IntroAccordion } from '../soknad-intro/intro-accordion'
+import { LenkeMedIkon } from '../lenke-med-ikon/LenkeMedIkon'
 
 import { urlTilSoknad } from './soknad-link'
 import { SporsmalTittel } from './sporsmal-tittel'
@@ -115,12 +117,24 @@ export const Soknaden = () => {
             <SoknadHeader />
 
             {!erForstesiden && <Fremdriftsbar />}
-            {erForstesiden && <ViktigInformasjon />}
-            {erForstesiden && valgtSykmelding?.pasient?.overSyttiAar && <Over70Aar />}
-            {erForstesiden && erGradertReisetilskuddsoknad && <SoknadMedToDeler />}
-            {erForstesiden && valgtSoknad?.opprettetAvInntektsmelding && <EgenmeldingsdagerArbeidsgiver />}
-            {erForstesiden && <Opplysninger ekspandert={true} />}
-            {erForstesiden && <FristSykepenger />}
+            {erForstesiden && (
+                <>
+                    <IntroGuide />
+                    <ForDuSoker />
+                    <IntroAccordion />
+                    <InfoOmTilbakedatering />
+                    {valgtSykmelding?.pasient?.overSyttiAar && <Over70Aar />}
+                    {erGradertReisetilskuddsoknad && <SoknadMedToDeler />}
+                    {valgtSoknad?.opprettetAvInntektsmelding && <EgenmeldingsdagerArbeidsgiver />}
+                    <BodyLong spacing>
+                        Det er viktig at du gir oss riktige opplysninger slik at vi kan behandle saken din.
+                        <LenkeMedIkon
+                            href="https://www.nav.no/sykepenger-og-personopplysninger"
+                            text="Les mer om viktigheten av å gi riktige opplysninger."
+                        />
+                    </BodyLong>
+                </>
+            )}
             {erForstesidenMedReisetilskudd && <OmReisetilskudd />}
             {!erForstesiden && <SporsmalTittel />}
             {sporsmal && <SporsmalForm sporsmal={sporsmal} key={sporsmal.id} />}

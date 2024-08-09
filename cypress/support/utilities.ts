@@ -67,7 +67,7 @@ export function svarCheckboxPanel() {
 export function checkViStolerPåDeg(gåVidere = true) {
     cy.get('form')
         .findByRole('checkbox', {
-            name: /Jeg vet at jeg kan miste retten til/i,
+            name: /Jeg vil svare så godt jeg kan på spørsmålene i søknaden./i,
         })
         .click()
     if (gåVidere) {
@@ -214,4 +214,34 @@ export function avbryterSoknad() {
 
     cy.findByRole('button', { name: 'Ja, jeg er sikker' }).click()
     modalIkkeAktiv()
+}
+
+export function sjekkIntroside() {
+    cy.contains('Sykepenger skal erstatte inntekten din når du ikke kan jobbe på grunn av din egen sykdom eller skade.')
+    cy.contains('For å lese mer om sykepenger, gå til nav.no/sykepenger')
+        .children()
+        .should('have.attr', 'href', 'https://www.nav.no/sykepenger')
+    cy.contains('Før du søker')
+    cy.contains('Meld fra til NAV her').and('have.attr', 'href', 'https://www.nav.no/skriv-til-oss')
+    cy.contains('Sjekk de oppdaterte saksbehandlingstidene').and(
+        'have.attr',
+        'href',
+        'https://www.nav.no/saksbehandlingstider#sykepenger',
+    )
+    cy.contains('Hvordan behandler vi personopplysninger').click()
+    cy.contains('Les mer om hvordan NAV behandler personopplysningene dine').and(
+        'have.attr',
+        'href',
+        'https://www.nav.no/sykepenger-og-personopplysninger',
+    )
+    cy.contains('Vi lagrer svar underveis').click()
+    cy.contains(
+        'Vi lagrer svarene dine mens du fyller ut, så du kan ta pauser underveis. Søknader som ikke blir sendt inn lagrer vi i 4 måneder før de slettes automatisk.',
+    )
+    cy.contains('Det er viktig at du gir oss riktige opplysninger slik at vi kan behandle saken din.')
+    cy.contains('Les mer om viktigheten av å gi riktige opplysninger').and(
+        'have.attr',
+        'href',
+        'https://www.nav.no/sykepenger-og-personopplysninger',
+    )
 }

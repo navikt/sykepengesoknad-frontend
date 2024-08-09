@@ -32,9 +32,7 @@ describe('Tester kvittering', () => {
             cy.get(`a[href*=${arbeidsledigKvittering.id}]`).click()
 
             // Svar og send
-            cy.contains(
-                'Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene jeg gir ikke er riktige eller fullstendige. Jeg vet også at NAV kan holde igjen eller kreve tilbake penger, og at å gi feil opplysninger kan være straffbart.',
-            ).click()
+            cy.contains('Jeg vil svare så godt jeg kan på spørsmålene i søknaden.').click()
             klikkGaVidere()
             svarJaHovedsporsmal()
             klikkGaVidere()
@@ -176,9 +174,6 @@ describe('Tester kvittering', () => {
                 'false',
             )
 
-            // Opplysninger finnes ikke
-            cy.contains('Opplysninger fra sykmeldingen').should('not.exist')
-
             // Knapperad finnes ikke
             cy.contains('Jeg vil endre svarene i søknaden').should('not.exist')
             cy.contains('Jeg vil at søknaden skal behandles av NAV').should('not.exist')
@@ -194,9 +189,7 @@ describe('Tester kvittering', () => {
             cy.get(`a[href*=${selvstendigKvittering.id}]`).click()
 
             // Svar og send
-            cy.contains(
-                'Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene jeg gir ikke er riktige eller fullstendige. Jeg vet også at NAV kan holde igjen eller kreve tilbake penger, og at å gi feil opplysninger kan være straffbart.',
-            ).click()
+            cy.contains('Jeg vil svare så godt jeg kan på spørsmålene i søknaden.').click()
             klikkGaVidere()
             svarNeiHovedsporsmal()
             klikkGaVidere()

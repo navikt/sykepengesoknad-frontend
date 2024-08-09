@@ -1,4 +1,4 @@
-import { setPeriodeFraTil } from '../../support/utilities'
+import { setPeriodeFraTil, sjekkIntroside } from '../../support/utilities'
 import { inlineForklaringer } from '../../support/sjekkInlineForklaringKvittering'
 import { arbeidstaker } from '../../../src/data/mock/data/soknad/arbeidstaker'
 
@@ -21,19 +21,10 @@ describe('Tester arbeidstakersøknad', () => {
     it('Søknad ANSVARSERKLARING', function () {
         cy.url().should('include', `${soknad.id}/1`)
 
-        cy.contains('Før du begynner').should('not.exist')
-        cy.contains('Det du fyller ut brukes til å vurdere om du har rett til sykepenger').should('not.exist')
+        sjekkIntroside()
 
         // Personvern erklæring
-        cy.get('.frist-sykepenger').click()
         cy.contains('Slik behandler NAV personopplysningene dine').click()
-
-        // Sykmelding
-        cy.contains('1. april - 24. april 2020 (24 dager)')
-        cy.contains('Posten Norge AS, Bærum')
-        cy.contains('100% sykmeldt')
-
-        cy.get('section[aria-label="Opplysninger fra sykmeldingen"] button').click()
 
         // Avbryt dialog vises
         cy.contains('Jeg har ikke behov for denne søknaden').click()
@@ -213,9 +204,7 @@ describe('Tester arbeidstakersøknad', () => {
         })
 
         cy.get('section[aria-label="Oppsummering fra søknaden"] button').click()
-        cy.contains(
-            'Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene jeg gir ikke er riktige eller fullstendige. Jeg vet også at NAV kan holde igjen eller kreve tilbake penger, og at å gi feil opplysninger kan være straffbart.',
-        )
+        cy.contains('Jeg vil svare så godt jeg kan på spørsmålene i søknaden.')
 
         cy.get('.oppsummering').within(() => {
             cy.contains('Jobber du vanligvis 37,5 timer i uka')

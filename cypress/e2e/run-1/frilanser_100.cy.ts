@@ -1,4 +1,4 @@
-import { setPeriodeFraTil } from '../../support/utilities'
+import { setPeriodeFraTil, sjekkIntroside } from '../../support/utilities'
 import { frilanser } from '../../../src/data/mock/data/soknad/frilanser'
 
 describe('Tester frilansersøknad', () => {
@@ -20,18 +20,10 @@ describe('Tester frilansersøknad', () => {
     it('Søknad ANSVARSERKLARING - steg 1', function () {
         cy.url().should('include', `${soknad.id}/1`)
 
-        // Sykmelding
-        cy.contains('1. april - 24. april 2020 (24 dager)')
-        cy.contains('Har ikke forsikring som gjelder de første 16 dagene av sykefraværet')
-        cy.contains('Egenmelding og/eller sykmelding på papir')
-        cy.contains('1. januar – 13. mars 2020')
-        cy.get('section[aria-label="Opplysninger fra sykmeldingen"] button').click()
-        cy.contains('Har ikke forsikring som gjelder de første 16 dagene av sykefraværet').should('not.be.visible')
+        sjekkIntroside()
 
         // Godkjenne ANSVARSERKLARING
-        cy.contains(
-            'Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene jeg gir ikke er riktige eller fullstendige. Jeg vet også at NAV kan holde igjen eller kreve tilbake penger, og at å gi feil opplysninger kan være straffbart.',
-        ).click()
+        cy.contains('Jeg vil svare så godt jeg kan på spørsmålene i søknaden.').click()
 
         cy.contains('Gå videre').click()
     })

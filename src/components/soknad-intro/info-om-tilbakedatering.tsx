@@ -3,7 +3,7 @@ import React from 'react'
 
 import { useSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
 
-export const ViktigInformasjon = () => {
+export const InfoOmTilbakedatering = () => {
     const { valgtSoknad } = useSoknadMedDetaljer()
 
     if (!valgtSoknad) {
