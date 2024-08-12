@@ -255,3 +255,10 @@ export function sjekkIntroside() {
 export function sporsmalOgSvar(sporsmal: string, svar: string) {
     return cy.contains(sporsmal).siblings().should('contain', svar)
 }
+
+export function mainSkalHaHoyde(hoyde: number) {
+    cy.get('main').should(($el) => {
+        const mainHoyde = parseInt($el.css('height'), 10)
+        expect(mainHoyde).to.equal(hoyde)
+    })
+}
