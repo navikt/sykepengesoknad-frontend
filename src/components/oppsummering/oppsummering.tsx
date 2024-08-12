@@ -1,5 +1,6 @@
 import React from 'react'
 import { FormSummary } from '@navikt/ds-react'
+import { useRouter } from 'next/router'
 
 import { RSSvartype } from '../../types/rs-types/rs-svartype'
 import { Sporsmal } from '../../types/types'
@@ -7,6 +8,8 @@ import { tekst } from '../../utils/tekster'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 import SendesTil from '../sporsmal/sporsmal-form/sendes-til'
 import { useSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
+import { SEPARATOR } from '../../utils/constants'
+import { useTestpersonQuery } from '../../hooks/useTestpersonQuery'
 
 import Behandlingsdager from './utdrag/behandlingsdager'
 import CheckboxGruppe from './utdrag/checkbox-gruppe'
@@ -26,8 +29,11 @@ export interface OppsummeringProps {
 }
 
 const Oppsummering = () => {
+    const { valgtSoknad, soknadId } = useSoknadMedDetaljer()
+    const testperson = useTestpersonQuery()
+    const router = useRouter()
+
     const tittel = tekst('sykepengesoknad.oppsummering.tittel')
-    const { valgtSoknad } = useSoknadMedDetaljer()
     if (!valgtSoknad) return null
 
     const sporsmal: ReadonlyArray<Sporsmal> = valgtSoknad.sporsmal
@@ -39,6 +45,13 @@ const Oppsummering = () => {
                 <FormSummary.Heading level="2" className="flex h-full items-center">
                     {tittel}
                 </FormSummary.Heading>
+                <FormSummary.EditLink
+                    href={`/soknader/${soknadId}${SEPARATOR}2${testperson.query()}`}
+                    onClick={(e) => {
+                        e.preventDefault()
+                        router.push(`/soknader/${soknadId}${SEPARATOR}2${testperson.query()}`)
+                    }}
+                />
             </FormSummary.Header>
 
             <FormSummary.Answers>

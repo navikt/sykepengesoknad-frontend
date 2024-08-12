@@ -220,6 +220,13 @@ describe('Tester arbeidstakersøknad', () => {
         cy.contains('Forrige steg').and('have.attr', 'href', `/soknader/${soknad.id}/7`).click()
         klikkGaVidere()
 
+        //Trykker på Endre svar og havner på første spørsmål
+        cy.contains('Endre svar').click()
+        cy.contains('Steg 1 av 7')
+        cy.findByRole('button', { name: 'Vis alle steg' }).click()
+        cy.findByRole('link', { name: 'Oppsummering fra søknaden' }).click()
+        cy.contains('Steg 7 av 7')
+
         cy.contains(
             'Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.',
         )
