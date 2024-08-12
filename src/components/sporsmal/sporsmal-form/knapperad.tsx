@@ -1,25 +1,19 @@
 import React from 'react'
-import { useRouter } from 'next/router'
 import { useFormContext } from 'react-hook-form'
 import { Button, Skeleton } from '@navikt/ds-react'
-import { ArrowLeftIcon, ArrowRightIcon } from '@navikt/aksel-icons'
+import { ArrowRightIcon } from '@navikt/aksel-icons'
 
 import { useSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
-import { useTestpersonQuery } from '../../../hooks/useTestpersonQuery'
 import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype'
 import { hentSporsmal } from '../../../utils/soknad-utils'
 import { tekst } from '../../../utils/tekster'
 import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus'
-import { logEvent } from '../../amplitude/amplitude'
-import { SEPARATOR } from '../../../utils/constants'
 import AvsluttOgFortsettSenere from '../../avslutt-og-fortsett-senere/avslutt-og-fortsett-senere'
 import AvbrytSoknadModal from '../../avbryt-soknad-modal/avbryt-soknad-modal'
 import { Tilbake } from '../tilbake-knapp/tilbake'
 
 const Knapperad = ({ poster }: { poster: boolean }) => {
-    const { valgtSoknad: soknad, sporsmal, stegNo, soknadId } = useSoknadMedDetaljer()
-    const testperson = useTestpersonQuery()
-    const router = useRouter()
+    const { valgtSoknad: soknad, sporsmal, stegNo } = useSoknadMedDetaljer()
 
     const { getValues } = useFormContext()
     const oppholdUtland = soknad?.soknadstype === RSSoknadstype.OPPHOLD_UTLAND

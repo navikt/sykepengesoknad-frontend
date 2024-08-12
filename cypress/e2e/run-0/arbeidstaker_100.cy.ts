@@ -1,7 +1,5 @@
 import {
-    checkViStolerPaDeg,
-    klikkGaVidere,
-    klikkTilbake,
+    checkViStolerPaDeg, klikkGaVidere,
     setPeriodeFraTil,
     sjekkIntroside,
     sporsmalOgSvar,
