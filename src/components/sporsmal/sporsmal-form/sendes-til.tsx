@@ -1,4 +1,4 @@
-import { FormSummary } from '@navikt/ds-react'
+import { FormSummary, List } from '@navikt/ds-react'
 import React from 'react'
 
 import { RSMottaker } from '../../../types/rs-types/rs-mottaker'
@@ -27,9 +27,13 @@ export default function SendesTil({ soknad }: { soknad: Soknad }) {
     return (
         <FormSummary.Answer>
             <FormSummary.Label>Søknaden sendes til</FormSummary.Label>
-            {sendTil.map((mottaker, index) => {
-                return <FormSummary.Value key={index}>{mottaker}</FormSummary.Value>
-            })}
+            <FormSummary.Value>
+                <List>
+                    {sendTil.map((mottaker, index) => {
+                        return <List.Item key={index}>{mottaker} </List.Item>
+                    })}
+                </List>
+            </FormSummary.Value>
         </FormSummary.Answer>
     )
 }
