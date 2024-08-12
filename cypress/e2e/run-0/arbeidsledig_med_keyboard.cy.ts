@@ -44,6 +44,7 @@ describe('Tester arbeidsledigsøknad', () => {
         cy.realPress('Tab')
         cy.realPress('Tab')
         cy.realPress('Tab')
+        cy.realPress('Tab')
         cy.realPress('Space')
         cy.realPress('Tab')
         cy.realPress('Tab')
@@ -52,6 +53,7 @@ describe('Tester arbeidsledigsøknad', () => {
 
         cy.contains('Andre inntektskilder')
         cy.contains('Hva mener vi med andre inntektskilder?')
+        cy.realPress('Tab')
         cy.realPress('Tab')
         cy.realPress('Tab')
         cy.realPress('Tab')
@@ -69,6 +71,7 @@ describe('Tester arbeidsledigsøknad', () => {
         cy.realPress('Tab')
         cy.realPress('Tab')
         cy.realPress('Tab')
+        cy.realPress('Tab')
         cy.realPress('Space')
         cy.realPress('{rightarrow}')
         cy.realPress('Tab')
@@ -78,6 +81,8 @@ describe('Tester arbeidsledigsøknad', () => {
         sjekkMainContentFokus()
 
         cy.contains('Oppsummering fra søknaden')
+        cy.realPress('Tab')
+        cy.realPress('Tab')
         cy.realPress('Tab')
         cy.realPress('Tab')
         cy.realPress('Tab')
