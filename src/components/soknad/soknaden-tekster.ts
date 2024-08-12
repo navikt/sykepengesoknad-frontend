@@ -3,6 +3,7 @@ const SoknadenTekster = {
     'soknad.sidetittel': 'Søknad',
     'kvittering.sidetittel': 'Kvittering',
     'soknad.tilbakeknapp': 'Tilbake',
+    'soknad.forrige_steg': 'Forrige steg',
     'statuspanel.status': 'Status',
     'sykepengesoknad.start.tittel': 'Ansvarserklæring',
     'sykepengesoknad.til_slutt.tittel': 'Oppsummering fra søknaden',

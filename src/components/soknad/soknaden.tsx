@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
-import { Alert, BodyLong, Button } from '@navikt/ds-react'
+import { Alert, BodyLong, Button, Link } from '@navikt/ds-react'
+import { ArrowLeftIcon } from '@navikt/aksel-icons'
 
 import OmReisetilskudd from '../../components/om-reisetilskudd/om-reisetilskudd'
 import SporsmalForm from '../../components/sporsmal/sporsmal-form/sporsmal-form'
@@ -29,6 +30,7 @@ import { erSisteSide } from '../sporsmal/sporsmal-utils'
 import { urlTilSoknad } from './soknad-link'
 import { SporsmalTittel } from './sporsmal-tittel'
 import { SoknadHeader } from './soknad-header'
+import { Tilbake } from "../sporsmal/tilbake-knapp/tilbake";
 
 export const Soknaden = () => {
     const router = useRouter()
@@ -119,6 +121,7 @@ export const Soknaden = () => {
     return (
         <>
             {valgtSoknadError && <FeilStateView feilmelding={valgtSoknadError?.status}></FeilStateView>}
+            <Tilbake variant="liten" />
             <SoknadHeader overskrivTittel={erSistesiden ? 'Oppsummering' : undefined} />
 
             {!erForstesiden && <Fremdriftsbar />}

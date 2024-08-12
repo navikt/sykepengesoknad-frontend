@@ -1,6 +1,7 @@
 import {
     checkViStolerPaDeg,
     klikkGaVidere,
+    klikkTilbake,
     setPeriodeFraTil,
     sjekkIntroside,
     sporsmalOgSvar,
@@ -217,10 +218,14 @@ describe('Tester arbeidstakersøknad', () => {
 
         cy.contains('Det er 1 feil i skjemaet').should('not.exist')
 
-        cy.get('.navds-checkbox__label').click()
+        //kan trykke på forrige steg knapp øverst
+        cy.contains('Forrige steg').and('have.attr', 'href', `/soknader/${soknad.id}/7`).click()
+        klikkGaVidere()
+
         cy.contains(
             'Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.',
         )
+        cy.get('.navds-checkbox__label').click()
 
         cy.contains('Send søknaden').click()
     })

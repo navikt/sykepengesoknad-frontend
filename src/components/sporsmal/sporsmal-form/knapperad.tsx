@@ -14,6 +14,7 @@ import { logEvent } from '../../amplitude/amplitude'
 import { SEPARATOR } from '../../../utils/constants'
 import AvsluttOgFortsettSenere from '../../avslutt-og-fortsett-senere/avslutt-og-fortsett-senere'
 import AvbrytSoknadModal from '../../avbryt-soknad-modal/avbryt-soknad-modal'
+import { Tilbake } from '../tilbake-knapp/tilbake'
 
 const Knapperad = ({ poster }: { poster: boolean }) => {
     const { valgtSoknad: soknad, sporsmal, stegNo, soknadId } = useSoknadMedDetaljer()
@@ -64,28 +65,7 @@ const Knapperad = ({ poster }: { poster: boolean }) => {
     return (
         <div className="my-8 border-t border-gray-400" data-cy="knapperad">
             <div className="flex w-full justify-between">
-                {skalViseTilbakeKnapp() && (
-                    <Button
-                        variant="secondary"
-                        type="button"
-                        className="mb-12 mt-6 inline-flex"
-                        onClick={(e) => {
-                            e.preventDefault()
-                            if (!soknad) return
-                            logEvent('navigere', {
-                                lenketekst: tekst('soknad.tilbakeknapp'),
-                                fra: soknad.sporsmal[stegNo - 1].tag,
-                                til: soknad.sporsmal[stegNo - 2].tag,
-                                soknadstype: soknad.soknadstype,
-                                stegId: `${stegNo}`,
-                            })
-                            router.push(`/soknader/${soknadId}${SEPARATOR}${stegNo - 1}${testperson.query()}`)
-                        }}
-                        icon={<ArrowLeftIcon aria-hidden />}
-                    >
-                        Tilbake
-                    </Button>
-                )}
+                {skalViseTilbakeKnapp() && <Tilbake variant="stor" />}
                 <Button
                     as={soknad ? 'button' : Skeleton}
                     variant="primary"
