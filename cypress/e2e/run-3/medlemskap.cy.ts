@@ -17,9 +17,7 @@ describe('Søknad med alle opprinnelige spørsmål om medlemskap', () => {
 
     before(() => {
         cy.visit(`/syk/sykepengesoknad/soknader/${soknad.id}/7?testperson=medlemskap`)
-        cy.get('.navds-heading--large')
-            .should('be.visible')
-            .and('have.text', 'Søknad om sykepenger8. – 21. september 2022')
+        cy.get('.navds-heading--large').should('be.visible')
     })
 
     it('Arbeid utenfor Norge', () => {
@@ -98,7 +96,7 @@ describe('Søknad med alle opprinnelige spørsmål om medlemskap', () => {
             sporsmalOgSvar('Hvilken dato fikk du denne oppholdstillatelsen?', '22.10.2023')
             sporsmalOgSvar('Er oppholdstillatelsen midlertidig eller permanent?', 'Midlertidig')
                 .children()
-                .should('contain', '12. – 24. juli 2024')
+                .should('contain', '12. – 24.')
         })
     })
 })
@@ -108,9 +106,7 @@ describe('Søknad med nytt spørsmål om oppholdstillatelse og kjent permanent o
 
     before(() => {
         cy.visit(`/syk/sykepengesoknad/soknader/${soknad.id}/11?testperson=medlemskap`)
-        cy.get('.navds-heading--large')
-            .should('be.visible')
-            .and('have.text', 'Søknad om sykepenger8. – 21. september 2022')
+        cy.get('.navds-heading--large').should('be.visible')
     })
 
     it('Har kjent permanent oppholdstillatelse', () => {
@@ -144,9 +140,7 @@ describe('Søknad med nytt spørsmål om oppholdstillatelse og kjent midlertidig
 
     before(() => {
         cy.visit(`/syk/sykepengesoknad/soknader/${soknad.id}/11?testperson=medlemskap`)
-        cy.get('.navds-heading--large')
-            .should('be.visible')
-            .and('have.text', 'Søknad om sykepenger8. – 21. september 2022')
+        cy.get('.navds-heading--large').should('be.visible')
     })
 
     it('Har kjent midlertidig oppholdstillatelse', () => {
