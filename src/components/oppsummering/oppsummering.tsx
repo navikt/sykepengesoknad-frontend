@@ -46,7 +46,7 @@ const Oppsummering = () => {
                     {tittel}
                 </FormSummary.Heading>
                 <FormSummary.EditLink
-                    href={`/soknader/${soknadId}${SEPARATOR}2${testperson.query()}`}
+                    href={`/syk/sykepengesoknad/soknader/${soknadId}${SEPARATOR}2${testperson.query()}`}
                     onClick={(e) => {
                         e.preventDefault()
                         router.push(`/soknader/${soknadId}${SEPARATOR}2${testperson.query()}`)
@@ -136,6 +136,7 @@ export const SporsmalVarianter = ({ sporsmal }: OppsummeringProps) => {
 
 function skalVisesIOppsummering(sporsmal: Sporsmal) {
     switch (sporsmal.tag) {
+        case 'ANSVARSERKLARING':
         case 'BEKREFT_OPPLYSNINGER':
         case 'VAER_KLAR_OVER_AT':
         case 'BEKREFT_OPPLYSNINGER_UTLAND_INFO':

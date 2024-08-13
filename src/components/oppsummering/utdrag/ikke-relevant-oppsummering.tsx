@@ -13,7 +13,9 @@ const IkkeRelevantOppsummering = ({ sporsmal }: OppsummeringProps) => {
     }
     return (
         <FormSummary.Answer>
-            <FormSummary.Label className="gruppe-av-under">{sporsmal.sporsmalstekst}</FormSummary.Label>
+            {sporsmal.sporsmalstekst && (
+                <FormSummary.Label className="gruppe-av-under">{sporsmal.sporsmalstekst}</FormSummary.Label>
+            )}
             <FormSummary.Value>
                 {tekstMedHtml(sporsmal.undertekst || '')}
                 {sporsmal.undersporsmal.length > 0 && (

@@ -17,7 +17,9 @@ const LandSum = ({ sporsmal }: OppsummeringProps) => {
 
     return (
         <FormSummary.Answer>
-            <FormSummary.Label className="land-label">{sporsmal.sporsmalstekst}</FormSummary.Label>
+            {sporsmal.sporsmalstekst && (
+                <FormSummary.Label className="land-label">{sporsmal.sporsmalstekst}</FormSummary.Label>
+            )}
             {landliste?.map((land, index) => {
                 return <FormSummary.Value key={index}>{land}</FormSummary.Value>
             })}

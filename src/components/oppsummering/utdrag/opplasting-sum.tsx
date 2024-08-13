@@ -30,7 +30,9 @@ const OpplastingSum = ({ sporsmal }: OppsummeringProps) => {
 
     return (
         <FormSummary.Answer>
-            <FormSummary.Label className="opplasting-label">{sporsmal.sporsmalstekst}</FormSummary.Label>
+            {sporsmal.sporsmalstekst && (
+                <FormSummary.Label className="opplasting-label">{sporsmal.sporsmalstekst}</FormSummary.Label>
+            )}
             <FormSummary.Value>{svartekst} </FormSummary.Value>
         </FormSummary.Answer>
     )

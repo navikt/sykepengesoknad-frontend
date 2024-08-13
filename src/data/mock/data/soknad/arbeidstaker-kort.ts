@@ -1,6 +1,6 @@
 import { RSSoknad } from '../../../../types/rs-types/rs-soknad'
 import { arbeidstaker100Syk } from '../sykmeldinger'
-import { bekreftelse } from '../sporsmal/vaer-klar-over-at'
+import { oppsummering } from '../sporsmal/vaer-klar-over-at'
 
 export const kortArbeidstakerSoknad: RSSoknad = {
     id: 'faba11f5-c4f2-4647-8c8a-347843747',
@@ -69,7 +69,7 @@ export const kortArbeidstakerSoknad: RSSoknad = {
                 },
             ],
         },
-        bekreftelse(),
+        oppsummering(),
     ],
     egenmeldtSykmelding: false,
     opprettetAvInntektsmelding: false,

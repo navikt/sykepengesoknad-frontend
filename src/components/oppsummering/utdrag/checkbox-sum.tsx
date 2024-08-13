@@ -9,7 +9,6 @@ import UndersporsmalSum from './undersporsmal-sum'
 const CheckboxSum = ({ sporsmal }: OppsummeringProps) => {
     const svarErChecked: boolean = hentSvar(sporsmal)
 
-    if (sporsmal.tag === 'ANSVARSERKLARING') return null
     return (
         <>
             {svarErChecked && (

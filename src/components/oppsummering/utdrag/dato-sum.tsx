@@ -10,7 +10,9 @@ const DatoSum = ({ sporsmal }: OppsummeringProps) => {
     const datoString = (svarverdi: RSSvar) => dayjs(svarverdi?.verdi.toString()).format('DD.MM.YYYY')
     return (
         <FormSummary.Answer>
-            <FormSummary.Label className="dato-label">{sporsmal.sporsmalstekst}</FormSummary.Label>
+            {sporsmal.sporsmalstekst && (
+                <FormSummary.Label className="dato-label">{sporsmal.sporsmalstekst}</FormSummary.Label>
+            )}
             {sporsmal.svarliste.svar.map((svarverdi, index) => (
                 <FormSummary.Value key={index}>{datoString(svarverdi)}</FormSummary.Value>
             ))}

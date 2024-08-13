@@ -92,7 +92,7 @@ describe('Tester selvstendig naringsdrivende søknad', () => {
         klikkGaVidere()
     })
 
-    it('Oppsummering ', function () {
+    it('Søknad TIL_SLUTT ', function () {
         sporsmalOgSvar(
             'Har du registrert virksomheten din som avviklet og slettet i Altinn før du ble sykmeldt?',
             'Nei',

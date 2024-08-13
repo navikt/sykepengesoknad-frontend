@@ -1,7 +1,7 @@
 import { RSSoknad } from '../../../../types/rs-types/rs-soknad'
 import { jsonDeepCopy } from '../../../../utils/json-deep-copy'
 import { arbeidstakerReisetilskuddSyk, sykmeldinger } from '../sykmeldinger'
-import { bekreftelse } from '../sporsmal/vaer-klar-over-at'
+import { oppsummering } from '../sporsmal/vaer-klar-over-at'
 import { nyttReisetilskudd } from '../soknad/arbeidstaker-reisetilskudd'
 
 import { Persona } from './personas'
@@ -213,7 +213,7 @@ export const delvisUtfyltReisetilskudd: RSSoknad = {
             ],
             undersporsmal: [],
         },
-        bekreftelse(),
+        oppsummering(),
     ],
     egenmeldtSykmelding: false,
     opprettetAvInntektsmelding: false,

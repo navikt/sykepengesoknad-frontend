@@ -107,9 +107,9 @@ describe('Tester søknad til utenlandsk sykmelding', () => {
         neiOgVidere(['Andre inntektskilder', 'Reise til utlandet'])
     })
 
-    it('Vær klar over at', function () {
+    it('Søknad TIL_SLUTT', function () {
         cy.url().should('include', `${id}/12`)
-        cy.contains('Oppsummering')
+        cy.contains('Oppsummering fra søknaden')
 
         cy.contains('Danmark')
         cy.contains('Statsminister i UK')

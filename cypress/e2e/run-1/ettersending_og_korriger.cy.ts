@@ -21,8 +21,9 @@ describe('Tester ettersending og korrigering', () => {
             'Permisjon',
             'Jobb underveis i sykefraværet',
             'Arbeid utenfor Norge',
+            'Andre inntektskilder',
+            'Reise til utlandet',
         ])
-        neiOgVidere(['Andre inntektskilder', 'Reise til utlandet'])
 
         cy.contains('Oppsummering fra søknaden')
         svarCheckboxPanel()

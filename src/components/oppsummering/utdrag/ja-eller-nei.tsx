@@ -26,7 +26,9 @@ const JaEllerNei = ({ sporsmal }: OppsummeringProps) => {
     const svartekst = tekst(`soknad.${svar.verdi.toLowerCase()}` as any)
     return (
         <FormSummary.Answer>
-            <FormSummary.Label className="ja-nei-label">{sporsmal.sporsmalstekst}</FormSummary.Label>
+            {sporsmal.sporsmalstekst && (
+                <FormSummary.Label className="ja-nei-label">{sporsmal.sporsmalstekst}</FormSummary.Label>
+            )}
             <FormSummary.Value>
                 {svartekst}
                 {erUndersporsmalStilt(sporsmal) && (

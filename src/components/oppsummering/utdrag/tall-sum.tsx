@@ -41,7 +41,9 @@ const TallSum = ({ sporsmal }: OppsummeringProps) => {
         <>
             {sporsmal.svarliste.svar.map((svarverdi, index) => (
                 <FormSummary.Answer key={index}>
-                    <FormSummary.Label className="tall-sum-label">{sporsmal.sporsmalstekst}</FormSummary.Label>
+                    {sporsmal.sporsmalstekst && (
+                        <FormSummary.Label className="tall-sum-label">{sporsmal.sporsmalstekst}</FormSummary.Label>
+                    )}
                     <FormSummary.Value>
                         {svarverdi.verdi} {label()}
                     </FormSummary.Value>

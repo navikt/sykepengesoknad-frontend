@@ -2,7 +2,7 @@ import { RSSporsmal } from '../../../../types/rs-types/rs-sporsmal'
 
 import { bekreftOpplysninger } from './bekreft-opplysninger'
 
-export const bekreftelse = (): RSSporsmal => {
+export const oppsummering = (): RSSporsmal => {
     return {
         id: '1623832',
         tag: 'TIL_SLUTT',

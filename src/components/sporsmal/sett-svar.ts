@@ -44,8 +44,9 @@ export const settSvar = (sporsmal: Sporsmal, verdier: Record<string, any>): Spor
         case RSSvartype.LAND:
         case RSSvartype.COMBOBOX_MULTI:
             return landSvar(sporsmal, verdi)
+        case RSSvartype.BEKREFTELSESPUNKTER:
         case RSSvartype.OPPSUMMERING:
-            return bekreftelsespunkterSvar(sporsmal, verdi, verdier)
+            return oppsummeringSvar(sporsmal, verdi, verdier)
         case RSSvartype.DATO:
             return datoSvar(sporsmal, verdi)
         case RSSvartype.DATOER:
@@ -87,7 +88,7 @@ const checkboxPanelSvar = (sporsmal: Sporsmal, verdi: any) => {
     return sporsmal.copyWith({ svarliste: svarliste })
 }
 
-const bekreftelsespunkterSvar = (sporsmal: Sporsmal, verdi: any, verdier: Record<string, any>) => {
+const oppsummeringSvar = (sporsmal: Sporsmal, verdi: any, verdier: Record<string, any>) => {
     const svarliste = {
         sporsmalId: sporsmal.id,
         svar: verdi.map((a: string) => {

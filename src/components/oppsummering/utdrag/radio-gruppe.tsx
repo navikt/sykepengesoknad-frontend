@@ -22,13 +22,13 @@ const RadioGruppe = ({ sporsmal }: OppsummeringProps) => {
     })
     return (
         <FormSummary.Answer>
-            <FormSummary.Label className="radio-label">{sporsmal.sporsmalstekst}</FormSummary.Label>
+            {sporsmal.sporsmalstekst && (
+                <FormSummary.Label className="radio-label">{sporsmal.sporsmalstekst}</FormSummary.Label>
+            )}
             <FormSummary.Value>
                 {svar}
                 {undersporsmalSomErBesvartOgHarUndersporsmal.length > 0 && (
-                    <FormSummary.Answers
-                        className={`antall-besvarte-${undersporsmalSomErBesvartOgHarUndersporsmal.length}`}
-                    >
+                    <FormSummary.Answers>
                         <UndersporsmalSum sporsmalsliste={undersporsmalSomErBesvartOgHarUndersporsmal} />
                     </FormSummary.Answers>
                 )}

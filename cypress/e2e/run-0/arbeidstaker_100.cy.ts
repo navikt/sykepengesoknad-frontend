@@ -169,7 +169,7 @@ describe('Tester arbeidstakersøknad', () => {
         klikkGaVidere()
     })
 
-    it('Søknad ANSVARSERKLARING', function () {
+    it('Søknad TIL_SLUTT', function () {
         cy.url().should('include', `${soknad.id}/8`)
 
         cy.get('.navds-progress-bar')

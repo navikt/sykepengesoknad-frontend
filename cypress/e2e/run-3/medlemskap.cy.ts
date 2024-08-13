@@ -125,8 +125,8 @@ describe('Søknad med nytt spørsmål om oppholdstillatelse og kjent permanent o
         klikkGaVidere()
     })
 
-    it('Oppsummering av søknad', () => {
-        cy.contains('Oppsummering')
+    it('Søknad TIL_SLUTT', () => {
+        cy.contains('Oppsummering fra søknaden')
         cy.get('[data-cy="oppsummering-fra-søknaden"]').within(() => {
             sporsmalOgSvar('Har Utlendingsdirektoratet gitt deg en oppholdstillatelse før 1. mai 2024?', 'Ja')
             sporsmalOgSvar('Hvilken dato fikk du denne oppholdstillatelsen?', '01.')
@@ -171,8 +171,8 @@ describe('Søknad med nytt spørsmål om oppholdstillatelse og kjent midlertidig
         klikkGaVidere()
     })
 
-    it('Oppsummering av søknad', () => {
-        cy.contains('Oppsummering')
+    it('Søknad TIL_SLUTT', () => {
+        cy.contains('Oppsummering fra søknaden')
         cy.get('[data-cy="oppsummering-fra-søknaden"]').within(() => {
             sporsmalOgSvar('Har Utlendingsdirektoratet gitt deg en oppholdstillatelse før 1. mai 2024?', 'Ja')
             sporsmalOgSvar('Hvilken dato fikk du denne oppholdstillatelsen?', '01.')

@@ -1,7 +1,7 @@
 import { RSSoknad } from '../../../../types/rs-types/rs-soknad'
 import { arbeidstaker100Syk } from '../sykmeldinger'
 import { andreInntektskilderV2 } from '../sporsmal/andre-inntektskilde-v2'
-import { bekreftelse } from '../sporsmal/vaer-klar-over-at'
+import { oppsummering } from '../sporsmal/vaer-klar-over-at'
 
 export const arbeidstakerMedGammelEOSSporsmal: RSSoknad = {
     id: 'faba11f5-c4f2-4647-8c8a-58b28ce2f3ef',
@@ -251,7 +251,7 @@ export const arbeidstakerMedGammelEOSSporsmal: RSSoknad = {
                 },
             ],
         },
-        bekreftelse(),
+        oppsummering(),
     ],
     egenmeldtSykmelding: false,
     opprettetAvInntektsmelding: false,
@@ -511,7 +511,7 @@ export const arbeidstaker: RSSoknad = {
                 },
             ],
         },
-        bekreftelse(),
+        oppsummering(),
     ],
     egenmeldtSykmelding: false,
     opprettetAvInntektsmelding: false,

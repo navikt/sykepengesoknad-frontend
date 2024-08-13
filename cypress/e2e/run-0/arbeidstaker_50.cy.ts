@@ -146,7 +146,7 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
         klikkGaVidere()
     })
 
-    it('Søknad ANSVARSERKLARING ', function () {
+    it('Søknad TIL_SLUTT ', function () {
         cy.url().should('include', `${soknad.id}/9`)
         cy.contains('Oppsummering fra søknaden')
         cy.get('[data-cy="oppsummering-fra-søknaden"]').within(() => {

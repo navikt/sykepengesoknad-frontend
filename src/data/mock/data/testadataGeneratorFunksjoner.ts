@@ -5,7 +5,7 @@ import { ArbeidsforholdFraInntektskomponenten } from '../../../types/rs-types/rs
 import { RSSoknad } from '../../../types/rs-types/rs-soknad'
 import { tilLesbarPeriodeMedArstall } from '../../../utils/dato-utils'
 
-import { bekreftelse } from './sporsmal/vaer-klar-over-at'
+import { oppsummering } from './sporsmal/vaer-klar-over-at'
 
 export function skapSykmelding(opts: { fom: string; tom: string; hovedjobb: string; id: string }) {
     const { fom, tom, hovedjobb, id } = opts
@@ -539,7 +539,7 @@ export function skapSoknad(opts: {
                     },
                 ],
             },
-            bekreftelse(),
+            oppsummering(),
         ],
         egenmeldtSykmelding: false,
         opprettetAvInntektsmelding: false,

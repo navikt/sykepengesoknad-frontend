@@ -101,7 +101,7 @@ describe('Tester frilansersøknad', () => {
         klikkGaVidere()
     })
 
-    it('Søknad VAER_KLAR_OVER_AT - steg 7', function () {
+    it('Søknad TIL_SLUTT - steg 7', function () {
         cy.url().should('include', `${soknad.id}/7`)
         cy.get('.navds-checkbox__label').click()
         cy.contains(

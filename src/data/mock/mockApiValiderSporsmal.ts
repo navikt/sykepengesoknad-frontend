@@ -42,6 +42,7 @@ function validerAntallSvar(sporsmal: RSSporsmal): void {
             case 'GRUPPE_AV_UNDERSPORSMAL':
             case 'INFO_BEHANDLINGSDAGER':
             case 'CHECKBOX_GRUPPE':
+            case 'BEKREFTELSESPUNKTER':
             case 'OPPSUMMERING':
                 return antall === 0
 
@@ -90,6 +91,7 @@ function validerUndersporsmal(sporsmal: RSSporsmal): void {
             besvarteUndersporsmal.forEach((usp) => mockApiValiderSporsmal(usp))
             break
 
+        case 'BEKREFTELSESPUNKTER':
         case 'OPPSUMMERING':
         case 'JA_NEI':
         case 'CHECKBOX':
@@ -144,6 +146,7 @@ function validerSvarverdi(sporsmal: RSSporsmal, svar: RSSvar): void {
 
         case 'COMBOBOX_SINGLE':
         case 'COMBOBOX_MULTI':
+        case 'BEKREFTELSESPUNKTER':
         case 'OPPSUMMERING':
         case 'LAND':
             predikat = () => verdi.trim() !== ''
