@@ -355,7 +355,7 @@ describe('Tester støtte for gamle spørsmål', () => {
         velgDato(4)
         gaVidere()
     })
-    it('Oppsummering av søknaden', () => {
+    it('Søknad TIL_SLUTT', () => {
         sporsmalOgSvar(
             'Hvor mye har du tjent i perioden fra den første arbeidsdagen frem til 24. april?',
             '25000 kroner før skatt',

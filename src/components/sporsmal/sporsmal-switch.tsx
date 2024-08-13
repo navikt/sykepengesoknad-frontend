@@ -21,7 +21,7 @@ import RadioKomp from './typer/radio-komp'
 import ComboboxSingle from './typer/combobox-single'
 import ComboboxMultiple from './typer/combobox-multiple'
 import GruppeAvUndersporsmal from './typer/gruppe-av-undersporsmal'
-import Kulepunkter from './typer/kulepunkter'
+import Oppsummeringsside from './typer/oppsummeringsside'
 
 interface SporsmalSwitchProps {
     sporsmal: Sporsmal
@@ -100,7 +100,7 @@ const SporsmalSwitch = ({ sporsmal, sporsmalIndex, erSisteSporsmal, erHovedspors
 
         case RSSvartype.BEKREFTELSESPUNKTER:
         case RSSvartype.OPPSUMMERING:
-            return <Kulepunkter sporsmal={sporsmal} />
+            return <Oppsummeringsside sporsmal={sporsmal} />
 
         default:
             return <UkjentSporsmal sporsmal={sporsmal} />

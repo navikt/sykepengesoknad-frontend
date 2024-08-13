@@ -82,8 +82,8 @@ describe('Søknad med alle opprinnelige spørsmål om medlemskap', () => {
         klikkGaVidere()
     })
 
-    it('Oppsummering av søknad', () => {
-        cy.contains('Oppsummering')
+    it('Søknad TIL_SLUTT', () => {
+        cy.contains('Oppsummering fra søknaden')
         cy.get('[data-cy="oppsummering-fra-søknaden"]').within(() => {
             //Arbeid utenfor Norge
             sporsmalOgSvar('Har du arbeidet utenfor Norge i løpet av de siste 12 månedene før du ble syk?', 'Ja')

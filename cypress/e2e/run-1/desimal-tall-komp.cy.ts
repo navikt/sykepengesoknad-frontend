@@ -71,7 +71,7 @@ describe('Tester at riktig antall desimaler sendes til backend', () => {
         cy.get('input#13acfccb-3f39-3893-8054-058270add6ab').should('have.value', '50')
     })
 
-    it('Sjekker oppsummering fra søknaden', () => {
+    it('Søknad TIL_SLUTT', () => {
         cy.visit(`/syk/sykepengesoknad/soknader/${gradertReisetilskudd.id}/15?testperson=reisetilskudd`)
         cy.get('[data-cy="oppsummering-fra-søknaden"]').within(() => {
             sporsmalOgSvar(
