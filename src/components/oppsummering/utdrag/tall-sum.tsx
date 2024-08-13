@@ -28,7 +28,14 @@ const TallSum = ({ sporsmal }: OppsummeringProps) => {
     }
 
     const undertekst = sporsmal.undertekst?.includes('Eksempel') === false ? sporsmal.undertekst : undefined
-    const label = undertekst || tekst(labelnokkel as any)
+    const label = () => {
+        switch (sporsmal.tag) {
+            case 'TILKOMMEN_INNTEKT_FORSTEGANG_BRUTTO':
+                return 'kroner før skatt'
+            default:
+                return undertekst || tekst(labelnokkel as any)
+        }
+    }
 
     return (
         <>
@@ -36,7 +43,7 @@ const TallSum = ({ sporsmal }: OppsummeringProps) => {
                 <FormSummary.Answer key={index}>
                     <FormSummary.Label className="tall-sum-label">{sporsmal.sporsmalstekst}</FormSummary.Label>
                     <FormSummary.Value>
-                        {svarverdi.verdi} {label}
+                        {svarverdi.verdi} {label()}
                     </FormSummary.Value>
                 </FormSummary.Answer>
             ))}

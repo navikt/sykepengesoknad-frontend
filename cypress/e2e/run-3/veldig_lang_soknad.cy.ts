@@ -9,6 +9,7 @@ import {
     svarCombobox,
     svarRadioGruppe,
     checkViStolerPaDeg,
+    sporsmalOgSvar,
 } from '../../support/utilities'
 import 'cypress-file-upload'
 import { veldigLangSoknad } from '../../../src/data/mock/data/soknad/veldig-lang-soknad'
@@ -354,7 +355,12 @@ describe('Tester støtte for gamle spørsmål', () => {
         velgDato(4)
         gaVidere()
     })
-    it('VAER_KLAR_OVER_AT & BEKREFT_OPPLYSNINGER', () => {
+    it('Oppsummering av søknaden', () => {
+        sporsmalOgSvar(
+            'Hvor mye har du tjent i perioden fra den første arbeidsdagen frem til 24. april?',
+            '25000 kroner før skatt',
+        )
+
         svarCheckboxPanel()
         cy.contains('Send søknaden').click()
     })
