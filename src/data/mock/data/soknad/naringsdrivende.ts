@@ -1,5 +1,5 @@
 import { RSSoknad } from '../../../../types/rs-types/rs-soknad'
-import { oppsummering } from '../sporsmal/vaer-klar-over-at'
+import { oppsummering } from '../sporsmal/oppsummering'
 import { naringsdrivende100syk } from '../sykmeldinger'
 import { inntektsopplysninger } from '../sporsmal/inntektsopplysninger'
 

@@ -1,6 +1,6 @@
 import { RSSoknad } from '../../../../types/rs-types/rs-soknad'
 import { frilanser100Syk } from '../sykmeldinger'
-import { oppsummering } from '../sporsmal/vaer-klar-over-at'
+import { oppsummering } from '../sporsmal/oppsummering'
 
 export const frilanserMedNyOppholdUtenfoeEOSSporsmal: RSSoknad = {
     id: 'a8e40578-682b-4a04-bfda-b7768af2ae13',

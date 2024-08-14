@@ -1,6 +1,6 @@
 import { RSSoknad } from '../../../../types/rs-types/rs-soknad'
 import { arbeidstakerReisetilskuddSyk } from '../sykmeldinger'
-import { oppsummering } from '../sporsmal/vaer-klar-over-at'
+import { oppsummering } from '../sporsmal/oppsummering'
 
 export const nyttReisetilskudd: RSSoknad = {
     id: '5294bdbd-38a2-4d2a-9917-0fcaf6cf205a',

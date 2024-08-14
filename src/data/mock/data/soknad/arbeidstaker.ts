@@ -1,7 +1,8 @@
 import { RSSoknad } from '../../../../types/rs-types/rs-soknad'
 import { arbeidstaker100Syk } from '../sykmeldinger'
 import { andreInntektskilderV2 } from '../sporsmal/andre-inntektskilde-v2'
-import { oppsummering } from '../sporsmal/vaer-klar-over-at'
+import { gammelOppsummering, oppsummering } from '../sporsmal/oppsummering'
+import { deepcopyMedNyId } from '../../deepcopyMedNyId'
 
 export const arbeidstakerMedGammelEOSSporsmal: RSSoknad = {
     id: 'faba11f5-c4f2-4647-8c8a-58b28ce2f3ef',
@@ -516,4 +517,10 @@ export const arbeidstaker: RSSoknad = {
     egenmeldtSykmelding: false,
     opprettetAvInntektsmelding: false,
     klippet: false,
+}
+
+export const arbeidtakerMedGammelOppsummering = (): RSSoknad => {
+    const nySoknad = deepcopyMedNyId(arbeidstaker, 'fb7d20a2-2e9d-4e37-936c-e3865920745e')
+    nySoknad.sporsmal = [...nySoknad.sporsmal.slice(0, nySoknad.sporsmal.length - 1), gammelOppsummering()]
+    return nySoknad
 }

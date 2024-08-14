@@ -19,6 +19,7 @@ export function mockApiValiderSporsmal(sporsmal: RSSporsmal): boolean {
 function validerAntallSvar(sporsmal: RSSporsmal): void {
     const predikat = (antall: number): boolean => {
         switch (sporsmal.svartype) {
+            case 'BEKREFTELSESPUNKTER':
             case 'JA_NEI':
             case 'BELOP':
             case 'KILOMETER':
@@ -42,7 +43,6 @@ function validerAntallSvar(sporsmal: RSSporsmal): void {
             case 'GRUPPE_AV_UNDERSPORSMAL':
             case 'INFO_BEHANDLINGSDAGER':
             case 'CHECKBOX_GRUPPE':
-            case 'BEKREFTELSESPUNKTER':
             case 'OPPSUMMERING':
                 return antall === 0
 

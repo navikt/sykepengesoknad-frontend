@@ -14,7 +14,7 @@ import {
     syk7,
     syk8,
 } from '../sykmeldinger'
-import { oppsummering } from '../sporsmal/vaer-klar-over-at'
+import { oppsummering } from '../sporsmal/oppsummering'
 
 import { arbeidstaker } from './arbeidstaker'
 import { utgattSoknad } from './arbeidstaker-utgatt'

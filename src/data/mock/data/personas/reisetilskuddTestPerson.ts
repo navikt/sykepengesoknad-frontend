@@ -1,7 +1,7 @@
 import { RSSoknad } from '../../../../types/rs-types/rs-soknad'
 import { jsonDeepCopy } from '../../../../utils/json-deep-copy'
 import { arbeidstakerReisetilskuddSyk, sykmeldinger } from '../sykmeldinger'
-import { oppsummering } from '../sporsmal/vaer-klar-over-at'
+import { oppsummering } from '../sporsmal/oppsummering'
 import { nyttReisetilskudd } from '../soknad/arbeidstaker-reisetilskudd'
 
 import { Persona } from './personas'

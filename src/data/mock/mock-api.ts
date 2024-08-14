@@ -37,7 +37,7 @@ import {
     soknadSomTriggerSporsmalFinnesIkkeISoknad,
 } from './data/soknad/soknader-integration'
 import { feilVedSlettingAvKvittering } from './data/personas/reisetilskuddTestPerson'
-import { arbeidstaker } from './data/soknad/arbeidstaker'
+import { arbeidstaker, arbeidtakerMedGammelOppsummering } from './data/soknad/arbeidstaker'
 import { arbeidstakerGradert } from './data/soknad/arbeidstaker-gradert'
 import { avbruttOppholdUtland } from './data/soknad/opphold-utland'
 import { mockApiValiderSporsmal } from './mockApiValiderSporsmal'
@@ -523,6 +523,7 @@ export async function mockApi(req: NextApiRequest, res: NextApiResponse) {
 const mottaker = (soknadId: string): RSMottaker => {
     if (
         soknadId === arbeidstaker.id ||
+        soknadId === arbeidtakerMedGammelOppsummering().id ||
         soknadId === arbeidstakerUtenforArbeidsgiverperiodeKvittering.id ||
         soknadId === arbeidstakerDeltPeriodeForsteUtenforArbeidsgiverperiodeKvittering.id ||
         soknadId === arbeidstakerUtenOppholdForsteUtenforArbeidsgiverperiodeKvittering.id ||

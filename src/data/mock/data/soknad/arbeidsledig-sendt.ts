@@ -2,7 +2,7 @@ import dayjs from 'dayjs'
 
 import { RSSoknad } from '../../../../types/rs-types/rs-soknad'
 import { arbeidstaker100Syk } from '../sykmeldinger'
-import { oppsummering } from '../sporsmal/vaer-klar-over-at'
+import { oppsummering } from '../sporsmal/oppsummering'
 
 export const sendtArbeidsledig: RSSoknad = {
     id: '3848e75e-4069-4076-95c0-3f9f0b63e498',

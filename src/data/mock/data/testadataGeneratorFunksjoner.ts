@@ -5,7 +5,7 @@ import { ArbeidsforholdFraInntektskomponenten } from '../../../types/rs-types/rs
 import { RSSoknad } from '../../../types/rs-types/rs-soknad'
 import { tilLesbarPeriodeMedArstall } from '../../../utils/dato-utils'
 
-import { oppsummering } from './sporsmal/vaer-klar-over-at'
+import { oppsummering } from './sporsmal/oppsummering'
 
 export function skapSykmelding(opts: { fom: string; tom: string; hovedjobb: string; id: string }) {
     const { fom, tom, hovedjobb, id } = opts
