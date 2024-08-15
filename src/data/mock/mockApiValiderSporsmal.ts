@@ -19,7 +19,6 @@ export function mockApiValiderSporsmal(sporsmal: RSSporsmal): boolean {
 function validerAntallSvar(sporsmal: RSSporsmal): void {
     const predikat = (antall: number): boolean => {
         switch (sporsmal.svartype) {
-            case 'BEKREFTELSESPUNKTER':
             case 'JA_NEI':
             case 'BELOP':
             case 'KILOMETER':
@@ -44,6 +43,7 @@ function validerAntallSvar(sporsmal: RSSporsmal): void {
             case 'INFO_BEHANDLINGSDAGER':
             case 'CHECKBOX_GRUPPE':
             case 'OPPSUMMERING':
+            case 'BEKREFTELSESPUNKTER':
                 return antall === 0
 
             case 'LAND':
@@ -63,7 +63,7 @@ function validerAntallSvar(sporsmal: RSSporsmal): void {
 
     if (!predikat(sporsmal.svar.length)) {
         throw new Error(
-            `Spørsmål med id ${sporsmal.id} og tag ${sporsmal.tag} har feil antall svar ${sporsmal.svar.length}`,
+            `Spørsmål med id ${sporsmal.id} og svartype ${sporsmal.svartype} og tag ${sporsmal.tag} har feil antall svar ${sporsmal.svar.length}`,
         )
     }
 }
@@ -206,7 +206,9 @@ function validerSvarverdi(sporsmal: RSSporsmal, svar: RSSvar): void {
     }
 
     if (!predikat()) {
-        throw new Error(`Spørsmål ${sporsmal.id} med tag ${sporsmal.svartype} har feil svarverdi ${verdi}`)
+        throw new Error(
+            `Spørsmål ${sporsmal.id} med svartype: ${sporsmal.svartype} og med tag: ${sporsmal.tag} har feil svarverdi: ${verdi}.`,
+        )
     }
 }
 
