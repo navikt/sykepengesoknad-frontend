@@ -62,6 +62,9 @@ export const settSvar = (sporsmal: Sporsmal, verdier: Record<string, any>): Spor
             // svarliste settes i gruppe fra radio og checkbox
             return sporsmal.copyWith({ undersporsmal: undersporsmal })
         }
+        case RSSvartype.BEKREFTELSESPUNKTER:
+        case RSSvartype.OPPSUMMERING:
+            return oppsummeringSvar(sporsmal, verdi, verdier)
 
         default:
             const svarliste = {
@@ -84,6 +87,27 @@ const checkboxPanelSvar = (sporsmal: Sporsmal, verdi: any) => {
     }
     return sporsmal.copyWith({ svarliste: svarliste })
 }
+
+/**
+ * Setter kun svar på BEKREFT_OPPLYSNINGER, som er underspørsmål av OPPSUMMERING (tidligere BEKREFTELSESPUNKTER)
+ */
+const oppsummeringSvar = (sporsmal: Sporsmal, _verdi: any, verdier: Record<string, any>) => {
+    const undersporsmal = sporsmal.undersporsmal.map((uspm) => {
+        const uspmVerdi = verdier[uspm.id]
+        const uspmSvarliste = {
+            sporsmalId: uspm.id,
+            svar: [
+                {
+                    verdi: uspmVerdi ? SvarEnums.CHECKED : '',
+                },
+            ],
+        }
+        return uspm.copyWith({ svarliste: uspmSvarliste })
+    })
+
+    return sporsmal.copyWith({ undersporsmal: undersporsmal })
+}
+
 const behandlingsdagerSvar = (sporsmal: Sporsmal, verdi: Date[]): Sporsmal => {
     const selectedDays = verdi
 
