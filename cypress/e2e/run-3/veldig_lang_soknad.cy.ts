@@ -10,7 +10,7 @@ import {
     svarRadioGruppe,
 } from '../../support/utilities'
 import 'cypress-file-upload'
-import { veldigLangSoknad } from '../../../src/data/mock/data/soknad/veldig-land-soknad'
+import { veldigLangSoknad } from '../../../src/data/mock/data/soknad/veldig-lang-soknad'
 import { rsToSoknad } from '../../../src/types/mapping'
 import 'cypress-real-events'
 
