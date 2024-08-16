@@ -12,7 +12,6 @@ export function mockApiValiderSporsmal(sporsmal: RSSporsmal): boolean {
         logger.error(`Validering av spørsmål med id ${sporsmal.id} feilet: ${e.message}`)
         return false
     }
-
     return true
 }
 
@@ -78,7 +77,9 @@ function validerUndersporsmal(sporsmal: RSSporsmal): void {
                     `Spørsmål ${sporsmal.id} av typen ${sporsmal.svartype} må ha minst ett besvart underspørsmål`,
                 )
             }
-            besvarteUndersporsmal.forEach((usp) => mockApiValiderSporsmal(usp))
+            besvarteUndersporsmal.forEach((usp) => {
+                if (!mockApiValiderSporsmal(usp)) throw new Error(`Feil i underspørsmål ${usp.id}`)
+            })
             break
 
         case 'RADIO_GRUPPE':
@@ -88,7 +89,9 @@ function validerUndersporsmal(sporsmal: RSSporsmal): void {
                     `Spørsmål ${sporsmal.id} av typen ${sporsmal.svartype} må ha eksakt ett besvart underspørsmål, men har ${besvarteUndersporsmal.length}`,
                 )
             }
-            besvarteUndersporsmal.forEach((usp) => mockApiValiderSporsmal(usp))
+            besvarteUndersporsmal.forEach((usp) => {
+                if (!mockApiValiderSporsmal(usp)) throw new Error(`Feil i underspørsmål ${usp.id}`)
+            })
             break
 
         case 'BEKREFTELSESPUNKTER':
@@ -120,10 +123,14 @@ function validerUndersporsmal(sporsmal: RSSporsmal): void {
                     sporsmal.svar.length === 1 &&
                     sporsmal.svar[0].verdi === sporsmal.kriterieForVisningAvUndersporsmal
                 ) {
-                    sporsmal.undersporsmal.forEach((usp) => mockApiValiderSporsmal(usp))
+                    sporsmal.undersporsmal.forEach((usp) => {
+                        if (!mockApiValiderSporsmal(usp)) throw new Error(`Feil i underspørsmål ${usp.id}`)
+                    })
                 }
             } else {
-                sporsmal.undersporsmal.forEach((usp) => mockApiValiderSporsmal(usp))
+                sporsmal.undersporsmal.forEach((usp) => {
+                    if (!mockApiValiderSporsmal(usp)) throw new Error(`Feil i underspørsmål ${usp.id}`)
+                })
             }
             break
 
