@@ -337,6 +337,11 @@ describe('Tester støtte for gamle spørsmål', () => {
         svarFritekst('Hvor mye har du tjent i perioden fra den første arbeidsdagen frem til 24. april?', '25000')
         gaVidere()
     })
+    it('Tilkommen inntekt paafolgende', () => {
+        svarJaHovedsporsmal()
+        svarFritekst('Hvor mye har du tjent i perioden?', '25000')
+        gaVidere()
+    })
 
     it('Avviklet virksomhet', () => {
         svarJaHovedsporsmal()

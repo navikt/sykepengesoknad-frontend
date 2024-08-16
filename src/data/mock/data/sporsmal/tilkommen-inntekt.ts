@@ -1,7 +1,8 @@
 import { v4 } from 'uuid'
+import dayjs from 'dayjs'
 
 import { RSSporsmal } from '../../../../types/rs-types/rs-sporsmal'
-import { tilLesbarDatoUtenAarstall } from '../../../../utils/dato-utils'
+import { tilLesbarDatoUtenAarstall, tilLesbarPeriodeMedArstall } from '../../../../utils/dato-utils'
 
 export const tilkommenInntektForstegangSporsmal = ({
     orgnavn,
@@ -46,6 +47,50 @@ export const tilkommenInntektForstegangSporsmal = ({
                 sporsmalstekst: `Hvor mye har du tjent i perioden fra den første arbeidsdagen frem til ${tomLesbar}?`,
                 undertekst:
                     'Oppgi det du har tjent brutto (før skatt). Se på lønnslippen eller kontrakten hvor mye du har tjent eller skal tjene.',
+                svartype: 'BELOP',
+                min: null,
+                max: null,
+                kriterieForVisningAvUndersporsmal: null,
+                svar: [],
+                undersporsmal: [],
+            },
+        ],
+    }
+}
+
+export const tilkommenInntektPafolgendeSporsmal = ({
+    orgnavn,
+    orgnr,
+    tom,
+    fom,
+}: {
+    orgnavn: string
+    orgnr: string
+    tom: string
+    fom: string
+}): RSSporsmal => {
+    const periodeTekst = tilLesbarPeriodeMedArstall(dayjs(fom), dayjs(tom))
+
+    return {
+        id: v4().toString(),
+        tag: 'TILKOMMEN_INNTEKT_PAFOLGENDE',
+        sporsmalstekst: `Har du jobbet noe hos ${orgnavn} i perioden ${periodeTekst}?`,
+        undertekst: null,
+        svartype: 'JA_NEI',
+        min: null,
+        metadata: {
+            orgnummer: orgnr,
+            orgnavn: orgnavn,
+        },
+        max: null,
+        kriterieForVisningAvUndersporsmal: 'JA',
+        svar: [],
+        undersporsmal: [
+            {
+                id: v4().toString(),
+                tag: 'TILKOMMEN_INNTEKT_PAFOLGENDE_BRUTTO',
+                sporsmalstekst: `Hvor mye har du tjent i perioden?`,
+                undertekst: `Oppgi det du har tjent brutto (før skatt) i perioden ${periodeTekst}. Se på lønnslippen eller kontrakten hvor mye du har tjent eller skal tjene.`,
                 svartype: 'BELOP',
                 min: null,
                 max: null,

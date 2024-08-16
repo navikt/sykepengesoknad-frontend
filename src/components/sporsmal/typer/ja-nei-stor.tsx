@@ -20,7 +20,7 @@ import { Yrkesskadebulletpoints } from '../yrkesskade-bulletpoints'
 import { InntektsopplysningerErKonfidensielleInfo } from '../inntektsopplysninger-er-konfidensielle-info'
 import { useSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
 import { KjentOppholdstillatelse } from '../kjent-oppholdstillatelse'
-import { NyttArbeidsforhold } from '../nytt-arbeidsforhold'
+import { NyttArbeidsforhold, NyttArbeidsforholdPafolgende } from '../nytt-arbeidsforhold'
 
 import { jaNeiStorStyle, JaNeiStyle } from './ja-nei-stor-style'
 
@@ -73,6 +73,7 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
                 {skalHaInntektsbulletpoints && <Inntektsbulletpoints soknad={valgtSoknad} />}
                 {skalViseKjentOppholdstillatelse && <KjentOppholdstillatelse soknad={valgtSoknad} />}
                 {sporsmal.tag === 'TILKOMMEN_INNTEKT_FORSTEGANG' && <NyttArbeidsforhold spm={sporsmal} />}
+                {sporsmal.tag === 'TILKOMMEN_INNTEKT_PAFOLGENDE' && <NyttArbeidsforholdPafolgende spm={sporsmal} />}
 
                 <Controller
                     name={sporsmal.id}
