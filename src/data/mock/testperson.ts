@@ -38,7 +38,7 @@ import { fiskePerson } from './data/personas/fisker'
 import { kjenteInntektskilderPerson } from './data/personas/kjente-inntektskilder'
 import { innenforAgPerioden } from './data/personas/innenfor-ag-periode'
 import { oppholdUtenforEOS } from './data/personas/opphold-utenfor-eos'
-import { tilkommenInntektForstegangs } from './data/personas/tilkommen-inntekt'
+import { tilkommenInntektForstegangs, tilkommenInntektPaafolgende } from './data/personas/tilkommen-inntekt'
 
 type PersonaKey =
     | 'uten-data'
@@ -77,6 +77,7 @@ type PersonaKey =
     | 'cummulative-layout-shift'
     | 'tilbakedateringer'
     | 'tilkommen-inntekt-forstegangs'
+    | 'tilkommen-inntekt-pafolgende'
     | 'selvstendig-naringsdrivende-sendt'
     | 'innenfor-arbeidsgiver-perioden'
 
@@ -129,6 +130,7 @@ export function testpersonerGruppert(): PersonaGroup {
         },
         ['Tilkommen inntekt']: {
             ['tilkommen-inntekt-forstegangs']: jsonDeepCopy(tilkommenInntektForstegangs),
+            ['tilkommen-inntekt-pafolgende']: jsonDeepCopy(tilkommenInntektPaafolgende),
         },
         ['testing']: {
             ['over-70']: over70(),
