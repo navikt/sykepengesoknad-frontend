@@ -2,7 +2,7 @@ import { RSSvartype } from '../../types/rs-types/rs-svartype'
 import { Soknad, Sporsmal } from '../../types/types'
 import { flattenSporsmal } from '../../utils/soknad-utils'
 import { tekst } from '../../utils/tekster'
-import { veldigLangSoknad } from '../../data/mock/data/soknad/veldig-land-soknad'
+import { veldigLangSoknad } from '../../data/mock/data/soknad/veldig-lang-soknad'
 import { rsToSoknad } from '../../types/mapping'
 import { testpersoner } from '../../data/mock/testperson'
 

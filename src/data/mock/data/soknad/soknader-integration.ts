@@ -20,7 +20,7 @@ import { arbeidstaker } from './arbeidstaker'
 import { utgattSoknad } from './arbeidstaker-utgatt'
 import { sendtArbeidsledig } from './arbeidsledig-sendt'
 import { avbruttSoknad } from './arbeidstaker-avbrutt'
-import { veldigLangSoknad } from './veldig-land-soknad'
+import { veldigLangSoknad } from './veldig-lang-soknad'
 
 export const arbeidstakersoknadMedUtenlandsoppholdSoktSykepenger: RSSoknad = {
     id: '5b74f271-5b94-455a-b79f-428f593f2b98',
