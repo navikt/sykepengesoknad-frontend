@@ -19,7 +19,7 @@ export const oppsummering = (): RSSporsmal => {
 
 export const gammelOppsummering = (): RSSporsmal => {
     return {
-        id: '1623833',
+        id: '16238321',
         tag: 'TIL_SLUTT',
         sporsmalstekst: 'Viktig å være klar over:',
         undertekst: null,

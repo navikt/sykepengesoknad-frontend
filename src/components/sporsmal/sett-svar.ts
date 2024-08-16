@@ -88,10 +88,12 @@ const checkboxPanelSvar = (sporsmal: Sporsmal, verdi: any) => {
     return sporsmal.copyWith({ svarliste: svarliste })
 }
 
-/**
- * Setter kun svar på BEKREFT_OPPLYSNINGER, som er underspørsmål av OPPSUMMERING (tidligere BEKREFTELSESPUNKTER)
- */
-const oppsummeringSvar = (sporsmal: Sporsmal, _verdi: any, verdier: Record<string, any>) => {
+const oppsummeringSvar = (sporsmal: Sporsmal, verdi: boolean, verdier: Record<string, any>) => {
+    const svarliste = {
+        sporsmalId: sporsmal.id,
+        svar: [{ verdi: String(verdi) }],
+    }
+
     const undersporsmal = sporsmal.undersporsmal.map((uspm) => {
         const uspmVerdi = verdier[uspm.id]
         const uspmSvarliste = {
@@ -105,7 +107,7 @@ const oppsummeringSvar = (sporsmal: Sporsmal, _verdi: any, verdier: Record<strin
         return uspm.copyWith({ svarliste: uspmSvarliste })
     })
 
-    return sporsmal.copyWith({ undersporsmal: undersporsmal })
+    return sporsmal.copyWith({ svarliste: svarliste, undersporsmal: undersporsmal })
 }
 
 const behandlingsdagerSvar = (sporsmal: Sporsmal, verdi: Date[]): Sporsmal => {

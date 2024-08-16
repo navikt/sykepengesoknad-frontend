@@ -1,11 +1,17 @@
 import { GuidePanel } from '@navikt/ds-react'
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useFormContext } from 'react-hook-form'
 
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import Oppsummering from '../../oppsummering/oppsummering'
 
 const Oppsummeringsside = ({ sporsmal }: SpmProps) => {
+    const { setValue } = useFormContext()
+    useEffect(() => {
+        setValue(sporsmal.id, true)
+    }, [setValue, sporsmal.id])
+
     return (
         <>
             <GuidePanel poster>

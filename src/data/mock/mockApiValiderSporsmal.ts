@@ -30,6 +30,8 @@ function validerAntallSvar(sporsmal: RSSporsmal): void {
             case 'TIMER':
             case 'TALL':
             case 'CHECKBOX':
+            case 'OPPSUMMERING':
+            case 'BEKREFTELSESPUNKTER':
                 return antall === 1
 
             case 'FRITEKST':
@@ -41,8 +43,6 @@ function validerAntallSvar(sporsmal: RSSporsmal): void {
             case 'GRUPPE_AV_UNDERSPORSMAL':
             case 'INFO_BEHANDLINGSDAGER':
             case 'CHECKBOX_GRUPPE':
-            case 'OPPSUMMERING':
-            case 'BEKREFTELSESPUNKTER':
                 return antall === 0
 
             case 'LAND':
@@ -153,8 +153,6 @@ function validerSvarverdi(sporsmal: RSSporsmal, svar: RSSvar): void {
 
         case 'COMBOBOX_SINGLE':
         case 'COMBOBOX_MULTI':
-        case 'BEKREFTELSESPUNKTER':
-        case 'OPPSUMMERING':
         case 'LAND':
             predikat = () => verdi.trim() !== ''
             break
@@ -165,8 +163,11 @@ function validerSvarverdi(sporsmal: RSSporsmal, svar: RSSvar): void {
 
         case 'CHECKBOX_PANEL':
         case 'RADIO':
-        case 'CHECKBOX':
             predikat = () => verdi === 'CHECKED'
+            break
+
+        case 'CHECKBOX':
+            predikat = () => verdi === 'CHECKED' || verdi === ''
             break
 
         case 'DATO':
@@ -210,6 +211,10 @@ function validerSvarverdi(sporsmal: RSSporsmal, svar: RSSvar): void {
         case 'INFO_BEHANDLINGSDAGER':
         case 'CHECKBOX_GRUPPE':
             throw new Error('Skal ha validert 0 svar allerede')
+
+        case 'BEKREFTELSESPUNKTER':
+        case 'OPPSUMMERING':
+            predikat = () => verdi === 'true'
     }
 
     if (!predikat()) {
