@@ -1,4 +1,5 @@
 import 'dayjs/locale/nb'
+import { it, expect } from 'vitest'
 
 import { tekst } from '../../utils/tekster'
 

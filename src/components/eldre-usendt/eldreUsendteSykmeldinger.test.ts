@@ -1,4 +1,5 @@
 import dayjs from 'dayjs'
+import { expect, test } from 'vitest'
 
 import { arbeidstaker100Syk } from '../../data/mock/data/sykmeldinger'
 import { jsonDeepCopy } from '../../utils/json-deep-copy'
