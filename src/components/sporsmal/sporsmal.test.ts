@@ -1,3 +1,5 @@
+import { expect, test } from 'vitest'
+
 import { RSSvartype } from '../../types/rs-types/rs-svartype'
 import { Soknad, Sporsmal } from '../../types/types'
 import { flattenSporsmal } from '../../utils/soknad-utils'

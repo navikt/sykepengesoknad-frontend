@@ -1,3 +1,5 @@
+import { expect, test } from 'vitest'
+
 import { sok6 } from '../../../data/mock/data/soknad/soknader-integration'
 import { rsToSoknad } from '../../../types/mapping'
 import { sendtArbeidsledig } from '../../../data/mock/data/soknad/arbeidsledig-sendt'

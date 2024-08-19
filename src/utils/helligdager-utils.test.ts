@@ -1,4 +1,5 @@
 import dayjs from 'dayjs'
+import { test, expect } from 'vitest'
 
 import { andrePinsedag, easterSunday, førstePinsedag, kristiHimmelfartsdag } from './helligdager-utils'
 
