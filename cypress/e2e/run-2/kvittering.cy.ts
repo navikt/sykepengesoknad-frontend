@@ -126,7 +126,7 @@ describe('Tester kvittering', () => {
             cy.findByRole('button', { name: 'Start søknaden' }).should('exist').click()
 
             // Svar og send
-            svarCombobox('Hvilke(t) land skal du reise til?', 'Søre', 'Søre franske territorier')
+            svarCombobox('Hvilke(t) land skal du reise til?', 'Søre fran', 'Søre franske territorier')
             cy.get('.navds-combobox__button-toggle-list').click()
             klikkGaVidere()
 
