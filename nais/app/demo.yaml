@@ -31,7 +31,7 @@ spec:
           namespace: personbruker
   # https://github.com/navikt/altinnkanal-2/blob/1b6a874294eb273602312c3494cd669ea9e94d9c/.nais/naiserator.yaml#L35
   {{#if TTL_HOURS}}
-  ttl: 168h # 7*24h
+  ttl: {{ TTL_HOURS }}
   {{/if}}
 
   env:
