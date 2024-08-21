@@ -219,6 +219,7 @@ const OpplastingForm = ({ valgtSoknad, setOpenModal, openModal }: OpplastingFrom
                 )}
 
                 <div className="mt-8 flex gap-4">
+                    {/*dette er en test*/}
                     <Button variant="primary" type="button" onClick={onSubmit} loading={laster}>
                         {tekst('opplasting_modal.bekreft')}
                     </Button>
