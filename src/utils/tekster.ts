@@ -18,7 +18,6 @@ import OpplysningerTekster from '../components/opplysninger-fra-sykmelding/opply
 import OpprettUtlandTekster from '../components/opprett-utland/opprett-utland-tekster'
 import OppsummeringTekster from '../components/oppsummering/oppsummering-tekster'
 import SoknadenTekster from '../components/soknad/soknaden-tekster'
-import SoknadMedToDelerTekster from '../components/soknad-med-to-deler/soknad-med-to-deler-tekster'
 import ListevisningTekster from '../components/listevisning/listevisning-tekster'
 import TeaserTekster from '../components/listevisning/teaser-tekster'
 import GuidepanelTekster from '../components/sporsmal/guidepanel/guidepanel-tekster'
@@ -26,7 +25,6 @@ import { EkspanderbarHjelpTekster } from '../components/hjelpetekster/ekspanderb
 import { EndringUtenEndringTekster } from '../components/sporsmal/endring-uten-endring/endring-uten-endring-tekster'
 import KnapperadTekster from '../components/sporsmal/sporsmal-form/knapperad-tekster'
 import SporsmalTekster from '../components/sporsmal/sporsmal-tekster'
-import EgenmeldingsdagerArbeidsgiverTekster from '../components/egenmeldingsdager-arbeidsgiver/egenmeldingsdager-arbeidsgiver-tekster'
 import vaerKlarOverAtTekster from '../components/sporsmal/bekreftelsespunkter/bekreftelsespunkter-arbeidstakere-tekster'
 
 const tekster = {
@@ -54,9 +52,7 @@ const tekster = {
     ...EldreUsendtTekster,
     ...GjenstaendeSoknaderTekster,
     ...AvsluttOgFortsettSenereTekster,
-    ...SoknadMedToDelerTekster,
     ...FristSykepengerTekster,
-    ...EgenmeldingsdagerArbeidsgiverTekster,
     ...vaerKlarOverAtTekster,
 }
 

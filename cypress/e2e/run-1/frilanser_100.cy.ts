@@ -1,4 +1,4 @@
-import { checkViStolerPaDeg, klikkGaVidere, setPeriodeFraTil, sjekkIntroside } from "../../support/utilities";
+import { checkViStolerPaDeg, klikkGaVidere, setPeriodeFraTil, sjekkIntroside } from '../../support/utilities'
 import { frilanser } from '../../../src/data/mock/data/soknad/frilanser'
 
 describe('Tester frilansersøknad', () => {

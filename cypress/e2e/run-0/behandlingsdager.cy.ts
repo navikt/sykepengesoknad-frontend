@@ -4,8 +4,8 @@ import {
     klikkGaVidere,
     klikkTilbake,
     sjekkIntroside,
-    svarNeiHovedsporsmal
-} from "../../support/utilities";
+    svarNeiHovedsporsmal,
+} from '../../support/utilities'
 
 describe('Tester behandlingsdagersøknad', () => {
     //-----

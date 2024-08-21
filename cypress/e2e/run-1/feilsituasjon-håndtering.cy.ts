@@ -3,7 +3,7 @@ import {
     soknadSomTriggerFeilStatusForOppdaterSporsmal,
     soknadSomTriggerSporsmalFinnesIkkeISoknad,
 } from '../../../src/data/mock/data/soknad/soknader-integration'
-import { svarNeiHovedsporsmal, klikkGaVidere, checkViStolerPaDeg } from "../../support/utilities";
+import { svarNeiHovedsporsmal, klikkGaVidere, checkViStolerPaDeg } from '../../support/utilities'
 
 describe('Tester feilsituasjoner ', () => {
     describe('Tester SPORSMAL_FINNES_IKKE_I_SOKNAD ', () => {

@@ -4,13 +4,13 @@ import {
     svarCheckboxPanel,
     setPeriodeFraTil,
     klikkGaVidere,
+    checkViStolerPaDeg,
 } from '../../support/utilities'
 
 describe('Tester korrigering av ferie', () => {
     it('Sender inn søknad med ja på ferie spørsmålet', () => {
         cy.visit('/syk/sykepengesoknad/soknader/5b769c04-e171-47c9-b79b-23ab8fce331e')
-        svarCheckboxPanel()
-        klikkGaVidere()
+        checkViStolerPaDeg()
         cy.contains('Tilbake i fullt arbeid')
         svarNeiHovedsporsmal()
         klikkGaVidere()
@@ -55,8 +55,7 @@ describe('Tester korrigering av ferie', () => {
         cy.contains('Jeg vil endre svarene i søknaden').click()
         cy.contains('Ok').click()
 
-        cy.contains('Jeg vil svare så godt jeg kan på spørsmålene i søknaden.').click()
-        klikkGaVidere()
+        checkViStolerPaDeg()
         cy.contains('Tilbake i fullt arbeid')
 
         svarNeiHovedsporsmal()

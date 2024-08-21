@@ -1,5 +1,5 @@
 import { avbruttSoknad } from '../../../src/data/mock/data/soknad/arbeidstaker-avbrutt'
-import { avbryterSoknad, checkViStolerPaDeg, modalAktiv } from "../../support/utilities";
+import { avbryterSoknad, checkViStolerPaDeg, modalAktiv } from '../../support/utilities'
 
 describe('Tester avbryting av søknad', () => {
     before(() => {

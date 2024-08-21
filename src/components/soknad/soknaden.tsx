@@ -3,7 +3,6 @@ import { useRouter } from 'next/router'
 import { BodyLong, Button } from '@navikt/ds-react'
 
 import OmReisetilskudd from '../../components/om-reisetilskudd/om-reisetilskudd'
-import SoknadMedToDeler from '../../components/soknad-med-to-deler/soknad-med-to-deler'
 import SporsmalForm from '../../components/sporsmal/sporsmal-form/sporsmal-form'
 import Fremdriftsbar from '../sporsmal/fremdriftsbar/fremdriftsbar'
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
@@ -12,9 +11,7 @@ import { logEvent } from '../amplitude/amplitude'
 import { EldreUsendtSoknad, harEldreUsendtSoknad } from '../eldre-usendt/eldre-usendt-soknad'
 import { EldreUsendtSykmelding } from '../eldre-usendt/eldre-usendt-sykmelding'
 import { eldreUsendteSykmeldinger } from '../eldre-usendt/eldreUsendteSykmeldinger'
-import { InfoOmTilbakedatering } from '../soknad-intro/info-om-tilbakedatering'
 import { soknadBreadcrumb, useUpdateBreadcrumbs } from '../../hooks/useBreadcrumbs'
-import EgenmeldingsdagerArbeidsgiver from '../egenmeldingsdager-arbeidsgiver/egenmeldingsdager-arbeidsgiver'
 import { FlexjarSporsmal } from '../flexjar/flexjar-sporsmal'
 import { useSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
 import { useToggle } from '../../toggles/context'
@@ -122,10 +119,7 @@ export const Soknaden = () => {
                     <IntroGuide />
                     <ForDuSoker />
                     <IntroAccordion />
-                    <InfoOmTilbakedatering />
                     {valgtSykmelding?.pasient?.overSyttiAar && <Over70Aar />}
-                    {erGradertReisetilskuddsoknad && <SoknadMedToDeler />}
-                    {valgtSoknad?.opprettetAvInntektsmelding && <EgenmeldingsdagerArbeidsgiver />}
                     <BodyLong spacing>
                         Det er viktig at du gir oss riktige opplysninger slik at vi kan behandle saken din.
                         <LenkeMedIkon

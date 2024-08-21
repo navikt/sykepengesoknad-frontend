@@ -32,7 +32,7 @@ describe('Tester arbeidsledigsøknad', () => {
             .should('have.css', 'box-shadow')
         cy.realPress('Space')
         cy.realPress('Tab')
-        cy.focused().contains('Gå videre').should('have.css', 'box-shadow')
+        cy.focused().contains('Start søknad').should('have.css', 'box-shadow')
         cy.realPress('Enter')
         sjekkMainContentFokus()
 

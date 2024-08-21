@@ -7,8 +7,9 @@ import {
     velgDato,
     klikkGaVidere,
     svarCombobox,
-    svarRadioGruppe, checkViStolerPaDeg
-} from "../../support/utilities";
+    svarRadioGruppe,
+    checkViStolerPaDeg,
+} from '../../support/utilities'
 import 'cypress-file-upload'
 import { veldigLangSoknad } from '../../../src/data/mock/data/soknad/veldig-lang-soknad'
 import { rsToSoknad } from '../../../src/types/mapping'

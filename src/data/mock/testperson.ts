@@ -23,11 +23,9 @@ import {
     over70,
     Persona,
     reisetilskuddPerson,
-    tilbakedateringer,
     utenData,
     utlandPerson,
 } from './data/personas/personas'
-import { opprettetAvInntektsmelding } from './data/personas/opprettet-av-inntektsmelding'
 import { utenlandskSykmelding } from './data/utenlandsk-sykmelding'
 import { yrkesskadePerson, yrkesskadeV2Person } from './data/yrkesskade'
 import { egenmeldingSykmeldingaPerson } from './data/personas/egenmeldingsdager-i-sykmeldingen'
@@ -66,7 +64,6 @@ type PersonaKey =
     | 'brukertest'
     | 'har-kontonummer'
     | 'har-ikke-kontonummer'
-    | 'egenmeldingsdager-arbeidsgiver'
     | 'sykmelding-med-egenmeldingsdager'
     | 'http-400-ved-send-soknad'
     | 'http-403-ved-get-soknad'
@@ -75,7 +72,6 @@ type PersonaKey =
     | 'korrigeringsfrist-utlopt'
     | 'kjente-inntektskilder'
     | 'cummulative-layout-shift'
-    | 'tilbakedateringer'
     | 'tilkommen-inntekt-forstegangs'
     | 'tilkommen-inntekt-pafolgende'
     | 'selvstendig-naringsdrivende-sendt'
@@ -122,7 +118,6 @@ export function testpersonerGruppert(): PersonaGroup {
             ['yrkesskade-v2']: jsonDeepCopy(yrkesskadeV2Person),
             ['utenlandsk-sykmelding']: jsonDeepCopy(utenlandskSykmelding),
             ['brukertest']: jsonDeepCopy(brukertest),
-            ['egenmeldingsdager-arbeidsgiver']: jsonDeepCopy(opprettetAvInntektsmelding),
             ['sykmelding-med-egenmeldingsdager']: jsonDeepCopy(egenmeldingSykmeldingaPerson),
         },
         ['medlemskap-sporsmal']: {
@@ -137,7 +132,6 @@ export function testpersonerGruppert(): PersonaGroup {
             ['korrigeringsfrist-utlopt']: jsonDeepCopy(korrigeringsfristUtloptPerson),
             ['har-kontonummer']: jsonDeepCopy(harKontonummer),
             ['har-ikke-kontonummer']: jsonDeepCopy(harIkkeKontonummer),
-            ['tilbakedateringer']: jsonDeepCopy(tilbakedateringer()),
             ['reisetilskudd-test']: jsonDeepCopy(reisetilskuddTestPerson),
             ['en-usendt-sykmelding']: jsonDeepCopy(enUsendtSykmelding),
             ['to-usendte-sykmeldinger']: jsonDeepCopy(toUsendteSykmeldinger),
