@@ -1,4 +1,4 @@
-import { checkViStolerPåDeg, klikkGaVidere, neiOgVidere, svarJaHovedsporsmal } from '../../support/utilities'
+import { checkViStolerPaDeg, klikkGaVidere, neiOgVidere, svarJaHovedsporsmal } from '../../support/utilities'
 import 'cypress-real-events'
 
 describe('Tester yrkesskadesspørsmål', () => {
@@ -12,7 +12,7 @@ describe('Tester yrkesskadesspørsmål', () => {
     })
 
     it('Svarer på spørsmål før yrkesskade', function () {
-        checkViStolerPåDeg()
+        checkViStolerPaDeg()
 
         neiOgVidere([
             'Tilbake i fullt arbeid',

@@ -71,7 +71,7 @@ function fyllUtSoknad() {
     it('Fyller ut søknaden', () => {
         cy.contains('Jeg vil svare så godt jeg kan på spørsmålene i søknaden.').click()
 
-        cy.contains('Gå videre').click()
+        cy.contains('Start søknad').click()
 
         svarNeiHovedsporsmal()
         klikkGaVidere()

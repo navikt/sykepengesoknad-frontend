@@ -1,5 +1,11 @@
 import { behandlingsdager } from '../../../src/data/mock/data/soknad/behandlingsdager'
-import { klikkGaVidere, klikkTilbake, sjekkIntroside, svarNeiHovedsporsmal } from '../../support/utilities'
+import {
+    checkViStolerPaDeg,
+    klikkGaVidere,
+    klikkTilbake,
+    sjekkIntroside,
+    svarNeiHovedsporsmal
+} from "../../support/utilities";
 
 describe('Tester behandlingsdagersøknad', () => {
     //-----
@@ -21,11 +27,7 @@ describe('Tester behandlingsdagersøknad', () => {
         cy.url().should('include', `${soknad.id}/1`)
 
         sjekkIntroside()
-
-        // Godkjenne ANSVARSERKLARING
-        cy.contains('Jeg vil svare så godt jeg kan på spørsmålene i søknaden.').click()
-
-        cy.contains('Gå videre').click()
+        checkViStolerPaDeg()
     })
 
     it('Søknad ENKELTSTAENDE_BEHANDLINGSDAGER - steg 2', function () {
@@ -43,7 +45,7 @@ describe('Tester behandlingsdagersøknad', () => {
         cy.get('button[aria-label="onsdag 15"]').click()
         cy.get('button[aria-label="onsdag 1"]').click()
 
-        cy.contains('Gå videre').click()
+        klikkGaVidere()
     })
 
     it('Søknad FERIE - steg 3', function () {
@@ -73,7 +75,7 @@ describe('Tester behandlingsdagersøknad', () => {
                 'Det betyr også at legen må skrive en sykmelding for hvert arbeidsforhold du er sykmeldt fra.',
         )
 
-        cy.contains('Gå videre').click()
+        klikkGaVidere()
     })
 
     it('Tilbake og videre', function () {
@@ -81,7 +83,7 @@ describe('Tester behandlingsdagersøknad', () => {
         klikkTilbake()
 
         cy.contains('Andre inntektskilder')
-        cy.contains('Gå videre').click()
+        klikkGaVidere()
     })
 
     it('Søknad TIL_SLUTT - steg 4', function () {

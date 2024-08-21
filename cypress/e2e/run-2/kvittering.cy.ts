@@ -11,7 +11,7 @@ import {
     sendtArbeidsledigKvittering,
 } from '../../../src/data/mock/data/soknad/soknader-integration'
 import {
-    checkViStolerPåDeg,
+    checkViStolerPaDeg,
     klikkGaVidere,
     setPeriodeFraTil,
     sjekkMainContentFokus,
@@ -31,9 +31,7 @@ describe('Tester kvittering', () => {
 
             cy.get(`a[href*=${arbeidsledigKvittering.id}]`).click()
 
-            // Svar og send
-            cy.contains('Jeg vil svare så godt jeg kan på spørsmålene i søknaden.').click()
-            klikkGaVidere()
+            checkViStolerPaDeg()
             svarJaHovedsporsmal()
             klikkGaVidere()
             cy.contains(
@@ -188,9 +186,7 @@ describe('Tester kvittering', () => {
             // Velg søknad
             cy.get(`a[href*=${selvstendigKvittering.id}]`).click()
 
-            // Svar og send
-            cy.contains('Jeg vil svare så godt jeg kan på spørsmålene i søknaden.').click()
-            klikkGaVidere()
+            checkViStolerPaDeg()
             svarNeiHovedsporsmal()
             klikkGaVidere()
             cy.get('[data-cy="bekreftCheckboksPanel"]').click()
@@ -357,7 +353,7 @@ describe('Tester kvittering', () => {
 })
 
 const besvarSoknad = () => {
-    checkViStolerPåDeg()
+    checkViStolerPaDeg()
     svarNeiHovedsporsmal()
     klikkGaVidere()
     svarCheckboxPanel()

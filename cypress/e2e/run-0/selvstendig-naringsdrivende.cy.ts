@@ -1,5 +1,5 @@
 import {
-    checkViStolerPåDeg,
+    checkViStolerPaDeg,
     harFeilISkjemaet,
     harFlereFeilISkjemaet,
     klikkGaVidere,
@@ -20,7 +20,7 @@ describe('Tester selvstendig naringsdrivende søknad', () => {
     })
 
     it('Svarer på vi stoler på deg', function () {
-        checkViStolerPåDeg()
+        checkViStolerPaDeg()
     })
 
     it('Svarer på spørsmål', function () {

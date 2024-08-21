@@ -7,8 +7,8 @@ import {
     velgDato,
     klikkGaVidere,
     svarCombobox,
-    svarRadioGruppe,
-} from '../../support/utilities'
+    svarRadioGruppe, checkViStolerPaDeg
+} from "../../support/utilities";
 import 'cypress-file-upload'
 import { veldigLangSoknad } from '../../../src/data/mock/data/soknad/veldig-lang-soknad'
 import { rsToSoknad } from '../../../src/types/mapping'
@@ -80,8 +80,8 @@ describe('Tester støtte for gamle spørsmål', () => {
         cy.get(`a[href*=${soknad.id}]`).click()
     })
     it('ANSVARSERKLARING', () => {
-        svarCheckboxPanel()
-        gaVidere()
+        checkViStolerPaDeg()
+        ++steg
     })
 
     it('YRKESSKADE', () => {

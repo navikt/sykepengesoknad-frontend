@@ -1,4 +1,4 @@
-import { setPeriodeFraTil, sjekkIntroside } from '../../support/utilities'
+import { checkViStolerPaDeg, klikkGaVidere, setPeriodeFraTil, sjekkIntroside } from '../../support/utilities'
 import { inlineForklaringer } from '../../support/sjekkInlineForklaringKvittering'
 import { arbeidstaker } from '../../../src/data/mock/data/soknad/arbeidstaker'
 
@@ -31,13 +31,11 @@ describe('Tester arbeidstakersøknad', () => {
         cy.findByRole('button', { name: 'Nei, jeg har behov for søknaden' }).click()
 
         // Må godkjenne ANSVARSERKLARING først
-        cy.contains('Gå videre').click()
+        cy.contains('Start søknad').click()
         cy.contains('Det er 1 feil i skjemaet')
         cy.get('.navds-confirmation-panel__inner').should('exist')
         cy.contains('Du må bekrefte at du har lest og forstått informasjonen før du kan gå videre')
-        cy.get('.navds-checkbox__label').click()
-
-        cy.contains('Gå videre').click()
+        checkViStolerPaDeg()
     })
 
     it('Søknad TILBAKE_I_ARBEID ', function () {
@@ -59,7 +57,7 @@ describe('Tester arbeidstakersøknad', () => {
 
     it('Søknad TILBAKE_I_ARBEID går videre ', function () {
         // I egen test for å sjekke axe på hjelpetekst
-        cy.contains('Gå videre').click()
+        klikkGaVidere()
     })
 
     it('Søknad FERIE_V2', function () {
@@ -70,8 +68,7 @@ describe('Tester arbeidstakersøknad', () => {
         cy.contains('Når tok du ut feriedager?')
 
         setPeriodeFraTil(16, 23)
-
-        cy.contains('Gå videre').click()
+        klikkGaVidere()
     })
 
     it('Søknad PERMISJON_V2', function () {
@@ -88,7 +85,7 @@ describe('Tester arbeidstakersøknad', () => {
 
         setPeriodeFraTil(14, 22)
 
-        cy.contains('Gå videre').click()
+        klikkGaVidere()
     })
 
     it('Søknad ARBEID_UNDERVEIS_100_PROSENT', function () {
@@ -120,7 +117,7 @@ describe('Tester arbeidstakersøknad', () => {
         cy.contains('Jobber du vanligvis 37,5 timer i uka hos Posten Norge AS, Bærum?')
         cy.get('input#af302d17-f35d-38a6-ac23-ccde5db369cb_0').click()
 
-        cy.contains('Gå videre').click()
+        klikkGaVidere()
     })
 
     it('Søknad ANDRE_INNTEKTSKILDER_V2', function () {
@@ -149,7 +146,7 @@ describe('Tester arbeidstakersøknad', () => {
             .parent()
             .click()
 
-        cy.contains('Gå videre').click()
+        klikkGaVidere()
     })
 
     it('Søknad OPPHOLD_UTENFOR_EOS ', function () {
@@ -161,7 +158,7 @@ describe('Tester arbeidstakersøknad', () => {
 
         setPeriodeFraTil(14, 22)
 
-        cy.contains('Gå videre').click()
+        klikkGaVidere()
     })
 
     it('Søknad ANSVARSERKLARING', function () {

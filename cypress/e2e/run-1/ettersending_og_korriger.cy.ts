@@ -1,4 +1,4 @@
-import { klikkGaVidere, neiOgVidere, svarCheckboxPanel } from '../../support/utilities'
+import { checkViStolerPaDeg, klikkGaVidere, neiOgVidere, svarCheckboxPanel } from "../../support/utilities";
 import { arbeidstakerGradert } from '../../../src/data/mock/data/soknad/arbeidstaker-gradert'
 
 describe('Tester ettersending og korrigering', () => {
@@ -14,9 +14,7 @@ describe('Tester ettersending og korrigering', () => {
     })
 
     it('Svar på søknad', function () {
-        svarCheckboxPanel()
-        klikkGaVidere()
-
+        checkViStolerPaDeg()
         neiOgVidere([
             'Tilbake i fullt arbeid',
             'Ferie',
@@ -76,9 +74,7 @@ describe('Tester ettersending og korrigering', () => {
 
         // ANSVARSERKLARING er resatt
         cy.get('.navds-checkbox__input[type=checkbox]').should('not.be.checked')
-        cy.get('.navds-checkbox__label').click()
-        cy.get('.navds-checkbox__input[type=checkbox]').should('be.checked')
-        klikkGaVidere()
+        checkViStolerPaDeg()
 
         klikkGaVidere()
         klikkGaVidere()

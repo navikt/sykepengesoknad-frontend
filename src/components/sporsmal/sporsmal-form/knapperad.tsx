@@ -50,6 +50,10 @@ const Knapperad = ({ poster }: { poster: boolean }) => {
             }
             return tekst('sykepengesoknad.send')
         }
+        const erForsteSteg = sporsmal && sporsmal.tag === 'ANSVARSERKLARING'
+        if (erForsteSteg) {
+            return tekst('sykepengesoknad.start')
+        }
         return tekst('sykepengesoknad.ga-videre')
     }
 

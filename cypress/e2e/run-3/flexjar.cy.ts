@@ -1,4 +1,4 @@
-import { klikkGaVidere, svarCheckboxPanel, svarNeiHovedsporsmal } from '../../support/utilities'
+import { checkViStolerPaDeg, klikkGaVidere, svarCheckboxPanel, svarNeiHovedsporsmal } from "../../support/utilities";
 import { arbeidstakerGradert } from '../../../src/data/mock/data/soknad/arbeidstaker-gradert'
 
 describe('Tester flexjar', () => {
@@ -21,10 +21,8 @@ describe('Tester flexjar', () => {
     }
 
     it('Naviger til tilbake i arbeid', function () {
-        svarCheckboxPanel()
         heading('Hjelp oss med å gjøre søknaden bedre').should('not.exist')
-
-        klikkGaVidere()
+        checkViStolerPaDeg()
     })
 
     it('Test å gi feedback', function () {

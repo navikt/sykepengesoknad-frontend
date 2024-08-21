@@ -64,14 +64,14 @@ export function svarCheckboxPanel() {
     cy.get('.navds-checkbox__label').click()
 }
 
-export function checkViStolerPåDeg(gåVidere = true) {
+export function checkViStolerPaDeg(gaVidere = true) {
     cy.get('form')
         .findByRole('checkbox', {
             name: /Jeg vil svare så godt jeg kan på spørsmålene i søknaden./i,
         })
         .click()
-    if (gåVidere) {
-        klikkGaVidere()
+    if (gaVidere) {
+        cy.contains('Start søknad').click()
     }
 }
 

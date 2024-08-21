@@ -1,5 +1,5 @@
 import { avbruttSoknad } from '../../../src/data/mock/data/soknad/arbeidstaker-avbrutt'
-import { avbryterSoknad } from '../../support/utilities'
+import { avbryterSoknad, checkViStolerPaDeg, modalAktiv } from "../../support/utilities";
 
 describe('Tester avbryting av søknad', () => {
     before(() => {
@@ -37,14 +37,15 @@ describe('Tester avbryting av søknad', () => {
     it('Søknad kan gjenåpnes', function () {
         cy.get('button[data-cy="bruk-soknad-likevel"]').click()
         cy.url().should('include', `${avbruttSoknad.id}/1`)
-        cy.contains('Gå videre')
+        checkViStolerPaDeg()
     })
 
     it('Søknad kan avsluttes og fortsette senere ', function () {
         cy.get('button[data-cy="avslutt-og-fortsett-senere"]').click()
+        modalAktiv()
         cy.contains('Vi lagrer søknaden din på Ditt sykefravær i listen med søknader om sykepenger.')
         cy.contains('Ja, fortsett senere')
-        cy.contains('Nei').click()
+        cy.findAllByRole('button', { name: 'Nei' }).eq(0).click()
     })
 
     it('Søknad kan avbrytes ', function () {

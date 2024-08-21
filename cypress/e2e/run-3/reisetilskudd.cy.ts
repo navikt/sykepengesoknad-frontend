@@ -47,7 +47,7 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
 
         it('Bekrefter ansvarserklæring', () => {
             cy.get('.navds-checkbox__label').click()
-            cy.contains('Gå videre').click()
+            cy.contains('Start søknad').click()
         })
     })
 
@@ -62,14 +62,14 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
             cy.get('input[type=checkbox]#1566426').click()
             cy.get('#1566427').type('1000', { delay: 100 })
             cy.get('#1566427').should('have.value', '1000')
-            cy.contains('Gå videre').click()
+            klikkGaVidere()
         })
 
         it('Beløpet er riktig når vi går frem og tilbake', () => {
             klikkTilbake()
             cy.get('#1566427').should('have.value', '1000')
 
-            cy.contains('Gå videre').click()
+            klikkGaVidere()
         })
     })
 
@@ -88,7 +88,7 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
         })
 
         it('Minst en dag må velges', () => {
-            cy.contains('Gå videre').click()
+            klikkGaVidere(true)
             cy.get('[data-cy="feil-lokal"]').contains('Du må oppgi minst en dag')
         })
 
@@ -101,7 +101,7 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
             cy.get('#1566447').type('1000')
             cy.get('#1566448').type('42')
 
-            cy.contains('Gå videre').click()
+            klikkGaVidere()
         })
 
         it('Beløpet er riktig når vi går frem og tilbake', () => {
@@ -114,7 +114,7 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
 
             cy.get('#1566447').should('have.value', '1000')
 
-            cy.contains('Gå videre').click()
+            klikkGaVidere()
         })
     })
 
@@ -192,7 +192,7 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
                     cy.contains('1 utgift på til sammen')
                 })
 
-                cy.contains('Gå videre').click()
+                klikkGaVidere()
             })
         })
     })
@@ -205,7 +205,7 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
 
         it('Arbeidsgiveren legger ut for reisene', () => {
             cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click()
-            cy.contains('Gå videre').click()
+            klikkGaVidere()
         })
     })
 
