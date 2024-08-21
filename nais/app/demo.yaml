@@ -30,7 +30,7 @@ spec:
         - application: nav-dekoratoren
           namespace: personbruker
   {{#if TTL_HOURS}}
-  ttl: {{ TTL_HOURS }}
+  ttl: 1h
   {{/if}}
 
   env:
