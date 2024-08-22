@@ -46,6 +46,16 @@ describe('Tester ettersending og korrigering', () => {
         cy.contains('Jeg vil at søknaden skal behandles av NAV').should('not.exist')
     })
 
+    it('Korriger fra /sendt', () => {
+        cy.visit('/syk/sykepengesoknad')
+        cy.get(`a[href*=${soknad.id}]`).click()
+        cy.url().should('include', `/sendt/${soknad.id}`)
+
+        cy.findByRole('link', { name: 'Endre svar' }).click()
+        cy.findByRole('button', { name: 'Ok' }).click()
+        cy.url().should('include', `/1`)
+    })
+
     it('Ettersend', () => {
         cy.visit('/syk/sykepengesoknad')
         cy.get(`[data-cy="Tidligere søknader"]`).children().should('have.length', 2)
@@ -66,8 +76,8 @@ describe('Tester ettersending og korrigering', () => {
     it('Korriger', () => {
         // Endre søknaden
         cy.url().should('include', `/sendt/${soknad.id}`)
-        cy.contains('Jeg vil endre svarene i søknaden').click()
-        cy.contains('Ok').click()
+        cy.findByRole('button', { name: 'Jeg vil endre svarene i søknaden' }).click()
+        cy.findByRole('button', { name: 'Ok' }).click()
 
         // Ny søknad
         cy.url().should('not.include', `/kvittering/${soknad.id}`)
@@ -89,6 +99,10 @@ describe('Tester ettersending og korrigering', () => {
         cy.contains('Send endringene').click()
 
         cy.url().should('include', `/kvittering/`)
+
+        cy.findByRole('link', { name: 'Endre svar' }).click()
+        cy.findByRole('button', { name: 'Ok' }).click()
+        cy.url().should('include', `/1`)
     })
 
     it('Søknad har teaser', () => {

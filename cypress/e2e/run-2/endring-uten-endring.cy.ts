@@ -10,7 +10,7 @@ describe('Tester endring uten en endringer', () => {
 
     it('Jeg vil endre svarene i søknaden', () => {
         // Endre søknaden
-        cy.contains('Jeg vil endre svarene i søknaden').click()
+        cy.findByRole('button', { name: 'Jeg vil endre svarene i søknaden' }).click()
         cy.findByRole('button', { name: 'Ok' }).click()
 
         // Ny søknad

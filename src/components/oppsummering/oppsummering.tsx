@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { FormSummary } from '@navikt/ds-react'
 import { useRouter } from 'next/router'
 
@@ -10,6 +10,8 @@ import SendesTil from '../sporsmal/sporsmal-form/sendes-til'
 import { useSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
 import { SEPARATOR } from '../../utils/constants'
 import { useTestpersonQuery } from '../../hooks/useTestpersonQuery'
+import EndreModal from '../endreknapp/endreModal'
+import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 
 import Behandlingsdager from './utdrag/behandlingsdager'
 import CheckboxGruppe from './utdrag/checkbox-gruppe'
@@ -32,35 +34,49 @@ const Oppsummering = () => {
     const { valgtSoknad, soknadId } = useSoknadMedDetaljer()
     const testperson = useTestpersonQuery()
     const router = useRouter()
+    const [aapen, setAapen] = useState<boolean>(false)
 
     const tittel = tekst('sykepengesoknad.oppsummering.tittel')
     if (!valgtSoknad) return null
 
     const sporsmal: ReadonlyArray<Sporsmal> = valgtSoknad.sporsmal
     const visSendTil = valgtSoknad?.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND
+    const skalViseEndre =
+        valgtSoknad.status !== RSSoknadstatus.KORRIGERT && valgtSoknad.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND
 
     return (
-        <FormSummary className="oppsummering my-8" data-cy="oppsummering-fra-søknaden" aria-label={tittel}>
-            <FormSummary.Header>
-                <FormSummary.Heading level="2" className="flex h-full items-center">
-                    {tittel}
-                </FormSummary.Heading>
-                <FormSummary.EditLink
-                    href={`/syk/sykepengesoknad/soknader/${soknadId}${SEPARATOR}2${testperson.query()}`}
-                    onClick={(e) => {
-                        e.preventDefault()
-                        router.push(`/soknader/${soknadId}${SEPARATOR}2${testperson.query()}`)
-                    }}
-                />
-            </FormSummary.Header>
+        <>
+            <FormSummary className="oppsummering my-8" data-cy="oppsummering-fra-søknaden" aria-label={tittel}>
+                <FormSummary.Header>
+                    <FormSummary.Heading level="2" className="flex h-full items-center">
+                        {tittel}
+                    </FormSummary.Heading>
+                    {skalViseEndre && (
+                        <FormSummary.EditLink
+                            href={`/syk/sykepengesoknad/soknader/${soknadId}${SEPARATOR}2${testperson.query()}`}
+                            onClick={(e) => {
+                                e.preventDefault()
+                                const maKorrigeres =
+                                    router.pathname.includes('/kvittering') || router.pathname.includes('/sendt')
+                                if (maKorrigeres) {
+                                    setAapen(true)
+                                } else {
+                                    router.push(`/soknader/${soknadId}${SEPARATOR}2${testperson.query()}`)
+                                }
+                            }}
+                        />
+                    )}
+                </FormSummary.Header>
 
-            <FormSummary.Answers>
-                {visSendTil && <SendesTil soknad={valgtSoknad} />}
-                {sporsmal?.filter(skalVisesIOppsummering).map((sporsmal, index) => {
-                    return <SporsmalVarianter sporsmal={sporsmal} key={index} />
-                })}
-            </FormSummary.Answers>
-        </FormSummary>
+                <FormSummary.Answers>
+                    {visSendTil && <SendesTil soknad={valgtSoknad} />}
+                    {sporsmal?.filter(skalVisesIOppsummering).map((sporsmal, index) => {
+                        return <SporsmalVarianter sporsmal={sporsmal} key={index} />
+                    })}
+                </FormSummary.Answers>
+            </FormSummary>
+            <EndreModal aapen={aapen} setAapen={setAapen} />
+        </>
     )
 }
 

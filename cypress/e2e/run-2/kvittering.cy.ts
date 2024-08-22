@@ -60,7 +60,7 @@ describe('Tester kvittering', () => {
                 )
 
             // Knapperad ( Endre, Ettersend)
-            cy.contains('Jeg vil endre svarene i søknaden').should('exist')
+            cy.findByRole('button', { name: 'Jeg vil endre svarene i søknaden' }).should('exist')
         })
 
         it('Etter 30 dager', () => {
@@ -77,7 +77,7 @@ describe('Tester kvittering', () => {
             cy.get('[data-cy="kvittering-panel"]').should('not.exist')
 
             // Knapperad ( Endre, Ettersend)
-            cy.contains('Jeg vil endre svarene i søknaden').should('exist')
+            cy.findByRole('button', { name: 'Jeg vil endre svarene i søknaden' }).should('exist')
         })
     })
 
@@ -138,7 +138,7 @@ describe('Tester kvittering', () => {
                 )
 
             // Knapperad finnes ikke
-            cy.contains('Jeg vil endre svarene i søknaden').should('not.exist')
+            cy.findByRole('button', { name: 'Jeg vil endre svarene i søknaden' }).should('not.exist')
             cy.contains('Jeg vil at søknaden skal behandles av NAV').should('not.exist')
             cy.contains('Jeg vil sende en kopi av søknaden til arbeidsgiveren min').should('not.exist')
         })
@@ -179,7 +179,7 @@ describe('Tester kvittering', () => {
                 )
 
             // Knapperad ( Endre, Ettersend)
-            cy.contains('Jeg vil endre svarene i søknaden').should('exist')
+            cy.findByRole('button', { name: 'Jeg vil endre svarene i søknaden' }).should('exist')
             cy.contains('Jeg vil at søknaden skal behandles av NAV').should('not.exist')
             cy.contains('Jeg vil sende en kopi av søknaden til arbeidsgiveren min').should('not.exist')
         })
@@ -331,7 +331,7 @@ const inntil16dagerKvittering = () => {
         .and('not.contain', 'Når blir pengene utbetalt')
 
     // Knapperad ( Endre, Ettersend)
-    cy.contains('Jeg vil endre svarene i søknaden').should('exist')
+    cy.findByRole('button', { name: 'Jeg vil endre svarene i søknaden' }).should('exist')
     cy.contains('Jeg vil at søknaden skal behandles av NAV').should('not.exist')
     cy.contains('Jeg vil sende en kopi av søknaden til arbeidsgiveren min').should('not.exist')
 }
@@ -372,7 +372,7 @@ const over16dagerKvittering = () => {
     inlineForklaringer()
 
     // Knapperad ( Endre, Ettersend)
-    cy.contains('Jeg vil endre svarene i søknaden').should('exist')
+    cy.findByRole('button', { name: 'Jeg vil endre svarene i søknaden' }).should('exist')
     cy.contains('Jeg vil at søknaden skal behandles av NAV').should('not.exist')
     cy.contains('Jeg vil sende en kopi av søknaden til arbeidsgiveren min').should('not.exist')
 }
@@ -410,7 +410,7 @@ const utenOppholdKvittering = () => {
     )
 
     // Knapperad ( Endre, Ettersend)
-    cy.contains('Jeg vil endre svarene i søknaden').should('exist')
+    cy.findByRole('button', { name: 'Jeg vil endre svarene i søknaden' }).should('exist')
     cy.contains('Jeg vil at søknaden skal behandles av NAV').should('not.exist')
     cy.contains('Jeg vil sende en kopi av søknaden til arbeidsgiveren min').should('exist')
 }
@@ -460,7 +460,7 @@ const medOppholdKvittering = () => {
     )
 
     // Knapperad ( Endre, Ettersend)
-    cy.contains('Jeg vil endre svarene i søknaden').should('exist')
+    cy.findByRole('button', { name: 'Jeg vil endre svarene i søknaden' }).should('exist')
     cy.contains('Jeg vil at søknaden skal behandles av NAV').should('not.exist')
     cy.contains('Jeg vil sende en kopi av søknaden til arbeidsgiveren min').should('exist')
 }
