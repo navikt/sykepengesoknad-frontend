@@ -13,7 +13,7 @@ export const oppsummering = (): RSSporsmal => {
         max: null,
         kriterieForVisningAvUndersporsmal: null,
         svar: [],
-        undersporsmal: [bekreftOpplysninger()],
+        undersporsmal: [],
     }
 }
 

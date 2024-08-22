@@ -262,11 +262,6 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
                 )
                 sporsmalOgSvar('Legger arbeidsgiveren din ut for reisene?', 'Ja')
             })
-            cy.get('.navds-checkbox__label').should(
-                'contain',
-                'Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.',
-            )
-            cy.get('[data-cy="bekreftCheckboksPanel"]').click()
 
             cy.contains('Send søknaden').click()
         })

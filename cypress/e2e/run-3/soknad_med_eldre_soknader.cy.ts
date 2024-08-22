@@ -76,10 +76,6 @@ function fyllUtSoknad() {
         svarNeiHovedsporsmal()
         klikkGaVidere()
 
-        cy.contains(
-            'Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.',
-        ).click()
-
         cy.contains('Send søknaden').click()
     })
 }

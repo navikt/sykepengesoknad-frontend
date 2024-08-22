@@ -47,7 +47,6 @@ describe('Tester korrigering av ferie', () => {
         svarNeiHovedsporsmal()
         klikkGaVidere()
         cy.contains('Oppsummering fra søknaden')
-        svarCheckboxPanel()
         cy.contains('Send søknaden').click()
     })
 

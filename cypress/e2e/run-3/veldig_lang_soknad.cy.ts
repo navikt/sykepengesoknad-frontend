@@ -361,7 +361,6 @@ describe('Tester støtte for gamle spørsmål', () => {
             '25000 kroner før skatt',
         )
 
-        svarCheckboxPanel()
         cy.contains('Send søknaden').click()
     })
     it('Søknad kvittering', () => {

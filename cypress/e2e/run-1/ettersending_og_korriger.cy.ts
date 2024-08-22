@@ -26,7 +26,6 @@ describe('Tester ettersending og korrigering', () => {
         ])
 
         cy.contains('Oppsummering fra søknaden')
-        svarCheckboxPanel()
         cy.contains('Send søknaden').click()
     })
 
@@ -95,7 +94,6 @@ describe('Tester ettersending og korrigering', () => {
         klikkGaVidere()
         klikkGaVidere()
         klikkGaVidere()
-        cy.get('.navds-checkbox__label').click()
         cy.contains('Send endringene').click()
 
         cy.url().should('include', `/kvittering/`)

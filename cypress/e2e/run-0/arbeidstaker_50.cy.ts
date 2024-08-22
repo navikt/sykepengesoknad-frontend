@@ -152,10 +152,6 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
         cy.get('[data-cy="oppsummering-fra-søknaden"]').within(() => {
             sporsmalOgSvar('Søknaden sendes til', 'Posten Norge AS, Bærum')
         })
-        cy.contains(
-            'Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.',
-        )
-        cy.get('.navds-checkbox__label').click()
 
         cy.contains('Send søknaden').click()
     })

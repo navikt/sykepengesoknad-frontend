@@ -34,9 +34,6 @@ describe('Tester kvittering', () => {
             checkViStolerPaDeg()
             svarJaHovedsporsmal()
             klikkGaVidere()
-            cy.contains(
-                'Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.',
-            ).click()
             cy.contains('Send søknaden').click()
 
             // Sendt datoer
@@ -104,9 +101,6 @@ describe('Tester kvittering', () => {
 
             svarNeiHovedsporsmal()
             klikkGaVidere()
-            cy.contains(
-                'Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.',
-            ).click()
             cy.contains('Send søknaden').click()
 
             // Sendt datoer
@@ -154,7 +148,6 @@ describe('Tester kvittering', () => {
             checkViStolerPaDeg()
             svarNeiHovedsporsmal()
             klikkGaVidere()
-            cy.get('[data-cy="bekreftCheckboksPanel"]').click()
             cy.contains('Send søknaden').click()
 
             // Sendt datoer
@@ -307,7 +300,6 @@ const besvarSoknad = () => {
     checkViStolerPaDeg()
     svarNeiHovedsporsmal()
     klikkGaVidere()
-    svarCheckboxPanel()
     cy.contains('Send søknaden').click()
     sjekkMainContentFokus()
     cy.get('[data-cy="kvittering"]')

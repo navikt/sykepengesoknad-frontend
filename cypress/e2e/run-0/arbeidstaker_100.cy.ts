@@ -223,11 +223,6 @@ describe('Tester arbeidstakersøknad', () => {
         cy.findByRole('link', { name: 'Oppsummering fra søknaden' }).click()
         cy.contains('Steg 7 av 7')
 
-        cy.contains(
-            'Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.',
-        )
-        cy.get('.navds-checkbox__label').click()
-
         cy.contains('Send søknaden').click()
     })
 
@@ -458,11 +453,6 @@ describe('Sjekker at søknader med gammel oppsummering ser ok ut', () => {
         cy.findByRole('button', { name: 'Vis alle steg' }).click()
         cy.findByRole('link', { name: 'Oppsummering fra søknaden' }).click()
         cy.contains('Steg 7 av 7')
-
-        cy.contains(
-            'Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.',
-        )
-        cy.get('.navds-checkbox__label').click()
 
         cy.contains('Send søknaden').click()
     })

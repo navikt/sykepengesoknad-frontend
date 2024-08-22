@@ -41,7 +41,6 @@ describe('Tester endring uten en endringer', () => {
 
     it('Vi ser en popup og lander på listevisninga', function () {
         cy.url().should('include', '/6')
-        cy.get('.navds-checkbox__label').click()
         cy.contains('Send endringene').click()
 
         cy.get('.navds-modal').contains('Du har ikke gjort noen endringer')

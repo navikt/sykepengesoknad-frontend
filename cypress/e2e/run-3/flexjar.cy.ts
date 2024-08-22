@@ -68,9 +68,8 @@ describe('Tester flexjar', () => {
         klikkGaVidere()
     })
 
-    it('Har ikke sporsmål flexjar på de siste sidene', function () {
+    it('Har ikke spørsmål flexjar på de siste sidene', function () {
         heading('Hjelp oss med å gjøre søknaden bedre').should('not.exist')
-        svarCheckboxPanel()
         cy.contains('Send søknaden').click()
         cy.contains('Søknaden er sendt')
         heading('Hjelp oss med å gjøre søknaden bedre').should('exist')

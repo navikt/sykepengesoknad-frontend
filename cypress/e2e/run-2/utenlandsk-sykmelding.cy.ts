@@ -115,7 +115,6 @@ describe('Tester søknad til utenlandsk sykmelding', () => {
         cy.contains('Statsminister i UK')
         cy.contains('Downing Street 10')
         cy.contains('81549300')
-        svarCheckboxPanel()
         cy.contains('Send søknaden').click()
         cy.contains('Søknaden er sendt')
     })

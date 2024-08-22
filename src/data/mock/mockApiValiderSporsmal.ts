@@ -5,6 +5,7 @@ import { RSSvar } from '../../types/rs-types/rs-svar'
 
 export function mockApiValiderSporsmal(sporsmal: RSSporsmal): boolean {
     try {
+        if (sporsmal.tag === 'BEKREFT_OPPLYSNINGER') return true
         validerAntallSvar(sporsmal)
         validerSvarverdier(sporsmal)
         validerUndersporsmal(sporsmal)

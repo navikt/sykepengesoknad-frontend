@@ -9,7 +9,6 @@ import {
     svarNeiHovedsporsmal,
     svarCheckboxSporsmal,
     svarDato,
-    checkJegHarLestOgSend,
     sporsmalOgSvar,
 } from '../../support/utilities'
 
@@ -123,8 +122,7 @@ describe('Tester selvstendig naringsdrivende søknad', () => {
                             })
                     })
             })
-
-        checkJegHarLestOgSend()
+        cy.contains('Send søknaden').click()
     })
 
     it('Kvittering', function () {

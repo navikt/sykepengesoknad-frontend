@@ -548,21 +548,7 @@ const soknad: RSSoknad = {
             max: null,
             kriterieForVisningAvUndersporsmal: null,
             svar: [],
-            undersporsmal: [
-                {
-                    id: '5c484d71-67a8-3631-af4e-5e0af1a963bf',
-                    tag: 'BEKREFT_OPPLYSNINGER',
-                    sporsmalstekst:
-                        'Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.',
-                    undertekst: null,
-                    svartype: 'CHECKBOX_PANEL',
-                    min: null,
-                    max: null,
-                    kriterieForVisningAvUndersporsmal: null,
-                    svar: [],
-                    undersporsmal: [],
-                },
-            ],
+            undersporsmal: [],
         },
     ],
     egenmeldtSykmelding: false,

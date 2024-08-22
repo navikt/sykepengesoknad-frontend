@@ -100,11 +100,7 @@ describe('Tester arbeidsledigsøknad', () => {
                         })
                 })
         })
-        cy.contains(
-            'Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.',
-        )
         cy.contains('Søknaden sendes til').should('not.exist')
-        cy.get('.navds-checkbox__label').click()
         cy.contains('Send søknaden').click()
     })
 

@@ -93,10 +93,6 @@ describe('Tester behandlingsdagersøknad', () => {
         cy.get('.navds-guide-panel__content').contains(
             'Nå kan du se over at alt er riktig før du sender inn søknaden. Ved behov kan du endre opplysningene inntil 12 måneder etter innsending.',
         )
-        cy.get('.navds-checkbox__label').click()
-        cy.contains(
-            'Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.',
-        )
 
         cy.contains('Oppsummering fra søknaden')
         cy.get('[data-cy="oppsummering-fra-søknaden"]').within(() => {
