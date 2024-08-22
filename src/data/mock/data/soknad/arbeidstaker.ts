@@ -263,8 +263,8 @@ export const arbeidstaker: RSSoknad = {
     soknadstype: 'ARBEIDSTAKERE',
     status: 'NY',
     fom: '2020-04-01',
-    tom: '2020-04-24',
-    opprettetDato: '2020-05-13',
+    tom: '2020-05-24',
+    opprettetDato: '2020-06-13',
     inntektskilderDataFraInntektskomponenten: [],
     sendtTilNAVDato: null,
     sendtTilArbeidsgiverDato: null,
@@ -282,6 +282,12 @@ export const arbeidstaker: RSSoknad = {
         {
             fom: '2020-04-01',
             tom: '2020-04-24',
+            grad: 100,
+            sykmeldingstype: 'AKTIVITET_IKKE_MULIG',
+        },
+        {
+            fom: '2020-04-28',
+            tom: '2020-05-24',
             grad: 100,
             sykmeldingstype: 'AKTIVITET_IKKE_MULIG',
         },

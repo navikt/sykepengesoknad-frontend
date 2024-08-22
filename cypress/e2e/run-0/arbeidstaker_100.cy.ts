@@ -22,6 +22,9 @@ describe('Tester arbeidstakersøknad', () => {
         cy.url().should('include', `${soknad.id}/1`)
 
         sjekkIntroside()
+        cy.contains(
+            'Siden sykemeldingen går over 31 dager, har vi delt opp søknaden, slik at du kan søke om sykepenger før hele perioden er ferdig. På den måten slipper du å vente lenge på sykepengene dine.',
+        )
 
         // Personvern erklæring
         cy.contains('Slik behandler NAV personopplysningene dine').click()

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
-import { BodyLong, Button } from '@navikt/ds-react'
+import { Alert, BodyLong, Button } from '@navikt/ds-react'
 
 import OmReisetilskudd from '../../components/om-reisetilskudd/om-reisetilskudd'
 import SporsmalForm from '../../components/sporsmal/sporsmal-form/sporsmal-form'
@@ -22,6 +22,7 @@ import { IntroGuide } from '../soknad-intro/intro-guide'
 import { ForDuSoker } from '../soknad-intro/for-du-soker'
 import { IntroAccordion } from '../soknad-intro/intro-accordion'
 import { LenkeMedIkon } from '../lenke-med-ikon/LenkeMedIkon'
+import { erOppdelt } from '../../utils/periode-utils'
 
 import { urlTilSoknad } from './soknad-link'
 import { SporsmalTittel } from './sporsmal-tittel'
@@ -108,6 +109,10 @@ export const Soknaden = () => {
 
     const erForstesiden = stegNo === 1 && !erUtenlandssoknad
     const erForstesidenMedReisetilskudd = stegNo === 1 && (erReisetilskuddsoknad || erGradertReisetilskuddsoknad)
+    const oppdeltSoknadTekst =
+        valgtSoknad && valgtSykmelding && erOppdelt(valgtSoknad, valgtSykmelding)
+            ? 'Siden sykemeldingen går over 31 dager, har vi delt opp søknaden, slik at du kan søke om sykepenger før hele perioden er ferdig. På den måten slipper du å vente lenge på sykepengene dine.'
+            : ''
     return (
         <>
             {valgtSoknadError && <FeilStateView feilmelding={valgtSoknadError?.status}></FeilStateView>}
@@ -119,6 +124,11 @@ export const Soknaden = () => {
                     <IntroGuide />
                     <ForDuSoker />
                     <IntroAccordion />
+                    {oppdeltSoknadTekst !== '' && (
+                        <Alert variant="info" className="mb-8">
+                            {oppdeltSoknadTekst}
+                        </Alert>
+                    )}
                     {valgtSykmelding?.pasient?.overSyttiAar && <Over70Aar />}
                     <BodyLong spacing>
                         Det er viktig at du gir oss riktige opplysninger slik at vi kan behandle saken din.
