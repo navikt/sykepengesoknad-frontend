@@ -217,7 +217,9 @@ export function avbryterSoknad() {
 }
 
 export function sjekkIntroside() {
-    cy.contains('Sykepenger skal erstatte inntekten din når du ikke kan jobbe på grunn av din egen sykdom eller skade.')
+    cy.contains(
+        'Her kan du søke om sykepenger mens du er sykmeldt. Sykepenger skal erstatte inntekten din når du ikke kan jobbe som normalt, på grunn av din egen sykdom eller skade.',
+    )
     cy.contains('For å lese mer om sykepenger, gå til nav.no/sykepenger')
         .children()
         .should('have.attr', 'href', 'https://www.nav.no/sykepenger')
@@ -234,7 +236,7 @@ export function sjekkIntroside() {
         'href',
         'https://www.nav.no/sykepenger-og-personopplysninger',
     )
-    cy.contains('Vi lagrer svar underveis').click()
+    cy.contains('Vi lagrer svarene underveis').click()
     cy.contains(
         'Vi lagrer svarene dine mens du fyller ut, så du kan ta pauser underveis. Søknader som ikke blir sendt inn lagrer vi i 4 måneder før de slettes automatisk.',
     )

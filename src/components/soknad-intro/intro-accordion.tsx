@@ -16,7 +16,7 @@ export const IntroAccordion = () => {
                 </Accordion.Content>
             </Accordion.Item>
             <Accordion.Item>
-                <Accordion.Header>Vi lagrer svar underveis</Accordion.Header>
+                <Accordion.Header>Vi lagrer svarene underveis</Accordion.Header>
                 <Accordion.Content>
                     Vi lagrer svarene dine mens du fyller ut, så du kan ta pauser underveis. Søknader som ikke blir
                     sendt inn lagrer vi i 4 måneder før de slettes automatisk.
