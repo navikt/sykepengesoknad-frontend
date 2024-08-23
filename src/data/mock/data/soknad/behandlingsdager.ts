@@ -34,8 +34,7 @@ export const behandlingsdager: RSSoknad = {
         {
             id: '687374',
             tag: 'ANSVARSERKLARING',
-            sporsmalstekst:
-                'Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene jeg gir ikke er riktige eller fullstendige. Jeg vet også at NAV kan holde igjen eller kreve tilbake penger, og at å gi feil opplysninger kan være straffbart.',
+            sporsmalstekst: 'Jeg vil svare så godt jeg kan på spørsmålene i søknaden.',
             undertekst: null,
             svartype: 'CHECKBOX_PANEL',
             min: null,

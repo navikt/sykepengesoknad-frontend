@@ -17,9 +17,10 @@ describe('Tester arbeidsledigsøknad', () => {
 
     it('Navigerer søknaden', () => {
         cy.url().should('include', `${soknad.id}/1`)
-        cy.contains('1. april - 24. april 2020 (24 dager)')
-        cy.contains('100% sykmeldt')
-        cy.contains('Opplysninger fra sykmeldingen')
+        cy.realPress('Tab')
+        cy.realPress('Tab')
+        cy.realPress('Tab')
+        cy.realPress('Tab')
         cy.realPress('Tab')
         cy.realPress('Tab')
         cy.realPress('Tab')
@@ -27,11 +28,11 @@ describe('Tester arbeidsledigsøknad', () => {
         cy.focused()
             .parent()
             .parent()
-            .contains('Jeg vet at jeg kan miste retten til sykepenger')
+            .contains('Jeg vil svare så godt jeg kan på spørsmålene i søknaden.')
             .should('have.css', 'box-shadow')
         cy.realPress('Space')
         cy.realPress('Tab')
-        cy.focused().contains('Gå videre').should('have.css', 'box-shadow')
+        cy.focused().contains('Start søknad').should('have.css', 'box-shadow')
         cy.realPress('Enter')
         sjekkMainContentFokus()
 

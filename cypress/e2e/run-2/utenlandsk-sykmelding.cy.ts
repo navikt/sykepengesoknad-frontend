@@ -1,4 +1,5 @@
 import {
+    klikkGaVidere,
     neiOgVidere,
     svarCheckboxPanel,
     svarCombobox,
@@ -19,8 +20,8 @@ describe('Tester søknad til utenlandsk sykmelding', () => {
         cy.url().should('include', `${id}/1`)
 
         cy.contains('Frist for å søke').should('not.exist')
-        cy.contains('Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene ').click()
-        cy.contains('Gå videre').click()
+        cy.contains('Jeg vil svare så godt jeg kan på spørsmålene i søknaden.').click()
+        cy.contains('Start søknad').click()
     })
 
     it('Bosted', function () {
@@ -28,13 +29,13 @@ describe('Tester søknad til utenlandsk sykmelding', () => {
 
         cy.contains('Bosted')
         cy.contains('Bor du i utlandet?')
-        cy.contains('Gå videre').click()
+        klikkGaVidere(true)
         cy.contains('Du må svare på om du bor i utlandet')
 
         svarJaHovedsporsmal()
         cy.contains('Oppgi utenlandsk kontaktadresse')
 
-        cy.contains('Gå videre').click()
+        klikkGaVidere(true)
 
         cy.contains('Du må oppgi et vegnavn')
         cy.contains('Du må oppgi et land')
@@ -45,7 +46,7 @@ describe('Tester søknad til utenlandsk sykmelding', () => {
         svarFritekst('Telefonnummer', '81549300')
         velgDato(4)
 
-        cy.contains('Gå videre').click()
+        klikkGaVidere()
     })
 
     it('Lønnet arbeid utenfor Norge', function () {
@@ -53,13 +54,13 @@ describe('Tester søknad til utenlandsk sykmelding', () => {
 
         cy.contains('Lønnet arbeid utenfor Norge')
         cy.contains('Utfører du lønnet arbeid utenfor Norge?')
-        cy.contains('Gå videre').click()
+        klikkGaVidere(true)
         cy.contains('Du må svare på om du utfører lønnet arbeid utenfor Norge')
 
         svarJaHovedsporsmal()
         cy.contains('Oppgi nærmere opplysninger om arbeid/virksomhet utenfor Norge')
 
-        cy.contains('Gå videre').click()
+        klikkGaVidere(true)
         cy.contains('Du må oppgi nærmere opplysninger om arbeidet')
 
         svarFritekst(
@@ -73,7 +74,7 @@ describe('Tester søknad til utenlandsk sykmelding', () => {
         cy.get(`[data-cy="feil-oppsumering"]`).contains('Du kan skrive maks 200 tegn')
         svarFritekst('Oppgi nærmere opplysninger om arbeid/virksomhet utenfor Norge', 'Statsminister i UK')
 
-        cy.contains('Gå videre').click()
+        klikkGaVidere()
     })
 
     it('Sykepenger i andre EØS-land', function () {
@@ -81,17 +82,17 @@ describe('Tester søknad til utenlandsk sykmelding', () => {
         cy.contains('Sykepenger i andre EU/EØS-land')
         cy.contains('Har du mottatt sykepenger eller lignende i andre EU/EØS-land i løpet av de siste tre årene?')
 
-        cy.contains('Gå videre').click()
+        klikkGaVidere(true)
         cy.contains('Du må svare på om du har mottatt sykepenger eller lignende i andre EU/EØS-land')
         svarJaHovedsporsmal()
         cy.contains('I hvilket land?')
-        cy.contains('Gå videre').click()
+        klikkGaVidere(true)
         cy.contains(
             'Du må velge alle andre EU/EØS-land bortsett fra Norge hvor du har mottatt sykepenger eller lignende i løpet av de siste tre årene',
         )
         svarCombobox('I hvilket land?', 'Dan', 'Danmark')
         cy.get('.navds-combobox__button-toggle-list').click()
-        cy.contains('Gå videre').click()
+        klikkGaVidere()
     })
 
     it('Svar nei på resten', function () {

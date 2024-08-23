@@ -1,4 +1,4 @@
-import { checkViStolerPåDeg, klikkTilbake, neiOgVidere } from '../../support/utilities'
+import { checkViStolerPaDeg, klikkTilbake, neiOgVidere } from '../../support/utilities'
 import 'cypress-real-events'
 
 describe('Tester form progress bar', () => {
@@ -9,7 +9,7 @@ describe('Tester form progress bar', () => {
     it('Introsiden har ingen form progress', function () {
         // ingen form progress
         cy.get('.navds-progress-bar').should('not.exist')
-        checkViStolerPåDeg()
+        checkViStolerPaDeg()
     })
 
     it('Første spørsmål har form progress, og ingen navigerbare', function () {

@@ -8,11 +8,6 @@ describe('Tester å åpne søknaden direkte fra sykefravaer', () => {
     it('Vi kan gå direkte til søknaden fra sykefravaer', function () {
         cy.visit(`/syk/sykepengesoknad/soknader/${soknad.id}`)
         cy.url().should('equal', Cypress.config().baseUrl + `/syk/sykepengesoknad/soknader/${soknad.id}/1`)
-
-        cy.contains('Opplysninger fra sykmelding').and('be.visible')
-        cy.contains('1. april - 24. april 2020 (24 dager)')
-        cy.contains('Posten Norge AS, Bærum')
-        cy.contains('100% sykmeldt')
     })
 
     it('Åpner en sendt søknad på en annen siden og sendes til sendt-side', function () {

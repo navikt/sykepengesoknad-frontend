@@ -1,4 +1,10 @@
-import { klikkTilbake, setPeriodeFraTil } from '../../support/utilities'
+import {
+    checkViStolerPaDeg,
+    klikkGaVidere,
+    klikkTilbake,
+    setPeriodeFraTil,
+    sjekkIntroside,
+} from '../../support/utilities'
 import { arbeidstakerGradert } from '../../../src/data/mock/data/soknad/arbeidstaker-gradert'
 
 describe('Tester arbeidstakersøknad - gradert 50%', () => {
@@ -15,24 +21,13 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
 
     it('Søknad ANSVARSERKLARING', function () {
         cy.url().should('include', `${soknad.id}/1`)
-
-        // Sykmelding
-        cy.contains('1. april - 24. april 2020 (24 dager)')
-        cy.contains('Posten Norge AS, Bærum')
-        cy.contains('50% sykmeldt')
-        cy.get('section[aria-label="Opplysninger fra sykmeldingen"] button').click()
-
-        // Godkjenne ANSVARSERKLARING
-        cy.contains(
-            'Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene jeg gir ikke er riktige eller fullstendige. Jeg vet også at NAV kan holde igjen eller kreve tilbake penger, og at å gi feil opplysninger kan være straffbart.',
-        ).click()
-
-        cy.contains('Gå videre').click()
+        sjekkIntroside()
+        checkViStolerPaDeg()
     })
 
     it('Tilbake til ANSVARSERKLARING og frem igjen', function () {
         klikkTilbake()
-        cy.contains('Gå videre').click()
+        cy.contains('Start søknad').click()
     })
 
     it('Søknad TILBAKE_I_ARBEID', function () {
@@ -44,7 +39,7 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
         cy.get('.navds-date__field-button').click()
         cy.get('.rdp-day').contains('20').click()
 
-        cy.contains('Gå videre').click()
+        klikkGaVidere()
     })
 
     it('Søknad FERIE_V2', function () {
@@ -56,7 +51,7 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
 
         setPeriodeFraTil(16, 23)
 
-        cy.contains('Gå videre').click()
+        klikkGaVidere()
     })
 
     it('Søknad PERMISJON_V2', function () {
@@ -68,7 +63,7 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
 
         setPeriodeFraTil(14, 22)
 
-        cy.contains('Gå videre').click()
+        klikkGaVidere()
     })
 
     it('Søknad JOBBET_DU_GRADERT', function () {
@@ -96,7 +91,7 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
         // 12 timer * (9 dager/5) * 0.5 (50% sykefraværsgrad) = 10.8 timer, så vi prøver litt lavere enn det
         cy.get('.undersporsmal .navds-text-field__input#34c3cb3f-1aeb-3095-9ac6-d8f4f4c9e539').type('10.7')
 
-        cy.contains('Gå videre').click()
+        klikkGaVidere(true)
 
         cy.get('.navds-read-more__button').contains('Er prosenten lavere enn du forventet?')
 
@@ -110,7 +105,7 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
         cy.get('.undersporsmal .navds-text-field__input#34c3cb3f-1aeb-3095-9ac6-d8f4f4c9e539').clear()
         cy.get('.undersporsmal .navds-text-field__input#34c3cb3f-1aeb-3095-9ac6-d8f4f4c9e539').type('11')
 
-        cy.contains('Gå videre').click()
+        klikkGaVidere()
     })
 
     it('Søknad ARBEID_UTENFOR_NORGE', function () {
@@ -120,7 +115,7 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
         cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click()
         cy.contains('Har du arbeidet i utlandet i løpet av de siste 12 månedene?')
 
-        cy.contains('Gå videre').click()
+        klikkGaVidere()
     })
 
     it('Søknad ANDRE_INNTEKTSKILDER_V2', function () {
@@ -136,7 +131,7 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
             'ansatt et annet sted enn nevnt over',
         )
         cy.get('input[type=checkbox]#d9ac4359-5519-34f1-b59d-b5ab24e55821').click()
-        cy.contains('Gå videre').click()
+        klikkGaVidere()
     })
 
     it('Søknad OPPHOLD_UTENFOR_EOS', function () {
@@ -147,7 +142,7 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
         cy.contains('Når var du utenfor EU/EØS?')
 
         setPeriodeFraTil(14, 22)
-        cy.contains('Gå videre').click()
+        klikkGaVidere()
     })
 
     it('Søknad ANSVARSERKLARING ', function () {

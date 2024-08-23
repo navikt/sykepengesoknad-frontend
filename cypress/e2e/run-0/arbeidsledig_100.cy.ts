@@ -1,4 +1,4 @@
-import { setPeriodeFraTil } from '../../support/utilities'
+import { checkViStolerPaDeg, klikkGaVidere, setPeriodeFraTil, sjekkIntroside } from '../../support/utilities'
 import { arbeidsledig } from '../../../src/data/mock/data/soknad/arbeidsledig'
 
 describe('Tester arbeidsledigsøknad', () => {
@@ -15,18 +15,8 @@ describe('Tester arbeidsledigsøknad', () => {
 
     it('Søknad ANSVARSERKLARING', () => {
         cy.url().should('include', `${soknad.id}/1`)
-
-        // Sykmelding
-        cy.contains('1. april - 24. april 2020 (24 dager)')
-        cy.contains('100% sykmeldt')
-        cy.get('section[aria-label="Opplysninger fra sykmeldingen"] button').click()
-
-        // Godkjenne ANSVARSERKLARING
-        cy.contains(
-            'Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene jeg gir ikke er riktige eller fullstendige. Jeg vet også at NAV kan holde igjen eller kreve tilbake penger, og at å gi feil opplysninger kan være straffbart.',
-        ).click()
-
-        cy.contains('Gå videre').click()
+        sjekkIntroside()
+        checkViStolerPaDeg()
     })
 
     it('Søknad FRISKMELDT', () => {
@@ -37,7 +27,7 @@ describe('Tester arbeidsledigsøknad', () => {
         cy.contains('Fra hvilken dato trengte du ikke lenger sykmeldingen?')
         cy.get('.navds-date__field-button').click()
         cy.get('.rdp-day').contains('10').click()
-        cy.contains('Gå videre').click()
+        klikkGaVidere()
     })
 
     it('Søknad ANDRE_INNTEKTSKILDER', () => {
@@ -48,7 +38,7 @@ describe('Tester arbeidsledigsøknad', () => {
         cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click()
 
         // Når ingen velges så dukker bare 1 feilmelding opp
-        cy.contains('Gå videre').click()
+        klikkGaVidere(true)
         cy.contains('Det er 1 feil i skjemaet')
         cy.contains('Du må oppgi hvilke inntektskilder du har')
 
@@ -64,7 +54,7 @@ describe('Tester arbeidsledigsøknad', () => {
                 'Det betyr også at legen må skrive en sykmelding for hvert arbeidsforhold du er sykmeldt fra.',
         )
 
-        cy.contains('Gå videre').click()
+        klikkGaVidere()
     })
 
     it('Søknad OPPHOLD_UTENFOR_EOS', () => {
@@ -78,7 +68,7 @@ describe('Tester arbeidsledigsøknad', () => {
         cy.contains('Når var du utenfor EU/EØS?')
         setPeriodeFraTil(17, 24)
 
-        cy.contains('Gå videre').click()
+        klikkGaVidere()
     })
 
     it('Søknad TIL_SLUTT', () => {

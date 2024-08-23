@@ -1,4 +1,5 @@
 import { sendtArbeidsledigKvittering } from '../../../src/data/mock/data/soknad/soknader-integration'
+import { klikkGaVidere } from '../../support/utilities'
 
 describe('Tester endring uten en endringer', () => {
     const soknad = sendtArbeidsledigKvittering
@@ -18,23 +19,23 @@ describe('Tester endring uten en endringer', () => {
     })
 
     it('Svarer det samme søknaden', function () {
-        cy.contains('kan være straffbart').click()
-        cy.contains('Gå videre').click()
+        cy.contains('Jeg vil svare så godt jeg kan på spørsmålene i søknaden.').click()
+        cy.contains('Start søknad').click()
         cy.contains('Friskmeldt')
 
-        cy.contains('Gå videre').click()
+        klikkGaVidere()
         cy.contains('Andre inntektskilder')
 
         cy.contains('Avslutt uten å endre søknaden')
         cy.contains('Jeg har ikke behov for denne søknaden').should('not.exist')
 
-        cy.contains('Gå videre').click()
+        klikkGaVidere()
         cy.contains('Var du på reise utenfor EU/EØS')
 
-        cy.contains('Gå videre').click()
+        klikkGaVidere()
         cy.contains('Arbeid utenfor Norge')
 
-        cy.contains('Gå videre').click()
+        klikkGaVidere()
         cy.contains('Oppsummering')
     })
 

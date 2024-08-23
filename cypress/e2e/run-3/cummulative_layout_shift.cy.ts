@@ -38,13 +38,13 @@ describe('Tester cummulative-layout-shift ', () => {
             'http://localhost:8080/syk/sykepengesoknad/soknader/04247ad5-9c15-4b7d-ae55-f23807777777/1?testperson=cummulative-layout-shift',
         )
         // Sjekk mains høyde
-        const expectedHeight = '1147px'
+        const expectedHeight = '1693px'
         cy.get('main').should('have.css', 'height', expectedHeight)
         cy.get('.navds-skeleton').should('have.length', 0)
 
         // Venter på at alle dataene er fetchet og rendret
 
-        cy.contains('Jeg vet at jeg kan miste retten').should('be.visible')
+        cy.contains('Jeg vil svare så godt jeg kan på spørsmålene i søknaden.').should('be.visible')
         cy.get('.navds-skeleton').should('have.length', 0)
 
         cy.get('main').should('have.css', 'height', expectedHeight)

@@ -4,13 +4,13 @@ import {
     svarCheckboxPanel,
     setPeriodeFraTil,
     klikkGaVidere,
+    checkViStolerPaDeg,
 } from '../../support/utilities'
 
 describe('Tester korrigering av ferie', () => {
     it('Sender inn søknad med ja på ferie spørsmålet', () => {
         cy.visit('/syk/sykepengesoknad/soknader/5b769c04-e171-47c9-b79b-23ab8fce331e')
-        svarCheckboxPanel()
-        klikkGaVidere()
+        checkViStolerPaDeg()
         cy.contains('Tilbake i fullt arbeid')
         svarNeiHovedsporsmal()
         klikkGaVidere()
@@ -55,10 +55,7 @@ describe('Tester korrigering av ferie', () => {
         cy.contains('Jeg vil endre svarene i søknaden').click()
         cy.contains('Ok').click()
 
-        cy.contains(
-            'Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene jeg gir ikke er riktige eller fullstendige. Jeg vet også at NAV kan holde igjen eller kreve tilbake penger, og at å gi feil opplysninger kan være straffbart.',
-        ).click()
-        klikkGaVidere()
+        checkViStolerPaDeg()
         cy.contains('Tilbake i fullt arbeid')
 
         svarNeiHovedsporsmal()

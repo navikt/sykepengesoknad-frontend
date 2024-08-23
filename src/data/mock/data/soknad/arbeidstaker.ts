@@ -36,8 +36,7 @@ export const arbeidstakerMedGammelEOSSporsmal: RSSoknad = {
         {
             id: '687336',
             tag: 'ANSVARSERKLARING',
-            sporsmalstekst:
-                'Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene jeg gir ikke er riktige eller fullstendige. Jeg vet også at NAV kan holde igjen eller kreve tilbake penger, og at å gi feil opplysninger kan være straffbart.',
+            sporsmalstekst: 'Jeg vil svare så godt jeg kan på spørsmålene i søknaden.',
             undertekst: null,
             svartype: 'CHECKBOX_PANEL',
             min: null,
@@ -264,8 +263,8 @@ export const arbeidstaker: RSSoknad = {
     soknadstype: 'ARBEIDSTAKERE',
     status: 'NY',
     fom: '2020-04-01',
-    tom: '2020-04-24',
-    opprettetDato: '2020-05-13',
+    tom: '2020-05-24',
+    opprettetDato: '2020-06-13',
     inntektskilderDataFraInntektskomponenten: [],
     sendtTilNAVDato: null,
     sendtTilArbeidsgiverDato: null,
@@ -286,13 +285,18 @@ export const arbeidstaker: RSSoknad = {
             grad: 100,
             sykmeldingstype: 'AKTIVITET_IKKE_MULIG',
         },
+        {
+            fom: '2020-04-28',
+            tom: '2020-05-24',
+            grad: 100,
+            sykmeldingstype: 'AKTIVITET_IKKE_MULIG',
+        },
     ],
     sporsmal: [
         {
             id: '687336',
             tag: 'ANSVARSERKLARING',
-            sporsmalstekst:
-                'Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene jeg gir ikke er riktige eller fullstendige. Jeg vet også at NAV kan holde igjen eller kreve tilbake penger, og at å gi feil opplysninger kan være straffbart.',
+            sporsmalstekst: 'Jeg vil svare så godt jeg kan på spørsmålene i søknaden.',
             undertekst: null,
             svartype: 'CHECKBOX_PANEL',
             min: null,

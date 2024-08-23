@@ -122,7 +122,6 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
             .and('have.attr', 'aria-valuetext', '2 av 4')
 
         cy.get('body').findByRole('link', { name: 'Tilbake' }).should('not.exist')
-        cy.contains('Opplysninger fra sykmeldingen').should('not.exist')
         cy.contains('Når skal du reise?')
 
         setPeriodeFraTil(17, 24)

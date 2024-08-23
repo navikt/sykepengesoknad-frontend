@@ -9,10 +9,6 @@ describe('Tester feilmeldinger', () => {
         cy.visit(`/syk/sykepengesoknad/soknader/${soknad.id}/${steg}`)
     }
 
-    function gaVidere() {
-        cy.contains('Gå videre').click()
-    }
-
     function feilmeldingHandtering(
         lokalFeilmelding: string,
         globalFeilmelding: string,
@@ -74,7 +70,7 @@ describe('Tester feilmeldinger', () => {
     it('CHECKBOX_PANEL ingen valg', () => {
         gaTilSoknad(arbeidstakerGradert, '1')
         cy.get('[data-cy="bekreftCheckboksPanel"]').should('have.attr', 'value', 'false')
-        klikkGaVidere(true)
+        cy.contains('Start søknad').click()
 
         feilmeldingHandtering(
             'Du må bekrefte dette',
@@ -88,7 +84,7 @@ describe('Tester feilmeldinger', () => {
 
     it('JA_NEI ingen valg', () => {
         gaTilSoknad(arbeidstakerGradert, '2')
-        gaVidere()
+        klikkGaVidere(true)
 
         feilmeldingHandtering(
             'Du må velge et alternativ',
@@ -101,7 +97,7 @@ describe('Tester feilmeldinger', () => {
     })
 
     it('DATO ingen dato', () => {
-        gaVidere()
+        klikkGaVidere(true)
         feilmeldingHandtering(
             'Datoen følger ikke formatet dd.mm.åååå',
             'Datoen følger ikke formatet dd.mm.åååå',
@@ -111,7 +107,7 @@ describe('Tester feilmeldinger', () => {
 
     it('DATO mindre enn min', () => {
         cy.get('.navds-text-field__input').type('01.01.1900')
-        gaVidere()
+        klikkGaVidere(true)
         feilmeldingHandtering(
             'Datoen kan ikke være før 01.04.2020',
             'Datoen kan ikke være før 01.04.2020',
@@ -122,7 +118,7 @@ describe('Tester feilmeldinger', () => {
     it('DATO større enn max', () => {
         cy.get('.navds-text-field__input').clear()
         cy.get('.navds-text-field__input').type('01.01.5000')
-        gaVidere()
+        klikkGaVidere(true)
         feilmeldingHandtering(
             'Datoen kan ikke være etter 24.04.2020',
             'Datoen kan ikke være etter 24.04.2020',
@@ -133,7 +129,7 @@ describe('Tester feilmeldinger', () => {
     it('DATO ugyldig format', () => {
         cy.get('.navds-text-field__input').clear()
         cy.get('.navds-text-field__input').type('abc')
-        gaVidere()
+        klikkGaVidere(true)
         feilmeldingHandtering(
             'Datoen følger ikke formatet dd.mm.åååå',
             'Datoen følger ikke formatet dd.mm.åååå',
@@ -144,7 +140,7 @@ describe('Tester feilmeldinger', () => {
     it('DATO ugyldig format', () => {
         cy.get('.navds-text-field__input').clear()
         cy.get('.navds-text-field__input').type('2020')
-        gaVidere()
+        klikkGaVidere(true)
         feilmeldingHandtering(
             'Datoen følger ikke formatet dd.mm.åååå',
             'Datoen følger ikke formatet dd.mm.åååå',
@@ -156,7 +152,7 @@ describe('Tester feilmeldinger', () => {
         gaTilSoknad(arbeidstakerGradert, '3')
         cy.get('input[value=JA]').click()
 
-        gaVidere()
+        klikkGaVidere(true)
         feilmeldingHandtering(
             'Du må oppgi en fra og med dato i formatet dd.mm.åååå',
             'Du må oppgi en fra og med dato i formatet dd.mm.åååå',
@@ -168,7 +164,7 @@ describe('Tester feilmeldinger', () => {
         resetAllePeriodeDateFelter()
         setPeriodeDateFieldMedIndex(0, '15.04.2020')
 
-        gaVidere()
+        klikkGaVidere(true)
         feilmeldingHandtering(
             'Du må oppgi en til og med dato i formatet dd.mm.åååå',
             'Du må oppgi en til og med dato i formatet dd.mm.åååå',
@@ -181,7 +177,7 @@ describe('Tester feilmeldinger', () => {
         setPeriodeDateFieldMedIndex(0, '01.01.2000')
         setPeriodeDateFieldMedIndex(1, '10.04.2020')
 
-        gaVidere()
+        klikkGaVidere(true)
         feilmeldingHandtering(
             'Fra og med kan ikke være før 01.04.2020',
             'Fra og med kan ikke være før 01.04.2020',
@@ -194,7 +190,7 @@ describe('Tester feilmeldinger', () => {
         setPeriodeDateFieldMedIndex(0, '01.04.2020')
         setPeriodeDateFieldMedIndex(1, '30.12.2050')
 
-        gaVidere()
+        klikkGaVidere(true)
         feilmeldingHandtering(
             'Til og med kan ikke være etter 24.04.2020',
             'Til og med kan ikke være etter 24.04.2020',
@@ -207,7 +203,7 @@ describe('Tester feilmeldinger', () => {
         setPeriodeDateFieldMedIndex(0, '15.04.2020')
         setPeriodeDateFieldMedIndex(1, 'abc')
 
-        gaVidere()
+        klikkGaVidere(true)
         feilmeldingHandtering(
             'Du må oppgi en til og med dato i formatet dd.mm.åååå',
             'Du må oppgi en til og med dato i formatet dd.mm.åååå',
@@ -220,7 +216,7 @@ describe('Tester feilmeldinger', () => {
         setPeriodeDateFieldMedIndex(0, '15.04.2020')
         setPeriodeDateFieldMedIndex(1, '10.04.2020')
 
-        gaVidere()
+        klikkGaVidere(true)
         feilmeldingHandtering(
             'Til og med må være etter fra og med',
             'Til og med må være etter fra og med',
@@ -234,7 +230,7 @@ describe('Tester feilmeldinger', () => {
         setPeriodeDateFieldMedIndex(1, '20.04.2020')
         cy.contains('Legg til ekstra periode').click()
 
-        gaVidere()
+        klikkGaVidere(true)
         feilmeldingHandtering(
             'Du må oppgi en fra og med dato i formatet dd.mm.åååå',
             'Du må oppgi en fra og med dato i formatet dd.mm.åååå',
@@ -249,7 +245,7 @@ describe('Tester feilmeldinger', () => {
         setPeriodeDateFieldMedIndex(2, '20.04.2020')
         setPeriodeDateFieldMedIndex(3, '24.04.2020')
 
-        gaVidere()
+        klikkGaVidere(true)
         feilmeldingHandtering(
             'Du kan ikke legge inn perioder som overlapper med hverandre',
             'Du kan ikke legge inn perioder som overlapper med hverandre',
@@ -259,7 +255,7 @@ describe('Tester feilmeldinger', () => {
 
     it('PERIODER slett', () => {
         cy.contains('Slett periode').click()
-        gaVidere()
+        klikkGaVidere()
         ingenFeilmeldinger()
     })
 
@@ -268,7 +264,7 @@ describe('Tester feilmeldinger', () => {
         cy.get('input[value=JA]').click()
         cy.get('.undersporsmal input[value=Prosent]').click()
         cy.get(`input[name=${arbeidstakerGradert.sporsmal[4].undersporsmal[0].id}]`).type('37.5')
-        gaVidere()
+        klikkGaVidere(true)
 
         feilmeldingHandteringMedLokalFeilmelding(
             'Du må oppgi en verdi',
@@ -279,7 +275,7 @@ describe('Tester feilmeldinger', () => {
 
     it('TALL mindre enn min', () => {
         cy.focused().type('-10')
-        gaVidere()
+        klikkGaVidere(true)
         feilmeldingHandteringMedLokalFeilmelding(
             'Må være minimum 51',
             'Vennligst fyll ut et tall mellom 51 og 99',
@@ -290,7 +286,7 @@ describe('Tester feilmeldinger', () => {
     it('TALL større enn max', () => {
         cy.focused().clear()
         cy.focused().type('1000')
-        gaVidere()
+        klikkGaVidere(true)
         feilmeldingHandteringMedLokalFeilmelding(
             'Må være maksimum 99',
             'Vennligst fyll ut et tall mellom 51 og 99',
@@ -303,7 +299,7 @@ describe('Tester feilmeldinger', () => {
         cy.get(
             `input[name=${arbeidstakerGradert.sporsmal[4].undersporsmal[1].undersporsmal[1].undersporsmal[0].id}]`,
         ).type('1')
-        gaVidere()
+        klikkGaVidere(true)
         feilmeldingHandteringMedLokalFeilmelding(
             'Timene utgjør mindre enn 50 %.',
             'Antall timer du skrev inn, betyr at du har jobbet 2 % av det du gjør når du er frisk. Du må enten svare nei på øverste spørsmålet eller endre antall timer totalt.',
@@ -320,7 +316,7 @@ describe('Tester feilmeldinger', () => {
     it('CHECKBOX_GRUPPE ingen valgt', () => {
         gaTilSoknad(arbeidstakerGradert, '7')
         cy.get('input[value=JA]').click()
-        gaVidere()
+        klikkGaVidere(true)
         feilmeldingHandtering(
             'Du må velge minst et alternativ',
             'Du må oppgi hvilke inntektskilder du har',
@@ -340,7 +336,7 @@ describe('Tester feilmeldinger', () => {
         setPeriodeDateFieldMedIndex(0, '01.04.2020')
         setPeriodeDateFieldMedIndex(1, '24.04.2020')
 
-        gaVidere()
+        klikkGaVidere(true)
         feilmeldingHandtering(
             'Du må velge et alternativ fra menyen',
             'Du må oppgi i hvilket land du har jobbet',
@@ -355,7 +351,7 @@ describe('Tester feilmeldinger', () => {
         cy.contains('Legg til nytt opphold').click()
         cy.findAllByRole('button', { name: 'Slett' }).should('have.length', 2)
 
-        gaVidere()
+        klikkGaVidere(true)
         cy.get('.navds-error-message').contains('Du må velge et alternativ fra menyen')
         cy.get('.navds-error-message').contains('Du må oppgi arbeidsgiveren du har jobbet hos utenfor Norge')
         cy.get('.navds-error-message').contains('Du må oppgi en fra og med dato i formatet dd.mm.åååå')

@@ -3,7 +3,7 @@ import {
     soknadSomTriggerFeilStatusForOppdaterSporsmal,
     soknadSomTriggerSporsmalFinnesIkkeISoknad,
 } from '../../../src/data/mock/data/soknad/soknader-integration'
-import { svarNeiHovedsporsmal, klikkGaVidere } from '../../support/utilities'
+import { svarNeiHovedsporsmal, klikkGaVidere, checkViStolerPaDeg } from '../../support/utilities'
 
 describe('Tester feilsituasjoner ', () => {
     describe('Tester SPORSMAL_FINNES_IKKE_I_SOKNAD ', () => {
@@ -20,7 +20,7 @@ describe('Tester feilsituasjoner ', () => {
             cy.url().should('include', `${soknadSomTriggerSporsmalFinnesIkkeISoknad.id}/1`)
 
             cy.get('.navds-checkbox__label').click()
-            cy.contains('Gå videre').click()
+            cy.contains('Start søknad').click()
         })
 
         it('Vi får se en feilmelding', function () {
@@ -44,8 +44,7 @@ describe('Tester feilsituasjoner ', () => {
         it('Ved svar på første spørsmål får vi en FEIL_STATUS_FOR_OPPDATER_SPORSMAL feil fra backend som gir oss refresh mulighet', function () {
             cy.url().should('include', `${soknadSomTriggerFeilStatusForOppdaterSporsmal.id}/1`)
 
-            cy.get('.navds-checkbox__label').click()
-            cy.contains('Gå videre').click()
+            checkViStolerPaDeg()
             cy.contains('Ooops! Her har det skjedd noe rart')
         })
 
@@ -56,8 +55,7 @@ describe('Tester feilsituasjoner ', () => {
         })
 
         it('Vi får se en feilmelding', function () {
-            cy.get('.navds-checkbox__label').click()
-            cy.contains('Gå videre').click()
+            checkViStolerPaDeg()
 
             cy.contains('Ooops! Her har det skjedd noe rart')
             cy.contains('Gå tilbake til listen over alle søknader').should('not.exist')
@@ -78,9 +76,7 @@ describe('Tester feilsituasjoner ', () => {
             cy.url().should('include', `${soknadSomTrigger401ForOppdaterSporsmal.id}/1`)
             cy.get('[data-cy="bekreftCheckboksPanel"]').should('not.be.checked')
 
-            cy.get('.navds-checkbox__label').click()
-            cy.get('[data-cy="bekreftCheckboksPanel"]').should('be.checked')
-            cy.contains('Gå videre').click()
+            checkViStolerPaDeg()
             cy.url().should('include', `${soknadSomTrigger401ForOppdaterSporsmal.id}/1`)
             cy.get('form').should('not.contain', 'Ooops! Her har det skjedd noe rart')
             cy.get('[data-cy="bekreftCheckboksPanel"]').should('not.be.checked')
@@ -97,7 +93,7 @@ describe('Tester feilsituasjoner ', () => {
         })
         it('Når vi sender søknad som får 400 får vi en feilmelding som lar oss refreshe', function () {
             svarNeiHovedsporsmal()
-            klikkGaVidere()
+            klikkGaVidere(true)
             cy.contains(
                 'Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.',
             ).click()
@@ -177,7 +173,7 @@ describe('Tester feilsituasjoner ', () => {
         })
         it('Når vi sender søknad som får 500 får vi en feilmelding', function () {
             svarNeiHovedsporsmal()
-            klikkGaVidere()
+            klikkGaVidere(true)
             cy.contains(
                 'Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.',
             ).click()

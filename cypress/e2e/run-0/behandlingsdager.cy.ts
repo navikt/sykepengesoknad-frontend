@@ -1,5 +1,11 @@
 import { behandlingsdager } from '../../../src/data/mock/data/soknad/behandlingsdager'
-import { klikkGaVidere, klikkTilbake, svarNeiHovedsporsmal } from '../../support/utilities'
+import {
+    checkViStolerPaDeg,
+    klikkGaVidere,
+    klikkTilbake,
+    sjekkIntroside,
+    svarNeiHovedsporsmal,
+} from '../../support/utilities'
 
 describe('Tester behandlingsdagersøknad', () => {
     //-----
@@ -20,18 +26,8 @@ describe('Tester behandlingsdagersøknad', () => {
     it('Søknad ANSVARSERKLARING - steg 1', function () {
         cy.url().should('include', `${soknad.id}/1`)
 
-        // Sykmelding
-        cy.contains('1. april - 24. april 2020 (24 dager)')
-        cy.contains('Posten Norge AS, Bærum')
-        cy.contains('1 behandlingsdag')
-        cy.get('section[aria-label="Opplysninger fra sykmeldingen"] button').click()
-
-        // Godkjenne ANSVARSERKLARING
-        cy.contains(
-            'Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene jeg gir ikke er riktige eller fullstendige. Jeg vet også at NAV kan holde igjen eller kreve tilbake penger, og at å gi feil opplysninger kan være straffbart.',
-        ).click()
-
-        cy.contains('Gå videre').click()
+        sjekkIntroside()
+        checkViStolerPaDeg()
     })
 
     it('Søknad ENKELTSTAENDE_BEHANDLINGSDAGER - steg 2', function () {
@@ -49,7 +45,7 @@ describe('Tester behandlingsdagersøknad', () => {
         cy.get('button[aria-label="onsdag 15"]').click()
         cy.get('button[aria-label="onsdag 1"]').click()
 
-        cy.contains('Gå videre').click()
+        klikkGaVidere()
     })
 
     it('Søknad FERIE - steg 3', function () {
@@ -79,7 +75,7 @@ describe('Tester behandlingsdagersøknad', () => {
                 'Det betyr også at legen må skrive en sykmelding for hvert arbeidsforhold du er sykmeldt fra.',
         )
 
-        cy.contains('Gå videre').click()
+        klikkGaVidere()
     })
 
     it('Tilbake og videre', function () {
@@ -87,7 +83,7 @@ describe('Tester behandlingsdagersøknad', () => {
         klikkTilbake()
 
         cy.contains('Andre inntektskilder')
-        cy.contains('Gå videre').click()
+        klikkGaVidere()
     })
 
     it('Søknad TIL_SLUTT - steg 4', function () {

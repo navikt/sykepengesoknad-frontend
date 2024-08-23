@@ -1,4 +1,4 @@
-import { checkViStolerPåDeg, svarCheckboxPanel, svarNeiHovedsporsmal, klikkGaVidere } from '../../support/utilities'
+import { checkViStolerPaDeg, svarCheckboxPanel, svarNeiHovedsporsmal, klikkGaVidere } from '../../support/utilities'
 
 describe('Tester kontonummer i kvittering', () => {
     it('Har kontonumer', () => {
@@ -30,7 +30,7 @@ describe('Tester kontonummer i kvittering', () => {
 })
 
 const besvarSoknad = () => {
-    checkViStolerPåDeg()
+    checkViStolerPaDeg()
     svarNeiHovedsporsmal()
     klikkGaVidere()
     cy.contains(

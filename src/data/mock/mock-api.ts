@@ -22,7 +22,6 @@ import { RSSvar } from '../../types/rs-types/rs-svar'
 import { RSArbeidssituasjon } from '../../types/rs-types/rs-arbeidssituasjon'
 import { RSOppdaterSporsmalResponse } from '../../types/rs-types/rest-response/rs-oppdatersporsmalresponse'
 
-import { arbeidstakerSoknadOpprettetAvInntektsmelding } from './data/personas/opprettet-av-inntektsmelding'
 import { Persona } from './data/personas/personas'
 import { testpersoner } from './testperson'
 import {
@@ -528,8 +527,7 @@ const mottaker = (soknadId: string): RSMottaker => {
         soknadId === arbeidstakerDeltPeriodeForsteUtenforArbeidsgiverperiodeKvittering.id ||
         soknadId === arbeidstakerUtenOppholdForsteUtenforArbeidsgiverperiodeKvittering.id ||
         soknadId === foranArbeidstakerMedOppholdKvittering.id ||
-        soknadId === arbeidstakerMedOppholdForsteUtenforArbeidsgiverperiodeKvittering.id ||
-        soknadId === arbeidstakerSoknadOpprettetAvInntektsmelding.id
+        soknadId === arbeidstakerMedOppholdForsteUtenforArbeidsgiverperiodeKvittering.id
     ) {
         return RSMottaker.ARBEIDSGIVER_OG_NAV
     }

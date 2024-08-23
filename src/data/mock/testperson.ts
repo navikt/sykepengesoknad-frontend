@@ -27,7 +27,6 @@ import {
     utenData,
     utlandPerson,
 } from './data/personas/personas'
-import { opprettetAvInntektsmelding } from './data/personas/opprettet-av-inntektsmelding'
 import { utenlandskSykmelding } from './data/utenlandsk-sykmelding'
 import { yrkesskadePerson, yrkesskadeV2Person } from './data/yrkesskade'
 import { egenmeldingSykmeldingaPerson } from './data/personas/egenmeldingsdager-i-sykmeldingen'
@@ -122,7 +121,6 @@ export function testpersonerGruppert(): PersonaGroup {
             ['yrkesskade-v2']: jsonDeepCopy(yrkesskadeV2Person),
             ['utenlandsk-sykmelding']: jsonDeepCopy(utenlandskSykmelding),
             ['brukertest']: jsonDeepCopy(brukertest),
-            ['egenmeldingsdager-arbeidsgiver']: jsonDeepCopy(opprettetAvInntektsmelding),
             ['sykmelding-med-egenmeldingsdager']: jsonDeepCopy(egenmeldingSykmeldingaPerson),
         },
         ['medlemskap-sporsmal']: {

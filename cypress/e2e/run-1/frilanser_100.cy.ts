@@ -1,4 +1,4 @@
-import { setPeriodeFraTil } from '../../support/utilities'
+import { checkViStolerPaDeg, klikkGaVidere, setPeriodeFraTil, sjekkIntroside } from '../../support/utilities'
 import { frilanser } from '../../../src/data/mock/data/soknad/frilanser'
 
 describe('Tester frilansersøknad', () => {
@@ -20,20 +20,8 @@ describe('Tester frilansersøknad', () => {
     it('Søknad ANSVARSERKLARING - steg 1', function () {
         cy.url().should('include', `${soknad.id}/1`)
 
-        // Sykmelding
-        cy.contains('1. april - 24. april 2020 (24 dager)')
-        cy.contains('Har ikke forsikring som gjelder de første 16 dagene av sykefraværet')
-        cy.contains('Egenmelding og/eller sykmelding på papir')
-        cy.contains('1. januar – 13. mars 2020')
-        cy.get('section[aria-label="Opplysninger fra sykmeldingen"] button').click()
-        cy.contains('Har ikke forsikring som gjelder de første 16 dagene av sykefraværet').should('not.be.visible')
-
-        // Godkjenne ANSVARSERKLARING
-        cy.contains(
-            'Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene jeg gir ikke er riktige eller fullstendige. Jeg vet også at NAV kan holde igjen eller kreve tilbake penger, og at å gi feil opplysninger kan være straffbart.',
-        ).click()
-
-        cy.contains('Gå videre').click()
+        sjekkIntroside()
+        checkViStolerPaDeg()
     })
 
     it('Søknad TILBAKE_I_ARBEID - steg 2', function () {
@@ -45,7 +33,7 @@ describe('Tester frilansersøknad', () => {
         cy.get('.navds-date__field-button').click()
         cy.get('.rdp-day').contains('20').click()
 
-        cy.contains('Gå videre').click()
+        klikkGaVidere()
     })
 
     it('Søknad ARBEID_UNDERVEIS_100_PROSENT - steg 3', function () {
@@ -65,7 +53,7 @@ describe('Tester frilansersøknad', () => {
         cy.contains('Jobber du vanligvis 37,5 timer i uka?')
         cy.get('input[type=radio]#9163fd91-7e4f-3474-ae32-405f18004af0_0').click()
 
-        cy.contains('Gå videre').click()
+        klikkGaVidere()
     })
 
     it('Søknad ANDRE_INNTEKTSKILDER - steg 4', function () {
@@ -85,7 +73,7 @@ describe('Tester frilansersøknad', () => {
                 'Det betyr også at legen må skrive en sykmelding for hvert arbeidsforhold du er sykmeldt fra.',
         )
 
-        cy.contains('Gå videre').click()
+        klikkGaVidere()
     })
 
     it('Søknad UTLAND - steg 5', function () {
@@ -100,7 +88,7 @@ describe('Tester frilansersøknad', () => {
 
         setPeriodeFraTil(14, 22)
 
-        cy.contains('Gå videre').click()
+        klikkGaVidere()
     })
 
     it('Søknad ARBEID_UTENFOR_NORGE - steg 6', function () {
@@ -110,7 +98,7 @@ describe('Tester frilansersøknad', () => {
         cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click()
         cy.contains('Har du arbeidet i utlandet i løpet av de siste 12 månedene?')
 
-        cy.contains('Gå videre').click()
+        klikkGaVidere()
     })
 
     it('Søknad VAER_KLAR_OVER_AT - steg 7', function () {
