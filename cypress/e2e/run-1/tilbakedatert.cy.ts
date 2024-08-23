@@ -5,13 +5,10 @@ describe('Tester søknader tilhørende tilbakedaterte sykmeldinger', () => {
         )
 
         // Viktig informasjon grunnet tilbakedatering
-        cy.get('.navds-guide-panel').should('be.visible')
-        cy.get('.navds-guide-panel').contains('Viktig informasjon')
-        cy.get('.navds-guide-panel').contains(
-            'Vanligvis starter sykmeldingen den dagen du er hos legen. I ditt tilfelle har legen skrevet at den startet tidligere.',
-        )
-        cy.get('.navds-guide-panel').contains(
-            'NAV må vurdere om det er en gyldig grunn for at sykmeldingen din starter før du var i kontakt med legen.',
+        cy.get('.navds-alert').should('be.visible')
+        cy.get('.navds-alert').contains('Viktig informasjon')
+        cy.get('.navds-alert').contains(
+            'Vanligvis starter sykemeldingen den dagen du besøker legen, men i ditt tilfelle har legen angitt en tidligere startdato. NAV må vurdere om det er en gyldig grunn for at sykemeldingen din starter før du var i kontakt med legen, og vil ta med dette i vurderingen når de går igjennom søknaden din.',
         )
     })
 
@@ -21,12 +18,12 @@ describe('Tester søknader tilhørende tilbakedaterte sykmeldinger', () => {
         )
 
         // Viktig informasjon grunnet tilbakedatering
-        cy.get('.navds-guide-panel').should('be.visible')
-        cy.get('.navds-guide-panel').contains('Viktig informasjon')
-        cy.get('.navds-guide-panel').contains(
-            'Vanligvis starter sykmeldingen den dagen du er hos legen. I ditt tilfelle har legen skrevet at den startet tidligere.',
+        cy.get('.navds-alert').should('be.visible')
+        cy.get('.navds-alert').contains('Viktig informasjon')
+        cy.get('.navds-alert').contains(
+            'Vanligvis starter sykemeldingen den dagen du besøker legen, men i ditt tilfelle har legen angitt en tidligere startdato.',
         )
-        cy.get('.navds-guide-panel').contains(
+        cy.get('.navds-alert').contains(
             'NAV har kommet til at det ikke er noen gyldig grunn til at sykmeldingen startet før dere hadde kontakt.',
         )
     })
