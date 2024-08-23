@@ -4,10 +4,10 @@ describe('Tester søknader tilhørende person over 70', () => {
             'http://localhost:8080/syk/sykepengesoknad/soknader/df1371a4-2773-41c2-a895-49f56142496c/1?testperson=over-70',
         )
 
-        cy.get('.navds-guide-panel').should('be.visible')
-        cy.get('.navds-guide-panel').contains('Viktig informasjon')
-        cy.get('.navds-guide-panel').contains('Når du har passert 70 år, har du ikke lenger rett til sykepenger.')
-        cy.get('.navds-guide-panel').contains(
+        cy.get('.navds-alert').should('be.visible')
+        cy.get('.navds-alert').contains('Viktig informasjon')
+        cy.get('.navds-alert').contains('Når du har passert 70 år, har du ikke lenger rett til sykepenger.')
+        cy.get('.navds-alert').contains(
             'Hvis du ikke skal søke om sykepenger, kan du avbryte søknaden. Hvis du likevel ønsker å søke, kan vi ikke hindre deg i dette.',
         )
     })
