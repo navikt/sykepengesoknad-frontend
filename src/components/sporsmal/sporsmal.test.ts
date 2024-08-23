@@ -103,6 +103,7 @@ test('Alle sporsmal tag ligger i veldigLangSoknad', () => {
             skipTag !== 'HVOR_MANGE_TIMER' && // Finnes i syfosoknad, men brukes ikke
             skipTag !== 'BEKREFT_OPPLYSNINGER_UTLAND' && // Kan bare inneholde en sisteside, dekkes av andre tester
             skipTag !== 'BEKREFT_OPPLYSNINGER_UTLAND_INFO' &&
+            skipTag !== 'BEKREFT_OPPLYSNINGER' &&
             skipTag !== 'VAER_KLAR_OVER_AT'
         ) // Kan bare inneholde en sisteside
     })
