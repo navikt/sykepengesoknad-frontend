@@ -244,6 +244,6 @@ export function sjekkIntroside() {
     cy.contains('Les mer om viktigheten av å gi riktige opplysninger').and(
         'have.attr',
         'href',
-        'https://www.nav.no/sykepenger-og-personopplysninger',
+        'https://www.nav.no/endringer',
     )
 }

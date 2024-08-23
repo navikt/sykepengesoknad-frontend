@@ -133,7 +133,7 @@ export const Soknaden = () => {
                     <BodyLong spacing>
                         Det er viktig at du gir oss riktige opplysninger slik at vi kan behandle saken din.
                         <LenkeMedIkon
-                            href="https://www.nav.no/sykepenger-og-personopplysninger"
+                            href="https://www.nav.no/endringer"
                             text="Les mer om viktigheten av å gi riktige opplysninger."
                         />
                     </BodyLong>
