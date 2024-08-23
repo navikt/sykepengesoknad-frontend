@@ -28,12 +28,14 @@ const JaEllerNei = ({ sporsmal }: OppsummeringProps) => {
     const svartekst = tekst(`soknad.${svar.verdi.toLowerCase()}` as any)
     return (
         <>
+
             <Label as="h3">{sporsmal.sporsmalstekst}</Label>
             <Avkrysset tekst={svartekst} />
             <Vis
                 hvis={erUndersporsmalStilt(sporsmal)}
                 render={() => <UndersporsmalSum sporsmalsliste={sporsmal.undersporsmal} />}
             />
+
         </>
     )
 }

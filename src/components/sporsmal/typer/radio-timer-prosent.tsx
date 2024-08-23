@@ -70,9 +70,10 @@ const RadioTimerProsent = ({ sporsmal }: SpmProps) => {
             <Vis
                 hvis={
                     watchRadio?.toLowerCase() === 'timer' &&
-                    beregnGrad?.() &&
-                    beregnGrad() !== Infinity &&
-                    validerGrad!() == true
+                    !Number.isNaN(beregnGrad!()) &&
+                    beregnGrad?.() // &&
+                    // beregnGrad() !== Infinity &&
+                    // validerGrad!() == true
                 }
                 render={() => (
                     <Alert variant="info" style={{ marginTop: '1rem' }}>
@@ -84,6 +85,15 @@ const RadioTimerProsent = ({ sporsmal }: SpmProps) => {
                     </Alert>
                 )}
             />
+
+            <br/>
+            <pre>
+                {JSON.stringify(sporsmal, null, 2)}
+            </pre>
+            <pre>
+                {JSON.stringify(hentUndersporsmal(sporsmal!, 'HVOR_MYE_TIMER_VERDI'), null, 2)}
+            </pre>
+            <br/>
 
             <Vis
                 hvis={errorTimer && rodeUkeDagerIPerioden(valgtSoknad!.fom, valgtSoknad!.tom)}

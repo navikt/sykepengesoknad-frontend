@@ -35,6 +35,8 @@ const TallSum = ({ sporsmal }: OppsummeringProps) => {
         <>
             <Label as="h3">{sporsmal.sporsmalstekst}</Label>
             <>
+
+
                 {sporsmal.svarliste.svar.map((svarverdi, index) => (
                     <Vis
                         hvis={svarverdi.verdi}
