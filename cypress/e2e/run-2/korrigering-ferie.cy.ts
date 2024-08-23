@@ -5,6 +5,7 @@ import {
     setPeriodeFraTil,
     klikkGaVidere,
     checkViStolerPaDeg,
+    modalAktiv,
 } from '../../support/utilities'
 
 describe('Tester korrigering av ferie', () => {
@@ -52,7 +53,8 @@ describe('Tester korrigering av ferie', () => {
 
     it('Korrigerer ferie spørsmålet fra NEI til JA', () => {
         cy.findByRole('button', { name: 'Jeg vil endre svarene i søknaden' }).click()
-        cy.contains('Ok').click()
+        modalAktiv()
+        cy.findByRole('button', { name: 'Ok' }).click()
 
         checkViStolerPaDeg()
         cy.contains('Tilbake i fullt arbeid')

@@ -1,12 +1,4 @@
-import {
-    klikkGaVidere,
-    neiOgVidere,
-    svarCheckboxPanel,
-    svarCombobox,
-    svarFritekst,
-    svarJaHovedsporsmal,
-    velgDato,
-} from '../../support/utilities'
+import {klikkGaVidere, neiOgVidere, svarCombobox, svarFritekst, svarJaHovedsporsmal, velgDato } from '../../support/utilities'
 import 'cypress-real-events'
 
 describe('Tester søknad til utenlandsk sykmelding', () => {

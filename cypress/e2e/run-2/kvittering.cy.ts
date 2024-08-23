@@ -15,7 +15,6 @@ import {
     klikkGaVidere,
     setPeriodeFraTil,
     sjekkMainContentFokus,
-    svarCheckboxPanel,
     svarNeiHovedsporsmal,
     svarCombobox,
     svarJaHovedsporsmal,
