@@ -23,6 +23,7 @@ import {
     over70,
     Persona,
     reisetilskuddPerson,
+    tilbakedateringer,
     utenData,
     utlandPerson,
 } from './data/personas/personas'
@@ -64,6 +65,7 @@ type PersonaKey =
     | 'brukertest'
     | 'har-kontonummer'
     | 'har-ikke-kontonummer'
+    | 'egenmeldingsdager-arbeidsgiver'
     | 'sykmelding-med-egenmeldingsdager'
     | 'http-400-ved-send-soknad'
     | 'http-403-ved-get-soknad'
@@ -72,6 +74,7 @@ type PersonaKey =
     | 'korrigeringsfrist-utlopt'
     | 'kjente-inntektskilder'
     | 'cummulative-layout-shift'
+    | 'tilbakedateringer'
     | 'tilkommen-inntekt-forstegangs'
     | 'tilkommen-inntekt-pafolgende'
     | 'selvstendig-naringsdrivende-sendt'
@@ -132,6 +135,7 @@ export function testpersonerGruppert(): PersonaGroup {
             ['korrigeringsfrist-utlopt']: jsonDeepCopy(korrigeringsfristUtloptPerson),
             ['har-kontonummer']: jsonDeepCopy(harKontonummer),
             ['har-ikke-kontonummer']: jsonDeepCopy(harIkkeKontonummer),
+            ['tilbakedateringer']: jsonDeepCopy(tilbakedateringer()),
             ['reisetilskudd-test']: jsonDeepCopy(reisetilskuddTestPerson),
             ['en-usendt-sykmelding']: jsonDeepCopy(enUsendtSykmelding),
             ['to-usendte-sykmeldinger']: jsonDeepCopy(toUsendteSykmeldinger),

@@ -23,6 +23,7 @@ import { ForDuSoker } from '../soknad-intro/for-du-soker'
 import { IntroAccordion } from '../soknad-intro/intro-accordion'
 import { LenkeMedIkon } from '../lenke-med-ikon/LenkeMedIkon'
 import { erOppdelt } from '../../utils/periode-utils'
+import { InfoOmTilbakedatering } from '../soknad-intro/info-om-tilbakedatering'
 
 import { urlTilSoknad } from './soknad-link'
 import { SporsmalTittel } from './sporsmal-tittel'
@@ -129,6 +130,7 @@ export const Soknaden = () => {
                             {oppdeltSoknadTekst}
                         </Alert>
                     )}
+                    <InfoOmTilbakedatering />
                     {valgtSykmelding?.pasient?.overSyttiAar && <Over70Aar />}
                     <BodyLong spacing>
                         Det er viktig at du gir oss riktige opplysninger slik at vi kan behandle saken din.
