@@ -4,7 +4,7 @@ import {
     klikkTilbake,
     setPeriodeFraTil,
     sjekkIntroside,
-    sporsmalOgSvar
+    sporsmalOgSvar,
 } from '../../support/utilities'
 import { arbeidstakerGradert } from '../../../src/data/mock/data/soknad/arbeidstaker-gradert'
 

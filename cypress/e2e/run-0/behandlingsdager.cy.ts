@@ -5,7 +5,7 @@ import {
     klikkTilbake,
     sjekkIntroside,
     svarNeiHovedsporsmal,
-    sporsmalOgSvar
+    sporsmalOgSvar,
 } from '../../support/utilities'
 
 describe('Tester behandlingsdagersøknad', () => {

@@ -1,5 +1,6 @@
 import {
-    checkViStolerPaDeg, klikkGaVidere,
+    checkViStolerPaDeg,
+    klikkGaVidere,
     setPeriodeFraTil,
     sjekkIntroside,
     sporsmalOgSvar,
@@ -181,9 +182,6 @@ describe('Tester arbeidstakersøknad', () => {
             'Nå kan du se over at alt er riktig før du sender inn søknaden. Ved behov kan du endre opplysningene inntil 12 måneder etter innsending.',
         )
 
-        cy.get('section[aria-label="Oppsummering fra søknaden"] button').click()
-        cy.contains('Jeg vil svare så godt jeg kan på spørsmålene i søknaden.')
-
         cy.get('[data-cy="oppsummering-fra-søknaden"]').within(() => {
             sporsmalOgSvar('Søknaden sendes til', 'NAV').and('contain', 'Posten Norge AS, Bærum')
             //Arbeid underveis i sykefravær
@@ -257,26 +255,20 @@ describe('Sjekker at søknader med gammel oppsummering ser ok ut', () => {
         cy.contains('Det du fyller ut brukes til å vurdere om du har rett til sykepenger').should('not.exist')
 
         // Personvern erklæring
-        cy.get('.frist-sykepenger').click()
         cy.contains('Slik behandler NAV personopplysningene dine').click()
-
-        // Sykmelding
-        cy.contains('1. april - 24. april 2020 (24 dager)')
-        cy.contains('Posten Norge AS, Bærum')
-        cy.contains('100% sykmeldt')
 
         // Avbryt dialog vises
         cy.contains('Jeg har ikke behov for denne søknaden').click()
         cy.findByRole('button', { name: 'Nei, jeg har behov for søknaden' }).click()
 
         // Må godkjenne ANSVARSERKLARING først
-        cy.contains('Gå videre').click()
+        cy.contains('Start søknad').click()
         cy.contains('Det er 1 feil i skjemaet')
         cy.get('.navds-confirmation-panel__inner').should('exist')
         cy.contains('Du må bekrefte at du har lest og forstått informasjonen før du kan gå videre')
         cy.get('.navds-checkbox__label').click()
 
-        cy.contains('Gå videre').click()
+        cy.contains('Start søknad').click()
     })
 
     it('Søknad TILBAKE_I_ARBEID ', function () {

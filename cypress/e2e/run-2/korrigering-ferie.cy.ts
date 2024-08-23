@@ -1,7 +1,6 @@
 import {
     svarJaHovedsporsmal,
     svarNeiHovedsporsmal,
-    svarCheckboxPanel,
     setPeriodeFraTil,
     klikkGaVidere,
     checkViStolerPaDeg,

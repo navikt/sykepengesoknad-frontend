@@ -3,7 +3,6 @@ import {
     svarFritekst,
     svarJaHovedsporsmal,
     svarNeiHovedsporsmal,
-    svarCheckboxPanel,
     velgDato,
     klikkGaVidere,
     svarCombobox,

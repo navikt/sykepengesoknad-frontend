@@ -1,4 +1,4 @@
-import { checkViStolerPaDeg, klikkGaVidere, neiOgVidere, svarCheckboxPanel } from '../../support/utilities'
+import { checkViStolerPaDeg, klikkGaVidere, neiOgVidere } from '../../support/utilities'
 import { arbeidstakerGradert } from '../../../src/data/mock/data/soknad/arbeidstaker-gradert'
 
 describe('Tester ettersending og korrigering', () => {

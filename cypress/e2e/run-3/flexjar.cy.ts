@@ -1,4 +1,4 @@
-import { checkViStolerPaDeg, klikkGaVidere, svarCheckboxPanel, svarNeiHovedsporsmal } from '../../support/utilities'
+import { checkViStolerPaDeg, klikkGaVidere, svarNeiHovedsporsmal } from '../../support/utilities'
 import { arbeidstakerGradert } from '../../../src/data/mock/data/soknad/arbeidstaker-gradert'
 
 describe('Tester flexjar', () => {
