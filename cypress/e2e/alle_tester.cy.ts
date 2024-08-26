@@ -1,4 +1,5 @@
 import './run-0/arbeidsledig_100.cy'
+import './run-0/arbeidsledig_med_keyboard.cy'
 import './run-0/arbeidstaker_50.cy'
 import './run-0/arbeidstaker_100.cy'
 import './run-0/andre_inntektskilder-bulletpoints.cy'

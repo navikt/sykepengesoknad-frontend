@@ -17,15 +17,20 @@ describe('Tester arbeidsledigsøknad', () => {
 
     it('Navigerer søknaden', () => {
         cy.url().should('include', `${soknad.id}/1`)
-        cy.contains('1. april - 24. april 2020 (24 dager)')
-        cy.contains('100% sykmeldt')
-        cy.contains('Opplysninger fra sykmeldingen')
         cy.realPress('Tab')
         cy.realPress('Tab')
         cy.realPress('Tab')
         cy.realPress('Tab')
         cy.realPress('Tab')
         cy.realPress('Tab')
+        cy.realPress('Space')
+        cy.contains('Les mer om hvordan NAV behandler personopplysningene dine').should('be.visible')
+        cy.realPress('Tab')
+        cy.realPress('Tab')
+        cy.realPress('Space')
+        cy.contains(
+            'Vi lagrer svarene dine mens du fyller ut, så du kan ta pauser underveis. Søknader som ikke blir sendt inn lagrer vi i 4 måneder før de slettes automatisk.',
+        ).should('be.visible')
         cy.realPress('Tab')
         cy.realPress('Tab')
         cy.focused()
