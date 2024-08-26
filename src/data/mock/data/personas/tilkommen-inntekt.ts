@@ -16,6 +16,7 @@ tilkommenInntektForstegangSoknad.sporsmal = [
         orgnavn: 'Kaffebrenneriet',
         orgnr: '123324',
         tom: tilkommenInntektForstegangSoknad.tom!,
+        fom: tilkommenInntektForstegangSoknad.fom!,
     }),
     ...tilkommenInntektForstegangSoknad.sporsmal.slice(splittSted),
 ]

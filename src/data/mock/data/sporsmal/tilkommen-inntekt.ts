@@ -2,18 +2,21 @@ import { v4 } from 'uuid'
 import dayjs from 'dayjs'
 
 import { RSSporsmal } from '../../../../types/rs-types/rs-sporsmal'
-import { tilLesbarDatoUtenAarstall, tilLesbarPeriodeMedArstall } from '../../../../utils/dato-utils'
+import { tilLesbarPeriodeMedArstall } from '../../../../utils/dato-utils'
 
 export const tilkommenInntektForstegangSporsmal = ({
     orgnavn,
     orgnr,
     tom,
+    fom,
 }: {
     orgnavn: string
     orgnr: string
     tom: string
+    fom: string
 }): RSSporsmal => {
-    const tomLesbar = tilLesbarDatoUtenAarstall(tom)
+    const periodeTekst = tilLesbarPeriodeMedArstall(dayjs(fom), dayjs(tom))
+
     return {
         id: v4().toString(),
         tag: 'TILKOMMEN_INNTEKT_FORSTEGANG',
@@ -43,10 +46,9 @@ export const tilkommenInntektForstegangSporsmal = ({
             },
             {
                 id: v4().toString(),
-                tag: 'TILKOMMEN_INNTEKT_FORSTEGANG_BRUTTO',
-                sporsmalstekst: `Hvor mye har du tjent i perioden fra den første arbeidsdagen frem til ${tomLesbar}?`,
-                undertekst:
-                    'Oppgi det du har tjent brutto (før skatt). Se på lønnslippen eller kontrakten hvor mye du har tjent eller skal tjene.',
+                tag: 'TILKOMMEN_INNTEKT_BRUTTO',
+                sporsmalstekst: `Hvor mye har du tjent i perioden ${periodeTekst}?`,
+                undertekst: `Oppgi det du har tjent brutto (før skatt) i perioden ${periodeTekst}. Se på lønnslippen eller kontrakten hvor mye du har tjent eller skal tjene.`,
                 svartype: 'BELOP',
                 min: null,
                 max: null,
@@ -88,8 +90,8 @@ export const tilkommenInntektPafolgendeSporsmal = ({
         undersporsmal: [
             {
                 id: v4().toString(),
-                tag: 'TILKOMMEN_INNTEKT_PAFOLGENDE_BRUTTO',
-                sporsmalstekst: `Hvor mye har du tjent i perioden?`,
+                tag: 'TILKOMMEN_INNTEKT_BRUTTO',
+                sporsmalstekst: `Hvor mye har du tjent i perioden ${periodeTekst}?`,
                 undertekst: `Oppgi det du har tjent brutto (før skatt) i perioden ${periodeTekst}. Se på lønnslippen eller kontrakten hvor mye du har tjent eller skal tjene.`,
                 svartype: 'BELOP',
                 min: null,

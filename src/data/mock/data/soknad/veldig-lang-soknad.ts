@@ -2359,7 +2359,12 @@ export const veldigLangSoknad: RSSoknad = {
         },
         ...utenlandskSykmeldingSporsmalene,
         kjenteInntektskilder(['Rema']),
-        tilkommenInntektForstegangSporsmal({ orgnavn: 'Kaffebrenneriet', orgnr: '123324', tom: '2020-04-24' }),
+        tilkommenInntektForstegangSporsmal({
+            orgnavn: 'Kaffebrenneriet',
+            orgnr: '123324',
+            tom: '2020-04-24',
+            fom: '2020-04-20',
+        }),
         tilkommenInntektPafolgendeSporsmal({
             orgnavn: 'Kaffebrenneriet',
             orgnr: '123324',
