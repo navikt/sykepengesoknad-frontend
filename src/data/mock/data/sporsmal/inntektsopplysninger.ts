@@ -411,7 +411,20 @@ export const inntektsopplysninger: RSSporsmal = {
                                             svartype: 'JA_NEI',
                                             min: null,
                                             max: null,
-
+                                            metadata: {
+                                                inntekt: {
+                                                    'inntekt-2020': 400000,
+                                                    'inntekt-2021': 450000,
+                                                    'inntekt-2022': 500000,
+                                                    'g-2020': 60000,
+                                                    'g-2021': 65000,
+                                                    'g-2022': 70000,
+                                                    'g-sykmelding': 80000,
+                                                    'beregnet-snitt': 450000,
+                                                    'beregnet-p25': 562500,
+                                                    'beregnet-m25': 337500,
+                                                },
+                                            },
                                             kriterieForVisningAvUndersporsmal: 'JA',
                                             svar: [],
                                             undersporsmal: [

@@ -16,6 +16,8 @@ import { tekstMedHtml } from '../../../utils/html-react-parser-utils'
 import { EkspanderbarHjelp } from '../../hjelpetekster/ekspanderbar-hjelp/ekspanderbar-hjelp'
 import { VarigEndringEksempler } from '../../hjelpetekster/varig-endring-eksempler'
 import { VarigEndringAlert } from '../../hjelpetekster/varig-endring-alert'
+import { hentInntektMetadata } from '../../../utils/ferdiglignet-inntekt'
+import { formatterTall } from '../../../utils/utils'
 
 const JaNeiLiten = ({ sporsmal }: SpmProps) => {
     const { watch, getValues } = useFormContext()
@@ -60,6 +62,11 @@ const JaNeiLiten = ({ sporsmal }: SpmProps) => {
         } else return <></>
     }
 
+    const inntektMetadata =
+        sporsmal.tag === 'INNTEKTSOPPLYSNINGER_VARIG_ENDRING_25_PROSENT' &&
+        sporsmal.metadata?.inntekt &&
+        hentInntektMetadata(sporsmal.metadata.inntekt as Record<string, number>)
+
     return (
         <>
             <div
@@ -78,20 +85,29 @@ const JaNeiLiten = ({ sporsmal }: SpmProps) => {
                             legend={sporsmal.sporsmalstekst}
                             error={fieldState.error && feilmelding.lokal}
                         >
-                            {sporsmal.tag === 'INNTEKTSOPPLYSNINGER_VARIG_ENDRING_25_PROSENT' &&
-                                sporsmal.metadata?.ferdiglignedInntekt && (
-                                    <InfoBoks>
-                                        <BodyShort className="mb-4">
-                                            Pensjonsgivende inntekt tre siste ferdiglignede år:
+                            {inntektMetadata && (
+                                <InfoBoks>
+                                    {Object.entries(inntektMetadata.inntekt).map(([year, inntektValue]) => (
+                                        <BodyShort key={year}>
+                                            {`${year}: ${formatterTall(inntektValue)} kr`}
+                                            {inntektMetadata.g[year] &&
+                                                ` (G: ${formatterTall(inntektMetadata.g[year])} kr)`}
                                         </BodyShort>
-                                        <BodyShort>2021: 457 987 kroner</BodyShort>
-                                        <BodyShort>2022: 566 345 kroner</BodyShort>
-                                        <BodyShort>2023: 621 999 kroner</BodyShort>
-                                        <BodyShort className="mt-4">
-                                            Gjernnomsnitt: <strong>548 777</strong> kroner.
-                                        </BodyShort>
-                                    </InfoBoks>
-                                )}
+                                    ))}
+                                    <BodyShort className="mt-4">
+                                        G ved sykmeldingstidspunkt: {formatterTall(inntektMetadata.g.sykmelding)} kr.
+                                    </BodyShort>
+                                    <BodyShort className="mt-4">
+                                        Gjennomsnitt: {formatterTall(inntektMetadata.beregnet.snitt)} kr.
+                                    </BodyShort>
+                                    <BodyShort>
+                                        Gjennomsnitt: {formatterTall(inntektMetadata.beregnet.m25)} kr (- 25 %)
+                                    </BodyShort>
+                                    <BodyShort>
+                                        Gjennomsnitt: {formatterTall(inntektMetadata.beregnet.p25)} kr (+ 25 %)
+                                    </BodyShort>
+                                </InfoBoks>
+                            )}
                             <EkspanderbarHjelp sporsmal={sporsmal} mb="mb-4" />
 
                             {sporsmal.tag === 'INNTEKTSOPPLYSNINGER_VARIG_ENDRING' && <VarigEndringEksempler />}
