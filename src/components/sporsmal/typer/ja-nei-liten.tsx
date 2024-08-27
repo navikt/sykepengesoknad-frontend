@@ -1,6 +1,7 @@
 import { Alert, BodyShort, Radio, RadioGroup } from '@navikt/ds-react'
 import React, { Fragment } from 'react'
 import { Controller, useFormContext } from 'react-hook-form'
+import { PiggybankIcon } from '@navikt/aksel-icons'
 
 import { SvarEnums } from '../../../types/enums'
 import { getLedetekst, tekst } from '../../../utils/tekster'
@@ -87,6 +88,12 @@ const JaNeiLiten = ({ sporsmal }: SpmProps) => {
                         >
                             {inntektMetadata && (
                                 <InfoBoks>
+                                    <div className="flex">
+                                        <PiggybankIcon title="sparegris" fontSize="1.5rem" />
+                                        <BodyShort className="mb-4 ml-2 font-semibold">
+                                            Inntektsopplysninger fra Skatteetaten
+                                        </BodyShort>
+                                    </div>
                                     {Object.entries(inntektMetadata.inntekt).map(([year, inntektValue]) => (
                                         <BodyShort key={year}>
                                             {`${year}: ${formatterTall(inntektValue)} kr`}

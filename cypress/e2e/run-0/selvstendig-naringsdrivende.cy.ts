@@ -76,6 +76,9 @@ describe('Tester selvstendig naringsdrivende søknad', () => {
 
         harFeilISkjemaet('Du må svare på om du har hatt mer enn 25 prosent endring i årsinntekten din')
 
+        cy.contains('Inntektsopplysninger fra Skatteetaten')
+        cy.contains('2020: 400.000 kr (G: 60.000 kr)')
+
         svarRadioSporsmal(
             'Har du hatt mer enn 25 prosent endring i årsinntekten din som følge av den varige endringen?',
             'Ja',
