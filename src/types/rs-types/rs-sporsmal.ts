@@ -4,6 +4,13 @@ import { RSSvar } from './rs-svar'
 import { RSSvartype, RSSvartypeType } from './rs-svartype'
 import { RSVisningskriterie, RSVisningskriterieType } from './rs-visningskriterie'
 
+type Metadata = {
+    orgnummer?: string
+    orgnavn?: string
+} & {
+    [key: string]: string | number | Record<string, number>
+}
+
 export interface RSSporsmal {
     id: string
     tag: string
@@ -14,7 +21,7 @@ export interface RSSporsmal {
     max: string | null
     kriterieForVisningAvUndersporsmal: RSVisningskriterieType | null
     svar: RSSvar[]
-    metadata?: Record<string, string>
+    metadata?: Metadata
     undersporsmal: RSSporsmal[]
     tittel?: string
 }

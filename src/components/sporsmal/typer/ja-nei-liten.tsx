@@ -78,6 +78,20 @@ const JaNeiLiten = ({ sporsmal }: SpmProps) => {
                             legend={sporsmal.sporsmalstekst}
                             error={fieldState.error && feilmelding.lokal}
                         >
+                            {sporsmal.tag === 'INNTEKTSOPPLYSNINGER_VARIG_ENDRING_25_PROSENT' &&
+                                sporsmal.metadata?.ferdiglignedInntekt && (
+                                    <InfoBoks>
+                                        <BodyShort className="mb-4">
+                                            Pensjonsgivende inntekt tre siste ferdiglignede år:
+                                        </BodyShort>
+                                        <BodyShort>2021: 457 987 kroner</BodyShort>
+                                        <BodyShort>2022: 566 345 kroner</BodyShort>
+                                        <BodyShort>2023: 621 999 kroner</BodyShort>
+                                        <BodyShort className="mt-4">
+                                            Gjernnomsnitt: <strong>548 777</strong> kroner.
+                                        </BodyShort>
+                                    </InfoBoks>
+                                )}
                             <EkspanderbarHjelp sporsmal={sporsmal} mb="mb-4" />
 
                             {sporsmal.tag === 'INNTEKTSOPPLYSNINGER_VARIG_ENDRING' && <VarigEndringEksempler />}
@@ -142,3 +156,7 @@ const JaNeiLiten = ({ sporsmal }: SpmProps) => {
 }
 
 export default JaNeiLiten
+
+const InfoBoks = ({ children }: { children: React.ReactNode }) => (
+    <p className="mb-6 p-3 rounded bg-surface-info-subtle">{children}</p>
+)

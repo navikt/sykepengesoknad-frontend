@@ -57,6 +57,13 @@ export class Soknad extends ObjectCopier {
     }
 }
 
+type Metadata = {
+    orgnummer?: string
+    orgnavn?: string
+} & {
+    [key: string]: string | number | Record<string, number>
+}
+
 export class Sporsmal extends ObjectCopier {
     constructor(
         readonly id: string,
@@ -73,7 +80,7 @@ export class Sporsmal extends ObjectCopier {
         readonly parentKriterie: RSVisningskriterieType | null,
         readonly erHovedsporsmal: boolean,
         readonly tittel: string | undefined,
-        readonly metadata: Record<string, string> | undefined,
+        readonly metadata: Metadata | undefined,
     ) {
         super()
     }

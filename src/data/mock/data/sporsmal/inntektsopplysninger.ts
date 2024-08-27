@@ -411,6 +411,7 @@ export const inntektsopplysninger: RSSporsmal = {
                                             svartype: 'JA_NEI',
                                             min: null,
                                             max: null,
+
                                             kriterieForVisningAvUndersporsmal: 'JA',
                                             svar: [],
                                             undersporsmal: [
