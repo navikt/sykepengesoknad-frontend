@@ -3,7 +3,7 @@ import React from 'react'
 import { Controller, useFormContext } from 'react-hook-form'
 
 import { rodeUkeDagerIPerioden } from '../../../utils/helligdager-utils'
-import { finnHovedSporsmal, hentSporsmal, hentUndersporsmal } from '../../../utils/soknad-utils'
+import { hentSporsmal, hentUndersporsmal } from '../../../utils/soknad-utils'
 import validerArbeidsgrad from '../../../utils/sporsmal/valider-arbeidsgrad'
 import { getLedetekst, tekst } from '../../../utils/tekster'
 import Vis from '../../vis'
