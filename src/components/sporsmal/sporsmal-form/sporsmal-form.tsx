@@ -54,12 +54,14 @@ const SporsmalForm = ({ sporsmal }: SpmProps) => {
         const snartSlutt = [
             RSSvartype.IKKE_RELEVANT,
             RSSvartype.CHECKBOX_PANEL,
+            RSSvartype.OPPSUMMERING,
             RSSvartype.BEKREFTELSESPUNKTER,
         ].includes(sporsmal!.svartype)
         if (!snartSlutt) {
             return false
         }
         if (
+            sporsmal!.svartype === RSSvartype.OPPSUMMERING ||
             sporsmal!.svartype === RSSvartype.BEKREFTELSESPUNKTER ||
             sporsmal!.tag === 'BEKREFT_OPPLYSNINGER_UTLAND_INFO'
         ) {

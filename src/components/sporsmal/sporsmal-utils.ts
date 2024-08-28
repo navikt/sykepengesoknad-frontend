@@ -105,6 +105,7 @@ export const hentGeneriskFeilmelding = (
         case RSSvartype.IKKE_RELEVANT:
         case RSSvartype.GRUPPE_AV_UNDERSPORSMAL:
         case RSSvartype.BEKREFTELSESPUNKTER:
+        case RSSvartype.OPPSUMMERING:
         case RSSvartype.INFO_BEHANDLINGSDAGER: {
             return ''
         }

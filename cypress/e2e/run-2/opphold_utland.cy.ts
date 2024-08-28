@@ -4,6 +4,7 @@ import {
     klikkTilbake,
     setPeriodeFraTil,
     sjekkMainContentFokus,
+    sporsmalOgSvar,
     svarCombobox,
 } from '../../support/utilities'
 import { oppholdUtland } from '../../../src/data/mock/data/soknad/opphold-utland'
@@ -160,39 +161,16 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
 
     it('Søknad TIL_SLUTT', () => {
         cy.url().should('include', `${soknad.id}/4`)
-        it('Bekreftelsespunktene er riktige', () => {
-            const punkter = [
-                'Jeg har avklart med legen at reisen ikke vil forlenge sykefraværet',
-                'Reisen hindrer ikke planlagt behandling eller avtaler med NAV',
-                'Reisen er avklart med arbeidsgiveren min',
-            ]
+        cy.get('.navds-guide-panel__content').contains(
+            'Nå kan du se over at alt er riktig før du sender inn søknaden. Ved behov kan du endre opplysningene inntil 12 måneder etter innsending.',
+        )
 
-            punkter.forEach((punkt) => {
-                cy.contains(punkt)
-            })
-        })
-    })
-
-    it('Oppsummering fra søknaden', function () {
-        cy.url().should('include', `${soknad.id}/4`)
-
-        cy.get('section[aria-label="Oppsummering fra søknaden"] button').click()
-
-        cy.get('.oppsummering').contains('Når skal du reise?').siblings().should('contain', '17. – 24. desember 2020')
-
-        cy.get('.oppsummering')
-            .contains('Hvilke(t) land skal du reise til?')
-            .siblings()
-            .should('contain', 'Afghanistan')
-            .and('contain', 'Sør-Korea')
-
-        cy.get('.oppsummering').contains('Har du arbeidsgiver?').siblings().should('contain', 'Ja')
-        cy.get('.oppsummering').within(() => {
-            cy.contains('Er du 100 % sykmeldt?').siblings().should('contain', 'Ja')
-
-            cy.contains('Har du avtalt med arbeidsgiveren din at du skal ta ut feriedager i hele perioden?')
-                .siblings()
-                .should('contain', 'Nei')
+        cy.get('[data-cy="oppsummering-fra-søknaden"]').within(() => {
+            sporsmalOgSvar('Når skal du reise?', '17. – 24. desember 2020')
+            sporsmalOgSvar('Hvilke(t) land skal du reise til?', 'Afghanistan').and('contain', 'Sør-Korea')
+            sporsmalOgSvar('Har du arbeidsgiver?', 'Ja')
+            sporsmalOgSvar('Er du 100 % sykmeldt?', 'Ja')
+            sporsmalOgSvar('Har du avtalt med arbeidsgiveren din at du skal ta ut feriedager i hele perioden?', 'Nei')
         })
     })
 
@@ -203,11 +181,6 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
             .should('have.attr', 'aria-valuenow', '4')
             .and('have.attr', 'aria-valuemax', '4')
             .and('have.attr', 'aria-valuetext', '4 av 4')
-
-        cy.contains('Viktig å være klar over:')
-        cy.contains(
-            'Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.',
-        ).click()
 
         cy.contains('Send søknaden').click()
     })

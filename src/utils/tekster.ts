@@ -25,7 +25,6 @@ import { EkspanderbarHjelpTekster } from '../components/hjelpetekster/ekspanderb
 import { EndringUtenEndringTekster } from '../components/sporsmal/endring-uten-endring/endring-uten-endring-tekster'
 import KnapperadTekster from '../components/sporsmal/sporsmal-form/knapperad-tekster'
 import SporsmalTekster from '../components/sporsmal/sporsmal-tekster'
-import vaerKlarOverAtTekster from '../components/sporsmal/bekreftelsespunkter/bekreftelsespunkter-arbeidstakere-tekster'
 
 const tekster = {
     ...OpplysningerTekster,
@@ -53,7 +52,6 @@ const tekster = {
     ...GjenstaendeSoknaderTekster,
     ...AvsluttOgFortsettSenereTekster,
     ...FristSykepengerTekster,
-    ...vaerKlarOverAtTekster,
 }
 
 export const tekst = (tekst: keyof typeof tekster): string => {

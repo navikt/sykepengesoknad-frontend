@@ -74,17 +74,6 @@ export function checkViStolerPaDeg(gaVidere = true) {
         cy.contains('Start søknad').click()
     }
 }
-
-export function checkJegHarLestOgSend() {
-    cy.get('form')
-        .findByRole('checkbox', {
-            name: 'Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.',
-        })
-        .click()
-
-    cy.findByRole('button', { name: 'Send søknaden' }).click()
-}
-
 export function neiOgVidere(titler: string[]) {
     for (let i = 0; i < titler.length; i++) {
         cy.get('h2').contains(titler[i]).should('be.visible')
@@ -246,4 +235,19 @@ export function sjekkIntroside() {
         'href',
         'https://www.nav.no/endringer',
     )
+}
+
+/**
+ * Sjekker spørsmål og svar i oppsummeringen av søknaden
+ * @returns svarElement som kan benyttes i underspørsmål
+ */
+export function sporsmalOgSvar(sporsmal: string, svar: string) {
+    return cy.contains(sporsmal).siblings().should('contain', svar)
+}
+
+export function mainSkalHaHoyde(hoyde: number) {
+    cy.get('main').should(($el) => {
+        const mainHoyde = parseInt($el.css('height'), 10)
+        expect(mainHoyde).to.equal(hoyde)
+    })
 }

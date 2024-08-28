@@ -3,9 +3,10 @@ const SoknadenTekster = {
     'soknad.sidetittel': 'Søknad',
     'kvittering.sidetittel': 'Kvittering',
     'soknad.tilbakeknapp': 'Tilbake',
+    'soknad.forrige_steg': 'Forrige steg',
     'statuspanel.status': 'Status',
     'sykepengesoknad.start.tittel': 'Ansvarserklæring',
-    'sykepengesoknad.til_slutt.tittel': 'Oppsummering',
+    'sykepengesoknad.til_slutt.tittel': 'Oppsummering fra søknaden',
     'sykepengesoknad.tilkommen_inntekt_forstegang.tittel': 'Nytt arbeidsforhold',
     'sykepengesoknad.tilkommen_inntekt_pafolgende.tittel': 'Inntekt fra annet arbeidsforhold',
     'sykepengesoknad.sykepengeinfo.til-nav':
@@ -87,11 +88,6 @@ const SoknadenTekster = {
 
     'sykepengesoknad.jobb-underveis-timer-i-prosent':
         'Antall timer du skrev inn, betyr at du har jobbet %PROSENT%% av det du gjør når du er frisk.',
-
-    'sykepengesoknad.oppsummering.nav-som-mottaker': 'Søknaden sendes til NAV.',
-    'sykepengesoknad.oppsummering.arbeidsgiver-som-mottaker': 'Søknaden sendes til %ARBEIDSGIVER% med kopi til NAV.',
-    'sykepengesoknad.oppsummering.nav-arbeidsgiver-som-mottaker':
-        'Søknaden sendes til NAV. Kopi av søknaden sendes til %ARBEIDSGIVER%.',
 
     'sykepengesoknad.kvittering.tekst':
         '<p>Søknaden er sendt til arbeidsgiveren din via Altinn. Det vil kunne ta noe tid før meldingen ligger i din arbeidsgivers innboks. Arbeidsgiveren vil ved behov videresende søknaden til NAV. Si gjerne fra til arbeidsgiveren din at du har sendt søknaden siden dette foreløpig er nytt for alle.</p><p>Du trenger ikke å sende inn del D av sykmeldingen på papir, med mindre arbeidsgiveren eller NAV senere ber deg om det.</p>',

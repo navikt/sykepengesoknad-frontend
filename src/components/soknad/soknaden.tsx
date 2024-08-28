@@ -24,6 +24,8 @@ import { IntroAccordion } from '../soknad-intro/intro-accordion'
 import { LenkeMedIkon } from '../lenke-med-ikon/LenkeMedIkon'
 import { erOppdelt } from '../../utils/periode-utils'
 import { InfoOmTilbakedatering } from '../soknad-intro/info-om-tilbakedatering'
+import { erSisteSide } from '../sporsmal/sporsmal-utils'
+import { Tilbake } from '../sporsmal/tilbake-knapp/tilbake'
 
 import { urlTilSoknad } from './soknad-link'
 import { SporsmalTittel } from './sporsmal-tittel'
@@ -109,6 +111,7 @@ export const Soknaden = () => {
     const sporsmal = valgtSoknad?.sporsmal[spmIndex]
 
     const erForstesiden = stegNo === 1 && !erUtenlandssoknad
+    const erSistesiden = valgtSoknad && sporsmal ? erSisteSide(valgtSoknad, stegNo) : false
     const erForstesidenMedReisetilskudd = stegNo === 1 && (erReisetilskuddsoknad || erGradertReisetilskuddsoknad)
     const oppdeltSoknadTekst =
         valgtSoknad && valgtSykmelding && erOppdelt(valgtSoknad, valgtSykmelding)
@@ -117,7 +120,8 @@ export const Soknaden = () => {
     return (
         <>
             {valgtSoknadError && <FeilStateView feilmelding={valgtSoknadError?.status}></FeilStateView>}
-            <SoknadHeader />
+            <Tilbake variant="liten" />
+            <SoknadHeader overskrivTittel={erSistesiden ? 'Oppsummering' : undefined} />
 
             {!erForstesiden && <Fremdriftsbar />}
             {erForstesiden && (
@@ -142,7 +146,7 @@ export const Soknaden = () => {
                 </>
             )}
             {erForstesidenMedReisetilskudd && <OmReisetilskudd />}
-            {!erForstesiden && <SporsmalTittel />}
+            {!erForstesiden && !erSistesiden && <SporsmalTittel />}
             {sporsmal && <SporsmalForm sporsmal={sporsmal} key={sporsmal.id} />}
             {!sporsmal && <SkeletonSporsmalForm />}
             {erForstesiden && !erUtenlandssoknad && (

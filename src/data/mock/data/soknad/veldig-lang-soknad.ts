@@ -1,6 +1,6 @@
 import { RSSoknad } from '../../../../types/rs-types/rs-soknad'
 import { arbeidstaker100Syk } from '../sykmeldinger'
-import { bekreftelse } from '../sporsmal/vaer-klar-over-at'
+import { oppsummering } from '../sporsmal/oppsummering'
 import {
     medlemskapOppholdstillatelseSporsmal,
     medlemskapOppholdstillatelseV2Sporsmal,
@@ -2373,7 +2373,7 @@ export const veldigLangSoknad: RSSoknad = {
         }),
         inntektsopplysninger,
         inntektsopplysningerLegacy,
-        bekreftelse(),
+        oppsummering(),
     ],
     egenmeldtSykmelding: false,
     opprettetAvInntektsmelding: false,

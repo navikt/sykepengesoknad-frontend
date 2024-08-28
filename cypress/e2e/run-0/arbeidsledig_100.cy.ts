@@ -1,4 +1,10 @@
-import { checkViStolerPaDeg, klikkGaVidere, setPeriodeFraTil, sjekkIntroside } from '../../support/utilities'
+import {
+    checkViStolerPaDeg,
+    klikkGaVidere,
+    setPeriodeFraTil,
+    sjekkIntroside,
+    sporsmalOgSvar,
+} from '../../support/utilities'
 import { arbeidsledig } from '../../../src/data/mock/data/soknad/arbeidsledig'
 
 describe('Tester arbeidsledigsøknad', () => {
@@ -73,45 +79,28 @@ describe('Tester arbeidsledigsøknad', () => {
 
     it('Søknad TIL_SLUTT', () => {
         cy.url().should('include', `${soknad.id}/5`)
-        cy.get('.navds-checkbox__label').click()
-        it('Bekreftelsespunktene er riktige', () => {
-            const punkter = [
-                'Du kan bare få sykepenger hvis det er din egen sykdom eller skade som hindrer deg i å jobbe. Sosiale eller økonomiske problemer gir ikke rett til sykepenger.',
-                'Du kan miste retten til sykepenger hvis du nekter å opplyse om din egen arbeidsevne, eller hvis du ikke tar imot behandling eller tilrettelegging.',
-                'Retten til sykepenger gjelder bare pensjonsgivende inntekt du har på sykmeldingstidspunktet.',
-                'NAV kan innhente opplysninger som er nødvendige for å behandle søknaden.',
-                'Fristen for å søke sykepenger er som hovedregel 3 måneder',
-                'Du kan endre svarene i denne søknaden opp til 12 måneder etter du sendte den inn første gangen.',
-            ]
 
-            const lenkerMedTekst = [
-                {
-                    tekst: 'Du må melde fra til NAV hvis du satt i varetekt, sonet straff eller var under forvaring i sykmeldingsperioden.',
-                    url: 'https://www.nav.no/skriv-til-oss',
-                },
-                {
-                    tekst: 'Du må melde fra om studier som er påbegynt etter at du ble sykmeldt, og som ikke er avklart med NAV. Det samme gjelder hvis du begynner å studere mer enn du gjorde før du ble sykmeldt.',
-                    url: 'https://www.nav.no/skriv-til-oss',
-                },
-                {
-                    tekst: 'Du kan lese mer om rettigheter og plikter på',
-                    url: 'https://www.nav.no/sykepenger',
-                },
-            ]
-
-            punkter.forEach((punkt) => {
-                cy.contains(punkt)
-            })
-
-            lenkerMedTekst.forEach(({ tekst, url }) => {
-                cy.contains(tekst).find('a').should('have.attr', 'href', url)
-            })
-        })
-        cy.contains(
-            'Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.',
+        cy.get('.navds-guide-panel__content').contains(
+            'Nå kan du se over at alt er riktig før du sender inn søknaden. Ved behov kan du endre opplysningene inntil 12 måneder etter innsending.',
         )
-        cy.contains('Søknaden sendes til').should('not.exist')
 
+        cy.get('[data-cy="oppsummering-fra-søknaden"]').within(() => {
+            sporsmalOgSvar('Brukte du hele sykmeldingen fram til 24. april 2020?', 'Nei')
+                .children()
+                .within(() => {
+                    sporsmalOgSvar('Fra hvilken dato trengte du ikke lenger sykmeldingen?', '10.04.2020')
+                })
+            sporsmalOgSvar('Har du hatt inntekt mens du har vært sykmeldt i perioden 1. - 24. april 2020?', 'Ja')
+                .children()
+                .within(() => {
+                    sporsmalOgSvar('Hvilke inntektskilder har du hatt?', 'andre arbeidsforhold')
+                        .children()
+                        .within(() => {
+                            sporsmalOgSvar('Er du sykmeldt fra dette?', 'Ja')
+                        })
+                })
+        })
+        cy.contains('Søknaden sendes til').should('not.exist')
         cy.contains('Send søknaden').click()
     })
 

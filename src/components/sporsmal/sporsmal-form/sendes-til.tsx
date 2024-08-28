@@ -1,40 +1,39 @@
-import { BodyShort } from '@navikt/ds-react'
+import { FormSummary, List } from '@navikt/ds-react'
 import React from 'react'
 
 import { RSMottaker } from '../../../types/rs-types/rs-mottaker'
-import { getLedetekst, tekst } from '../../../utils/tekster'
 import { Soknad } from '../../../types/types'
-import { tekstMedHtml } from '../../../utils/html-react-parser-utils'
 import useMottakerSoknad from '../../../hooks/useMottakerSoknad'
-import SoknadenTekster from '../../soknad/soknaden-tekster'
 
 export default function SendesTil({ soknad }: { soknad: Soknad }) {
     const { data: mottaker } = useMottakerSoknad(soknad.id)
+    if (!soknad.arbeidsgiver) return null
 
-    let nokkel: keyof typeof SoknadenTekster | undefined
-    if (mottaker === RSMottaker.ARBEIDSGIVER) {
-        nokkel = 'sykepengesoknad.oppsummering.arbeidsgiver-som-mottaker'
-    }
-    if (mottaker === RSMottaker.NAV) {
-        nokkel = 'sykepengesoknad.oppsummering.nav-som-mottaker'
-    }
-    if (mottaker === RSMottaker.ARBEIDSGIVER_OG_NAV) {
-        nokkel = 'sykepengesoknad.oppsummering.nav-arbeidsgiver-som-mottaker'
-    }
-
-    if (!mottaker || !nokkel || soknad.arbeidssituasjon !== 'ARBEIDSTAKER') {
-        return null
+    let sendTil: string[]
+    switch (mottaker) {
+        case RSMottaker.ARBEIDSGIVER:
+            sendTil = [soknad.arbeidsgiver.navn]
+            break
+        case RSMottaker.NAV:
+            sendTil = ['NAV']
+            break
+        case RSMottaker.ARBEIDSGIVER_OG_NAV:
+            sendTil = ['NAV', soknad.arbeidsgiver.navn]
+            break
+        default:
+            sendTil = []
     }
 
     return (
-        <BodyShort as="div" className="mb-8 text-left">
-            {soknad.arbeidsgiver !== undefined
-                ? tekstMedHtml(
-                      getLedetekst(tekst(nokkel), {
-                          '%ARBEIDSGIVER%': soknad.arbeidsgiver.navn,
-                      }),
-                  )
-                : tekstMedHtml(tekst(nokkel))}
-        </BodyShort>
+        <FormSummary.Answer>
+            <FormSummary.Label>Søknaden sendes til</FormSummary.Label>
+            <FormSummary.Value>
+                <List>
+                    {sendTil.map((mottaker, index) => {
+                        return <List.Item key={index}>{mottaker} </List.Item>
+                    })}
+                </List>
+            </FormSummary.Value>
+        </FormSummary.Answer>
     )
 }

@@ -1,17 +1,24 @@
-import { Label } from '@navikt/ds-react'
+import { FormSummary } from '@navikt/ds-react'
 import React from 'react'
 
-import { Sporsmal } from '../../../types/types'
-import { OppsummeringProps, SporsmalVarianter } from '../oppsummering'
+import { OppsummeringProps } from '../oppsummering'
+
+import UndersporsmalSum from './undersporsmal-sum'
 
 const CheckboxGruppe = ({ sporsmal }: OppsummeringProps) => {
     return (
-        <>
-            <Label as="h3">{sporsmal.sporsmalstekst}</Label>
-            {sporsmal.undersporsmal.map((s: Sporsmal, idx) => (
-                <SporsmalVarianter sporsmal={s} key={idx} />
-            ))}
-        </>
+        <FormSummary.Answer>
+            {sporsmal.sporsmalstekst && (
+                <FormSummary.Label className="checkbox-label">{sporsmal.sporsmalstekst}</FormSummary.Label>
+            )}
+            <FormSummary.Value>
+                {sporsmal.undersporsmal.length > 0 && (
+                    <FormSummary.Answers>
+                        <UndersporsmalSum sporsmalsliste={sporsmal.undersporsmal} />
+                    </FormSummary.Answers>
+                )}
+            </FormSummary.Value>
+        </FormSummary.Answer>
     )
 }
 

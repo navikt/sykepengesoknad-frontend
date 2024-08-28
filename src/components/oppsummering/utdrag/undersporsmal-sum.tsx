@@ -12,11 +12,7 @@ const UndersporsmalSum = ({ sporsmalsliste = [] }: UndersporsmalProps) => {
         return undefined
     }
 
-    return sporsmalsliste.map((sporsmal, idx) => (
-        <div className="pl-4 pt-4" key={idx}>
-            <SporsmalVarianter sporsmal={sporsmal} />
-        </div>
-    ))
+    return sporsmalsliste.map((sporsmal, idx) => <SporsmalVarianter sporsmal={sporsmal} key={idx} />)
 }
 
 export default UndersporsmalSum

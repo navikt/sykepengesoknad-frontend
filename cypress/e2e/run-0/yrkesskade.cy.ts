@@ -1,4 +1,10 @@
-import { checkViStolerPaDeg, klikkGaVidere, neiOgVidere, svarJaHovedsporsmal } from '../../support/utilities'
+import {
+    checkViStolerPaDeg,
+    klikkGaVidere,
+    neiOgVidere,
+    sporsmalOgSvar,
+    svarJaHovedsporsmal,
+} from '../../support/utilities'
 import 'cypress-real-events'
 
 describe('Tester yrkesskadesspørsmål', () => {
@@ -91,12 +97,16 @@ describe('Tester yrkesskadesspørsmål', () => {
         cy.realPress('Enter')
     })
 
-    it('Vi ser de valgte skadedatoene i oppsymmeringa', function () {
-        cy.get('form').findByRole('region', { name: 'Oppsummering fra søknaden' }).click()
-
-        cy.findByRole('region', { name: 'Oppsummering fra søknaden' }).within(() => {
-            cy.findByText('Skadedato 2. april 1997 (Vedtaksdato 3. desember 1999)')
-            cy.findByText('Skadedato 1. januar 2020 (Vedtaksdato 5. april 2021)')
+    it('Vi ser de valgte skadedatoene i oppsummeringa', function () {
+        cy.get('[data-cy="oppsummering-fra-søknaden"]').within(() => {
+            sporsmalOgSvar(
+                'Hvilken skadedato skyldes dette sykefraværet? Du kan velge flere.',
+                'Skadedato 2. april 1997 (Vedtaksdato 3. desember 1999)',
+            )
+            sporsmalOgSvar(
+                'Hvilken skadedato skyldes dette sykefraværet? Du kan velge flere.',
+                'Skadedato 1. januar 2020 (Vedtaksdato 5. april 2021)',
+            )
         })
     })
 })

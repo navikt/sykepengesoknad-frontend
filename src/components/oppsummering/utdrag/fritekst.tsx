@@ -1,16 +1,19 @@
-import { BodyShort, Label } from '@navikt/ds-react'
+import { FormSummary } from '@navikt/ds-react'
 import React from 'react'
 
 import { OppsummeringProps } from '../oppsummering'
+import { hentSvar } from '../../sporsmal/hent-svar'
 
 const Fritekst = ({ sporsmal }: OppsummeringProps) => {
     if (sporsmal.svarliste.svar.length === 0) return null
     if (!sporsmal.svarliste.svar[0].verdi) return null
     return (
-        <>
-            <Label as="h3">{sporsmal.sporsmalstekst}</Label>
-            <BodyShort>{sporsmal.svarliste.svar[0].verdi}</BodyShort>
-        </>
+        <FormSummary.Answer>
+            {sporsmal.sporsmalstekst && (
+                <FormSummary.Label className="fritekst-label">{sporsmal.sporsmalstekst}</FormSummary.Label>
+            )}
+            <FormSummary.Value>{hentSvar(sporsmal)}</FormSummary.Value>
+        </FormSummary.Answer>
     )
 }
 

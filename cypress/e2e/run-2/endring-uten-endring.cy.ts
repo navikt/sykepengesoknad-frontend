@@ -10,7 +10,7 @@ describe('Tester endring uten en endringer', () => {
 
     it('Jeg vil endre svarene i søknaden', () => {
         // Endre søknaden
-        cy.contains('Jeg vil endre svarene i søknaden').click()
+        cy.findByRole('button', { name: 'Jeg vil endre svarene i søknaden' }).click()
         cy.findByRole('button', { name: 'Ok' }).click()
 
         // Ny søknad
@@ -36,12 +36,11 @@ describe('Tester endring uten en endringer', () => {
         cy.contains('Arbeid utenfor Norge')
 
         klikkGaVidere()
-        cy.contains('Oppsummering')
+        cy.contains('Oppsummering fra søknaden')
     })
 
     it('Vi ser en popup og lander på listevisninga', function () {
         cy.url().should('include', '/6')
-        cy.get('.navds-checkbox__label').click()
         cy.contains('Send endringene').click()
 
         cy.get('.navds-modal').contains('Du har ikke gjort noen endringer')

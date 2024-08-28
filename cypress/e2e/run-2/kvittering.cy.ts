@@ -15,7 +15,6 @@ import {
     klikkGaVidere,
     setPeriodeFraTil,
     sjekkMainContentFokus,
-    svarCheckboxPanel,
     svarNeiHovedsporsmal,
     svarCombobox,
     svarJaHovedsporsmal,
@@ -34,9 +33,6 @@ describe('Tester kvittering', () => {
             checkViStolerPaDeg()
             svarJaHovedsporsmal()
             klikkGaVidere()
-            cy.contains(
-                'Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.',
-            ).click()
             cy.contains('Send søknaden').click()
 
             // Sendt datoer
@@ -59,22 +55,8 @@ describe('Tester kvittering', () => {
                     'Du får vanligvis utbetalt sykepengene enten innen den 25. i måneden, eller innen fem dager etter at vi har sendt deg svar på søknaden din. Hvis søknaden din gjelder dager i to ulike kalendermåneder, kan utbetalingen bli delt i to. Les mer om når du kan forvente å få pengene.',
                 )
 
-            // Oppsummering minimert
-            cy.get('[data-cy="oppsummering-fra-søknaden"]  .navds-expansioncard__header-button').should(
-                'have.attr',
-                'aria-expanded',
-                'false',
-            )
-
-            // Opplysninger minimert
-            cy.get('[data-cy="opplysninger-fra-sykmeldingen"] .navds-expansioncard__header-button').should(
-                'have.attr',
-                'aria-expanded',
-                'false',
-            )
-
             // Knapperad ( Endre, Ettersend)
-            cy.contains('Jeg vil endre svarene i søknaden').should('exist')
+            cy.findByRole('button', { name: 'Jeg vil endre svarene i søknaden' }).should('exist')
         })
 
         it('Etter 30 dager', () => {
@@ -90,22 +72,8 @@ describe('Tester kvittering', () => {
             // Hva skjer videre skal ikke finnes
             cy.get('[data-cy="kvittering-panel"]').should('not.exist')
 
-            // Oppsummering ekspandert
-            cy.get('[data-cy="oppsummering-fra-søknaden"]  .navds-expansioncard__header-button').should(
-                'have.attr',
-                'aria-expanded',
-                'true',
-            )
-            // Opplysninger minimert
-
-            cy.get('[data-cy="opplysninger-fra-sykmeldingen"] .navds-expansioncard__header-button').should(
-                'have.attr',
-                'aria-expanded',
-                'false',
-            )
-
             // Knapperad ( Endre, Ettersend)
-            cy.contains('Jeg vil endre svarene i søknaden').should('exist')
+            cy.findByRole('button', { name: 'Jeg vil endre svarene i søknaden' }).should('exist')
         })
     })
 
@@ -132,9 +100,6 @@ describe('Tester kvittering', () => {
 
             svarNeiHovedsporsmal()
             klikkGaVidere()
-            cy.contains(
-                'Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.',
-            ).click()
             cy.contains('Send søknaden').click()
 
             // Sendt datoer
@@ -165,15 +130,8 @@ describe('Tester kvittering', () => {
                     'Saksbehandlingstiden regnes fra NAV har mottatt all nødvendig dokumentasjon. Etter dette må du regne med å vente minst fire uker før søknaden er behandlet. Sjekk saksbehandlingstidene',
                 )
 
-            // Oppsummering minimert
-            cy.get('[data-cy="oppsummering-fra-søknaden"]  .navds-expansioncard__header-button').should(
-                'have.attr',
-                'aria-expanded',
-                'false',
-            )
-
             // Knapperad finnes ikke
-            cy.contains('Jeg vil endre svarene i søknaden').should('not.exist')
+            cy.findByRole('button', { name: 'Jeg vil endre svarene i søknaden' }).should('not.exist')
             cy.contains('Jeg vil at søknaden skal behandles av NAV').should('not.exist')
             cy.contains('Jeg vil sende en kopi av søknaden til arbeidsgiveren min').should('not.exist')
         })
@@ -189,7 +147,6 @@ describe('Tester kvittering', () => {
             checkViStolerPaDeg()
             svarNeiHovedsporsmal()
             klikkGaVidere()
-            cy.get('[data-cy="bekreftCheckboksPanel"]').click()
             cy.contains('Send søknaden').click()
 
             // Sendt datoer
@@ -213,22 +170,8 @@ describe('Tester kvittering', () => {
                     'Du får vanligvis utbetalt sykepengene enten innen den 25. i måneden, eller innen fem dager etter at vi har sendt deg svar på søknaden din. Hvis søknaden din gjelder dager i to ulike kalendermåneder, kan utbetalingen bli delt i to. Les mer om når du kan forvente å få pengene.',
                 )
 
-            // Oppsummering minimert
-            cy.get('[data-cy="oppsummering-fra-søknaden"]  .navds-expansioncard__header-button').should(
-                'have.attr',
-                'aria-expanded',
-                'false',
-            )
-
-            // Opplysninger minimert
-            cy.get('[data-cy="opplysninger-fra-sykmeldingen"] .navds-expansioncard__header-button').should(
-                'have.attr',
-                'aria-expanded',
-                'false',
-            )
-
             // Knapperad ( Endre, Ettersend)
-            cy.contains('Jeg vil endre svarene i søknaden').should('exist')
+            cy.findByRole('button', { name: 'Jeg vil endre svarene i søknaden' }).should('exist')
             cy.contains('Jeg vil at søknaden skal behandles av NAV').should('not.exist')
             cy.contains('Jeg vil sende en kopi av søknaden til arbeidsgiveren min').should('not.exist')
         })
@@ -356,7 +299,6 @@ const besvarSoknad = () => {
     checkViStolerPaDeg()
     svarNeiHovedsporsmal()
     klikkGaVidere()
-    svarCheckboxPanel()
     cy.contains('Send søknaden').click()
     sjekkMainContentFokus()
     cy.get('[data-cy="kvittering"]')
@@ -379,22 +321,8 @@ const inntil16dagerKvittering = () => {
         .and('not.contain', 'NAV behandler søknaden')
         .and('not.contain', 'Når blir pengene utbetalt')
 
-    // Oppsummering minimert
-    cy.get('[data-cy="oppsummering-fra-søknaden"]  .navds-expansioncard__header-button').should(
-        'have.attr',
-        'aria-expanded',
-        'false',
-    )
-
-    // Opplysninger minimert
-    cy.get('[data-cy="opplysninger-fra-sykmeldingen"] .navds-expansioncard__header-button').should(
-        'have.attr',
-        'aria-expanded',
-        'false',
-    )
-
     // Knapperad ( Endre, Ettersend)
-    cy.contains('Jeg vil endre svarene i søknaden').should('exist')
+    cy.findByRole('button', { name: 'Jeg vil endre svarene i søknaden' }).should('exist')
     cy.contains('Jeg vil at søknaden skal behandles av NAV').should('not.exist')
     cy.contains('Jeg vil sende en kopi av søknaden til arbeidsgiveren min').should('not.exist')
 }
@@ -433,22 +361,9 @@ const over16dagerKvittering = () => {
     )
 
     inlineForklaringer()
-    // Oppsummering minimert
-    cy.get('[data-cy="oppsummering-fra-søknaden"]  .navds-expansioncard__header-button').should(
-        'have.attr',
-        'aria-expanded',
-        'false',
-    )
-
-    // Opplysninger minimert
-    cy.get('[data-cy="opplysninger-fra-sykmeldingen"] .navds-expansioncard__header-button').should(
-        'have.attr',
-        'aria-expanded',
-        'false',
-    )
 
     // Knapperad ( Endre, Ettersend)
-    cy.contains('Jeg vil endre svarene i søknaden').should('exist')
+    cy.findByRole('button', { name: 'Jeg vil endre svarene i søknaden' }).should('exist')
     cy.contains('Jeg vil at søknaden skal behandles av NAV').should('not.exist')
     cy.contains('Jeg vil sende en kopi av søknaden til arbeidsgiveren min').should('not.exist')
 }
@@ -485,22 +400,8 @@ const utenOppholdKvittering = () => {
         'https://www.nav.no/saksbehandlingstider#sykepenger',
     )
 
-    // Oppsummering minimert
-    cy.get('[data-cy="oppsummering-fra-søknaden"]  .navds-expansioncard__header-button').should(
-        'have.attr',
-        'aria-expanded',
-        'false',
-    )
-
-    // Opplysninger minimert
-    cy.get('[data-cy="opplysninger-fra-sykmeldingen"] .navds-expansioncard__header-button').should(
-        'have.attr',
-        'aria-expanded',
-        'false',
-    )
-
     // Knapperad ( Endre, Ettersend)
-    cy.contains('Jeg vil endre svarene i søknaden').should('exist')
+    cy.findByRole('button', { name: 'Jeg vil endre svarene i søknaden' }).should('exist')
     cy.contains('Jeg vil at søknaden skal behandles av NAV').should('not.exist')
     cy.contains('Jeg vil sende en kopi av søknaden til arbeidsgiveren min').should('exist')
 }
@@ -549,22 +450,8 @@ const medOppholdKvittering = () => {
         'https://www.nav.no/saksbehandlingstider#sykepenger',
     )
 
-    // Oppsummering minimert
-    cy.get('[data-cy="oppsummering-fra-søknaden"]  .navds-expansioncard__header-button').should(
-        'have.attr',
-        'aria-expanded',
-        'false',
-    )
-
-    // Opplysninger minimert
-    cy.get('[data-cy="opplysninger-fra-sykmeldingen"] .navds-expansioncard__header-button').should(
-        'have.attr',
-        'aria-expanded',
-        'false',
-    )
-
     // Knapperad ( Endre, Ettersend)
-    cy.contains('Jeg vil endre svarene i søknaden').should('exist')
+    cy.findByRole('button', { name: 'Jeg vil endre svarene i søknaden' }).should('exist')
     cy.contains('Jeg vil at søknaden skal behandles av NAV').should('not.exist')
     cy.contains('Jeg vil sende en kopi av søknaden til arbeidsgiveren min').should('exist')
 }

@@ -37,7 +37,7 @@ import {
     soknadSomTriggerSporsmalFinnesIkkeISoknad,
 } from './data/soknad/soknader-integration'
 import { feilVedSlettingAvKvittering } from './data/personas/reisetilskuddTestPerson'
-import { arbeidstaker } from './data/soknad/arbeidstaker'
+import { arbeidstaker, arbeidtakerMedGammelOppsummering } from './data/soknad/arbeidstaker'
 import { arbeidstakerGradert } from './data/soknad/arbeidstaker-gradert'
 import { avbruttOppholdUtland } from './data/soknad/opphold-utland'
 import { mockApiValiderSporsmal } from './mockApiValiderSporsmal'
@@ -269,11 +269,7 @@ export async function mockApi(req: NextApiRequest, res: NextApiResponse) {
             soknad.sendtTilArbeidsgiverDato = null
             soknad.sendtTilNAVDato = null
             soknad.sporsmal[0].svar = []
-            if (sisteSporsmal.tag === 'TIL_SLUTT') {
-                sisteSporsmal.undersporsmal[0].svar = []
-            } else {
-                sisteSporsmal.svar = []
-            }
+            sisteSporsmal.svar = []
 
             testperson.soknader.push(soknad)
 
@@ -523,6 +519,7 @@ export async function mockApi(req: NextApiRequest, res: NextApiResponse) {
 const mottaker = (soknadId: string): RSMottaker => {
     if (
         soknadId === arbeidstaker.id ||
+        soknadId === arbeidtakerMedGammelOppsummering().id ||
         soknadId === arbeidstakerUtenforArbeidsgiverperiodeKvittering.id ||
         soknadId === arbeidstakerDeltPeriodeForsteUtenforArbeidsgiverperiodeKvittering.id ||
         soknadId === arbeidstakerUtenOppholdForsteUtenforArbeidsgiverperiodeKvittering.id ||

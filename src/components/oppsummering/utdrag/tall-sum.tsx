@@ -1,10 +1,9 @@
-import { BodyShort, Label } from '@navikt/ds-react'
+import { FormSummary } from '@navikt/ds-react'
 import React from 'react'
 import { logger } from '@navikt/next-logger'
 
 import { RSSvartype } from '../../../types/rs-types/rs-svartype'
 import { tekst } from '../../../utils/tekster'
-import Vis from '../../vis'
 import { OppsummeringProps } from '../oppsummering'
 
 const TallSum = ({ sporsmal }: OppsummeringProps) => {
@@ -29,24 +28,27 @@ const TallSum = ({ sporsmal }: OppsummeringProps) => {
     }
 
     const undertekst = sporsmal.undertekst?.includes('Eksempel') === false ? sporsmal.undertekst : undefined
-    const label = undertekst || tekst(labelnokkel as any)
+    const label = () => {
+        switch (sporsmal.tag) {
+            case 'TILKOMMEN_INNTEKT_FORSTEGANG_BRUTTO':
+                return 'kroner før skatt'
+            default:
+                return undertekst || tekst(labelnokkel as any)
+        }
+    }
 
     return (
         <>
-            <Label as="h3">{sporsmal.sporsmalstekst}</Label>
-            <>
-                {sporsmal.svarliste.svar.map((svarverdi, index) => (
-                    <Vis
-                        hvis={svarverdi.verdi}
-                        key={index}
-                        render={() => (
-                            <BodyShort spacing>
-                                {svarverdi.verdi} {label}
-                            </BodyShort>
-                        )}
-                    />
-                ))}
-            </>
+            {sporsmal.svarliste.svar.map((svarverdi, index) => (
+                <FormSummary.Answer key={index}>
+                    {sporsmal.sporsmalstekst && (
+                        <FormSummary.Label className="tall-sum-label">{sporsmal.sporsmalstekst}</FormSummary.Label>
+                    )}
+                    <FormSummary.Value>
+                        {svarverdi.verdi} {label()}
+                    </FormSummary.Value>
+                </FormSummary.Answer>
+            ))}
         </>
     )
 }

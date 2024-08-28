@@ -4,6 +4,7 @@ import {
     klikkTilbake,
     setPeriodeFraTil,
     sjekkIntroside,
+    sporsmalOgSvar,
 } from '../../support/utilities'
 import { arbeidstakerGradert } from '../../../src/data/mock/data/soknad/arbeidstaker-gradert'
 
@@ -145,14 +146,12 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
         klikkGaVidere()
     })
 
-    it('Søknad ANSVARSERKLARING ', function () {
+    it('Søknad TIL_SLUTT ', function () {
         cy.url().should('include', `${soknad.id}/9`)
-        cy.contains('Oppsummering')
-        cy.contains(
-            'Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.',
-        )
-        cy.get('.navds-checkbox__label').click()
-        cy.contains('Søknaden sendes til Posten Norge AS, Bærum med kopi til NAV.')
+        cy.contains('Oppsummering fra søknaden')
+        cy.get('[data-cy="oppsummering-fra-søknaden"]').within(() => {
+            sporsmalOgSvar('Søknaden sendes til', 'Posten Norge AS, Bærum')
+        })
 
         cy.contains('Send søknaden').click()
     })

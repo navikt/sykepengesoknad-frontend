@@ -5,6 +5,7 @@ import { RSSvar } from '../../types/rs-types/rs-svar'
 
 export function mockApiValiderSporsmal(sporsmal: RSSporsmal): boolean {
     try {
+        if (sporsmal.tag === 'BEKREFT_OPPLYSNINGER') return true
         validerAntallSvar(sporsmal)
         validerSvarverdier(sporsmal)
         validerUndersporsmal(sporsmal)
@@ -12,7 +13,6 @@ export function mockApiValiderSporsmal(sporsmal: RSSporsmal): boolean {
         logger.error(`Validering av spørsmål med id ${sporsmal.id} feilet: ${e.message}`)
         return false
     }
-
     return true
 }
 
@@ -31,6 +31,8 @@ function validerAntallSvar(sporsmal: RSSporsmal): void {
             case 'TIMER':
             case 'TALL':
             case 'CHECKBOX':
+            case 'OPPSUMMERING':
+            case 'BEKREFTELSESPUNKTER':
                 return antall === 1
 
             case 'FRITEKST':
@@ -45,7 +47,6 @@ function validerAntallSvar(sporsmal: RSSporsmal): void {
                 return antall === 0
 
             case 'LAND':
-            case 'BEKREFTELSESPUNKTER':
             case 'COMBOBOX_SINGLE':
             case 'COMBOBOX_MULTI':
             case 'PERIODER':
@@ -62,7 +63,7 @@ function validerAntallSvar(sporsmal: RSSporsmal): void {
 
     if (!predikat(sporsmal.svar.length)) {
         throw new Error(
-            `Spørsmål med id ${sporsmal.id} og tag ${sporsmal.tag} har feil antall svar ${sporsmal.svar.length}`,
+            `Spørsmål med id ${sporsmal.id} og svartype ${sporsmal.svartype} og tag ${sporsmal.tag} har feil antall svar ${sporsmal.svar.length}`,
         )
     }
 }
@@ -77,7 +78,9 @@ function validerUndersporsmal(sporsmal: RSSporsmal): void {
                     `Spørsmål ${sporsmal.id} av typen ${sporsmal.svartype} må ha minst ett besvart underspørsmål`,
                 )
             }
-            besvarteUndersporsmal.forEach((usp) => mockApiValiderSporsmal(usp))
+            besvarteUndersporsmal.forEach((usp) => {
+                if (!mockApiValiderSporsmal(usp)) throw new Error(`Feil i underspørsmål ${usp.id}`)
+            })
             break
 
         case 'RADIO_GRUPPE':
@@ -87,10 +90,13 @@ function validerUndersporsmal(sporsmal: RSSporsmal): void {
                     `Spørsmål ${sporsmal.id} av typen ${sporsmal.svartype} må ha eksakt ett besvart underspørsmål, men har ${besvarteUndersporsmal.length}`,
                 )
             }
-            besvarteUndersporsmal.forEach((usp) => mockApiValiderSporsmal(usp))
+            besvarteUndersporsmal.forEach((usp) => {
+                if (!mockApiValiderSporsmal(usp)) throw new Error(`Feil i underspørsmål ${usp.id}`)
+            })
             break
 
         case 'BEKREFTELSESPUNKTER':
+        case 'OPPSUMMERING':
         case 'JA_NEI':
         case 'CHECKBOX':
         case 'CHECKBOX_PANEL':
@@ -118,10 +124,14 @@ function validerUndersporsmal(sporsmal: RSSporsmal): void {
                     sporsmal.svar.length === 1 &&
                     sporsmal.svar[0].verdi === sporsmal.kriterieForVisningAvUndersporsmal
                 ) {
-                    sporsmal.undersporsmal.forEach((usp) => mockApiValiderSporsmal(usp))
+                    sporsmal.undersporsmal.forEach((usp) => {
+                        if (!mockApiValiderSporsmal(usp)) throw new Error(`Feil i underspørsmål ${usp.id}`)
+                    })
                 }
             } else {
-                sporsmal.undersporsmal.forEach((usp) => mockApiValiderSporsmal(usp))
+                sporsmal.undersporsmal.forEach((usp) => {
+                    if (!mockApiValiderSporsmal(usp)) throw new Error(`Feil i underspørsmål ${usp.id}`)
+                })
             }
             break
 
@@ -144,7 +154,6 @@ function validerSvarverdi(sporsmal: RSSporsmal, svar: RSSvar): void {
 
         case 'COMBOBOX_SINGLE':
         case 'COMBOBOX_MULTI':
-        case 'BEKREFTELSESPUNKTER':
         case 'LAND':
             predikat = () => verdi.trim() !== ''
             break
@@ -155,8 +164,11 @@ function validerSvarverdi(sporsmal: RSSporsmal, svar: RSSvar): void {
 
         case 'CHECKBOX_PANEL':
         case 'RADIO':
-        case 'CHECKBOX':
             predikat = () => verdi === 'CHECKED'
+            break
+
+        case 'CHECKBOX':
+            predikat = () => verdi === 'CHECKED' || verdi === ''
             break
 
         case 'DATO':
@@ -200,10 +212,16 @@ function validerSvarverdi(sporsmal: RSSporsmal, svar: RSSvar): void {
         case 'INFO_BEHANDLINGSDAGER':
         case 'CHECKBOX_GRUPPE':
             throw new Error('Skal ha validert 0 svar allerede')
+
+        case 'BEKREFTELSESPUNKTER':
+        case 'OPPSUMMERING':
+            predikat = () => verdi === 'true'
     }
 
     if (!predikat()) {
-        throw new Error(`Spørsmål ${sporsmal.id} med tag ${sporsmal.svartype} har feil svarverdi ${verdi}`)
+        throw new Error(
+            `Spørsmål ${sporsmal.id} med svartype: ${sporsmal.svartype} og med tag: ${sporsmal.tag} har feil svarverdi: ${verdi}.`,
+        )
     }
 }
 

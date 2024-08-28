@@ -1,4 +1,4 @@
-import { checkViStolerPaDeg, klikkGaVidere, neiOgVidere, svarCheckboxPanel } from '../../support/utilities'
+import { checkViStolerPaDeg, klikkGaVidere, neiOgVidere } from '../../support/utilities'
 import { arbeidstakerGradert } from '../../../src/data/mock/data/soknad/arbeidstaker-gradert'
 
 describe('Tester ettersending og korrigering', () => {
@@ -21,11 +21,11 @@ describe('Tester ettersending og korrigering', () => {
             'Permisjon',
             'Jobb underveis i sykefraværet',
             'Arbeid utenfor Norge',
+            'Andre inntektskilder',
+            'Reise til utlandet',
         ])
-        neiOgVidere(['Andre inntektskilder', 'Reise til utlandet'])
 
-        cy.contains('Oppsummering')
-        svarCheckboxPanel()
+        cy.contains('Oppsummering fra søknaden')
         cy.contains('Send søknaden').click()
     })
 
@@ -43,6 +43,16 @@ describe('Tester ettersending og korrigering', () => {
 
         // Kan ikke ettersende til nav på kvittering
         cy.contains('Jeg vil at søknaden skal behandles av NAV').should('not.exist')
+    })
+
+    it('Korriger fra /sendt', () => {
+        cy.visit('/syk/sykepengesoknad')
+        cy.get(`a[href*=${soknad.id}]`).click()
+        cy.url().should('include', `/sendt/${soknad.id}`)
+
+        cy.findByRole('link', { name: 'Endre svar' }).click()
+        cy.findByRole('button', { name: 'Ok' }).click()
+        cy.url().should('include', `/1`)
     })
 
     it('Ettersend', () => {
@@ -65,8 +75,8 @@ describe('Tester ettersending og korrigering', () => {
     it('Korriger', () => {
         // Endre søknaden
         cy.url().should('include', `/sendt/${soknad.id}`)
-        cy.contains('Jeg vil endre svarene i søknaden').click()
-        cy.contains('Ok').click()
+        cy.findByRole('button', { name: 'Jeg vil endre svarene i søknaden' }).click()
+        cy.findByRole('button', { name: 'Ok' }).click()
 
         // Ny søknad
         cy.url().should('not.include', `/kvittering/${soknad.id}`)
@@ -84,10 +94,13 @@ describe('Tester ettersending og korrigering', () => {
         klikkGaVidere()
         klikkGaVidere()
         klikkGaVidere()
-        cy.get('.navds-checkbox__label').click()
         cy.contains('Send endringene').click()
 
         cy.url().should('include', `/kvittering/`)
+
+        cy.findByRole('link', { name: 'Endre svar' }).click()
+        cy.findByRole('button', { name: 'Ok' }).click()
+        cy.url().should('include', `/1`)
     })
 
     it('Søknad har teaser', () => {

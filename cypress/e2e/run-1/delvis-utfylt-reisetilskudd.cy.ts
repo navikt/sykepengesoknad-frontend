@@ -16,7 +16,6 @@ describe('Tester delvis utfylt søknad med reisetilskudd', () => {
     it('Går til første ubesvarte spørsmål', () => {
         cy.get(`a[href*=${delvisUtfyltSoknad.id}]`).click()
         cy.url().should('include', `${delvisUtfyltSoknad.id}/6`)
-        cy.get('[data-cy="bekreftCheckboksPanel"]').should('not.be.checked')
     })
 
     it('Forrige spørsmål er besvart', () => {

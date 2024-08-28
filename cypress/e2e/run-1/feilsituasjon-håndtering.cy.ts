@@ -94,9 +94,6 @@ describe('Tester feilsituasjoner ', () => {
         it('Når vi sender søknad som får 400 får vi en feilmelding som lar oss refreshe', function () {
             svarNeiHovedsporsmal()
             klikkGaVidere(true)
-            cy.contains(
-                'Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.',
-            ).click()
             cy.contains('Send søknaden').click()
             cy.contains(
                 'Vi har lagret dine svar, men du må laste inn siden på nytt før du kan sende søknaden. Klikk her for å laste inn siden på nytt.',
@@ -174,9 +171,6 @@ describe('Tester feilsituasjoner ', () => {
         it('Når vi sender søknad som får 500 får vi en feilmelding', function () {
             svarNeiHovedsporsmal()
             klikkGaVidere(true)
-            cy.contains(
-                'Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.',
-            ).click()
             cy.contains('Send søknaden').click()
             cy.contains('Beklager, det oppstod en teknisk feil.').click()
             cy.url().should(

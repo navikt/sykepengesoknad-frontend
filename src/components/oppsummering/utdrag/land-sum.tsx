@@ -1,31 +1,36 @@
-import { BodyShort, Label } from '@navikt/ds-react'
+import { FormSummary } from '@navikt/ds-react'
 import React from 'react'
 
 import { OppsummeringProps } from '../oppsummering'
+import { hentSvar } from '../../sporsmal/hent-svar'
+
+import UndersporsmalSum from './undersporsmal-sum'
 
 const LandSum = ({ sporsmal }: OppsummeringProps) => {
-    const svar = sporsmal.svarliste.svar
-    if (!svar || sporsmal.svarliste.svar.length === 0) {
-        return null
+    const landsvar = hentSvar(sporsmal)
+    let landliste: string[]
+    if (typeof landsvar === 'string') {
+        landliste = [landsvar]
+    } else {
+        landliste = landsvar
     }
 
-    const svarliste =
-        svar.length === 1 ? (
-            <BodyShort>{svar[0].verdi}</BodyShort>
-        ) : (
-            <ul>
-                {sporsmal.svarliste.svar.map((s) => (
-                    <BodyShort as="li" key={s.verdi.toString()}>
-                        {s.verdi}
-                    </BodyShort>
-                ))}
-            </ul>
-        )
     return (
-        <>
-            <Label as="h3">{sporsmal.sporsmalstekst}</Label>
-            {svarliste}
-        </>
+        <FormSummary.Answer>
+            {sporsmal.sporsmalstekst && (
+                <FormSummary.Label className="land-label">{sporsmal.sporsmalstekst}</FormSummary.Label>
+            )}
+            {landliste?.map((land, index) => {
+                return <FormSummary.Value key={index}>{land}</FormSummary.Value>
+            })}
+            <FormSummary.Value>
+                {sporsmal.undersporsmal.length > 0 && (
+                    <FormSummary.Answers className={`antall-svar-${sporsmal.undersporsmal.length}`}>
+                        <UndersporsmalSum sporsmalsliste={sporsmal.undersporsmal} />
+                    </FormSummary.Answers>
+                )}
+            </FormSummary.Value>
+        </FormSummary.Answer>
     )
 }
 

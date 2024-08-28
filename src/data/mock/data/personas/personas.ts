@@ -19,7 +19,7 @@ import { deepcopyMedNyId } from '../../deepcopyMedNyId'
 import { oppholdUtland } from '../soknad/opphold-utland'
 import { kortSoknadMedID } from '../../kort-soknad-med-id'
 import { arbeidstakerGradert } from '../soknad/arbeidstaker-gradert'
-import { arbeidstaker } from '../soknad/arbeidstaker'
+import { arbeidstaker, arbeidtakerMedGammelOppsummering } from '../soknad/arbeidstaker'
 import { arbeidsledig } from '../soknad/arbeidsledig'
 import { frilanser } from '../soknad/frilanser'
 import { behandlingsdager } from '../soknad/behandlingsdager'
@@ -101,7 +101,7 @@ export const clsPerson: Persona = {
 }
 
 export const arbeidstakerPerson: Persona = {
-    soknader: [arbeidstaker, arbeidstakerGradert],
+    soknader: [arbeidstaker, arbeidstakerGradert, arbeidtakerMedGammelOppsummering()],
     sykmeldinger: [arbeidstaker100Syk, arbeidstaker50Syk],
     beskrivelse: 'Arbeidstaker søknad',
 }

@@ -1,5 +1,5 @@
 import { RSSoknad } from '../../../../types/rs-types/rs-soknad'
-import { bekreftelse } from '../sporsmal/vaer-klar-over-at'
+import { oppsummering } from '../sporsmal/oppsummering'
 import { deepcopyMedNyId } from '../../deepcopyMedNyId'
 
 export const oppholdUtland: RSSoknad = {
@@ -82,7 +82,7 @@ export const oppholdUtland: RSSoknad = {
                 },
             ],
         },
-        bekreftelse(),
+        oppsummering(),
     ],
     egenmeldtSykmelding: null,
     opprettetAvInntektsmelding: false,

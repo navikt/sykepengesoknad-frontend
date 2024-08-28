@@ -1,6 +1,6 @@
 import { RSSoknad } from '../../../../types/rs-types/rs-soknad'
 import { arbeidsledig100Syk } from '../sykmeldinger'
-import { bekreftelse } from '../sporsmal/vaer-klar-over-at'
+import { oppsummering } from '../sporsmal/oppsummering'
 
 export const arbeidsledigMedNyOppholdUtenforESSporsmal: RSSoknad = {
     id: '934f39f4-cb47-459f-8209-0dbef6d36059',
@@ -303,7 +303,7 @@ export const arbeidsledigMedNyOppholdUtenforESSporsmal: RSSoknad = {
                 },
             ],
         },
-        bekreftelse(),
+        oppsummering(),
     ],
     egenmeldtSykmelding: false,
     opprettetAvInntektsmelding: false,
@@ -610,7 +610,7 @@ export const arbeidsledig: RSSoknad = {
                 },
             ],
         },
-        bekreftelse(),
+        oppsummering(),
     ],
     egenmeldtSykmelding: false,
     opprettetAvInntektsmelding: false,

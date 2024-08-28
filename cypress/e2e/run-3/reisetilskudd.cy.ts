@@ -1,4 +1,4 @@
-import { klikkGaVidere, klikkTilbake } from '../../support/utilities'
+import { klikkGaVidere, klikkTilbake, sporsmalOgSvar } from '../../support/utilities'
 import { nyttReisetilskudd } from '../../../src/data/mock/data/soknad/arbeidstaker-reisetilskudd'
 
 describe('Teste førsteside i reisetilskuddsøknaden', () => {
@@ -212,43 +212,56 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
     describe('Oppsummering - Reisetilskudd', () => {
         it('URL er riktig', () => {
             cy.url().should('include', `/soknader/${nyttReisetilskudd.id}/6`)
-            cy.get('[data-cy="sporsmal-tittel"]').should('have.text', 'Oppsummering')
-        })
-
-        it('Bekreftelsespunktene er riktige', () => {
-            const bekreftelser = [
-                'Retten til reisetilskudd gjelder bare hvis du trenger midlertidig transport til og fra arbeidsstedet på grunn av helseplager.',
-                'Du kan få reisetilskudd hvis du i utgangspunktet har rett til sykepenger.',
-                'NAV kan innhente flere opplysninger som er nødvendige for å behandle søknaden.',
-                'NAV kan holde igjen eller kreve tilbake penger hvis du gir uriktige eller ufullstendige opplysninger.',
-                'Det å gi feil opplysninger kan være straffbart.',
-                'Fristen for å søke reisetilskudd er som hovedregel 3 måneder.',
-                'Du kan endre svarene i denne søknaden opp til 12 måneder etter du sendte den inn første gangen.',
-            ]
-
-            bekreftelser.forEach((bekreftelse) => {
-                cy.contains(bekreftelse)
-            })
-            cy.contains('Du kan lese mer om rettigheter og plikter på')
-                .find('a')
-                .should('have.attr', 'href', 'https://www.nav.no/reisetilskudd')
+            cy.get('.navds-guide-panel__content').contains(
+                'Nå kan du se over at alt er riktig før du sender inn søknaden. Ved behov kan du endre opplysningene inntil 12 måneder etter innsending.',
+            )
         })
 
         it('Oppsummering inneholder riktig informasjon', () => {
-            cy.get('.oppsummering').click()
-            cy.get('.navds-expansioncard__content-inner > :nth-child(4)').should(
-                'include.text',
-                'Last opp kvitteringer for reiser til og fra jobben mellom 1. - 24. april 2020.',
-            )
-            cy.get('.navds-expansioncard__content-inner > :nth-child(4)').should(
-                'include.text',
-                'Du lastet opp 1 kvittering på 99 kr',
-            )
-            cy.get('.navds-checkbox__label').should(
-                'contain',
-                'Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.',
-            )
-            cy.get('[data-cy="bekreftCheckboksPanel"]').click()
+            cy.get('[data-cy="oppsummering-fra-søknaden"]').within(() => {
+                sporsmalOgSvar('Brukte du bil eller offentlig transport til og fra jobben før du ble sykmeldt?', 'Ja')
+                    .children()
+                    .within(() => {
+                        sporsmalOgSvar('Hva slags type transport brukte du?', 'Offentlig transport')
+                            .children()
+                            .within(() => {
+                                sporsmalOgSvar(
+                                    'Hvor mye betaler du vanligvis i måneden for offentlig transport?',
+                                    '1000 kroner',
+                                )
+                            })
+                    })
+                sporsmalOgSvar(
+                    'Reiste du med egen bil, leiebil eller kollega til jobben mellom 23. desember 2020 - 7. januar 2021?',
+                    'Ja',
+                )
+                    .children()
+                    .within(() => {
+                        sporsmalOgSvar(
+                            'Hvilke dager reiste du med bil i perioden 23. desember 2020 - 7. januar 2021?',
+                            '04.01.2021',
+                        )
+                            .and('contain', '05.01.2021')
+                            .and('contain', '06.01.2021')
+                        sporsmalOgSvar('Hadde du utgifter til bompenger?', 'Ja')
+                            .children()
+                            .within(() => {
+                                sporsmalOgSvar(
+                                    'Hvor mye betalte du i bompenger mellom hjemmet ditt og jobben?',
+                                    '1000 kroner',
+                                )
+                            })
+                        sporsmalOgSvar(
+                            'Hvor mange kilometer er kjøreturen mellom hjemmet ditt og jobben én vei?',
+                            '42 kilometer',
+                        )
+                    })
+                sporsmalOgSvar(
+                    'Last opp kvitteringer for reiser til og fra jobben mellom 1. - 24. april 2020.',
+                    'Du lastet opp 1 kvittering på 99 kr',
+                )
+                sporsmalOgSvar('Legger arbeidsgiveren din ut for reisene?', 'Ja')
+            })
 
             cy.contains('Send søknaden').click()
         })

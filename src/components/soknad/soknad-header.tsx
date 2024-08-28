@@ -3,41 +3,36 @@ import React from 'react'
 import { useSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 import { forsteBokstavLiten, tekst } from '../../utils/tekster'
-import { tilLesbarPeriodeMedArstall } from '../../utils/dato-utils'
 import { Banner } from '../banner/banner'
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 
-export const SoknadHeader = () => {
+export const SoknadHeader = ({ overskrivTittel }: { overskrivTittel?: string | undefined }) => {
     const { valgtSoknad } = useSoknadMedDetaljer()
 
-    const tittel = () => {
-        let tittel = ''
+    const finnTittel = (tittel?: string | undefined) => {
+        if (tittel) return tittel
+        let utTittel = ''
 
         switch (valgtSoknad?.soknadstype) {
             case RSSoknadstype.OPPHOLD_UTLAND:
-                tittel = tekst('sykepengesoknad-utland.tittel')
+                utTittel = tekst('sykepengesoknad-utland.tittel')
                 break
             case RSSoknadstype.REISETILSKUDD:
-                tittel = tekst('reisetilskuddsoknad.tittel')
+                utTittel = tekst('reisetilskuddsoknad.tittel')
                 break
             case RSSoknadstype.GRADERT_REISETILSKUDD:
-                tittel = tekst('gradert-reisetilskuddsoknad.tittel')
+                utTittel = tekst('gradert-reisetilskuddsoknad.tittel')
                 break
             default:
-                tittel = tekst('sykepengesoknad.sidetittel')
+                utTittel = tekst('sykepengesoknad.sidetittel')
         }
         if (valgtSoknad?.status === RSSoknadstatus.AVBRUTT) {
-            tittel = 'Fjernet ' + forsteBokstavLiten(tittel)
+            utTittel = 'Fjernet ' + forsteBokstavLiten(utTittel)
         }
-        return tittel
+        return utTittel
     }
-    if (!valgtSoknad) return <Banner overskrift={tittel()} underoverskrift="placeholder tekst" skeleton={true} />
-
-    function underoverskrift() {
-        if (valgtSoknad && valgtSoknad.fom && valgtSoknad.tom) {
-            return tilLesbarPeriodeMedArstall(valgtSoknad.fom, valgtSoknad.tom)
-        }
+    if (!valgtSoknad) {
+        return <Banner overskrift={finnTittel(overskrivTittel)} underoverskrift="placeholder tekst" skeleton={true} />
     }
-
-    return <Banner overskrift={tittel()} underoverskrift={underoverskrift()} />
+    return <Banner overskrift={finnTittel(overskrivTittel)} />
 }

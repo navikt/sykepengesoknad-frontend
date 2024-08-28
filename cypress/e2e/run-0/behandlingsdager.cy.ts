@@ -5,6 +5,7 @@ import {
     klikkTilbake,
     sjekkIntroside,
     svarNeiHovedsporsmal,
+    sporsmalOgSvar,
 } from '../../support/utilities'
 
 describe('Tester behandlingsdagersøknad', () => {
@@ -88,44 +89,19 @@ describe('Tester behandlingsdagersøknad', () => {
 
     it('Søknad TIL_SLUTT - steg 4', function () {
         cy.url().should('include', `${soknad.id}/5`)
-        cy.contains('Oppsummering')
-        it('Bekreftelsespunktene er riktige', () => {
-            const punkter = [
-                'Denne søknaden gjelder hvis selve behandlingen har en slik virkning på deg at du ikke kan jobbe resten av dagen. Grunnen er altså behandlingens effekt, og ikke at du for eksempel måtte bruke arbeidstid.',
-                'NAV kan innhente opplysninger som er nødvendige for å behandle søknaden.',
-                'Fristen for å søke sykepenger er som hovedregel 3 måneder.',
-                'Du kan endre svarene i denne søknaden opp til 12 måneder etter du sendte den inn første gangen.',
-            ]
-
-            punkter.forEach((punkt) => {
-                cy.contains(punkt)
-            })
-
-            cy.contains('Du kan lese mer om rettigheter og plikter på')
-                .find('a')
-                .should('have.attr', 'href', 'https://www.nav.no/sykepenger')
-        })
-        cy.get('.navds-checkbox__label').click()
-        cy.contains(
-            'Jeg har lest all informasjonen jeg har fått i søknaden og bekrefter at opplysningene jeg har gitt er korrekte.',
+        cy.contains('Oppsummering fra søknaden')
+        cy.get('.navds-guide-panel__content').contains(
+            'Nå kan du se over at alt er riktig før du sender inn søknaden. Ved behov kan du endre opplysningene inntil 12 måneder etter innsending.',
         )
-        cy.contains('Søknaden sendes til NAV.')
 
-        cy.get('.oppsummering').click()
-        cy.get('[data-cy="oppsummering__behandlingsdager"]')
-            .contains('1. – 3. april')
-            .siblings()
-            .should('contain', 'Ikke til behandling')
-        cy.get('[data-cy="oppsummering__behandlingsdager"]')
-            .contains('6. – 10. april')
-            .siblings()
-            .should('contain', '10. april')
-        cy.get('[data-cy="oppsummering__behandlingsdager"]')
-            .contains('13. – 17. april')
-            .siblings()
-            .should('contain', '15. april')
-        cy.get('[data-cy="oppsummering__behandlingsdager"]').contains('20. – 24. april')
-        cy.get('[data-cy="oppsummering__behandlingsdager"]').contains('Ikke til behandling')
+        cy.contains('Oppsummering fra søknaden')
+        cy.get('[data-cy="oppsummering-fra-søknaden"]').within(() => {
+            sporsmalOgSvar('Søknaden sendes til', 'NAV')
+            sporsmalOgSvar('1. – 3. april', 'Ikke til behandling')
+            sporsmalOgSvar('6. – 10. april', '10. april')
+            sporsmalOgSvar('13. – 17. april', '15. april')
+            sporsmalOgSvar('20. – 24. april', 'Ikke til behandling')
+        })
 
         cy.contains('Send søknaden').click()
     })
