@@ -3,7 +3,7 @@ import React from 'react'
 import { Controller, useFormContext } from 'react-hook-form'
 
 import { rodeUkeDagerIPerioden } from '../../../utils/helligdager-utils'
-import { finnHovedSporsmal, hentSporsmal, hentUndersporsmal } from "../../../utils/soknad-utils";
+import { finnHovedSporsmal, hentSporsmal, hentUndersporsmal } from '../../../utils/soknad-utils'
 import validerArbeidsgrad from '../../../utils/sporsmal/valider-arbeidsgrad'
 import { getLedetekst, tekst } from '../../../utils/tekster'
 import Vis from '../../vis'
@@ -23,8 +23,6 @@ const RadioTimerProsent = ({ sporsmal }: SpmProps) => {
         watchRadio = getValues(sporsmal.id)
     }
 
-
-    // watchTimer er lagt inn for å rendre prosent-alerten
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const watchTimer = watch(hentUndersporsmal(sporsmal!, 'HVOR_MYE_TIMER_VERDI')!.id)
     const errorTimer = errors[hentUndersporsmal(sporsmal!, 'HVOR_MYE_TIMER_VERDI')!.id]
@@ -32,13 +30,10 @@ const RadioTimerProsent = ({ sporsmal }: SpmProps) => {
     const feilmelding = hentFeilmelding(sporsmal)
     const { valgtSoknad } = useSoknadMedDetaljer()
 
-    const watchVanligeTimer = watch(hentSporsmal(valgtSoknad!, "HVOR_MANGE_TIMER_PER_UKE")!.id)
-    const watch40timerIUkenJaNei = watch(hentSporsmal(valgtSoknad!, "JOBBER_DU_NORMAL_ARBEIDSUKE")!.id)
-    // if (watchVanligeTimer === undefined) {
-    //     watchRadio = getValues(hentSporsmal(valgtSoknad!, "HVOR_MANGE_TIMER_PER_UKE")!.id)
-    // }
+    const watchVanligeTimer = watch(hentSporsmal(valgtSoknad!, 'HVOR_MANGE_TIMER_PER_UKE')!.id)
+    const watch40timerIUkenJaNei = watch(hentSporsmal(valgtSoknad!, 'JOBBER_DU_NORMAL_ARBEIDSUKE')!.id)
 
-    const { validerGrad, beregnGrad } = validerArbeidsgrad(sporsmal)
+    const { beregnGrad } = validerArbeidsgrad(sporsmal) // validerGrad,
 
     const lavereProsentHjelpTittel = tekst('ekspanderbarhjelp.prosenten_lavere_enn_forventet_arbeidstaker.tittel')
     return (
@@ -80,13 +75,8 @@ const RadioTimerProsent = ({ sporsmal }: SpmProps) => {
                     !Number.isNaN(beregnGrad!()) &&
                     beregnGrad?.() &&
                     !Number.isNaN(beregnGrad!() * 100) &&
-                    (watchVanligeTimer ||
-                     watch40timerIUkenJaNei === 'JA')
-                    // &&
-                    // beregnGrad() !== Infinity
-                    // &&
-                    // beregnGrad() !== Infinity &&
-                    // validerGrad!() == true
+                    (watchVanligeTimer || watch40timerIUkenJaNei === 'JA') &&
+                    beregnGrad() !== Infinity
                 }
                 render={() => (
                     <Alert variant="info" style={{ marginTop: '1rem' }}>
@@ -98,18 +88,6 @@ const RadioTimerProsent = ({ sporsmal }: SpmProps) => {
                     </Alert>
                 )}
             />
-
-            {/*<br/>*/}
-            {/*<pre>*/}
-            {/*    {JSON.stringify(sporsmal, null, 2)}*/}
-            {/*</pre>*/}
-            {/*<pre>*/}
-            {/*    {JSON.stringify(hentUndersporsmal(sporsmal!, 'HVOR_MYE_TIMER_VERDI'), null, 2)}*/}
-            {/*</pre>*/}
-            {/*<br/>*/}
-            {/*{valgtSoknad && hentSporsmal(valgtSoknad, "HVOR_MANGE_TIMER_PER_UKE") ? "fant det!" : "fant det ikke!"}*/}
-            {/*<br/>*/}
-            {/*{valgtSoknad && JSON.stringify(hentSporsmal(valgtSoknad, "HVOR_MANGE_TIMER_PER_UKE"), null, 2)}*/}
 
             <Vis
                 hvis={errorTimer && rodeUkeDagerIPerioden(valgtSoknad!.fom, valgtSoknad!.tom)}
@@ -123,7 +101,6 @@ const RadioTimerProsent = ({ sporsmal }: SpmProps) => {
                         </BodyLong>
                         {watch40timerIUkenJaNei}
                     </ReadMore>
-
                 )}
             />
         </>

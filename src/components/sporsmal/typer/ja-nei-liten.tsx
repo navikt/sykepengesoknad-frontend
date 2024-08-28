@@ -94,7 +94,6 @@ const JaNeiLiten = ({ sporsmal }: SpmProps) => {
                         </RadioGroup>
                     )}
                 />
-
             </div>
 
             <Vis
@@ -138,9 +137,6 @@ const JaNeiLiten = ({ sporsmal }: SpmProps) => {
             {sporsmal.tag === 'INNTEKTSOPPLYSNINGER_VARIG_ENDRING_25_PROSENT' && watchJaNei === 'JA' && (
                 <VarigEndringAlert />
             )}
-            <pre>
-                            {/*{JSON.stringify(sporsmal, null, 2)}*/}
-            </pre>
         </>
     )
 }
