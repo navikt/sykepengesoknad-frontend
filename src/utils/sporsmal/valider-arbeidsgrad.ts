@@ -70,10 +70,18 @@ const useValiderArbeidsgrad = (sporsmal: Sporsmal) => {
 
     const beregnGrad = () => {
         const values = getValues()
+
+        const watch40timerIUkenJaNei = hentSporsmal(valgtSoknad!, "JOBBER_DU_NORMAL_ARBEIDSUKE")!.id
         const timerPerUkeId = hentUndersporsmal(hovedSporsmal!, 'HVOR_MANGE_TIMER_PER_UKE')!.id
         const faktiskTimerId = hentUndersporsmal(hovedSporsmal!, 'HVOR_MYE_TIMER_VERDI')!.id
 
-        const timerPerUke = parseFloat(values[timerPerUkeId])
+        let timerPerUke = undefined
+        if (values[watch40timerIUkenJaNei] === 'JA') {
+             timerPerUke = 37.5
+        } else {
+            timerPerUke = parseFloat(values[timerPerUkeId])
+        }
+
         const faktiskTimer = parseFloat(values[faktiskTimerId])
 
         const faktiskeSykedager =
