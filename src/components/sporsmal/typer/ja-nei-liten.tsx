@@ -139,7 +139,7 @@ const JaNeiLiten = ({ sporsmal }: SpmProps) => {
                 <VarigEndringAlert />
             )}
             <pre>
-                            {JSON.stringify(sporsmal, null, 2)}
+                            {/*{JSON.stringify(sporsmal, null, 2)}*/}
             </pre>
         </>
     )

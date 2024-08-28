@@ -79,8 +79,11 @@ const RadioTimerProsent = ({ sporsmal }: SpmProps) => {
                     watchRadio?.toLowerCase() === 'timer' &&
                     !Number.isNaN(beregnGrad!()) &&
                     beregnGrad?.() &&
-                    watchVanligeTimer &&
-                    watch40timerIUkenJaNei
+                    !Number.isNaN(beregnGrad!() * 100) &&
+                    (watchVanligeTimer ||
+                     watch40timerIUkenJaNei === 'JA')
+                    // &&
+                    // beregnGrad() !== Infinity
                     // &&
                     // beregnGrad() !== Infinity &&
                     // validerGrad!() == true
@@ -96,17 +99,17 @@ const RadioTimerProsent = ({ sporsmal }: SpmProps) => {
                 )}
             />
 
-            <br/>
-            <pre>
-                {JSON.stringify(sporsmal, null, 2)}
-            </pre>
-            <pre>
-                {JSON.stringify(hentUndersporsmal(sporsmal!, 'HVOR_MYE_TIMER_VERDI'), null, 2)}
-            </pre>
-            <br/>
-            {valgtSoknad && hentSporsmal(valgtSoknad, "HVOR_MANGE_TIMER_PER_UKE") ? "fant det!" : "fant det ikke!"}
-            <br/>
-            {valgtSoknad && JSON.stringify(hentSporsmal(valgtSoknad, "HVOR_MANGE_TIMER_PER_UKE"), null, 2)}
+            {/*<br/>*/}
+            {/*<pre>*/}
+            {/*    {JSON.stringify(sporsmal, null, 2)}*/}
+            {/*</pre>*/}
+            {/*<pre>*/}
+            {/*    {JSON.stringify(hentUndersporsmal(sporsmal!, 'HVOR_MYE_TIMER_VERDI'), null, 2)}*/}
+            {/*</pre>*/}
+            {/*<br/>*/}
+            {/*{valgtSoknad && hentSporsmal(valgtSoknad, "HVOR_MANGE_TIMER_PER_UKE") ? "fant det!" : "fant det ikke!"}*/}
+            {/*<br/>*/}
+            {/*{valgtSoknad && JSON.stringify(hentSporsmal(valgtSoknad, "HVOR_MANGE_TIMER_PER_UKE"), null, 2)}*/}
 
             <Vis
                 hvis={errorTimer && rodeUkeDagerIPerioden(valgtSoknad!.fom, valgtSoknad!.tom)}
@@ -118,7 +121,9 @@ const RadioTimerProsent = ({ sporsmal }: SpmProps) => {
                         <BodyLong spacing>
                             {tekst('ekspanderbarhjelp.prosenten_lavere_enn_forventet_arbeidstaker.innhold2')}
                         </BodyLong>
+                        {watch40timerIUkenJaNei}
                     </ReadMore>
+
                 )}
             />
         </>
