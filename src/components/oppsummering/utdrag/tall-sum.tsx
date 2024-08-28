@@ -30,7 +30,7 @@ const TallSum = ({ sporsmal }: OppsummeringProps) => {
     const undertekst = sporsmal.undertekst?.includes('Eksempel') === false ? sporsmal.undertekst : undefined
     const label = () => {
         switch (sporsmal.tag) {
-            case 'TILKOMMEN_INNTEKT_FORSTEGANG_BRUTTO':
+            case 'TILKOMMEN_INNTEKT_BRUTTO':
                 return 'kroner før skatt'
             default:
                 return undertekst || tekst(labelnokkel as any)

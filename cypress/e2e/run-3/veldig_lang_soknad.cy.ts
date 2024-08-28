@@ -355,10 +355,7 @@ describe('Tester støtte for gamle spørsmål', () => {
         gaVidere()
     })
     it('Søknad TIL_SLUTT', () => {
-        sporsmalOgSvar(
-            'Hvor mye har du tjent i perioden fra den første arbeidsdagen frem til 24. april?',
-            '25000 kroner før skatt',
-        )
+        sporsmalOgSvar('Hvor mye har du tjent i perioden 20. – 24. april 2020?', '25000 kroner før skatt')
 
         cy.contains('Send søknaden').click()
     })
