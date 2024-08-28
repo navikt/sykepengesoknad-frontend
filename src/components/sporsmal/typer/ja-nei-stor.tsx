@@ -72,8 +72,8 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
             <div>
                 {skalHaInntektsbulletpoints && <Inntektsbulletpoints soknad={valgtSoknad} />}
                 {skalViseKjentOppholdstillatelse && <KjentOppholdstillatelse soknad={valgtSoknad} />}
-                {sporsmal.tag === 'TILKOMMEN_INNTEKT_FORSTEGANG' && <NyttArbeidsforhold spm={sporsmal} />}
-                {sporsmal.tag === 'TILKOMMEN_INNTEKT_PAFOLGENDE' && <NyttArbeidsforholdPafolgende spm={sporsmal} />}
+                {sporsmal.tag === 'NYTT_ARBEIDSFORHOLD_FORSTEGANG' && <NyttArbeidsforhold spm={sporsmal} />}
+                {sporsmal.tag === 'NYTT_ARBEIDSFORHOLD_PAFOLGENDE' && <NyttArbeidsforholdPafolgende spm={sporsmal} />}
 
                 <Controller
                     name={sporsmal.id}
