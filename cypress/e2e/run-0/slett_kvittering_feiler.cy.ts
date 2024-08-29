@@ -22,7 +22,7 @@ describe('Test sletting av kvittering som feiler', () => {
         it('Liste med kvitteringer er oppdatert', () => {
             cy.get('.navds-table').within(() => {
                 cy.contains('Taxi')
-                cy.contains('1.234 kr')
+                cy.contains('1 234 kr')
                 cy.contains('1 utgift på til sammen')
             })
         })
