@@ -86,10 +86,17 @@ const JaNeiLiten = ({ sporsmal }: SpmProps) => {
                             error={fieldState.error && feilmelding.lokal}
                         >
                             {inntektMetadata && (
-                                <BodyShort>
-                                    Din inntekt på sykmeldingstidspunktet:{' '}
-                                    <strong>{formatterTall(inntektMetadata.beregnet.snitt)}</strong> kroner.
-                                </BodyShort>
+                                <>
+                                    <BodyShort className="mt-4">
+                                        Din inntekt på sykmeldingstidspunktet:{' '}
+                                        <strong>{formatterTall(inntektMetadata.beregnet.snitt)}</strong> kroner.
+                                    </BodyShort>
+                                    <BodyShort className="mt-4">
+                                        Har du en inntekt som gjør at du tjener mindre enn{' '}
+                                        <strong>{formatterTall(inntektMetadata.beregnet.m25)}</strong> kroner eller mer
+                                        enn <strong>{formatterTall(inntektMetadata.beregnet.p25)}</strong> kroner?
+                                    </BodyShort>
+                                </>
                             )}
                             <EkspanderbarHjelp sporsmal={sporsmal} mb="mb-4" />
 
