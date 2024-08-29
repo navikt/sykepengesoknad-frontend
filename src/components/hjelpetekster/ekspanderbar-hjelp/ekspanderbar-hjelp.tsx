@@ -8,6 +8,7 @@ import { logEvent } from '../../amplitude/amplitude'
 import { tekstMedHtml } from '../../../utils/html-react-parser-utils'
 import { useSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
 import { Sporsmal } from '../../../types/types'
+import { formatterTall } from '../../../utils/utils'
 
 import { AndreInntektskilderHjelpBody } from './andre-inntektskilder-hjelp-body'
 import { EkspanderbarHjelpTekster } from './ekspanderbar-hjelp-tekst'
@@ -113,7 +114,7 @@ export const EkspanderbarHjelp = ({ sporsmal, mb }: { sporsmal: Sporsmal; mb?: s
             case 'KJENTE_INNTEKTSKILDER':
                 return <KjenteInntektkilderHjelpBody />
             case 'INNTEKTSOPPLYSNINGER_VARIG_ENDRING_25_PROSENT':
-                return <VarigEndring25prosent />
+                return <VarigEndring25prosent sporsmal={sporsmal} />
             case 'INNTEKTSOPPLYSNINGER_DRIFT_VIRKSOMHETEN':
                 return <DriftIVirksomhet />
             case 'INNTEKTSOPPLYSNINGER_VIRKSOMHETEN_AVVIKLET':
@@ -138,7 +139,7 @@ export const EkspanderbarHjelp = ({ sporsmal, mb }: { sporsmal: Sporsmal; mb?: s
     function lagTittel(nokkel: string): string {
         if (sporsmal.tag === 'INNTEKTSOPPLYSNINGER_VARIG_ENDRING_25_PROSENT' && sporsmal.metadata?.inntekt) {
             const { 'beregnet-snitt': beregnetSnitt } = sporsmal.metadata.inntekt as Record<string, number>
-            return `Hvordan har vi kommet frem til ${beregnetSnitt} kroner?`
+            return `Hvordan har vi kommet frem til ${formatterTall(beregnetSnitt)} kroner?`
         } else {
             return (
                 EkspanderbarHjelpTekster[
