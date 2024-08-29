@@ -135,19 +135,27 @@ export const EkspanderbarHjelp = ({ sporsmal, mb }: { sporsmal: Sporsmal; mb?: s
         return null
     }
 
-    const tittel =
-        EkspanderbarHjelpTekster[
-            `ekspanderbarhjelp.${nokkel.toLowerCase()}.tittel` as keyof typeof EkspanderbarHjelpTekster
-        ] || 'Spørsmålet forklart'
+    function lagTittel(nokkel: string): string {
+        if (sporsmal.tag === 'INNTEKTSOPPLYSNINGER_VARIG_ENDRING_25_PROSENT' && sporsmal.metadata?.inntekt) {
+            const { 'beregnet-snitt': beregnetSnitt } = sporsmal.metadata.inntekt as Record<string, number>
+            return `Hvordan har vi kommet frem til ${beregnetSnitt} kroner?`
+        } else {
+            return (
+                EkspanderbarHjelpTekster[
+                    `ekspanderbarhjelp.${nokkel.toLowerCase()}.tittel` as keyof typeof EkspanderbarHjelpTekster
+                ] || 'Spørsmålet forklart'
+            )
+        }
+    }
 
     return (
         <ReadMore
             className={`${mb ?? 'mb-8'} mt-4 w-full`}
-            header={tittel}
+            header={lagTittel(nokkel)}
             open={expanded}
             onClick={() => {
                 logEvent(expanded ? 'readmore lukket' : 'readmore åpnet', {
-                    tittel: tittel,
+                    tittel: lagTittel(nokkel),
                     component: 'hjelpetekst',
                     spørsmål: nokkel,
                 })
