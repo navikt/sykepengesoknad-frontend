@@ -16,8 +16,8 @@ import { tekstMedHtml } from '../../../utils/html-react-parser-utils'
 import { EkspanderbarHjelp } from '../../hjelpetekster/ekspanderbar-hjelp/ekspanderbar-hjelp'
 import { VarigEndringEksempler } from '../../hjelpetekster/varig-endring-eksempler'
 import { VarigEndringAlert } from '../../hjelpetekster/varig-endring-alert'
-import { hentInntektMetadata } from '../../../utils/ferdiglignet-inntekt'
 import { formatterTall } from '../../../utils/utils'
+import { hentInntektMetadata } from '../../../utils/ferdiglignet-inntekt'
 
 const JaNeiLiten = ({ sporsmal }: SpmProps) => {
     const { watch, getValues } = useFormContext()
@@ -63,9 +63,7 @@ const JaNeiLiten = ({ sporsmal }: SpmProps) => {
     }
 
     const inntektMetadata =
-        sporsmal.tag === 'INNTEKTSOPPLYSNINGER_VARIG_ENDRING_25_PROSENT' &&
-        sporsmal.metadata?.inntekt &&
-        hentInntektMetadata(sporsmal.metadata.inntekt as Record<string, number>)
+        sporsmal.tag === 'INNTEKTSOPPLYSNINGER_VARIG_ENDRING_25_PROSENT' && hentInntektMetadata(sporsmal)
 
     return (
         <>

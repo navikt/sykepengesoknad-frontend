@@ -1,3 +1,5 @@
+import { Sporsmal } from '../types/types'
+
 function parseVerdierMedPrefix(inntekt: Record<string, number>, prefix: string): Record<string, number> {
     const ferdiglignetInntekt: Record<string, number> = {}
 
@@ -11,10 +13,13 @@ function parseVerdierMedPrefix(inntekt: Record<string, number>, prefix: string):
     return ferdiglignetInntekt
 }
 
-export function hentInntektMetadata(inntekt: Record<string, number>): Record<string, Record<string, number>> {
-    return {
-        inntekt: parseVerdierMedPrefix(inntekt, 'inntekt-'),
-        g: parseVerdierMedPrefix(inntekt, 'g-'),
-        beregnet: parseVerdierMedPrefix(inntekt, 'beregnet-'),
-    }
+export function hentInntektMetadata(sporsmal: Sporsmal) {
+    const inntektMetadata = sporsmal.metadata?.inntekt as Record<string, number>
+    return (
+        inntektMetadata && {
+            inntekt: parseVerdierMedPrefix(inntektMetadata, 'inntekt-'),
+            g: parseVerdierMedPrefix(inntektMetadata, 'g-'),
+            beregnet: parseVerdierMedPrefix(inntektMetadata, 'beregnet-'),
+        }
+    )
 }
