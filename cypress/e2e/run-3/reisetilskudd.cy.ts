@@ -140,9 +140,9 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
         it('Fil list oppdateres med kvittering', () => {
             cy.get('.navds-table').within(() => {
                 cy.contains('Taxi')
-                cy.contains('1.234 kr')
+                cy.contains('1 234 kr')
                 cy.contains('1 utgift på til sammen')
-                cy.contains('1.234 kr')
+                cy.contains('1 234 kr')
             })
         })
 
