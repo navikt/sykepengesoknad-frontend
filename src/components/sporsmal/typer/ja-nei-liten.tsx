@@ -1,7 +1,6 @@
 import { Alert, BodyShort, Radio, RadioGroup } from '@navikt/ds-react'
 import React, { Fragment } from 'react'
 import { Controller, useFormContext } from 'react-hook-form'
-import { PiggybankIcon } from '@navikt/aksel-icons'
 
 import { SvarEnums } from '../../../types/enums'
 import { getLedetekst, tekst } from '../../../utils/tekster'
@@ -87,33 +86,10 @@ const JaNeiLiten = ({ sporsmal }: SpmProps) => {
                             error={fieldState.error && feilmelding.lokal}
                         >
                             {inntektMetadata && (
-                                <InfoBoks>
-                                    <div className="flex">
-                                        <PiggybankIcon title="sparegris" fontSize="1.5rem" />
-                                        <BodyShort className="mb-4 ml-2 font-semibold">
-                                            Inntektsopplysninger fra Skatteetaten
-                                        </BodyShort>
-                                    </div>
-                                    {Object.entries(inntektMetadata.inntekt).map(([year, inntektValue]) => (
-                                        <BodyShort key={year}>
-                                            {`${year}: ${formatterTall(inntektValue)} kr`}
-                                            {inntektMetadata.g[year] &&
-                                                ` (G: ${formatterTall(inntektMetadata.g[year])} kr)`}
-                                        </BodyShort>
-                                    ))}
-                                    <BodyShort className="mt-4">
-                                        G ved sykmeldingstidspunkt: {formatterTall(inntektMetadata.g.sykmelding)} kr.
-                                    </BodyShort>
-                                    <BodyShort className="mt-4">
-                                        Gjennomsnitt: {formatterTall(inntektMetadata.beregnet.snitt)} kr.
-                                    </BodyShort>
-                                    <BodyShort>
-                                        Gjennomsnitt: {formatterTall(inntektMetadata.beregnet.m25)} kr (- 25 %)
-                                    </BodyShort>
-                                    <BodyShort>
-                                        Gjennomsnitt: {formatterTall(inntektMetadata.beregnet.p25)} kr (+ 25 %)
-                                    </BodyShort>
-                                </InfoBoks>
+                                <BodyShort>
+                                    Din inntekt på sykmeldingstidspunktet:{' '}
+                                    <strong>{formatterTall(inntektMetadata.beregnet.snitt)}</strong> kroner.
+                                </BodyShort>
                             )}
                             <EkspanderbarHjelp sporsmal={sporsmal} mb="mb-4" />
 
@@ -179,7 +155,3 @@ const JaNeiLiten = ({ sporsmal }: SpmProps) => {
 }
 
 export default JaNeiLiten
-
-const InfoBoks = ({ children }: { children: React.ReactNode }) => (
-    <p className="mb-6 p-3 rounded bg-surface-info-subtle">{children}</p>
-)
