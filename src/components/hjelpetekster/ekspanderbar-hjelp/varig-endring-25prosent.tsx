@@ -16,7 +16,7 @@ export const VarigEndring25prosent = ({ sporsmal }: VarigEndring25prosentProps) 
             <BodyShort spacing>Vi henter inntekten din fra Skatteetaten, og bruker ferdig lignet årsinntekt.</BodyShort>
             {inntektMetadata && (
                 <>
-                    <BodyShort className="mt-4">
+                    <BodyShort spacing>
                         Så regnes den gjennomsnittelige årsinntekten ut basert på de tre siste årene, slik at din
                         gjennomsnittelige årsinntekt blir{' '}
                         <strong>{formatterTall(inntektMetadata.beregnet.snitt)}</strong> kroner.
