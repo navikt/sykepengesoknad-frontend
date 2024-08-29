@@ -85,7 +85,7 @@ const JaNeiLiten = ({ sporsmal }: SpmProps) => {
                         >
                             {inntektMetadata && (
                                 <>
-                                    <BodyShort spacing>
+                                    <BodyShort className="mt-4" spacing>
                                         Din inntekt på sykmeldingstidspunktet:{' '}
                                         <strong>{formatterTall(inntektMetadata.beregnet.snitt)}</strong> kroner.
                                     </BodyShort>
