@@ -1,6 +1,6 @@
-import { Soknad } from '../../../types/soknad'
+import { Soknad } from '../../../types/types'
 import { Alert, BodyLong, BodyShort, Radio, RadioGroup, ReadMore } from '@navikt/ds-react'
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Controller, useFormContext } from 'react-hook-form'
 
 import { rodeUkeDagerIPerioden } from '../../../utils/helligdager-utils'
@@ -20,6 +20,8 @@ interface TimerProsentAlertProps {
     validerGrad: (() => string | true) | undefined;
     tekst: typeof tekst;
     valgtSoknad: Soknad;
+    timerValue: number | null;
+    watchTimer: string | null;
 }
 
 export const TimerProsentAlert: React.FC<TimerProsentAlertProps> = ({
@@ -28,16 +30,41 @@ export const TimerProsentAlert: React.FC<TimerProsentAlertProps> = ({
     validerGrad,
     tekst,
     valgtSoknad,
+    timerValue,
+    watchTimer,
 }) => {
     const shouldShow = beregnGrad && 
         watchRadio?.toLowerCase() === 'timer' &&
         beregnGrad() !== undefined &&
         beregnGrad() !== Infinity &&
-        validerGrad?.() === true;
+        validerGrad?.() === true &&
+        timerValue !== null
+        && watchTimer !== null;
 
-    if (!shouldShow) return null;
+    if (!shouldShow) return ( <pre>
+        new:
+        <br />
+        {watchRadio}
+        <br />
+        <pre>
+        {true || JSON.stringify(valgtSoknad, null, 2)}
+        </pre>
+        <br />
+        <pre>
+        {JSON.stringify(timerValue, null, 2)}
+        </pre>
+        <pre>
+        {JSON.stringify(watchTimer, null, 2)}
+        </pre>
+    </pre>);
 
-    
+    /*
+    export const hentSporsmal = (soknad: Soknad, tag: string): Sporsmal | undefined => {
+        return flattenSporsmal(soknad.sporsmal).find((spm) => spm.tag === tag)
+    }*/
+
+    // const normalArbeidsuke = hentSporsmal(valgtSoknad, "JOBBER_DU_NORMAL_ARBEIDSUKE")
+
 
 
 
@@ -55,9 +82,17 @@ export const TimerProsentAlert: React.FC<TimerProsentAlertProps> = ({
                 <pre>
                     stringified:
                     <br />
+                    valgt soknad;
+                    <pre>
+                        {JSON.stringify(valgtSoknad, null, 2)}
+                    </pre>
+                    <br />
                     {JSON.stringify(hentSporsmal(valgtSoknad, "JOBBER_DU_NORMAL_ARBEIDSUKE"))}
                     <br />
-                    {JSON.stringify(valgtSoknad)}
+                    
+                    <br />
+                    {JSON.stringify(timerValue)}
+                    {JSON.stringify(watchTimer)}
                 </pre>
             </div>
         </>
@@ -75,10 +110,16 @@ const RadioTimerProsent = ({ sporsmal }: SpmProps) => {
         watchRadio = getValues(sporsmal.id)
     }
 
-    // watchTimer er lagt inn for å rendre prosent-alerten
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const watchTimer = watch(hentUndersporsmal(sporsmal!, 'HVOR_MYE_TIMER_VERDI')!.id)
-    const errorTimer = errors[hentUndersporsmal(sporsmal!, 'HVOR_MYE_TIMER_VERDI')!.id]
+    const [timerValue, setTimerValue] = useState<number | null>(null)
+    const timerUndersporsmal = hentUndersporsmal(sporsmal, 'HVOR_MYE_TIMER_VERDI_0')
+    const watchTimer = timerUndersporsmal && timerUndersporsmal.id ? watch(timerUndersporsmal.id) : undefined
+
+    useEffect(() => {
+        if (watchTimer) {
+        const numericValue = parseFloat(watchTimer)
+        setTimerValue(isNaN(numericValue) ? null : numericValue)
+        }
+    }, [watchTimer])
 
     const feilmelding = hentFeilmelding(sporsmal)
     const { valgtSoknad } = useSoknadMedDetaljer()
@@ -139,18 +180,22 @@ const RadioTimerProsent = ({ sporsmal }: SpmProps) => {
                 )}
             /> */}
 
-            {valgtSoknad &&
-            <TimerProsentAlert
-                watchRadio={watchRadio}
-                beregnGrad={beregnGrad}
-                validerGrad={validerGrad}
-                tekst={tekst}
-                valgtSoknad={valgtSoknad}
-            />
-        }
+            {valgtSoknad && (
+                <TimerProsentAlert
+                    watchRadio={watchRadio}
+                    watchTimer={watchTimer}
+                    beregnGrad={beregnGrad}
+                    validerGrad={validerGrad}
+                    tekst={tekst}
+                    valgtSoknad={valgtSoknad}
+                    timerValue={timerValue}
+                />
+            )}
+
+
 
             <Vis
-                hvis={errorTimer && rodeUkeDagerIPerioden(valgtSoknad!.fom, valgtSoknad!.tom)}
+                hvis={true || errors[hentUndersporsmal(sporsmal!, 'HVOR_MYE_TIMER_VERDI')!.id] && rodeUkeDagerIPerioden(valgtSoknad!.fom, valgtSoknad!.tom)}
                 render={() => (
                     <ReadMore header={lavereProsentHjelpTittel}>
                         <BodyLong spacing>
