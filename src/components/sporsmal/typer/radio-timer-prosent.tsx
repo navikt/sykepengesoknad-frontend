@@ -1,3 +1,4 @@
+import { Soknad } from '../../../types/soknad'
 import { Alert, BodyLong, BodyShort, Radio, RadioGroup, ReadMore } from '@navikt/ds-react'
 import React from 'react'
 import { Controller, useFormContext } from 'react-hook-form'
@@ -11,6 +12,57 @@ import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { hentFeilmelding } from '../sporsmal-utils'
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
 import { useSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
+import { hentSporsmal } from '../../../utils/soknad-utils'
+
+interface TimerProsentAlertProps {
+    watchRadio: string;
+    beregnGrad: (() => number) | undefined;
+    validerGrad: (() => string | true) | undefined;
+    tekst: typeof tekst;
+    valgtSoknad: Soknad;
+}
+
+export const TimerProsentAlert: React.FC<TimerProsentAlertProps> = ({
+    watchRadio,
+    beregnGrad,
+    validerGrad,
+    tekst,
+    valgtSoknad,
+}) => {
+    const shouldShow = beregnGrad && 
+        watchRadio?.toLowerCase() === 'timer' &&
+        beregnGrad() !== undefined &&
+        beregnGrad() !== Infinity &&
+        validerGrad?.() === true;
+
+    if (!shouldShow) return null;
+
+    
+
+
+
+    return (
+        <>
+        <Alert variant="info" style={{ marginTop: '1rem' }}>
+            <BodyShort>
+                {getLedetekst(tekst('sykepengesoknad.jobb-underveis-timer-i-prosent'), {
+                    '%PROSENT%': typeof beregnGrad === 'number' ? Math.floor(beregnGrad * 100) : 0,
+                })}
+            </BodyShort>
+            
+        </Alert>
+        <div>
+                <pre>
+                    stringified:
+                    <br />
+                    {JSON.stringify(hentSporsmal(valgtSoknad, "JOBBER_DU_NORMAL_ARBEIDSUKE"))}
+                    <br />
+                    {JSON.stringify(valgtSoknad)}
+                </pre>
+            </div>
+        </>
+    );
+};
 
 const RadioTimerProsent = ({ sporsmal }: SpmProps) => {
     const {
@@ -67,7 +119,9 @@ const RadioTimerProsent = ({ sporsmal }: SpmProps) => {
                 )
             })}
 
-            <Vis
+            
+
+            {/* <Vis
                 hvis={
                     watchRadio?.toLowerCase() === 'timer' &&
                     beregnGrad?.() &&
@@ -78,12 +132,22 @@ const RadioTimerProsent = ({ sporsmal }: SpmProps) => {
                     <Alert variant="info" style={{ marginTop: '1rem' }}>
                         <BodyShort>
                             {getLedetekst(tekst('sykepengesoknad.jobb-underveis-timer-i-prosent'), {
-                                '%PROSENT%': Math.floor(beregnGrad!() * 100),
+                                '%PROSENT%': typeof beregnGrad!() === 'number' ? Math.floor(beregnGrad!() * 100) : 0,
                             })}
                         </BodyShort>
                     </Alert>
                 )}
+            /> */}
+
+            {valgtSoknad &&
+            <TimerProsentAlert
+                watchRadio={watchRadio}
+                beregnGrad={beregnGrad}
+                validerGrad={validerGrad}
+                tekst={tekst}
+                valgtSoknad={valgtSoknad}
             />
+        }
 
             <Vis
                 hvis={errorTimer && rodeUkeDagerIPerioden(valgtSoknad!.fom, valgtSoknad!.tom)}
