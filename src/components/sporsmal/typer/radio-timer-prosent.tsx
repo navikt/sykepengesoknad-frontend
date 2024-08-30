@@ -1,7 +1,7 @@
 import { Soknad } from '../../../types/types'
 import { Alert, BodyLong, BodyShort, Radio, RadioGroup, ReadMore } from '@navikt/ds-react'
 import React, { useState, useEffect } from 'react'
-import { Controller, useFormContext } from 'react-hook-form'
+import { Controller, useFormContext, useWatch } from 'react-hook-form'
 
 import { rodeUkeDagerIPerioden } from '../../../utils/helligdager-utils'
 import { hentUndersporsmal } from '../../../utils/soknad-utils'
@@ -99,6 +99,69 @@ export const TimerProsentAlert: React.FC<TimerProsentAlertProps> = ({
     );
 };
 
+interface TimerProsentAlert2Props {
+    timerEllerProsentId: string;
+    underSporsmalIder: string[];
+    valgtSoknad: Soknad;
+}
+
+const TimerProsentAlert2: React.FC<TimerProsentAlert2Props> = ({ timerEllerProsentId, underSporsmalIder, valgtSoknad }) => {
+
+
+    if (underSporsmalIder.length !== 2) {
+        return <div>Under sporsmal ikke 2</div>
+    }
+
+
+    const { control, getValues } = useFormContext()
+    
+    const watchedValues = useWatch({
+        control,
+        name: [timerEllerProsentId, ...underSporsmalIder],
+    })
+
+    useEffect(() => {
+        console.log('Watched values:', watchedValues)
+        console.log('All form values:', getValues())
+    }, [watchedValues, getValues])
+
+    
+    // let timerEllerProsent = watch(timerEllerProsentId)
+    // if (timerEllerProsent === undefined) {
+    //     timerEllerProsent = getValues(timerEllerProsentId)
+    // }
+
+    // const timerId = underSporsmalIder[0]
+    // const prosentId = underSporsmalIder[1]
+
+    // let watchTimer = watch(timerId)
+    // if (watchTimer === undefined) {
+    //     watchTimer = getValues(timerId)
+    // }
+
+    // let watchProsent = watch(prosentId)
+    // if (watchProsent === undefined) {
+    //     watchProsent = getValues(prosentId)
+    // }
+    
+    return (
+        <div>
+            <div>
+                {/* watchTimer: {timerEllerProsent} <br />
+                timer: {watchTimer} <br />
+                prosent: {watchProsent} <br /> */}
+            </div>
+            <pre>
+            {JSON.stringify(watchedValues)}
+                {JSON.stringify(timerEllerProsentId)}
+                {JSON.stringify(underSporsmalIder)}
+                {JSON.stringify(valgtSoknad)}
+
+            </pre>
+        </div>
+    );
+}
+
 const RadioTimerProsent = ({ sporsmal }: SpmProps) => {
     const {
         formState: { errors },
@@ -110,16 +173,24 @@ const RadioTimerProsent = ({ sporsmal }: SpmProps) => {
         watchRadio = getValues(sporsmal.id)
     }
 
-    const [timerValue, setTimerValue] = useState<number | null>(null)
-    const timerUndersporsmal = hentUndersporsmal(sporsmal, 'HVOR_MYE_TIMER_VERDI_0')
-    const watchTimer = timerUndersporsmal && timerUndersporsmal.id ? watch(timerUndersporsmal.id) : undefined
-
-    useEffect(() => {
-        if (watchTimer) {
-        const numericValue = parseFloat(watchTimer)
-        setTimerValue(isNaN(numericValue) ? null : numericValue)
+    const timerId = hentUndersporsmal(sporsmal, 'HVOR_MYE_TIMER_VERDI_0')?.id
+    let watchTimer = timerId ? watch(timerId) : undefined
+    if (watchTimer === undefined) {
+        if (timerId) {
+        watchTimer = getValues(timerId)
         }
-    }, [watchTimer])
+    }
+
+    const [timerValue, setTimerValue] = useState<number | null>(null)
+    // const timerUndersporsmal = hentUndersporsmal(sporsmal, 'HVOR_MYE_TIMER_VERDI_0')
+    // const watchTimer = timerUndersporsmal && timerUndersporsmal.id ? watch(timerUndersporsmal.id) : undefined
+
+    // useEffect(() => {
+    //     if (watchTimer) {
+    //     const numericValue = parseFloat(watchTimer)
+    //     setTimerValue(isNaN(numericValue) ? null : numericValue)
+    //     }
+    // }, [watchTimer])
 
     const feilmelding = hentFeilmelding(sporsmal)
     const { valgtSoknad } = useSoknadMedDetaljer()
@@ -180,7 +251,7 @@ const RadioTimerProsent = ({ sporsmal }: SpmProps) => {
                 )}
             /> */}
 
-            {valgtSoknad && (
+            {/* {false && valgtSoknad && (
                 <TimerProsentAlert
                     watchRadio={watchRadio}
                     watchTimer={watchTimer}
@@ -190,10 +261,17 @@ const RadioTimerProsent = ({ sporsmal }: SpmProps) => {
                     valgtSoknad={valgtSoknad}
                     timerValue={timerValue}
                 />
+            )} */}
+
+            {valgtSoknad && sporsmal.undersporsmal.length > 0 && (
+                <TimerProsentAlert2
+                    timerEllerProsentId={sporsmal.id}
+                    underSporsmalIder={sporsmal.undersporsmal.map(x => x.id)}
+                    valgtSoknad={valgtSoknad}
+                />
+
             )}
-
-
-
+            
             <Vis
                 hvis={true || errors[hentUndersporsmal(sporsmal!, 'HVOR_MYE_TIMER_VERDI')!.id] && rodeUkeDagerIPerioden(valgtSoknad!.fom, valgtSoknad!.tom)}
                 render={() => (
