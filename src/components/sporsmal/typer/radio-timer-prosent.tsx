@@ -103,16 +103,10 @@ interface TimerProsentAlert2Props {
     timerEllerProsentId: string;
     underSporsmalIder: string[];
     valgtSoknad: Soknad;
+    undersporsmalTags: string[];
 }
 
-const TimerProsentAlert2: React.FC<TimerProsentAlert2Props> = ({ timerEllerProsentId, underSporsmalIder, valgtSoknad }) => {
-
-
-    if (underSporsmalIder.length !== 2) {
-        return <div>Under sporsmal ikke 2</div>
-    }
-
-
+const TimerProsentAlert2: React.FC<TimerProsentAlert2Props> = ({ timerEllerProsentId, underSporsmalIder, valgtSoknad, undersporsmalTags}) => {
     const { control, getValues } = useFormContext()
     
     const watchedValues = useWatch({
@@ -123,40 +117,27 @@ const TimerProsentAlert2: React.FC<TimerProsentAlert2Props> = ({ timerEllerProse
     useEffect(() => {
         console.log('Watched values:', watchedValues)
         console.log('All form values:', getValues())
-    }, [watchedValues, getValues])
+        console.log('timerEllerProsentId:', timerEllerProsentId)
+        console.log('underSporsmalIder:', underSporsmalIder)
+    }, [watchedValues, getValues, timerEllerProsentId, underSporsmalIder, valgtSoknad])
 
-    
-    // let timerEllerProsent = watch(timerEllerProsentId)
-    // if (timerEllerProsent === undefined) {
-    //     timerEllerProsent = getValues(timerEllerProsentId)
-    // }
+    const [timerEllerProsent, watchTimer, watchProsent] = watchedValues
 
-    // const timerId = underSporsmalIder[0]
-    // const prosentId = underSporsmalIder[1]
-
-    // let watchTimer = watch(timerId)
-    // if (watchTimer === undefined) {
-    //     watchTimer = getValues(timerId)
-    // }
-
-    // let watchProsent = watch(prosentId)
-    // if (watchProsent === undefined) {
-    //     watchProsent = getValues(prosentId)
-    // }
-    
     return (
         <div>
             <div>
-                {/* watchTimer: {timerEllerProsent} <br />
-                timer: {watchTimer} <br />
-                prosent: {watchProsent} <br /> */}
+                timerEllerProsent: {timerEllerProsent} <br />
+                prosent: {watchProsent} <br />
+
+                watchTimer: {watchTimer} <br />
+
+                undersporsmalTags: {JSON.stringify(undersporsmalTags)} <br />
+
             </div>
             <pre>
-            {JSON.stringify(watchedValues)}
-                {JSON.stringify(timerEllerProsentId)}
-                {JSON.stringify(underSporsmalIder)}
-                {JSON.stringify(valgtSoknad)}
-
+                timerEllerProsentId: {JSON.stringify(timerEllerProsentId)}
+                underSporsmalIder: {JSON.stringify(underSporsmalIder)}
+                All form values: {JSON.stringify(getValues(), null, 2)}
             </pre>
         </div>
     );
@@ -268,6 +249,7 @@ const RadioTimerProsent = ({ sporsmal }: SpmProps) => {
                     timerEllerProsentId={sporsmal.id}
                     underSporsmalIder={sporsmal.undersporsmal.map(x => x.id)}
                     valgtSoknad={valgtSoknad}
+                    undersporsmalTags={sporsmal.undersporsmal.map(x => x.tag)}
                 />
 
             )}
