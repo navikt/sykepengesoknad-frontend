@@ -108,7 +108,10 @@ interface TimerProsentAlert2Props {
 
 const TimerProsentAlert2: React.FC<TimerProsentAlert2Props> = ({ timerEllerProsentId, underSporsmalIder, valgtSoknad, undersporsmalTags}) => {
     const { control, getValues } = useFormContext()
-    
+
+    const [secondaryWatchValues, setSecondaryWatchValues] = useState<any>(null)
+
+    // this seems to work, not pipe that data into USESTATE!!!
     const watchedValues = useWatch({
         control,
         name: [timerEllerProsentId, ...underSporsmalIder],
@@ -123,16 +126,22 @@ const TimerProsentAlert2: React.FC<TimerProsentAlert2Props> = ({ timerEllerProse
 
     const [timerEllerProsent, watchTimer, watchProsent] = watchedValues
 
+
+    // this seems to work, not pipe that data into USESTATE!!!
     // can you force this to rerender? every time 0.5 seconds
     useEffect(() => {
         const interval = setInterval(() => {
             console.log('Watched values:', watchedValues)
-            console.log('All form values:', getValues())
+
+            const getValuesResult = getValues()
+            console.log('All form values:', getValuesResult)
+            setSecondaryWatchValues(getValuesResult)
             console.log('timerEllerProsentId:', timerEllerProsentId)
             console.log('underSporsmalIder:', underSporsmalIder)
         }, 500)
         return () => clearInterval(interval)
     }, [watchedValues, getValues, timerEllerProsentId, underSporsmalIder, valgtSoknad])
+      
 
 
     return (
@@ -153,7 +162,7 @@ const TimerProsentAlert2: React.FC<TimerProsentAlert2Props> = ({ timerEllerProse
                 <br />
                 All form values: {JSON.stringify(getValues(), null, 2)}
                 <br />
-
+                Secondary watch values from useEffect: {JSON.stringify(secondaryWatchValues, null, 2)}
             </pre>
         </div>
     );
