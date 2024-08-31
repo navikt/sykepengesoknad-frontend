@@ -123,6 +123,18 @@ const TimerProsentAlert2: React.FC<TimerProsentAlert2Props> = ({ timerEllerProse
 
     const [timerEllerProsent, watchTimer, watchProsent] = watchedValues
 
+    // can you force this to rerender? every time 0.5 seconds
+    useEffect(() => {
+        const interval = setInterval(() => {
+            console.log('Watched values:', watchedValues)
+            console.log('All form values:', getValues())
+            console.log('timerEllerProsentId:', timerEllerProsentId)
+            console.log('underSporsmalIder:', underSporsmalIder)
+        }, 500)
+        return () => clearInterval(interval)
+    }, [watchedValues, getValues, timerEllerProsentId, underSporsmalIder, valgtSoknad])
+
+
     return (
         <div>
             <div>
@@ -136,8 +148,12 @@ const TimerProsentAlert2: React.FC<TimerProsentAlert2Props> = ({ timerEllerProse
             </div>
             <pre>
                 timerEllerProsentId: {JSON.stringify(timerEllerProsentId)}
+                <br />
                 underSporsmalIder: {JSON.stringify(underSporsmalIder)}
+                <br />
                 All form values: {JSON.stringify(getValues(), null, 2)}
+                <br />
+
             </pre>
         </div>
     );
