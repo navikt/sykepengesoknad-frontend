@@ -1,4 +1,4 @@
-import { Alert, BodyShort, Radio, RadioGroup } from '@navikt/ds-react'
+import { Alert, BodyShort, Radio, RadioGroup, VStack } from '@navikt/ds-react'
 import React, { Fragment } from 'react'
 import { Controller, useFormContext } from 'react-hook-form'
 
@@ -85,15 +85,18 @@ const JaNeiLiten = ({ sporsmal }: SpmProps) => {
                         >
                             {inntektMetadata && (
                                 <>
-                                    <BodyShort className="mt-4" spacing>
-                                        Din inntekt på sykmeldingstidspunktet:{' '}
-                                        <strong>{formatterTall(inntektMetadata.beregnet.snitt)}</strong> kroner.
-                                    </BodyShort>
-                                    <BodyShort spacing>
-                                        Har du en inntekt som gjør at du tjener mindre enn{' '}
-                                        <strong>{formatterTall(inntektMetadata.beregnet.m25)}</strong> kroner eller mer
-                                        enn <strong>{formatterTall(inntektMetadata.beregnet.p25)}</strong> kroner?
-                                    </BodyShort>
+                                    <VStack gap="4">
+                                        <BodyShort>
+                                            Din inntekt på sykmeldingstidspunktet:{' '}
+                                            <strong>{formatterTall(inntektMetadata.beregnet.snitt)}</strong> kroner.
+                                        </BodyShort>
+                                        <BodyShort>
+                                            Har du en inntekt som gjør at du tjener mindre enn{' '}
+                                            <strong>{formatterTall(inntektMetadata.beregnet.m25)}</strong> kroner eller
+                                            mer enn <strong>{formatterTall(inntektMetadata.beregnet.p25)}</strong>{' '}
+                                            kroner?
+                                        </BodyShort>
+                                    </VStack>
                                 </>
                             )}
                             <EkspanderbarHjelp sporsmal={sporsmal} mb="mb-4" />

@@ -1,4 +1,4 @@
-import { BodyShort } from '@navikt/ds-react'
+import { BodyShort, VStack } from '@navikt/ds-react'
 import React from 'react'
 
 import { Sporsmal } from '../../../types/types'
@@ -15,23 +15,22 @@ export const VarigEndring25prosent = ({ sporsmal }: VarigEndring25prosentProps) 
     if (inntektMetadata) {
         return (
             <>
-                <BodyShort spacing>
-                    Vi henter inntekten din fra Skatteetaten, og bruker ferdig lignet årsinntekt.
-                </BodyShort>
-
-                <BodyShort spacing>Din inntekt per kalenderår de tre siste ferdiglignende år:</BodyShort>
-
-                {Object.entries(inntektMetadata.inntekt).map(([year, inntektValue]) => (
-                    <BodyShort key={year}>
-                        <strong>{year}</strong>: {`${formatterTall(inntektValue)} kroner`}
+                <VStack gap="4">
+                    <BodyShort>Vi henter inntekten din fra Skatteetaten, og bruker ferdig lignet årsinntekt.</BodyShort>
+                    <BodyShort>Din inntekt per kalenderår de tre siste ferdiglignende år:</BodyShort>
+                    <div>
+                        {Object.entries(inntektMetadata.inntekt).map(([year, inntektValue]) => (
+                            <BodyShort key={year}>
+                                <strong>{year}</strong>: {`${formatterTall(inntektValue)} kroner`}
+                            </BodyShort>
+                        ))}
+                    </div>
+                    <BodyShort>
+                        Så regnes den gjennomsnittelige årsinntekten ut basert på de tre siste årene, slik at din
+                        gjennomsnittelige årsinntekt blir{' '}
+                        <strong>{formatterTall(inntektMetadata.beregnet.snitt)}</strong> kroner.
                     </BodyShort>
-                ))}
-
-                <BodyShort className="mt-4">
-                    Så regnes den gjennomsnittelige årsinntekten ut basert på de tre siste årene, slik at din
-                    gjennomsnittelige årsinntekt blir <strong>{formatterTall(inntektMetadata.beregnet.snitt)}</strong>{' '}
-                    kroner.
-                </BodyShort>
+                </VStack>
             </>
         )
     } else {
