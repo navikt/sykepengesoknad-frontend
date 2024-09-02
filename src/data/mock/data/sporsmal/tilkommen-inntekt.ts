@@ -48,7 +48,8 @@ export const tilkommenInntektForstegangSporsmal = ({
                 id: v4().toString(),
                 tag: 'NYTT_ARBEIDSFORHOLD_UNDERVEIS_BRUTTO',
                 sporsmalstekst: `Hvor mye har du tjent i perioden ${periodeTekst}?`,
-                undertekst: `Oppgi det du har tjent brutto (før skatt) i perioden ${periodeTekst}. Se på lønnslippen eller kontrakten hvor mye du har tjent eller skal tjene.`,
+                undertekst:
+                    'Oppgi det du har tjent før skatt. Se på lønnslippen eller kontrakten hvor mye du har tjent eller skal tjene.',
                 svartype: 'BELOP',
                 min: null,
                 max: null,
@@ -92,7 +93,8 @@ export const tilkommenInntektPafolgendeSporsmal = ({
                 id: v4().toString(),
                 tag: 'NYTT_ARBEIDSFORHOLD_UNDERVEIS_BRUTTO',
                 sporsmalstekst: `Hvor mye har du tjent i perioden ${periodeTekst}?`,
-                undertekst: `Oppgi det du har tjent brutto (før skatt) i perioden ${periodeTekst}. Se på lønnslippen eller kontrakten hvor mye du har tjent eller skal tjene.`,
+                undertekst:
+                    'Oppgi det du har tjent før skatt. Se på lønnslippen eller kontrakten hvor mye du har tjent eller skal tjene.',
                 svartype: 'BELOP',
                 min: null,
                 max: null,
