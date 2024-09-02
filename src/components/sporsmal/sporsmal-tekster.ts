@@ -289,10 +289,10 @@ const SporsmalTekster = {
     'soknad.feilmelding.INNTEKTSOPPLYSNINGER_VIRKSOMHETEN_AVVIKLET_JA': '',
     'soknad.feilmelding.INNTEKTSOPPLYSNINGER_VIRKSOMHETEN_AVVIKLET_NEI': '',
     'soknad.feilmelding.INNTEKTSOPPLYSNINGER_VIRKSOMHETEN_AVVIKLET_NAR': '',
-    'soknad.feilmelding.TILKOMMEN_INNTEKT_FORSTEGANG': 'Du må svare på om du har startet å jobbe',
-    'soknad.feilmelding.TILKOMMEN_INNTEKT_FORSTEGANG_FORSTE_ARBEIDSDAG': '',
-    'soknad.feilmelding.TILKOMMEN_INNTEKT_BRUTTO': 'Du må oppgi hvor mye du har tjent',
-    'soknad.feilmelding.TILKOMMEN_INNTEKT_PAFOLGENDE': 'Du må svare på om du har jobbet',
+    'soknad.feilmelding.NYTT_ARBEIDSFORHOLD_UNDERVEIS_FORSTEGANG': 'Du må svare på om du har startet å jobbe',
+    'soknad.feilmelding.NYTT_ARBEIDSFORHOLD_UNDERVEIS_FORSTEGANG_FORSTE_ARBEIDSDAG': '',
+    'soknad.feilmelding.NYTT_ARBEIDSFORHOLD_UNDERVEIS_BRUTTO': 'Du må oppgi hvor mye du har tjent',
+    'soknad.feilmelding.NYTT_ARBEIDSFORHOLD_UNDERVEIS_PAFOLGENDE': 'Du må svare på om du har jobbet',
 }
 
 export default SporsmalTekster

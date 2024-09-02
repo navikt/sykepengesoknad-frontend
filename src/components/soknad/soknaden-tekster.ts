@@ -7,8 +7,8 @@ const SoknadenTekster = {
     'statuspanel.status': 'Status',
     'sykepengesoknad.start.tittel': 'Ansvarserklæring',
     'sykepengesoknad.til_slutt.tittel': 'Oppsummering fra søknaden',
-    'sykepengesoknad.tilkommen_inntekt_forstegang.tittel': 'Nytt arbeidsforhold',
-    'sykepengesoknad.tilkommen_inntekt_pafolgende.tittel': 'Inntekt fra annet arbeidsforhold',
+    'sykepengesoknad.nytt_arbeidsforhold_underveis_forstegang.tittel': 'Nytt arbeidsforhold',
+    'sykepengesoknad.nytt_arbeidsforhold_underveis_pafolgende.tittel': 'Inntekt fra annet arbeidsforhold',
     'sykepengesoknad.sykepengeinfo.til-nav':
         'Sykepenger utbetales etter at NAV har innvilget søknaden. <a class="navds-link" href="https://www.nav.no/saksbehandlingstider#sykepenger" target="_blank">Les om sykepenger og saksbehandlingstider.</a>',
 
