@@ -1,4 +1,4 @@
-import { checkViStolerPaDeg, klikkGaVidere, svarNeiHovedsporsmal } from '../../support/utilities'
+import { checkViStolerPaDeg, heading, klikkGaVidere, svarNeiHovedsporsmal } from '../../support/utilities'
 import { arbeidstakerGradert } from '../../../src/data/mock/data/soknad/arbeidstaker-gradert'
 
 describe('Tester flexjar', () => {
@@ -12,13 +12,6 @@ describe('Tester flexjar', () => {
     it('Laster startside', function () {
         cy.get(`a[href*=${soknad.id}]`).click()
     })
-
-    function heading(heading: string, level = 3) {
-        return cy.get('body').findByRole('heading', {
-            name: heading,
-            level,
-        })
-    }
 
     it('Naviger til tilbake i arbeid', function () {
         heading('Hjelp oss med å gjøre søknaden bedre').should('not.exist')

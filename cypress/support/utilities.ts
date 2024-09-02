@@ -74,6 +74,14 @@ export function checkViStolerPaDeg(gaVidere = true) {
         cy.contains('Start søknad').click()
     }
 }
+
+export function heading(heading: string, level = 3) {
+    return cy.get('body').findByRole('heading', {
+        name: heading,
+        level,
+    })
+}
+
 export function neiOgVidere(titler: string[]) {
     for (let i = 0; i < titler.length; i++) {
         cy.get('h2').contains(titler[i]).should('be.visible')
@@ -109,6 +117,7 @@ export function klikkGaVidere(forventFeil = false) {
         sjekkMainContentFokus()
     })
 }
+
 export function klikkTilbake() {
     // Få nåværende URL
     cy.url().then((currentUrl) => {
