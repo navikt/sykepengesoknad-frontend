@@ -19,7 +19,7 @@ export const tilkommenInntektForstegangSporsmal = ({
 
     return {
         id: v4().toString(),
-        tag: 'TILKOMMEN_INNTEKT_FORSTEGANG',
+        tag: 'NYTT_ARBEIDSFORHOLD_UNDERVEIS_FORSTEGANG',
         sporsmalstekst: `Har du startet å jobbe hos ${orgnavn}?`,
         undertekst: null,
         svartype: 'JA_NEI',
@@ -34,7 +34,7 @@ export const tilkommenInntektForstegangSporsmal = ({
         undersporsmal: [
             {
                 id: v4().toString(),
-                tag: 'TILKOMMEN_INNTEKT_FORSTEGANG_FORSTE_ARBEIDSDAG',
+                tag: 'NYTT_ARBEIDSFORHOLD_UNDERVEIS_FORSTEGANG_FORSTE_ARBEIDSDAG',
                 sporsmalstekst: 'Når hadde du din første arbeidsdag?',
                 undertekst: null,
                 svartype: 'DATO',
@@ -46,7 +46,7 @@ export const tilkommenInntektForstegangSporsmal = ({
             },
             {
                 id: v4().toString(),
-                tag: 'TILKOMMEN_INNTEKT_BRUTTO',
+                tag: 'NYTT_ARBEIDSFORHOLD_UNDERVEIS_BRUTTO',
                 sporsmalstekst: `Hvor mye har du tjent i perioden ${periodeTekst}?`,
                 undertekst: `Oppgi det du har tjent brutto (før skatt) i perioden ${periodeTekst}. Se på lønnslippen eller kontrakten hvor mye du har tjent eller skal tjene.`,
                 svartype: 'BELOP',
@@ -75,7 +75,7 @@ export const tilkommenInntektPafolgendeSporsmal = ({
 
     return {
         id: v4().toString(),
-        tag: 'TILKOMMEN_INNTEKT_PAFOLGENDE',
+        tag: 'NYTT_ARBEIDSFORHOLD_UNDERVEIS_PAFOLGENDE',
         sporsmalstekst: `Har du jobbet noe hos ${orgnavn} i perioden ${periodeTekst}?`,
         undertekst: null,
         svartype: 'JA_NEI',
@@ -90,7 +90,7 @@ export const tilkommenInntektPafolgendeSporsmal = ({
         undersporsmal: [
             {
                 id: v4().toString(),
-                tag: 'TILKOMMEN_INNTEKT_BRUTTO',
+                tag: 'NYTT_ARBEIDSFORHOLD_UNDERVEIS_BRUTTO',
                 sporsmalstekst: `Hvor mye har du tjent i perioden ${periodeTekst}?`,
                 undertekst: `Oppgi det du har tjent brutto (før skatt) i perioden ${periodeTekst}. Se på lønnslippen eller kontrakten hvor mye du har tjent eller skal tjene.`,
                 svartype: 'BELOP',
