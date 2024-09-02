@@ -1,4 +1,4 @@
-import { BodyShort, TextField } from '@navikt/ds-react'
+import { BodyShort, ReadMore, TextField } from '@navikt/ds-react'
 import React from 'react'
 import { useFormContext } from 'react-hook-form'
 
@@ -119,6 +119,12 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
                     },
                 })}
             />
+
+            {sporsmal.tag == 'NYTT_ARBEIDSFORHOLD_UNDERVEIS_BRUTTO' && (
+                <ReadMore header="Jobbet i ferien?" className="mt-4">
+                    Du trenger ikke oppgi eventuell inntekt du opparbeidet deg når du egentlig hadde ferie.
+                </ReadMore>
+            )}
 
             <div role="alert" aria-live="assertive">
                 <Vis
