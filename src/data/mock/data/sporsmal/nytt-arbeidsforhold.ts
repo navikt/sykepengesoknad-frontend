@@ -5,13 +5,13 @@ import { RSSporsmal } from '../../../../types/rs-types/rs-sporsmal'
 import { tilLesbarPeriodeMedArstall } from '../../../../utils/dato-utils'
 
 export const nyttArbeidsforholdForstegangSporsmal = ({
-    orgnavn,
-    orgnr,
+    arbeidsstedNavn,
+    arbeidsstedOrgnummer,
     tom,
     fom,
 }: {
-    orgnavn: string
-    orgnr: string
+    arbeidsstedNavn: string
+    arbeidsstedOrgnummer: string
     tom: string
     fom: string
 }): RSSporsmal => {
@@ -20,13 +20,13 @@ export const nyttArbeidsforholdForstegangSporsmal = ({
     return {
         id: v4().toString(),
         tag: 'NYTT_ARBEIDSFORHOLD_UNDERVEIS_FORSTEGANG',
-        sporsmalstekst: `Har du startet å jobbe hos ${orgnavn}?`,
+        sporsmalstekst: `Har du startet å jobbe hos ${arbeidsstedNavn}?`,
         undertekst: null,
         svartype: 'JA_NEI',
         min: null,
         metadata: {
-            orgnummer: orgnr,
-            orgnavn: orgnavn,
+            arbeidsstedOrgnummer: arbeidsstedOrgnummer,
+            arbeidsstedNavn: arbeidsstedNavn,
         },
         max: null,
         kriterieForVisningAvUndersporsmal: 'JA',
@@ -82,8 +82,8 @@ export const nyttArbeidsforholdPafolgendeSporsmal = ({
         svartype: 'JA_NEI',
         min: null,
         metadata: {
-            orgnummer: orgnr,
-            orgnavn: orgnavn,
+            arbeidsstedOrgnummer: orgnr,
+            arbeidsstedNavn: orgnavn,
         },
         max: null,
         kriterieForVisningAvUndersporsmal: 'JA',

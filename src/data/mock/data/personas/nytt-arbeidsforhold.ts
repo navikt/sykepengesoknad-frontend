@@ -16,8 +16,8 @@ if (splittSted === -1) {
 nyttArbeidsforholdForstegangSoknad.sporsmal = [
     ...nyttArbeidsforholdForstegangSoknad.sporsmal.slice(0, splittSted),
     nyttArbeidsforholdForstegangSporsmal({
-        orgnavn: 'Kaffebrenneriet',
-        orgnr: '123324',
+        arbeidsstedNavn: 'Kaffebrenneriet',
+        arbeidsstedOrgnummer: '123324',
         tom: nyttArbeidsforholdForstegangSoknad.tom!,
         fom: nyttArbeidsforholdForstegangSoknad.fom!,
     }),
