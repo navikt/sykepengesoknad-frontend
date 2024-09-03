@@ -9,7 +9,6 @@ import { finnHovedSporsmal, hentSporsmal, hentUndersporsmal } from '../soknad-ut
 import { getLedetekst, tekst } from '../tekster'
 import { useSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
 
-
 // const beregnGradFunksjon = (periode: any, faktiskTimer: number, timerPerUke: number, sykedager: any) => {
 //         const values = getValues()
 //         const timerPerUkeId = hentUndersporsmal(hovedSporsmal!, 'HVOR_MANGE_TIMER_PER_UKE')!.id
@@ -83,8 +82,6 @@ import { useSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
 //
 //         return faktiskTimer / uker / timerPerUke
 //     }
-
-
 
 const useValiderArbeidsgrad = (sporsmal: Sporsmal) => {
     const { valgtSoknad } = useSoknadMedDetaljer()

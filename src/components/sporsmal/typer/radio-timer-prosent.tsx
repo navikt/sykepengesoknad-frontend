@@ -1,8 +1,8 @@
-import { Soknad, Sporsmal } from "../../../types/types";
 import { Alert, BodyLong, BodyShort, Radio, RadioGroup, ReadMore } from '@navikt/ds-react'
 import React, { useState, useEffect } from 'react'
 import { Controller, useFormContext, useWatch } from 'react-hook-form'
 
+import { Soknad, Sporsmal } from '../../../types/types'
 import { rodeUkeDagerIPerioden } from '../../../utils/helligdager-utils'
 import { hentUndersporsmal } from '../../../utils/soknad-utils'
 import validerArbeidsgrad from '../../../utils/sporsmal/valider-arbeidsgrad'
@@ -12,24 +12,27 @@ import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { hentFeilmelding } from '../sporsmal-utils'
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
 import { useSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
-import { hentSporsmal } from '../../../utils/soknad-utils'
-
 
 interface TimerProsentAlert2Props {
-    timerEllerProsentId: string;
-    underSporsmalIder: string[];
-    valgtSoknad: Soknad;
-    undersporsmalTags: string[];
-    sporsmal: Sporsmal;
+    timerEllerProsentId: string
+    underSporsmalIder: string[]
+    valgtSoknad: Soknad
+    undersporsmalTags: string[]
+    sporsmal: Sporsmal
 }
 
-const TimerProsentAlert2: React.FC<TimerProsentAlert2Props> = ({ timerEllerProsentId, underSporsmalIder, valgtSoknad, undersporsmalTags, sporsmal}) => {
+const TimerProsentAlert2: React.FC<TimerProsentAlert2Props> = ({
+    timerEllerProsentId,
+    underSporsmalIder,
+    valgtSoknad,
+    undersporsmalTags,
+    sporsmal,
+}) => {
     const { control, getValues } = useFormContext()
     const [secondaryWatchValues, setSecondaryWatchValues] = useState<any>(null)
-    const { validerGrad, beregnGrad } = validerArbeidsgrad(sporsmal)
+    const { beregnGrad } = validerArbeidsgrad(sporsmal)
 
     const [beregnetGrad, setBeregnetGrad] = useState<number | undefined>(undefined)
-
 
     // this seems to work, not pipe that data into USESTATE!!!
     const watchedValues = useWatch({
@@ -37,83 +40,67 @@ const TimerProsentAlert2: React.FC<TimerProsentAlert2Props> = ({ timerEllerProse
         name: [timerEllerProsentId, ...underSporsmalIder],
     })
 
-    useEffect(() => {
-        console.log('Watched values:', watchedValues)
-        console.log('All form values:', getValues())
-        console.log('timerEllerProsentId:', timerEllerProsentId)
-        console.log('underSporsmalIder:', underSporsmalIder)
-    }, [watchedValues, getValues, timerEllerProsentId, underSporsmalIder, valgtSoknad, validerGrad, beregnGrad])
+    // useEffect(() => {
+    //     // console.log('Watched values:', watchedValues)
+    //     // console.log('All form values:', getValues())
+    //     // console.log('timerEllerProsentId:', timerEllerProsentId)
+    //     // console.log('underSporsmalIder:', underSporsmalIder)
+    // }, [watchedValues, getValues, timerEllerProsentId, underSporsmalIder, valgtSoknad, validerGrad, beregnGrad])
 
     const [timerEllerProsent, watchTimer, watchProsent] = watchedValues
-
 
     // this seems to work, not pipe that data into USESTATE!!!
     // can you force this to rerender? every time 0.5 seconds
     useEffect(() => {
         const interval = setInterval(() => {
-            console.log('Watched values:', watchedValues)
+            // console.log('Watched values:', watchedValues)
 
             const getValuesResult = getValues()
-            console.log('All form values:', getValuesResult)
+            // console.log('All form values:', getValuesResult)
             setSecondaryWatchValues(getValuesResult)
-            console.log('timerEllerProsentId:', timerEllerProsentId)
-            console.log('underSporsmalIder:', underSporsmalIder)
+            // console.log('timerEllerProsentId:', timerEllerProsentId)
+            // console.log('underSporsmalIder:', underSporsmalIder)
             setBeregnetGrad(beregnGrad!())
         }, 250)
         return () => clearInterval(interval)
     }, [watchedValues, getValues, timerEllerProsentId, underSporsmalIder, valgtSoknad])
 
-
-
-
     return (
-
         <div>
+            {beregnetGrad && beregnetGrad > 0 && (
+                <Alert variant="info" style={{ marginTop: '1rem' }}>
+                    <BodyShort>
+                        {getLedetekst(tekst('sykepengesoknad.jobb-underveis-timer-i-prosent'), {
+                            '%PROSENT%': Math.floor(beregnetGrad * 100),
+                        })}
+                    </BodyShort>
+                </Alert>
+            )}
 
-
-
-                   { beregnetGrad  && beregnetGrad > 0 &&
-                    
-
-
-                    <Alert variant="info" style={{ marginTop: '1rem' }}>
-                        <BodyShort>
-                            {getLedetekst(tekst('sykepengesoknad.jobb-underveis-timer-i-prosent'), {
-                                '%PROSENT%': Math.floor(beregnetGrad * 100),
-                            })}
-                        </BodyShort>
-                    </Alert>
-                }
-            
-
-        {/*<Vis*/}
-        {/*        hvis={*/}
-        {/*             watchRadio?.toLowerCase() === 'timer' &&*/}
-        {/*             beregnGrad?.() &&*/}
-        {/*             beregnGrad() !== Infinity &&*/}
-        {/*             validerGrad!() == true*/}
-        {/*        }*/}
-        {/*        render={() => (*/}
-        {/*            <Alert variant="info" style={{ marginTop: '1rem' }}>*/}
-        {/*                <BodyShort>*/}
-        {/*                    {getLedetekst(tekst('sykepengesoknad.jobb-underveis-timer-i-prosent'), {*/}
-        {/*                        '%PROSENT%': typeof beregnGrad!() === 'number' ? Math.floor(beregnGrad!() * 100) : 0,*/}
-        {/*                    })}*/}
-        {/*                </BodyShort>*/}
-        {/*            </Alert>*/}
-        {/*        )}*/}
-        {/*    />*/}
+            {/*<Vis*/}
+            {/*        hvis={*/}
+            {/*             watchRadio?.toLowerCase() === 'timer' &&*/}
+            {/*             beregnGrad?.() &&*/}
+            {/*             beregnGrad() !== Infinity &&*/}
+            {/*             validerGrad!() == true*/}
+            {/*        }*/}
+            {/*        render={() => (*/}
+            {/*            <Alert variant="info" style={{ marginTop: '1rem' }}>*/}
+            {/*                <BodyShort>*/}
+            {/*                    {getLedetekst(tekst('sykepengesoknad.jobb-underveis-timer-i-prosent'), {*/}
+            {/*                        '%PROSENT%': typeof beregnGrad!() === 'number' ? Math.floor(beregnGrad!() * 100) : 0,*/}
+            {/*                    })}*/}
+            {/*                </BodyShort>*/}
+            {/*            </Alert>*/}
+            {/*        )}*/}
+            {/*    />*/}
             <div>
                 timerEllerProsent: {timerEllerProsent} <br />
                 prosent: {watchProsent} <br />
-
                 watchTimer: {watchTimer} <br />
-
                 undersporsmalTags: {JSON.stringify(undersporsmalTags)} <br />
-
             </div>
             <pre>
-
                 timerEllerProsentId: {JSON.stringify(timerEllerProsentId)}
                 <br />
                 underSporsmalIder: {JSON.stringify(underSporsmalIder)}
@@ -123,7 +110,7 @@ const TimerProsentAlert2: React.FC<TimerProsentAlert2Props> = ({ timerEllerProse
                 Secondary watch values from useEffect: {JSON.stringify(secondaryWatchValues, null, 2)}
             </pre>
         </div>
-    );
+    )
 }
 
 const RadioTimerProsent = ({ sporsmal }: SpmProps) => {
@@ -141,14 +128,12 @@ const RadioTimerProsent = ({ sporsmal }: SpmProps) => {
     let watchTimer = timerId ? watch(timerId) : undefined
     if (watchTimer === undefined) {
         if (timerId) {
-        watchTimer = getValues(timerId)
+            watchTimer = getValues(timerId)
         }
     }
 
-
     const feilmelding = hentFeilmelding(sporsmal)
     const { valgtSoknad } = useSoknadMedDetaljer()
-
 
     const lavereProsentHjelpTittel = tekst('ekspanderbarhjelp.prosenten_lavere_enn_forventet_arbeidstaker.tittel')
     return (
@@ -184,21 +169,22 @@ const RadioTimerProsent = ({ sporsmal }: SpmProps) => {
                 )
             })}
 
-
-
             {valgtSoknad && sporsmal.undersporsmal.length > 0 && (
                 <TimerProsentAlert2
                     timerEllerProsentId={sporsmal.id}
-                    underSporsmalIder={sporsmal.undersporsmal.map(x => x.id)}
+                    underSporsmalIder={sporsmal.undersporsmal.map((x) => x.id)}
                     valgtSoknad={valgtSoknad}
-                    undersporsmalTags={sporsmal.undersporsmal.map(x => x.tag)}
+                    undersporsmalTags={sporsmal.undersporsmal.map((x) => x.tag)}
                     sporsmal={sporsmal}
                 />
-
             )}
 
             <Vis
-                hvis={true || errors[hentUndersporsmal(sporsmal!, 'HVOR_MYE_TIMER_VERDI')!.id] && rodeUkeDagerIPerioden(valgtSoknad!.fom, valgtSoknad!.tom)}
+                hvis={
+                    true ||
+                    (errors[hentUndersporsmal(sporsmal!, 'HVOR_MYE_TIMER_VERDI')!.id] &&
+                        rodeUkeDagerIPerioden(valgtSoknad!.fom, valgtSoknad!.tom))
+                }
                 render={() => (
                     <ReadMore header={lavereProsentHjelpTittel}>
                         <BodyLong spacing>

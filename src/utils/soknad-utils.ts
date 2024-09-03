@@ -39,7 +39,6 @@ export const hentSporsmalMedId = (soknad: Soknad, id: string): Sporsmal | undefi
     return flattenSporsmal(soknad.sporsmal).find((spm) => spm.id === id)
 }
 
-
 export const hentSporsmal = (soknad: Soknad, tag: string): Sporsmal | undefined => {
     return flattenSporsmal(soknad.sporsmal).find((spm) => spm.tag === tag)
 }
