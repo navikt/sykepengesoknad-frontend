@@ -28,7 +28,6 @@ const TimerProsentAlert2: React.FC<TimerProsentAlert2Props> = ({
     undersporsmalTags,
     sporsmal,
 }) => {
-
     const { control, getValues } = useFormContext() // formState: { errors }
     const [secondaryWatchValues, setSecondaryWatchValues] = useState<any>(null)
     const { beregnGrad } = validerArbeidsgrad(sporsmal)
@@ -40,7 +39,6 @@ const TimerProsentAlert2: React.FC<TimerProsentAlert2Props> = ({
         control,
         name: [timerEllerProsentId, ...underSporsmalIder],
     })
-
 
     // useEffect(() => {
     //     // console.log('Watched values:', watchedValues)
@@ -54,7 +52,6 @@ const TimerProsentAlert2: React.FC<TimerProsentAlert2Props> = ({
     // this seems to work, not pipe that data into USESTATE!!!
     // can you force this to rerender? every time 0.5 seconds
     useEffect(() => {
-
         const interval = setInterval(() => {
             // console.log('Watched values:', watchedValues)
 
@@ -79,7 +76,6 @@ const TimerProsentAlert2: React.FC<TimerProsentAlert2Props> = ({
                     </BodyShort>
                 </Alert>
             )}
-
 
             {/*<Vis*/}
             {/*        hvis={*/}
@@ -138,7 +134,7 @@ const RadioTimerProsent = ({ sporsmal }: SpmProps) => {
 
     const feilmelding = hentFeilmelding(sporsmal)
     const { valgtSoknad } = useSoknadMedDetaljer()
-        const lavereProsentHjelpTittel = tekst('ekspanderbarhjelp.prosenten_lavere_enn_forventet_arbeidstaker.tittel')
+    const lavereProsentHjelpTittel = tekst('ekspanderbarhjelp.prosenten_lavere_enn_forventet_arbeidstaker.tittel')
 
     return (
         <>
@@ -185,8 +181,8 @@ const RadioTimerProsent = ({ sporsmal }: SpmProps) => {
 
             <Vis
                 hvis={
-                    (errors[hentUndersporsmal(sporsmal!, 'HVOR_MYE_TIMER_VERDI')!.id] &&
-                        rodeUkeDagerIPerioden(valgtSoknad!.fom, valgtSoknad!.tom))
+                    errors[hentUndersporsmal(sporsmal!, 'HVOR_MYE_TIMER_VERDI')!.id] &&
+                    rodeUkeDagerIPerioden(valgtSoknad!.fom, valgtSoknad!.tom)
                 }
                 render={() => (
                     <ReadMore header={lavereProsentHjelpTittel}>
@@ -199,8 +195,6 @@ const RadioTimerProsent = ({ sporsmal }: SpmProps) => {
                     </ReadMore>
                 )}
             />
-
-
         </>
     )
 }
