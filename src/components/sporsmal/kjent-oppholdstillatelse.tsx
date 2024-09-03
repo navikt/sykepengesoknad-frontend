@@ -1,5 +1,5 @@
 import dayjs from 'dayjs'
-import { BodyShort, Label } from '@navikt/ds-react'
+import { BodyShort, Box, Label, VStack } from '@navikt/ds-react'
 import React from 'react'
 
 import { Soknad } from '../../types/types'
@@ -19,19 +19,15 @@ export const KjentOppholdstillatelse = ({ soknad }: { soknad: Soknad }) => {
 
     return (
         <>
-            <Label as="p" className="mb-4">
-                Vi har mottatt denne oppholdstillatelsen fra Utlendingsdirektoratet:
-            </Label>
-            <InfoBoks>
-                <Label as="p" className="mb-1">
-                    {tittel}
-                </Label>
-                <BodyShort>{periode}</BodyShort>
-            </InfoBoks>
+            <VStack gap="4" marginBlock="4">
+                <Label as="p">Vi har mottatt denne oppholdstillatelsen fra Utlendingsdirektoratet:</Label>
+                <Box background="surface-info-subtle" borderRadius="medium" padding="3">
+                    <VStack gap="2">
+                        <Label as="p">{tittel}</Label>
+                        <BodyShort>{periode}</BodyShort>
+                    </VStack>
+                </Box>
+            </VStack>
         </>
     )
 }
-
-const InfoBoks = ({ children }: { children: React.ReactNode }) => (
-    <p className="mb-6 p-3 rounded bg-surface-info-subtle">{children}</p>
-)
