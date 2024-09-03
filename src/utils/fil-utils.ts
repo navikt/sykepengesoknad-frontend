@@ -16,9 +16,9 @@ export const filstørrelseTilBytes = (filstørrelse: string): number => {
     return verdi * k ** i
 }
 
-export const formattertFiltyper = '.png og .jpeg'
+export const formattertFiltyper = '.png, .jpg .jpeg'
 
-export const tillatteFiltyper = 'image/png,image/jpeg'
+export const tillatteFiltyper = 'image/png,image/jpeg,image/jpg'
 
 export const maxFilstørrelse = filstørrelseTilBytes('5MB')
 
