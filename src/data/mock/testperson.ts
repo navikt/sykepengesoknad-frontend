@@ -37,7 +37,7 @@ import { fiskePerson } from './data/personas/fisker'
 import { kjenteInntektskilderPerson } from './data/personas/kjente-inntektskilder'
 import { innenforAgPerioden } from './data/personas/innenfor-ag-periode'
 import { oppholdUtenforEOS } from './data/personas/opphold-utenfor-eos'
-import { tilkommenInntektForstegangs, tilkommenInntektPaafolgende } from './data/personas/tilkommen-inntekt'
+import { nyttArbeidsforholdForstegangs, nyttArbeidsforholdPaafolgende } from './data/personas/nytt-arbeidsforhold'
 
 type PersonaKey =
     | 'uten-data'
@@ -75,8 +75,8 @@ type PersonaKey =
     | 'kjente-inntektskilder'
     | 'cummulative-layout-shift'
     | 'tilbakedateringer'
-    | 'tilkommen-inntekt-forstegangs'
-    | 'tilkommen-inntekt-pafolgende'
+    | 'nytt-arbeidsforhold-forstegangs'
+    | 'nytt-arbeidsforhold-pafolgende'
     | 'selvstendig-naringsdrivende-sendt'
     | 'innenfor-arbeidsgiver-perioden'
 
@@ -87,7 +87,7 @@ export type PersonaGroupKey =
     | 'soknad-sporsmal'
     | 'medlemskap-sporsmal'
     | 'testing'
-    | 'Tilkommen inntekt'
+    | 'Nytt arbeidsforhold'
 type PersonaGroup = Record<PersonaGroupKey, PersonaData>
 
 export function testpersoner(): PersonaData {
@@ -126,9 +126,9 @@ export function testpersonerGruppert(): PersonaGroup {
         ['medlemskap-sporsmal']: {
             ['medlemskap']: jsonDeepCopy(medlemskapPerson),
         },
-        ['Tilkommen inntekt']: {
-            ['tilkommen-inntekt-forstegangs']: jsonDeepCopy(tilkommenInntektForstegangs),
-            ['tilkommen-inntekt-pafolgende']: jsonDeepCopy(tilkommenInntektPaafolgende),
+        ['Nytt arbeidsforhold']: {
+            ['nytt-arbeidsforhold-forstegangs']: jsonDeepCopy(nyttArbeidsforholdForstegangs),
+            ['nytt-arbeidsforhold-pafolgende']: jsonDeepCopy(nyttArbeidsforholdPaafolgende),
         },
         ['testing']: {
             ['over-70']: over70(),

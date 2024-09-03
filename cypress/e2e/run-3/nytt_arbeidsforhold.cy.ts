@@ -4,7 +4,7 @@ describe('Tester nytt arbeidsforhold', () => {
     it('Åpner førstegangs nytt arbeidsforhold sporsmål', function () {
         cy.clearCookies()
         cy.visit(
-            '/syk/sykepengesoknad/soknader/260f06b5-9fd0-4b30-94d2-4f90851b4cac/7?testperson=tilkommen-inntekt-forstegangs',
+            '/syk/sykepengesoknad/soknader/260f06b5-9fd0-4b30-94d2-4f90851b4cac/7?testperson=nytt-arbeidsforhold-forstegangs',
         )
         heading('Nytt arbeidsforhold', 2).should('exist')
     })
@@ -29,7 +29,7 @@ describe('Tester nytt arbeidsforhold', () => {
     it('Åpner påfølgende nytt arbeidsforhold sporsmål', function () {
         cy.clearCookies()
         cy.visit(
-            '/syk/sykepengesoknad/soknader/260f06b5-9fd0-4b30-94d2-4f90851b4ddd/7?testperson=tilkommen-inntekt-pafolgende',
+            '/syk/sykepengesoknad/soknader/260f06b5-9fd0-4b30-94d2-4f90851b4ddd/7?testperson=nytt-arbeidsforhold-pafolgende',
         )
         heading('Inntekt fra annet arbeidsforhold', 2).should('exist')
     })
