@@ -4,7 +4,7 @@ import dayjs from 'dayjs'
 import { RSSporsmal } from '../../../../types/rs-types/rs-sporsmal'
 import { tilLesbarPeriodeMedArstall } from '../../../../utils/dato-utils'
 
-export const tilkommenInntektForstegangSporsmal = ({
+export const nyttArbeidsforholdForstegangSporsmal = ({
     orgnavn,
     orgnr,
     tom,
@@ -61,7 +61,7 @@ export const tilkommenInntektForstegangSporsmal = ({
     }
 }
 
-export const tilkommenInntektPafolgendeSporsmal = ({
+export const nyttArbeidsforholdPafolgendeSporsmal = ({
     orgnavn,
     orgnr,
     tom,
