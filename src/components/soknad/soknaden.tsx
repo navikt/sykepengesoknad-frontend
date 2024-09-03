@@ -120,7 +120,8 @@ export const Soknaden = () => {
     return (
         <>
             {valgtSoknadError && <FeilStateView feilmelding={valgtSoknadError?.status}></FeilStateView>}
-            <Tilbake variant="liten" />
+            {!erForstesiden && <Tilbake variant="liten" />}
+
             <SoknadHeader overskrivTittel={erSistesiden ? 'Oppsummering' : undefined} />
 
             {!erForstesiden && <Fremdriftsbar />}

@@ -23,7 +23,6 @@ describe('Tester arbeidsledigsøknad', () => {
         cy.realPress('Tab')
         cy.realPress('Tab')
         cy.realPress('Tab')
-        cy.realPress('Tab')
         cy.realPress('Space')
         cy.contains('Les mer om hvordan NAV behandler personopplysningene dine').should('be.visible')
         cy.realPress('Tab')
