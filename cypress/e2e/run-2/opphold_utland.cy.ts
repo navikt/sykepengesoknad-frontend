@@ -29,7 +29,7 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
     })
 
     it('Viser infoside om søknad om å beholde sykepenger utenfor EU/EØS, og starter søknaden', () => {
-        cy.contains('Du trenger ikke søke hvis du enten')
+        cy.contains('Du trenger ikke søke hvis du')
         cy.contains('Har du allerede vært på reise?')
         cy.findByRole('button', { name: 'Start søknaden' }).should('exist').click()
     })
