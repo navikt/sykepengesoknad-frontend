@@ -85,7 +85,7 @@ function MyApp({ Component, pageProps }: AppProps<ServerSidePropsResult>): React
             </Head>
             <FlagProvider toggles={pageProps.toggles}>
                 <QueryClientProvider client={queryClient}>
-                    <div id="root" className="mx-auto max-w-2xl p-4 pb-32">
+                    <div id="root" className="mx-auto max-w-2xl pt-4 pb-32 px-4 md:px-0">
                         <DemoWarning />
                         <main id="maincontent" role="main" tabIndex={-1} className="outline-none">
                             <Component {...pageProps} />
