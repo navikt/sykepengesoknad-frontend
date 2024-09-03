@@ -1,4 +1,4 @@
-import { Soknad } from '../../../types/types'
+import { Soknad, Sporsmal } from "../../../types/types";
 import { Alert, BodyLong, BodyShort, Radio, RadioGroup, ReadMore } from '@navikt/ds-react'
 import React, { useState, useEffect } from 'react'
 import { Controller, useFormContext, useWatch } from 'react-hook-form'
@@ -14,26 +14,22 @@ import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
 import { useSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
 import { hentSporsmal } from '../../../utils/soknad-utils'
 
-interface TimerProsentAlertProps {
-    watchRadio: string;
-    beregnGrad: (() => number) | undefined;
-    validerGrad: (() => string | true) | undefined;
-    tekst: typeof tekst;
-    valgtSoknad: Soknad;
-    timerValue: number | null;
-    watchTimer: string | null;
-}
 
 interface TimerProsentAlert2Props {
     timerEllerProsentId: string;
     underSporsmalIder: string[];
     valgtSoknad: Soknad;
     undersporsmalTags: string[];
+    sporsmal: Sporsmal;
 }
 
-const TimerProsentAlert2: React.FC<TimerProsentAlert2Props> = ({ timerEllerProsentId, underSporsmalIder, valgtSoknad, undersporsmalTags}) => {
+const TimerProsentAlert2: React.FC<TimerProsentAlert2Props> = ({ timerEllerProsentId, underSporsmalIder, valgtSoknad, undersporsmalTags, sporsmal}) => {
     const { control, getValues } = useFormContext()
     const [secondaryWatchValues, setSecondaryWatchValues] = useState<any>(null)
+
+    const { validerGrad, beregnGrad } = validerArbeidsgrad(sporsmal)
+
+
 
     // this seems to work, not pipe that data into USESTATE!!!
     const watchedValues = useWatch({
@@ -46,7 +42,7 @@ const TimerProsentAlert2: React.FC<TimerProsentAlert2Props> = ({ timerEllerProse
         console.log('All form values:', getValues())
         console.log('timerEllerProsentId:', timerEllerProsentId)
         console.log('underSporsmalIder:', underSporsmalIder)
-    }, [watchedValues, getValues, timerEllerProsentId, underSporsmalIder, valgtSoknad])
+    }, [watchedValues, getValues, timerEllerProsentId, underSporsmalIder, valgtSoknad, validerGrad, beregnGrad])
 
     const [timerEllerProsent, watchTimer, watchProsent] = watchedValues
 
@@ -72,6 +68,25 @@ const TimerProsentAlert2: React.FC<TimerProsentAlert2Props> = ({ timerEllerProse
     return (
 
         <div>
+
+             <Vis
+                hvis={
+                 true ||
+                    beregnGrad !== undefined &&
+                    beregnGrad?.() &&
+                    Infinity !== beregnGrad() &&
+                    validerGrad!() == true
+                }
+                render={() => (
+                    <Alert variant="info" style={{ marginTop: '1rem' }}>
+                        <BodyShort>
+                            {getLedetekst(tekst('sykepengesoknad.jobb-underveis-timer-i-prosent'), {
+                                '%PROSENT%': Math.floor(beregnGrad!() * 100),
+                            })}
+                        </BodyShort>
+                    </Alert>
+                )}
+            />
 
         {/*<Vis*/}
         {/*        hvis={*/}
@@ -136,7 +151,6 @@ const RadioTimerProsent = ({ sporsmal }: SpmProps) => {
     const feilmelding = hentFeilmelding(sporsmal)
     const { valgtSoknad } = useSoknadMedDetaljer()
 
-    const { validerGrad, beregnGrad } = validerArbeidsgrad(sporsmal)
 
     const lavereProsentHjelpTittel = tekst('ekspanderbarhjelp.prosenten_lavere_enn_forventet_arbeidstaker.tittel')
     return (
@@ -180,6 +194,7 @@ const RadioTimerProsent = ({ sporsmal }: SpmProps) => {
                     underSporsmalIder={sporsmal.undersporsmal.map(x => x.id)}
                     valgtSoknad={valgtSoknad}
                     undersporsmalTags={sporsmal.undersporsmal.map(x => x.tag)}
+                    sporsmal={sporsmal}
                 />
 
             )}

@@ -30,6 +30,62 @@ import { useSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
 //         return faktiskTimer / uker / timerPerUke
 // }
 
+// export const beregnGrad = (soknad) => {
+//
+//     const sykedagerForFrilansere = () => {
+//         return periodeDager
+//             .filter((dag) => dag.day() !== 0 && dag.day() !== 6)
+//             .filter((dag) => {
+//                 if (tilbake !== '') {
+//                     return dag < dayjs(tilbake)
+//                 } else {
+//                     return true
+//                 }
+//             })
+//     }
+//
+//     const sykedagerForArbeidstakere = () => {
+//         const feriedager = hentPeriodeListe(hentSporsmal(valgtSoknad, 'FERIE_NAR_V2')!).flatMap((periode) =>
+//             ukeDatoListe(periode.fom, periode.tom),
+//         )
+//         const permisjonsdager = hentPeriodeListe(hentSporsmal(valgtSoknad, 'PERMISJON_NAR_V2')!).flatMap((periode) =>
+//             ukeDatoListe(periode.fom, periode.tom),
+//         )
+//         const ekskluderteDager = [feriedager, permisjonsdager].flat()
+//
+//         return periodeDager
+//             .filter((dag) => !ekskluderteDager.find((ekskludertDag) => ekskludertDag.toString() === dag.toString()))
+//             .filter((dag) => dag.day() !== 0 && dag.day() !== 6)
+//             .filter((dag) => {
+//                 if (tilbake !== '') {
+//                     return dag < dayjs(tilbake)
+//                 } else {
+//                     return true
+//                 }
+//             })
+//     }
+//
+//         const values = getValues()
+//         const timerPerUkeId = hentUndersporsmal(hovedSporsmal!, 'HVOR_MANGE_TIMER_PER_UKE')!.id
+//         const faktiskTimerId = hentUndersporsmal(hovedSporsmal!, 'HVOR_MYE_TIMER_VERDI')!.id
+//
+//         const timerPerUke = parseFloat(values[timerPerUkeId])
+//         const faktiskTimer = parseFloat(values[faktiskTimerId])
+//
+//         const faktiskeSykedager =
+//             valgtSoknad.soknadstype === RSSoknadstype.ARBEIDSTAKERE
+//                 ? sykedagerForArbeidstakere()
+//                 : sykedagerForFrilansere()
+//
+//         const dagerIPeriode = faktiskeSykedager.length
+//
+//         const uker = dagerIPeriode / 5
+//
+//         return faktiskTimer / uker / timerPerUke
+//     }
+
+
+
 const useValiderArbeidsgrad = (sporsmal: Sporsmal) => {
     const { valgtSoknad } = useSoknadMedDetaljer()
 
