@@ -7,6 +7,7 @@ describe('Tester nytt arbeidsforhold', () => {
             '/syk/sykepengesoknad/soknader/260f06b5-9fd0-4b30-94d2-4f90851b4cac/7?testperson=nytt-arbeidsforhold-forstegangs',
         )
         heading('Nytt arbeidsforhold', 2).should('exist')
+        cy.get('div').contains('Kaffebrenneriet').should('have.css', 'background-color', 'rgb(236, 238, 240)')
     })
 
     it('Svarer ja på hovedspørsmål', function () {
@@ -32,6 +33,7 @@ describe('Tester nytt arbeidsforhold', () => {
             '/syk/sykepengesoknad/soknader/260f06b5-9fd0-4b30-94d2-4f90851b4ddd/7?testperson=nytt-arbeidsforhold-pafolgende',
         )
         heading('Inntekt fra annet arbeidsforhold', 2).should('exist')
+        cy.get('div').contains('Kaffebrenneriet').should('have.css', 'background-color', 'rgb(236, 238, 240)')
     })
 
     it('Svarer ja på hovedspørsmål', function () {
