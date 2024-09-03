@@ -26,9 +26,9 @@ interface TimerProsentAlert2Props {
 const TimerProsentAlert2: React.FC<TimerProsentAlert2Props> = ({ timerEllerProsentId, underSporsmalIder, valgtSoknad, undersporsmalTags, sporsmal}) => {
     const { control, getValues } = useFormContext()
     const [secondaryWatchValues, setSecondaryWatchValues] = useState<any>(null)
-
     const { validerGrad, beregnGrad } = validerArbeidsgrad(sporsmal)
 
+    const [beregnetGrad, setBeregnetGrad] = useState<number | undefined>(undefined)
 
 
     // this seems to work, not pipe that data into USESTATE!!!
@@ -58,7 +58,8 @@ const TimerProsentAlert2: React.FC<TimerProsentAlert2Props> = ({ timerEllerProse
             setSecondaryWatchValues(getValuesResult)
             console.log('timerEllerProsentId:', timerEllerProsentId)
             console.log('underSporsmalIder:', underSporsmalIder)
-        }, 500)
+            setBeregnetGrad(beregnGrad!())
+        }, 250)
         return () => clearInterval(interval)
     }, [watchedValues, getValues, timerEllerProsentId, underSporsmalIder, valgtSoknad])
 
@@ -69,24 +70,21 @@ const TimerProsentAlert2: React.FC<TimerProsentAlert2Props> = ({ timerEllerProse
 
         <div>
 
-             <Vis
-                hvis={
-                 true ||
-                    beregnGrad !== undefined &&
-                    beregnGrad?.() &&
-                    Infinity !== beregnGrad() &&
-                    validerGrad!() == true
-                }
-                render={() => (
+
+
+                   { beregnetGrad  && beregnetGrad > 0 &&
+                    
+
+
                     <Alert variant="info" style={{ marginTop: '1rem' }}>
                         <BodyShort>
                             {getLedetekst(tekst('sykepengesoknad.jobb-underveis-timer-i-prosent'), {
-                                '%PROSENT%': Math.floor(beregnGrad!() * 100),
+                                '%PROSENT%': Math.floor(beregnetGrad * 100),
                             })}
                         </BodyShort>
                     </Alert>
-                )}
-            />
+                }
+            
 
         {/*<Vis*/}
         {/*        hvis={*/}
