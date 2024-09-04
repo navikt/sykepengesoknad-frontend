@@ -67,7 +67,7 @@ const OpprettUtland = () => {
             </Heading>
 
             <BodyLong className="mb-3">
-                Du må søke om å beholde sykepengene hvis du planlegger å reise utenfor EU/EØS, eller har reist , mens du
+                Du må søke om å beholde sykepengene hvis du planlegger å reise utenfor EU/EØS, eller har reist, mens du
                 er sykmeldt. Du bør sende søknaden før du reiser, for å være sikker på at du beholder sykepengene dine.
             </BodyLong>
             <BodyLong className="mb-3">
