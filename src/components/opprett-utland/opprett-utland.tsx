@@ -75,8 +75,7 @@ const OpprettUtland = () => {
                 tolvmånedersperiode.
             </BodyLong>
             <BodyLong className="mb-3">
-                Hvis du skal ta ut lovbestemt ferie, trenger du ikke å søke. I stedet krysser du av for ferie i søknaden
-                om sykepenger som sendes etter at sykmeldingsperioden er over.
+                Dersom noen av dagene du er utenfor EU/EØS ikke er feriedager, må du sende inn søknad for disse dagene.
             </BodyLong>
             <BodyLong className="mb-10">
                 <LenkeMedIkon
