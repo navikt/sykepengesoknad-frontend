@@ -39,7 +39,7 @@ export const nyttArbeidsforholdForstegangSporsmal = ({
                 undertekst: null,
                 svartype: 'DATO',
                 min: null,
-                max: null,
+                max: tom,
                 kriterieForVisningAvUndersporsmal: null,
                 svar: [],
                 undersporsmal: [],
