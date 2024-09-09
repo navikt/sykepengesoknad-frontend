@@ -46,7 +46,7 @@ describe('Tester ettersending og korrigering', () => {
     })
 
     it('Korriger fra /sendt', () => {
-        cy.visit('/syk/sykepengesoknad')
+        cy.visit('/syk/sykepengesoknad?testperson=arbeidstaker-gradert')
         cy.get(`a[href*=${soknad.id}]`).click()
         cy.url().should('include', `/sendt/${soknad.id}`)
 
@@ -56,7 +56,7 @@ describe('Tester ettersending og korrigering', () => {
     })
 
     it('Ettersend', () => {
-        cy.visit('/syk/sykepengesoknad')
+        cy.visit('/syk/sykepengesoknad?testperson=arbeidstaker-gradert')
         cy.get(`[data-cy="Tidligere søknader"]`).children().should('have.length', 2)
         cy.get(`[data-cy="Tidligere søknader"] > a[href*=${soknad.id}]`).click()
 
@@ -104,7 +104,7 @@ describe('Tester ettersending og korrigering', () => {
     })
 
     it('Søknad har teaser', () => {
-        cy.visit('/syk/sykepengesoknad')
+        cy.visit('/syk/sykepengesoknad?testperson=arbeidstaker-gradert')
         cy.get('.navds-heading--large').should('be.visible').and('have.text', 'Søknader')
 
         cy.get(`a[href*=${soknad.id}]`)
