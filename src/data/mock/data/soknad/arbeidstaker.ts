@@ -286,12 +286,6 @@ export const arbeidstaker: RSSoknad = {
             grad: 100,
             sykmeldingstype: 'AKTIVITET_IKKE_MULIG',
         },
-        {
-            fom: '2020-04-28',
-            tom: '2020-05-24',
-            grad: 100,
-            sykmeldingstype: 'AKTIVITET_IKKE_MULIG',
-        },
     ],
     sporsmal: [
         {
