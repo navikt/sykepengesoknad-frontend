@@ -101,14 +101,14 @@ export const clsPerson: Persona = {
 }
 
 export const arbeidstakerPerson: Persona = {
-    soknader: [arbeidstaker, arbeidstakerGradert, arbeidtakerMedGammelOppsummering()],
-    sykmeldinger: [arbeidstaker100Syk, arbeidstaker50Syk],
+    soknader: [arbeidstaker],
+    sykmeldinger: [arbeidstaker100Syk],
     beskrivelse: 'Arbeidstaker 100% søknad',
 }
 
 export const arbeidstakerGradertPerson: Persona = {
-    soknader: [arbeidstaker, arbeidstakerGradert, arbeidtakerMedGammelOppsummering()],
-    sykmeldinger: [arbeidstaker100Syk, arbeidstaker50Syk],
+    soknader: [arbeidstakerGradert],
+    sykmeldinger: [arbeidstaker50Syk],
     beskrivelse: 'Arbeidstaker 50% søknad',
 }
 
