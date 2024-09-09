@@ -6,7 +6,7 @@ describe('Tester flexjar', () => {
 
     before(() => {
         cy.clearCookies()
-        cy.visit('/syk/sykepengesoknad')
+        cy.visit('/syk/sykepengesoknad?testperson=arbeidstaker-gradert')
     })
 
     it('Laster startside', function () {

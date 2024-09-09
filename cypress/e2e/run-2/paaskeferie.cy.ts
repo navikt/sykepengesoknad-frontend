@@ -2,7 +2,7 @@ import { svarJaHovedsporsmal, svarNeiHovedsporsmal } from '../../support/utiliti
 
 describe('Tester påskeferiehjelpetekst', () => {
     it('Søknaden går over påskeferien', () => {
-        cy.visit('/syk/sykepengesoknad/soknader/5b769c04-e171-47c9-b79b-23ab8fce331e/3')
+        cy.visit('/syk/sykepengesoknad/soknader/5b769c04-e171-47c9-b79b-23ab8fce331e/3?testperson=arbeidstaker-gradert')
 
         cy.get('[data-cy="sporsmal-tittel"]').should('contain', 'Ferie')
 

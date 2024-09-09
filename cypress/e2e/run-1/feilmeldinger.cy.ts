@@ -5,8 +5,12 @@ import 'cypress-real-events'
 import { arbeidstakerGradert } from '../../../src/data/mock/data/soknad/arbeidstaker-gradert'
 
 describe('Tester feilmeldinger', () => {
-    function gaTilSoknad(soknad: RSSoknad, steg: string) {
-        cy.visit(`/syk/sykepengesoknad/soknader/${soknad.id}/${steg}`)
+    function gaTilSoknad(soknad: RSSoknad, steg: string, testperson?: string) {
+        let url = `/syk/sykepengesoknad/soknader/${soknad.id}/${steg}`
+        if (testperson) {
+            url += `?testperson=${testperson}`
+        }
+        cy.visit(url)
     }
 
     function feilmeldingHandtering(
@@ -68,7 +72,7 @@ describe('Tester feilmeldinger', () => {
     })
 
     it('CHECKBOX_PANEL ingen valg', () => {
-        gaTilSoknad(arbeidstakerGradert, '1')
+        gaTilSoknad(arbeidstakerGradert, '1', 'arbeidstaker-gradert')
         cy.get('[data-cy="bekreftCheckboksPanel"]').should('have.attr', 'value', 'false')
         cy.contains('Start søknad').click()
 
@@ -83,7 +87,7 @@ describe('Tester feilmeldinger', () => {
     })
 
     it('JA_NEI ingen valg', () => {
-        gaTilSoknad(arbeidstakerGradert, '2')
+        gaTilSoknad(arbeidstakerGradert, '2', 'arbeidstaker-gradert')
         klikkGaVidere(true)
 
         feilmeldingHandtering(
@@ -149,7 +153,7 @@ describe('Tester feilmeldinger', () => {
     })
 
     it('PERIODER ingen fom', () => {
-        gaTilSoknad(arbeidstakerGradert, '3')
+        gaTilSoknad(arbeidstakerGradert, '3', 'arbeidstaker-gradert')
         cy.get('input[value=JA]').click()
 
         klikkGaVidere(true)
@@ -260,7 +264,7 @@ describe('Tester feilmeldinger', () => {
     })
 
     it('TALL ingen valg', () => {
-        gaTilSoknad(arbeidstakerGradert, '5')
+        gaTilSoknad(arbeidstakerGradert, '5', 'arbeidstaker-gradert')
         cy.get('input[value=JA]').click()
         cy.get('.undersporsmal input[value=Prosent]').click()
         cy.get(`input[name=${arbeidstakerGradert.sporsmal[4].undersporsmal[0].id}]`).type('37.5')
@@ -314,7 +318,7 @@ describe('Tester feilmeldinger', () => {
     })
 
     it('CHECKBOX_GRUPPE ingen valgt', () => {
-        gaTilSoknad(arbeidstakerGradert, '7')
+        gaTilSoknad(arbeidstakerGradert, '7', 'arbeidstaker-gradert')
         cy.get('input[value=JA]').click()
         klikkGaVidere(true)
         feilmeldingHandtering(
