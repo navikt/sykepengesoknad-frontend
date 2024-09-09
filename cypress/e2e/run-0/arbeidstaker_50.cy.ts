@@ -12,7 +12,7 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
     const soknad = arbeidstakerGradert
 
     before(() => {
-        cy.visit('/syk/sykepengesoknad')
+        cy.visit('/syk/sykepengesoknad?testperson=arbeidstaker-gradert')
     })
 
     it('Laster startside', function () {

@@ -9,7 +9,7 @@ import {
 
 describe('Tester korrigering av ferie', () => {
     it('Sender inn søknad med ja på ferie spørsmålet', () => {
-        cy.visit('/syk/sykepengesoknad/soknader/5b769c04-e171-47c9-b79b-23ab8fce331e')
+        cy.visit('/syk/sykepengesoknad/soknader/5b769c04-e171-47c9-b79b-23ab8fce331e?testperson=arbeidstaker-gradert')
         checkViStolerPaDeg()
         cy.contains('Tilbake i fullt arbeid')
         svarNeiHovedsporsmal()

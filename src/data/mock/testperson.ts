@@ -8,6 +8,7 @@ import { reisetilskuddTestPerson } from './data/personas/reisetilskuddTestPerson
 import { enUsendtSykmelding, toUsendteSykmeldinger } from './data/usendte-sykmeldinger'
 import {
     arbeidsledigPerson,
+    arbeidstakerGradertPerson,
     arbeidstakerPerson,
     behandlingsdagerPerson,
     clsPerson,
@@ -17,6 +18,7 @@ import {
     får403vedGetSoknad,
     får404vedPutOgGetSoknad,
     får500vedSendSoknad,
+    gammelOppsummering,
     harIkkeKontonummer,
     harKontonummer,
     integration,
@@ -42,6 +44,7 @@ import { nyttArbeidsforholdForstegangs, nyttArbeidsforholdPaafolgende } from './
 type PersonaKey =
     | 'uten-data'
     | 'arbeidstaker'
+    | 'arbeidstaker-gradert'
     | 'arbeidsledig'
     | 'reisetilskudd'
     | 'reisetilskudd-test'
@@ -79,6 +82,7 @@ type PersonaKey =
     | 'nytt-arbeidsforhold-pafolgende'
     | 'selvstendig-naringsdrivende-sendt'
     | 'innenfor-arbeidsgiver-perioden'
+    | 'gammel-oppsummering'
 
 export type PersonaData = Partial<Record<PersonaKey, Persona>>
 
@@ -102,6 +106,7 @@ export function testpersonerGruppert(): PersonaGroup {
     const data: PersonaGroup = {
         ['soknad-typer']: {
             ['arbeidstaker']: jsonDeepCopy(arbeidstakerPerson),
+            ['arbeidstaker-gradert']: jsonDeepCopy(arbeidstakerGradertPerson),
             ['arbeidsledig']: jsonDeepCopy(arbeidsledigPerson),
             ['selvstendig-naringsdrivende']: jsonDeepCopy(selvstendigNaringsdrivende),
             ['selvstendig-naringsdrivende-sendt']: jsonDeepCopy(selvstendigNaringsdrivendeSendt),
@@ -147,6 +152,7 @@ export function testpersonerGruppert(): PersonaGroup {
             ['http-500-ved-send-soknad']: jsonDeepCopy(får500vedSendSoknad),
             ['cummulative-layout-shift']: jsonDeepCopy(clsPerson),
             ['integrasjon-soknader']: jsonDeepCopy(integration),
+            ['gammel-oppsummering']: jsonDeepCopy(gammelOppsummering),
         },
     }
 

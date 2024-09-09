@@ -1,22 +1,12 @@
-import {
-    checkViStolerPaDeg,
-    klikkGaVidere,
-    setPeriodeFraTil,
-    sjekkIntroside,
-    sporsmalOgSvar,
-} from '../../support/utilities'
+import { klikkGaVidere, setPeriodeFraTil, sporsmalOgSvar } from '../../support/utilities'
 import { inlineForklaringer } from '../../support/sjekkInlineForklaringKvittering'
-import { arbeidstaker } from '../../../src/data/mock/data/soknad/arbeidstaker'
+import { arbeidtakerMedGammelOppsummering } from '../../../src/data/mock/data/soknad/arbeidstaker'
 
-describe('Tester arbeidstakersøknad', () => {
-    //-----
-    // Sykmelding: 7e90121c-b64b-4a1c-b7a5-93c9d95aba47, arbeidstaker - 100%
-    // Søknad: faba11f5-c4f2-4647-8c8a-58b28ce2f3ef, fom: 1.4.20, tom: 24.4.20
-    //-----
-    const soknad = arbeidstaker
+describe('Sjekker at søknader med gammel oppsummering ser ok ut', () => {
+    const soknad = arbeidtakerMedGammelOppsummering()
 
     before(() => {
-        cy.visit('/syk/sykepengesoknad')
+        cy.visit('/syk/sykepengesoknad?testperson=gammel-oppsummering')
     })
 
     it('Laster startside', function () {
@@ -27,10 +17,8 @@ describe('Tester arbeidstakersøknad', () => {
     it('Søknad ANSVARSERKLARING', function () {
         cy.url().should('include', `${soknad.id}/1`)
 
-        sjekkIntroside()
-        cy.contains(
-            'Siden sykemeldingen går over 31 dager, har vi delt opp søknaden, slik at du kan søke om sykepenger før hele perioden er ferdig. På den måten slipper du å vente lenge på sykepengene dine.',
-        )
+        cy.contains('Før du begynner').should('not.exist')
+        cy.contains('Det du fyller ut brukes til å vurdere om du har rett til sykepenger').should('not.exist')
 
         // Personvern erklæring
         cy.contains('Slik behandler NAV personopplysningene dine').click()
@@ -44,7 +32,9 @@ describe('Tester arbeidstakersøknad', () => {
         cy.contains('Det er 1 feil i skjemaet')
         cy.get('.navds-confirmation-panel__inner').should('exist')
         cy.contains('Du må bekrefte at du har lest og forstått informasjonen før du kan gå videre')
-        checkViStolerPaDeg()
+        cy.get('.navds-checkbox__label').click()
+
+        cy.contains('Start søknad').click()
     })
 
     it('Søknad TILBAKE_I_ARBEID ', function () {
@@ -66,7 +56,7 @@ describe('Tester arbeidstakersøknad', () => {
 
     it('Søknad TILBAKE_I_ARBEID går videre ', function () {
         // I egen test for å sjekke axe på hjelpetekst
-        klikkGaVidere()
+        cy.contains('Gå videre').click()
     })
 
     it('Søknad FERIE_V2', function () {
@@ -77,7 +67,8 @@ describe('Tester arbeidstakersøknad', () => {
         cy.contains('Når tok du ut feriedager?')
 
         setPeriodeFraTil(16, 23)
-        klikkGaVidere()
+
+        cy.contains('Gå videre').click()
     })
 
     it('Søknad PERMISJON_V2', function () {
@@ -94,7 +85,7 @@ describe('Tester arbeidstakersøknad', () => {
 
         setPeriodeFraTil(14, 22)
 
-        klikkGaVidere()
+        cy.contains('Gå videre').click()
     })
 
     it('Søknad ARBEID_UNDERVEIS_100_PROSENT', function () {
@@ -126,7 +117,7 @@ describe('Tester arbeidstakersøknad', () => {
         cy.contains('Jobber du vanligvis 37,5 timer i uka hos Posten Norge AS, Bærum?')
         cy.get('input#af302d17-f35d-38a6-ac23-ccde5db369cb_0').click()
 
-        klikkGaVidere()
+        cy.contains('Gå videre').click()
     })
 
     it('Søknad ANDRE_INNTEKTSKILDER_V2', function () {
@@ -155,7 +146,7 @@ describe('Tester arbeidstakersøknad', () => {
             .parent()
             .click()
 
-        klikkGaVidere()
+        cy.contains('Gå videre').click()
     })
 
     it('Søknad OPPHOLD_UTENFOR_EOS ', function () {
@@ -167,7 +158,7 @@ describe('Tester arbeidstakersøknad', () => {
 
         setPeriodeFraTil(14, 22)
 
-        klikkGaVidere()
+        cy.contains('Gå videre').click()
     })
 
     it('Søknad TIL_SLUTT', function () {
@@ -211,7 +202,9 @@ describe('Tester arbeidstakersøknad', () => {
         cy.contains('Det er 1 feil i skjemaet').should('not.exist')
 
         //kan trykke på forrige steg knapp øverst
-        cy.contains('Forrige steg').and('have.attr', 'href', `/soknader/${soknad.id}/7`).click()
+        cy.contains('Forrige steg')
+            .and('have.attr', 'href', `/soknader/${soknad.id}/7?testperson=gammel-oppsummering`)
+            .click()
         klikkGaVidere()
 
         //Trykker på Endre svar og havner på første spørsmål
