@@ -8,7 +8,7 @@ import { EkspanderbarHjelp } from '../../hjelpetekster/ekspanderbar-hjelp/ekspan
 import { NyIArbeidslivertAlert } from '../../hjelpetekster/ny-i-arbeidslivert-alert'
 import { cn } from '../../../utils/tw-utils'
 import { Sporsmal } from '../../../types/types'
-import { useRadiogruppeKeyboardNavigation } from '../../../utils/keyboard-navigation'
+import { useRadiogruppeTastaturNavigasjon } from '../../../utils/tastatur-navigasjon'
 
 import { jaNeiStorStyle, JaNeiStyle } from './ja-nei-stor-style'
 
@@ -25,7 +25,7 @@ const RadioKomp = ({ sporsmal, erHovedsporsmal }: { sporsmal: Sporsmal; erHoveds
 
     const feilmelding = hentFeilmelding(sporsmal)
     const error = errors[sporsmal.id] !== undefined
-    useRadiogruppeKeyboardNavigation(sporsmal, erHovedsporsmal)
+    useRadiogruppeTastaturNavigasjon(sporsmal, erHovedsporsmal)
     const erHovedJaNei =
         sporsmal.undersporsmal.length == 2 &&
         sporsmal.undersporsmal.some((uspm) => uspm.sporsmalstekst == 'Ja') &&

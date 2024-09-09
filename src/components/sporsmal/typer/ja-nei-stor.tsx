@@ -14,7 +14,7 @@ import { tekstMedHtml } from '../../../utils/html-react-parser-utils'
 import { PaskeferieInfo } from '../../hjelpetekster/paaskeferie/paskeferie-info'
 import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus'
 import { YrkesskadeInfo } from '../../hjelpetekster/yrkesskade-info'
-import { useJaNeiKeyboardNavigation } from '../../../utils/keyboard-navigation'
+import { useJaNeiTastaturNavigasjon } from '../../../utils/tastatur-navigasjon'
 import { Inntektsbulletpoints } from '../inntektsbulletpoints'
 import { Yrkesskadebulletpoints } from '../yrkesskade-bulletpoints'
 import { InntektsopplysningerErKonfidensielleInfo } from '../inntektsopplysninger-er-konfidensielle-info'
@@ -39,7 +39,7 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
         watchJaNei = getValues(sporsmal.id)
     }
 
-    useJaNeiKeyboardNavigation(sporsmal)
+    useJaNeiTastaturNavigasjon(sporsmal)
     if (!valgtSoknad) return null
 
     const valider = (value: any) => {

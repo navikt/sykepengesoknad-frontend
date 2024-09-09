@@ -4,12 +4,12 @@ import { Controller } from 'react-hook-form'
 
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { hentFeilmelding } from '../sporsmal-utils'
-import { useCheckboxNavigation } from '../../../utils/keyboard-navigation'
+import { useCheckboxNavigasjon } from '../../../utils/tastatur-navigasjon'
 
 const CheckboxInput = ({ sporsmal }: SpmProps) => {
     const spm = sporsmal.tag === 'BEKREFT_OPPLYSNINGER_UTLAND_INFO' ? sporsmal.undersporsmal[0] : sporsmal
 
-    useCheckboxNavigation(sporsmal)
+    useCheckboxNavigasjon(sporsmal)
 
     const feilmelding = hentFeilmelding(spm)
     return (
