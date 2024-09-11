@@ -1,35 +1,53 @@
 import { naringsdrivendeSoknad } from '../soknad/naringsdrivende'
 import { naringsdrivende100syk } from '../sykmeldinger'
 import { deepcopyMedNyId } from '../../deepcopyMedNyId'
+import { inntektsopplysningerUtenSigrunData } from '../sporsmal/inntektsopplysningerUtenSigrunData'
+import { RSSporsmal } from '../../../../types/rs-types/rs-sporsmal'
+import { RSSoknad } from '../../../../types/rs-types/rs-soknad'
 
 import { Persona } from './personas'
 
+const soknadUtenSigrunData = lagSoknadMedInntektsopplysninger(
+    '2faff926-5261-42e5-927b-02e4aa44a7ad',
+    inntektsopplysningerUtenSigrunData,
+)
+
 export const selvstendigNaringsdrivende: Persona = {
-    soknader: [naringsdrivendeSoknad],
+    soknader: [soknadUtenSigrunData],
     sykmeldinger: [naringsdrivende100syk],
     beskrivelse: 'Selvstendig næringsdrivende',
 }
 
-const sendtSoknadGammelKvittering = deepcopyMedNyId(naringsdrivendeSoknad, '3708c4de-d16c-4835-841b-a6716b688888')
-sendtSoknadGammelKvittering.status = 'SENDT'
-// sendt nå
-sendtSoknadGammelKvittering.sendtTilNAVDato = new Date().toISOString()
-sendtSoknadGammelKvittering.sporsmal.forEach((sporsmal) => {
+const sendtSoknadMedGammelKvittering = deepcopyMedNyId(naringsdrivendeSoknad, '3708c4de-d16c-4835-841b-a6716b688888')
+
+sendtSoknadMedGammelKvittering.status = 'SENDT'
+sendtSoknadMedGammelKvittering.sendtTilNAVDato = new Date().toISOString()
+sendtSoknadMedGammelKvittering.sporsmal.forEach((sporsmal) => {
     sporsmal.svar = [{ verdi: 'NEI' }]
 })
-
-const sendtSoknadNyKvitteringMedDokumenter = deepcopyMedNyId(
-    sendtSoknadGammelKvittering,
+const sendtSoknadMedNyKvitteringMedDokumenter = deepcopyMedNyId(
+    sendtSoknadMedGammelKvittering,
     '3708c4de-d16c-4835-841b-a6716b688999',
 )
-sendtSoknadNyKvitteringMedDokumenter.inntektsopplysningerNyKvittering = true
-sendtSoknadNyKvitteringMedDokumenter.inntektsopplysningerInnsendingId = '1234'
-sendtSoknadNyKvitteringMedDokumenter.inntektsopplysningerInnsendingDokumenter = [
+
+sendtSoknadMedNyKvitteringMedDokumenter.inntektsopplysningerNyKvittering = true
+sendtSoknadMedNyKvitteringMedDokumenter.inntektsopplysningerInnsendingId = '1234'
+sendtSoknadMedNyKvitteringMedDokumenter.inntektsopplysningerInnsendingDokumenter = [
     'Skattemelding/Næringsspesifikasjon hvis den er klar',
 ]
 
+function lagSoknadMedInntektsopplysninger(id: string, inntektsopplysningerUtenSigrunData: RSSporsmal) {
+    const soknad = deepcopyMedNyId(naringsdrivendeSoknad, id) as RSSoknad
+    soknad.sporsmal.splice(
+        soknad.sporsmal.findIndex((sporsmal) => sporsmal.tag === 'TIL_SLUTT'),
+        0,
+        inntektsopplysningerUtenSigrunData,
+    )
+    return soknad
+}
+
 export const selvstendigNaringsdrivendeSendt: Persona = {
-    soknader: [sendtSoknadGammelKvittering, sendtSoknadNyKvitteringMedDokumenter],
+    soknader: [sendtSoknadMedGammelKvittering, sendtSoknadMedNyKvitteringMedDokumenter],
     sykmeldinger: [naringsdrivende100syk],
     beskrivelse: 'Selvstendig næringsdrivende med sendt søknad',
 }

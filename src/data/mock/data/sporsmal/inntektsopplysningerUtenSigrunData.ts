@@ -27,7 +27,7 @@ export const inntektsopplysningerLegacy: RSSporsmal = {
                 {
                     id: v4().toString(),
                     tag: 'INNTEKTSOPPLYSNINGER_NY_I_ARBEIDSLIVET',
-                    sporsmalstekst: 'Er du ny i arbeidslivet etter 1.1.2019?',
+                    sporsmalstekst: 'Er du ny i arbeidslivet etter 1. januar 2019?',
                     undertekst: null,
                     svartype: 'RADIO_GRUPPE',
                     min: null,
@@ -75,7 +75,7 @@ export const inntektsopplysningerLegacy: RSSporsmal = {
                                     id: v4().toString(),
                                     tag: 'INNTEKTSOPPLYSNINGER_VARIG_ENDRING',
                                     sporsmalstekst:
-                                        'Har det skjedd en varig endring i arbeidssituasjonen eller virksomheten din i mellom 1.1.2019 og frem til sykmeldingstidspunktet?',
+                                        'Har det skjedd en varig endring i arbeidssituasjonen eller virksomheten din i mellom 1. januar 2019 og frem til sykmeldingstidspunktet?',
                                     undertekst: null,
                                     svartype: 'JA_NEI',
                                     min: null,
@@ -220,7 +220,7 @@ export const inntektsopplysningerLegacy: RSSporsmal = {
     ],
 }
 
-export const inntektsopplysninger: RSSporsmal = {
+export const inntektsopplysningerUtenSigrunData: RSSporsmal = {
     id: v4().toString(),
     tag: 'INNTEKTSOPPLYSNINGER_VIRKSOMHETEN_AVVIKLET',
     sporsmalstekst: 'Har du registrert virksomheten din som avviklet og slettet i Altinn før du ble sykmeldt?',
@@ -271,7 +271,7 @@ export const inntektsopplysninger: RSSporsmal = {
                 {
                     id: v4().toString(),
                     tag: 'INNTEKTSOPPLYSNINGER_NY_I_ARBEIDSLIVET',
-                    sporsmalstekst: 'Er du ny i arbeidslivet etter 1.1.2019?',
+                    sporsmalstekst: 'Er du ny i arbeidslivet etter 1. januar 2019?',
                     undertekst: null,
                     svartype: 'RADIO_GRUPPE',
                     min: null,
@@ -319,7 +319,7 @@ export const inntektsopplysninger: RSSporsmal = {
                                     id: v4().toString(),
                                     tag: 'INNTEKTSOPPLYSNINGER_VARIG_ENDRING',
                                     sporsmalstekst:
-                                        'Har det skjedd en varig endring i arbeidssituasjonen eller virksomheten din i mellom 1.1.2019 og frem til sykmeldingstidspunktet?',
+                                        'Har det skjedd en varig endring mellom 1. januar 2019 og frem til sykmeldingstidspunktet?',
                                     undertekst: null,
                                     svartype: 'JA_NEI',
                                     min: null,
