@@ -1,4 +1,4 @@
-import { Alert, BodyShort, Radio, RadioGroup } from '@navikt/ds-react'
+import { Alert, BodyShort, Radio, RadioGroup, VStack } from '@navikt/ds-react'
 import React, { Fragment } from 'react'
 import { Controller, useFormContext } from 'react-hook-form'
 
@@ -16,6 +16,8 @@ import { tekstMedHtml } from '../../../utils/html-react-parser-utils'
 import { EkspanderbarHjelp } from '../../hjelpetekster/ekspanderbar-hjelp/ekspanderbar-hjelp'
 import { VarigEndringEksempler } from '../../hjelpetekster/varig-endring-eksempler'
 import { VarigEndringAlert } from '../../hjelpetekster/varig-endring-alert'
+import { formatterTall } from '../../../utils/utils'
+import { hentInntektMetadata } from '../../../utils/ferdiglignet-inntekt'
 
 import { BeregningSykepengegrunnlagInfo } from './beregning-sykepengegrunnlag-info'
 
@@ -62,8 +64,12 @@ const JaNeiLiten = ({ sporsmal }: SpmProps) => {
         } else return <></>
     }
 
+    const inntektMetadata =
+        sporsmal.tag === 'INNTEKTSOPPLYSNINGER_VARIG_ENDRING_25_PROSENT' && hentInntektMetadata(sporsmal.metadata)
+
     return (
         <>
+            <hr />
             <div
                 className={
                     'mt-8' +
@@ -89,6 +95,22 @@ const JaNeiLiten = ({ sporsmal }: SpmProps) => {
                             legend={sporsmal.sporsmalstekst}
                             error={fieldState.error && feilmelding.lokal}
                         >
+                            {inntektMetadata && (
+                                <>
+                                    <VStack gap="4">
+                                        <BodyShort>
+                                            Din årsinntekt på sykmeldingstidspunktet:{' '}
+                                            <strong>{formatterTall(inntektMetadata.beregnet.snitt)}</strong> kroner.
+                                        </BodyShort>
+                                        <BodyShort>
+                                            Har du en inntekt som gjør at du tjener mindre enn{' '}
+                                            <strong>{formatterTall(inntektMetadata.beregnet.m25)}</strong> kroner eller
+                                            mer enn <strong>{formatterTall(inntektMetadata.beregnet.p25)}</strong>{' '}
+                                            kroner?
+                                        </BodyShort>
+                                    </VStack>
+                                </>
+                            )}
                             <EkspanderbarHjelp sporsmal={sporsmal} mb="mb-4" />
 
                             {sporsmal.tag === 'INNTEKTSOPPLYSNINGER_VARIG_ENDRING' && <VarigEndringEksempler />}

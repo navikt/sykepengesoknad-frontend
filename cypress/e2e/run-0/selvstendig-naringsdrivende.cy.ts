@@ -15,7 +15,7 @@ import {
 describe('Tester selvstendig naringsdrivende søknad', () => {
     before(() => {
         cy.visit(
-            '/syk/sykepengesoknad/soknader/2faff926-5261-42e5-927b-02e4aa44a7ad/1?testperson=selvstendig-naringsdrivende',
+            '/syk/sykepengesoknad/soknader/bd6f6207-3888-4210-a4c0-cbe6806b5d00/1?testperson=selvstendig-naringsdrivende',
         )
     })
 
@@ -49,7 +49,6 @@ describe('Tester selvstendig naringsdrivende søknad', () => {
         klikkGaVidere(true)
         harFeilISkjemaet('Datoen følger ikke formatet dd.mm.åååå')
         svarRadioSporsmal('Er du ny i arbeidslivet etter 1. januar 2019?', 'Nei')
-
         klikkGaVidere(true)
         harFeilISkjemaet('Du må svare på om det har skjedd en varig endring')
 
@@ -78,6 +77,17 @@ describe('Tester selvstendig naringsdrivende søknad', () => {
             'Har det skjedd en varig endring mellom 1. januar 2019 og frem til sykmeldingstidspunktet?',
             'Ja',
         )
+
+        cy.contains('Har du hatt mer enn 25 prosent endring i årsinntekten din som følge av den varige endringen?')
+        cy.contains('Din årsinntekt på sykmeldingstidspunktet: 450 000 kroner.')
+        cy.contains('Har du en inntekt som gjør at du tjener mindre enn 337 500 kroner eller mer enn 562 500 kroner?')
+
+        cy.contains('Hvordan har vi kommet frem til 450 000 kroner?').click()
+        cy.contains('Vi henter informasjon om inntekt fra Skatteetaten.').should('be.visible')
+        cy.contains('2020: 400 000 kroner').should('be.visible')
+        cy.contains('2021: 450 000 kroner').should('be.visible')
+        cy.contains('2022: 500 000 kroner').should('be.visible')
+
         klikkGaVidere(true)
 
         harFlereFeilISkjemaet(2, [
