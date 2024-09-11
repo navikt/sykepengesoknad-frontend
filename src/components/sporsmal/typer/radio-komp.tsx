@@ -1,4 +1,4 @@
-import { Radio, RadioGroup } from '@navikt/ds-react'
+import { BodyShort, Radio, RadioGroup } from '@navikt/ds-react'
 import React from 'react'
 import { Controller, useFormContext } from 'react-hook-form'
 
@@ -47,6 +47,12 @@ const RadioKomp = ({ sporsmal, erHovedsporsmal }: { sporsmal: Sporsmal; erHoveds
                         className={cn({ 'mt-8': !erHovedJaNei })}
                         data-cy="radio-komp"
                     >
+                        {sporsmal.tag === 'INNTEKTSOPPLYSNINGER_NY_I_ARBEIDSLIVET' && (
+                            <BodyShort size="small" className="text-text-subtle">
+                                Datoen er første dag i det i det første av tre av de ferdiglignede årene.
+                            </BodyShort>
+                        )}
+
                         <EkspanderbarHjelp
                             sporsmal={sporsmal}
                             key="radio-komp-hjelp"

@@ -17,6 +17,8 @@ import { EkspanderbarHjelp } from '../../hjelpetekster/ekspanderbar-hjelp/ekspan
 import { VarigEndringEksempler } from '../../hjelpetekster/varig-endring-eksempler'
 import { VarigEndringAlert } from '../../hjelpetekster/varig-endring-alert'
 
+import { BeregningSykepengegrunnlagInfo } from './beregning-sykepengegrunnlag-info'
+
 const JaNeiLiten = ({ sporsmal }: SpmProps) => {
     const { watch, getValues } = useFormContext()
     let watchJaNei = watch(sporsmal.id)
@@ -69,6 +71,15 @@ const JaNeiLiten = ({ sporsmal }: SpmProps) => {
                     (sporsmal.parentKriterie ? ' kriterie--' + sporsmal.parentKriterie.toLowerCase() : '')
                 }
             >
+                {sporsmal.tag === 'INNTEKTSOPPLYSNINGER_VARIG_ENDRING' && (
+                    <>
+                        <BeregningSykepengegrunnlagInfo />
+                        <BodyShort size="large" weight="semibold" spacing>
+                            Varig endring i din arbeidssituasjon eller virksomhet
+                        </BodyShort>
+                    </>
+                )}
+
                 <Controller
                     name={sporsmal.id}
                     rules={{ required: feilmelding.global }}

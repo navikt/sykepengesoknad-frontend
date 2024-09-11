@@ -1,7 +1,6 @@
 import { RSSoknad } from '../../../../types/rs-types/rs-soknad'
 import { oppsummering } from '../sporsmal/oppsummering'
 import { naringsdrivende100syk } from '../sykmeldinger'
-import { inntektsopplysninger } from '../sporsmal/inntektsopplysninger'
 
 export const naringsdrivendeSoknad: RSSoknad = {
     id: 'a8e40578-682b-4a04-bfda-b7768af2ae55',
@@ -323,7 +322,6 @@ export const naringsdrivendeSoknad: RSSoknad = {
             svar: [],
             undersporsmal: [],
         },
-        inntektsopplysninger,
         oppsummering(),
     ],
     egenmeldtSykmelding: false,
