@@ -28,6 +28,13 @@ describe('Tester opprettelse av søknad om å beholde sykepenger utenfor EØS', 
         cy.contains('Du kan velge flere.')
     })
 
+    it('Kan gå tilbake til forside, og starte søknad igjen', () => {
+        cy.contains('Forrige steg').click()
+        cy.url().should('include', 'sykepengesoknad-utland')
+        cy.findByRole('button', { name: 'Start søknaden' }).should('exist').click()
+        cy.url().should('include', `b4de172d-863d-4069-b357-76019a9d9537/1`)
+    })
+
     it('Avbryter søknaden og havner på avbrutt-siden', () => {
         cy.intercept(
             'POST',
