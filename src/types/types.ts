@@ -73,7 +73,7 @@ export class Sporsmal extends ObjectCopier {
         readonly parentKriterie: RSVisningskriterieType | null,
         readonly erHovedsporsmal: boolean,
         readonly tittel: string | undefined,
-        readonly metadata: Record<string, string> | undefined,
+        readonly metadata: Record<string, string | number> | undefined,
     ) {
         super()
     }
