@@ -8,25 +8,33 @@ import { tekst } from '../../../utils/tekster'
 import { SEPARATOR } from '../../../utils/constants'
 import { useSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
 import { useTestpersonQuery } from '../../../hooks/useTestpersonQuery'
+import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype'
+import { utlandsoknadPath } from '../../soknad/soknad-link'
 
 export const Tilbake = ({ variant }: { variant: 'liten' | 'stor' }) => {
     const { valgtSoknad, stegNo, soknadId } = useSoknadMedDetaljer()
     const testperson = useTestpersonQuery()
     const router = useRouter()
 
-    const tilbakeLenke = `/soknader/${soknadId}${SEPARATOR}${stegNo - 1}${testperson.query()}`
+    const tilbakeLenke = (): string => {
+        if (valgtSoknad?.soknadstype == RSSoknadstype.OPPHOLD_UTLAND && valgtSoknad.sporsmal[stegNo - 2] == null) {
+            return `${utlandsoknadPath}${testperson.query()}`
+        } else {
+            return `/soknader/${soknadId}${SEPARATOR}${stegNo - 1}${testperson.query()}`
+        }
+    }
 
     const klikkTilbake = (e: React.MouseEvent, lenketekst: string) => {
         e.preventDefault()
         if (!valgtSoknad) return
         logEvent('navigere', {
             lenketekst: lenketekst,
-            fra: valgtSoknad.sporsmal[stegNo - 1].tag,
-            til: valgtSoknad.sporsmal[stegNo - 2].tag,
+            fra: valgtSoknad.sporsmal[stegNo - 1]?.tag,
+            til: valgtSoknad.sporsmal[stegNo - 2]?.tag,
             soknadstype: valgtSoknad.soknadstype,
             stegId: `${stegNo}`,
         })
-        router.push(tilbakeLenke)
+        router.push(tilbakeLenke()).then()
     }
 
     if (variant === 'stor') {
@@ -44,7 +52,7 @@ export const Tilbake = ({ variant }: { variant: 'liten' | 'stor' }) => {
     }
 
     return (
-        <Link href={tilbakeLenke} onClick={(e) => klikkTilbake(e, tekst('soknad.forrige_steg'))}>
+        <Link href={tilbakeLenke()} onClick={(e) => klikkTilbake(e, tekst('soknad.forrige_steg'))}>
             <ArrowLeftIcon aria-hidden />
             Forrige steg
         </Link>
