@@ -23,7 +23,13 @@ before(() => {
 })
 
 afterEach(() => {
-    setupAxe()
+    cy.url().then((currentUrl) => {
+        if (currentUrl.includes('localhost')) {
+            setupAxe()
+        } else {
+            cy.log('Sjekker ikke eksterne sider for universiell utforming.')
+        }
+    })
 })
 
 function setupAxe() {

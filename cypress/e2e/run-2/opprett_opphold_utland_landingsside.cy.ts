@@ -71,15 +71,13 @@ describe('Tester opprettelse av søknad om å beholde sykepenger utenfor EØS', 
     })
 
     it('Avbryter en ikke-opprettet opphold utland søknad', () => {
-        // Ignorerer eventuelle feil fra demosiden
-        cy.origin('https://demo.ekstern.dev.nav.no', () => {
-            cy.on('uncaught:exception', () => {
-                return false
-            })
-        })
+        cy.intercept('GET', 'https://demo.ekstern.dev.nav.no/syk/sykefravaer', {
+            statusCode: 200,
+            body: { message: 'Mocked response' },
+        }).as('demoRequest')
 
         cy.visit('/syk/sykepengesoknad/sykepengesoknad-utland')
         avbryterSoknad()
-        cy.url().should('include', `/syk/sykefravaer`)
+        cy.wait('@demoRequest').its('request.url').should('include', 'https://demo.ekstern.dev.nav.no/syk/sykefravaer')
     })
 })
