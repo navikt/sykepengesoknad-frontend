@@ -69,7 +69,6 @@ const JaNeiLiten = ({ sporsmal }: SpmProps) => {
 
     return (
         <>
-            <hr />
             <div
                 className={
                     'mt-8' +
