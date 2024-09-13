@@ -1,9 +1,7 @@
 import {
-    checkViStolerPaDeg,
     harFeilISkjemaet,
     harFlereFeilISkjemaet,
     klikkGaVidere,
-    neiOgVidere,
     sporsmalOgSvar,
     svarCheckboxSporsmal,
     svarDato,
@@ -15,71 +13,15 @@ import {
     modalAktiv,
 } from '../../support/utilities'
 
-describe('Tester selvstendig naringsdrivende søknad', () => {
+describe('Tester selvstendig naringsdrivende søknad med data fra Sigrun', () => {
     before(() => {
         cy.visit(
-            '/syk/sykepengesoknad/soknader/bd6f6207-3888-4210-a4c0-cbe6806b5d00/1?testperson=selvstendig-naringsdrivende',
+            '/syk/sykepengesoknad/soknader/bd6f6207-3888-4210-a4c0-cbe6806b5d00/7?testperson=selvstendig-naringsdrivende',
         )
-    })
-
-    it('Svarer på vi stoler på deg', function () {
-        checkViStolerPaDeg()
-    })
-
-    it('Svarer på spørsmål', function () {
-        neiOgVidere([
-            'Tilbake i fullt arbeid',
-            'Jobb underveis i sykefraværet',
-            'Andre inntektskilder',
-            'Reise til utlandet',
-            'Arbeid utenfor Norge',
-        ])
     })
 
     it('Virksomheten din', function () {
-        klikkGaVidere(true)
-        harFeilISkjemaet('Du må svare på om virksomheten har blitt avviklet og slettet')
-        svarJaHovedsporsmal()
-        cy.contains('Når ble virksomheten avviklet?')
-        klikkGaVidere(true)
-        harFeilISkjemaet('Datoen følger ikke formatet dd.mm.åååå')
-        svarNeiHovedsporsmal()
-        cy.contains('Datoen er første dag i det i det første av tre av de ferdiglignede årene.')
-        klikkGaVidere(true)
-        harFeilISkjemaet('Du må svare på om du er ny i arbeidslivet')
-        svarRadioSporsmal('Er du ny i arbeidslivet etter 1. januar 2019?', 'Ja')
-        cy.contains('Du har oppgitt at du er ny i arbeidslivet.')
-        klikkGaVidere(true)
-        harFeilISkjemaet('Datoen følger ikke formatet dd.mm.åååå')
-        svarRadioSporsmal('Er du ny i arbeidslivet etter 1. januar 2019?', 'Nei')
-        klikkGaVidere(true)
-        harFeilISkjemaet('Du må svare på om det har skjedd en varig endring')
-
-        cy.contains('Beregning av sykepengegrunnlaget')
-        cy.contains(
-            'Sykepenger for selvstendig næringsdrivende baseres vanligvis på gjennomsnittlig årsinntekt de tre siste ferdiglignede årene.',
-        )
-        cy.contains(
-            'Unntak kan gjøres hvis inntekten din har endret seg varig mer enn 25 prosent på grunn av endringer i arbeidssituasjonen.',
-        )
-        cy.contains('Hvis du ikke har tre ferdiglignede år, vil sykepengegrunnlaget fastsettes ved skjønn.')
-
-        cy.contains('Hva betyr ferdiglignet inntekt?').click()
-        cy.contains(
-            'Ferdiglignet inntekt betyr den endelige inntekten som er beregnet og godkjent av skattemyndighetene etter at selvangivelsen eller skattemeldingen er gjennomgått.',
-        ).should('be.visible')
-
-        cy.contains('Varig endring i din arbeidssituasjon eller virksomhet')
-        cy.contains('Eksempler på varig endring')
-        cy.contains('Avsluttet eller startet andre arbeidsforhold ved siden av virksomheten')
-        svarRadioSporsmal(
-            'Har det skjedd en varig endring mellom 1. januar 2019 og frem til sykmeldingstidspunktet?',
-            'Nei',
-        )
-        svarRadioSporsmal(
-            'Har det skjedd en varig endring mellom 1. januar 2019 og frem til sykmeldingstidspunktet?',
-            'Ja',
-        )
+        fellesInnholdFørVisningAvSigrunData()
 
         cy.contains('Har du hatt mer enn 25 prosent endring i årsinntekten din som følge av den varige endringen?')
         cy.contains('Din årsinntekt på sykmeldingstidspunktet: 450 000 kroner.')
@@ -91,29 +33,37 @@ describe('Tester selvstendig naringsdrivende søknad', () => {
         cy.contains('2021: 450 000 kroner').should('be.visible')
         cy.contains('2022: 500 000 kroner').should('be.visible')
 
-        klikkGaVidere(true)
+        fellesInnholdEtterVisningAvSigrunData()
 
-        harFlereFeilISkjemaet(2, [
-            'Du må svare på hvilken endring som har skjedd',
-            'Du må svare på om du har hatt mer enn 25 prosent endring i årsinntekten din',
-        ])
+        klikkGaVidere()
+    })
+    tilSlutt()
+    kvitteringen()
+})
 
-        svarCheckboxSporsmal(
-            'Hvilken endring har skjedd i din arbeidssituasjon eller virksomhet?',
-            'Endret markedssituasjon',
+describe('Tester selvstendig naringsdrivende søknad uten data fra Sigrun', () => {
+    before(() => {
+        cy.visit(
+            '/syk/sykepengesoknad/soknader/2faff926-5261-42e5-927b-02e4aa44a7ad/7?testperson=selvstendig-naringsdrivende',
         )
+    })
 
-        harFeilISkjemaet('Du må svare på om du har hatt mer enn 25 prosent endring i årsinntekten din')
+    it('Virksomheten din', function () {
+        fellesInnholdFørVisningAvSigrunData()
 
-        svarRadioSporsmal(
-            'Har du hatt mer enn 25 prosent endring i årsinntekten din som følge av den varige endringen?',
-            'Ja',
-        )
-        cy.contains('Etter du har sendt inn søknaden trenger vi dokumentasjon på den varige endringen din.')
-        klikkGaVidere(true)
-        harFeilISkjemaet('Datoen følger ikke formatet dd.mm.åååå')
+        cy.contains('Har du hatt mer enn 25 prosent endring i årsinntekten din som følge av den varige endringen?')
+        cy.contains('Din årsinntekt på sykmeldingstidspunktet: 450 000 kroner.').should('not.exist')
+        cy.contains(
+            'Har du en inntekt som gjør at du tjener mindre enn 337 500 kroner eller mer enn 562 500 kroner?',
+        ).should('not.exist')
 
-        svarDato('Når skjedde den siste varige endringen?', '12.03.2020')
+        cy.contains('Hvordan har vi kommet frem til 450 000 kroner?').should('not.exist')
+        cy.get('span').filter(':contains("Spørsmålet forklart")').last().click()
+        cy.contains('Sykepenger til selvstendig næringsdrivende').should('be.visible')
+        cy.contains('Det kan likevel gjøres unntak').should('be.visible')
+        cy.contains('Vi skjønner at det noen ganger ').should('be.visible')
+
+        fellesInnholdEtterVisningAvSigrunData()
 
         klikkGaVidere(true)
     })
@@ -130,7 +80,81 @@ describe('Tester selvstendig naringsdrivende søknad', () => {
         modalIkkeAktiv()
     })
 
-    it('Søknad TIL_SLUTT ', function () {
+    tilSlutt()
+    kvitteringen()
+})
+
+function fellesInnholdFørVisningAvSigrunData() {
+    klikkGaVidere(true)
+    harFeilISkjemaet('Du må svare på om virksomheten har blitt avviklet og slettet')
+    svarJaHovedsporsmal()
+    cy.contains('Når ble virksomheten avviklet?')
+    klikkGaVidere(true)
+    harFeilISkjemaet('Datoen følger ikke formatet dd.mm.åååå')
+    svarNeiHovedsporsmal()
+    cy.contains('Datoen er første dag i det i det første av tre av de ferdiglignede årene.')
+    klikkGaVidere(true)
+    harFeilISkjemaet('Du må svare på om du er ny i arbeidslivet')
+    svarRadioSporsmal('Er du ny i arbeidslivet etter 1. januar 2019?', 'Ja')
+    cy.contains('Du har oppgitt at du er ny i arbeidslivet.')
+    klikkGaVidere(true)
+    harFeilISkjemaet('Datoen følger ikke formatet dd.mm.åååå')
+    svarRadioSporsmal('Er du ny i arbeidslivet etter 1. januar 2019?', 'Nei')
+    klikkGaVidere(true)
+    harFeilISkjemaet('Du må svare på om det har skjedd en varig endring')
+
+    cy.contains('Beregning av sykepengegrunnlaget')
+    cy.contains(
+        'Sykepenger for selvstendig næringsdrivende baseres vanligvis på gjennomsnittlig årsinntekt de tre siste ferdiglignede årene.',
+    )
+    cy.contains(
+        'Unntak kan gjøres hvis inntekten din har endret seg varig mer enn 25 prosent på grunn av endringer i arbeidssituasjonen.',
+    )
+    cy.contains('Hvis du ikke har tre ferdiglignede år, vil sykepengegrunnlaget fastsettes ved skjønn.')
+
+    cy.contains('Hva betyr ferdiglignet inntekt?').click()
+    cy.contains(
+        'Ferdiglignet inntekt betyr den endelige inntekten som er beregnet og godkjent av skattemyndighetene etter at selvangivelsen eller skattemeldingen er gjennomgått.',
+    ).should('be.visible')
+
+    cy.contains('Varig endring i din arbeidssituasjon eller virksomhet')
+    cy.contains('Eksempler på varig endring')
+    cy.contains('Avsluttet eller startet andre arbeidsforhold ved siden av virksomheten')
+    svarRadioSporsmal(
+        'Har det skjedd en varig endring mellom 1. januar 2019 og frem til sykmeldingstidspunktet?',
+        'Nei',
+    )
+    svarRadioSporsmal('Har det skjedd en varig endring mellom 1. januar 2019 og frem til sykmeldingstidspunktet?', 'Ja')
+}
+
+function fellesInnholdEtterVisningAvSigrunData() {
+    klikkGaVidere(true)
+
+    harFlereFeilISkjemaet(2, [
+        'Du må svare på hvilken endring som har skjedd',
+        'Du må svare på om du har hatt mer enn 25 prosent endring i årsinntekten din',
+    ])
+
+    svarCheckboxSporsmal(
+        'Hvilken endring har skjedd i din arbeidssituasjon eller virksomhet?',
+        'Endret markedssituasjon',
+    )
+
+    harFeilISkjemaet('Du må svare på om du har hatt mer enn 25 prosent endring i årsinntekten din')
+
+    svarRadioSporsmal(
+        'Har du hatt mer enn 25 prosent endring i årsinntekten din som følge av den varige endringen?',
+        'Ja',
+    )
+    cy.contains('Etter du har sendt inn søknaden trenger vi dokumentasjon på den varige endringen din.')
+    klikkGaVidere(true)
+    harFeilISkjemaet('Datoen følger ikke formatet dd.mm.åååå')
+
+    svarDato('Når skjedde den siste varige endringen?', '12.03.2020')
+}
+
+function tilSlutt() {
+    it('Til slutt ', function () {
         sporsmalOgSvar(
             'Har du registrert virksomheten din som avviklet og slettet i Altinn før du ble sykmeldt?',
             'Nei',
@@ -163,10 +187,12 @@ describe('Tester selvstendig naringsdrivende søknad', () => {
             })
         cy.contains('Send søknaden').click()
     })
+}
 
+function kvitteringen() {
     it('Kvittering', function () {
         cy.contains('Søknaden er sendt til NAV')
         cy.contains('Du må sende inn dokumentasjon på inntekten din før vi kan behandle saken.')
         cy.contains('Skattemelding/Næringsspesifikasjon hvis den er klar')
     })
-})
+}
