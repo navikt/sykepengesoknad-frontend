@@ -252,7 +252,7 @@ const SporsmalTekster = {
     'soknad.undertekst.OFFENTLIG_TRANSPORT_BELOP': 'Oppgi i kroner',
     'soknad.undertekst.BIL_BOMPENGER_BELOP': 'Oppgi i kroner',
     'soknad.undertekst.KM_HJEM_JOBB': 'Oppgi i kilometer',
-    'soknad.undertekst.HVOR_MANGE_TIMER_PER_UKE': 'Oppgi timer per uke',
+    'soknad.undertekst.HVOR_MANGE_TIMER_PER_UKE': 'Eksempel: 8,5',
     'soknad.undertekst.HVOR_MYE_TIMER_VERDI': 'Oppgi timer totalt',
     'soknad.undertekst.HVOR_MYE_PROSENT_VERDI': 'Oppgi prosent',
 
