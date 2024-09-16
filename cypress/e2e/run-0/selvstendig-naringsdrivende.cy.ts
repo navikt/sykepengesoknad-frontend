@@ -97,7 +97,7 @@ describe('Tester selvstendig naringsdrivende søknad', () => {
     it('svar på flexjar survey', () => {
         cy.url().should('include', 'visSurvey=true')
         modalAktiv()
-        cy.contains('Var informasjonen du fikk nok til at du kunne svare på dette spørsmålet?')
+        cy.contains('Har du nok informasjon til å kunne svare på spørsmålet om endring i årsinntekten?')
         cy.findByRole('button', { name: 'Ja' }).click()
         svarFritekst('Er det noe du vil trekke frem? (valgfritt)', 'Har kontroll på alt')
         cy.contains('Send tilbakemelding').click()
