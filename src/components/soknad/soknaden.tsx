@@ -26,6 +26,8 @@ import { erOppdelt } from '../../utils/periode-utils'
 import { InfoOmTilbakedatering } from '../soknad-intro/info-om-tilbakedatering'
 import { erSisteSide } from '../sporsmal/sporsmal-utils'
 import { Tilbake } from '../sporsmal/tilbake-knapp/tilbake'
+import { FlexjarSurveyModal } from '../flexjar/flexjar-survey'
+import { skjulFlexjarSurvey } from '../flexjar/utils'
 
 import { urlTilSoknad } from './soknad-link'
 import { SporsmalTittel } from './sporsmal-tittel'
@@ -44,6 +46,11 @@ export const Soknaden = () => {
         spmIndex,
         valgtSoknadError,
     } = useSoknadMedDetaljer()
+    const [visSurvey, setVisSurvey] = useState(router.query.visSurvey === 'true')
+    useEffect(() => {
+        setVisSurvey(router.query.visSurvey === 'true')
+    }, [router.query.visSurvey])
+    const flexjarSurveyAlternativer = ['Ja', 'Nei']
 
     useUpdateBreadcrumbs(() => [{ ...soknadBreadcrumb, handleInApp: true }], [])
 
@@ -113,10 +120,12 @@ export const Soknaden = () => {
     const erForstesiden = stegNo === 1 && !erUtenlandssoknad
     const erSistesiden = valgtSoknad && sporsmal ? erSisteSide(valgtSoknad, stegNo) : false
     const erForstesidenMedReisetilskudd = stegNo === 1 && (erReisetilskuddsoknad || erGradertReisetilskuddsoknad)
+
     const oppdeltSoknadTekst =
         valgtSoknad && valgtSykmelding && erOppdelt(valgtSoknad, valgtSykmelding)
             ? 'Siden sykemeldingen går over 31 dager, har vi delt opp søknaden, slik at du kan søke om sykepenger før hele perioden er ferdig. På den måten slipper du å vente lenge på sykepengene dine.'
             : ''
+
     return (
         <>
             {valgtSoknadError && <FeilStateView feilmelding={valgtSoknadError?.status}></FeilStateView>}
@@ -168,6 +177,17 @@ export const Soknaden = () => {
                 valgtSoknad?.soknadstype === RSSoknadstype.OPPHOLD_UTLAND) && (
                 <FlexjarSporsmal soknad={valgtSoknad} sporsmal={sporsmal} steg={stegNo} />
             )}
+            <FlexjarSurveyModal
+                visSurvey={visSurvey}
+                surveySporsmal="Var informasjonen du fikk nok til at du kunne svare på dette spørsmålet?"
+                svarAlternativer={flexjarSurveyAlternativer}
+                onSubmit={() => {
+                    skjulFlexjarSurvey(router).then(() => {
+                        setVisSurvey(false)
+                    })
+                }}
+                feedbackId="sykpengesoknad-naering-25-endring"
+            ></FlexjarSurveyModal>
         </>
     )
 }
