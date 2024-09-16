@@ -37,9 +37,6 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
         }
     }
 
-    const manglerSporsmalsTekst = sporsmal.sporsmalstekst === ''
-    const harUndertekst = !!sporsmal.undertekst
-
     const antallDesimaler = (() => {
         switch (sporsmal.svartype) {
             case RSSvartype.PROSENT:
@@ -55,11 +52,10 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
         }
     })()
 
-    const description = harUndertekst
-        ? sporsmal.undertekst
-        : manglerSporsmalsTekst
-          ? ''
-          : tekst(('soknad.undertekst.' + sporsmal.tag) as any)
+    const manglerSporsmalsTekst = sporsmal.sporsmalstekst === ''
+    const description =
+        sporsmal.undertekst || (manglerSporsmalsTekst ? '' : tekst(('soknad.undertekst.' + sporsmal.tag) as any))
+
     return (
         <div className={!sporsmal.parentKriterie ? '' : 'mt-8 w-full'}>
             <TextField
