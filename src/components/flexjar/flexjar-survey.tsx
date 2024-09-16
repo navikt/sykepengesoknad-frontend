@@ -40,7 +40,7 @@ export const FlexjarSurvey = ({
         setThanksFeedback,
         setActiveState,
         color: 'var(--a-red-100)',
-        hoverColor: 'hover:text-red-500',
+        hoverColor: 'hover:text-blue-500',
         width: 'w-full',
     }
 
