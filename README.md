@@ -1,6 +1,7 @@
 # sykepengesoknad-frontend
 Søknadsdialog for sykepenger. Bruker next.js og designsystemet.
 
+
 ## Kjør lokalt
 `npm run dev`
 
