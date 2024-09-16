@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { BodyShort } from '@navikt/ds-react'
 
 import { logEvent } from '../amplitude/amplitude'
@@ -21,8 +21,8 @@ export interface EmojiButtonProps {
 export const EmojiButton = (props: EmojiButtonProps) => {
     const isActive = props.activeState === props.feedback
 
-    const handleOnClick = () => {
-        if (props.activeState) {
+    useEffect(() => {
+        if (isActive) {
             logEvent('knapp klikket', {
                 komponent: 'flexjar',
                 feedbackId: props.feedbackId,
@@ -30,6 +30,10 @@ export const EmojiButton = (props: EmojiButtonProps) => {
                 svar: props.activeState + '',
             })
         }
+        // eslint-disable-next-line
+    }, [props.activeState])
+
+    const handleOnClick = () => {
         props.setThanksFeedback(false)
         if (isActive) {
             props.setActiveState(null)
