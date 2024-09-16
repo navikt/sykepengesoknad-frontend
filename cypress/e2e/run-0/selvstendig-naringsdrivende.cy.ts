@@ -92,7 +92,7 @@ function fellesInnholdFørVisningAvSigrunData() {
     klikkGaVidere(true)
     harFeilISkjemaet('Datoen følger ikke formatet dd.mm.åååå')
     svarNeiHovedsporsmal()
-    cy.contains('Datoen er første dag i det i det første av tre av de ferdiglignede årene.')
+    cy.contains('Datoen er første dag i det første av tre av de ferdiglignede årene.')
     klikkGaVidere(true)
     harFeilISkjemaet('Du må svare på om du er ny i arbeidslivet')
     svarRadioSporsmal('Er du ny i arbeidslivet etter 1. januar 2019?', 'Ja')

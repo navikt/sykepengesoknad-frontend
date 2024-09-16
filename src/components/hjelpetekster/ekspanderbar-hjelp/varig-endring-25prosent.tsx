@@ -33,7 +33,7 @@ export const VarigEndring25prosent = ({ sporsmal }: VarigEndring25prosentProps) 
                 </BodyShort>
                 <LenkeMedIkon href="https://www.nav.no/grunnbelopet" text="Les mer om grunnbeløpet" />
                 <BodyShort className="mt-4" spacing>
-                    Din inntekt per kalenderår, de tre siste ferdiglignende år:
+                    Din inntekt per kalenderår, de tre siste ferdiglignede årene:
                 </BodyShort>
                 <div>
                     {Object.entries(inntektMetadata.inntekt).map(([year, inntektValue]) => (

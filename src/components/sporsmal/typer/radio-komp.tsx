@@ -49,7 +49,7 @@ const RadioKomp = ({ sporsmal, erHovedsporsmal }: { sporsmal: Sporsmal; erHoveds
                     >
                         {sporsmal.tag === 'INNTEKTSOPPLYSNINGER_NY_I_ARBEIDSLIVET' && (
                             <BodyShort size="small" className="text-text-subtle">
-                                Datoen er første dag i det i det første av tre av de ferdiglignede årene.
+                                Datoen er første dag i det første av tre av de ferdiglignede årene.
                             </BodyShort>
                         )}
 
