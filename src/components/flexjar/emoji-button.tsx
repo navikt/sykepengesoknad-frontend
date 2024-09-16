@@ -7,7 +7,7 @@ import { cn } from '../../utils/tw-utils'
 import { FillProps } from './emojies'
 
 export interface EmojiButtonProps {
-    feedback: number
+    feedback: number | string
     Emoji: (fp: FillProps) => React.JSX.Element
     text: string
     color: string
@@ -16,6 +16,7 @@ export interface EmojiButtonProps {
     setThanksFeedback: (b: boolean) => void
     setActiveState: (s: number | string | null) => void
     feedbackId: string
+    width?: string
 }
 
 export const EmojiButton = (props: EmojiButtonProps) => {
@@ -47,8 +48,9 @@ export const EmojiButton = (props: EmojiButtonProps) => {
             type="button"
             aria-pressed={isActive}
             className={cn(
-                'rounded-xl flex flex-col items-center py-2 gap-y-2 text-gray-900 w-[78px] h-[128px] hover:bg-gray-100',
+                'rounded-xl flex flex-col items-center py-2 gap-y-2 text-gray-900 h-[128px] hover:bg-gray-100',
                 props.hoverColor,
+                props.width || 'w-[78px]',
                 {
                     [`${props.hoverColor.split(':')[1]} bg-gray-100`]: isActive,
                 },

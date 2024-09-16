@@ -12,7 +12,7 @@ import AvsluttOgFortsettSenere from '../../avslutt-og-fortsett-senere/avslutt-og
 import AvbrytSoknadModal from '../../avbryt-soknad-modal/avbryt-soknad-modal'
 import { Tilbake } from '../tilbake-knapp/tilbake'
 
-const Knapperad = ({ poster }: { poster: boolean }) => {
+const Knapperad = ({ poster, setVisFlexjar }: { poster: boolean; setVisFlexjar: (value: boolean) => void }) => {
     const { valgtSoknad: soknad, sporsmal, stegNo } = useSoknadMedDetaljer()
 
     const { getValues } = useFormContext()
@@ -68,6 +68,18 @@ const Knapperad = ({ poster }: { poster: boolean }) => {
                     className="mb-12 mt-6 inline-flex"
                     iconPosition="right"
                     icon={knappetekst() !== tekst('sykepengesoknad.send') && <ArrowRightIcon aria-hidden />}
+                    onClick={() => {
+                        if (soknad) {
+                            const formValues = getValues()
+                            const varigEndring = hentSporsmal(
+                                soknad,
+                                'INNTEKTSOPPLYSNINGER_VARIG_ENDRING_25_PROSENT',
+                            )?.id
+                            if (varigEndring && formValues[varigEndring]) {
+                                setVisFlexjar(true)
+                            }
+                        }
+                    }}
                 >
                     {knappetekst()}
                 </Button>

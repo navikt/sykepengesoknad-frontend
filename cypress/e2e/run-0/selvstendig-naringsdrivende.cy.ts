@@ -10,6 +10,9 @@ import {
     svarCheckboxSporsmal,
     svarDato,
     sporsmalOgSvar,
+    modalIkkeAktiv,
+    svarFritekst,
+    modalAktiv,
 } from '../../support/utilities'
 
 describe('Tester selvstendig naringsdrivende søknad', () => {
@@ -88,7 +91,17 @@ describe('Tester selvstendig naringsdrivende søknad', () => {
 
         svarDato('Når skjedde den siste varige endringen?', '12.03.2020')
 
-        klikkGaVidere()
+        klikkGaVidere(true)
+    })
+
+    it('svar på flexjar survey', () => {
+        cy.url().should('include', 'visSurvey=true')
+        modalAktiv()
+        cy.contains('Har du nok informasjon til å kunne svare på spørsmålet om endring i årsinntekten?')
+        cy.findByRole('button', { name: 'Ja' }).click()
+        svarFritekst('Er det noe du vil trekke frem? (valgfritt)', 'Har kontroll på alt')
+        cy.contains('Send tilbakemelding').click()
+        modalIkkeAktiv()
     })
 
     it('Søknad TIL_SLUTT ', function () {

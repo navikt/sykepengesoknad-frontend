@@ -150,3 +150,45 @@ export const veldigGlad = (props: FillProps) => (
         />
     </svg>
 )
+
+export const tommelNed = () => {
+    return (
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="3em"
+            height="3em"
+            fill="none"
+            viewBox="0 0 24 24"
+            focusable="false"
+            role="img"
+        >
+            <path
+                fill="currentColor"
+                fillRule="evenodd"
+                d="M11.353 3.265a1 1 0 0 1 .147-.015h5.472c1.24 0 2.327.83 2.653 2.026l1.91 7a2.75 2.75 0 0 1-2.654 3.474h-5.34l.793 2.38a2.75 2.75 0 0 1-2.609 3.62H10.5a.75.75 0 0 1-.624-.334L6.099 15.75H3a.75.75 0 0 1-.75-.75V5A.75.75 0 0 1 3 4.25h3.426zm.221 1.485-4.927.985a1 1 0 0 1-.147.015H3.75v8.5H6.5a.75.75 0 0 1 .624.334l3.777 5.666h.824a1.25 1.25 0 0 0 1.186-1.645l-1.122-3.368a.75.75 0 0 1 .711-.987h6.381a1.25 1.25 0 0 0 1.206-1.579l-1.909-7a1.25 1.25 0 0 0-1.206-.921z"
+                clipRule="evenodd"
+            ></path>
+        </svg>
+    )
+}
+
+export const tommelOpp = () => {
+    return (
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="3em"
+            height="3em"
+            fill="none"
+            viewBox="0 0 24 24"
+            focusable="false"
+            role="img"
+        >
+            <path
+                fill="currentColor"
+                fillRule="evenodd"
+                d="M9.876 2.584a.75.75 0 0 1 .624-.334h1.225a2.75 2.75 0 0 1 2.609 3.62l-.793 2.38h5.34a2.75 2.75 0 0 1 2.654 3.474l-1.91 7a2.75 2.75 0 0 1-2.653 2.026H11.5a1 1 0 0 1-.147-.015l-4.927-.985H3a.75.75 0 0 1-.75-.75V9A.75.75 0 0 1 3 8.25h3.099zm1.025 1.166L7.124 9.416a.75.75 0 0 1-.624.334H3.75v8.5H6.5q.075 0 .147.015l4.927.985h5.398a1.25 1.25 0 0 0 1.206-.921l1.91-7A1.25 1.25 0 0 0 18.88 9.75H12.5a.75.75 0 0 1-.711-.987l1.122-3.368a1.25 1.25 0 0 0-1.186-1.645z"
+                clipRule="evenodd"
+            ></path>
+        </svg>
+    )
+}
