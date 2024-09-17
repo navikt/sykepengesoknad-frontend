@@ -179,7 +179,7 @@ export const Soknaden = () => {
             )}
             <FlexjarSurveyModal
                 visSurvey={visSurvey}
-                surveySporsmal="Har du nok informasjon til å kunne svare på spørsmålet om endring i årsinntekten?"
+                surveySporsmal="Har du nok informasjon til å kunne svare på spørsmålet om endring i årsinntekten, spesielt om du har hatt en endring på 25%?"
                 svarAlternativer={flexjarSurveyAlternativer}
                 onSubmit={() => {
                     skjulFlexjarSurvey(router).then(() => {
