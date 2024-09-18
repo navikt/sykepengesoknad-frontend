@@ -61,7 +61,7 @@
         "cypress-file-upload": "^5.0.8",
         "cypress-real-events": "^1.13.0",
         "eslint": "^8.57.0",
-        "eslint-config-next": "^14.2.7",
+        "eslint-config-next": "^14.2.12",
         "eslint-plugin-cypress": "^3.5.0",
         "jsdom": "^25.0.0",
         "next": "^14.2.5",
