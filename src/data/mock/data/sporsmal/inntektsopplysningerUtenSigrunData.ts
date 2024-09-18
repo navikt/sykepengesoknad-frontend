@@ -223,7 +223,7 @@ export const inntektsopplysningerLegacy: RSSporsmal = {
 export const inntektsopplysningerUtenSigrunData: RSSporsmal = {
     id: v4().toString(),
     tag: 'INNTEKTSOPPLYSNINGER_VIRKSOMHETEN_AVVIKLET',
-    sporsmalstekst: 'Har du registrert virksomheten din som avviklet og slettet i Altinn før du ble sykmeldt?',
+    sporsmalstekst: 'Har du avviklet virksomheten din før du ble sykmeldt?',
     undertekst: null,
     svartype: 'RADIO_GRUPPE',
     min: null,
@@ -442,7 +442,7 @@ export const inntektsopplysningerUtenSigrunData: RSSporsmal = {
 export const inntektsopplysningerMedSigrunData: RSSporsmal = {
     id: v4().toString(),
     tag: 'INNTEKTSOPPLYSNINGER_VIRKSOMHETEN_AVVIKLET',
-    sporsmalstekst: 'Har du registrert virksomheten din som avviklet og slettet i Altinn før du ble sykmeldt?',
+    sporsmalstekst: 'Har du avviklet virksomheten din før du ble sykmeldt?',
     undertekst: null,
     svartype: 'RADIO_GRUPPE',
     min: null,

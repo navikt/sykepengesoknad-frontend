@@ -155,10 +155,7 @@ function fellesInnholdEtterVisningAvSigrunData() {
 
 function tilSlutt() {
     it('Til slutt ', function () {
-        sporsmalOgSvar(
-            'Har du registrert virksomheten din som avviklet og slettet i Altinn før du ble sykmeldt?',
-            'Nei',
-        )
+        sporsmalOgSvar('Har du avviklet virksomheten din før du ble sykmeldt?', 'Nei')
             .children()
             .within(() => {
                 sporsmalOgSvar('Er du ny i arbeidslivet etter 1. januar 2019?', 'Nei')
