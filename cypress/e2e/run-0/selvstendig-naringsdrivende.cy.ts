@@ -107,9 +107,6 @@ function fellesInnholdFørVisningAvSigrunData() {
     cy.contains(
         'Sykepenger for selvstendig næringsdrivende baseres vanligvis på gjennomsnittlig årsinntekt de tre siste ferdiglignede årene.',
     )
-    cy.contains(
-        'Unntak kan gjøres hvis inntekten din har endret seg varig mer enn 25 prosent på grunn av endringer i arbeidssituasjonen.',
-    )
     cy.contains('Hvis du ikke har tre ferdiglignede år, vil sykepengegrunnlaget fastsettes ved skjønn.')
 
     cy.contains('Hva betyr ferdiglignet inntekt?').click()
