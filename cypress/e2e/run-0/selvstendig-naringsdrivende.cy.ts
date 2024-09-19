@@ -36,6 +36,7 @@ describe('Tester selvstendig naringsdrivende søknad med data fra Sigrun', () =>
         fellesInnholdEtterVisningAvSigrunData()
 
         klikkGaVidere()
+        cy.contains('Jeg vil ikke gi tilbakemelding').click()
     })
     tilSlutt()
     kvitteringen()
