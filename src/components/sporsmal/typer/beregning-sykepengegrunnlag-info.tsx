@@ -20,11 +20,6 @@ export function BeregningSykepengegrunnlagInfo() {
                 tilfeller være opp til fem kalenderår tilbake i tid.
             </BodyShort>
             <BodyShort spacing>
-                Unntak kan gjøres hvis inntekten din har endret seg varig mer enn 25 prosent på grunn av endringer i
-                arbeidssituasjonen. I slike tilfeller vil sykepengegrunnlaget fastsettes basert på inntekten din på
-                sykmeldingstidspunktet.
-            </BodyShort>
-            <BodyShort spacing>
                 Hvis du ikke har tre ferdiglignede år, vil sykepengegrunnlaget fastsettes ved skjønn.
             </BodyShort>
 
