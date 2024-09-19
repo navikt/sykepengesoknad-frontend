@@ -27,7 +27,7 @@ export const inntektsopplysningerLegacy: RSSporsmal = {
                 {
                     id: v4().toString(),
                     tag: 'INNTEKTSOPPLYSNINGER_NY_I_ARBEIDSLIVET',
-                    sporsmalstekst: 'Er du ny i arbeidslivet etter 1. januar 2019?',
+                    sporsmalstekst: 'Utenom virksomheten din, har du hatt andre jobber før 1. januar 2019?',
                     undertekst: null,
                     svartype: 'RADIO_GRUPPE',
                     min: null,
@@ -86,8 +86,7 @@ export const inntektsopplysningerLegacy: RSSporsmal = {
                                         {
                                             id: v4().toString(),
                                             tag: 'INNTEKTSOPPLYSNINGER_VARIG_ENDRING_BEGRUNNELSE',
-                                            sporsmalstekst:
-                                                'Hvilken endring har skjedd i din arbeidssituasjon eller virksomhet?',
+                                            sporsmalstekst: 'Hvilken endring har skjedd?',
                                             undertekst: 'Du kan velge en eller flere alternativer',
                                             svartype: 'CHECKBOX_GRUPPE',
                                             min: null,
@@ -271,7 +270,7 @@ export const inntektsopplysningerUtenSigrunData: RSSporsmal = {
                 {
                     id: v4().toString(),
                     tag: 'INNTEKTSOPPLYSNINGER_NY_I_ARBEIDSLIVET',
-                    sporsmalstekst: 'Er du ny i arbeidslivet etter 1. januar 2019?',
+                    sporsmalstekst: 'Utenom virksomheten din, har du hatt andre jobber før 1. januar 2019?',
                     undertekst: null,
                     svartype: 'RADIO_GRUPPE',
                     min: null,
@@ -330,8 +329,7 @@ export const inntektsopplysningerUtenSigrunData: RSSporsmal = {
                                         {
                                             id: v4().toString(),
                                             tag: 'INNTEKTSOPPLYSNINGER_VARIG_ENDRING_BEGRUNNELSE',
-                                            sporsmalstekst:
-                                                'Hvilken endring har skjedd i din arbeidssituasjon eller virksomhet?',
+                                            sporsmalstekst: 'Hvilken endring har skjedd?',
                                             undertekst: 'Du kan velge en eller flere alternativer',
                                             svartype: 'CHECKBOX_GRUPPE',
                                             min: null,
@@ -490,7 +488,7 @@ export const inntektsopplysningerMedSigrunData: RSSporsmal = {
                 {
                     id: v4().toString(),
                     tag: 'INNTEKTSOPPLYSNINGER_NY_I_ARBEIDSLIVET',
-                    sporsmalstekst: 'Er du ny i arbeidslivet etter 1. januar 2019?',
+                    sporsmalstekst: 'Utenom virksomheten din, har du hatt andre jobber før 1. januar 2019?',
                     undertekst: null,
                     svartype: 'RADIO_GRUPPE',
                     min: null,
@@ -549,8 +547,7 @@ export const inntektsopplysningerMedSigrunData: RSSporsmal = {
                                         {
                                             id: v4().toString(),
                                             tag: 'INNTEKTSOPPLYSNINGER_VARIG_ENDRING_BEGRUNNELSE',
-                                            sporsmalstekst:
-                                                'Hvilken endring har skjedd i din arbeidssituasjon eller virksomhet?',
+                                            sporsmalstekst: 'Hvilken endring har skjedd?',
                                             undertekst: 'Du kan velge en eller flere alternativer',
                                             svartype: 'CHECKBOX_GRUPPE',
                                             min: null,

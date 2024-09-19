@@ -95,11 +95,11 @@ function fellesInnholdFørVisningAvSigrunData() {
     cy.contains('Datoen er første dag i det første av tre av de ferdiglignede årene.')
     klikkGaVidere(true)
     harFeilISkjemaet('Du må svare på om du er ny i arbeidslivet')
-    svarRadioSporsmal('Er du ny i arbeidslivet etter 1. januar 2019?', 'Ja')
+    svarRadioSporsmal('Utenom virksomheten din, har du hatt andre jobber før 1. januar 2019?', 'Ja')
     cy.contains('Du har oppgitt at du er ny i arbeidslivet.')
     klikkGaVidere(true)
     harFeilISkjemaet('Datoen følger ikke formatet dd.mm.åååå')
-    svarRadioSporsmal('Er du ny i arbeidslivet etter 1. januar 2019?', 'Nei')
+    svarRadioSporsmal('Utenom virksomheten din, har du hatt andre jobber før 1. januar 2019?', 'Nei')
     klikkGaVidere(true)
     harFeilISkjemaet('Du må svare på om det har skjedd en varig endring')
 
@@ -135,10 +135,7 @@ function fellesInnholdEtterVisningAvSigrunData() {
         'Du må svare på om du har hatt mer enn 25 prosent endring i årsinntekten din',
     ])
 
-    svarCheckboxSporsmal(
-        'Hvilken endring har skjedd i din arbeidssituasjon eller virksomhet?',
-        'Endret markedssituasjon',
-    )
+    svarCheckboxSporsmal('Hvilken endring har skjedd?', 'Endret markedssituasjon')
 
     harFeilISkjemaet('Du må svare på om du har hatt mer enn 25 prosent endring i årsinntekten din')
 
@@ -158,7 +155,7 @@ function tilSlutt() {
         sporsmalOgSvar('Har du avviklet virksomheten din før du ble sykmeldt?', 'Nei')
             .children()
             .within(() => {
-                sporsmalOgSvar('Er du ny i arbeidslivet etter 1. januar 2019?', 'Nei')
+                sporsmalOgSvar('Utenom virksomheten din, har du hatt andre jobber før 1. januar 2019?', 'Nei')
                     .children()
                     .within(() => {
                         sporsmalOgSvar(
@@ -167,10 +164,7 @@ function tilSlutt() {
                         )
                             .children()
                             .within(() => {
-                                sporsmalOgSvar(
-                                    'Hvilken endring har skjedd i din arbeidssituasjon eller virksomhet?',
-                                    'Endret markedssituasjon',
-                                )
+                                sporsmalOgSvar('Hvilken endring har skjedd?', 'Endret markedssituasjon')
                                 sporsmalOgSvar(
                                     'Har du hatt mer enn 25 prosent endring i årsinntekten din som følge av den varige endringen?',
                                     'Ja',
