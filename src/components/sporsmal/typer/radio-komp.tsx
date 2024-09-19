@@ -11,6 +11,7 @@ import { Sporsmal } from '../../../types/types'
 import { useRadiogruppeTastaturNavigasjon } from '../../../utils/tastatur-navigasjon'
 
 import { jaNeiStorStyle, JaNeiStyle } from './ja-nei-stor-style'
+import { BeregningSykepengegrunnlagInfo } from './beregning-sykepengegrunnlag-info'
 
 const RadioKomp = ({ sporsmal, erHovedsporsmal }: { sporsmal: Sporsmal; erHovedsporsmal: boolean }) => {
     const {
@@ -33,6 +34,12 @@ const RadioKomp = ({ sporsmal, erHovedsporsmal }: { sporsmal: Sporsmal; erHoveds
         erHovedsporsmal
     return (
         <>
+            {sporsmal.tag === 'INNTEKTSOPPLYSNINGER_NY_I_ARBEIDSLIVET' && (
+                <div className="mb-4">
+                    <BeregningSykepengegrunnlagInfo />
+                </div>
+            )}
+
             <Controller
                 name={sporsmal.id}
                 rules={{ required: feilmelding.global }}
