@@ -19,8 +19,6 @@ import { VarigEndringAlert } from '../../hjelpetekster/varig-endring-alert'
 import { formatterTall } from '../../../utils/utils'
 import { hentInntektMetadata } from '../../../utils/ferdiglignet-inntekt'
 
-import { BeregningSykepengegrunnlagInfo } from './beregning-sykepengegrunnlag-info'
-
 const JaNeiLiten = ({ sporsmal }: SpmProps) => {
     const { watch, getValues } = useFormContext()
     let watchJaNei = watch(sporsmal.id)
@@ -78,9 +76,12 @@ const JaNeiLiten = ({ sporsmal }: SpmProps) => {
             >
                 {sporsmal.tag === 'INNTEKTSOPPLYSNINGER_VARIG_ENDRING' && (
                     <>
-                        <BeregningSykepengegrunnlagInfo />
                         <BodyShort size="large" weight="semibold" spacing>
                             Varig endring i din arbeidssituasjon eller virksomhet
+                        </BodyShort>
+                        <BodyShort spacing>
+                            Hvis inntekten din har endret seg varig med mer enn 25 prosent på grunn av endringer i
+                            arbeidssituasjonen, vil sykepengegrunnlaget fastsettes ved skjønn.
                         </BodyShort>
                     </>
                 )}
