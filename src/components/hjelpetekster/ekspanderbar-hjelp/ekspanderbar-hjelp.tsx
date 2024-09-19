@@ -151,7 +151,7 @@ export const EkspanderbarHjelp = ({ sporsmal, mb }: { sporsmal: Sporsmal; mb?: s
 
     return (
         <ReadMore
-            className={`${mb ?? 'mb-8'} mt-4 w-full ${sporsmal.tag === 'INNTEKTSOPPLYSNINGER_NY_I_ARBEIDSLIVET' ? 'bg-red-100' : ''}`}
+            className={`${mb ?? 'mb-8'} mt-4 w-full`}
             header={lagTittel(nokkel)}
             open={expanded}
             onClick={() => {
