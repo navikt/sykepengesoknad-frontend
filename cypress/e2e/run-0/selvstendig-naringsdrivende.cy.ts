@@ -11,6 +11,7 @@ import {
     modalIkkeAktiv,
     svarFritekst,
     modalAktiv,
+    sjekkMainContentFokus,
 } from '../../support/utilities'
 
 describe('Tester selvstendig naringsdrivende søknad med data fra Sigrun', () => {
@@ -35,8 +36,9 @@ describe('Tester selvstendig naringsdrivende søknad med data fra Sigrun', () =>
 
         fellesInnholdEtterVisningAvSigrunData()
 
-        klikkGaVidere()
+        klikkGaVidere(false, true)
         cy.contains('Jeg vil ikke gi tilbakemelding').click()
+        sjekkMainContentFokus()
     })
     tilSlutt()
     kvitteringen()

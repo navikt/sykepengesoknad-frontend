@@ -97,7 +97,7 @@ export function velgDato(dato = 10) {
     cy.get('.rdp-day').contains(dato).first().click()
 }
 
-export function klikkGaVidere(forventFeil = false) {
+export function klikkGaVidere(forventFeil = false, skipFocusCheck = false) {
     // Få nåværende URL
     cy.url().then((currentUrl) => {
         // Trekke ut det nåværende path parameteret
@@ -114,7 +114,9 @@ export function klikkGaVidere(forventFeil = false) {
             const newPathParam = parseInt(newUrl.split('/').pop()!)
             expect(newPathParam).to.eq(currentPathParam + 1)
         })
-        sjekkMainContentFokus()
+        if (!skipFocusCheck) {
+            sjekkMainContentFokus()
+        }
     })
 }
 
