@@ -11,7 +11,7 @@ export const PermisjonHjelpBody = () => {
             <BodyShort spacing>Svar ja, hvis du har avtalt permisjon og derfor ikke skal ha sykepenger.</BodyShort>
             <BodyShort>
                 Svar nei hvis du søker om sykepenger i stedet for foreldrepermisjon. Du svarer også nei hvis du har
-                ferie, er permittert, har seniordager eller blir syk før en planlagt permisjon.”
+                ferie, er permittert, har seniordager eller blir syk før en planlagt permisjon.
             </BodyShort>
         </>
     )
