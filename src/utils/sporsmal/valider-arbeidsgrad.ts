@@ -57,6 +57,7 @@ const useValiderArbeidsgrad = (sporsmal: Sporsmal) => {
             })
     }
 
+    // todo send inn beregnet grad som argument
     const validerGrad = () => {
         const faktiskArbeidsGrad = beregnGrad()
         const forventetArbeidsGrad = 1.0 - periode.grad / 100
@@ -66,6 +67,59 @@ const useValiderArbeidsgrad = (sporsmal: Sporsmal) => {
                   '%PROSENT%': Math.floor(faktiskArbeidsGrad! * 100),
               })
             : true
+    }
+
+    // todo send inn beregnet grad som argument
+    const validerGradNy = (beregnetGrad: number) => {
+        const faktiskArbeidsGrad = beregnetGrad // beregnGrad()
+        const forventetArbeidsGrad = 1.0 - periode.grad / 100
+
+        return faktiskArbeidsGrad < forventetArbeidsGrad
+            ? getLedetekst(tekst('soknad.feilmelding.MINDRE_TIMER_ENN_FORVENTET'), {
+                  '%PROSENT%': Math.floor(faktiskArbeidsGrad! * 100),
+              })
+            : true
+    }
+
+    // todo du må validere også
+    const beregnGradNy = (
+        hvorMyeTimerVerdi: string,
+        jobberDuNormalArbeidsuke: string,
+        hvorMangeTimerPerUke: string,
+    ) => {
+        const faktiskeSykedager =
+            valgtSoknad.soknadstype === RSSoknadstype.ARBEIDSTAKERE
+                ? sykedagerForArbeidstakere()
+                : sykedagerForFrilansere()
+        const dagerIPeriode = faktiskeSykedager.length
+
+        const uker = dagerIPeriode / 5
+
+        function timerPerUkeVanligvis() {
+            if (jobberDuNormalArbeidsuke === 'JA') {
+                return 37.5
+            }
+            if (hvorMangeTimerPerUke !== '') {
+                return parseFloat(hvorMangeTimerPerUke)
+            }
+            return undefined
+        }
+
+        function timerDennePerioden() {
+            if (hvorMyeTimerVerdi !== '') {
+                return parseFloat(hvorMyeTimerVerdi)
+            }
+            // vi beregner ikke arbeidsgrad hvis bruker oppgir prosent eller ikke enda har opgitt antall timer
+            return undefined
+        }
+        const timerPerUke = timerPerUkeVanligvis()
+        const faktiskTimer = timerDennePerioden()
+
+        if (!faktiskTimer || !timerPerUke) {
+            return undefined
+        } else {
+            return faktiskTimer / uker / timerPerUke
+        }
     }
 
     const beregnGrad = () => {
@@ -88,7 +142,7 @@ const useValiderArbeidsgrad = (sporsmal: Sporsmal) => {
         return faktiskTimer / uker / timerPerUke
     }
 
-    return { beregnGrad, validerGrad, periode, hovedSporsmal }
+    return { beregnGrad, validerGrad, periode, hovedSporsmal, beregnGradNy, validerGradNy }
 }
 
 export default useValiderArbeidsgrad
