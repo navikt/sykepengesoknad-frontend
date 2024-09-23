@@ -83,7 +83,6 @@ const RadioTimerProsent = ({ sporsmal }: SpmProps) => {
     }
     const errorTimer = errors[hentUndersporsmal(sporsmal!, 'HVOR_MYE_TIMER_VERDI')!.id]
 
-
     const feilmelding = hentFeilmelding(sporsmal)
     const { valgtSoknad } = useSoknadMedDetaljer()
 
@@ -129,10 +128,7 @@ const RadioTimerProsent = ({ sporsmal }: SpmProps) => {
             )}
 
             <Vis
-                hvis={
-                    errorTimer && rodeUkeDagerIPerioden(valgtSoknad!.fom, valgtSoknad!.tom)
-
-                }
+                hvis={errorTimer && rodeUkeDagerIPerioden(valgtSoknad!.fom, valgtSoknad!.tom)}
                 render={() => (
                     <ReadMore header={lavereProsentHjelpTittel}>
                         <BodyLong spacing>
