@@ -57,9 +57,11 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
     const error = errors[sporsmal.id] !== undefined
 
     const skalHaInntektsbulletpoints =
-        sporsmal.tag === 'ANDRE_INNTEKTSKILDER_V2' && valgtSoknad.inntektskilderDataFraInntektskomponenten
+        sporsmal.tag === 'ANDRE_INNTEKTSKILDER_V2' &&
+        (valgtSoknad.inntektskilderDataFraInntektskomponenten || sporsmal.metadata)
     const skalViseKjentOppholdstillatelse =
         sporsmal.tag === 'MEDLEMSKAP_OPPHOLDSTILLATELSE_V2' && valgtSoknad.kjentOppholdstillatelse
+
     function sporsmalstekst() {
         if (skalHaInntektsbulletpoints) {
             return 'Har du andre inntektskilder enn nevnt over?'
