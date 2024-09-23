@@ -58,7 +58,6 @@ async function getAndValidateDefinitions(): Promise<ReturnType<typeof getDefinit
     if (unleashCache.has('toggles')) {
         const cachedToggles = unleashCache.get<ReturnType<typeof getDefinitions>>('toggles')
         if (cachedToggles != null) {
-            logger.info('Using cached unleash definitions')
             return cachedToggles
         }
     }
@@ -80,12 +79,6 @@ async function getAndValidateDefinitions(): Promise<ReturnType<typeof getDefinit
             `Difference in expected flags and flags in unleash, expected but not in unleash: ${diff.join(', ')}`,
         )
     }
-
-    logger.info(
-        `Fetched ${definitions.features.length} flags from unleash: ${definitions.features
-            .map((it) => it.name)
-            .join('\n')}\n`,
-    )
 
     return definitions
 }
