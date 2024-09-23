@@ -346,7 +346,7 @@ const soknad: RSSoknad = {
                         {
                             id: '9fe26995-4b22-38ea-a6ac-5f292ddb27b6',
                             tag: 'INNTEKTSOPPLYSNINGER_NY_I_ARBEIDSLIVET',
-                            sporsmalstekst: 'Er du ny i arbeidslivet etter 16. januar 2019?',
+                            sporsmalstekst: 'Utenom virksomheten din, har du hatt andre jobber før 16. januar 2019?',
                             undertekst: null,
                             svartype: 'RADIO_GRUPPE',
                             min: null,
@@ -405,8 +405,7 @@ const soknad: RSSoknad = {
                                                 {
                                                     id: '8f84c930-30fd-3b0f-85a3-6108cbd8a7d3',
                                                     tag: 'INNTEKTSOPPLYSNINGER_VARIG_ENDRING_BEGRUNNELSE',
-                                                    sporsmalstekst:
-                                                        'Hvilken endring har skjedd i din arbeidssituasjon eller virksomhet?',
+                                                    sporsmalstekst: 'Hvilken endring har skjedd?',
                                                     undertekst: 'Du kan velge en eller flere alternativer',
                                                     svartype: 'CHECKBOX_GRUPPE',
                                                     min: null,

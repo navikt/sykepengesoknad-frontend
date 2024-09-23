@@ -16,6 +16,8 @@ import { tekstMedHtml } from '../../../utils/html-react-parser-utils'
 import { EkspanderbarHjelp } from '../../hjelpetekster/ekspanderbar-hjelp/ekspanderbar-hjelp'
 import { VarigEndringEksempler } from '../../hjelpetekster/varig-endring-eksempler'
 import { VarigEndringAlert } from '../../hjelpetekster/varig-endring-alert'
+import { formatterTall } from '../../../utils/utils'
+import { hentInntektMetadata } from '../../../utils/ferdiglignet-inntekt'
 
 const JaNeiLiten = ({ sporsmal }: SpmProps) => {
     const { watch, getValues } = useFormContext()
@@ -60,6 +62,9 @@ const JaNeiLiten = ({ sporsmal }: SpmProps) => {
         } else return <></>
     }
 
+    const inntektMetadata =
+        sporsmal.tag === 'INNTEKTSOPPLYSNINGER_VARIG_ENDRING_25_PROSENT' && hentInntektMetadata(sporsmal.metadata)
+
     return (
         <>
             <div
@@ -69,6 +74,18 @@ const JaNeiLiten = ({ sporsmal }: SpmProps) => {
                     (sporsmal.parentKriterie ? ' kriterie--' + sporsmal.parentKriterie.toLowerCase() : '')
                 }
             >
+                {sporsmal.tag === 'INNTEKTSOPPLYSNINGER_VARIG_ENDRING' && (
+                    <>
+                        <BodyShort size="large" weight="semibold" spacing>
+                            Varig endring i din arbeidssituasjon eller virksomhet
+                        </BodyShort>
+                        <BodyShort spacing>
+                            Hvis inntekten din har endret seg varig med mer enn 25 prosent på grunn av endringer i
+                            arbeidssituasjonen, vil sykepengegrunnlaget fastsettes ved skjønn.
+                        </BodyShort>
+                    </>
+                )}
+
                 <Controller
                     name={sporsmal.id}
                     rules={{ required: feilmelding.global }}
@@ -78,6 +95,19 @@ const JaNeiLiten = ({ sporsmal }: SpmProps) => {
                             legend={sporsmal.sporsmalstekst}
                             error={fieldState.error && feilmelding.lokal}
                         >
+                            {inntektMetadata && (
+                                <>
+                                    <BodyShort spacing>
+                                        Din gjennomsnittlige årsinntekt på sykmeldingstidspunktet:{' '}
+                                        <strong>{formatterTall(inntektMetadata.beregnet.snitt)}</strong> kroner.
+                                    </BodyShort>
+                                    <BodyShort>
+                                        Har du en årsinntekt som gjør at du tjener mindre enn{' '}
+                                        <strong>{formatterTall(inntektMetadata.beregnet.m25)}</strong> kroner eller mer
+                                        enn <strong>{formatterTall(inntektMetadata.beregnet.p25)}</strong> kroner?
+                                    </BodyShort>
+                                </>
+                            )}
                             <EkspanderbarHjelp sporsmal={sporsmal} mb="mb-4" />
 
                             {sporsmal.tag === 'INNTEKTSOPPLYSNINGER_VARIG_ENDRING' && <VarigEndringEksempler />}

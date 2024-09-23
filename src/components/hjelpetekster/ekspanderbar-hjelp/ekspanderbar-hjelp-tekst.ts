@@ -20,5 +20,6 @@ export const EkspanderbarHjelpTekster = {
     'ekspanderbarhjelp.prosenten_lavere_enn_forventet_arbeidstaker.innhold1':
         'Grunnen kan være at helligdager eller røde dager som havner på mandag-fredag regnes som sykepengedager hos NAV. Derfor fordeles timene dine også på disse dagene selv om du hadde fri.',
     'ekspanderbarhjelp.inntektsopplysninger_ny_i_arbeidslivet.innhold':
-        'Dette omfatter personer som nylig har kommet ut i arbeidslivet og i den forbindelse har startet en næringsvirksomhet. Det kan eksempelvis være en student som etter eksamen oppretter et firma.',
+        'Når du begynte å jobbe, så var din første jobb å starte opp næringsvirksomheten. For eksempel, etter endt utdanning, valgte du å starte et firma som ditt første steg inn i arbeidslivet.\n' +
+        'Dette gjelder ikke korte deltidsjobber som feks avisbud på ungdomskolen.',
 }

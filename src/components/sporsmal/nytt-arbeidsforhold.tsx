@@ -12,7 +12,7 @@ export const NyttArbeidsforhold = ({ spm }: { spm: Sporsmal }) => {
             <Label as="p" className="mb-4">
                 Vi har funnet et nytt arbeidsforhold:
             </Label>
-            <GraaBoks tekst={spm.metadata?.arbeidsstedNavn} />
+            <GraaBoks tekst={spm.metadata?.arbeidsstedNavn as string} />
         </>
     )
 }
@@ -21,7 +21,7 @@ export const NyttArbeidsforholdPafolgende = ({ spm }: { spm: Sporsmal }) => {
     if (!spm.metadata?.arbeidsstedNavn) {
         return null
     }
-    return <GraaBoks tekst={spm.metadata?.arbeidsstedNavn} />
+    return <GraaBoks tekst={spm.metadata?.arbeidsstedNavn as string} />
 }
 
 function GraaBoks(props: { tekst: string }) {

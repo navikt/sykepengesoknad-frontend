@@ -14,7 +14,7 @@ export interface RSSporsmal {
     max: string | null
     kriterieForVisningAvUndersporsmal: RSVisningskriterieType | null
     svar: RSSvar[]
-    metadata?: Record<string, string>
+    metadata?: Record<string, string | number>
     undersporsmal: RSSporsmal[]
     tittel?: string
 }

@@ -12,7 +12,10 @@ import { utenlandskSykmeldingSporsmalene } from '../sporsmal/utenlandsk-sykmeldi
 import { yrkesskadeV2Sporsmal } from '../sporsmal/yrkesskade-v2'
 import { yrkesskadeV1Sporsmal } from '../sporsmal/yrkesskade-v1'
 import { kjenteInntektskilder } from '../sporsmal/kjente-inntektskilder'
-import { inntektsopplysninger, inntektsopplysningerLegacy } from '../sporsmal/inntektsopplysninger'
+import {
+    inntektsopplysningerUtenSigrunData,
+    inntektsopplysningerLegacy,
+} from '../sporsmal/inntektsopplysningerUtenSigrunData'
 import {
     nyttArbeidsforholdForstegangSporsmal,
     nyttArbeidsforholdPafolgendeSporsmal,
@@ -2374,7 +2377,7 @@ export const veldigLangSoknad: RSSoknad = {
             fom: '2020-04-20',
             tom: '2020-04-24',
         }),
-        inntektsopplysninger,
+        inntektsopplysningerUtenSigrunData,
         inntektsopplysningerLegacy,
         oppsummering(),
     ],

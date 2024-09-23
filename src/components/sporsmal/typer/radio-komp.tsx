@@ -1,4 +1,4 @@
-import { Radio, RadioGroup } from '@navikt/ds-react'
+import { BodyShort, Radio, RadioGroup } from '@navikt/ds-react'
 import React from 'react'
 import { Controller, useFormContext } from 'react-hook-form'
 
@@ -11,6 +11,7 @@ import { Sporsmal } from '../../../types/types'
 import { useRadiogruppeTastaturNavigasjon } from '../../../utils/tastatur-navigasjon'
 
 import { jaNeiStorStyle, JaNeiStyle } from './ja-nei-stor-style'
+import { BeregningSykepengegrunnlagInfo } from './beregning-sykepengegrunnlag-info'
 
 const RadioKomp = ({ sporsmal, erHovedsporsmal }: { sporsmal: Sporsmal; erHovedsporsmal: boolean }) => {
     const {
@@ -33,6 +34,12 @@ const RadioKomp = ({ sporsmal, erHovedsporsmal }: { sporsmal: Sporsmal; erHoveds
         erHovedsporsmal
     return (
         <>
+            {sporsmal.tag === 'INNTEKTSOPPLYSNINGER_NY_I_ARBEIDSLIVET' && (
+                <div className="mb-4">
+                    <BeregningSykepengegrunnlagInfo />
+                </div>
+            )}
+
             <Controller
                 name={sporsmal.id}
                 rules={{ required: feilmelding.global }}
@@ -47,6 +54,12 @@ const RadioKomp = ({ sporsmal, erHovedsporsmal }: { sporsmal: Sporsmal; erHoveds
                         className={cn({ 'mt-8': !erHovedJaNei })}
                         data-cy="radio-komp"
                     >
+                        {sporsmal.tag === 'INNTEKTSOPPLYSNINGER_NY_I_ARBEIDSLIVET' && (
+                            <BodyShort size="small" className="text-text-subtle">
+                                Datoen er første dag i det første av tre av de ferdiglignede årene.
+                            </BodyShort>
+                        )}
+
                         <EkspanderbarHjelp
                             sporsmal={sporsmal}
                             key="radio-komp-hjelp"
