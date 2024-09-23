@@ -85,7 +85,7 @@ const RadioTimerProsent = ({ sporsmal }: SpmProps) => {
     const feilmelding = hentFeilmelding(sporsmal)
     const { valgtSoknad } = useSoknadMedDetaljer()
 
-    const { beregnGradNy } = validerArbeidsgrad(sporsmal)
+    const { beregnGradNy, validerGrad } = validerArbeidsgrad(sporsmal)
 
     const lavereProsentHjelpTittel = tekst('ekspanderbarhjelp.prosenten_lavere_enn_forventet_arbeidstaker.tittel')
 
@@ -129,7 +129,9 @@ const RadioTimerProsent = ({ sporsmal }: SpmProps) => {
             <Vis
                 hvis={
                     errors[hentUndersporsmal(sporsmal!, 'HVOR_MYE_TIMER_VERDI')!.id] &&
-                    rodeUkeDagerIPerioden(valgtSoknad!.fom, valgtSoknad!.tom)
+                    rodeUkeDagerIPerioden(valgtSoknad!.fom, valgtSoknad!.tom) &&
+                    validerGrad!() == true
+
                 }
                 render={() => (
                     <ReadMore header={lavereProsentHjelpTittel}>
