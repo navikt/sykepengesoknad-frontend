@@ -81,11 +81,13 @@ const RadioTimerProsent = ({ sporsmal }: SpmProps) => {
     if (watchTimer === undefined && timerId) {
         watchTimer = getValues(timerId)
     }
+    const errorTimer = errors[hentUndersporsmal(sporsmal!, 'HVOR_MYE_TIMER_VERDI')!.id]
+
 
     const feilmelding = hentFeilmelding(sporsmal)
     const { valgtSoknad } = useSoknadMedDetaljer()
 
-    const { beregnGradNy, validerGrad } = validerArbeidsgrad(sporsmal)
+    const { beregnGradNy } = validerArbeidsgrad(sporsmal)
 
     const lavereProsentHjelpTittel = tekst('ekspanderbarhjelp.prosenten_lavere_enn_forventet_arbeidstaker.tittel')
 
@@ -128,9 +130,7 @@ const RadioTimerProsent = ({ sporsmal }: SpmProps) => {
 
             <Vis
                 hvis={
-                    errors[hentUndersporsmal(sporsmal!, 'HVOR_MYE_TIMER_VERDI')!.id] &&
-                    rodeUkeDagerIPerioden(valgtSoknad!.fom, valgtSoknad!.tom) &&
-                    validerGrad!() == true
+                    errorTimer && rodeUkeDagerIPerioden(valgtSoknad!.fom, valgtSoknad!.tom)
 
                 }
                 render={() => (
