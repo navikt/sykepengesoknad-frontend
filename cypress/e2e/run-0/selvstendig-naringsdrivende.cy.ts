@@ -25,8 +25,10 @@ describe('Tester selvstendig naringsdrivende søknad med data fra Sigrun', () =>
         fellesInnholdFørVisningAvSigrunData()
 
         cy.contains('Har du hatt mer enn 25 prosent endring i årsinntekten din som følge av den varige endringen?')
-        cy.contains('Din årsinntekt på sykmeldingstidspunktet: 450 000 kroner.')
-        cy.contains('Har du en inntekt som gjør at du tjener mindre enn 337 500 kroner eller mer enn 562 500 kroner?')
+        cy.contains('Din gjennomsnittlige årsinntekt på sykmeldingstidspunktet: 450 000 kroner.')
+        cy.contains(
+            'Har du en årsinntekt som gjør at du tjener mindre enn 337 500 kroner eller mer enn 562 500 kroner?',
+        )
 
         cy.contains('Hvordan har vi kommet frem til 450 000 kroner?').click()
         cy.contains('Vi henter informasjon om inntekt fra Skatteetaten.').should('be.visible')
@@ -55,9 +57,9 @@ describe('Tester selvstendig naringsdrivende søknad uten data fra Sigrun', () =
         fellesInnholdFørVisningAvSigrunData()
 
         cy.contains('Har du hatt mer enn 25 prosent endring i årsinntekten din som følge av den varige endringen?')
-        cy.contains('Din årsinntekt på sykmeldingstidspunktet: 450 000 kroner.').should('not.exist')
+        cy.contains('Din gjennomsnittlige årsinntekt på sykmeldingstidspunktet: 450 000 kroner.').should('not.exist')
         cy.contains(
-            'Har du en inntekt som gjør at du tjener mindre enn 337 500 kroner eller mer enn 562 500 kroner?',
+            'Har du en årsinntekt som gjør at du tjener mindre enn 337 500 kroner eller mer enn 562 500 kroner?',
         ).should('not.exist')
 
         cy.contains('Hvordan har vi kommet frem til 450 000 kroner?').should('not.exist')
