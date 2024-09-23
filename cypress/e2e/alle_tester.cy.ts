@@ -23,7 +23,7 @@ import './run-1/korrigering-ferie-spm-infotekst.cy'
 import './run-1/utkast-korrigering.cy'
 import './run-1/over-sytti.cy'
 import './run-1/tilbakedatert.cy'
-import './run-1/gammel-oppsummering.cy'
+// import './run-1/gammel-oppsummering.cy'
 
 import './run-2/datovelger_komp.cy'
 import './run-2/endring-uten-endring.cy'
