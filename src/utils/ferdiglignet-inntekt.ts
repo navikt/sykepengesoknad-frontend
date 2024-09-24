@@ -1,3 +1,5 @@
+import { KjentInntektskilde } from '../types/types'
+
 function parseVerdierMedPrefix(metadata: Record<string, number>, prefix: string): Record<string, number> {
     const ferdiglignetInntekt: Record<string, number> = {}
 
@@ -11,7 +13,7 @@ function parseVerdierMedPrefix(metadata: Record<string, number>, prefix: string)
     return ferdiglignetInntekt
 }
 
-export function hentInntektMetadata(metadata: Record<string, string | number> | undefined) {
+export function hentInntektMetadata(metadata: Record<string, string | number | KjentInntektskilde[]> | undefined) {
     const inntektMetadata = metadata as Record<string, number>
     return (
         metadata && {

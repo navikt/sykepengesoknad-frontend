@@ -57,9 +57,11 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
     const error = errors[sporsmal.id] !== undefined
 
     const skalHaInntektsbulletpoints =
-        sporsmal.tag === 'ANDRE_INNTEKTSKILDER_V2' && valgtSoknad.inntektskilderDataFraInntektskomponenten
+        sporsmal.tag === 'ANDRE_INNTEKTSKILDER_V2' &&
+        (valgtSoknad.inntektskilderDataFraInntektskomponenten || sporsmal.metadata)
     const skalViseKjentOppholdstillatelse =
         sporsmal.tag === 'MEDLEMSKAP_OPPHOLDSTILLATELSE_V2' && valgtSoknad.kjentOppholdstillatelse
+
     function sporsmalstekst() {
         if (skalHaInntektsbulletpoints) {
             return 'Har du andre inntektskilder enn nevnt over?'
@@ -70,7 +72,7 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
     return (
         <>
             <div>
-                {skalHaInntektsbulletpoints && <Inntektsbulletpoints soknad={valgtSoknad} />}
+                {skalHaInntektsbulletpoints && <Inntektsbulletpoints soknad={valgtSoknad} sporsmal={sporsmal} />}
                 {skalViseKjentOppholdstillatelse && <KjentOppholdstillatelse soknad={valgtSoknad} />}
                 {sporsmal.tag === 'NYTT_ARBEIDSFORHOLD_UNDERVEIS_FORSTEGANG' && <NyttArbeidsforhold spm={sporsmal} />}
                 {sporsmal.tag === 'NYTT_ARBEIDSFORHOLD_UNDERVEIS_PAFOLGENDE' && (

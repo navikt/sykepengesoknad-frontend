@@ -73,10 +73,15 @@ export class Sporsmal extends ObjectCopier {
         readonly parentKriterie: RSVisningskriterieType | null,
         readonly erHovedsporsmal: boolean,
         readonly tittel: string | undefined,
-        readonly metadata: Record<string, string | number> | undefined,
+        readonly metadata: Record<string, string | KjentInntektskilde[] | number> | undefined,
     ) {
         super()
     }
+}
+
+export interface KjentInntektskilde {
+    navn: string
+    orgnummer: string
 }
 
 export interface Ettersend {

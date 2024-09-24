@@ -2,9 +2,18 @@ import { BodyShort, Label } from '@navikt/ds-react'
 import React from 'react'
 import { CheckmarkCircleIcon } from '@navikt/aksel-icons'
 
-import { Soknad } from '../../types/types'
+import { KjentInntektskilde, Soknad, Sporsmal } from '../../types/types'
 
-export const Inntektsbulletpoints = ({ soknad }: { soknad: Soknad }) => {
+export const Inntektsbulletpoints = ({ soknad, sporsmal }: { soknad: Soknad; sporsmal: Sporsmal }) => {
+    const navn: string[] = []
+    if (sporsmal.metadata) {
+        const items = sporsmal.metadata.kjenteInntektskilder as KjentInntektskilde[]
+        items.forEach((item) => navn.push(item.navn))
+    } else {
+        navn.push(soknad.arbeidsgiver!.navn)
+        soknad.inntektskilderDataFraInntektskomponenten?.forEach((inntektskilde) => navn.push(inntektskilde.navn))
+    }
+
     return (
         <>
             <Label as="p" className="mb-4 mt-10">
@@ -12,10 +21,7 @@ export const Inntektsbulletpoints = ({ soknad }: { soknad: Soknad }) => {
             </Label>
 
             <ul data-cy="inntektskilder--fra-inntektskomponenten-liste" className="mb-10">
-                <ListItemWithIcon content={soknad.arbeidsgiver!.navn} />
-                {soknad.inntektskilderDataFraInntektskomponenten?.map((inntektskilde, index) => (
-                    <ListItemWithIcon key={index} content={inntektskilde.navn} />
-                ))}
+                {navn?.map((n, index) => <ListItemWithIcon key={index} content={n} />)}
             </ul>
         </>
     )

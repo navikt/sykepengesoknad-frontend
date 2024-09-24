@@ -29,6 +29,14 @@ nyttArbeidsforholdForstegangSoknad.inntektskilderDataFraInntektskomponenten?.pus
     arbeidsforholdstype: 'ARBEIDSTAKER',
 })
 
+nyttArbeidsforholdForstegangSoknad.sporsmal.find((spm) => spm.tag === 'ANDRE_INNTEKTSKILDER_V2')!.metadata = {
+    kjenteInntektskilder: [
+        { orgnummer: '123324', navn: 'Matbutikken AS' },
+        { orgnummer: '123324', navn: 'Smørebussen AS' },
+        { orgnummer: '123324', navn: 'Kaffebrenneriet' },
+    ],
+}
+
 export const nyttArbeidsforholdForstegangs: Persona = {
     soknader: [nyttArbeidsforholdForstegangSoknad],
     sykmeldinger: [brukertestSykmelding],
@@ -54,7 +62,7 @@ nyttArbeidsforholdPaafolgendeSoknad.sporsmal = [
     }),
     ...nyttArbeidsforholdPaafolgendeSoknad.sporsmal.slice(splittStedPaafolgende),
 ]
-nyttArbeidsforholdForstegangSoknad.inntektskilderDataFraInntektskomponenten?.push({
+nyttArbeidsforholdPaafolgendeSoknad.inntektskilderDataFraInntektskomponenten?.push({
     orgnummer: '123324',
     navn: 'Kaffebrenneriet',
     arbeidsforholdstype: 'ARBEIDSTAKER',

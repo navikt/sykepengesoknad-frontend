@@ -41,4 +41,21 @@ describe('Tester andre inntektskilder bulletpoints', () => {
         cy.contains('Har du andre inntektskilder enn Posten Norge AS, Bærum?').and('be.visible')
         cy.get('[data-cy="inntektskilder--fra-inntektskomponenten-liste"]').should('not.exist')
     })
+
+    it('Viser data primært fra metadata på spørsmålet når vi har det', () => {
+        cy.visit(
+            `/syk/sykepengesoknad/soknader/260f06b5-9fd0-4b30-94d2-4f90851b4cac/8?testperson=nytt-arbeidsforhold-forstegangs`,
+        )
+
+        cy.contains('Arbeidsforhold vi har registrert på deg:').and('be.visible')
+        cy.contains('Har du andre inntektskilder enn nevnt over?').and('be.visible')
+        cy.get('[data-cy="inntektskilder--fra-inntektskomponenten-liste"]').find('li').should('have.length', 3)
+        const expectedValues = ['Matbutikken AS', 'Smørebussen AS', 'Kaffebrenneriet']
+
+        cy.get('[data-cy="inntektskilder--fra-inntektskomponenten-liste"]')
+            .find('li')
+            .each(($el, index) => {
+                cy.wrap($el).should('contain', expectedValues[index])
+            })
+    })
 })
