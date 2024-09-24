@@ -49,6 +49,8 @@ const TimerProsentAlert = ({ valgtSoknad, beregnGradNy }: TimerProsentAlertProps
     })
 
     const beregnetGrad = beregnGradNy(hvorMyeTimerVerdi, jobberDuNormalArbeidsuke, hvorMangeTimerPerUke)
+    // const validertGrad = validerGradNy(beregnetGrad)
+    // const validertGrad = beregnetGrad !== undefined ? validerGradNy(beregnetGrad) : false // Pass beregnetGrad to validerGradNy
 
     return (
         <div>
@@ -86,7 +88,7 @@ const RadioTimerProsent = ({ sporsmal }: SpmProps) => {
     const feilmelding = hentFeilmelding(sporsmal)
     const { valgtSoknad } = useSoknadMedDetaljer()
 
-    const { beregnGradNy } = validerArbeidsgrad(sporsmal)
+    const { beregnGradNy, validerGrad } = validerArbeidsgrad(sporsmal)
 
     const lavereProsentHjelpTittel = tekst('ekspanderbarhjelp.prosenten_lavere_enn_forventet_arbeidstaker.tittel')
 
@@ -123,7 +125,7 @@ const RadioTimerProsent = ({ sporsmal }: SpmProps) => {
                 )
             })}
 
-            {valgtSoknad && sporsmal.undersporsmal.length > 0 && beregnGradNy && (
+            {valgtSoknad && sporsmal.undersporsmal.length > 0 && beregnGradNy && validerGrad!() == true && (
                 <TimerProsentAlert valgtSoknad={valgtSoknad} beregnGradNy={beregnGradNy} />
             )}
 
