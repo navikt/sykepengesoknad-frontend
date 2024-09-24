@@ -72,7 +72,7 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
     return (
         <>
             <div>
-                {skalHaInntektsbulletpoints && <Inntektsbulletpoints soknad={valgtSoknad} />}
+                {skalHaInntektsbulletpoints && <Inntektsbulletpoints soknad={valgtSoknad} sporsmal={sporsmal} />}
                 {skalViseKjentOppholdstillatelse && <KjentOppholdstillatelse soknad={valgtSoknad} />}
                 {sporsmal.tag === 'NYTT_ARBEIDSFORHOLD_UNDERVEIS_FORSTEGANG' && <NyttArbeidsforhold spm={sporsmal} />}
                 {sporsmal.tag === 'NYTT_ARBEIDSFORHOLD_UNDERVEIS_PAFOLGENDE' && (
