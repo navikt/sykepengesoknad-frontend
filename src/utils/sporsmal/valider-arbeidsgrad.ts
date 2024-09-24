@@ -57,7 +57,6 @@ const useValiderArbeidsgrad = (sporsmal: Sporsmal) => {
             })
     }
 
-    // todo send inn beregnet grad som argument
     const validerGrad = () => {
         const faktiskArbeidsGrad = beregnGrad()
         const forventetArbeidsGrad = 1.0 - periode.grad / 100
