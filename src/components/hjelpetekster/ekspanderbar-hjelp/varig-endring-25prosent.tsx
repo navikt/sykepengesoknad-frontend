@@ -43,9 +43,9 @@ export const VarigEndring25prosent = ({ sporsmal }: VarigEndring25prosentProps) 
                     ))}
                 </div>
                 <BodyShort className="mt-4">
-                    Så regnes den den gjennomsnittlige årsinntekten ut basert på de tre siste årene, slik at din
-                    gjennomsnittlige årsinntekten blir <strong>{formatterTall(inntektMetadata.beregnet.snitt)}</strong>{' '}
-                    kroner.
+                    Så regnes den gjennomsnittlige årsinntekten ut basert på de tre siste årene, slik at den
+                    gjennomsnittlige årsinntekten din blir{' '}
+                    <strong>{formatterTall(inntektMetadata.beregnet.snitt)}</strong> kroner.
                 </BodyShort>
             </>
         )
