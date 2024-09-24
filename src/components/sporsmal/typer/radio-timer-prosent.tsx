@@ -86,7 +86,7 @@ const RadioTimerProsent = ({ sporsmal }: SpmProps) => {
     const feilmelding = hentFeilmelding(sporsmal)
     const { valgtSoknad } = useSoknadMedDetaljer()
 
-    const { beregnGradNy, validerGrad } = validerArbeidsgrad(sporsmal)
+    const { beregnGradNy } = validerArbeidsgrad(sporsmal)
 
     const lavereProsentHjelpTittel = tekst('ekspanderbarhjelp.prosenten_lavere_enn_forventet_arbeidstaker.tittel')
 
@@ -123,7 +123,7 @@ const RadioTimerProsent = ({ sporsmal }: SpmProps) => {
                 )
             })}
 
-            {valgtSoknad && sporsmal.undersporsmal.length > 0 && beregnGradNy && validerGrad!() == true && (
+            {valgtSoknad && sporsmal.undersporsmal.length > 0 && beregnGradNy && (
                 <TimerProsentAlert valgtSoknad={valgtSoknad} beregnGradNy={beregnGradNy} />
             )}
 
