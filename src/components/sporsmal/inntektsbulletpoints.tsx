@@ -7,7 +7,7 @@ import { KjentInntektskilde, Soknad, Sporsmal } from '../../types/types'
 export const Inntektsbulletpoints = ({ soknad, sporsmal }: { soknad: Soknad; sporsmal: Sporsmal }) => {
     const navn: string[] = []
     if (sporsmal.metadata) {
-        const items = sporsmal.metadata.navn as KjentInntektskilde[]
+        const items = sporsmal.metadata.kjenteInntektskilder as KjentInntektskilde[]
         items.forEach((item) => navn.push(item.navn))
     } else {
         navn.push(soknad.arbeidsgiver!.navn)

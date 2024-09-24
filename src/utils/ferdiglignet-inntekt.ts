@@ -1,4 +1,4 @@
-import {KjentInntektskilde} from "../types/types";
+import { KjentInntektskilde } from '../types/types'
 
 function parseVerdierMedPrefix(metadata: Record<string, number>, prefix: string): Record<string, number> {
     const ferdiglignetInntekt: Record<string, number> = {}
