@@ -49,8 +49,6 @@ const TimerProsentAlert = ({ valgtSoknad, beregnGradNy }: TimerProsentAlertProps
     })
 
     const beregnetGrad = beregnGradNy(hvorMyeTimerVerdi, jobberDuNormalArbeidsuke, hvorMangeTimerPerUke)
-    // const validertGrad = validerGradNy(beregnetGrad)
-    // const validertGrad = beregnetGrad !== undefined ? validerGradNy(beregnetGrad) : false // Pass beregnetGrad to validerGradNy
 
     return (
         <div>

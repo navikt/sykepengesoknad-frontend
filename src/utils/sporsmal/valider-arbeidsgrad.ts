@@ -69,19 +69,6 @@ const useValiderArbeidsgrad = (sporsmal: Sporsmal) => {
             : true
     }
 
-    // todo send inn beregnet grad som argument
-    const validerGradNy = (beregnetGrad: number) => {
-        const faktiskArbeidsGrad = beregnetGrad // beregnGrad()
-        const forventetArbeidsGrad = 1.0 - periode.grad / 100
-
-        return faktiskArbeidsGrad < forventetArbeidsGrad
-            ? getLedetekst(tekst('soknad.feilmelding.MINDRE_TIMER_ENN_FORVENTET'), {
-                  '%PROSENT%': Math.floor(faktiskArbeidsGrad! * 100),
-              })
-            : true
-    }
-
-    // todo du må validere også
     const beregnGradNy = (
         hvorMyeTimerVerdi: string,
         jobberDuNormalArbeidsuke: string,
@@ -102,6 +89,7 @@ const useValiderArbeidsgrad = (sporsmal: Sporsmal) => {
             if (hvorMangeTimerPerUke !== '') {
                 return parseFloat(hvorMangeTimerPerUke)
             }
+            // vi kan ikke regne ut arbeidsgrad hvis bruker ikke har svart her
             return undefined
         }
 
@@ -142,7 +130,7 @@ const useValiderArbeidsgrad = (sporsmal: Sporsmal) => {
         return faktiskTimer / uker / timerPerUke
     }
 
-    return { beregnGrad, validerGrad, periode, hovedSporsmal, beregnGradNy, validerGradNy }
+    return { beregnGrad, validerGrad, periode, hovedSporsmal, beregnGradNy }
 }
 
 export default useValiderArbeidsgrad
