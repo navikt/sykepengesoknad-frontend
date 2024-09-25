@@ -101,6 +101,7 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
         cy.contains(
             'Antall timer du skrev inn, betyr at du har jobbet 49 % av det du gjør når du er frisk. Du må enten svare nei på øverste spørsmålet eller endre antall timer totalt.',
         )
+        cy.contains('Antall timer du skrev inn, betyr at du har jobbet 49% av det du gjør når du er frisk.')
 
 
         // Endre timer til 11, som er mer enn 10.8
