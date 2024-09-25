@@ -73,6 +73,8 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
         // Test spørsmål
         cy.get('[data-cy="ja-nei-stor"] input[value=JA]').click()
 
+        cy.contains('Antall timer du skrev inn, betyr at du har jobbet').should('not.exist')
+
         // Underspørsmål 1
         cy.contains(
             'Hvor mange timer i uken jobber du vanligvis når du er frisk? Varierer det, kan du oppgi gjennomsnittet.',
