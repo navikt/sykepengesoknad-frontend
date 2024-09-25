@@ -56,7 +56,7 @@ const TimerProsentAlert = ({ valgtSoknad, beregnGradNy }: TimerProsentAlertProps
                 <Alert variant="info" style={{ marginTop: '1rem' }}>
                     <BodyShort>
                         {getLedetekst(tekst('sykepengesoknad.jobb-underveis-timer-i-prosent'), {
-                            '%PROSENT%': Math.round(beregnetGrad * 100),
+                            '%PROSENT%': Math.floor(beregnetGrad * 100),
                         })}
                     </BodyShort>
                 </Alert>
