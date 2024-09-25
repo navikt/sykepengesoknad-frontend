@@ -28,8 +28,8 @@ export const VarigEndring25prosent = ({ sporsmal }: VarigEndring25prosentProps) 
                     <div className="flex justify-center">Gjennomsnittlig grunnbeløp i det aktuelle kalenderåret</div>
                 </Box>
                 <BodyShort size="small" className="text-text-subtle">
-                    Sykepengegrunnlaget kan ikke være høyere enn 6G. Hvis du tjente mer enn dette i ett eller flere år,
-                    regner man en tredjedel av inntekten mellom 6G og 12G. Inntekt over 12G regnes ikke med.
+                    Sykepengegrunnlaget kan ikke være høyere enn 6G. Hvis du hadde høyere inntekt enn dette i ett eller
+                    flere år, regner man en tredjedel av inntekten mellom 6G og 12G. Inntekt over 12G regnes ikke med.
                 </BodyShort>
                 <LenkeMedIkon href="https://www.nav.no/grunnbelopet" text="Les mer om grunnbeløpet" />
                 <BodyShort className="mt-4" spacing>
