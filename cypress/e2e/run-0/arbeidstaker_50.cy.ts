@@ -91,7 +91,7 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
         // Gradkalkulatoren dermed vil regne ut at man har hatt 9 arbeidsdager i denne perioden
         // 12 timer * (9 dager/5) * 0.5 (50% sykefraværsgrad) = 10.8 timer, så vi prøver litt lavere enn det
         cy.get('.undersporsmal .navds-text-field__input#34c3cb3f-1aeb-3095-9ac6-d8f4f4c9e539').type('10.7')
-
+        cy.contains('Antall timer du skrev inn, betyr at du har jobbet 49% av det du gjør når du er frisk.')
         klikkGaVidere(true)
 
         cy.get('.navds-read-more__button').contains('Er prosenten lavere enn du forventet?')
@@ -101,7 +101,7 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
         cy.contains(
             'Antall timer du skrev inn, betyr at du har jobbet 49 % av det du gjør når du er frisk. Du må enten svare nei på øverste spørsmålet eller endre antall timer totalt.',
         )
-        cy.contains('Antall timer du skrev inn, betyr at du har jobbet 49% av det du gjør når du er frisk.')
+
 
         // Endre timer til 11, som er mer enn 10.8
         cy.get('.undersporsmal .navds-text-field__input#34c3cb3f-1aeb-3095-9ac6-d8f4f4c9e539').clear()
