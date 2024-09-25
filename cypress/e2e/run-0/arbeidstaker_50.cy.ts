@@ -105,7 +105,6 @@ describe('Tester arbeidstakersøknad - gradert 50%', () => {
         )
         cy.contains('Antall timer du skrev inn, betyr at du har jobbet 49% av det du gjør når du er frisk.')
 
-
         // Endre timer til 11, som er mer enn 10.8
         cy.get('.undersporsmal .navds-text-field__input#34c3cb3f-1aeb-3095-9ac6-d8f4f4c9e539').clear()
         cy.get('.undersporsmal .navds-text-field__input#34c3cb3f-1aeb-3095-9ac6-d8f4f4c9e539').type('11')
