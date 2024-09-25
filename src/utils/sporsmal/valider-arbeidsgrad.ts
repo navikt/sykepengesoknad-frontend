@@ -68,6 +68,52 @@ const useValiderArbeidsgrad = (sporsmal: Sporsmal) => {
             : true
     }
 
+    const beregnGradNy = (
+        hvorMyeTimerVerdi: string,
+        jobberDuNormalArbeidsuke: string,
+        hvorMangeTimerPerUke: string,
+    ) => {
+        /* Forskjellen på denne funksjonen og beregnGrad er at denne funksjonen tar
+        inn verdier som argumenter, mens beregnGrad henter verdier fra formen.
+        beregnGrad virker onSubmit, men ikke alltid fortløpende mens bruker fyller
+        inn verdier.
+         */
+        const faktiskeSykedager =
+            valgtSoknad.soknadstype === RSSoknadstype.ARBEIDSTAKERE
+                ? sykedagerForArbeidstakere()
+                : sykedagerForFrilansere()
+        const dagerIPeriode = faktiskeSykedager.length
+
+        const uker = dagerIPeriode / 5
+
+        function timerPerUkeVanligvis() {
+            if (jobberDuNormalArbeidsuke === 'JA') {
+                return 37.5
+            }
+            if (hvorMangeTimerPerUke !== '') {
+                return parseFloat(hvorMangeTimerPerUke)
+            }
+            // vi kan ikke regne ut arbeidsgrad hvis bruker ikke har svart her
+            return undefined
+        }
+
+        function timerDennePerioden() {
+            if (hvorMyeTimerVerdi !== '') {
+                return parseFloat(hvorMyeTimerVerdi)
+            }
+            // vi beregner ikke arbeidsgrad hvis bruker oppgir prosent eller ikke enda har opgitt antall timer
+            return undefined
+        }
+        const timerPerUke = timerPerUkeVanligvis()
+        const faktiskTimer = timerDennePerioden()
+
+        if (!faktiskTimer || !timerPerUke) {
+            return undefined
+        } else {
+            return faktiskTimer / uker / timerPerUke
+        }
+    }
+
     const beregnGrad = () => {
         const values = getValues()
         const timerPerUkeId = hentUndersporsmal(hovedSporsmal!, 'HVOR_MANGE_TIMER_PER_UKE')!.id
@@ -88,7 +134,7 @@ const useValiderArbeidsgrad = (sporsmal: Sporsmal) => {
         return faktiskTimer / uker / timerPerUke
     }
 
-    return { beregnGrad, validerGrad, periode, hovedSporsmal }
+    return { beregnGrad, validerGrad, periode, hovedSporsmal, beregnGradNy }
 }
 
 export default useValiderArbeidsgrad
