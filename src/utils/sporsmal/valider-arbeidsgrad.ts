@@ -73,6 +73,11 @@ const useValiderArbeidsgrad = (sporsmal: Sporsmal) => {
         jobberDuNormalArbeidsuke: string,
         hvorMangeTimerPerUke: string,
     ) => {
+        /* forskjellen på denne funksjonen og beregnGrad er at denne funksjonen tar
+        inn verdier som argumenter, mens beregnGrad henter verdier fra formen
+        beregnGrad virker onSubmit, men ikke alltid fortløpende mens bruker fyller
+        inn verdier
+         */
         const faktiskeSykedager =
             valgtSoknad.soknadstype === RSSoknadstype.ARBEIDSTAKERE
                 ? sykedagerForArbeidstakere()
