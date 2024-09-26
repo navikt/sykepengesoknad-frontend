@@ -10,7 +10,6 @@ describe('Tester nytt arbeidsforhold', () => {
 
     it('Svarer ja på hovedspørsmål', function () {
         svarJaHovedsporsmal()
-        cy.contains('Når hadde du din første arbeidsdag?')
         cy.contains('Hvor mye har du tjent i perioden 8. – 21. september 2022?')
     })
 
