@@ -20,7 +20,7 @@ export const nyttArbeidsforholdSporsmal = ({
     return {
         id: v4().toString(),
         tag: 'NYTT_ARBEIDSFORHOLD_UNDERVEIS',
-        sporsmalstekst: `Har du startet å jobbe hos ${arbeidsstedNavn}?`,
+        sporsmalstekst: `Har du jobbet noe hos ${arbeidsstedNavn} i perioden ${periodeTekst}?`,
         undertekst: null,
         svartype: 'JA_NEI',
         min: null,
