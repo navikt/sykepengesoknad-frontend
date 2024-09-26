@@ -34,18 +34,6 @@ export const nyttArbeidsforholdSporsmal = ({
         undersporsmal: [
             {
                 id: v4().toString(),
-                tag: 'NYTT_ARBEIDSFORHOLD_UNDERVEIS_FORSTE_ARBEIDSDAG',
-                sporsmalstekst: 'Når hadde du din første arbeidsdag?',
-                undertekst: null,
-                svartype: 'DATO',
-                min: null,
-                max: tom,
-                kriterieForVisningAvUndersporsmal: null,
-                svar: [],
-                undersporsmal: [],
-            },
-            {
-                id: v4().toString(),
                 tag: 'NYTT_ARBEIDSFORHOLD_UNDERVEIS_BRUTTO',
                 sporsmalstekst: `Hvor mye har du tjent i perioden ${periodeTekst}?`,
                 undertekst:

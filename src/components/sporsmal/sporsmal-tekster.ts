@@ -290,7 +290,6 @@ const SporsmalTekster = {
     'soknad.feilmelding.INNTEKTSOPPLYSNINGER_VIRKSOMHETEN_AVVIKLET_NEI': '',
     'soknad.feilmelding.INNTEKTSOPPLYSNINGER_VIRKSOMHETEN_AVVIKLET_NAR': '',
     'soknad.feilmelding.NYTT_ARBEIDSFORHOLD_UNDERVEIS': 'Du må svare på om du har startet å jobbe',
-    'soknad.feilmelding.NYTT_ARBEIDSFORHOLD_UNDERVEIS_FORSTE_ARBEIDSDAG': '',
     'soknad.feilmelding.NYTT_ARBEIDSFORHOLD_UNDERVEIS_BRUTTO': 'Du må oppgi hvor mye du har tjent',
 }
 
