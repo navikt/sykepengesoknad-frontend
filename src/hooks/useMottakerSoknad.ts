@@ -3,12 +3,16 @@ import { useQuery } from '@tanstack/react-query'
 import { fetchJsonMedRequestId } from '../utils/fetch'
 import { RSMottaker } from '../types/rs-types/rs-mottaker'
 
-export function mottakerSoknadQueryFn(id: string) {
-    return fetchJsonMedRequestId(`/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${id}/mottaker`, {
-        method: 'GET',
-        credentials: 'include',
-        headers: { 'Content-Type': 'application/json' },
-    }).then((json) => json.mottaker)
+export async function mottakerSoknadQueryFn(id: string) {
+    const json = await fetchJsonMedRequestId(
+        `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/${id}/mottaker`,
+        {
+            method: 'GET',
+            credentials: 'include',
+            headers: { 'Content-Type': 'application/json' },
+        },
+    )
+    return await json.mottaker
 }
 
 export default function useMottakerSoknad(id: string, enabled = true) {
