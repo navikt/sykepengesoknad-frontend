@@ -39,7 +39,7 @@ import { fiskePerson } from './data/personas/fisker'
 import { kjenteInntektskilderPerson } from './data/personas/kjente-inntektskilder'
 import { innenforAgPerioden } from './data/personas/innenfor-ag-periode'
 import { oppholdUtenforEOS } from './data/personas/opphold-utenfor-eos'
-import { nyttArbeidsforholdForstegangs, nyttArbeidsforholdPaafolgende } from './data/personas/nytt-arbeidsforhold'
+import { nyttArbeidsforhold } from './data/personas/nytt-arbeidsforhold'
 
 type PersonaKey =
     | 'uten-data'
@@ -78,8 +78,7 @@ type PersonaKey =
     | 'kjente-inntektskilder'
     | 'cummulative-layout-shift'
     | 'tilbakedateringer'
-    | 'nytt-arbeidsforhold-forstegangs'
-    | 'nytt-arbeidsforhold-pafolgende'
+    | 'nytt-arbeidsforhold'
     | 'selvstendig-naringsdrivende-sendt'
     | 'innenfor-arbeidsgiver-perioden'
     | 'gammel-oppsummering'
@@ -132,8 +131,7 @@ export function testpersonerGruppert(): PersonaGroup {
             ['medlemskap']: jsonDeepCopy(medlemskapPerson),
         },
         ['Nytt arbeidsforhold']: {
-            ['nytt-arbeidsforhold-forstegangs']: jsonDeepCopy(nyttArbeidsforholdForstegangs),
-            ['nytt-arbeidsforhold-pafolgende']: jsonDeepCopy(nyttArbeidsforholdPaafolgende),
+            ['nytt-arbeidsforhold']: jsonDeepCopy(nyttArbeidsforhold),
         },
         ['testing']: {
             ['over-70']: over70(),
