@@ -16,10 +16,7 @@ import {
     inntektsopplysningerUtenSigrunData,
     inntektsopplysningerLegacy,
 } from '../sporsmal/inntektsopplysningerUtenSigrunData'
-import {
-    nyttArbeidsforholdForstegangSporsmal,
-    nyttArbeidsforholdPafolgendeSporsmal,
-} from '../sporsmal/nytt-arbeidsforhold'
+import { nyttArbeidsforholdSporsmal } from '../sporsmal/nytt-arbeidsforhold'
 
 export const veldigLangSoknad: RSSoknad = {
     id: '214f6e73-8150-4261-8ce5-e2b41907fa58',
@@ -2365,17 +2362,11 @@ export const veldigLangSoknad: RSSoknad = {
         },
         ...utenlandskSykmeldingSporsmalene,
         kjenteInntektskilder(['Rema']),
-        nyttArbeidsforholdForstegangSporsmal({
+        nyttArbeidsforholdSporsmal({
             arbeidsstedNavn: 'Kaffebrenneriet',
             arbeidsstedOrgnummer: '123324',
             tom: '2020-04-24',
             fom: '2020-04-20',
-        }),
-        nyttArbeidsforholdPafolgendeSporsmal({
-            orgnavn: 'Kaffebrenneriet',
-            orgnr: '123324',
-            fom: '2020-04-20',
-            tom: '2020-04-24',
         }),
         inntektsopplysningerUtenSigrunData,
         inntektsopplysningerLegacy,

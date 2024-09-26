@@ -43,9 +43,7 @@ describe('Tester andre inntektskilder bulletpoints', () => {
     })
 
     it('Viser data primært fra metadata på spørsmålet når vi har det', () => {
-        cy.visit(
-            `/syk/sykepengesoknad/soknader/260f06b5-9fd0-4b30-94d2-4f90851b4cac/8?testperson=nytt-arbeidsforhold-forstegangs`,
-        )
+        cy.visit(`/syk/sykepengesoknad/soknader/260f06b5-9fd0-4b30-94d2-4f90851b4cac/8?testperson=nytt-arbeidsforhold`)
 
         cy.contains('Arbeidsforhold vi har registrert på deg:').and('be.visible')
         cy.contains('Har du andre inntektskilder enn nevnt over?').and('be.visible')

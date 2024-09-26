@@ -1,35 +1,32 @@
 import { deepcopyMedNyId } from '../../deepcopyMedNyId'
-import {
-    nyttArbeidsforholdForstegangSporsmal,
-    nyttArbeidsforholdPafolgendeSporsmal,
-} from '../sporsmal/nytt-arbeidsforhold'
+import { nyttArbeidsforholdSporsmal } from '../sporsmal/nytt-arbeidsforhold'
 
 import { Persona } from './personas'
 import { brukertestSoknad, brukertestSykmelding } from './brukertest'
 
-const nyttArbeidsforholdForstegangSoknad = deepcopyMedNyId(brukertestSoknad, '260f06b5-9fd0-4b30-94d2-4f90851b4cac')
+const nyttArbeidsforholdSoknad = deepcopyMedNyId(brukertestSoknad, '260f06b5-9fd0-4b30-94d2-4f90851b4cac')
 
-const splittSted = nyttArbeidsforholdForstegangSoknad.sporsmal.findIndex((spm) => spm.tag === 'ANDRE_INNTEKTSKILDER_V2')
+const splittSted = nyttArbeidsforholdSoknad.sporsmal.findIndex((spm) => spm.tag === 'ANDRE_INNTEKTSKILDER_V2')
 if (splittSted === -1) {
     throw new Error('Søknad mangler spørsmål ANDRE_INNTEKTSKILDER_V2')
 }
-nyttArbeidsforholdForstegangSoknad.sporsmal = [
-    ...nyttArbeidsforholdForstegangSoknad.sporsmal.slice(0, splittSted),
-    nyttArbeidsforholdForstegangSporsmal({
+nyttArbeidsforholdSoknad.sporsmal = [
+    ...nyttArbeidsforholdSoknad.sporsmal.slice(0, splittSted),
+    nyttArbeidsforholdSporsmal({
         arbeidsstedNavn: 'Kaffebrenneriet',
         arbeidsstedOrgnummer: '123324',
-        tom: nyttArbeidsforholdForstegangSoknad.tom!,
-        fom: nyttArbeidsforholdForstegangSoknad.fom!,
+        tom: nyttArbeidsforholdSoknad.tom!,
+        fom: nyttArbeidsforholdSoknad.fom!,
     }),
-    ...nyttArbeidsforholdForstegangSoknad.sporsmal.slice(splittSted),
+    ...nyttArbeidsforholdSoknad.sporsmal.slice(splittSted),
 ]
-nyttArbeidsforholdForstegangSoknad.inntektskilderDataFraInntektskomponenten?.push({
+nyttArbeidsforholdSoknad.inntektskilderDataFraInntektskomponenten?.push({
     orgnummer: '123324',
     navn: 'Kaffebrenneriet',
     arbeidsforholdstype: 'ARBEIDSTAKER',
 })
 
-nyttArbeidsforholdForstegangSoknad.sporsmal.find((spm) => spm.tag === 'ANDRE_INNTEKTSKILDER_V2')!.metadata = {
+nyttArbeidsforholdSoknad.sporsmal.find((spm) => spm.tag === 'ANDRE_INNTEKTSKILDER_V2')!.metadata = {
     kjenteInntektskilder: [
         { orgnummer: '123324', navn: 'Matbutikken AS' },
         { orgnummer: '123324', navn: 'Smørebussen AS' },
@@ -37,40 +34,9 @@ nyttArbeidsforholdForstegangSoknad.sporsmal.find((spm) => spm.tag === 'ANDRE_INN
     ],
 }
 
-export const nyttArbeidsforholdForstegangs: Persona = {
-    soknader: [nyttArbeidsforholdForstegangSoknad],
+export const nyttArbeidsforhold: Persona = {
+    soknader: [nyttArbeidsforholdSoknad],
     sykmeldinger: [brukertestSykmelding],
     kontonummer: '12340000000',
     beskrivelse: 'Førstegangsspørsmål om nytt arbeidsforhold',
-}
-const nyttArbeidsforholdPaafolgendeSoknad = deepcopyMedNyId(brukertestSoknad, '260f06b5-9fd0-4b30-94d2-4f90851b4ddd')
-
-const splittStedPaafolgende = nyttArbeidsforholdPaafolgendeSoknad.sporsmal.findIndex(
-    (spm) => spm.tag === 'ANDRE_INNTEKTSKILDER_V2',
-)
-if (splittStedPaafolgende === -1) {
-    throw new Error('Søknad mangler spørsmål ANDRE_INNTEKTSKILDER_V2')
-}
-
-nyttArbeidsforholdPaafolgendeSoknad.sporsmal = [
-    ...nyttArbeidsforholdPaafolgendeSoknad.sporsmal.slice(0, splittStedPaafolgende),
-    nyttArbeidsforholdPafolgendeSporsmal({
-        orgnavn: 'Kaffebrenneriet',
-        orgnr: '123324',
-        tom: nyttArbeidsforholdForstegangSoknad.tom!,
-        fom: nyttArbeidsforholdForstegangSoknad.fom!,
-    }),
-    ...nyttArbeidsforholdPaafolgendeSoknad.sporsmal.slice(splittStedPaafolgende),
-]
-nyttArbeidsforholdPaafolgendeSoknad.inntektskilderDataFraInntektskomponenten?.push({
-    orgnummer: '123324',
-    navn: 'Kaffebrenneriet',
-    arbeidsforholdstype: 'ARBEIDSTAKER',
-})
-
-export const nyttArbeidsforholdPaafolgende: Persona = {
-    soknader: [nyttArbeidsforholdPaafolgendeSoknad],
-    sykmeldinger: [brukertestSykmelding],
-    kontonummer: '12340000000',
-    beskrivelse: 'Påfølgende spørsmål om nytt arbeidsforhold',
 }

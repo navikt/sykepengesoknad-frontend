@@ -78,8 +78,7 @@ export const EkspanderbarHjelp = ({ sporsmal, mb }: { sporsmal: Sporsmal; mb?: s
                 return <FerieHjelpBody />
             case 'ANDRE_INNTEKTSKILDER_V2':
                 return <AndreInntektskilderHjelpBody />
-            case 'NYTT_ARBEIDSFORHOLD_UNDERVEIS_FORSTEGANG':
-            case 'NYTT_ARBEIDSFORHOLD_UNDERVEIS_PAFOLGENDE':
+            case 'NYTT_ARBEIDSFORHOLD_UNDERVEIS':
                 return <TilkommenInntektHjelpBody />
             case 'PERMISJON_V2':
                 return <PermisjonHjelpBody />
