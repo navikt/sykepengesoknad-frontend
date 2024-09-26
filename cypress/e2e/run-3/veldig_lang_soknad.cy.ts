@@ -334,7 +334,6 @@ describe('Tester støtte for gamle spørsmål', () => {
     })
     it('Tilkommen inntekt', () => {
         svarJaHovedsporsmal()
-        velgDato(4)
         svarFritekst('Hvor mye har du tjent i perioden 20. – 24. april 2020?', '25000')
         gaVidere()
     })
