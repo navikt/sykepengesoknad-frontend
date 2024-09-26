@@ -10,7 +10,7 @@ export default function useSoknader() {
 
     return useQuery<RSSoknadmetadata[], Error>({
         queryKey: ['soknader'],
-        queryFn: () =>
+        queryFn: async () =>
             fetchJsonMedRequestId(
                 `/syk/sykepengesoknad/api/sykepengesoknad-backend/api/v2/soknader/metadata${testpersonQuery.query()}`,
                 {

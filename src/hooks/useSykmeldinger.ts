@@ -10,7 +10,7 @@ export default function useSykmeldinger() {
 
     return useQuery<Sykmelding[], Error>({
         queryKey: ['sykmeldinger'],
-        queryFn: () =>
+        queryFn: async () =>
             fetchJsonMedRequestId(
                 `/syk/sykepengesoknad/api/sykmeldinger-backend/api/v2/sykmeldinger${testpersonQuery.query()}`,
                 {

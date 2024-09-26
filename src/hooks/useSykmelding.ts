@@ -10,7 +10,7 @@ export default function useSykmelding(id: string | undefined) {
     return useQuery<Sykmelding | undefined, Error>({
         queryKey: ['sykmelding', id],
         enabled: sykmeldingerLastet && id !== undefined,
-        queryFn: () => {
+        queryFn: async () => {
             return Promise.resolve(sykmeldinger?.find((s) => s.id === id))
         },
     })
