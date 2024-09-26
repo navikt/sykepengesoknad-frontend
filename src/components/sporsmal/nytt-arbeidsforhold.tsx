@@ -17,13 +17,6 @@ export const NyttArbeidsforhold = ({ spm }: { spm: Sporsmal }) => {
     )
 }
 
-export const NyttArbeidsforholdPafolgende = ({ spm }: { spm: Sporsmal }) => {
-    if (!spm.metadata?.arbeidsstedNavn) {
-        return null
-    }
-    return <GraaBoks tekst={spm.metadata?.arbeidsstedNavn as string} />
-}
-
 function GraaBoks(props: { tekst: string }) {
     return (
         <Label as="p" className="bg-bg-subtle p-4 mb-10 rounded inline-block">

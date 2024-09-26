@@ -19,7 +19,7 @@ export const nyttArbeidsforholdForstegangSporsmal = ({
 
     return {
         id: v4().toString(),
-        tag: 'NYTT_ARBEIDSFORHOLD_UNDERVEIS_FORSTEGANG',
+        tag: 'NYTT_ARBEIDSFORHOLD_UNDERVEIS',
         sporsmalstekst: `Har du startet å jobbe hos ${arbeidsstedNavn}?`,
         undertekst: null,
         svartype: 'JA_NEI',
@@ -34,7 +34,7 @@ export const nyttArbeidsforholdForstegangSporsmal = ({
         undersporsmal: [
             {
                 id: v4().toString(),
-                tag: 'NYTT_ARBEIDSFORHOLD_UNDERVEIS_FORSTEGANG_FORSTE_ARBEIDSDAG',
+                tag: 'NYTT_ARBEIDSFORHOLD_UNDERVEIS_FORSTE_ARBEIDSDAG',
                 sporsmalstekst: 'Når hadde du din første arbeidsdag?',
                 undertekst: null,
                 svartype: 'DATO',
@@ -76,7 +76,7 @@ export const nyttArbeidsforholdPafolgendeSporsmal = ({
 
     return {
         id: v4().toString(),
-        tag: 'NYTT_ARBEIDSFORHOLD_UNDERVEIS_PAFOLGENDE',
+        tag: 'NYTT_ARBEIDSFORHOLD_UNDERVEIS',
         sporsmalstekst: `Har du jobbet noe hos ${orgnavn} i perioden ${periodeTekst}?`,
         undertekst: null,
         svartype: 'JA_NEI',
