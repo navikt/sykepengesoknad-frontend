@@ -100,11 +100,11 @@ function fellesInnholdFørVisningAvSigrunData() {
     cy.contains('Datoen er første dag i det første av tre av de ferdiglignede årene.')
     klikkGaVidere(true)
     harFeilISkjemaet('Du må svare på om du er ny i arbeidslivet')
-    svarRadioSporsmal('Utenom virksomheten din, har du hatt andre jobber før 1. januar 2019?', 'Ja')
+    svarRadioSporsmal('Er du ny i arbeidslivet etter 1. januar 2019?', 'Ja')
     cy.contains('Du har oppgitt at du er ny i arbeidslivet.')
     klikkGaVidere(true)
     harFeilISkjemaet('Datoen følger ikke formatet dd.mm.åååå')
-    svarRadioSporsmal('Utenom virksomheten din, har du hatt andre jobber før 1. januar 2019?', 'Nei')
+    svarRadioSporsmal('Er du ny i arbeidslivet etter 1. januar 2019?', 'Nei')
     klikkGaVidere(true)
     harFeilISkjemaet('Du må svare på om det har skjedd en varig endring')
 
@@ -157,7 +157,7 @@ function tilSlutt() {
         sporsmalOgSvar('Har du avviklet virksomheten din før du ble sykmeldt?', 'Nei')
             .children()
             .within(() => {
-                sporsmalOgSvar('Utenom virksomheten din, har du hatt andre jobber før 1. januar 2019?', 'Nei')
+                sporsmalOgSvar('Er du ny i arbeidslivet etter 1. januar 2019?', 'Nei')
                     .children()
                     .within(() => {
                         sporsmalOgSvar(

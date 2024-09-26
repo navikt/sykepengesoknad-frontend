@@ -346,7 +346,7 @@ const soknad: RSSoknad = {
                         {
                             id: '9fe26995-4b22-38ea-a6ac-5f292ddb27b6',
                             tag: 'INNTEKTSOPPLYSNINGER_NY_I_ARBEIDSLIVET',
-                            sporsmalstekst: 'Utenom virksomheten din, har du hatt andre jobber før 16. januar 2019?',
+                            sporsmalstekst: 'Er du ny i arbeidslivet etter 16. januar 2019?',
                             undertekst: null,
                             svartype: 'RADIO_GRUPPE',
                             min: null,
