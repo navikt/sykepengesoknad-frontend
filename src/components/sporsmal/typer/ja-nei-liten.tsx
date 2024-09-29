@@ -65,8 +65,8 @@ const JaNeiLiten = ({ sporsmal }: SpmProps) => {
     const erVarigEndring = sporsmal.tag === 'INNTEKTSOPPLYSNINGER_VARIG_ENDRING_25_PROSENT'
     let sigrunInntekt: SigrunInntekt | null = null
 
-    if (erVarigEndring && erSigrunInntekt(sporsmal.metadata)) {
-        sigrunInntekt = sporsmal.metadata as SigrunInntekt
+    if (erVarigEndring && erSigrunInntekt(sporsmal.metadata?.sigrunInntekt)) {
+        sigrunInntekt = sporsmal.metadata?.sigrunInntekt as SigrunInntekt
     }
 
     return (

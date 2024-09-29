@@ -10,7 +10,9 @@ interface VarigEndring25prosentProps {
 }
 
 export const VarigEndring25prosent = ({ sporsmal }: VarigEndring25prosentProps) => {
-    const inntektMetadata = erSigrunInntekt(sporsmal.metadata) ? (sporsmal.metadata as SigrunInntekt) : undefined
+    const inntektMetadata = erSigrunInntekt(sporsmal.metadata?.sigrunInntekt)
+        ? (sporsmal.metadata?.sigrunInntekt as SigrunInntekt)
+        : undefined
 
     if (inntektMetadata) {
         return (

@@ -628,21 +628,23 @@ export const inntektsopplysningerMedSigrunData: RSSporsmal = {
                                             min: null,
                                             max: null,
                                             metadata: {
-                                                inntekter: [
-                                                    { aar: '2020', verdi: 400000 },
-                                                    { aar: '2021', verdi: 450000 },
-                                                    { aar: '2022', verdi: 500000 },
-                                                ],
-                                                'g-verdier': [
-                                                    { aar: '2020', verdi: 60000 },
-                                                    { aar: '2021', verdi: 65000 },
-                                                    { aar: '2022', verdi: 70000 },
-                                                ],
-                                                'g-sykmelding': 80000,
-                                                beregnet: {
-                                                    snitt: 450000,
-                                                    p25: 562500,
-                                                    m25: 337500,
+                                                sigrunInntekt: {
+                                                    inntekter: [
+                                                        { aar: '2020', verdi: 400000 },
+                                                        { aar: '2021', verdi: 450000 },
+                                                        { aar: '2022', verdi: 500000 },
+                                                    ],
+                                                    'g-verdier': [
+                                                        { aar: '2020', verdi: 60000 },
+                                                        { aar: '2021', verdi: 65000 },
+                                                        { aar: '2022', verdi: 70000 },
+                                                    ],
+                                                    'g-sykmelding': 80000,
+                                                    beregnet: {
+                                                        snitt: 450000,
+                                                        p25: 562500,
+                                                        m25: 337500,
+                                                    },
                                                 },
                                             },
                                             kriterieForVisningAvUndersporsmal: 'JA',
