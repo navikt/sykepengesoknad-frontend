@@ -7,7 +7,7 @@ import { tekst } from '../../../utils/tekster'
 import { logEvent } from '../../amplitude/amplitude'
 import { tekstMedHtml } from '../../../utils/html-react-parser-utils'
 import { useSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
-import { Sporsmal } from '../../../types/types'
+import { erSigrunInntekt, SigrunInntekt, Sporsmal } from '../../../types/types'
 import { formatterTall } from '../../../utils/utils'
 
 import { AndreInntektskilderHjelpBody } from './andre-inntektskilder-hjelp-body'
@@ -136,9 +136,12 @@ export const EkspanderbarHjelp = ({ sporsmal, mb }: { sporsmal: Sporsmal; mb?: s
     }
 
     function lagTittel(nokkel: string): string {
-        if (sporsmal.tag === 'INNTEKTSOPPLYSNINGER_VARIG_ENDRING_25_PROSENT' && sporsmal.metadata) {
-            const { 'beregnet-snitt': beregnetSnitt } = sporsmal.metadata as Record<string, number>
-            return `Hvordan har vi kommet frem til ${formatterTall(beregnetSnitt)} kroner?`
+        if (
+            sporsmal.tag === 'INNTEKTSOPPLYSNINGER_VARIG_ENDRING_25_PROSENT' &&
+            erSigrunInntekt(sporsmal.metadata?.sigrunInntekt)
+        ) {
+            const { beregnet } = sporsmal.metadata?.sigrunInntekt as SigrunInntekt
+            return `Hvordan har vi kommet frem til ${formatterTall(beregnet.snitt)} kroner?`
         } else {
             return (
                 EkspanderbarHjelpTekster[

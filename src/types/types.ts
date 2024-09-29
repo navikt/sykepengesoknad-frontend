@@ -127,6 +127,7 @@ export interface SigrunInntekt {
 }
 
 export function erSigrunInntekt(obj: any): obj is SigrunInntekt {
+    if (!obj) return false
     return (
         Array.isArray(obj.inntekter) &&
         obj.inntekter.every((inntekt: any) => typeof inntekt.aar === 'string' && typeof inntekt.verdi === 'number') &&
