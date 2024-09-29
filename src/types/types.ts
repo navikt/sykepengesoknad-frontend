@@ -73,7 +73,7 @@ export class Sporsmal extends ObjectCopier {
         readonly parentKriterie: RSVisningskriterieType | null,
         readonly erHovedsporsmal: boolean,
         readonly tittel: string | undefined,
-        readonly metadata: Record<string, string | KjentInntektskilde[] | number> | undefined,
+        readonly metadata: Record<string, string | number | KjentInntektskilde[]> | SigrunInntekt | undefined,
     ) {
         super()
     }
@@ -113,4 +113,29 @@ export enum UtgiftTyper {
 
 export function svarverdiToKvittering(kvittering: string): Kvittering {
     return new Kvittering(kvittering)
+}
+
+export interface SigrunInntekt {
+    inntekter: { aar: string; verdi: number }[]
+    'g-verdier': { aar: string; verdi: number }[]
+    'g-sykmelding': number
+    beregnet: {
+        snitt: number
+        p25: number
+        m25: number
+    }
+}
+
+export function erSigrunInntekt(obj: any): obj is SigrunInntekt {
+    return (
+        Array.isArray(obj.inntekter) &&
+        obj.inntekter.every((inntekt: any) => typeof inntekt.aar === 'string' && typeof inntekt.verdi === 'number') &&
+        Array.isArray(obj['g-verdier']) &&
+        obj['g-verdier'].every((gVerdi: any) => typeof gVerdi.aar === 'string' && typeof gVerdi.verdi === 'number') &&
+        typeof obj['g-sykmelding'] === 'number' &&
+        obj.beregnet &&
+        typeof obj.beregnet.snitt === 'number' &&
+        typeof obj.beregnet.p25 === 'number' &&
+        typeof obj.beregnet.m25 === 'number'
+    )
 }

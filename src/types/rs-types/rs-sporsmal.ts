@@ -1,4 +1,4 @@
-import { KjentInntektskilde, Sporsmal } from '../types'
+import { KjentInntektskilde, SigrunInntekt, Sporsmal } from '../types'
 
 import { RSSvar } from './rs-svar'
 import { RSSvartype, RSSvartypeType } from './rs-svartype'
@@ -14,7 +14,7 @@ export interface RSSporsmal {
     max: string | null
     kriterieForVisningAvUndersporsmal: RSVisningskriterieType | null
     svar: RSSvar[]
-    metadata?: Record<string, string | KjentInntektskilde[] | number>
+    metadata?: Record<string, string | KjentInntektskilde[] | number> | SigrunInntekt
     undersporsmal: RSSporsmal[]
     tittel?: string
 }

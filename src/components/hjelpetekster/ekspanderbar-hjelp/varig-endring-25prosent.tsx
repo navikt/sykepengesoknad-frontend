@@ -1,8 +1,7 @@
 import { BodyShort, Box } from '@navikt/ds-react'
 import React from 'react'
 
-import { Sporsmal } from '../../../types/types'
-import { hentInntektMetadata } from '../../../utils/ferdiglignet-inntekt'
+import { erSigrunInntekt, SigrunInntekt, Sporsmal } from '../../../types/types'
 import { formatterTall } from '../../../utils/utils'
 import { LenkeMedIkon } from '../../lenke-med-ikon/LenkeMedIkon'
 
@@ -11,7 +10,7 @@ interface VarigEndring25prosentProps {
 }
 
 export const VarigEndring25prosent = ({ sporsmal }: VarigEndring25prosentProps) => {
-    const inntektMetadata = hentInntektMetadata(sporsmal.metadata)
+    const inntektMetadata = erSigrunInntekt(sporsmal.metadata) ? (sporsmal.metadata as SigrunInntekt) : undefined
 
     if (inntektMetadata) {
         return (
@@ -36,16 +35,16 @@ export const VarigEndring25prosent = ({ sporsmal }: VarigEndring25prosentProps) 
                     Din inntekt per kalenderår, de tre siste ferdiglignede årene:
                 </BodyShort>
                 <div>
-                    {Object.entries(inntektMetadata.inntekt).map(([year, inntektValue]) => (
-                        <BodyShort key={year}>
-                            <strong>{year}</strong>: {`${formatterTall(inntektValue)} kroner`}
+                    {inntektMetadata.inntekter?.map((inntekt: { aar: string; verdi: number }) => (
+                        <BodyShort key={inntekt.aar}>
+                            <strong>{inntekt.aar}</strong>: {`${formatterTall(inntekt.verdi)} kroner`}
                         </BodyShort>
                     ))}
                 </div>
                 <BodyShort className="mt-4">
                     Så regnes den gjennomsnittlige årsinntekten ut basert på de tre siste årene, slik at den
                     gjennomsnittlige årsinntekten din blir{' '}
-                    <strong>{formatterTall(inntektMetadata.beregnet.snitt)}</strong> kroner.
+                    <strong>{formatterTall(inntektMetadata.beregnet?.snitt)}</strong> kroner.
                 </BodyShort>
             </>
         )

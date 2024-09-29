@@ -17,7 +17,7 @@ import { EkspanderbarHjelp } from '../../hjelpetekster/ekspanderbar-hjelp/ekspan
 import { VarigEndringEksempler } from '../../hjelpetekster/varig-endring-eksempler'
 import { VarigEndringAlert } from '../../hjelpetekster/varig-endring-alert'
 import { formatterTall } from '../../../utils/utils'
-import { hentInntektMetadata } from '../../../utils/ferdiglignet-inntekt'
+import { erSigrunInntekt, SigrunInntekt } from '../../../types/types'
 
 const JaNeiLiten = ({ sporsmal }: SpmProps) => {
     const { watch, getValues } = useFormContext()
@@ -62,8 +62,12 @@ const JaNeiLiten = ({ sporsmal }: SpmProps) => {
         } else return <></>
     }
 
-    const inntektMetadata =
-        sporsmal.tag === 'INNTEKTSOPPLYSNINGER_VARIG_ENDRING_25_PROSENT' && hentInntektMetadata(sporsmal.metadata)
+    const erVarigEndring = sporsmal.tag === 'INNTEKTSOPPLYSNINGER_VARIG_ENDRING_25_PROSENT'
+    let sigrunInntekt: SigrunInntekt | null = null
+
+    if (erVarigEndring && erSigrunInntekt(sporsmal.metadata)) {
+        sigrunInntekt = sporsmal.metadata as SigrunInntekt
+    }
 
     return (
         <>
@@ -95,16 +99,16 @@ const JaNeiLiten = ({ sporsmal }: SpmProps) => {
                             legend={sporsmal.sporsmalstekst}
                             error={fieldState.error && feilmelding.lokal}
                         >
-                            {inntektMetadata && (
+                            {erVarigEndring && sigrunInntekt && (
                                 <>
                                     <BodyShort spacing>
                                         Din gjennomsnittlige årsinntekt på sykmeldingstidspunktet:{' '}
-                                        <strong>{formatterTall(inntektMetadata.beregnet.snitt)}</strong> kroner.
+                                        <strong>{formatterTall(sigrunInntekt.beregnet.snitt)}</strong> kroner.
                                     </BodyShort>
                                     <BodyShort>
                                         Har du en årsinntekt som gjør at du tjener mindre enn{' '}
-                                        <strong>{formatterTall(inntektMetadata.beregnet.m25)}</strong> kroner eller mer
-                                        enn <strong>{formatterTall(inntektMetadata.beregnet.p25)}</strong> kroner?
+                                        <strong>{formatterTall(sigrunInntekt.beregnet.m25)}</strong> kroner eller mer
+                                        enn <strong>{formatterTall(sigrunInntekt.beregnet.p25)}</strong> kroner?
                                     </BodyShort>
                                 </>
                             )}
