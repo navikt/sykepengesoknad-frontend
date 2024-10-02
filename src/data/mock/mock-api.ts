@@ -188,7 +188,6 @@ export async function mockApi(req: NextApiRequest, res: NextApiResponse) {
         HENT_SYKMELDINGER: 'GET /api/sykmeldinger-backend/api/v2/sykmeldinger',
         GET_SOKNAD: 'GET /api/sykepengesoknad-backend/api/v2/soknad/[uuid]',
         KORRIGER_SOKNAD: 'POST /api/sykepengesoknad-backend/api/v2/soknader/[uuid]/korriger',
-        ETTERSEND_TIL_NAV: 'POST /api/sykepengesoknad-backend/api/v2/soknader/[uuid]/ettersendTilNav',
         ETTERSEND_TIL_ARBEIDSGIVER: 'POST /api/sykepengesoknad-backend/api/v2/soknader/[uuid]/ettersendTilArbeidsgiver',
         AVBRYT_SOKNAD: 'POST /api/sykepengesoknad-backend/api/v2/soknader/[uuid]/avbryt',
         GJENAPNE_SOKNAD: 'POST /api/sykepengesoknad-backend/api/v2/soknader/[uuid]/gjenapne',
@@ -274,12 +273,6 @@ export async function mockApi(req: NextApiRequest, res: NextApiResponse) {
             testperson.soknader.push(soknad)
 
             return sendJson(soknad, 200)
-        },
-        [ENDPOINTS.ETTERSEND_TIL_NAV]: async () => {
-            const soknad = getSoknadEllerFeilmld(soknadId)
-            if (!soknad) return
-            soknad.sendtTilNAVDato = dayjs().toJSON()
-            return sendJson()
         },
         [ENDPOINTS.ETTERSEND_TIL_ARBEIDSGIVER]: async () => {
             const soknad = getSoknadEllerFeilmld(soknadId)

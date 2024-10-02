@@ -132,7 +132,6 @@ describe('Tester kvittering', () => {
 
             // Knapperad finnes ikke
             cy.findByRole('button', { name: 'Jeg vil endre svarene i søknaden' }).should('not.exist')
-            cy.contains('Jeg vil at søknaden skal behandles av NAV').should('not.exist')
             cy.contains('Jeg vil sende en kopi av søknaden til arbeidsgiveren min').should('not.exist')
         })
     })
@@ -172,7 +171,6 @@ describe('Tester kvittering', () => {
 
             // Knapperad ( Endre, Ettersend)
             cy.findByRole('button', { name: 'Jeg vil endre svarene i søknaden' }).should('exist')
-            cy.contains('Jeg vil at søknaden skal behandles av NAV').should('not.exist')
             cy.contains('Jeg vil sende en kopi av søknaden til arbeidsgiveren min').should('not.exist')
         })
     })
@@ -191,21 +189,9 @@ describe('Tester kvittering', () => {
 
             inntil16dagerKvittering()
 
-            // Ettersending til nav vises ikke i kvittering
-            cy.contains('Jeg vil at søknaden skal behandles av NAV').should('not.exist')
             cy.visit('/syk/sykepengesoknad?testperson=integrasjon-soknader')
             cy.get(`a[href*=${arbeidstakerInnenforArbeidsgiverperiodeKvittering.id}]`).click()
             cy.url().should('include', `/sendt/${arbeidstakerInnenforArbeidsgiverperiodeKvittering.id}`)
-
-            // Ettersend
-            cy.contains('Jeg vil at søknaden skal behandles av NAV').click()
-            cy.contains(
-                'Vanligvis behandles søknaden bare av NAV hvis det samlede sykefraværet er 16 dager eller mer. Denne søknaden er beregnet til å være kortere. Hvis arbeidsgiveren din eller NAV har bedt deg sende den likevel, gjør du det her.',
-            )
-            cy.contains('Send søknaden til NAV').click()
-            cy.contains('Jeg vil at søknaden skal behandles av NAV').should('not.exist')
-
-            over16dagerKvittering()
         })
 
         it('Utenfor arbeidsgiverperiode', () => {
@@ -315,7 +301,7 @@ const inntil16dagerKvittering = () => {
         .and('contain', 'Du får sykepengene fra arbeidsgiveren din')
         .and(
             'contain',
-            'Arbeidsgiveren din betaler de første 16 kalenderdagene av sykefraværet. Hvis du mener sykefraværet har vart lenger enn det, kan du sende søknaden til NAV. Noen arbeidsplasser fortsetter å utbetale sykepenger fra dag 17, men da får de penger tilbake fra NAV.',
+            'Arbeidsgiveren din betaler de første 16 kalenderdagene av sykefraværet. Noen arbeidsplasser fortsetter å utbetale sykepenger fra dag 17, men da får de penger tilbake fra NAV.',
         )
         .and('not.contain', 'Før NAV kan behandle søknaden')
         .and('not.contain', 'NAV behandler søknaden')
@@ -323,7 +309,6 @@ const inntil16dagerKvittering = () => {
 
     // Knapperad ( Endre, Ettersend)
     cy.findByRole('button', { name: 'Jeg vil endre svarene i søknaden' }).should('exist')
-    cy.contains('Jeg vil at søknaden skal behandles av NAV').should('not.exist')
     cy.contains('Jeg vil sende en kopi av søknaden til arbeidsgiveren min').should('not.exist')
 }
 
@@ -364,7 +349,6 @@ const over16dagerKvittering = () => {
 
     // Knapperad ( Endre, Ettersend)
     cy.findByRole('button', { name: 'Jeg vil endre svarene i søknaden' }).should('exist')
-    cy.contains('Jeg vil at søknaden skal behandles av NAV').should('not.exist')
     cy.contains('Jeg vil sende en kopi av søknaden til arbeidsgiveren min').should('not.exist')
 }
 
@@ -402,8 +386,14 @@ const utenOppholdKvittering = () => {
 
     // Knapperad ( Endre, Ettersend)
     cy.findByRole('button', { name: 'Jeg vil endre svarene i søknaden' }).should('exist')
-    cy.contains('Jeg vil at søknaden skal behandles av NAV').should('not.exist')
     cy.contains('Jeg vil sende en kopi av søknaden til arbeidsgiveren min').should('exist')
+    cy.findByRole('button', { name: 'Jeg vil sende en kopi av søknaden til arbeidsgiveren min' }).click()
+    cy.contains(
+        'Hvis din arbeidsgiver har bedt deg sende en kopi, eller du av andre årsaker likevel ønsker å sende søknaden til arbeidsgiveren din, kan du gjøre det her.',
+    )
+    cy.findByRole('button', { name: 'Send kopi av søknaden til arbeidsgiver' }).click()
+
+    cy.contains('Jeg vil sende en kopi av søknaden til arbeidsgiveren min').should('not.exist')
 }
 
 const medOppholdKvittering = () => {
@@ -452,6 +442,5 @@ const medOppholdKvittering = () => {
 
     // Knapperad ( Endre, Ettersend)
     cy.findByRole('button', { name: 'Jeg vil endre svarene i søknaden' }).should('exist')
-    cy.contains('Jeg vil at søknaden skal behandles av NAV').should('not.exist')
     cy.contains('Jeg vil sende en kopi av søknaden til arbeidsgiveren min').should('exist')
 }
