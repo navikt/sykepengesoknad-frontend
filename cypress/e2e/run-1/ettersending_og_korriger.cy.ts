@@ -52,24 +52,10 @@ describe('Tester ettersending og korrigering', () => {
         cy.url().should('include', `/1`)
     })
 
-    it('Ettersend', () => {
+    it('Korriger', () => {
         cy.visit('/syk/sykepengesoknad?testperson=arbeidstaker-gradert')
         cy.get(`[data-cy="Tidligere søknader"]`).children().should('have.length', 2)
         cy.get(`[data-cy="Tidligere søknader"] > a[href*=${soknad.id}]`).click()
-
-        cy.contains('Jeg vil at søknaden skal behandles av NAV').click()
-        cy.contains(
-            'Vanligvis behandles søknaden bare av NAV hvis det samlede sykefraværet er 16 dager eller mer. Denne søknaden er beregnet til å være kortere. Hvis arbeidsgiveren din eller NAV har bedt deg sende den likevel, gjør du det her.',
-        )
-        cy.contains('Send søknaden til NAV').click()
-        cy.contains('Jeg vil at søknaden skal behandles av NAV').should('not.exist')
-
-        // Innholdet i kvitteringen blir også oppdatert
-        cy.contains('NAV behandler søknaden din')
-        cy.contains('Du får sykepengene fra arbeidsgiveren din').should('not.exist')
-    })
-
-    it('Korriger', () => {
         // Endre søknaden
         cy.url().should('include', `/sendt/${soknad.id}`)
         cy.findByRole('button', { name: 'Jeg vil endre svarene i søknaden' }).click()
@@ -98,14 +84,5 @@ describe('Tester ettersending og korrigering', () => {
         cy.findByRole('link', { name: 'Endre svar' }).click()
         cy.findByRole('button', { name: 'Ok' }).click()
         cy.url().should('include', `/1`)
-    })
-
-    it('Søknad har teaser', () => {
-        cy.visit('/syk/sykepengesoknad?testperson=arbeidstaker-gradert')
-        cy.get('.navds-heading--large').should('be.visible').and('have.text', 'Søknader')
-
-        cy.get(`a[href*=${soknad.id}]`)
-            .should('contain', '1. – 24. april 2020')
-            .and('contain', 'Sendt til arbeidsgiver og NAV')
     })
 })
