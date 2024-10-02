@@ -76,11 +76,6 @@ const RadioTimerProsent = ({ sporsmal }: SpmProps) => {
         watchRadio = getValues(sporsmal.id)
     }
 
-    // const timerId = hentUndersporsmal(sporsmal, 'HVOR_MYE_TIMER_VERDI_0')?.id
-    // let watchTimer = timerId ? watch(timerId) : undefined
-    // if (watchTimer === undefined && timerId) {
-    //     watchTimer = getValues(timerId)
-    // }
     const errorTimer = errors[hentUndersporsmal(sporsmal!, 'HVOR_MYE_TIMER_VERDI')!.id]
 
     const feilmelding = hentFeilmelding(sporsmal)
