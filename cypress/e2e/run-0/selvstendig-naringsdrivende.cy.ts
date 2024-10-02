@@ -145,7 +145,7 @@ function fellesInnholdEtterVisningAvSigrunData() {
         'Har du hatt mer enn 25 prosent endring i årsinntekten din som følge av den varige endringen?',
         'Ja',
     )
-    cy.contains('Etter du har sendt inn søknaden trenger vi dokumentasjon på den varige endringen din.')
+    cy.contains('Etter du har sendt inn søknaden trenger vi dokumentasjon på inntekten din etter den varige endringen.')
     klikkGaVidere(true)
     harFeilISkjemaet('Datoen følger ikke formatet dd.mm.åååå')
 
