@@ -387,6 +387,13 @@ const utenOppholdKvittering = () => {
     // Knapperad ( Endre, Ettersend)
     cy.findByRole('button', { name: 'Jeg vil endre svarene i søknaden' }).should('exist')
     cy.contains('Jeg vil sende en kopi av søknaden til arbeidsgiveren min').should('exist')
+    cy.findByRole('button', { name: 'Jeg vil sende en kopi av søknaden til arbeidsgiveren min' }).click()
+    cy.contains(
+        'Hvis din arbeidsgiver har bedt deg sende en kopi, eller du av andre årsaker likevel ønsker å sende søknaden til arbeidsgiveren din, kan du gjøre det her.',
+    )
+    cy.findByRole('button', { name: 'Send kopi av søknaden til arbeidsgiver' }).click()
+
+    cy.contains('Jeg vil sende en kopi av søknaden til arbeidsgiveren min').should('not.exist')
 }
 
 const medOppholdKvittering = () => {
