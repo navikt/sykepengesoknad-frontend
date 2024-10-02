@@ -303,7 +303,7 @@ const inntil16dagerKvittering = () => {
         .and('contain', 'Du får sykepengene fra arbeidsgiveren din')
         .and(
             'contain',
-            'Arbeidsgiveren din betaler de første 16 kalenderdagene av sykefraværet. Hvis du mener sykefraværet har vart lenger enn det, kan du sende søknaden til NAV. Noen arbeidsplasser fortsetter å utbetale sykepenger fra dag 17, men da får de penger tilbake fra NAV.',
+            'Arbeidsgiveren din betaler de første 16 kalenderdagene av sykefraværet. Noen arbeidsplasser fortsetter å utbetale sykepenger fra dag 17, men da får de penger tilbake fra NAV.',
         )
         .and('not.contain', 'Før NAV kan behandle søknaden')
         .and('not.contain', 'NAV behandler søknaden')
