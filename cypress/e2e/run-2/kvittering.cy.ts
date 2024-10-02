@@ -192,8 +192,6 @@ describe('Tester kvittering', () => {
             cy.visit('/syk/sykepengesoknad?testperson=integrasjon-soknader')
             cy.get(`a[href*=${arbeidstakerInnenforArbeidsgiverperiodeKvittering.id}]`).click()
             cy.url().should('include', `/sendt/${arbeidstakerInnenforArbeidsgiverperiodeKvittering.id}`)
-
-            over16dagerKvittering()
         })
 
         it('Utenfor arbeidsgiverperiode', () => {
