@@ -20,13 +20,15 @@ export const VarigEndring25prosent = ({ sporsmal }: VarigEndring25prosentProps) 
                 <BodyShort spacing>Vi henter informasjon om inntekt fra Skatteetaten.</BodyShort>
                 <BodyShort weight="semibold">Årsinntekten for et kalenderår beregnes med denne formelen</BodyShort>
                 <Box marginBlock="2" padding="4" borderRadius="medium" background="bg-subtle">
-                    <div className="flex justify-center">
+                    <div className="flex justify-center text-small md:text-medium">
                         Pensjonsgivende årsinntekt
-                        <div className="flex justify-center w-12">x</div>
+                        <div className="flex justify-center w-12 mx-2">x</div>
                         grunnbeløpet på sykmeldingstidspunktet
                     </div>
                     <div className="border-t border-black w-full mt-3 mb-3"></div>
-                    <div className="flex justify-center">Gjennomsnittlig grunnbeløp i det aktuelle kalenderåret</div>
+                    <BodyShort className="flex justify-center text-small md:text-medium">
+                        Gjennomsnittlig grunnbeløp i det aktuelle kalenderåret
+                    </BodyShort>
                 </Box>
                 <BodyShort size="small" className="text-text-subtle">
                     Sykepengegrunnlaget kan ikke være høyere enn 6G. Hvis du hadde høyere inntekt enn dette i ett eller
