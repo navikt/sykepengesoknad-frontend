@@ -62,8 +62,6 @@ const SendtSide = () => {
                     <>
                         <Vis hvis={skalViseEndre} render={() => <Endreknapp />} />
 
-                        <Vis hvis={!erSendtTilNav} render={() => <Ettersending gjelder="nav" />} />
-
                         <Vis
                             hvis={skalViseSendTilArbeidsgiver}
                             render={() => <Ettersending gjelder="arbeidsgiver" />}

@@ -40,9 +40,6 @@ describe('Tester ettersending og korrigering', () => {
 
         cy.contains('Du får sykepengene fra arbeidsgiveren din')
         cy.contains('Arbeidsgiveren din betaler de første 16 kalenderdagene av sykefraværet.')
-
-        // Kan ikke ettersende til nav på kvittering
-        cy.contains('Jeg vil at søknaden skal behandles av NAV').should('not.exist')
     })
 
     it('Korriger fra /sendt', () => {
