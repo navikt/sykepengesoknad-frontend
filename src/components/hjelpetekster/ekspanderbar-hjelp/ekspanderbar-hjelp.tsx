@@ -157,8 +157,15 @@ export const EkspanderbarHjelp = ({ sporsmal, mb }: { sporsmal: Sporsmal; mb?: s
             header={lagTittel(nokkel)}
             open={expanded}
             onClick={() => {
+                function vaskTittel(tittel: string): string {
+                    if (tittel.includes('Hvordan har vi kommet frem til')) {
+                        return 'Hvordan har vi kommet frem til [redacted] kroner?'
+                    }
+                    return tittel
+                }
+
                 logEvent(expanded ? 'readmore lukket' : 'readmore åpnet', {
-                    tittel: lagTittel(nokkel),
+                    tittel: vaskTittel(lagTittel(nokkel)),
                     component: 'hjelpetekst',
                     spørsmål: nokkel,
                 })
