@@ -18,9 +18,9 @@ const FilOpplaster = ({ valgtFil, setValgtFil }: FilOpplasterProps) => {
     return (
         <VStack gap="6" data-cy="filopplasteren">
             <UNSAFE_FileUpload.Dropzone
-                accept=".png,.jpeg" // todo do we allow jpg as well? it's more common according to chatgpt
+                accept=".png,.jpeg,.jpg"
                 label={tekst('drag_and_drop.label')}
-                fileLimit={{ max: 1, current: valgtFil.length }} // todo  det går å laste opp to, si ifra til aksel?
+                fileLimit={{ max: 1, current: valgtFil.length }}
                 multiple={false}
                 onSelect={setValgtFil}
             />
