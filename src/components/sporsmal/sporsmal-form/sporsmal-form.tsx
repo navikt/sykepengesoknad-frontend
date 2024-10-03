@@ -6,7 +6,6 @@ import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype'
 import { RSSvartype } from '../../../types/rs-types/rs-svartype'
 import { Soknad, Sporsmal } from '../../../types/types'
 import { SEPARATOR } from '../../../utils/constants'
-import { hentAnnonymisertSvar, logEvent } from '../../amplitude/amplitude'
 import FeilOppsummering from '../../feil/feil-oppsummering'
 import GuidepanelOverSporsmalstekst from '../guidepanel/GuidepanelOverSporsmalstekst'
 import { EndringUtenEndringModal } from '../endring-uten-endring/endring-uten-endring-modal'
@@ -23,6 +22,8 @@ import { useOppdaterSporsmal } from '../../../hooks/useOppdaterSporsmal'
 import { FeilStateView } from '../../feil/refresh-hvis-feil-state'
 import { useSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
 import { visFlexjarSurvey } from '../../flexjar/utils'
+import { logEvent } from '../../amplitude/amplitude'
+import { tekst } from '../../../utils/tekster'
 
 import Knapperad from './knapperad'
 
@@ -115,13 +116,12 @@ const SporsmalForm = ({ sporsmal }: SpmProps) => {
                     })
                     sendSoknad(oppdatertSoknad)
                 } else {
-                    logEvent('skjema spørsmål besvart', {
-                        soknadstype: oppdatertSoknad.soknadstype,
-                        skjemanavn: 'sykepengesoknad',
+                    logEvent('knapp klikket', {
+                        tekst: tekst('sykepengesoknad.ga-videre'),
+                        soknadstype: valgtSoknad.soknadstype,
                         spørsmål: sporsmal.tag,
-                        svar: hentAnnonymisertSvar(sporsmal),
+                        component: 'Sporsmal form',
                     })
-
                     if (visFlexjar) {
                         await visFlexjarSurvey(
                             router,

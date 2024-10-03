@@ -1,9 +1,7 @@
 import { logAmplitudeEvent } from '@navikt/nav-dekoratoren-moduler'
 import { logger } from '@navikt/next-logger'
 
-import { Kvittering, Sporsmal } from '../../types/types'
 import { amplitudeEnabled, isLocalBackend } from '../../utils/environment'
-import { hentSvar } from '../sporsmal/hent-svar'
 
 type validEventNames =
     | 'readmore lukket'
@@ -25,11 +23,23 @@ type validEventNames =
     | 'expansioncard åpnet'
     | 'expansioncard lukket' //Bruk kun navn fra taksonomien
 
+const godkjenteSvarKeys = ['JA', 'NEI', 'CHECKED', 'UNCHECKED', 'Prosent', 'Timer']
+
 export const logEvent = (eventName: validEventNames, eventData: Record<string, string | boolean | undefined>) => {
     if (window) {
         // Fjern nøkkel-verdi par med verdien undefined fra eventData
         const cleanedEventData = Object.fromEntries(Object.entries(eventData).filter((event) => event[1] !== undefined))
-
+        const svar = cleanedEventData['svar']
+        if (svar) {
+            // Whitelister svar for å unngå logging av sensitiv informasjon
+            if (!godkjenteSvarKeys.includes(svar as string)) {
+                cleanedEventData['svar'] = '[redacted]'
+                if (isLocalBackend()) {
+                    // eslint-disable-next-line no-console
+                    console.log('Redacted svar: ', svar)
+                }
+            }
+        }
         if (amplitudeEnabled()) {
             logAmplitudeEvent({
                 origin: 'sykepengesoknad-frontend',
@@ -64,14 +74,4 @@ export const logEvent = (eventName: validEventNames, eventData: Record<string, s
             }
         }
     }
-}
-
-export const hentAnnonymisertSvar = (sporsmal: Sporsmal): any => {
-    const hovedSpmSvar = hentSvar(sporsmal)
-
-    if (sporsmal.tag === 'KVITTERINGER') {
-        return hovedSpmSvar.map((svar: Kvittering) => svar.typeUtgift)
-    }
-
-    return hovedSpmSvar
 }

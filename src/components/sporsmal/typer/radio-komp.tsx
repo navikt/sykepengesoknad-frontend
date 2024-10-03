@@ -9,6 +9,8 @@ import { NyIArbeidslivertAlert } from '../../hjelpetekster/ny-i-arbeidslivert-al
 import { cn } from '../../../utils/tw-utils'
 import { Sporsmal } from '../../../types/types'
 import { useRadiogruppeTastaturNavigasjon } from '../../../utils/tastatur-navigasjon'
+import { logEvent } from '../../amplitude/amplitude'
+import { useSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
 
 import { jaNeiStorStyle, JaNeiStyle } from './ja-nei-stor-style'
 import { BeregningSykepengegrunnlagInfo } from './beregning-sykepengegrunnlag-info'
@@ -23,6 +25,7 @@ const RadioKomp = ({ sporsmal, erHovedsporsmal }: { sporsmal: Sporsmal; erHoveds
     if (watchRadio === undefined) {
         watchRadio = getValues(sporsmal?.id)
     }
+    const { valgtSoknad } = useSoknadMedDetaljer()
 
     const feilmelding = hentFeilmelding(sporsmal)
     const error = errors[sporsmal.id] !== undefined
@@ -42,7 +45,17 @@ const RadioKomp = ({ sporsmal, erHovedsporsmal }: { sporsmal: Sporsmal; erHoveds
 
             <Controller
                 name={sporsmal.id}
-                rules={{ required: feilmelding.global }}
+                rules={{
+                    required: feilmelding.global,
+                    onChange: (event) => {
+                        logEvent('skjema spørsmål besvart', {
+                            soknadstype: valgtSoknad?.soknadstype,
+                            skjemanavn: 'sykepengesoknad',
+                            spørsmål: sporsmal.tag,
+                            svar: event.target.value,
+                        })
+                    },
+                }}
                 defaultValue=""
                 render={({ field }) => (
                     <RadioGroup

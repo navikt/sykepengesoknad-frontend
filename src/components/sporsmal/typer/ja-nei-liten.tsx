@@ -18,6 +18,8 @@ import { VarigEndringEksempler } from '../../hjelpetekster/varig-endring-eksempl
 import { VarigEndringAlert } from '../../hjelpetekster/varig-endring-alert'
 import { formatterTall } from '../../../utils/utils'
 import { erSigrunInntekt, SigrunInntekt } from '../../../types/types'
+import { logEvent } from '../../amplitude/amplitude'
+import { useSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
 
 const JaNeiLiten = ({ sporsmal }: SpmProps) => {
     const { watch, getValues } = useFormContext()
@@ -25,6 +27,8 @@ const JaNeiLiten = ({ sporsmal }: SpmProps) => {
     if (watchJaNei === undefined) {
         watchJaNei = getValues(sporsmal.id)
     }
+    const { valgtSoknad } = useSoknadMedDetaljer()
+
     const feilmelding = hentFeilmelding(sporsmal)
 
     const presisering = (valgt: boolean) => {
@@ -92,7 +96,17 @@ const JaNeiLiten = ({ sporsmal }: SpmProps) => {
 
                 <Controller
                     name={sporsmal.id}
-                    rules={{ required: feilmelding.global }}
+                    rules={{
+                        required: feilmelding.global,
+                        onChange: (event) => {
+                            logEvent('skjema spørsmål besvart', {
+                                soknadstype: valgtSoknad?.soknadstype,
+                                skjemanavn: 'sykepengesoknad',
+                                spørsmål: sporsmal.tag,
+                                svar: event.target.value,
+                            })
+                        },
+                    }}
                     render={({ field, fieldState }) => (
                         <RadioGroup
                             {...field}

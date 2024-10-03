@@ -12,6 +12,7 @@ import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { hentFeilmelding } from '../sporsmal-utils'
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
 import { useSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
+import { logEvent } from '../../amplitude/amplitude'
 
 interface TimerProsentAlertProps {
     valgtSoknad: Soknad
@@ -89,7 +90,17 @@ const RadioTimerProsent = ({ sporsmal }: SpmProps) => {
         <>
             <Controller
                 name={sporsmal.id}
-                rules={{ required: feilmelding.global }}
+                rules={{
+                    required: feilmelding.global,
+                    onChange: (event) => {
+                        logEvent('skjema spørsmål besvart', {
+                            soknadstype: valgtSoknad?.soknadstype,
+                            skjemanavn: 'sykepengesoknad',
+                            spørsmål: sporsmal.tag,
+                            svar: event.target.value,
+                        })
+                    },
+                }}
                 defaultValue=""
                 render={({ field }) => (
                     <RadioGroup

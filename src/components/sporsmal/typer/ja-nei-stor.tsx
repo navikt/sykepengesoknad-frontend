@@ -21,6 +21,7 @@ import { InntektsopplysningerErKonfidensielleInfo } from '../inntektsopplysninge
 import { useSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
 import { KjentOppholdstillatelse } from '../kjent-oppholdstillatelse'
 import { NyttArbeidsforhold } from '../nytt-arbeidsforhold'
+import { logEvent } from '../../amplitude/amplitude'
 
 import { jaNeiStorStyle, JaNeiStyle } from './ja-nei-stor-style'
 
@@ -78,7 +79,18 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
 
                 <Controller
                     name={sporsmal.id}
-                    rules={{ validate: (value) => valider(value), required: feilmelding.global }}
+                    rules={{
+                        validate: (value) => valider(value),
+                        required: feilmelding.global,
+                        onChange: (event) => {
+                            logEvent('skjema spørsmål besvart', {
+                                soknadstype: valgtSoknad.soknadstype,
+                                skjemanavn: 'sykepengesoknad',
+                                spørsmål: sporsmal.tag,
+                                svar: event.target.value,
+                            })
+                        },
+                    }}
                     defaultValue=""
                     render={({ field, fieldState }) => (
                         <RadioGroup
