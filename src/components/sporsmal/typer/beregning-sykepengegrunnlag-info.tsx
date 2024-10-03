@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import { BodyShort, Heading, ReadMore } from '@navikt/ds-react'
 
+import { logEvent } from '../../amplitude/amplitude'
+
 export function BeregningSykepengegrunnlagInfo() {
     const [expanded, setExpanded] = useState<boolean>(false)
 
     useEffect(() => {
         setExpanded(false)
     }, [])
+    const readmoreTittel = 'Hva betyr ferdiglignet inntekt?'
 
     return (
         <>
@@ -25,10 +28,14 @@ export function BeregningSykepengegrunnlagInfo() {
 
             <ReadMore
                 className="mb-8 mt-4 w-full"
-                header="Hva betyr ferdiglignet inntekt?"
+                header={readmoreTittel}
                 open={expanded}
                 onClick={() => {
                     setExpanded((prev) => !prev)
+                    logEvent(expanded ? 'readmore lukket' : 'readmore åpnet', {
+                        tittel: readmoreTittel,
+                        component: 'hjelpetekst',
+                    })
                 }}
             >
                 <div className="mt-4">
