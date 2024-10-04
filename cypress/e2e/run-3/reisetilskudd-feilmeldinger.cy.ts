@@ -68,4 +68,36 @@ describe('Tester feilmeldinger i reisetilskudd', () => {
         cy.get('.navds-modal').contains('Bekreft').click()
         cy.get('[data-cy="opplasting-form"]').contains('Beløp kan ikke være større enn 10 000').should('not.exist')
     })
+
+
+
+
+        it('Legger inn taxi kvittering', () => {
+            // cy.get('button').contains('Legg til reiseutgift').click()
+            cy.get('select[name=transportmiddel]').select('TAXI')
+            cy.get('#transportmiddel').contains('Taxi')
+
+            // cy.get('input[name=belop_input]').type('1234') vi har allerde data her
+            cy.get('[data-cy="filopplasteren"] input[type=file]').attachFile('kvittering.pdf')
+            cy.get('button').contains('Bekreft').click()
+            cy.get('.navds-modal').contains('Filtypen til kvittering.pdf er ugyldig')// .should('not.exist')
+                    cy.get('.navds-modal').contains('Slett filen').click()
+            cy.get('[data-cy="filopplasteren"] input[type=file]').attachFile('kvittering.jpg')
+            cy.get('button').contains('Bekreft').click()
+            cy.get('.navds-modal').contains('Filtypen til kvittering.pdf er ugyldig').should('not.exist')
+        })
+
+
+
+        it('Fil list oppdateres med kvittering', () => {
+            cy.get('.navds-table').within(() => {
+                cy.contains('Taxi')
+                cy.contains('99 kr')
+                cy.contains('1 utgift på til sammen')
+                cy.contains('99 kr')
+            })
+        })
+
+
+
 })
