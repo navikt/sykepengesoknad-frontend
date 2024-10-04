@@ -4,7 +4,7 @@ import React from 'react'
 export function VarigEndringEksempler() {
     return (
         <>
-            <Box padding="2" borderRadius="medium" background="bg-subtle">
+            <Box padding="4" borderRadius="medium" background="bg-subtle" className="mb-4">
                 <Label>Eksempler på varig endring:</Label>
                 <List size="medium">
                     <List.Item>Opprettelse eller nedleggelse av næringsvirksomhet</List.Item>
