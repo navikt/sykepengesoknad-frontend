@@ -70,18 +70,19 @@ describe('Tester feilmeldinger i reisetilskudd', () => {
     })
 
     it('Legger inn taxi kvittering', () => {
-        // cy.get('button').contains('Legg til reiseutgift').click()
         cy.get('select[name=transportmiddel]').select('TAXI')
         cy.get('#transportmiddel').contains('Taxi')
-
-        // cy.get('input[name=belop_input]').type('1234') vi har allerde data her
         cy.get('[data-cy="filopplasteren"] input[type=file]').attachFile('kvittering.pdf')
         cy.get('button').contains('Bekreft').click()
-        cy.get('.navds-modal').contains('Filtypen til kvittering.pdf er ugyldig') // .should('not.exist')
+        cy.get('.navds-modal').contains('Filtypen til kvittering.pdf er ugyldig')
+        cy.get('.navds-modal').contains('Slett filen').click()
+        cy.get('[data-cy="filopplasteren"] input[type=file]').attachFile(['kvittering.jpg','kvittering2.jpg'])
+        cy.get('button').contains('Bekreft').click()
+        cy.get('.navds-modal').contains('Du kan ikke laste opp mer enn en fil').should('be.visible')
         cy.get('.navds-modal').contains('Slett filen').click()
         cy.get('[data-cy="filopplasteren"] input[type=file]').attachFile('kvittering.jpg')
         cy.get('button').contains('Bekreft').click()
-        cy.get('.navds-modal').contains('Filtypen til kvittering.pdf er ugyldig').should('not.exist')
+        cy.get('.navds-modal').contains('Du kan ikke laste opp mer enn en fil').should('not.exist')
     })
 
     it('Fil list oppdateres med kvittering', () => {
