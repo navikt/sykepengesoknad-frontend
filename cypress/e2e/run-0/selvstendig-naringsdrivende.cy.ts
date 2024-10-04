@@ -24,6 +24,8 @@ describe('Tester selvstendig naringsdrivende søknad med data fra Sigrun', () =>
     it('Virksomheten din', function () {
         fellesInnholdFørVisningAvSigrunData()
 
+        cy.contains('Datoen er første dag i det første av tre av de ferdiglignede årene.')
+
         cy.contains('Har du hatt mer enn 25 prosent endring i årsinntekten din som følge av den varige endringen?')
         cy.contains('Din gjennomsnittlige årsinntekt på sykmeldingstidspunktet: 450 000 kroner.')
         cy.contains(
@@ -55,6 +57,8 @@ describe('Tester selvstendig naringsdrivende søknad uten data fra Sigrun', () =
 
     it('Virksomheten din', function () {
         fellesInnholdFørVisningAvSigrunData()
+
+        cy.contains('Datoen er første dag i det første av tre av de ferdiglignede årene.').should('not.exist')
 
         cy.contains('Har du hatt mer enn 25 prosent endring i årsinntekten din som følge av den varige endringen?')
         cy.contains('Din gjennomsnittlige årsinntekt på sykmeldingstidspunktet: 450 000 kroner.').should('not.exist')
@@ -97,7 +101,6 @@ function fellesInnholdFørVisningAvSigrunData() {
     klikkGaVidere(true)
     harFeilISkjemaet('Datoen følger ikke formatet dd.mm.åååå')
     svarNeiHovedsporsmal()
-    cy.contains('Datoen er første dag i det første av tre av de ferdiglignede årene.')
     klikkGaVidere(true)
     harFeilISkjemaet('Du må svare på om du er ny i arbeidslivet')
     svarRadioSporsmal('Er du ny i arbeidslivet etter 1. januar 2019?', 'Ja')
