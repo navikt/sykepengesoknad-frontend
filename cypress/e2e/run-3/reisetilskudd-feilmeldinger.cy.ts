@@ -76,7 +76,7 @@ describe('Tester feilmeldinger i reisetilskudd', () => {
         cy.get('button').contains('Bekreft').click()
         cy.get('.navds-modal').contains('Filtypen til kvittering.pdf er ugyldig')
         cy.get('.navds-modal').contains('Slett filen').click()
-        cy.get('[data-cy="filopplasteren"] input[type=file]').attachFile(['kvittering.jpg','kvittering2.jpg'])
+        cy.get('[data-cy="filopplasteren"] input[type=file]').attachFile(['kvittering.jpg', 'kvittering2.jpg'])
         cy.get('button').contains('Bekreft').click()
         cy.get('.navds-modal').contains('Du kan ikke laste opp mer enn en fil').should('be.visible')
         cy.get('.navds-modal').contains('Slett filen').click()
