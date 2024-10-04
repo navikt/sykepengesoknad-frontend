@@ -66,10 +66,10 @@ const JaNeiLiten = ({ sporsmal }: SpmProps) => {
         } else return <></>
     }
 
-    const erVarigEndring = sporsmal.tag === 'INNTEKTSOPPLYSNINGER_VARIG_ENDRING_25_PROSENT'
+    const erVarigEndring25Prosent = sporsmal.tag === 'INNTEKTSOPPLYSNINGER_VARIG_ENDRING_25_PROSENT'
     let sigrunInntekt: SigrunInntekt | null = null
 
-    if (erVarigEndring && erSigrunInntekt(sporsmal.metadata?.sigrunInntekt)) {
+    if (erVarigEndring25Prosent && erSigrunInntekt(sporsmal.metadata?.sigrunInntekt)) {
         sigrunInntekt = sporsmal.metadata?.sigrunInntekt as SigrunInntekt
     }
 
@@ -91,6 +91,7 @@ const JaNeiLiten = ({ sporsmal }: SpmProps) => {
                             Hvis inntekten din har endret seg varig med mer enn 25 prosent på grunn av endringer i
                             arbeidssituasjonen, vil sykepengegrunnlaget fastsettes ved skjønn.
                         </BodyShort>
+                        {sporsmal.tag === 'INNTEKTSOPPLYSNINGER_VARIG_ENDRING' && <VarigEndringEksempler />}
                     </>
                 )}
 
@@ -113,7 +114,7 @@ const JaNeiLiten = ({ sporsmal }: SpmProps) => {
                             legend={sporsmal.sporsmalstekst}
                             error={fieldState.error && feilmelding.lokal}
                         >
-                            {erVarigEndring && sigrunInntekt && (
+                            {erVarigEndring25Prosent && sigrunInntekt && (
                                 <>
                                     <BodyShort spacing>
                                         Din gjennomsnittlige årsinntekt på sykmeldingstidspunktet:{' '}
@@ -128,7 +129,6 @@ const JaNeiLiten = ({ sporsmal }: SpmProps) => {
                             )}
                             <EkspanderbarHjelp sporsmal={sporsmal} mb="mb-4" />
 
-                            {sporsmal.tag === 'INNTEKTSOPPLYSNINGER_VARIG_ENDRING' && <VarigEndringEksempler />}
                             <Fragment key={sporsmal.id}>
                                 <Radio id={field.name + '_0'} value="JA">
                                     Ja
