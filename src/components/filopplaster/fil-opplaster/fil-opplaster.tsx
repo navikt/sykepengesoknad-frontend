@@ -34,7 +34,6 @@ const FilOpplaster = ({ valgtFil, setValgtFil }: FilOpplasterProps) => {
                     }}
                 />
             ))}
-            {/*<>{errors.fil_input?.message}</>*/}
             <div role="alert" aria-live="assertive">
                 <Vis
                     hvis={errors.fil_input}
