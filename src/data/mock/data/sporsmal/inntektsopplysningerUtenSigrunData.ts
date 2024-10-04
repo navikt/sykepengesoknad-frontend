@@ -318,7 +318,7 @@ export const inntektsopplysningerUtenSigrunData: RSSporsmal = {
                                     id: v4().toString(),
                                     tag: 'INNTEKTSOPPLYSNINGER_VARIG_ENDRING',
                                     sporsmalstekst:
-                                        'Har det skjedd en varig endring mellom 1. januar 2019 og frem til sykmeldingstidspunktet?',
+                                        'Har det skjedd en varig endring i arbeidssituasjonen eller virksomheten din i mellom 1. januar 2019 og frem til sykmeldingstidspunktet?',
                                     undertekst: null,
                                     svartype: 'JA_NEI',
                                     min: null,
@@ -536,7 +536,7 @@ export const inntektsopplysningerMedSigrunData: RSSporsmal = {
                                     id: v4().toString(),
                                     tag: 'INNTEKTSOPPLYSNINGER_VARIG_ENDRING',
                                     sporsmalstekst:
-                                        'Har det skjedd en varig endring mellom 1. januar 2019 og frem til sykmeldingstidspunktet?',
+                                        'Har det skjedd en varig endring i arbeidssituasjonen eller virksomheten din i mellom 1. januar 2019 og frem til sykmeldingstidspunktet?',
                                     undertekst: null,
                                     svartype: 'JA_NEI',
                                     min: null,

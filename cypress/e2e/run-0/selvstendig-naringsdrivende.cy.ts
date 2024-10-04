@@ -126,10 +126,13 @@ function fellesInnholdFørVisningAvSigrunData() {
     cy.contains('Eksempler på varig endring')
     cy.contains('Avsluttet eller startet andre arbeidsforhold ved siden av virksomheten')
     svarRadioSporsmal(
-        'Har det skjedd en varig endring mellom 1. januar 2019 og frem til sykmeldingstidspunktet?',
+        'Har det skjedd en varig endring i arbeidssituasjonen eller virksomheten din i mellom 1. januar 2019 og frem til sykmeldingstidspunktet?',
         'Nei',
     )
-    svarRadioSporsmal('Har det skjedd en varig endring mellom 1. januar 2019 og frem til sykmeldingstidspunktet?', 'Ja')
+    svarRadioSporsmal(
+        'Har det skjedd en varig endring i arbeidssituasjonen eller virksomheten din i mellom 1. januar 2019 og frem til sykmeldingstidspunktet?',
+        'Ja',
+    )
 }
 
 function fellesInnholdEtterVisningAvSigrunData() {
@@ -164,7 +167,7 @@ function tilSlutt() {
                     .children()
                     .within(() => {
                         sporsmalOgSvar(
-                            'Har det skjedd en varig endring mellom 1. januar 2019 og frem til sykmeldingstidspunktet?',
+                            'Har det skjedd en varig endring i arbeidssituasjonen eller virksomheten din i mellom 1. januar 2019 og frem til sykmeldingstidspunktet?',
                             'Ja',
                         )
                             .children()
