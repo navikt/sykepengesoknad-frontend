@@ -1,4 +1,4 @@
-import { Alert, BodyLong, BodyShort, Button, Label, ReadMore, Select, TextField } from '@navikt/ds-react'
+import { Alert, BodyLong, BodyShort, Button, FileObject, ReadMore, Select, TextField } from '@navikt/ds-react'
 import { logger } from '@navikt/next-logger'
 import dayjs from 'dayjs'
 import React, { useEffect, useState } from 'react'
@@ -8,11 +8,11 @@ import { useQueryClient } from '@tanstack/react-query'
 import { RSSvar } from '../../../types/rs-types/rs-svar'
 import { Kvittering, Soknad, UtgiftTyper } from '../../../types/types'
 import { AuthenticationError, fetchJsonMedRequestId } from '../../../utils/fetch'
-import { formaterFilstørrelse, formattertFiltyper, maxFilstørrelse } from '../../../utils/fil-utils'
+import { formaterFilstørrelse, formattertFiltyper, maxFilstørrelse, tillatteFiltyper } from '../../../utils/fil-utils'
 import { getLedetekst, tekst } from '../../../utils/tekster'
-import DragAndDrop from '../drag-and-drop/drag-and-drop'
 import { useTestpersonQuery } from '../../../hooks/useTestpersonQuery'
 import { useSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
+import FilOpplaster from '../fil-opplaster/fil-opplaster'
 
 import OpplastingTekster from './opplasting-tekster'
 
@@ -34,7 +34,12 @@ const OpplastingForm = ({ valgtSoknad, setOpenModal, openModal }: OpplastingFrom
 
     const [laster, setLaster] = useState<boolean>(false)
     const [feilmelding, setFeilmelding] = useState<string>()
-    const [valgtFil, setValgtFil] = useState<File>()
+
+    const [valgtFil, setValgtFil] = useState<FileObject[]>([])
+
+    const MAX_FILE_SIZE_IN_MEGA_BYTES = 5
+
+    const MAX_FILE_SIZE_IN_BYTES = MAX_FILE_SIZE_IN_MEGA_BYTES * 1024 * 1024
 
     const methods = useForm({
         mode: 'onBlur',
@@ -45,7 +50,7 @@ const OpplastingForm = ({ valgtSoknad, setOpenModal, openModal }: OpplastingFrom
     useEffect(() => {
         methods.reset()
         methods.clearErrors()
-        setValgtFil(undefined)
+        setValgtFil([])
     }, [openModal, methods])
 
     if (!valgtSoknad) return null
@@ -62,13 +67,44 @@ const OpplastingForm = ({ valgtSoknad, setOpenModal, openModal }: OpplastingFrom
 
             const valid = await methods.trigger()
 
-            if (!valgtFil) {
+            if (valgtFil.length < 1) {
                 methods.setError('fil_input', {
                     type: 'manual',
                     message: tekst('opplasting_modal.filopplasting.feilmelding'),
                 })
                 return
             }
+
+            if (valgtFil !== undefined && !tillatteFiltyper.split(',').includes(valgtFil[0].file.type)) {
+                methods.setError('fil_input', {
+                    type: 'manual',
+                    message: getLedetekst(tekst('drag_and_drop.filtype'), {
+                        '%FILNAVN%': valgtFil[0].file.name,
+                        '%TILLATTEFILTYPER%': formattertFiltyper,
+                    }),
+                })
+                return
+            }
+
+            if (valgtFil.length > 1) {
+                methods.setError('fil_input', {
+                    type: 'manual',
+                    message: 'Du kan ikke laste opp mer enn en fil',
+                })
+                return
+            }
+
+            if (valgtFil.length > 0 && valgtFil[0].file.size > MAX_FILE_SIZE_IN_BYTES) {
+                methods.setError('fil_input', {
+                    type: 'manual',
+                    message: getLedetekst(tekst('drag_and_drop.maks'), {
+                        '%FILNAVN%': valgtFil[0].file.name,
+                        '%MAKSSTOR%': maks,
+                    }),
+                })
+                return
+            }
+
             if (!valid) return
 
             const opplastingResponse: OpplastetKvittering = await lastOppKvittering()
@@ -91,7 +127,7 @@ const OpplastingForm = ({ valgtSoknad, setOpenModal, openModal }: OpplastingFrom
 
     const lastOppKvittering = async () => {
         const requestData = new FormData()
-        requestData.append('file', valgtFil as Blob)
+        requestData.append('file', valgtFil[0].file as Blob)
 
         // TODO: Gjør om til mutation
         return await fetchJsonMedRequestId(
@@ -209,8 +245,7 @@ const OpplastingForm = ({ valgtSoknad, setOpenModal, openModal }: OpplastingFrom
                 />
 
                 <div className="mt-4">
-                    <Label as="p">{tekst('drag_and_drop.label')}</Label>
-                    <DragAndDrop valgtFil={valgtFil} setValgtFil={setValgtFil} />
+                    <FilOpplaster valgtFil={valgtFil} setValgtFil={setValgtFil} />
                 </div>
                 {feilmelding && (
                     <Alert variant="warning" className="mt-8">

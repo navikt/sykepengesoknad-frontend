@@ -6,7 +6,7 @@ import BannerTekster from '../components/banner/banner-tekster'
 import { EldreUsendtTekster } from '../components/eldre-usendt/eldre-usendt-tekster'
 import { EndreknappTekster } from '../components/endreknapp/endreknapp-tekster'
 import RefreshHvisFeilStateTekster from '../components/feil/refresh-hvis-feil-state-tekster'
-import DragAndDropTekster from '../components/filopplaster/drag-and-drop/drag-and-drop-tekster'
+import FilOpplasterTekster from '../components/filopplaster/fil-opplaster/fil-opplaster-tekster'
 import FilListeTekster from '../components/filopplaster/fil-liste/fil-liste-tekster'
 import OpplastingTekster from '../components/filopplaster/kvittering-modal/opplasting-tekster'
 import FristSykepengerTekster from '../components/frist-sykepenger/frist-sykepenger-tekster'
@@ -46,7 +46,7 @@ const tekster = {
     ...RefreshHvisFeilStateTekster,
     ...OmReisetilskuddTekster,
     ...FilListeTekster,
-    ...DragAndDropTekster,
+    ...FilOpplasterTekster,
     ...OpplastingTekster,
     ...EldreUsendtTekster,
     ...GjenstaendeSoknaderTekster,
