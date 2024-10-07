@@ -17,16 +17,14 @@ const FilOpplaster = ({ valgtFil, setValgtFil }: FilOpplasterProps) => {
     return (
         <div data-cy="filopplasteren">
             <div className="mb-6">
-
-
-            <UNSAFE_FileUpload.Dropzone
-                accept=".png,.jpeg,.jpg"
-                label={tekst('drag_and_drop.label')}
-                fileLimit={{ max: 1, current: valgtFil.length }}
-                multiple={false}
-                onSelect={setValgtFil}
-            />
-                </div>
+                <UNSAFE_FileUpload.Dropzone
+                    accept=".png,.jpeg,.jpg"
+                    label={tekst('drag_and_drop.label')}
+                    fileLimit={{ max: 1, current: valgtFil.length }}
+                    multiple={false}
+                    onSelect={setValgtFil}
+                />
+            </div>
             {valgtFil.map((file) => (
                 <UNSAFE_FileUpload.Item
                     key={file.file.name}
