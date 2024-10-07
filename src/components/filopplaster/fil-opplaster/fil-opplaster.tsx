@@ -15,7 +15,10 @@ const FilOpplaster = ({ valgtFil, setValgtFil }: FilOpplasterProps) => {
     } = useFormContext()
 
     return (
-        <div className="mb6" data-cy="filopplasteren">
+        <div data-cy="filopplasteren">
+            <div className="mb-6">
+
+
             <UNSAFE_FileUpload.Dropzone
                 accept=".png,.jpeg,.jpg"
                 label={tekst('drag_and_drop.label')}
@@ -23,6 +26,7 @@ const FilOpplaster = ({ valgtFil, setValgtFil }: FilOpplasterProps) => {
                 multiple={false}
                 onSelect={setValgtFil}
             />
+                </div>
             {valgtFil.map((file) => (
                 <UNSAFE_FileUpload.Item
                     key={file.file.name}
