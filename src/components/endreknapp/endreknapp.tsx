@@ -19,7 +19,7 @@ const Endreknapp = () => {
             <Button
                 type="button"
                 variant="secondary"
-                className="mt-4 mb-6 block"
+                className="mt-4 block"
                 onClick={() => {
                     logEvent('knapp klikket', {
                         tekst: endreKnappTekst,
