@@ -4,7 +4,6 @@ import { SvarEnums } from '../../types/enums'
 import { RSSvar } from '../../types/rs-types/rs-svar'
 import { RSSvartype } from '../../types/rs-types/rs-svartype'
 import { Sporsmal, svarverdiToKvittering } from '../../types/types'
-import { empty } from '../../utils/constants'
 
 import { FormPeriode } from './typer/periode-komp'
 
@@ -76,7 +75,7 @@ export const hentPerioder = (sporsmal: Sporsmal) => {
 export const hentPeriode = (sporsmal: Sporsmal, index: number) => {
     const svar = sporsmal.svarliste.svar[index]
     const periode: FormPeriode = { fom: '', tom: '' }
-    if (svar === empty) {
+    if (svar === null || svar === undefined) {
         return periode
     }
     return JSON.parse(svar.verdi) as FormPeriode

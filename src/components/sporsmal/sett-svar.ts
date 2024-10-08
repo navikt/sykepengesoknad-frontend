@@ -2,7 +2,6 @@ import dayjs from 'dayjs'
 
 import { RSSvartype } from '../../types/rs-types/rs-svartype'
 import { Sporsmal } from '../../types/types'
-import { empty } from '../../utils/constants'
 import { SvarEnums } from '../../types/enums'
 import { RSSvar } from '../../types/rs-types/rs-svar'
 
@@ -13,7 +12,7 @@ const hentVerdier = (sporsmal: Sporsmal, verdier: Record<string, any>) => {
         verdi = Object.entries(verdier)
             .filter(([key]) => key.startsWith(startMed))
             .map(([key]) => verdier[key])
-            .filter((verdi) => verdi !== empty && verdi !== false)
+            .filter((verdi) => verdi !== null && verdi !== undefined && verdi !== false)
     }
     return verdi
 }
