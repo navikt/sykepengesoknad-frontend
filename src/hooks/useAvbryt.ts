@@ -1,11 +1,11 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { logger } from '@navikt/next-logger'
 import { useRouter } from 'next/router'
 
-import fetchMedRequestId, { AuthenticationError, FetchError } from '../utils/fetch'
+import fetchMedRequestId, { FetchError } from '../utils/fetch'
 import { Soknad } from '../types/types'
 import { RSSoknadstatus } from '../types/rs-types/rs-soknadstatus'
 import { RSSoknadstype } from '../types/rs-types/rs-soknadstype'
+import { logEvent } from '../components/amplitude/amplitude'
 
 import { useTestpersonQuery } from './useTestpersonQuery'
 
@@ -49,9 +49,11 @@ export function useAvbryt() {
             }
         },
         onError: (e) => {
-            if (!(e instanceof AuthenticationError)) {
-                logger.warn(e)
-            }
+            logEvent('mutation error', {
+                mutation: 'avbryt soknad',
+                skjemanavn: 'sykepengesoknad',
+                status: e?.status?.toString(),
+            })
         },
     })
 }

@@ -5,6 +5,7 @@ import { Soknad, Sporsmal } from '../types/types'
 import { sporsmalToRS } from '../types/rs-types/rs-sporsmal'
 import { RSOppdaterSporsmalResponse } from '../types/rs-types/rest-response/rs-oppdatersporsmalresponse'
 import { rsToSoknad, skapSporsmal } from '../types/mapping'
+import { logEvent } from '../components/amplitude/amplitude'
 
 import { useTestpersonQuery } from './useTestpersonQuery'
 
@@ -54,6 +55,13 @@ export function useOppdaterSporsmal() {
             const soknadMedSvar = oppdatertSoknad()
             queryClient.setQueriesData(['soknad', variables.soknad.id], soknadMedSvar)
             if (variables.onSuccess) variables.onSuccess(soknadMedSvar)
+        },
+        onError: (e) => {
+            logEvent('mutation error', {
+                mutation: 'oppdater sporsmal',
+                skjemanavn: 'sykepengesoknad',
+                status: e?.status?.toString(),
+            })
         },
     })
 }

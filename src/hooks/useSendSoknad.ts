@@ -2,6 +2,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 
 import fetchMedRequestId, { FetchError } from '../utils/fetch'
 import { Soknad } from '../types/types'
+import { logEvent } from '../components/amplitude/amplitude'
 
 import { useTestpersonQuery } from './useTestpersonQuery'
 
@@ -32,6 +33,13 @@ export function useSendSoknad() {
             if (soknad.korrigerer !== undefined) {
                 queryClient.invalidateQueries(['soknad', soknad.korrigerer]).catch()
             }
+        },
+        onError: (e) => {
+            logEvent('mutation error', {
+                mutation: 'send soknad',
+                skjemanavn: 'sykepengesoknad',
+                status: e?.status?.toString(),
+            })
         },
     })
 }
