@@ -10,6 +10,7 @@ type validEventNames =
     | 'skjema validering feilet'
     | 'alert vist'
     | 'guidepanel vist'
+    | 'mutation error'
     | 'accordion åpnet'
     | 'accordion lukket'
     | 'knapp klikket'
