@@ -3,6 +3,9 @@ import { avbryterSoknad } from '../../support/utilities'
 describe('Tester opprettelse av søknad om å beholde sykepenger utenfor EØS', () => {
     it('Oppretter søknad', () => {
         cy.clearAllCookies()
+        cy.visit('/syk/sykepengesoknad')
+        cy.contains('Søknader')
+
         cy.visit('/syk/sykepengesoknad/sykepengesoknad-utland')
 
         cy.findByRole('heading', { level: 1, name: 'Søknad om å beholde sykepenger utenfor EU/EØS' }).should('exist')
