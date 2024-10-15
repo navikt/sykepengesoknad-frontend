@@ -14,12 +14,15 @@ export function useSoknadMedDetaljer() {
 
     const soknadId = soknadIdUnsafe ? uuid.stringify(uuid.parse(soknadIdUnsafe)) : undefined
 
+    const { data: soknader, isLoading: soknaderLaster } = useSoknader()
     const {
         data: valgtSoknad,
         isLoading: valgtSoknadLaster,
         error: valgtSoknadError,
-    } = useSoknad(soknadId, soknadId !== undefined)
-    const { data: soknader, isLoading: soknaderLaster } = useSoknader()
+    } = useSoknad(
+        soknadId,
+        soknadId !== undefined && soknader !== undefined && soknader.map((s) => s.id).includes(soknadId),
+    )
     const { data: sykmeldinger, isLoading: sykmeldingerLaster } = useSykmeldinger()
     const { data: valgtSykmelding } = useSykmelding(valgtSoknad?.sykmeldingId)
 
