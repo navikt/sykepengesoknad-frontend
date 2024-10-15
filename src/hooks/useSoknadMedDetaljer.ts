@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router'
 import * as uuid from 'uuid'
+import { useEffect } from 'react'
 
 import { RSSoknadstype } from '../types/rs-types/rs-soknadstype'
 
@@ -25,6 +26,12 @@ export function useSoknadMedDetaljer() {
     )
     const { data: sykmeldinger, isLoading: sykmeldingerLaster } = useSykmeldinger()
     const { data: valgtSykmelding } = useSykmelding(valgtSoknad?.sykmeldingId)
+
+    useEffect(() => {
+        if (soknadId !== undefined && soknader !== undefined && !soknader.map((s) => s.id).includes(soknadId)) {
+            window.location.href = '/syk/sykepengesoknad'
+        }
+    }, [soknadId, soknader])
 
     const stegNo = parseInt(stegId)
     const spmIndex = stegNo - 1
