@@ -39,9 +39,10 @@ import {
 import { feilVedSlettingAvKvittering } from './data/personas/reisetilskuddTestPerson'
 import { arbeidstaker, arbeidtakerMedGammelOppsummering } from './data/soknad/arbeidstaker'
 import { arbeidstakerGradert } from './data/soknad/arbeidstaker-gradert'
-import { avbruttOppholdUtland } from './data/soknad/opphold-utland'
+import { oppholdUtland } from './data/soknad/opphold-utland'
 import { mockApiValiderSporsmal } from './mockApiValiderSporsmal'
 import { soknadInnenforArbeidsgiverperioden } from './data/personas/innenfor-ag-periode'
+import { deepcopyMedNyId } from './deepcopyMedNyId'
 
 type session = {
     expires: dayjs.Dayjs
@@ -378,7 +379,10 @@ export async function mockApi(req: NextApiRequest, res: NextApiResponse) {
             if (eksisterendeSoknad) {
                 return sendJson(eksisterendeSoknad)
             }
-            return sendJson({ ...avbruttOppholdUtland, status: RSSoknadstatus.NY })
+            const nySoknad = deepcopyMedNyId(oppholdUtland, uuid.v4())
+            testperson.soknader.push(nySoknad)
+
+            return sendJson(nySoknad)
         },
         [ENDPOINTS.SEND_SOKNAD]: async () => {
             if (soknadId === '9157b65a-0372-4657-864c-195037349df5') {
