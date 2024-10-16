@@ -33,5 +33,6 @@ updates:
           - '@types/react'
           - '@types/react-dom'
     ignore:
+      - dependency-name: '@types/node'
       - dependency-name: 'eslint'
         versions: ['9.x']
