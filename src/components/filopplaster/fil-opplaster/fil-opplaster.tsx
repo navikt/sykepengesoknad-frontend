@@ -1,4 +1,4 @@
-import { BodyShort, FileObject, UNSAFE_FileUpload } from '@navikt/ds-react'
+import { BodyShort, FileObject, FileUpload } from '@navikt/ds-react'
 import React, { Dispatch, SetStateAction } from 'react'
 import { useFormContext } from 'react-hook-form'
 
@@ -17,7 +17,7 @@ const FilOpplaster = ({ valgtFil, setValgtFil }: FilOpplasterProps) => {
     return (
         <div data-cy="filopplasteren">
             <div className="mb-6">
-                <UNSAFE_FileUpload.Dropzone
+                <FileUpload.Dropzone
                     accept=".png,.jpeg,.jpg"
                     label={tekst('drag_and_drop.label')}
                     fileLimit={{ max: 1, current: valgtFil.length }}
@@ -26,7 +26,7 @@ const FilOpplaster = ({ valgtFil, setValgtFil }: FilOpplasterProps) => {
                 />
             </div>
             {valgtFil.map((file) => (
-                <UNSAFE_FileUpload.Item
+                <FileUpload.Item
                     key={file.file.name}
                     file={file.file}
                     button={{
