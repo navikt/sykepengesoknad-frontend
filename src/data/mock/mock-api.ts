@@ -177,7 +177,7 @@ export async function mockApi(req: NextApiRequest, res: NextApiResponse) {
         const ms = Math.floor(Math.random() * 500) + 2000
         await sleep(ms)
     }
-
+    await sleep(500)
     function sendJson(json = {}, status = 200) {
         res.writeHead(status, { 'Content-Type': 'application/json' })
         res.end(JSON.stringify(json))

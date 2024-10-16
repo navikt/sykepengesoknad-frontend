@@ -16,5 +16,3 @@ jobs:
     with:
       app: sykepengesoknad
       base-path: syk/sykepengesoknad
-      sentry-project: sykepengesoknad
-      sentry-enabled: false
