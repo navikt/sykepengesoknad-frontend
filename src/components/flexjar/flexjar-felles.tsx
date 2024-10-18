@@ -110,69 +110,71 @@ export function FlexjarFelles({
     return (
         <section className={`w-full ${fullBredde ? '' : 'mt-16 md:w-3/4'}`}>
             <div>
-                <div className="mt-1 border-4 border-surface-subtle rounded-medium">
-                    <div className="bg-surface-subtle p-6 flex gap-4 items-center">
-                        <div className="bg-gray-900 w-10 h-10 rounded-full flex justify-center items-center">
-                            <MagnifyingGlassIcon aria-hidden={true} className="text-white axe-exclude" />
+                {!thanksFeedback && (
+                    <div className="mt-1 border-4 border-surface-subtle rounded-medium">
+                        <div className="bg-surface-subtle p-6 flex gap-4 items-center">
+                            <div className="bg-gray-900 w-10 h-10 rounded-full flex justify-center items-center">
+                                <MagnifyingGlassIcon aria-hidden={true} className="text-white axe-exclude" />
+                            </div>
+                            <div>
+                                <Label as="h3" className="mb-2">
+                                    {flexjartittel}
+                                </Label>
+                                <BodyShort>Anonym tilbakemelding på tjenesten</BodyShort>
+                            </div>
                         </div>
-                        <div>
-                            <Label as="h3" className="mb-2">
-                                {flexjartittel}
-                            </Label>
-                            <BodyShort>Anonym tilbakemelding på tjenesten</BodyShort>
-                        </div>
-                    </div>
-                    <div className="px-6 py-8">
-                        {flexjarsporsmal && (
-                            <Label as="p" className="mb-8">
-                                {flexjarsporsmal}
-                            </Label>
-                        )}
+                        <div className="px-6 py-8">
+                            {flexjarsporsmal && (
+                                <Label as="p" className="mb-8">
+                                    {flexjarsporsmal}
+                                </Label>
+                            )}
 
-                        {children}
-                        {activeState !== null && (
-                            <form className="mt-10 w-full">
-                                <Textarea
-                                    ref={textAreaRef}
-                                    error={errorMsg}
-                                    label={getPlaceholder()}
-                                    onKeyDown={async (e) => {
-                                        if (e.key === 'Enter' && e.ctrlKey) {
+                            {children}
+                            {activeState !== null && (
+                                <form className="mt-10 w-full">
+                                    <Textarea
+                                        ref={textAreaRef}
+                                        error={errorMsg}
+                                        label={getPlaceholder()}
+                                        onKeyDown={async (e) => {
+                                            if (e.key === 'Enter' && e.ctrlKey) {
+                                                e.preventDefault()
+                                                await handleSend(() => reset())
+                                            }
+                                        }}
+                                        value={textValue}
+                                        onChange={(e) => {
+                                            setThanksFeedback(false)
+                                            setErrorMsg(null)
+                                            setTextValue(e.target.value)
+                                        }}
+                                        maxLength={600}
+                                        minRows={3}
+                                    />
+                                    <Alert variant="warning" className="mt-4">
+                                        Ikke skriv inn navn eller andre personopplysninger. Dette blir kun brukt til å
+                                        forbedre tjenesten. Du vil ikke få et svar fra oss.
+                                    </Alert>
+                                    <Button
+                                        className="mr-auto mt-6"
+                                        size="medium"
+                                        variant="secondary-neutral"
+                                        onClick={async (e) => {
                                             e.preventDefault()
                                             await handleSend(() => reset())
-                                        }
-                                    }}
-                                    value={textValue}
-                                    onChange={(e) => {
-                                        setThanksFeedback(false)
-                                        setErrorMsg(null)
-                                        setTextValue(e.target.value)
-                                    }}
-                                    maxLength={600}
-                                    minRows={3}
-                                />
-                                <Alert variant="warning" className="mt-4">
-                                    Ikke skriv inn navn eller andre personopplysninger. Dette blir kun brukt til å
-                                    forbedre tjenesten. Du vil ikke få et svar fra oss.
-                                </Alert>
-                                <Button
-                                    className="mr-auto mt-6"
-                                    size="medium"
-                                    variant="secondary-neutral"
-                                    onClick={async (e) => {
-                                        e.preventDefault()
-                                        await handleSend(() => reset())
-                                        if (sekundaerEffekt) {
-                                            sekundaerEffekt()
-                                        }
-                                    }}
-                                >
-                                    {sendTilbakemelding}
-                                </Button>
-                            </form>
-                        )}
+                                            if (sekundaerEffekt) {
+                                                sekundaerEffekt()
+                                            }
+                                        }}
+                                    >
+                                        {sendTilbakemelding}
+                                    </Button>
+                                </form>
+                            )}
+                        </div>
                     </div>
-                </div>
+                )}
                 <div aria-live="polite">
                     {thanksFeedback && (
                         <div className="mt-2 border-4 border-green-100 rounded-medium bg-green-100 p-6">
