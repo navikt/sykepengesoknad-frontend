@@ -35,8 +35,8 @@ describe('Tester flexjar', () => {
                 cy.findByRole('button', {
                     name: 'Send tilbakemelding',
                 }).click()
-                cy.contains('Takk for tilbakemeldingen din!')
             })
+        cy.contains('Takk for tilbakemeldingen din!')
     })
 
     it('Navigerer til siste side', function () {
@@ -85,7 +85,7 @@ describe('Tester flexjar', () => {
                 cy.findByRole('button', {
                     name: 'Send tilbakemelding',
                 }).click()
-                cy.contains('Takk for tilbakemeldingen din!')
             })
+        cy.contains('Takk for tilbakemeldingen din!')
     })
 })

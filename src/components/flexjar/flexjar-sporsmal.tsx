@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { Soknad, Sporsmal } from '../../types/types'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
@@ -15,6 +15,9 @@ export const FlexjarSporsmal = ({ soknad, sporsmal, steg }: FlexjarSporsmalProps
     const [activeState, setActiveState] = useState<string | number | null>(null)
     const [thanksFeedback, setThanksFeedback] = useState<boolean>(false)
 
+    useEffect(() => {
+        setThanksFeedback(false)
+    }, [sporsmal?.tag])
     if (steg <= 1 && soknad?.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND) {
         return null
     }
