@@ -61,7 +61,14 @@ const Fremdriftsbar = () => {
     return (
         <FormProgress totalSteps={antallSteg} activeStep={aktivtSteg}>
             {skapSteg().map((s, i) => {
-                const url = `/soknader/${valgtSoknad?.id}${SEPARATOR}${i + 2}${testperson.query()}`
+                function steg() {
+                    if (valgtSoknad?.soknadstype == RSSoknadstype.OPPHOLD_UTLAND) {
+                        return i + 1
+                    }
+                    return i + 2
+                }
+
+                const url = `/soknader/${valgtSoknad?.id}${SEPARATOR}${steg()}${testperson.query()}`
                 const klikkbart = i != aktivtSteg - 1 && s.alleTidligereErBesvart
                 return (
                     <FormProgress.Step
