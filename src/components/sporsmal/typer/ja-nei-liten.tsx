@@ -112,6 +112,7 @@ const JaNeiLiten = ({ sporsmal }: SpmProps) => {
                         <RadioGroup
                             {...field}
                             legend={sporsmal.sporsmalstekst}
+                            description={sporsmal.undertekst}
                             error={fieldState.error && feilmelding.lokal}
                         >
                             {erVarigEndring25Prosent && sigrunInntekt && (
@@ -167,6 +168,20 @@ const JaNeiLiten = ({ sporsmal }: SpmProps) => {
                     </>
                 )}
             />
+            {sporsmal.tag == 'AVKLART_MED_SYKMELDER' && watchJaNei === 'NEI' && (
+                <Alert variant="warning" className="mt-4">
+                    Du må avklare reisen med sykemelder før du reiser. Uten godkjenning risikerer du at sykepengene
+                    stanses under reisen og beregnes på nytt etter et lavere grunnlag når du er tilbake. Ved reiser på
+                    fire uker eller mer kan dette også føre til avslag på videre sykepenger.
+                </Alert>
+            )}
+            {sporsmal.tag == 'AVKLART_MED_ARBEIDSGIVER_ELLER_NAV' && watchJaNei === 'NEI' && (
+                <Alert variant="warning" className="mt-4">
+                    Du må avklare reisen med arbeidsgiver/NAV før du reiser. Uten godkjenning risikerer du at
+                    sykepengene stanses under reisen og beregnes på nytt etter et lavere grunnlag når du er tilbake. Ved
+                    reiser på fire uker eller mer kan dette også føre til avslag på videre sykepenger.
+                </Alert>
+            )}
 
             <div aria-live="assertive">
                 <AnimateOnMount
