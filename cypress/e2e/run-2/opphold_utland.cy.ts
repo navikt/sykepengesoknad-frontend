@@ -6,6 +6,7 @@ import {
     sjekkMainContentFokus,
     sporsmalOgSvar,
     svarCombobox,
+    svarRadioGruppe,
 } from '../../support/utilities'
 import { oppholdUtland } from '../../../src/data/mock/data/soknad/opphold-utland'
 import 'cypress-real-events'
@@ -119,8 +120,8 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
 
         cy.get('.navds-progress-bar')
             .should('have.attr', 'aria-valuenow', '2')
-            .and('have.attr', 'aria-valuemax', '4')
-            .and('have.attr', 'aria-valuetext', '2 av 4')
+            .and('have.attr', 'aria-valuemax', '5')
+            .and('have.attr', 'aria-valuetext', '2 av 5')
 
         cy.get('body').findByRole('link', { name: 'Tilbake' }).should('not.exist')
         cy.contains('Når skal du reise?')
@@ -159,8 +160,14 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
         klikkGaVidere()
     })
 
+    it('Avklaring i forbindlese med reise', function () {
+        svarRadioGruppe('Er utenlandsoppholdet avklart med den som sykmeldte deg?', 'Ja')
+        svarRadioGruppe('Har du avklart utenlandsoppholdet med arbeidsgiveren/NAV?', 'Ja')
+        klikkGaVidere()
+    })
+
     it('Søknad TIL_SLUTT', () => {
-        cy.url().should('include', `${soknad.id}/4`)
+        cy.url().should('include', `${soknad.id}/5`)
         cy.get('.navds-guide-panel__content').contains(
             'Nå kan du se over at alt er riktig før du sender inn søknaden. Ved behov kan du endre opplysningene inntil 12 måneder etter innsending.',
         )
@@ -175,12 +182,12 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
     })
 
     it('Sender søknaden', function () {
-        cy.url().should('include', `${soknad.id}/4`)
+        cy.url().should('include', `${soknad.id}/5`)
 
         cy.get('.navds-progress-bar')
-            .should('have.attr', 'aria-valuenow', '4')
-            .and('have.attr', 'aria-valuemax', '4')
-            .and('have.attr', 'aria-valuetext', '4 av 4')
+            .should('have.attr', 'aria-valuenow', '5')
+            .and('have.attr', 'aria-valuemax', '5')
+            .and('have.attr', 'aria-valuetext', '5 av 5')
 
         cy.contains('Send søknaden').click()
     })

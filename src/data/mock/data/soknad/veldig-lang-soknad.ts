@@ -17,6 +17,7 @@ import {
     inntektsopplysningerLegacy,
 } from '../sporsmal/inntektsopplysningerUtenSigrunData'
 import { nyttArbeidsforholdSporsmal } from '../sporsmal/nytt-arbeidsforhold'
+import { avklaringIfbmReise } from '../sporsmal/avklaringIfbmReise'
 
 export const veldigLangSoknad: RSSoknad = {
     id: '214f6e73-8150-4261-8ce5-e2b41907fa58',
@@ -2370,6 +2371,7 @@ export const veldigLangSoknad: RSSoknad = {
         }),
         inntektsopplysningerUtenSigrunData,
         inntektsopplysningerLegacy,
+        avklaringIfbmReise(),
         oppsummering(),
     ],
     egenmeldtSykmelding: false,
