@@ -1,5 +1,6 @@
 import {
     avbryterSoknad,
+    harFlereFeilISkjemaet,
     klikkGaVidere,
     klikkTilbake,
     setPeriodeFraTil,
@@ -161,8 +162,27 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
     })
 
     it('Avklaring i forbindlese med reise', function () {
+        klikkGaVidere(true)
+        harFlereFeilISkjemaet(2, [
+            'Du må svare på om utenlandsoppholdet er avklart med den som sykmeldte deg',
+            'Du må svare på om utenlandsoppholdet er avklart med arbeidsgiver eller NAV',
+        ])
+
+        function infoBokser(exists: boolean) {
+            cy.contains('Du må avklare reisen med sykemelder før du reiser').should(exists ? 'exist' : 'not.exist')
+            cy.contains('Du må avklare reisen med arbeidsgiver/NAV før du reiser').should(
+                exists ? 'exist' : 'not.exist',
+            )
+        }
+
+        infoBokser(false)
+        svarRadioGruppe('Er utenlandsoppholdet avklart med den som sykmeldte deg?', 'Nei')
+        svarRadioGruppe('Har du avklart utenlandsoppholdet med arbeidsgiveren/NAV?', 'Nei')
+        infoBokser(true)
         svarRadioGruppe('Er utenlandsoppholdet avklart med den som sykmeldte deg?', 'Ja')
         svarRadioGruppe('Har du avklart utenlandsoppholdet med arbeidsgiveren/NAV?', 'Ja')
+        infoBokser(false)
+
         klikkGaVidere()
     })
 
