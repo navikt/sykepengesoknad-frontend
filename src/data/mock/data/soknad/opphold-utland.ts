@@ -1,6 +1,7 @@
 import { RSSoknad } from '../../../../types/rs-types/rs-soknad'
 import { oppsummering } from '../sporsmal/oppsummering'
 import { deepcopyMedNyId } from '../../deepcopyMedNyId'
+import { avklaringIfbmReise } from '../sporsmal/avklaringIfbmReise'
 
 export const oppholdUtland: RSSoknad = {
     id: 'b9d67b0d-b1f8-44a5-bcbd-6010b60b90ce',
@@ -82,14 +83,10 @@ export const oppholdUtland: RSSoknad = {
                 },
             ],
         },
+        avklaringIfbmReise(),
         oppsummering(),
     ],
     egenmeldtSykmelding: null,
     opprettetAvInntektsmelding: false,
     klippet: false,
 }
-
-export const avbruttOppholdUtland: RSSoknad = deepcopyMedNyId(
-    { ...oppholdUtland, status: 'AVBRUTT' },
-    'b4de172d-863d-4069-b357-76019a9d9537',
-)
