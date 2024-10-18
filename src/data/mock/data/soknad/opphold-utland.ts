@@ -1,6 +1,5 @@
 import { RSSoknad } from '../../../../types/rs-types/rs-soknad'
 import { oppsummering } from '../sporsmal/oppsummering'
-import { deepcopyMedNyId } from '../../deepcopyMedNyId'
 import { avklaringIfbmReise } from '../sporsmal/avklaringIfbmReise'
 
 export const oppholdUtland: RSSoknad = {

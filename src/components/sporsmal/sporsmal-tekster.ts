@@ -291,6 +291,11 @@ const SporsmalTekster = {
     'soknad.feilmelding.INNTEKTSOPPLYSNINGER_VIRKSOMHETEN_AVVIKLET_NAR': '',
     'soknad.feilmelding.NYTT_ARBEIDSFORHOLD_UNDERVEIS': 'Du må svare på om du har startet å jobbe',
     'soknad.feilmelding.NYTT_ARBEIDSFORHOLD_UNDERVEIS_BRUTTO': 'Du må oppgi hvor mye du har tjent',
+
+    'soknad.feilmelding.AVKLART_MED_SYKMELDER':
+        'Du må svare på om utenlandsoppholdet er avklart med den som sykmeldte deg',
+    'soknad.feilmelding.AVKLART_MED_ARBEIDSGIVER_ELLER_NAV':
+        'Du må svare på om utenlandsoppholdet er avklart med arbeidsgiver eller NAV',
 }
 
 export default SporsmalTekster

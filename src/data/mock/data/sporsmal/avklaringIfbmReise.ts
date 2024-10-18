@@ -9,7 +9,7 @@ export const avklaringIfbmReise = (): RSSporsmal => {
         svartype: 'GRUPPE_AV_UNDERSPORSMAL',
         min: null,
         max: null,
-        kriterieForVisningAvUndersporsmal: 'JA',
+        kriterieForVisningAvUndersporsmal: null,
         svar: [],
         undersporsmal: [
             {
@@ -30,7 +30,7 @@ export const avklaringIfbmReise = (): RSSporsmal => {
                 tag: 'AVKLART_MED_ARBEIDSGIVER_ELLER_NAV',
                 sporsmalstekst: 'Har du avklart utenlandsoppholdet med arbeidsgiveren/NAV?',
                 undertekst:
-                    'Utenlandsoppholdet må avklares med arbeidsgiveren din, eller NAV om du ikke har en arbeidsgiver, før du reiser. Utenlandsoppholdet kan ikke hindre planlagt aktivitet pả arbeidsplassen eller Nav.',
+                    'Utenlandsoppholdet må avklares med arbeidsgiveren din, eller NAV om du ikke har en arbeidsgiver, før du reiser. Utenlandsoppholdet kan ikke hindre planlagt aktivitet pả arbeidsplassen eller NAV.',
                 svartype: 'JA_NEI',
                 min: null,
                 max: null,
