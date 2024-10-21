@@ -15,7 +15,7 @@ export const avklaringIfbmReise = (): RSSporsmal => {
             {
                 id: '96284e6f-073c-41f6-8f7d-76c242faab0e',
                 tag: 'AVKLART_MED_SYKMELDER',
-                sporsmalstekst: 'Er utenlandsoppholdet avklart med den som sykmeldte deg?',
+                sporsmalstekst: 'Har du avklart utenlandsoppholdet med den som sykmeldte deg?',
                 undertekst:
                     'Utenlandsoppholdet må ikke forverre helsen din, forlenge sykefraværet eller hindre oppfølging.',
                 svartype: 'JA_NEI',
