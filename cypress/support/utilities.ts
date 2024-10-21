@@ -160,12 +160,8 @@ export function harFlereFeilISkjemaet(antall: number, feilmelding: string[]) {
     cy.get('form')
         .findByRole('alert')
         .within(() => {
-            cy.findByRole('region', { name: `Det er ${antall} feil i skjemaet` })
-                .should('be.visible')
-                .within(() => {
-                    cy.findByRole('heading', { name: `Det er ${antall} feil i skjemaet`, level: 2 }).scrollIntoView()
-                    feilmelding.forEach((melding) => cy.contains(melding).should('be.visible'))
-                })
+            cy.findByRole('heading', { name: `Det er ${antall} feil i skjemaet`, level: 2 }).scrollIntoView()
+            feilmelding.forEach((melding) => cy.contains(melding).should('be.visible'))
         })
 }
 
