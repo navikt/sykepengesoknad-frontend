@@ -1,5 +1,6 @@
 import {
     checkViStolerPaDeg,
+    harFeilISkjemaet,
     klikkGaVidere,
     neiOgVidere,
     sporsmalOgSvar,
@@ -73,21 +74,10 @@ describe('Tester yrkesskadesspørsmål', () => {
     })
 
     it('Men får feilmelding', function () {
-        cy.get('form')
-            .findByRole('alert')
-            .within(() => {
-                cy.findByRole('region', { name: 'Det er 1 feil i skjemaet' })
-                    .should('be.visible')
-                    .within(() => {
-                        cy.findByRole('heading', { name: 'Det er 1 feil i skjemaet', level: 2 }).scrollIntoView()
-                        cy.contains('Du må velge minst en skadedato').should('be.visible')
-
-                        cy.findByText('Du må velge minst en skadedato').should('be.visible')
-                        cy.findByRole('link', { name: /Du må velge minst en skadedato/i })
-                            .should('be.visible')
-                            .click()
-                    })
-            })
+        harFeilISkjemaet('Du må velge minst en skadedato')
+        cy.findByRole('link', { name: /Du må velge minst en skadedato/i })
+            .should('be.visible')
+            .click()
     })
 
     it('Vi velger to med keyboard og går videre med enter', function () {
