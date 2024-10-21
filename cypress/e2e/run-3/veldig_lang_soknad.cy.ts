@@ -349,7 +349,7 @@ describe('Tester støtte for gamle spørsmål', () => {
         gaVidere()
     })
     it('Avklaring i forbindlese med reise', function () {
-        svarRadioGruppe('Er utenlandsoppholdet avklart med den som sykmeldte deg?', 'Ja')
+        svarRadioGruppe('Har du avklart utenlandsoppholdet med den som sykmeldte deg?', 'Ja')
         svarRadioGruppe('Har du avklart utenlandsoppholdet med arbeidsgiveren/NAV?', 'Ja')
         klikkGaVidere()
     })

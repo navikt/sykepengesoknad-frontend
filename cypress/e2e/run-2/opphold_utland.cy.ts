@@ -176,10 +176,10 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
         }
 
         infoBokser(false)
-        svarRadioGruppe('Er utenlandsoppholdet avklart med den som sykmeldte deg?', 'Nei')
+        svarRadioGruppe('Har du avklart utenlandsoppholdet med den som sykmeldte deg?', 'Nei')
         svarRadioGruppe('Har du avklart utenlandsoppholdet med arbeidsgiveren/NAV?', 'Nei')
         infoBokser(true)
-        svarRadioGruppe('Er utenlandsoppholdet avklart med den som sykmeldte deg?', 'Ja')
+        svarRadioGruppe('Har du avklart utenlandsoppholdet med den som sykmeldte deg?', 'Ja')
         svarRadioGruppe('Har du avklart utenlandsoppholdet med arbeidsgiveren/NAV?', 'Ja')
         infoBokser(false)
 
