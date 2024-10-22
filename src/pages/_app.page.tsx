@@ -72,7 +72,6 @@ function MyApp({ Component, pageProps }: AppProps<ServerSidePropsResult>): React
         if (router.asPath !== '/') {
             // Ikke fokuser når man går tilbake til listevisninga
             document.getElementById('maincontent')?.focus()
-            document.getElementById('maincontent')?.scrollIntoView()
         }
     }, [router.asPath])
 
