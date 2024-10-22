@@ -5,7 +5,7 @@ on:
 
 jobs:
   felles-workflow:
-    uses: navikt/flex-github-actions-workflows/.github/workflows/next-js.yml@main
+    uses: navikt/flex-github-actions-workflows/.github/workflows/next-js.yml@testplay
     permissions:
       packages: read
       contents: read
