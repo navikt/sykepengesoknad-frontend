@@ -169,11 +169,12 @@ const Arbeidstaker = () => {
             {!sendtForMerEnn30DagerSiden(valgtSoknad.sendtTilArbeidsgiverDato, valgtSoknad.sendtTilNAVDato) && (
                 <>
                     <GridItems>
-                        {kvitteringTekst === 'medOpphold' ? (
+                        {kvitteringTekst === 'medOpphold' && (
                             <Heading size="small" level="3">
                                 {tekst('kvittering.viktig-informasjon')}
                             </Heading>
-                        ) : (
+                        )}
+                        {kvitteringTekst !== 'medOpphold' && (
                             <Heading size="small" level="3">
                                 {tekst('kvittering.hva-skjer-videre')}
                             </Heading>
