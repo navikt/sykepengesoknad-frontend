@@ -1,7 +1,6 @@
 import React from 'react'
 
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
-import Vis from '../vis'
 import { useSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
 
 import KvitteringVidere from './innhold/kvittering-videre'
@@ -16,11 +15,8 @@ const AlleAndre = () => {
     return (
         <>
             <KvitteringStatus />
-            <Vis hvis={valgtSoknad.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND} render={() => <KvitteringVidere />} />
-            <Vis
-                hvis={valgtSoknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND}
-                render={() => <KvitteringUtenlands />}
-            />
+            {valgtSoknad.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND && <KvitteringVidere />}
+            {valgtSoknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND && <KvitteringUtenlands />}
         </>
     )
 }

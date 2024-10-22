@@ -7,7 +7,6 @@ import { useRouter } from 'next/router'
 import { AuthenticationError, fetchJsonMedRequestId } from '../../utils/fetch'
 import { tekst } from '../../utils/tekster'
 import { urlTilSoknad } from '../soknad/soknad-link'
-import Vis from '../vis'
 import { useUpdateBreadcrumbs } from '../../hooks/useBreadcrumbs'
 import { LenkeMedIkon } from '../lenke-med-ikon/LenkeMedIkon'
 import { rsToSoknad } from '../../types/mapping'
@@ -138,9 +137,7 @@ const OpprettUtland = () => {
                 {tekst('opprett-utland.fortsett')}
             </Button>
 
-            <div aria-live="polite">
-                <Vis hvis={feilmeldingTekst} render={() => <Alert variant="error">{feilmeldingTekst}</Alert>} />
-            </div>
+            <div aria-live="polite">{feilmeldingTekst && <Alert variant="error">{feilmeldingTekst}</Alert>}</div>
             <AvbrytOppholdUtlandSoknadModal soknad={soknad} />
             <LenkeMedIkon
                 className="mt-8"

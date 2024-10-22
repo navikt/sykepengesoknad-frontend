@@ -5,7 +5,6 @@ import { useFormContext } from 'react-hook-form'
 import { RSSvartype } from '../../../types/rs-types/rs-svartype'
 import validerArbeidsgrad from '../../../utils/sporsmal/valider-arbeidsgrad'
 import { getLedetekst, tekst } from '../../../utils/tekster'
-import Vis from '../../vis'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { hentFeilmelding } from '../sporsmal-utils'
 
@@ -123,41 +122,30 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
             )}
 
             <div role="alert" aria-live="assertive">
-                <Vis
-                    hvis={errors[sporsmal.id]}
-                    render={() => (
-                        <>
-                            <Vis
-                                hvis={errors[sporsmal.id]?.type !== 'validate'}
-                                render={() => (
-                                    <BodyShort
-                                        as="span"
-                                        className="mt-2 block font-bold text-surface-danger"
-                                        data-cy="feil-lokal"
-                                    >
-                                        {feilmelding.lokal}
-                                    </BodyShort>
-                                )}
-                            />
-                            <Vis
-                                hvis={
-                                    errors[sporsmal.id]?.type === 'validate' && sporsmal.tag === 'HVOR_MYE_TIMER_VERDI'
-                                }
-                                render={() => (
-                                    <BodyShort
-                                        as="span"
-                                        className="mt-2 block font-bold text-surface-danger"
-                                        data-cy="feil-lokal"
-                                    >
-                                        {getLedetekst(tekst('soknad.feilmelding.MINDRE_TIMER_ENN_FORVENTET.lokal'), {
-                                            '%GRAD%': 100 - periode!.grad,
-                                        })}
-                                    </BodyShort>
-                                )}
-                            />
-                        </>
-                    )}
-                />
+                {errors[sporsmal.id] && (
+                    <>
+                        {errors[sporsmal.id]?.type !== 'validate' && (
+                            <BodyShort
+                                as="span"
+                                className="mt-2 block font-bold text-surface-danger"
+                                data-cy="feil-lokal"
+                            >
+                                {feilmelding.lokal}
+                            </BodyShort>
+                        )}
+                        {errors[sporsmal.id]?.type === 'validate' && sporsmal.tag === 'HVOR_MYE_TIMER_VERDI' && (
+                            <BodyShort
+                                as="span"
+                                className="mt-2 block font-bold text-surface-danger"
+                                data-cy="feil-lokal"
+                            >
+                                {getLedetekst(tekst('soknad.feilmelding.MINDRE_TIMER_ENN_FORVENTET.lokal'), {
+                                    '%GRAD%': 100 - periode!.grad,
+                                })}
+                            </BodyShort>
+                        )}
+                    </>
+                )}
             </div>
         </div>
     )

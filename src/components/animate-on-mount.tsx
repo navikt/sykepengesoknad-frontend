@@ -1,7 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
 
-import Vis from './vis'
-
 interface AnimateOnMountProps {
     mounted: boolean
     enter: string
@@ -26,7 +24,7 @@ const AnimateOnMount = (props: AnimateOnMountProps) => {
 
     return (
         <div ref={animRef} className={`${start} ${styles}`}>
-            <Vis hvis={mounted} render={() => children} />
+            {mounted && children}
         </div>
     )
 }

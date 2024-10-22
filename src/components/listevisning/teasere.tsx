@@ -3,7 +3,6 @@ import React, { useState } from 'react'
 
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { sorterEtterNyesteFom, sorterEtterSendt, sorterEtterStatus } from '../../utils/sorter-soknader'
-import Vis from '../vis'
 import { RSSoknadmetadata } from '../../types/rs-types/rs-soknadmetadata'
 
 import FremtidigeSoknaderTeaser from './fremtidige-soknader-teaser'
@@ -39,33 +38,29 @@ const Teasere = ({ soknader, tittel, tomListeTekst, kanSorteres = false }: Sokna
         return soknader
     }
 
+    const harSoknader = sorterteSoknader().length > 0
+
     return (
         <div data-cy={tittel} className="mb-12">
             <div className="mb-3 flex justify-between">
-                <Vis
-                    hvis={sorterteSoknader().length > 0 || tomListeTekst}
-                    render={() => (
-                        <Heading size="medium" spacing level="2">
-                            {tittel}
-                        </Heading>
-                    )}
-                />
-                <Vis
-                    hvis={kanSorteres && sorterteSoknader().length > 0}
-                    render={() => (
-                        <Select
-                            size="small"
-                            label="Sorter etter"
-                            onChange={(event) => setSortering(event.target.value as Sortering)}
-                        >
-                            {Object.values(Sortering).map((sort) => (
-                                <option value={sort} key={sort}>
-                                    {sort}
-                                </option>
-                            ))}
-                        </Select>
-                    )}
-                />
+                {(harSoknader || tomListeTekst) && (
+                    <Heading size="medium" spacing level="2">
+                        {tittel}
+                    </Heading>
+                )}
+                {kanSorteres && harSoknader && (
+                    <Select
+                        size="small"
+                        label="Sorter etter"
+                        onChange={(event) => setSortering(event.target.value as Sortering)}
+                    >
+                        {Object.values(Sortering).map((sort) => (
+                            <option value={sort} key={sort}>
+                                {sort}
+                            </option>
+                        ))}
+                    </Select>
+                )}
             </div>
 
             {sorterteSoknader().map((soknad, idx) => {
@@ -81,7 +76,7 @@ const Teasere = ({ soknader, tittel, tomListeTekst, kanSorteres = false }: Sokna
                         return <ListevisningLenkepanel key={idx} soknad={soknad} />
                 }
             })}
-            <Vis hvis={soknader.length === 0} render={() => <BodyShort weight="semibold">{tomListeTekst}</BodyShort>} />
+            {soknader.length === 0 && <BodyShort weight="semibold">{tomListeTekst}</BodyShort>}
         </div>
     )
 }

@@ -2,7 +2,6 @@ import { BodyShort, Label } from '@navikt/ds-react'
 import React from 'react'
 
 import { tekst } from '../../utils/tekster'
-import Vis from '../vis'
 import { Soknad } from '../../types/types'
 
 interface ArbeidsgiverInfoProps {
@@ -11,9 +10,8 @@ interface ArbeidsgiverInfoProps {
 
 const ArbeidsgiverInfo = ({ valgtSoknad }: ArbeidsgiverInfoProps) => {
     return (
-        <Vis
-            hvis={valgtSoknad.arbeidsgiver}
-            render={() => (
+        <>
+            {valgtSoknad.arbeidsgiver && (
                 <section className="mt-8">
                     <Label size="small" as="h3">
                         {tekst('sykepengesoknad.sykmelding-utdrag.arbeidsgiver')}
@@ -21,7 +19,7 @@ const ArbeidsgiverInfo = ({ valgtSoknad }: ArbeidsgiverInfoProps) => {
                     <BodyShort>{valgtSoknad.arbeidsgiver!.navn}</BodyShort>
                 </section>
             )}
-        />
+        </>
     )
 }
 

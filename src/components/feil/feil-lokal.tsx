@@ -4,7 +4,6 @@ import { useFormContext } from 'react-hook-form'
 
 import { Sporsmal } from '../../types/types'
 import { hentFeilmelding } from '../sporsmal/sporsmal-utils'
-import Vis from '../vis'
 
 interface FeilProps {
     sporsmal: Sporsmal
@@ -17,16 +16,15 @@ const FeilLokal = ({ sporsmal }: FeilProps) => {
     const feilmelding = hentFeilmelding(sporsmal, errors[sporsmal.id])
 
     return (
-        <Vis
-            hvis={errors[sporsmal.id]}
-            render={() => (
+        <>
+            {errors[sporsmal.id] && (
                 <div role="alert" aria-live="assertive">
                     <BodyShort as="span" className="mt-2 block font-bold text-surface-danger" data-cy="feil-lokal">
                         {feilmelding.lokal}
                     </BodyShort>
                 </div>
             )}
-        />
+        </>
     )
 }
 

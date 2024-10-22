@@ -8,7 +8,6 @@ import { tekst } from '../../../utils/tekster'
 import { hentPerioder } from '../hent-svar'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
-import Vis from '../../vis'
 import { RSSvartype } from '../../../types/rs-types/rs-svartype'
 
 import PeriodeKomp from './periode-komp'
@@ -29,14 +28,14 @@ const Perioder = ({ sporsmal }: SpmProps) => {
         e.preventDefault()
         const index = lokal.findIndex((value) => value === idx)
         lokal.splice(index, 1)
-        setLokal(lokal)
+        setLokal([...lokal]) // Ensure state updates correctly
         unregister(sporsmal.id + '_' + idx, { keepValue: false })
     }
 
     const leggTilPeriode = (e: any) => {
         e.preventDefault()
         lokal.push(lokal[lokal.length - 1] + 1)
-        setLokal(lokal)
+        setLokal([...lokal]) // Ensure state updates correctly
         forceUpdate()
     }
 
@@ -54,21 +53,19 @@ const Perioder = ({ sporsmal }: SpmProps) => {
                     />
                 ))}
             </ul>
-            <Vis
-                hvis={sporsmal.svartype === RSSvartype.PERIODER}
-                render={() => (
-                    <Button
-                        type="button"
-                        icon={<PlusIcon aria-hidden={true} />}
-                        size="small"
-                        variant="tertiary"
-                        className="mt-4"
-                        onClick={leggTilPeriode}
-                    >
-                        {tekst('sykepengesoknad.periodevelger.legg-til-ekstra')}
-                    </Button>
-                )}
-            ></Vis>
+
+            {sporsmal.svartype === RSSvartype.PERIODER && (
+                <Button
+                    type="button"
+                    icon={<PlusIcon aria-hidden={true} />}
+                    size="small"
+                    variant="tertiary"
+                    className="mt-4"
+                    onClick={leggTilPeriode}
+                >
+                    {tekst('sykepengesoknad.periodevelger.legg-til-ekstra')}
+                </Button>
+            )}
 
             <div aria-live="assertive">
                 <UndersporsmalListe oversporsmal={sporsmal} />

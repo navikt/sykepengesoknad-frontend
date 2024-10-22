@@ -2,7 +2,6 @@ import { BodyShort, Label } from '@navikt/ds-react'
 import React from 'react'
 
 import { tekst } from '../../../utils/tekster'
-import Vis from '../../vis'
 import { UseKontonummer } from '../../../hooks/useKontonummer'
 import { tekstMedHtml } from '../../../utils/html-react-parser-utils'
 
@@ -22,22 +21,16 @@ const Kontonummer = () => {
                 {tekst('kvittering.kontonummer.tittel')}
             </Label>
 
-            <Vis
-                hvis={!kontonummer}
-                render={() => <BodyShort>{tekstMedHtml(tekst('kvittering.kontonummer.mangler'))}</BodyShort>}
-            />
-
-            <Vis
-                hvis={kontonummer}
-                render={() => (
-                    <>
-                        <BodyShort>
-                            <strong>{formatterKontonr(kontonummer!)}</strong>
-                        </BodyShort>
-                        <BodyShort>{tekstMedHtml(tekst('kvittering.kontonummer.endre'))}</BodyShort>
-                    </>
-                )}
-            />
+            {!kontonummer ? (
+                <BodyShort>{tekstMedHtml(tekst('kvittering.kontonummer.mangler'))}</BodyShort>
+            ) : (
+                <>
+                    <BodyShort>
+                        <strong>{formatterKontonr(kontonummer!)}</strong>
+                    </BodyShort>
+                    <BodyShort>{tekstMedHtml(tekst('kvittering.kontonummer.endre'))}</BodyShort>
+                </>
+            )}
         </div>
     )
 }

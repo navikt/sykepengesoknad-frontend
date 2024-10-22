@@ -11,7 +11,6 @@ import FristSykepenger from '../frist-sykepenger/frist-sykepenger'
 import { GjenstaendeSoknader, hentGjenstaendeSoknader } from '../gjenstaende-soknader/gjenstaende-soknader'
 import Opplysninger from '../opplysninger-fra-sykmelding/opplysninger'
 import { urlTilSoknad } from '../soknad/soknad-link'
-import Vis from '../vis'
 import useSoknader from '../../hooks/useSoknader'
 import QueryStatusPanel from '../queryStatusPanel/QueryStatusPanel'
 import { soknadBreadcrumb, useUpdateBreadcrumbs } from '../../hooks/useBreadcrumbs'
@@ -84,15 +83,12 @@ const AvbruttSoknad = () => {
                     </BodyLong>
                 </>
             )}
-            <Vis
-                hvis={dayjs(valgtSoknad.avbruttDato).isAfter(dayjs().subtract(2, 'seconds'))}
-                render={() => (
-                    <GjenstaendeSoknader
-                        style={{ marginTop: '1rem', marginBottom: '1rem' }}
-                        soknader={gjenstaendeSoknader}
-                    />
-                )}
-            />
+            {dayjs(valgtSoknad.avbruttDato).isAfter(dayjs().subtract(2, 'seconds')) && (
+                <GjenstaendeSoknader
+                    style={{ marginTop: '1rem', marginBottom: '1rem' }}
+                    soknader={gjenstaendeSoknader}
+                />
+            )}
             <GjenapneSoknad />
         </>
     )

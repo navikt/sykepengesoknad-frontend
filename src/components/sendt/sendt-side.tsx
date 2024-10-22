@@ -7,12 +7,11 @@ import { logEvent } from '../amplitude/amplitude'
 import Endreknapp from '../endreknapp/endreknapp'
 import Ettersending from '../ettersending/ettersending'
 import Kvittering from '../kvittering/kvittering'
-import Vis from '../vis'
-import { urlTilSoknad } from '../soknad/soknad-link'
 import QueryStatusPanel from '../queryStatusPanel/QueryStatusPanel'
 import { kvitteringBreadcrumb, useUpdateBreadcrumbs } from '../../hooks/useBreadcrumbs'
 import { SoknadHeader } from '../soknad/soknad-header'
 import { useSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
+import { urlTilSoknad } from '../soknad/soknad-link'
 
 const SendtSide = () => {
     const { valgtSoknad, soknadId } = useSoknadMedDetaljer()
@@ -56,19 +55,13 @@ const SendtSide = () => {
 
             <Kvittering />
 
-            <Vis
-                hvis={skalViseKnapperad}
-                render={() => (
-                    <>
-                        <Vis hvis={skalViseEndre} render={() => <Endreknapp />} />
+            {skalViseKnapperad && (
+                <>
+                    {skalViseEndre && <Endreknapp />}
 
-                        <Vis
-                            hvis={skalViseSendTilArbeidsgiver}
-                            render={() => <Ettersending gjelder="arbeidsgiver" />}
-                        />
-                    </>
-                )}
-            />
+                    {skalViseSendTilArbeidsgiver && <Ettersending gjelder="arbeidsgiver" />}
+                </>
+            )}
         </>
     )
 }
