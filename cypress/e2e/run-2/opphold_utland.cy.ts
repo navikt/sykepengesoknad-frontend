@@ -222,4 +222,20 @@ describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
             .and('contain', 'Les mer om sykepenger når du er på reise.')
             .and('contain', 'Du søker om sykepenger')
     })
+
+    it('Går til listevisningen', function () {
+        cy.visit('/syk/sykepengesoknad?testperson=bare-utland')
+        cy.contains('Søknader')
+    })
+
+    it('Navigerer til den sendte søknaden igjen', function () {
+        cy.get('[data-cy="Tidligere søknader"]')
+            .findByRole('link', { name: 'Søknad om å beholde sykepenger utenfor EU/EØS Sendt til NAV' })
+            .click()
+    })
+
+    it('Viser sendt side', function () {
+        cy.url().should('include', `sendt/${soknad.id}`)
+        cy.contains('Oppsummering fra søknaden')
+    })
 })
