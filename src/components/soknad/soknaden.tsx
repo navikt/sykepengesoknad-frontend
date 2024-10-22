@@ -59,9 +59,10 @@ export const Soknaden = () => {
 
     useEffect(() => {
         if (!valgtSoknad || stegId !== '1') return
-
-        // finn posisjon på siste besvarte spørsmål
-        router.push(urlTilSoknad(valgtSoknad, true, true), undefined, { shallow: true })
+        if (valgtSoknad.status == RSSoknadstatus.NY || valgtSoknad.status == RSSoknadstatus.UTKAST_TIL_KORRIGERING) {
+            // finn posisjon på siste besvarte spørsmål
+            router.push(urlTilSoknad(valgtSoknad, true, true), undefined, { shallow: true })
+        }
         // eslint-disable-next-line
     }, [valgtSoknad?.id])
 

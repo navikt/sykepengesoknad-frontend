@@ -27,6 +27,7 @@ import { nyttReisetilskudd } from '../soknad/arbeidstaker-reisetilskudd'
 import { gradertReisetilskudd } from '../soknad/arbeidstaker-reisetilskudd-gradert'
 import { fremtidigSoknad } from '../soknad/arbeidstaker-fremtidig'
 import { jsonDeepCopy } from '../../../../utils/json-deep-copy'
+import { utgattSoknad } from '../soknad/arbeidstaker-utgatt'
 
 import { brukertestSoknad, brukertestSykmelding } from './brukertest'
 
@@ -158,6 +159,12 @@ export const integration: Persona = {
     soknader: soknaderIntegration,
     sykmeldinger: sykmeldinger,
     beskrivelse: 'God mix med søknader som brukes til integrasjons tester',
+}
+
+export const kunUtgattSoknad: Persona = {
+    soknader: [deepcopyMedNyId(utgattSoknad, 'df1371a4-2773-41c2-a895-49f561424aaa')],
+    sykmeldinger: sykmeldinger,
+    beskrivelse: 'Kun en utgått søknad',
 }
 
 export function over70(): Persona {
