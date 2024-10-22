@@ -20,8 +20,4 @@ export const formattertFiltyper = '.png, .jpg .jpeg'
 
 export const tillatteFiltyper = 'image/png,image/jpeg,image/jpg'
 
-export const maxFilstørrelse = filstørrelseTilBytes('5MB')
-
-export const customTruncet = (text: string, size: number) => {
-    return text.length <= size ? text : text.slice(0, size) + '...' + text.slice(-3)
-}
+export const maxFilstørrelse = filstørrelseTilBytes('10MB')
