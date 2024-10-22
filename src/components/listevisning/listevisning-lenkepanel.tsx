@@ -62,9 +62,10 @@ export const ListevisningLenkepanel = ({ soknad, onClick }: { soknad: RSSoknadme
             </Button>
         )
     }
-    const avbruttOppholdUtland = soknad.status == 'AVBRUTT' && soknad.soknadstype == 'OPPHOLD_UTLAND'
+    const skipUtlandInfoside =
+        (soknad.status == 'AVBRUTT' || soknad.status == 'SENDT') && soknad.soknadstype == 'OPPHOLD_UTLAND'
     return (
-        <Link href={urlTilSoknad(soknad, true, avbruttOppholdUtland)} data-cy={`link-listevisning-${soknad.id}`}>
+        <Link href={urlTilSoknad(soknad, true, skipUtlandInfoside)} data-cy={`link-listevisning-${soknad.id}`}>
             <StyletLinkPanel paddingBottom={true}></StyletLinkPanel>
         </Link>
     )
