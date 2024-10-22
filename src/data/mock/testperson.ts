@@ -22,6 +22,7 @@ import {
     harIkkeKontonummer,
     harKontonummer,
     integration,
+    kunUtgattSoknad,
     over70,
     Persona,
     reisetilskuddPerson,
@@ -82,6 +83,7 @@ type PersonaKey =
     | 'selvstendig-naringsdrivende-sendt'
     | 'innenfor-arbeidsgiver-perioden'
     | 'gammel-oppsummering'
+    | 'utgatt'
 
 export type PersonaData = Partial<Record<PersonaKey, Persona>>
 
@@ -151,6 +153,7 @@ export function testpersonerGruppert(): PersonaGroup {
             ['cummulative-layout-shift']: jsonDeepCopy(clsPerson),
             ['integrasjon-soknader']: jsonDeepCopy(integration),
             ['gammel-oppsummering']: jsonDeepCopy(gammelOppsummering),
+            ['utgatt']: jsonDeepCopy(kunUtgattSoknad),
         },
     }
 

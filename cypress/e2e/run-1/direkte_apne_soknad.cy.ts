@@ -49,4 +49,12 @@ describe('Tester å åpne søknaden direkte fra sykefravaer', () => {
         cy.url().should('equal', Cypress.config().baseUrl + '/syk/sykepengesoknad/soknader')
         cy.contains('Nye søknader').and('be.visible')
     })
+
+    it('Direkte navigering til en utgått søknad ender på listevisningen', function () {
+        cy.visit(`/syk/sykepengesoknad/soknader/${soknad.id}`)
+        cy.url().should('equal', Cypress.config().baseUrl + `/syk/sykepengesoknad/soknader/${soknad.id}/1`)
+
+        cy.visit('/syk/sykepengesoknad/soknader/df1371a4-2773-41c2-a895-49f561424aaa/1?testperson=utgatt')
+        cy.url().should('equal', Cypress.config().baseUrl + `/syk/sykepengesoknad?testperson=utgatt`)
+    })
 })

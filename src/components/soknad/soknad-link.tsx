@@ -21,6 +21,8 @@ export const urlTilSoknad = (soknad: Soknad | RSSoknadmetadata, medQueryParams =
     }
 
     switch (soknad.status) {
+        case RSSoknadstatus.UTGAATT:
+            return `/${queryParams}`
         case RSSoknadstatus.SENDT:
             return `/sendt/${soknad.id}${queryParams}`
         case RSSoknadstatus.AVBRUTT:
