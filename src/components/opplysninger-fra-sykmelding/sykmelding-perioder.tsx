@@ -6,7 +6,6 @@ import { Periode, Sykmelding } from '../../types/sykmelding'
 import { getDuration } from '../../utils/dato-utils'
 import { sorterEtterEldsteTom } from '../../utils/sykmelding-utils'
 import { tekst } from '../../utils/tekster'
-import Vis from '../vis'
 
 interface SykmeldingPerioderProps {
     valgtSykmelding: Sykmelding
@@ -30,6 +29,8 @@ const SykmeldingPerioder = ({ valgtSykmelding }: SykmeldingPerioderProps) => {
                     return `${periode.behandlingsdager} behandlingsdager`
                 }
                 return '1 behandlingsdag'
+            default:
+                return ''
         }
     }
 
@@ -52,23 +53,18 @@ const SykmeldingPerioder = ({ valgtSykmelding }: SykmeldingPerioderProps) => {
 
                         <BodyShort>{hentPeriodeTekst(periode)}</BodyShort>
 
-                        <Vis
-                            hvis={periode.gradert?.reisetilskudd}
-                            render={() => (
-                                <>
-                                    <img
-                                        style={{ width: 16, height: 16 }}
-                                        src="/syk/sykepengesoknad/static/check-box-1.png"
-                                        alt="Avkrysset"
-                                        aria-hidden={true}
-                                        className="mb-1 mr-2 inline"
-                                    />
-                                    <BodyShort as="span">
-                                        {tekst('din-sykmelding.periode.gradertreisetilskudd')}
-                                    </BodyShort>
-                                </>
-                            )}
-                        />
+                        {periode.gradert?.reisetilskudd && (
+                            <>
+                                <img
+                                    style={{ width: 16, height: 16 }}
+                                    src="/syk/sykepengesoknad/static/check-box-1.png"
+                                    alt="Avkrysset"
+                                    aria-hidden={true}
+                                    className="mb-1 mr-2 inline"
+                                />
+                                <BodyShort as="span">{tekst('din-sykmelding.periode.gradertreisetilskudd')}</BodyShort>
+                            </>
+                        )}
                     </div>
                 )
             })}

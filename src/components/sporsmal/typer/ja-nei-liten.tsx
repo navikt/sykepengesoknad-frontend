@@ -6,7 +6,6 @@ import { SvarEnums } from '../../../types/enums'
 import { getLedetekst, tekst } from '../../../utils/tekster'
 import AnimateOnMount from '../../animate-on-mount'
 import { utlandssoknadUrl } from '../../soknad/soknad-link'
-import Vis from '../../vis'
 import KnapperadAvbryt from '../sporsmal-form/knapperad-avbryt'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { hentFeilmelding } from '../sporsmal-utils'
@@ -145,29 +144,23 @@ const JaNeiLiten = ({ sporsmal }: SpmProps) => {
                 />
             </div>
 
-            <Vis
-                hvis={sporsmal.tag === 'SYKMELDINGSGRAD' && watchJaNei === 'NEI'}
-                render={() => (
+            {sporsmal.tag === 'SYKMELDINGSGRAD' && watchJaNei === 'NEI' && (
+                <ProgressivtGuidePanel className="mb-8">
+                    <BodyShort>{tekstMedHtml(tekst('sykepengesoknad-utland.skjema.bjorn'))}</BodyShort>
+                </ProgressivtGuidePanel>
+            )}
+
+            {sporsmal.tag === 'FERIE' && watchJaNei === 'JA' && (
+                <>
                     <ProgressivtGuidePanel className="mb-8">
-                        <BodyShort>{tekstMedHtml(tekst('sykepengesoknad-utland.skjema.bjorn'))}</BodyShort>
+                        <BodyShort>
+                            {tekstMedHtml(tekst('sykepengesoknad-utland.skjema.ferie-sporsmal-bjorn'))}
+                        </BodyShort>
                     </ProgressivtGuidePanel>
-                )}
-            />
 
-            <Vis
-                hvis={sporsmal.tag === 'FERIE' && watchJaNei === 'JA'}
-                render={() => (
-                    <>
-                        <ProgressivtGuidePanel className="mb-8">
-                            <BodyShort>
-                                {tekstMedHtml(tekst('sykepengesoknad-utland.skjema.ferie-sporsmal-bjorn'))}
-                            </BodyShort>
-                        </ProgressivtGuidePanel>
-
-                        <KnapperadAvbryt />
-                    </>
-                )}
-            />
+                    <KnapperadAvbryt />
+                </>
+            )}
             {sporsmal.tag == 'AVKLART_MED_SYKMELDER' && watchJaNei === 'NEI' && (
                 <Alert variant="warning" className="mt-4">
                     Du må avklare reisen med sykemelder før du reiser. Uten godkjenning risikerer du at sykepengene
@@ -188,7 +181,6 @@ const JaNeiLiten = ({ sporsmal }: SpmProps) => {
                     mounted={
                         watchJaNei === sporsmal.kriterieForVisningAvUndersporsmal &&
                         sporsmal.tag !== 'UTLANDSOPPHOLD_SOKT_SYKEPENGER'
-                        // TODO: Dette er en fix for å ikke vise underspørsmål, fjern denne etter hvert
                     }
                     enter="undersporsmal--vis"
                     leave="undersporsmal--skjul"

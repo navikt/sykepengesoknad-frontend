@@ -5,7 +5,6 @@ import { RSArbeidssituasjon } from '../../../types/rs-types/rs-arbeidssituasjon'
 import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype'
 import { sendtForMerEnn30DagerSiden } from '../../../utils/dato-utils'
 import { tekst } from '../../../utils/tekster'
-import Vis from '../../vis'
 import Kontonummer from '../kontonummer/kontonummer'
 import { tekstMedHtml } from '../../../utils/html-react-parser-utils'
 import { LenkeMedIkon } from '../../lenke-med-ikon/LenkeMedIkon'
@@ -31,6 +30,7 @@ const KvitteringVidere = () => {
             valgtSoknad.arbeidssituasjon,
         ) &&
         valgtSoknad.forstegangssoknad
+
     return (
         <KvtteringPanel>
             {naringsdrivendeForstegangssoknad && (
@@ -60,17 +60,14 @@ const KvitteringVidere = () => {
                     />
                 </div>
 
-                <Vis
-                    hvis={valgtSoknad.soknadstype !== RSSoknadstype.REISETILSKUDD}
-                    render={() => (
-                        <div className="mb-4">
-                            <Label as="h2">{tekst('kvittering.naar-blir-pengene')}</Label>
-                            <BodyLong as="span">
-                                {tekstMedHtml(tekst('kvittering.arbeidstaker.over16.utbetaling'))}
-                            </BodyLong>
-                        </div>
-                    )}
-                />
+                {valgtSoknad.soknadstype !== RSSoknadstype.REISETILSKUDD && (
+                    <div className="mb-4">
+                        <Label as="h2">{tekst('kvittering.naar-blir-pengene')}</Label>
+                        <BodyLong as="span">
+                            {tekstMedHtml(tekst('kvittering.arbeidstaker.over16.utbetaling'))}
+                        </BodyLong>
+                    </div>
+                )}
 
                 <div className="mb-4">
                     <Kontonummer />

@@ -3,7 +3,6 @@ import dayjs from 'dayjs'
 import React from 'react'
 
 import { tekst } from '../../../utils/tekster'
-import Vis from '../../vis'
 import Avkrysset from '../../oppsummering/utdrag/avkrysset'
 import { useSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
 
@@ -39,24 +38,18 @@ const ArbeidstakerStatus = () => {
 
     return (
         <>
-            <Vis
-                hvis={valgtSoknad.sendtTilArbeidsgiverDato}
-                render={() => (
-                    <div data-cy="sendt-arbeidsgiver">
-                        <Avkrysset tekst={`${tilArbNavn()} ${tilOrg()}${medKopi}`} />
-                        <Detail className="pl-6">{tilArbDato()}</Detail>
-                    </div>
-                )}
-            />
-            <Vis
-                hvis={valgtSoknad.sendtTilNAVDato}
-                render={() => (
-                    <div data-cy="sendt-nav">
-                        <Avkrysset tekst={Mottaker.NAV} />
-                        <Detail className="pl-6">{tilNavDato()}</Detail>
-                    </div>
-                )}
-            />
+            {valgtSoknad.sendtTilArbeidsgiverDato && (
+                <div data-cy="sendt-arbeidsgiver">
+                    <Avkrysset tekst={`${tilArbNavn()} ${tilOrg()}${medKopi}`} />
+                    <Detail className="pl-6">{tilArbDato()}</Detail>
+                </div>
+            )}
+            {valgtSoknad.sendtTilNAVDato && (
+                <div data-cy="sendt-nav">
+                    <Avkrysset tekst={Mottaker.NAV} />
+                    <Detail className="pl-6">{tilNavDato()}</Detail>
+                </div>
+            )}
         </>
     )
 }

@@ -3,7 +3,6 @@ import React, { useState } from 'react'
 
 import { tekst } from '../../utils/tekster'
 import { tekstMedHtml } from '../../utils/html-react-parser-utils'
-import Vis from '../vis'
 import { useEttersendArbeidsgiver } from '../../hooks/useEttersendArbeidsgiver'
 import { useSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
 
@@ -61,10 +60,9 @@ const Ettersending = ({ gjelder }: EttersendingProps) => {
             >
                 <Modal.Body>
                     <BodyShort spacing>{tekstMedHtml(tekst('kvittering.info.send-til-arbeidsgiver'))}</BodyShort>
-                    <Vis
-                        hvis={ettersendArbeidsgiverError}
-                        render={() => <Alert variant="error">Beklager, klarte ikke ettersende søknaden din</Alert>}
-                    />
+                    {ettersendArbeidsgiverError && (
+                        <Alert variant="error">Beklager, klarte ikke ettersende søknaden din</Alert>
+                    )}
                     <Button
                         type="button"
                         size="small"

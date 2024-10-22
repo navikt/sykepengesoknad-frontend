@@ -5,7 +5,6 @@ import { useController, useFormContext } from 'react-hook-form'
 
 import { validerFom, validerPeriode, validerTom } from '../../../utils/sporsmal/valider-periode'
 import { tekst } from '../../../utils/tekster'
-import Vis from '../../vis'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { kalenderMedDropdownCaption, maanedKalenderApnesPa } from '../sporsmal-utils'
 
@@ -95,20 +94,17 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
                     </div>
                 </DatePicker>
             </fieldset>
-            <Vis
-                hvis={index > 0}
-                render={() => (
-                    <Button
-                        type="button"
-                        variant="tertiary"
-                        size="small"
-                        id={'btn_' + id}
-                        onClick={(e) => slettPeriode(e, index)}
-                    >
-                        {tekst('sykepengesoknad.periodevelger.slett')}
-                    </Button>
-                )}
-            />
+            {index > 0 && (
+                <Button
+                    type="button"
+                    variant="tertiary"
+                    size="small"
+                    id={'btn_' + id}
+                    onClick={(e) => slettPeriode(e, index)}
+                >
+                    {tekst('sykepengesoknad.periodevelger.slett')}
+                </Button>
+            )}
         </li>
     )
 }

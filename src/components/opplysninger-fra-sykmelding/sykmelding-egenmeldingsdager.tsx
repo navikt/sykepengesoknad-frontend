@@ -2,7 +2,6 @@ import { BodyShort, Label } from '@navikt/ds-react'
 import React from 'react'
 
 import { hentEgenmeldingsdager } from '../../utils/sykmelding-utils'
-import Vis from '../vis'
 import { Sykmelding } from '../../types/sykmelding'
 
 interface EgenmeldingsdagerProps {
@@ -13,15 +12,14 @@ const Egenmeldingsdager = ({ valgtSykmelding }: EgenmeldingsdagerProps) => {
     const dager = hentEgenmeldingsdager(valgtSykmelding)
 
     return (
-        <Vis
-            hvis={dager && dager.length > 0}
-            render={() => (
+        <>
+            {dager && dager.length > 0 && (
                 <section className="mt-8">
                     <Label size="small" as="h3">
-                        Egenmeldingsdager ({dager!.length} dager)
+                        Egenmeldingsdager ({dager.length} dager)
                     </Label>
                     <ul>
-                        {dager?.map((d, idx) => (
+                        {dager.map((d, idx) => (
                             <BodyShort as="li" key={`egenmeldingdag-${idx}`}>
                                 {d}
                             </BodyShort>
@@ -29,7 +27,7 @@ const Egenmeldingsdager = ({ valgtSykmelding }: EgenmeldingsdagerProps) => {
                     </ul>
                 </section>
             )}
-        />
+        </>
     )
 }
 

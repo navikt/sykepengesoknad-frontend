@@ -4,7 +4,6 @@ import React, { useState } from 'react'
 
 import { Kvittering, Sporsmal, svarverdiToKvittering } from '../../types/types'
 import { tekst } from '../../utils/tekster'
-import Vis from '../vis'
 import { useSlettKvittering } from '../../hooks/useSlettKvittering'
 import { useSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
 
@@ -64,14 +63,11 @@ const Slettknapp = ({ sporsmal, kvittering }: SlettknappProps) => {
             >
                 <Modal.Body>
                     <div aria-live="polite">
-                        <Vis
-                            hvis={slettingError}
-                            render={() => (
-                                <Alert className="mt-4" variant="error">
-                                    {tekst('opplasting_modal.slett.feilmelding')}
-                                </Alert>
-                            )}
-                        />
+                        {slettingError && (
+                            <Alert className="mt-4" variant="error">
+                                {tekst('opplasting_modal.slett.feilmelding')}
+                            </Alert>
+                        )}
                     </div>
                 </Modal.Body>
                 <Modal.Footer>

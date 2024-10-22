@@ -3,7 +3,6 @@ import dayjs from 'dayjs'
 import React from 'react'
 
 import { tekst } from '../../../utils/tekster'
-import Vis from '../../vis'
 import { useSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
 
 export enum Mottaker {
@@ -22,9 +21,8 @@ const KvitteringStatus = () => {
     if (!valgtSoknad) return null
 
     return (
-        <Vis
-            hvis={valgtSoknad.sendtTilNAVDato}
-            render={() => (
+        <>
+            {valgtSoknad.sendtTilNAVDato && (
                 <Alert variant="success" data-cy="sendt-nav">
                     <Heading size="small" level="2">
                         {tekst('kvittering.soknaden-er-sendt-til')} {Mottaker.NAV}
@@ -34,7 +32,7 @@ const KvitteringStatus = () => {
                     </BodyShort>
                 </Alert>
             )}
-        />
+        </>
     )
 }
 

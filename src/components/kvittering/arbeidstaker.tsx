@@ -10,7 +10,6 @@ import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 import { sendtForMerEnn30DagerSiden } from '../../utils/dato-utils'
 import { tekst } from '../../utils/tekster'
-import Vis from '../vis'
 import useSoknader from '../../hooks/useSoknader'
 import { RSSoknadmetadata } from '../../types/rs-types/rs-soknadmetadata'
 import useSykmelding from '../../hooks/useSykmelding'
@@ -167,28 +166,24 @@ const Arbeidstaker = () => {
 
             <div className="col-span-12 mx-4 mb-8 border-b-2 border-b-gray-200 pb-2" />
 
-            <Vis
-                hvis={!sendtForMerEnn30DagerSiden(valgtSoknad.sendtTilArbeidsgiverDato, valgtSoknad.sendtTilNAVDato)}
-                render={() => {
-                    return (
-                        <>
-                            <GridItems>
-                                {kvitteringTekst === 'medOpphold' ? (
-                                    <Heading size="small" level="3">
-                                        {tekst('kvittering.viktig-informasjon')}
-                                    </Heading>
-                                ) : (
-                                    <Heading size="small" level="3">
-                                        {tekst('kvittering.hva-skjer-videre')}
-                                    </Heading>
-                                )}
-                            </GridItems>
+            {!sendtForMerEnn30DagerSiden(valgtSoknad.sendtTilArbeidsgiverDato, valgtSoknad.sendtTilNAVDato) && (
+                <>
+                    <GridItems>
+                        {kvitteringTekst === 'medOpphold' && (
+                            <Heading size="small" level="3">
+                                {tekst('kvittering.viktig-informasjon')}
+                            </Heading>
+                        )}
+                        {kvitteringTekst !== 'medOpphold' && (
+                            <Heading size="small" level="3">
+                                {tekst('kvittering.hva-skjer-videre')}
+                            </Heading>
+                        )}
+                    </GridItems>
 
-                            <GridItems>{kvitteringInnhold()}</GridItems>
-                        </>
-                    )
-                }}
-            />
+                    <GridItems>{kvitteringInnhold()}</GridItems>
+                </>
+            )}
         </KvtteringPanel>
     )
 }

@@ -4,7 +4,6 @@ import { RSArbeidssituasjon } from '../../types/rs-types/rs-arbeidssituasjon'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 import Opplysninger from '../opplysninger-fra-sykmelding/opplysninger'
 import Oppsummering from '../oppsummering/oppsummering'
-import Vis from '../vis'
 import { useSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
 
 import Arbeidstaker from './arbeidstaker'
@@ -25,10 +24,9 @@ const Kvittering = () => {
 
             <Oppsummering />
 
-            <Vis
-                hvis={valgtSoknad.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND}
-                render={() => <Opplysninger ekspandert={false} steg="kvittering" />}
-            />
+            {valgtSoknad.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND && (
+                <Opplysninger ekspandert={false} steg="kvittering" />
+            )}
         </div>
     )
 }

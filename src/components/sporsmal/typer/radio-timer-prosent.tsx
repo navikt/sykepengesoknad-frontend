@@ -7,7 +7,6 @@ import { rodeUkeDagerIPerioden } from '../../../utils/helligdager-utils'
 import { hentSporsmal, hentUndersporsmal } from '../../../utils/soknad-utils'
 import validerArbeidsgrad from '../../../utils/sporsmal/valider-arbeidsgrad'
 import { getLedetekst, tekst } from '../../../utils/tekster'
-import Vis from '../../vis'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { hentFeilmelding } from '../sporsmal-utils'
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
@@ -133,19 +132,16 @@ const RadioTimerProsent = ({ sporsmal }: SpmProps) => {
                 <TimerProsentAlert valgtSoknad={valgtSoknad} beregnGradNy={beregnGradNy} />
             )}
 
-            <Vis
-                hvis={errorTimer && rodeUkeDagerIPerioden(valgtSoknad!.fom, valgtSoknad!.tom)}
-                render={() => (
-                    <ReadMore header={lavereProsentHjelpTittel}>
-                        <BodyLong spacing>
-                            {tekst('ekspanderbarhjelp.prosenten_lavere_enn_forventet_arbeidstaker.innhold1')}
-                        </BodyLong>
-                        <BodyLong spacing>
-                            {tekst('ekspanderbarhjelp.prosenten_lavere_enn_forventet_arbeidstaker.innhold2')}
-                        </BodyLong>
-                    </ReadMore>
-                )}
-            />
+            {errorTimer && rodeUkeDagerIPerioden(valgtSoknad!.fom, valgtSoknad!.tom) && (
+                <ReadMore header={lavereProsentHjelpTittel}>
+                    <BodyLong spacing>
+                        {tekst('ekspanderbarhjelp.prosenten_lavere_enn_forventet_arbeidstaker.innhold1')}
+                    </BodyLong>
+                    <BodyLong spacing>
+                        {tekst('ekspanderbarhjelp.prosenten_lavere_enn_forventet_arbeidstaker.innhold2')}
+                    </BodyLong>
+                </ReadMore>
+            )}
         </>
     )
 }

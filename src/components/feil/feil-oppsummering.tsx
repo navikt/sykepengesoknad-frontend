@@ -6,7 +6,6 @@ import { RSSvartype } from '../../types/rs-types/rs-svartype'
 import { Soknad, Sporsmal } from '../../types/types'
 import { flattenSporsmal } from '../../utils/soknad-utils'
 import { logEvent } from '../amplitude/amplitude'
-import Vis from '../vis'
 import { FetchError } from '../../utils/fetch'
 
 const FeilOppsummering = ({
@@ -95,12 +94,18 @@ const FeilOppsummering = ({
             klikk()
         }
     }
+
     return (
         <div aria-live="polite" role="alert">
-            <Vis
-                hvis={antall > 0}
-                render={() => {
-                    const elements = entries.map((list) => (
+            {antall > 0 && (
+                <ErrorSummary
+                    ref={oppsummering}
+                    size="medium"
+                    heading={sendError ? 'Beklager, det oppstod en feil' : 'Det er ' + antall + ' feil i skjemaet'}
+                    className="mt-8"
+                    data-cy="feil-oppsumering"
+                >
+                    {entries.map((list) => (
                         <ErrorSummary.Item
                             href="#"
                             key={list[1].message + list[0]}
@@ -110,36 +115,20 @@ const FeilOppsummering = ({
                         >
                             {list[1].message}
                         </ErrorSummary.Item>
-                    ))
-                    if (sendError) {
-                        elements.push(
-                            <ErrorSummary.Item
-                                onKeyDown={(e) => handleKeyDownSendError(e)}
-                                onClick={() => klikk()}
-                                key="send-error"
-                            >
-                                {sendError?.status == 400
-                                    ? 'Vi har lagret dine svar, men du må laste inn siden på nytt før du kan sende søknaden. Klikk her for å laste inn siden på nytt.'
-                                    : 'Beklager, det oppstod en teknisk feil.'}
-                            </ErrorSummary.Item>,
-                        )
-                    }
-                    const heading = sendError
-                        ? 'Beklager, det oppstod en feil'
-                        : 'Det er ' + antall + ' feil i skjemaet'
-                    return (
-                        <ErrorSummary
-                            ref={oppsummering}
-                            size="medium"
-                            heading={heading}
-                            className="mt-8"
-                            data-cy="feil-oppsumering"
+                    ))}
+                    {sendError && (
+                        <ErrorSummary.Item
+                            onKeyDown={(e) => handleKeyDownSendError(e)}
+                            onClick={() => klikk()}
+                            key="send-error"
                         >
-                            {elements}
-                        </ErrorSummary>
-                    )
-                }}
-            />
+                            {sendError?.status == 400
+                                ? 'Vi har lagret dine svar, men du må laste inn siden på nytt før du kan sende søknaden. Klikk her for å laste inn siden på nytt.'
+                                : 'Beklager, det oppstod en teknisk feil.'}
+                        </ErrorSummary.Item>
+                    )}
+                </ErrorSummary>
+            )}
         </div>
     )
 }
