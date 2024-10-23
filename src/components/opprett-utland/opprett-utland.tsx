@@ -55,7 +55,11 @@ const OpprettUtland = () => {
 
         const soknad = rsToSoknad(data)
         queryClient.setQueriesData(['soknad', soknad.id], soknad)
-        await queryClient.invalidateQueries(['soknader'])
+
+        if ((!soknader?.map((s) => s.id).includes(soknad.id) && soknader?.length) || -1 >= 0) {
+            const oppdaterteSoknader = [...soknader!, soknad]
+            queryClient.setQueriesData(['soknader'], oppdaterteSoknader)
+        }
         await router.push(urlTilSoknad(soknad, true, true))
     }
 
@@ -64,7 +68,6 @@ const OpprettUtland = () => {
             <Heading size="large" level="1" className="mt-8 mb-10">
                 {tekst('opprett-utland.tittel')}
             </Heading>
-
             <BodyLong className="mb-3">
                 Du må søke om å beholde sykepengene hvis du planlegger å reise utenfor EU/EØS, eller har reist, mens du
                 er sykmeldt. Du bør sende søknaden før du reiser, for å være sikker på at du beholder sykepengene dine.
