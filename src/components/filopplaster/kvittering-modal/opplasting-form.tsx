@@ -37,7 +37,7 @@ const OpplastingForm = ({ valgtSoknad, setOpenModal, openModal }: OpplastingFrom
 
     const [valgtFil, setValgtFil] = useState<FileObject[]>([])
 
-    const MAX_FILE_SIZE_IN_MEGA_BYTES = 5
+    const MAX_FILE_SIZE_IN_MEGA_BYTES = 10
 
     const MAX_FILE_SIZE_IN_BYTES = MAX_FILE_SIZE_IN_MEGA_BYTES * 1024 * 1024
 
