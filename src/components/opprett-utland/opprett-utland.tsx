@@ -51,7 +51,7 @@ const OpprettUtland = () => {
 
         const soknad = rsToSoknad(data)
 
-        window.location.href = urlTilSoknad(soknad, true, true)
+        window.location.href = '/syk/sykepengesoknad' + urlTilSoknad(soknad, true, true)
     }
 
     return (
