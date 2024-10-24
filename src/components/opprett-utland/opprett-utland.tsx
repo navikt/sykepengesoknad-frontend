@@ -1,8 +1,6 @@
 import { Alert, BodyLong, BodyShort, Button, ExpansionCard, Heading, List } from '@navikt/ds-react'
 import { logger } from '@navikt/next-logger'
 import React, { useState } from 'react'
-import { useQueryClient } from '@tanstack/react-query'
-import { useRouter } from 'next/router'
 
 import { AuthenticationError, fetchJsonMedRequestId } from '../../utils/fetch'
 import { tekst } from '../../utils/tekster'
@@ -18,9 +16,7 @@ import useSoknad from '../../hooks/useSoknad'
 import AvbrytOppholdUtlandSoknadModal from '../avbryt-soknad-modal/avbryt-opphold-utland-soknad-modal'
 
 const OpprettUtland = () => {
-    const queryClient = useQueryClient()
     const [feilmeldingTekst, setFeilmeldingTekst] = useState<string>()
-    const router = useRouter()
     const testpersonQuery = useTestpersonQuery()
     const { data: soknader } = useSoknader()
     const hentSisteUtlandSoknad = soknader?.find(
@@ -54,9 +50,8 @@ const OpprettUtland = () => {
         }
 
         const soknad = rsToSoknad(data)
-        queryClient.setQueriesData(['soknad', soknad.id], soknad)
-        await queryClient.invalidateQueries(['soknader'])
-        await router.push(urlTilSoknad(soknad, true, true))
+
+        window.location.href = '/syk/sykepengesoknad' + urlTilSoknad(soknad, true, true)
     }
 
     return (
@@ -64,7 +59,6 @@ const OpprettUtland = () => {
             <Heading size="large" level="1" className="mt-8 mb-10">
                 {tekst('opprett-utland.tittel')}
             </Heading>
-
             <BodyLong className="mb-3">
                 Du må søke om å beholde sykepengene hvis du planlegger å reise utenfor EU/EØS, eller har reist, mens du
                 er sykmeldt. Du bør sende søknaden før du reiser, for å være sikker på at du beholder sykepengene dine.
