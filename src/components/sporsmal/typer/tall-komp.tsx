@@ -116,8 +116,10 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
             />
 
             {sporsmal.tag == 'NYTT_ARBEIDSFORHOLD_UNDERVEIS_BRUTTO' && (
-                <ReadMore header="Jobbet i ferien?" className="mt-4">
-                    Du trenger ikke oppgi eventuell inntekt du opparbeidet deg når du egentlig hadde ferie.
+                <ReadMore header="Jobbet i ferie, permisjon eller mens du mottok Nav-ytelser?" className="mt-4">
+                    Du skal ikke oppgi eventuell inntekt du opparbeidet deg når du hadde ferie, permisjon eller mottok
+                    andre ytelser fra Nav. Andre ytelser fra Nav kan være foreldrepenger, omsorgspenger,
+                    opplæringspenger og arbeidsavklaringspenger.
                 </ReadMore>
             )}
 
