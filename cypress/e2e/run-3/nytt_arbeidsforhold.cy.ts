@@ -16,11 +16,11 @@ describe('Tester nytt arbeidsforhold', () => {
     it('Ekspanderer ferie hjelpetekst', function () {
         cy.get('body')
             .findByRole('button', {
-                name: 'Jobbet i ferien?',
+                name: 'Jobbet i ferie, permisjon eller mens du mottok Nav-ytelser?',
             })
             .click()
-        cy.contains('Du trenger ikke oppgi eventuell inntekt du opparbeidet deg når du egentlig hadde ferie.').should(
-            'be.visible',
-        )
+        cy.contains(
+            'Du skal ikke oppgi eventuell inntekt du opparbeidet deg når du hadde ferie, permisjon eller mottok andre ytelser fra Nav. Andre ytelser fra Nav kan være foreldrepenger, omsorgspenger, opplæringspenger og arbeidsavklaringspenger.',
+        ).should('be.visible')
     })
 })
