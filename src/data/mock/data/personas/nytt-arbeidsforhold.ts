@@ -38,5 +38,5 @@ export const nyttArbeidsforhold: Persona = {
     soknader: [nyttArbeidsforholdSoknad],
     sykmeldinger: [brukertestSykmelding],
     kontonummer: '12340000000',
-    beskrivelse: 'Førstegangsspørsmål om nytt arbeidsforhold',
+    beskrivelse: 'Spørsmål om nytt arbeidsforhold',
 }

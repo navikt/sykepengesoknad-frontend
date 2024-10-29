@@ -1,7 +1,7 @@
 import { heading, svarJaHovedsporsmal } from '../../support/utilities'
 
 describe('Tester nytt arbeidsforhold', () => {
-    it('Åpner førstegangs nytt arbeidsforhold sporsmål', function () {
+    it('Åpner nytt arbeidsforhold sporsmål', function () {
         cy.clearCookies()
         cy.visit('/syk/sykepengesoknad/soknader/260f06b5-9fd0-4b30-94d2-4f90851b4cac/7?testperson=nytt-arbeidsforhold')
         heading('Nytt arbeidsforhold', 2).should('exist')
