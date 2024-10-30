@@ -43,7 +43,7 @@ describe('Tester cummulative-layout-shift ', () => {
 
         // Venter på at alle dataene er fetchet og rendret
 
-        cy.contains('Jeg vil svare så godt jeg kan på spørsmålene i søknaden.').should('be.visible')
+        cy.contains('Jeg bekrefter at jeg vil svare så riktig som jeg kan.').should('be.visible')
         cy.get('.navds-skeleton').should('have.length', 0)
 
         mainSkalHaHoyde(1657)

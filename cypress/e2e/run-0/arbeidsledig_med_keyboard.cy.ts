@@ -36,7 +36,7 @@ describe('Tester arbeidsledigsøknad', () => {
         cy.focused()
             .parent()
             .parent()
-            .contains('Jeg vil svare så godt jeg kan på spørsmålene i søknaden.')
+            .contains('Jeg bekrefter at jeg vil svare så riktig som jeg kan.')
             .should('have.css', 'box-shadow')
         cy.realPress('Space')
         cy.realPress('Tab')
