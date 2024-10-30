@@ -67,7 +67,7 @@ export function svarCheckboxPanel() {
 export function checkViStolerPaDeg(gaVidere = true) {
     cy.get('form')
         .findByRole('checkbox', {
-            name: /Jeg vil svare så godt jeg kan på spørsmålene i søknaden./i,
+            name: /Jeg bekrefter at jeg vil svare så riktig som jeg kan./i,
         })
         .click()
     if (gaVidere) {

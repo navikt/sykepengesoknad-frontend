@@ -31,7 +31,7 @@ export const arbeidsledigMedNyOppholdUtenforESSporsmal: RSSoknad = {
         {
             id: '687395',
             tag: 'ANSVARSERKLARING',
-            sporsmalstekst: 'Jeg vil svare så godt jeg kan på spørsmålene i søknaden.',
+            sporsmalstekst: 'Jeg bekrefter at jeg vil svare så riktig som jeg kan.',
             undertekst: null,
             svartype: 'CHECKBOX_PANEL',
             min: null,
@@ -338,7 +338,7 @@ export const arbeidsledig: RSSoknad = {
         {
             id: '687395',
             tag: 'ANSVARSERKLARING',
-            sporsmalstekst: 'Jeg vil svare så godt jeg kan på spørsmålene i søknaden.',
+            sporsmalstekst: 'Jeg bekrefter at jeg vil svare så riktig som jeg kan.',
             undertekst: null,
             svartype: 'CHECKBOX_PANEL',
             min: null,

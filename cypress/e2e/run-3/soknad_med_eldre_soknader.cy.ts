@@ -69,7 +69,7 @@ describe('Eldre søknader', () => {
 
 function fyllUtSoknad() {
     it('Fyller ut søknaden', () => {
-        cy.contains('Jeg vil svare så godt jeg kan på spørsmålene i søknaden.').click()
+        cy.contains('Jeg bekrefter at jeg vil svare så riktig som jeg kan.').click()
 
         cy.contains('Start søknad').click()
 

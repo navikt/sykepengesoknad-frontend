@@ -32,7 +32,7 @@ const soknad: RSSoknad = {
         {
             id: '43f3c0c5-65cb-3d4e-b31f-c02c2599ee95',
             tag: 'ANSVARSERKLARING',
-            sporsmalstekst: 'Jeg vil svare så godt jeg kan på spørsmålene i søknaden.',
+            sporsmalstekst: 'Jeg bekrefter at jeg vil svare så riktig som jeg kan.',
             undertekst: null,
             svartype: 'CHECKBOX_PANEL',
             min: null,
