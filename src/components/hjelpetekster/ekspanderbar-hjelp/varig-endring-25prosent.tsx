@@ -21,22 +21,22 @@ export const VarigEndring25prosent = ({ sporsmal }: VarigEndring25prosentProps) 
                 <BodyShort weight="semibold">Årsinntekten for et kalenderår beregnes med denne formelen</BodyShort>
                 <Box marginBlock="2" padding="4" borderRadius="medium" background="bg-subtle">
                     <div className="flex justify-center text-small md:text-medium">
-                        Pensjonsgivende årsinntekt
+                        Ferdiglignet årsinntekt
                         <div className="flex justify-center w-12 mx-2">x</div>
-                        grunnbeløpet på sykmeldingstidspunktet
+                        Grunnbeløpet (G) på sykmeldingstidspunktet
                     </div>
                     <div className="border-t border-black w-full mt-3 mb-3"></div>
                     <BodyShort className="flex justify-center text-small md:text-medium">
-                        Gjennomsnittlig grunnbeløp i det aktuelle kalenderåret
+                        Gjennomsnittlig G i det aktuelle kalenderåret
                     </BodyShort>
                 </Box>
                 <BodyShort size="small" className="text-text-subtle">
-                    Sykepengegrunnlaget kan ikke være høyere enn 6G. Hvis du hadde høyere inntekt enn dette i ett eller
-                    flere år, regner man en tredjedel av inntekten mellom 6G og 12G. Inntekt over 12G regnes ikke med.
+                    Videre beregnes den endelige årsinntekten ved å ta hele inntekten opp til 6 G og legge til en
+                    tredjedel av inntekten som overstiger 6 G, opp til en grense på 12 G.
                 </BodyShort>
                 <LenkeMedIkon href="https://www.nav.no/grunnbelopet" text="Les mer om grunnbeløpet" />
                 <BodyShort className="mt-4" spacing>
-                    Din inntekt per kalenderår, de tre siste ferdiglignede årene:
+                    Din beregnede inntekt per kalenderår de siste tre ferdiglignede årene:
                 </BodyShort>
                 <div>
                     {inntektMetadata.inntekter?.map((inntekt: { aar: string; verdi: number }) => (
@@ -46,8 +46,7 @@ export const VarigEndring25prosent = ({ sporsmal }: VarigEndring25prosentProps) 
                     ))}
                 </div>
                 <BodyShort className="mt-4">
-                    Så regnes den gjennomsnittlige årsinntekten ut basert på de tre siste årene, slik at den
-                    gjennomsnittlige årsinntekten din blir{' '}
+                    Beregnet gjennomsnittlig årsinntekt blir{' '}
                     <strong>{formatterTall(inntektMetadata.beregnet?.snitt)}</strong> kroner.
                 </BodyShort>
             </>
