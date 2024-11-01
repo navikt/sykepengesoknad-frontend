@@ -38,7 +38,7 @@
         "remeda": "^2.16.0",
         "tailwind-merge": "^2.5.4",
         "use-force-update": "^1.0.11",
-        "uuid": "^10.0.0"
+        "uuid": "^11.0.2"
     },
     "devDependencies": {
         "@cypress/webpack-preprocessor": "^6.0.2",
