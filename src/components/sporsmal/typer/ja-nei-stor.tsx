@@ -22,8 +22,18 @@ import { useSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
 import { KjentOppholdstillatelse } from '../kjent-oppholdstillatelse'
 import { NyttArbeidsforhold } from '../nytt-arbeidsforhold'
 import { logEvent } from '../../amplitude/amplitude'
+import { Soknad } from '../../../types/types'
 
 import { jaNeiStorStyle, JaNeiStyle } from './ja-nei-stor-style'
+
+function harSvartJaFerie(valgtSoknad: Soknad | undefined) {
+    if (!valgtSoknad) {
+        return false
+    }
+    return valgtSoknad.sporsmal.some(
+        (s) => s.tag === 'FERIE_V2' && s.svarliste.svar.some((svar) => svar.verdi === 'JA'),
+    )
+}
 
 const JaNeiStor = ({ sporsmal }: SpmProps) => {
     const {
@@ -161,6 +171,14 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
                     start="undersporsmal"
                 >
                     <>
+                        {sporsmal.tag === 'NYTT_ARBEIDSFORHOLD_UNDERVEIS' &&
+                            watchJaNei === 'JA' &&
+                            harSvartJaFerie(valgtSoknad) && (
+                                <Alert className="mt-8" variant="info">
+                                    Du svarte at du hadde ferie, det påvirker hva du skal svarer her.
+                                </Alert>
+                            )}
+
                         <UndersporsmalListe oversporsmal={sporsmal} oversporsmalSvar={watchJaNei} />
 
                         {valgtSoknad?.status === RSSoknadstatus.UTKAST_TIL_KORRIGERING &&
