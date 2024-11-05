@@ -1,4 +1,4 @@
-import { BodyShort, ReadMore, TextField } from '@navikt/ds-react'
+import { BodyShort, TextField } from '@navikt/ds-react'
 import React from 'react'
 import { useFormContext } from 'react-hook-form'
 
@@ -114,14 +114,6 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
                     },
                 })}
             />
-
-            {sporsmal.tag == 'NYTT_ARBEIDSFORHOLD_UNDERVEIS_BRUTTO' && (
-                <ReadMore header="Jobbet i ferie, permisjon eller mens du mottok Nav-ytelser?" className="mt-4">
-                    Du skal ikke oppgi eventuell inntekt du opparbeidet deg når du hadde ferie, permisjon eller mottok
-                    andre ytelser fra Nav. Andre ytelser fra Nav kan være foreldrepenger, omsorgspenger,
-                    opplæringspenger og arbeidsavklaringspenger.
-                </ReadMore>
-            )}
 
             <div role="alert" aria-live="assertive">
                 {errors[sporsmal.id] && (

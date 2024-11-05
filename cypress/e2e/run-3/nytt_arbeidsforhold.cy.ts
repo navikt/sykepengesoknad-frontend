@@ -12,15 +12,4 @@ describe('Tester nytt arbeidsforhold', () => {
         svarJaHovedsporsmal()
         cy.contains('Hvor mye har du tjent i perioden 8. – 21. september 2022?')
     })
-
-    it('Ekspanderer ferie hjelpetekst', function () {
-        cy.get('body')
-            .findByRole('button', {
-                name: 'Jobbet i ferie, permisjon eller mens du mottok Nav-ytelser?',
-            })
-            .click()
-        cy.contains(
-            'Du skal ikke oppgi eventuell inntekt du opparbeidet deg når du hadde ferie, permisjon eller mottok andre ytelser fra Nav. Andre ytelser fra Nav kan være foreldrepenger, omsorgspenger, opplæringspenger og arbeidsavklaringspenger.',
-        ).should('be.visible')
-    })
 })
