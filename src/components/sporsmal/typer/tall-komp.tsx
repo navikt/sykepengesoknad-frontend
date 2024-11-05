@@ -61,7 +61,7 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
             sporsmal.undertekst || (manglerSporsmalsTekst ? '' : tekst(('soknad.undertekst.' + sporsmal.tag) as any))
         if (sporsmal.tag == 'NYTT_ARBEIDSFORHOLD_UNDERVEIS_BRUTTO') {
             const jaFerie = harSvartJaFerie(valgtSoknad)
-            const jaPermisjon = harSvartJaFerie(valgtSoknad)
+            const jaPermisjon = harSvartJaPermisjon(valgtSoknad)
             if (jaFerie || jaPermisjon) {
                 const feriePermisjonTekst = () => {
                     if (jaFerie) {
@@ -177,12 +177,16 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
 }
 
 function harSvartJaFerie(valgtSoknad: Soknad | undefined) {
+    return harSvartJaPaaTag(valgtSoknad, 'FERIE_V2')
+}
+function harSvartJaPermisjon(valgtSoknad: Soknad | undefined) {
+    return harSvartJaPaaTag(valgtSoknad, 'PERMISJON_V2')
+}
+function harSvartJaPaaTag(valgtSoknad: Soknad | undefined, tag: string) {
     if (!valgtSoknad) {
         return false
     }
-    return valgtSoknad.sporsmal.some(
-        (s) => s.tag === 'FERIE_V2' && s.svarliste.svar.some((svar) => svar.verdi === 'JA'),
-    )
+    return valgtSoknad.sporsmal.some((s) => s.tag === tag && s.svarliste.svar.some((svar) => svar.verdi === 'JA'))
 }
 
 export default TallKomp
