@@ -1,4 +1,4 @@
-import { BodyShort, ReadMore, TextField } from '@navikt/ds-react'
+import { Alert, BodyShort, TextField } from '@navikt/ds-react'
 import React from 'react'
 import { useFormContext } from 'react-hook-form'
 
@@ -7,6 +7,8 @@ import validerArbeidsgrad from '../../../utils/sporsmal/valider-arbeidsgrad'
 import { getLedetekst, tekst } from '../../../utils/tekster'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { hentFeilmelding } from '../sporsmal-utils'
+import { useSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
+import { Soknad } from '../../../types/types'
 
 function removeCharacters(value: string) {
     return value.replace(/[^0-9.,]/g, '')
@@ -20,6 +22,7 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
 
     const feilmelding = hentFeilmelding(sporsmal, errors[sporsmal.id])
     const { validerGrad, periode, hovedSporsmal } = validerArbeidsgrad(sporsmal)
+    const { valgtSoknad } = useSoknadMedDetaljer()
 
     const valider = () => {
         if (validerGrad) {
@@ -52,8 +55,36 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
     })()
 
     const manglerSporsmalsTekst = sporsmal.sporsmalstekst === ''
-    const description =
-        sporsmal.undertekst || (manglerSporsmalsTekst ? '' : tekst(('soknad.undertekst.' + sporsmal.tag) as any))
+
+    const description = () => {
+        const tekstDescription =
+            sporsmal.undertekst || (manglerSporsmalsTekst ? '' : tekst(('soknad.undertekst.' + sporsmal.tag) as any))
+        if (sporsmal.tag == 'NYTT_ARBEIDSFORHOLD_UNDERVEIS_BRUTTO') {
+            const jaFerie = harSvartJaFerie(valgtSoknad)
+            const jaPermisjon = harSvartJaPermisjon(valgtSoknad)
+            if (jaFerie || jaPermisjon) {
+                const feriePermisjonTekst = () => {
+                    if (jaFerie && !jaPermisjon) {
+                        return 'ferie'
+                    }
+                    if (jaPermisjon && !jaFerie) {
+                        return 'permisjon'
+                    }
+                    return 'ferie eller permisjon'
+                }
+
+                return (
+                    <>
+                        <BodyShort>{tekstDescription}</BodyShort>
+                        <Alert variant="warning" className="mt-2 bg-white border-0 p-0">
+                            {`Ikke ta med det du eventuelt tjente de dagene du hadde ${feriePermisjonTekst()} fra ${valgtSoknad?.arbeidsgiver?.navn}.`}
+                        </Alert>
+                    </>
+                )
+            }
+        }
+        return tekstDescription
+    }
 
     return (
         <div className={!sporsmal.parentKriterie ? '' : 'mt-8 w-full'}>
@@ -63,7 +94,7 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
                         ? tekst(('soknad.undertekst.' + sporsmal.tag) as any)
                         : sporsmal.sporsmalstekst
                 }
-                description={description}
+                description={description()}
                 className="[&>input]:md:w-1/2"
                 type="text"
                 id={sporsmal.id}
@@ -115,14 +146,6 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
                 })}
             />
 
-            {sporsmal.tag == 'NYTT_ARBEIDSFORHOLD_UNDERVEIS_BRUTTO' && (
-                <ReadMore header="Jobbet i ferie, permisjon eller mens du mottok Nav-ytelser?" className="mt-4">
-                    Du skal ikke oppgi eventuell inntekt du opparbeidet deg når du hadde ferie, permisjon eller mottok
-                    andre ytelser fra Nav. Andre ytelser fra Nav kan være foreldrepenger, omsorgspenger,
-                    opplæringspenger og arbeidsavklaringspenger.
-                </ReadMore>
-            )}
-
             <div role="alert" aria-live="assertive">
                 {errors[sporsmal.id] && (
                     <>
@@ -151,6 +174,19 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
             </div>
         </div>
     )
+}
+
+function harSvartJaFerie(valgtSoknad: Soknad | undefined) {
+    return harSvartJaPaaTag(valgtSoknad, 'FERIE_V2')
+}
+function harSvartJaPermisjon(valgtSoknad: Soknad | undefined) {
+    return harSvartJaPaaTag(valgtSoknad, 'PERMISJON_V2')
+}
+function harSvartJaPaaTag(valgtSoknad: Soknad | undefined, tag: string) {
+    if (!valgtSoknad) {
+        return false
+    }
+    return valgtSoknad.sporsmal.some((s) => s.tag === tag && s.svarliste.svar.some((svar) => svar.verdi === 'JA'))
 }
 
 export default TallKomp
