@@ -175,7 +175,7 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
                             watchJaNei === 'JA' &&
                             harSvartJaFerie(valgtSoknad) && (
                                 <Alert className="mt-8" variant="info">
-                                    Du svarte at du hadde ferie, det påvirker hva du skal svarer her.
+                                    {`Du svarte at du hadde ferie fra ${valgtSoknad.arbeidsgiver?.navn}, det påvirker hva du skal svare her.`}
                                 </Alert>
                             )}
 
