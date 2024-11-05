@@ -1,4 +1,4 @@
-import { BodyShort, TextField } from '@navikt/ds-react'
+import { Alert, BodyShort, TextField } from '@navikt/ds-react'
 import React from 'react'
 import { useFormContext } from 'react-hook-form'
 
@@ -7,6 +7,8 @@ import validerArbeidsgrad from '../../../utils/sporsmal/valider-arbeidsgrad'
 import { getLedetekst, tekst } from '../../../utils/tekster'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { hentFeilmelding } from '../sporsmal-utils'
+import { useSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
+import { Soknad } from '../../../types/types'
 
 function removeCharacters(value: string) {
     return value.replace(/[^0-9.,]/g, '')
@@ -20,6 +22,7 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
 
     const feilmelding = hentFeilmelding(sporsmal, errors[sporsmal.id])
     const { validerGrad, periode, hovedSporsmal } = validerArbeidsgrad(sporsmal)
+    const { valgtSoknad } = useSoknadMedDetaljer()
 
     const valider = () => {
         if (validerGrad) {
@@ -52,8 +55,22 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
     })()
 
     const manglerSporsmalsTekst = sporsmal.sporsmalstekst === ''
-    const description =
-        sporsmal.undertekst || (manglerSporsmalsTekst ? '' : tekst(('soknad.undertekst.' + sporsmal.tag) as any))
+
+    function description() {
+        const tekstDescription =
+            sporsmal.undertekst || (manglerSporsmalsTekst ? '' : tekst(('soknad.undertekst.' + sporsmal.tag) as any))
+        if (sporsmal.tag == 'NYTT_ARBEIDSFORHOLD_UNDERVEIS_BRUTTO' && harSvartJaFerie(valgtSoknad)) {
+            return (
+                <div>
+                    <BodyShort>{tekstDescription}</BodyShort>
+                    <Alert variant="warning" className="mt-2 bg-white border-0 p-0">
+                        {`Ikke ta med det du eventuelt tjente de dagene du hadde ferie fra ${valgtSoknad?.arbeidsgiver?.navn}.`}
+                    </Alert>
+                </div>
+            )
+        }
+        return tekstDescription
+    }
 
     return (
         <div className={!sporsmal.parentKriterie ? '' : 'mt-8 w-full'}>
@@ -63,7 +80,7 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
                         ? tekst(('soknad.undertekst.' + sporsmal.tag) as any)
                         : sporsmal.sporsmalstekst
                 }
-                description={description}
+                description={description()}
                 className="[&>input]:md:w-1/2"
                 type="text"
                 id={sporsmal.id}
@@ -142,6 +159,15 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
                 )}
             </div>
         </div>
+    )
+}
+
+function harSvartJaFerie(valgtSoknad: Soknad | undefined) {
+    if (!valgtSoknad) {
+        return false
+    }
+    return valgtSoknad.sporsmal.some(
+        (s) => s.tag === 'FERIE_V2' && s.svarliste.svar.some((svar) => svar.verdi === 'JA'),
     )
 }
 
