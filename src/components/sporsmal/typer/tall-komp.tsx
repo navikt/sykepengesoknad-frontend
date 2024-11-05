@@ -56,18 +56,32 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
 
     const manglerSporsmalsTekst = sporsmal.sporsmalstekst === ''
 
-    function description() {
+    const description = () => {
         const tekstDescription =
             sporsmal.undertekst || (manglerSporsmalsTekst ? '' : tekst(('soknad.undertekst.' + sporsmal.tag) as any))
-        if (sporsmal.tag == 'NYTT_ARBEIDSFORHOLD_UNDERVEIS_BRUTTO' && harSvartJaFerie(valgtSoknad)) {
-            return (
-                <div>
-                    <BodyShort>{tekstDescription}</BodyShort>
-                    <Alert variant="warning" className="mt-2 bg-white border-0 p-0">
-                        {`Ikke ta med det du eventuelt tjente de dagene du hadde ferie fra ${valgtSoknad?.arbeidsgiver?.navn}.`}
-                    </Alert>
-                </div>
-            )
+        if (sporsmal.tag == 'NYTT_ARBEIDSFORHOLD_UNDERVEIS_BRUTTO') {
+            const jaFerie = harSvartJaFerie(valgtSoknad)
+            const jaPermisjon = harSvartJaFerie(valgtSoknad)
+            if (jaFerie || jaPermisjon) {
+                const feriePermisjonTekst = () => {
+                    if (jaFerie) {
+                        return 'ferie'
+                    }
+                    if (jaPermisjon) {
+                        return 'permisjon'
+                    }
+                    return 'ferie eller permisjon'
+                }
+
+                return (
+                    <>
+                        <BodyShort>{tekstDescription}</BodyShort>
+                        <Alert variant="warning" className="mt-2 bg-white border-0 p-0">
+                            {`Ikke ta med det du eventuelt tjente de dagene du hadde ${feriePermisjonTekst()} fra ${valgtSoknad?.arbeidsgiver?.navn}.`}
+                        </Alert>
+                    </>
+                )
+            }
         }
         return tekstDescription
     }
