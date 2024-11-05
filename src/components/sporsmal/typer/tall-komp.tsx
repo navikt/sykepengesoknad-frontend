@@ -64,10 +64,10 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
             const jaPermisjon = harSvartJaPermisjon(valgtSoknad)
             if (jaFerie || jaPermisjon) {
                 const feriePermisjonTekst = () => {
-                    if (jaFerie) {
+                    if (jaFerie && !jaPermisjon) {
                         return 'ferie'
                     }
-                    if (jaPermisjon) {
+                    if (jaPermisjon && !jaFerie) {
                         return 'permisjon'
                     }
                     return 'ferie eller permisjon'
