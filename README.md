@@ -16,6 +16,8 @@ I din `.bashrc` eller `.zshrc`, sett følgende miljøvariabel:
 ## Dette logges i Amplitude
 
 
+
+
 | brukers handling/logg                                      | skjemanavn | søknadstype | søknadsstatus | spørsmålstag | tekst | svar (hoved) | komponentnavn |
 |------------------------------------------------------------|:----------:|:-----------:|:-------------:|:------------:|:-----:|:------------:|:-------------:|
 | Åpne skjema                                                |     x      |      x      |       x       |              |       |              |               |
