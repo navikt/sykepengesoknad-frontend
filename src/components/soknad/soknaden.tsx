@@ -175,7 +175,8 @@ export const Soknaden = () => {
                 sporsmal?.tag == 'INNTEKTSOPPLYSNINGER_DRIFT_VIRKSOMHETEN' ||
                 sporsmal?.tag == 'INNTEKTSOPPLYSNINGER_VIRKSOMHETEN_AVVIKLET' ||
                 sporsmal?.tag == 'MEDLEMSKAP_OPPHOLDSTILLATELSE_V2' ||
-                valgtSoknad?.soknadstype === RSSoknadstype.OPPHOLD_UTLAND) && (
+                sporsmal?.tag == 'JOBBET_DU_GRADERT' ||
+                sporsmal?.tag == 'ARBEID_UNDERVEIS_100_PROSENT') && (
                 <FlexjarSporsmal soknad={valgtSoknad} sporsmal={sporsmal} steg={stegNo} />
             )}
             <FlexjarSurveyModal
