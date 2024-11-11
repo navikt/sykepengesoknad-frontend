@@ -128,5 +128,6 @@ export function rsToSoknad(soknad: RSSoknad): Soknad {
         soknad.inntektsopplysningerInnsendingId,
         soknad.inntektsopplysningerInnsendingDokumenter,
         kjentOppholdstillatelse,
+        soknad.julesoknad,
     )
 }

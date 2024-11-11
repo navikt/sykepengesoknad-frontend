@@ -172,6 +172,7 @@ export const Soknaden = () => {
                 </Button>
             )}
             {(flexjarToggle.enabled ||
+                valgtSoknad?.julesoknad ||
                 sporsmal?.tag == 'INNTEKTSOPPLYSNINGER_DRIFT_VIRKSOMHETEN' ||
                 sporsmal?.tag == 'INNTEKTSOPPLYSNINGER_VIRKSOMHETEN_AVVIKLET' ||
                 sporsmal?.tag == 'MEDLEMSKAP_OPPHOLDSTILLATELSE_V2' ||

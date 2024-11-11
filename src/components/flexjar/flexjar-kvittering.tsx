@@ -10,6 +10,12 @@ export const FlexjarKvittering = () => {
     const { valgtSoknad } = useSoknadMedDetaljer()
 
     const feedbackId = 'sykepengesoknad-kvittering'
+    const feedbackProps: Record<string, string | undefined | boolean> = {
+        soknadstype: valgtSoknad?.soknadstype.toString(),
+    }
+    if (valgtSoknad?.julesoknad) {
+        feedbackProps['julesøknad'] = true
+    }
     return (
         <EmojiFlexjar
             feedbackId={feedbackId}
@@ -20,9 +26,7 @@ export const FlexjarKvittering = () => {
             getPlaceholder={() => 'Fortell oss om din opplevelse (valgfritt)'}
             flexjarsporsmal="Hvordan opplevde du denne søknaden?"
             flexjartittel="Hjelp oss med å gjøre søknaden bedre"
-            feedbackProps={{
-                soknadstype: valgtSoknad?.soknadstype.toString(),
-            }}
+            feedbackProps={feedbackProps}
         />
     )
 }

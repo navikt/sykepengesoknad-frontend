@@ -47,6 +47,13 @@ export const FlexjarSporsmal = ({ soknad, sporsmal, steg }: FlexjarSporsmalProps
     }
 
     const feedbackId = 'sykepengesoknad-sporsmal'
+    const feedbackProps: Record<string, string | undefined | boolean> = {
+        soknadstype: soknad?.soknadstype.toString(),
+        sporsmal: sporsmal?.tag.toString(),
+    }
+    if (soknad?.julesoknad) {
+        feedbackProps['julesøknad'] = true
+    }
     return (
         <FlexjarFelles
             feedbackId={feedbackId}
@@ -55,10 +62,7 @@ export const FlexjarSporsmal = ({ soknad, sporsmal, steg }: FlexjarSporsmalProps
             thanksFeedback={thanksFeedback}
             setThanksFeedback={setThanksFeedback}
             getPlaceholder={getPlaceholder}
-            feedbackProps={{
-                soknadstype: soknad?.soknadstype.toString(),
-                sporsmal: sporsmal?.tag.toString(),
-            }}
+            feedbackProps={feedbackProps}
             textRequired={activeState === 'FORBEDRING' || activeState === 'NEI'}
             flexjartittel="Hjelp oss med å gjøre søknaden bedre"
             flexjarsporsmal="Opplever du at du har nok informasjon til å svare på dette spørsmålet?"

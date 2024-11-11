@@ -40,4 +40,5 @@ export interface RSSoknad {
     inntektsopplysningerInnsendingId?: string
     inntektsopplysningerInnsendingDokumenter?: string[]
     kjentOppholdstillatelse?: RSKjentOppholdstillatelse
+    julesoknad?: boolean
 }
