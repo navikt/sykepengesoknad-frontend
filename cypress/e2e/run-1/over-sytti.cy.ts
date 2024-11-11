@@ -1,7 +1,7 @@
 describe('Tester søknader tilhørende person over 70', () => {
     it('Person over 70', function () {
         cy.visit(
-            'http://localhost:8080/syk/sykepengesoknad/soknader/df1371a4-2773-41c2-a895-49f56142496c/1?testperson=over-70',
+            'http://localhost:3000/syk/sykepengesoknad/soknader/df1371a4-2773-41c2-a895-49f56142496c/1?testperson=over-70',
         )
 
         cy.get('.navds-alert').should('be.visible')

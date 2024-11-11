@@ -1,7 +1,7 @@
 describe('Tester søknader tilhørende tilbakedaterte sykmeldinger', () => {
     it('Tilbakedatering under behandling', function () {
         cy.visit(
-            'http://localhost:8080/syk/sykepengesoknad/soknader/9205cc51-145b-4bda-8e99-aeaade949daf/1?testperson=tilbakedateringer',
+            'http://localhost:3000/syk/sykepengesoknad/soknader/9205cc51-145b-4bda-8e99-aeaade949daf/1?testperson=tilbakedateringer',
         )
 
         // Viktig informasjon grunnet tilbakedatering
@@ -14,7 +14,7 @@ describe('Tester søknader tilhørende tilbakedaterte sykmeldinger', () => {
 
     it('Tilbakedatering avvist', function () {
         cy.visit(
-            'http://localhost:8080/syk/sykepengesoknad/soknader/9205cc51-145b-4bda-8e99-aeaade949daa/1?testperson=tilbakedateringer',
+            'http://localhost:3000/syk/sykepengesoknad/soknader/9205cc51-145b-4bda-8e99-aeaade949daa/1?testperson=tilbakedateringer',
         )
 
         // Viktig informasjon grunnet tilbakedatering
