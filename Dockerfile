@@ -5,6 +5,7 @@ ENV NODE_ENV=production
 COPY /next.config.js ./
 COPY /next-logger.config.js ./
 COPY /.next ./.next
+COPY /.env ./
 COPY /public ./public
 COPY /node_modules ./node_modules
 
