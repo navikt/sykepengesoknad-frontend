@@ -36,7 +36,7 @@ describe('Tester flexjar', () => {
                     name: 'Send tilbakemelding',
                 }).click()
             })
-        cy.contains('Takk for tilbakemeldingen din!')
+        cy.contains('Takk for tilbakemeldingen!')
     })
 
     it('Navigerer til siste side', function () {
@@ -68,7 +68,7 @@ describe('Tester flexjar', () => {
         heading('Tilbakemeldingen din er viktig for oss!').should('exist')
     })
 
-    it('Har kvittering flexjar på kvitteringa', function () {
+    it('Har emoji flexjar på kvitteringa', function () {
         cy.contains('Hva synes du om denne søknaden?')
         heading('Tilbakemeldingen din er viktig for oss!')
             .closest('section')
@@ -86,6 +86,6 @@ describe('Tester flexjar', () => {
                     name: 'Send tilbakemelding',
                 }).click()
             })
-        cy.contains('Takk for tilbakemeldingen din!')
+        cy.contains('Takk for tilbakemeldingen!')
     })
 })
