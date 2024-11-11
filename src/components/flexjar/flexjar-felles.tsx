@@ -138,6 +138,9 @@ export function FlexjarFelles({
                                         ref={textAreaRef}
                                         error={errorMsg}
                                         label={getPlaceholder()}
+                                        description={
+                                            'Unngå å skrive inn navn, fødselsnummer eller andre personlige opplysninger.'
+                                        }
                                         onKeyDown={async (e) => {
                                             if (e.key === 'Enter' && e.ctrlKey) {
                                                 e.preventDefault()
@@ -151,11 +154,11 @@ export function FlexjarFelles({
                                             setTextValue(e.target.value)
                                         }}
                                         maxLength={600}
-                                        minRows={3}
+                                        minRows={2}
                                     />
                                     <Alert variant="warning" className="mt-4">
-                                        Ikke skriv inn navn eller andre personopplysninger. Dette blir kun brukt til å
-                                        forbedre tjenesten. Du vil ikke få et svar fra oss.
+                                        Tilbakemeldingen din er anonym og vil ikke knyttes til søknaden din. Den brukes
+                                        kun for å gjøre nettsidene bedre
                                     </Alert>
                                     <Button
                                         className="mr-auto mt-6"
