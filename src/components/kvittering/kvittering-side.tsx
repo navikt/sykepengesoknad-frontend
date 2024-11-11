@@ -79,7 +79,7 @@ const KvitteringSide = () => {
     const skalViseFlexjar =
         !skalViseSelvstendigNaeringsdrivendeUxSignals &&
         !skalViseUxSignals &&
-        (flexjarToggle.enabled || valgtSoknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND)
+        (flexjarToggle.enabled || valgtSoknad.julesoknad)
 
     return (
         <>
