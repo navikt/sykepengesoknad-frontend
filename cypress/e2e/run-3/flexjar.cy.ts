@@ -62,15 +62,15 @@ describe('Tester flexjar', () => {
     })
 
     it('Har ikke spørsmål flexjar på de siste sidene', function () {
-        heading('Hjelp oss med å gjøre søknaden bedre').should('not.exist')
+        heading('Tilbakemeldingen din er viktig for oss!').should('not.exist')
         cy.contains('Send søknaden').click()
         cy.contains('Søknaden er sendt')
-        heading('Hjelp oss med å gjøre søknaden bedre').should('exist')
+        heading('Tilbakemeldingen din er viktig for oss!').should('exist')
     })
 
     it('Har kvittering flexjar på kvitteringa', function () {
-        cy.contains('Hvordan opplevde du denne søknaden')
-        heading('Hjelp oss med å gjøre søknaden bedre')
+        cy.contains('Hva synes du om denne søknaden?')
+        heading('Tilbakemeldingen din er viktig for oss!')
             .closest('section')
             .within(() => {
                 cy.findByRole('button', {
