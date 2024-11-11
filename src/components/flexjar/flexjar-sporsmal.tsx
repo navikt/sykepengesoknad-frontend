@@ -64,8 +64,8 @@ export const FlexjarSporsmal = ({ soknad, sporsmal, steg }: FlexjarSporsmalProps
             getPlaceholder={getPlaceholder}
             feedbackProps={feedbackProps}
             textRequired={activeState === 'FORBEDRING' || activeState === 'NEI'}
-            flexjartittel="Hjelp oss med å gjøre søknaden bedre"
-            flexjarsporsmal="Opplever du at du har nok informasjon til å svare på dette spørsmålet?"
+            flexjartittel="Tilbakemeldingen din er viktig for oss!"
+            flexjarsporsmal="Har du informasjonen du trenger for å svare på spørsmålet i søknaden?"
         >
             <div className="flex w-full gap-2">
                 <FeedbackButton feedbackId={feedbackId} tekst="Ja" svar="JA" {...feedbackButtonProps} />

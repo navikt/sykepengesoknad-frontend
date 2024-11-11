@@ -120,7 +120,7 @@ export function FlexjarFelles({
                                 <Label as="h3" className="mb-2">
                                     {flexjartittel}
                                 </Label>
-                                <BodyShort>Anonym tilbakemelding på tjenesten</BodyShort>
+                                <BodyShort>Svarene dine er anonyme</BodyShort>
                             </div>
                         </div>
                         <div className="px-6 py-8">

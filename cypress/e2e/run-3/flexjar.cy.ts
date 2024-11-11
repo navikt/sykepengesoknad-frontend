@@ -14,15 +14,15 @@ describe('Tester flexjar', () => {
     })
 
     it('Naviger til tilbake i arbeid', function () {
-        heading('Hjelp oss med å gjøre søknaden bedre').should('not.exist')
+        heading('Tilbakemeldingen din er viktig for oss!').should('not.exist')
         checkViStolerPaDeg()
     })
 
     it('Test å gi feedback', function () {
         cy.contains('Tilbake i fullt arbeid')
-        cy.contains('Hjelp oss med å gjøre søknaden bedre')
+        cy.contains('Tilbakemeldingen din er viktig for oss!')
 
-        heading('Hjelp oss med å gjøre søknaden bedre')
+        heading('Tilbakemeldingen din er viktig for oss!')
             .closest('section')
             .within(() => {
                 cy.findByRole('button', {
