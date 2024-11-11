@@ -16,3 +16,4 @@ jobs:
     with:
       app: sykepengesoknad
       base-path: syk/sykepengesoknad
+      port: 3000
