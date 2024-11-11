@@ -27,3 +27,5 @@ yarn-error.log*
 
 
 /cypress/integration
+/test-results/
+/playwright-report/

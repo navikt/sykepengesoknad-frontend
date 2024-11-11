@@ -41,15 +41,18 @@
         "uuid": "^10.0.0"
     },
     "devDependencies": {
+        "@axe-core/playwright": "^4.10.0",
         "@cypress/webpack-preprocessor": "^6.0.2",
         "@navikt/eslint-config-teamsykmelding": "^6.6.0",
         "@testing-library/cypress": "^10.0.2",
+        "@playwright/test": "^1.48.2",
         "@types/classnames": "^2.3.4",
         "@types/jsdom": "^21.1.7",
         "@types/node": "~20.14.10",
         "@types/react": "^18.3.12",
         "@types/react-dom": "^18.3.1",
         "@types/uuid": "^10.0.0",
+        "axe-core": "^4.10.1",
         "autoprefixer": "^10.4.20",
         "cypress": "^13.15.1",
         "cypress-axe": "^1.5.0",
@@ -80,13 +83,15 @@
         "test:ci": "vitest --run",
         "cy:open": "cypress open --e2e",
         "cy:headless-parallel": "node cypress/headless-parallel.js",
+        "play": "npx playwright test --ui",
+        "play-headless": "npx playwright test",
         "e2e": "caffeinate -i start-test dev-ingen-dekorator http://localhost:3000/syk/sykepengesoknad cy:open",
         "headless": "MOCK_BACKEND=true start-test dev-ingen-dekorator http://localhost:3000/syk/sykepengesoknad cy:headless-parallel",
         "prettier:write": "prettier --write .",
         "prettier:check": "prettier --check .",
         "tsc": "tsc",
-        "lint": "eslint --ext=ts,tsx src cypress",
-        "lint:fix": "eslint --ext=ts,tsx src cypress --fix",
+        "lint": "eslint --ext=ts,tsx src cypress playwright",
+        "lint:fix": "eslint --ext=ts,tsx src cypress playwright --fix",
         "format": "npm run prettier:write && npm run lint:fix"
     },
     "eslintConfig": {
@@ -100,7 +105,17 @@
             "@typescript-eslint/no-explicit-any": "off",
             "@typescript-eslint/no-non-null-assertion": "off",
             "@next/next/no-img-element": "off"
-        }
+        },
+        "overrides": [
+            {
+                "files": [
+                    "**/playwright/**/*.{js,ts}"
+                ],
+                "rules": {
+                    "testing-library/prefer-screen-queries": "off"
+                }
+            }
+        ]
     },
     "prettier": "@navikt/eslint-config-teamsykmelding/prettier"
 }
