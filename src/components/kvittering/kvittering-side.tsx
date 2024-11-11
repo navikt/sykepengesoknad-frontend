@@ -21,6 +21,7 @@ import { SoknadHeader } from '../soknad/soknad-header'
 import { FlexjarKvittering } from '../flexjar/flexjar-kvittering'
 import { useSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
 import { useToggle } from '../../toggles/context'
+import { JulesoknadTekstKvittering } from '../julesoknad/julesoknad-infotekst'
 
 import Kvittering from './kvittering'
 import { erSelvstendigNaeringsdrivende } from './harSvartJa'
@@ -76,17 +77,16 @@ const KvitteringSide = () => {
         erSelvstendigNaeringsdrivende(valgtSoknad, soknader)
     const skalViseUxSignals =
         !skalViseSelvstendigNaeringsdrivendeUxSignals && defaultStudyActive && gjenstaendeSoknader.length === 0
+    const erJulesoknad = !!valgtSoknad?.julesoknad
     const skalViseFlexjar =
-        !skalViseSelvstendigNaeringsdrivendeUxSignals &&
-        !skalViseUxSignals &&
-        (flexjarToggle.enabled || valgtSoknad.julesoknad)
+        !skalViseSelvstendigNaeringsdrivendeUxSignals && !skalViseUxSignals && (flexjarToggle.enabled || erJulesoknad)
 
     return (
         <>
             <SoknadHeader />
 
             <Kvittering />
-
+            {erJulesoknad && <JulesoknadTekstKvittering />}
             <GjenstaendeSoknader soknader={gjenstaendeSoknader} />
 
             {gjenstaendeSoknader.length === 0 && (

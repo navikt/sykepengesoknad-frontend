@@ -2,6 +2,7 @@ import { Sykmelding } from '../../../types/sykmelding'
 import { jsonDeepCopy } from '../../../utils/json-deep-copy'
 
 import { brukertestSykmelding } from './personas/brukertest'
+import { julesoknadSykmelding } from './julesoknad-sykmelding'
 
 export const arbeidstaker100Syk = new Sykmelding({
     id: '61e04c94-a4be-45f5-8dbd-5c0b7a8707ea',
@@ -1247,4 +1248,5 @@ export const sykmeldinger: Sykmelding[] = [
     syk7,
     syk8,
     brukertestSykmelding,
+    julesoknadSykmelding,
 ]
