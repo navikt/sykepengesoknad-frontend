@@ -12,6 +12,7 @@ import {
     arbeidstakerReisetilskuddSyk,
     frilanser100Syk,
     gradertReisetilskuddSm,
+    julesoknadSykmelding,
     syk7,
     sykmeldinger,
 } from '../sykmeldinger'
@@ -28,8 +29,7 @@ import { gradertReisetilskudd } from '../soknad/arbeidstaker-reisetilskudd-grade
 import { fremtidigSoknad } from '../soknad/arbeidstaker-fremtidig'
 import { jsonDeepCopy } from '../../../../utils/json-deep-copy'
 import { utgattSoknad } from '../soknad/arbeidstaker-utgatt'
-import { arbeidstakerJulesoknad } from '../soknad/arbeidstaker-julesoknad'
-import { julesoknadSykmelding } from '../julesoknad-sykmelding'
+import arbeidstakerJulesoknad from '../soknad/arbeidstaker-julesoknad'
 
 import { brukertestSoknad, brukertestSykmelding } from './brukertest'
 
