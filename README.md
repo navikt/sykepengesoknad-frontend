@@ -13,6 +13,11 @@ I din `.bashrc` eller `.zshrc`, sett følgende miljøvariabel:
 
 `export NPM_AUTH_TOKEN=<din PAT med read:packages>`
 
+### Playwright UI tester
+Krever browsere installert. Kjør: `npx playwright install`
+
+
+
 ## Dette logges i Amplitude
 
 

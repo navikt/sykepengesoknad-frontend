@@ -48,7 +48,7 @@ export default function Person() {
                 >
                     <Popover open={showHint} onClose={() => void 0} placement="bottom-end" anchorEl={buttonRef.current}>
                         <Popover.Content>
-                            <Heading size="small" level="3" className="motion-safe:animate-bounce">
+                            <Heading size="small" level="2" className="motion-safe:animate-bounce">
                                 Tips!
                             </Heading>
                             <div className="w-[220px]">

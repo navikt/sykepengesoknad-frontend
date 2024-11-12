@@ -182,6 +182,7 @@ export const tommelOpp = () => {
             viewBox="0 0 24 24"
             focusable="false"
             role="img"
+            aria-label="Tommel opp"
         >
             <path
                 fill="currentColor"
