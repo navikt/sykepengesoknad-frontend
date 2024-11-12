@@ -1,12 +1,13 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react'
-import { Alert, BodyShort, Button, Heading, Label, Textarea } from '@navikt/ds-react'
-import { FaceSmileIcon, MagnifyingGlassIcon } from '@navikt/aksel-icons'
+import { Alert, BodyShort, Button, Label, Textarea } from '@navikt/ds-react'
+import { MagnifyingGlassIcon } from '@navikt/aksel-icons'
 
 import { cn } from '../../utils/tw-utils'
 import { logEvent } from '../amplitude/amplitude'
 
 import { UseOpprettFlexjarFeedback } from './queryhooks/useOpprettFlexjarFeedback'
 import { UseOppdaterFlexjarFeedback } from './queryhooks/useOppdaterFlexjarFeedback'
+import { tommelOpp } from './emojies'
 
 interface FlexjarFellesProps {
     feedbackId: string
@@ -120,7 +121,7 @@ export function FlexjarFelles({
                                 <Label as="h3" className="mb-2">
                                     {flexjartittel}
                                 </Label>
-                                <BodyShort>Anonym tilbakemelding på tjenesten</BodyShort>
+                                <BodyShort>Svarene dine er anonyme</BodyShort>
                             </div>
                         </div>
                         <div className="px-6 py-8">
@@ -137,6 +138,9 @@ export function FlexjarFelles({
                                         ref={textAreaRef}
                                         error={errorMsg}
                                         label={getPlaceholder()}
+                                        description={
+                                            'Unngå å skrive inn navn, fødselsnummer eller andre personlige opplysninger.'
+                                        }
                                         onKeyDown={async (e) => {
                                             if (e.key === 'Enter' && e.ctrlKey) {
                                                 e.preventDefault()
@@ -150,11 +154,11 @@ export function FlexjarFelles({
                                             setTextValue(e.target.value)
                                         }}
                                         maxLength={600}
-                                        minRows={3}
+                                        minRows={2}
                                     />
                                     <Alert variant="warning" className="mt-4">
-                                        Ikke skriv inn navn eller andre personopplysninger. Dette blir kun brukt til å
-                                        forbedre tjenesten. Du vil ikke få et svar fra oss.
+                                        Tilbakemeldingen din er anonym og vil ikke knyttes til søknaden din. Den brukes
+                                        kun for å gjøre nettsidene bedre
                                     </Alert>
                                     <Button
                                         className="mr-auto mt-6"
@@ -177,11 +181,16 @@ export function FlexjarFelles({
                 )}
                 <div aria-live="polite">
                     {thanksFeedback && (
-                        <div className="mt-2 border-4 border-green-100 rounded-medium bg-green-100 p-6">
-                            <Heading size="small" as="p" className="flex items-center">
-                                Takk for tilbakemeldingen din!{' '}
-                                <FaceSmileIcon className="ml-2" aria-label="smilefjes"></FaceSmileIcon>
-                            </Heading>
+                        <div className="mt-2 border-4 border-green-100 rounded-medium bg-green-100 p-6 flex flex-row items-center">
+                            {tommelOpp()}
+                            <div className="pl-6">
+                                <Label as="h3" className="mb-2">
+                                    Takk for tilbakemeldingen!
+                                </Label>
+                                <BodyShort>
+                                    Vi setter stor pris på at du tok deg tid til å dele dine tanker med oss.
+                                </BodyShort>
+                            </div>
                         </div>
                     )}
                 </div>

@@ -24,8 +24,8 @@ export const FlexjarKvittering = () => {
             thanksFeedback={thanksFeedback}
             setThanksFeedback={setThanksFeedback}
             getPlaceholder={() => 'Fortell oss om din opplevelse (valgfritt)'}
-            flexjarsporsmal="Hvordan opplevde du denne søknaden?"
-            flexjartittel="Hjelp oss med å gjøre søknaden bedre"
+            flexjarsporsmal="Hva synes du om denne søknaden?"
+            flexjartittel="Tilbakemeldingen din er viktig for oss!"
             feedbackProps={feedbackProps}
         />
     )

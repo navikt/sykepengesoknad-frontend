@@ -14,15 +14,15 @@ describe('Tester flexjar', () => {
     })
 
     it('Naviger til tilbake i arbeid', function () {
-        heading('Hjelp oss med å gjøre søknaden bedre').should('not.exist')
+        heading('Tilbakemeldingen din er viktig for oss!').should('not.exist')
         checkViStolerPaDeg()
     })
 
     it('Test å gi feedback', function () {
         cy.contains('Tilbake i fullt arbeid')
-        cy.contains('Hjelp oss med å gjøre søknaden bedre')
+        cy.contains('Tilbakemeldingen din er viktig for oss!')
 
-        heading('Hjelp oss med å gjøre søknaden bedre')
+        heading('Tilbakemeldingen din er viktig for oss!')
             .closest('section')
             .within(() => {
                 cy.findByRole('button', {
@@ -31,12 +31,13 @@ describe('Tester flexjar', () => {
                 cy.findByRole('button', {
                     name: 'Ja',
                 }).should('have.css', 'background-color', 'rgb(35, 38, 42)')
+                cy.contains('Unngå å skrive inn navn, fødselsnummer eller andre personlige opplysninger.')
                 cy.findByRole('textbox').type('Dette er en test')
                 cy.findByRole('button', {
                     name: 'Send tilbakemelding',
                 }).click()
             })
-        cy.contains('Takk for tilbakemeldingen din!')
+        cy.contains('Takk for tilbakemeldingen!')
     })
 
     it('Navigerer til siste side', function () {
@@ -62,15 +63,15 @@ describe('Tester flexjar', () => {
     })
 
     it('Har ikke spørsmål flexjar på de siste sidene', function () {
-        heading('Hjelp oss med å gjøre søknaden bedre').should('not.exist')
+        heading('Tilbakemeldingen din er viktig for oss!').should('not.exist')
         cy.contains('Send søknaden').click()
         cy.contains('Søknaden er sendt')
-        heading('Hjelp oss med å gjøre søknaden bedre').should('exist')
+        heading('Tilbakemeldingen din er viktig for oss!').should('exist')
     })
 
-    it('Har kvittering flexjar på kvitteringa', function () {
-        cy.contains('Hvordan opplevde du denne søknaden')
-        heading('Hjelp oss med å gjøre søknaden bedre')
+    it('Har emoji flexjar på kvitteringa', function () {
+        cy.contains('Hva synes du om denne søknaden?')
+        heading('Tilbakemeldingen din er viktig for oss!')
             .closest('section')
             .within(() => {
                 cy.findByRole('button', {
@@ -81,11 +82,12 @@ describe('Tester flexjar', () => {
                 cy.findByRole('button', {
                     name: 'Bra',
                 }).should('have.css', 'background-color', 'rgb(236, 238, 240)')
+                cy.contains('Unngå å skrive inn navn, fødselsnummer eller andre personlige opplysninger.')
                 cy.findByRole('textbox').type('Dette er en test')
                 cy.findByRole('button', {
                     name: 'Send tilbakemelding',
                 }).click()
             })
-        cy.contains('Takk for tilbakemeldingen din!')
+        cy.contains('Takk for tilbakemeldingen!')
     })
 })
