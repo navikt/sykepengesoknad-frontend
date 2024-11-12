@@ -2,7 +2,7 @@ import 'cypress-real-events'
 import { julesoknadPerson } from '../../../src/data/mock/data/personas/personas'
 import { checkViStolerPaDeg, klikkGaVidere } from '../../support/utilities'
 
-describe('Søknad med alle opprinnelige spørsmål om medlemskap', () => {
+describe('Julesøkand med informasjon på introside og kvittering', () => {
     const soknad = julesoknadPerson.soknader[0]
 
     before(() => {
