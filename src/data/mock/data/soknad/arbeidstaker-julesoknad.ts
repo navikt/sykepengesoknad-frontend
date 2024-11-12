@@ -6,7 +6,6 @@ import { arbeidstaker } from './arbeidstaker'
 const arbeidstakerJulesoknad = deepcopyMedNyId(arbeidstaker, '6e60c42e-ff62-4806-92b0-deade6f9fc69')
 
 arbeidstakerJulesoknad.julesoknad = true
-arbeidstakerJulesoknad.julesoknad = true
 arbeidstakerJulesoknad.fom = '2024-12-01'
 arbeidstakerJulesoknad.tom = '2024-12-31'
 arbeidstakerJulesoknad.opprettetDato = '2024-11-30'
