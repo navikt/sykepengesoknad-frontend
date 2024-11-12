@@ -28,6 +28,7 @@ import { erSisteSide } from '../sporsmal/sporsmal-utils'
 import { Tilbake } from '../sporsmal/tilbake-knapp/tilbake'
 import { FlexjarSurveyModal } from '../flexjar/flexjar-survey'
 import { skjulFlexjarSurvey } from '../flexjar/utils'
+import { JulesoknadTekstIntroside } from '../julesoknad/julesoknad-infotekst'
 
 import { urlTilSoknad } from './soknad-link'
 import { SporsmalTittel } from './sporsmal-tittel'
@@ -121,6 +122,7 @@ export const Soknaden = () => {
     const erForstesiden = stegNo === 1 && !erUtenlandssoknad
     const erSistesiden = valgtSoknad && sporsmal ? erSisteSide(valgtSoknad, stegNo) : false
     const erForstesidenMedReisetilskudd = stegNo === 1 && (erReisetilskuddsoknad || erGradertReisetilskuddsoknad)
+    const erJulesoknad = !!valgtSoknad?.julesoknad
 
     const oppdeltSoknadTekst =
         valgtSoknad && valgtSykmelding && erOppdelt(valgtSoknad, valgtSykmelding)
@@ -140,6 +142,7 @@ export const Soknaden = () => {
                     <IntroGuide />
                     <ForDuSoker />
                     <IntroAccordion />
+                    {erJulesoknad && <JulesoknadTekstIntroside />}
                     {oppdeltSoknadTekst !== '' && (
                         <Alert variant="info" className="mb-8">
                             {oppdeltSoknadTekst}

@@ -119,6 +119,9 @@ function PersonGruppeVisning({ gruppe, personer }: { gruppe: PersonaGroupKey; pe
             case 'medlemskap-sporsmal': {
                 return 'Spørsmål om Medlemskap'
             }
+            case 'arbeidstaker-julesoknad': {
+                return 'Julesøknad'
+            }
             case 'testing': {
                 return 'Forskjellige Testscenarios'
             }

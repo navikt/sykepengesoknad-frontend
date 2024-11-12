@@ -22,6 +22,7 @@ import {
     harIkkeKontonummer,
     harKontonummer,
     integration,
+    julesoknadPerson,
     kunUtgattSoknad,
     over70,
     Persona,
@@ -84,6 +85,7 @@ type PersonaKey =
     | 'innenfor-arbeidsgiver-perioden'
     | 'gammel-oppsummering'
     | 'utgatt'
+    | 'julesoknad'
 
 export type PersonaData = Partial<Record<PersonaKey, Persona>>
 
@@ -91,6 +93,7 @@ export type PersonaGroupKey =
     | 'soknad-typer'
     | 'soknad-sporsmal'
     | 'medlemskap-sporsmal'
+    | 'arbeidstaker-julesoknad'
     | 'testing'
     | 'Nytt arbeidsforhold'
 type PersonaGroup = Record<PersonaGroupKey, PersonaData>
@@ -131,6 +134,9 @@ export function testpersonerGruppert(): PersonaGroup {
         },
         ['medlemskap-sporsmal']: {
             ['medlemskap']: jsonDeepCopy(medlemskapPerson),
+        },
+        ['arbeidstaker-julesoknad']: {
+            ['julesoknad']: jsonDeepCopy(julesoknadPerson),
         },
         ['Nytt arbeidsforhold']: {
             ['nytt-arbeidsforhold']: jsonDeepCopy(nyttArbeidsforhold),
