@@ -23,7 +23,7 @@ describe('Tester flexjar', () => {
         cy.contains('Tilbakemeldingen din er viktig for oss!')
 
         heading('Tilbakemeldingen din er viktig for oss!')
-            .closest('section')
+            .closest('[role="region"]')
             .within(() => {
                 cy.findByRole('button', {
                     name: 'Ja',
@@ -72,7 +72,7 @@ describe('Tester flexjar', () => {
     it('Har emoji flexjar på kvitteringa', function () {
         cy.contains('Hva synes du om denne søknaden?')
         heading('Tilbakemeldingen din er viktig for oss!')
-            .closest('section')
+            .closest('[role="region"]')
             .within(() => {
                 cy.findByRole('button', {
                     name: 'Bra',
