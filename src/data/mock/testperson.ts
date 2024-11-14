@@ -34,7 +34,11 @@ import {
 import { utenlandskSykmelding } from './data/utenlandsk-sykmelding'
 import { yrkesskadePerson, yrkesskadeV2Person } from './data/yrkesskade'
 import { egenmeldingSykmeldingaPerson } from './data/personas/egenmeldingsdager-i-sykmeldingen'
-import { selvstendigNaringsdrivende, selvstendigNaringsdrivendeSendt } from './data/personas/naringsdrivende'
+import {
+    selvstendigNaringsdrivende,
+    selvstendigNaringsdrivendeSendt,
+    selvstendigNaringsdrivendeUtenSigrun,
+} from './data/personas/naringsdrivende'
 import { korrigeringsfristUtloptPerson } from './data/personas/korrigeringsfrist-utlopt'
 import { medlemskapPerson } from './data/personas/medlemskap'
 import { fiskePerson } from './data/personas/fisker'
@@ -67,6 +71,7 @@ type PersonaKey =
     | 'to-eldre-usendte-soknader'
     | 'bare-utland'
     | 'selvstendig-naringsdrivende'
+    | 'selvstendig-naringsdrivende-uten-sigrun'
     | 'brukertest'
     | 'har-kontonummer'
     | 'har-ikke-kontonummer'
@@ -113,6 +118,7 @@ export function testpersonerGruppert(): PersonaGroup {
             ['arbeidstaker-gradert']: jsonDeepCopy(arbeidstakerGradertPerson),
             ['arbeidsledig']: jsonDeepCopy(arbeidsledigPerson),
             ['selvstendig-naringsdrivende']: jsonDeepCopy(selvstendigNaringsdrivende),
+            ['selvstendig-naringsdrivende-uten-sigrun']: jsonDeepCopy(selvstendigNaringsdrivendeUtenSigrun),
             ['selvstendig-naringsdrivende-sendt']: jsonDeepCopy(selvstendigNaringsdrivendeSendt),
             ['frilanser']: jsonDeepCopy(frilanserPerson),
             ['fisker']: jsonDeepCopy(fiskePerson),

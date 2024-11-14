@@ -138,9 +138,7 @@ export function FlexjarFelles({
                                         ref={textAreaRef}
                                         error={errorMsg}
                                         label={getPlaceholder()}
-                                        description={
-                                            'Unngå å skrive inn navn, fødselsnummer eller andre personlige opplysninger.'
-                                        }
+                                        description="Unngå å skrive inn navn, fødselsnummer eller andre personlige opplysninger."
                                         onKeyDown={async (e) => {
                                             if (e.key === 'Enter' && e.ctrlKey) {
                                                 e.preventDefault()

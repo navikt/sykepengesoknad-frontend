@@ -22,9 +22,9 @@ import { FlexjarKvittering } from '../flexjar/flexjar-kvittering'
 import { useSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
 import { useToggle } from '../../toggles/context'
 import { JulesoknadTekstKvittering } from '../julesoknad/julesoknad-infotekst'
+import { RSArbeidssituasjon } from '../../types/rs-types/rs-arbeidssituasjon'
 
 import Kvittering from './kvittering'
-import { erSelvstendigNaeringsdrivende } from './harSvartJa'
 
 const KvitteringSide = () => {
     const { valgtSoknad, soknadId } = useSoknadMedDetaljer()
@@ -32,7 +32,7 @@ const KvitteringSide = () => {
     const { data: soknader } = useSoknader()
     const defaultStudy = 'panel-yhv7yi5h9q'
     const { data: defaultStudyActive } = useStudyStatus(defaultStudy)
-    const selvstendigNaeringsdrivendeStudy = 'panel-btpxotvjey'
+    const selvstendigNaeringsdrivendeStudy = 'panel-gtnepi3ujl'
     const { data: selvstendigNaeringsdrivendeStudyActive } = useStudyStatus(selvstendigNaeringsdrivendeStudy)
 
     useUpdateBreadcrumbs(() => [{ ...kvitteringBreadcrumb, handleInApp: true }], [])
@@ -74,7 +74,8 @@ const KvitteringSide = () => {
     const skalViseSelvstendigNaeringsdrivendeUxSignals =
         selvstendigNaeringsdrivendeStudyActive &&
         gjenstaendeSoknader.length === 0 &&
-        erSelvstendigNaeringsdrivende(valgtSoknad, soknader)
+        valgtSoknad.soknadstype === RSSoknadstype.SELVSTENDIGE_OG_FRILANSERE &&
+        valgtSoknad.arbeidssituasjon == RSArbeidssituasjon.NAERINGSDRIVENDE
     const skalViseUxSignals =
         !skalViseSelvstendigNaeringsdrivendeUxSignals && defaultStudyActive && gjenstaendeSoknader.length === 0
     const erJulesoknad = !!valgtSoknad?.julesoknad
