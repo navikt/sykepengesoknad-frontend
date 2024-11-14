@@ -51,7 +51,7 @@ describe('Tester selvstendig naringsdrivende søknad med data fra Sigrun', () =>
 describe('Tester selvstendig naringsdrivende søknad uten data fra Sigrun', () => {
     before(() => {
         cy.visit(
-            '/syk/sykepengesoknad/soknader/2faff926-5261-42e5-927b-02e4aa44a7ad/7?testperson=selvstendig-naringsdrivende',
+            '/syk/sykepengesoknad/soknader/2faff926-5261-42e5-927b-02e4aa44a7ad/7?testperson=selvstendig-naringsdrivende-uten-sigrun',
         )
     })
 
