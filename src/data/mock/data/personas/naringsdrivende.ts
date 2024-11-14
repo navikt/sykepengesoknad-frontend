@@ -21,9 +21,15 @@ const soknadUtenSigrunData = lagSoknadMedInntektsopplysninger(
 )
 
 export const selvstendigNaringsdrivende: Persona = {
-    soknader: [soknadMedSigrunData, soknadUtenSigrunData],
+    soknader: [soknadMedSigrunData],
     sykmeldinger: [naringsdrivende100syk],
     beskrivelse: 'Selvstendig næringsdrivende',
+}
+
+export const selvstendigNaringsdrivendeUtenSigrun: Persona = {
+    soknader: [soknadUtenSigrunData],
+    sykmeldinger: [naringsdrivende100syk],
+    beskrivelse: 'Selvstendig næringsdrivende uten sigrun data',
 }
 
 const sendtSoknadMedGammelKvittering = deepcopyMedNyId(naringsdrivendeSoknad, '3708c4de-d16c-4835-841b-a6716b688888')
