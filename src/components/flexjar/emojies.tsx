@@ -173,6 +173,7 @@ export const tommelNed = () => {
 }
 
 export const tommelOpp = () => {
+    const skjultFraSkjermlesere = true
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -182,7 +183,10 @@ export const tommelOpp = () => {
             viewBox="0 0 24 24"
             focusable="false"
             role="img"
+            aria-hidden={skjultFraSkjermlesere ? 'true' : 'false'}
+            aria-labelledby="emoji-tommel-opp"
         >
+            <title id="emoji-tommel-opp">Tommel opp</title>
             <path
                 fill="currentColor"
                 fillRule="evenodd"

@@ -109,7 +109,7 @@ export function FlexjarFelles({
     }
 
     return (
-        <section className={`w-full ${fullBredde ? '' : 'mt-16 md:w-3/4'}`}>
+        <div role="region" className={`w-full ${fullBredde ? '' : 'mt-16 md:w-3/4'}`}>
             <div>
                 {!thanksFeedback && (
                     <div className="mt-1 border-4 border-surface-subtle rounded-medium">
@@ -193,7 +193,7 @@ export function FlexjarFelles({
                     )}
                 </div>
             </div>
-        </section>
+        </div>
     )
 }
 
