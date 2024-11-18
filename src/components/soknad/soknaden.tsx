@@ -51,7 +51,6 @@ export const Soknaden = () => {
     useEffect(() => {
         setVisSurvey(router.query.visSurvey === 'true')
     }, [router.query.visSurvey])
-    const flexjarSurveyAlternativer = ['Ja', 'Nei']
 
     useUpdateBreadcrumbs(() => [{ ...soknadBreadcrumb, handleInApp: true }], [])
 
@@ -185,14 +184,14 @@ export const Soknaden = () => {
             )}
             <FlexjarSurveyModal
                 visSurvey={visSurvey}
-                surveySporsmal="Har du nok informasjon til å kunne svare på spørsmålet om endring i årsinntekten, spesielt om du har hatt en endring på 25%?"
-                svarAlternativer={flexjarSurveyAlternativer}
+                surveySporsmal="Var noen av spørsmålene vi stilte om virksomheten din vanskelige å svare på?"
+                tittel="Vi hører gjerne fra deg"
                 onSubmit={() => {
                     skjulFlexjarSurvey(router).then(() => {
                         setVisSurvey(false)
                     })
                 }}
-                feedbackId="sykpengesoknad-naering-25-endring"
+                feedbackId="sykpengesoknad-sn-virksomheten-din-survey"
             ></FlexjarSurveyModal>
         </>
     )

@@ -21,8 +21,9 @@ interface FlexjarFellesProps {
     flexjarsporsmal: string
     flexjartittel: string
     feedbackProps: Record<string, string | undefined | boolean>
-    sekundaerEffekt?: () => void
+    feedbackPropsProvider?: () => Record<string, string | undefined | boolean>
     fullBredde?: boolean
+    instantSubmittNei?: boolean
 }
 
 export function FlexjarFelles({
@@ -37,8 +38,9 @@ export function FlexjarFelles({
     children,
     textRequired,
     feedbackProps,
-    sekundaerEffekt,
+    feedbackPropsProvider,
     fullBredde,
+    instantSubmittNei,
 }: FlexjarFellesProps) {
     const [textValue, setTextValue] = useState('')
     const [errorMsg, setErrorMsg] = useState<string | null>(null)
@@ -57,6 +59,9 @@ export function FlexjarFelles({
                 svar: activeState,
                 ...feedbackProps,
             }
+            if (feedbackPropsProvider) {
+                Object.assign(body, feedbackPropsProvider())
+            }
             if (data?.id) {
                 oppdaterFeedback({ body, id: data.id, cb: knappeklikk })
                 return true
@@ -65,7 +70,16 @@ export function FlexjarFelles({
                 return false
             }
         },
-        [activeState, data?.id, feedbackId, feedbackProps, giFeedback, oppdaterFeedback, textValue],
+        [
+            activeState,
+            data?.id,
+            feedbackId,
+            feedbackProps,
+            giFeedback,
+            oppdaterFeedback,
+            textValue,
+            feedbackPropsProvider,
+        ],
     )
     useEffect(() => {
         setErrorMsg(null)
@@ -107,6 +121,11 @@ export function FlexjarFelles({
             setThanksFeedback(true)
         }
     }
+    useEffect(() => {
+        if (instantSubmittNei && activeState === 'NEI') {
+            setThanksFeedback(true)
+        }
+    }, [activeState, instantSubmittNei, setThanksFeedback])
 
     return (
         <div role="region" className={`w-full ${fullBredde ? '' : 'mt-16 md:w-3/4'}`}>
@@ -156,7 +175,7 @@ export function FlexjarFelles({
                                     />
                                     <Alert variant="warning" className="mt-4">
                                         Tilbakemeldingen din er anonym og vil ikke knyttes til søknaden din. Den brukes
-                                        kun for å gjøre nettsidene bedre
+                                        kun for å gjøre nettsidene bedre.
                                     </Alert>
                                     <Button
                                         className="mr-auto mt-6"
@@ -165,9 +184,6 @@ export function FlexjarFelles({
                                         onClick={async (e) => {
                                             e.preventDefault()
                                             await handleSend(() => reset())
-                                            if (sekundaerEffekt) {
-                                                sekundaerEffekt()
-                                            }
                                         }}
                                     >
                                         {sendTilbakemelding}
