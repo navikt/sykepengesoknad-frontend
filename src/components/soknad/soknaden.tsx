@@ -185,7 +185,6 @@ export const Soknaden = () => {
             <FlexjarSurveyModal
                 visSurvey={visSurvey}
                 surveySporsmal="Var noen av spørsmålene vi stilte om virksomheten din vanskelige å svare på?"
-                tittel="Vi hører gjerne fra deg"
                 onSubmit={() => {
                     skjulFlexjarSurvey(router).then(() => {
                         setVisSurvey(false)

@@ -20,6 +20,7 @@ interface FlexjarFellesProps {
     textRequired?: boolean
     flexjarsporsmal: string
     flexjartittel: string
+    modal?: boolean
     feedbackProps: Record<string, string | undefined | boolean>
     feedbackPropsProvider?: () => Record<string, string | undefined | boolean>
     fullBredde?: boolean
@@ -37,6 +38,7 @@ export function FlexjarFelles({
     flexjarsporsmal,
     children,
     textRequired,
+    modal,
     feedbackProps,
     feedbackPropsProvider,
     fullBredde,
@@ -131,18 +133,23 @@ export function FlexjarFelles({
         <div role="region" className={`w-full ${fullBredde ? '' : 'mt-16 md:w-3/4'}`}>
             <div>
                 {!thanksFeedback && (
-                    <div className="mt-1 border-4 border-surface-subtle rounded-medium">
-                        <div className="bg-surface-subtle p-6 flex gap-4 items-center">
-                            <div className="bg-gray-900 w-10 h-10 rounded-full flex justify-center items-center">
-                                <MagnifyingGlassIcon aria-hidden={true} className="text-white axe-exclude" />
+                    <div className={cn({ 'mt-1 border-4 border-surface-subtle rounded-medium': !modal })}>
+                        {!modal && (
+                            <div className="bg-surface-subtle p-6 flex gap-4 items-center">
+                                <div className="bg-gray-900 w-10 h-10 rounded-full flex justify-center items-center">
+                                    <MagnifyingGlassIcon aria-hidden={true} className="text-white axe-exclude" />
+                                </div>
+                                <div>
+                                    <Label as="h3" className="mb-2">
+                                        {flexjartittel}
+                                    </Label>
+                                    <BodyShort>Svarene dine er anonyme</BodyShort>
+                                </div>
                             </div>
-                            <div>
-                                <Label as="h3" className="mb-2">
-                                    {flexjartittel}
-                                </Label>
-                                <BodyShort>Svarene dine er anonyme</BodyShort>
-                            </div>
-                        </div>
+                        )}
+
+                        {modal && <BodyShort className="px-6">Svarene dine er anonyme </BodyShort>}
+
                         <div className="px-6 py-8">
                             {flexjarsporsmal && (
                                 <Label as="p" className="mb-8">
@@ -195,15 +202,17 @@ export function FlexjarFelles({
                 )}
                 <div aria-live="polite">
                     {thanksFeedback && (
-                        <div className="mt-2 border-4 border-green-100 rounded-medium bg-green-100 p-6 flex flex-row items-center">
-                            {tommelOpp()}
-                            <div className="pl-6">
-                                <Label as="h3" className="mb-2">
-                                    Takk for tilbakemeldingen!
-                                </Label>
-                                <BodyShort>
-                                    Vi setter stor pris på at du tok deg tid til å dele dine tanker med oss.
-                                </BodyShort>
+                        <div className="px-6 py-8">
+                            <div className="mt-2 border-4 border-green-100 rounded-medium bg-green-100 p-6 flex flex-row items-center">
+                                {tommelOpp()}
+                                <div className="pl-6">
+                                    <Label as="h3" className="mb-2">
+                                        Takk for tilbakemeldingen!
+                                    </Label>
+                                    <BodyShort>
+                                        Vi setter stor pris på at du tok deg tid til å dele dine tanker med oss.
+                                    </BodyShort>
+                                </div>
                             </div>
                         </div>
                     )}

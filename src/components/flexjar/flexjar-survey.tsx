@@ -7,15 +7,24 @@ import { logEvent } from '../amplitude/amplitude'
 import { FeedbackButton, FlexjarFelles } from './flexjar-felles'
 
 interface FlexjarSurveyProps {
-    tittel?: string
     surveySporsmal: string
     onSubmit: () => void
     feedbackId: string
+    tittel: string
+    thanksFeedback: boolean
+    setThanksFeedback: (b: boolean) => void
 }
 
-const FlexjarSurvey = ({ tittel, surveySporsmal, onSubmit, feedbackId }: FlexjarSurveyProps) => {
+const FlexjarSurvey = ({
+    surveySporsmal,
+    onSubmit,
+    feedbackId,
+    tittel,
+    thanksFeedback,
+    setThanksFeedback,
+}: FlexjarSurveyProps) => {
     const [activeState, setActiveState] = useState<string | number | null>(null)
-    const [thanksFeedback, setThanksFeedback] = useState<boolean>(false)
+
     const { valgtSoknad } = useSoknadMedDetaljer()
 
     const [vanskeligeSporsmal, setVanskeligeSporsmal] = useState<string[]>([])
@@ -53,6 +62,7 @@ const FlexjarSurvey = ({ tittel, surveySporsmal, onSubmit, feedbackId }: Flexjar
                 setActiveState={setActiveState}
                 activeState={activeState}
                 thanksFeedback={thanksFeedback}
+                modal={true}
                 instantSubmittNei={true}
                 setThanksFeedback={setThanksFeedback}
                 getPlaceholder={getPlaceholder}
@@ -91,8 +101,8 @@ const FlexjarSurvey = ({ tittel, surveySporsmal, onSubmit, feedbackId }: Flexjar
                 )}
             </FlexjarFelles>
             <Button
+                className="m-4"
                 variant="tertiary"
-                className="px-6 mt-8"
                 onClick={(e) => {
                     logEvent('knapp klikket', {
                         tekst: lukkeKnappTekst,
@@ -111,41 +121,41 @@ const FlexjarSurvey = ({ tittel, surveySporsmal, onSubmit, feedbackId }: Flexjar
 
 interface FlexjarSurveyModalProps {
     tittel?: string
-    modalTittel?: string
     surveySporsmal: string
     onSubmit: () => void
     feedbackId: string
     visSurvey: boolean
 }
 
-export const FlexjarSurveyModal = ({
-    tittel,
-    modalTittel,
-    surveySporsmal,
-    onSubmit,
-    feedbackId,
-    visSurvey,
-}: FlexjarSurveyModalProps) => {
+export const FlexjarSurveyModal = ({ surveySporsmal, onSubmit, feedbackId, visSurvey }: FlexjarSurveyModalProps) => {
+    const [thanksFeedback, setThanksFeedback] = useState<boolean>(false)
+    const [harLukket, setHarLukket] = useState<boolean>(false)
+    const tittel = thanksFeedback ? 'Tusen takk!' : 'Vi hører gjerne fra deg'
     return (
         <>
             <Modal
-                open={visSurvey}
-                header={{ heading: modalTittel ?? '', closeButton: true }}
+                open={visSurvey && !harLukket}
+                header={{ heading: tittel ?? '', closeButton: true }}
                 onClose={() => {
                     onSubmit()
+                    setHarLukket(true)
                 }}
             >
                 {visSurvey && (
-                    <div className="flex flex-row-reverse flex-wrap gap-4 p-6 pt-0">
-                        <FlexjarSurvey
-                            tittel={tittel}
-                            feedbackId={feedbackId}
-                            surveySporsmal={surveySporsmal}
-                            onSubmit={() => {
-                                onSubmit()
-                            }}
-                        ></FlexjarSurvey>
-                    </div>
+                    <>
+                        <div className="flex flex-row-reverse flex-wrap gap-4 pt-0">
+                            <FlexjarSurvey
+                                tittel={tittel}
+                                thanksFeedback={thanksFeedback}
+                                setThanksFeedback={setThanksFeedback}
+                                feedbackId={feedbackId}
+                                surveySporsmal={surveySporsmal}
+                                onSubmit={() => {
+                                    onSubmit()
+                                }}
+                            ></FlexjarSurvey>
+                        </div>
+                    </>
                 )}
             </Modal>
         </>
