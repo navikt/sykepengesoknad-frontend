@@ -26,7 +26,7 @@ import { erOppdelt } from '../../utils/periode-utils'
 import { InfoOmTilbakedatering } from '../soknad-intro/info-om-tilbakedatering'
 import { erSisteSide } from '../sporsmal/sporsmal-utils'
 import { Tilbake } from '../sporsmal/tilbake-knapp/tilbake'
-import { FlexjarSurveyModal } from '../flexjar/flexjar-survey'
+import { SelvstendingSurveyModal } from '../flexjar/selvstending-survey'
 import { skjulFlexjarSurvey } from '../flexjar/utils'
 import { JulesoknadTekstIntroside } from '../julesoknad/julesoknad-infotekst'
 
@@ -51,7 +51,6 @@ export const Soknaden = () => {
     useEffect(() => {
         setVisSurvey(router.query.visSurvey === 'true')
     }, [router.query.visSurvey])
-    const flexjarSurveyAlternativer = ['Ja', 'Nei']
 
     useUpdateBreadcrumbs(() => [{ ...soknadBreadcrumb, handleInApp: true }], [])
 
@@ -183,17 +182,14 @@ export const Soknaden = () => {
                 sporsmal?.tag == 'ARBEID_UNDERVEIS_100_PROSENT') && (
                 <FlexjarSporsmal soknad={valgtSoknad} sporsmal={sporsmal} steg={stegNo} />
             )}
-            <FlexjarSurveyModal
+            <SelvstendingSurveyModal
                 visSurvey={visSurvey}
-                surveySporsmal="Har du nok informasjon til å kunne svare på spørsmålet om endring i årsinntekten, spesielt om du har hatt en endring på 25%?"
-                svarAlternativer={flexjarSurveyAlternativer}
                 onSubmit={() => {
                     skjulFlexjarSurvey(router).then(() => {
                         setVisSurvey(false)
                     })
                 }}
-                feedbackId="sykpengesoknad-naering-25-endring"
-            ></FlexjarSurveyModal>
+            ></SelvstendingSurveyModal>
         </>
     )
 }
