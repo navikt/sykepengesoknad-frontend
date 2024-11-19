@@ -46,7 +46,7 @@ export const SelvstendingSurveyModal = ({ onSubmit, visSurvey }: { onSubmit: () 
                 return false
             }
         },
-        [activeState, data.id, feedbackProps, giFeedback, oppdaterFeedback, textValue, vanskeligeSporsmal],
+        [activeState, data?.id, feedbackProps, giFeedback, oppdaterFeedback, textValue, vanskeligeSporsmal],
     )
     useEffect(() => {
         setErrorMsg(null)
