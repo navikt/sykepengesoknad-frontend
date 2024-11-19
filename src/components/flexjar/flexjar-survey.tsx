@@ -1,37 +1,38 @@
 import React, { useState } from 'react'
-import { Button, Modal } from '@navikt/ds-react'
+import { Button, Checkbox, CheckboxGroup, Modal } from '@navikt/ds-react'
 
 import { useSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
 import { logEvent } from '../amplitude/amplitude'
 
-import { FlexjarFelles } from './flexjar-felles'
-import { EmojiButton } from './emoji-button'
-import { tommelNed, tommelOpp } from './emojies'
+import { FeedbackButton, FlexjarFelles } from './flexjar-felles'
 
 interface FlexjarSurveyProps {
-    tittel?: string
     surveySporsmal: string
-    svarAlternativer: string[]
     onSubmit: () => void
     feedbackId: string
+    tittel: string
+    thanksFeedback: boolean
+    setThanksFeedback: (b: boolean) => void
 }
 
-export const FlexjarSurvey = ({
-    tittel,
+const FlexjarSurvey = ({
     surveySporsmal,
-    svarAlternativer,
     onSubmit,
     feedbackId,
+    tittel,
+    thanksFeedback,
+    setThanksFeedback,
 }: FlexjarSurveyProps) => {
     const [activeState, setActiveState] = useState<string | number | null>(null)
-    const [thanksFeedback, setThanksFeedback] = useState<boolean>(false)
+
     const { valgtSoknad } = useSoknadMedDetaljer()
 
+    const [vanskeligeSporsmal, setVanskeligeSporsmal] = useState<string[]>([])
     const getPlaceholder = (): string => {
         if (!activeState && typeof activeState != 'string') {
             throw new Error('Ugyldig tilbakemeldingstype')
         }
-        return 'Er det noe du vil trekke frem? (valgfritt)'
+        return 'Vil du foreslå en forbedring? (valgfritt)'
     }
 
     const feedbackButtonProps = {
@@ -44,26 +45,15 @@ export const FlexjarSurvey = ({
         width: 'w-full',
     }
 
-    const alternativer = () => {
-        return (
-            <>
-                <EmojiButton
-                    feedbackId={feedbackId}
-                    feedback={svarAlternativer[0]}
-                    Emoji={tommelOpp}
-                    text={svarAlternativer[0]}
-                    {...feedbackButtonProps}
-                />
-                <EmojiButton
-                    feedbackId={feedbackId}
-                    feedback={svarAlternativer[1]}
-                    Emoji={tommelNed}
-                    text={svarAlternativer[1]}
-                    {...feedbackButtonProps}
-                />
-            </>
-        )
-    }
+    const alternativerCheck = [
+        'Avviklet virksomhet',
+        'Ny i arbeidslivet',
+        'Varig endring i arbeidssituasjon eller virksomhet',
+        'Endring i inntekt på mer enn 25%',
+        'Annet',
+    ]
+
+    const lukkeKnappTekst = thanksFeedback ? 'Lukk vindu' : 'Jeg vil ikke gi tilbakemelding'
 
     return (
         <>
@@ -72,30 +62,50 @@ export const FlexjarSurvey = ({
                 setActiveState={setActiveState}
                 activeState={activeState}
                 thanksFeedback={thanksFeedback}
+                modal={true}
+                instantSubmittNei={true}
                 setThanksFeedback={setThanksFeedback}
                 getPlaceholder={getPlaceholder}
                 feedbackProps={{
                     soknadstype: valgtSoknad?.soknadstype.toString(),
                 }}
+                feedbackPropsProvider={() => ({
+                    vanskeligeSporsmal: JSON.stringify(vanskeligeSporsmal),
+                })}
                 textRequired={false}
                 flexjartittel={tittel || 'Hjelp oss å gjøre denne tjenesten bedre'}
                 flexjarsporsmal={surveySporsmal}
-                sekundaerEffekt={() => {
-                    //Timeout for å vise at tilbakemeldingen er sendt
-                    setTimeout(() => {
-                        onSubmit()
-                    }, 1000)
-                }}
                 fullBredde={true}
             >
-                <div className="flex row w-full justify-around">{alternativer()}</div>
+                <div className="flex w-full gap-2">
+                    <FeedbackButton feedbackId={feedbackId} tekst="Ja" svar="JA" {...feedbackButtonProps} />
+                    <FeedbackButton feedbackId={feedbackId} tekst="Nei" svar="NEI" {...feedbackButtonProps} />
+                </div>
+                {activeState == 'JA' && (
+                    <CheckboxGroup
+                        className="mt-8"
+                        legend="Hva var vanskelig å svare på? (valgfritt)"
+                        description="(Du kan huke av for flere alternativer)"
+                        onChange={(e) => {
+                            setVanskeligeSporsmal(e)
+                        }}
+                    >
+                        {alternativerCheck.map((alternativ) => {
+                            return (
+                                <Checkbox value={alternativ} key={alternativ}>
+                                    {alternativ}
+                                </Checkbox>
+                            )
+                        })}
+                    </CheckboxGroup>
+                )}
             </FlexjarFelles>
             <Button
+                className="m-4"
                 variant="tertiary"
-                className="px-6 mt-8"
                 onClick={(e) => {
                     logEvent('knapp klikket', {
-                        tekst: 'Jeg vil ikke gi tilbakemelding',
+                        tekst: lukkeKnappTekst,
                         soknadstype: valgtSoknad?.soknadstype,
                         component: feedbackId,
                     })
@@ -103,7 +113,7 @@ export const FlexjarSurvey = ({
                     onSubmit()
                 }}
             >
-                Jeg vil ikke gi tilbakemelding
+                {lukkeKnappTekst}
             </Button>
         </>
     )
@@ -111,43 +121,41 @@ export const FlexjarSurvey = ({
 
 interface FlexjarSurveyModalProps {
     tittel?: string
-    modalTittel?: string
     surveySporsmal: string
-    svarAlternativer: string[]
     onSubmit: () => void
     feedbackId: string
     visSurvey: boolean
 }
-export const FlexjarSurveyModal = ({
-    tittel,
-    modalTittel,
-    surveySporsmal,
-    svarAlternativer,
-    onSubmit,
-    feedbackId,
-    visSurvey,
-}: FlexjarSurveyModalProps) => {
+
+export const FlexjarSurveyModal = ({ surveySporsmal, onSubmit, feedbackId, visSurvey }: FlexjarSurveyModalProps) => {
+    const [thanksFeedback, setThanksFeedback] = useState<boolean>(false)
+    const [harLukket, setHarLukket] = useState<boolean>(false)
+    const tittel = thanksFeedback ? 'Tusen takk!' : 'Vi hører gjerne fra deg'
     return (
         <>
             <Modal
-                open={visSurvey}
-                header={modalTittel ? { heading: modalTittel } : undefined}
+                open={visSurvey && !harLukket}
+                header={{ heading: tittel ?? '', closeButton: true }}
                 onClose={() => {
                     onSubmit()
+                    setHarLukket(true)
                 }}
             >
                 {visSurvey && (
-                    <div className="flex flex-row-reverse flex-wrap gap-4 p-6 pt-4">
-                        <FlexjarSurvey
-                            tittel={tittel}
-                            feedbackId={feedbackId}
-                            surveySporsmal={surveySporsmal}
-                            svarAlternativer={svarAlternativer}
-                            onSubmit={() => {
-                                onSubmit()
-                            }}
-                        ></FlexjarSurvey>
-                    </div>
+                    <>
+                        <div className="flex flex-row-reverse flex-wrap gap-4 pt-0">
+                            <FlexjarSurvey
+                                tittel={tittel}
+                                thanksFeedback={thanksFeedback}
+                                setThanksFeedback={setThanksFeedback}
+                                feedbackId={feedbackId}
+                                surveySporsmal={surveySporsmal}
+                                onSubmit={() => {
+                                    onSubmit()
+                                }}
+                            ></FlexjarSurvey>
+                        </div>
+                    </>
                 )}
             </Modal>
         </>

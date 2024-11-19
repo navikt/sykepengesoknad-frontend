@@ -20,9 +20,11 @@ interface FlexjarFellesProps {
     textRequired?: boolean
     flexjarsporsmal: string
     flexjartittel: string
+    modal?: boolean
     feedbackProps: Record<string, string | undefined | boolean>
-    sekundaerEffekt?: () => void
+    feedbackPropsProvider?: () => Record<string, string | undefined | boolean>
     fullBredde?: boolean
+    instantSubmittNei?: boolean
 }
 
 export function FlexjarFelles({
@@ -36,9 +38,11 @@ export function FlexjarFelles({
     flexjarsporsmal,
     children,
     textRequired,
+    modal,
     feedbackProps,
-    sekundaerEffekt,
+    feedbackPropsProvider,
     fullBredde,
+    instantSubmittNei,
 }: FlexjarFellesProps) {
     const [textValue, setTextValue] = useState('')
     const [errorMsg, setErrorMsg] = useState<string | null>(null)
@@ -57,6 +61,9 @@ export function FlexjarFelles({
                 svar: activeState,
                 ...feedbackProps,
             }
+            if (feedbackPropsProvider) {
+                Object.assign(body, feedbackPropsProvider())
+            }
             if (data?.id) {
                 oppdaterFeedback({ body, id: data.id, cb: knappeklikk })
                 return true
@@ -65,7 +72,16 @@ export function FlexjarFelles({
                 return false
             }
         },
-        [activeState, data?.id, feedbackId, feedbackProps, giFeedback, oppdaterFeedback, textValue],
+        [
+            activeState,
+            data?.id,
+            feedbackId,
+            feedbackProps,
+            giFeedback,
+            oppdaterFeedback,
+            textValue,
+            feedbackPropsProvider,
+        ],
     )
     useEffect(() => {
         setErrorMsg(null)
@@ -107,23 +123,33 @@ export function FlexjarFelles({
             setThanksFeedback(true)
         }
     }
+    useEffect(() => {
+        if (instantSubmittNei && activeState === 'NEI') {
+            setThanksFeedback(true)
+        }
+    }, [activeState, instantSubmittNei, setThanksFeedback])
 
     return (
         <div role="region" className={`w-full ${fullBredde ? '' : 'mt-16 md:w-3/4'}`}>
             <div>
                 {!thanksFeedback && (
-                    <div className="mt-1 border-4 border-surface-subtle rounded-medium">
-                        <div className="bg-surface-subtle p-6 flex gap-4 items-center">
-                            <div className="bg-gray-900 w-10 h-10 rounded-full flex justify-center items-center">
-                                <MagnifyingGlassIcon aria-hidden={true} className="text-white axe-exclude" />
+                    <div className={cn({ 'mt-1 border-4 border-surface-subtle rounded-medium': !modal })}>
+                        {!modal && (
+                            <div className="bg-surface-subtle p-6 flex gap-4 items-center">
+                                <div className="bg-gray-900 w-10 h-10 rounded-full flex justify-center items-center">
+                                    <MagnifyingGlassIcon aria-hidden={true} className="text-white axe-exclude" />
+                                </div>
+                                <div>
+                                    <Label as="h3" className="mb-2">
+                                        {flexjartittel}
+                                    </Label>
+                                    <BodyShort>Svarene dine er anonyme</BodyShort>
+                                </div>
                             </div>
-                            <div>
-                                <Label as="h3" className="mb-2">
-                                    {flexjartittel}
-                                </Label>
-                                <BodyShort>Svarene dine er anonyme</BodyShort>
-                            </div>
-                        </div>
+                        )}
+
+                        {modal && <BodyShort className="px-6">Svarene dine er anonyme </BodyShort>}
+
                         <div className="px-6 py-8">
                             {flexjarsporsmal && (
                                 <Label as="p" className="mb-8">
@@ -156,7 +182,7 @@ export function FlexjarFelles({
                                     />
                                     <Alert variant="warning" className="mt-4">
                                         Tilbakemeldingen din er anonym og vil ikke knyttes til søknaden din. Den brukes
-                                        kun for å gjøre nettsidene bedre
+                                        kun for å gjøre nettsidene bedre.
                                     </Alert>
                                     <Button
                                         className="mr-auto mt-6"
@@ -165,9 +191,6 @@ export function FlexjarFelles({
                                         onClick={async (e) => {
                                             e.preventDefault()
                                             await handleSend(() => reset())
-                                            if (sekundaerEffekt) {
-                                                sekundaerEffekt()
-                                            }
                                         }}
                                     >
                                         {sendTilbakemelding}
@@ -179,15 +202,17 @@ export function FlexjarFelles({
                 )}
                 <div aria-live="polite">
                     {thanksFeedback && (
-                        <div className="mt-2 border-4 border-green-100 rounded-medium bg-green-100 p-6 flex flex-row items-center">
-                            {tommelOpp()}
-                            <div className="pl-6">
-                                <Label as="h3" className="mb-2">
-                                    Takk for tilbakemeldingen!
-                                </Label>
-                                <BodyShort>
-                                    Vi setter stor pris på at du tok deg tid til å dele dine tanker med oss.
-                                </BodyShort>
+                        <div className="px-6 py-8">
+                            <div className="mt-2 border-4 border-green-100 rounded-medium bg-green-100 p-6 flex flex-row items-center">
+                                {tommelOpp()}
+                                <div className="pl-6">
+                                    <Label as="h3" className="mb-2">
+                                        Takk for tilbakemeldingen!
+                                    </Label>
+                                    <BodyShort>
+                                        Vi setter stor pris på at du tok deg tid til å dele dine tanker med oss.
+                                    </BodyShort>
+                                </div>
                             </div>
                         </div>
                     )}
