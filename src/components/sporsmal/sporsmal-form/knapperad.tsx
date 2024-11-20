@@ -71,10 +71,7 @@ const Knapperad = ({ poster, setVisFlexjar }: { poster: boolean; setVisFlexjar: 
                     onClick={() => {
                         if (soknad) {
                             const formValues = getValues()
-                            const varigEndring = hentSporsmal(
-                                soknad,
-                                'INNTEKTSOPPLYSNINGER_VARIG_ENDRING_25_PROSENT',
-                            )?.id
+                            const varigEndring = hentSporsmal(soknad, 'INNTEKTSOPPLYSNINGER_VIRKSOMHETEN_AVVIKLET')?.id
                             if (varigEndring && formValues[varigEndring]) {
                                 setVisFlexjar(true)
                             }

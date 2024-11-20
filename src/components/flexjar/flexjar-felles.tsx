@@ -21,7 +21,6 @@ interface FlexjarFellesProps {
     flexjarsporsmal: string
     flexjartittel: string
     feedbackProps: Record<string, string | undefined | boolean>
-    sekundaerEffekt?: () => void
     fullBredde?: boolean
 }
 
@@ -37,7 +36,6 @@ export function FlexjarFelles({
     children,
     textRequired,
     feedbackProps,
-    sekundaerEffekt,
     fullBredde,
 }: FlexjarFellesProps) {
     const [textValue, setTextValue] = useState('')
@@ -165,9 +163,6 @@ export function FlexjarFelles({
                                         onClick={async (e) => {
                                             e.preventDefault()
                                             await handleSend(() => reset())
-                                            if (sekundaerEffekt) {
-                                                sekundaerEffekt()
-                                            }
                                         }}
                                     >
                                         {sendTilbakemelding}
