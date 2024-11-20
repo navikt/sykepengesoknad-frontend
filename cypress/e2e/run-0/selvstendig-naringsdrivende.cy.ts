@@ -80,12 +80,13 @@ describe('Tester selvstendig naringsdrivende søknad uten data fra Sigrun', () =
     it('svar på flexjar survey', () => {
         cy.url().should('include', 'visSurvey=true')
         modalAktiv()
-        cy.contains(
-            'Har du nok informasjon til å kunne svare på spørsmålet om endring i årsinntekten, spesielt om du har hatt en endring på 25%?',
-        )
+        cy.contains('Var noen av spørsmålene vi stilte om virksomheten din vanskelige å svare på?')
         cy.findByRole('button', { name: 'Ja' }).click()
-        svarFritekst('Er det noe du vil trekke frem? (valgfritt)', 'Har kontroll på alt')
+        cy.findByRole('checkbox', { name: 'Annet' }).click()
+        svarFritekst('Vil du foreslå en forbedring? (valgfritt)', 'Har kontroll på alt')
         cy.contains('Send tilbakemelding').click()
+        cy.findByRole('button', { name: 'Lukk vindu' }).click()
+
         modalIkkeAktiv()
     })
 
