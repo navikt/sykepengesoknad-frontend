@@ -19,7 +19,7 @@ export const SelvstendingSurveyModal = ({ onSubmit, visSurvey }: { onSubmit: () 
         return {}
     }, [])
     const [vanskeligeSporsmal, setVanskeligeSporsmal] = useState<string[]>([])
-
+    const [harLukket, setHarLukket] = useState<boolean>(false)
     const [textValue, setTextValue] = useState('')
     const [errorMsg, setErrorMsg] = useState<string | null>(null)
     const textAreaRef = useRef(null)
@@ -31,12 +31,14 @@ export const SelvstendingSurveyModal = ({ onSubmit, visSurvey }: { onSubmit: () 
                 return false
             }
 
-            const body = {
+            const body: Record<string, string | undefined | boolean | number> = {
                 feedback: textValue,
                 feedbackId: feedbackId,
                 svar: activeState,
                 ...feedbackProps,
-                vanskeligeSporsmal: JSON.stringify(vanskeligeSporsmal),
+            }
+            if (activeState == 'JA') {
+                body['vanskeligeSporsmal'] = vanskeligeSporsmal.join(',')
             }
             if (data?.id) {
                 oppdaterFeedback({ body, id: data.id, cb: knappeklikk })
@@ -92,8 +94,6 @@ export const SelvstendingSurveyModal = ({ onSubmit, visSurvey }: { onSubmit: () 
         'Annet',
     ]
 
-    if (thanksFeedback) {
-    }
     useEffect(() => {
         if (activeState === 'NEI') {
             setThanksFeedback(true)
@@ -125,10 +125,11 @@ export const SelvstendingSurveyModal = ({ onSubmit, visSurvey }: { onSubmit: () 
         <Modal
             width={modalStyle()?.width}
             className={modalStyle()?.margin}
-            open={visSurvey}
+            open={visSurvey && !harLukket}
             aria-labelledby="modal-heading"
             onClose={() => {
                 onSubmit()
+                setHarLukket(true)
             }}
         >
             {!thanksFeedback && (
