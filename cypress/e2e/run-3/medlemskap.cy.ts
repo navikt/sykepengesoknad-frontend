@@ -121,7 +121,7 @@ describe('Søknad med nytt spørsmål om oppholdstillatelse og kjent permanent o
         cy.contains('Til og med')
 
         velgDato(1)
-        setPeriodeFraTil(10, 25)
+        setPeriodeFraTil(10, 15)
         klikkGaVidere()
     })
 
@@ -130,7 +130,7 @@ describe('Søknad med nytt spørsmål om oppholdstillatelse og kjent permanent o
         cy.get('[data-cy="oppsummering-fra-søknaden"]').within(() => {
             sporsmalOgSvar('Har Utlendingsdirektoratet gitt deg en oppholdstillatelse før 1. mai 2024?', 'Ja')
             sporsmalOgSvar('Hvilken dato fikk du denne oppholdstillatelsen?', '01.')
-            sporsmalOgSvar('Hvilken periode gjelder denne oppholdstillatelsen?', '10. – 25.')
+            sporsmalOgSvar('Hvilken periode gjelder denne oppholdstillatelsen?', '10. – 15.')
         })
     })
 })
@@ -166,7 +166,7 @@ describe('Søknad med nytt spørsmål om oppholdstillatelse og kjent midlertidig
         cy.contains('Til og med')
 
         velgDato(1)
-        setPeriodeFraTil(10, 20)
+        setPeriodeFraTil(10, 15)
 
         klikkGaVidere()
     })
@@ -176,7 +176,7 @@ describe('Søknad med nytt spørsmål om oppholdstillatelse og kjent midlertidig
         cy.get('[data-cy="oppsummering-fra-søknaden"]').within(() => {
             sporsmalOgSvar('Har Utlendingsdirektoratet gitt deg en oppholdstillatelse før 1. mai 2024?', 'Ja')
             sporsmalOgSvar('Hvilken dato fikk du denne oppholdstillatelsen?', '01.')
-            sporsmalOgSvar('Hvilken periode gjelder denne oppholdstillatelsen?', '10. – 20.')
+            sporsmalOgSvar('Hvilken periode gjelder denne oppholdstillatelsen?', '10. – 15.')
         })
     })
 })
