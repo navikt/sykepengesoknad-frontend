@@ -6,23 +6,20 @@ import { useRouter } from 'next/router'
 import Endreknapp from '../../components/endreknapp/endreknapp'
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
-import { isProd, sykefravaerUrl } from '../../utils/environment'
+import { sykefravaerUrl } from '../../utils/environment'
 import { tekst } from '../../utils/tekster'
 import { logEvent } from '../amplitude/amplitude'
 import Ettersending from '../ettersending/ettersending'
 import { GjenstaendeSoknader, hentGjenstaendeSoknader } from '../gjenstaende-soknader/gjenstaende-soknader'
-import { UxSignalsWidget } from '../ux-signals/UxSignalsWidget'
 import useSoknader from '../../hooks/useSoknader'
 import { urlTilSoknad } from '../soknad/soknad-link'
 import QueryStatusPanel from '../queryStatusPanel/QueryStatusPanel'
 import { kvitteringBreadcrumb, useUpdateBreadcrumbs } from '../../hooks/useBreadcrumbs'
-import { useStudyStatus } from '../../hooks/useStudyStatus'
 import { SoknadHeader } from '../soknad/soknad-header'
 import { FlexjarKvittering } from '../flexjar/flexjar-kvittering'
 import { useSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
 import { useToggle } from '../../toggles/context'
 import { JulesoknadTekstKvittering } from '../julesoknad/julesoknad-infotekst'
-import { RSArbeidssituasjon } from '../../types/rs-types/rs-arbeidssituasjon'
 
 import Kvittering from './kvittering'
 
@@ -30,10 +27,6 @@ const KvitteringSide = () => {
     const { valgtSoknad, soknadId } = useSoknadMedDetaljer()
     const router = useRouter()
     const { data: soknader } = useSoknader()
-    const defaultStudy = 'panel-yhv7yi5h9q'
-    const { data: defaultStudyActive } = useStudyStatus(defaultStudy)
-    const selvstendigNaeringsdrivendeStudy = 'panel-gtnepi3ujl'
-    const { data: selvstendigNaeringsdrivendeStudyActive } = useStudyStatus(selvstendigNaeringsdrivendeStudy)
 
     useUpdateBreadcrumbs(() => [{ ...kvitteringBreadcrumb, handleInApp: true }], [])
 
@@ -71,16 +64,8 @@ const KvitteringSide = () => {
 
     const gjenstaendeSoknader = hentGjenstaendeSoknader(soknader, valgtSoknad)
 
-    const skalViseSelvstendigNaeringsdrivendeUxSignals =
-        selvstendigNaeringsdrivendeStudyActive &&
-        gjenstaendeSoknader.length === 0 &&
-        valgtSoknad.soknadstype === RSSoknadstype.SELVSTENDIGE_OG_FRILANSERE &&
-        valgtSoknad.arbeidssituasjon == RSArbeidssituasjon.NAERINGSDRIVENDE
-    const skalViseUxSignals =
-        !skalViseSelvstendigNaeringsdrivendeUxSignals && defaultStudyActive && gjenstaendeSoknader.length === 0
     const erJulesoknad = !!valgtSoknad?.julesoknad
-    const skalViseFlexjar =
-        !skalViseSelvstendigNaeringsdrivendeUxSignals && !skalViseUxSignals && (flexjarToggle.enabled || erJulesoknad)
+    const skalViseFlexjar = flexjarToggle.enabled || erJulesoknad
 
     return (
         <>
@@ -105,10 +90,6 @@ const KvitteringSide = () => {
                     {tekst('kvittering.ferdig')}
                 </Button>
             )}
-            {skalViseSelvstendigNaeringsdrivendeUxSignals && (
-                <UxSignalsWidget study={selvstendigNaeringsdrivendeStudy} demo={!isProd()} />
-            )}
-            {skalViseUxSignals && <UxSignalsWidget study={defaultStudy} demo={!isProd()} />}
             {skalViseEndre && <Endreknapp />}
             {skalViseSendTilArbeidsgiver && <Ettersending gjelder="arbeidsgiver" />}
             {skalViseFlexjar && <FlexjarKvittering />}
