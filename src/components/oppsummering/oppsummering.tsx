@@ -46,7 +46,7 @@ const Oppsummering = () => {
 
     return (
         <>
-            <FormSummary className="oppsummering my-8" data-cy="oppsummering-fra-søknaden" aria-label={tittel}>
+            <FormSummary className="oppsummering my-8" data-cy="oppsummering-fra-søknaden">
                 <FormSummary.Header>
                     <FormSummary.Heading level="2" className="flex h-full items-center">
                         {tittel}
