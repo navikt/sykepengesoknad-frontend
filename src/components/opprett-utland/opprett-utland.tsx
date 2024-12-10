@@ -1,4 +1,4 @@
-import { Alert, BodyLong, BodyShort, Button, ExpansionCard, Heading, List } from '@navikt/ds-react'
+import { Alert, BodyLong, Button, ExpansionCard, Heading, List } from '@navikt/ds-react'
 import { logger } from '@navikt/next-logger'
 import React, { useState } from 'react'
 
@@ -80,12 +80,8 @@ const OpprettUtland = () => {
                 Du trenger ikke søke hvis du
             </Heading>
             <List className="mb-10">
-                <List.Item>
-                    <BodyShort>har avtalt med arbeidsgiveren din at du tar ut lovbestemt ferie</BodyShort>
-                </List.Item>
-                <List.Item>
-                    <BodyShort>er sykmeldt på grunn av godkjent yrkesskade</BodyShort>
-                </List.Item>
+                <List.Item>har avtalt med arbeidsgiveren din at du tar ut lovbestemt ferie</List.Item>
+                <List.Item>er sykmeldt på grunn av godkjent yrkesskade</List.Item>
             </List>
 
             <Heading spacing size="small" level="2">
