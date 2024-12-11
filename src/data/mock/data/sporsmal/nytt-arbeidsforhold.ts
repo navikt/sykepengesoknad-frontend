@@ -19,7 +19,7 @@ export const nyttArbeidsforholdSporsmal = ({
 
     return {
         id: v4().toString(),
-        tag: 'NYTT_ARBEIDSFORHOLD_UNDERVEIS',
+        tag: 'NYTT_ARBEIDSFORHOLD_UNDERVEIS_0',
         sporsmalstekst: `Har du jobbet noe hos ${arbeidsstedNavn} i perioden ${periodeTekst}?`,
         undertekst: null,
         svartype: 'JA_NEI',
@@ -34,7 +34,7 @@ export const nyttArbeidsforholdSporsmal = ({
         undersporsmal: [
             {
                 id: v4().toString(),
-                tag: 'NYTT_ARBEIDSFORHOLD_UNDERVEIS_BRUTTO',
+                tag: 'NYTT_ARBEIDSFORHOLD_UNDERVEIS_BRUTTO_0',
                 sporsmalstekst: `Hvor mye har du tjent i perioden ${periodeTekst}?`,
                 undertekst:
                     'Oppgi det du har tjent før skatt. Se på lønnslippen eller kontrakten hvor mye du har tjent eller skal tjene.',
