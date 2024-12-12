@@ -34,7 +34,7 @@ export default function Person() {
                         type="button"
                         ref={buttonRef}
                         onClick={() => setOpenState((b) => !b)}
-                        icon={<SandboxIcon title="Åpne testdataverktøy" />}
+                        icon={<SandboxIcon title="Åpne testdataverktøy" aria-hidden />}
                         variant="tertiary-neutral"
                     />
                 </Tooltip>

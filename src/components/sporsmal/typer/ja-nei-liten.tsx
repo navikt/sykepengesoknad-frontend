@@ -1,4 +1,4 @@
-import { Alert, BodyShort, Radio, RadioGroup } from '@navikt/ds-react'
+import { Alert, BodyShort, Radio, RadioGroup, Heading } from '@navikt/ds-react'
 import React, { Fragment } from 'react'
 import { Controller, useFormContext } from 'react-hook-form'
 
@@ -83,9 +83,9 @@ const JaNeiLiten = ({ sporsmal }: SpmProps) => {
             >
                 {sporsmal.tag === 'INNTEKTSOPPLYSNINGER_VARIG_ENDRING' && (
                     <>
-                        <BodyShort size="large" weight="semibold" spacing>
+                        <Heading level="2" spacing size="small">
                             Varig endring i din arbeidssituasjon eller virksomhet
-                        </BodyShort>
+                        </Heading>
                         <BodyShort spacing>
                             Hvis inntekten din har endret seg varig med mer enn 25 prosent på grunn av endringer i
                             arbeidssituasjonen, vil sykepengegrunnlaget fastsettes ved skjønn.
