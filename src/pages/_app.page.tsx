@@ -9,7 +9,7 @@ import React, { ReactElement, useEffect, useRef } from 'react'
 import { QueryCache, QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { useRouter } from 'next/router'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
-import dynamic from 'next/dynamic'
+// import dynamic from 'next/dynamic'
 
 import { useHandleDecoratorClicks } from '../hooks/useBreadcrumbs'
 import { basePath } from '../utils/environment'
@@ -57,12 +57,12 @@ function MyApp({ Component, pageProps }: AppProps<ServerSidePropsResult>): React
 
     const router = useRouter()
     const isFirst = useRef(true)
-    const DemoWarning = () => {
-        const DemoWarning = dynamic(() => import('../components/demo-warning/DemoWarning'), {
-            ssr: false,
-        })
-        return <DemoWarning />
-    }
+    // const DemoWarning = () => {
+    //     const DemoWarning = dynamic(() => import('../components/demo-warning/DemoWarning'), {
+    //         ssr: false,
+    //     })
+    //     return <DemoWarning />
+    // }
 
     useEffect(() => {
         if (isFirst.current) {
@@ -87,7 +87,6 @@ function MyApp({ Component, pageProps }: AppProps<ServerSidePropsResult>): React
                 <QueryClientProvider client={queryClient}>
                     <div id="root" className="mx-auto max-w-2xl p-4 md:p-0 pb-32">
                         <main id="maincontent" role="main" tabIndex={-1} className="outline-none mb-6">
-                            <DemoWarning />
                             <Component {...pageProps} />
                         </main>
                     </div>
