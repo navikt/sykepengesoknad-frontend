@@ -9,7 +9,7 @@ import React, { ReactElement, useEffect, useRef } from 'react'
 import { QueryCache, QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { useRouter } from 'next/router'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
-// import dynamic from 'next/dynamic'
+//      import dynamic from 'next/dynamic'
 
 import { useHandleDecoratorClicks } from '../hooks/useBreadcrumbs'
 import { basePath } from '../utils/environment'
