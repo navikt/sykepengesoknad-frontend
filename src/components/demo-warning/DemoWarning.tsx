@@ -24,17 +24,18 @@ const DemoWarning = () => {
     }
 
     return (
-        <Alert
-            role="banner"
-            variant="warning"
-            closeButton={true}
-            onClose={() => {
-                setAlertLukket(true)
-                localStorage.setItem('demo-warning-lukket', dayjs().toString())
-            }}
-        >
-            Dette er en demoside og inneholder ikke dine personlige data.
-        </Alert>
+        null
+        // <Alert
+        //     role="banner"
+        //     variant="warning"
+        //     closeButton={true}
+        //     onClose={() => {
+        //         setAlertLukket(true)
+        //         localStorage.setItem('demo-warning-lukket', dayjs().toString())
+        //     }}
+        // >
+        //     Dette er en demoside og inneholder ikke dine personlige data.
+        // </Alert>
     )
 }
 
