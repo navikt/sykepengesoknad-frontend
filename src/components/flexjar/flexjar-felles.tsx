@@ -128,7 +128,7 @@ export function FlexjarFelles({
                                 <MagnifyingGlassIcon aria-hidden={true} className="text-white axe-exclude" />
                             </div>
                             <div>
-                                <Label as="h3" className="mb-2">
+                                <Label as="h2" className="mb-2">
                                     {flexjartittel}
                                 </Label>
                                 <BodyShort>Svarene dine er anonyme</BodyShort>
