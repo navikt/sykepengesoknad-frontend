@@ -75,7 +75,7 @@ export function checkViStolerPaDeg(gaVidere = true) {
     }
 }
 
-export function heading(heading: string, level = 3) {
+export function heading(heading: string, level = 2) {
     return cy.get('body').findByRole('heading', {
         name: heading,
         level,
