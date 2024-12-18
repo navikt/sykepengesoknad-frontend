@@ -22,7 +22,7 @@ describe('Tester flexjar', () => {
         cy.contains('Tilbake i fullt arbeid')
         cy.contains('Tilbakemeldingen din er viktig for oss!')
 
-        heading('Tilbakemeldingen din er viktig for oss!')
+        heading('Tilbakemeldingen din er viktig for oss!', 2)
             .closest('[role="region"]')
             .within(() => {
                 cy.findByRole('button', {
