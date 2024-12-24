@@ -36,7 +36,7 @@
         "react-dom": "^18.3.1",
         "react-hook-form": "^7.53.0",
         "remeda": "^2.16.0",
-        "tailwind-merge": "^2.5.4",
+        "tailwind-merge": "^2.6.0",
         "use-force-update": "^1.0.11",
         "uuid": "^10.0.0"
     },
