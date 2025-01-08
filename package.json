@@ -43,16 +43,16 @@
         "@axe-core/playwright": "^4.10.1",
         "@cypress/webpack-preprocessor": "^6.0.2",
         "@navikt/eslint-config-teamsykmelding": "^7.1.0",
-        "@testing-library/cypress": "^10.0.2",
         "@playwright/test": "^1.49.1",
+        "@testing-library/cypress": "^10.0.2",
         "@types/classnames": "^2.3.4",
         "@types/jsdom": "^21.1.7",
         "@types/node": "~22.10.5",
         "@types/react": "^19.0.3",
         "@types/react-dom": "^19.0.2",
         "@types/uuid": "^10.0.0",
-        "axe-core": "^4.10.2",
         "autoprefixer": "^10.4.20",
+        "axe-core": "^4.10.2",
         "cypress": "^13.17.0",
         "cypress-axe": "^1.5.0",
         "cypress-file-upload": "^5.0.8",
@@ -116,5 +116,8 @@
             }
         ]
     },
-    "prettier": "@navikt/eslint-config-teamsykmelding/prettier"
+    "prettier": "@navikt/eslint-config-teamsykmelding/prettier",
+    "optionalDependencies": {
+        "@rollup/rollup-linux-x64-gnu": "^4.30.1"
+    }
 }
