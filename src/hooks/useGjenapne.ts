@@ -21,8 +21,14 @@ export function useGjenapne() {
             )
         },
         onSuccess: async (_data, id) => {
-            await queryClient.invalidateQueries(['soknad', id])
-            queryClient.invalidateQueries(['soknader']).catch()
+            await queryClient.invalidateQueries({
+                queryKey: ['soknad', id],
+            })
+            queryClient
+                .invalidateQueries({
+                    queryKey: ['soknader'],
+                })
+                .catch()
         },
         onError: (e) => {
             if (!(e instanceof AuthenticationError)) {

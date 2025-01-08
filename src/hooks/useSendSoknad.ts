@@ -26,12 +26,22 @@ export function useSendSoknad() {
         mutationKey: ['sendsoknad'],
 
         onSuccess: async (_, soknad) => {
-            await queryClient.invalidateQueries(['soknad', soknad.id])
+            await queryClient.invalidateQueries({
+                queryKey: ['soknad', soknad.id],
+            })
 
-            queryClient.invalidateQueries(['soknader']).catch()
+            queryClient
+                .invalidateQueries({
+                    queryKey: ['soknader'],
+                })
+                .catch()
 
             if (soknad.korrigerer !== undefined) {
-                queryClient.invalidateQueries(['soknad', soknad.korrigerer]).catch()
+                queryClient
+                    .invalidateQueries({
+                        queryKey: ['soknad', soknad.korrigerer],
+                    })
+                    .catch()
             }
         },
         onError: (e) => {

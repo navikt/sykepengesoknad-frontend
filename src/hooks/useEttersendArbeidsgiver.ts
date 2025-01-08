@@ -28,9 +28,19 @@ export function useEttersendArbeidsgiver() {
             )
         },
         onSuccess: async (data, variables) => {
-            await queryClient.invalidateQueries(['soknad', variables.id])
-            queryClient.invalidateQueries(['mottaker', variables.id]).catch()
-            queryClient.invalidateQueries(['soknader']).catch()
+            await queryClient.invalidateQueries({
+                queryKey: ['soknad', variables.id],
+            })
+            queryClient
+                .invalidateQueries({
+                    queryKey: ['mottaker', variables.id],
+                })
+                .catch()
+            queryClient
+                .invalidateQueries({
+                    queryKey: ['soknader'],
+                })
+                .catch()
             variables.onSuccess()
         },
         onError: (e) => {

@@ -16,6 +16,8 @@ test('Alle tags har global feilmelding', () => {
 
     tags = tags.filter((skipTag) => {
         return (
+            // Svartype: RADIO
+            // Svartype: RADIO
             skipTag !== 'VAER_KLAR_OVER_AT' && // Svartype: IKKE_RELEVANT
             skipTag !== 'TIL_SLUTT' && // Svartype: IKKE_RELEVANT
             skipTag !== 'IKKE_SOKT_UTENLANDSOPPHOLD_INFORMASJON' && // Svartype: IKKE_RELEVANT
@@ -62,8 +64,8 @@ test('Alle tags har global feilmelding', () => {
             skipTag !== 'KJENTE_INNTEKTSKILDER_SLUTTET_NEI' && // Svartype: RADIO
             skipTag !== 'KJENTE_INNTEKTSKILDER_SLUTTET_JA' && // Svartype: RADIO
             skipTag !== 'INNTEKTSKILDE_SELVSTENDIG_VARIG_ENDRING_JA' && // Svartype: RADIO
-            skipTag !== 'INNTEKTSKILDE_SELVSTENDIG_VARIG_ENDRING_NEI' && // Svartype: RADIO
-            skipTag !== 'INNTEKTSKILDE_SELVSTENDIG_VARIG_ENDRING_VET_IKKE' // Svartype: RADIO
+            skipTag !== 'INNTEKTSKILDE_SELVSTENDIG_VARIG_ENDRING_NEI' &&
+            skipTag !== 'INNTEKTSKILDE_SELVSTENDIG_VARIG_ENDRING_VET_IKKE'
         )
     })
 

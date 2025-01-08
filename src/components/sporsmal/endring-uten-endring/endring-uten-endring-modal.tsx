@@ -16,7 +16,7 @@ export const EndringUtenEndringModal = (props: EndringUtenEndringModalProps) => 
     const { valgtSoknad } = useSoknadMedDetaljer()
 
     const { data: soknader } = useSoknader()
-    const { mutate: avbrytMutation, isLoading: avbryter, error: avbrytError } = useAvbryt()
+    const { mutate: avbrytMutation, isPending: avbryter, error: avbrytError } = useAvbryt()
 
     if (!valgtSoknad || !soknader) return null
 

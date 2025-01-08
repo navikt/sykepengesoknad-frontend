@@ -36,7 +36,7 @@ const FilOpplaster = ({ valgtFil, setValgtFil }: FilOpplasterProps) => {
                 />
             ))}
             <div role="alert" aria-live="assertive">
-                {errors.fil_input && (
+                {errors.fil_input && errors.fil_input.message && typeof errors.fil_input?.message === 'string' && (
                     <BodyShort
                         as="span"
                         className="mt-2 flex gap-2 font-bold text-surface-danger before:content-['•']"

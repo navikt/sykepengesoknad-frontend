@@ -13,7 +13,7 @@ import { useUpdateBreadcrumbs } from '../../hooks/useBreadcrumbs'
 import Teasere from './teasere'
 
 const Listevisning = () => {
-    const { data: soknader, isLoading } = useSoknader()
+    const { data: soknader, isPending } = useSoknader()
 
     useUpdateBreadcrumbs(() => [], [])
 
@@ -43,7 +43,7 @@ const Listevisning = () => {
             <OmSykepenger />
 
             <QueryStatusPanel />
-            {isLoading && (
+            {isPending && (
                 <>
                     <div className="mb-12">
                         <Skeleton variant="rectangle" className="mb-6" width="25%" height="32px" />

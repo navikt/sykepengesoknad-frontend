@@ -112,7 +112,9 @@ const OpplastingForm = ({ valgtSoknad, setOpenModal, openModal }: OpplastingFrom
 
             await lagreSvar(opplastingResponse)
 
-            await queryClient.invalidateQueries(['soknad', valgtSoknad.id])
+            await queryClient.invalidateQueries({
+                queryKey: ['soknad', valgtSoknad.id],
+            })
 
             setOpenModal(false)
         } catch (e: any) {

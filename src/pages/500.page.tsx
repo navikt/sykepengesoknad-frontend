@@ -1,7 +1,7 @@
 import { Page } from '@navikt/ds-react'
 import React from 'react'
 
-function ServerError(): JSX.Element | boolean {
+function ServerError() {
     return (
         <Page>
             <Page.Block width="xl">

@@ -11,7 +11,7 @@ import { EndreknappTekster } from './endreknapp-tekster'
 
 const EndreModal = ({ aapen, setAapen }: { aapen: boolean; setAapen: (p: boolean) => void }) => {
     const { valgtSoknad } = useSoknadMedDetaljer()
-    const { mutate: korrigerMutation, isLoading: korrigerer, error: korrigeringError } = useKorriger()
+    const { mutate: korrigerMutation, isPending: korrigerer, error: korrigeringError } = useKorriger()
 
     if (!valgtSoknad) return null
     const endreKnappTekst = EndreknappTekster['kvittering.knapp.endre']

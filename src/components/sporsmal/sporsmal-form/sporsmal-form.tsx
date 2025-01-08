@@ -37,10 +37,10 @@ const SporsmalForm = ({ sporsmal }: SpmProps) => {
 
     const { erUtenlandssoknad, valgtSoknad, spmIndex, stegNo } = useSoknadMedDetaljer()
     const { data: korrigerer } = useSoknad(valgtSoknad?.korrigerer, valgtSoknad?.korrigerer !== undefined)
-    const { mutate: sendSoknadMutation, isLoading: senderSoknad, error: sendError } = useSendSoknad()
+    const { mutate: sendSoknadMutation, isPending: senderSoknad, error: sendError } = useSendSoknad()
     const {
         mutate: oppdaterSporsmalMutation,
-        isLoading: oppdatererSporsmal,
+        isPending: oppdatererSporsmal,
         error: oppdaterError,
     } = useOppdaterSporsmal()
 

@@ -37,12 +37,23 @@ export function useAvbryt() {
             }
 
             if (variables.valgtSoknad.status === RSSoknadstatus.UTKAST_TIL_KORRIGERING) {
-                await queryClient.invalidateQueries(['soknad', variables.valgtSoknad.id], { refetchType: 'none' })
-                await queryClient.invalidateQueries(['soknader'])
+                await queryClient.invalidateQueries({
+                    queryKey: ['soknad', variables.valgtSoknad.id],
+                    refetchType: 'none',
+                })
+                await queryClient.invalidateQueries({
+                    queryKey: ['soknader'],
+                })
                 await router.push('/')
             } else {
-                await queryClient.invalidateQueries(['soknad', variables.valgtSoknad.id])
-                queryClient.invalidateQueries(['soknader']).catch()
+                await queryClient.invalidateQueries({
+                    queryKey: ['soknad', variables.valgtSoknad.id],
+                })
+                queryClient
+                    .invalidateQueries({
+                        queryKey: ['soknader'],
+                    })
+                    .catch()
             }
             if (variables.valgtSoknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND) {
                 await router.push(`/avbrutt/${variables.valgtSoknad.id}`)

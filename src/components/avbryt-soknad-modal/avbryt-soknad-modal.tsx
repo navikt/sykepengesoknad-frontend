@@ -45,7 +45,7 @@ const AvbrytKorrigering = () => {
 const AvbrytSoknadModal = () => {
     const { valgtSoknad, stegId } = useSoknadMedDetaljer()
 
-    const { mutate: avbrytMutation, isLoading: avbryter, error: avbrytError } = useAvbryt()
+    const { mutate: avbrytMutation, isPending: avbryter, error: avbrytError } = useAvbryt()
 
     const [aapen, setAapen] = useState<boolean>(false)
 

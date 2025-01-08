@@ -34,8 +34,12 @@ export function useKorriger() {
         },
         onSuccess: async (data, variables) => {
             const soknad = rsToSoknad(data as RSSoknad)
-            queryClient.setQueriesData(['soknad', soknad.id], soknad)
-            queryClient.invalidateQueries(['soknader']).catch()
+            queryClient.setQueryData(['soknad', soknad.id], soknad)
+            queryClient
+                .invalidateQueries({
+                    queryKey: ['soknader'],
+                })
+                .catch()
             variables.onSuccess()
             await router.push(urlTilSoknad(soknad))
         },

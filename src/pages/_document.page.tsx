@@ -38,7 +38,7 @@ class MyDocument extends Document<Props> {
         return { ...initialProps, Decorator, language }
     }
 
-    render(): JSX.Element {
+    render() {
         const { Decorator, language } = this.props
         const showDecorator = serverRuntimeConfig.noDecorator != 'true'
 

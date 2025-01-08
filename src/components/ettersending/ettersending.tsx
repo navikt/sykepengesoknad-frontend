@@ -14,7 +14,7 @@ const Ettersending = ({ gjelder }: EttersendingProps) => {
     const { soknadId } = useSoknadMedDetaljer()
     const {
         mutate: ettersendArbeidsgiverMutation,
-        isLoading: ettersenderArbeidsgiver,
+        isPending: ettersenderArbeidsgiver,
         error: ettersendArbeidsgiverError,
     } = useEttersendArbeidsgiver()
 
