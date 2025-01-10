@@ -13,7 +13,7 @@ import {
 } from './utilities'
 import { validerAxe } from './uuvalidering'
 
-test.describe.serial('Tester søknad om å beholde sykepenger utenfor EØS', () => {
+test.describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
     const soknad = oppholdUtland
 
     test('Går til søknad som har påfølgende søknader som må fylles ut', async ({ page }, testInfo) => {
