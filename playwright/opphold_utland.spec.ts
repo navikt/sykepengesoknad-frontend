@@ -1,4 +1,4 @@
-import { expect } from '@playwright/test'
+import test, { expect } from '@playwright/test'
 
 import { oppholdUtland } from '../src/data/mock/data/soknad/opphold-utland'
 
@@ -11,12 +11,14 @@ import {
     svarCombobox,
     svarRadioGruppe,
 } from './utilities'
-import { test } from './fixtures'
+import { validerAxe } from './uuvalidering'
 
-test.describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
-    const soknad = oppholdUtland // Hentar id eller liknande derifrå
+test.describe.serial('Tester søknad om å beholde sykepenger utenfor EØS', () => {
+    const soknad = oppholdUtland
 
-    test('Går til søknad som har påfølgende søknader som må fylles ut', async ({ page }) => {
+    test('Går til søknad som har påfølgende søknader som må fylles ut', async ({ page }, testInfo) => {
+        // Opprett ny kontekst og side ÉN gang
+
         await page.goto('/syk/sykepengesoknad?testperson=bare-utland')
 
         await expect(page.locator('.navds-heading--large')).toBeVisible()
@@ -31,16 +33,15 @@ test.describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
         await expect(header).toBeVisible()
 
         await expect(header).toContainText('Søknad om å beholde sykepenger utenfor EU/EØS')
-    })
+        await validerAxe(page, testInfo)
 
-    test('Viser infoside og starter søknaden', async ({ page }) => {
+        // Viser infoside og starter søknaden', async () => {
         await expect(page.getByText('Du trenger ikke søke hvis du')).toBeVisible()
         await expect(page.getByText('Har du allerede vært på reise?')).toBeVisible()
         // Start søknaden
         await page.getByRole('button', { name: 'Start søknaden' }).click()
-    })
 
-    test('Velger land innenfor EU/EØS og får info om å ikke søke', async ({ page }) => {
+        // Velger land innenfor EU/EØS og får info om å ikke søke', async () => {
         await expect(page).toHaveURL(new RegExp(`${soknad.id}/1`))
 
         // Klikk gå videre utan å fylle inn -> forventa feil
@@ -66,9 +67,8 @@ test.describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
         )
 
         await klikkGaVidere(page, true)
-    })
 
-    test('Velger land utenfor EU/EØS', async ({ page }) => {
+        // Velger land utenfor EU/EØS', async () => {
         // Sidan me framleis er på same side (spørsmål 1):
         await expect(page).toHaveURL(new RegExp(`${soknad.id}/1`))
 
@@ -87,40 +87,33 @@ test.describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
         await page.getByRole('option', { name: 'Sør-Korea' }).click()
 
         await klikkGaVidere(page)
-    })
 
-    test('Avbryter søknaden og havner på avbrutt-siden', async ({ page }) => {
+        // Avbryter søknaden og havner på avbrutt-siden', async () => {
         await avbryterSoknad(page)
         await expect(page).toHaveURL(new RegExp(`avbrutt/${soknad.id}`))
         await expect(page.getByText('Fjernet søknad om å beholde sykepenger utenfor EU/EØS')).toBeVisible()
         await expect(page.getByRole('link', { name: 'nav.no/sykepenger#utland' })).toBeVisible()
         await expect(
-            page.getByText(
-                'I utgangspunktet bør du søke før du reiser til land utenfor EU/EØS. Du kan likevel søke ...',
-            ),
+            page.getByText('I utgangspunktet bør du søke før du reiser til land utenfor EU/EØS. Du kan likevel søke'),
         ).toBeVisible()
-    })
 
-    test('Gjenåpner søknaden', async ({ page }) => {
-        await page.getByRole('button', { name: 'Gjenoppta søknad' }).click() // Tilpass til riktig data-cy/text
+        // Gjenåpner søknaden', async () => {
+        await page.getByRole('button', { name: 'Jeg vil bruke denne søknaden likevel' }).click()
         await expect(page).toHaveURL(new RegExp(`${soknad.id}/2`))
         await expect(page.getByText('Gå videre')).toBeVisible()
-    })
 
-    test('Velger periode for utenlandsopphold', async ({ page }) => {
+        // Velger periode for utenlandsopphold', async () => {
         await expect(page).toHaveURL(new RegExp(`${soknad.id}/2`))
         await setPeriodeFraTil(page, 17, 24)
 
         await klikkGaVidere(page)
-    })
 
-    test('Går tilbake og frem igjen', async ({ page }) => {
+        // Går tilbake og frem igjen', async () => {
         await klikkTilbake(page)
         // sjekkMainContentFokus(page) – om du hadde ein eigen funksjon for å teste fokus
         await klikkGaVidere(page)
-    })
 
-    test('Oppgir arbeidsgiver', async ({ page }) => {
+        // Oppgir arbeidsgiver', async () => {
         await expect(page).toHaveURL(new RegExp(`${soknad.id}/3`))
 
         // "Har du arbeidsgiver?" -> JA
@@ -134,20 +127,25 @@ test.describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
 
         // "Har du avtalt feriedager?" -> NEI
         await page
-            .locator('fieldset', { hasText: 'Har du avtalt med arbeidsgiveren ...' })
+            .locator('fieldset', {
+                hasText: 'Har du avtalt med arbeidsgiveren din at du skal ta ut feriedager i hele perioden?',
+            })
             .getByRole('radio', { name: 'Nei', exact: true })
             .check()
 
         await klikkGaVidere(page)
-    })
 
-    test('Avklaring i forbindelse med reise', async ({ page }) => {
+        // Avklaring i forbindelse med reise', async () => {
         // Klikk "Gå videre" -> forventa feil
         await klikkGaVidere(page, true)
 
         // 2 feil i skjemaet:
-        await expect(page.getByText('Du må svare på om utenlandsoppholdet ... sykmeldte deg')).toBeVisible()
-        await expect(page.getByText('Du må svare på om utenlandsoppholdet ... arbeidsgiver eller NAV')).toBeVisible()
+        await expect(
+            page.getByText('Du må svare på om utenlandsoppholdet er avklart med den som sykmeldte deg'),
+        ).toBeVisible()
+        await expect(
+            page.getByText('Du må svare på om utenlandsoppholdet er avklart med arbeidsgiver eller NAV'),
+        ).toBeVisible()
 
         // Radiogruppe: 'Har du avklart utenlandsoppholdet ... sykmeldte deg?' -> 'Nei'
         await svarRadioGruppe(page, 'Har du avklart utenlandsoppholdet med den som sykmeldte deg?', 'Nei')
@@ -160,9 +158,8 @@ test.describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
         await svarRadioGruppe(page, 'Har du avklart utenlandsoppholdet med arbeidsgiveren/NAV?', 'Ja')
 
         await klikkGaVidere(page)
-    })
 
-    test('Søknad TIL_SLUTT (oppsummering)', async ({ page }) => {
+        // Søknad TIL_SLUTT (oppsummering)', async () => {
         await expect(page).toHaveURL(new RegExp(`${soknad.id}/5`))
         await expect(
             page.locator('.navds-guide-panel__content', {
@@ -182,14 +179,12 @@ test.describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
             'Har du avtalt med arbeidsgiveren din at du skal ta ut feriedager i hele perioden?',
             'Nei',
         )
-    })
 
-    test('Sender søknaden', async ({ page }) => {
+        // Sender søknaden', async () => {
         await expect(page).toHaveURL(new RegExp(`${soknad.id}/5`))
         await page.getByRole('button', { name: 'Send søknaden' }).click()
-    })
 
-    test('Viser kvittering med Ferdig-knapp', async ({ page }) => {
+        // Viser kvittering med Ferdig-knapp', async () => {
         await expect(page).toHaveURL(new RegExp(`kvittering/${soknad.id}`))
         const kvitteringPanel = page.locator('[data-cy="kvittering-panel"]')
         await expect(kvitteringPanel).toContainText('Hva skjer videre?')
@@ -197,23 +192,20 @@ test.describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
         await expect(kvitteringPanel).toContainText('Risiko ved å reise før du har mottatt svar')
         await expect(kvitteringPanel).toContainText('Les mer om sykepenger når du er på reise.')
         await expect(kvitteringPanel).toContainText('Du søker om sykepenger')
-    })
 
-    test('Går til listevisningen', async ({ page }) => {
+        // Går til listevisningen', async () => {
         // Gjer som i Cypress, men her: naviger direkte tilbake
         await page.goto('/syk/sykepengesoknad?testperson=bare-utland')
-        await expect(page.locator('h1')).toHaveText('Søknader')
-    })
+        await expect(page.locator('h1').first()).toHaveText('Søknader')
 
-    test('Navigerer til den sendte søknaden igjen', async ({ page }) => {
+        // Navigerer til den sendte søknaden igjen', async () => {
         const tidligere = page.locator('[data-cy="Tidligere søknader"]')
         await expect(tidligere).toBeVisible()
         await tidligere
             .getByRole('link', { name: 'Søknad om å beholde sykepenger utenfor EU/EØS Sendt til NAV' })
             .click()
-    })
 
-    test('Viser sendt side', async ({ page }) => {
+        // Viser sendt side', async () => {
         await expect(page).toHaveURL(new RegExp(`sendt/${soknad.id}`))
         await expect(page.getByText('Oppsummering fra søknaden')).toBeVisible()
     })

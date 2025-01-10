@@ -79,19 +79,19 @@ export async function svarCombobox(
 // Eksempel på korleis du kan implementere desse hjelpefunksjonane:
 async function modalIkkeAktiv(page: Page) {
     // Til dømes: vent på at eit modal-element ikkje er synleg
-    await expect(page.locator('[role="dialog"]')).toBeHidden()
+    await expect(page.locator('body')).not.toHaveCSS('overflow', 'hidden')
 }
 
 async function modalAktiv(page: Page) {
-    // Til dømes: vent på at eit modal-element er synleg
-    await expect(page.locator('[role="dialog"]')).toBeVisible()
+    await expect(page.locator('body')).toHaveCSS('overflow', 'hidden')
 }
 
 export async function avbryterSoknad(page: Page) {
     // 1. Avbryt-knappen er synleg før modalen er aktiv
     await modalIkkeAktiv(page)
-    await expect(page.getByText('Jeg har ikke behov for denne søknaden')).toBeVisible()
-    await page.getByText('Jeg har ikke behov for denne søknaden').click()
+
+    await expect(page.getByRole('button', { name: 'Jeg har ikke behov for denne søknaden' })).toBeVisible()
+    await page.getByRole('button', { name: 'Jeg har ikke behov for denne søknaden' }).click()
 
     // 2. No er modalen aktiv, og me ser 'Nei, jeg har behov for søknaden'
     await modalAktiv(page)
@@ -103,8 +103,8 @@ export async function avbryterSoknad(page: Page) {
     await expect(page.getByText('Nei, jeg har behov for søknaden')).not.toBeVisible()
 
     // 4. Klikk på 'Jeg har ikke behov for denne søknaden' endå ein gong
-    await expect(page.getByText('Jeg har ikke behov for denne søknaden')).toBeVisible()
-    await page.getByText('Jeg har ikke behov for denne søknaden').click()
+    await expect(page.getByRole('button', { name: 'Jeg har ikke behov for denne søknaden' })).toBeVisible()
+    await page.getByRole('button', { name: 'Jeg har ikke behov for denne søknaden' }).click()
 
     // 5. Ny modalvising med ekstra tekst
     await modalAktiv(page)
@@ -169,5 +169,5 @@ export async function sporsmalOgSvar(container: Locator, sporsmal: string, svar:
     const siblingLocator = sporsmalLocator.locator('xpath=following-sibling::*')
 
     // 3. Sjekk at minst ett av søskenelementene inneholder `svar`
-    await expect(siblingLocator).toContainText(svar)
+    await expect(siblingLocator.first()).toContainText(svar)
 }
