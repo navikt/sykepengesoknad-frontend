@@ -23,9 +23,9 @@ const GruppeAvUndersporsmal = ({ sporsmal, sporsmalIndex, erSisteSporsmal }: Gru
     const { valgtSoknad, spmIndex } = useSoknadMedDetaljer()
     const { getValues, trigger } = useFormContext()
 
-    const { mutate: oppdaterSporsmal, isLoading: oppdatererSporsmal } = useOppdaterSporsmal()
-    const { mutate: leggTilNyttUndersporsmal, isLoading: leggerTil } = useLeggTilUndersporsmal()
-    const { mutate: slettundersporsmal, isLoading: sletter } = useSlettUndersporsmal()
+    const { mutate: oppdaterSporsmal, isPending: oppdatererSporsmal } = useOppdaterSporsmal()
+    const { mutate: leggTilNyttUndersporsmal, isPending: leggerTil } = useLeggTilUndersporsmal()
+    const { mutate: slettundersporsmal, isPending: sletter } = useSlettUndersporsmal()
 
     const erMedlemskap = sporsmal.tag.includes('MEDLEMSKAP')
     const kanSlette = erMedlemskap && (sporsmalIndex > 0 || !erSisteSporsmal)

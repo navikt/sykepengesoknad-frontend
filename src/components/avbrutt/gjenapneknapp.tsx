@@ -8,7 +8,7 @@ import { useSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
 const GjenapneSoknad = () => {
     const { valgtSoknad } = useSoknadMedDetaljer()
 
-    const { mutate: gjenapneMutation, isLoading: gjenapner, error: gjenapneError } = useGjenapne()
+    const { mutate: gjenapneMutation, isPending: gjenapner, error: gjenapneError } = useGjenapne()
 
     if (!valgtSoknad) return null
 

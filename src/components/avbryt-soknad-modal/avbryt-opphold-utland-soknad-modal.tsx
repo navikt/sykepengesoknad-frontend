@@ -43,7 +43,7 @@ const AvbrytKorrigeringOppholdutland = ({ soknad }: SoknadProps) => {
 }
 
 const AvbrytOppholdUtlandSoknadModal = ({ soknad }: SoknadProps) => {
-    const { mutate: avbrytMutation, isLoading: avbryter, error: avbrytError } = useAvbryt()
+    const { mutate: avbrytMutation, isPending: avbryter, error: avbrytError } = useAvbryt()
 
     const [aapen, setAapen] = useState<boolean>(false)
 

@@ -26,17 +26,23 @@ const Opplasting = ({ sporsmal }: SpmProps) => {
             <Button type="button" variant="secondary" className="w-full p-8" onClick={aktiverModal}>
                 <BodyShort>{tekst('opplasting.legg-til')}</BodyShort>
             </Button>
-            <Modal
-                open={openModal}
-                portal={true}
-                onClose={() => setOpenModal(false)}
-                header={{ heading: tekst('opplasting_modal.nytt-utlegg.tittel'), size: 'medium', closeButton: false }}
-                className="w-96"
-            >
-                <Modal.Body>
-                    <OpplastingForm valgtSoknad={valgtSoknad} setOpenModal={setOpenModal} openModal={openModal} />
-                </Modal.Body>
-            </Modal>
+            {openModal && (
+                <Modal
+                    open={openModal}
+                    portal={true}
+                    onClose={() => setOpenModal(false)}
+                    header={{
+                        heading: tekst('opplasting_modal.nytt-utlegg.tittel'),
+                        size: 'medium',
+                        closeButton: false,
+                    }}
+                    className="w-96"
+                >
+                    <Modal.Body>
+                        <OpplastingForm valgtSoknad={valgtSoknad} setOpenModal={setOpenModal} openModal={openModal} />
+                    </Modal.Body>
+                </Modal>
+            )}
 
             <FilListe />
         </>

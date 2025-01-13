@@ -1,7 +1,7 @@
 import { Page } from '@navikt/ds-react'
 import React, { useEffect } from 'react'
 
-function NotFound(): JSX.Element | boolean {
+function NotFound() {
     useEffect(() => {
         if (window.location.pathname === '/') {
             window.location.pathname = '/syk/sykepengesoknad'

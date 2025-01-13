@@ -1,7 +1,6 @@
 import { Button, Label } from '@navikt/ds-react'
 import React, { useEffect, useRef, useState } from 'react'
 import { useFormContext } from 'react-hook-form'
-import useForceUpdate from 'use-force-update'
 import { PlusIcon } from '@navikt/aksel-icons'
 
 import { tekst } from '../../../utils/tekster'
@@ -9,6 +8,7 @@ import { hentPerioder } from '../hent-svar'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
 import { RSSvartype } from '../../../types/rs-types/rs-svartype'
+import useForceUpdate from '../../../hooks/useForceUpdate'
 
 import PeriodeKomp from './periode-komp'
 

@@ -15,7 +15,7 @@ interface SlettknappProps {
 const Slettknapp = ({ sporsmal, kvittering }: SlettknappProps) => {
     const { soknadId } = useSoknadMedDetaljer()
 
-    const { mutate: slettKvitteringMutation, isLoading: sletter, error: slettingError } = useSlettKvittering()
+    const { mutate: slettKvitteringMutation, isPending: sletter, error: slettingError } = useSlettKvittering()
 
     const [vilSlette, setVilSlette] = useState<boolean>(false)
     if (!soknadId) {

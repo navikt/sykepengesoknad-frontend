@@ -29,7 +29,9 @@ export function useSlettKvittering() {
             )
         },
         onSuccess: async (data, variables) => {
-            await queryClient.invalidateQueries(['soknad', variables.soknadId])
+            await queryClient.invalidateQueries({
+                queryKey: ['soknad', variables.soknadId],
+            })
             variables.onSuccess()
         },
         onError: (e) => {

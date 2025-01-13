@@ -80,9 +80,10 @@ const Arbeidstaker = () => {
         if (forrigeSoknadId === undefined) {
             return true
         }
-        const mottakerAvForrigeSoknad = await queryClient.fetchQuery(['mottaker', forrigeSoknadId], () =>
-            mottakerSoknadQueryFn(forrigeSoknadId),
-        )
+        const mottakerAvForrigeSoknad = await queryClient.fetchQuery({
+            queryKey: ['mottaker', forrigeSoknadId],
+            queryFn: () => mottakerSoknadQueryFn(forrigeSoknadId),
+        })
 
         return mottakerAvForrigeSoknad === RSMottaker.ARBEIDSGIVER
     }

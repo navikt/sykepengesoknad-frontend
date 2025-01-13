@@ -28,7 +28,9 @@ export function useSlettUndersporsmal() {
             )
         },
         onSuccess: async (data, variables) => {
-            await queryClient.invalidateQueries(['soknad', variables.soknadId])
+            await queryClient.invalidateQueries({
+                queryKey: ['soknad', variables.soknadId],
+            })
         },
         onError: (e) => {
             if (!(e instanceof AuthenticationError)) {

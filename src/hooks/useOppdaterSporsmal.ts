@@ -53,7 +53,7 @@ export function useOppdaterSporsmal() {
             }
 
             const soknadMedSvar = oppdatertSoknad()
-            queryClient.setQueriesData(['soknad', variables.soknad.id], soknadMedSvar)
+            queryClient.setQueryData(['soknad', variables.soknad.id], soknadMedSvar)
             if (variables.onSuccess) variables.onSuccess(soknadMedSvar)
         },
         onError: (e) => {

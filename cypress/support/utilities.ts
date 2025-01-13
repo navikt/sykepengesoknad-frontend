@@ -38,18 +38,6 @@ export function svarRadioGruppe(groupName: string, radioName: string) {
     cy.findByRole('group', { name: groupName }).findByRole('radio', { name: radioName }).check()
 }
 
-export function svarCheckboxGruppe(groupName: string, checkboxNames: string | string[]) {
-    cy.findByRole('group', { name: groupName }).within(() => {
-        if (Array.isArray(checkboxNames)) {
-            checkboxNames.forEach((checkboxName) => {
-                cy.findByRole('checkbox', { name: checkboxName }).check()
-            })
-        } else {
-            cy.findByRole('checkbox', { name: checkboxNames }).check()
-        }
-    })
-}
-
 export function svarJaHovedsporsmal() {
     cy.get('form').findAllByRole('radio', { name: 'Ja' }).first().click()
     cy.get('form').findAllByRole('radio', { name: 'Ja' }).first().should('be.checked')
