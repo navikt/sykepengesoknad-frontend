@@ -49,7 +49,7 @@ spec:
     path: syk/sykepengesoknad/api/internal/isReady
   startup:
     path: syk/sykepengesoknad/api/internal/isAlive
-    initialDelay: 10
+    initialDelay: 30
   prometheus:
     enabled: true
     path: /syk/sykepengesoknad/api/internal/prometheus
