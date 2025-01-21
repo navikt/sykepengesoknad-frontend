@@ -5,6 +5,10 @@ metadata:
   namespace: flex
   annotations:
     nginx.ingress.kubernetes.io/proxy-body-size: "20M"
+    config.linkerd.io/proxy-cpu-limit: "1"
+    config.linkerd.io/proxy-cpu-request: "200m"
+    config.linkerd.io/proxy-memory-limit: "1Gi"
+    config.linkerd.io/proxy-memory-request: "256Mi"
   labels:
     team: flex
 spec:
