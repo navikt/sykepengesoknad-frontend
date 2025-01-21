@@ -49,7 +49,7 @@ export const logEvent = (eventName: validEventNames, eventData: Record<string, s
             }).catch((e) => logger.warn(`Feil ved amplitude logging`, e))
         } else {
             // eslint-disable-next-line no-console
-            console.log(`Logger ${eventName} - Event properties: ${JSON.stringify(cleanedEventData)}`)
+            console.log(`Logger ${eventName} - Event properties: \n${JSON.stringify(cleanedEventData, null, 4)}`)
 
             if (isLocalBackend()) {
                 let url = window.location.href
