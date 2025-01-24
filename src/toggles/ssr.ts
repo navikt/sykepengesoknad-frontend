@@ -1,4 +1,3 @@
-import { getRandomValues } from 'crypto'
 import { IncomingHttpHeaders } from 'http'
 
 import { IToggle, getDefinitions, evaluateFlags } from '@unleash/nextjs'
@@ -24,10 +23,9 @@ export async function getFlagsServerSide(
     }
 
     try {
-        const { sessionId, userId } = handleUnleashIds(req, res)
+        const { userId } = handleUnleashIds(req, res)
         const definitions = await getAndValidateDefinitions()
         return evaluateFlags(definitions, {
-            sessionId,
             userId,
             environment: getUnleashEnvironment(),
         })
@@ -90,40 +88,17 @@ export function handleUnleashIds(
     res: GetServerSidePropsContext['res'],
 ): {
     userId: string | undefined
-    sessionId: string
 } {
     const pid = parseAuthHeader(req.headers)?.pid ?? undefined
 
-    const existingUnleashId = req.cookies[unleashCookieName]
-    if (existingUnleashId != null) {
-        // Not logged in user, but user has already the unleash cookie
-        return {
-            userId: pid,
-            sessionId: existingUnleashId,
-        }
-    } else {
-        // Not logged in user, and no unleash cookie, generate new and set header, but don't overwrite existing set-cookies
-        const existingHeader = safeCoerceHeader(res.getHeader('set-cookie'))
-        const newId = `${getRandomValues(new Uint32Array(2)).join('')}`
-        res.setHeader('set-cookie', [...existingHeader, `${unleashCookieName}=${newId}; path=/;`])
-        return {
-            userId: pid,
-            sessionId: newId,
-        }
+    const harGammelUnleashCookie = req.cookies[unleashCookieName]
+    if (harGammelUnleashCookie != null) {
+        // Delete the old cookie
+        res.setHeader('set-cookie', `${unleashCookieName}=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT;`)
     }
-}
-
-function safeCoerceHeader(header: string | string[] | number | undefined | null): string[] {
-    if (header == null) {
-        return []
+    return {
+        userId: pid,
     }
-    if (typeof header === 'string') {
-        return [header]
-    }
-    if (typeof header === 'number') {
-        return [header.toString()]
-    }
-    return header
 }
 
 function parseAuthHeader(headers: IncomingHttpHeaders): TokenPayload | null {
