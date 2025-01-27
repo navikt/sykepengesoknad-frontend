@@ -32,6 +32,9 @@ export const periodeListevisning = (soknad: RSSoknadmetadata) => {
         return ''
     }
 
+    if (soknad.soknadstype == RSSoknadstype.FRISKMELDT_TIL_ARBEIDSFORMIDLING) {
+        return 'Friskmeldt til arbeidsformidling'
+    }
     const perioder = soknad.soknadPerioder
         .map((p) => {
             if (soknad.soknadstype === RSSoknadstype.BEHANDLINGSDAGER) {
