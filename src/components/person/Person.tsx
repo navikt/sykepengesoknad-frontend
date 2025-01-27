@@ -125,6 +125,9 @@ function PersonGruppeVisning({ gruppe, personer }: { gruppe: PersonaGroupKey; pe
             case 'testing': {
                 return 'Forskjellige Testscenarios'
             }
+            case 'friskmeldt-til-arbeidsformidling': {
+                return 'Friskmeldt til arbeidsformidling'
+            }
             default: {
                 return gruppe
             }
