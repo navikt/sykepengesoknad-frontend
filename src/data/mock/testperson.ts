@@ -46,7 +46,10 @@ import { kjenteInntektskilderPerson } from './data/personas/kjente-inntektskilde
 import { innenforAgPerioden } from './data/personas/innenfor-ag-periode'
 import { oppholdUtenforEOS } from './data/personas/opphold-utenfor-eos'
 import { nyttArbeidsforhold } from './data/personas/nytt-arbeidsforhold'
-import { fremtidigeFriskmeldtTilArbeidsformidling } from './data/personas/friskmeldt-til-arbeidsformidling'
+import {
+    fremtidigeFriskmeldtTilArbeidsformidling,
+    friskmeldtTilArbeidsformidlingPersona,
+} from './data/personas/friskmeldt-til-arbeidsformidling'
 
 type PersonaKey =
     | 'uten-data'
@@ -93,6 +96,7 @@ type PersonaKey =
     | 'utgatt'
     | 'julesoknad'
     | 'fta-to-fremtidige'
+    | 'fta-en-ny'
 
 export type PersonaData = Partial<Record<PersonaKey, Persona>>
 
@@ -146,6 +150,7 @@ export function testpersonerGruppert(): PersonaGroup {
         },
         ['friskmeldt-til-arbeidsformidling']: {
             ['fta-to-fremtidige']: jsonDeepCopy(fremtidigeFriskmeldtTilArbeidsformidling),
+            ['fta-en-ny']: jsonDeepCopy(friskmeldtTilArbeidsformidlingPersona),
         },
         ['arbeidstaker-julesoknad']: {
             ['julesoknad']: jsonDeepCopy(julesoknadPerson),
