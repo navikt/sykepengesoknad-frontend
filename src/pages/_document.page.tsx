@@ -6,7 +6,6 @@ import Document, { DocumentContext, DocumentInitialProps, Head, Html, Main, Next
 import React from 'react'
 
 import { createInitialServerSideBreadcrumbs } from '../hooks/useBreadcrumbs'
-import { isE2E } from '../utils/environment'
 
 const { serverRuntimeConfig } = getConfig()
 
@@ -62,18 +61,4 @@ class MyDocument extends Document<Props> {
     }
 }
 
-class E2EDocument extends Document<Props> {
-    render(): React.JSX.Element {
-        return (
-            <Html lang="no">
-                <Head />
-                <body>
-                    <Main />
-                    <NextScript />
-                </body>
-            </Html>
-        )
-    }
-}
-
-export default isE2E() ? E2EDocument : MyDocument
+export default MyDocument
