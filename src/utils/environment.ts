@@ -5,12 +5,17 @@ const { publicRuntimeConfig } = getConfig()
 export function isProd() {
     return publicRuntimeConfig.env === 'prod'
 }
+
 export function isLabs() {
     return publicRuntimeConfig.env === 'labs'
 }
 
 export function isIntegrationtest() {
     return isMockBackend() && !isOpplaering()
+}
+
+export function isE2E() {
+    return process.env.NEXT_PUBLIC_IS_E2E === 'true'
 }
 
 export function isMockBackend() {
@@ -60,6 +65,7 @@ export function naisAppName() {
 export function basePath() {
     return publicRuntimeConfig.basePath
 }
+
 export function sendInnUrl() {
     return publicRuntimeConfig.sendInnUrl
 }
