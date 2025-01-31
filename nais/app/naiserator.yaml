@@ -31,7 +31,7 @@ spec:
       level: Level4
   observability:
     autoInstrumentation:
-      enabled: false
+      enabled: true
       runtime: nodejs
     logging:
       destinations:
