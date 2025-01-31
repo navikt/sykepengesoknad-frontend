@@ -1,6 +1,11 @@
 import { logger } from '@navikt/next-logger'
 
+import { isMockBackend } from './environment'
+
 export const checkJwks = async (): Promise<boolean> => {
+    if (isMockBackend()) {
+        return true
+    }
     const jwksUri = process.env.IDPORTEN_JWKS_URI
 
     if (!jwksUri) {

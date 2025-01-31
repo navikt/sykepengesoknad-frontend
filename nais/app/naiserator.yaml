@@ -9,6 +9,7 @@ metadata:
     config.linkerd.io/proxy-cpu-request: "200m"
     config.linkerd.io/proxy-memory-limit: "1Gi"
     config.linkerd.io/proxy-memory-request: "256Mi"
+    config.linkerd.io/proxy-outbound-connect-timeout: "5s"
   labels:
     team: flex
 spec:
