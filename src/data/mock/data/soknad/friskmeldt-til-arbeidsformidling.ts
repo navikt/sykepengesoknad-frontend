@@ -3,6 +3,10 @@ import { RSSoknadstatusType } from '../../../../types/rs-types/rs-soknadstatus'
 import { RSSporsmal } from '../../../../types/rs-types/rs-sporsmal'
 import { ansvarserklaring } from '../sporsmal/ansvarserklaring'
 import { oppsummering } from '../sporsmal/oppsummering'
+import { v4 } from 'uuid'
+import { tilLesbarPeriodeMedArstall } from '../../../../utils/dato-utils'
+import dayjs from 'dayjs'
+import { ArbeidsforholdFraInntektskomponenten } from '../../../../types/rs-types/rs-arbeidsforholdfrainntektskomponenten'
 
 function skapfriskmeldtTilArbeidsformidling({
     fom,
@@ -67,18 +71,170 @@ export const friskmeldtTilArbeidsformidling = skapfriskmeldtTilArbeidsformidling
     uuid: '7e89c042-a822-40e6-bb4c-d04fe5f12685',
     sporsmal: [
         ansvarserklaring(),
-        {
-            id: '8eea7bec-97c2-3921-bf14-83a2e82d1e46',
-            tag: 'FRISKMELDT',
-            sporsmalstekst: 'Er dette en fin skallsøknad for testing?',
-            undertekst: null,
-            svartype: 'JA_NEI',
-            min: null,
-            max: null,
-            kriterieForVisningAvUndersporsmal: null,
-            svar: [],
-            undersporsmal: [],
-        },
+        jobbsituasjonenDin({
+            fom: '2025-04-15',
+            tom: '2025-04-28',
+        }),
+        inntektUnderveis({
+            fom: '2025-04-15',
+            tom: '2025-04-28',
+        }),
+        reiseTilUtlandet({
+            fom: '2025-04-15',
+            tom: '2025-04-28',
+        }),
         oppsummering(),
     ],
 })
+
+export function jobbsituasjonenDin(opts: { fom: string; tom: string }): RSSporsmal {
+    const { fom, tom } = opts
+
+    const periodeTekst = tilLesbarPeriodeMedArstall(dayjs(fom), dayjs(tom))
+
+    return {
+        id: v4().toString(),
+        tag: 'FTA_JOBBSITUASJONEN_DIN',
+        sporsmalstekst: `Begynte du i ny jobb i perioden ${periodeTekst}?`,
+        undertekst: null,
+        tittel: 'Jobbsituasjonen din',
+        svartype: 'RADIO_GRUPPE',
+        min: null,
+        max: null,
+        kriterieForVisningAvUndersporsmal: null,
+        svar: [],
+        undersporsmal: [
+            {
+                id: v4().toString(),
+                tag: 'FTA_JOBBSITUASJONEN_DIN_JA',
+                sporsmalstekst: 'Ja',
+                undertekst: null,
+                svartype: 'RADIO',
+                min: null,
+                max: null,
+                kriterieForVisningAvUndersporsmal: 'CHECKED',
+                svar: [],
+
+                undersporsmal: [
+                    {
+                        id: v4().toString(),
+                        tag: 'FTA_JOBBSITUASJONEN_DIN_NAR',
+                        sporsmalstekst: 'Når begynte du i ny jobb?',
+                        undertekst: null,
+                        svartype: 'DATO',
+                        min: null,
+                        max: null,
+                        kriterieForVisningAvUndersporsmal: null,
+                        svar: [],
+                        undersporsmal: [],
+                    },
+                    {
+                        id: v4().toString(),
+                        tag: 'FTA_JOBBSITUASJONEN_DIN_FORTSATT_ARBEIDSSOKER',
+                        sporsmalstekst: 'Vil du fortsatt være registrert som arbeidssøker hos Nav de neste to ukene?',
+                        undertekst: 'Svar ja hvis du har begynt i en midlertidig jobb og fortsatt søker andre jobber',
+                        svartype: 'JA_NEI',
+                        min: null,
+                        max: null,
+                        kriterieForVisningAvUndersporsmal: null,
+                        svar: [],
+                        undersporsmal: [],
+                    },
+                ],
+            },
+            {
+                id: v4().toString(),
+                tag: 'FTA_JOBBSITUASJONEN_DIN_NEI',
+                sporsmalstekst: 'Nei',
+                undertekst: null,
+                svartype: 'RADIO',
+                min: null,
+                max: null,
+                kriterieForVisningAvUndersporsmal: 'CHECKED',
+                svar: [],
+
+                undersporsmal: [
+                    {
+                        id: v4().toString(),
+                        tag: 'FTA_JOBBSITUASJONEN_DIN_FORTSATT_ARBEIDSSOKER',
+                        sporsmalstekst: 'Vil du fortsatt være registrert som arbeidssøker hos Nav de neste to ukene?',
+                        undertekst: null,
+                        svartype: 'JA_NEI',
+                        min: null,
+                        max: null,
+                        kriterieForVisningAvUndersporsmal: null,
+                        svar: [],
+                        undersporsmal: [],
+                    },
+                ],
+            },
+        ],
+    }
+}
+
+export function inntektUnderveis(opts: { fom: string; tom: string }): RSSporsmal {
+    const { fom, tom } = opts
+
+    const periodeTekst = tilLesbarPeriodeMedArstall(dayjs(fom), dayjs(tom))
+
+    return {
+        id: v4().toString(),
+        tag: 'FTA_INNTEKT_UNDERVEIS',
+        sporsmalstekst: `Hadde du  inntekt i perioden ${periodeTekst}?`,
+        undertekst: null,
+        tittel: 'Inntekt underveis',
+        svartype: 'JA_NEI',
+        min: null,
+        max: null,
+        kriterieForVisningAvUndersporsmal: 'JA',
+        svar: [],
+        undersporsmal: [
+            {
+                id: v4().toString(),
+                tag: 'FTA_INNTEKT_UNDERVEIS_BELOP',
+                sporsmalstekst: `Hvor mye tjente du i perioden ${periodeTekst}?`,
+                undertekst:
+                    'Oppgi beløp før skatt. Har du flere jobber, skal du oppgi det du har tjent til sammen i perioden.',
+                svartype: 'BELOP',
+                min: null,
+                max: null,
+                kriterieForVisningAvUndersporsmal: null,
+                svar: [],
+                undersporsmal: [],
+            },
+        ],
+    }
+}
+
+export function reiseTilUtlandet(opts: { fom: string; tom: string }): RSSporsmal {
+    const { fom, tom } = opts
+
+    const periodeTekst = tilLesbarPeriodeMedArstall(dayjs(fom), dayjs(tom))
+
+    return {
+        id: v4().toString(),
+        tag: 'FTA_REISE_TIL_UTLANDET',
+        sporsmalstekst: `Hadde du  inntekt i perioden ${periodeTekst}?`,
+        undertekst: null,
+        tittel: 'Reise til utlandet',
+        svartype: 'JA_NEI',
+        min: null,
+        max: null,
+        kriterieForVisningAvUndersporsmal: 'JA',
+        svar: [],
+        undersporsmal: [
+            {
+                id: v4().toString(),
+                tag: 'FTA_REISE_TIL_UTLANDET_PERIODER',
+                sporsmalstekst: `Når var du utenfor EU/EØS?`,
+                undertekst: null,
+                svartype: 'PERIODER',
+                min: null,
+                max: null,
+                kriterieForVisningAvUndersporsmal: null,
+                svar: [],
+                undersporsmal: [],
+            },
+        ],
+    }
+}
