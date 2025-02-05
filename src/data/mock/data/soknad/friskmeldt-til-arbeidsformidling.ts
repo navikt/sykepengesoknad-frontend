@@ -1,12 +1,12 @@
+import { v4 } from 'uuid'
+import dayjs from 'dayjs'
+
 import { RSSoknad } from '../../../../types/rs-types/rs-soknad'
 import { RSSoknadstatusType } from '../../../../types/rs-types/rs-soknadstatus'
 import { RSSporsmal } from '../../../../types/rs-types/rs-sporsmal'
 import { ansvarserklaring } from '../sporsmal/ansvarserklaring'
 import { oppsummering } from '../sporsmal/oppsummering'
-import { v4 } from 'uuid'
 import { tilLesbarPeriodeMedArstall } from '../../../../utils/dato-utils'
-import dayjs from 'dayjs'
-import { ArbeidsforholdFraInntektskomponenten } from '../../../../types/rs-types/rs-arbeidsforholdfrainntektskomponenten'
 
 function skapfriskmeldtTilArbeidsformidling({
     fom,
@@ -87,6 +87,23 @@ export const friskmeldtTilArbeidsformidling = skapfriskmeldtTilArbeidsformidling
     ],
 })
 
+function fortsattArbneidssoker(nyJobbUndersporsmal?: boolean): RSSporsmal {
+    return {
+        id: v4().toString(),
+        tag: 'FTA_JOBBSITUASJONEN_DIN_FORTSATT_ARBEIDSSOKER' + (nyJobbUndersporsmal ? '_NY_JOBB' : ''),
+        sporsmalstekst: 'Vil du fortsatt være registrert som arbeidssøker hos Nav de neste to ukene?',
+        undertekst: nyJobbUndersporsmal
+            ? 'Svar ja hvis du har begynt i en midlertidig jobb og fortsatt søker andre jobber'
+            : null,
+        svartype: 'JA_NEI',
+        min: null,
+        max: null,
+        kriterieForVisningAvUndersporsmal: null,
+        svar: [],
+        undersporsmal: [],
+    }
+}
+
 export function jobbsituasjonenDin(opts: { fom: string; tom: string }): RSSporsmal {
     const { fom, tom } = opts
 
@@ -128,18 +145,7 @@ export function jobbsituasjonenDin(opts: { fom: string; tom: string }): RSSporsm
                         svar: [],
                         undersporsmal: [],
                     },
-                    {
-                        id: v4().toString(),
-                        tag: 'FTA_JOBBSITUASJONEN_DIN_FORTSATT_ARBEIDSSOKER',
-                        sporsmalstekst: 'Vil du fortsatt være registrert som arbeidssøker hos Nav de neste to ukene?',
-                        undertekst: 'Svar ja hvis du har begynt i en midlertidig jobb og fortsatt søker andre jobber',
-                        svartype: 'JA_NEI',
-                        min: null,
-                        max: null,
-                        kriterieForVisningAvUndersporsmal: null,
-                        svar: [],
-                        undersporsmal: [],
-                    },
+                    fortsattArbneidssoker(true),
                 ],
             },
             {
@@ -153,20 +159,7 @@ export function jobbsituasjonenDin(opts: { fom: string; tom: string }): RSSporsm
                 kriterieForVisningAvUndersporsmal: 'CHECKED',
                 svar: [],
 
-                undersporsmal: [
-                    {
-                        id: v4().toString(),
-                        tag: 'FTA_JOBBSITUASJONEN_DIN_FORTSATT_ARBEIDSSOKER',
-                        sporsmalstekst: 'Vil du fortsatt være registrert som arbeidssøker hos Nav de neste to ukene?',
-                        undertekst: null,
-                        svartype: 'JA_NEI',
-                        min: null,
-                        max: null,
-                        kriterieForVisningAvUndersporsmal: null,
-                        svar: [],
-                        undersporsmal: [],
-                    },
-                ],
+                undersporsmal: [fortsattArbneidssoker()],
             },
         ],
     }
