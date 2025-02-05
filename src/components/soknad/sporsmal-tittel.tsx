@@ -27,9 +27,6 @@ const hentTekst = (soknad: Soknad, sidenummer: number, sporsmal: Sporsmal) => {
     if (sidenummer === 1 && soknad.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND) {
         return tekst('sykepengesoknad.start.tittel')
     }
-    if (sporsmal.tittel) {
-        return sporsmal.tittel
-    }
     const nokkel = sporsmal.tag.toLowerCase()
     return erSisteSide(soknad, sidenummer)
         ? tekst('sykepengesoknad.til_slutt.tittel')
