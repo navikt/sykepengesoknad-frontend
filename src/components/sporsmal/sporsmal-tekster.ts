@@ -301,6 +301,16 @@ const SporsmalTekster = {
     'sykepengesoknad.fta_jobbsituasjonen_din.tittel': 'Jobbsituasjonen din',
     'sykepengesoknad.fta_inntekt_underveis.tittel': 'Inntekt underveis',
     'sykepengesoknad.fta_reise_til_utlandet.tittel': 'Reise til utlandet',
+    'soknad.feilmelding.FTA_JOBBSITUASJONEN_DIN': 'x',
+    'soknad.feilmelding.FTA_JOBBSITUASJONEN_DIN_JA': 'x',
+    'soknad.feilmelding.FTA_JOBBSITUASJONEN_DIN_NAR': 'x',
+    'soknad.feilmelding.FTA_JOBBSITUASJONEN_DIN_FORTSATT_ARBEIDSSOKER_NY_JOBB': 'x',
+    'soknad.feilmelding.FTA_JOBBSITUASJONEN_DIN_NEI': 'x',
+    'soknad.feilmelding.FTA_JOBBSITUASJONEN_DIN_FORTSATT_ARBEIDSSOKER': 'x',
+    'soknad.feilmelding.FTA_INNTEKT_UNDERVEIS': 'x',
+    'soknad.feilmelding.FTA_INNTEKT_UNDERVEIS_BELOP': 'x',
+    'soknad.feilmelding.FTA_REISE_TIL_UTLANDET': 'x',
+    'soknad.feilmelding.FTA_REISE_TIL_UTLANDET_NAR': 'x',
 }
 
 export default SporsmalTekster

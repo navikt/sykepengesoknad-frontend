@@ -91,7 +91,7 @@ function fortsattArbneidssoker(nyJobbUndersporsmal?: boolean): RSSporsmal {
     return {
         id: v4().toString(),
         tag: 'FTA_JOBBSITUASJONEN_DIN_FORTSATT_ARBEIDSSOKER' + (nyJobbUndersporsmal ? '_NY_JOBB' : ''),
-        sporsmalstekst: 'Vil du fortsatt være registrert som arbeidssøker hos Nav de neste to ukene?',
+        sporsmalstekst: 'Vil du fortsatt være registrert som arbeidssøker hos Nav?',
         undertekst: nyJobbUndersporsmal
             ? 'Svar ja hvis du har begynt i en midlertidig jobb og fortsatt søker andre jobber'
             : null,
@@ -215,7 +215,7 @@ export function reiseTilUtlandet(opts: { fom: string; tom: string }): RSSporsmal
         undersporsmal: [
             {
                 id: v4().toString(),
-                tag: 'FTA_REISE_TIL_UTLANDET_PERIODER',
+                tag: 'FTA_REISE_TIL_UTLANDET_NAR',
                 sporsmalstekst: `Når var du utenfor EU/EØS?`,
                 undertekst: null,
                 svartype: 'PERIODER',

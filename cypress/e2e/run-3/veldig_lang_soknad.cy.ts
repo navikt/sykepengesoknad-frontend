@@ -84,7 +84,19 @@ describe('Tester støtte for gamle spørsmål', () => {
         checkViStolerPaDeg()
         ++steg
     })
-
+    it('Jobbsituasjonen din', () => {
+        svarNeiHovedsporsmal()
+        svarRadioGruppe('Vil du fortsatt være registrert som arbeidssøker hos Nav?', 'Ja')
+        gaVidere()
+    })
+    it('Inntekt underveis', () => {
+        svarNeiHovedsporsmal()
+        gaVidere()
+    })
+    it('Reise til utlandet', () => {
+        svarNeiHovedsporsmal()
+        gaVidere()
+    })
     it('YRKESSKADE', () => {
         svarNeiHovedsporsmal()
         gaVidere()

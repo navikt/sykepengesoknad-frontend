@@ -19,6 +19,8 @@ import {
 import { nyttArbeidsforholdSporsmal } from '../sporsmal/nytt-arbeidsforhold'
 import { avklaringIfbmReise } from '../sporsmal/avklaringIfbmReise'
 
+import { inntektUnderveis, jobbsituasjonenDin, reiseTilUtlandet } from './friskmeldt-til-arbeidsformidling'
+
 export const veldigLangSoknad: RSSoknad = {
     id: '214f6e73-8150-4261-8ce5-e2b41907fa58',
     sykmeldingId: arbeidstaker100Syk.id,
@@ -60,6 +62,18 @@ export const veldigLangSoknad: RSSoknad = {
             svar: [],
             undersporsmal: [],
         },
+        jobbsituasjonenDin({
+            fom: '2025-04-15',
+            tom: '2025-04-28',
+        }),
+        inntektUnderveis({
+            fom: '2025-04-15',
+            tom: '2025-04-28',
+        }),
+        reiseTilUtlandet({
+            fom: '2025-04-15',
+            tom: '2025-04-28',
+        }),
         yrkesskadeV1Sporsmal,
         yrkesskadeV2Sporsmal,
         medlemskapOppholdstillatelseSporsmal,
@@ -2371,6 +2385,7 @@ export const veldigLangSoknad: RSSoknad = {
         }),
         inntektsopplysningerUtenSigrunData,
         inntektsopplysningerLegacy,
+
         avklaringIfbmReise(),
         oppsummering(),
     ],
