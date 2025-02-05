@@ -60,7 +60,7 @@
         "eslint": "^8.57.1",
         "eslint-config-next": "^15.1.6",
         "eslint-plugin-cypress": "^3.5.0",
-        "jsdom": "^25.0.1",
+        "jsdom": "^26.0.0",
         "next": "^15.1.6",
         "postcss": "^8.5.1",
         "prettier": "^3.4.2",
