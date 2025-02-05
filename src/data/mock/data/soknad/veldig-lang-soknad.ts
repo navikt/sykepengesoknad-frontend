@@ -62,18 +62,7 @@ export const veldigLangSoknad: RSSoknad = {
             svar: [],
             undersporsmal: [],
         },
-        jobbsituasjonenDin({
-            fom: '2025-04-15',
-            tom: '2025-04-28',
-        }),
-        inntektUnderveis({
-            fom: '2025-04-15',
-            tom: '2025-04-28',
-        }),
-        reiseTilUtlandet({
-            fom: '2025-04-15',
-            tom: '2025-04-28',
-        }),
+
         yrkesskadeV1Sporsmal,
         yrkesskadeV2Sporsmal,
         medlemskapOppholdstillatelseSporsmal,
@@ -2387,6 +2376,18 @@ export const veldigLangSoknad: RSSoknad = {
         inntektsopplysningerLegacy,
 
         avklaringIfbmReise(),
+        jobbsituasjonenDin({
+            fom: '2025-04-15',
+            tom: '2025-04-28',
+        }),
+        inntektUnderveis({
+            fom: '2025-04-15',
+            tom: '2025-04-28',
+        }),
+        reiseTilUtlandet({
+            fom: '2025-04-15',
+            tom: '2025-04-28',
+        }),
         oppsummering(),
     ],
     egenmeldtSykmelding: false,

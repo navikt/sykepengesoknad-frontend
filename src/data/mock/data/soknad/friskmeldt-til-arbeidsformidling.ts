@@ -205,7 +205,7 @@ export function reiseTilUtlandet(opts: { fom: string; tom: string }): RSSporsmal
     return {
         id: v4().toString(),
         tag: 'FTA_REISE_TIL_UTLANDET',
-        sporsmalstekst: `Hadde du  inntekt i perioden ${periodeTekst}?`,
+        sporsmalstekst: `Var du på reise utenfor EU/EØS i perioden ${periodeTekst}?`,
         undertekst: null,
         svartype: 'JA_NEI',
         min: null,
