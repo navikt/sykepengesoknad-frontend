@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
-import { Alert, BodyLong, Button } from '@navikt/ds-react'
+import { Button } from '@navikt/ds-react'
 
 import OmReisetilskudd from '../../components/om-reisetilskudd/om-reisetilskudd'
 import SporsmalForm from '../../components/sporsmal/sporsmal-form/sporsmal-form'
@@ -17,18 +17,11 @@ import { useSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
 import { useToggle } from '../../toggles/context'
 import { SkeletonSporsmalForm } from '../sporsmal/sporsmal-form/skeleton-sporsmal-form'
 import { FeilStateView } from '../feil/refresh-hvis-feil-state'
-import { Over70Aar } from '../soknad-intro/over-70'
-import { IntroGuide } from '../soknad-intro/intro-guide'
-import { ForDuSoker } from '../soknad-intro/for-du-soker'
-import { IntroAccordion } from '../soknad-intro/intro-accordion'
-import { LenkeMedIkon } from '../lenke-med-ikon/LenkeMedIkon'
-import { erOppdelt } from '../../utils/periode-utils'
-import { InfoOmTilbakedatering } from '../soknad-intro/info-om-tilbakedatering'
 import { erSisteSide } from '../sporsmal/sporsmal-utils'
 import { Tilbake } from '../sporsmal/tilbake-knapp/tilbake'
 import { SelvstendingSurveyModal } from '../flexjar/selvstending-survey'
 import { skjulFlexjarSurvey } from '../flexjar/utils'
-import { JulesoknadTekstIntroside } from '../julesoknad/julesoknad-infotekst'
+import { Introside } from '../soknad-intro/introside'
 
 import { urlTilSoknad } from './soknad-link'
 import { SporsmalTittel } from './sporsmal-tittel'
@@ -36,17 +29,8 @@ import { SoknadHeader } from './soknad-header'
 
 export const Soknaden = () => {
     const router = useRouter()
-    const {
-        erUtenlandssoknad,
-        stegId,
-        stegNo,
-        valgtSoknad,
-        valgtSykmelding,
-        soknader,
-        sykmeldinger,
-        spmIndex,
-        valgtSoknadError,
-    } = useSoknadMedDetaljer()
+    const { erUtenlandssoknad, stegId, stegNo, valgtSoknad, soknader, sykmeldinger, spmIndex, valgtSoknadError } =
+        useSoknadMedDetaljer()
     const [visSurvey, setVisSurvey] = useState(router.query.visSurvey === 'true')
     useEffect(() => {
         setVisSurvey(router.query.visSurvey === 'true')
@@ -121,12 +105,6 @@ export const Soknaden = () => {
     const erForstesiden = stegNo === 1 && !erUtenlandssoknad
     const erSistesiden = valgtSoknad && sporsmal ? erSisteSide(valgtSoknad, stegNo) : false
     const erForstesidenMedReisetilskudd = stegNo === 1 && (erReisetilskuddsoknad || erGradertReisetilskuddsoknad)
-    const erJulesoknad = !!valgtSoknad?.julesoknad
-
-    const oppdeltSoknadTekst =
-        valgtSoknad && valgtSykmelding && erOppdelt(valgtSoknad, valgtSykmelding)
-            ? 'Siden sykemeldingen går over 31 dager, har vi delt opp søknaden, slik at du kan søke om sykepenger før hele perioden er ferdig. På den måten slipper du å vente lenge på sykepengene dine.'
-            : ''
 
     return (
         <>
@@ -136,28 +114,7 @@ export const Soknaden = () => {
             <SoknadHeader overskrivTittel={erSistesiden ? 'Oppsummering' : undefined} />
 
             {!erForstesiden && <Fremdriftsbar />}
-            {erForstesiden && (
-                <>
-                    <IntroGuide />
-                    <ForDuSoker />
-                    <IntroAccordion />
-                    {erJulesoknad && <JulesoknadTekstIntroside />}
-                    {oppdeltSoknadTekst !== '' && (
-                        <Alert variant="info" className="mb-8">
-                            {oppdeltSoknadTekst}
-                        </Alert>
-                    )}
-                    <InfoOmTilbakedatering />
-                    {valgtSykmelding?.pasient?.overSyttiAar && <Over70Aar />}
-                    <BodyLong spacing>
-                        Det er viktig at du gir oss riktige opplysninger slik at vi kan behandle saken din.
-                        <LenkeMedIkon
-                            href="https://www.nav.no/endringer"
-                            text="Les mer om viktigheten av å gi riktige opplysninger."
-                        />
-                    </BodyLong>
-                </>
-            )}
+            {erForstesiden && <Introside></Introside>}
             {erForstesidenMedReisetilskudd && <OmReisetilskudd />}
             {!erForstesiden && !erSistesiden && <SporsmalTittel />}
             {sporsmal && <SporsmalForm sporsmal={sporsmal} key={sporsmal.id} />}
