@@ -19,6 +19,7 @@ import { formatterTall } from '../../../utils/utils'
 import { erSigrunInntekt, SigrunInntekt } from '../../../types/types'
 import { logEvent } from '../../amplitude/amplitude'
 import { useSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
+import { FortsattArbeidssoker } from '../../hjelpetekster/friskmeldt-til-arbeidsformidling/fortsatt-arbeidssoker'
 
 const JaNeiLiten = ({ sporsmal }: SpmProps) => {
     const { watch, getValues } = useFormContext()
@@ -191,6 +192,9 @@ const JaNeiLiten = ({ sporsmal }: SpmProps) => {
             </div>
             {sporsmal.tag === 'INNTEKTSOPPLYSNINGER_VARIG_ENDRING_25_PROSENT' && watchJaNei === 'JA' && (
                 <VarigEndringAlert />
+            )}
+            {sporsmal.tag?.startsWith('FTA_JOBBSITUASJONEN_DIN_FORTSATT_ARBEIDSSOKER') && (
+                <FortsattArbeidssoker sporsmal={sporsmal} fieldValue={watchJaNei} />
             )}
         </>
     )

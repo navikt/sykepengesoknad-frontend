@@ -17,3 +17,20 @@ export const IntroGuide = () => {
         </GuidePanel>
     )
 }
+
+export const IntroGuideFriskmelding = () => {
+    return (
+        <GuidePanel poster className="mb-8">
+            <Heading size="medium" level="2" spacing>
+                Hei!
+            </Heading>
+            <BodyLong spacing>
+                Med friskmelding til arbeidsformidling kan du få sykepenger mens du ser etter ny jobb. Da må du være
+                registrert som arbeidssøker hos Nav og søke om sykepenger hver 14. dag.
+            </BodyLong>
+            <BodyShort>
+                Les mer om <Link href="https://www.nav.no/sykepenger">friskmelding til arbeidsformidling.</Link>
+            </BodyShort>
+        </GuidePanel>
+    )
+}
