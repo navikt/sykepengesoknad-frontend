@@ -7,7 +7,7 @@ import { useSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
 import { erOppdelt } from '../../utils/periode-utils'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 
-import { IntroGuide } from './intro-guide'
+import { IntroGuide, IntroGuideFriskmelding } from './intro-guide'
 import { ForDuSoker } from './for-du-soker'
 import { IntroAccordion } from './intro-accordion'
 import { InfoOmTilbakedatering } from './info-om-tilbakedatering'
@@ -20,7 +20,7 @@ export function Introside() {
     if (valgtSoknad.soknadstype === RSSoknadstype.FRISKMELDT_TIL_ARBEIDSFORMIDLING) {
         return (
             <>
-                <BodyLong spacing>Her kommer søknadsintro for frikmseldt til arbeidsformidling</BodyLong>
+                <IntroGuideFriskmelding />
             </>
         )
     }
