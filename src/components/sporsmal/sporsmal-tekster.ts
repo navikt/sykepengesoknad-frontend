@@ -311,6 +311,7 @@ const SporsmalTekster = {
     'soknad.feilmelding.FTA_INNTEKT_UNDERVEIS_BELOP': 'x',
     'soknad.feilmelding.FTA_REISE_TIL_UTLANDET': 'x',
     'soknad.feilmelding.FTA_REISE_TIL_UTLANDET_NAR': 'x',
+    'soknad.feilmelding.FTA_JOBBSITUASJONEN_DIN_FORTSATT_ARBEIDSSOKER_AVREGISTRERT_NAR': 'x',
 }
 
 export default SporsmalTekster
