@@ -65,45 +65,52 @@ export const fremtidigFriskmeldtTilArbeidsformidling2 = skapfriskmeldtTilArbeids
     status: 'FREMTIDIG',
 })
 
-export const friskmeldtTilArbeidsformidling = skapfriskmeldtTilArbeidsformidling({
-    fom: '2025-04-14',
-    tom: '2025-04-27',
-    opprettetDato: '2025-04-01',
-    uuid: '7e89c042-a822-40e6-bb4c-d04fe5f12685',
-    sporsmal: [
-        ansvarserklaring(),
-        jobbsituasjonenDin({
-            fom: '2025-04-14',
-            tom: '2025-04-27',
-        }),
-        inntektUnderveis({
-            fom: '2025-04-14',
-            tom: '2025-04-27',
-        }),
-        reiseTilUtlandet({
-            fom: '2025-04-14',
-            tom: '2025-04-27',
-        }),
-        oppsummering(),
-    ],
-})
+export function nyFriskmeldtTilArbeidsformidling({ fom, tom, uuid }: { fom: string; tom: string; uuid: string }) {
+    return skapfriskmeldtTilArbeidsformidling({
+        fom: fom,
+        tom: tom,
+        opprettetDato: fom,
+        uuid: uuid,
+        sporsmal: [
+            ansvarserklaring(),
+            jobbsituasjonenDin({
+                fom: fom,
+                tom: tom,
+            }),
+            inntektUnderveis({
+                fom: fom,
+                tom: tom,
+            }),
+            reiseTilUtlandet({
+                fom: fom,
+                tom: tom,
+            }),
+            oppsummering(),
+        ],
+    })
+}
 
-function fortsattArbeidssokerDato(): RSSporsmal {
+function fortsattArbeidssokerDato(fom: string, tom: string): RSSporsmal {
     return {
         id: v4().toString(),
         tag: 'FTA_JOBBSITUASJONEN_DIN_FORTSATT_ARBEIDSSOKER_AVREGISTRERT_NAR',
         sporsmalstekst: 'Fra og med når?',
         undertekst: 'Du vil ikke være friskmeldt til arbeidsformidling fra og med denne datoen',
         svartype: 'DATO',
-        min: null,
-        max: null,
+        min: fom,
+        max: tom,
         kriterieForVisningAvUndersporsmal: null,
         svar: [],
         undersporsmal: [],
     }
 }
 
-function fortsattArbeidssoker(nyJobbUndersporsmal: boolean, medDatoSporsmal: boolean): RSSporsmal {
+function fortsattArbeidssoker(
+    nyJobbUndersporsmal: boolean,
+    medDatoSporsmal: boolean,
+    fom: string,
+    tom: string,
+): RSSporsmal {
     return {
         id: v4().toString(),
         tag: 'FTA_JOBBSITUASJONEN_DIN_FORTSATT_ARBEIDSSOKER' + (nyJobbUndersporsmal ? '_NY_JOBB' : ''),
@@ -116,7 +123,7 @@ function fortsattArbeidssoker(nyJobbUndersporsmal: boolean, medDatoSporsmal: boo
         max: null,
         kriterieForVisningAvUndersporsmal: medDatoSporsmal ? 'NEI' : null,
         svar: [],
-        undersporsmal: medDatoSporsmal ? [fortsattArbeidssokerDato()] : [],
+        undersporsmal: medDatoSporsmal ? [fortsattArbeidssokerDato(fom, tom)] : [],
     }
 }
 
@@ -154,13 +161,13 @@ export function jobbsituasjonenDin(opts: { fom: string; tom: string }): RSSporsm
                         sporsmalstekst: 'Når begynte du i ny jobb?',
                         undertekst: null,
                         svartype: 'DATO',
-                        min: null,
-                        max: null,
+                        min: fom,
+                        max: tom,
                         kriterieForVisningAvUndersporsmal: null,
                         svar: [],
                         undersporsmal: [],
                     },
-                    fortsattArbeidssoker(true, false),
+                    fortsattArbeidssoker(true, false, fom, tom),
                 ],
             },
             {
@@ -174,7 +181,7 @@ export function jobbsituasjonenDin(opts: { fom: string; tom: string }): RSSporsm
                 kriterieForVisningAvUndersporsmal: 'CHECKED',
                 svar: [],
 
-                undersporsmal: [fortsattArbeidssoker(false, true)],
+                undersporsmal: [fortsattArbeidssoker(false, true, fom, tom)],
             },
         ],
     }
@@ -247,8 +254,8 @@ export function reiseTilUtlandet(opts: { fom: string; tom: string }): RSSporsmal
                 sporsmalstekst: `Når var du utenfor EU/EØS?`,
                 undertekst: null,
                 svartype: 'PERIODER',
-                min: null,
-                max: null,
+                min: fom,
+                max: tom,
                 kriterieForVisningAvUndersporsmal: null,
                 svar: [],
                 undersporsmal: [],
