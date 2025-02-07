@@ -45,49 +45,65 @@ function skapfriskmeldtTilArbeidsformidling({
         egenmeldtSykmelding: false,
         opprettetAvInntektsmelding: false,
         klippet: false,
+        friskTilArbeidVedtakId: 'vedtakid-123',
     }
 }
 
 export const fremtidigFriskmeldtTilArbeidsformidling1 = skapfriskmeldtTilArbeidsformidling({
-    fom: '2025-04-01',
-    tom: '2025-04-14',
+    fom: '2025-04-14',
+    tom: '2025-04-27',
     opprettetDato: '2025-04-01',
     uuid: '583e1dcf-1bb3-4414-a3ad-a723f546e97b',
     status: 'FREMTIDIG',
 })
 
 export const fremtidigFriskmeldtTilArbeidsformidling2 = skapfriskmeldtTilArbeidsformidling({
-    fom: '2025-04-15',
-    tom: '2025-04-28',
+    fom: '2025-04-28',
+    tom: '2025-05-11',
     opprettetDato: '2025-04-01',
     uuid: '7a06090e-d158-4f14-9db5-a2c520ddc6f2',
     status: 'FREMTIDIG',
 })
 
 export const friskmeldtTilArbeidsformidling = skapfriskmeldtTilArbeidsformidling({
-    fom: '2025-04-15',
-    tom: '2025-04-28',
+    fom: '2025-04-14',
+    tom: '2025-04-27',
     opprettetDato: '2025-04-01',
     uuid: '7e89c042-a822-40e6-bb4c-d04fe5f12685',
     sporsmal: [
         ansvarserklaring(),
         jobbsituasjonenDin({
-            fom: '2025-04-15',
-            tom: '2025-04-28',
+            fom: '2025-04-14',
+            tom: '2025-04-27',
         }),
         inntektUnderveis({
-            fom: '2025-04-15',
-            tom: '2025-04-28',
+            fom: '2025-04-14',
+            tom: '2025-04-27',
         }),
         reiseTilUtlandet({
-            fom: '2025-04-15',
-            tom: '2025-04-28',
+            fom: '2025-04-14',
+            tom: '2025-04-27',
         }),
         oppsummering(),
     ],
 })
 
-function fortsattArbneidssoker(nyJobbUndersporsmal?: boolean): RSSporsmal {
+function fortsattArbeidssokerDato(): RSSporsmal {
+    return {
+        id: v4().toString(),
+        tag: 'FTA_JOBBSITUASJONEN_DIN_FORTSATT_ARBEIDSSOKER_AVREGISTRERT_NAR',
+        sporsmalstekst: 'Fra og med når?',
+        undertekst: 'Du vil ikke få utbetalt sykepenger fra og med denne datoen',
+        svartype: 'DATO',
+        min: null,
+        max: null,
+        kriterieForVisningAvUndersporsmal: null,
+        svar: [],
+        undersporsmal: [],
+    }
+}
+
+function fortsattArbeidssoker(nyJobbUndersporsmal: boolean, medDatoSporsmal: boolean): RSSporsmal {
     return {
         id: v4().toString(),
         tag: 'FTA_JOBBSITUASJONEN_DIN_FORTSATT_ARBEIDSSOKER' + (nyJobbUndersporsmal ? '_NY_JOBB' : ''),
@@ -98,9 +114,9 @@ function fortsattArbneidssoker(nyJobbUndersporsmal?: boolean): RSSporsmal {
         svartype: 'JA_NEI',
         min: null,
         max: null,
-        kriterieForVisningAvUndersporsmal: null,
+        kriterieForVisningAvUndersporsmal: medDatoSporsmal ? 'NEI' : null,
         svar: [],
-        undersporsmal: [],
+        undersporsmal: medDatoSporsmal ? [fortsattArbeidssokerDato()] : [],
     }
 }
 
@@ -144,7 +160,7 @@ export function jobbsituasjonenDin(opts: { fom: string; tom: string }): RSSporsm
                         svar: [],
                         undersporsmal: [],
                     },
-                    fortsattArbneidssoker(true),
+                    fortsattArbeidssoker(true, false),
                 ],
             },
             {
@@ -158,7 +174,7 @@ export function jobbsituasjonenDin(opts: { fom: string; tom: string }): RSSporsm
                 kriterieForVisningAvUndersporsmal: 'CHECKED',
                 svar: [],
 
-                undersporsmal: [fortsattArbneidssoker()],
+                undersporsmal: [fortsattArbeidssoker(false, true)],
             },
         ],
     }
