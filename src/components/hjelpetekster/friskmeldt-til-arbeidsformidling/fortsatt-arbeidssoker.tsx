@@ -26,7 +26,7 @@ export function FortsattArbeidssoker({ sporsmal, fieldValue }: { sporsmal: Spors
                     (s) => s.friskTilArbeidVedtakId === valgtSoknad.friskTilArbeidVedtakId && s.id !== valgtSoknad.id,
                 )
                 ?.filter((s) => valgtSoknad.fom! < s.fom!)
-                ?.sort((a, b) => (a.fom! < b.fom! ? 1 : -1))
+                ?.sort((a, b) => (a.fom! > b.fom! ? 1 : -1))
 
             if (senereSoknaderMedSammeId && senereSoknaderMedSammeId.length > 0) {
                 return tilLesbarPeriodeMedArstall(senereSoknaderMedSammeId[0].fom!, senereSoknaderMedSammeId[0].tom!)
