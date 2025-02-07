@@ -36,6 +36,7 @@ import { VarigEndring25prosent } from './varig-endring-25prosent'
 import { DriftIVirksomhet } from './drift-i-virksomhet'
 import { AvvikletVirksomhet } from './avviklet-virksomhet'
 import { TilkommenInntektHjelpBody } from './tilkommen-inntekt-hjep-body'
+import { InntektUnderveisFtaHjelpBody } from './inntekt-underveis-fta-hjelp-body'
 
 export const EkspanderbarHjelp = ({ sporsmal, mb }: { sporsmal: Sporsmal; mb?: string }) => {
     const { valgtSoknad } = useSoknadMedDetaljer()
@@ -83,11 +84,15 @@ export const EkspanderbarHjelp = ({ sporsmal, mb }: { sporsmal: Sporsmal; mb?: s
             case 'PERMISJON_V2':
                 return <PermisjonHjelpBody />
             case 'UTLAND_V2':
-                return <UtlandHjelpBody />
+                return <UtlandHjelpBody medNei={true} />
             case 'OPPHOLD_UTENFOR_EOS':
-                return <UtlandHjelpBody />
+                return <UtlandHjelpBody medNei={true} />
+            case 'FTA_REISE_TIL_UTLANDET':
+                return <UtlandHjelpBody medNei={false} />
             case 'ARBEID_UNDERVEIS_100_PROSENT':
                 return <ArbeidUnderveisHjelpBody />
+            case 'FTA_INNTEKT_UNDERVEIS':
+                return <InntektUnderveisFtaHjelpBody />
             case 'ARBEID_UTENFOR_NORGE':
                 return <ArbeidUtenforNorgeHjelpBody />
             case 'FRAVAR_FOR_SYKMELDINGEN':

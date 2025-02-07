@@ -40,7 +40,7 @@ export function FortsattArbeidssoker({ sporsmal, fieldValue }: { sporsmal: Spors
         }
         return (
             <Alert variant="info" className="mt-4">
-                {`Du har svart at du fortsatt vil være registrert som arbeidssøker hos Nav. Da vil du være friskmeldt til arbeidsformidling i neste periode, altså ${nesteSoknadPeriodeTekst}.`}
+                {`Du har svart at du fortsatt vil være registrert som arbeidssøker hos Nav. Da vil du fortsatt være friskmeldt til arbeidsformidling i neste periode, altså ${nesteSoknadPeriodeTekst}.`}
             </Alert>
         )
     }
