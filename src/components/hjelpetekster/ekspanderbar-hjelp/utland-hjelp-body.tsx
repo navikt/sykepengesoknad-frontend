@@ -1,6 +1,6 @@
 import { BodyShort } from '@navikt/ds-react'
 
-export const UtlandHjelpBody = () => {
+export const UtlandHjelpBody = ({ medNei }: { medNei: boolean }) => {
     return (
         <>
             <BodyShort spacing>
@@ -11,10 +11,12 @@ export const UtlandHjelpBody = () => {
             <BodyShort spacing>
                 Svar ja, dersom du har oppholdt deg utenfor EU/EØS i løpet av perioden som står i spørsmålet.
             </BodyShort>
-            <BodyShort spacing>
-                Svar nei, dersom du har avviklet lovbestemt ferie. Da svarer du i stedet på spørsmålet om ferie i
-                søknaden.
-            </BodyShort>
+            {medNei && (
+                <BodyShort spacing>
+                    Svar nei, dersom du har avviklet lovbestemt ferie. Da svarer du i stedet på spørsmålet om ferie i
+                    søknaden.
+                </BodyShort>
+            )}
         </>
     )
 }
