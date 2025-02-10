@@ -67,30 +67,21 @@ export const fremtidigFriskmeldtTilArbeidsformidling2 = skapfriskmeldtTilArbeids
 
 export function nyFriskmeldtTilArbeidsformidling({ fom, tom, uuid }: { fom: string; tom: string; uuid: string }) {
     return skapfriskmeldtTilArbeidsformidling({
-        fom: fom,
-        tom: tom,
+        fom,
+        tom,
         opprettetDato: fom,
-        uuid: uuid,
+        uuid,
         sporsmal: [
             ansvarserklaring(),
-            jobbsituasjonenDin({
-                fom: fom,
-                tom: tom,
-            }),
-            inntektUnderveis({
-                fom: fom,
-                tom: tom,
-            }),
-            reiseTilUtlandet({
-                fom: fom,
-                tom: tom,
-            }),
+            jobbsituasjonenDin({ fom, tom }),
+            inntektUnderveis({ fom, tom }),
+            reiseTilUtlandet({ fom, tom }),
             oppsummering(),
         ],
     })
 }
 
-function fortsattArbeidssokerDato(fom: string, tom: string): RSSporsmal {
+function fortsattArbeidssokerDato({ fom, tom }: { fom: string; tom: string }): RSSporsmal {
     return {
         id: v4().toString(),
         tag: 'FTA_JOBBSITUASJONEN_DIN_FORTSATT_ARBEIDSSOKER_AVREGISTRERT_NAR',
@@ -105,12 +96,17 @@ function fortsattArbeidssokerDato(fom: string, tom: string): RSSporsmal {
     }
 }
 
-function fortsattArbeidssoker(
-    nyJobbUndersporsmal: boolean,
-    medDatoSporsmal: boolean,
-    fom: string,
-    tom: string,
-): RSSporsmal {
+function fortsattArbeidssoker({
+    nyJobbUndersporsmal,
+    medDatoSporsmal,
+    fom,
+    tom,
+}: {
+    nyJobbUndersporsmal: boolean
+    medDatoSporsmal: boolean
+    fom: string
+    tom: string
+}): RSSporsmal {
     return {
         id: v4().toString(),
         tag: 'FTA_JOBBSITUASJONEN_DIN_FORTSATT_ARBEIDSSOKER' + (nyJobbUndersporsmal ? '_NY_JOBB' : ''),
@@ -123,7 +119,7 @@ function fortsattArbeidssoker(
         max: null,
         kriterieForVisningAvUndersporsmal: medDatoSporsmal ? 'NEI' : null,
         svar: [],
-        undersporsmal: medDatoSporsmal ? [fortsattArbeidssokerDato(fom, tom)] : [],
+        undersporsmal: medDatoSporsmal ? [fortsattArbeidssokerDato({ fom, tom })] : [],
     }
 }
 
@@ -153,7 +149,6 @@ export function jobbsituasjonenDin(opts: { fom: string; tom: string }): RSSporsm
                 max: null,
                 kriterieForVisningAvUndersporsmal: 'CHECKED',
                 svar: [],
-
                 undersporsmal: [
                     {
                         id: v4().toString(),
@@ -167,7 +162,12 @@ export function jobbsituasjonenDin(opts: { fom: string; tom: string }): RSSporsm
                         svar: [],
                         undersporsmal: [],
                     },
-                    fortsattArbeidssoker(true, false, fom, tom),
+                    fortsattArbeidssoker({
+                        nyJobbUndersporsmal: true,
+                        medDatoSporsmal: false,
+                        fom,
+                        tom,
+                    }),
                 ],
             },
             {
@@ -180,8 +180,14 @@ export function jobbsituasjonenDin(opts: { fom: string; tom: string }): RSSporsm
                 max: null,
                 kriterieForVisningAvUndersporsmal: 'CHECKED',
                 svar: [],
-
-                undersporsmal: [fortsattArbeidssoker(false, true, fom, tom)],
+                undersporsmal: [
+                    fortsattArbeidssoker({
+                        nyJobbUndersporsmal: false,
+                        medDatoSporsmal: true,
+                        fom,
+                        tom,
+                    }),
+                ],
             },
         ],
     }
