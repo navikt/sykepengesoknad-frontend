@@ -1,31 +1,5 @@
 import { Soknad, Sporsmal } from '../types/types'
 
-export const getSendtTilSuffix = (soknad: Soknad): string => {
-    if (soknad.sendtTilArbeidsgiverDato && soknad.sendtTilNAVDato) {
-        return '.til-arbeidsgiver-og-nav'
-    }
-    if (soknad.sendtTilArbeidsgiverDato) {
-        return '.til-arbeidsgiver'
-    }
-    if (soknad.sendtTilNAVDato) {
-        return '.til-nav'
-    }
-    return ''
-}
-
-export const getRiktigDato = (soknad: Soknad): Date | string => {
-    if (soknad.sendtTilArbeidsgiverDato && soknad.sendtTilNAVDato) {
-        return soknad.sendtTilNAVDato
-    }
-    if (soknad.sendtTilArbeidsgiverDato) {
-        return soknad.sendtTilArbeidsgiverDato
-    }
-    if (soknad.sendtTilNAVDato) {
-        return soknad.sendtTilNAVDato
-    }
-    return ''
-}
-
 export const flattenSporsmal = (sporsmal: ReadonlyArray<Sporsmal>) => {
     let flatArr: Sporsmal[] = []
     for (let i = 0; i < sporsmal.length; i++) {
@@ -33,10 +7,6 @@ export const flattenSporsmal = (sporsmal: ReadonlyArray<Sporsmal>) => {
         flatArr = flatArr.concat(flattenSporsmal(sporsmal[i].undersporsmal))
     }
     return flatArr
-}
-
-export const hentSporsmalMedId = (soknad: Soknad, id: string): Sporsmal | undefined => {
-    return flattenSporsmal(soknad.sporsmal).find((spm) => spm.id === id)
 }
 
 export const hentSporsmal = (soknad: Soknad, tag: string): Sporsmal | undefined => {

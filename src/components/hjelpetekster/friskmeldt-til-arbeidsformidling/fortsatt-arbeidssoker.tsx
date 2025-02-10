@@ -59,7 +59,7 @@ export function FortsattArbeidssoker({ sporsmal, fieldValue }: { sporsmal: Spors
             return null
         }
 
-        return <IkkeLengreArbeidssøker variant="warning" dato={dato()} />
+        return <IkkeLengreArbeidssøker variant="info" dato={dato()} />
     }
     if (sporsmal.tag == 'FTA_JOBBSITUASJONEN_DIN_FORTSATT_ARBEIDSSOKER' && fieldValue === 'NEI') {
         const dato = () => {

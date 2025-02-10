@@ -43,6 +43,7 @@ import { oppholdUtland } from './data/soknad/opphold-utland'
 import { mockApiValiderSporsmal } from './mockApiValiderSporsmal'
 import { soknadInnenforArbeidsgiverperioden } from './data/personas/innenfor-ag-periode'
 import { deepcopyMedNyId } from './deepcopyMedNyId'
+import { inntektUnderveis, reiseTilUtlandet } from './data/soknad/friskmeldt-til-arbeidsformidling'
 
 type session = {
     expires: dayjs.Dayjs
@@ -363,6 +364,49 @@ export async function mockApi(req: NextApiRequest, res: NextApiResponse) {
                         })
                         json.mutertSoknad = soknaden
                     }
+                }
+            }
+
+            if (body.tag == 'FTA_JOBBSITUASJONEN_DIN') {
+                const underspm = flattenSporsmal(body.undersporsmal)
+
+                const finnBegrensendeDato = (): string | undefined => {
+                    function tagHarSvar(tag: string, svar: string) {
+                        return underspm.find((spm) => spm.tag === tag)?.svar[0]?.verdi === svar
+                    }
+
+                    if (tagHarSvar('FTA_JOBBSITUASJONEN_DIN_JA', 'CHECKED')) {
+                        if (tagHarSvar('FTA_JOBBSITUASJONEN_DIN_FORTSATT_ARBEIDSSOKER_NY_JOBB', 'NEI')) {
+                            return underspm.find((spm) => spm.tag === 'FTA_JOBBSITUASJONEN_DIN_NAR')?.svar[0]?.verdi
+                        }
+                        return undefined
+                    }
+
+                    if (tagHarSvar('FTA_JOBBSITUASJONEN_DIN_NEI', 'CHECKED')) {
+                        if (tagHarSvar('FTA_JOBBSITUASJONEN_DIN_FORTSATT_ARBEIDSSOKER', 'NEI')) {
+                            return underspm.find(
+                                (spm) => spm.tag === 'FTA_JOBBSITUASJONEN_DIN_FORTSATT_ARBEIDSSOKER_AVREGISTRERT_NAR',
+                            )?.svar[0]?.verdi
+                        }
+                        return undefined
+                    }
+                }
+                const begrensendeDato = finnBegrensendeDato()
+
+                if (begrensendeDato) {
+                    const dagForBegrensende = dayjs(begrensendeDato).subtract(1, 'day').format('YYYY-MM-DD')
+
+                    soknaden.sporsmal = soknaden.sporsmal.filter((spm) => {
+                        const tagsSomForsvinner = ['FTA_INNTEKT_UNDERVEIS', 'FTA_REISE_TIL_UTLANDET']
+                        return !tagsSomForsvinner.some((tag) => spm.tag.includes(tag))
+                    })
+                    if (begrensendeDato !== soknaden.fom) {
+                        const inntekt = inntektUnderveis({ fom: soknaden.fom!, tom: dagForBegrensende })
+                        const reiste = reiseTilUtlandet({ fom: soknaden.fom!, tom: dagForBegrensende })
+                        // Legg til før det siste spørsmålet i sporsmal lista
+                        soknaden.sporsmal.splice(soknaden.sporsmal.length - 1, 0, inntekt, reiste)
+                    }
+                    json.mutertSoknad = soknaden
                 }
             }
 
