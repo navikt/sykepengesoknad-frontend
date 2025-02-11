@@ -1,9 +1,8 @@
-import { BodyShort, Modal, ReadMore } from '@navikt/ds-react'
+import { BodyLong, Modal, ReadMore } from '@navikt/ds-react'
 import dayjs from 'dayjs'
 import React, { useState } from 'react'
 
 import { tilLesbarDatoMedArstall } from '../../utils/dato-utils'
-import { getLedetekst, tekst } from '../../utils/tekster'
 import { ModalFooterMedLukk } from '../modal-footer-med-lukk'
 
 import { SykepengesoknadTeaserProps } from './teaser-util'
@@ -26,24 +25,19 @@ const FremtidigeSoknaderTeaser = ({ soknad }: SykepengesoknadTeaserProps) => {
                 onClose={() => {
                     setAapen(false)
                 }}
-                header={{ heading: tekst('soknader.teaser.fremtidig.modal.tittel'), closeButton: true }}
+                header={{ heading: 'Du er litt tidlig ute', closeButton: true }}
             >
                 <Modal.Body>
-                    <BodyShort spacing>
-                        {getLedetekst(tekst('soknader.teaser.fremtidig.modal.tekst'), {
-                            '%DATO%': tilLesbarDatoMedArstall(dayjs(soknad.tom).add(1, 'day')),
-                        })}
-                    </BodyShort>
-                    <BodyShort spacing>{tekst('soknader.teaser.fremtidig.modal.tekst2')}</BodyShort>
+                    <BodyLong spacing>
+                        {`Du må vente med å søke om sykepenger til perioden er over ${tilLesbarDatoMedArstall(dayjs(soknad.tom).add(1, 'day'))}. Vi sender deg en melding når søknaden er klar til å fylles ut.`}
+                    </BodyLong>
 
-                    <ReadMore
-                        header={
-                            <BodyShort weight="semibold">
-                                {tekst('soknader.teaser.fremtidig.modal.utvidbar.tittel')}
-                            </BodyShort>
-                        }
-                    >
-                        <BodyShort spacing>{tekst('soknader.teaser.fremtidig.modal.utvidbar.tekst')}</BodyShort>
+                    <ReadMore header="Hvorfor kan jeg ikke søke nå?">
+                        <BodyLong spacing>
+                            Spørsmålene i søknaden handler om situasjonen din den siste perioden. Nav bruker svarene
+                            dine til å beregne hvor mye sykepenger du kan få utbetalt. Derfor må du vente til perioden
+                            er over med å fylle ut søknaden.
+                        </BodyLong>
                     </ReadMore>
                 </Modal.Body>
                 <ModalFooterMedLukk setOpen={setAapen} />

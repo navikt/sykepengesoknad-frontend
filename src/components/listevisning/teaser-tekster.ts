@@ -7,13 +7,6 @@ const TeaserTekster = {
     'soknad.teaser.status.UTGAATT': 'Utgått',
     'soknad.teaser.delvis-utfylt.tekst': 'Påbegynt av deg',
     'soknad.teaser.utkast-korrigering.tekst': 'Utkast til endring',
-    'soknader.teaser.fremtidig.modal.tittel': 'Søknaden er ikke klar',
-    'soknader.teaser.fremtidig.modal.tekst':
-        'Du kan ikke fylle ut søknaden før denne sykmeldingsperioden er over %DATO%.',
-    'soknader.teaser.fremtidig.modal.tekst2': 'Du får en melding når søknaden er klar til å fylles ut.',
-    'soknader.teaser.fremtidig.modal.utvidbar.tittel': 'Hvorfor kan jeg ikke søke nå?',
-    'soknader.teaser.fremtidig.modal.utvidbar.tekst':
-        'For å utbetale riktig trenger vi å vite hva som skjedde i løpet av sykefraværet, for eksempel om du jobbet mer enn sykmeldingen sier, eller om du gjorde noe annet som har betydning for sykepengene dine.',
     'soknad.utland.teaser.tittel': 'Søknad om å beholde sykepenger utenfor EU/EØS',
     'soknad.teaser.tittel': 'Søknad om sykepenger',
     'soknad.teaser.periode': 'Gjelder perioden %PERIODE%',
