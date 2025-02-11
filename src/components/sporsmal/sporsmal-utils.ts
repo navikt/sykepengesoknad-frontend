@@ -70,6 +70,9 @@ export const hentGeneriskFeilmelding = (
         case RSSvartype.KILOMETER:
         case RSSvartype.TALL: {
             if (type === 'required') {
+                if (svartype == RSSvartype.BELOP) {
+                    return 'Du må oppgi et beløp'
+                }
                 return 'Du må oppgi en verdi'
             } else if (type === 'min') {
                 return `Må være minimum ${(error?.ref as HTMLInputElement).min}`

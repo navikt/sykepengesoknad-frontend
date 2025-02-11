@@ -1,5 +1,5 @@
 import React from 'react'
-import { Accordion, BodyLong, BodyShort, Heading, Link } from '@navikt/ds-react'
+import { Accordion, BodyLong, Heading, Link } from '@navikt/ds-react'
 
 import { lagrerUnderveisTekst, lagrerUnderveisTittel } from '../intro-accordion'
 import { huskAaSokeTekst } from '../for-du-soker'
@@ -14,11 +14,9 @@ export function IntrosideFta() {
             </Heading>
             <BodyLong spacing>
                 I denne søknaden får du spørsmål om situasjonen din har endret seg den siste perioden. Nav bruker
-                svarene dine til å beregne hvor mye sykepenger du kan få.
+                svarene dine til å beregne hvor mye sykepenger du kan få. I tillegg trenger vi å vite om du fortsatt vil
+                være friskmeldt til arbeidsformidling fremover.
             </BodyLong>
-            <BodyShort spacing>
-                I tillegg trenger vi å vite om du fortsatt vil være friskmeldt til arbeidsformidling fremover.
-            </BodyShort>
             <Heading size="small" level="2" spacing>
                 Sykmelding fra legen
             </Heading>

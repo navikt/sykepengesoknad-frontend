@@ -78,7 +78,7 @@ describe('Tester feilmeldinger', () => {
 
         feilmeldingHandtering(
             'Du må bekrefte dette',
-            'Du må bekrefte at du har lest og forstått informasjonen før du kan gå videre',
+            'Du må bekrefte at du vil svare så riktig du kan',
             arbeidstakerGradert.sporsmal[0].id,
         )
         cy.focused().should('have.attr', 'name', arbeidstakerGradert.sporsmal[0].id).click()

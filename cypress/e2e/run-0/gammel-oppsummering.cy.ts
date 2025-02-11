@@ -31,7 +31,7 @@ describe('Sjekker at søknader med gammel oppsummering ser ok ut', () => {
         cy.contains('Start søknad').click()
         cy.contains('Det er 1 feil i skjemaet')
         cy.get('.navds-confirmation-panel__inner').should('exist')
-        cy.contains('Du må bekrefte at du har lest og forstått informasjonen før du kan gå videre')
+        cy.contains('Du må bekrefte at du vil svare så riktig du kan')
         cy.get('.navds-checkbox__label').click()
 
         cy.contains('Start søknad').click()
