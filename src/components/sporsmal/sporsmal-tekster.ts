@@ -6,8 +6,7 @@ const SporsmalTekster = {
     'soknad.feilmelding.dato.lokal': 'Du må oppgi en dato',
     'soknad.feilmelding.periode.lokal': 'Du må oppgi periode',
 
-    'soknad.feilmelding.ANSVARSERKLARING':
-        'Du må bekrefte at du har lest og forstått informasjonen før du kan gå videre',
+    'soknad.feilmelding.ANSVARSERKLARING': 'Du må bekrefte at du vil svare så riktig du kan',
     'soknad.feilmelding.ANDRE_INNTEKTSKILDER': 'Du må svare på om du har andre inntektskilder eller arbeidsforhold',
     'soknad.feilmelding.ANDRE_INNTEKTSKILDER_V2': 'Du må svare på om du har andre inntektskilder eller arbeidsforhold',
     'soknad.feilmelding.ARBEID_UTENFOR_NORGE.lokal': 'Du må svare på om du har jobbet utenfor Norge',
@@ -305,11 +304,11 @@ const SporsmalTekster = {
     'soknad.feilmelding.FTA_JOBBSITUASJONEN_DIN_JA': '',
     'soknad.feilmelding.FTA_JOBBSITUASJONEN_DIN_NAR': '',
     'soknad.feilmelding.FTA_JOBBSITUASJONEN_DIN_FORTSATT_ARBEIDSSOKER_NY_JOBB':
-        'Du må svare på om du fortsatt være registrert som arbeidssøker',
+        'Du må svare på om du fortsatt vil være registrert som arbeidssøker',
     'soknad.feilmelding.FTA_JOBBSITUASJONEN_DIN_NEI': '',
     'soknad.feilmelding.FTA_JOBBSITUASJONEN_DIN_FORTSATT_ARBEIDSSOKER':
-        'Du må svare på om du fortsatt være registrert som arbeidssøker',
-    'soknad.feilmelding.FTA_INNTEKT_UNDERVEIS': 'Du må svare på om du har hatt inntekt underveis',
+        'Du må svare på om du fortsatt vil være registrert som arbeidssøker',
+    'soknad.feilmelding.FTA_INNTEKT_UNDERVEIS': 'Du må svare på om du hadde inntekt i perioden',
     'soknad.feilmelding.FTA_INNTEKT_UNDERVEIS_MER_ENN_PLEIER': 'Du må svare på om tjente mer enn du pleier',
     'soknad.feilmelding.FTA_INNTEKT_UNDERVEIS_MER_ENN_PLEIER_BELOP': 'Du må svare på hvor mye du tjente',
     'soknad.feilmelding.FTA_REISE_TIL_UTLANDET': 'Du må svare på om du har vært utenfor EU/EØS i denne perioden',

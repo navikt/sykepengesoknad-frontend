@@ -43,7 +43,7 @@ describe('Tester arbeidstakersøknad', () => {
         cy.contains('Start søknad').click()
         cy.contains('Det er 1 feil i skjemaet')
         cy.get('.navds-confirmation-panel__inner').should('exist')
-        cy.contains('Du må bekrefte at du har lest og forstått informasjonen før du kan gå videre')
+        cy.contains('Du må bekrefte at du vil svare så riktig du kan')
         checkViStolerPaDeg()
     })
 
