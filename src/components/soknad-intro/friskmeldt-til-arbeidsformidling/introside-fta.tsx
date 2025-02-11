@@ -1,0 +1,78 @@
+import React from 'react'
+import { Accordion, BodyLong, BodyShort, Heading, Link } from '@navikt/ds-react'
+
+import { lagrerUnderveisTekst, lagrerUnderveisTittel } from '../intro-accordion'
+import { huskAaSokeTekst } from '../for-du-soker'
+import { IntroGuideFriskmelding } from '../intro-guide'
+
+export function IntrosideFta() {
+    return (
+        <>
+            <IntroGuideFriskmelding />
+            <Heading size="small" level="2" spacing>
+                Før du søker
+            </Heading>
+            <BodyLong spacing>
+                I denne søknaden får du spørsmål om situasjonen din har endret seg den siste perioden. Nav bruker
+                svarene dine til å beregne hvor mye sykepenger du kan få.
+            </BodyLong>
+            <BodyShort spacing>
+                I tillegg trenger vi å vite om du fortsatt vil være friskmeldt til arbeidsformidling fremover.
+            </BodyShort>
+            <Heading size="small" level="2" spacing>
+                Sykmelding fra legen
+            </Heading>
+            <BodyLong spacing>
+                Du trenger ikke sykmelding mens du er friskmeldt til arbeidsformidling, med mindre du blir syk
+                underveis. Da må du ta kontakt med legen din.
+            </BodyLong>
+            <Heading size="small" level="2" spacing>
+                {lagrerUnderveisTittel}
+            </Heading>
+            <BodyLong spacing>{lagrerUnderveisTekst}</BodyLong>
+            <Heading size="small" level="2" spacing>
+                Frist for å søke
+            </Heading>
+            <BodyLong spacing>{huskAaSokeTekst}</BodyLong>
+            <Heading size="small" level="2" spacing>
+                Har du spørsmål?
+            </Heading>
+            <BodyLong spacing>
+                <KontaktOssLenke tekst="Ta kontakt med Nav" />
+            </BodyLong>
+            <Accordion className="my-8">
+                <Accordion.Item>
+                    <Accordion.Header>For deg som studerer</Accordion.Header>
+                    <Accordion.Content>
+                        {
+                            'I utgangspunktet får du ikke sykepenger mens du studerer. Har du begynt å studere, eller skal studere mer enn før, må du '
+                        }
+                        <KontaktOssLenke tekst="ta kontakt med Nav" />
+                        {' så vi kan vurdere saken din.'}
+                    </Accordion.Content>
+                </Accordion.Item>
+                <Accordion.Item>
+                    <Accordion.Header>Varetekt, soning eller forvaring</Accordion.Header>
+                    <Accordion.Content>
+                        {
+                            'I utgangspunktet får du ikke sykepenger når du sitter i varetekt, soner straff eller er under forvaring. Du kan ha rett til sykepenger hvis du jobber mens du soner straff. '
+                        }
+                        <KontaktOssLenke tekst="Ta kontakt med Nav" />
+                        {' så vi kan vurdere saken din. '}
+                    </Accordion.Content>
+                </Accordion.Item>
+            </Accordion>
+            <BodyLong spacing>
+                <Link href="https://www.nav.no/endringer" rel="noopener noreferrer" target="_blank">
+                    Les mer om viktigheten av å gi riktige opplysninger
+                </Link>
+            </BodyLong>
+        </>
+    )
+}
+
+const KontaktOssLenke = ({ tekst }: { tekst: string }) => (
+    <Link href="https://www.nav.no/kontaktoss" rel="noopener noreferrer" target="_blank">
+        {tekst}
+    </Link>
+)

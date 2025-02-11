@@ -7,11 +7,12 @@ import { useSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
 import { erOppdelt } from '../../utils/periode-utils'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 
-import { IntroGuide, IntroGuideFriskmelding } from './intro-guide'
+import { IntroGuide } from './intro-guide'
 import { ForDuSoker } from './for-du-soker'
 import { IntroAccordion } from './intro-accordion'
 import { InfoOmTilbakedatering } from './info-om-tilbakedatering'
 import { Over70Aar } from './over-70'
+import { IntrosideFta } from './friskmeldt-til-arbeidsformidling/introside-fta'
 
 export function Introside() {
     const { valgtSoknad, valgtSykmelding } = useSoknadMedDetaljer()
@@ -20,7 +21,7 @@ export function Introside() {
     if (valgtSoknad.soknadstype === RSSoknadstype.FRISKMELDT_TIL_ARBEIDSFORMIDLING) {
         return (
             <>
-                <IntroGuideFriskmelding />
+                <IntrosideFta />
             </>
         )
     }

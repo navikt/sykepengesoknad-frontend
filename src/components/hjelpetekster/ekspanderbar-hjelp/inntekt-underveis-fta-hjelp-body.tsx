@@ -7,7 +7,10 @@ export const InntektUnderveisFtaHjelpBody = () => {
                 Sykepenger skal erstatte inntekten du ville hatt hvis du hadde jobbet som normalt. For å beregne riktig
                 sykepenger, må vi vite om du har hatt noe inntekt fra oppdrag eller andre jobber underveis.
             </BodyShort>
-            <BodyShort className="py-3">Dette gjelder ikke:</BodyShort>
+            <BodyShort className="py-3">
+                Du kan kun få sykepenger for pensjonsgivende inntekt, det vil si inntekt du får som lønn og betaler
+                skatt av. Det gjelder ikke:
+            </BodyShort>
             <List as="ul" size="small" className="[&>ul]:mt-2">
                 <List.Item>
                     <BodyShort>Stønader fra folketrygden (uføretrygd, foreldrepenger, AAP, pleiepenger osv.)</BodyShort>
