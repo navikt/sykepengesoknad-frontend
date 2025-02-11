@@ -301,18 +301,20 @@ const SporsmalTekster = {
     'sykepengesoknad.fta_jobbsituasjonen_din.tittel': 'Jobbsituasjonen din',
     'sykepengesoknad.fta_inntekt_underveis.tittel': 'Inntekt underveis',
     'sykepengesoknad.fta_reise_til_utlandet.tittel': 'Reise til utlandet',
-    'soknad.feilmelding.FTA_JOBBSITUASJONEN_DIN': 'x',
-    'soknad.feilmelding.FTA_JOBBSITUASJONEN_DIN_JA': 'x',
-    'soknad.feilmelding.FTA_JOBBSITUASJONEN_DIN_NAR': 'x',
-    'soknad.feilmelding.FTA_JOBBSITUASJONEN_DIN_FORTSATT_ARBEIDSSOKER_NY_JOBB': 'x',
-    'soknad.feilmelding.FTA_JOBBSITUASJONEN_DIN_NEI': 'x',
-    'soknad.feilmelding.FTA_JOBBSITUASJONEN_DIN_FORTSATT_ARBEIDSSOKER': 'x',
-    'soknad.feilmelding.FTA_INNTEKT_UNDERVEIS': 'x',
-    'soknad.feilmelding.FTA_INNTEKT_UNDERVEIS_MER_ENN_PLEIER': 'x',
-    'soknad.feilmelding.FTA_INNTEKT_UNDERVEIS_MER_ENN_PLEIER_BELOP': 'x',
-    'soknad.feilmelding.FTA_REISE_TIL_UTLANDET': 'x',
-    'soknad.feilmelding.FTA_REISE_TIL_UTLANDET_NAR': 'x',
-    'soknad.feilmelding.FTA_JOBBSITUASJONEN_DIN_FORTSATT_ARBEIDSSOKER_AVREGISTRERT_NAR': 'x',
+    'soknad.feilmelding.FTA_JOBBSITUASJONEN_DIN': 'Du må svare på om du begynte du i ny jobb',
+    'soknad.feilmelding.FTA_JOBBSITUASJONEN_DIN_JA': '',
+    'soknad.feilmelding.FTA_JOBBSITUASJONEN_DIN_NAR': '',
+    'soknad.feilmelding.FTA_JOBBSITUASJONEN_DIN_FORTSATT_ARBEIDSSOKER_NY_JOBB':
+        'Du må svare på om du fortsatt være registrert som arbeidssøker',
+    'soknad.feilmelding.FTA_JOBBSITUASJONEN_DIN_NEI': '',
+    'soknad.feilmelding.FTA_JOBBSITUASJONEN_DIN_FORTSATT_ARBEIDSSOKER':
+        'Du må svare på om du fortsatt være registrert som arbeidssøker',
+    'soknad.feilmelding.FTA_INNTEKT_UNDERVEIS': 'Du må svare på om du har hatt inntekt underveis',
+    'soknad.feilmelding.FTA_INNTEKT_UNDERVEIS_MER_ENN_PLEIER': 'Du må svare på om tjente mer enn du pleier',
+    'soknad.feilmelding.FTA_INNTEKT_UNDERVEIS_MER_ENN_PLEIER_BELOP': 'Du må svare på hvor mye du tjente',
+    'soknad.feilmelding.FTA_REISE_TIL_UTLANDET': 'Du må svare på om du har vært utenfor EU/EØS i denne perioden',
+    'soknad.feilmelding.FTA_REISE_TIL_UTLANDET_NAR': '',
+    'soknad.feilmelding.FTA_JOBBSITUASJONEN_DIN_FORTSATT_ARBEIDSSOKER_AVREGISTRERT_NAR': '',
 }
 
 export default SporsmalTekster

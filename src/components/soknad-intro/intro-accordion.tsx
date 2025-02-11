@@ -16,12 +16,13 @@ export const IntroAccordion = () => {
                 </Accordion.Content>
             </Accordion.Item>
             <Accordion.Item>
-                <Accordion.Header>Vi lagrer svarene underveis</Accordion.Header>
-                <Accordion.Content>
-                    Vi lagrer svarene dine mens du fyller ut, så du kan ta pauser underveis. Søknader som ikke blir
-                    sendt inn lagrer vi i 4 måneder før de slettes automatisk.
-                </Accordion.Content>
+                <Accordion.Header>{lagrerUnderveisTittel}</Accordion.Header>
+                <Accordion.Content>{lagrerUnderveisTekst}</Accordion.Content>
             </Accordion.Item>
         </Accordion>
     )
 }
+
+export const lagrerUnderveisTittel = 'Vi lagrer svarene underveis'
+export const lagrerUnderveisTekst =
+    'Vi lagrer svarene dine mens du fyller ut, så du kan ta pauser underveis. Søknader som ikke blir sendt inn lagrer vi i 4 måneder før de slettes automatisk.'

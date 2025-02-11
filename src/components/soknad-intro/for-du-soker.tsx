@@ -19,9 +19,7 @@ export const ForDuSoker = () => {
                 <List.Item>
                     Du kan endre svarene i denne søknaden opp til 12 måneder etter du sendte den inn første gangen.
                 </List.Item>
-                <List.Item>
-                    Husk at du må søke om sykepenger innen 3 hele kalendermåneder etter den måneden du hadde sykedager.
-                </List.Item>
+                <List.Item>{huskAaSokeTekst}</List.Item>
                 <List.Item>
                     <List description="Husk å melde fra til NAV hvis du i sykmeldingsperioden:">
                         <List.Item className="!mb-0 !-mt-2" icon={<StrekPunkt />}>
@@ -53,3 +51,6 @@ export const ForDuSoker = () => {
         </>
     )
 }
+
+export const huskAaSokeTekst =
+    'Husk at du må søke om sykepenger innen 3 hele kalendermåneder etter den måneden du hadde sykedager.'
