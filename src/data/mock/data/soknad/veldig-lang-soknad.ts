@@ -2379,6 +2379,7 @@ export const veldigLangSoknad: RSSoknad = {
         jobbsituasjonenDin({
             fom: '2025-04-15',
             tom: '2025-04-28',
+            sisteSoknad: false,
         }),
         inntektUnderveis({
             fom: '2025-04-15',
