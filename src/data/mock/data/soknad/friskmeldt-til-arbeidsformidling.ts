@@ -65,7 +65,17 @@ export const fremtidigFriskmeldtTilArbeidsformidling2 = skapfriskmeldtTilArbeids
     status: 'FREMTIDIG',
 })
 
-export function nyFriskmeldtTilArbeidsformidling({ fom, tom, uuid }: { fom: string; tom: string; uuid: string }) {
+export function nyFriskmeldtTilArbeidsformidling({
+    fom,
+    tom,
+    uuid,
+    sisteSoknad,
+}: {
+    fom: string
+    tom: string
+    uuid: string
+    sisteSoknad: boolean
+}) {
     return skapfriskmeldtTilArbeidsformidling({
         fom,
         tom,
@@ -73,7 +83,7 @@ export function nyFriskmeldtTilArbeidsformidling({ fom, tom, uuid }: { fom: stri
         uuid,
         sporsmal: [
             ansvarserklaring(),
-            jobbsituasjonenDin({ fom, tom }),
+            jobbsituasjonenDin({ fom, tom, sisteSoknad }),
             inntektUnderveis({ fom, tom }),
             reiseTilUtlandet({ fom, tom }),
             oppsummering(),
@@ -123,11 +133,68 @@ function fortsattArbeidssoker({
     }
 }
 
-export function jobbsituasjonenDin(opts: { fom: string; tom: string }): RSSporsmal {
+export function jobbsituasjonenDin(opts: { fom: string; tom: string; sisteSoknad: boolean }): RSSporsmal {
     const { fom, tom } = opts
 
     const periodeTekst = tilLesbarPeriodeMedArstall(dayjs(fom), dayjs(tom))
 
+    const ja: RSSporsmal = {
+        id: v4().toString(),
+        tag: 'FTA_JOBBSITUASJONEN_DIN_JA',
+        sporsmalstekst: 'Ja',
+        undertekst: null,
+        svartype: 'RADIO',
+        min: null,
+        max: null,
+        kriterieForVisningAvUndersporsmal: 'CHECKED',
+        svar: [],
+        undersporsmal: [
+            {
+                id: v4().toString(),
+                tag: 'FTA_JOBBSITUASJONEN_DIN_NAR',
+                sporsmalstekst: 'Når begynte du i ny jobb?',
+                undertekst: null,
+                svartype: 'DATO',
+                min: fom,
+                max: tom,
+                kriterieForVisningAvUndersporsmal: null,
+                svar: [],
+                undersporsmal: [],
+            },
+        ],
+    }
+    if (!opts.sisteSoknad) {
+        ja.undersporsmal.push(
+            fortsattArbeidssoker({
+                nyJobbUndersporsmal: true,
+                medDatoSporsmal: false,
+                fom,
+                tom,
+            }),
+        )
+    }
+    const nei: RSSporsmal = {
+        id: v4().toString(),
+        tag: 'FTA_JOBBSITUASJONEN_DIN_NEI',
+        sporsmalstekst: 'Nei',
+        undertekst: null,
+        svartype: 'RADIO',
+        min: null,
+        max: null,
+        kriterieForVisningAvUndersporsmal: 'CHECKED',
+        svar: [],
+        undersporsmal: [],
+    }
+    if (!opts.sisteSoknad) {
+        nei.undersporsmal.push(
+            fortsattArbeidssoker({
+                nyJobbUndersporsmal: false,
+                medDatoSporsmal: true,
+                fom,
+                tom,
+            }),
+        )
+    }
     return {
         id: v4().toString(),
         tag: 'FTA_JOBBSITUASJONEN_DIN',
@@ -138,58 +205,7 @@ export function jobbsituasjonenDin(opts: { fom: string; tom: string }): RSSporsm
         max: null,
         kriterieForVisningAvUndersporsmal: null,
         svar: [],
-        undersporsmal: [
-            {
-                id: v4().toString(),
-                tag: 'FTA_JOBBSITUASJONEN_DIN_JA',
-                sporsmalstekst: 'Ja',
-                undertekst: null,
-                svartype: 'RADIO',
-                min: null,
-                max: null,
-                kriterieForVisningAvUndersporsmal: 'CHECKED',
-                svar: [],
-                undersporsmal: [
-                    {
-                        id: v4().toString(),
-                        tag: 'FTA_JOBBSITUASJONEN_DIN_NAR',
-                        sporsmalstekst: 'Når begynte du i ny jobb?',
-                        undertekst: null,
-                        svartype: 'DATO',
-                        min: fom,
-                        max: tom,
-                        kriterieForVisningAvUndersporsmal: null,
-                        svar: [],
-                        undersporsmal: [],
-                    },
-                    fortsattArbeidssoker({
-                        nyJobbUndersporsmal: true,
-                        medDatoSporsmal: false,
-                        fom,
-                        tom,
-                    }),
-                ],
-            },
-            {
-                id: v4().toString(),
-                tag: 'FTA_JOBBSITUASJONEN_DIN_NEI',
-                sporsmalstekst: 'Nei',
-                undertekst: null,
-                svartype: 'RADIO',
-                min: null,
-                max: null,
-                kriterieForVisningAvUndersporsmal: 'CHECKED',
-                svar: [],
-                undersporsmal: [
-                    fortsattArbeidssoker({
-                        nyJobbUndersporsmal: false,
-                        medDatoSporsmal: true,
-                        fom,
-                        tom,
-                    }),
-                ],
-            },
-        ],
+        undersporsmal: [ja, nei],
     }
 }
 

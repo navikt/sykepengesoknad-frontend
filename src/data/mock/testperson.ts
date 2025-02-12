@@ -49,6 +49,7 @@ import { nyttArbeidsforhold } from './data/personas/nytt-arbeidsforhold'
 import {
     fremtidigeFriskmeldtTilArbeidsformidling,
     friskmeldtTilArbeidsformidlingPersona,
+    sisteSoknadFriskmeldtTilArbeidsformidlingPersona,
 } from './data/personas/friskmeldt-til-arbeidsformidling'
 
 type PersonaKey =
@@ -97,6 +98,7 @@ type PersonaKey =
     | 'julesoknad'
     | 'fta-to-fremtidige'
     | 'fta-en-ny'
+    | 'fta-siste'
 
 export type PersonaData = Partial<Record<PersonaKey, Persona>>
 
@@ -151,6 +153,7 @@ export function testpersonerGruppert(): PersonaGroup {
         ['friskmeldt-til-arbeidsformidling']: {
             ['fta-to-fremtidige']: jsonDeepCopy(fremtidigeFriskmeldtTilArbeidsformidling),
             ['fta-en-ny']: jsonDeepCopy(friskmeldtTilArbeidsformidlingPersona),
+            ['fta-siste']: jsonDeepCopy(sisteSoknadFriskmeldtTilArbeidsformidlingPersona),
         },
         ['arbeidstaker-julesoknad']: {
             ['julesoknad']: jsonDeepCopy(julesoknadPerson),
