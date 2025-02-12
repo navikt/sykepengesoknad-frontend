@@ -9,8 +9,17 @@ export const flattenSporsmal = (sporsmal: ReadonlyArray<Sporsmal>) => {
     return flatArr
 }
 
+export const harSvart = (soknad: Soknad, tag: string, svar: string): boolean => {
+    return flattenSporsmal(soknad.sporsmal).some(
+        (spm) => spm.tag === tag && spm.svarliste.svar.some((s) => s.verdi === svar),
+    )
+}
 export const hentSporsmal = (soknad: Soknad, tag: string): Sporsmal | undefined => {
     return flattenSporsmal(soknad.sporsmal).find((spm) => spm.tag === tag)
+}
+export const hentSvar = (soknad: Soknad, tag: string): string | undefined => {
+    const spm = hentSporsmal(soknad, tag)
+    return spm?.svarliste.svar.find((s) => s.verdi)?.verdi
 }
 
 export const hentUndersporsmal = (sporsmal: Sporsmal, tag: string): Sporsmal | undefined => {
