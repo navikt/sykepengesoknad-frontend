@@ -59,7 +59,7 @@ export function FortsattArbeidssoker({ sporsmal, fieldValue }: { sporsmal: Spors
             return null
         }
 
-        return <IkkeLengreArbeidssøker variant="info" dato={dato()} />
+        return <IkkeLengreArbeidssøker variant="info" nyJobb={true} dato={dato()} />
     }
     if (sporsmal.tag == 'FTA_JOBBSITUASJONEN_DIN_FORTSATT_ARBEIDSSOKER' && fieldValue === 'NEI') {
         const dato = () => {
@@ -76,21 +76,36 @@ export function FortsattArbeidssoker({ sporsmal, fieldValue }: { sporsmal: Spors
             return null
         }
 
-        return <IkkeLengreArbeidssøker variant="warning" dato={dato()} />
+        return <IkkeLengreArbeidssøker variant="warning" nyJobb={false} dato={dato()} />
     }
     return null
 }
 
-function IkkeLengreArbeidssøker({ variant, dato }: { variant: 'warning' | 'info'; dato: string | null }) {
+function IkkeLengreArbeidssøker({
+    variant,
+    dato,
+    nyJobb,
+}: {
+    variant: 'warning' | 'info'
+    nyJobb: boolean
+    dato: string | null
+}) {
     if (!dato) {
         return null
     }
     return (
         <Alert variant={variant} className="mt-4">
-            <BodyLong spacing>
-                Du har svart at du har begynt i ny jobb og dermed ikke vil være registrert som arbeidssøker hos Nav
-                lenger.
-            </BodyLong>
+            {nyJobb ? (
+                <BodyLong spacing>
+                    Du har svart at du har begynt i ny jobb og dermed ikke vil være registrert som arbeidssøker hos Nav
+                    lenger.
+                </BodyLong>
+            ) : (
+                <BodyLong spacing>
+                    Du har svart at du ikke vil være registrert som arbeidssøker hos Nav lenger.
+                </BodyLong>
+            )}
+
             <BodyLong>
                 {`Det betyr at du ikke vil være friskmeldt til arbeidsformidling fra og med ${dato}. Da stanser vi sykepengene dine fra og med denne datoen, og fjerner deg fra arbeidssøkerregisteret vårt.`}
             </BodyLong>
