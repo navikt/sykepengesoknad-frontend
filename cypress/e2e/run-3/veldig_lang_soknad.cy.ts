@@ -354,7 +354,7 @@ describe('Tester støtte for gamle spørsmål', () => {
     })
     it('Jobbsituasjonen din', () => {
         svarNeiHovedsporsmal()
-        svarRadioGruppe('Vil du fortsatt være registrert som arbeidssøker hos Nav?', 'Ja')
+        svarRadioGruppe('Vil du fortsatt være friskmeldt til arbeidsformidling?', 'Ja')
         klikkGaVidere()
     })
     it('Inntekt underveis', () => {

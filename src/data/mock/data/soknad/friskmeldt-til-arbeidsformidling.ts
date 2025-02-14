@@ -94,9 +94,9 @@ export function nyFriskmeldtTilArbeidsformidling({
 function fortsattArbeidssokerDato({ fom, tom }: { fom: string; tom: string }): RSSporsmal {
     return {
         id: v4().toString(),
-        tag: 'FTA_JOBBSITUASJONEN_DIN_FORTSATT_ARBEIDSSOKER_AVREGISTRERT_NAR',
+        tag: 'FTA_JOBBSITUASJONEN_DIN_FORTSATT_FRISKMELDT_AVREGISTRERT_NAR',
         sporsmalstekst: 'Fra og med når?',
-        undertekst: 'Du vil ikke være friskmeldt til arbeidsformidling fra og med denne datoen',
+        undertekst: 'Du vil ikke få utbetalt sykepenger fra og med denne datoen',
         svartype: 'DATO',
         min: fom,
         max: tom,
@@ -119,8 +119,8 @@ function fortsattArbeidssoker({
 }): RSSporsmal {
     return {
         id: v4().toString(),
-        tag: 'FTA_JOBBSITUASJONEN_DIN_FORTSATT_ARBEIDSSOKER' + (nyJobbUndersporsmal ? '_NY_JOBB' : ''),
-        sporsmalstekst: 'Vil du fortsatt være registrert som arbeidssøker hos Nav?',
+        tag: 'FTA_JOBBSITUASJONEN_DIN_FORTSATT_FRISKMELDT' + (nyJobbUndersporsmal ? '_NY_JOBB' : ''),
+        sporsmalstekst: 'Vil du fortsatt være friskmeldt til arbeidsformidling?',
         undertekst: nyJobbUndersporsmal
             ? 'Svar ja hvis du har begynt i en midlertidig jobb og fortsatt søker andre jobber'
             : null,

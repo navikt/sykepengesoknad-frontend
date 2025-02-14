@@ -303,17 +303,17 @@ const SporsmalTekster = {
     'soknad.feilmelding.FTA_JOBBSITUASJONEN_DIN': 'Du må svare på om du begynte du i ny jobb',
     'soknad.feilmelding.FTA_JOBBSITUASJONEN_DIN_JA': '',
     'soknad.feilmelding.FTA_JOBBSITUASJONEN_DIN_NAR': '',
-    'soknad.feilmelding.FTA_JOBBSITUASJONEN_DIN_FORTSATT_ARBEIDSSOKER_NY_JOBB':
-        'Du må svare på om du fortsatt vil være registrert som arbeidssøker',
+    'soknad.feilmelding.FTA_JOBBSITUASJONEN_DIN_FORTSATT_FRISKMELDT_NY_JOBB':
+        'Du må svare på om du fortsatt vil være friskmeldt til arbeidsformidling',
     'soknad.feilmelding.FTA_JOBBSITUASJONEN_DIN_NEI': '',
-    'soknad.feilmelding.FTA_JOBBSITUASJONEN_DIN_FORTSATT_ARBEIDSSOKER':
-        'Du må svare på om du fortsatt vil være registrert som arbeidssøker',
+    'soknad.feilmelding.FTA_JOBBSITUASJONEN_DIN_FORTSATT_FRISKMELDT':
+        'Du må svare på om du fortsatt vil være friskmeldt til arbeidsformidling',
     'soknad.feilmelding.FTA_INNTEKT_UNDERVEIS': 'Du må svare på om du hadde inntekt i perioden',
     'soknad.feilmelding.FTA_INNTEKT_UNDERVEIS_MER_ENN_PLEIER': 'Du må svare på om tjente mer enn du pleier',
     'soknad.feilmelding.FTA_INNTEKT_UNDERVEIS_MER_ENN_PLEIER_BELOP': 'Du må svare på hvor mye du tjente',
     'soknad.feilmelding.FTA_REISE_TIL_UTLANDET': 'Du må svare på om du har vært utenfor EU/EØS i denne perioden',
     'soknad.feilmelding.FTA_REISE_TIL_UTLANDET_NAR': '',
-    'soknad.feilmelding.FTA_JOBBSITUASJONEN_DIN_FORTSATT_ARBEIDSSOKER_AVREGISTRERT_NAR': '',
+    'soknad.feilmelding.FTA_JOBBSITUASJONEN_DIN_FORTSATT_FRISKMELDT_AVREGISTRERT_NAR': '',
 }
 
 export default SporsmalTekster

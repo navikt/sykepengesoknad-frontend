@@ -376,16 +376,16 @@ export async function mockApi(req: NextApiRequest, res: NextApiResponse) {
                     }
 
                     if (tagHarSvar('FTA_JOBBSITUASJONEN_DIN_JA', 'CHECKED')) {
-                        if (tagHarSvar('FTA_JOBBSITUASJONEN_DIN_FORTSATT_ARBEIDSSOKER_NY_JOBB', 'NEI')) {
+                        if (tagHarSvar('FTA_JOBBSITUASJONEN_DIN_FORTSATT_FRISKMELDT_NY_JOBB', 'NEI')) {
                             return underspm.find((spm) => spm.tag === 'FTA_JOBBSITUASJONEN_DIN_NAR')?.svar[0]?.verdi
                         }
                         return undefined
                     }
 
                     if (tagHarSvar('FTA_JOBBSITUASJONEN_DIN_NEI', 'CHECKED')) {
-                        if (tagHarSvar('FTA_JOBBSITUASJONEN_DIN_FORTSATT_ARBEIDSSOKER', 'NEI')) {
+                        if (tagHarSvar('FTA_JOBBSITUASJONEN_DIN_FORTSATT_FRISKMELDT', 'NEI')) {
                             return underspm.find(
-                                (spm) => spm.tag === 'FTA_JOBBSITUASJONEN_DIN_FORTSATT_ARBEIDSSOKER_AVREGISTRERT_NAR',
+                                (spm) => spm.tag === 'FTA_JOBBSITUASJONEN_DIN_FORTSATT_FRISKMELDT_AVREGISTRERT_NAR',
                             )?.svar[0]?.verdi
                         }
                         return undefined
