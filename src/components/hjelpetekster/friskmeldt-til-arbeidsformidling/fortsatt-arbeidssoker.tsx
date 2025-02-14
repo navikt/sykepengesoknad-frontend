@@ -13,8 +13,8 @@ export function FortsattArbeidssoker({ sporsmal, fieldValue }: { sporsmal: Spors
 
     const { valgtSoknad, soknader } = useSoknadMedDetaljer()
     if (
-        (sporsmal.tag == 'FTA_JOBBSITUASJONEN_DIN_FORTSATT_ARBEIDSSOKER_NY_JOBB' ||
-            sporsmal.tag == 'FTA_JOBBSITUASJONEN_DIN_FORTSATT_ARBEIDSSOKER') &&
+        (sporsmal.tag == 'FTA_JOBBSITUASJONEN_DIN_FORTSATT_FRISKMELDT_NY_JOBB' ||
+            sporsmal.tag == 'FTA_JOBBSITUASJONEN_DIN_FORTSATT_FRISKMELDT') &&
         fieldValue === 'JA'
     ) {
         const nesteSoknadPeriode = () => {
@@ -40,11 +40,14 @@ export function FortsattArbeidssoker({ sporsmal, fieldValue }: { sporsmal: Spors
         }
         return (
             <Alert variant="info" className="mt-4">
-                {`Du har svart at du fortsatt vil være registrert som arbeidssøker hos Nav. Da vil du fortsatt være friskmeldt til arbeidsformidling i neste periode, altså ${nesteSoknadPeriodeTekst}.`}
+                <BodyLong spacing>Du har svart at du fortsatt vil være friskmeldt til arbeidsformidling.</BodyLong>
+                <BodyLong>
+                    {`Da vil du også være registrert som arbeidssøker hos Nav i neste periode, altså ${nesteSoknadPeriodeTekst}.`}
+                </BodyLong>
             </Alert>
         )
     }
-    if (sporsmal.tag == 'FTA_JOBBSITUASJONEN_DIN_FORTSATT_ARBEIDSSOKER_NY_JOBB' && fieldValue === 'NEI') {
+    if (sporsmal.tag == 'FTA_JOBBSITUASJONEN_DIN_FORTSATT_FRISKMELDT_NY_JOBB' && fieldValue === 'NEI') {
         const dato = () => {
             const tagForDato = flattenSporsmal(valgtSoknad?.sporsmal || []).find(
                 (s) => s.tag === 'FTA_JOBBSITUASJONEN_DIN_NAR',
@@ -59,12 +62,24 @@ export function FortsattArbeidssoker({ sporsmal, fieldValue }: { sporsmal: Spors
             return null
         }
 
-        return <IkkeLengreArbeidssøker variant="info" nyJobb={true} dato={dato()} />
+        const formattertDatodato = dato()
+        if (!formattertDatodato) return null
+        return (
+            <Alert variant="info" className="mt-4">
+                <BodyLong spacing>
+                    Du har svart at du har begynt i ny jobb og dermed ikke vil være friskmeldt til arbeidsformidling
+                    lenger.
+                </BodyLong>
+                <BodyLong>
+                    {`Da stanser vi sykepengene dine fra og med ${formattertDatodato}, og fjerner deg fra arbeidssøkerregisteret vårt.`}
+                </BodyLong>
+            </Alert>
+        )
     }
-    if (sporsmal.tag == 'FTA_JOBBSITUASJONEN_DIN_FORTSATT_ARBEIDSSOKER' && fieldValue === 'NEI') {
+    if (sporsmal.tag == 'FTA_JOBBSITUASJONEN_DIN_FORTSATT_FRISKMELDT' && fieldValue === 'NEI') {
         const dato = () => {
             const tagForDato = sporsmal.undersporsmal.find(
-                (s) => s.tag === 'FTA_JOBBSITUASJONEN_DIN_FORTSATT_ARBEIDSSOKER_AVREGISTRERT_NAR',
+                (s) => s.tag === 'FTA_JOBBSITUASJONEN_DIN_FORTSATT_FRISKMELDT_AVREGISTRERT_NAR',
             )
             if (!tagForDato) {
                 return null
@@ -75,40 +90,16 @@ export function FortsattArbeidssoker({ sporsmal, fieldValue }: { sporsmal: Spors
             }
             return null
         }
-
-        return <IkkeLengreArbeidssøker variant="warning" nyJobb={false} dato={dato()} />
+        const formattertDatodato = dato()
+        if (!formattertDatodato) return null
+        return (
+            <Alert variant="warning" className="mt-4">
+                <BodyLong spacing>Du har svart at du ikke vil være friskmeldt til arbeidsformidling lenger.</BodyLong>
+                <BodyLong>
+                    {`Da stanser vi sykepengene dine fra og med ${formattertDatodato}, og fjerner deg fra arbeidssøkerregisteret vårt.`}
+                </BodyLong>
+            </Alert>
+        )
     }
     return null
-}
-
-function IkkeLengreArbeidssøker({
-    variant,
-    dato,
-    nyJobb,
-}: {
-    variant: 'warning' | 'info'
-    nyJobb: boolean
-    dato: string | null
-}) {
-    if (!dato) {
-        return null
-    }
-    return (
-        <Alert variant={variant} className="mt-4">
-            {nyJobb ? (
-                <BodyLong spacing>
-                    Du har svart at du har begynt i ny jobb og dermed ikke vil være registrert som arbeidssøker hos Nav
-                    lenger.
-                </BodyLong>
-            ) : (
-                <BodyLong spacing>
-                    Du har svart at du ikke vil være registrert som arbeidssøker hos Nav lenger.
-                </BodyLong>
-            )}
-
-            <BodyLong>
-                {`Det betyr at du ikke vil være friskmeldt til arbeidsformidling fra og med ${dato}. Da stanser vi sykepengene dine fra og med denne datoen, og fjerner deg fra arbeidssøkerregisteret vårt.`}
-            </BodyLong>
-        </Alert>
-    )
 }

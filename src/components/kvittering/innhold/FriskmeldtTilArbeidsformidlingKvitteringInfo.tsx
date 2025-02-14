@@ -31,15 +31,11 @@ export function FriskmeldtTilArbeidsformidlingKvitteringInfo() {
     const sisteSoeknad = finnSisteSoknad()
     const nyJobb = harSvart(valgtSoknad, 'FTA_JOBBSITUASJONEN_DIN_JA', 'CHECKED')
     if (nyJobb) {
-        const fortsattArbeidssoker = harSvart(
-            valgtSoknad,
-            'FTA_JOBBSITUASJONEN_DIN_FORTSATT_ARBEIDSSOKER_NY_JOBB',
-            'JA',
-        )
+        const fortsattArbeidssoker = harSvart(valgtSoknad, 'FTA_JOBBSITUASJONEN_DIN_FORTSATT_FRISKMELDT_NY_JOBB', 'JA')
         if (fortsattArbeidssoker) {
             return <DuErFortsattRegistrertFremTil dato={sisteSoeknad.tom!} />
         }
-        const ikkeArbeidssoker = harSvart(valgtSoknad, 'FTA_JOBBSITUASJONEN_DIN_FORTSATT_ARBEIDSSOKER_NY_JOBB', 'NEI')
+        const ikkeArbeidssoker = harSvart(valgtSoknad, 'FTA_JOBBSITUASJONEN_DIN_FORTSATT_FRISKMELDT_NY_JOBB', 'NEI')
         if (ikkeArbeidssoker) {
             const nyJobbDato = hentSvar(valgtSoknad, 'FTA_JOBBSITUASJONEN_DIN_NAR')
             if (nyJobbDato) {
@@ -50,13 +46,13 @@ export function FriskmeldtTilArbeidsformidlingKvitteringInfo() {
 
     const ikkeNyJobb = harSvart(valgtSoknad, 'FTA_JOBBSITUASJONEN_DIN_NEI', 'CHECKED')
     if (ikkeNyJobb) {
-        const fortsattArbeidssoker = harSvart(valgtSoknad, 'FTA_JOBBSITUASJONEN_DIN_FORTSATT_ARBEIDSSOKER', 'JA')
+        const fortsattArbeidssoker = harSvart(valgtSoknad, 'FTA_JOBBSITUASJONEN_DIN_FORTSATT_FRISKMELDT', 'JA')
         if (fortsattArbeidssoker) {
             return <DuErFortsattRegistrertFremTil dato={sisteSoeknad.tom!} />
         }
-        const ikkeArbeidssoker = harSvart(valgtSoknad, 'FTA_JOBBSITUASJONEN_DIN_FORTSATT_ARBEIDSSOKER', 'NEI')
+        const ikkeArbeidssoker = harSvart(valgtSoknad, 'FTA_JOBBSITUASJONEN_DIN_FORTSATT_FRISKMELDT', 'NEI')
         if (ikkeArbeidssoker) {
-            const nyJobbDato = hentSvar(valgtSoknad, 'FTA_JOBBSITUASJONEN_DIN_FORTSATT_ARBEIDSSOKER_AVREGISTRERT_NAR')
+            const nyJobbDato = hentSvar(valgtSoknad, 'FTA_JOBBSITUASJONEN_DIN_FORTSATT_FRISKMELDT_AVREGISTRERT_NAR')
             if (nyJobbDato) {
                 return <DuErAvmeldt dato={nyJobbDato} />
             }

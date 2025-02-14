@@ -193,7 +193,7 @@ const JaNeiLiten = ({ sporsmal }: SpmProps) => {
             {sporsmal.tag === 'INNTEKTSOPPLYSNINGER_VARIG_ENDRING_25_PROSENT' && watchJaNei === 'JA' && (
                 <VarigEndringAlert />
             )}
-            {sporsmal.tag?.startsWith('FTA_JOBBSITUASJONEN_DIN_FORTSATT_ARBEIDSSOKER') && (
+            {sporsmal.tag?.startsWith('FTA_JOBBSITUASJONEN_DIN_FORTSATT_FRISKMELDT') && (
                 <FortsattArbeidssoker sporsmal={sporsmal} fieldValue={watchJaNei} />
             )}
         </>
