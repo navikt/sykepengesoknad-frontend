@@ -31,6 +31,7 @@ const TallSum = ({ sporsmal }: OppsummeringProps) => {
     const label = () => {
         switch (sporsmal.tag) {
             case 'NYTT_ARBEIDSFORHOLD_UNDERVEIS_BRUTTO':
+            case 'FTA_INNTEKT_UNDERVEIS_MER_ENN_PLEIER_BELOP':
                 return 'kroner før skatt'
             default:
                 return undertekst || tekst(labelnokkel as any)
