@@ -21,8 +21,11 @@ export function IntrosideFta() {
                 Sykmelding fra legen
             </Heading>
             <BodyLong spacing>
-                Du trenger ikke sykmelding mens du er friskmeldt til arbeidsformidling, med mindre du blir syk
-                underveis. Da må du ta kontakt med legen din.
+                {
+                    'Du trenger ikke sykmelding mens du er friskmeldt til arbeidsformidling, med mindre du blir syk underveis. Da må du ta kontakt med legen din. Husk å '
+                }
+                <KontaktOssLenke tekst="gi beskjed til Nav" />
+                {' hvis du ikke kan være arbeidssøker lenger.'}
             </BodyLong>
             <Heading size="small" level="2" spacing>
                 {lagrerUnderveisTittel}
