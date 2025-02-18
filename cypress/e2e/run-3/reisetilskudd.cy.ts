@@ -276,10 +276,7 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
             cy.get('[data-cy="kvittering-panel"]')
                 .should('contain', 'Hva skjer videre?')
                 .and('contain', 'NAV behandler søknaden din')
-                .and(
-                    'contain',
-                    'Saksbehandlingstiden regnes fra Nav har mottatt all nødvendig dokumentasjon.',
-                )
+                .and('contain', 'Saksbehandlingstiden regnes fra Nav har mottatt all nødvendig dokumentasjon.')
         })
     })
 })
