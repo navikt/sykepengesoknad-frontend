@@ -65,7 +65,10 @@ const KvitteringSide = () => {
     const gjenstaendeSoknader = hentGjenstaendeSoknader(soknader, valgtSoknad)
 
     const erJulesoknad = !!valgtSoknad?.julesoknad
-    const skalViseFlexjar = flexjarToggle.enabled || erJulesoknad
+    const skalViseFlexjar =
+        flexjarToggle.enabled ||
+        erJulesoknad ||
+        valgtSoknad?.soknadstype == RSSoknadstype.FRISKMELDT_TIL_ARBEIDSFORMIDLING
 
     return (
         <>
