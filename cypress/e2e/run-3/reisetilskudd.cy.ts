@@ -276,10 +276,7 @@ describe('Teste førsteside i reisetilskuddsøknaden', () => {
             cy.get('[data-cy="kvittering-panel"]')
                 .should('contain', 'Hva skjer videre?')
                 .and('contain', 'NAV behandler søknaden din')
-                .and(
-                    'contain',
-                    'Saksbehandlingstiden regnes fra NAV har mottatt all nødvendig dokumentasjon. Etter dette må du regne med å vente minst fire uker før søknaden er behandlet.',
-                )
+                .and('contain', 'Saksbehandlingstiden regnes fra Nav har mottatt all nødvendig dokumentasjon.')
         })
     })
 })

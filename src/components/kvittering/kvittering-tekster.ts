@@ -64,8 +64,8 @@ export const KvitteringTekster = {
     'kvittering.arbeidstaker.tittel': 'Du får sykepengene fra arbeidsgiveren din',
     'kvittering.arbeidstaker.hvorfor-skille-ved-16-dager': 'Hvorfor går det et skille ved 16 dager?',
     'kvittering.arbeidstaker.saksbehandlingstid':
-        'Saksbehandlingstiden regnes fra NAV har mottatt all nødvendig dokumentasjon. Etter dette må du regne med å vente minst fire uker før søknaden er behandlet.',
-    'kvittering.arbeidstaker.saksbehandlingstid.lenke': 'Sjekk saksbehandlingstidene',
+        'Saksbehandlingstiden regnes fra Nav har mottatt all nødvendig dokumentasjon.',
+    'kvittering.arbeidstaker.saksbehandlingstid.lenke': 'Sjekk de oppdaterte saksbehandlingstidene',
     'kvittering.arbeidstaker.saksbehandlingstid.lenke.url': 'https://www.nav.no/saksbehandlingstider#sykepenger',
     'kvittering.arbeidstaker.brodtekst':
         'Arbeidsgiveren din betaler de første 16 kalenderdagene av sykefraværet. Noen arbeidsplasser fortsetter å utbetale sykepenger fra dag 17, men da får de penger tilbake fra NAV.',
