@@ -113,6 +113,19 @@ test.describe('Friskmeldt til arbeidsformidling', () => {
         await harSynligTekst(page, /Du er friskmeldt til arbeidsformidling frem til 11. mai 2025./i)
     })
 
+    test('Siste søknad', async ({ page }) => {
+        await page.context().clearCookies()
+        await page.goto(
+            'http://localhost:3000/syk/sykepengesoknad/soknader/ac0ff5c0-e6bc-416d-b5d9-dfa3654e9f26/1?testperson=fta-siste',
+        )
+        await fjernAnimasjoner(page)
+        await checkViStolerPaDeg(page)
+        await neiOgVidere(page, ['Jobbsituasjonen din', 'Inntekt underveis', 'Reise til utlandet'])
+
+        await page.getByRole('button', { name: 'Send søknaden' }).click()
+        await harSynligTittel(page, 'Søknaden er sendt til NAV', 2)
+    })
+
     async function fullforSoknad(page: Page) {
         await klikkGaVidere(page)
         await neiOgVidere(page, ['Inntekt underveis', 'Reise til utlandet'])
