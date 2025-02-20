@@ -7,8 +7,8 @@ export async function checkViStolerPaDeg(page: Page, gaVidere = true) {
     await checkbox.click()
 
     if (gaVidere) {
-        const startButton = page.getByText('Start søknad')
-        await startButton.click()
+        await expect(page.getByRole('button', { name: 'Start søknad' })).toBeVisible()
+        await page.getByRole('button', { name: 'Start søknad' }).click()
     }
 }
 
@@ -17,6 +17,14 @@ export async function svarNeiHovedsporsmal(page: Page) {
     await radioButton.click()
 
     await expect(radioButton).toBeChecked()
+}
+
+export async function neiOgVidere(page: Page, titler: string[]) {
+    for (let i = 0; i < titler.length; i++) {
+        await harSynligTittel(page, titler[i], 2)
+        await svarNeiHovedsporsmal(page)
+        await klikkGaVidere(page)
+    }
 }
 
 export async function klikkGaVidere(page: Page, forventFeil = false, skipFocusCheck = false) {
@@ -153,7 +161,7 @@ export async function setPeriodeFraTil(page: Page, fom: number, tom: number, per
     await periodeLocator.locator('.rdp-cell', { hasText: tom.toString() }).click()
 }
 
-export async function svarRadioGruppe(page: Page, groupName: string, radioName: string) {
+export async function svarRadioGruppe(page: Page, groupName: string | RegExp, radioName: string) {
     // Finn riktig "gruppe" med groupName
     const group = page.getByRole('group', { name: groupName })
 
@@ -170,4 +178,27 @@ export async function sporsmalOgSvar(container: Locator, sporsmal: string, svar:
 
     // 3. Sjekk at minst ett av søskenelementene inneholder `svar`
     await expect(siblingLocator.first()).toContainText(svar)
+}
+
+export async function harSynligTittel(page: Page, tittelTekst: string, level: number) {
+    const locator = page.getByRole('heading', { level, name: tittelTekst })
+    await expect(locator).toBeVisible()
+    return locator
+}
+
+export async function harSynligTekst(page: Page, tekst: string | RegExp) {
+    const locator = page.getByText(tekst)
+    await expect(locator).toBeVisible()
+    return locator
+}
+
+export async function fjernAnimasjoner(page: Page) {
+    await page.addStyleTag({
+        content: `*,
+*::before,
+*::after {
+  transition: none !important;
+  animation: none !important;
+}`,
+    })
 }
