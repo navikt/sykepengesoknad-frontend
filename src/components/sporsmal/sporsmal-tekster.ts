@@ -309,8 +309,7 @@ const SporsmalTekster = {
     'soknad.feilmelding.FTA_JOBBSITUASJONEN_DIN_FORTSATT_FRISKMELDT':
         'Du må svare på om du fortsatt vil være friskmeldt til arbeidsformidling',
     'soknad.feilmelding.FTA_INNTEKT_UNDERVEIS': 'Du må svare på om du hadde inntekt i perioden',
-    'soknad.feilmelding.FTA_INNTEKT_UNDERVEIS_MER_ENN_PLEIER': 'Du må svare på om tjente mer enn du pleier',
-    'soknad.feilmelding.FTA_INNTEKT_UNDERVEIS_MER_ENN_PLEIER_BELOP': 'Du må svare på hvor mye du tjente',
+    'soknad.feilmelding.FTA_INNTEKT_UNDERVEIS_BELOP': 'Du må svare på hvor mye du tjente',
     'soknad.feilmelding.FTA_REISE_TIL_UTLANDET': 'Du må svare på om du har vært utenfor EU/EØS i denne perioden',
     'soknad.feilmelding.FTA_REISE_TIL_UTLANDET_NAR': '',
     'soknad.feilmelding.FTA_JOBBSITUASJONEN_DIN_FORTSATT_FRISKMELDT_AVREGISTRERT_NAR': '',
