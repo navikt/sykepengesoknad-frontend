@@ -406,7 +406,7 @@ const soknad: RSSoknad = {
                                                     id: '8f84c930-30fd-3b0f-85a3-6108cbd8a7d3',
                                                     tag: 'INNTEKTSOPPLYSNINGER_VARIG_ENDRING_BEGRUNNELSE',
                                                     sporsmalstekst: 'Hvilken endring har skjedd?',
-                                                    undertekst: 'Du kan velge en eller flere alternativer',
+                                                    undertekst: 'Du kan velge ett eller flere alternativer',
                                                     svartype: 'CHECKBOX_GRUPPE',
                                                     min: null,
                                                     max: null,
