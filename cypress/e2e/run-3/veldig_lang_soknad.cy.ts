@@ -339,12 +339,12 @@ describe('Tester støtte for gamle spørsmål', () => {
 
     it('Avviklet virksomhet', () => {
         svarJaHovedsporsmal()
-        velgDato(4)
+        velgDato(14)
         gaVidere()
     })
     it('Drift i virksomheten', () => {
         svarNeiHovedsporsmal()
-        velgDato(4)
+        velgDato(14)
         gaVidere()
     })
     it('Avklaring i forbindlese med reise', function () {
