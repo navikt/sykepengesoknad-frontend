@@ -9,6 +9,7 @@ import { logEvent } from '../amplitude/amplitude'
 import { urlTilSoknad } from '../soknad/soknad-link'
 import { RSSoknadmetadata } from '../../types/rs-types/rs-soknadmetadata'
 import { Soknad } from '../../types/types'
+import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 
 interface Props {
     soknader: RSSoknadmetadata[]
@@ -72,6 +73,7 @@ export function hentGjenstaendeSoknader(soknader: RSSoknadmetadata[], valgtSokna
     return soknader
         .filter((s) => s.id !== valgtSoknad.id)
         .filter((s) => s.status === RSSoknadstatus.NY)
+        .filter((s) => s.soknadstype !== RSSoknadstype.FRISKMELDT_TIL_ARBEIDSFORMIDLING) //Ekskluderes da disse kan slettes etter innsending av foregående søknad
         .sort((a, b) => {
             const fomA = a.fom ? a.fom.getTime() : Number.MAX_SAFE_INTEGER
             const fomB = b.fom ? b.fom.getTime() : Number.MAX_SAFE_INTEGER
