@@ -76,9 +76,9 @@ describe('Søknad med alle opprinnelige spørsmål om medlemskap', () => {
         cy.contains('Oppholdstillatelse')
 
         svarJaHovedsporsmal()
-        velgDato(22)
+        velgDato(14)
         svarRadioGruppe('Er oppholdstillatelsen midlertidig eller permanent?', 'Midlertidig')
-        setPeriodeFraTil(12, 24)
+        setPeriodeFraTil(12, 13)
         klikkGaVidere()
     })
 
@@ -93,10 +93,10 @@ describe('Søknad med alle opprinnelige spørsmål om medlemskap', () => {
 
             //Oppholdstillatelse
             sporsmalOgSvar('Har du oppholdstillatelse fra Utlendingsdirektoratet?', 'Ja')
-            sporsmalOgSvar('Hvilken dato fikk du denne oppholdstillatelsen?', '22.10.2023')
+            sporsmalOgSvar('Hvilken dato fikk du denne oppholdstillatelsen?', '14.10.2023')
             sporsmalOgSvar('Er oppholdstillatelsen midlertidig eller permanent?', 'Midlertidig')
                 .children()
-                .should('contain', '12. – 24.')
+                .should('contain', '12. – 13.')
         })
     })
 })

@@ -35,11 +35,8 @@ export function IntrosideFta() {
                 Sykmelding fra legen
             </Heading>
             <BodyLong spacing>
-                {
-                    'Du trenger ikke sykmelding mens du er friskmeldt til arbeidsformidling, med mindre du blir syk underveis. Da må du ta kontakt med legen din. Husk å '
-                }
-                <KontaktOssLenke tekst="gi beskjed til Nav" />
-                {' hvis du ikke kan være arbeidssøker lenger.'}
+                Du trenger ikke sykmelding mens du er friskmeldt til arbeidsformidling, med mindre du blir syk
+                underveis. Da må du ta kontakt med legen din.
             </BodyLong>
             <Heading size="small" level="2" spacing>
                 {lagrerUnderveisTittel}
@@ -53,7 +50,7 @@ export function IntrosideFta() {
                 Har du spørsmål?
             </Heading>
             <BodyLong spacing>
-                <KontaktOssLenke tekst="Ta kontakt med Nav" />
+                <SkrivTilOssLenke tekst="Ta kontakt med Nav" />
             </BodyLong>
             <Accordion className="my-8">
                 <Accordion.Item>
@@ -62,7 +59,7 @@ export function IntrosideFta() {
                         {
                             'I utgangspunktet får du ikke sykepenger mens du studerer. Har du begynt å studere, eller skal studere mer enn før, må du '
                         }
-                        <KontaktOssLenke tekst="ta kontakt med Nav" />
+                        <BeskjedSykepengerLenke tekst="ta kontakt med Nav" />
                         {' så vi kan vurdere saken din.'}
                     </Accordion.Content>
                 </Accordion.Item>
@@ -72,7 +69,7 @@ export function IntrosideFta() {
                         {
                             'I utgangspunktet får du ikke sykepenger når du sitter i varetekt, soner straff eller er under forvaring. Du kan ha rett til sykepenger hvis du jobber mens du soner straff. '
                         }
-                        <KontaktOssLenke tekst="Ta kontakt med Nav" />
+                        <BeskjedSykepengerLenke tekst="Ta kontakt med Nav" />
                         {' så vi kan vurdere saken din. '}
                     </Accordion.Content>
                 </Accordion.Item>
@@ -86,8 +83,18 @@ export function IntrosideFta() {
     )
 }
 
-const KontaktOssLenke = ({ tekst }: { tekst: string }) => (
-    <Link href="https://www.nav.no/kontaktoss" rel="noopener noreferrer" target="_blank">
+const SkrivTilOssLenke = ({ tekst }: { tekst: string }) => (
+    <Link href="https://innboks.nav.no/s/skriv-til-oss?category=Helse" rel="noopener noreferrer" target="_blank">
+        {tekst}
+    </Link>
+)
+
+const BeskjedSykepengerLenke = ({ tekst }: { tekst: string }) => (
+    <Link
+        href="https://innboks.nav.no/s/beskjed-til-oss?category=Beskjed-sykepenger"
+        rel="noopener noreferrer"
+        target="_blank"
+    >
         {tekst}
     </Link>
 )
