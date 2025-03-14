@@ -34,7 +34,7 @@ const EndreModal = ({ aapen, setAapen }: { aapen: boolean; setAapen: (p: boolean
                         <BodyShort spacing>
                             {EndreknappTekster.utlopt}
                             <LenkeMedIkon
-                                href="https://innboks.nav.no/s/beskjed-til-oss?category=Beskjed-sykepenger"
+                                href="https://innboks.nav.no/s/beskjed-til-oss?category=Endring-sykepenger"
                                 text={EndreknappTekster.sto}
                             />
                             .
