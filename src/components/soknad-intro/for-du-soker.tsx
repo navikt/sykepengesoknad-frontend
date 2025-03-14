@@ -32,7 +32,10 @@ export const ForDuSoker = () => {
                             satt i varetekt, sonet straff eller var under forvaring
                         </List.Item>
                         <List.Item className="!-ml-3" icon={<IngenPunkt />}>
-                            <LenkeMedIkon href="https://www.nav.no/skriv-til-oss" text="Meld fra til NAV her" />{' '}
+                            <LenkeMedIkon
+                                href="https://innboks.nav.no/s/beskjed-til-oss?category=Beskjed-sykepenger"
+                                text="Meld fra til NAV her"
+                            />{' '}
                         </List.Item>
                     </List>
                 </List.Item>
