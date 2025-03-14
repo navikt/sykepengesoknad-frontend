@@ -1,6 +1,7 @@
 import { BodyLong, Modal, ReadMore } from '@navikt/ds-react'
 import dayjs from 'dayjs'
 import React, { useState } from 'react'
+import { ClockDashedIcon } from '@navikt/aksel-icons'
 
 import { tilLesbarDatoMedArstall } from '../../utils/dato-utils'
 import { ModalFooterMedLukk } from '../modal-footer-med-lukk'
@@ -25,7 +26,11 @@ const FremtidigeSoknaderTeaser = ({ soknad }: SykepengesoknadTeaserProps) => {
                 onClose={() => {
                     setAapen(false)
                 }}
-                header={{ heading: 'Du er litt tidlig ute', closeButton: true }}
+                header={{
+                    heading: 'Du er litt tidlig ute',
+                    closeButton: true,
+                    icon: <ClockDashedIcon aria-hidden={true} />,
+                }}
             >
                 <Modal.Body>
                     <BodyLong spacing>
