@@ -33,7 +33,11 @@ const EndreModal = ({ aapen, setAapen }: { aapen: boolean; setAapen: (p: boolean
                     {valgtSoknad.korrigeringsfristUtlopt && (
                         <BodyShort spacing>
                             {EndreknappTekster.utlopt}
-                            <LenkeMedIkon href="https://www.nav.no/skriv-til-oss" text={EndreknappTekster.sto} />.
+                            <LenkeMedIkon
+                                href="https://innboks.nav.no/s/beskjed-til-oss?category=Beskjed-sykepenger"
+                                text={EndreknappTekster.sto}
+                            />
+                            .
                         </BodyShort>
                     )}
                     {!valgtSoknad.korrigeringsfristUtlopt && (

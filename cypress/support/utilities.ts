@@ -208,7 +208,11 @@ export function sjekkIntroside() {
         .children()
         .should('have.attr', 'href', 'https://www.nav.no/sykepenger')
     cy.contains('Før du søker')
-    cy.contains('Meld fra til NAV her').and('have.attr', 'href', 'https://www.nav.no/skriv-til-oss')
+    cy.contains('Meld fra til NAV her').and(
+        'have.attr',
+        'href',
+        'https://innboks.nav.no/s/beskjed-til-oss?category=Beskjed-sykepenger',
+    )
     cy.contains('Sjekk de oppdaterte saksbehandlingstidene').and(
         'have.attr',
         'href',
