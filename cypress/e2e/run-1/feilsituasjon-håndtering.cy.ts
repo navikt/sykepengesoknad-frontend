@@ -172,7 +172,7 @@ describe('Tester feilsituasjoner ', () => {
             svarNeiHovedsporsmal()
             klikkGaVidere(true)
             cy.contains('Send søknaden').click()
-            cy.contains('Beklager, det oppstod en teknisk feil.').click()
+            cy.contains('Klikk her for å laste inn siden på nytt og prøv igjen.')
             cy.url().should(
                 'equal',
                 Cypress.config().baseUrl +
