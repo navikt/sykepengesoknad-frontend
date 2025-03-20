@@ -73,9 +73,15 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
     return (
         <>
             <div>
-                {skalHaInntektsbulletpoints && <Inntektsbulletpoints soknad={valgtSoknad} sporsmal={sporsmal} />}
-                {skalViseKjentOppholdstillatelse && <KjentOppholdstillatelse soknad={valgtSoknad} />}
-                {sporsmal.tag === 'NYTT_ARBEIDSFORHOLD_UNDERVEIS' && <NyttArbeidsforhold spm={sporsmal} />}
+                {skalHaInntektsbulletpoints && (
+                    <Inntektsbulletpoints key="inntekt-bulletpoints" soknad={valgtSoknad} sporsmal={sporsmal} />
+                )}
+                {skalViseKjentOppholdstillatelse && (
+                    <KjentOppholdstillatelse key="kjent-opphold" soknad={valgtSoknad} />
+                )}
+                {sporsmal.tag === 'NYTT_ARBEIDSFORHOLD_UNDERVEIS' && (
+                    <NyttArbeidsforhold key="nytt-arbeidsforhold" spm={sporsmal} />
+                )}
 
                 <Controller
                     name={sporsmal.id}
@@ -114,7 +120,7 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
                             <EkspanderbarHjelp sporsmal={sporsmal} key="ja-nei-stor-hjelp" />
                             {sporsmal.tag === 'YRKESSKADE_V2' && <Yrkesskadebulletpoints sporsmal={sporsmal} />}
 
-                            <JaNeiStyle>
+                            <JaNeiStyle key="ja-nei-stor-style">
                                 <Radio
                                     id={`${field.name}_0`}
                                     key={`${field.name}_0`}
