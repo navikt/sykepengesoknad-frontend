@@ -48,6 +48,9 @@ const AvbrytSoknadModal = () => {
     const { mutate: avbrytMutation, isPending: avbryter, error: avbrytError } = useAvbryt()
 
     const [aapen, setAapen] = useState<boolean>(false)
+    if (valgtSoknad?.soknadstype == 'FRISKMELDT_TIL_ARBEIDSFORMIDLING') {
+        return null
+    }
 
     if (valgtSoknad?.status == RSSoknadstatus.UTKAST_TIL_KORRIGERING) {
         return <AvbrytKorrigering />
