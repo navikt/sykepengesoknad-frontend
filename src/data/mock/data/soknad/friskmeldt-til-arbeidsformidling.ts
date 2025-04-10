@@ -70,11 +70,13 @@ export function nyFriskmeldtTilArbeidsformidling({
     tom,
     uuid,
     sisteSoknad,
+    nyttUnderspm,
 }: {
     fom: string
     tom: string
     uuid: string
     sisteSoknad: boolean
+    nyttUnderspm: boolean
 }) {
     return skapfriskmeldtTilArbeidsformidling({
         fom,
@@ -83,7 +85,7 @@ export function nyFriskmeldtTilArbeidsformidling({
         uuid,
         sporsmal: [
             ansvarserklaring(),
-            jobbsituasjonenDin({ fom, tom, sisteSoknad }),
+            jobbsituasjonenDin({ fom, tom, sisteSoknad, nyttUnderspm }),
             inntektUnderveis({ fom, tom }),
             reiseTilUtlandet({ fom, tom }),
             oppsummering(),
@@ -111,16 +113,20 @@ function fortsattArbeidssoker({
     medDatoSporsmal,
     fom,
     tom,
+    nyttUnderspm,
 }: {
     nyJobbUndersporsmal: boolean
     medDatoSporsmal: boolean
     fom: string
     tom: string
+    nyttUnderspm: boolean
 }): RSSporsmal {
     return {
         id: v4().toString(),
         tag: 'FTA_JOBBSITUASJONEN_DIN_FORTSATT_FRISKMELDT' + (nyJobbUndersporsmal ? '_NY_JOBB' : ''),
-        sporsmalstekst: 'Vil du fortsatt være friskmeldt til arbeidsformidling?',
+        sporsmalstekst: nyttUnderspm
+            ? 'Vil du fortsatt være registrert som arbeidssøker hos Nav?'
+            : 'Vil du fortsatt være friskmeldt til arbeidsformidling?',
         undertekst: nyJobbUndersporsmal
             ? 'Svar ja hvis du har begynt i en midlertidig jobb og fortsatt søker andre jobber'
             : null,
@@ -133,8 +139,13 @@ function fortsattArbeidssoker({
     }
 }
 
-export function jobbsituasjonenDin(opts: { fom: string; tom: string; sisteSoknad: boolean }): RSSporsmal {
-    const { fom, tom } = opts
+export function jobbsituasjonenDin(opts: {
+    fom: string
+    tom: string
+    sisteSoknad: boolean
+    nyttUnderspm: boolean
+}): RSSporsmal {
+    const { fom, tom, nyttUnderspm } = opts
 
     const periodeTekst = tilLesbarPeriodeMedArstall(dayjs(fom), dayjs(tom))
 
@@ -170,6 +181,7 @@ export function jobbsituasjonenDin(opts: { fom: string; tom: string; sisteSoknad
                 medDatoSporsmal: false,
                 fom,
                 tom,
+                nyttUnderspm,
             }),
         )
     }
@@ -192,6 +204,7 @@ export function jobbsituasjonenDin(opts: { fom: string; tom: string; sisteSoknad
                 medDatoSporsmal: true,
                 fom,
                 tom,
+                nyttUnderspm,
             }),
         )
     }
