@@ -42,7 +42,7 @@ export const sisteSoknadFriskmeldtTilArbeidsformidlingPersona: Persona = {
     beskrivelse: 'Siste søknad i vedtaksperiode om sykepenger grunnet friskmeldt til arbeidsformidling',
 }
 
-export const legazyFriskmeldtTilArbeidsformidlingPersona: Persona = {
+export const legacyFriskmeldtTilArbeidsformidlingPersona: Persona = {
     soknader: [
         nyFriskmeldtTilArbeidsformidling({
             fom: '2025-03-31',
@@ -51,6 +51,8 @@ export const legazyFriskmeldtTilArbeidsformidlingPersona: Persona = {
             sisteSoknad: false,
             nyttUnderspm: false,
         }),
+        deepcopyMedNyId(fremtidigFriskmeldtTilArbeidsformidling2, '3a5ca70f-d14c-4012-aaab-21dcaa019d55'),
+        deepcopyMedNyId(fremtidigFriskmeldtTilArbeidsformidling1, '3a5ca70f-d14c-4012-aaab-21dcaa019d66'),
     ],
     sykmeldinger: [],
     beskrivelse: 'Søknad om sykepenger grunnet friskmeldt til arbeidsformidling med gammelt underspørsmål',
