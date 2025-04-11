@@ -29,7 +29,10 @@ export const IntroGuideFriskmelding = () => {
                 registrert som arbeidssøker hos Nav og søke om sykepenger hver 14. dag.
             </BodyLong>
             <BodyShort>
-                Les mer om <Link href="https://www.nav.no/sykepenger">friskmelding til arbeidsformidling.</Link>
+                Les mer om{' '}
+                <Link href="https://www.nav.no/friskmelding-arbeidsformidling">
+                    friskmelding til arbeidsformidling.
+                </Link>
             </BodyShort>
         </GuidePanel>
     )
