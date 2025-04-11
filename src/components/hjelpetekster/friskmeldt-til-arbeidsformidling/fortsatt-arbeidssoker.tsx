@@ -11,6 +11,10 @@ export function FortsattArbeidssoker({ sporsmal, fieldValue }: { sporsmal: Spors
     const { watch, getValues } = useFormContext()
     watch() // Nå abonnerer vi på alle skjemaverdiene
 
+    // Logikken rundt gammel spørsmålstekst kan fjernes på sikt når alle disse er sendt inn
+    const gammelSporsmalstekst = sporsmal.sporsmalstekst == 'Vil du fortsatt være friskmeldt til arbeidsformidling?'
+
+    const nySporsmalstekst = sporsmal.sporsmalstekst == 'Vil du fortsatt være registrert som arbeidssøker hos Nav?'
     const { valgtSoknad, soknader } = useSoknadMedDetaljer()
     if (
         (sporsmal.tag == 'FTA_JOBBSITUASJONEN_DIN_FORTSATT_FRISKMELDT_NY_JOBB' ||
@@ -40,10 +44,26 @@ export function FortsattArbeidssoker({ sporsmal, fieldValue }: { sporsmal: Spors
         }
         return (
             <Alert variant="info" className="mt-4">
-                <BodyLong spacing>Du har svart at du fortsatt vil være friskmeldt til arbeidsformidling.</BodyLong>
-                <BodyLong>
-                    {`Da vil du også være registrert som arbeidssøker hos Nav i neste periode, altså ${nesteSoknadPeriodeTekst}.`}
-                </BodyLong>
+                {gammelSporsmalstekst && (
+                    <>
+                        <BodyLong spacing>
+                            Du har svart at du fortsatt vil være friskmeldt til arbeidsformidling.
+                        </BodyLong>
+                        <BodyLong>
+                            {`Da vil du også være registrert som arbeidssøker hos Nav i neste periode, altså ${nesteSoknadPeriodeTekst}.`}
+                        </BodyLong>
+                    </>
+                )}
+                {nySporsmalstekst && (
+                    <>
+                        <BodyLong spacing>
+                            Du har svart at du fortsatt vil være registrert som arbeidssøker hos Nav.
+                        </BodyLong>
+                        <BodyLong>
+                            {`Da vil du også være friskmeldt til arbeidsformidling i neste periode, altså ${nesteSoknadPeriodeTekst}.`}
+                        </BodyLong>
+                    </>
+                )}
             </Alert>
         )
     }
@@ -66,13 +86,26 @@ export function FortsattArbeidssoker({ sporsmal, fieldValue }: { sporsmal: Spors
         if (!formattertDatodato) return null
         return (
             <Alert variant="info" className="mt-4">
-                <BodyLong spacing>
-                    Du har svart at du har begynt i ny jobb og dermed ikke vil være friskmeldt til arbeidsformidling
-                    lenger.
-                </BodyLong>
-                <BodyLong>
-                    {`Da stanser vi sykepengene dine fra og med ${formattertDatodato}, og fjerner deg fra arbeidssøkerregisteret vårt.`}
-                </BodyLong>
+                {gammelSporsmalstekst && (
+                    <>
+                        <BodyLong spacing>
+                            Du har svart at du har begynt i ny jobb og dermed ikke vil være friskmeldt til
+                            arbeidsformidling lenger.
+                        </BodyLong>
+                        <BodyLong>
+                            {`Da stanser vi sykepengene dine fra og med ${formattertDatodato}, og fjerner deg fra arbeidssøkerregisteret vårt.`}
+                        </BodyLong>
+                    </>
+                )}
+                {nySporsmalstekst && (
+                    <>
+                        <BodyLong spacing>
+                            Du har svart at du har begynt i ny jobb og dermed ikke vil være registrert som arbeidssøker
+                            hos Nav lenger.
+                        </BodyLong>
+                        <BodyLong>{`Da stanser vi sykepengene dine fra og med ${formattertDatodato}.`}</BodyLong>
+                    </>
+                )}
             </Alert>
         )
     }
@@ -94,12 +127,27 @@ export function FortsattArbeidssoker({ sporsmal, fieldValue }: { sporsmal: Spors
         if (!formattertDatodato) return null
         return (
             <Alert variant="warning" className="mt-4">
-                <BodyLong spacing>Du har svart at du ikke vil være friskmeldt til arbeidsformidling lenger.</BodyLong>
-                <BodyLong>
-                    {`Da stanser vi sykepengene dine fra og med ${formattertDatodato}, og fjerner deg fra arbeidssøkerregisteret vårt.`}
-                </BodyLong>
+                {gammelSporsmalstekst && (
+                    <>
+                        <BodyLong spacing>
+                            Du har svart at du ikke vil være friskmeldt til arbeidsformidling lenger.
+                        </BodyLong>
+                        <BodyLong>
+                            {`Da stanser vi sykepengene dine fra og med ${formattertDatodato}, og fjerner deg fra arbeidssøkerregisteret vårt.`}
+                        </BodyLong>
+                    </>
+                )}
+                {nySporsmalstekst && (
+                    <>
+                        <BodyLong spacing>
+                            Du har svart at du ikke vil være registrert som arbeidssøker hos Nav lenger.
+                        </BodyLong>
+                        <BodyLong>{`Da stanser vi sykepengene dine fra og med ${formattertDatodato}.`}</BodyLong>
+                    </>
+                )}
             </Alert>
         )
     }
+
     return null
 }

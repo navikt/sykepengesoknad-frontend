@@ -2380,6 +2380,7 @@ export const veldigLangSoknad: RSSoknad = {
             fom: '2025-04-15',
             tom: '2025-04-28',
             sisteSoknad: false,
+            nyttUnderspm: true,
         }),
         inntektUnderveis({
             fom: '2025-04-15',
