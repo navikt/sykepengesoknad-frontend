@@ -8,7 +8,6 @@ import { useSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
 
 import Arbeidstaker from './arbeidstaker'
 import AlleAndre from './alle-andre'
-import { FriskmeldtTilArbeidsformidlingKvitteringInfo } from './innhold/FriskmeldtTilArbeidsformidlingKvitteringInfo'
 
 const Kvittering = () => {
     const { valgtSoknad } = useSoknadMedDetaljer()
@@ -22,9 +21,6 @@ const Kvittering = () => {
     return (
         <div data-cy="kvittering">
             {arbeidstakerKvittering ? <Arbeidstaker /> : <AlleAndre />}
-            {valgtSoknad.soknadstype == RSSoknadstype.FRISKMELDT_TIL_ARBEIDSFORMIDLING && (
-                <FriskmeldtTilArbeidsformidlingKvitteringInfo />
-            )}
             <Oppsummering />
 
             {valgtSoknad.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND &&
