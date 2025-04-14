@@ -63,7 +63,11 @@ test.describe('Friskmeldt til arbeidsformidling', () => {
         await harSynligTittel(page, 'Jobbsituasjonen din', 2)
         await svarRadioGruppe(page, /Begynte du i ny jobb i perioden/i, 'Nei')
         await svarRadioGruppe(page, /Vil du fortsatt være friskmeldt til arbeidsformidling?/i, 'Nei')
-        await page.getByRole('textbox', { name: 'Fra og med når' }).fill('08.04.2025')
+        await page
+            .getByRole('textbox', {
+                name: 'Fra hvilken dato vil du ikke lenger være friskmeldt til arbeidsformidling?',
+            })
+            .fill('08.04.2025')
 
         await harSynligTekst(
             page,
