@@ -14,6 +14,7 @@ import GridItems from '../grid-items'
 
 import { SendInntektsopplysningerForSelvstendigNæringsdrivende } from './SendInntektsopplysningerForSelvstendigNaringsdrivende'
 import { EttersendDokumenterForSelvstendigNaringsdrivende } from './EttersendDokumenterForSelvstendigNaringsdrivende'
+import { FriskmeldtTilArbeidsformidlingKvitteringInfo } from './FriskmeldtTilArbeidsformidlingKvitteringInfo'
 
 const KvitteringVidere = () => {
     const { valgtSoknad } = useSoknadMedDetaljer()
@@ -51,6 +52,9 @@ const KvitteringVidere = () => {
                 </Heading>
             </GridItems>
             <GridItems>
+                {valgtSoknad.soknadstype == RSSoknadstype.FRISKMELDT_TIL_ARBEIDSFORMIDLING && (
+                    <FriskmeldtTilArbeidsformidlingKvitteringInfo />
+                )}
                 <div className="mb-4">
                     <Label as="h2">{tekst('kvittering.nav-behandler-soknaden')}</Label>
                     <BodyLong as="span">{tekst('kvittering.arbeidstaker.saksbehandlingstid')} </BodyLong>

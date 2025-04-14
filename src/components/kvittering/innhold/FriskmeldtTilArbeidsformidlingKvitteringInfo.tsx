@@ -1,11 +1,9 @@
-import { BodyLong, Heading } from '@navikt/ds-react'
+import { BodyLong } from '@navikt/ds-react'
 import React from 'react'
 
-import GridItems from '../grid-items'
 import { harSvart, hentSvar } from '../../../utils/soknad-utils'
 import { useSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
 import { tilLesbarDatoMedArstall } from '../../../utils/dato-utils'
-import { KvtteringPanel } from '../kvittering-panel'
 import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype'
 
 export function FriskmeldtTilArbeidsformidlingKvitteringInfo() {
@@ -64,27 +62,29 @@ export function FriskmeldtTilArbeidsformidlingKvitteringInfo() {
 function DuErAvmeldt({ dato }: { dato: Date | string }) {
     const datoFormattert = tilLesbarDatoMedArstall(dato)
     return (
-        <KvtteringPanel className="mt-8 py-4 bg-bg-subtle rounded border-0">
-            <GridItems>
-                <Heading size="xsmall" level="3" className="mb-4">
-                    {`Du vil ikke lenger være friskmeldt til arbeidsformidling fra og med ${datoFormattert}. `}
-                </Heading>
-                <BodyLong>
-                    Da stanser vi sykepengene dine fra og med denne datoen, og fjerner deg fra arbeidssøkerregisteret
-                    vårt.
-                </BodyLong>
-            </GridItems>
-        </KvtteringPanel>
+        <MedAvsluttendeHr>
+            <BodyLong spacing>Du har nå sendt inn den siste søknaden for friskmeldt til arbeidsformidling.</BodyLong>
+            <BodyLong>
+                {`Fra og med ${datoFormattert} vil du ikke motta flere søknader og vi stanser sykepengene dine.`}
+            </BodyLong>
+        </MedAvsluttendeHr>
     )
 }
 
 function DuErFortsattRegistrertFremTil({ dato }: { dato: Date }) {
     const datoFormattert = tilLesbarDatoMedArstall(dato)
     return (
-        <KvtteringPanel className="mt-8 py-4 bg-blue-50 rounded border-0">
-            <GridItems>
-                <BodyLong>{`Du er friskmeldt til arbeidsformidling frem til ${datoFormattert}.`}</BodyLong>
-            </GridItems>
-        </KvtteringPanel>
+        <MedAvsluttendeHr>
+            <BodyLong>{`Du er friskmeldt til arbeidsformidling frem til ${datoFormattert}.`}</BodyLong>
+        </MedAvsluttendeHr>
+    )
+}
+
+function MedAvsluttendeHr({ children }: { children: React.ReactNode }) {
+    return (
+        <>
+            {children}
+            <hr className="my-10 border-gray-500" />
+        </>
     )
 }
