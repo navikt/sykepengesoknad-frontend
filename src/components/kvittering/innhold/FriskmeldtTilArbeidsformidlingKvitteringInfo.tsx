@@ -64,9 +64,7 @@ function DuErAvmeldt({ dato }: { dato: Date | string }) {
     return (
         <MedAvsluttendeHr>
             <BodyLong spacing>Du har nå sendt inn den siste søknaden for friskmeldt til arbeidsformidling.</BodyLong>
-            <BodyLong>
-                {`Fra og med ${datoFormattert} vil du ikke motta flere søknader og vi stanser sykepengene dine.`}
-            </BodyLong>
+            <BodyLong>{`Fra og med ${datoFormattert} stanser vi sykepengene dine.`}</BodyLong>
         </MedAvsluttendeHr>
     )
 }

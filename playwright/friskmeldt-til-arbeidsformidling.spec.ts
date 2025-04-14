@@ -54,10 +54,7 @@ test.describe('Friskmeldt til arbeidsformidling', () => {
         await harSynligTekst(page, /Da stanser vi sykepengene dine fra og med denne datoen./i)
         await fullforSoknad(page)
         await harSynligTekst(page, /Du har nå sendt inn den siste søknaden for friskmeldt til arbeidsformidling./i)
-        await harSynligTekst(
-            page,
-            /Fra og med 8. april 2025 vil du ikke motta flere søknader og vi stanser sykepengene dine./i,
-        )
+        await harSynligTekst(page, /Fra og med 8. april 2025 stanser vi sykepengene dine./i)
     })
 
     test('Jobbsituasjonen din - Nei - Nei', async ({ page }) => {
@@ -76,10 +73,7 @@ test.describe('Friskmeldt til arbeidsformidling', () => {
 
         await fullforSoknad(page)
         await harSynligTekst(page, /Du har nå sendt inn den siste søknaden for friskmeldt til arbeidsformidling./i)
-        await harSynligTekst(
-            page,
-            /Fra og med 8. april 2025 vil du ikke motta flere søknader og vi stanser sykepengene dine./i,
-        )
+        await harSynligTekst(page, /Fra og med 8. april 2025 stanser vi sykepengene dine./i)
     })
 
     test('Jobbsituasjonen din - Nei - Ja', async ({ page }) => {
@@ -105,10 +99,7 @@ test.describe('Friskmeldt til arbeidsformidling', () => {
         await page.getByRole('button', { name: 'Send søknaden' }).click()
         await harSynligTittel(page, 'Søknaden er sendt til NAV', 2)
         await harSynligTekst(page, /Du har nå sendt inn den siste søknaden for friskmeldt til arbeidsformidling./i)
-        await harSynligTekst(
-            page,
-            /Fra og med 13. april 2025 vil du ikke motta flere søknader og vi stanser sykepengene dine./i,
-        )
+        await harSynligTekst(page, /Fra og med 13. april 2025 stanser vi sykepengene dine./i)
     })
 
     async function fullforSoknad(page: Page) {

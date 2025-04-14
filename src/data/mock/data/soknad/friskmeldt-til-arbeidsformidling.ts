@@ -95,7 +95,7 @@ function fortsattArbeidssokerDato({ fom, tom }: { fom: string; tom: string }): R
     return {
         id: v4().toString(),
         tag: 'FTA_JOBBSITUASJONEN_DIN_FORTSATT_FRISKMELDT_AVREGISTRERT_NAR',
-        sporsmalstekst: 'Fra og med når?',
+        sporsmalstekst: 'Fra hvilken dato vil du ikke lenger være friskmeldt til arbeidsformidling?',
         undertekst: 'Du vil ikke få utbetalt sykepenger fra og med denne datoen',
         svartype: 'DATO',
         min: fom,
