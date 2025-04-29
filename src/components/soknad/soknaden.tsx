@@ -19,8 +19,6 @@ import { SkeletonSporsmalForm } from '../sporsmal/sporsmal-form/skeleton-sporsma
 import { FeilStateView } from '../feil/refresh-hvis-feil-state'
 import { erSisteSide } from '../sporsmal/sporsmal-utils'
 import { Tilbake } from '../sporsmal/tilbake-knapp/tilbake'
-import { SelvstendingSurveyModal } from '../flexjar/selvstending-survey'
-import { skjulFlexjarSurvey } from '../flexjar/utils'
 import { Introside } from '../soknad-intro/introside'
 
 import { urlTilSoknad } from './soknad-link'
@@ -31,10 +29,6 @@ export const Soknaden = () => {
     const router = useRouter()
     const { erUtenlandssoknad, stegId, stegNo, valgtSoknad, soknader, sykmeldinger, spmIndex, valgtSoknadError } =
         useSoknadMedDetaljer()
-    const [visSurvey, setVisSurvey] = useState(router.query.visSurvey === 'true')
-    useEffect(() => {
-        setVisSurvey(router.query.visSurvey === 'true')
-    }, [router.query.visSurvey])
 
     useUpdateBreadcrumbs(() => [{ ...soknadBreadcrumb, handleInApp: true }], [])
 
@@ -141,14 +135,6 @@ export const Soknaden = () => {
                 sporsmal?.tag == 'ARBEID_UNDERVEIS_100_PROSENT') && (
                 <FlexjarSporsmal soknad={valgtSoknad} sporsmal={sporsmal} steg={stegNo} />
             )}
-            <SelvstendingSurveyModal
-                visSurvey={visSurvey}
-                onSubmit={() => {
-                    skjulFlexjarSurvey(router).then(() => {
-                        setVisSurvey(false)
-                    })
-                }}
-            ></SelvstendingSurveyModal>
         </>
     )
 }

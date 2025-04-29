@@ -9,8 +9,6 @@ import {
     svarNeiHovedsporsmal,
     svarRadioSporsmal,
     modalIkkeAktiv,
-    svarFritekst,
-    modalAktiv,
     sjekkMainContentFokus,
 } from '../../support/utilities'
 
@@ -41,7 +39,6 @@ describe('Tester selvstendig naringsdrivende søknad med data fra Sigrun', () =>
         fellesInnholdEtterVisningAvSigrunData()
 
         klikkGaVidere(false, true)
-        cy.contains('Jeg vil ikke gi tilbakemelding').click()
         sjekkMainContentFokus()
     })
     tilSlutt()
@@ -77,16 +74,8 @@ describe('Tester selvstendig naringsdrivende søknad uten data fra Sigrun', () =
         klikkGaVidere(true)
     })
 
-    it('svar på flexjar survey', () => {
+    it('Viser ikke FlexJar Survey', () => {
         cy.url().should('include', 'visSurvey=true')
-        modalAktiv()
-        cy.contains('Var noen av spørsmålene vi stilte om virksomheten din vanskelige å svare på?')
-        cy.findByRole('button', { name: 'Ja' }).click()
-        cy.findByRole('checkbox', { name: 'Annet' }).click()
-        svarFritekst('Vil du foreslå en forbedring? (valgfritt)', 'Har kontroll på alt')
-        cy.contains('Send tilbakemelding').click()
-        cy.findByRole('button', { name: 'Lukk vindu' }).click()
-
         modalIkkeAktiv()
     })
 
