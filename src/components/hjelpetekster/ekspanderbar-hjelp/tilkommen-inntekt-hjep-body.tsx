@@ -6,7 +6,8 @@ export const TilkommenInntektHjelpBody = () => {
         <>
             <BodyShort spacing>
                 Sykepengene skal erstatte inntektstapet ditt, derfor må vi vite all inntekten du har så utregningen blir
-                riktig. Det nye arbeidsforhold har vi fått via Arbeidsgiver- og arbeidstakerregisteret (Aa-registeret).{' '}
+                riktig. Det nye arbeidsforhold har vi fått via Arbeidsgiver- og arbeidstakerregisteret
+                (Aa-registeret).{' '}
             </BodyShort>
         </>
     )
