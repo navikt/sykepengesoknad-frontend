@@ -34,7 +34,7 @@
         "prom-client": "^15.1.3",
         "react": "^19.1.0",
         "react-dom": "^19.1.0",
-        "react-hook-form": "^7.55.0",
+        "react-hook-form": "^7.56.3",
         "remeda": "^2.21.3",
         "tailwind-merge": "^2.6.0",
         "uuid": "^11.1.0"
