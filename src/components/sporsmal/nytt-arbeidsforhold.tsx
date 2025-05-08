@@ -19,7 +19,7 @@ export const NyttArbeidsforhold = ({ spm }: { spm: Sporsmal }) => {
 
 function GraaBoks(props: { tekst: string }) {
     return (
-        <Label as="p" className="bg-bg-subtle p-4 mb-10 rounded inline-block">
+        <Label as="p" className="bg-bg-subtle p-4 mb-10 rounded-sm inline-block">
             {props.tekst}
         </Label>
     )

@@ -10,7 +10,7 @@ export const SkeletonSporsmalForm = () => {
         // Checkboxpanel
         return (
             <>
-                <Skeleton variant="rectangle" className="rounded" height="131px"></Skeleton>
+                <Skeleton variant="rectangle" className="rounded-sm" height="131px"></Skeleton>
                 <div className="my-8">
                     <Button as={Skeleton} variant="primary" type="submit" className="mb-12 mt-6 inline-flex">
                         Gå videre
@@ -32,8 +32,8 @@ export const SkeletonSporsmalForm = () => {
                 En placeholder for lengden på et typisk spørsmål. Litt mer
             </Label>
             <Skeleton className="mb-8 mt-4" variant="rectangle" height="32px" width="172px"></Skeleton>
-            <Skeleton className="mb-4 rounded md:w-1/2" height="60px" variant="rectangle" />
-            <Skeleton className="mb-4 rounded md:w-1/2" height="60px" variant="rectangle" />
+            <Skeleton className="mb-4 rounded-sm md:w-1/2" height="60px" variant="rectangle" />
+            <Skeleton className="mb-4 rounded-sm md:w-1/2" height="60px" variant="rectangle" />
             <div className="my-8">
                 <Button as={Skeleton} variant="primary" type="submit" className="mb-12 mt-14 flex">
                     Gå videre

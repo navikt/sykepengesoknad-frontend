@@ -12,7 +12,7 @@ interface EksempelKalenderProps {
 
 const EksempelFrist = ({ normalTekst, boldTekst, mndEn, mndTo, mndTre, mndFire }: EksempelKalenderProps) => {
     return (
-        <div className="my-2 rounded bg-gray-100 p-4" aria-hidden>
+        <div className="my-2 rounded-sm bg-gray-100 p-4" aria-hidden>
             <BodyShort spacing>
                 {normalTekst}
                 <strong>{boldTekst}</strong>
