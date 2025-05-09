@@ -7,7 +7,7 @@ import { SpmProps } from '../sporsmal-form/sporsmal-form'
 const IkkeRelevant = ({ sporsmal }: SpmProps) => {
     if (sporsmal.tag.includes('KJENTE_INNTEKTSKILDER_GRUPPE_TITTEL')) {
         return (
-            <Heading size="medium" level="3" className="p-4 bg-gray-100 rounded">
+            <Heading size="medium" level="3" className="p-4 bg-gray-100 rounded-sm">
                 {sporsmal.sporsmalstekst}
             </Heading>
         )

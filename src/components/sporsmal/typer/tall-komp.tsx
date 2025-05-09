@@ -95,7 +95,7 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
                         : sporsmal.sporsmalstekst
                 }
                 description={description()}
-                className="[&>input]:md:w-1/2"
+                className="md:[&>input]:w-1/2"
                 type="text"
                 id={sporsmal.id}
                 min={sporsmal.min!}
