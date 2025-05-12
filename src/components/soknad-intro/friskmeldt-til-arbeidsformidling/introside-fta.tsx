@@ -9,19 +9,6 @@ export function IntrosideFta() {
     return (
         <>
             <IntroGuideFriskmelding />
-            <Alert variant="info" className="mb-8">
-                <Heading size="small" level="2" spacing>
-                    Ny søknad erstatter meldekort
-                </Heading>
-                <BodyLong spacing>
-                    Dette er den nye søknaden for deg som er friskmeldt til arbeidsformidling. Den erstatter de
-                    tidligere meldekortene, som nå fases ut.
-                </BodyLong>
-                <BodyLong>
-                    Du må fortsatt søke om sykepenger hver 14. dag og vil få beskjed fra Nav når søknaden for hver
-                    periode er klar til å fylles ut.
-                </BodyLong>
-            </Alert>
             <Heading size="small" level="2" spacing>
                 Før du søker
             </Heading>
