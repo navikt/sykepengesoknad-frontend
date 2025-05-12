@@ -1,5 +1,5 @@
 import React from 'react'
-import { Accordion, Alert, BodyLong, Heading, Link } from '@navikt/ds-react'
+import { Accordion, BodyLong, Heading, Link } from '@navikt/ds-react'
 
 import { lagrerUnderveisTekst, lagrerUnderveisTittel } from '../intro-accordion'
 import { huskAaSokeTekst } from '../for-du-soker'
