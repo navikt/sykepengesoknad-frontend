@@ -22,8 +22,11 @@ test.describe('Friskmeldt til arbeidsformidling', () => {
     })
     test('Har egen introside', async ({ page }) => {
         await harSynligTittel(page, 'Søknad om sykepenger', 1)
-        await harSynligTittel(page, 'Ny søknad erstatter meldekort', 2)
-        await harSynligTekst(page, /Dette er den nye søknaden for deg som er friskmeldt til arbeidsformidling/i)
+        await harSynligTittel(page, 'Før du søker', 2)
+        await harSynligTekst(
+            page,
+            /Med friskmelding til arbeidsformidling kan du få sykepenger mens du ser etter ny jobb/i,
+        )
         await page.getByRole('button', { name: 'For deg som studerer' }).click()
         await harSynligTekst(page, /I utgangspunktet får du ikke sykepenger mens du studerer/i)
     })
