@@ -23,9 +23,9 @@ export const brukertestSoknad = skapSoknad({
     soknadId: '963e816f-7b3c-4513-818b-95595d84dd91',
 })
 
-export const brukertest: Persona = {
+export const brukertestPerosn: Persona = {
     soknader: [brukertestSoknad],
     sykmeldinger: [brukertestSykmelding],
     kontonummer: '12340000000',
-    beskrivelse: 'Brukertest',
+    beskrivelse: 'Søknad for brukertest',
 }

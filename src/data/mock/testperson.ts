@@ -2,7 +2,7 @@ import { logger } from '@navikt/next-logger'
 
 import { jsonDeepCopy } from '../../utils/json-deep-copy'
 
-import { brukertest } from './data/personas/brukertest'
+import { brukertestPerosn } from './data/personas/brukertestPerosn'
 import { eldreUsendtSoknad, flereEldreUsendteSoknader } from './data/personas/eldre-usendt-soknad'
 import { reisetilskuddTestPerson } from './data/personas/reisetilskuddTestPerson'
 import { enUsendtSykmelding, toUsendteSykmeldinger } from './data/usendte-sykmeldinger'
@@ -14,42 +14,42 @@ import {
     clsPerson,
     fremtidigPerson,
     frilanserPerson,
-    får400vedSendSoknad,
-    får403vedGetSoknad,
-    får404vedPutOgGetSoknad,
-    får500vedSendSoknad,
-    gammelOppsummering,
-    harIkkeKontonummer,
-    harKontonummer,
-    integration,
+    http400vedSendSoknad,
+    http403vedGetSoknad,
+    http404vedPutOgGetSoknad,
+    http500vedSendSoknad,
+    gammelOppsummeringPerson,
+    harIkkeKontonummerPerson,
+    harKontonummerPerson,
+    integrasjonstestPerson,
     julesoknadPerson,
-    kunUtgattSoknad,
+    kunUtgattSoknadPerson,
     over70,
     Persona,
     reisetilskuddPerson,
     tilbakedateringer,
-    utenData,
+    utenDataPerson,
     utlandPerson,
 } from './data/personas/personas'
-import { utenlandskSykmelding } from './data/utenlandsk-sykmelding'
+import { utenlandskSykmeldingPerson } from './data/utenlandsk-sykmelding-person'
 import { yrkesskadePerson, yrkesskadeV2Person } from './data/yrkesskade'
 import { egenmeldingSykmeldingaPerson } from './data/personas/egenmeldingsdager-i-sykmeldingen'
 import {
-    selvstendigNaringsdrivende,
-    selvstendigNaringsdrivendeSendt,
-    selvstendigNaringsdrivendeUtenSigrun,
+    selvstendigNaringsdrivendePerson,
+    selvstendigNaringsdrivendeSendtPerson,
+    selvstendigNaringsdrivendeUtenSigrunPerson,
 } from './data/personas/naringsdrivende'
 import { korrigeringsfristUtloptPerson } from './data/personas/korrigeringsfrist-utlopt'
 import { medlemskapPerson } from './data/personas/medlemskap'
 import { fiskePerson } from './data/personas/fisker'
 import { kjenteInntektskilderPerson } from './data/personas/kjente-inntektskilder'
-import { innenforAgPerioden } from './data/personas/innenfor-ag-periode'
-import { oppholdUtenforEOS } from './data/personas/opphold-utenfor-eos'
-import { nyttArbeidsforhold } from './data/personas/nytt-arbeidsforhold'
+import { innenforArbeidsgiverPeriodenPerson } from './data/personas/innenfor-ag-periode'
+import { oppholdUtenforEosPerson } from './data/personas/opphold-utenfor-eos-person'
+import { nyttArbeidsforholdPerson } from './data/personas/nytt-arbeidsforhold'
 import {
-    fremtidigeFriskmeldtTilArbeidsformidling,
-    friskmeldtTilArbeidsformidlingPersona,
-    sisteSoknadFriskmeldtTilArbeidsformidlingPersona,
+    fremtidigeFriskTilArbeidPerson,
+    friskTilArbeidPerson,
+    sisteSoknadFriskTilArbeidPerson,
 } from './data/personas/friskmeldt-til-arbeidsformidling'
 
 type PersonaKey =
@@ -108,8 +108,8 @@ export type PersonaGroupKey =
     | 'medlemskap-sporsmal'
     | 'arbeidstaker-julesoknad'
     | 'testing'
-    | 'Nytt arbeidsforhold'
     | 'friskmeldt-til-arbeidsformidling'
+    | 'selvstendig-naringsdrivende'
 type PersonaGroup = Record<PersonaGroupKey, PersonaData>
 
 export function testpersoner(): PersonaData {
@@ -126,60 +126,60 @@ export function testpersonerGruppert(): PersonaGroup {
             ['arbeidstaker']: jsonDeepCopy(arbeidstakerPerson),
             ['arbeidstaker-gradert']: jsonDeepCopy(arbeidstakerGradertPerson),
             ['arbeidsledig']: jsonDeepCopy(arbeidsledigPerson),
-            ['selvstendig-naringsdrivende']: jsonDeepCopy(selvstendigNaringsdrivende),
-            ['selvstendig-naringsdrivende-uten-sigrun']: jsonDeepCopy(selvstendigNaringsdrivendeUtenSigrun),
-            ['selvstendig-naringsdrivende-sendt']: jsonDeepCopy(selvstendigNaringsdrivendeSendt),
             ['frilanser']: jsonDeepCopy(frilanserPerson),
             ['fisker']: jsonDeepCopy(fiskePerson),
             ['behandlingsdager']: jsonDeepCopy(behandlingsdagerPerson),
             ['reisetilskudd']: jsonDeepCopy(reisetilskuddPerson),
             ['bare-utland']: jsonDeepCopy(utlandPerson),
             ['fremtidig']: jsonDeepCopy(fremtidigPerson),
-            ['uten-data']: jsonDeepCopy(utenData),
-            ['innenfor-arbeidsgiver-perioden']: jsonDeepCopy(innenforAgPerioden),
+            ['uten-data']: jsonDeepCopy(utenDataPerson),
+            ['innenfor-arbeidsgiver-perioden']: jsonDeepCopy(innenforArbeidsgiverPeriodenPerson),
+            ['nytt-arbeidsforhold']: jsonDeepCopy(nyttArbeidsforholdPerson),
         },
         ['soknad-sporsmal']: {
-            ['opphold-utenfor-eos']: jsonDeepCopy(oppholdUtenforEOS),
+            ['opphold-utenfor-eos']: jsonDeepCopy(oppholdUtenforEosPerson),
             ['kjente-inntektskilder']: jsonDeepCopy(kjenteInntektskilderPerson),
             ['yrkesskade']: jsonDeepCopy(yrkesskadePerson),
             ['yrkesskade-v2']: jsonDeepCopy(yrkesskadeV2Person),
-            ['utenlandsk-sykmelding']: jsonDeepCopy(utenlandskSykmelding),
-            ['brukertest']: jsonDeepCopy(brukertest),
+            ['utenlandsk-sykmelding']: jsonDeepCopy(utenlandskSykmeldingPerson),
             ['sykmelding-med-egenmeldingsdager']: jsonDeepCopy(egenmeldingSykmeldingaPerson),
         },
         ['medlemskap-sporsmal']: {
             ['medlemskap']: jsonDeepCopy(medlemskapPerson),
         },
+        ['selvstendig-naringsdrivende']: {
+            ['selvstendig-naringsdrivende']: jsonDeepCopy(selvstendigNaringsdrivendePerson),
+            ['selvstendig-naringsdrivende-uten-sigrun']: jsonDeepCopy(selvstendigNaringsdrivendeUtenSigrunPerson),
+            ['selvstendig-naringsdrivende-sendt']: jsonDeepCopy(selvstendigNaringsdrivendeSendtPerson),
+        },
         ['friskmeldt-til-arbeidsformidling']: {
-            ['fta-to-fremtidige']: jsonDeepCopy(fremtidigeFriskmeldtTilArbeidsformidling),
-            ['fta-en-ny']: jsonDeepCopy(friskmeldtTilArbeidsformidlingPersona),
-            ['fta-siste']: jsonDeepCopy(sisteSoknadFriskmeldtTilArbeidsformidlingPersona),
+            ['fta-to-fremtidige']: jsonDeepCopy(fremtidigeFriskTilArbeidPerson),
+            ['fta-en-ny']: jsonDeepCopy(friskTilArbeidPerson),
+            ['fta-siste']: jsonDeepCopy(sisteSoknadFriskTilArbeidPerson),
         },
         ['arbeidstaker-julesoknad']: {
             ['julesoknad']: jsonDeepCopy(julesoknadPerson),
         },
-        ['Nytt arbeidsforhold']: {
-            ['nytt-arbeidsforhold']: jsonDeepCopy(nyttArbeidsforhold),
-        },
         ['testing']: {
+            ['brukertest']: jsonDeepCopy(brukertestPerosn),
             ['over-70']: over70(),
             ['korrigeringsfrist-utlopt']: jsonDeepCopy(korrigeringsfristUtloptPerson),
-            ['har-kontonummer']: jsonDeepCopy(harKontonummer),
-            ['har-ikke-kontonummer']: jsonDeepCopy(harIkkeKontonummer),
+            ['har-kontonummer']: jsonDeepCopy(harKontonummerPerson),
+            ['har-ikke-kontonummer']: jsonDeepCopy(harIkkeKontonummerPerson),
             ['tilbakedateringer']: jsonDeepCopy(tilbakedateringer()),
             ['reisetilskudd-test']: jsonDeepCopy(reisetilskuddTestPerson),
             ['en-usendt-sykmelding']: jsonDeepCopy(enUsendtSykmelding),
             ['to-usendte-sykmeldinger']: jsonDeepCopy(toUsendteSykmeldinger),
             ['en-eldre-usendt-soknad']: jsonDeepCopy(eldreUsendtSoknad),
             ['to-eldre-usendte-soknader']: jsonDeepCopy(flereEldreUsendteSoknader),
-            ['http-400-ved-send-soknad']: jsonDeepCopy(får400vedSendSoknad),
-            ['http-403-ved-get-soknad']: jsonDeepCopy(får403vedGetSoknad),
-            ['http-404-ved-put-soknad']: jsonDeepCopy(får404vedPutOgGetSoknad),
-            ['http-500-ved-send-soknad']: jsonDeepCopy(får500vedSendSoknad),
+            ['http-400-ved-send-soknad']: jsonDeepCopy(http400vedSendSoknad),
+            ['http-403-ved-get-soknad']: jsonDeepCopy(http403vedGetSoknad),
+            ['http-404-ved-put-soknad']: jsonDeepCopy(http404vedPutOgGetSoknad),
+            ['http-500-ved-send-soknad']: jsonDeepCopy(http500vedSendSoknad),
             ['cummulative-layout-shift']: jsonDeepCopy(clsPerson),
-            ['integrasjon-soknader']: jsonDeepCopy(integration),
-            ['gammel-oppsummering']: jsonDeepCopy(gammelOppsummering),
-            ['utgatt']: jsonDeepCopy(kunUtgattSoknad),
+            ['integrasjon-soknader']: jsonDeepCopy(integrasjonstestPerson),
+            ['gammel-oppsummering']: jsonDeepCopy(gammelOppsummeringPerson),
+            ['utgatt']: jsonDeepCopy(kunUtgattSoknadPerson),
         },
     }
 
