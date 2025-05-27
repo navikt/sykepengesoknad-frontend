@@ -2,7 +2,7 @@ import { deepcopyMedNyId } from '../../deepcopyMedNyId'
 import { kjenteInntektskilder } from '../sporsmal/kjente-inntektskilder'
 
 import { Persona } from './personas'
-import { brukertestSoknad, brukertestSykmelding } from './brukertest'
+import { brukertestSoknad, brukertestSykmelding } from './brukertestPerosn'
 
 const soknad = deepcopyMedNyId(brukertestSoknad, '7fdc72b9-30a9-435c-9eb1-f7cc68a8b444')
 

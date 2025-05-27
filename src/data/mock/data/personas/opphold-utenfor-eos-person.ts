@@ -5,12 +5,12 @@ import { frilanserMedNyOppholdUtenfoeEOSSporsmal } from '../soknad/frilanser'
 
 import { Persona } from './personas'
 
-export const oppholdUtenforEOS: Persona = {
+export const oppholdUtenforEosPerson: Persona = {
     soknader: [
         arbeidstakerMedGammelEOSSporsmal,
         arbeidsledigMedNyOppholdUtenforESSporsmal,
         frilanserMedNyOppholdUtenfoeEOSSporsmal,
     ],
     sykmeldinger: sykmeldinger,
-    beskrivelse: 'Opphold utenfor eøs',
+    beskrivelse: 'Opphold utenfor EØS',
 }

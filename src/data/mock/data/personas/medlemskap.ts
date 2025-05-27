@@ -8,7 +8,7 @@ import {
 } from '../sporsmal/medlemskap'
 
 import { Persona } from './personas'
-import { brukertestSoknad, brukertestSykmelding } from './brukertest'
+import { brukertestSoknad, brukertestSykmelding } from './brukertestPerosn'
 
 const medlemskapOriginalOppholdstillatelse = deepcopyMedNyId(brukertestSoknad, '7fdc72b9-30a9-435c-9eb1-f7cc68a8b429')
 const oppholdUtlandSpm = medlemskapOriginalOppholdstillatelse.sporsmal.find(
@@ -75,5 +75,5 @@ export const medlemskapPerson: Persona = {
     ],
     sykmeldinger: [brukertestSykmelding],
     kontonummer: '12340000000',
-    beskrivelse: 'Person med søknader med forskjellig spørsmål om medlemskap',
+    beskrivelse: 'Søknader med forskjellig spørsmål om medlemskap',
 }

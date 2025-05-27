@@ -128,6 +128,9 @@ function PersonGruppeVisning({ gruppe, personer }: { gruppe: PersonaGroupKey; pe
             case 'friskmeldt-til-arbeidsformidling': {
                 return 'Friskmeldt til arbeidsformidling'
             }
+            case 'selvstendig-naringsdrivende': {
+                return 'Selvstendig Næringsdrivende'
+            }
             default: {
                 return gruppe
             }

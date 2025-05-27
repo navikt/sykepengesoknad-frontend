@@ -7,12 +7,12 @@ import { deepcopyMedNyId } from '../../deepcopyMedNyId'
 
 import { Persona } from './personas'
 
-export const fremtidigeFriskmeldtTilArbeidsformidling: Persona = {
+export const fremtidigeFriskTilArbeidPerson: Persona = {
     soknader: [fremtidigFriskmeldtTilArbeidsformidling1, fremtidigFriskmeldtTilArbeidsformidling2],
     sykmeldinger: [],
     beskrivelse: 'To fremtidige friskmeldt til arbeidsformidling søknader',
 }
-export const friskmeldtTilArbeidsformidlingPersona: Persona = {
+export const friskTilArbeidPerson: Persona = {
     soknader: [
         nyFriskmeldtTilArbeidsformidling({
             fom: '2025-03-31',
@@ -27,7 +27,7 @@ export const friskmeldtTilArbeidsformidlingPersona: Persona = {
     beskrivelse: 'Søknad om sykepenger grunnet friskmeldt til arbeidsformidling',
 }
 
-export const sisteSoknadFriskmeldtTilArbeidsformidlingPersona: Persona = {
+export const sisteSoknadFriskTilArbeidPerson: Persona = {
     soknader: [
         nyFriskmeldtTilArbeidsformidling({
             fom: '2025-03-31',

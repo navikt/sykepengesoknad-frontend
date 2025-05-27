@@ -21,7 +21,7 @@ export const soknadInnenforArbeidsgiverperioden = skapSoknad({
     soknadId: '73f690c5-5b80-45bd-a270-179f5241ee60',
 })
 
-export const innenforAgPerioden: Persona = {
+export const innenforArbeidsgiverPeriodenPerson: Persona = {
     soknader: [soknadInnenforArbeidsgiverperioden],
     sykmeldinger: [sykmelding],
     beskrivelse: 'Kort søknad innenfor arbeidsgiverperioden',
