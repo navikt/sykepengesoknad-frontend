@@ -3,7 +3,7 @@
 # tools
 .idea
 *.iml
-
+mise.toml
 # dependencies
 /node_modules
 /.pnp
