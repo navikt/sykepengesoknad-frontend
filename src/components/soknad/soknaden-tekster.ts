@@ -120,6 +120,10 @@ const SoknadenTekster = {
 
     'sykepengesoknad.inntektsopplysninger_drift_virksomheten.tittel': 'Virksomheten din',
     'sykepengesoknad.inntektsopplysninger_virksomheten_avviklet.tittel': 'Virksomheten din',
+
+    'sykepengesoknad.naringsdrivende_virksomheten_din.tittel': 'Virksomheten din',
+    'sykepengesoknad.naringsdrivende_ny_i_arbeidslivet.tittel': 'Ny i arbeidslivet',
+    'sykepengesoknad.naringsdrivende_varig_endring.tittel': 'Endringer i arbeidsituasjonen din',
 }
 
 export default SoknadenTekster
