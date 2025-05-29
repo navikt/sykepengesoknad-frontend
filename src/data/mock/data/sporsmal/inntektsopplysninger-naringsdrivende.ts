@@ -219,7 +219,7 @@ export const inntektsopplysningerLegacy: RSSporsmal = {
     ],
 }
 
-export const inntektsopplysningerUtenSigrunData: RSSporsmal = {
+export const inntektsopplysningerNaringsdrivende: RSSporsmal = {
     id: v4().toString(),
     tag: 'INNTEKTSOPPLYSNINGER_VIRKSOMHETEN_AVVIKLET',
     sporsmalstekst: 'Har du avviklet virksomheten din før du ble sykmeldt?',

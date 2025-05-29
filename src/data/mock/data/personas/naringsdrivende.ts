@@ -5,11 +5,11 @@ import { RSSporsmal } from '../../../../types/rs-types/rs-sporsmal'
 import { RSSoknad } from '../../../../types/rs-types/rs-soknad'
 import {
     inntektsopplysningerMedSigrunData,
-    inntektsopplysningerUtenSigrunData,
+    inntektsopplysningerNaringsdrivende,
     virksomhetenDin1,
     virksomhetenDin2,
     virksomhetenDin3,
-} from '../sporsmal/inntektsopplysningerUtenSigrunData'
+} from '../sporsmal/inntektsopplysninger-naringsdrivende'
 
 import { Persona } from './personas'
 
@@ -18,7 +18,7 @@ const soknadMedSigrunData = lagSoknadMedInntektsopplysninger('bd6f6207-3888-4210
 ])
 
 const soknadUtenSigrunData = lagSoknadMedInntektsopplysninger('2faff926-5261-42e5-927b-02e4aa44a7ad', [
-    inntektsopplysningerUtenSigrunData,
+    inntektsopplysningerNaringsdrivende,
 ])
 
 export const selvstendigNaringsdrivendePerson: Persona = {
