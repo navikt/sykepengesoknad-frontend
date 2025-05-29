@@ -38,6 +38,7 @@ import {
     selvstendigNaringsdrivendePerson,
     selvstendigNaringsdrivendeSendtPerson,
     selvstendigNaringsdrivendeUtenSigrunPerson,
+    selvstendigNaringsdrivendeVirksomhetenDinPerson,
 } from './data/personas/naringsdrivende'
 import { korrigeringsfristUtloptPerson } from './data/personas/korrigeringsfrist-utlopt'
 import { medlemskapPerson } from './data/personas/medlemskap'
@@ -92,6 +93,7 @@ type PersonaKey =
     | 'tilbakedateringer'
     | 'nytt-arbeidsforhold'
     | 'selvstendig-naringsdrivende-sendt'
+    | 'selvstendig-naringsdrivende-virksomheten-din'
     | 'innenfor-arbeidsgiver-perioden'
     | 'gammel-oppsummering'
     | 'utgatt'
@@ -151,6 +153,9 @@ export function testpersonerGruppert(): PersonaGroup {
             ['selvstendig-naringsdrivende']: jsonDeepCopy(selvstendigNaringsdrivendePerson),
             ['selvstendig-naringsdrivende-uten-sigrun']: jsonDeepCopy(selvstendigNaringsdrivendeUtenSigrunPerson),
             ['selvstendig-naringsdrivende-sendt']: jsonDeepCopy(selvstendigNaringsdrivendeSendtPerson),
+            ['selvstendig-naringsdrivende-virksomheten-din']: jsonDeepCopy(
+                selvstendigNaringsdrivendeVirksomhetenDinPerson,
+            ),
         },
         ['friskmeldt-til-arbeidsformidling']: {
             ['fta-to-fremtidige']: jsonDeepCopy(fremtidigeFriskTilArbeidPerson),
