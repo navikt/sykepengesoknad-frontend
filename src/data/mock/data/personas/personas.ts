@@ -204,5 +204,5 @@ export function tilbakedateringer(): Persona {
 export const julesoknadPerson: Persona = {
     soknader: [deepcopyMedNyId(arbeidstakerJulesoknad, '343a0419-5d44-4ce8-afad-015c151a2382')],
     sykmeldinger: [julesoknadSykmelding],
-    beskrivelse: 'Søkander for testing av Julesøknader',
+    beskrivelse: 'Testing av Julesøknad',
 }
