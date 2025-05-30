@@ -1,7 +1,20 @@
 import { Page } from '@playwright/test'
 
 import { test } from './fixtures'
-import { checkViStolerPaDeg, fjernAnimasjoner, harSynligTekst, harSynligTittel, neiOgVidere } from './utilities'
+import {
+    checkViStolerPaDeg,
+    fjernAnimasjoner,
+    harSynligTekst,
+    harSynligTittel,
+    klikkGaVidere,
+    neiOgVidere,
+} from './utilities'
+
+export async function sendSoknad(page: Page) {
+    await harSynligTittel(page, 'Oppsummering fra søknaden', 2)
+    await page.getByRole('button', { name: 'Send søknaden' }).click()
+    await harSynligTekst(page, 'Søknaden er sendt til NAV')
+}
 
 test.describe('Selvstendig næringsdrivende - Virksomheten din', () => {
     const baseUrl = 'http://localhost:3000/syk/sykepengesoknad/soknader/ffa7c5d2-4766-4450-a521-3ecc5842d015'
@@ -32,15 +45,33 @@ test.describe('Selvstendig næringsdrivende - Virksomheten din', () => {
         await neiOgVidere(page, ['Virksomheten din'])
         await neiOgVidere(page, ['Ny i arbeidslivet'])
         await neiOgVidere(page, ['Endringer i arbeidsituasjonen din'])
-
-        await harSynligTittel(page, 'Oppsummering fra søknaden', 2)
-        await page.getByRole('button', { name: 'Send søknaden' }).click()
-        await harSynligTekst(page, 'Søknaden er sendt til NAV')
+        await sendSoknad(page)
     })
 
     test('Virksomheten din', async ({ page }) => {
         await goToPage(page, 7)
-        await harSynligTittel(page, 'Virksomheten Din', 2)
+        await harSynligTittel(page, 'Virksomheten din', 2)
+
+        await page.getByRole('button', { name: 'Spørsmålet forklart' }).click()
+        await harSynligTekst(
+            page,
+            'Hvis du avviklet virksomheten din før du ble sykmeldt, har du ikke rett til sykepenger som selvstendig næringsdrivende',
+        )
+
+        await page.getByRole('radio', { name: 'Ja' }).click()
+        await harSynligTekst(page, 'Når avviklet du virksomheten din?')
+
+        const dateInput = page.getByLabel('Når avviklet du virksomheten din?')
+        await dateInput.fill('01.01.2025')
+        await klikkGaVidere(page)
+
+        await neiOgVidere(page, ['Ny i arbeidslivet'])
+        await neiOgVidere(page, ['Endringer i arbeidsituasjonen din'])
+
+        await sendSoknad(page)
+
+        await harSynligTekst(page, 'Når avviklet du virksomheten din?')
+        await harSynligTekst(page, '01.01.2025')
     })
     test('Ny i arbeidslivet', async ({ page }) => {
         await goToPage(page, 8)

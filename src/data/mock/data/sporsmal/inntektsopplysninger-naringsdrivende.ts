@@ -683,9 +683,22 @@ export const virksomhetenDin1: RSSporsmal = {
     svartype: 'JA_NEI',
     min: null,
     max: null,
-    kriterieForVisningAvUndersporsmal: null,
+    kriterieForVisningAvUndersporsmal: 'JA',
     svar: [],
-    undersporsmal: [],
+    undersporsmal: [
+        {
+            id: v4().toString(),
+            tag: 'NARINGSDRIVENDE_VIRKSOMHETEN_DIN_AVVIKLET_DATO',
+            sporsmalstekst: 'Når avviklet du virksomheten din?',
+            undertekst: null,
+            svartype: 'DATO',
+            min: null,
+            max: null,
+            kriterieForVisningAvUndersporsmal: null,
+            svar: [],
+            undersporsmal: [],
+        },
+    ],
 }
 
 export const virksomhetenDin2: RSSporsmal = {

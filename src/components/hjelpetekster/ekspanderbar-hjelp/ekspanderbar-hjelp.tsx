@@ -38,6 +38,7 @@ import { AvvikletVirksomhet } from './avviklet-virksomhet'
 import { TilkommenInntektHjelpBody } from './tilkommen-inntekt-hjep-body'
 import { InntektUnderveisFtaHjelpBody } from './inntekt-underveis-fta-hjelp-body'
 import { JobbsituasjonenDin } from './jobbsituasjonen-din'
+import { NaringsdrivendeVirksomhetenDin } from './naringsdrivende-virksomheten-din'
 
 export const EkspanderbarHjelp = ({ sporsmal, mb }: { sporsmal: Sporsmal; mb?: string }) => {
     const { valgtSoknad } = useSoknadMedDetaljer()
@@ -126,6 +127,8 @@ export const EkspanderbarHjelp = ({ sporsmal, mb }: { sporsmal: Sporsmal; mb?: s
                 return <AvvikletVirksomhet />
             case 'FTA_JOBBSITUASJONEN_DIN':
                 return <JobbsituasjonenDin />
+            case 'NARINGSDRIVENDE_VIRKSOMHETEN_DIN':
+                return <NaringsdrivendeVirksomhetenDin />
             default:
                 if (harInnhold) {
                     return (
