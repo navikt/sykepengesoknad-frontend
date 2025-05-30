@@ -313,6 +313,13 @@ const SporsmalTekster = {
     'soknad.feilmelding.FTA_REISE_TIL_UTLANDET': 'Du må svare på om du har vært utenfor EU/EØS i denne perioden',
     'soknad.feilmelding.FTA_REISE_TIL_UTLANDET_NAR': '',
     'soknad.feilmelding.FTA_JOBBSITUASJONEN_DIN_FORTSATT_FRISKMELDT_AVREGISTRERT_NAR': '',
+
+    'soknad.feilmelding.NARINGSDRIVENDE_VIRKSOMHETEN_DIN':
+        'Du må svare på om du avviklet virksomheten din før du ble sykmeldt',
+    'soknad.feilmelding.NARINGSDRIVENDE_VIRKSOMHETEN_DIN_AVVIKLET_DATO': 'Du må oppgi når du avviklet virksomheten din',
+    'soknad.feilmelding.NARINGSDRIVENDE_NY_I_ARBEIDSLIVET': 'Du må svare på om du er ny i arbeidslivet',
+    'soknad.feilmelding.NARINGSDRIVENDE_VARIG_ENDRING':
+        'Du må svare på om det har skjedd en varig endring i virksomheten eller arbeidssituasjonen din',
 }
 
 export default SporsmalTekster

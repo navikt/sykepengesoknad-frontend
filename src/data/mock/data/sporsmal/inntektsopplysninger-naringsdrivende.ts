@@ -675,7 +675,7 @@ export const inntektsopplysningerMedSigrunData: RSSporsmal = {
     ],
 }
 
-export const virksomhetenDin1: RSSporsmal = {
+export const naringsdrivendeVirksomhetenDin: RSSporsmal = {
     id: v4().toString(),
     tag: 'NARINGSDRIVENDE_VIRKSOMHETEN_DIN',
     sporsmalstekst: 'Avviklet du virksomheten din før du ble sykmeldt 1.mai 2025?',
@@ -701,7 +701,7 @@ export const virksomhetenDin1: RSSporsmal = {
     ],
 }
 
-export const virksomhetenDin2: RSSporsmal = {
+export const naringsdrivendeNyIArbeidslivet: RSSporsmal = {
     id: v4().toString(),
     tag: 'NARINGSDRIVENDE_NY_I_ARBEIDSLIVET',
     sporsmalstekst: 'Har du blitt yrkesaktiv mellom 1.mars 2025 og frem til du ble sykmeldt 1.mai 2025?',
@@ -714,7 +714,7 @@ export const virksomhetenDin2: RSSporsmal = {
     undersporsmal: [],
 }
 
-export const virksomhetenDin3: RSSporsmal = {
+export const naringsdrivendeVarigEndring: RSSporsmal = {
     id: v4().toString(),
     tag: 'NARINGSDRIVENDE_VARIG_ENDRING',
     sporsmalstekst:
