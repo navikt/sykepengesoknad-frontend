@@ -59,7 +59,6 @@ test.describe('Selvstendig næringsdrivende - Virksomheten din', () => {
         )
 
         await page.getByRole('radio', { name: 'Ja' }).click()
-        await harSynligTekst(page, 'Når avviklet du virksomheten din?')
 
         const dateInput = page.getByLabel('Når avviklet du virksomheten din?')
         await dateInput.fill('01.01.2025')
@@ -73,10 +72,32 @@ test.describe('Selvstendig næringsdrivende - Virksomheten din', () => {
         await harSynligTekst(page, 'Når avviklet du virksomheten din?')
         await harSynligTekst(page, '01.01.2025')
     })
+
     test('Ny i arbeidslivet', async ({ page }) => {
         await goToPage(page, 8)
         await harSynligTittel(page, 'Ny i arbeidslivet', 2)
+
+        await page.getByRole('button', { name: 'Spørsmålet forklart' }).click()
+        await harSynligTekst(
+            page,
+            'Nav bruker vanligvis gjennomsnittet av den pensjonsgivende inntekten din for de siste 3 årene før du ble syk for å beregne hvor mye sykepenger du kan få.',
+        )
+
+        await page.getByRole('radio', { name: 'Ja' }).click()
+        await harSynligTekst(page, 'Når ble du yrkesaktiv?')
+
+        const dateInput = page.getByLabel('Når ble du yrkesaktiv?')
+        await dateInput.fill('01.02.2025')
+        await klikkGaVidere(page)
+
+        await neiOgVidere(page, ['Endringer i arbeidsituasjonen din'])
+
+        await sendSoknad(page)
+
+        await harSynligTekst(page, 'Når ble du yrkesaktiv?')
+        await harSynligTekst(page, '01.02.2025')
     })
+
     test('Endringer i arbeidssituasjonen din', async ({ page }) => {
         await goToPage(page, 9)
         await harSynligTittel(page, 'Endringer i arbeidsituasjonen din', 2)

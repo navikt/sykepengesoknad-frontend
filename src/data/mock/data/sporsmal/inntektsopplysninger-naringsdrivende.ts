@@ -709,9 +709,22 @@ export const naringsdrivendeNyIArbeidslivet: RSSporsmal = {
     svartype: 'JA_NEI',
     min: null,
     max: null,
-    kriterieForVisningAvUndersporsmal: null,
+    kriterieForVisningAvUndersporsmal: 'JA',
     svar: [],
-    undersporsmal: [],
+    undersporsmal: [
+        {
+            id: v4().toString(),
+            tag: 'NARINGSDRIVENDE_NY_I_ARBEIDSLIVET_DATO',
+            sporsmalstekst: 'Når ble du yrkesaktiv?',
+            undertekst: null,
+            svartype: 'DATO',
+            min: null,
+            max: null,
+            kriterieForVisningAvUndersporsmal: null,
+            svar: [],
+            undersporsmal: [],
+        },
+    ],
 }
 
 export const naringsdrivendeVarigEndring: RSSporsmal = {
