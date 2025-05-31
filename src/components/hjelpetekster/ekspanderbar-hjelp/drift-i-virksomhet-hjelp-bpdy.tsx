@@ -1,6 +1,6 @@
 import { BodyShort } from '@navikt/ds-react'
 
-export const DriftIVirksomhet = () => {
+export const DriftIVirksomhetHjelpBpdy = () => {
     return (
         <>
             <BodyShort spacing>

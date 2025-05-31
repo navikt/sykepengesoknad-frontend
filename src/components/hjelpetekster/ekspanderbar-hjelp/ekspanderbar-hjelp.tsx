@@ -32,13 +32,13 @@ import {
     MedlemskapOppholdstillatelseV2HjelpBody,
 } from './medlemskap-oppholdstillatelse-hjelp-body'
 import { KjenteInntektkilderHjelpBody } from './kjente-inntektkilder'
-import { VarigEndring25prosent } from './varig-endring-25prosent'
-import { DriftIVirksomhet } from './drift-i-virksomhet'
-import { AvvikletVirksomhet } from './avviklet-virksomhet'
+import { VarigEndring25prosentHjelpBody } from './varig-endring25prosent-hjelp-body'
+import { DriftIVirksomhetHjelpBpdy } from './drift-i-virksomhet-hjelp-bpdy'
+import { AvvikletVirksomhetHjelpBody } from './avviklet-virksomhet-hjelp-body'
 import { TilkommenInntektHjelpBody } from './tilkommen-inntekt-hjep-body'
 import { InntektUnderveisFtaHjelpBody } from './inntekt-underveis-fta-hjelp-body'
-import { JobbsituasjonenDin } from './jobbsituasjonen-din'
-import { NaringsdrivendeVirksomhetenDin } from './naringsdrivende-virksomheten-din'
+import { JobbsituasjonenDinHjelpBody } from './jobbsituasjonen-din-hjelp-body'
+import { NaringsdrivendeVirksomhetenDinHjelpBody } from './naringsdrivende-virksomheten-din-hjelp-body'
 import { NaringsdrivendeNyIArbeidsLivetHjelpBody } from './naringsdrivende-ny-i-arbeids-livet-hjelp-body'
 
 export const EkspanderbarHjelp = ({ sporsmal, mb }: { sporsmal: Sporsmal; mb?: string }) => {
@@ -121,15 +121,15 @@ export const EkspanderbarHjelp = ({ sporsmal, mb }: { sporsmal: Sporsmal; mb?: s
             case 'KJENTE_INNTEKTSKILDER':
                 return <KjenteInntektkilderHjelpBody />
             case 'INNTEKTSOPPLYSNINGER_VARIG_ENDRING_25_PROSENT':
-                return <VarigEndring25prosent sporsmal={sporsmal} />
+                return <VarigEndring25prosentHjelpBody sporsmal={sporsmal} />
             case 'INNTEKTSOPPLYSNINGER_DRIFT_VIRKSOMHETEN':
-                return <DriftIVirksomhet />
+                return <DriftIVirksomhetHjelpBpdy />
             case 'INNTEKTSOPPLYSNINGER_VIRKSOMHETEN_AVVIKLET':
-                return <AvvikletVirksomhet />
+                return <AvvikletVirksomhetHjelpBody />
             case 'FTA_JOBBSITUASJONEN_DIN':
-                return <JobbsituasjonenDin />
+                return <JobbsituasjonenDinHjelpBody />
             case 'NARINGSDRIVENDE_VIRKSOMHETEN_DIN':
-                return <NaringsdrivendeVirksomhetenDin />
+                return <NaringsdrivendeVirksomhetenDinHjelpBody />
             case 'NARINGSDRIVENDE_NY_I_ARBEIDSLIVET':
                 return <NaringsdrivendeNyIArbeidsLivetHjelpBody />
             default:
