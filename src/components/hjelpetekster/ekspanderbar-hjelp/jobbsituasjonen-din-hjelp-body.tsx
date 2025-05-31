@@ -1,6 +1,6 @@
 import { BodyLong } from '@navikt/ds-react'
 
-export const JobbsituasjonenDin = () => {
+export const JobbsituasjonenDinHjelpBody = () => {
     return (
         <>
             <BodyLong spacing>

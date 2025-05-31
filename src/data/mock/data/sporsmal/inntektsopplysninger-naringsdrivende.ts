@@ -219,7 +219,7 @@ export const inntektsopplysningerLegacy: RSSporsmal = {
     ],
 }
 
-export const inntektsopplysningerUtenSigrunData: RSSporsmal = {
+export const inntektsopplysningerNaringsdrivende: RSSporsmal = {
     id: v4().toString(),
     tag: 'INNTEKTSOPPLYSNINGER_VIRKSOMHETEN_AVVIKLET',
     sporsmalstekst: 'Har du avviklet virksomheten din før du ble sykmeldt?',
@@ -673,4 +673,70 @@ export const inntektsopplysningerMedSigrunData: RSSporsmal = {
             ],
         },
     ],
+}
+
+export const naringsdrivendeVirksomhetenDin: RSSporsmal = {
+    id: v4().toString(),
+    tag: 'NARINGSDRIVENDE_VIRKSOMHETEN_DIN',
+    sporsmalstekst: 'Avviklet du virksomheten din før du ble sykmeldt 1.mai 2025?',
+    undertekst: null,
+    svartype: 'JA_NEI',
+    min: null,
+    max: null,
+    kriterieForVisningAvUndersporsmal: 'JA',
+    svar: [],
+    undersporsmal: [
+        {
+            id: v4().toString(),
+            tag: 'NARINGSDRIVENDE_VIRKSOMHETEN_DIN_AVVIKLET_DATO',
+            sporsmalstekst: 'Når avviklet du virksomheten din?',
+            undertekst: null,
+            svartype: 'DATO',
+            min: null,
+            max: null,
+            kriterieForVisningAvUndersporsmal: null,
+            svar: [],
+            undersporsmal: [],
+        },
+    ],
+}
+
+export const naringsdrivendeNyIArbeidslivet: RSSporsmal = {
+    id: v4().toString(),
+    tag: 'NARINGSDRIVENDE_NY_I_ARBEIDSLIVET',
+    sporsmalstekst: 'Har du blitt yrkesaktiv mellom 1.mars 2025 og frem til du ble sykmeldt 1.mai 2025?',
+    undertekst: null,
+    svartype: 'JA_NEI',
+    min: null,
+    max: null,
+    kriterieForVisningAvUndersporsmal: 'JA',
+    svar: [],
+    undersporsmal: [
+        {
+            id: v4().toString(),
+            tag: 'NARINGSDRIVENDE_NY_I_ARBEIDSLIVET_DATO',
+            sporsmalstekst: 'Når ble du yrkesaktiv?',
+            undertekst: null,
+            svartype: 'DATO',
+            min: null,
+            max: null,
+            kriterieForVisningAvUndersporsmal: null,
+            svar: [],
+            undersporsmal: [],
+        },
+    ],
+}
+
+export const naringsdrivendeVarigEndring: RSSporsmal = {
+    id: v4().toString(),
+    tag: 'NARINGSDRIVENDE_VARIG_ENDRING',
+    sporsmalstekst:
+        'Har det skjedd en varig endring i virksomheten eller arbeidssituasjonen din mellom 1.mars 2025 og frem til du ble sykmeldt 1.mai 2025?',
+    undertekst: null,
+    svartype: 'JA_NEI',
+    min: null,
+    max: null,
+    kriterieForVisningAvUndersporsmal: null,
+    svar: [],
+    undersporsmal: [],
 }
