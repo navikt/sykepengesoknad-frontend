@@ -1,6 +1,6 @@
 import { BodyShort } from '@navikt/ds-react'
 
-export const AvvikletVirksomhet = () => {
+export const AvvikletVirksomhetHjelpBody = () => {
     return (
         <>
             <BodyShort spacing>
