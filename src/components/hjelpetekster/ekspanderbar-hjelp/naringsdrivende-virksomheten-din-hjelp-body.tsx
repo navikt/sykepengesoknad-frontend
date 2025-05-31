@@ -1,6 +1,6 @@
 import { BodyLong } from '@navikt/ds-react'
 
-export const NaringsdrivendeVirksomhetenDin = () => {
+export const NaringsdrivendeVirksomhetenDinHjelpBody = () => {
     return (
         <>
             <BodyLong spacing>
