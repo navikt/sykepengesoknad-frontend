@@ -94,6 +94,7 @@ export const SporsmalVarianter = ({ sporsmal }: OppsummeringProps) => {
         }
 
         case RSSvartype.DATOER:
+        case RSSvartype.MAANED:
         case RSSvartype.DATO: {
             return <DatoSum sporsmal={sporsmal} />
         }

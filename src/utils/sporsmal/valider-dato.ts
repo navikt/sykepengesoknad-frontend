@@ -1,5 +1,5 @@
 import dayjs from 'dayjs'
-import { DateValidationT } from '@navikt/ds-react'
+import { DateValidationT, MonthValidationT } from '@navikt/ds-react'
 
 import { Sporsmal } from '../../types/types'
 
@@ -26,3 +26,18 @@ const validerDato = (sporsmal: Sporsmal, value?: Date, dateValidation?: DateVali
 }
 
 export default validerDato
+
+export const validerMaaned = (sporsmal: Sporsmal, value?: Date, monthValidation?: MonthValidationT) => {
+    if (!monthValidation && value) {
+        // Vi må bruke monthValidation fordi Monthpicker ikke returnerer noe verdi når de er utenfor min/max
+        // Men Datepicker validering skjer ikke når vi laster inn et tidligere svar
+        return true
+    }
+    if (!monthValidation || monthValidation.isEmpty || monthValidation.isInvalid) {
+        return 'Datoen følger ikke formatet dd.mm.åååå'
+    }
+    if (!monthValidation.isValidMonth) {
+        return 'Datoen følger ikke formatet maaned'
+    }
+    return true
+}
