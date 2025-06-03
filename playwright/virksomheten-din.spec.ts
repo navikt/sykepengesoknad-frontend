@@ -101,5 +101,35 @@ test.describe('Selvstendig næringsdrivende - Virksomheten din', () => {
     test('Endringer i arbeidssituasjonen din', async ({ page }) => {
         await goToPage(page, 9)
         await harSynligTittel(page, 'Endringer i arbeidsituasjonen din', 2)
+
+        await page.getByRole('button', { name: 'Spørsmålet forklart' }).click()
+        await harSynligTekst(
+            page,
+            'Har det skjedd en varig endring i virksomheten eller arbeidssituasjonen din mellom 1.mars 2025 og frem til du ble sykmeldt 1.mai 2025?',
+        )
+
+        await page.getByRole('radio', { name: 'Ja' }).click()
+        await harSynligTekst(page, 'Hvilken varig endring har skjedd?')
+        await harSynligTekst(page, 'Du kan velge et eller flere alternativer')
+        await harSynligTekst(page, 'Vi skjønner at det kan være vanskelig å svare nøyaktig, men svar så godt du kan.')
+
+        await page.getByRole('checkbox', { name: 'Jobbet mindre i virksomheten' }).click()
+        await page.getByRole('checkbox', { name: 'Endring i kundegrunnlag' }).click()
+
+        const monthInput = page.getByLabel('Når skjedde endringen?')
+        await monthInput.fill('januar 2024')
+
+        await harSynligTekst(
+            page,
+            'Det kan være vi trenger mer dokumentasjon på dette. Da vil en saksbehandler ta kontakt med deg.',
+        )
+
+        await klikkGaVidere(page)
+        await sendSoknad(page)
+
+        await harSynligTekst(page, 'Når skjedde endringen?')
+        await harSynligTekst(page, '01.03.2025')
+        await harSynligTekst(page, 'Jobbet mindre i virksomheten')
+        await harSynligTekst(page, 'Endring i kundegrunnlag')
     })
 })
