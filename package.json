@@ -68,7 +68,7 @@
         "tailwindcss": "^4.1.5",
         "ts-loader": "^9.5.2",
         "typescript": "^5.8.3",
-        "vitest": "^3.1.4"
+        "vitest": "^3.2.0"
     },
     "scripts": {
         "dev": "MOCK_BACKEND=true next dev -p 3000  | pino-pretty",
