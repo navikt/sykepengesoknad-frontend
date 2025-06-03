@@ -22,6 +22,8 @@ import { useSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
 import { KjentOppholdstillatelse } from '../kjent-oppholdstillatelse'
 import { NyttArbeidsforhold } from '../nytt-arbeidsforhold'
 import { logEvent } from '../../amplitude/amplitude'
+import { NaringsdrivendeYrkesaktivInfo } from '../../hjelpetekster/yrkesaktiv-info'
+import { VarigEndringInfo } from '../../hjelpetekster/varig-endring-info'
 
 import { jaNeiStorStyle, JaNeiStyle } from './ja-nei-stor-style'
 
@@ -169,7 +171,6 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
                 >
                     <>
                         <UndersporsmalListe oversporsmal={sporsmal} oversporsmalSvar={watchJaNei} />
-
                         {valgtSoknad?.status === RSSoknadstatus.UTKAST_TIL_KORRIGERING &&
                             sporsmal.tag === 'FERIE_V2' &&
                             watchJaNei === 'JA' && (
@@ -178,9 +179,10 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
                                     har ferie.
                                 </Alert>
                             )}
-
                         <YrkesskadeInfo sporsmal={sporsmal} jaNeiSvar={watchJaNei} />
                         <PaskeferieInfo sporsmal={sporsmal} jaNeiSvar={watchJaNei} />
+                        <NaringsdrivendeYrkesaktivInfo sporsmal={sporsmal} jaNeiSvar={watchJaNei} />
+                        <VarigEndringInfo sporsmal={sporsmal} jaNeiSvar={watchJaNei} />
                     </>
                 </AnimateOnMount>
             </div>

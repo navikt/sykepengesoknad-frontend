@@ -26,6 +26,7 @@ export enum RSSvartype {
     BELOP = 'BELOP',
     DATOER = 'DATOER',
     KVITTERING = 'KVITTERING',
+    MAANED = 'MAANED',
 }
 
 export type RSSvartypeType =
@@ -56,3 +57,4 @@ export type RSSvartypeType =
     | 'BELOP'
     | 'DATOER'
     | 'KVITTERING'
+    | 'MAANED'
