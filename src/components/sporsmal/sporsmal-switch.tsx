@@ -7,7 +7,6 @@ import BehDager from './typer/beh-dager'
 import CheckboxKomp from './typer/checkbox-komp'
 import CheckboxPanel from './typer/checkbox-panel'
 import DagerKomp from './typer/dager-komp'
-import DatoInput from './typer/dato-komp'
 import IkkeRelevant from './typer/ikke-relevant'
 import JaNeiStor from './typer/ja-nei-stor'
 import JaNeiLiten from './typer/ja-nei-liten'
@@ -39,8 +38,6 @@ const SporsmalSwitch = ({ sporsmal, sporsmalIndex, erSisteSporsmal, erHovedspors
             return <CheckboxKomp sporsmal={sporsmal} />
 
         case RSSvartype.DATO:
-            return <DatoInput sporsmal={sporsmal} />
-
         case RSSvartype.MAANED:
             return <MonthInput sporsmal={sporsmal} />
 

@@ -20,6 +20,7 @@ import DatoSum from './utdrag/dato-sum'
 import Fritekst from './utdrag/fritekst'
 import JaEllerNei from './utdrag/ja-eller-nei'
 import LandSum from './utdrag/land-sum'
+import MaanedSum from './utdrag/maaned-sum'
 import OpplastingSum from './utdrag/opplasting-sum'
 import PerioderSum from './utdrag/perioder-sum'
 import RadioGruppe from './utdrag/radio-gruppe'
@@ -94,9 +95,12 @@ export const SporsmalVarianter = ({ sporsmal }: OppsummeringProps) => {
         }
 
         case RSSvartype.DATOER:
-        case RSSvartype.MAANED:
         case RSSvartype.DATO: {
             return <DatoSum sporsmal={sporsmal} />
+        }
+
+        case RSSvartype.MAANED: {
+            return <MaanedSum sporsmal={sporsmal} />
         }
 
         case RSSvartype.PERIODE:

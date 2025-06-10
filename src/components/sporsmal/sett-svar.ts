@@ -44,6 +44,7 @@ export const settSvar = (sporsmal: Sporsmal, verdier: Record<string, any>): Spor
         case RSSvartype.COMBOBOX_MULTI:
             return landSvar(sporsmal, verdi)
         case RSSvartype.DATO:
+        case RSSvartype.MAANED:
             return datoSvar(sporsmal, verdi)
         case RSSvartype.DATOER:
             return datoerSvar(sporsmal, verdi)
