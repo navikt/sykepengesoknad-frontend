@@ -125,10 +125,15 @@ test.describe('Selvstendig næringsdrivende - Virksomheten din', () => {
         )
 
         await klikkGaVidere(page)
+
+        await harSynligTittel(page, 'Oppsummering fra søknaden', 2)
+        await harSynligTekst(page, 'Når skjedde endringen?')
+        await harSynligTekst(page, 'januar 2024')
+
         await sendSoknad(page)
 
         await harSynligTekst(page, 'Når skjedde endringen?')
-        await harSynligTekst(page, '01.03.2025')
+        await harSynligTekst(page, 'januar 2024')
         await harSynligTekst(page, 'Jobbet mindre i virksomheten')
         await harSynligTekst(page, 'Endring i kundegrunnlag')
     })
