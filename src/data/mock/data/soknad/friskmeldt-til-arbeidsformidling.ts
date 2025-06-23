@@ -218,7 +218,7 @@ export function inntektUnderveis(opts: { fom: string; tom: string }): RSSporsmal
         id: v4().toString(),
         tag: 'FTA_INNTEKT_UNDERVEIS',
         sporsmalstekst: `Hadde du  inntekt i perioden ${periodeTekst}?`,
-        undertekst: 'Dette kan for eksempel være inntekt fra en annen jobb du ikke er sykmeldt fra.',
+        undertekst: 'Dette kan for eksempel være inntekt fra en annen jobb du ikke har vært sykmeldt fra.',
         svartype: 'JA_NEI',
         min: null,
         max: null,
