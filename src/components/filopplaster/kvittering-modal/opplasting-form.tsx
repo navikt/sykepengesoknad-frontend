@@ -214,7 +214,7 @@ const OpplastingForm = ({ valgtSoknad, setOpenModal, openModal }: OpplastingFrom
                         validate: (val) => {
                             if (!val) return 'Du må skrive inn beløp'
                             if (val < 0) return 'Beløp kan ikke være negativt'
-                            if (val > 10000) return 'Beløp kan ikke være større enn 10 000'
+                            if (val > 1000000) return 'Beløp kan ikke være større enn 1 000 000'
                             return true
                         },
                     }}

@@ -41,7 +41,7 @@ describe('Tester feilmeldinger i reisetilskudd', () => {
         cy.get('input[name=belop_input]').clear()
         cy.get('input[name=belop_input]').type('1000000000')
         cy.get('.navds-modal').contains('Bekreft').click()
-        cy.get('[data-cy="opplasting-form"]').contains('Beløp kan ikke være større enn 10 000')
+        cy.get('[data-cy="opplasting-form"]').contains('Beløp kan ikke være større enn 1 000 000')
     })
 
     it('Kan ikke skrive inn med 3 desimaler', () => {
