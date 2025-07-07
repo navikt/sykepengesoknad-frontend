@@ -21,7 +21,9 @@ export const Inntektsbulletpoints = ({ soknad, sporsmal }: { soknad: Soknad; spo
             </Label>
 
             <ul data-cy="inntektskilder--fra-inntektskomponenten-liste" className="mb-10">
-                {navn?.map((n, index) => <ListItemWithIcon key={index} content={n} />)}
+                {navn?.map((n, index) => (
+                    <ListItemWithIcon key={index} content={n} />
+                ))}
             </ul>
         </>
     )
