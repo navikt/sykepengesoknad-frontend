@@ -1,6 +1,4 @@
-import { expect } from '@playwright/test'
-
-import { test } from './fixtures'
+import { test, expect } from './fixtures'
 
 test.describe('Tester visning av forside', () => {
     test('Laster startside', async ({ page }) => {

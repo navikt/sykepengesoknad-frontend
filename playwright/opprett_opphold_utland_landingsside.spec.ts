@@ -1,5 +1,4 @@
-import test, { expect } from '@playwright/test'
-
+import { test, expect } from './fixtures'
 import { avbryterSoknad } from './utilities'
 
 test.describe('Tester opprettelse av opphold utland søknad', () => {
