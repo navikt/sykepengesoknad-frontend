@@ -1,7 +1,6 @@
-import test, { expect } from '@playwright/test'
-
 import { oppholdUtland } from '../src/data/mock/data/soknad/opphold-utland'
 
+import { test, expect } from './fixtures'
 import {
     avbryterSoknad,
     klikkGaVidere,
