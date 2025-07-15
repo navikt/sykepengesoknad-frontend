@@ -8,7 +8,7 @@ async function sjekkMainContentFokus(page: Page) {
 
 const arbeidsledig = {
   // Assuming this is the same mock data structure as in the Cypress test
-  id: 'some-soknad-id', // Replace with actual mock data if needed
+  id: '934f39f4-cb47-459f-8209-0dbef6d30059', // Replace with actual mock data if needed
 };
 
 let sharedPage: Page;
@@ -78,8 +78,11 @@ test.describe('Tester arbeidsledigsøknad', () => {
     await expect(startButton).toHaveCSS('box-shadow', /./);
     await sharedPage.keyboard.press('Enter');
     await sjekkMainContentFokus(sharedPage);
-
-    await expect(sharedPage.getByText('Friskmeldt')).toBeVisible();
+    // sleep to ensure the page has loaded
+    const content = await sharedPage.content();
+console.log(content); // Look for "Friskmeldt" in the output
+    await sharedPage.waitForSelector('text=Friskmeldt');
+    await expect(sharedPage.getByText('Friskmeldt')).toHaveCount(1)
     await expect(
       sharedPage.locator('form').getByRole('radio', { name: 'Nei' }),
     ).toHaveCount(1);
