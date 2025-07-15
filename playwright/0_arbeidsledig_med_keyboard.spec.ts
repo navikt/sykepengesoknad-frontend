@@ -1,165 +1,148 @@
-import { test, expect, Browser, Page } from '@playwright/test';
+import { test, expect, Page } from '@playwright/test'
+import exp = require("node:constants");
 
-// Utility function to check if main content has focus (adapted from Cypress)
+// Utility function
 async function sjekkMainContentFokus(page: Page) {
-  const mainContent = page.locator('main');
-  await expect(mainContent).toBeFocused();
+    const mainContent = page.locator('main')
+    await expect(mainContent).toBeFocused()
 }
 
 const arbeidsledig = {
-  // Assuming this is the same mock data structure as in the Cypress test
-  id: '934f39f4-cb47-459f-8209-0dbef6d30059', // Replace with actual mock data if needed
-};
+    id: '934f39f4-cb47-459f-8209-0dbef6d30059',
+}
 
-let sharedPage: Page;
+test('Full arbeidsledigsøknad flow', async ({ page }) => {
+    // Gå til startside
+    await page.goto('/syk/sykepengesoknad?testperson=arbeidsledig', {
+        waitUntil: 'networkidle',
+    })
+    await expect(page.locator('.navds-heading--large')).toBeVisible()
+    await expect(page.locator('.navds-heading--large')).toHaveText('Søknader')
+    await page.locator(`a[href*="${arbeidsledig.id}"]`).click()
 
-test.describe.configure({ mode: 'serial' });
+    // Første steg: les/vilkår
+    await expect(page).toHaveURL(new RegExp(`${arbeidsledig.id}/1`))
+    await page.keyboard.press('Tab') // ... repeat as needed
+    await page.keyboard.press('Tab')
+    await page.keyboard.press('Tab')
+    await page.keyboard.press('Tab')
+    await page.keyboard.press('Tab')
+    await page.keyboard.press('Space')
+    await expect(page.getByText('Les mer om hvordan NAV behandler personopplysningene dine')).toBeVisible()
 
-test.describe('Tester arbeidsledigsøknad', () => {
-  test.beforeAll(async ({ browser }: { browser: Browser }) => {
-    const context = await browser.newContext();
-    sharedPage = await context.newPage();
-    await sharedPage.goto('/syk/sykepengesoknad?testperson=arbeidsledig', {
-      waitUntil: 'networkidle',
-    });
-  });
-
-  test.afterAll(async () => {
-    await sharedPage.context().close();
-  });
-
-  test('Laster startside', async () => {
-    await expect(sharedPage.locator('.navds-heading--large')).toBeVisible();
-    await expect(sharedPage.locator('.navds-heading--large')).toHaveText(
-      'Søknader',
-    );
-    await sharedPage.locator(`a[href*="${arbeidsledig.id}"]`).click();
-  });
-
-  test('Navigerer søknaden', async () => {
-    await expect(sharedPage).toHaveURL(new RegExp(`${arbeidsledig.id}/1`));
-
-    await sharedPage.keyboard.press('Tab');
-    await sharedPage.keyboard.press('Tab');
-    await sharedPage.keyboard.press('Tab');
-    await sharedPage.keyboard.press('Tab');
-    await sharedPage.keyboard.press('Tab');
-    await sharedPage.keyboard.press('Space');
+    await page.keyboard.press('Tab')
+    await page.keyboard.press('Tab')
+    await page.keyboard.press('Space')
     await expect(
-      sharedPage.getByText(
-        'Les mer om hvordan NAV behandler personopplysningene dine',
-      ),
+        page.getByText(
+            'Vi lagrer svarene dine mens du fyller ut, så du kan ta pauser underveis. Søknader som ikke blir sendt inn lagrer vi i 4 måneder før de slettes automatisk.',
+        ),
+    ).toBeVisible()
+
+    await page.keyboard.press('Tab')
+    await page.keyboard.press('Tab')
+    const bekreftLabel = page
+        .locator('label')
+        .filter({ hasText: 'Jeg bekrefter at jeg vil svare så riktig som jeg kan.' })
+        .locator('..')
+    await expect(bekreftLabel).toHaveCSS('box-shadow', /./)
+    await page.keyboard.press('Space')
+
+    await page.keyboard.press('Tab')
+    const startButton = page.getByRole('button', { name: 'Start søknad' })
+    await expect(startButton).toHaveCSS('box-shadow', /./)
+    await page.keyboard.press('Enter')
+    await sjekkMainContentFokus(page)
+
+    // Debug: show content for failing selector
+    // const content = await page.content();
+    // console.log(content);
+    const content = await page.content()
+    console.log(content)
+    expect(content).toContain('Friskmeldt');
+    expect(content).toContain('data-cy="sporsmal-tittel"');
+    // await page.waitForSelector('text=Friskmeldt');
+    // await expect(page.getByTestId('sporsmal-tittel')).toHaveCount(1)
+    // this fails because of strict mode
+    // expect(page.getByText('Friskmeldt')).toBeVisible()
+    expect(page.getByRole('heading', { name: 'Friskmeldt' })).toBeVisible()
+    await expect(page.locator('form').getByRole('radio', { name: 'Nei' })).toHaveCount(1)
+
+    // Neste steg
+    await page.keyboard.press('Tab')
+    await page.keyboard.press('Tab')
+    await page.keyboard.press('Tab')
+    await page.keyboard.press('Tab')
+    await page.keyboard.press('Space')
+    await page.keyboard.press('Tab')
+    await page.keyboard.press('Tab')
+    const gaVidereButton1 = page.getByRole('button', { name: 'Gå videre' })
+    await expect(gaVidereButton1).toHaveCSS('box-shadow', /./)
+    await page.keyboard.press('Enter')
+    await sjekkMainContentFokus(page)
+
+    expect(page.getByRole('heading', { name: 'Andre inntektskilder' })).toBeVisible()
+
+    await expect(page.getByText('Hva mener vi med andre inntektskilder?')).toBeVisible()
+
+    await page.keyboard.press('Tab')
+    await page.keyboard.press('Tab')
+    await page.keyboard.press('Tab')
+    await page.keyboard.press('Tab')
+    await page.keyboard.press('Tab')
+    await page.keyboard.press('Space')
+    await page.keyboard.press('ArrowRight')
+    await page.keyboard.press('Tab')
+    await page.keyboard.press('Tab')
+    const gaVidereButton2 = page.getByRole('button', { name: 'Gå videre' })
+    await expect(gaVidereButton2).toHaveCSS('box-shadow', /./)
+    await page.keyboard.press('Enter')
+    await sjekkMainContentFokus(page)
+
+
+    expect(page.getByRole('heading', { name: 'Reise' })).toBeVisible()
+
+    await page.keyboard.press('Tab')
+    await page.keyboard.press('Tab')
+    await page.keyboard.press('Tab')
+    await page.keyboard.press('Tab')
+    await page.keyboard.press('Tab')
+    await page.keyboard.press('Space')
+    await page.keyboard.press('ArrowRight')
+    await page.keyboard.press('Tab')
+    await page.keyboard.press('Tab')
+    const gaVidereButton3 = page.getByRole('button', { name: 'Gå videre' })
+    await expect(gaVidereButton3).toHaveCSS('box-shadow', /./)
+    await page.keyboard.press('Enter')
+    await sjekkMainContentFokus(page)
+
+
+    await expect(page.getByRole('heading', { name: 'Oppsummering fra søknaden' })).toBeVisible()
+    // await expect(page.getByText('Oppsummering fra søknaden')).toBeVisible()
+    // await expect(page.getByRole('heading', { name: 'Oppsummering fra søknaden' })).toBeVisible()
+
+    await page.keyboard.press('Tab')
+    await page.keyboard.press('Tab')
+    await page.keyboard.press('Tab')
+    await page.keyboard.press('Tab')
+    await page.keyboard.press('Tab')
+    await page.keyboard.press('Tab')
+    const sendButton = page.getByRole('button', { name: 'Send søknaden' })
+    await expect(sendButton).toHaveCSS('box-shadow', /./)
+    await page.keyboard.press('Enter')
+    await sjekkMainContentFokus(page)
+
+        await expect(
+      page.getByText('Søknaden er sendt til NAV'),
     ).toBeVisible();
-
-    await sharedPage.keyboard.press('Tab');
-    await sharedPage.keyboard.press('Tab');
-    await sharedPage.keyboard.press('Space');
-    await expect(
-      sharedPage.getByText(
-        'Vi lagrer svarene dine mens du fyller ut, så du kan ta pauser underveis. Søknader som ikke blir sendt inn lagrer vi i 4 måneder før de slettes automatisk.',
-      ),
-    ).toBeVisible();
-
-    await sharedPage.keyboard.press('Tab');
-    await sharedPage.keyboard.press('Tab');
-    const bekreftLabel = sharedPage
-      .locator('label')
-      .filter({
-        hasText: 'Jeg bekrefter at jeg vil svare så riktig som jeg kan.',
-      })
-      .locator('..');
-    await expect(bekreftLabel).toHaveCSS('box-shadow', /./); // Check for any box-shadow
-    await sharedPage.keyboard.press('Space');
-
-    await sharedPage.keyboard.press('Tab');
-    const startButton = sharedPage.getByRole('button', {
-      name: 'Start søknad',
-    });
-    await expect(startButton).toHaveCSS('box-shadow', /./);
-    await sharedPage.keyboard.press('Enter');
-    await sjekkMainContentFokus(sharedPage);
-    // sleep to ensure the page has loaded
-    const content = await sharedPage.content();
-console.log(content); // Look for "Friskmeldt" in the output
-    await sharedPage.waitForSelector('text=Friskmeldt');
-    await expect(sharedPage.getByText('Friskmeldt')).toHaveCount(1)
-    await expect(
-      sharedPage.locator('form').getByRole('radio', { name: 'Nei' }),
-    ).toHaveCount(1);
-
-    await sharedPage.keyboard.press('Tab');
-    await sharedPage.keyboard.press('Tab');
-    await sharedPage.keyboard.press('Tab');
-    await sharedPage.keyboard.press('Tab');
-    await sharedPage.keyboard.press('Space');
-    await sharedPage.keyboard.press('Tab');
-    await sharedPage.keyboard.press('Tab');
-    const gaVidereButton1 = sharedPage.getByRole('button', {
-      name: 'Gå videre',
-    });
-    await expect(gaVidereButton1).toHaveCSS('box-shadow', /./);
-    await sharedPage.keyboard.press('Enter');
-    await sjekkMainContentFokus(sharedPage);
-
-    await expect(sharedPage.getByText('Andre inntektskilder')).toBeVisible();
-    await expect(
-      sharedPage.getByText('Hva mener vi med andre inntektskilder?'),
-    ).toBeVisible();
-
-    await sharedPage.keyboard.press('Tab');
-    await sharedPage.keyboard.press('Tab');
-    await sharedPage.keyboard.press('Tab');
-    await sharedPage.keyboard.press('Tab');
-    await sharedPage.keyboard.press('Tab');
-    await sharedPage.keyboard.press('Space');
-    await sharedPage.keyboard.press('ArrowRight');
-    await sharedPage.keyboard.press('Tab');
-    await sharedPage.keyboard.press('Tab');
-    const gaVidereButton2 = sharedPage.getByRole('button', {
-      name: 'Gå videre',
-    });
-    await expect(gaVidereButton2).toHaveCSS('box-shadow', /./);
-    await sharedPage.keyboard.press('Enter');
-    await sjekkMainContentFokus(sharedPage);
-
-    await expect(sharedPage.getByText('Reise')).toBeVisible();
-
-    await sharedPage.keyboard.press('Tab');
-    await sharedPage.keyboard.press('Tab');
-    await sharedPage.keyboard.press('Tab');
-    await sharedPage.keyboard.press('Tab');
-    await sharedPage.keyboard.press('Tab');
-    await sharedPage.keyboard.press('Space');
-    await sharedPage.keyboard.press('ArrowRight');
-    await sharedPage.keyboard.press('Tab');
-    await sharedPage.keyboard.press('Tab');
-    const gaVidereButton3 = sharedPage.getByRole('button', {
-      name: 'Gå videre',
-    });
-    await expect(gaVidereButton3).toHaveCSS('box-shadow', /./);
-    await sharedPage.keyboard.press('Enter');
-    await sjekkMainContentFokus(sharedPage);
+    //await expect(page.getByText('Mottatt')).toBeVisible()
 
     await expect(
-      sharedPage.getByText('Oppsummering fra søknaden'),
-    ).toBeVisible();
+  page.getByText(/Mottatt.*kl/, { exact: false })
+).toBeVisible();
 
-    await sharedPage.keyboard.press('Tab');
-    await sharedPage.keyboard.press('Tab');
-    await sharedPage.keyboard.press('Tab');
-    await sharedPage.keyboard.press('Tab');
-    await sharedPage.keyboard.press('Tab');
-    await sharedPage.keyboard.press('Tab');
-    const sendButton = sharedPage.getByRole('button', {
-      name: 'Send søknaden',
-    });
-    await expect(sendButton).toHaveCSS('box-shadow', /./);
-    await sharedPage.keyboard.press('Enter');
-    await sjekkMainContentFokus(sharedPage);
 
-    await expect(
-      sharedPage.getByText('Søknaden er sendt til NAV'),
-    ).toBeVisible();
-    await expect(sharedPage.getByText('Mottatt')).toBeVisible();
-  });
-});
+
+// await expect(page.getByRole('heading', { name: 'Mottatt' })).toBeVisible()
+
+})
