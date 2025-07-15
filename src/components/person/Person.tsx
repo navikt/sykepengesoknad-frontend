@@ -46,7 +46,7 @@ export default function Person() {
                         } as CSSProperties
                     }
                 >
-                    <Popover open={showHint} onClose={() => void 0} placement="bottom-end" anchorEl={buttonRef.current}>
+         {/*           <Popover open={showHint} onClose={() => void 0} placement="bottom-end" anchorEl={buttonRef.current}>
                         <Popover.Content>
                             <Heading size="small" level="2" className="motion-safe:animate-bounce">
                                 Tips!
@@ -64,7 +64,7 @@ export default function Person() {
                                 OK!
                             </Button>
                         </Popover.Content>
-                    </Popover>
+                    </Popover>*/}
                 </div>
             </div>
             <Modal
