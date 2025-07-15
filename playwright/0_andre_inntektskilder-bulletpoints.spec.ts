@@ -1,5 +1,6 @@
 import { test, expect } from '@playwright/test';
-
+// done kjører grønt
+// todo manuell sjekk
 test.describe('Tester andre inntektskilder bulletpoints', () => {
   test.beforeEach(async ({ page }) => {
     await page.context().clearCookies();
