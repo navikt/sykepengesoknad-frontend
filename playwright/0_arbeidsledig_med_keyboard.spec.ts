@@ -1,5 +1,4 @@
 import { test, expect, Page } from '@playwright/test'
-import exp = require("node:constants");
 
 // Utility function
 async function sjekkMainContentFokus(page: Page) {
@@ -54,17 +53,6 @@ test('Full arbeidsledigsøknad flow', async ({ page }) => {
     await page.keyboard.press('Enter')
     await sjekkMainContentFokus(page)
 
-    // Debug: show content for failing selector
-    // const content = await page.content();
-    // console.log(content);
-    const content = await page.content()
-    console.log(content)
-    expect(content).toContain('Friskmeldt');
-    expect(content).toContain('data-cy="sporsmal-tittel"');
-    // await page.waitForSelector('text=Friskmeldt');
-    // await expect(page.getByTestId('sporsmal-tittel')).toHaveCount(1)
-    // this fails because of strict mode
-    // expect(page.getByText('Friskmeldt')).toBeVisible()
     expect(page.getByRole('heading', { name: 'Friskmeldt' })).toBeVisible()
     await expect(page.locator('form').getByRole('radio', { name: 'Nei' })).toHaveCount(1)
 
@@ -99,7 +87,6 @@ test('Full arbeidsledigsøknad flow', async ({ page }) => {
     await page.keyboard.press('Enter')
     await sjekkMainContentFokus(page)
 
-
     expect(page.getByRole('heading', { name: 'Reise' })).toBeVisible()
 
     await page.keyboard.press('Tab')
@@ -116,10 +103,7 @@ test('Full arbeidsledigsøknad flow', async ({ page }) => {
     await page.keyboard.press('Enter')
     await sjekkMainContentFokus(page)
 
-
     await expect(page.getByRole('heading', { name: 'Oppsummering fra søknaden' })).toBeVisible()
-    // await expect(page.getByText('Oppsummering fra søknaden')).toBeVisible()
-    // await expect(page.getByRole('heading', { name: 'Oppsummering fra søknaden' })).toBeVisible()
 
     await page.keyboard.press('Tab')
     await page.keyboard.press('Tab')
@@ -132,17 +116,7 @@ test('Full arbeidsledigsøknad flow', async ({ page }) => {
     await page.keyboard.press('Enter')
     await sjekkMainContentFokus(page)
 
-        await expect(
-      page.getByText('Søknaden er sendt til NAV'),
-    ).toBeVisible();
-    //await expect(page.getByText('Mottatt')).toBeVisible()
+    await expect(page.getByText('Søknaden er sendt til NAV')).toBeVisible()
 
-    await expect(
-  page.getByText(/Mottatt.*kl/, { exact: false })
-).toBeVisible();
-
-
-
-// await expect(page.getByRole('heading', { name: 'Mottatt' })).toBeVisible()
-
+    await expect(page.getByText(/Mottatt.*kl/, { exact: false })).toBeVisible()
 })
