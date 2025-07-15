@@ -1,4 +1,4 @@
-    describe('Tester andre inntektskilder bulletpoints', () => {
+describe('Tester andre inntektskilder bulletpoints', () => {
     before(() => {
         cy.clearCookies()
     })
