@@ -22,6 +22,7 @@ import { useSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
 import { KjentOppholdstillatelse } from '../kjent-oppholdstillatelse'
 import { NyttArbeidsforhold } from '../nytt-arbeidsforhold'
 import { logEvent } from '../../amplitude/amplitude'
+import { OppholdUtenforEUEOS } from '../opphold-utenfor-eu-eos'
 
 import { jaNeiStorStyle, JaNeiStyle } from './ja-nei-stor-style'
 
@@ -82,6 +83,8 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
                 {sporsmal.tag === 'NYTT_ARBEIDSFORHOLD_UNDERVEIS' && (
                     <NyttArbeidsforhold key="nytt-arbeidsforhold" spm={sporsmal} />
                 )}
+                {sporsmal.tag === 'OPPHOLD_UTENFOR_EOS' && <OppholdUtenforEUEOS />}
+                {sporsmal.tag === 'FTA_REISE_TIL_UTLANDET' && <OppholdUtenforEUEOS />}
 
                 <Controller
                     name={sporsmal.id}
