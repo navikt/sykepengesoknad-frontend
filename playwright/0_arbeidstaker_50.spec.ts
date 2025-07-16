@@ -24,9 +24,20 @@ test.describe('Tester arbeidstakersøknad - gradert 50%', () => {
 
             // const pageDomContent = await page.content()
             // console.log(pageDomContent) // For debugging, remove in production
-            const checkbox = page.locator('input[data-cy="bekreftCheckboksPanel"]')
-            await expect(checkbox).toBeVisible()
-            await checkbox.check()
+            // const checkbox = page.locator('input[data-cy="bekreftCheckboksPanel"]')
+            // await expect(checkbox).toBeVisible()
+            // await checkbox.check()
+            // await page.locator('button').filter({ hasText: 'Start søknad' }).click()
+
+            await page.getByLabel('Jeg bekrefter at jeg vil svare så riktig som jeg kan.').check();
+
+
+            // Klikk "Start søknaden"
+            await expect(page.getByRole('button', { name: 'Start søknaden' })).toBeVisible()
+            await page.getByRole('button', { name: 'Start søknaden' }).click()
+
+
+
         })
 
         await test.step('Tilbake til ANSVARSERKLARING og frem igjen', async () => {
