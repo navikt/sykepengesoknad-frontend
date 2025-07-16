@@ -22,9 +22,11 @@ test.describe('Tester arbeidstakersøknad - gradert 50%', () => {
             // checkViStolerPaDeg() - likely checks and interacts with a consent
             // Assuming it's checking and clicking a checkbox
 
-            const pageDomContent = await page.content()
-            console.log(pageDomContent) // For debugging, remove in production
-            await page.locator('[data-cy="ansvarserklaering"] input[type="checkbox"]').check() // Adjust selector
+            // const pageDomContent = await page.content()
+            // console.log(pageDomContent) // For debugging, remove in production
+            const checkbox = page.locator('input[data-cy="bekreftCheckboksPanel"]')
+            await expect(checkbox).toBeVisible()
+            await checkbox.check()
         })
 
         await test.step('Tilbake til ANSVARSERKLARING og frem igjen', async () => {
