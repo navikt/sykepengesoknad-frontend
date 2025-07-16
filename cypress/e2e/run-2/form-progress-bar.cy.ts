@@ -79,7 +79,7 @@ describe('Tester form progress bar', () => {
     it('Vi besvarer litt videre og endre på kvittering', function () {
         neiOgVidere([
             'Andre inntektskilder',
-            'Reise til utlandet',
+            'Reise utenfor EU/EØS',
             'Reisetilskudd',
             'Før du fikk sykmelding',
             'Reise med bil',

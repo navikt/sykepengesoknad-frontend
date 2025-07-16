@@ -361,7 +361,7 @@ describe('Tester støtte for gamle spørsmål', () => {
         svarNeiHovedsporsmal()
         klikkGaVidere()
     })
-    it('Reise til utlandet', () => {
+    it('Reise utenfor EU/EØS', () => {
         svarNeiHovedsporsmal()
         klikkGaVidere()
     })

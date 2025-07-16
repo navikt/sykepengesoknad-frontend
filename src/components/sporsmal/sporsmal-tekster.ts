@@ -299,7 +299,7 @@ const SporsmalTekster = {
 
     'sykepengesoknad.fta_jobbsituasjonen_din.tittel': 'Jobbsituasjonen din',
     'sykepengesoknad.fta_inntekt_underveis.tittel': 'Inntekt underveis',
-    'sykepengesoknad.fta_reise_til_utlandet.tittel': 'Reise til utlandet',
+    'sykepengesoknad.fta_reise_til_utlandet.tittel': 'Reise utenfor EU/EØS',
     'soknad.feilmelding.FTA_JOBBSITUASJONEN_DIN': 'Du må svare på om du begynte du i ny jobb',
     'soknad.feilmelding.FTA_JOBBSITUASJONEN_DIN_JA': '',
     'soknad.feilmelding.FTA_JOBBSITUASJONEN_DIN_NAR': '',
