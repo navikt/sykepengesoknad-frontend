@@ -16,7 +16,7 @@ export const SkeletonSporsmalForm = () => {
                         Gå videre
                     </Button>
                     <Button as={Skeleton} variant="tertiary" type="button" className="flex">
-                        Lagre søknad og fortsett senere
+                        Avslutt og fortsett senere
                     </Button>
                     <Button as={Skeleton} variant="tertiary" type="button" className="flex">
                         Jeg har ikke behov for denne søknaden
@@ -39,7 +39,7 @@ export const SkeletonSporsmalForm = () => {
                     Gå videre
                 </Button>
                 <Button as={Skeleton} variant="tertiary" type="button" className="flex">
-                    Lagre søknad og fortsett senere
+                    Avslutt og fortsett senere
                 </Button>
                 <Button as={Skeleton} variant="tertiary" type="button" className="flex">
                     Jeg har ikke behov for denne søknaden
