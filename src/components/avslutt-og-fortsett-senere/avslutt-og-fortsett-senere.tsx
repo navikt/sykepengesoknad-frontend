@@ -13,13 +13,16 @@ const AvsluttOgFortsettSenere = () => {
     const [aapen, setAapen] = useState<boolean>(false)
 
 
-    if (valgtSoknad && valgtSoknad.soknadstype === 'OPPHOLD_UTLAND') {
+    if (valgtSoknad && valgtSoknad.soknadstype === 'OPPHOLD_UTLAND' && stegId == "1") {
         // For utenlandssøknader skal ikke denne knappen vises
         return <div>Lagre søknad og fortsett senere [var her]</div>
     }
 
     return (
         <>
+
+            {/*JSON.stringify(valgtSoknad)*/}
+            {JSON.stringify(stegId)}
             <Button
                 className={cn('block', { '-ml-5': valgtSoknad })}
                 variant="tertiary"
