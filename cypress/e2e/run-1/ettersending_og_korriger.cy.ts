@@ -22,7 +22,7 @@ describe('Tester ettersending og korrigering', () => {
             'Jobb underveis i sykefraværet',
             'Arbeid utenfor Norge',
             'Andre inntektskilder',
-            'Reise til utlandet',
+            'Reise utenfor EU/EØS',
         ])
 
         cy.contains('Oppsummering fra søknaden')

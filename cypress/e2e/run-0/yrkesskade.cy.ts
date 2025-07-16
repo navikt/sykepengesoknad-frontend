@@ -29,7 +29,7 @@ describe('Tester yrkesskadesspørsmål', () => {
             'Arbeid utenfor Norge',
         ])
 
-        neiOgVidere(['Andre inntektskilder', 'Reise til utlandet'])
+        neiOgVidere(['Andre inntektskilder', 'Reise utenfor EU/EØS'])
     })
 
     it('Kommer til spørsmål om yrkesskade', function () {

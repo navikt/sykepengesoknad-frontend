@@ -43,7 +43,7 @@ describe('Tester korrigering av ferie', () => {
         cy.contains('NAV trenger å vite om din pensjonsgivende inntekt')
         svarNeiHovedsporsmal()
         klikkGaVidere()
-        cy.contains('Reise til utlandet')
+        cy.contains('Reise utenfor EU/EØS')
         svarNeiHovedsporsmal()
         klikkGaVidere()
         cy.contains('Oppsummering fra søknaden')

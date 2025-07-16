@@ -103,7 +103,7 @@ describe('Tester søknad til utenlandsk sykmelding', () => {
             'Arbeid utenfor Norge',
         ])
 
-        neiOgVidere(['Andre inntektskilder', 'Reise til utlandet'])
+        neiOgVidere(['Andre inntektskilder', 'Reise utenfor EU/EØS'])
     })
 
     it('Søknad TIL_SLUTT', function () {
