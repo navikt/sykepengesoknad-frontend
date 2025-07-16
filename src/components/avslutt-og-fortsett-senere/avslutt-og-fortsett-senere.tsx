@@ -23,20 +23,11 @@ const AvsluttOgFortsettSenere = () => {
 
     const { control } = useFormContext()
 
-    const relevantTagList = ['LAND']
+    const landSporsmalId = hentSporsmal(valgtSoknad!, 'LAND')?.id || ''
 
-    const tagToIdMap = new Map<string, string>()
-
-    relevantTagList.forEach((tag) => {
-        const sporsmalId = hentSporsmal(valgtSoknad!, tag)?.id
-        if (sporsmalId) {
-            tagToIdMap.set(tag, sporsmalId)
-        }
-    })
-
-    const hvilkenLandVerdi =  useWatch({
+    const hvilkenLandVerdi = useWatch({
         control,
-        name: tagToIdMap.get('LAND') || '',
+        name: landSporsmalId,
     })
 
     /*
