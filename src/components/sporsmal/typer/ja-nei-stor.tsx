@@ -71,6 +71,8 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
         return sporsmal.sporsmalstekst
     }
 
+    const erOppholdUtenforEUEOS = sporsmal.tag === 'OPPHOLD_UTENFOR_EOS' || sporsmal.tag === 'FTA_REISE_TIL_UTLANDET'
+
     return (
         <>
             <div>
@@ -83,8 +85,7 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
                 {sporsmal.tag === 'NYTT_ARBEIDSFORHOLD_UNDERVEIS' && (
                     <NyttArbeidsforhold key="nytt-arbeidsforhold" spm={sporsmal} />
                 )}
-                {sporsmal.tag === 'OPPHOLD_UTENFOR_EOS' && <OppholdUtenforEUEOS />}
-                {sporsmal.tag === 'FTA_REISE_TIL_UTLANDET' && <OppholdUtenforEUEOS />}
+                {erOppholdUtenforEUEOS && <OppholdUtenforEUEOS />}
 
                 <Controller
                     name={sporsmal.id}
@@ -184,6 +185,13 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
 
                         <YrkesskadeInfo sporsmal={sporsmal} jaNeiSvar={watchJaNei} />
                         <PaskeferieInfo sporsmal={sporsmal} jaNeiSvar={watchJaNei} />
+
+                        {erOppholdUtenforEUEOS && (
+                            <Alert variant="info" className="mt-4">
+                                Nav oppretter en egen søknad som du må sende inn. Du får varsel når den er klar, og
+                                finner den under Ditt sykefravær etter at du har sendt inn denne søknaden.
+                            </Alert>
+                        )}
                     </>
                 </AnimateOnMount>
             </div>
