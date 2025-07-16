@@ -101,7 +101,7 @@ test.describe('Friskmeldt til arbeidsformidling', () => {
         )
         await fjernAnimasjoner(page)
         await checkViStolerPaDeg(page)
-        await neiOgVidere(page, ['Jobbsituasjonen din', 'Inntekt underveis', 'Reise til utlandet'])
+        await neiOgVidere(page, ['Jobbsituasjonen din', 'Inntekt underveis', 'Reise utenfor EU/EØS'])
 
         await page.getByRole('button', { name: 'Send søknaden' }).click()
         await harSynligTittel(page, 'Søknaden er sendt til NAV', 2)
@@ -111,7 +111,7 @@ test.describe('Friskmeldt til arbeidsformidling', () => {
 
     async function fullforSoknad(page: Page) {
         await klikkGaVidere(page)
-        await neiOgVidere(page, ['Inntekt underveis', 'Reise til utlandet'])
+        await neiOgVidere(page, ['Inntekt underveis', 'Reise utenfor EU/EØS'])
         await harSynligTittel(page, 'Oppsummering', 2)
         await page.getByRole('button', { name: 'Send søknaden' }).click()
         await harSynligTittel(page, 'Søknaden er sendt til NAV', 2)
