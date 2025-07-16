@@ -98,8 +98,8 @@ export async function avbryterSoknad(page: Page) {
     // 1. Avbryt-knappen er synleg før modalen er aktiv
     await modalIkkeAktiv(page)
 
-    await expect(page.getByRole('button', { name: 'Jeg har ikke behov for denne søknaden' })).toBeVisible()
-    await page.getByRole('button', { name: 'Jeg har ikke behov for denne søknaden' }).click()
+    await expect(page.getByRole('button', { name: 'Jeg vil slette denne søknaden' })).toBeVisible()
+    await page.getByRole('button', { name: 'Jeg vil slette denne søknaden' }).click()
 
     // 2. No er modalen aktiv, og me ser 'Nei, jeg har behov for søknaden'
     await modalAktiv(page)
@@ -110,9 +110,9 @@ export async function avbryterSoknad(page: Page) {
     await modalIkkeAktiv(page)
     await expect(page.getByText('Nei, jeg har behov for søknaden')).not.toBeVisible()
 
-    // 4. Klikk på 'Jeg har ikke behov for denne søknaden' endå ein gong
-    await expect(page.getByRole('button', { name: 'Jeg har ikke behov for denne søknaden' })).toBeVisible()
-    await page.getByRole('button', { name: 'Jeg har ikke behov for denne søknaden' }).click()
+    // 4. Klikk på 'Jeg vil slette denne søknaden' endå ein gong
+    await expect(page.getByRole('button', { name: 'Jeg vil slette denne søknaden' })).toBeVisible()
+    await page.getByRole('button', { name: 'Jeg vil slette denne søknaden' }).click()
 
     // 5. Ny modalvising med ekstra tekst
     await modalAktiv(page)

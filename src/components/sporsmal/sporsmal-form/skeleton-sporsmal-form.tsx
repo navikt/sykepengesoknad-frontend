@@ -19,7 +19,7 @@ export const SkeletonSporsmalForm = () => {
                         Avslutt og fortsett senere
                     </Button>
                     <Button as={Skeleton} variant="tertiary" type="button" className="flex">
-                        Jeg har ikke behov for denne søknaden
+                        Jeg vil slette denne søknaden
                     </Button>
                 </div>
             </>
@@ -42,7 +42,7 @@ export const SkeletonSporsmalForm = () => {
                     Avslutt og fortsett senere
                 </Button>
                 <Button as={Skeleton} variant="tertiary" type="button" className="flex">
-                    Jeg har ikke behov for denne søknaden
+                    Jeg vil slette denne søknaden
                 </Button>
             </div>
         </>

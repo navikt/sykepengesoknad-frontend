@@ -33,7 +33,7 @@ Krever browsere installert. Kjør: `npx playwright install`
 | Åpne hjelpetekst i alle spørsmål untatt noen få            |            |             |               |      x       |       |              |       x       |
 | Åpne/lukke "Slik behandler NAV personopplysningene dine"   |            |      x      |               |              |   x   |              |       x       |
 | Åpne/lukke "Avslutt og fortsett senere"               |            |      x      |               |              |       |              |       x       |
-| Åpne/lukke "Jeg har ikke behov for denne søknaden"         |            |      x      |               |              |       |              |       x       |
+| Åpne/lukke "Jeg vil slette denne søknaden"         |            |      x      |               |              |       |              |       x       |
 | Åpne/lukke "Jeg vil endre svarene i søknaden"              |            |             |               |              |   x   |              |               |
 | Navigering i brødsmulesti                                  |            |             |               |              |   x   |              |               |
 | Navigering fra/til andre spørsmål via "tilbake" knappen    |            |      x      |               |      x       |   x   |              |               |

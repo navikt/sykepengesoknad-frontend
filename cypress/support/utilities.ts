@@ -184,14 +184,14 @@ export function svarCheckboxSporsmal(sporsmal: string, svar: string) {
 export function avbryterSoknad() {
     // Avbryt dialog vises
     modalIkkeAktiv()
-    cy.contains('Jeg har ikke behov for denne søknaden').as('avbrytSoknad').should('be.visible')
+    cy.contains('Jeg vil slette denne søknaden').as('avbrytSoknad').should('be.visible')
     cy.get('@avbrytSoknad').click()
     modalAktiv()
     cy.contains('Nei, jeg har behov for søknaden').should('be.visible')
     cy.findByRole('button', { name: 'Nei, jeg har behov for søknaden' }).click()
     modalIkkeAktiv()
     cy.contains('Nei, jeg har behov for søknaden').should('not.be.visible')
-    cy.contains('Jeg har ikke behov for denne søknaden').should('be.visible').click()
+    cy.contains('Jeg vil slette denne søknaden').should('be.visible').click()
     modalAktiv()
     cy.contains('Fjerner du søknaden vil du ikke få sykepenger basert på denne søknaden.').should('be.visible')
     cy.contains('Ja, jeg er sikker').should('be.visible')
