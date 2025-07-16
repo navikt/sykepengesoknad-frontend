@@ -6,23 +6,57 @@ import { tekst } from '../../utils/tekster'
 import { logEvent } from '../amplitude/amplitude'
 import { useSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
 import { cn } from '../../utils/tw-utils'
+import { Controller, useFormContext, useWatch } from 'react-hook-form'
+import { watch } from "node:fs";
+import { hentSporsmal, hentUndersporsmal } from "../../utils/soknad-utils";
+
+
+const blokkkerBrukerFraAGaVidereNarDeIkkeTrengerASoke = (valgSoknadStegId) => {
+    return null
+}
+
 
 const AvsluttOgFortsettSenere = () => {
     const { valgtSoknad, stegId } = useSoknadMedDetaljer()
 
     const [aapen, setAapen] = useState<boolean>(false)
 
+    const { control } = useFormContext()
 
-    if (valgtSoknad && valgtSoknad.soknadstype === 'OPPHOLD_UTLAND' && stegId == "1") {
+    const relevantTagList = ['LAND']
+
+    const tagToIdMap = new Map<string, string>()
+
+    relevantTagList.forEach((tag) => {
+        const sporsmalId = hentSporsmal(valgtSoknad!, tag)?.id
+        if (sporsmalId) {
+            tagToIdMap.set(tag, sporsmalId)
+        }
+    })
+
+    const hvilkenLandVerdi =  useWatch({
+        control,
+        name: tagToIdMap.get('LAND') || '',
+    })
+
+    /*
+
+    const watchTimer = (hentUndersporsmal(sporsmal!, 'HVOR_MYE_TIMER_VERDI')!.id)
+*/
+
+
+
+    // denne skal bli satt til 1 om vi vil ha en unik knapp for å avslutte og fortsette senere her
+    if (valgtSoknad && valgtSoknad.soknadstype === 'OPPHOLD_UTLAND' && stegId == "4") {
         // For utenlandssøknader skal ikke denne knappen vises
         return <div>Lagre søknad og fortsett senere [var her]</div>
     }
 
     return (
         <>
-
-            {/*JSON.stringify(valgtSoknad)*/}
-            {JSON.stringify(stegId)}
+            {JSON.stringify(hvilkenLandVerdi)}<br />
+            {JSON.stringify(valgtSoknad)}<br />
+            {JSON.stringify(stegId)}<br />
             <Button
                 className={cn('block', { '-ml-5': valgtSoknad })}
                 variant="tertiary"

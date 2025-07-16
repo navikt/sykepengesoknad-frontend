@@ -25,6 +25,10 @@ interface TimerProsentAlertProps {
 const TimerProsentAlert = ({ valgtSoknad, beregnGradNy }: TimerProsentAlertProps) => {
     const { control } = useFormContext()
 
+
+
+
+
     const relevantTagList = ['HVOR_MYE_TIMER_VERDI', 'JOBBER_DU_NORMAL_ARBEIDSUKE', 'HVOR_MANGE_TIMER_PER_UKE']
 
     const tagToIdMap = new Map<string, string>()
