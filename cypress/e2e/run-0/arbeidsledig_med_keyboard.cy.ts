@@ -79,6 +79,7 @@ describe('Tester arbeidsledigsøknad', () => {
         cy.realPress('Tab')
         cy.realPress('Tab')
         cy.realPress('Tab')
+        cy.realPress('Tab')
         cy.realPress('Space')
         cy.realPress('{rightarrow}')
         cy.realPress('Tab')
