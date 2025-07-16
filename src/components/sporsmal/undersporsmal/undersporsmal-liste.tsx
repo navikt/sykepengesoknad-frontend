@@ -28,7 +28,7 @@ const UndersporsmalListe = ({ oversporsmal, oversporsmalSvar }: UndersporsmalLis
 
             {oversporsmal.undersporsmal
                 .map((underspm: Sporsmal, idx: number) => (
-                    <div data-sporsmaltag={underspm.tag} key={underspm.id}>
+                    <div data-sporsmaltag={underspm.tag} data-sporsmaltype={underspm.svartype} key={underspm.id}>
                         <SporsmalSwitch
                             key={underspm.id}
                             sporsmal={underspm}
