@@ -12,6 +12,12 @@ const AvsluttOgFortsettSenere = () => {
 
     const [aapen, setAapen] = useState<boolean>(false)
 
+
+    if (valgtSoknad && valgtSoknad.soknadstype === 'OPPHOLD_UTLAND') {
+        // For utenlandssøknader skal ikke denne knappen vises
+        return <div>Lagre søknad og fortsett senere [var her]</div>
+    }
+
     return (
         <>
             <Button
