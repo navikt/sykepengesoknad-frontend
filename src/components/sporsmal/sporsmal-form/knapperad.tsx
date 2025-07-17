@@ -24,11 +24,10 @@ const erLandIEuEos = (land: string) => {
 const soknadOmÅBeholdeSykepengerUtenforEUEøsSpecialCase = () => {
     return (
         <div className="my-8 border-t border-gray-400" data-cy="knapperad">
-            <div className={"mt-4"}>
+            <div className="mt-4">
                 <AvbrytSoknadModal euEøsSpecialCase={true} />
             </div>
-
-            </div>
+        </div>
     )
 }
 
@@ -119,9 +118,6 @@ const Knapperad = ({ poster, setVisFlexjar }: { poster: boolean; setVisFlexjar: 
                     {knappetekst()}
                 </Button>
             </div>
-
-            {soknad && soknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND && <div>hello</div>}
-
             <AvsluttOgFortsettSenere />
             <AvbrytSoknadModal />
         </div>

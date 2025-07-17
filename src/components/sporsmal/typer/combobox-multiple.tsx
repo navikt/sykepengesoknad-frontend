@@ -22,7 +22,7 @@ const ComboboxMultiple = ({ sporsmal }: SpmProps) => {
             setApneListe(false)
             settErKlikketUtenfor(false)
         }
-    }, [erKlikketUtenfor, apneListe])
+    }, [erKlikketUtenfor, apneListe, settErKlikketUtenfor])
 
     const options = useMemo(() => {
         if (sporsmal.tag == 'LAND') {
@@ -33,7 +33,6 @@ const ComboboxMultiple = ({ sporsmal }: SpmProps) => {
         }
         throw new Error('Ugyldig tag for landvelger: ' + sporsmal.tag)
     }, [sporsmal])
-
 
     return (
         <div ref={ref}>
@@ -62,7 +61,7 @@ const ComboboxMultiple = ({ sporsmal }: SpmProps) => {
                                 shouldAutocomplete={true}
                                 selectedOptions={field.value}
                                 onFocus={handleToggle}
-                                onKeyDownCapture={event => {
+                                onKeyDownCapture={(event) => {
                                     if (erBokstavEllerMellomrom(event.key)) {
                                         setApneListe(true)
                                     } else if (event.key === 'Enter') {
@@ -73,9 +72,7 @@ const ComboboxMultiple = ({ sporsmal }: SpmProps) => {
                                 }}
                                 onToggleSelected={(option, isSelected) => {
                                     const optionLowerCase = option.toLowerCase()
-                                    const valgtLand = options.find(
-                                        land => optionLowerCase === land.toLowerCase()
-                                    )
+                                    const valgtLand = options.find((land) => optionLowerCase === land.toLowerCase())
                                     if (!valgtLand) return
 
                                     if (isSelected) {
@@ -83,9 +80,7 @@ const ComboboxMultiple = ({ sporsmal }: SpmProps) => {
                                             field.onChange([...field.value, valgtLand])
                                         }
                                     } else {
-                                        field.onChange(
-                                            field.value.filter((item: string) => item !== valgtLand)
-                                        )
+                                        field.onChange(field.value.filter((item: string) => item !== valgtLand))
                                     }
                                 }}
                             />
