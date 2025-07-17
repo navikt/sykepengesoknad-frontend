@@ -36,7 +36,7 @@ describe('Tester arbeidstakersøknad', () => {
         cy.contains('Slik behandler NAV personopplysningene dine').click()
 
         // Avbryt dialog vises
-        cy.contains('Jeg har ikke behov for denne søknaden').click()
+        cy.contains('Jeg vil slette denne søknaden').click()
         cy.findByRole('button', { name: 'Nei, jeg har behov for søknaden' }).click()
 
         // Må godkjenne ANSVARSERKLARING først
