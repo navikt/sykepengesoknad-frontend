@@ -10,6 +10,44 @@ import { Controller, useFormContext, useWatch } from 'react-hook-form'
 import { watch } from "node:fs";
 import { hentSporsmal, hentUndersporsmal } from "../../utils/soknad-utils";
 
+const euEosLand = [
+  "Østerrike",
+  "Belgia",
+  "Bulgaria",
+  "Kroatia",
+  "Kypros",
+  "Tsjekkia",
+  "Danmark",
+  "Estland",
+  "Finland",
+  "Frankrike",
+  "Tyskland",
+  "Hellas",
+  "Ungarn",
+  "Irland",
+  "Italia",
+  "Latvia",
+  "Litauen",
+  "Luxembourg",
+  "Malta",
+  "Nederland",
+  "Polen",
+  "Portugal",
+  "Romania",
+  "Slovakia",
+  "Slovenia",
+  "Spania",
+  "Sverige",
+  "Island",
+  "Liechtenstein",
+  "Norge"
+];
+
+
+const erLandIEuEos = (land: string) => {
+  return euEosLand.includes(land.trim());
+}
+
 
 const blokkkerBrukerFraAGaVidereNarDeIkkeTrengerASoke = (valgSoknadStegId) => {
     return null
@@ -25,15 +63,12 @@ const AvsluttOgFortsettSenere = () => {
 
     const landSporsmalId = hentSporsmal(valgtSoknad!, 'LAND')?.id || ''
 
-    const hvilkenLandVerdi = useWatch({
+    const hvilkenLandVerdi: string[] = useWatch({
         control,
         name: landSporsmalId,
     })
 
-    /*
-
-    const watchTimer = (hentUndersporsmal(sporsmal!, 'HVOR_MYE_TIMER_VERDI')!.id)
-*/
+    const alleLandIEuEos = hvilkenLandVerdi?.every((land) => erLandIEuEos(land)) && hvilkenLandVerdi.length > 0
 
 
 
@@ -45,6 +80,8 @@ const AvsluttOgFortsettSenere = () => {
 
     return (
         <>
+
+            {alleLandIEuEos && alleLandIEuEos.toString()}<br />
             {JSON.stringify(hvilkenLandVerdi)}<br />
             {JSON.stringify(valgtSoknad)}<br />
             {JSON.stringify(stegId)}<br />
