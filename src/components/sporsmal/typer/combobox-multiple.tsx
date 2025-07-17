@@ -95,7 +95,7 @@ const ComboboxMultiple = ({ sporsmal }: SpmProps) => {
                                 }
                             } else {
                                 // Remove from form value
-                                field.onChange(field.value.filter((item) => item !== valgtLand))
+                                field.onChange(field.value.filter((item: string) => item !== valgtLand))
                                 // Remove from IEOS state if present
                                 if (isIEOS) {
                                     setValgtLandIEOS(valgtLandIEOS.filter((l) => l !== valgtLand))
