@@ -1,5 +1,5 @@
-import React from 'react'
-import { useFormContext } from 'react-hook-form'
+import React, { useState } from 'react'
+import { useFormContext, useWatch } from 'react-hook-form'
 import { Button, Skeleton } from '@navikt/ds-react'
 import { ArrowRightIcon } from '@navikt/aksel-icons'
 
@@ -11,49 +11,67 @@ import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus'
 import AvsluttOgFortsettSenere from '../../avslutt-og-fortsett-senere/avslutt-og-fortsett-senere'
 import AvbrytSoknadModal from '../../avbryt-soknad-modal/avbryt-soknad-modal'
 import { Tilbake } from '../tilbake-knapp/tilbake'
-import { Soknad } from "../../../types/types";
+import { Soknad } from '../../../types/types'
+import { landlisteUtenforEøs, landlisteEøs } from '../../sporsmal/landliste'
 
+// bør bruke denne: src/components/sporsmal/landliste.ts
+const euEosLand = landlisteEøs
 
-const soknadOmÅBeholdeSykepengerUtenforEUEøsSpecialCase = (soknad : Soknad  ) => {
-    return <div className="my-8 border-t border-gray-400" data-cy="knapperad">
-
-        {soknad && soknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND && <div>hello</div>}
-
-        <AvbrytSoknadModal />
-    </div>;
+const erLandIEuEos = (land: string) => {
+    return euEosLand.includes(land.trim())
 }
 
+const soknadOmÅBeholdeSykepengerUtenforEUEøsSpecialCase = () => {
+    return (
+        <div className="my-8 border-t border-gray-400" data-cy="knapperad">
+            <AvbrytSoknadModal euEøsSpecialCase={true} />
+        </div>
+    )
+}
 
 const Knapperad = ({ poster, setVisFlexjar }: { poster: boolean; setVisFlexjar: (value: boolean) => void }) => {
-    const { valgtSoknad: soknad, sporsmal, stegNo } = useSoknadMedDetaljer();
+    const { valgtSoknad: soknad, sporsmal, stegNo } = useSoknadMedDetaljer()
 
-    const { getValues } = useFormContext();
-    const oppholdUtland = soknad?.soknadstype === RSSoknadstype.OPPHOLD_UTLAND;
-    const aktivtSteg = oppholdUtland ? stegNo : stegNo - 1;
+    const { getValues } = useFormContext()
+    const oppholdUtland = soknad?.soknadstype === RSSoknadstype.OPPHOLD_UTLAND
+    const aktivtSteg = oppholdUtland ? stegNo : stegNo - 1
+
+    const { valgtSoknad } = useSoknadMedDetaljer()
+
+    const { control } = useFormContext()
+
+    const landSporsmalId = hentSporsmal(valgtSoknad!, 'LAND')?.id || ''
+
+    const hvilkenLandVerdi: string[] = useWatch({
+        control,
+        name: landSporsmalId,
+    })
+
+    const alleLandIEuEos = hvilkenLandVerdi?.every((land) => erLandIEuEos(land)) && hvilkenLandVerdi.length > 0
 
     // du kunne skjult knapeprat her
     const skalSkjuleKnapperad = () => {
-        if (!soknad || !sporsmal) return false;
-        if (soknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND && sporsmal.tag === "ARBEIDSGIVER") {
-            const formValues = getValues();
-            const arbeidsgiverId = hentSporsmal(soknad, "ARBEIDSGIVER")!.id;
-            const ferieId = hentSporsmal(soknad, "FERIE")!.id;
-            return formValues[ ferieId ] === "JA" && formValues[ arbeidsgiverId ] === "JA";
+        if (!soknad || !sporsmal) return false
+        if (soknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND && sporsmal.tag === 'ARBEIDSGIVER') {
+            const formValues = getValues()
+            const arbeidsgiverId = hentSporsmal(soknad, 'ARBEIDSGIVER')!.id
+            const ferieId = hentSporsmal(soknad, 'FERIE')!.id
+            return formValues[ferieId] === 'JA' && formValues[arbeidsgiverId] === 'JA'
         }
-        return false;
-    };
+        return false
+    }
 
-    if (skalSkjuleKnapperad()) return null;
+    if (skalSkjuleKnapperad()) return null
 
-    if (soknad && soknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND && stegNo === 1) {
-        return soknadOmÅBeholdeSykepengerUtenforEUEøsSpecialCase(soknad);
+    if (soknad && soknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND && stegNo === 1 && alleLandIEuEos) {
+        return soknadOmÅBeholdeSykepengerUtenforEUEøsSpecialCase()
     }
 
     const knappetekst = () => {
-        if (!soknad) return tekst("sykepengesoknad.ga-videre");
+        if (!soknad) return tekst('sykepengesoknad.ga-videre')
 
         const erTagBekreftelse = (tag: string) =>
-            tag.includes("BEKREFT_OPPLYSNINGER") || ["TIL_SLUTT", "VAER_KLAR_OVER_AT"].includes(tag)
+            tag.includes('BEKREFT_OPPLYSNINGER') || ['TIL_SLUTT', 'VAER_KLAR_OVER_AT'].includes(tag)
 
         const erSisteSteg = sporsmal && erTagBekreftelse(sporsmal.tag)
         if (erSisteSteg) {
