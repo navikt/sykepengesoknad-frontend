@@ -13,7 +13,7 @@ interface LenkeProps {
 export function LenkeMedIkon(props: LenkeProps) {
     return (
         <Link className={cn(props.className)} target="_blank" rel="noopener" href={props.href}>
-            <BodyShort className="text-text-action" as="span">
+            <BodyShort className="text-blue-600" as="span">
                 {props.text}
             </BodyShort>
             <ExternalLinkIcon aria-hidden={true} />
