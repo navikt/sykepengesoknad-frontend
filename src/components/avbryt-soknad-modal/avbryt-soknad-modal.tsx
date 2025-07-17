@@ -14,7 +14,6 @@ const AvbrytKorrigering = () => {
     const { valgtSoknad, stegId } = useSoknadMedDetaljer()
 
     const [aapen, setAapen] = useState<boolean>(false)
-    const { logEvent } = useAvbryt()
 
     if (!valgtSoknad) return null
 
