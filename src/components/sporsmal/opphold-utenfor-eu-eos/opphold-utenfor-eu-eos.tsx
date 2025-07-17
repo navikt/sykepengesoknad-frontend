@@ -1,7 +1,9 @@
 import { Accordion, BodyLong } from '@navikt/ds-react'
 import React from 'react'
 
-import { LenkeMedIkon } from '../lenke-med-ikon/LenkeMedIkon'
+import { LenkeMedIkon } from '../../lenke-med-ikon/LenkeMedIkon'
+
+import { SjekkLandEuEos } from './sjekk-land-eu-eos'
 
 export const OppholdUtenforEUEOS = () => {
     return (
@@ -35,6 +37,7 @@ export const OppholdUtenforEUEOS = () => {
                     </Accordion.Content>
                 </Accordion.Item>
             </Accordion>
+            <SjekkLandEuEos />
         </>
     )
 }
