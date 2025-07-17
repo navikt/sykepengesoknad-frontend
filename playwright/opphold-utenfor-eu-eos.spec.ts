@@ -60,6 +60,34 @@ test.describe('Opphold utenfor EU/EØS', () => {
             ).toBeVisible()
         })
 
+        await test.step('Kan velge land for opphold utenfor EU/EØS', async () => {
+            const landVelgerOverskrift = page.getByText('Sjekk om landet er utenfor EU/EØS')
+            await expect(landVelgerOverskrift).toBeVisible()
+
+            const landVelger = page.getByRole('combobox', {
+                name: 'Sjekk om landet er utenfor EU/EØS',
+            })
+            await expect(landVelger).toBeVisible()
+
+            const valgteLand = landVelger.locator('..').locator('..').getByRole('listitem')
+
+            await landVelger.fill('Belgia')
+            await page.getByRole('option', { name: 'Belgia' }).click()
+            await expect(valgteLand.nth(0)).toHaveText('Belgia')
+
+            await landVelger.press('Escape')
+            await expect(
+                page.getByText('Du har ikke reist utenfor EU/EØS. Svar nei på dette spørsmålet.'),
+            ).toBeVisible()
+
+            await landVelger.fill('Afghanistan')
+            await page.getByRole('option', { name: 'Afghanistan' }).click()
+            await expect(valgteLand.nth(1)).toHaveText('Afghanistan')
+
+            await landVelger.press('Escape')
+            await expect(page.getByText('Du har reist utenfor EU/EØS.')).toBeVisible()
+        })
+
         await test.step('Viser info om opprettelse av egen søknad', async () => {
             await svarRadioGruppe(page, /Var du på reise utenfor EU\/EØS/i, 'Ja')
             await expect(
