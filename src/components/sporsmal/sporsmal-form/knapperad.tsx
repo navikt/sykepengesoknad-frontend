@@ -24,8 +24,11 @@ const erLandIEuEos = (land: string) => {
 const soknadOmÅBeholdeSykepengerUtenforEUEøsSpecialCase = () => {
     return (
         <div className="my-8 border-t border-gray-400" data-cy="knapperad">
-            <AvbrytSoknadModal euEøsSpecialCase={true} />
-        </div>
+            <div className={"mt-4"}>
+                <AvbrytSoknadModal euEøsSpecialCase={true} />
+            </div>
+
+            </div>
     )
 }
 

@@ -35,7 +35,7 @@ const ComboboxMultiple = ({ sporsmal }: SpmProps) => {
         throw new Error('Ugyldig tag for landvelger: ' + sporsmal.tag)
     }, [sporsmal])
 
-    const infoBoksMelding = (): string => {
+    const infoBoksMelding = (valgteLand : string[]): string => {
         if (valgtLandIEOS.length > 1) {
             if (valgtLandIEOS.length === 2) {
                 return `${valgtLandIEOS.join(' og ')} ligger innenfor EU/EØS, så du trenger ikke søke for disse landene.`
@@ -106,7 +106,7 @@ const ComboboxMultiple = ({ sporsmal }: SpmProps) => {
             />
             {valgtLandIEOS.length > 0 && (
                 <Alert className="mt-8" variant="info" closeButton={true} onClose={() => setValgtLandIEOS([])}>
-                    {infoBoksMelding()}
+                    {infoBoksMelding(valgteLand)}
                 </Alert>
             )}
         </div>

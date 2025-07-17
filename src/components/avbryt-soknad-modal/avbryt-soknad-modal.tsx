@@ -81,7 +81,23 @@ const AvbrytSoknadModal = ({ euEøsSpecialCase = false }: AvbrytSoknadModalProps
                     {tekst('avbryt.popup.tittel')}
                 </Button>
             )}
-            {euEøsSpecialCase && <Button variant="danger">Danger</Button>}
+            {euEøsSpecialCase && (
+                <Button
+                    variant="danger"
+                    type="button"
+                    data-cy="avbryt-soknad"
+                    onClick={() => {
+                        setAapen(true)
+                        logEvent('modal åpnet', {
+                            component: tekst('avbryt.popup.tittel'),
+                            soknadstype: valgtSoknad?.soknadstype,
+                            steg: stegId,
+                        })
+                    }}
+                >
+                    Avbryt søknad
+                </Button>
+            )}
 
             <Modal
                 open={aapen}
