@@ -33,7 +33,7 @@ const AvsluttOgFortsettSenere = () => {
         name: landSporsmalId,
     })
 
-    const alleLandIEuEos = hvilkenLandVerdi?.every((land) => erLandIEuEos(land)) && hvilkenLandVerdi.length > 0
+    const alleLandIEuEos = false // hvilkenLandVerdi?.every((land) => erLandIEuEos(land)) && hvilkenLandVerdi.length > 0
 
     // denne skal bli satt til 1 om vi vil ha en unik knapp for å avslutte og fortsette senere her
     if (valgtSoknad && valgtSoknad.soknadstype === 'OPPHOLD_UTLAND' && stegId == '1' && alleLandIEuEos) {
