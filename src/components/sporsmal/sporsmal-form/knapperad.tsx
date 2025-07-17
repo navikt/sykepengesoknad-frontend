@@ -19,6 +19,7 @@ const Knapperad = ({ poster, setVisFlexjar }: { poster: boolean; setVisFlexjar: 
     const oppholdUtland = soknad?.soknadstype === RSSoknadstype.OPPHOLD_UTLAND
     const aktivtSteg = oppholdUtland ? stegNo : stegNo - 1
 
+    // du kunne skjult knapeprat her
     const skalSkjuleKnapperad = () => {
         if (!soknad || !sporsmal) return false
         if (soknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND && sporsmal.tag === 'ARBEIDSGIVER') {

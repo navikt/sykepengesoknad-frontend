@@ -36,14 +36,14 @@ const AvsluttOgFortsettSenere = () => {
     const alleLandIEuEos = hvilkenLandVerdi?.every((land) => erLandIEuEos(land)) && hvilkenLandVerdi.length > 0
 
     // denne skal bli satt til 1 om vi vil ha en unik knapp for å avslutte og fortsette senere her
-    if (valgtSoknad && valgtSoknad.soknadstype === 'OPPHOLD_UTLAND' && stegId == '4') {
+    if (valgtSoknad && valgtSoknad.soknadstype === 'OPPHOLD_UTLAND' && stegId == '1' && alleLandIEuEos) {
         // For utenlandssøknader skal ikke denne knappen vises
         return <div>Lagre søknad og fortsett senere [var her]</div>
     }
 
     return (
         <>
-            {String(alleLandIEuEos)}
+            {"alle land i eøs: " + String(alleLandIEuEos)}
             <br />
             {JSON.stringify(hvilkenLandVerdi)}
             <br />
@@ -51,9 +51,12 @@ const AvsluttOgFortsettSenere = () => {
             <br />
             {JSON.stringify(stegId)}
             <br />
-            <Button
+
+
+
+             <Button
                 className={cn('block', { '-ml-5': valgtSoknad })}
-                variant="tertiary"
+                variant="primary"
                 type="button"
                 as={valgtSoknad ? Button : Skeleton}
                 data-cy="avslutt-og-fortsett-senere"
@@ -69,6 +72,7 @@ const AvsluttOgFortsettSenere = () => {
             >
                 {tekst('avslutt.popup.tittel')}
             </Button>
+
 
             <Modal
                 open={aapen}
