@@ -52,13 +52,13 @@ export const SjekkLandEuEos = () => {
                             />
 
                             {valgtLandIEOS.length > 0 && valgtLandUtenforEOS.length === 0 && (
-                                <Alert className="mt-8 bg-white" variant="info">
+                                <Alert inline className="mt-8 bg-white" variant="info">
                                     Du har ikke reist utenfor EU/EØS. Svar nei på dette spørsmålet.
                                 </Alert>
                             )}
 
                             {valgtLandUtenforEOS.length > 0 && (
-                                <Alert className="mt-8 bg-white" variant="info">
+                                <Alert inline className="mt-8 bg-white" variant="info">
                                     Du har reist utenfor EU/EØS.
                                 </Alert>
                             )}
