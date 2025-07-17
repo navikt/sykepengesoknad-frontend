@@ -20,10 +20,12 @@ export const OppholdUtenforEUEOS = () => {
                     </Accordion.Content>
                 </Accordion.Item>
                 <Accordion.Item>
-                    <Accordion.Header>Var reisen en behandlingsreise ved Oslo Universitetssykehus?</Accordion.Header>
+                    <Accordion.Header>
+                        Var reisen en behandlingsreise i regi av Oslo Universitetssykehus?
+                    </Accordion.Header>
                     <Accordion.Content>
                         <BodyLong spacing>
-                            Reiste du til utlandet i forbindelse med behandlingsreise ved Oslo Universitetssykehus
+                            Reiste du til utlandet i forbindelse med behandlingsreise i regi av Oslo Universitetssykehus
                             trenger du ikke søke om å beholde sykepengene på reise.
                         </BodyLong>
                         <BodyLong spacing>

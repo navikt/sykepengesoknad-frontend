@@ -45,7 +45,7 @@ test.describe('Opphold utenfor EU/EØS', () => {
             ).toBeVisible()
 
             const accordionOsloSykehus = page.getByRole('button', {
-                name: 'Var reisen en behandlingsreise ved Oslo Universitetssykehus?',
+                name: 'Var reisen en behandlingsreise i regi av Oslo Universitetssykehus?',
             })
             await expect(accordionOsloSykehus).toBeVisible()
             await accordionOsloSykehus.click()
@@ -54,7 +54,7 @@ test.describe('Opphold utenfor EU/EØS', () => {
                     .locator('div')
                     .filter({ has: accordionOsloSykehus })
                     .getByText(
-                        'Reiste du til utlandet i forbindelse med behandlingsreise ved Oslo Universitetssykehus',
+                        'Reiste du til utlandet i forbindelse med behandlingsreise i regi av Oslo Universitetssykehus',
                         { exact: false },
                     ),
             ).toBeVisible()
