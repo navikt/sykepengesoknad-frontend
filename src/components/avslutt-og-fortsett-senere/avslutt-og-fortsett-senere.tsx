@@ -10,39 +10,10 @@ import { logEvent } from '../amplitude/amplitude'
 import { useSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
 import { cn } from '../../utils/tw-utils'
 import { hentSporsmal, hentUndersporsmal } from '../../utils/soknad-utils'
+import { landlisteUtenforEøs, landlisteEøs } from '../sporsmal/landliste'
 
-const euEosLand = [
-    'Østerrike',
-    'Belgia',
-    'Bulgaria',
-    'Kroatia',
-    'Kypros',
-    'Tsjekkia',
-    'Danmark',
-    'Estland',
-    'Finland',
-    'Frankrike',
-    'Tyskland',
-    'Hellas',
-    'Ungarn',
-    'Irland',
-    'Italia',
-    'Latvia',
-    'Litauen',
-    'Luxembourg',
-    'Malta',
-    'Nederland',
-    'Polen',
-    'Portugal',
-    'Romania',
-    'Slovakia',
-    'Slovenia',
-    'Spania',
-    'Sverige',
-    'Island',
-    'Liechtenstein',
-    'Norge',
-]
+// bør bruke denne: src/components/sporsmal/landliste.ts
+const euEosLand = landlisteEøs
 
 const erLandIEuEos = (land: string) => {
     return euEosLand.includes(land.trim())
@@ -72,7 +43,7 @@ const AvsluttOgFortsettSenere = () => {
 
     return (
         <>
-            {alleLandIEuEos}
+            {String(alleLandIEuEos)}
             <br />
             {JSON.stringify(hvilkenLandVerdi)}
             <br />

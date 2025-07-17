@@ -79,6 +79,8 @@ const ComboboxMultiple = ({ sporsmal }: SpmProps) => {
                             const valgtLand = options.find((land) => optionLowerCase === land.toLowerCase())
                             if (!valgtLand) return
 
+
+                            // her gjør vi et spesifikt utvvalg for å håndtere eøs land
                             const isIEOS = landlisteEøs.includes(valgtLand) && sporsmal.tag === 'LAND'
 
                             if (isSelected) {
