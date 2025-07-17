@@ -19,10 +19,11 @@ const ComboboxMultiple = ({ sporsmal }: SpmProps) => {
     }
 
     useEffect(() => {
-        if (erKlikketUtenfor) {
+        if (erKlikketUtenfor && apneListe) {
             setApneListe(false)
+            settErKlikketUtenfor(false) // Optionally reset this for next time
         }
-    }, [erKlikketUtenfor])
+    }, [erKlikketUtenfor, apneListe])
 
     const options = useMemo(() => {
         if (sporsmal.tag == 'LAND') {
@@ -74,21 +75,29 @@ const ComboboxMultiple = ({ sporsmal }: SpmProps) => {
                             }
                         }}
                         onToggleSelected={(option, isSelected) => {
+                            const optionLowerCase = option.toLowerCase()
+                            const valgtLand = options.find((land) => optionLowerCase === land.toLowerCase())
+                            if (!valgtLand) return
+
+                            const isIEOS = landlisteEøs.includes(valgtLand) && sporsmal.tag === 'LAND'
+
                             if (isSelected) {
-                                const optionLowerCase = option.toLowerCase()
-                                const valgtLand = options.find((land) => optionLowerCase === land.toLowerCase())
-                                if (valgtLand) {
-                                    if (landlisteEøs.includes(valgtLand) && sporsmal.tag == 'LAND') {
-                                        const alleLand = [...valgtLandIEOS, valgtLand]
-                                        setValgtLandIEOS(alleLand)
-                                        setApneListe(false)
-                                    } else {
-                                        field.onChange([...field.value, valgtLand])
-                                    }
+                                // Add to form value if not already present
+                                if (!field.value.includes(valgtLand)) {
+                                    field.onChange([...field.value, valgtLand])
+                                }
+                                // Track IEOS selections separately
+                                if (isIEOS && !valgtLandIEOS.includes(valgtLand)) {
+                                    setValgtLandIEOS([...valgtLandIEOS, valgtLand])
+                                    setApneListe(false)
                                 }
                             } else {
-                                field.onChange(field.value.filter((item: string) => item !== option))
-                                setValgtLandIEOS([])
+                                // Remove from form value
+                                field.onChange(field.value.filter((item) => item !== valgtLand))
+                                // Remove from IEOS state if present
+                                if (isIEOS) {
+                                    setValgtLandIEOS(valgtLandIEOS.filter((l) => l !== valgtLand))
+                                }
                             }
                         }}
                     />

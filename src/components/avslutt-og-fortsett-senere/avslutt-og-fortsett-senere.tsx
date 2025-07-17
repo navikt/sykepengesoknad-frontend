@@ -1,58 +1,52 @@
+import { watch } from 'node:fs'
+
 import { BodyShort, Button, Modal, Skeleton } from '@navikt/ds-react'
 import React, { useState } from 'react'
+import { Controller, useFormContext, useWatch } from 'react-hook-form'
 
 import { minSideUrl } from '../../utils/environment'
 import { tekst } from '../../utils/tekster'
 import { logEvent } from '../amplitude/amplitude'
 import { useSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
 import { cn } from '../../utils/tw-utils'
-import { Controller, useFormContext, useWatch } from 'react-hook-form'
-import { watch } from "node:fs";
-import { hentSporsmal, hentUndersporsmal } from "../../utils/soknad-utils";
+import { hentSporsmal, hentUndersporsmal } from '../../utils/soknad-utils'
 
 const euEosLand = [
-  "Østerrike",
-  "Belgia",
-  "Bulgaria",
-  "Kroatia",
-  "Kypros",
-  "Tsjekkia",
-  "Danmark",
-  "Estland",
-  "Finland",
-  "Frankrike",
-  "Tyskland",
-  "Hellas",
-  "Ungarn",
-  "Irland",
-  "Italia",
-  "Latvia",
-  "Litauen",
-  "Luxembourg",
-  "Malta",
-  "Nederland",
-  "Polen",
-  "Portugal",
-  "Romania",
-  "Slovakia",
-  "Slovenia",
-  "Spania",
-  "Sverige",
-  "Island",
-  "Liechtenstein",
-  "Norge"
-];
-
+    'Østerrike',
+    'Belgia',
+    'Bulgaria',
+    'Kroatia',
+    'Kypros',
+    'Tsjekkia',
+    'Danmark',
+    'Estland',
+    'Finland',
+    'Frankrike',
+    'Tyskland',
+    'Hellas',
+    'Ungarn',
+    'Irland',
+    'Italia',
+    'Latvia',
+    'Litauen',
+    'Luxembourg',
+    'Malta',
+    'Nederland',
+    'Polen',
+    'Portugal',
+    'Romania',
+    'Slovakia',
+    'Slovenia',
+    'Spania',
+    'Sverige',
+    'Island',
+    'Liechtenstein',
+    'Norge',
+]
 
 const erLandIEuEos = (land: string) => {
-  return euEosLand.includes(land.trim());
+    return euEosLand.includes(land.trim())
 }
-
-
-const blokkkerBrukerFraAGaVidereNarDeIkkeTrengerASoke = (valgSoknadStegId) => {
-    return null
-}
-
 
 const AvsluttOgFortsettSenere = () => {
     const { valgtSoknad, stegId } = useSoknadMedDetaljer()
@@ -70,21 +64,22 @@ const AvsluttOgFortsettSenere = () => {
 
     const alleLandIEuEos = hvilkenLandVerdi?.every((land) => erLandIEuEos(land)) && hvilkenLandVerdi.length > 0
 
-
-
     // denne skal bli satt til 1 om vi vil ha en unik knapp for å avslutte og fortsette senere her
-    if (valgtSoknad && valgtSoknad.soknadstype === 'OPPHOLD_UTLAND' && stegId == "4") {
+    if (valgtSoknad && valgtSoknad.soknadstype === 'OPPHOLD_UTLAND' && stegId == '4') {
         // For utenlandssøknader skal ikke denne knappen vises
         return <div>Lagre søknad og fortsett senere [var her]</div>
     }
 
     return (
         <>
-
-            {alleLandIEuEos && alleLandIEuEos.toString()}<br />
-            {JSON.stringify(hvilkenLandVerdi)}<br />
-            {JSON.stringify(valgtSoknad)}<br />
-            {JSON.stringify(stegId)}<br />
+            {alleLandIEuEos}
+            <br />
+            {JSON.stringify(hvilkenLandVerdi)}
+            <br />
+            {JSON.stringify(valgtSoknad)}
+            <br />
+            {JSON.stringify(stegId)}
+            <br />
             <Button
                 className={cn('block', { '-ml-5': valgtSoknad })}
                 variant="tertiary"

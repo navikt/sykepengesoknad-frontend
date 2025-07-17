@@ -16,7 +16,6 @@ const AvbrytKorrigering = () => {
     const [aapen, setAapen] = useState<boolean>(false)
     const { logEvent } = useAvbryt()
 
-
     if (!valgtSoknad) return null
 
     return (
@@ -57,7 +56,7 @@ const AvbrytSoknadModal = () => {
 
     return (
         <>
-              <Button variant="danger">Danger</Button>
+            <Button variant="danger">Danger</Button>
 
             <Button
                 variant="tertiary"

@@ -82,7 +82,7 @@ const Knapperad = ({ poster, setVisFlexjar }: { poster: boolean; setVisFlexjar: 
                 </Button>
             </div>
 
-            {soknad && soknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND && <div>hello</div> }
+            {soknad && soknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND && <div>hello</div>}
 
             <AvsluttOgFortsettSenere />
             <AvbrytSoknadModal />
