@@ -177,7 +177,7 @@ export async function sporsmalOgSvar(container: Locator, sporsmal: string, svar:
     const siblingLocator = sporsmalLocator.locator('xpath=following-sibling::*')
 
     // 3. Sjekk at minst ett av søskenelementene inneholder `svar`
-    await expect(siblingLocator.first()).toContainText(svar)
+    await expect(siblingLocator.filter({ hasText: svar })).toBeVisible()
 }
 
 export async function harSynligTittel(page: Page, tittelTekst: string, level: number) {

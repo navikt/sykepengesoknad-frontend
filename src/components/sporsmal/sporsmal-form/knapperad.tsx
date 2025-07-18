@@ -1,5 +1,5 @@
 import React from 'react'
-import { useFormContext } from 'react-hook-form'
+import { useFormContext, useWatch } from 'react-hook-form'
 import { Button, Skeleton } from '@navikt/ds-react'
 import { ArrowRightIcon } from '@navikt/aksel-icons'
 
@@ -11,6 +11,23 @@ import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus'
 import AvsluttOgFortsettSenere from '../../avslutt-og-fortsett-senere/avslutt-og-fortsett-senere'
 import AvbrytSoknadModal from '../../avbryt-soknad-modal/avbryt-soknad-modal'
 import { Tilbake } from '../tilbake-knapp/tilbake'
+import { landlisteEøs } from '../../sporsmal/landliste'
+
+const euEosLand = landlisteEøs
+
+const erLandIEuEos = (land: string) => {
+    return euEosLand.includes(land.trim())
+}
+
+const soknadOmÅBeholdeSykepengerUtenforEUEøsSpecialCase = () => {
+    return (
+        <div className="my-8 border-t border-gray-400" data-cy="knapperad">
+            <div className="mt-4">
+                <AvbrytSoknadModal euEøsSpecialCase={true} />
+            </div>
+        </div>
+    )
+}
 
 const Knapperad = ({ poster, setVisFlexjar }: { poster: boolean; setVisFlexjar: (value: boolean) => void }) => {
     const { valgtSoknad: soknad, sporsmal, stegNo } = useSoknadMedDetaljer()
@@ -18,6 +35,19 @@ const Knapperad = ({ poster, setVisFlexjar }: { poster: boolean; setVisFlexjar: 
     const { getValues } = useFormContext()
     const oppholdUtland = soknad?.soknadstype === RSSoknadstype.OPPHOLD_UTLAND
     const aktivtSteg = oppholdUtland ? stegNo : stegNo - 1
+
+    const { valgtSoknad } = useSoknadMedDetaljer()
+
+    const { control } = useFormContext()
+
+    const landSporsmalId = hentSporsmal(valgtSoknad!, 'LAND')?.id || ''
+
+    const hvilkenLandVerdi: string[] = useWatch({
+        control,
+        name: landSporsmalId,
+    })
+
+    const alleLandIEuEos = hvilkenLandVerdi?.every((land) => erLandIEuEos(land)) && hvilkenLandVerdi.length > 0
 
     const skalSkjuleKnapperad = () => {
         if (!soknad || !sporsmal) return false
@@ -31,6 +61,10 @@ const Knapperad = ({ poster, setVisFlexjar }: { poster: boolean; setVisFlexjar: 
     }
 
     if (skalSkjuleKnapperad()) return null
+
+    if (soknad && soknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND && stegNo === 1 && alleLandIEuEos) {
+        return soknadOmÅBeholdeSykepengerUtenforEUEøsSpecialCase()
+    }
 
     const knappetekst = () => {
         if (!soknad) return tekst('sykepengesoknad.ga-videre')

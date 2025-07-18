@@ -42,7 +42,11 @@ const AvbrytKorrigering = () => {
     )
 }
 
-const AvbrytSoknadModal = () => {
+interface AvbrytSoknadModalProps {
+    euEøsSpecialCase?: boolean
+}
+
+const AvbrytSoknadModal = ({ euEøsSpecialCase = false }: AvbrytSoknadModalProps) => {
     const { valgtSoknad, stegId } = useSoknadMedDetaljer()
 
     const { mutate: avbrytMutation, isPending: avbryter, error: avbrytError } = useAvbryt()
@@ -55,25 +59,45 @@ const AvbrytSoknadModal = () => {
 
     return (
         <>
-            <Button
-                variant="tertiary"
-                type="button"
-                as={valgtSoknad ? Button : Skeleton}
-                className={cn('text-surface-danger hover:bg-red-50 hover:text-surface-danger', {
-                    '-ml-5': valgtSoknad,
-                })}
-                data-cy="avbryt-soknad"
-                onClick={() => {
-                    setAapen(true)
-                    logEvent('modal åpnet', {
-                        component: tekst('avbryt.popup.tittel'),
-                        soknadstype: valgtSoknad?.soknadstype,
-                        steg: stegId,
-                    })
-                }}
-            >
-                {tekst('avbryt.popup.tittel')}
-            </Button>
+            {!euEøsSpecialCase && (
+                <Button
+                    variant="tertiary"
+                    type="button"
+                    as={valgtSoknad ? Button : Skeleton}
+                    className={cn('text-surface-danger hover:bg-red-50 hover:text-surface-danger', {
+                        '-ml-5': valgtSoknad,
+                    })}
+                    data-cy="avbryt-soknad"
+                    onClick={() => {
+                        setAapen(true)
+                        logEvent('modal åpnet', {
+                            component: tekst('avbryt.popup.tittel'),
+                            soknadstype: valgtSoknad?.soknadstype,
+                            steg: stegId,
+                        })
+                    }}
+                >
+                    {tekst('avbryt.popup.tittel')}
+                </Button>
+            )}
+            {euEøsSpecialCase && (
+                <Button
+                    variant="danger"
+                    type="button"
+                    data-cy="avbryt-soknad"
+                    onClick={() => {
+                        setAapen(true)
+                        logEvent('modal åpnet', {
+                            component: tekst('avbryt.popup.tittel'),
+                            soknadstype: valgtSoknad?.soknadstype,
+                            steg: stegId,
+                        })
+                    }}
+                >
+                    Avbryt søknad
+                </Button>
+            )}
+
             <Modal
                 open={aapen}
                 header={{ heading: tekst('avbryt.popup.tittel') }}
