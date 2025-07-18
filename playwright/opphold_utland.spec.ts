@@ -72,25 +72,29 @@ test.describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
         ).toContainText('Du har kun vært innenfor EU/EØS, så du trenger ikke sende inn søknad.')
 
         await expect(page.getByRole('button', { name: 'Avbryt søknad' })).toBeVisible()
-        // Assert "Avslutt og fortsett senere" button does not exist
+        // Assert "Avslutt og fortsett senere" er borte
         await expect(page.getByRole('button', { name: 'Avslutt og fortsett senere' })).toHaveCount(0)
 
-        // Assert "Jeg vil slette denne søknaden" button does not exist
+        // Assert "Jeg vil slette denne søknaden" er borte
         await expect(page.getByRole('button', { name: 'Jeg vil slette denne søknaden' })).toHaveCount(0)
 
-        // await klikkGaVidere(page, true)
 
         // Velger land utenfor EU/EØS', async () => {
         // Sidan me framleis er på same side (spørsmål 1):
         await expect(page).toHaveURL(new RegExp(`${soknad.id}/1`))
 
-        // todo fjernet fordi vi nå ikke kan gå videre
-        // Klikk gå videre for å trigge feil
-        // await klikkGaVidere(page, true)
-        // await expect(page.getByText('Du må velge minst et alternativ fra menyen')).toBeVisible()
+        // Klikk gå videre utan å fylle inn -> forventa feil
 
         // Velger Afghanistan
         await svarCombobox(page, 'Hvilke(t) land skal du reise til?', 'Afg', 'Afghanistan')
+
+        // Assert "Avslutt og fortsett senere" er der igjen
+        await expect(page.getByRole('button', { name: 'Avslutt og fortsett senere' })).toHaveCount(1)
+
+        // Assert "Jeg vil slette denne søknaden" er der igjen
+        await expect(page.getByRole('button', { name: 'Jeg vil slette denne søknaden' })).toHaveCount(1)
+
+
         // Velger Fransk Polynesia, lukker med chip
         await svarCombobox(page, 'Hvilke(t) land skal du reise til?', 'Fransk', 'Fransk Polynesia')
         await page.locator('.navds-chips__chip-text', { hasText: 'Fransk Polynesia' }).click()
