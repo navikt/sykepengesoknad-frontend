@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useFormContext, useWatch } from 'react-hook-form'
 import { Button, Skeleton } from '@navikt/ds-react'
 import { ArrowRightIcon } from '@navikt/aksel-icons'
@@ -11,8 +11,7 @@ import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus'
 import AvsluttOgFortsettSenere from '../../avslutt-og-fortsett-senere/avslutt-og-fortsett-senere'
 import AvbrytSoknadModal from '../../avbryt-soknad-modal/avbryt-soknad-modal'
 import { Tilbake } from '../tilbake-knapp/tilbake'
-import { Soknad } from '../../../types/types'
-import { landlisteUtenforEøs, landlisteEøs } from '../../sporsmal/landliste'
+import { landlisteEøs } from '../../sporsmal/landliste'
 
 // bør bruke denne: src/components/sporsmal/landliste.ts
 const euEosLand = landlisteEøs

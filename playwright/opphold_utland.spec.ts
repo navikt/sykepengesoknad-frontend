@@ -51,19 +51,25 @@ test.describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
 
         // Velger land innanfor EØS
         await svarCombobox(page, 'Hvilke(t) land skal du reise til?', 'Hel', 'Hellas', true)
-        await expect(page.locator('.navds-alert', { hasText: 'Du har kun vært innenfor EU/EØS, så du trenger ikke sende inn søknad.'})).toContainText(
-            'Du har kun vært innenfor EU/EØS, så du trenger ikke sende inn søknad.',
-        )
+        await expect(
+            page.locator('.navds-alert', {
+                hasText: 'Du har kun vært innenfor EU/EØS, så du trenger ikke sende inn søknad.',
+            }),
+        ).toContainText('Du har kun vært innenfor EU/EØS, så du trenger ikke sende inn søknad.')
 
         await svarCombobox(page, 'Hvilke(t) land skal du reise til?', 'Svei', 'Sveits', true)
-        await expect(page.locator('.navds-alert', { hasText: 'Du har kun vært innenfor EU/EØS, så du trenger ikke sende inn søknad.'})).toContainText(
-            'Du har kun vært innenfor EU/EØS, så du trenger ikke sende inn søknad.',
-        )
+        await expect(
+            page.locator('.navds-alert', {
+                hasText: 'Du har kun vært innenfor EU/EØS, så du trenger ikke sende inn søknad.',
+            }),
+        ).toContainText('Du har kun vært innenfor EU/EØS, så du trenger ikke sende inn søknad.')
 
         await svarCombobox(page, 'Hvilke(t) land skal du reise til?', 'Lit', 'Litauen', true)
-        await expect(page.locator('.navds-alert', { hasText: 'Du har kun vært innenfor EU/EØS, så du trenger ikke sende inn søknad.'})).toContainText(
-            'Du har kun vært innenfor EU/EØS, så du trenger ikke sende inn søknad.',
-        )
+        await expect(
+            page.locator('.navds-alert', {
+                hasText: 'Du har kun vært innenfor EU/EØS, så du trenger ikke sende inn søknad.',
+            }),
+        ).toContainText('Du har kun vært innenfor EU/EØS, så du trenger ikke sende inn søknad.')
 
         await expect(page.getByRole('button', { name: 'Avbryt søknad' })).toBeVisible()
         // Assert "Avslutt og fortsett senere" button does not exist
@@ -72,13 +78,11 @@ test.describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
         // Assert "Jeg vil slette denne søknaden" button does not exist
         await expect(page.getByRole('button', { name: 'Jeg vil slette denne søknaden' })).toHaveCount(0)
 
-
         // await klikkGaVidere(page, true)
 
         // Velger land utenfor EU/EØS', async () => {
         // Sidan me framleis er på same side (spørsmål 1):
         await expect(page).toHaveURL(new RegExp(`${soknad.id}/1`))
-
 
         // todo fjernet fordi vi nå ikke kan gå videre
         // Klikk gå videre for å trigge feil
