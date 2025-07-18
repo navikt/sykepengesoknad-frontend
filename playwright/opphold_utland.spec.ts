@@ -82,9 +82,7 @@ test.describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
         // Velger land utenfor EU/EØS', async () => {
         // Sidan me framleis er på same side (spørsmål 1):
         await expect(page).toHaveURL(new RegExp(`${soknad.id}/1`))
-
-        // Klikk gå videre utan å fylle inn -> forventa feil
-
+        
         // Velger Afghanistan
         await svarCombobox(page, 'Hvilke(t) land skal du reise til?', 'Afg', 'Afghanistan')
 
