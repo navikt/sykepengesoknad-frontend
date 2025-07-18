@@ -51,29 +51,39 @@ test.describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
 
         // Velger land innanfor EØS
         await svarCombobox(page, 'Hvilke(t) land skal du reise til?', 'Hel', 'Hellas', true)
-        await expect(page.locator('.navds-alert', { hasText: 'ligger innenfor EU/EØS' })).toContainText(
-            'Hellas ligger innenfor EU/EØS',
+        await expect(page.locator('.navds-alert', { hasText: 'Du har kun vært innenfor EU/EØS, så du trenger ikke sende inn søknad.'})).toContainText(
+            'Du har kun vært innenfor EU/EØS, så du trenger ikke sende inn søknad.',
         )
 
         await svarCombobox(page, 'Hvilke(t) land skal du reise til?', 'Svei', 'Sveits', true)
-        await expect(page.locator('.navds-alert', { hasText: 'ligger innenfor EU/EØS' })).toContainText(
-            'Hellas og Sveits ligger innenfor EU/EØS',
+        await expect(page.locator('.navds-alert', { hasText: 'Du har kun vært innenfor EU/EØS, så du trenger ikke sende inn søknad.'})).toContainText(
+            'Du har kun vært innenfor EU/EØS, så du trenger ikke sende inn søknad.',
         )
 
         await svarCombobox(page, 'Hvilke(t) land skal du reise til?', 'Lit', 'Litauen', true)
-        await expect(page.locator('.navds-alert', { hasText: 'ligger innenfor EU/EØS' })).toContainText(
-            'Hellas, Sveits og Litauen ligger innenfor EU/EØS',
+        await expect(page.locator('.navds-alert', { hasText: 'Du har kun vært innenfor EU/EØS, så du trenger ikke sende inn søknad.'})).toContainText(
+            'Du har kun vært innenfor EU/EØS, så du trenger ikke sende inn søknad.',
         )
 
-        await klikkGaVidere(page, true)
+        await expect(page.getByRole('button', { name: 'Avbryt søknad' })).toBeVisible()
+        // Assert "Avslutt og fortsett senere" button does not exist
+        await expect(page.getByRole('button', { name: 'Avslutt og fortsett senere' })).toHaveCount(0)
+
+        // Assert "Jeg vil slette denne søknaden" button does not exist
+        await expect(page.getByRole('button', { name: 'Jeg vil slette denne søknaden' })).toHaveCount(0)
+
+
+        // await klikkGaVidere(page, true)
 
         // Velger land utenfor EU/EØS', async () => {
         // Sidan me framleis er på same side (spørsmål 1):
         await expect(page).toHaveURL(new RegExp(`${soknad.id}/1`))
 
+
+        // todo fjernet fordi vi nå ikke kan gå videre
         // Klikk gå videre for å trigge feil
-        await klikkGaVidere(page, true)
-        await expect(page.getByText('Du må velge minst et alternativ fra menyen')).toBeVisible()
+        // await klikkGaVidere(page, true)
+        // await expect(page.getByText('Du må velge minst et alternativ fra menyen')).toBeVisible()
 
         // Velger Afghanistan
         await svarCombobox(page, 'Hvilke(t) land skal du reise til?', 'Afg', 'Afghanistan')
@@ -170,7 +180,11 @@ test.describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
         const oppsummering = page.locator('[data-cy="oppsummering-fra-søknaden"]')
 
         await sporsmalOgSvar(oppsummering, 'Når skal du reise?', '17. – 24. desember 2020')
+        await sporsmalOgSvar(oppsummering, 'Hvilke(t) land skal du reise til?', 'Hellas')
+        await sporsmalOgSvar(oppsummering, 'Hvilke(t) land skal du reise til?', 'Sveits')
+        await sporsmalOgSvar(oppsummering, 'Hvilke(t) land skal du reise til?', 'Litauen')
         await sporsmalOgSvar(oppsummering, 'Hvilke(t) land skal du reise til?', 'Afghanistan')
+        await sporsmalOgSvar(oppsummering, 'Hvilke(t) land skal du reise til?', 'Sør-Korea')
         await sporsmalOgSvar(oppsummering, 'Har du arbeidsgiver?', 'Ja')
         await sporsmalOgSvar(oppsummering, 'Er du 100 % sykmeldt?', 'Ja')
         await sporsmalOgSvar(
