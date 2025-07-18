@@ -13,7 +13,6 @@ import AvbrytSoknadModal from '../../avbryt-soknad-modal/avbryt-soknad-modal'
 import { Tilbake } from '../tilbake-knapp/tilbake'
 import { landlisteEøs } from '../../sporsmal/landliste'
 
-// bør bruke denne: src/components/sporsmal/landliste.ts
 const euEosLand = landlisteEøs
 
 const erLandIEuEos = (land: string) => {

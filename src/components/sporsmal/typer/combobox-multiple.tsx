@@ -40,7 +40,6 @@ const ComboboxMultiple = ({ sporsmal }: SpmProps) => {
                 name={sporsmal.id}
                 rules={{ required: feilmelding.global }}
                 render={({ field, fieldState }) => {
-                    // Sjekk om ALLE valgte land er i EØS
                     const alleValgteErIEOS =
                         field.value &&
                         field.value.length > 0 &&
