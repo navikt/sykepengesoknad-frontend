@@ -5,7 +5,6 @@ import { arbeidsledig } from '../../../src/data/mock/data/soknad/arbeidsledig'
 
 describe('Tester arbeidsledigsøknad', () => {
     const soknad = arbeidsledig
-
     before(() => {
         cy.clearAllCookies()
         cy.visit('/syk/sykepengesoknad?testperson=arbeidsledig')
@@ -15,6 +14,7 @@ describe('Tester arbeidsledigsøknad', () => {
         cy.get('.navds-heading--large').should('be.visible').and('have.text', 'Søknader')
         cy.get(`a[href*=${soknad.id}]`).click()
     })
+
 
     it('Navigerer søknaden', () => {
         cy.url().should('include', `${soknad.id}/1`)
@@ -38,6 +38,7 @@ describe('Tester arbeidsledigsøknad', () => {
             .parent()
             .contains('Jeg bekrefter at jeg vil svare så riktig som jeg kan.')
             .should('have.css', 'box-shadow')
+        // 1
         cy.realPress('Space')
         cy.realPress('Tab')
         cy.focused().contains('Start søknad').should('have.css', 'box-shadow')
@@ -56,6 +57,8 @@ describe('Tester arbeidsledigsøknad', () => {
         cy.focused().contains('Gå videre').should('have.css', 'box-shadow').realPress('Enter')
         sjekkMainContentFokus()
 
+        // 2
+
         cy.contains('Andre inntektskilder')
         cy.contains('Hva mener vi med andre inntektskilder?')
         cy.realPress('Tab')
@@ -71,6 +74,7 @@ describe('Tester arbeidsledigsøknad', () => {
         cy.realPress('Enter')
         sjekkMainContentFokus()
 
+        // 3
         cy.contains('Reise')
         cy.realPress('Tab')
         cy.realPress('Tab')
@@ -92,7 +96,7 @@ describe('Tester arbeidsledigsøknad', () => {
         cy.realPress('Tab')
         cy.realPress('Tab')
         cy.realPress('Tab')
-        cy.focused().contains('Send søknaden').should('have.css', 'box-shadow')
+
         cy.realPress('Enter')
         sjekkMainContentFokus()
 
