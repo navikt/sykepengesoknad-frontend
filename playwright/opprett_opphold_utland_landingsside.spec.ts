@@ -3,9 +3,6 @@ import { avbryterSoknad } from './utilities'
 
 test.describe('Tester opprettelse av opphold utland søknad', () => {
     test('Oppretter søknad', async ({ page }) => {
-        // Tilsvarer cy.clearAllCookies()
-        await page.context().clearCookies()
-
         // Gå til /syk/sykepengesoknad
         await page.goto('/syk/sykepengesoknad')
         await expect(page.getByText('Søknader').first()).toBeVisible()

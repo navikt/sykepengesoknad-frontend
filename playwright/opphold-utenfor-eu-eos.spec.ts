@@ -3,7 +3,6 @@ import { checkViStolerPaDeg, neiOgVidere, svarRadioGruppe } from './utilities'
 
 test.describe('Opphold utenfor EU/EØS', () => {
     test.beforeEach(async ({ page }) => {
-        await page.context().clearCookies()
         await page.goto('/syk/sykepengesoknad?testperson=arbeidstaker')
 
         const link = page.getByRole('link', { name: 'Søknad Om Sykepenger' })
