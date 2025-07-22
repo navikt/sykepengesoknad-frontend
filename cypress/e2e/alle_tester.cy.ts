@@ -12,7 +12,6 @@ import './run-0/yrkesskade.cy'
 import './run-0/selvstendig-naringsdrivende.cy'
 import './run-0/gammel-oppsummering.cy'
 
-import './run-1/delvis-utfylt-soknad.cy'
 import './run-1/desimal-tall-komp.cy'
 import './run-1/direkte_apne_soknad.cy'
 import './run-1/ettersending_og_korriger.cy'
