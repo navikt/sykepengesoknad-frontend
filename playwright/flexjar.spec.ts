@@ -5,10 +5,10 @@ import { test, expect } from './fixtures'
 
 test.describe('Tester flexjar', () => {
     test.beforeEach(async ({ page }) => {
-        await page.context().clearCookies()
         await page.goto('/syk/sykepengesoknad?testperson=arbeidstaker-gradert')
 
         const link = page.getByRole('link', { name: 'Søknad Om Sykepenger' })
+        await expect(link).toBeVisible()
         await link.click()
     })
 

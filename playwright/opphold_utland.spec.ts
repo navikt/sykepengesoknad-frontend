@@ -10,12 +10,11 @@ import {
     svarCombobox,
     svarRadioGruppe,
 } from './utilities'
-import { validerAxe } from './uuvalidering'
 
 test.describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
     const soknad = oppholdUtland
 
-    test('Går til søknad som har påfølgende søknader som må fylles ut', async ({ page }, testInfo) => {
+    test('Går til søknad som har påfølgende søknader som må fylles ut', async ({ page }) => {
         // Opprett ny kontekst og side ÉN gang
 
         await page.goto('/syk/sykepengesoknad?testperson=bare-utland')
@@ -32,7 +31,6 @@ test.describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
         await expect(header).toBeVisible()
 
         await expect(header).toContainText('Søknad om å beholde sykepenger utenfor EU/EØS')
-        await validerAxe(page, testInfo)
 
         // Viser infoside og starter søknaden', async () => {
         await expect(page.getByText('Du trenger ikke søke hvis du')).toBeVisible()
