@@ -85,12 +85,12 @@ export async function svarCombobox(
 }
 
 // Eksempel på korleis du kan implementere desse hjelpefunksjonane:
-async function modalIkkeAktiv(page: Page) {
+export async function modalIkkeAktiv(page: Page) {
     // Til dømes: vent på at eit modal-element ikkje er synleg
     await expect(page.locator('body')).not.toHaveCSS('overflow', 'hidden')
 }
 
-async function modalAktiv(page: Page) {
+export async function modalAktiv(page: Page) {
     await expect(page.locator('body')).toHaveCSS('overflow', 'hidden')
 }
 
