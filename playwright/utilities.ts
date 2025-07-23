@@ -12,10 +12,15 @@ export async function checkViStolerPaDeg(page: Page, gaVidere = true) {
     }
 }
 
+export async function svarJaHovedsporsmal(page: Page) {
+    const radioButton = page.locator('form').getByRole('radio', { name: 'Ja' }).first()
+    await radioButton.click()
+    await expect(radioButton).toBeChecked()
+}
+
 export async function svarNeiHovedsporsmal(page: Page) {
     const radioButton = page.locator('form').getByRole('radio', { name: 'Nei' }).first()
     await radioButton.click()
-
     await expect(radioButton).toBeChecked()
 }
 
