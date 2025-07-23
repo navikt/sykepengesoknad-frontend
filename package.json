@@ -23,7 +23,7 @@
         "classnames": "^2.5.1",
         "cookie": "^1.0.2",
         "dayjs": "^1.11.13",
-        "html-react-parser": "^5.2.5",
+        "html-react-parser": "^5.2.6",
         "jose": "^6.0.12",
         "next-logger": "^5.0.1",
         "nextleton": "^0.6.1",
