@@ -229,7 +229,7 @@ test.describe('Tester arbeidstakersøknad - gradert 50%', () => {
 
         await test.step('Søknad TIL_SLUTT', async () => {
             await expect(page).toHaveURL(new RegExp(`.*${soknadId}\\/9`))
-            await expect(page.locator('text=Oppsummering fra søknaden')).toBeVisible()
+            await expect(page.getByRole('heading', { name: 'Oppsummering fra søknaden' })).toBeVisible()
             const oppsummering = page.locator('[data-cy="oppsummering-fra-søknaden"]')
             await expect(oppsummering).toContainText('Søknaden sendes til')
             await expect(oppsummering).toContainText('Posten Norge AS, Bærum')
