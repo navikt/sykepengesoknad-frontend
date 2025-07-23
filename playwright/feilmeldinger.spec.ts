@@ -249,7 +249,6 @@ test.describe('Tester feilmeldinger', () => {
 
         const prosentInput = page.getByLabel('Oppgi prosent')
         const timerInput = page.getByLabel('Oppgi timer totalt')
-        const timerSporsmalId = soknad.sporsmal[4].undersporsmal[1].undersporsmal[1].undersporsmal[0].id
 
         await test.step('Prosent: Ingen verdi', async () => {
             await page.getByRole('radio', { name: 'Prosent' }).click()
