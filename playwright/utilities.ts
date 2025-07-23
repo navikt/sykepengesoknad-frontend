@@ -108,7 +108,7 @@ export async function avbryterSoknad(page: Page) {
 
     // 3. Modalen skal vere «lukka» igjen
     await modalIkkeAktiv(page)
-    await expect(page.getByText('Nei, jeg har behov for søknaden')).not.toBeVisible()
+    await expect(page.getByText('Nei, jeg har behov for søknaden')).toBeHidden()
 
     // 4. Klikk på 'Jeg vil slette denne søknaden' endå ein gong
     await expect(page.getByRole('button', { name: 'Jeg vil slette denne søknaden' })).toBeVisible()

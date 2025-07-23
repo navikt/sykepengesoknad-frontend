@@ -18,7 +18,7 @@ test.describe('Tester flexjar', () => {
         await checkViStolerPaDeg(page)
     })
 
-    test('Test å gi feedback', async ({ page }) => {
+    test('å gi feedback', async ({ page }) => {
         await checkViStolerPaDeg(page)
         await page.getByText('Tilbake i fullt arbeid').isVisible()
         await page.getByText('Tilbakemeldingen din er viktig for oss!').isVisible()
