@@ -1,4 +1,42 @@
-import { test, expect } from '@playwright/test'
+import { test, expect, Page } from '@playwright/test'
+
+/**
+ * Fill a text field by trying multiple locator strategies
+ * @param page - Playwright page object
+ * @param labelText - The label text associated with the input field
+ * @param value - The value to fill
+ * @param fallbackSelector - Optional fallback CSS selector if label approach fails
+ */
+const fillTextFieldByLabel = async (page: Page, labelText: string, value: string, fallbackSelector?: string) => {
+    try {
+        // Primary strategy: Use getByLabel which is more semantic and robust
+        await page.getByLabel(labelText).fill(value)
+    } catch (error) {
+        console.warn(`Failed to fill field by label "${labelText}", trying fallback selector`)
+        if (fallbackSelector) {
+            await page.locator(fallbackSelector).fill(value)
+        } else {
+            throw error
+        }
+    }
+}
+
+const setPeriodeFraTil = async (page: Page, fom: number, tom: number, periodeIndex = 0) => {
+    // In a period component with a given ID, the "from" field is the first field and "to" field is the second field.
+    // Get the period component with the right id (including 0, 1 etc for where in the sequence it is)
+    // Then select the right calendar date popup button for day in month.
+    
+    const periodeComponent = page.locator(`[data-cy="periode"]`).nth(periodeIndex)
+    
+    // Click the first date field button (fra/from)
+    await periodeComponent.locator('.navds-date__field-button').nth(0).click()
+    
+    // Click the "from" date
+    await periodeComponent.locator('.rdp-cell').filter({ hasText: fom.toString() }).click()
+    
+    // Click the "to" date  
+    await periodeComponent.locator('.rdp-cell').filter({ hasText: tom.toString() }).click()
+}
 
 test.describe('Tester arbeidstakersøknad - gradert 50%', () => {
     test('Full søknadsflyt', async ({ page }) => {
@@ -59,27 +97,26 @@ test.describe('Tester arbeidstakersøknad - gradert 50%', () => {
             // klikkGaVidere() - click next
             await page.locator('button').filter({ hasText: 'Gå videre' }).click()
 
-            // await page.locator('button[data-cy="ga-videre"]').click()
+            // await page.locator('button').filter({ hasText: 'Gå videre' }).click()
         })
 
         await test.step('Søknad FERIE_V2', async () => {
             await expect(page).toHaveURL(new RegExp(`.*${soknadId}\\/3`))
             await page.locator('[data-cy="ja-nei-stor"] input[value="JA"]').click()
             await expect(page.locator('text=Når tok du ut feriedager?')).toBeVisible()
-            // setPeriodeFraTil(16, 23) - set dates, assuming April 2020 from context
-            await page.locator('#fra-dato').fill('2020-04-16') // Adjust IDs if needed
-            await page.locator('#til-dato').fill('2020-04-23')
-            await page.locator('button[data-cy="ga-videre"]').click()
+            // Set period from 16th to 23rd
+            await setPeriodeFraTil(page, 16, 23)
+            await page.locator('button').filter({ hasText: 'Gå videre' }).click()
+
         })
 
         await test.step('Søknad PERMISJON_V2', async () => {
             await expect(page).toHaveURL(new RegExp(`.*${soknadId}\\/4`))
             await page.locator('[data-cy="ja-nei-stor"] input[value="JA"]').click()
             await expect(page.locator('text=Når tok du permisjon?')).toBeVisible()
-            // setPeriodeFraTil(14, 22)
-            await page.locator('#fra-dato').fill('2020-04-14')
-            await page.locator('#til-dato').fill('2020-04-22')
-            await page.locator('button[data-cy="ga-videre"]').click()
+            // Set period from 14th to 22nd
+            await setPeriodeFraTil(page, 14, 22)
+            await page.locator('button').filter({ hasText: 'Gå videre' }).click()
         })
 
         await test.step('Søknad JOBBET_DU_GRADERT', async () => {
@@ -92,9 +129,11 @@ test.describe('Tester arbeidstakersøknad - gradert 50%', () => {
                     'text=Hvor mange timer i uken jobber du vanligvis når du er frisk? Varierer det, kan du oppgi gjennomsnittet.',
                 ),
             ).toBeVisible()
-            await page
-                .locator('.undersporsmal .navds-text-field__input#495730df-717d-3774-bd19-e6bcf76e3ba2')
-                .fill('12')
+            await fillTextFieldByLabel(
+                page, 
+                'Hvor mange timer i uken jobber du vanligvis når du er frisk? Varierer det, kan du oppgi gjennomsnittet.',
+                '12'
+            )
 
             await expect(page.locator('text=Hvor mye jobbet du tilsammen 1. - 24. april 2020?')).toBeVisible()
             await expect(page.locator('text=Velg timer eller prosent')).toBeVisible()
@@ -115,7 +154,7 @@ test.describe('Tester arbeidstakersøknad - gradert 50%', () => {
             ).toBeVisible()
 
             // klikkGaVidere(true) - assuming with validation
-            await page.locator('button[data-cy="ga-videre"]').click()
+            await page.locator('button').filter({ hasText: 'Gå videre' }).click()
 
             await expect(
                 page.locator('.navds-read-more__button:has-text("Er prosenten lavere enn du forventet?")'),
@@ -140,14 +179,14 @@ test.describe('Tester arbeidstakersøknad - gradert 50%', () => {
                 .locator('.undersporsmal .navds-text-field__input#34c3cb3f-1aeb-3095-9ac6-d8f4f4c9e539')
                 .fill('11')
 
-            await page.locator('button[data-cy="ga-videre"]').click()
+            await page.locator('button').filter({ hasText: 'Gå videre' }).click()
         })
 
         await test.step('Søknad ARBEID_UTENFOR_NORGE', async () => {
             await expect(page).toHaveURL(new RegExp(`.*${soknadId}\\/6`))
             await page.locator('[data-cy="ja-nei-stor"] input[value="JA"]').click()
             await expect(page.locator('text=Har du arbeidet i utlandet i løpet av de siste 12 månedene?')).toBeVisible()
-            await page.locator('button[data-cy="ga-videre"]').click()
+            await page.locator('button').filter({ hasText: 'Gå videre' }).click()
         })
 
         await test.step('Søknad ANDRE_INNTEKTSKILDER_V2', async () => {
@@ -163,17 +202,16 @@ test.describe('Tester arbeidstakersøknad - gradert 50%', () => {
                 page.locator('.undersporsmal .navds-checkbox label[for="d9ac4359-5519-34f1-b59d-b5ab24e55821"]'),
             ).toHaveText(/ansatt et annet sted enn nevnt over/)
             await page.locator('input[type="checkbox"]#d9ac4359-5519-34f1-b59d-b5ab24e55821').check()
-            await page.locator('button[data-cy="ga-videre"]').click()
+            await page.locator('button').filter({ hasText: 'Gå videre' }).click()
         })
 
         await test.step('Søknad OPPHOLD_UTENFOR_EOS', async () => {
             await expect(page).toHaveURL(new RegExp(`.*${soknadId}\\/8`))
             await page.locator('[data-cy="ja-nei-stor"] input[value="JA"]').click()
             await expect(page.locator('text=Når var du utenfor EU/EØS?')).toBeVisible()
-            // setPeriodeFraTil(14, 22)
-            await page.locator('#fra-dato').fill('2020-04-14')
-            await page.locator('#til-dato').fill('2020-04-22')
-            await page.locator('button[data-cy="ga-videre"]').click()
+            // Set period from 14th to 22nd
+            await setPeriodeFraTil(page, 14, 22)
+            await page.locator('button').filter({ hasText: 'Gå videre' }).click()
         })
 
         await test.step('Søknad TIL_SLUTT', async () => {
