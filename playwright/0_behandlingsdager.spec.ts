@@ -151,7 +151,7 @@ test.describe('Tester behandlingsdagersøknad', () => {
     await test.step('Søknad FERIE - steg 3', async () => {
       await expect(page).toHaveURL(new RegExp(`${soknad.id}/3`));
 
-      await expect(page.getByText('Ferie')).toBeVisible();
+      await expect(page.getByRole('heading', { name: 'Ferie' })).toBeVisible();
       await svarNeiHovedsporsmal(page);
       await klikkGaVidere(page);
     });
@@ -162,12 +162,12 @@ test.describe('Tester behandlingsdagersøknad', () => {
       await page.locator('[data-cy="ja-nei-stor"] input[value=JA]').check();
 
       await expect(page.getByText('Hvilke andre inntektskilder har du?')).toBeVisible();
-      await expect(page.locator('.undersporsmal .navds-checkbox label[for=687382]')).toHaveText(
+      await expect(page.locator('.undersporsmal .navds-checkbox label[for="687382"]')).toHaveText(
         /andre arbeidsforhold/,
       );
-      await page.locator('input[type=checkbox]#687382').check();
+      await page.locator('input[type=checkbox]#\\36 87382').check();
 
-      await page.locator('input[type=radio]#687383_0').check();
+      await page.locator('input[type=radio]#\\36 87383_0 ').check();
       await expect(
         page.getByText(
           'Du må sende egen sykepengesøknad for dette. ' +
