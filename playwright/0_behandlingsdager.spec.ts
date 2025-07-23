@@ -179,21 +179,21 @@ test.describe('Tester behandlingsdagersøknad', () => {
     });
 
     await test.step('Tilbake og videre', async () => {
-      await expect(page.getByText('Oppsummering')).toBeVisible();
+      await expect(page.getByRole('heading', { name: 'Oppsummering', exact: true })).toBeVisible();
       await klikkTilbake(page);
 
-      await expect(page.getByText('Andre inntektskilder')).toBeVisible();
+      await expect(page.getByRole('heading', { name: 'Andre inntektskilder', exact: true })).toBeVisible();
       await klikkGaVidere(page);
     });
 
     await test.step('Søknad TIL_SLUTT - steg 4', async () => {
       await expect(page).toHaveURL(new RegExp(`${soknad.id}/5`));
-      await expect(page.getByText('Oppsummering fra søknaden')).toBeVisible();
+      await expect(page.getByRole('heading', { name: 'Oppsummering fra søknaden', exact: true })).toBeVisible();
       await expect(page.locator('.navds-guide-panel__content')).toHaveText(
         /Nå kan du se over at alt er riktig før du sender inn søknaden. Ved behov kan du endre opplysningene inntil 12 måneder etter innsending./,
       );
 
-      await expect(page.getByText('Oppsummering fra søknaden')).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Oppsummering fra søknaden', exact: true })).toBeVisible();
       await sporsmalOgSvar(page, 'Søknaden sendes til', 'NAV');
       await sporsmalOgSvar(page, '1. – 3. april', 'Ikke til behandling');
       await sporsmalOgSvar(page, '6. – 10. april', '10. april');
