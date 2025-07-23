@@ -261,3 +261,87 @@ export async function tabUntilFocusedContainsText(
             }`,
     )
 }
+
+export async function sjekkIntroside(page) {
+  await expect(
+    page.getByText(
+      'Her kan du søke om sykepenger mens du er sykmeldt. ' +
+        'Sykepenger skal erstatte inntekten din når du ikke kan jobbe som ' +
+        'normalt, på grunn av din egen sykdom eller skade.',
+    ),
+  ).toBeVisible();
+  const sykepengerLink = page.getByRole('link', { name: 'nav.no/sykepenger' });
+  await expect(sykepengerLink).toHaveAttribute('href', 'https://www.nav.no/sykepenger');
+  await expect(page.getByText('Før du søker')).toBeVisible();
+  await expect(page.getByRole('link', { name: 'Meld fra til NAV her' })).toHaveAttribute(
+    'href',
+    'https://innboks.nav.no/s/beskjed-til-oss?category=Beskjed-sykepenger',
+  );
+  await expect(page.getByRole('link', { name: 'Sjekk de oppdaterte saksbehandlingstidene' })).toHaveAttribute(
+    'href',
+    'https://www.nav.no/saksbehandlingstider#sykepenger',
+  );
+  await page.getByText('Hvordan behandler vi personopplysninger').click();
+  await expect(
+    page.getByRole('link', { name: 'Les mer om hvordan NAV behandler personopplysningene dine' }),
+  ).toHaveAttribute('href', 'https://www.nav.no/sykepenger-og-personopplysninger');
+  await page.getByText('Vi lagrer svarene underveis').click();
+  await expect(
+    page.getByText(
+      'Vi lagrer svarene dine mens du fyller ut, så du kan ta pauser ' +
+        'underveis. Søknader som ikke blir sendt inn lagrer vi i 4 måneder før de ' +
+        'slettes automatisk.',
+    ),
+  ).toBeVisible();
+  await expect(
+    page.getByText('Det er viktig at du gir oss riktige opplysninger slik at vi kan behandle saken din.'),
+  ).toBeVisible();
+  await expect(page.getByRole('link', { name: 'Les mer om viktigheten av å gi riktige opplysninger' })).toHaveAttribute(
+    'href',
+    'https://www.nav.no/endringer',
+  );
+}
+
+
+export async function sporsmalOgSvar2(page, sporsmal: string, svar: string) {
+  const question = page.getByText(sporsmal);
+  await expect(question).toBeVisible();
+  const answer = question.locator('xpath=following-sibling::*').first();
+  await expect(answer).toHaveText(new RegExp(svar));
+}
+
+// -----
+
+
+/*
+async function checkViStolerPaDeg(page, gaVidere = true) {
+  await page
+    .getByRole('checkbox', {
+      name: /Jeg bekrefter at jeg vil svare så riktig som jeg kan./i,
+    })
+    .check();
+  if (gaVidere) {
+    await page.getByText('Start søknad').click();
+  }
+}
+
+async function klikkGaVidere(page, forventFeil = false, skipFocusCheck = false) {
+  const currentUrl = page.url();
+  const currentPathParam = parseInt(currentUrl.split('/').pop()!, 10);
+
+  await page.getByRole('button', { name: 'Gå videre' }).click();
+  if (forventFeil) return;
+
+  await expect(page).not.toHaveURL(currentUrl);
+
+  const newUrl = page.url();
+  const newPathParam = parseInt(newUrl.split('/').pop()!, 10);
+  expect(newPathParam).toEqual(currentPathParam + 1);
+
+  if (!skipFocusCheck) {
+    // Approximate focus check (Playwright doesn't have direct 'focused' like Cypress;
+    // use if needed, or skip as focus is often implicit)
+    await expect(page.locator('#maincontent')).toBeFocused();
+  }
+}
+*/

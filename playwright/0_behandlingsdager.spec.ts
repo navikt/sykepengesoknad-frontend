@@ -2,107 +2,18 @@
 // Note: Run with `npx playwright test` assuming Playwright is installed.
 
 import { test, expect } from '@playwright/test';
-import { behandlingsdager } from '../src/data/mock/data/soknad/behandlingsdager';
+import { behandlingsdager  } from '../src/data/mock/data/soknad/behandlingsdager';
 
-// Translated utilities (only those used in the test)
-async function checkViStolerPaDeg(page, gaVidere = true) {
-  await page
-    .getByRole('checkbox', {
-      name: /Jeg bekrefter at jeg vil svare så riktig som jeg kan./i,
-    })
-    .check();
-  if (gaVidere) {
-    await page.getByText('Start søknad').click();
-  }
-}
+import {
+    checkViStolerPaDeg,
+    klikkGaVidere,
+    sjekkIntroside,
+    svarNeiHovedsporsmal,
+    klikkTilbake,
+    sporsmalOgSvar,
+    sporsmalOgSvar2,
 
-async function klikkGaVidere(page, forventFeil = false, skipFocusCheck = false) {
-  const currentUrl = page.url();
-  const currentPathParam = parseInt(currentUrl.split('/').pop()!, 10);
-
-  await page.getByRole('button', { name: 'Gå videre' }).click();
-  if (forventFeil) return;
-
-  await expect(page).not.toHaveURL(currentUrl);
-
-  const newUrl = page.url();
-  const newPathParam = parseInt(newUrl.split('/').pop()!, 10);
-  expect(newPathParam).toEqual(currentPathParam + 1);
-
-  if (!skipFocusCheck) {
-    // Approximate focus check (Playwright doesn't have direct 'focused' like Cypress;
-    // use if needed, or skip as focus is often implicit)
-    await expect(page.locator('#maincontent')).toBeFocused();
-  }
-}
-
-async function klikkTilbake(page) {
-  const currentUrl = page.url();
-  const currentPathParam = parseInt(currentUrl.split('/').pop()!, 10);
-
-  await page.getByRole('button', { name: 'Tilbake' }).click();
-
-  await expect(page).not.toHaveURL(currentUrl);
-
-  const newUrl = page.url();
-  const newPathParam = parseInt(newUrl.split('/').pop()!, 10);
-  expect(newPathParam).toEqual(currentPathParam - 1);
-
-  // Approximate focus check
-  await expect(page.locator('#maincontent')).toBeFocused();
-}
-
-async function sjekkIntroside(page) {
-  await expect(
-    page.getByText(
-      'Her kan du søke om sykepenger mens du er sykmeldt. ' +
-        'Sykepenger skal erstatte inntekten din når du ikke kan jobbe som ' +
-        'normalt, på grunn av din egen sykdom eller skade.',
-    ),
-  ).toBeVisible();
-  const sykepengerLink = page.getByRole('link', { name: 'nav.no/sykepenger' });
-  await expect(sykepengerLink).toHaveAttribute('href', 'https://www.nav.no/sykepenger');
-  await expect(page.getByText('Før du søker')).toBeVisible();
-  await expect(page.getByRole('link', { name: 'Meld fra til NAV her' })).toHaveAttribute(
-    'href',
-    'https://innboks.nav.no/s/beskjed-til-oss?category=Beskjed-sykepenger',
-  );
-  await expect(page.getByRole('link', { name: 'Sjekk de oppdaterte saksbehandlingstidene' })).toHaveAttribute(
-    'href',
-    'https://www.nav.no/saksbehandlingstider#sykepenger',
-  );
-  await page.getByText('Hvordan behandler vi personopplysninger').click();
-  await expect(
-    page.getByRole('link', { name: 'Les mer om hvordan NAV behandler personopplysningene dine' }),
-  ).toHaveAttribute('href', 'https://www.nav.no/sykepenger-og-personopplysninger');
-  await page.getByText('Vi lagrer svarene underveis').click();
-  await expect(
-    page.getByText(
-      'Vi lagrer svarene dine mens du fyller ut, så du kan ta pauser ' +
-        'underveis. Søknader som ikke blir sendt inn lagrer vi i 4 måneder før de ' +
-        'slettes automatisk.',
-    ),
-  ).toBeVisible();
-  await expect(
-    page.getByText('Det er viktig at du gir oss riktige opplysninger slik at vi kan behandle saken din.'),
-  ).toBeVisible();
-  await expect(page.getByRole('link', { name: 'Les mer om viktigheten av å gi riktige opplysninger' })).toHaveAttribute(
-    'href',
-    'https://www.nav.no/endringer',
-  );
-}
-
-async function svarNeiHovedsporsmal(page) {
-  await page.getByRole('radio', { name: 'Nei' }).first().check();
-  await expect(page.getByRole('radio', { name: 'Nei' }).first()).toBeChecked();
-}
-
-async function sporsmalOgSvar(page, sporsmal: string, svar: string) {
-  const question = page.getByText(sporsmal);
-  await expect(question).toBeVisible();
-  const answer = question.locator('xpath=following-sibling::*').first();
-  await expect(answer).toHaveText(new RegExp(svar));
-}
+} from './utilities'; // Adjust the import path if these are in a separate file
 
 test.describe('Tester behandlingsdagersøknad', () => {
   const soknad = behandlingsdager;
@@ -186,22 +97,22 @@ test.describe('Tester behandlingsdagersøknad', () => {
       await klikkGaVidere(page);
     });
 
-    await test.step('Søknad TIL_SLUTT - steg 4', async () => {
+        await test.step('Søknad TIL_SLUTT - steg 4', async () => {
       await expect(page).toHaveURL(new RegExp(`${soknad.id}/5`));
       await expect(page.getByRole('heading', { name: 'Oppsummering fra søknaden', exact: true })).toBeVisible();
       await expect(page.locator('.navds-guide-panel__content')).toHaveText(
         /Nå kan du se over at alt er riktig før du sender inn søknaden. Ved behov kan du endre opplysningene inntil 12 måneder etter innsending./,
       );
 
-    await expect(page.getByRole('heading', { name: 'Oppsummering fra søknaden', exact: true })).toBeVisible();
-      await sporsmalOgSvar(page, 'Søknaden sendes til', 'NAV');
-      await sporsmalOgSvar(page, '1. – 3. april', 'Ikke til behandling');
-      await sporsmalOgSvar(page, '6. – 10. april', '10. april');
-      await sporsmalOgSvar(page, '13. – 17. april', '15. april');
-      await sporsmalOgSvar(page, '20. – 24. april', 'Ikke til behandling');
+      await expect(page.getByRole('heading', { name: 'Oppsummering fra søknaden', exact: true })).toBeVisible();
+      await sporsmalOgSvar2(page, 'Søknaden sendes til', 'NAV');
+      await sporsmalOgSvar2(page, '1. – 3. april', 'Ikke til behandling');
+      await sporsmalOgSvar2(page, '6. – 10. april', '10. april');
+      await sporsmalOgSvar2(page, '13. – 17. april', '15. april');
+      await sporsmalOgSvar2(page, '20. – 24. april', 'Ikke til behandling');
 
       await page.getByText('Send søknaden').click();
-    });
+    }); // <-- this was missing
 
     await test.step('Søknad kvittering', async () => {
       await expect(page).toHaveURL(new RegExp(`/kvittering/${soknad.id}`));
@@ -211,5 +122,5 @@ test.describe('Tester behandlingsdagersøknad', () => {
       await expect(kvittering).toContainText('NAV behandler søknaden');
       await expect(kvittering).toContainText('Når blir pengene utbetalt');
     });
-  });
-});
+  }); // <-- closes `test('Full behandlingsdager flow', async ({ page }) => {`
+}); // <-- closes `test.describe(...)`
