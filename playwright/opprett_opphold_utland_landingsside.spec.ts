@@ -39,7 +39,7 @@ test.describe('Tester opprettelse av opphold utland søknad', () => {
         await page.getByRole('button', { name: 'Start søknaden' }).click()
         // Avbryter søknaden og havner på avbrutt-siden'
         // Sjekk at "Ooops! Her har det skjedd noe rart" IKKE finnes
-        await expect(page.getByText('Ooops! Her har det skjedd noe rart')).not.toBeVisible()
+        await expect(page.getByText('Ooops! Her har det skjedd noe rart')).toBeHidden()
 
         // Avbryt
         await avbryterSoknad(page)
