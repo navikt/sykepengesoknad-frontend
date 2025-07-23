@@ -4,6 +4,8 @@ test.describe('Tester arbeidstakersøknad - gradert 50%', () => {
     test('Full søknadsflyt', async ({ page }) => {
         await page.goto('/syk/sykepengesoknad?testperson=arbeidstaker-gradert')
 
+        const soknadId = '5b769c04-e171-47c9-b79b-23ab8fce331e'
+
         await test.step('Laster startside', async () => {
             await expect(page.locator('.navds-heading--large')).toBeVisible()
             await expect(page.locator('.navds-heading--large')).toHaveText('Søknader')
@@ -15,7 +17,8 @@ test.describe('Tester arbeidstakersøknad - gradert 50%', () => {
 
         await test.step('Søknad ANSVARSERKLARING', async () => {
             // Assuming soknad.id is 'some-id', adjust accordingly
-            await expect(page).toHaveURL(/.*5b769c04-e171-47c9-b79b-23ab8fce331e\/1/)
+            // await expect(page).toHaveURL(/.*5b769c04-e171-47c9-b79b-23ab8fce331e\/1/)
+            await expect(page).toHaveURL(new RegExp(`.*${soknadId}\\/1`))
             // sjekkIntroside() - translate to checks
             // Use a strict locator for the heading
             await expect(page.getByRole('heading', { name: 'Før du søker' })).toBeVisible()
@@ -33,8 +36,8 @@ test.describe('Tester arbeidstakersøknad - gradert 50%', () => {
 
 
             // Klikk "Start søknaden"
-            await expect(page.getByRole('button', { name: 'Start søknaden' })).toBeVisible()
-            await page.getByRole('button', { name: 'Start søknaden' }).click()
+            await expect(page.getByRole('button', { name: 'Start søknad' })).toBeVisible()
+            await page.getByRole('button', { name: 'Start søknad' }).click()
 
 
 
@@ -42,22 +45,25 @@ test.describe('Tester arbeidstakersøknad - gradert 50%', () => {
 
         await test.step('Tilbake til ANSVARSERKLARING og frem igjen', async () => {
             // klikkTilbake() - click back
-            await page.locator('button[data-cy="tilbake"]').click()
+            // wait for 10 seconds
+            await page.locator('button').filter({ hasText: 'Tilbake' }).click()
             await page.locator('button').filter({ hasText: 'Start søknad' }).click()
         })
 
         await test.step('Søknad TILBAKE_I_ARBEID', async () => {
-            await expect(page).toHaveURL(/.*some-id\/2/)
+            await expect(page).toHaveURL(new RegExp(`.*${soknadId}\\/2`))
             await page.locator('[data-cy="ja-nei-stor"] input[value="JA"]').click()
             await expect(page.locator('text=Når begynte du å jobbe igjen?')).toBeVisible()
             await page.locator('.navds-date__field-button').click()
             await page.locator('.rdp-day:has-text("20")').click()
             // klikkGaVidere() - click next
-            await page.locator('button[data-cy="ga-videre"]').click()
+            await page.locator('button').filter({ hasText: 'Gå videre' }).click()
+
+            // await page.locator('button[data-cy="ga-videre"]').click()
         })
 
         await test.step('Søknad FERIE_V2', async () => {
-            await expect(page).toHaveURL(/.*some-id\/3/)
+            await expect(page).toHaveURL(new RegExp(`.*${soknadId}\\/3`))
             await page.locator('[data-cy="ja-nei-stor"] input[value="JA"]').click()
             await expect(page.locator('text=Når tok du ut feriedager?')).toBeVisible()
             // setPeriodeFraTil(16, 23) - set dates, assuming April 2020 from context
@@ -67,7 +73,7 @@ test.describe('Tester arbeidstakersøknad - gradert 50%', () => {
         })
 
         await test.step('Søknad PERMISJON_V2', async () => {
-            await expect(page).toHaveURL(/.*some-id\/4/)
+            await expect(page).toHaveURL(new RegExp(`.*${soknadId}\\/4`))
             await page.locator('[data-cy="ja-nei-stor"] input[value="JA"]').click()
             await expect(page.locator('text=Når tok du permisjon?')).toBeVisible()
             // setPeriodeFraTil(14, 22)
@@ -77,7 +83,7 @@ test.describe('Tester arbeidstakersøknad - gradert 50%', () => {
         })
 
         await test.step('Søknad JOBBET_DU_GRADERT', async () => {
-            await expect(page).toHaveURL(/.*some-id\/5/)
+            await expect(page).toHaveURL(new RegExp(`.*${soknadId}\\/5`))
             await page.locator('[data-cy="ja-nei-stor"] input[value="JA"]').click()
             await expect(page.locator('text=Antall timer du skrev inn, betyr at du har jobbet')).not.toBeVisible()
 
@@ -138,14 +144,14 @@ test.describe('Tester arbeidstakersøknad - gradert 50%', () => {
         })
 
         await test.step('Søknad ARBEID_UTENFOR_NORGE', async () => {
-            await expect(page).toHaveURL(/.*some-id\/6/)
+            await expect(page).toHaveURL(new RegExp(`.*${soknadId}\\/6`))
             await page.locator('[data-cy="ja-nei-stor"] input[value="JA"]').click()
             await expect(page.locator('text=Har du arbeidet i utlandet i løpet av de siste 12 månedene?')).toBeVisible()
             await page.locator('button[data-cy="ga-videre"]').click()
         })
 
         await test.step('Søknad ANDRE_INNTEKTSKILDER_V2', async () => {
-            await expect(page).toHaveURL(/.*some-id\/7/)
+            await expect(page).toHaveURL(new RegExp(`.*${soknadId}\\/7`))
             await expect(page.locator('text=Har du andre inntektskilder enn nevnt over?')).toBeVisible()
             await page.locator('[data-cy="ja-nei-stor"] input[value="JA"]').click()
             await expect(
@@ -161,7 +167,7 @@ test.describe('Tester arbeidstakersøknad - gradert 50%', () => {
         })
 
         await test.step('Søknad OPPHOLD_UTENFOR_EOS', async () => {
-            await expect(page).toHaveURL(/.*some-id\/8/)
+            await expect(page).toHaveURL(new RegExp(`.*${soknadId}\\/8`))
             await page.locator('[data-cy="ja-nei-stor"] input[value="JA"]').click()
             await expect(page.locator('text=Når var du utenfor EU/EØS?')).toBeVisible()
             // setPeriodeFraTil(14, 22)
@@ -171,7 +177,7 @@ test.describe('Tester arbeidstakersøknad - gradert 50%', () => {
         })
 
         await test.step('Søknad TIL_SLUTT', async () => {
-            await expect(page).toHaveURL(/.*some-id\/9/)
+            await expect(page).toHaveURL(new RegExp(`.*${soknadId}\\/9`))
             await expect(page.locator('text=Oppsummering fra søknaden')).toBeVisible()
             const oppsummering = page.locator('[data-cy="oppsummering-fra-søknaden"]')
             await expect(oppsummering).toContainText('Søknaden sendes til')
@@ -181,7 +187,7 @@ test.describe('Tester arbeidstakersøknad - gradert 50%', () => {
         })
 
         await test.step('Søknad kvittering', async () => {
-            await expect(page).toHaveURL(/.*kvittering\/some-id/)
+            await expect(page).toHaveURL(new RegExp(`.*\\/kvittering\\/${soknadId}`))
             const kvittering = page.locator('[data-cy="kvittering"]')
             await expect(kvittering).toContainText('Hva skjer videre?')
             await expect(kvittering).toContainText('Du får sykepengene fra arbeidsgiveren din')
