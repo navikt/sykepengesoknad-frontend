@@ -39,7 +39,7 @@ test.describe('Tester endring uten en endringer', () => {
             await expect(
                 page.getByRole('dialog').filter({ hasText: /Vi behandler den opprinnelige sykepengesøknaden din./i }),
             ).toBeVisible()
-            await page.getByRole('button', { name: 'Ok' }).click()
+            await page.getByRole('button', { name: 'Ok', exact: true }).click()
             await harSoknaderlisteHeading(page)
         })
     })
