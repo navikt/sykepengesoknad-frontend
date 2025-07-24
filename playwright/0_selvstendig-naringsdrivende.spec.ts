@@ -176,19 +176,18 @@ async function fellesInnholdEtterVisningAvSigrunData(page: Page) {
 }
 
 async function tilSlutt(page: Page) {
-    // Assuming this is on the summary page; nesting locators to mimic Cypress chaining
-    const outerContainer = page.locator('body'); // Adjust to actual summary container if needed
-    await sporsmalOgSvar(outerContainer, 'Har du avviklet virksomheten din før du ble sykmeldt?', 'Nei');
-    const innerContainer1 = outerContainer.locator('xpath=following-sibling::*').first(); // Approximate chaining
-    await sporsmalOgSvar(innerContainer1, 'Er du ny i arbeidslivet etter 1. januar 2019?', 'Nei');
-    const innerContainer2 = innerContainer1.locator('xpath=following-sibling::*').first();
-    await sporsmalOgSvar(innerContainer2, 'Har det skjedd en varig endring i arbeidssituasjonen eller virksomheten din i mellom 1. januar 2019 og frem til sykmeldingstidspunktet?', 'Ja');
-    const innerContainer3 = innerContainer2.locator('xpath=following-sibling::*').first();
-    await sporsmalOgSvar(innerContainer3, 'Hvilken endring har skjedd?', 'Endret markedssituasjon');
-    await sporsmalOgSvar(innerContainer3, 'Har du hatt mer enn 25 prosent endring i årsinntekten din som følge av den varige endringen?', 'Ja');
-    const innerContainer4 = innerContainer3.locator('xpath=following-sibling::*').first();
-    await sporsmalOgSvar(innerContainer4, 'Når skjedde den siste varige endringen?', '12.03.2020');
+    // Use the form summary container that contains all the questions and answers
+    const summaryContainer = page.locator('.navds-form-summary, form'); // Target the form summary or fallback to form
+    
+    // Verify the main questions and answers in the summary
+    await sporsmalOgSvar(summaryContainer, 'Har du avviklet virksomheten din før du ble sykmeldt?', 'Nei');
+    await sporsmalOgSvar(summaryContainer, 'Er du ny i arbeidslivet etter 1. januar 2019?', 'Nei');
+    await sporsmalOgSvar(summaryContainer, 'Har det skjedd en varig endring i arbeidssituasjonen eller virksomheten din i mellom 1. januar 2019 og frem til sykmeldingstidspunktet?', 'Ja');
+    await sporsmalOgSvar(summaryContainer, 'Hvilken endring har skjedd?', 'Endret markedssituasjon');
+    await sporsmalOgSvar(summaryContainer, 'Har du hatt mer enn 25 prosent endring i årsinntekten din som følge av den varige endringen?', 'Ja');
+    await sporsmalOgSvar(summaryContainer, 'Når skjedde den siste varige endringen?', '12.03.2020');
 
+    await page.getByRole('button', { name: 'Send' }).click();
     await page.getByText('Send søknaden').click();
 }
 
