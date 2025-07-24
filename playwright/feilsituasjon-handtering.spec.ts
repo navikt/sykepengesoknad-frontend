@@ -154,7 +154,8 @@ test.describe('Tester feilsituasjoner', () => {
             await page.goto(`/syk/sykepengesoknad${testpersonQuery}`)
             await harSoknaderlisteHeading(page)
 
-            await page.getByRole('link').nth(1).click()
+            await expect(page.getByRole('link')).toHaveCount(2)
+            await page.locator('a[href*="5a7d403b-df78-491e-86f0-bf3f25408765"]').click()
             await expect(page).toHaveURL(/5a7d403b-df78-491e-86f0-bf3f25408765\/1/)
 
             await forventOopsOgTilbakeTilListen(page)
