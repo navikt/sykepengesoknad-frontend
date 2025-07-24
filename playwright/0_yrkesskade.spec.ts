@@ -7,8 +7,6 @@ import {
     neiOgVidere,
     sporsmalOgSvar,
     svarJaHovedsporsmal,
-    harSynligTittel,
-    harSynligTekst,
 } from './utilities'
 
 test.describe('Tester yrkesskadesspørsmål', () => {

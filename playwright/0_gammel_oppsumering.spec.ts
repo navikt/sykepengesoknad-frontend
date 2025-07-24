@@ -1,14 +1,6 @@
 import { test, expect } from '@playwright/test'
 
-import {
-    klikkGaVidere,
-    setPeriodeFraTil,
-    sporsmalOgSvar,
-    fjernAnimasjoner,
-    harSynligTekst,
-    sporsmalOgSvar2,
-    svarTekstboks,
-} from './utilities'
+import { setPeriodeFraTil, sporsmalOgSvar, fjernAnimasjoner, svarTekstboks } from './utilities'
 
 test.describe('Sjekker at søknader med gammel oppsummering ser ok ut', () => {
     test('Full søknadsflyt med gammel oppsummering', async ({ page }) => {

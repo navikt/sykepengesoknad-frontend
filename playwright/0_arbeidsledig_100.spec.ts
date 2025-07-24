@@ -6,22 +6,7 @@ import {
     setPeriodeFraTil,
     sjekkIntroside,
     sporsmalOgSvar,
-    svarNeiHovedsporsmal,
-    neiOgVidere,
-    modalIkkeAktiv,
-    modalAktiv,
-    avbryterSoknad,
-    klikkTilbake,
-    svarCombobox,
-    svarRadioGruppe,
-    harSynligTittel,
-    harSynligTekst,
     fjernAnimasjoner,
-    tabUntilFocusedContainsText,
-    sporsmalOgSvar2,
-    svarDato,
-    svarTekstboks,
-    sjekkMainContentFokus,
 } from './utilities'
 
 // Mock-data (basert på Cypress-koden din)
@@ -31,7 +16,7 @@ const arbeidsledig = {
 }
 
 test.describe('Tester arbeidsledigsøknad', () => {
-    test('Gjennomfører hele søknadsflyten for arbeidsledig søknad', async ({ page, context, browserName }) => {
+    test('Gjennomfører hele søknadsflyten for arbeidsledig søknad', async ({ page }) => {
         // Forberedelser: Fjern animasjoner for stabil testing (valgfritt, men anbefalt for flakiness)
         await fjernAnimasjoner(page)
 

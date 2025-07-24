@@ -12,7 +12,7 @@ const fillTextFieldByLabel = async (page: Page, labelText: string, value: string
         // Primary strategy: Use getByLabel which is more semantic and robust
         await page.getByLabel(labelText).fill(value)
     } catch (error) {
-        console.warn(`Failed to fill field by label "${labelText}", trying fallback selector`)
+        // console.warn(`Failed to fill field by label "${labelText}", trying fallback selector`)
         if (fallbackSelector) {
             await page.locator(fallbackSelector).fill(value)
         } else {

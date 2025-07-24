@@ -20,12 +20,11 @@ test('Full arbeidsledigsøknad flow', async ({ page }) => {
     })
 
     async function elementInFocusLocator() {
-        const elementInFocus = page.locator(':focus')
-        const text = await elementInFocus.textContent()
-        console.log(`Element in focus text: ${text}`)
+        // const elementInFocus = page.locator(':focus')
+        // const text = await elementInFocus.textContent()
+        // console.log(`Element in focus text: ${text}`)
     }
 
-    const elementInFocusText = page.locator(':focus')
     await expect(page.locator('.navds-heading--large')).toBeVisible()
     await expect(page.locator('.navds-heading--large')).toHaveText('Søknader')
     await page.locator(`a[href*="${soknad.id}"]`).click()
@@ -96,7 +95,7 @@ test('Full arbeidsledigsøknad flow', async ({ page }) => {
     // 2
 
     expect(page.getByRole('heading', { name: 'Andre inntektskilder' })).toBeVisible()
-    console.log('Andre inntektskilder')
+    // console.log('Andre inntektskilder')
     await expect(page.getByText('Hva mener vi med andre inntektskilder?')).toBeVisible()
     await page.keyboard.press('Tab')
     await page.keyboard.press('Tab')
@@ -116,7 +115,7 @@ test('Full arbeidsledigsøknad flow', async ({ page }) => {
     await expect(focusedAi).toHaveCSS('box-shadow', /.+/)
     //const gaVidereButton2 = page.getByRole('button', { name: 'Gå videre' })
     // await expect(gaVidereButton2).toHaveCSS('box-shadow', /./)
-    console.log(focusedAi)
+    // console.log(focusedAi)
     await page.keyboard.press('Enter')
     //await sjekkMainContentFokus(page)
 
