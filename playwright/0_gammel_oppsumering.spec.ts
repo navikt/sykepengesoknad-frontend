@@ -7,6 +7,7 @@ import {
     fjernAnimasjoner,
     harSynligTekst,
     sporsmalOgSvar2,
+    svarTekstboks
 } from './utilities'
 
 test.describe('Sjekker at søknader med gammel oppsummering ser ok ut', () => {
@@ -138,7 +139,7 @@ test.describe('Sjekker at søknader med gammel oppsummering ser ok ut', () => {
             // await page
             //     .locator('.undersporsmal .navds-text-field__input#796cf7ed-8a7e-39de-9cbc-6e789aa5af3f')
             //     .fill('21')
-            await sporsmalOgSvar2(
+            await svarTekstboks(
                 page,
                 'Oppgi hvor mange prosent av din normale arbeidstid du jobbet hos Posten Norge AS, Bærum i perioden 1. - 24. april 2020?',
                 '21',
@@ -161,7 +162,7 @@ test.describe('Sjekker at søknader med gammel oppsummering ser ok ut', () => {
             //     .fill('21')
 
 
-            await sporsmalOgSvar2(page, "Oppgi totalt antall timer du jobbet i perioden 1. - 24. april 2020 hos Posten Norge AS, Bærum", "21")
+            await svarTekstboks(page, "Oppgi totalt antall timer du jobbet i perioden 1. - 24. april 2020 hos Posten Norge AS, Bærum", "21")
 
 
             await expect(page.getByText('Er prosenten lavere enn du forventet?')).not.toBeVisible()
@@ -257,11 +258,23 @@ test.describe('Sjekker at søknader med gammel oppsummering ser ok ut', () => {
             //kan trykke på forrige steg knapp øverst
             const forrigeStegLink = page.getByText('Forrige steg')
             await expect(forrigeStegLink).toHaveAttribute('href', /\/soknader\/.*\/7\?testperson=gammel-oppsummering/)
-            await forrigeStegLink.click()
-            await klikkGaVidere(page)
+            // await forrigeStegLink.click()
+            // get button with the text Tilbake and click it
+            await page.getByRole('button', { name: 'Tilbake' }).click()
+            // await klikkGaVidere(page)
+            await page.getByRole('button', { name: 'Gå videre' }).click()
+            // wait for 30 seconds
+            
 
             //Trykker på Endre svar og havner på første spørsmål
-            await page.getByText('Endre svar').click()
+            await page.getByRole('button', { name: 'Gå videre' }).click()
+            // await page.getByText('Ikke her').click()
+
+            // await this text showing up on the page  Oppsummering fra søknaden
+            // await page.getByRole('heading', {name: 'Oppsummering fra søknaden'}).isVisible()
+            await page.getByText('Søknaden sendes til NAV').isVisible()
+            await page.getByRole('link', { name: 'Endre svar' }).click()
+
             await expect(page.getByText('Steg 1 av 7')).toBeVisible()
             await page.getByRole('button', { name: 'Vis alle steg' }).click()
             await page.getByRole('link', { name: 'Oppsummering fra søknaden' }).click()
