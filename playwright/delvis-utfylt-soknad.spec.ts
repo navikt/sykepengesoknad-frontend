@@ -1,7 +1,7 @@
 import { delvisUtfylltArbeidsledig } from '../src/data/mock/data/soknad/soknader-integration'
 
 import { test, expect } from './fixtures'
-import { klikkTilbake, trykkPaSoknadMedId } from './utilities'
+import { harSoknaderlisteHeading, klikkTilbake, trykkPaSoknadMedId } from './utilities'
 
 test.describe('Delvis utfylt søknad', () => {
     test('Full testflyt for delvis utfylt søknad', async ({ page }) => {
@@ -9,7 +9,7 @@ test.describe('Delvis utfylt søknad', () => {
 
         await test.step('Navigerer til søknadssiden', async () => {
             await page.goto('/syk/sykepengesoknad?testperson=integrasjon-soknader')
-            await expect(page.getByRole('heading', { level: 1, name: 'Søknader' })).toBeVisible()
+            await harSoknaderlisteHeading(page)
         })
 
         await test.step('Går til første ubesvarte spørsmål', async () => {

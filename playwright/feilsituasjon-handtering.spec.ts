@@ -7,18 +7,24 @@ import {
 } from '../src/data/mock/data/soknad/soknader-integration'
 
 import { test, expect } from './fixtures'
-import { checkViStolerPaDeg, klikkGaVidere, svarNeiHovedsporsmal, trykkPaSoknadMedId } from './utilities'
+import {
+    checkViStolerPaDeg,
+    harSoknaderlisteHeading,
+    klikkGaVidere,
+    svarNeiHovedsporsmal,
+    trykkPaSoknadMedId,
+} from './utilities'
 
 const OOPS_ERROR = 'Ooops! Her har det skjedd noe rart'
 const BACK_TO_LIST = 'Gå tilbake til listen over alle søknader'
 const REFRESH_PAGE = 'Last inn siden på nytt'
 const SEND_SOKNADEN = 'Send søknaden'
-const SOKNADER_HEADING = 'Søknader'
 const SOKNAD_OM_SYKEPENGER = 'Søknad om sykepenger'
 
 async function gaTilListeOgApneSoknad(page: Page, url: string, soknadId: string) {
     await page.goto(url)
-    await expect(page.getByRole('heading', { level: 1, name: SOKNADER_HEADING })).toBeVisible()
+    await harSoknaderlisteHeading(page)
+    await harSoknaderlisteHeading(page)
     await trykkPaSoknadMedId(page, soknadId)
     await expect(page).toHaveURL(new RegExp(`${soknadId}/1`))
     await expect(page.getByRole('heading', { name: SOKNAD_OM_SYKEPENGER })).toBeVisible()
@@ -40,7 +46,7 @@ async function forventOopsOgTilbakeTilListen(page: Page) {
         await expect(page.getByText(REFRESH_PAGE)).toBeHidden()
         await page.getByText(BACK_TO_LIST).click()
         await expect(page).toHaveURL(/\/syk\/sykepengesoknad/)
-        await expect(page.getByRole('heading', { level: 1, name: SOKNADER_HEADING })).toBeVisible()
+        await harSoknaderlisteHeading(page)
     })
 }
 
@@ -116,7 +122,7 @@ test.describe('Tester feilsituasjoner', () => {
 
         test('403 gir alert og knapp for å gå tilbake til listen', async ({ page }) => {
             await page.goto(`/syk/sykepengesoknad${testpersonQuery}`)
-            await expect(page.getByRole('heading', { level: 1, name: SOKNADER_HEADING })).toBeVisible()
+            await harSoknaderlisteHeading(page)
 
             await page.getByRole('link').first().click()
             await expect(page).toHaveURL(/3fa85f64-5717-4562-b3fc-2c963f67afa3\/1/)
@@ -144,7 +150,7 @@ test.describe('Tester feilsituasjoner', () => {
 
         test('404 gir alert og knapp for å gå tilbake til listen', async ({ page }) => {
             await page.goto(`/syk/sykepengesoknad${testpersonQuery}`)
-            await expect(page.getByRole('heading', { level: 1, name: SOKNADER_HEADING })).toBeVisible()
+            await harSoknaderlisteHeading(page)
 
             await page.getByRole('link').nth(1).click()
             await expect(page).toHaveURL(/5a7d403b-df78-491e-86f0-bf3f25408765\/1/)

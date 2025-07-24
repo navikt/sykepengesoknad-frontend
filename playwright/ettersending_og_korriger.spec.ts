@@ -3,6 +3,7 @@ import { arbeidstakerGradert } from '../src/data/mock/data/soknad/arbeidstaker-g
 import { test, expect } from './fixtures'
 import {
     checkViStolerPaDeg,
+    harSoknaderlisteHeading,
     harSynligTittel,
     klikkGaVidere,
     neiOgVidere,
@@ -19,7 +20,7 @@ test.describe('Tester ettersending og korrigering', () => {
 
     test('Svarer på søknad og korrigerer', async ({ page }) => {
         await test.step('Viser søknader og åpner søknaden', async () => {
-            await harSynligTittel(page, 'Søknader', 1)
+            await harSoknaderlisteHeading(page)
             await trykkPaSoknadMedId(page, soknad.id)
         })
 
