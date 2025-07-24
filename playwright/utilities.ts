@@ -68,20 +68,17 @@ export async function svarCombobox(
     autocompleteVerdi: string = verdi,
     fjernVerdi: boolean = false,
 ) {
-    // Opprett ein locator for combobox basert på Rolle + name
-    const combo = page.getByRole('combobox', { name })
+    const comboBox = page.getByRole('combobox', { name })
+    await comboBox.fill(verdi)
+    await expect(comboBox).toHaveValue(autocompleteVerdi)
 
-    // Skriv inn i combobox-feltet
-    await combo.type(verdi)
-
-    // Sjekk at verdien er oppdatert til forventa autocompleteVerdi
-    await expect(combo).toHaveValue(autocompleteVerdi)
-
-    // Trykk Enter for å velje
-    await combo.press('Enter')
+    await comboBox.press('Enter')
 
     // Verifiser at comboboxen no er tømt
-    await expect(combo).toHaveValue('')
+    await expect(comboBox).toHaveValue('')
+
+    //Lukker listen
+    await page.locator('.navds-combobox__button-toggle-list').click()
 
     // Dersom vi ikkje skal fjerne verdien, sjekk at ho er synleg i den valde-lista
     if (!fjernVerdi) {
