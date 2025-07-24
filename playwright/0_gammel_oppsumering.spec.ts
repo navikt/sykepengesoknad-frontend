@@ -34,7 +34,7 @@ test.describe('Sjekker at søknader med gammel oppsummering ser ok ut', () => {
         await page.getByText('Slik behandler NAV personopplysningene dine').click()
 
         // Avbryt dialog vises
-        await page.getByText('Jeg har ikke behov for denne søknaden').click()
+        await page.getByRole('button', { name: 'Jeg har ikke behov for denne søknaden' }).click()
         await page.getByRole('button', { name: 'Nei, jeg har behov for søknaden' }).click()
 
         // Må godkjenne ANSVARSERKLARING først
@@ -127,6 +127,7 @@ test.describe('Sjekker at søknader med gammel oppsummering ser ok ut', () => {
         await expect(page.getByText('Når tok du permisjon?')).toBeVisible()
 
         await setPeriodeFraTil(page, 14, 22)
+        f
 
         await page.getByText('Gå videre').click()
     })

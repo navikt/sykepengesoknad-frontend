@@ -310,6 +310,12 @@ export async function sporsmalOgSvar2(page, sporsmal: string, svar: string) {
   await expect(answer).toHaveText(new RegExp(svar));
 }
 
+export async function svarDato(page: Page, sporsmal: string, svar: string) {
+    const form = page.locator('form')
+    const textbox = form.getByRole('textbox', { name: sporsmal })
+    await textbox.type(svar)
+}
+
 // -----
 
 
