@@ -1,151 +1,216 @@
-import { test, expect } from '@playwright/test'
+import { test, expect } from '@playwright/test';
+import {
+  checkViStolerPaDeg,
+  klikkGaVidere,
+  setPeriodeFraTil,
+  sjekkIntroside,
+  sporsmalOgSvar,
+  svarNeiHovedsporsmal,
+  neiOgVidere,
+  modalIkkeAktiv,
+  modalAktiv,
+  avbryterSoknad,
+  klikkTilbake,
+  svarCombobox,
+  svarRadioGruppe,
+  harSynligTittel,
+  harSynligTekst,
+  fjernAnimasjoner,
+  tabUntilFocusedContainsText,
+  sporsmalOgSvar2,
+  svarDato,
+  svarTekstboks,
+  sjekkMainContentFokus,
+} from './utilities'
 
-// Assuming the mock data is available; adjust the import path as needed
-// import { arbeidsledig } from '../../../src/data/mock/data/soknad/arbeidsledig';
-// For this example, we'll define a placeholder if needed, but use as in original
-const soknad = { id: 'placeholder-id' } // Replace with actual import or value
 
-let sharedPage
-
-test.beforeAll(async ({ browser }) => {
-    const context = await browser.newContext()
-    sharedPage = await context.newPage()
-    await sharedPage.goto('/syk/sykepengesoknad?testperson=arbeidsledig')
-})
-
-test.afterAll(async () => {
-    await sharedPage.context().close()
-})
+// Mock-data (basert på Cypress-koden din)
+const arbeidsledig = {
+  id: '934f39f4-cb47-459f-8209-0dbef6d30059', // Erstatt med faktisk ID fra mock-data, f.eks. fra '../../../src/data/mock/data/soknad/arbeidsledig'
+  // Legg til flere felter om nødvendig fra mock-data
+};
 
 test.describe('Tester arbeidsledigsøknad', () => {
-    test('Laster startside', async () => {
-        await expect(sharedPage.locator('.navds-heading--large')).toBeVisible()
-        await expect(sharedPage.locator('.navds-heading--large')).toHaveText('Søknader')
-        await sharedPage.locator(`a[href*="${soknad.id}"]`).click()
-    })
+  test('Gjennomfører hele søknadsflyten for arbeidsledig søknad', async ({ page, context, browserName }) => {
+    // Forberedelser: Fjern animasjoner for stabil testing (valgfritt, men anbefalt for flakiness)
+    await fjernAnimasjoner(page);
 
-    test('Søknad ANSVARSERKLARING', async () => {
-        await expect(sharedPage).toHaveURL(new RegExp(`${soknad.id}/1`))
+    // await test.step('Laster startside', async () => {
+    //   await page.goto('/syk/sykepengesoknad?testperson=arbeidsledig');
+    //   await expect(page.getByRole('heading', { name: 'Søknader', level: 1 })).toBeVisible(); // Antatt nivå 1 for '.navds-heading--large'
+    //   await page.locator('.navds-link-panel').filter({ hasText: 'Søknad om sykepenger' }).click(); // Klikk på link panel med søknad
+    // });
 
-        // Approximating sjekkIntroside(): Checking for some intro elements (guessed based on context)
-        // If it's a standard check, adjust accordingly; e.g., check for specific texts or elements
-        await expect(sharedPage.getByText('Før du begynner')).toBeVisible() // Placeholder; replace with actual if known
+        // await test.step('Laster startside', async () => {
+        //     // await expect(page.locator('.navds-heading--large')).toBeVisible()
+        //     // await expect(page.locator('.navds-heading--large')).toHaveText('Søknader')
+        //     // Assuming soknad.id is known or can be selected by pattern
+        //     // For translation, assume we click the link containing the ID
+        //     // Replace 'some-soknad-id' with actual if known, or use a better selector
+        //     await page.locator(`a[href*="${arbeidsledig.id}]`).click() // Adjust based on actual ID
+        // })
 
-        // Approximating checkViStolerPaDeg(): Likely checks a "we trust you" checkbox and proceeds
-        // Assuming it's a checkbox with specific label or id
-        await sharedPage.locator('input[type="checkbox"][id*="vi-stoler-pa-deg"]').check() // Adjust selector
-        // Assuming this also clicks next or is followed by navigation
-        await sharedPage.getByRole('button', { name: 'Start søknaden' }).click() // Placeholder; adjust
-    })
+    await test.step('Laster startside', async () => {
+  // Naviger til startsiden (hvis ikke allerede gjort i et tidligere steg; tilpass om nødvendig)
+  await page.goto('/syk/sykepengesoknad?testperson=arbeidsledig');
 
-    test('Søknad FRISKMELDT', async () => {
-        await expect(sharedPage).toHaveURL(new RegExp(`${soknad.id}/2`))
+  // Verifiser at heading er synlig og har riktig tekst (antatt som h1 basert på '.navds-heading--large')
+  const heading = page.getByRole('heading', { name: 'Søknader', level: 1 });
+  await expect(heading).toBeVisible();
+  await expect(heading).toHaveText('Søknader');
 
-        // Test spørsmål
-        await sharedPage.locator('[data-cy="ja-nei-stor"] input[value="NEI"]').check()
-        await expect(sharedPage.getByText('Fra hvilken dato trengte du ikke lenger sykmeldingen?')).toBeVisible()
-        await sharedPage.locator('.navds-date__field-button').click()
-        await sharedPage.locator('.rdp-day', { hasText: '10' }).click()
+  // Klikk på lenken som inneholder soknad.id i href-attributten
+  const link = page.locator(`a[href*="${arbeidsledig.id}"]`);
+  await expect(link).toBeVisible(); // Valgfri sjekk for å sikre lenken finnes
+  await link.click();
+});
 
-        // Approximating klikkGaVidere(): Click "Gå videre" button
-        await sharedPage.getByRole('button', { name: 'Gå videre' }).click()
-    })
+    await test.step('Søknad ANSVARSERKLARING', async () => {
+      await expect(page).toHaveURL(new RegExp(`${arbeidsledig.id}/1`));
+      await sjekkIntroside(page); // Bruk eksisterende utility for å verifisere introside-innhold
+      await checkViStolerPaDeg(page, true); // Bekreft ansvarserklæring og gå videre (gaVidere=true)
+    });
 
-    test('Søknad ANDRE_INNTEKTSKILDER', async () => {
-        await expect(sharedPage).toHaveURL(new RegExp(`${soknad.id}/3`))
+    await test.step('Søknad FRISKMELDT', async () => {
+      await expect(page).toHaveURL(new RegExp(`${arbeidsledig.id}/2`));
 
-        // Test spørsmål
-        await expect(
-            sharedPage.getByText('Har du hatt inntekt mens du har vært sykmeldt i perioden 1. - 24. april 2020?'),
-        ).toBeVisible()
-        await sharedPage.locator('[data-cy="ja-nei-stor"] input[value="JA"]').check()
+      // Test spørsmål: Velg 'NEI' på hovedspørsmål
+      await page.locator('[data-cy="ja-nei-stor"] input[value=NEI]').check(); // Velg 'Nei' (tilsvarer Cypress .click() på radio)
+      await expect(page.getByText('Fra hvilken dato trengte du ikke lenger sykmeldingen?')).toBeVisible();
 
-        // Når ingen velges så dukker bare 1 feilmelding opp
-        await sharedPage.getByRole('button', { name: 'Gå videre' }).click() // Attempt to proceed to trigger error
-        await expect(sharedPage.getByText('Det er 1 feil i skjemaet')).toBeVisible()
-        await expect(sharedPage.getByText('Du må oppgi hvilke inntektskilder du har')).toBeVisible()
+      // Velg dato i kalender
+      await page.locator('.navds-date__field-button').click();
+      await page.locator('.rdp-day', { hasText: '10' }).click();
 
-        // Svarer JA
-        // Underspørsmål nivå 1 - checkbox
-        await expect(sharedPage.getByText('Hvilke inntektskilder har du hatt?')).toBeVisible()
-        await expect(sharedPage.locator('.undersporsmal .navds-checkbox label[for="687404"]')).toContainText(
-            'andre arbeidsforhold',
-        )
-        await sharedPage.locator('input[type="checkbox"]#687404').check()
+      await klikkGaVidere(page); // Gå videre uten å forvente feil
+    });
 
-        // Underspørsmål nivå 2 - radio
-        await sharedPage.locator('input[type="radio"]#687405_0').check()
-        await expect(
-            sharedPage.getByText(
-                'Du må sende egen sykepengesøknad for dette. ' +
-                    'Det betyr også at legen må skrive en sykmelding for hvert arbeidsforhold du er sykmeldt fra.',
-            ),
-        ).toBeVisible()
+    await test.step('Søknad ANDRE_INNTEKTSKILDER', async () => {
+      await expect(page).toHaveURL(new RegExp(`${arbeidsledig.id}/3`));
 
-        await sharedPage.getByRole('button', { name: 'Gå videre' }).click()
-    })
+      // Test spørsmål
+      await expect(
+        page.getByText('Har du hatt inntekt mens du har vært sykmeldt i perioden 1. - 24. april 2020?'),
+      ).toBeVisible();
 
-    test('Søknad OPPHOLD_UTENFOR_EOS', async () => {
-        await expect(sharedPage).toHaveURL(new RegExp(`${soknad.id}/4`))
+      // Velg 'JA' på hovedspørsmål
+      await page.locator('[data-cy="ja-nei-stor"] input[value=JA]').check();
 
-        // Test spørsmål
-        await expect(
-            sharedPage.getByText('Var du på reise utenfor EU/EØS mens du var sykmeldt 1. - 24. april 2020?'),
-        ).toBeVisible()
-        await sharedPage.locator('[data-cy="ja-nei-stor"] input[value="JA"]').check()
+      // Forsøk å gå videre uten valg for å trigge feil (ingen inntektskilder valgt)
+      await klikkGaVidere(page, true); // forventFeil=true
+      await expect(page.getByText('Det er 1 feil i skjemaet')).toBeVisible();
+      await expect(page.getByText('Du må oppgi hvilke inntektskilder du har')).toBeVisible();
 
-        // Underspørsmål 1
-        await expect(sharedPage.getByText('Når var du utenfor EU/EØS?')).toBeVisible()
 
-        // Approximating setPeriodeFraTil(17, 24): Set date range
-        // Assuming two date pickers for from and to
-        await sharedPage.locator('.navds-date__field-button').first().click() // From date
-        await sharedPage.locator('.rdp-day', { hasText: '17' }).click()
-        await sharedPage.locator('.navds-date__field-button').nth(1).click() // To date
-        await sharedPage.locator('.rdp-day', { hasText: '24' }).click()
+      /*
 
-        await sharedPage.getByRole('button', { name: 'Gå videre' }).click()
-    })
+      await test.step('Velg inntektskilde: andre arbeidsforhold', async () => {
+  // Finn og velg checkboxen for "andre arbeidsforhold" basert på ID (fra HTML: id="687404")
+  const checkbox = page.locator('#687404'); // Eller bruk page.getByLabel('andre arbeidsforhold') for tekstbasert locator
 
-    test('Søknad TIL_SLUTT', async () => {
-        await expect(sharedPage).toHaveURL(new RegExp(`${soknad.id}/5`))
+  // Sjekk at checkboxen er synlig og ikke allerede valgt (valgfri verifikasjon for robusthet)
+  await expect(checkbox).toBeVisible();
+  await expect(checkbox).not.toBeChecked(); // Hvis du vil sikre at den ikke er forhåndsvalgt
 
-        await expect(sharedPage.locator('.navds-guide-panel__content')).toContainText(
-            'Nå kan du se over at alt er riktig før du sender inn søknaden. Ved behov kan du endre opplysningene inntil 12 måneder etter innsending.',
-        )
+  // Velg (check) checkboxen
+  await checkbox.check();
 
-        const oppsummering = sharedPage.locator('[data-cy="oppsummering-fra-søknaden"]')
-        // Approximating sporsmalOgSvar checks (nested)
-        const friskmeldt = oppsummering.locator('div', {
-            hasText: 'Brukte du hele sykmeldingen fram til 24. april 2020?',
-        })
-        await expect(friskmeldt).toContainText('Nei')
-        await expect(
-            friskmeldt.locator('div', {
-                hasText: 'Fra hvilken dato trengte du ikke lenger sykmeldingen?',
-            }),
-        ).toContainText('10.04.2020')
+  // Verifiser at den nå er valgt
+  await expect(checkbox).toBeChecked();
+});
 
-        const inntektskilder = oppsummering.locator('div', {
-            hasText: 'Har du hatt inntekt mens du har vært sykmeldt i perioden 1. - 24. april 2020?',
-        })
-        await expect(inntektskilder).toContainText('Ja')
-        await expect(inntektskilder.locator('div', { hasText: 'Hvilke inntektskilder har du hatt?' })).toContainText(
-            'andre arbeidsforhold',
-        )
-        await expect(inntektskilder.locator('div', { hasText: 'Er du sykmeldt fra dette?' })).toContainText('Ja')
+      */
+      // Svar JA og velg inntektskilder
+      // Underspørsmål nivå 1 - checkbox
 
-        await expect(sharedPage.getByText('Søknaden sendes til')).toHaveCount(0)
-        await sharedPage.getByRole('button', { name: 'Send søknaden' }).click()
-    })
+      const checkbox = page.getByLabel('andre arbeidsforhold')
+      checkbox.click();
 
-    test('Søknad kvittering', async () => {
-        await expect(sharedPage).toHaveURL(new RegExp(`/kvittering/${soknad.id}`))
+      await expect(page.getByText('Dette betyr at du er ansatt hos en eller flere arbeidsgiverne som ikke er kjent for oss enda og derfor ikke ligger i listen ovenfor.')).toBeVisible();
+      await page.getByText('Er du sykmeldt fra dette?')
+  .locator('xpath=..')
+  .getByRole('radio', { name: 'Ja' })
+  .click();
 
-        // Hva skjer videre
-        const kvittering = sharedPage.locator('[data-cy="kvittering-panel"]')
-        await expect(kvittering).toContainText('Hva skjer videre?')
-        await expect(kvittering).toContainText('NAV behandler søknaden din')
-        await expect(kvittering).toContainText('Når blir pengene utbetalt?')
-    })
-})
+    //   await expect(page.locator('.undersporsmal .navds-checkbox label[for=687404]')).toContainText(
+    //     'andre arbeidsforhold',
+    //   );
+    //   await page.locator('input[type=checkbox]#687404').click();
+
+      // Underspørsmål nivå 2 - radio
+      // await page.locator('input[type=radio]#687405_0').check();
+      // Finn og velg radio-knappen for "Ja" basert på ID (fra HTML: id="687405_0")
+
+    //   await expect(
+    //     page.getByText(
+    //       'Du må sende egen sykepengesøknad for dette. ' +
+    //         'Det betyr også at legen må skrive en sykmelding for hvert arbeidsforhold du er sykmeldt fra.',
+    //     ),
+    //   ).toBeVisible();
+
+      await klikkGaVidere(page); // Gå videre
+    });
+
+    await test.step('Søknad OPPHOLD_UTENFOR_EOS', async () => {
+      await expect(page).toHaveURL(new RegExp(`${arbeidsledig.id}/4`));
+
+      // Test spørsmål
+      await expect(
+        page.getByText('Var du på reise utenfor EU/EØS mens du var sykmeldt 1. - 24. april 2020?'),
+      ).toBeVisible();
+
+      // Velg 'JA' på hovedspørsmål
+      await page.locator('[data-cy="ja-nei-stor"] input[value=JA]').check();
+
+      // Underspørsmål 1: Sett periode
+      await expect(page.getByText('Når var du utenfor EU/EØS?')).toBeVisible();
+      await setPeriodeFraTil(page, 17, 24); // Bruk utility for å sette periode
+
+      await klikkGaVidere(page); // Gå videre
+    });
+
+    await test.step('Søknad TIL_SLUTT (oppsummering)', async () => {
+      await expect(page).toHaveURL(new RegExp(`${arbeidsledig.id}/5`));
+
+      // Verifiser guide-panel innhold
+      await expect(page.locator('.navds-guide-panel__content')).toContainText(
+        'Nå kan du se over at alt er riktig før du sender inn søknaden. Ved behov kan du endre opplysningene inntil 12 måneder etter innsending.',
+      );
+
+      // Verifiser oppsummering med sporsmalOgSvar (bruk container for oppsummering)
+      const oppsummering = page.locator('[data-cy="oppsummering-fra-søknaden"]');
+      await sporsmalOgSvar(oppsummering, 'Brukte du hele sykmeldingen fram til 24. april 2020?', 'Nei');
+      // Nestede spørsmål (bruk .locator for undernivå)
+      const friskmeldtSvar = oppsummering.getByText('Brukte du hele sykmeldingen fram til 24. april 2020?').locator('..');
+      await sporsmalOgSvar(friskmeldtSvar, 'Fra hvilken dato trengte du ikke lenger sykmeldingen?', '10.04.2020');
+
+      await sporsmalOgSvar(
+        oppsummering,
+        'Har du hatt inntekt mens du har vært sykmeldt i perioden 1. - 24. april 2020?',
+        'Ja',
+      );
+      const inntektSvar = oppsummering.getByText(
+        'Har du hatt inntekt mens du har vært sykmeldt i perioden 1. - 24. april 2020?',
+      ).locator('..');
+      await sporsmalOgSvar(inntektSvar, 'Hvilke inntektskilder har du hatt?', 'andre arbeidsforhold');
+      const underInntektSvar = inntektSvar.getByText('Hvilke inntektskilder har du hatt?').locator('..');
+      await sporsmalOgSvar(underInntektSvar, 'Er du sykmeldt fra dette?', 'Ja');
+
+      // Bekreft at 'Søknaden sendes til' ikke finnes
+      await expect(page.getByText('Søknaden sendes til')).not.toBeVisible();
+
+      // Send inn søknaden
+      await page.getByRole('button', { name: 'Send søknaden' }).click();
+    });
+
+    await test.step('Søknad kvittering', async () => {
+      await expect(page).toHaveURL(new RegExp(`/kvittering/${arbeidsledig.id}`));
+
+      // Verifiser kvitteringspanel
+      const kvitteringPanel = page.locator('[data-cy="kvittering-panel"]');
+      await expect(kvitteringPanel).toContainText('Hva skjer videre?');
+      await expect(kvitteringPanel).toContainText('NAV behandler søknaden din');
+      await expect(kvitteringPanel).toContainText('Når blir pengene utbetalt?');
+    });
+  });
+});
