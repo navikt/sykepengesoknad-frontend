@@ -12,7 +12,6 @@ import './run-0/yrkesskade.cy'
 import './run-0/selvstendig-naringsdrivende.cy'
 import './run-0/gammel-oppsummering.cy'
 
-import './run-1/frilanser_100.cy'
 import './run-1/korrigering-ferie-spm-infotekst.cy'
 import './run-1/utkast-korrigering.cy'
 import './run-1/over-sytti.cy'
