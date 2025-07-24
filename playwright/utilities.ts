@@ -185,8 +185,8 @@ export async function sporsmalOgSvar(container: Locator, sporsmal: string, svar:
     await expect(siblingLocator.filter({ hasText: svar })).toBeVisible()
 }
 
-export async function harSynligTittel(page: Page, tittelTekst: string, level: number) {
-    const locator = page.getByRole('heading', { level, name: tittelTekst })
+export async function harSynligTittel(page: Page, tittelTekst: string, level: number, exact: boolean = false) {
+    const locator = page.getByRole('heading', { level, name: tittelTekst, exact: exact })
     await expect(locator).toBeVisible()
     return locator
 }
