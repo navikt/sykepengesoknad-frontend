@@ -12,10 +12,15 @@ export async function checkViStolerPaDeg(page: Page, gaVidere = true) {
     }
 }
 
+export async function svarJaHovedsporsmal(page: Page) {
+    const radioButton = page.locator('form').getByRole('radio', { name: 'Ja' }).first()
+    await radioButton.click()
+    await expect(radioButton).toBeChecked()
+}
+
 export async function svarNeiHovedsporsmal(page: Page) {
     const radioButton = page.locator('form').getByRole('radio', { name: 'Nei' }).first()
     await radioButton.click()
-
     await expect(radioButton).toBeChecked()
 }
 
@@ -201,4 +206,12 @@ export async function fjernAnimasjoner(page: Page) {
   animation: none !important;
 }`,
     })
+}
+
+export const trykkPaSoknadMedId = async (page: Page, soknadId: string) => {
+    await page.locator(`a[href*="${soknadId}"]`).click()
+}
+
+export const harSoknaderlisteHeading = async (page: Page) => {
+    return harSynligTittel(page, 'Søknader', 1)
 }
