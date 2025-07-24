@@ -85,7 +85,7 @@ test.describe('Søknad om å beholde sykepenger utenfor EØS med ferie', () => {
         await test.step('Avbryter søknaden og havner på avbrutt-siden', async () => {
             await avbryterSoknad(page)
             await expect(page).toHaveURL(new RegExp(`avbrutt/${soknad.id}`))
-            await harSynligTittel(page, 'Fjernet søknad om å beholde sykepenger utenfor EU/EØS', 2)
+            await harSynligTittel(page, 'Fjernet søknad om å beholde sykepenger utenfor EU/EØS', 1)
             await expect(page.getByRole('link', { name: 'nav.no/sykepenger#utland' })).toBeVisible()
             await harSynligTekst(page, /I utgangspunktet bør du søke før du reiser til land utenfor EU\/EØS/)
         })
