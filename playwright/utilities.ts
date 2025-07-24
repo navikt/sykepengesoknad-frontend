@@ -334,6 +334,28 @@ export async function svarTekstboks(page: Page, sporsmal: string, svar: string) 
     const textbox = form.getByRole('textbox', { name: sporsmal })
     await textbox.type(svar)
 }
+
+export async function svarJaHovedsporsmal(page: Page) {
+    const radioButton = page.locator('form').getByRole('radio', { name: 'Ja' }).first()
+    await radioButton.click()
+    await expect(radioButton).toBeChecked()
+}
+
+export async function harFeilISkjemaet(page: Page, feilmelding: string) {
+    await harFlereFeilISkjemaet(page, 1, [feilmelding])
+}
+
+export async function harFlereFeilISkjemaet(page: Page, antall: number, feilmelding: string[]) {
+    const form = page.locator('form')
+    const alert = form.getByRole('alert')
+    
+    await expect(alert.getByRole('heading', { name: `Det er ${antall} feil i skjemaet`, level: 2 })).toBeVisible()
+    
+    for (const melding of feilmelding) {
+        await expect(alert.getByText(melding)).toBeVisible()
+    }
+}
+
 // -----
 
 
