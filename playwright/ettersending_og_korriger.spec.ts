@@ -59,7 +59,7 @@ test.describe('Tester ettersending og korrigering', () => {
             await expect(page).toHaveURL(new RegExp(`/sendt/${soknad.id}`))
 
             await page.getByRole('link', { name: 'Endre svar' }).click()
-            await page.getByRole('button', { name: 'Ok' }).click()
+            await page.getByRole('button', { name: 'Ok', exact: true }).click()
             await expect(page).toHaveURL(new RegExp(`/1`))
         })
 

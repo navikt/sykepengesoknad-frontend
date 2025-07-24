@@ -55,6 +55,7 @@ test.describe('Tester feilsituasjoner', () => {
         const testpersonQuery = '?testperson=integrasjon-soknader'
         const soknad = soknadSomTriggerSporsmalFinnesIkkeISoknad
 
+        // eslint-disable-next-line playwright/expect-expect
         test('Feil fra backend gir refresh-mulighet', async ({ page }) => {
             await test.step('Gå til søknad og trigger feil', async () => {
                 await gaTilListeOgApneSoknad(page, '/syk/sykepengesoknad' + testpersonQuery, soknad.id)
@@ -68,6 +69,7 @@ test.describe('Tester feilsituasjoner', () => {
         const testpersonQuery = '?testperson=integrasjon-soknader'
         const soknad = soknadSomTriggerFeilStatusForOppdaterSporsmal
 
+        // eslint-disable-next-line playwright/expect-expect
         test('Feil fra backend gir refresh-mulighet', async ({ page }) => {
             await gaTilListeOgApneSoknad(page, '/syk/sykepengesoknad' + testpersonQuery, soknad.id)
             await checkViStolerPaDeg(page)
