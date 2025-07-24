@@ -15,7 +15,6 @@ describe('Tester arbeidsledigsøknad', () => {
         cy.get(`a[href*=${soknad.id}]`).click()
     })
 
-
     it('Navigerer søknaden', () => {
         cy.url().should('include', `${soknad.id}/1`)
         cy.realPress('Tab')
