@@ -211,3 +211,7 @@ export async function fjernAnimasjoner(page: Page) {
 export const trykkPaSoknadMedId = async (page: Page, soknadId: string) => {
     await page.locator(`a[href*="${soknadId}"]`).click()
 }
+
+export const harSoknaderlisteHeading = async (page: Page) => {
+    return harSynligTittel(page, 'Søknader', 1)
+}
