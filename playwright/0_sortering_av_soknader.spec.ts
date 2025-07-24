@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test'
+
 import { Soknad } from '../src/types/types'
 import { rsToSoknad } from '../src/types/mapping'
 import { soknaderIntegration } from '../src/data/mock/data/soknad/soknader-integration'
@@ -6,7 +7,7 @@ import { soknaderIntegration } from '../src/data/mock/data/soknad/soknader-integ
 const articleTilSoknad = async (locators: any) => {
     const soknader: Soknad[] = []
     const count = await locators.count()
-    
+
     for (let i = 0; i < count; i++) {
         const element = locators.nth(i)
         const dataCy = await element.getAttribute('data-cy')
@@ -42,7 +43,7 @@ test.describe('Tester sortering av søknader', () => {
     test('Nye søknader sorteres etter tidligste tom dato', async ({ page }) => {
         const articles = page.locator('[data-cy="Nye søknader"] .navds-link-panel')
         const soknader = await articleTilSoknad(articles)
-        
+
         let forrigeSoknad = soknader[0]
         soknader.forEach((sok: Soknad) => {
             expect(getFomFraSoknad(forrigeSoknad).getTime()).toBeLessThanOrEqual(getFomFraSoknad(sok).getTime())
@@ -52,10 +53,10 @@ test.describe('Tester sortering av søknader', () => {
 
     test('Sorter etter Status', async ({ page }) => {
         await page.locator('select').selectOption('Status')
-        
+
         const articles = page.locator('[data-cy="Tidligere søknader"] .navds-link-panel')
         const soknader = await articleTilSoknad(articles)
-        
+
         let forrigeSoknad = soknader[0]
         soknader.forEach((sok: Soknad) => {
             expect(forrigeSoknad.status <= sok.status).toBe(true)
@@ -65,10 +66,10 @@ test.describe('Tester sortering av søknader', () => {
 
     test('Sorter etter Dato', async ({ page }) => {
         await page.locator('select').selectOption('Dato')
-        
+
         const articles = page.locator('[data-cy="Tidligere søknader"] .navds-link-panel')
         const soknader = await articleTilSoknad(articles)
-        
+
         let forrigeSoknad = soknader[0]
         soknader.forEach((sok: Soknad) => {
             expect(getFomFraSoknad(forrigeSoknad).getTime()).toBeGreaterThanOrEqual(getFomFraSoknad(sok).getTime())
@@ -76,20 +77,28 @@ test.describe('Tester sortering av søknader', () => {
         })
 
         await expect(page.locator('select')).toContainText('Dato')
-        await expect(page.locator('[data-cy="Tidligere søknader"] .navds-link-panel').nth(0)).toContainText('27. mai – 11. juni 2020')
-        await expect(page.locator('[data-cy="Tidligere søknader"] .navds-link-panel').nth(1)).toContainText('23. mai – 7. juni 2020')
+        await expect(page.locator('[data-cy="Tidligere søknader"] .navds-link-panel').nth(0)).toContainText(
+            '27. mai – 11. juni 2020',
+        )
+        await expect(page.locator('[data-cy="Tidligere søknader"] .navds-link-panel').nth(1)).toContainText(
+            '23. mai – 7. juni 2020',
+        )
     })
 
     test('Sorter etter Sendt', async ({ page }) => {
         await page.locator('select').selectOption('Sendt')
         await expect(page.locator('select')).toContainText('Sendt')
 
-        await expect(page.locator('[data-cy="Tidligere søknader"] .navds-link-panel').nth(0)).toContainText('27. mai – 11. juni 2020')
-        await expect(page.locator('[data-cy="Tidligere søknader"] .navds-link-panel').nth(1)).toContainText('25. – 27. mars 2020')
-        
+        await expect(page.locator('[data-cy="Tidligere søknader"] .navds-link-panel').nth(0)).toContainText(
+            '27. mai – 11. juni 2020',
+        )
+        await expect(page.locator('[data-cy="Tidligere søknader"] .navds-link-panel').nth(1)).toContainText(
+            '25. – 27. mars 2020',
+        )
+
         const articles = page.locator('[data-cy="Tidligere søknader"] .navds-link-panel')
         const soknader = await articleTilSoknad(articles)
-        
+
         let forrigeSoknad = soknader[0]
         soknader.forEach((sok: Soknad) => {
             expect(senesteSendtDato(sok)).toBeLessThanOrEqual(senesteSendtDato(forrigeSoknad))

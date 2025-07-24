@@ -7,7 +7,7 @@ import {
     fjernAnimasjoner,
     harSynligTekst,
     sporsmalOgSvar2,
-    svarTekstboks
+    svarTekstboks,
 } from './utilities'
 
 test.describe('Sjekker at søknader med gammel oppsummering ser ok ut', () => {
@@ -134,8 +134,6 @@ test.describe('Sjekker at søknader med gammel oppsummering ser ok ut', () => {
                 ),
             ).toBeVisible()
 
-
-
             // await page
             //     .locator('.undersporsmal .navds-text-field__input#796cf7ed-8a7e-39de-9cbc-6e789aa5af3f')
             //     .fill('21')
@@ -145,7 +143,6 @@ test.describe('Sjekker at søknader med gammel oppsummering ser ok ut', () => {
                 '21',
             )
 
-                
             // Velger timer
             await page.locator('.undersporsmal input[value=Timer]').click()
             await expect(
@@ -158,18 +155,19 @@ test.describe('Sjekker at søknader med gammel oppsummering ser ok ut', () => {
             // await page
             //     .locator('.undersporsmal .navds-text-field__input#6cc620d8-d4b0-3e82-a038-2757df6fc311')
 
-
             //     .fill('21')
 
-
-            await svarTekstboks(page, "Oppgi totalt antall timer du jobbet i perioden 1. - 24. april 2020 hos Posten Norge AS, Bærum", "21")
-
+            await svarTekstboks(
+                page,
+                'Oppgi totalt antall timer du jobbet i perioden 1. - 24. april 2020 hos Posten Norge AS, Bærum',
+                '21',
+            )
 
             await expect(page.getByText('Er prosenten lavere enn du forventet?')).not.toBeVisible()
 
             // Underspørsmål 2
             await expect(
-                page.getByText('Jobber du vanligvis 37,5 timer i uka hos Posten Norge AS, Bærum?')
+                page.getByText('Jobber du vanligvis 37,5 timer i uka hos Posten Norge AS, Bærum?'),
             ).toBeVisible()
             await page.locator('input#af302d17-f35d-38a6-ac23-ccde5db369cb_0').click()
 
@@ -264,7 +262,6 @@ test.describe('Sjekker at søknader med gammel oppsummering ser ok ut', () => {
             // await klikkGaVidere(page)
             await page.getByRole('button', { name: 'Gå videre' }).click()
             // wait for 30 seconds
-            
 
             //Trykker på Endre svar og havner på første spørsmål
             await page.getByRole('button', { name: 'Gå videre' }).click()

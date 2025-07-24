@@ -44,7 +44,7 @@ test.describe('Tester yrkesskadesspørsmål', () => {
         // Check the list exists and has 2 items
         const listLocator = registrerteYrkesskaderText.locator('xpath=following-sibling::ul').first()
         await expect(listLocator).toBeVisible()
-        
+
         const listItems = listLocator.locator('li')
         await expect(listItems).toHaveCount(2)
 
@@ -64,9 +64,11 @@ test.describe('Tester yrkesskadesspørsmål', () => {
         await helpButton.click()
 
         const helpContent = helpButton.locator('xpath=following-sibling::*').first()
-        await expect(helpContent.getByText(
-            'Svar ja, hvis det nylig er sendt inn en skademelding som påvirker dette sykefraværet.',
-        )).toBeVisible()
+        await expect(
+            helpContent.getByText(
+                'Svar ja, hvis det nylig er sendt inn en skademelding som påvirker dette sykefraværet.',
+            ),
+        ).toBeVisible()
 
         // Svarer ja og går videre
         await svarJaHovedsporsmal(page)
@@ -86,7 +88,7 @@ test.describe('Tester yrkesskadesspørsmål', () => {
 
         // Vi ser de valgte skadedatoene i oppsummeringa
         const oppsummeringContainer = page.locator('[data-cy="oppsummering-fra-søknaden"]')
-        
+
         await sporsmalOgSvar(
             oppsummeringContainer,
             'Hvilken skadedato skyldes dette sykefraværet? Du kan velge flere.',

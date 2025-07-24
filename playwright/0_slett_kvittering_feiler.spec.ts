@@ -1,5 +1,6 @@
-import { test, expect } from '@playwright/test'
 import path from 'path'
+
+import { test, expect } from '@playwright/test'
 
 test.describe('Test sletting av kvittering som feiler', () => {
     const soknadId = 'd4ce1c57-1f91-411b-ab64-beabbba29b65' // feilVedSlettingAvKvittering.id
@@ -17,15 +18,15 @@ test.describe('Test sletting av kvittering som feiler', () => {
 
         await test.step('Laster opp Taxi-kvittering', async () => {
             await page.getByRole('button', { name: 'Legg til reiseutgift' }).click()
-            
+
             await page.locator('select[name=transportmiddel]').selectOption('TAXI')
             await page.locator('input[name=belop_input]').fill('1234')
-            
+
             // Upload file
             const fileInput = page.locator('[data-cy="filopplasteren"] input[type=file]')
             const filePath = path.join(__dirname, '..', 'cypress', 'fixtures', 'kvittering.jpg')
             await fileInput.setInputFiles(filePath)
-            
+
             await page.getByRole('button', { name: 'Bekreft' }).click()
         })
 
@@ -39,9 +40,9 @@ test.describe('Test sletting av kvittering som feiler', () => {
         await test.step('Sletting av kvittering fra liste', async () => {
             await page.getByRole('button', { name: 'Slett' }).click()
             await page.getByRole('button', { name: 'Ja, jeg er sikker' }).click()
-            
+
             await expect(page.getByText('Det skjedde en feil ved sletting av kvitteringen')).toBeVisible()
-            
+
             await page.getByLabel('Vil du slette kvitteringen?').getByRole('button', { name: 'Nei' }).click
         })
     })
