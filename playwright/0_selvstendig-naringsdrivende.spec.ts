@@ -1,11 +1,10 @@
-import { expect, Locator, Page, test } from '@playwright/test'
+import { expect, Page, test } from '@playwright/test'
 
 import {
     svarRadioGruppe,
     klikkGaVidere,
     svarDato,
     sporsmalOgSvar,
-    modalIkkeAktiv,
     svarNeiHovedsporsmal,
     sjekkMainContentFokus,
 } from './utilities'
