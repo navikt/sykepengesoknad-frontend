@@ -48,6 +48,33 @@ const createOptions = (): OptionsType => {
 
 const opts = createOptions()
 
+const commonBrowserConfigs = [
+    {
+        name: 'Desktop Chromium',
+        use: { ...devices['Desktop Chrome'], viewport: { width: 1920, height: 1080 } },
+    },
+    {
+        name: 'Mobile Chromium',
+        use: { ...devices['Pixel 5'], viewport: { width: 375, height: 667 }, isMobile: true },
+    },
+    {
+        name: 'Desktop Firefox',
+        use: { ...devices['Desktop Firefox'], viewport: { width: 1920, height: 1080 } },
+    },
+    {
+        name: 'Mobile Firefox',
+        use: { ...devices['Pixel 5'], viewport: { width: 375, height: 667 }, isMobile: true },
+    },
+    {
+        name: 'Desktop WebKit',
+        use: { ...devices['Desktop Safari'], viewport: { width: 1920, height: 1080 } },
+    },
+    {
+        name: 'Mobile WebKit',
+        use: { ...devices['iPhone 12'], viewport: { width: 375, height: 667 }, isMobile: true },
+    },
+]
+
 export default defineConfig({
     testDir: './playwright',
     timeout: 30000,
@@ -61,19 +88,18 @@ export default defineConfig({
         navigationTimeout: 60000,
         trace: 'on-first-retry',
     },
-    projects: [
-        {
-            name: 'chromium',
-            use: { ...devices['Desktop Chrome'] },
-        },
-        ...(process.env.CI
-            ? [
-                  {
-                      name: 'firefox',
-                      use: { ...devices['Desktop Firefox'] },
-                  },
-              ]
-            : []),
-    ],
+    projects: process.env.CI
+        ? [
+              {
+                  name: 'CI Chromium',
+                  use: { ...devices['Desktop Chrome'], viewport: { width: 1920, height: 1080 } },
+              },
+              {
+                  name: 'CI Firefox',
+                  use: { ...devices['Desktop Firefox'], viewport: { width: 1920, height: 1080 } },
+              },
+          ]
+        : commonBrowserConfigs,
+
     webServer: opts.server,
 })
