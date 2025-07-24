@@ -52,7 +52,7 @@ test.describe('Tester avbryting av søknad', () => {
         await checkViStolerPaDeg(page)
 
         // Søknad kan avsluttes og fortsette senere
-        await page.getByRole('button', { name: 'Avslutt og fortsett senere' }).click() // Matches Cypress data-cy="avslutt-og-fortsett-senere"
+        await page.getByRole('button', { name: 'Lagre søknad og fortsett senere' }).click() // Matches Cypress data-cy="avslutt-og-fortsett-senere"
         await modalAktiv(page)
         await harSynligTekst(page, 'Vi lagrer søknaden din på Ditt sykefravær i listen med søknader om sykepenger.')
         await harSynligTekst(page, 'Ja, fortsett senere')
