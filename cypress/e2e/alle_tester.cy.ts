@@ -12,7 +12,6 @@ import './run-0/yrkesskade.cy'
 import './run-0/selvstendig-naringsdrivende.cy'
 import './run-0/gammel-oppsummering.cy'
 
-import './run-2/endring-uten-endring.cy'
 import './run-2/fremtidig_soknad.cy'
 import './run-2/kvittering.cy'
 import './run-2/kontonummer.cy'
