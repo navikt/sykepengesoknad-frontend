@@ -20,7 +20,6 @@ import './run-2/utenlandsk-sykmelding.cy'
 import './run-2/paaskeferie.cy'
 import './run-2/korrigering-ferie.cy'
 import './run-2/paaskeferie.cy'
-import './run-2/form-progress-bar.cy'
 
 import './run-3/absolutt_tvang.cy'
 import './run-3/cummulative_layout_shift.cy'
