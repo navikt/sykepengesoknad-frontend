@@ -25,16 +25,16 @@ const setPeriodeFraTil = async (page: Page, fom: number, tom: number, periodeInd
     // In a period component with a given ID, the "from" field is the first field and "to" field is the second field.
     // Get the period component with the right id (including 0, 1 etc for where in the sequence it is)
     // Then select the right calendar date popup button for day in month.
-    
+
     const periodeComponent = page.locator(`[data-cy="periode"]`).nth(periodeIndex)
-    
+
     // Click the first date field button (fra/from)
     await periodeComponent.locator('.navds-date__field-button').nth(0).click()
-    
+
     // Click the "from" date
     await periodeComponent.locator('.rdp-cell').filter({ hasText: fom.toString() }).click()
-    
-    // Click the "to" date  
+
+    // Click the "to" date
     await periodeComponent.locator('.rdp-cell').filter({ hasText: tom.toString() }).click()
 }
 
@@ -70,15 +70,11 @@ test.describe('Tester arbeidstakersøknad - gradert 50%', () => {
             // await checkbox.check()
             // await page.locator('button').filter({ hasText: 'Start søknad' }).click()
 
-            await page.getByLabel('Jeg bekrefter at jeg vil svare så riktig som jeg kan.').check();
-
+            await page.getByLabel('Jeg bekrefter at jeg vil svare så riktig som jeg kan.').check()
 
             // Klikk "Start søknaden"
             await expect(page.getByRole('button', { name: 'Start søknad' })).toBeVisible()
             await page.getByRole('button', { name: 'Start søknad' }).click()
-
-
-
         })
 
         await test.step('Tilbake til ANSVARSERKLARING og frem igjen', async () => {
@@ -107,7 +103,6 @@ test.describe('Tester arbeidstakersøknad - gradert 50%', () => {
             // Set period from 16th to 23rd
             await setPeriodeFraTil(page, 16, 23)
             await page.locator('button').filter({ hasText: 'Gå videre' }).click()
-
         })
 
         await test.step('Søknad PERMISJON_V2', async () => {
@@ -130,9 +125,9 @@ test.describe('Tester arbeidstakersøknad - gradert 50%', () => {
                 ),
             ).toBeVisible()
             await fillTextFieldByLabel(
-                page, 
+                page,
                 'Hvor mange timer i uken jobber du vanligvis når du er frisk? Varierer det, kan du oppgi gjennomsnittet.',
-                '12'
+                '12',
             )
 
             await expect(page.locator('text=Hvor mye jobbet du tilsammen 1. - 24. april 2020?')).toBeVisible()
@@ -143,16 +138,16 @@ test.describe('Tester arbeidstakersøknad - gradert 50%', () => {
                 page,
                 'Oppgi prosent',
                 '51',
-                '.undersporsmal .navds-text-field__input#13acfccb-3f39-3893-8054-058270add6ab'
+                '.undersporsmal .navds-text-field__input#13acfccb-3f39-3893-8054-058270add6ab',
             )
 
             await page.locator('.undersporsmal input[value="Timer"]').click()
-            
+
             await fillTextFieldByLabel(
                 page,
                 'Oppgi timer totalt',
                 '10.7',
-                '.undersporsmal .navds-text-field__input#13acfccb-3f39-3893-8054-058270add6ab'
+                '.undersporsmal .navds-text-field__input#13acfccb-3f39-3893-8054-058270add6ab',
             )
 
             // await page
@@ -185,11 +180,11 @@ test.describe('Tester arbeidstakersøknad - gradert 50%', () => {
                 ),
             ).toBeVisible()
 
-                await fillTextFieldByLabel(
+            await fillTextFieldByLabel(
                 page,
                 'Oppgi timer totalt',
                 '11',
-                '.undersporsmal .navds-text-field__input#13acfccb-3f39-3893-8054-058270add6ab'
+                '.undersporsmal .navds-text-field__input#13acfccb-3f39-3893-8054-058270add6ab',
             )
 
             await page.locator('button').filter({ hasText: 'Gå videre' }).click()

@@ -12,10 +12,7 @@ export default function Person() {
     return (
         <>
             <div hidden={openState}>
-                <div
-                    onMouseEnter={() => setShowHint(true)}
-                    onMouseLeave={() => setShowHint(false)}
-                >
+                <div onMouseEnter={() => setShowHint(true)} onMouseLeave={() => setShowHint(false)}>
                     <Tooltip content="Verktøy for testing">
                         <Button
                             type="button"
@@ -33,7 +30,12 @@ export default function Person() {
                             } as CSSProperties
                         }
                     >
-                        <Popover open={showHint} onClose={() => void 0} placement="bottom-end" anchorEl={buttonRef.current}>
+                        <Popover
+                            open={showHint}
+                            onClose={() => void 0}
+                            placement="bottom-end"
+                            anchorEl={buttonRef.current}
+                        >
                             <Popover.Content>
                                 <Heading size="small" level="2" className="motion-safe:animate-bounce">
                                     Tips!

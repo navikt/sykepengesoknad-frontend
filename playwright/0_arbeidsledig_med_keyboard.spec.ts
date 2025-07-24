@@ -1,4 +1,5 @@
 import { test, expect, Page } from '@playwright/test'
+
 import { tabUntilFocusedContainsText } from './utilities'
 
 // Utility function
@@ -18,13 +19,13 @@ test('Full arbeidsledigsøknad flow', async ({ page }) => {
         waitUntil: 'networkidle',
     })
 
-async function elementInFocusLocator() {
-    const elementInFocus = page.locator(':focus');
-    const text = await elementInFocus.textContent();
-    console.log(`Element in focus text: ${text}`);
-}
+    async function elementInFocusLocator() {
+        const elementInFocus = page.locator(':focus')
+        const text = await elementInFocus.textContent()
+        console.log(`Element in focus text: ${text}`)
+    }
 
-    let elementInFocusText = page.locator(':focus');
+    const elementInFocusText = page.locator(':focus')
     await expect(page.locator('.navds-heading--large')).toBeVisible()
     await expect(page.locator('.navds-heading--large')).toHaveText('Søknader')
     await page.locator(`a[href*="${soknad.id}"]`).click()
@@ -56,15 +57,12 @@ async function elementInFocusLocator() {
     await expect(bekreftLabel).toHaveCSS('box-shadow', /./)
     // 1
 
-
     await page.keyboard.press('Space')
     await page.keyboard.press('Tab')
     const startButton = page.getByRole('button', { name: 'Start søknad' })
     await expect(startButton).toHaveCSS('box-shadow', /./)
     await page.keyboard.press('Enter')
     await sjekkMainContentFokus(page)
-
-
 
     expect(page.getByRole('heading', { name: 'Friskmeldt' })).toBeVisible()
     await expect(page.locator('form').getByRole('radio', { name: 'Nei' })).toHaveCount(1)
@@ -97,7 +95,6 @@ async function elementInFocusLocator() {
 
     // 2
 
-
     expect(page.getByRole('heading', { name: 'Andre inntektskilder' })).toBeVisible()
     console.log('Andre inntektskilder')
     await expect(page.getByText('Hva mener vi med andre inntektskilder?')).toBeVisible()
@@ -112,18 +109,16 @@ async function elementInFocusLocator() {
     await page.keyboard.press('Tab')
     elementInFocus = page.locator(':focus')
     await page.keyboard.press('Tab')
-    
 
     const focusedAi = page.locator(':focus')
 
-    await expect(focusedAi).toHaveText('Gå videre');
+    await expect(focusedAi).toHaveText('Gå videre')
     await expect(focusedAi).toHaveCSS('box-shadow', /.+/)
     //const gaVidereButton2 = page.getByRole('button', { name: 'Gå videre' })
     // await expect(gaVidereButton2).toHaveCSS('box-shadow', /./)
     console.log(focusedAi)
     await page.keyboard.press('Enter')
     //await sjekkMainContentFokus(page)
-
 
     //3
     // const pageContent = await page.content()
@@ -152,8 +147,6 @@ async function elementInFocusLocator() {
     await page.keyboard.press('Enter')
     await sjekkMainContentFokus(page)
 
-    
-
     await expect(page.getByRole('heading', { name: 'Oppsummering fra søknaden' })).toBeVisible()
     await page.keyboard.press('Tab')
     await page.keyboard.press('Tab')
@@ -161,9 +154,9 @@ async function elementInFocusLocator() {
     await page.keyboard.press('Tab')
     await page.keyboard.press('Tab')
     await page.keyboard.press('Tab')
-    const focused = page.locator(':focus');
-    await expect(focused).toHaveText('Send søknaden');
-    await expect(focused).toHaveCSS('box-shadow', /.+/); // Checks for any box-shadow
+    const focused = page.locator(':focus')
+    await expect(focused).toHaveText('Send søknaden')
+    await expect(focused).toHaveCSS('box-shadow', /.+/) // Checks for any box-shadow
     // const sendButton = page.getByRole('button', { name: 'Send søknaden' })
     // await expect(sendButton).toHaveCSS('box-shadow', /./)
     await page.keyboard.press('Enter')
@@ -172,6 +165,4 @@ async function elementInFocusLocator() {
     await expect(page.getByText('Søknaden er sendt til NAV')).toBeVisible()
 
     await expect(page.getByText(/Mottatt.*kl/, { exact: false })).toBeVisible()
-   
-    
 })
