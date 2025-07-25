@@ -54,7 +54,7 @@ test.describe('Tester søknad til utenlandsk sykmelding', () => {
             await svarJaHovedsporsmal(page)
             await harSynligTekst(page, 'Oppgi nærmere opplysninger om arbeid/virksomhet utenfor Norge')
             await klikkGaVidere(page, true)
-            await harSynligTekst(page, 'Du må oppgi nærmere opplysninger om arbeidet')
+            await expect(page.getByRole('paragraph').filter({ hasText: 'Du må oppgi nærmere' })).toBeVisible()
             await svarFritekst(
                 page,
                 'Oppgi nærmere opplysninger om arbeid/virksomhet utenfor Norge',
