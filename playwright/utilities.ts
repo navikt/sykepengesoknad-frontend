@@ -349,6 +349,62 @@ export async function harFlereFeilISkjemaet(page: Page, antall: number, feilmeld
     }
 }
 
+export async function svarFritekst(page: Page, sporsmal: string, svar: string) {
+    const form = page.locator('form')
+    const textbox = form.getByRole('textbox', { name: sporsmal })
+    await textbox.type(svar)
+}
+
+export async function velgDato(page: Page, dag?: number) {
+    if (dag) {
+        await page.locator('.rdp-day').getByText(dag.toString()).click()
+    } else {
+        // Default behavior - click first available date
+        await page.locator('.rdp-day').first().click()
+    }
+}
+
+export async function velgKalenderdag(page: Page) {
+    await page.locator('[aria-label="mandag 13"]').click()
+}
+
+export async function velgTimer(page: Page, steg: number, soknad: any) {
+    const id = soknad.sporsmal[steg - 1].undersporsmal[1].undersporsmal[1].undersporsmal[0].id
+    await page.locator('.undersporsmal input[value=timer]').click()
+    await page.locator(`.undersporsmal .navds-text-field__input#${id}`).type('21')
+}
+
+export async function velgTall(page: Page, sporsmalstekst: string, verdi: string) {
+    await page.getByText(sporsmalstekst).locator('..').getByRole('textbox').type(verdi)
+}
+
+export async function velgCheckbox(page: Page, gjelder: string) {
+    await page.locator('.undersporsmal .navds-checkbox').getByText(gjelder).click()
+}
+
+export async function svarRadio(page: Page, gjelder: string, svar: 'JA' | 'NEI' | 'Prosent' | 'Timer') {
+    const questionElement = page.getByText(gjelder)
+    const parentElement = questionElement.locator('..')
+    await parentElement.locator(`input[value="${svar}"]`).click()
+}
+
+export async function svarSykMedEgenmelding(page: Page) {
+    await page.getByText('Jeg var syk med egenmelding').click()
+}
+
+export async function velgBehandlingsdager(page: Page) {
+    await page.locator('.rdp-day').getByText('10').click()
+    await page.locator('.rdp-day').getByText('16').click()
+}
+
+export async function lastOppKvittering(page: Page) {
+    await page.getByRole('button', { name: 'Legg til reiseutgift' }).click()
+    await page.locator('select[name=transportmiddel]').selectOption('TAXI')
+    await page.locator('input[name=belop_input]').type('1234')
+    await page.locator('[data-cy="filopplasteren"] input[type=file]').setInputFiles('playwright/fixtures/kvittering.jpg')
+    await page.getByRole('button', { name: 'Bekreft' }).click()
+}
+
 // -----
 
 /*
