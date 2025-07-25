@@ -171,6 +171,12 @@ export async function svarRadioGruppe(page: Page, groupName: string | RegExp, ra
     await group.getByRole('radio', { name: radioName }).check()
 }
 
+export async function svarFritekst(page: Page, name: string, verdi: string) {
+    const textbox = page.getByRole('textbox', { name })
+    await textbox.clear()
+    await textbox.fill(verdi)
+}
+
 export async function sporsmalOgSvar(container: Locator, sporsmal: string, svar: string) {
     // 1. Finn elementet med teksten `sporsmal` *innenfor* container
     const sporsmalLocator = container.getByText(sporsmal)
