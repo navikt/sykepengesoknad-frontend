@@ -277,7 +277,7 @@ export async function tabUntilFocusedContainsText(
     )
 }
 
-export async function sjekkIntroside(page) {
+export async function sjekkIntroside(page: Page) {
     await expect(
         page.getByText(
             'Her kan du søke om sykepenger mens du er sykmeldt. ' +
@@ -316,22 +316,6 @@ export async function sjekkIntroside(page) {
     ).toHaveAttribute('href', 'https://www.nav.no/endringer')
 }
 
-/*
-export async function sporsmalOgSvar2(page, sporsmal: string, svar: string) {
-  const question = page.getByText(sporsmal);
-  await expect(question).toBeVisible();
-  const answer = question.locator('xpath=following-sibling::*').first();
-  await expect(answer).toHaveText(new RegExp(svar));
-}
-  */
-
-export async function sporsmalOgSvar2(page, sporsmal: string, svar: string) {
-    const question = page.getByText(sporsmal)
-    await expect(question).toBeVisible()
-    const answer = question.locator('xpath=following-sibling::input[@type="text"]').first()
-    await expect(answer).toHaveValue(svar)
-}
-
 export async function svarDato(page: Page, sporsmal: string, svar: string) {
     const form = page.locator('form')
     const textbox = form.getByRole('textbox', { name: sporsmal })
@@ -342,12 +326,6 @@ export async function svarTekstboks(page: Page, sporsmal: string, svar: string) 
     const form = page.locator('form')
     const textbox = form.getByRole('textbox', { name: sporsmal })
     await textbox.type(svar)
-}
-
-export async function svarJaHovedsporsmal(page: Page) {
-    const radioButton = page.locator('form').getByRole('radio', { name: 'Ja' }).first()
-    await radioButton.click()
-    await expect(radioButton).toBeChecked()
 }
 
 export async function harFeilISkjemaet(page: Page, feilmelding: string) {
@@ -363,12 +341,6 @@ export async function harFlereFeilISkjemaet(page: Page, antall: number, feilmeld
     for (const melding of feilmelding) {
         await expect(alert.getByText(melding)).toBeVisible()
     }
-}
-
-export async function svarFritekst(page: Page, sporsmal: string, svar: string) {
-    const form = page.locator('form')
-    const textbox = form.getByRole('textbox', { name: sporsmal })
-    await textbox.type(svar)
 }
 
 export async function velgDato(page: Page, dag?: number) {
@@ -417,41 +389,8 @@ export async function lastOppKvittering(page: Page) {
     await page.getByRole('button', { name: 'Legg til reiseutgift' }).click()
     await page.locator('select[name=transportmiddel]').selectOption('TAXI')
     await page.locator('input[name=belop_input]').type('1234')
-    await page.locator('[data-cy="filopplasteren"] input[type=file]').setInputFiles('playwright/fixtures/kvittering.jpg')
+    await page
+        .locator('[data-cy="filopplasteren"] input[type=file]')
+        .setInputFiles('playwright/fixtures/kvittering.jpg')
     await page.getByRole('button', { name: 'Bekreft' }).click()
 }
-
-// -----
-
-/*
-async function checkViStolerPaDeg(page, gaVidere = true) {
-  await page
-    .getByRole('checkbox', {
-      name: /Jeg bekrefter at jeg vil svare så riktig som jeg kan./i,
-    })
-    .check();
-  if (gaVidere) {
-    await page.getByText('Start søknad').click();
-  }
-}
-
-async function klikkGaVidere(page, forventFeil = false, skipFocusCheck = false) {
-  const currentUrl = page.url();
-  const currentPathParam = parseInt(currentUrl.split('/').pop()!, 10);
-
-  await page.getByRole('button', { name: 'Gå videre' }).click();
-  if (forventFeil) return;
-
-  await expect(page).not.toHaveURL(currentUrl);
-
-  const newUrl = page.url();
-  const newPathParam = parseInt(newUrl.split('/').pop()!, 10);
-  expect(newPathParam).toEqual(currentPathParam + 1);
-
-  if (!skipFocusCheck) {
-    // Approximate focus check (Playwright doesn't have direct 'focused' like Cypress;
-    // use if needed, or skip as focus is often implicit)
-    await expect(page.locator('#maincontent')).toBeFocused();
-  }
-}
-*/
