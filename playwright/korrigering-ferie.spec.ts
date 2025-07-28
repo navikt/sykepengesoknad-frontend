@@ -9,7 +9,6 @@ import {
     neiOgVidere,
 } from './utilities'
 
-//TODO: sjekk om denne dupliserer korrigering-ferie-spm-infotekst.spec.ts
 test.describe('Tester korrigering av ferie', () => {
     const soknadId = '5b769c04-e171-47c9-b79b-23ab8fce331e'
     const testpersonQuery = '?testperson=arbeidstaker-gradert'

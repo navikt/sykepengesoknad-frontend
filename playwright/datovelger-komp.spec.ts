@@ -11,7 +11,6 @@ test.describe('Tester at datovelger viser korrekt feilmelding, og at man ikke ka
         await page.goto(`/syk/sykepengesoknad/soknader/${soknad.id}/3${testpersonQuery}`)
     })
 
-    //TODO Sjekk om denne er duplikat av en annen test i feilmeldinger.spec.ts
     test('Trigger feilmelding', async ({ page }) => {
         await svarJaHovedsporsmal(page)
         await expect(page.getByText('Når tok du ut feriedager?')).toBeVisible()
