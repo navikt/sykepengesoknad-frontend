@@ -68,20 +68,17 @@ export async function svarCombobox(
     autocompleteVerdi: string = verdi,
     fjernVerdi: boolean = false,
 ) {
-    // Opprett ein locator for combobox basert på Rolle + name
-    const combo = page.getByRole('combobox', { name })
+    const comboBox = page.getByRole('combobox', { name })
+    await comboBox.fill(verdi)
+    await expect(comboBox).toHaveValue(autocompleteVerdi)
 
-    // Skriv inn i combobox-feltet
-    await combo.type(verdi)
-
-    // Sjekk at verdien er oppdatert til forventa autocompleteVerdi
-    await expect(combo).toHaveValue(autocompleteVerdi)
-
-    // Trykk Enter for å velje
-    await combo.press('Enter')
+    await comboBox.press('Enter')
 
     // Verifiser at comboboxen no er tømt
-    await expect(combo).toHaveValue('')
+    await expect(comboBox).toHaveValue('')
+
+    //Lukker listen
+    await page.locator('.navds-combobox__button-toggle-list').click()
 
     // Dersom vi ikkje skal fjerne verdien, sjekk at ho er synleg i den valde-lista
     if (!fjernVerdi) {
@@ -174,6 +171,12 @@ export async function svarRadioGruppe(page: Page, groupName: string | RegExp, ra
     await group.getByRole('radio', { name: radioName }).check()
 }
 
+export async function svarFritekst(page: Page, name: string, verdi: string) {
+    const textbox = page.getByRole('textbox', { name })
+    await textbox.clear()
+    await textbox.fill(verdi)
+}
+
 export async function sporsmalOgSvar(container: Locator, sporsmal: string, svar: string) {
     // 1. Finn elementet med teksten `sporsmal` *innenfor* container
     const sporsmalLocator = container.getByText(sporsmal)
@@ -185,8 +188,8 @@ export async function sporsmalOgSvar(container: Locator, sporsmal: string, svar:
     await expect(siblingLocator.filter({ hasText: svar })).toBeVisible()
 }
 
-export async function harSynligTittel(page: Page, tittelTekst: string, level: number) {
-    const locator = page.getByRole('heading', { level, name: tittelTekst })
+export async function harSynligTittel(page: Page, tittelTekst: string, level: number, exact: boolean = false) {
+    const locator = page.getByRole('heading', { level, name: tittelTekst, exact: exact })
     await expect(locator).toBeVisible()
     return locator
 }
