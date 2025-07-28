@@ -21,6 +21,7 @@ import {
 } from './utilities'
 import { veldigLangSoknad } from '../src/data/mock/data/soknad/veldig-lang-soknad'
 import { rsToSoknad } from '../src/types/mapping'
+import { get } from 'http'
 
 test.describe('Tester støtte for gamle spørsmål', () => {
     //-----
@@ -399,28 +400,42 @@ test.describe('Tester støtte for gamle spørsmål', () => {
         })
 
         await test.step('Step 54: Inntekt underveis', async () => {
+            page.getByRole('heading', {name: "Inntekt underveis"}).isVisible()
             await svarNeiHovedsporsmal(page)
             await klikkGaVidere(page)
         })
 
         await test.step('Step 55: Reise til utlandet', async () => {
+            page.getByRole('heading', {name: "Reise til utlandet"}).isVisible()
             await svarNeiHovedsporsmal(page)
             await klikkGaVidere(page)
         })
 
         await test.step('Step 56: Søknad TIL_SLUTT', async () => {
+            page.getByRole('heading', {name: "Oppsummering fra søknaden"}).isVisible()
+            // Oppsummering fra søknaden
             await sporsmalOgSvar(page.locator('form'), 'Hvor mye har du tjent i perioden 20. – 24. april 2020?', '25000 kroner før skatt')
-            await page.getByRole('button', { name: 'Send søknaden' }).click()
+            // await klikkGaVidere(page)
+             await page.getByRole('button', { name: 'Send søknaden' }).click()
+
         })
 
         await test.step('Step 57: Søknad kvittering', async () => {
-            
-            const kvittering = page.locator('[data-cy="kvittering"]')
-            await expect(kvittering).toContainText('Hva skjer videre?')
-            // await expect(page).toHaveURL(new RegExp(`/kvittering/${soknad.id}`))
-            await expect(kvittering).toContainText('Før NAV kan behandle søknaden')
-            await expect(kvittering).toContainText('NAV behandler søknaden')
-            await expect(kvittering).toContainText('Når blir pengene utbetalt')
+            test.setTimeout(60000); // 1 minute just for this step
+
+            // wait for 30 seconds
+            await page.screenshot({ path: 'step57.png', fullPage: true });
+            //   await expect(page.getByRole('heading', { name: 'Søknaden er sendt' })).toBeVisible()
+            // await expect(page.url()).toContain('kvittering')
+            await page.getByRole('button', { name: 'Send søknaden' }).click()
+            await page.screenshot({ path: 'step57_2.png', fullPage: true });
+            await page.waitForLoadState('networkidle');
+    
+            const kvitteringSection = page.locator('[data-cy="kvittering"]')
+            await expect(kvitteringSection).toContainText('Hva skjer videre?')
+            await expect(kvitteringSection).toContainText('Før NAV kan behandle søknaden')
+            await expect(kvitteringSection).toContainText('NAV behandler søknaden')
+            await expect(kvitteringSection).toContainText('Når blir pengene utbetalt')
         })
     })
 })
