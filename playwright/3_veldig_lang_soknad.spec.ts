@@ -421,6 +421,7 @@ test.describe('Tester støtte for gamle spørsmål', () => {
         })
 
         await test.step('Step 57: Søknad kvittering', async () => {
+            await expect(page.getByRole('heading', {name: "Søknaden er sendt"})).toBeVisible()
             test.setTimeout(60000); // 1 minute just for this step
 
             // wait for 30 seconds
