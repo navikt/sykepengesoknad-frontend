@@ -30,7 +30,7 @@ test.describe('Tester yrkesskadesspørsmål', () => {
             'Arbeid utenfor Norge',
         ])
 
-        await neiOgVidere(page, ['Andre inntektskilder', 'Reise til utlandet'])
+        await neiOgVidere(page, ['Andre inntektskilder', 'Reise utenfor EU/EØS'])
 
         // Kommer til spørsmål om yrkesskade
         const main = page.locator('main')
