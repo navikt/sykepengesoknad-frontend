@@ -38,12 +38,13 @@ test.describe('Test sletting av kvittering som feiler', () => {
         })
 
         await test.step('Sletting av kvittering fra liste', async () => {
-            await page.getByRole('button', { name: 'Slett' }).click()
+            // Scope the "Slett" button to the table to avoid ambiguity with other "Slett" buttons
+            await page.locator('.navds-table').getByRole('button', { name: 'Slett' }).click()
             await page.getByRole('button', { name: 'Ja, jeg er sikker' }).click()
 
             await expect(page.getByText('Det skjedde en feil ved sletting av kvitteringen')).toBeVisible()
 
-            await page.getByLabel('Vil du slette kvitteringen?').getByRole('button', { name: 'Nei' }).click
+            await page.getByLabel('Vil du slette kvitteringen?').getByRole('button', { name: 'Nei' }).click()
         })
     })
 })
