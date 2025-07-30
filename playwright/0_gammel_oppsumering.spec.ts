@@ -32,7 +32,7 @@ test.describe('Sjekker at søknader med gammel oppsummering ser ok ut', () => {
             // Avbryt dialog vises
             await page
                 .getByRole('button', {
-                    name: 'Jeg har ikke behov for denne søknaden',
+                    name: 'Jeg vil slette denne søknaden',
                 })
                 .click()
             await page.getByRole('button', { name: 'Nei, jeg har behov for søknaden' }).click()
@@ -273,6 +273,9 @@ test.describe('Sjekker at søknader med gammel oppsummering ser ok ut', () => {
         })
 
         await test.step('Søknad kvittering', async () => {
+
+            await expect(page.getByRole('heading', {name: "Søknaden er sendt"})).toBeVisible()
+            
             await expect(page).toHaveURL(/\/kvittering\/.*/)
 
             const kvittering = page.locator('[data-cy="kvittering"]')
