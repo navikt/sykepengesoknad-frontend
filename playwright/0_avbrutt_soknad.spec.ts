@@ -48,11 +48,16 @@ test.describe('Tester avbryting av søknad', () => {
 
         // Søknad kan gjenåpnes
         await page.getByRole('button', { name: 'Jeg vil bruke denne søknaden likevel' }).click() // Matches Cypress data-cy="bruk-soknad-likevel"
+        
         await expect(page).toHaveURL(new RegExp(`${avbruttSoknad.id}/1`))
         await checkViStolerPaDeg(page)
 
         // Søknad kan avsluttes og fortsette senere
-        await page.getByRole('button', { name: 'Lagre søknad og fortsett senere' }).click() // Matches Cypress data-cy="avslutt-og-fortsett-senere"
+        // expect this heading to be visible
+
+        await expect(page.getByRole('heading', { name: 'Fravær før sykmeldingen' })).toBeVisible()
+        await expect(page.getByRole('button', { name: 'Avslutt og fortsett senere' })).toBeVisible()
+        await page.getByRole('button', { name: 'Avslutt og fortsett senere' }).click() // Matches Cypress data-cy="avslutt-og-fortsett-senere"
         await modalAktiv(page)
         await harSynligTekst(page, 'Vi lagrer søknaden din på Ditt sykefravær i listen med søknader om sykepenger.')
         await harSynligTekst(page, 'Ja, fortsett senere')
