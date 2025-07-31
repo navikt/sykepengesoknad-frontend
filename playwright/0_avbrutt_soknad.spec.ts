@@ -25,7 +25,7 @@ test.describe('Tester avbryting av søknad', () => {
         // Ved klikk så åpnes avbrutt søknad visning
         await avbruttLink.click()
 
-        await expect(page.getByText('Søknaden ble avbrutt og fjernet av deg')).toBeVisible()
+        await expect(page.getByText('Du har fjernet søknaden, som betyr at du ikke vil få sykepenger basert på denne søknaden.')).toBeVisible()
 
 
         await expect(page).toHaveURL(new RegExp(`avbrutt/${avbruttSoknad.id}`))

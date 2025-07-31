@@ -30,6 +30,7 @@ test('Full arbeidsledigsøknad flow', async ({ page }) => {
     await page.locator(`a[href*="${soknad.id}"]`).click()
 
     // Første steg: les/vilkår
+    await expect(page.getByRole('heading', { name: 'Før du søker' })).toBeVisible()
     await expect(page).toHaveURL(new RegExp(`${soknad.id}/1`))
     await page.keyboard.press('Tab') // ... repeat as needed
     await page.keyboard.press('Tab')
