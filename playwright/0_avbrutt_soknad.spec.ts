@@ -24,6 +24,10 @@ test.describe('Tester avbryting av søknad', () => {
 
         // Ved klikk så åpnes avbrutt søknad visning
         await avbruttLink.click()
+
+        await expect(page.getByText('Søknaden ble avbrutt og fjernet av deg')).toBeVisible()
+
+
         await expect(page).toHaveURL(new RegExp(`avbrutt/${avbruttSoknad.id}`))
 
         // Avbrutt tekster stemmer
