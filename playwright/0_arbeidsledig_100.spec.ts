@@ -198,6 +198,8 @@ test.describe('Tester arbeidsledigsøknad', () => {
             // await expect(page).toHaveURL(new RegExp(`/kvittering/${arbeidsledig.id}`))
             // removed this url check as it can be flakey
             // Verifiser kvitteringspanel
+
+            await expect(page.getByRole('heading', { name: 'Søknaden er sendt til NAV' })).toBeVisible()
             const kvitteringPanel = page.locator('[data-cy="kvittering-panel"]')
             await expect(kvitteringPanel).toContainText('Hva skjer videre?')
             await expect(kvitteringPanel).toContainText('NAV behandler søknaden din')
