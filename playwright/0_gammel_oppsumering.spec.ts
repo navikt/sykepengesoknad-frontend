@@ -256,6 +256,7 @@ test.describe('Sjekker at søknader med gammel oppsummering ser ok ut', () => {
             // wait for 30 seconds
 
             //Trykker på Endre svar og havner på første spørsmål
+            await expect(page.getByRole('button', { name: 'Gå videre' })).toBeVisible()
             await page.getByRole('button', { name: 'Gå videre' }).click()
             // await page.getByText('Ikke her').click()
 
