@@ -257,7 +257,7 @@ test.describe('Sjekker at søknader med gammel oppsummering ser ok ut', () => {
 
             //Trykker på Endre svar og havner på første spørsmål
             await expect(page.getByRole('button', { name: 'Gå videre' })).toBeVisible()
-            await page.getByRole('button', { name: 'Gå videre' }).click()
+            await page.getByRole('button', { name: 'Gå videre' }).click({force: true})
             // await page.getByText('Ikke her').click()
 
             // await this text showing up on the page  Oppsummering fra søknaden
