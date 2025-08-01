@@ -198,6 +198,9 @@ test.describe('Tester arbeidsledigsøknad', () => {
             // await expect(page).toHaveURL(new RegExp(`/kvittering/${arbeidsledig.id}`))
             // removed this url check as it can be flakey
             // Verifiser kvitteringspanel
+            // Wait for page to finish loading
+            // await page.waitForLoadState('load')
+            await expect(page).toHaveURL(new RegExp(`/kvittering/${arbeidsledig.id}`))
 
             await expect(page.getByRole('heading', { name: 'Søknaden er sendt til NAV' })).toBeVisible()
             const kvitteringPanel = page.locator('[data-cy="kvittering-panel"]')
