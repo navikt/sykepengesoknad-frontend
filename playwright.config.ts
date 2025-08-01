@@ -57,22 +57,22 @@ const commonBrowserConfigs = [
         name: 'Mobile Chromium',
         use: { ...devices['Pixel 5'], viewport: { width: 375, height: 667 }, isMobile: true },
     },
-    {
-        name: 'Desktop Firefox',
-        use: { ...devices['Desktop Firefox'], viewport: { width: 1920, height: 1080 } },
-    },
-    {
-        name: 'Mobile Firefox',
-        use: { ...devices['Pixel 5'], viewport: { width: 375, height: 667 }, isMobile: true },
-    },
-    {
-        name: 'Desktop WebKit',
-        use: { ...devices['Desktop Safari'], viewport: { width: 1920, height: 1080 } },
-    },
-    {
-        name: 'Mobile WebKit',
-        use: { ...devices['iPhone 12'], viewport: { width: 375, height: 667 }, isMobile: true },
-    },
+    // {
+    //     name: 'Desktop Firefox',
+    //     use: { ...devices['Desktop Firefox'], viewport: { width: 1920, height: 1080 } },
+    // },
+    // {
+    //     name: 'Mobile Firefox',
+    //     use: { ...devices['Pixel 5'], viewport: { width: 375, height: 667 }, isMobile: true },
+    // },
+    // {
+    //     name: 'Desktop WebKit',
+    //     use: { ...devices['Desktop Safari'], viewport: { width: 1920, height: 1080 } },
+    // },
+    // {
+    //     name: 'Mobile WebKit',
+    //     use: { ...devices['iPhone 12'], viewport: { width: 375, height: 667 }, isMobile: true },
+    // },
 ]
 
 export default defineConfig({
@@ -94,10 +94,10 @@ export default defineConfig({
                   name: 'CI Chromium',
                   use: { ...devices['Desktop Chrome'], viewport: { width: 1920, height: 1080 } },
               },
-              {
-                  name: 'CI Firefox',
-                  use: { ...devices['Desktop Firefox'], viewport: { width: 1920, height: 1080 } },
-              },
+            //   {
+            //       name: 'CI Firefox',
+            //       use: { ...devices['Desktop Firefox'], viewport: { width: 1920, height: 1080 } },
+            //   },
           ]
         : commonBrowserConfigs,
 

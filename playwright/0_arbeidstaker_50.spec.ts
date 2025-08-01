@@ -40,11 +40,16 @@ const setPeriodeFraTil = async (page: Page, fom: number, tom: number, periodeInd
 
 test.describe('Tester arbeidstakersøknad - gradert 50%', () => {
     test('Full søknadsflyt', async ({ page }) => {
+
+
         await page.goto('/syk/sykepengesoknad?testperson=arbeidstaker-gradert')
 
         const soknadId = '5b769c04-e171-47c9-b79b-23ab8fce331e'
 
         await test.step('Laster startside', async () => {
+            await page.waitForLoadState('load')
+
+
             await expect(page.locator('.navds-heading--large')).toBeVisible()
             await expect(page.locator('.navds-heading--large')).toHaveText('Søknader')
             // Assuming soknad.id is known or can be selected by pattern
@@ -54,12 +59,14 @@ test.describe('Tester arbeidstakersøknad - gradert 50%', () => {
         })
 
         await test.step('Søknad ANSVARSERKLARING', async () => {
+            await page.waitForLoadState('load')
+            await expect(page.getByRole('heading', { name: 'Før du søker' })).toBeVisible()
+
             // Assuming soknad.id is 'some-id', adjust accordingly
             // await expect(page).toHaveURL(/.*5b769c04-e171-47c9-b79b-23ab8fce331e\/1/)
             await expect(page).toHaveURL(new RegExp(`.*${soknadId}\\/1`))
             // sjekkIntroside() - translate to checks
             // Use a strict locator for the heading
-            await expect(page.getByRole('heading', { name: 'Før du søker' })).toBeVisible()
             // checkViStolerPaDeg() - likely checks and interacts with a consent
             // Assuming it's checking and clicking a checkbox
 
