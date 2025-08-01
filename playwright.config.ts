@@ -78,7 +78,7 @@ const commonBrowserConfigs = [
 export default defineConfig({
     testDir: './playwright',
     timeout: 30000,
-    fullyParallel: true,
+    fullyParallel: false,
     forbidOnly: !!process.env.CI,
     retries: 2,
     workers: 1, // process.env.CI ? 1 : undefined,
