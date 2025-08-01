@@ -88,8 +88,8 @@ export default defineConfig({
     timeout: 30000,
     fullyParallel: false,
     forbidOnly: !!process.env.CI,
-    retries: 2,
-    workers: 1, // process.env.CI ? 1 : undefined,
+    retries: 1,
+    workers: 2, // process.env.CI ? 1 : undefined,
     reporter: process.env.CI ? 'blob' : 'html',
     use: {
         baseURL: opts.baseURL,
