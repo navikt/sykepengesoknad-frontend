@@ -263,7 +263,7 @@ test.describe('Sjekker at søknader med gammel oppsummering ser ok ut', () => {
             // await this text showing up on the page  Oppsummering fra søknaden
             // await page.getByRole('heading', {name: 'Oppsummering fra søknaden'}).isVisible()
             await page.getByText('Søknaden sendes til NAV').isVisible()
-            await page.getByRole('link', { name: 'Endre svar' }).click()
+            await page.getByRole('link', { name: 'Endre svar' }).click({force: true})
 
             await expect(page.getByText('Steg 1 av 7')).toBeVisible()
             await page.getByRole('button', { name: 'Vis alle steg' }).click()
