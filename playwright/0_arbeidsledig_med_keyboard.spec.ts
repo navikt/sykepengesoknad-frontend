@@ -16,9 +16,7 @@ test.describe('Arbeidsledigsøknad med tastaturnavigasjon', () => {
     test('Full arbeidsledigsøknad flow', async ({ page }) => {
         let elementInFocus = page.locator(':focus')
         // Gå til startside
-        await page.goto('/syk/sykepengesoknad?testperson=arbeidsledig', {
-            waitUntil: 'networkidle',
-        })
+        await page.goto('/syk/sykepengesoknad?testperson=arbeidsledig')
 
         async function elementInFocusLocator() {
             // const elementInFocus = page.locator(':focus')
