@@ -13,7 +13,7 @@ test.describe('Julesøkand med informasjon på introside og kvittering', () => {
 
         await test.step('Laster introside', async () => {
             await page.goto(`/syk/sykepengesoknad/soknader/${soknad.id}/1?testperson=julesoknad`)
-            await expect(page.locator('.navds-heading--large')).toBeVisible()
+            await expect(page.getByRole('heading', { name: 'Søknad om sykepenger' })).toBeVisible()
         })
 
         await test.step('Søknad ANSVARSERKLARING - med julesøknad informasjon', async () => {
