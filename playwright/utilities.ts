@@ -177,6 +177,11 @@ export async function svarFritekst(page: Page, name: string, verdi: string) {
     await textbox.fill(verdi)
 }
 
+export async function hentFritekst(page: Page, name: string): Promise<string> {
+    const textbox = page.getByRole('textbox', { name })
+    return await textbox.inputValue()
+}
+
 export async function sporsmalOgSvar(container: Locator, sporsmal: string, svar: string) {
     // 1. Finn elementet med teksten `sporsmal` *innenfor* container
     const sporsmalLocator = container.getByText(sporsmal)
@@ -433,6 +438,15 @@ export async function svarRadio(page: Page, gjelder: string, svar: 'JA' | 'NEI' 
     const parentElement = questionElement.locator('..')
     await parentElement.locator(`input[value="${svar}"]`).click()
 }
+
+export async function svarRadioClickOption(page: Page, gjelder: string, svar: string) {
+    const questionElement = page.getByText(gjelder)
+    const parentElement = questionElement.locator('..')
+    await parentElement.getByText(svar).click()
+    await expect(parentElement.getByText(svar)).toBeChecked()
+}
+
+
 
 export async function svarSykMedEgenmelding(page: Page) {
     await page.getByText('Jeg var syk med egenmelding').click()
