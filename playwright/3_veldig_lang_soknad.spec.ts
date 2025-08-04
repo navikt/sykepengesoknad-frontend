@@ -1,5 +1,3 @@
-import { get } from 'http'
-
 import { test, expect } from '@playwright/test'
 
 import { veldigLangSoknad } from '../src/data/mock/data/soknad/veldig-lang-soknad'
@@ -452,12 +450,9 @@ test.describe('Tester støtte for gamle spørsmål', () => {
             // test.setTimeout(60000); // 1 minute just for this step
 
             // wait for 30 seconds
-            await page.screenshot({ path: 'step57.png', fullPage: true })
             //   await expect(page.getByRole('heading', { name: 'Søknaden er sendt' })).toBeVisible()
             // await expect(page.url()).toContain('kvittering')
             // await page.getByRole('button', { name: 'Send søknaden' }).click()
-            await page.screenshot({ path: 'step57_2.png', fullPage: true })
-            await page.waitForLoadState('networkidle')
 
             const kvitteringSection = page.locator('[data-cy="kvittering"]')
             await expect(kvitteringSection).toContainText('Hva skjer videre?')
