@@ -188,7 +188,7 @@ test.describe('Tester arbeidsledigsøknad', () => {
             await sporsmalOgSvar(underInntektSvar, 'Er du sykmeldt fra dette?', 'Ja')
 
             // Bekreft at 'Søknaden sendes til' ikke finnes
-            await expect(page.getByText('Søknaden sendes til')).not.toBeVisible()
+            await expect(page.getByText('Søknaden sendes til')).toBeHidden()
 
             // Send inn søknaden
             await page.getByRole('button', { name: 'Send søknaden' }).click()

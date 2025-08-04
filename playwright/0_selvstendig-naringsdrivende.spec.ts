@@ -106,9 +106,7 @@ test.describe('Tester selvstendig naringsdrivende søknad uten data fra Sigrun',
     test('Virksomheten din', async ({ page }) => {
         await fellesInnholdFørVisningAvSigrunData(page)
 
-        await expect(
-            page.getByText('Datoen er første dag i det første av tre av de ferdiglignede årene.'),
-        ).not.toBeVisible()
+        await expect(page.getByText('Datoen er første dag i det første av tre av de ferdiglignede årene.')).toBeHidden()
 
         await expect(
             page.getByText(
@@ -117,14 +115,14 @@ test.describe('Tester selvstendig naringsdrivende søknad uten data fra Sigrun',
         ).toBeVisible()
         await expect(
             page.getByText('Din gjennomsnittlige årsinntekt på sykmeldingstidspunktet: 450 000 kroner.'),
-        ).not.toBeVisible()
+        ).toBeHidden()
         await expect(
             page.getByText(
                 'Har du en årsinntekt som gjør at du tjener mindre enn 337 500 kroner eller mer enn 562 500 kroner?',
             ),
-        ).not.toBeVisible()
+        ).toBeHidden()
 
-        await expect(page.getByText('Hvordan har vi kommet frem til 450 000 kroner?')).not.toBeVisible()
+        await expect(page.getByText('Hvordan har vi kommet frem til 450 000 kroner?')).toBeHidden()
         await page.locator('span').filter({ hasText: 'Spørsmålet forklart' }).last().click()
         await expect(page.getByText('Sykepenger til selvstendig næringsdrivende')).toBeVisible()
         await expect(page.getByText('Det kan likevel gjøres unntak')).toBeVisible()

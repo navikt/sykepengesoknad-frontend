@@ -25,8 +25,9 @@ test.describe('Tester avbryting av søknad', () => {
         // Ved klikk så åpnes avbrutt søknad visning
         await avbruttLink.click()
 
-        await expect(page.getByText('Du har fjernet søknaden, som betyr at du ikke vil få sykepenger basert på denne søknaden.')).toBeVisible()
-
+        await expect(
+            page.getByText('Du har fjernet søknaden, som betyr at du ikke vil få sykepenger basert på denne søknaden.'),
+        ).toBeVisible()
 
         await expect(page).toHaveURL(new RegExp(`avbrutt/${avbruttSoknad.id}`))
 
@@ -52,7 +53,7 @@ test.describe('Tester avbryting av søknad', () => {
 
         // Søknad kan gjenåpnes
         await page.getByRole('button', { name: 'Jeg vil bruke denne søknaden likevel' }).click() // Matches Cypress data-cy="bruk-soknad-likevel"
-        
+
         await expect(page).toHaveURL(new RegExp(`${avbruttSoknad.id}/1`))
         await checkViStolerPaDeg(page)
 

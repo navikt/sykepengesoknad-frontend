@@ -40,15 +40,12 @@ const setPeriodeFraTil = async (page: Page, fom: number, tom: number, periodeInd
 
 test.describe('Tester arbeidstakersøknad - gradert 50%', () => {
     test('Full søknadsflyt', async ({ page }) => {
-
-
         await page.goto('/syk/sykepengesoknad?testperson=arbeidstaker-gradert')
 
         const soknadId = '5b769c04-e171-47c9-b79b-23ab8fce331e'
 
         await test.step('Laster startside', async () => {
             await page.waitForLoadState('load')
-
 
             await expect(page.locator('.navds-heading--large')).toBeVisible()
             await expect(page.locator('.navds-heading--large')).toHaveText('Søknader')
@@ -124,7 +121,7 @@ test.describe('Tester arbeidstakersøknad - gradert 50%', () => {
         await test.step('Søknad JOBBET_DU_GRADERT', async () => {
             await expect(page).toHaveURL(new RegExp(`.*${soknadId}\\/5`))
             await page.locator('[data-cy="ja-nei-stor"] input[value="JA"]').click()
-            await expect(page.locator('text=Antall timer du skrev inn, betyr at du har jobbet')).not.toBeVisible()
+            await expect(page.locator('text=Antall timer du skrev inn, betyr at du har jobbet')).toBeHidden()
 
             await expect(
                 page.locator(

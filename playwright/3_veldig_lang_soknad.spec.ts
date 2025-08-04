@@ -1,4 +1,10 @@
+import { get } from 'http'
+
 import { test, expect } from '@playwright/test'
+
+import { veldigLangSoknad } from '../src/data/mock/data/soknad/veldig-lang-soknad'
+import { rsToSoknad } from '../src/types/mapping'
+
 import {
     setPeriodeFraTil,
     svarFritekst,
@@ -19,9 +25,6 @@ import {
     velgBehandlingsdager,
     lastOppKvittering,
 } from './utilities'
-import { veldigLangSoknad } from '../src/data/mock/data/soknad/veldig-lang-soknad'
-import { rsToSoknad } from '../src/types/mapping'
-import { get } from 'http'
 
 test.describe('Tester støtte for gamle spørsmål', () => {
     test.setTimeout(120000) // 2 minutes timeout for all tests in this describe block
@@ -50,165 +53,177 @@ test.describe('Tester støtte for gamle spørsmål', () => {
         test.setTimeout(120000) // 2 minutes timeout for the entire test
         const steg = { value: 1 }
 
-        await test.step('Step 1: Navigate to søknad', async () => {
+        await test.step('1: Navigate to søknad', async () => {
             await expect(page.getByRole('heading', { name: 'Søknader', level: 1 })).toBeVisible()
             await page.locator(`a[href*="${soknad.id}"]`).click()
         })
 
-        await test.step('Step 2: ANSVARSERKLARING', async () => {
+        await test.step('2: ANSVARSERKLARING', async () => {
             await checkViStolerPaDeg(page)
             steg.value++
         })
 
-        await test.step('Step 3: YRKESSKADE', async () => {
+        await test.step('3: YRKESSKADE', async () => {
             await svarNeiHovedsporsmal(page)
             await gaVidere(page, steg)
         })
 
-        await test.step('Step 4: YRKESSKADE_V2', async () => {
+        await test.step('4: YRKESSKADE_V2', async () => {
             await svarNeiHovedsporsmal(page)
             await gaVidere(page, steg)
         })
 
-        await test.step('Step 5: ARBEID_UNDERVEIS_100_PROSENT_0', async () => {
+        await test.step('5: ARBEID_UNDERVEIS_100_PROSENT_0', async () => {
             await svarNeiHovedsporsmal(page)
             await gaVidere(page, steg)
         })
 
-        await test.step('Step 6: MEDLEMSKAP_OPPHOLDSTILLATELSE', async () => {
+        await test.step('6: MEDLEMSKAP_OPPHOLDSTILLATELSE', async () => {
             await svarNeiHovedsporsmal(page)
             await gaVidere(page, steg)
         })
 
-        await test.step('Step 7: MEDLEMSKAP_OPPHOLDSTILLATELSE_V2', async () => {
+        await test.step('7: MEDLEMSKAP_OPPHOLDSTILLATELSE_V2', async () => {
             await svarNeiHovedsporsmal(page)
             await gaVidere(page, steg)
         })
 
-        await test.step('Step 8: MEDLEMSKAP_OPPHOLD_UTENFOR_EOS', async () => {
+        await test.step('8: MEDLEMSKAP_OPPHOLD_UTENFOR_EOS', async () => {
             await svarNeiHovedsporsmal(page)
             await gaVidere(page, steg)
         })
 
-        await test.step('Step 9: MEDLEMSKAP_OPPHOLD_UTENFOR_NORGE', async () => {
+        await test.step('9: MEDLEMSKAP_OPPHOLD_UTENFOR_NORGE', async () => {
             await svarNeiHovedsporsmal(page)
             await gaVidere(page, steg)
         })
 
-        await test.step('Step 10: MEDLEMSKAP_UTFORT_ARBEID_UTENFOR_NORGE', async () => {
+        await test.step('10: MEDLEMSKAP_UTFORT_ARBEID_UTENFOR_NORGE', async () => {
             await svarNeiHovedsporsmal(page)
             await gaVidere(page, steg)
         })
 
-        await test.step('Step 11: ANDRE_INNTEKTSKILDER - first instance', async () => {
+        await test.step('11: ANDRE_INNTEKTSKILDER - first instance', async () => {
             await svarJaHovedsporsmal(page)
             await velgCheckbox(page, 'dagmamma')
             await svarRadio(page, 'Er du sykmeldt fra dette?', 'JA')
             await gaVidere(page, steg)
         })
 
-        await test.step('Step 12: ANDRE_INNTEKTSKILDER - second instance', async () => {
+        await test.step('12: ANDRE_INNTEKTSKILDER - second instance', async () => {
             await svarJaHovedsporsmal(page)
             await velgCheckbox(page, 'frilanser')
             await svarRadio(page, 'Er du sykmeldt fra dette?', 'JA')
             await gaVidere(page, steg)
         })
 
-        await test.step('Step 13: ANDRE_INNTEKTSKILDER_V2 - first instance', async () => {
+        await test.step('13: ANDRE_INNTEKTSKILDER_V2 - first instance', async () => {
             await svarJaHovedsporsmal(page)
             await velgCheckbox(page, 'dagmamma')
             await gaVidere(page, steg)
         })
 
-        await test.step('Step 14: ANDRE_INNTEKTSKILDER_V2 - second instance', async () => {
+        await test.step('14: ANDRE_INNTEKTSKILDER_V2 - second instance', async () => {
             await svarJaHovedsporsmal(page)
             await velgCheckbox(page, 'Dagmamma')
             await gaVidere(page, steg)
         })
 
-        await test.step('Step 15: ANDRE_INNTEKTSKILDER_V2_SI_NEI_HOVEDSPORSMAL', async () => {
+        await test.step('15: ANDRE_INNTEKTSKILDER_V2_SI_NEI_HOVEDSPORSMAL', async () => {
             await svarJaHovedsporsmal(page)
             await velgCheckbox(page, 'Dagmamma')
             await gaVidere(page, steg)
         })
 
-        await test.step('Step 16: ARBEID_UTENFOR_NORGE', async () => {
+        await test.step('16: ARBEID_UTENFOR_NORGE', async () => {
             await svarNeiHovedsporsmal(page)
             await gaVidere(page, steg)
         })
 
-        await test.step('Step 17: ARBEIDSGIVER', async () => {
+        await test.step('17: ARBEIDSGIVER', async () => {
             await svarJaHovedsporsmal(page)
             await svarRadio(page, 'Er du 100 % sykmeldt?', 'JA')
-            await svarRadio(page, 'Har du avtalt med arbeidsgiveren din at du skal ta ut feriedager i hele perioden?', 'JA')
+            await svarRadio(
+                page,
+                'Har du avtalt med arbeidsgiveren din at du skal ta ut feriedager i hele perioden?',
+                'JA',
+            )
             await gaVidere(page, steg)
         })
 
-        await test.step('Step 18: ARBEIDSLEDIG_UTLAND', async () => {
+        await test.step('18: ARBEIDSLEDIG_UTLAND', async () => {
             await svarJaHovedsporsmal(page)
             await setPeriodeFraTil(page, 12, 15)
             await svarRadio(page, 'Har du søkt om å beholde sykepengene for disse dagene?', 'JA')
             await gaVidere(page, steg)
         })
 
-        await test.step('Step 19: EGENMELDINGER', async () => {
+        await test.step('19: EGENMELDINGER', async () => {
             await svarJaHovedsporsmal(page)
             await svarSykMedEgenmelding(page)
             await setPeriodeFraTil(page, 12, 15)
             await gaVidere(page, steg)
         })
 
-        await test.step('Step 20: FRAVAR_FOR_SYKMELDINGEN', async () => {
+        await test.step('20: FRAVAR_FOR_SYKMELDINGEN', async () => {
             await svarJaHovedsporsmal(page)
             await setPeriodeFraTil(page, 12, 15)
             await gaVidere(page, steg)
         })
 
-        await test.step('Step 21: ENKELTSTAENDE_BEHANDLINGSDAGER', async () => {
+        await test.step('21: ENKELTSTAENDE_BEHANDLINGSDAGER', async () => {
             await velgBehandlingsdager(page)
             await gaVidere(page, steg)
         })
 
-        await test.step('Step 22: FERIE_V2', async () => {
+        await test.step('22: FERIE_V2', async () => {
             await svarJaHovedsporsmal(page)
             await setPeriodeFraTil(page, 12, 15)
             await gaVidere(page, steg)
         })
 
-        await test.step('Step 23: FERIE_PERMISJON_UTLAND', async () => {
+        await test.step('23: FERIE_PERMISJON_UTLAND', async () => {
             await svarJaHovedsporsmal(page)
             await velgCheckbox(page, 'Jeg tok ut ferie')
             await setPeriodeFraTil(page, 12, 15)
             await gaVidere(page, steg)
         })
 
-        await test.step('Step 24: FRAVER_FOR_BEHANDLING', async () => {
+        await test.step('24: FRAVER_FOR_BEHANDLING', async () => {
             await svarJaHovedsporsmal(page)
             await svarSykMedEgenmelding(page)
             await setPeriodeFraTil(page, 12, 15)
             await gaVidere(page, steg)
         })
 
-        await test.step('Step 25: FRISKMELDT', async () => {
+        await test.step('25: FRISKMELDT', async () => {
             await svarJaHovedsporsmal(page)
             await gaVidere(page, steg)
         })
 
-        await test.step('Step 26: JOBBET_DU_100_PROSENT', async () => {
+        await test.step('26: JOBBET_DU_100_PROSENT', async () => {
             await svarJaHovedsporsmal(page)
-            await velgTall(page, 'Hvor mange timer i uken jobber du vanligvis når du er frisk? Varierer det, kan du oppgi gjennomsnittet.', '12')
+            await velgTall(
+                page,
+                'Hvor mange timer i uken jobber du vanligvis når du er frisk? Varierer det, kan du oppgi gjennomsnittet.',
+                '12',
+            )
             await velgTimer(page, steg.value, soknad)
             await gaVidere(page, steg)
         })
 
-        await test.step('Step 27: JOBBET_DU_GRADERT', async () => {
+        await test.step('27: JOBBET_DU_GRADERT', async () => {
             await svarJaHovedsporsmal(page)
-            await velgTall(page, 'Hvor mange timer i uken jobber du vanligvis når du er frisk? Varierer det, kan du oppgi gjennomsnittet.', '12')
+            await velgTall(
+                page,
+                'Hvor mange timer i uken jobber du vanligvis når du er frisk? Varierer det, kan du oppgi gjennomsnittet.',
+                '12',
+            )
             await velgTimer(page, steg.value, soknad)
             await gaVidere(page, steg)
         })
 
-        await test.step('Step 28: LAND', async () => {
+        await test.step('28: LAND', async () => {
             await expect(page.getByText('Hvilke(t) land skal du reise til?')).toBeVisible()
             await page.getByRole('combobox', { name: 'Hvilke(t) land skal du reise til?' }).type('Søre fran')
             await page.getByRole('option', { name: 'Søre franske territorier' }).click()
@@ -216,25 +231,25 @@ test.describe('Tester støtte for gamle spørsmål', () => {
             await gaVidere(page, steg)
         })
 
-        await test.step('Step 29: LAND_COMBOBOX', async () => {
+        await test.step('29: LAND_COMBOBOX', async () => {
             await expect(page.getByText('Hvilke(t) land skal du reise til?')).toBeVisible()
             await svarCombobox(page, 'Hvilke(t) land skal du reise til?', 'Søre fran', 'Søre franske territorier')
             await page.locator('.navds-combobox__button-toggle-list').click()
             await gaVidere(page, steg)
         })
 
-        await test.step('Step 30: PERIODEUTLAND', async () => {
+        await test.step('30: PERIODEUTLAND', async () => {
             await setPeriodeFraTil(page, 12, 15)
             await gaVidere(page, steg)
         })
 
-        await test.step('Step 31: PERMISJON_V2', async () => {
+        await test.step('31: PERMISJON_V2', async () => {
             await svarJaHovedsporsmal(page)
             await setPeriodeFraTil(page, 12, 15)
             await gaVidere(page, steg)
         })
 
-        await test.step('Step 32: PERMITTERT_NAA', async () => {
+        await test.step('32: PERMITTERT_NAA', async () => {
             await svarJaHovedsporsmal(page)
             await page.locator('.navds-date__field-button').click()
             await velgDato(page, 10)
@@ -242,147 +257,153 @@ test.describe('Tester støtte for gamle spørsmål', () => {
             await gaVidere(page, steg)
         })
 
-        await test.step('Step 33: PERMITTERT_PERIODE', async () => {
+        await test.step('33: PERMITTERT_PERIODE', async () => {
             await svarJaHovedsporsmal(page)
             await setPeriodeFraTil(page, 12, 15)
             await gaVidere(page, steg)
         })
 
-        await test.step('Step 34: TILBAKE_I_ARBEID', async () => {
+        await test.step('34: TILBAKE_I_ARBEID', async () => {
             await svarJaHovedsporsmal(page)
             await page.locator('.navds-date__field-button').click()
             await velgDato(page, 10)
             await gaVidere(page, steg)
         })
 
-        await test.step('Step 35: UTDANNING', async () => {
+        await test.step('35: UTDANNING', async () => {
             await svarJaHovedsporsmal(page)
-            
+
             // Wait for the date field to be visible
             await page.waitForSelector('.navds-date__field-button', { state: 'visible' })
-            
+
             // Click the date picker button to open the calendar
             await page.locator('.navds-date__field-button').click()
-            
+
             // Wait for the calendar to open
             // await page.waitForSelector('.rdp-day', { state: 'visible' })
-            
+
             // Select day 10 from the calendar
             await velgDato(page, 10)
-            
+
             // Answer the follow-up question about full-time study
             await svarRadio(page, 'Er utdanningen et fulltidsstudium?', 'JA')
-            
+
             await gaVidere(page, steg)
         })
 
-        await test.step('Step 36: OPPHOLD_UTENFOR_EOS', async () => {
+        await test.step('36: OPPHOLD_UTENFOR_EOS', async () => {
             await svarJaHovedsporsmal(page)
             await setPeriodeFraTil(page, 12, 15)
             await gaVidere(page, steg)
         })
 
-        await test.step('Step 37: UTLAND', async () => {
+        await test.step('37: UTLAND', async () => {
             await svarJaHovedsporsmal(page)
             await setPeriodeFraTil(page, 12, 15)
             await svarRadio(page, 'Har du søkt om å beholde sykepengene for disse dagene?', 'JA')
             await gaVidere(page, steg)
         })
 
-        await test.step('Step 38: UTLAND_V2', async () => {
+        await test.step('38: UTLAND_V2', async () => {
             await svarJaHovedsporsmal(page)
             await setPeriodeFraTil(page, 12, 15)
             await gaVidere(page, steg)
         })
 
-        await test.step('Step 39: BRUKTE_REISETILSKUDDET', async () => {
+        await test.step('39: BRUKTE_REISETILSKUDDET', async () => {
             await svarJaHovedsporsmal(page)
             await gaVidere(page, steg)
         })
 
-        await test.step('Step 40: TRANSPORT_TIL_DAGLIG', async () => {
+        await test.step('40: TRANSPORT_TIL_DAGLIG', async () => {
             await svarJaHovedsporsmal(page)
             await velgCheckbox(page, 'Offentlig transport')
             await velgTall(page, 'Hvor mye betaler du vanligvis i måneden for offentlig transport?', '21')
             await gaVidere(page, steg)
         })
 
-        await test.step('Step 41: REISE_MED_BIL', async () => {
+        await test.step('41: REISE_MED_BIL', async () => {
             await svarJaHovedsporsmal(page)
             await velgKalenderdag(page)
             await svarRadio(page, 'Hadde du utgifter til bompenger?', 'NEI')
             await gaVidere(page, steg)
         })
 
-        await test.step('Step 42: KVITTERINGER', async () => {
+        await test.step('42: KVITTERINGER', async () => {
             await lastOppKvittering(page)
             await gaVidere(page, steg)
         })
 
-        await test.step('Step 43: UTBETALING', async () => {
+        await test.step('43: UTBETALING', async () => {
             await svarJaHovedsporsmal(page)
             await gaVidere(page, steg)
         })
 
-        await test.step('Step 44: ARBEID_UNDERVEIS_100_PROSENT', async () => {
+        await test.step('44: ARBEID_UNDERVEIS_100_PROSENT', async () => {
             await svarJaHovedsporsmal(page)
             await svarRadio(page, 'Oppgi arbeidsmengde i timer eller prosent:', 'Timer')
-            await velgTall(page, 'Oppgi totalt antall timer du jobbet i perioden 1. - 24. april 2020 hos Posten Norge AS, Bærum', '12')
+            await velgTall(
+                page,
+                'Oppgi totalt antall timer du jobbet i perioden 1. - 24. april 2020 hos Posten Norge AS, Bærum',
+                '12',
+            )
             await svarRadio(page, 'Jobber du vanligvis 37,5 timer i uka hos Posten Norge AS, Bærum?', 'JA')
             await gaVidere(page, steg)
         })
 
-        await test.step('Step 45: BOSTED', async () => {
+        await test.step('45: BOSTED', async () => {
             await svarJaHovedsporsmal(page)
             await svarFritekst(page, 'Vegnavn og husnummer, evt. postboks', 'Downing Street 10')
             await svarFritekst(page, 'Land', 'UK')
             await svarFritekst(page, 'Telefonnummer', '81549300')
 
-             await page.waitForSelector('.navds-date__field-button', { state: 'visible' })
+            await page.waitForSelector('.navds-date__field-button', { state: 'visible' })
             // Click the date picker button to open the calendar
             await page.locator('.navds-date__field-button').click()
 
             // Hvor lenge skal denne adressen brukes?
 
-
             await velgDato(page, 10)
             await gaVidere(page, steg)
         })
 
-        await test.step('Step 46: LØNNET ARBEID', async () => {
+        await test.step('46: LØNNET ARBEID', async () => {
             await svarJaHovedsporsmal(page)
             await svarFritekst(page, 'Oppgi nærmere opplysninger om arbeid/virksomhet utenfor Norge', 'Britiske staten')
             await gaVidere(page, steg)
         })
 
-        await test.step('Step 47: Sykepenger i andre EU/EØS-land', async () => {
+        await test.step('47: Sykepenger i andre EU/EØS-land', async () => {
             await svarNeiHovedsporsmal(page)
             await gaVidere(page, steg)
         })
 
-        await test.step('Step 48: Kjente inntektskilder', async () => {
+        await test.step('48: Kjente inntektskilder', async () => {
             await svarRadioGruppe(page, 'Har du sluttet hos Rema før du ble sykmeldt 8. september', 'Nei')
-            await svarRadioGruppe(page, 'Har du utført noe arbeid ved Rema i perioden 24. august - 7. september 2022?', 'Ja')
+            await svarRadioGruppe(
+                page,
+                'Har du utført noe arbeid ved Rema i perioden 24. august - 7. september 2022?',
+                'Ja',
+            )
             await gaVidere(page, steg)
         })
 
-        await test.step('Step 49: Tilkommen inntekt', async () => {
+        await test.step('49: Tilkommen inntekt', async () => {
             await svarJaHovedsporsmal(page)
             await svarFritekst(page, 'Hvor mye har du tjent i perioden 20. – 24. april 2020?', '25000')
             await gaVidere(page, steg)
         })
 
-        await test.step('Step 50: Avviklet virksomhet', async () => {
+        await test.step('50: Avviklet virksomhet', async () => {
             await svarJaHovedsporsmal(page)
 
-
-             await page.waitForSelector('.navds-date__field-button', { state: 'visible' })
+            await page.waitForSelector('.navds-date__field-button', { state: 'visible' })
             await page.locator('.navds-date__field-button').click()
             await velgDato(page, 14)
             await gaVidere(page, steg)
         })
 
-        await test.step('Step 51: Drift i virksomheten', async () => {
+        await test.step('51: Drift i virksomheten', async () => {
             await svarNeiHovedsporsmal(page)
             await page.waitForSelector('.navds-date__field-button', { state: 'visible' })
             await page.locator('.navds-date__field-button').click()
@@ -390,51 +411,54 @@ test.describe('Tester støtte for gamle spørsmål', () => {
             await gaVidere(page, steg)
         })
 
-        await test.step('Step 52: Avklaring i forbindlese med reise', async () => {
+        await test.step('52: Avklaring i forbindlese med reise', async () => {
             await svarRadioGruppe(page, 'Har du avklart utenlandsoppholdet med den som sykmeldte deg?', 'Ja')
             await svarRadioGruppe(page, 'Har du avklart utenlandsoppholdet med arbeidsgiveren/NAV?', 'Ja')
             await klikkGaVidere(page)
         })
 
-        await test.step('Step 53: Jobbsituasjonen din', async () => {
+        await test.step('53: Jobbsituasjonen din', async () => {
             await svarNeiHovedsporsmal(page)
             await svarRadioGruppe(page, 'Vil du fortsatt være friskmeldt til arbeidsformidling?', 'Ja')
             await klikkGaVidere(page)
         })
 
-        await test.step('Step 54: Inntekt underveis', async () => {
-            page.getByRole('heading', {name: "Inntekt underveis"}).isVisible()
+        await test.step('54: Inntekt underveis', async () => {
+            page.getByRole('heading', { name: 'Inntekt underveis' }).isVisible()
             await svarNeiHovedsporsmal(page)
             await klikkGaVidere(page)
         })
 
-        await test.step('Step 55: Reise til utlandet', async () => {
-            page.getByRole('heading', {name: "Reise til utlandet"}).isVisible()
+        await test.step('55: Reise til utlandet', async () => {
+            page.getByRole('heading', { name: 'Reise til utlandet' }).isVisible()
             await svarNeiHovedsporsmal(page)
             await klikkGaVidere(page)
         })
 
-        await test.step('Step 56: Søknad TIL_SLUTT', async () => {
-            page.getByRole('heading', {name: "Oppsummering fra søknaden"}).isVisible()
+        await test.step('56: Søknad TIL_SLUTT', async () => {
+            page.getByRole('heading', { name: 'Oppsummering fra søknaden' }).isVisible()
             // Oppsummering fra søknaden
-            await sporsmalOgSvar(page.locator('form'), 'Hvor mye har du tjent i perioden 20. – 24. april 2020?', '25000 kroner før skatt')
+            await sporsmalOgSvar(
+                page.locator('form'),
+                'Hvor mye har du tjent i perioden 20. – 24. april 2020?',
+                '25000 kroner før skatt',
+            )
             // await klikkGaVidere(page)
-             await page.getByRole('button', { name: 'Send søknaden' }).click()
-
+            await page.getByRole('button', { name: 'Send søknaden' }).click()
         })
 
-        await test.step('Step 57: Søknad kvittering', async () => {
-            await expect(page.getByRole('heading', {name: "Søknaden er sendt"})).toBeVisible()
+        await test.step('57: Søknad kvittering', async () => {
+            await expect(page.getByRole('heading', { name: 'Søknaden er sendt' })).toBeVisible()
             // test.setTimeout(60000); // 1 minute just for this step
 
             // wait for 30 seconds
-            await page.screenshot({ path: 'step57.png', fullPage: true });
+            await page.screenshot({ path: 'step57.png', fullPage: true })
             //   await expect(page.getByRole('heading', { name: 'Søknaden er sendt' })).toBeVisible()
             // await expect(page.url()).toContain('kvittering')
             // await page.getByRole('button', { name: 'Send søknaden' }).click()
-            await page.screenshot({ path: 'step57_2.png', fullPage: true });
-            await page.waitForLoadState('networkidle');
-    
+            await page.screenshot({ path: 'step57_2.png', fullPage: true })
+            await page.waitForLoadState('networkidle')
+
             const kvitteringSection = page.locator('[data-cy="kvittering"]')
             await expect(kvitteringSection).toContainText('Hva skjer videre?')
             await expect(kvitteringSection).toContainText('Før NAV kan behandle søknaden')

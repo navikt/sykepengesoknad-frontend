@@ -20,6 +20,6 @@ test.describe('Tester endrefrist 12 måneder', () => {
 
         await page.getByRole('button', { name: 'Lukk' }).click()
 
-        await expect(page.getByRole('button', { name: 'Lukk' })).not.toBeVisible()
+        await expect(page.getByRole('button', { name: 'Lukk' })).toBeHidden()
     })
 })

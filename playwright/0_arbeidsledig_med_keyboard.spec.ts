@@ -64,7 +64,7 @@ test('Full arbeidsledigsøknad flow', async ({ page }) => {
     await page.keyboard.press('Enter')
     await sjekkMainContentFokus(page)
 
-    expect(page.getByRole('heading', { name: 'Friskmeldt' })).toBeVisible()
+    await expect(page.getByRole('heading', { name: 'Friskmeldt' })).toBeVisible()
     await expect(page.locator('form').getByRole('radio', { name: 'Nei' })).toHaveCount(1)
 
     // Neste steg
@@ -95,7 +95,7 @@ test('Full arbeidsledigsøknad flow', async ({ page }) => {
 
     // 2
 
-    expect(page.getByRole('heading', { name: 'Andre inntektskilder' })).toBeVisible()
+    await expect(page.getByRole('heading', { name: 'Andre inntektskilder' })).toBeVisible()
     // console.log('Andre inntektskilder')
     await expect(page.getByText('Hva mener vi med andre inntektskilder?')).toBeVisible()
     await page.keyboard.press('Tab')
@@ -128,7 +128,7 @@ test('Full arbeidsledigsøknad flow', async ({ page }) => {
 
     for (let i = 0; i < 8; i++) {
         await page.keyboard.press('Tab')
-    }    
+    }
     // tabUntilFocusedContainsText('chromium', page, 'Spørsmålet forklart', { maxTabs: 10 })
     await page.keyboard.press('Space')
     await page.keyboard.press('ArrowRight')

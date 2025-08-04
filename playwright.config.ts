@@ -22,7 +22,7 @@ const createOptions = (): OptionsType => {
                 port: 3000,
                 timeout: 120 * 1000, // Wait up to 2 minutes for the server to start
                 reuseExistingServer: true,
-        },
+            },
         }
     }
 
@@ -102,10 +102,10 @@ export default defineConfig({
                   name: 'CI Chromium',
                   use: { ...devices['Desktop Chrome'], viewport: { width: 1920, height: 1080 } },
               },
-            //   {
-            //       name: 'CI Firefox',
-            //       use: { ...devices['Desktop Firefox'], viewport: { width: 1920, height: 1080 } },
-            //   },
+              //   {
+              //       name: 'CI Firefox',
+              //       use: { ...devices['Desktop Firefox'], viewport: { width: 1920, height: 1080 } },
+              //   },
           ]
         : commonBrowserConfigs,
 

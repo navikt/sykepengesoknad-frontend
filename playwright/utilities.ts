@@ -317,8 +317,7 @@ export async function tabUntilFocusedContainsTextStrict(
 
         const textContent = (await elementToCheckTextOn.textContent()) ?? ''
 
-        const isMatch =
-            typeof expectedText === 'string' ? textContent === expectedText : expectedText.test(textContent)
+        const isMatch = typeof expectedText === 'string' ? textContent === expectedText : expectedText.test(textContent)
 
         if (isMatch) {
             await expect(currentFocused).toBeVisible()
@@ -445,8 +444,6 @@ export async function svarRadioClickOption(page: Page, gjelder: string, svar: st
     await parentElement.getByText(svar).click()
     await expect(parentElement.getByText(svar)).toBeChecked()
 }
-
-
 
 export async function svarSykMedEgenmelding(page: Page) {
     await page.getByText('Jeg var syk med egenmelding').click()
