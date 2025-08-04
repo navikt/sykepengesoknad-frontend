@@ -169,9 +169,9 @@ test.describe('Teste førsteside i reisetilskuddsøknaden', () => {
                 page.locator('.navds-table__expanded-row-content img[alt="kvittering for taxi"]'),
             ).toBeVisible()
 
-            await table.getByText('Slett').click()
+            await table.getByRole('button', { name: 'Slett' }).click()
             await expect(page.getByRole('dialog').filter({ hasText: 'Vil du slette kvitteringen?' })).toBeVisible()
-            await page.getByText('Ja, jeg er sikker').click()
+            await page.getByRole('button', {name: 'Ja, jeg er sikker'}).click()
             await expect(page.getByText('Vil du slette kvitteringen?')).toBeHidden()
             await expect(page.locator('.sumlinje')).toBeHidden()
 
