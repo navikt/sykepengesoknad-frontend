@@ -39,11 +39,9 @@ test.describe('Tester cummulative-layout-shift', () => {
         // Check main height initially
         await mainSkalHaHoyde(page, 1148)
 
-        
         // Wait for data to be fetched and rendered
         await harSynligTittel(page, 'Ferie', 2)
-                await expect(page.locator('.navds-skeleton')).toHaveCount(0)
-
+        await expect(page.locator('.navds-skeleton')).toHaveCount(0)
 
         // Verify main height hasn't changed
         await mainSkalHaHoyde(page, 1148)
