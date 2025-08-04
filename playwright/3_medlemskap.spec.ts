@@ -32,7 +32,7 @@ test.describe('Søknad med alle opprinnelige spørsmål om medlemskap', () => {
         })
 
         await test.step('Arbeid utenfor Norge', async () => {
-            await expect(page.getByText('Arbeid utenfor Norge')).toBeVisible()
+            await expect(page.getByRole('heading', { name: 'Arbeid utenfor Norge' })).toBeVisible()
             await svarJaHovedsporsmal(page)
             await svarCombobox(page, 'I hvilket land arbeidet du?', 'Fra', 'Frankrike')
             await svarFritekst(page, 'Hvilken arbeidsgiver jobbet du for?', 'Croissant AS')
@@ -41,18 +41,20 @@ test.describe('Søknad med alle opprinnelige spørsmål om medlemskap', () => {
         })
 
         await test.step('Opphold utenfor Norge', async () => {
-            await expect(page.getByText('Opphold utenfor Norge')).toBeVisible()
+            await expect(page.getByRole('heading', { name: 'Opphold utenfor Norge', level: 2 })).toBeVisible()
             await svarJaHovedsporsmal(page)
             await svarCombobox(page, 'I hvilket land utenfor Norge har du oppholdt deg?', 'Sve', 'Sveits')
+            await page.locator('.navds-combobox__button-toggle-list').click()
             await svarRadioGruppe(page, 'Hva gjorde du i utlandet?', 'Jeg studerte')
             await setPeriodeFraTil(page, 12, 20)
             await klikkGaVidere(page)
         })
 
         await test.step('Opphold utenfor EØS', async () => {
-            await expect(page.getByText('Opphold utenfor EU/EØS')).toBeVisible()
+            await expect(page.getByRole('heading', { name: 'Opphold utenfor EU/EØS', level: 2 })).toBeVisible()
             await svarJaHovedsporsmal(page)
             await svarCombobox(page, 'I hvilket land utenfor EU/EØS eller Sveits har du oppholdt deg?', 'Fra', 'Fransk Polynesia')
+            await page.locator('.navds-combobox__button-toggle-list').click()
             await svarRadioGruppe(page, 'Hva gjorde du i utlandet?', 'Jeg var på ferie')
             await setPeriodeFraTil(page, 12, 20, 0)
 
@@ -76,7 +78,7 @@ test.describe('Søknad med alle opprinnelige spørsmål om medlemskap', () => {
         })
 
         await test.step('Oppholdstillatelse', async () => {
-            await expect(page.getByText('Oppholdstillatelse')).toBeVisible()
+            await expect(page.getByRole('heading', { name: 'Oppholdstillatelse', level: 2 })).toBeVisible()
             await svarJaHovedsporsmal(page)
             await velgDato(page, 14)
             await svarRadioGruppe(page, 'Er oppholdstillatelsen midlertidig eller permanent?', 'Midlertidig')
@@ -85,7 +87,7 @@ test.describe('Søknad med alle opprinnelige spørsmål om medlemskap', () => {
         })
 
         await test.step('Søknad TIL_SLUTT (oppsummering)', async () => {
-            await expect(page.getByText('Oppsummering fra søknaden')).toBeVisible()
+            await expect(page.getByRole('heading', { name: 'Oppsummering fra søknaden' })).toBeVisible()
             
             const oppsummeringContainer = page.locator('[data-cy="oppsummering-fra-søknaden"]')
             
@@ -116,7 +118,7 @@ test.describe('Søknad med nytt spørsmål om oppholdstillatelse og kjent perman
         })
 
         await test.step('Har kjent permanent oppholdstillatelse', async () => {
-            await expect(page.getByText('Oppholdstillatelse')).toBeVisible()
+            await expect(page.getByRole('heading', { name: 'Oppholdstillatelse', level: 2 })).toBeVisible()
             await expect(page.getByText('Vi har mottatt denne oppholdstillatelsen fra Utlendingsdirektoratet:')).toBeVisible()
             await expect(page.getByText('Permanent oppholdstillatelse')).toBeVisible()
             await expect(page.getByText('Fra 1. mai 2024.')).toBeVisible()
@@ -132,7 +134,7 @@ test.describe('Søknad med nytt spørsmål om oppholdstillatelse og kjent perman
         })
 
         await test.step('Søknad TIL_SLUTT (oppsummering)', async () => {
-            await expect(page.getByText('Oppsummering fra søknaden')).toBeVisible()
+            await expect(page.getByRole('heading', { name: 'Oppsummering fra søknaden', level: 2 })).toBeVisible()
             
             const oppsummeringContainer = page.locator('[data-cy="oppsummering-fra-søknaden"]')
             await sporsmalOgSvar(oppsummeringContainer, 'Har Utlendingsdirektoratet gitt deg en oppholdstillatelse før 1. mai 2024?', 'Ja')
@@ -152,7 +154,7 @@ test.describe('Søknad med nytt spørsmål om oppholdstillatelse og kjent midler
         })
 
         await test.step('Har kjent midlertidig oppholdstillatelse', async () => {
-            await expect(page.getByText('Oppholdstillatelse')).toBeVisible()
+            await expect(page.getByRole('heading', { name: 'Oppholdstillatelse', level: 2 })).toBeVisible()
             await expect(page.getByText('Vi har mottatt denne oppholdstillatelsen fra Utlendingsdirektoratet:')).toBeVisible()
             await expect(page.getByText('Midlertidig oppholdstillatelse')).toBeVisible()
             await expect(page.getByText('Fra 1. mai 2024 til 31. desember 2024.')).toBeVisible()
@@ -185,7 +187,7 @@ test.describe('Søknad med nytt spørsmål om oppholdstillatelse og kjent midler
         })
 
         await test.step('Søknad TIL_SLUTT (oppsummering)', async () => {
-            await expect(page.getByText('Oppsummering fra søknaden')).toBeVisible()
+            await expect(page.getByRole('heading', { name: 'Oppsummering fra søknaden', level: 2 })).toBeVisible()
             
             const oppsummeringContainer = page.locator('[data-cy="oppsummering-fra-søknaden"]')
             await sporsmalOgSvar(oppsummeringContainer, 'Har Utlendingsdirektoratet gitt deg en oppholdstillatelse før 1. mai 2024?', 'Ja')
