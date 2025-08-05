@@ -1,14 +1,10 @@
 import {
-    svarJaHovedsporsmal,
-    svarNeiHovedsporsmal,
     klikkGaVidere,
     klikkTilbake,
-    sporsmalOgSvar,
     lastOppKvittering,
     velgCheckbox,
     svarFritekst,
     hentFritekst,
-    svarRadio,
     svarRadioClickOption,
     // Add any other needed utilities here
 } from './utilities'
