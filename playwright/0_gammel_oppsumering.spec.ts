@@ -256,7 +256,8 @@ test.describe('Sjekker at søknader med gammel oppsummering ser ok ut', () => {
             await expect(page.getByRole('heading', { name: 'Reise utenfor EU/EØS' })).toBeVisible()
             await expect(page.getByRole('button', { name: 'Gå videre' })).toBeVisible()
             await page.getByRole('button', { name: 'Gå videre' }).click()
-            
+
+
 
             //Trykker på Endre svar og havner på første spørsmål
             await expect(page.getByRole('button', { name: 'Gå videre' })).toBeVisible()
@@ -268,6 +269,7 @@ test.describe('Sjekker at søknader med gammel oppsummering ser ok ut', () => {
             await page.getByText('Søknaden sendes til NAV').isVisible()
             await page.getByRole('link', { name: 'Endre svar' }).click()
 
+            await page.getByRole('heading', { name: 'Tilbake i fullt arbeid' }).click()
             await expect(page.getByText('Steg 1 av 7')).toBeVisible()
             await page.getByRole('button', { name: 'Vis alle steg' }).click()
             await page.getByRole('link', { name: 'Oppsummering fra søknaden' }).click()
