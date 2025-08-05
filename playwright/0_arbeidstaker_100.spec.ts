@@ -8,7 +8,16 @@ import {
     svarRadio,
     velgTall,
     harSynligTittel,
+    harSoknaderlisteHeading,
+    trykkPaSoknadMedId,
+    svarFritekst,
 } from './utilities'
+
+import { arbeidstaker } from '../src/data/mock/data/soknad/arbeidstaker'
+const soknadId = arbeidstaker.id
+
+
+
 
 const fillTextFieldByLabel = async (page: Page, labelText: string, value: string, fallbackSelector?: string) => {
     try {
@@ -23,22 +32,33 @@ const fillTextFieldByLabel = async (page: Page, labelText: string, value: string
 }
 
 test.describe('Tester arbeidstakersøknad - 100%', () => {
+
+    test.beforeEach(async ({ page }) => {
+            await page.goto('/syk/sykepengesoknad')
+        })
     test('Full søknadsflyt', async ({ page }) => {
-        await page.goto('/syk/sykepengesoknad')
+        //  await page.goto('/syk/sykepengesoknad')
 
         // Sykmelding: 7e90121c-b64b-4a1c-b7a5-93c9d95aba47, arbeidstaker - 100%
         // Søknad: faba11f5-c4f2-4647-8c8a-58b28ce2f3ef, fom: 1.4.20, tom: 24.4.20
-        const soknadId = 'faba11f5-c4f2-4647-8c8a-58b28ce2f3ef'
+        // const soknadId = 'faba11f5-c4f2-4647-8c8a-58b28ce2f3ef'
 
         await test.step('Laster startside', async () => {
-            // await page.waitForLoadState('load')
-            await expect(page.locator('.navds-heading--large')).toBeVisible()
-            await expect(page.locator('.navds-heading--large')).toHaveText('Søknader')
-            await expect(page.getByRole('link', {name: "Søknad om sykepenger"})).toBeVisible()
-            await page.locator(`a[href*="${soknadId}"]`).click()
+            // // await page.waitForLoadState('load')
+            // await expect(page.locator('.navds-heading--large')).toBeVisible()
+            // await expect(page.locator('.navds-heading--large')).toHaveText('Søknader')
+            // await expect(page.getByRole('link', {name: "Søknad om sykepenger"})).toBeVisible()
+            // await page.getByRole('link', {name: "Søknad om sykepenger"}).click
+            // // await page.locator(`a[href*="${soknadId}"]`).click()
+
+            await harSoknaderlisteHeading(page)
+            await trykkPaSoknadMedId(page, soknadId)
         })
 
         await test.step('Søknad ANSVARSERKLARING', async () => {
+            // await page.waitForLoadState('load')
+
+            await expect(page.getByRole('heading', { name: 'Før du søker' })).toBeVisible()
             await expect(page).toHaveURL(new RegExp(`.*${soknadId}\\/1`))
 
             await sjekkIntroside(page)
@@ -53,7 +73,7 @@ test.describe('Tester arbeidstakersøknad - 100%', () => {
             await page.getByText('Slik behandler NAV personopplysningene dine').click()
 
             // Avbryt dialog
-            await page.getByText('Jeg vil slette denne søknaden').click()
+            await page.getByRole('button', { name:'Jeg vil slette denne søknaden'}).click()
             await page.getByRole('button', { name: 'Nei, jeg har behov for søknaden' }).click()
 
             // Må godkjenne ANSVARSERKLARING først
@@ -138,7 +158,7 @@ test.describe('Tester arbeidstakersøknad - 100%', () => {
                     'Oppgi hvor mange prosent av din normale arbeidstid du jobbet hos Posten Norge AS, Bærum i perioden 1. - 24. april 2020?'
                 )
             ).toBeVisible()
-            await page.locator('.undersporsmal .navds-text-field__input#796cf7ed-8a7e-39de-9cbc-6e789aa5af3f').fill('21')
+            // await page.locator('.undersporsmal .navds-text-field__input#796cf7ed-8a7e-39de-9cbc-6e789aa5af3f').fill('21')
             
             // Switch to timer
             await page.locator('.undersporsmal input[value="Timer"]').click()
@@ -147,7 +167,8 @@ test.describe('Tester arbeidstakersøknad - 100%', () => {
             ).toBeVisible()
             await expect(page.getByText('Antall timer du skrev inn, betyr at du har jobbet')).toBeHidden()
             
-            await page.locator('.undersporsmal .navds-text-field__input#6cc620d8-d4b0-3e82-a038-2757df6fc311').fill('21')
+            // await page.locator('.undersporsmal .navds-text-field__input#6cc620d8-d4b0-3e82-a038-2757df6fc311').fill('21')
+            await svarFritekst(page, 'Oppgi totalt antall timer du jobbet i perioden 1. - 24. april 2020 hos Posten Norge AS, Bærum', '21')
             await expect(page.getByText('Er prosenten lavere enn du forventet?')).toBeHidden()
 
             // Underspørsmål 2 - normal arbeidstid
@@ -214,7 +235,7 @@ test.describe('Tester arbeidstakersøknad - 100%', () => {
             const oppsummering = page.locator('[data-cy="oppsummering-fra-søknaden"]')
             
             await sporsmalOgSvar(oppsummering, 'Søknaden sendes til', 'NAV')
-            await expect(oppsummering.getByText('Posten Norge AS, Bærum')).toBeVisible()
+            await expect(oppsummering.getByText('Posten Norge AS, Bærum', {exact: true})).toBeVisible()
 
             // Arbeid underveis i sykefravær
             await sporsmalOgSvar(oppsummering, 'Oppgi arbeidsmengde i timer eller prosent:', 'Timer')
@@ -243,7 +264,7 @@ test.describe('Tester arbeidstakersøknad - 100%', () => {
             await klikkGaVidere(page)
 
             // Test edit answers
-            await page.getByText('Endre svar').click()
+            await page.getByRole('link', {name: 'Endre svar'}).click()
             await expect(page.getByText('Steg 1 av 7')).toBeVisible()
             await page.getByRole('button', { name: 'Vis alle steg' }).click()
             await page.getByRole('link', { name: 'Oppsummering fra søknaden' }).click()
