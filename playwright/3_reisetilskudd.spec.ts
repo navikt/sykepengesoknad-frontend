@@ -8,10 +8,8 @@ import {
     svarRadioClickOption,
     // Add any other needed utilities here
 } from './utilities'
-
-const { test, expect } = require('@playwright/test')
-
-const { nyttReisetilskudd } = require('../src/data/mock/data/soknad/arbeidstaker-reisetilskudd')
+import { test, expect } from '@playwright/test'
+import { nyttReisetilskudd } from '../src/data/mock/data/soknad/arbeidstaker-reisetilskudd'
 
 test.describe('Teste førsteside i reisetilskuddsøknaden', () => {
     test.setTimeout(180 * 1000) // Increased timeout to 3 minutes for slow navigation
