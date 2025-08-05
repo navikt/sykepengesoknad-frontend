@@ -19,7 +19,7 @@ const createOptions = (): OptionsType => {
             timeout,
             server: {
                 command: 'npm run dev-ingen-dekorator',
-                port: 3000,
+                port: 3001,
                 timeout: 120 * 1000, // Wait up to 2 minutes for the server to start
                 // reuseExistingServer: true,
             },
