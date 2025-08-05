@@ -1,5 +1,4 @@
 import {
-
     svarJaHovedsporsmal,
     svarNeiHovedsporsmal,
     klikkGaVidere,
@@ -122,10 +121,16 @@ test.describe('Teste førsteside i reisetilskuddsøknaden', () => {
 
             // Wait and verify all required fields are filled before proceeding
             await page.waitForTimeout(2000)
-            
+
             // Verify all required fields are filled before navigation
-            await expect(page.getByRole('textbox', { name: 'Hvor mye betalte du i bompenger mellom hjemmet ditt og jobben?' })).toHaveValue('1000')
-            await expect(page.getByRole('textbox', { name: 'Hvor mange kilometer er kjøreturen mellom hjemmet ditt og jobben én vei?' })).toHaveValue('42')
+            await expect(
+                page.getByRole('textbox', { name: 'Hvor mye betalte du i bompenger mellom hjemmet ditt og jobben?' }),
+            ).toHaveValue('1000')
+            await expect(
+                page.getByRole('textbox', {
+                    name: 'Hvor mange kilometer er kjøreturen mellom hjemmet ditt og jobben én vei?',
+                }),
+            ).toHaveValue('42')
 
             // await klikkGaVidere(page)
 
@@ -171,7 +176,7 @@ test.describe('Teste førsteside i reisetilskuddsøknaden', () => {
 
             await table.getByRole('button', { name: 'Slett' }).click()
             await expect(page.getByRole('dialog').filter({ hasText: 'Vil du slette kvitteringen?' })).toBeVisible()
-            await page.getByRole('button', {name: 'Ja, jeg er sikker'}).click()
+            await page.getByRole('button', { name: 'Ja, jeg er sikker' }).click()
             await expect(page.getByText('Vil du slette kvitteringen?')).toBeHidden()
             await expect(page.locator('.sumlinje')).toBeHidden()
 
