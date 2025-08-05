@@ -252,9 +252,11 @@ test.describe('Sjekker at søknader med gammel oppsummering ser ok ut', () => {
             // get button with the text Tilbake and click it
             await page.getByRole('button', { name: 'Tilbake' }).click()
             // await klikkGaVidere(page)
+            // forventer forrige overskrift skal dukke opp
+            await expect(page.getByRole('heading', { name: 'Reise utenfor EU/EØS' })).toBeVisible()
             await expect(page.getByRole('button', { name: 'Gå videre' })).toBeVisible()
             await page.getByRole('button', { name: 'Gå videre' }).click()
-            // wait for 30 seconds
+            
 
             //Trykker på Endre svar og havner på første spørsmål
             await expect(page.getByRole('button', { name: 'Gå videre' })).toBeVisible()
