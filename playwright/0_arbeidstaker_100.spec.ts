@@ -1,4 +1,7 @@
 import { test, expect, Page } from '@playwright/test'
+
+import { arbeidstaker } from '../src/data/mock/data/soknad/arbeidstaker'
+
 import {
     checkViStolerPaDeg,
     klikkGaVidere,
@@ -13,11 +16,7 @@ import {
     svarFritekst,
 } from './utilities'
 
-import { arbeidstaker } from '../src/data/mock/data/soknad/arbeidstaker'
 const soknadId = arbeidstaker.id
-
-
-
 
 const fillTextFieldByLabel = async (page: Page, labelText: string, value: string, fallbackSelector?: string) => {
     try {
@@ -32,10 +31,9 @@ const fillTextFieldByLabel = async (page: Page, labelText: string, value: string
 }
 
 test.describe('Tester arbeidstakersøknad - 100%', () => {
-
     test.beforeEach(async ({ page }) => {
-            await page.goto('/syk/sykepengesoknad')
-        })
+        await page.goto('/syk/sykepengesoknad')
+    })
     test('Full søknadsflyt', async ({ page }) => {
         //  await page.goto('/syk/sykepengesoknad')
 
@@ -62,18 +60,18 @@ test.describe('Tester arbeidstakersøknad - 100%', () => {
             await expect(page).toHaveURL(new RegExp(`.*${soknadId}\\/1`))
 
             await sjekkIntroside(page)
-            
+
             await expect(
                 page.getByText(
-                    'Siden sykemeldingen går over 31 dager, har vi delt opp søknaden, slik at du kan søke om sykepenger før hele perioden er ferdig. På den måten slipper du å vente lenge på sykepengene dine.'
-                )
+                    'Siden sykemeldingen går over 31 dager, har vi delt opp søknaden, slik at du kan søke om sykepenger før hele perioden er ferdig. På den måten slipper du å vente lenge på sykepengene dine.',
+                ),
             ).toBeVisible()
 
             // Personvern erklæring
             await page.getByText('Slik behandler NAV personopplysningene dine').click()
 
             // Avbryt dialog
-            await page.getByRole('button', { name:'Jeg vil slette denne søknaden'}).click()
+            await page.getByRole('button', { name: 'Jeg vil slette denne søknaden' }).click()
             await page.getByRole('button', { name: 'Nei, jeg har behov for søknaden' }).click()
 
             // Må godkjenne ANSVARSERKLARING først
@@ -81,13 +79,13 @@ test.describe('Tester arbeidstakersøknad - 100%', () => {
             await expect(page.getByText('Det er 1 feil i skjemaet')).toBeVisible()
             await expect(page.locator('.navds-confirmation-panel__inner')).toBeVisible()
             await expect(page.getByText('Du må bekrefte at du vil svare så riktig du kan')).toBeVisible()
-            
+
             await checkViStolerPaDeg(page)
         })
 
         await test.step('Søknad TILBAKE_I_ARBEID', async () => {
             await expect(page).toHaveURL(new RegExp(`.*${soknadId}\\/2`))
-            
+
             // Check progress bar
             await expect(page.locator('.navds-progress-bar')).toHaveAttribute('aria-valuenow', '1')
             await expect(page.locator('.navds-progress-bar')).toHaveAttribute('aria-valuemax', '7')
@@ -96,15 +94,15 @@ test.describe('Tester arbeidstakersøknad - 100%', () => {
             // Answer yes to main question
             await page.locator('[data-cy="ja-nei-stor"] input[value="JA"]').click()
             await expect(page.getByText('Når begynte du å jobbe igjen?')).toBeVisible()
-            
+
             // Select date
             await page.locator('.navds-date__field-button').click()
             await page.locator('.rdp-day').filter({ hasText: '20' }).click()
-            
+
             await expect(
                 page.getByText(
-                    'Svaret ditt betyr at du har vært i fullt arbeid fra 20. – 24. april 2020. Du får ikke utbetalt sykepenger for denne perioden'
-                )
+                    'Svaret ditt betyr at du har vært i fullt arbeid fra 20. – 24. april 2020. Du får ikke utbetalt sykepenger for denne perioden',
+                ),
             ).toBeVisible()
         })
 
@@ -126,9 +124,13 @@ test.describe('Tester arbeidstakersøknad - 100%', () => {
             await expect(page).toHaveURL(new RegExp(`.*${soknadId}\\/4`))
 
             await expect(page.getByText('Spørsmålet forklart')).toBeVisible()
-            await expect(page.getByText('Permisjon er dager du var borte fra jobb av andre grunner enn sykdom')).toBeHidden()
+            await expect(
+                page.getByText('Permisjon er dager du var borte fra jobb av andre grunner enn sykdom'),
+            ).toBeHidden()
             await page.getByText('Spørsmålet forklart').click()
-            await expect(page.getByText('Permisjon er dager du var borte fra jobb av andre grunner enn sykdom')).toBeVisible()
+            await expect(
+                page.getByText('Permisjon er dager du var borte fra jobb av andre grunner enn sykdom'),
+            ).toBeVisible()
 
             await page.locator('[data-cy="ja-nei-stor"] input[value="JA"]').click()
             await expect(page.getByText('Når tok du permisjon?')).toBeVisible()
@@ -142,37 +144,45 @@ test.describe('Tester arbeidstakersøknad - 100%', () => {
 
             await expect(
                 page.getByText(
-                    'I perioden 1. - 24. april 2020 var du 100 % sykmeldt fra Posten Norge AS, Bærum. Jobbet du noe hos Posten Norge AS, Bærum i denne perioden?'
-                )
+                    'I perioden 1. - 24. april 2020 var du 100 % sykmeldt fra Posten Norge AS, Bærum. Jobbet du noe hos Posten Norge AS, Bærum i denne perioden?',
+                ),
             ).toBeVisible()
-            
+
             await page.locator('[data-cy="ja-nei-stor"] input[value="JA"]').click()
 
             // Underspørsmål 1 - arbeidsmengde
             await expect(page.getByText('Oppgi arbeidsmengde i timer eller prosent')).toBeVisible()
-            
+
             // Select prosent first
             await page.locator('.undersporsmal input[value="Prosent"]').click()
             await expect(
                 page.getByText(
-                    'Oppgi hvor mange prosent av din normale arbeidstid du jobbet hos Posten Norge AS, Bærum i perioden 1. - 24. april 2020?'
-                )
+                    'Oppgi hvor mange prosent av din normale arbeidstid du jobbet hos Posten Norge AS, Bærum i perioden 1. - 24. april 2020?',
+                ),
             ).toBeVisible()
             // await page.locator('.undersporsmal .navds-text-field__input#796cf7ed-8a7e-39de-9cbc-6e789aa5af3f').fill('21')
-            
+
             // Switch to timer
             await page.locator('.undersporsmal input[value="Timer"]').click()
             await expect(
-                page.getByText('Oppgi totalt antall timer du jobbet i perioden 1. - 24. april 2020 hos Posten Norge AS, Bærum')
+                page.getByText(
+                    'Oppgi totalt antall timer du jobbet i perioden 1. - 24. april 2020 hos Posten Norge AS, Bærum',
+                ),
             ).toBeVisible()
             await expect(page.getByText('Antall timer du skrev inn, betyr at du har jobbet')).toBeHidden()
-            
+
             // await page.locator('.undersporsmal .navds-text-field__input#6cc620d8-d4b0-3e82-a038-2757df6fc311').fill('21')
-            await svarFritekst(page, 'Oppgi totalt antall timer du jobbet i perioden 1. - 24. april 2020 hos Posten Norge AS, Bærum', '21')
+            await svarFritekst(
+                page,
+                'Oppgi totalt antall timer du jobbet i perioden 1. - 24. april 2020 hos Posten Norge AS, Bærum',
+                '21',
+            )
             await expect(page.getByText('Er prosenten lavere enn du forventet?')).toBeHidden()
 
             // Underspørsmål 2 - normal arbeidstid
-            await expect(page.getByText('Jobber du vanligvis 37,5 timer i uka hos Posten Norge AS, Bærum?')).toBeVisible()
+            await expect(
+                page.getByText('Jobber du vanligvis 37,5 timer i uka hos Posten Norge AS, Bærum?'),
+            ).toBeVisible()
             await page.locator('input#af302d17-f35d-38a6-ac23-ccde5db369cb_0').click()
 
             await klikkGaVidere(page)
@@ -185,7 +195,8 @@ test.describe('Tester arbeidstakersøknad - 100%', () => {
             await page.locator('[data-cy="ja-nei-stor"] input[value="JA"]').click()
 
             // Select additional income sources
-            const ansattAndreSteder = page.getByText('Velg inntektskildene som passer for deg:')
+            const ansattAndreSteder = page
+                .getByText('Velg inntektskildene som passer for deg:')
                 .locator('..')
                 .getByText('Ansatt andre steder enn nevnt over')
                 .locator('..')
@@ -193,12 +204,13 @@ test.describe('Tester arbeidstakersøknad - 100%', () => {
 
             // Answer sub-question
             const subQuestion = page.getByText(
-                'Har du jobbet for eller mottatt inntekt fra én eller flere av disse arbeidsgiverne de siste 14 dagene før du ble sykmeldt?'
+                'Har du jobbet for eller mottatt inntekt fra én eller flere av disse arbeidsgiverne de siste 14 dagene før du ble sykmeldt?',
             )
             await subQuestion.locator('..').locator('input[type="radio"][value="JA"]').click()
 
             // Select self-employed
-            const selvstendingNaering = page.getByText('Velg inntektskildene som passer for deg:')
+            const selvstendingNaering = page
+                .getByText('Velg inntektskildene som passer for deg:')
                 .locator('..')
                 .getByText('Selvstendig næringsdrivende')
                 .locator('..')
@@ -226,35 +238,45 @@ test.describe('Tester arbeidstakersøknad - 100%', () => {
             await expect(page.locator('.navds-progress-bar')).toHaveAttribute('aria-valuetext', '7 av 7')
 
             await expect(
-                page.locator('.navds-guide-panel__content').getByText(
-                    'Nå kan du se over at alt er riktig før du sender inn søknaden. Ved behov kan du endre opplysningene inntil 12 måneder etter innsending.'
-                )
+                page
+                    .locator('.navds-guide-panel__content')
+                    .getByText(
+                        'Nå kan du se over at alt er riktig før du sender inn søknaden. Ved behov kan du endre opplysningene inntil 12 måneder etter innsending.',
+                    ),
             ).toBeVisible()
 
             // Check summary content
             const oppsummering = page.locator('[data-cy="oppsummering-fra-søknaden"]')
-            
+
             await sporsmalOgSvar(oppsummering, 'Søknaden sendes til', 'NAV')
-            await expect(oppsummering.getByText('Posten Norge AS, Bærum', {exact: true})).toBeVisible()
+            await expect(oppsummering.getByText('Posten Norge AS, Bærum', { exact: true })).toBeVisible()
 
             // Arbeid underveis i sykefravær
             await sporsmalOgSvar(oppsummering, 'Oppgi arbeidsmengde i timer eller prosent:', 'Timer')
             await sporsmalOgSvar(
                 oppsummering,
                 'Oppgi totalt antall timer du jobbet i perioden 1. - 24. april 2020 hos Posten Norge AS, Bærum',
-                '21 timer'
+                '21 timer',
             )
             await sporsmalOgSvar(oppsummering, 'Jobber du vanligvis 37,5 timer i uka', 'Ja')
 
             // Andre inntektskilder
             await sporsmalOgSvar(oppsummering, 'Har du andre inntektskilder enn Butikken?', 'Ja')
-            await sporsmalOgSvar(oppsummering, 'Velg inntektskildene som passer for deg:', 'Ansatt andre steder enn nevnt over')
+            await sporsmalOgSvar(
+                oppsummering,
+                'Velg inntektskildene som passer for deg:',
+                'Ansatt andre steder enn nevnt over',
+            )
             await sporsmalOgSvar(
                 oppsummering,
                 'Har du jobbet for eller mottatt inntekt fra én eller flere av disse arbeidsgiverne de siste 14 dagene før du ble sykmeldt?',
-                'Ja'
+                'Ja',
             )
-            await sporsmalOgSvar(oppsummering, 'Velg inntektskildene som passer for deg:', 'Selvstendig næringsdrivende')
+            await sporsmalOgSvar(
+                oppsummering,
+                'Velg inntektskildene som passer for deg:',
+                'Selvstendig næringsdrivende',
+            )
 
             await expect(page.getByText('Det er 1 feil i skjemaet')).toBeHidden()
 
@@ -264,7 +286,7 @@ test.describe('Tester arbeidstakersøknad - 100%', () => {
             await klikkGaVidere(page)
 
             // Test edit answers
-            await page.getByRole('link', {name: 'Endre svar'}).click()
+            await page.getByRole('link', { name: 'Endre svar' }).click()
             await expect(page.getByText('Steg 1 av 7')).toBeVisible()
             await page.getByRole('button', { name: 'Vis alle steg' }).click()
             await page.getByRole('link', { name: 'Oppsummering fra søknaden' }).click()
@@ -275,7 +297,7 @@ test.describe('Tester arbeidstakersøknad - 100%', () => {
 
         await test.step('Søknad kvittering', async () => {
             await expect(page).toHaveURL(new RegExp(`.*\\/kvittering\\/${soknadId}`))
-            
+
             const kvittering = page.locator('[data-cy="kvittering"]')
             await expect(kvittering).toContainText('Hva skjer videre?')
             await expect(kvittering).toContainText('Før NAV kan behandle søknaden')

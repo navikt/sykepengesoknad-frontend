@@ -89,7 +89,7 @@ export default defineConfig({
     fullyParallel: false,
     forbidOnly: !!process.env.CI,
     retries: 2,
-    workers: 2, // process.env.CI ? 1 : undefined,
+    workers: 4, // process.env.CI ? 1 : undefined,
     reporter: process.env.CI ? 'blob' : 'html',
     use: {
         baseURL: opts.baseURL,
