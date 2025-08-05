@@ -252,18 +252,19 @@ test.describe('Sjekker at søknader med gammel oppsummering ser ok ut', () => {
             // get button with the text Tilbake and click it
             await page.getByRole('button', { name: 'Tilbake' }).click()
             // await klikkGaVidere(page)
+            await expect(page.getByRole('button', { name: 'Gå videre' })).toBeVisible()
             await page.getByRole('button', { name: 'Gå videre' }).click()
             // wait for 30 seconds
 
             //Trykker på Endre svar og havner på første spørsmål
             await expect(page.getByRole('button', { name: 'Gå videre' })).toBeVisible()
-            await page.getByRole('button', { name: 'Gå videre' }).click({ force: true })
+            await page.getByRole('button', { name: 'Gå videre' }).click()
             // await page.getByText('Ikke her').click()
 
             // await this text showing up on the page  Oppsummering fra søknaden
             // await page.getByRole('heading', {name: 'Oppsummering fra søknaden'}).isVisible()
             await page.getByText('Søknaden sendes til NAV').isVisible()
-            await page.getByRole('link', { name: 'Endre svar' }).click({ force: true })
+            await page.getByRole('link', { name: 'Endre svar' }).click()
 
             await expect(page.getByText('Steg 1 av 7')).toBeVisible()
             await page.getByRole('button', { name: 'Vis alle steg' }).click()
