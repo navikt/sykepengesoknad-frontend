@@ -1,4 +1,4 @@
-import { test, expect, Page } from '@playwright/test'
+import { test, expect } from '@playwright/test'
 
 import { arbeidstaker } from '../src/data/mock/data/soknad/arbeidstaker'
 
@@ -8,27 +8,12 @@ import {
     setPeriodeFraTil,
     sjekkIntroside,
     sporsmalOgSvar,
-    svarRadio,
-    velgTall,
-    harSynligTittel,
     harSoknaderlisteHeading,
     trykkPaSoknadMedId,
     svarFritekst,
 } from './utilities'
 
 const soknadId = arbeidstaker.id
-
-const fillTextFieldByLabel = async (page: Page, labelText: string, value: string, fallbackSelector?: string) => {
-    try {
-        await page.getByLabel(labelText).fill(value)
-    } catch (error) {
-        if (fallbackSelector) {
-            await page.locator(fallbackSelector).fill(value)
-        } else {
-            throw error
-        }
-    }
-}
 
 test.describe('Tester arbeidstakersøknad - 100%', () => {
     test.beforeEach(async ({ page }) => {
