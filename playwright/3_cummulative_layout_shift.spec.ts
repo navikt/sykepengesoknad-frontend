@@ -35,9 +35,10 @@ test.describe('Tester cummulative-layout-shift', () => {
             '/syk/sykepengesoknad/soknader/04247ad5-9c15-4b7d-ae55-f23807777777/3?testperson=cummulative-layout-shift',
         )
 
-        await expect(page.locator('.navds-skeleton')).toHaveCount(0)
         // Check main height initially
         await mainSkalHaHoyde(page, 1148)
+        await expect(page.locator('.navds-skeleton')).toHaveCount(0)
+
 
         // Wait for data to be fetched and rendered
         await harSynligTittel(page, 'Ferie', 2)
