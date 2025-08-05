@@ -1,11 +1,21 @@
 import { test, expect } from '@playwright/test'
-import { harSynligTittel, svarJaHovedsporsmal, svarNeiHovedsporsmal, klikkGaVidere, setPeriodeFraTil, harSynligTekst } from './utilities'
+
+import {
+    harSynligTittel,
+    svarJaHovedsporsmal,
+    svarNeiHovedsporsmal,
+    klikkGaVidere,
+    setPeriodeFraTil,
+    harSynligTekst,
+} from './utilities'
 
 test.describe('Tester nytt arbeidsforhold', () => {
     test('Åpner nytt arbeidsforhold sporsmål', async ({ page }) => {
         await test.step('Navigerer til nytt arbeidsforhold spørsmål', async () => {
-            await page.goto('/syk/sykepengesoknad/soknader/260f06b5-9fd0-4b30-94d2-4f90851b4cac/7?testperson=nytt-arbeidsforhold')
-            
+            await page.goto(
+                '/syk/sykepengesoknad/soknader/260f06b5-9fd0-4b30-94d2-4f90851b4cac/7?testperson=nytt-arbeidsforhold',
+            )
+
             await harSynligTittel(page, 'Nytt arbeidsforhold', 2)
         })
 
@@ -18,7 +28,9 @@ test.describe('Tester nytt arbeidsforhold', () => {
 
     test('Svarer ja på hovedspørsmål', async ({ page }) => {
         await test.step('Navigerer til nytt arbeidsforhold spørsmål', async () => {
-            await page.goto('/syk/sykepengesoknad/soknader/260f06b5-9fd0-4b30-94d2-4f90851b4cac/7?testperson=nytt-arbeidsforhold')
+            await page.goto(
+                '/syk/sykepengesoknad/soknader/260f06b5-9fd0-4b30-94d2-4f90851b4cac/7?testperson=nytt-arbeidsforhold',
+            )
         })
 
         await test.step('Svarer ja og verifiserer hjelpetekst', async () => {
@@ -29,7 +41,9 @@ test.describe('Tester nytt arbeidsforhold', () => {
 
     test('Får spesifikk hjelpetekst ved ja på ferie', async ({ page }) => {
         await test.step('Navigerer til ferie spørsmål', async () => {
-            await page.goto('/syk/sykepengesoknad/soknader/260f06b5-9fd0-4b30-94d2-4f90851b4cac/3?testperson=nytt-arbeidsforhold')
+            await page.goto(
+                '/syk/sykepengesoknad/soknader/260f06b5-9fd0-4b30-94d2-4f90851b4cac/3?testperson=nytt-arbeidsforhold',
+            )
             await harSynligTittel(page, 'Ferie', 2)
         })
 
@@ -52,13 +66,18 @@ test.describe('Tester nytt arbeidsforhold', () => {
 
         await test.step('Svarer ja på nytt arbeidsforhold og verifiserer hjelpetekst', async () => {
             await svarJaHovedsporsmal(page)
-            await harSynligTekst(page, 'Ikke ta med det du eventuelt tjente de dagene du hadde ferie fra MATBUTIKKEN AS.')
+            await harSynligTekst(
+                page,
+                'Ikke ta med det du eventuelt tjente de dagene du hadde ferie fra MATBUTIKKEN AS.',
+            )
         })
     })
 
     test('Får spesifikk hjelpetekst ved ja på permisjon', async ({ page }) => {
         await test.step('Navigerer til ferie spørsmål og svarer nei', async () => {
-            await page.goto('/syk/sykepengesoknad/soknader/260f06b5-9fd0-4b30-94d2-4f90851b4cac/3?testperson=nytt-arbeidsforhold')
+            await page.goto(
+                '/syk/sykepengesoknad/soknader/260f06b5-9fd0-4b30-94d2-4f90851b4cac/3?testperson=nytt-arbeidsforhold',
+            )
             await harSynligTittel(page, 'Ferie', 2)
 
             await svarNeiHovedsporsmal(page)
@@ -83,13 +102,18 @@ test.describe('Tester nytt arbeidsforhold', () => {
 
         await test.step('Svarer ja på nytt arbeidsforhold og verifiserer hjelpetekst', async () => {
             await svarJaHovedsporsmal(page)
-            await harSynligTekst(page, 'Ikke ta med det du eventuelt tjente de dagene du hadde permisjon fra MATBUTIKKEN AS.')
+            await harSynligTekst(
+                page,
+                'Ikke ta med det du eventuelt tjente de dagene du hadde permisjon fra MATBUTIKKEN AS.',
+            )
         })
     })
 
     test('Får spesifikk hjelpetekst ved ja på ferie og permisjon', async ({ page }) => {
         await test.step('Navigerer til ferie spørsmål og svarer ja', async () => {
-            await page.goto('/syk/sykepengesoknad/soknader/260f06b5-9fd0-4b30-94d2-4f90851b4cac/3?testperson=nytt-arbeidsforhold')
+            await page.goto(
+                '/syk/sykepengesoknad/soknader/260f06b5-9fd0-4b30-94d2-4f90851b4cac/3?testperson=nytt-arbeidsforhold',
+            )
             await harSynligTittel(page, 'Ferie', 2)
 
             await svarJaHovedsporsmal(page)
@@ -115,7 +139,10 @@ test.describe('Tester nytt arbeidsforhold', () => {
 
         await test.step('Svarer ja på nytt arbeidsforhold og verifiserer kombinert hjelpetekst', async () => {
             await svarJaHovedsporsmal(page)
-            await harSynligTekst(page, 'Ikke ta med det du eventuelt tjente de dagene du hadde ferie eller permisjon fra MATBUTIKKEN AS.')
+            await harSynligTekst(
+                page,
+                'Ikke ta med det du eventuelt tjente de dagene du hadde ferie eller permisjon fra MATBUTIKKEN AS.',
+            )
         })
     })
 })
