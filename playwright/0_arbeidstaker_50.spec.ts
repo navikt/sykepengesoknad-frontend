@@ -1,18 +1,9 @@
 import { test, expect, Page } from '@playwright/test'
 
-/**
- * Fill a text field by trying multiple locator strategies
- * @param page - Playwright page object
- * @param labelText - The label text associated with the input field
- * @param value - The value to fill
- * @param fallbackSelector - Optional fallback CSS selector if label approach fails
- */
 const fillTextFieldByLabel = async (page: Page, labelText: string, value: string, fallbackSelector?: string) => {
     try {
-        // Primary strategy: Use getByLabel which is more semantic and robust
         await page.getByLabel(labelText).fill(value)
     } catch (error) {
-        // console.warn(`Failed to fill field by label "${labelText}", trying fallback selector`)
         if (fallbackSelector) {
             await page.locator(fallbackSelector).fill(value)
         } else {
@@ -22,19 +13,13 @@ const fillTextFieldByLabel = async (page: Page, labelText: string, value: string
 }
 
 const setPeriodeFraTil = async (page: Page, fom: number, tom: number, periodeIndex = 0) => {
-    // In a period component with a given ID, the "from" field is the first field and "to" field is the second field.
-    // Get the period component with the right id (including 0, 1 etc for where in the sequence it is)
-    // Then select the right calendar date popup button for day in month.
 
     const periodeComponent = page.locator(`[data-cy="periode"]`).nth(periodeIndex)
 
-    // Click the first date field button (fra/from)
     await periodeComponent.locator('.navds-date__field-button').nth(0).click()
 
-    // Click the "from" date
     await periodeComponent.locator('.rdp-cell').filter({ hasText: fom.toString() }).click()
 
-    // Click the "to" date
     await periodeComponent.locator('.rdp-cell').filter({ hasText: tom.toString() }).click()
 }
 
@@ -49,30 +34,15 @@ test.describe('Tester arbeidstakersøknad - gradert 50%', () => {
 
             await expect(page.locator('.navds-heading--large')).toBeVisible()
             await expect(page.locator('.navds-heading--large')).toHaveText('Søknader')
-            // Assuming soknad.id is known or can be selected by pattern
-            // For translation, assume we click the link containing the ID
-            // Replace 'some-soknad-id' with actual if known, or use a better selector
-            await page.locator('a[href*="5b769c04-e171-47c9-b79b-23ab8fce331e"]').click() // Adjust based on actual ID
+            await page.locator('a[href*="5b769c04-e171-47c9-b79b-23ab8fce331e"]').click() 
         })
 
         await test.step('Søknad ANSVARSERKLARING', async () => {
             await page.waitForLoadState('load')
             await expect(page.getByRole('heading', { name: 'Før du søker' })).toBeVisible()
 
-            // Assuming soknad.id is 'some-id', adjust accordingly
-            // await expect(page).toHaveURL(/.*5b769c04-e171-47c9-b79b-23ab8fce331e\/1/)
             await expect(page).toHaveURL(new RegExp(`.*${soknadId}\\/1`))
-            // sjekkIntroside() - translate to checks
-            // Use a strict locator for the heading
-            // checkViStolerPaDeg() - likely checks and interacts with a consent
-            // Assuming it's checking and clicking a checkbox
-
-            // const pageDomContent = await page.content()
-            // console.log(pageDomContent) // For debugging, remove in production
-            // const checkbox = page.locator('input[data-cy="bekreftCheckboksPanel"]')
-            // await expect(checkbox).toBeVisible()
-            // await checkbox.check()
-            // await page.locator('button').filter({ hasText: 'Start søknad' }).click()
+       
 
             await page.getByLabel('Jeg bekrefter at jeg vil svare så riktig som jeg kan.').check()
 
@@ -82,8 +52,6 @@ test.describe('Tester arbeidstakersøknad - gradert 50%', () => {
         })
 
         await test.step('Tilbake til ANSVARSERKLARING og frem igjen', async () => {
-            // klikkTilbake() - click back
-            // wait for 10 seconds
             await page.locator('button').filter({ hasText: 'Tilbake' }).click()
             await page.locator('button').filter({ hasText: 'Start søknad' }).click()
         })
@@ -94,10 +62,8 @@ test.describe('Tester arbeidstakersøknad - gradert 50%', () => {
             await expect(page.locator('text=Når begynte du å jobbe igjen?')).toBeVisible()
             await page.locator('.navds-date__field-button').click()
             await page.locator('.rdp-day:has-text("20")').click()
-            // klikkGaVidere() - click next
             await page.locator('button').filter({ hasText: 'Gå videre' }).click()
 
-            // await page.locator('button').filter({ hasText: 'Gå videre' }).click()
         })
 
         await test.step('Søknad FERIE_V2', async () => {
@@ -142,7 +108,6 @@ test.describe('Tester arbeidstakersøknad - gradert 50%', () => {
                 page,
                 'Oppgi prosent',
                 '51',
-                '.undersporsmal .navds-text-field__input#13acfccb-3f39-3893-8054-058270add6ab',
             )
 
             await page.locator('.undersporsmal input[value="Timer"]').click()
@@ -151,19 +116,9 @@ test.describe('Tester arbeidstakersøknad - gradert 50%', () => {
                 page,
                 'Oppgi timer totalt',
                 '10.7',
-                '.undersporsmal .navds-text-field__input#13acfccb-3f39-3893-8054-058270add6ab',
             )
 
-            // await page
-            //     .locator('.undersporsmal .navds-text-field__input#34c3cb3f-1aeb-3095-9ac6-d8f4f4c9e539')
-            //     .fill('10.7')
-            // await expect(
-            //     page.locator(
-            //         'text=Antall timer du skrev inn, betyr at du har jobbet 49% av det du gjør når du er frisk.',
-            //     ),
-            // ).toBeVisible()
-
-            // klikkGaVidere(true) - assuming with validation
+      
             await page.locator('button').filter({ hasText: 'Gå videre' }).click()
 
             await expect(
@@ -188,7 +143,6 @@ test.describe('Tester arbeidstakersøknad - gradert 50%', () => {
                 page,
                 'Oppgi timer totalt',
                 '11',
-                '.undersporsmal .navds-text-field__input#13acfccb-3f39-3893-8054-058270add6ab',
             )
 
             await page.locator('button').filter({ hasText: 'Gå videre' }).click()
@@ -221,7 +175,6 @@ test.describe('Tester arbeidstakersøknad - gradert 50%', () => {
             await expect(page).toHaveURL(new RegExp(`.*${soknadId}\\/8`))
             await page.locator('[data-cy="ja-nei-stor"] input[value="JA"]').click()
             await expect(page.locator('text=Når var du utenfor EU/EØS?')).toBeVisible()
-            // Set period from 14th to 22nd
             await setPeriodeFraTil(page, 14, 22)
             await page.locator('button').filter({ hasText: 'Gå videre' }).click()
         })
@@ -232,7 +185,6 @@ test.describe('Tester arbeidstakersøknad - gradert 50%', () => {
             const oppsummering = page.locator('[data-cy="oppsummering-fra-søknaden"]')
             await expect(oppsummering).toContainText('Søknaden sendes til')
             await expect(oppsummering).toContainText('Posten Norge AS, Bærum')
-            // sporsmalOgSvar - assuming it checks specific Q&A
             await page.locator('button').filter({ hasText: 'Send søknaden' }).click()
         })
 
