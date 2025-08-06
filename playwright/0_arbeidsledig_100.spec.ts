@@ -9,10 +9,8 @@ import {
     fjernAnimasjoner,
 } from './utilities'
 
-// Mock-data (basert på Cypress-koden din)
 const arbeidsledig = {
-    id: '934f39f4-cb47-459f-8209-0dbef6d30059', // Erstatt med faktisk ID fra mock-data, f.eks. fra '../../../src/data/mock/data/soknad/arbeidsledig'
-    // Legg til flere felter om nødvendig fra mock-data
+    id: '934f39f4-cb47-459f-8209-0dbef6d30059'
 }
 
 test.describe('Tester arbeidsledigsøknad', () => {
@@ -20,20 +18,6 @@ test.describe('Tester arbeidsledigsøknad', () => {
         // Forberedelser: Fjern animasjoner for stabil testing (valgfritt, men anbefalt for flakiness)
         await fjernAnimasjoner(page)
 
-        // await test.step('Laster startside', async () => {
-        //   await page.goto('/syk/sykepengesoknad?testperson=arbeidsledig');
-        //   await expect(page.getByRole('heading', { name: 'Søknader', level: 1 })).toBeVisible(); // Antatt nivå 1 for '.navds-heading--large'
-        //   await page.locator('.navds-link-panel').filter({ hasText: 'Søknad om sykepenger' }).click(); // Klikk på link panel med søknad
-        // });
-
-        // await test.step('Laster startside', async () => {
-        //     // await expect(page.locator('.navds-heading--large')).toBeVisible()
-        //     // await expect(page.locator('.navds-heading--large')).toHaveText('Søknader')
-        //     // Assuming soknad.id is known or can be selected by pattern
-        //     // For translation, assume we click the link containing the ID
-        //     // Replace 'some-soknad-id' with actual if known, or use a better selector
-        //     await page.locator(`a[href*="${arbeidsledig.id}]`).click() // Adjust based on actual ID
-        // })
 
         await test.step('Laster startside', async () => {
             // Naviger til startsiden (hvis ikke allerede gjort i et tidligere steg; tilpass om nødvendig)
@@ -86,29 +70,8 @@ test.describe('Tester arbeidsledigsøknad', () => {
             await expect(page.getByText('Det er 1 feil i skjemaet')).toBeVisible()
             await expect(page.getByText('Du må oppgi hvilke inntektskilder du har')).toBeVisible()
 
-            /*
-
-      await test.step('Velg inntektskilde: andre arbeidsforhold', async () => {
-  // Finn og velg checkboxen for "andre arbeidsforhold" basert på ID (fra HTML: id="687404")
-  const checkbox = page.locator('#687404'); // Eller bruk page.getByLabel('andre arbeidsforhold') for tekstbasert locator
-
-  // Sjekk at checkboxen er synlig og ikke allerede valgt (valgfri verifikasjon for robusthet)
-  await expect(checkbox).toBeVisible();
-  await expect(checkbox).not.toBeChecked(); // Hvis du vil sikre at den ikke er forhåndsvalgt
-
-  // Velg (check) checkboxen
-  await checkbox.check();
-
-  // Verifiser at den nå er valgt
-  await expect(checkbox).toBeChecked();
-});
-
-      */
-            // Svar JA og velg inntektskilder
-            // Underspørsmål nivå 1 - checkbox
-
             const checkbox = page.getByLabel('andre arbeidsforhold')
-            checkbox.click()
+            await checkbox.click()
 
             await expect(
                 page.getByText(
@@ -121,21 +84,6 @@ test.describe('Tester arbeidsledigsøknad', () => {
                 .getByRole('radio', { name: 'Ja' })
                 .click()
 
-            //   await expect(page.locator('.undersporsmal .navds-checkbox label[for=687404]')).toContainText(
-            //     'andre arbeidsforhold',
-            //   );
-            //   await page.locator('input[type=checkbox]#687404').click();
-
-            // Underspørsmål nivå 2 - radio
-            // await page.locator('input[type=radio]#687405_0').check();
-            // Finn og velg radio-knappen for "Ja" basert på ID (fra HTML: id="687405_0")
-
-            //   await expect(
-            //     page.getByText(
-            //       'Du må sende egen sykepengesøknad for dette. ' +
-            //         'Det betyr også at legen må skrive en sykmelding for hvert arbeidsforhold du er sykmeldt fra.',
-            //     ),
-            //   ).toBeVisible();
 
             await klikkGaVidere(page) // Gå videre
         })
@@ -195,11 +143,7 @@ test.describe('Tester arbeidsledigsøknad', () => {
         })
 
         await test.step('Søknad kvittering', async () => {
-            // await expect(page).toHaveURL(new RegExp(`/kvittering/${arbeidsledig.id}`))
-            // removed this url check as it can be flakey
-            // Verifiser kvitteringspanel
-            // Wait for page to finish loading
-            // await page.waitForLoadState('load')
+    
             await expect(page).toHaveURL(new RegExp(`/kvittering/${arbeidsledig.id}`))
 
             await expect(page.getByRole('heading', { name: 'Søknaden er sendt til NAV' })).toBeVisible()

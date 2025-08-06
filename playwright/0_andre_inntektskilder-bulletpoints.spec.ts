@@ -37,7 +37,7 @@ test.describe('Tester andre inntektskilder bulletpoints', () => {
         }
     })
 
-    test('Viser ikke liste vi ikke har data fra inntektskomponenten', async ({ page }) => {
+    test('Viser ikke liste når vi mangler data fra inntektskomponenten', async ({ page }) => {
         await page.goto(
             '/syk/sykepengesoknad/soknader/214f6e73-8150-4261-8ce5-e2b41907fa58/10?testperson=integrasjon-soknader',
         )
