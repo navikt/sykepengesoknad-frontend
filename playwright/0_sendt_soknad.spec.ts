@@ -13,7 +13,6 @@ test.describe('Tester sendt søknad', () => {
     })
 
     test('Sendt søknad har forventa tekst', async ({ page }) => {
-        // Using the correct mock data ID from sendtArbeidsledig
         const sendtArbeidsledigId = '3848e75e-4069-4076-95c0-3f9f0b63e498'
 
         const soknadLink = page.locator(`[data-cy="link-listevisning-${sendtArbeidsledigId}"]`)
@@ -23,7 +22,6 @@ test.describe('Tester sendt søknad', () => {
     })
 
     test('Ved klikk så åpnes kvittering søknad visning', async ({ page }) => {
-        // Using the correct mock data ID from sendtArbeidsledig
         const sendtArbeidsledigId = '3848e75e-4069-4076-95c0-3f9f0b63e498'
 
         await trykkPaSoknadMedId(page, sendtArbeidsledigId)
@@ -33,7 +31,6 @@ test.describe('Tester sendt søknad', () => {
     })
 
     test('Siden kan refreshes', async ({ page }) => {
-        // Using the correct mock data ID from sendtArbeidsledig
         const sendtArbeidsledigId = '3848e75e-4069-4076-95c0-3f9f0b63e498'
 
         await page.goto(`/syk/sykepengesoknad/sendt/${sendtArbeidsledigId}?testperson=integrasjon-soknader`)
