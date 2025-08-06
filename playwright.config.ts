@@ -102,10 +102,10 @@ export default defineConfig({
                   name: 'CI Chromium',
                   use: { ...devices['Desktop Chrome'], viewport: { width: 1920, height: 1080 } },
               },
-                {
-                    name: 'CI Firefox',
-                    use: { ...devices['Desktop Firefox'], viewport: { width: 1920, height: 1080 } },
-                },
+              {
+                  name: 'CI Firefox',
+                  use: { ...devices['Desktop Firefox'], viewport: { width: 1920, height: 1080 } },
+              },
           ]
         : commonBrowserConfigs,
 
