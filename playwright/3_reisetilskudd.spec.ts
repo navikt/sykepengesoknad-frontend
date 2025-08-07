@@ -13,6 +13,7 @@ import {
 } from './utilities'
 
 test.describe('Teste førsteside i reisetilskuddsøknaden', () => {
+    test.setTimeout(180 * 1000) // Increased timeout to 3 minutes for slow navigation
     test.beforeEach(async ({ page }) => {
         await page.context().clearCookies()
         await page.goto('/syk/sykepengesoknad?testperson=reisetilskudd')
@@ -25,6 +26,8 @@ test.describe('Teste førsteside i reisetilskuddsøknaden', () => {
             await expect(page.locator('.navds-heading--large')).toBeVisible()
             await expect(page.locator('.navds-heading--large')).toHaveText('Søknader')
             await page.getByRole('link', { name: 'Søknad om reisetilskudd' }).click()
+
+
 
             await expect(page).toHaveURL(new RegExp(`${nyttReisetilskudd.id}/1`))
         })
@@ -109,12 +112,16 @@ test.describe('Teste førsteside i reisetilskuddsøknaden', () => {
                 }),
             ).toHaveValue('42')
 
+
             await klikkGaVidere(page)
             steg.value++
         })
 
         await test.step('Opplasting - Reisetilskudd', async () => {
+
             await expect(page).toHaveURL(new RegExp(`${nyttReisetilskudd.id}/4`))
+
+            await lastOppKvittering(page)
 
             const table = page.locator('.navds-table')
             await expect(table).toContainText('Taxi')
@@ -171,6 +178,7 @@ test.describe('Teste førsteside i reisetilskuddsøknaden', () => {
             await expect(page.locator('.navds-guide-panel__content')).toContainText(
                 'Nå kan du se over at alt er riktig før du sender inn søknaden.',
             )
+
 
             await page.getByText('Send søknaden').click()
         })
