@@ -17,7 +17,7 @@ test.describe('Sjekker at søknader med gammel oppsummering ser ok ut', () => {
             await expect(heading).toBeVisible()
 
             // Click on the søknad link - we'll need to find the specific soknad ID from the mock data
-            await page.locator('a[href*="soknader/"]').first().click()
+            // await page.locator('a[href*="soknader/"]').first().click() .. you do not need to click twice
 
             await trykkPaSoknadMedId(page, arbeidtakerMedGammelOppsummering().id)
         })
