@@ -84,7 +84,7 @@ test.describe('Tester feilmeldinger i reisetilskudd', () => {
         await page.locator('input[name=belop_input]').fill('99')
         await page.locator('.navds-modal').getByText('Bekreft').click()
         await expect(
-            page.locator('[data-cy="opplasting-form"]').getByText('Beløp kan ikke være större enn 10 000'),
+            page.locator('[data-cy="opplasting-form"]').getByText('Beløp kan ikke være større enn 10 000'),
         ).toBeHidden()
     })
 
