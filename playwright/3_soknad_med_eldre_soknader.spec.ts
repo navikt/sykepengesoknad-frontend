@@ -15,7 +15,6 @@ test.describe('Eldre søknader', () => {
         })
 
         test('Viser advarsel om at det finnes eldre søknad', async ({ page }) => {
-            // Repeat navigation to reach this state
             await expect(page.locator('.navds-heading--large')).toBeVisible()
             await expect(page.locator('.navds-heading--large')).toHaveText('Søknader')
             await page.locator(`a[href*="e6e53c43-3b64-48be-b9d1-39d95198e528"]`).click()
@@ -30,7 +29,6 @@ test.describe('Eldre søknader', () => {
         })
 
         test('Vi ender på den eldste søknaden', async ({ page }) => {
-            // Repeat navigation to reach this state
             await expect(page.locator('.navds-heading--large')).toBeVisible()
             await expect(page.locator('.navds-heading--large')).toHaveText('Søknader')
             await page.locator(`a[href*="e6e53c43-3b64-48be-b9d1-39d95198e528"]`).click()
@@ -52,7 +50,6 @@ test.describe('Eldre søknader', () => {
         })
 
         test('Viser advarsel om at det finnes eldre søknader', async ({ page }) => {
-            // Repeat navigation to reach this state
             await expect(page.locator('.navds-heading--large')).toBeVisible()
             await expect(page.locator('.navds-heading--large')).toHaveText('Søknader')
             await page.locator(`a[href*="e6e53c43-3b64-48be-b9d1-39d95198e521"]`).click()
@@ -67,7 +64,6 @@ test.describe('Eldre søknader', () => {
         })
 
         test('Vi ender på den eldste søknaden', async ({ page }) => {
-            // Repeat navigation to reach this state
             await expect(page.locator('.navds-heading--large')).toBeVisible()
             await expect(page.locator('.navds-heading--large')).toHaveText('Søknader')
             await page.locator(`a[href*="e6e53c43-3b64-48be-b9d1-39d95198e521"]`).click()
@@ -77,7 +73,6 @@ test.describe('Eldre søknader', () => {
         })
 
         test('Vi har lenke til neste søknad', async ({ page }) => {
-            // Repeat navigation and fill out first søknad to reach this state
             await expect(page.locator('.navds-heading--large')).toBeVisible()
             await expect(page.locator('.navds-heading--large')).toHaveText('Søknader')
             await page.locator(`a[href*="e6e53c43-3b64-48be-b9d1-39d95198e521"]`).click()
@@ -89,7 +84,6 @@ test.describe('Eldre søknader', () => {
         })
 
         test('Vi har lenke til neste søknad (second)', async ({ page }) => {
-            // Repeat navigation and fill out first two søknader to reach this state
             await expect(page.locator('.navds-heading--large')).toBeVisible()
             await expect(page.locator('.navds-heading--large')).toHaveText('Søknader')
             await page.locator(`a[href*="e6e53c43-3b64-48be-b9d1-39d95198e521"]`).click()
@@ -103,7 +97,6 @@ test.describe('Eldre søknader', () => {
         })
 
         test('Siden har en Ferdig-knapp', async ({ page }) => {
-            // Repeat navigation and fill out all three søknader to reach this state
             await expect(page.locator('.navds-heading--large')).toBeVisible()
             await expect(page.locator('.navds-heading--large')).toHaveText('Søknader')
             await page.locator(`a[href*="e6e53c43-3b64-48be-b9d1-39d95198e521"]`).click()
