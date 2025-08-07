@@ -1,6 +1,7 @@
 import { test, expect } from '@playwright/test'
 
-import { setPeriodeFraTil, sporsmalOgSvar, fjernAnimasjoner, svarTekstboks } from './utilities'
+import { setPeriodeFraTil, sporsmalOgSvar, fjernAnimasjoner, svarTekstboks, trykkPaSoknadMedId } from './utilities'
+import { arbeidtakerMedGammelOppsummering } from '../src/data/mock/data/soknad/arbeidstaker'
 
 test.describe('Sjekker at søknader med gammel oppsummering ser ok ut', () => {
     test('Full søknadsflyt med gammel oppsummering', async ({ page }) => {
@@ -16,6 +17,8 @@ test.describe('Sjekker at søknader med gammel oppsummering ser ok ut', () => {
 
             // Click on the søknad link - we'll need to find the specific soknad ID from the mock data
             await page.locator('a[href*="soknader/"]').first().click()
+
+            await trykkPaSoknadMedId(page, arbeidtakerMedGammelOppsummering().id)
         })
 
         await test.step('Søknad ANSVARSERKLARING', async () => {
@@ -143,8 +146,6 @@ test.describe('Sjekker at søknader med gammel oppsummering ser ok ut', () => {
                 ),
             ).toBeVisible()
             await expect(page.getByText('Antall timer du skrev inn, betyr at du har jobbet')).toBeHidden()
-            // Svarer timer
-            // await page
             //     .locator('.undersporsmal .navds-text-field__input#6cc620d8-d4b0-3e82-a038-2757df6fc311')
 
             //     .fill('21')
@@ -248,22 +249,12 @@ test.describe('Sjekker at søknader med gammel oppsummering ser ok ut', () => {
             //kan trykke på forrige steg knapp øverst
             const forrigeStegLink = page.getByText('Forrige steg')
             await expect(forrigeStegLink).toHaveAttribute('href', /\/soknader\/.*\/7\?testperson=gammel-oppsummering/)
-            // await forrigeStegLink.click()
-            // get button with the text Tilbake and click it
             await page.getByRole('button', { name: 'Tilbake' }).click()
-            // await klikkGaVidere(page)
             // forventer forrige overskrift skal dukke opp
             await expect(page.getByRole('heading', { name: 'Reise utenfor EU/EØS' })).toBeVisible()
             await expect(page.getByRole('button', { name: 'Gå videre' })).toBeVisible()
             await page.getByRole('button', { name: 'Gå videre' }).click()
 
-            //Trykker på Endre svar og havner på første spørsmål
-            // await expect(page.getByRole('button', { name: 'Gå videre' })).toBeVisible()
-            // await page.getByRole('button', { name: 'Gå videre' }).click()
-            // await page.getByText('Ikke her').click()
-
-            // await this text showing up on the page  Oppsummering fra søknaden
-            // await page.getByRole('heading', {name: 'Oppsummering fra søknaden'}).isVisible()
             await page.getByText('Søknaden sendes til NAV').isVisible()
             await page.getByRole('link', { name: 'Endre svar' }).click()
 
