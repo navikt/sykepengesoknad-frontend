@@ -18,7 +18,7 @@ async function checkViStolerPaDeg(page, gaVidere = true) {
 }
 
 async function klikkGaVidere(page, forventFeil = false, skipFocusCheck = false) {
-    const currentUrl = page.url()
+    const currentUrl = await page.url()
     const currentPathParam = parseInt(currentUrl.split('/').pop()!, 10)
 
     await page.getByRole('button', { name: 'Gå videre' }).click()
@@ -26,7 +26,7 @@ async function klikkGaVidere(page, forventFeil = false, skipFocusCheck = false) 
 
     await expect(page).not.toHaveURL(currentUrl)
 
-    const newUrl = page.url()
+    const newUrl = await page.url()
     const newPathParam = parseInt(newUrl.split('/').pop()!, 10)
     expect(newPathParam).toEqual(currentPathParam + 1)
 
@@ -38,14 +38,14 @@ async function klikkGaVidere(page, forventFeil = false, skipFocusCheck = false) 
 }
 
 async function klikkTilbake(page) {
-    const currentUrl = page.url()
+    const currentUrl = await page.url()
     const currentPathParam = parseInt(currentUrl.split('/').pop()!, 10)
 
     await page.getByRole('button', { name: 'Tilbake' }).click()
 
     await expect(page).not.toHaveURL(currentUrl)
 
-    const newUrl = page.url()
+    const newUrl = await page.url()
     const newPathParam = parseInt(newUrl.split('/').pop()!, 10)
     expect(newPathParam).toEqual(currentPathParam - 1)
 
