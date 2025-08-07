@@ -271,19 +271,13 @@ test.describe('Tester støtte for gamle spørsmål', () => {
         await test.step('35: UTDANNING', async () => {
             await svarJaHovedsporsmal(page)
 
-            // Wait for the date field to be visible
             await page.waitForSelector('.navds-date__field-button', { state: 'visible' })
 
-            // Click the date picker button to open the calendar
             await page.locator('.navds-date__field-button').click()
 
-            // Wait for the calendar to open
-            // await page.waitForSelector('.rdp-day', { state: 'visible' })
 
-            // Select day 10 from the calendar
             await velgDato(page, 10)
 
-            // Answer the follow-up question about full-time study
             await svarRadio(page, 'Er utdanningen et fulltidsstudium?', 'JA')
 
             await gaVidere(page, steg)
@@ -356,7 +350,6 @@ test.describe('Tester støtte for gamle spørsmål', () => {
             await svarFritekst(page, 'Telefonnummer', '81549300')
 
             await page.waitForSelector('.navds-date__field-button', { state: 'visible' })
-            // Click the date picker button to open the calendar
             await page.locator('.navds-date__field-button').click()
 
             // Hvor lenge skal denne adressen brukes?
@@ -441,18 +434,12 @@ test.describe('Tester støtte for gamle spørsmål', () => {
                 'Hvor mye har du tjent i perioden 20. – 24. april 2020?',
                 '25000 kroner før skatt',
             )
-            // await klikkGaVidere(page)
             await page.getByRole('button', { name: 'Send søknaden' }).click()
         })
 
         await test.step('57: Søknad kvittering', async () => {
             await expect(page.getByRole('heading', { name: 'Søknaden er sendt' })).toBeVisible()
-            // test.setTimeout(60000); // 1 minute just for this step
-
-            // wait for 30 seconds
-            //   await expect(page.getByRole('heading', { name: 'Søknaden er sendt' })).toBeVisible()
-            // await expect(page.url()).toContain('kvittering')
-            // await page.getByRole('button', { name: 'Send søknaden' }).click()
+        
 
             const kvitteringSection = page.locator('[data-cy="kvittering"]')
             await expect(kvitteringSection).toContainText('Hva skjer videre?')
