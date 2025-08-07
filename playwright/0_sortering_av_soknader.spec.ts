@@ -87,7 +87,7 @@ test.describe('Tester sortering av søknader', () => {
 
     test('Sorter etter Sendt', async ({ page }) => {
         await page.locator('select').selectOption('Sendt')
-        await expect(page.locator('select')).toContainText('Sendt')
+        await expect(page.locator('select')).toHaveValue('Sendt')
 
         await expect(page.locator('[data-cy="Tidligere søknader"] .navds-link-panel').nth(0)).toContainText(
             '27. mai – 11. juni 2020',
@@ -101,7 +101,7 @@ test.describe('Tester sortering av søknader', () => {
 
         let forrigeSoknad = soknader[0]
         for (const sok of soknader) {
-            expect(senesteSendtDato(sok)).toBeLessThanOrEqual(senesteSendtDato(forrigeSoknad))
+            expect(senesteSendtDato(forrigeSoknad)).toBeGreaterThanOrEqual(senesteSendtDato(sok))
             forrigeSoknad = sok
         }
     })
