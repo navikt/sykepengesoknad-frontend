@@ -275,7 +275,6 @@ test.describe('Tester støtte for gamle spørsmål', () => {
 
             await page.locator('.navds-date__field-button').click()
 
-
             await velgDato(page, 10)
 
             await svarRadio(page, 'Er utdanningen et fulltidsstudium?', 'JA')
@@ -439,7 +438,6 @@ test.describe('Tester støtte for gamle spørsmål', () => {
 
         await test.step('57: Søknad kvittering', async () => {
             await expect(page.getByRole('heading', { name: 'Søknaden er sendt' })).toBeVisible()
-        
 
             const kvitteringSection = page.locator('[data-cy="kvittering"]')
             await expect(kvitteringSection).toContainText('Hva skjer videre?')

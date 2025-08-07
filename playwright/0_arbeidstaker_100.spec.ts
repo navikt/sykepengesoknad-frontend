@@ -32,7 +32,6 @@ test.describe('Tester arbeidstakersøknad - 100%', () => {
         })
 
         await test.step('Søknad ANSVARSERKLARING', async () => {
- 
             await expect(page.getByRole('heading', { name: 'Før du søker' })).toBeVisible()
             await expect(page).toHaveURL(new RegExp(`.*${soknadId}\\/1`))
 

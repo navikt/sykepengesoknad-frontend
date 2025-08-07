@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test'
+
 import { svarNeiHovedsporsmal, klikkGaVidere } from './utilities'
 
 test.describe('Eldre søknader', () => {
@@ -13,9 +14,9 @@ test.describe('Eldre søknader', () => {
 
         await test.step('Vis advarsel om eldre søknad og klikk videre', async () => {
             await expect(page).toHaveURL(/e6e53c43-3b64-48be-b9d1-39d95198e528\/1/)
-            await expect(page.getByText(
-                'Du har en eldre søknad du må velge om du skal bruke, før du kan begynne på denne.'
-            )).toBeVisible()
+            await expect(
+                page.getByText('Du har en eldre søknad du må velge om du skal bruke, før du kan begynne på denne.'),
+            ).toBeVisible()
             await page.getByText('Gå til eldste søknad').click()
         })
 
@@ -34,9 +35,9 @@ test.describe('Eldre søknader', () => {
 
         await test.step('Vis advarsel om to eldre søknader og klikk videre', async () => {
             await expect(page).toHaveURL(/e6e53c43-3b64-48be-b9d1-39d95198e521\/1/)
-            await expect(page.getByText(
-                'Du har to eldre søknader du må velge om du skal bruke, før du kan begynne på denne.'
-            )).toBeVisible()
+            await expect(
+                page.getByText('Du har to eldre søknader du må velge om du skal bruke, før du kan begynne på denne.'),
+            ).toBeVisible()
             await page.getByText('Gå til eldste søknad').click()
         })
 
