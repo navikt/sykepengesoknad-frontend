@@ -20,7 +20,7 @@ test.describe('Tester cummulative-layout-shift', () => {
         expect(mainHoyde).toBe(hoyde)
     }
 
-    // TODO må teste main høyde i de ulike tilstandene
+    // TODO må teste main høyde i de ulike tilstandene, har ikke fått det til å virke i playwright slik det gjorde i cypress
 
     test('Høyden endres ikke i happy case i listevisninga etter at dataene er lastet', async ({ page }) => {
         await page.goto('/syk/sykepengesoknad?testperson=cummulative-layout-shift')
