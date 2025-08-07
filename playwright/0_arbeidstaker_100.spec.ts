@@ -27,13 +27,6 @@ test.describe('Tester arbeidstakersøknad - 100%', () => {
         // const soknadId = 'faba11f5-c4f2-4647-8c8a-58b28ce2f3ef'
 
         await test.step('Laster startside', async () => {
-            // // await page.waitForLoadState('load')
-            // await expect(page.locator('.navds-heading--large')).toBeVisible()
-            // await expect(page.locator('.navds-heading--large')).toHaveText('Søknader')
-            // await expect(page.getByRole('link', {name: "Søknad om sykepenger"})).toBeVisible()
-            // await page.getByRole('link', {name: "Søknad om sykepenger"}).click
-            // // await page.locator(`a[href*="${soknadId}"]`).click()
-
             await harSoknaderlisteHeading(page)
             await trykkPaSoknadMedId(page, soknadId)
         })

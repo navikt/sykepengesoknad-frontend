@@ -1,5 +1,5 @@
 import { test, expect, Page } from '@playwright/test'
-
+import { arbeidstakerGradert } from '../src/data/mock/data/soknad/arbeidstaker-gradert'
 const fillTextFieldByLabel = async (page: Page, labelText: string, value: string, fallbackSelector?: string) => {
     try {
         await page.getByLabel(labelText).fill(value)
@@ -27,14 +27,14 @@ test.describe('Tester arbeidstakersøknad - gradert 50%', () => {
     test('Full søknadsflyt', async ({ page }) => {
         await page.goto('/syk/sykepengesoknad?testperson=arbeidstaker-gradert')
 
-        const soknadId = '5b769c04-e171-47c9-b79b-23ab8fce331e'
+        const soknadId = arbeidstakerGradert.id
 
         await test.step('Laster startside', async () => {
             await page.waitForLoadState('load')
 
             await expect(page.locator('.navds-heading--large')).toBeVisible()
             await expect(page.locator('.navds-heading--large')).toHaveText('Søknader')
-            await page.locator('a[href*="5b769c04-e171-47c9-b79b-23ab8fce331e"]').click() 
+            await page.locator(`a[href*="${soknadId}"]`).click() 
         })
 
         await test.step('Søknad ANSVARSERKLARING', async () => {
@@ -70,7 +70,6 @@ test.describe('Tester arbeidstakersøknad - gradert 50%', () => {
             await expect(page).toHaveURL(new RegExp(`.*${soknadId}\\/3`))
             await page.locator('[data-cy="ja-nei-stor"] input[value="JA"]').click()
             await expect(page.locator('text=Når tok du ut feriedager?')).toBeVisible()
-            // Set period from 16th to 23rd
             await setPeriodeFraTil(page, 16, 23)
             await page.locator('button').filter({ hasText: 'Gå videre' }).click()
         })
@@ -79,7 +78,6 @@ test.describe('Tester arbeidstakersøknad - gradert 50%', () => {
             await expect(page).toHaveURL(new RegExp(`.*${soknadId}\\/4`))
             await page.locator('[data-cy="ja-nei-stor"] input[value="JA"]').click()
             await expect(page.locator('text=Når tok du permisjon?')).toBeVisible()
-            // Set period from 14th to 22nd
             await setPeriodeFraTil(page, 14, 22)
             await page.locator('button').filter({ hasText: 'Gå videre' }).click()
         })
