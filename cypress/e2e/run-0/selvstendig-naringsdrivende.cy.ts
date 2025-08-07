@@ -75,8 +75,8 @@ describe('Tester selvstendig naringsdrivende søknad uten data fra Sigrun', () =
     })
 
     it('Viser ikke FlexJar Survey', () => {
-        cy.url().should('include', 'visSurvey=true')
-        modalIkkeAktiv()
+            cy.url().should('include', 'visSurvey=true')
+            modalIkkeAktiv()
     })
 
     tilSlutt()

@@ -11,7 +11,7 @@ test.describe('Test sletting av kvittering som feiler', () => {
 
     test('Full flyt - sletting av kvittering som feiler', async ({ page }) => {
         await test.step('URL er riktig', async () => {
-            expect(page.url()).toContain(`/syk/sykepengesoknad/soknader/${soknadId}/4`)
+            await expect(page).toHaveURL(new RegExp(`/syk/sykepengesoknad/soknader/${soknadId}/4`));    
             await expect(page.locator('h2[data-cy="sporsmal-tittel"]')).toBeVisible()
             await expect(page.locator('h2[data-cy="sporsmal-tittel"]')).toHaveText('Kvitteringer')
         })
@@ -24,7 +24,7 @@ test.describe('Test sletting av kvittering som feiler', () => {
 
             // Upload file
             const fileInput = page.locator('[data-cy="filopplasteren"] input[type=file]')
-            const filePath = path.join(__dirname, '..', 'cypress', 'fixtures', 'kvittering.jpg')
+            const filePath = path.join(__dirname, 'fixtures', 'kvittering.jpg')
             await fileInput.setInputFiles(filePath)
 
             await page.getByRole('button', { name: 'Bekreft' }).click()

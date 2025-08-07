@@ -7,6 +7,7 @@ import {
     sporsmalOgSvar,
     svarNeiHovedsporsmal,
     sjekkMainContentFokus,
+    modalIkkeAktiv,
 } from './utilities'
 
 // New utilities implemented for missing Cypress equivalents
@@ -43,13 +44,7 @@ export async function svarRadioSporsmal(page: Page, question: string, answer: st
     await svarRadioGruppe(page, question, answer)
 }
 
-// Existing utilities (as provided; assuming they are imported or defined elsewhere, but included here for completeness)
-// Adjust import as needed: import { checkViStolerPaDeg, modalAktiv, avbryterSoknad, harSynligTekst } from './utilities';
-// The full list from the message is incorporated where relevant.
 
-// ... (all other provided utilities like checkViStolerPaDeg, svarNeiHovedsporsmal, etc., are assumed available)
-
-// Now, the rewritten Playwright tests
 
 test.describe('Tester selvstendig naringsdrivende søknad med data fra Sigrun', () => {
     test.beforeEach(async ({ page }) => {
@@ -133,22 +128,12 @@ test.describe('Tester selvstendig naringsdrivende søknad uten data fra Sigrun',
         await klikkGaVidere(page, true)
 
         await tilSlutt(page)
+        
+        await expect(page).toHaveURL(/visSurvey=true/)
+        await modalIkkeAktiv(page)
+        
         await kvitteringen(page)
     })
-
-    // test('Viser ikke FlexJar Survey', async ({ page }) => {
-    //     console.log(page.url());
-    //     await expect(page).toHaveURL(/visSurvey=true/);
-    //     await modalIkkeAktiv(page);
-    // });
-
-    // test('Til slutt', async ({ page }) => {
-    //     await tilSlutt(page);
-    // });
-
-    // test('Kvittering', async ({ page }) => {
-    //     await kvitteringen(page);
-    // });
 })
 
 async function fellesInnholdFørVisningAvSigrunData(page: Page) {
