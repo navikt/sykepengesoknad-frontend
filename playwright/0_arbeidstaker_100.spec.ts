@@ -32,8 +32,7 @@ test.describe('Tester arbeidstakersøknad - 100%', () => {
         })
 
         await test.step('Søknad ANSVARSERKLARING', async () => {
-            // await page.waitForLoadState('load')
-
+ 
             await expect(page.getByRole('heading', { name: 'Før du søker' })).toBeVisible()
             await expect(page).toHaveURL(new RegExp(`.*${soknadId}\\/1`))
 
@@ -138,7 +137,6 @@ test.describe('Tester arbeidstakersøknad - 100%', () => {
                     'Oppgi hvor mange prosent av din normale arbeidstid du jobbet hos Posten Norge AS, Bærum i perioden 1. - 24. april 2020?',
                 ),
             ).toBeVisible()
-            // await page.locator('.undersporsmal .navds-text-field__input#796cf7ed-8a7e-39de-9cbc-6e789aa5af3f').fill('21')
 
             // Switch to timer
             await page.locator('.undersporsmal input[value="Timer"]').click()
@@ -149,7 +147,6 @@ test.describe('Tester arbeidstakersøknad - 100%', () => {
             ).toBeVisible()
             await expect(page.getByText('Antall timer du skrev inn, betyr at du har jobbet')).toBeHidden()
 
-            // await page.locator('.undersporsmal .navds-text-field__input#6cc620d8-d4b0-3e82-a038-2757df6fc311').fill('21')
             await svarFritekst(
                 page,
                 'Oppgi totalt antall timer du jobbet i perioden 1. - 24. april 2020 hos Posten Norge AS, Bærum',
