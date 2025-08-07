@@ -9,16 +9,16 @@ test.describe('Tester cummulative-layout-shift', () => {
         await expect(page.getByRole('heading', { name: text, level })).toBeVisible({ timeout: 10000 })
     }
 
-    async function mainSkalHaHoyde(page: Page, hoyde: number) {
-        const main = page.locator('main')
-        await expect(main).toBeVisible()
+    // async function mainSkalHaHoyde(page: Page, hoyde: number) {
+    //     const main = page.locator('main')
+    //     await expect(main).toBeVisible()
 
-        // Evaluate height via computed style, like Cypress does
-        const mainHoyde = await main.evaluate((el) => {
-            return parseInt(window.getComputedStyle(el).height, 10)
-        })
-        expect(mainHoyde).toBe(hoyde)
-    }
+    //     // Evaluate height via computed style, like Cypress does
+    //     const mainHoyde = await main.evaluate((el) => {
+    //         return parseInt(window.getComputedStyle(el).height, 10)
+    //     })
+    //     expect(mainHoyde).toBe(hoyde)
+    // }
 
     // TODO må teste main høyde i de ulike tilstandene, har ikke fått det til å virke i playwright slik det gjorde i cypress
 
