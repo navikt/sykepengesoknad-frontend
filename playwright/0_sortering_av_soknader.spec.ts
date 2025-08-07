@@ -45,10 +45,10 @@ test.describe('Tester sortering av søknader', () => {
         const soknader = await articleTilSoknad(articles)
 
         let forrigeSoknad = soknader[0]
-        soknader.forEach((sok: Soknad) => {
+        for (const sok of soknader) {
             expect(getFomFraSoknad(forrigeSoknad).getTime()).toBeLessThanOrEqual(getFomFraSoknad(sok).getTime())
             forrigeSoknad = sok
-        })
+        }
     })
 
     test('Sorter etter Status', async ({ page }) => {
@@ -58,10 +58,10 @@ test.describe('Tester sortering av søknader', () => {
         const soknader = await articleTilSoknad(articles)
 
         let forrigeSoknad = soknader[0]
-        soknader.forEach((sok: Soknad) => {
+        for (const sok of soknader) {
             expect(forrigeSoknad.status <= sok.status).toBe(true)
             forrigeSoknad = sok
-        })
+        }
     })
 
     test('Sorter etter Dato', async ({ page }) => {
@@ -71,12 +71,12 @@ test.describe('Tester sortering av søknader', () => {
         const soknader = await articleTilSoknad(articles)
 
         let forrigeSoknad = soknader[0]
-        soknader.forEach((sok: Soknad) => {
+        for (const sok of soknader) {
             expect(getFomFraSoknad(forrigeSoknad).getTime()).toBeGreaterThanOrEqual(getFomFraSoknad(sok).getTime())
             forrigeSoknad = sok
-        })
+        }
 
-        await expect(page.locator('select')).toContainText('Dato')
+        await expect(page.locator('select')).toHaveValue('Dato')
         await expect(page.locator('[data-cy="Tidligere søknader"] .navds-link-panel').nth(0)).toContainText(
             '27. mai – 11. juni 2020',
         )
@@ -100,9 +100,9 @@ test.describe('Tester sortering av søknader', () => {
         const soknader = await articleTilSoknad(articles)
 
         let forrigeSoknad = soknader[0]
-        soknader.forEach((sok: Soknad) => {
+        for (const sok of soknader) {
             expect(senesteSendtDato(sok)).toBeLessThanOrEqual(senesteSendtDato(forrigeSoknad))
             forrigeSoknad = sok
-        })
+        }
     })
 })

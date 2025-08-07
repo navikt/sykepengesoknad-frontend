@@ -52,8 +52,8 @@ test.describe('Tester yrkesskadesspørsmål', () => {
         ]
 
         // Check each list item contains the expected text
-        for (let i = 0; i < expectedTexts.length; i++) {
-            await expect(listItems.nth(i)).toContainText(expectedTexts[i])
+        for (const [i, text] of expectedTexts.entries()) {
+            await expect(listItems.nth(i)).toContainText(text)
             await expect(listItems.nth(i)).toBeVisible()
         }
 
