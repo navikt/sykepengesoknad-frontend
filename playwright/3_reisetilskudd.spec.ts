@@ -10,11 +10,9 @@ import {
     svarFritekst,
     hentFritekst,
     svarRadioClickOption,
-    // Add any other needed utilities here
 } from './utilities'
 
 test.describe('Teste førsteside i reisetilskuddsøknaden', () => {
-    test.setTimeout(180 * 1000) // Increased timeout to 3 minutes for slow navigation
     test.beforeEach(async ({ page }) => {
         await page.context().clearCookies()
         await page.goto('/syk/sykepengesoknad?testperson=reisetilskudd')
@@ -28,11 +26,8 @@ test.describe('Teste førsteside i reisetilskuddsøknaden', () => {
             await expect(page.locator('.navds-heading--large')).toHaveText('Søknader')
             await page.getByRole('link', { name: 'Søknad om reisetilskudd' }).click()
 
-            // await expect(page.getByRole('link', { name: /Søknad om reisetilskudd/ }).filter({ hasText: nyttReisetilskudd.id })).toContainText('Søknad om reisetilskudd');
 
-            // await expect(page.getByRole('link', { name: /Søknad om reisetilskudd/ })).click();
 
-            //       await page.getByRole('link', { name: /Søknad om reisetilskudd/ }).filter({ hasText: nyttReisetilskudd.id }).click();
             await expect(page).toHaveURL(new RegExp(`${nyttReisetilskudd.id}/1`))
         })
 
@@ -41,8 +36,6 @@ test.describe('Teste førsteside i reisetilskuddsøknaden', () => {
 
             await page.locator('[data-cy="om-reisetilskudd"]').click()
             await expect(page.locator('.navds-label').filter({ hasText: 'Hva dekker reisetilskuddet' })).toBeVisible()
-            // await expect(page.locator('.navds-body-long').filter({ hasText: "Reisetilskuddet dekker nødvendige ekstra reiseutgifter" })).toBeVisible();
-            // await page.getByRole('link', { name: "Søknad om reisetilskudd" }).click();
             await expect(
                 page
                     .locator('p.navds-body-long')
@@ -65,18 +58,14 @@ test.describe('Teste førsteside i reisetilskuddsøknaden', () => {
             await expect(page.locator('[data-cy="sporsmal-tittel"]')).toHaveText('Før du fikk sykmelding')
 
             await page.locator('[data-cy="ja-nei-stor"] input[value=JA]').click()
-            // await page.locator('input[type=checkbox]#1566426').click();
             velgCheckbox(page, 'Offentlig transport')
             await expect(
                 page.getByText('Hvor mye betaler du vanligvis i måneden for offentlig transport?'),
             ).toBeVisible()
-            // await page.locator('#1566427').fill('1000');
             svarFritekst(page, 'Hvor mye betaler du vanligvis i måneden for offentlig transport?', '1000')
-            // await expect(page.locator('#1566427')).toHaveValue('1000');
             await klikkGaVidere(page)
 
             await klikkTilbake(page)
-            // await expect(page.locator('#1566427')).toHaveValue('1000');
             const fritekstValue = await hentFritekst(
                 page,
                 'Hvor mye betaler du vanligvis i måneden for offentlig transport?',
@@ -103,22 +92,16 @@ test.describe('Teste førsteside i reisetilskuddsøknaden', () => {
             await page.locator('[aria-label="tirsdag 5"]').click()
             await page.locator('[aria-label="onsdag 6"]').click()
 
-            // Verify that dates are selected
             await expect(page.locator('[aria-label="mandag 4"]')).toHaveAttribute('aria-pressed', 'true')
             await expect(page.locator('[aria-label="tirsdag 5"]')).toHaveAttribute('aria-pressed', 'true')
             await expect(page.locator('[aria-label="onsdag 6"]')).toHaveAttribute('aria-pressed', 'true')
 
-            // await page.locator('input[type=radio]#1566446_0').click();
             await svarRadioClickOption(page, 'Hadde du utgifter til bompenger?', 'Ja')
             await svarFritekst(page, 'Hvor mye betalte du i bompenger mellom hjemmet ditt og jobben?', '1000')
-            // await page.locator('#1566447').fill('1000');
-            // await page.locator('#1566448').fill('42');
             await svarFritekst(page, 'Hvor mange kilometer er kjøreturen mellom hjemmet ditt og jobben én vei?', '42')
 
-            // Wait and verify all required fields are filled before proceeding
             await page.waitForTimeout(2000)
 
-            // Verify all required fields are filled before navigation
             await expect(
                 page.getByRole('textbox', { name: 'Hvor mye betalte du i bompenger mellom hjemmet ditt og jobben?' }),
             ).toHaveValue('1000')
@@ -128,36 +111,18 @@ test.describe('Teste førsteside i reisetilskuddsøknaden', () => {
                 }),
             ).toHaveValue('42')
 
-            // await klikkGaVidere(page)
 
-            // // Wait for navigation to complete with longer timeout
-            // await expect(page).toHaveURL(new RegExp(`${nyttReisetilskudd.id}/4`), { timeout: 10000 })
 
-            // await klikkTilbake(page)
-            // await klikkTilbake(page)
-            // //   await expect(page.locator('[aria-label="mandag 4"]')).toHaveClass(/rdp-day_selected/);
-            // //   await expect(page.locator('[aria-label="tirsdag 5"]')).toHaveClass(/rdp-day_selected/);
-            // //   await expect(page.locator('[aria-label="onsdag 6"]')).toHaveClass(/rdp-day_selected/);
-            // //   await expect(page.locator('[aria-label="torsdag 7"]')).not.toHaveClass(/rdp-day_selected/);
 
-            // // await expect(page.locator('#1566447')).toHaveValue('1000');
 
-            // const fritekstValue = await hentFritekst(
-            //     page,
-            //     'Hvor mye betaler du vanligvis i måneden for offentlig transport?',
-            // )
-            // expect(fritekstValue).toBe('1000')
             await klikkGaVidere(page)
             steg.value++
         })
 
         await test.step('Opplasting - Reisetilskudd', async () => {
-            // await expect(page.getByText('Legg til reiseutgift')).toBeVisible();
 
             await expect(page).toHaveURL(new RegExp(`${nyttReisetilskudd.id}/4`))
-            // await expect(page.getByText('Du må laste opp kvittering')).toBeVisible();
 
-            await lastOppKvittering(page) // Using provided utility for uploading taxi kvittering
 
             const table = page.locator('.navds-table')
             await expect(table).toContainText('Taxi')
@@ -215,25 +180,8 @@ test.describe('Teste førsteside i reisetilskuddsøknaden', () => {
                 'Nå kan du se over at alt er riktig før du sender inn søknaden.',
             )
 
-            //   const oppsummering = page.locator('[data-cy="oppsummering-fra-søknaden"]');
-            //   const q1 = await sporsmalOgSvar(oppsummering, 'Brukte du bil eller offentlig transport til og fra jobben før du ble sykmeldt?', 'Ja');
-            //   const subQ1 = q1.locator('..');
-            //   await sporsmalOgSvar(subQ1, 'Hva slags type transport brukte du?', 'Offentlig transport');
-            //   const subSubQ1 = subQ1.locator('..');
-            //   await sporsmalOgSvar(subSubQ1, 'Hvor mye betaler du vanligvis i måneden for offentlig transport?', '1000 kroner');
 
-            //   const q2 = await sporsmalOgSvar(oppsummering, 'Reiste du med egen bil, leiebil eller kollega til jobben mellom 23. desember 2020 - 7. januar 2021?', 'Ja');
-            //   const subQ2 = q2.locator('..');
-            //   await sporsmalOgSvar(subQ2, 'Hvilke dager reiste du med bil i perioden 23. desember 2020 - 7. januar 2021?', '04.01.2021');
-            //   await expect(subQ2).toContainText('05.01.2021');
-            //   await expect(subQ2).toContainText('06.01.2021');
-            //   await sporsmalOgSvar(subQ2, 'Hadde du utgifter til bompenger?', 'Ja');
-            //   const subSubQ2 = subQ2.locator('..');
-            //   await sporsmalOgSvar(subSubQ2, 'Hvor mye betalte du i bompenger mellom hjemmet ditt og jobben?', '1000 kroner');
-            //   await sporsmalOgSvar(subQ2, 'Hvor mange kilometer er kjøreturen mellom hjemmet ditt og jobben én vei?', '42 kilometer');
 
-            //   await sporsmalOgSvar(oppsummering, 'Last opp kvitteringer for reiser til og fra jobben mellom 1. - 24. april 2020.', 'Du lastet opp 1 kvittering på 99 kr');
-            //   await sporsmalOgSvar(oppsummering, 'Legger arbeidsgiveren din ut for reisene?', 'Ja');
 
             await page.getByText('Send søknaden').click()
         })
