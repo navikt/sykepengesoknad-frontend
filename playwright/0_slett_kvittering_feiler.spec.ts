@@ -11,7 +11,7 @@ test.describe('Test sletting av kvittering som feiler', () => {
 
     test('Full flyt - sletting av kvittering som feiler', async ({ page }) => {
         await test.step('URL er riktig', async () => {
-            await expect(page).toHaveURL(new RegExp(`/syk/sykepengesoknad/soknader/${soknadId}/4`));    
+            await expect(page).toHaveURL(new RegExp(`/syk/sykepengesoknad/soknader/${soknadId}/4`))
             await expect(page.locator('h2[data-cy="sporsmal-tittel"]')).toBeVisible()
             await expect(page.locator('h2[data-cy="sporsmal-tittel"]')).toHaveText('Kvitteringer')
         })

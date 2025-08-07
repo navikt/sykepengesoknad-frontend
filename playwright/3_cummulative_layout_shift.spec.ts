@@ -1,7 +1,6 @@
 import { test, expect, Page } from '@playwright/test'
 
 test.describe('Tester cummulative-layout-shift', () => {
-
     async function ventTilIngenSkeletons(page: Page) {
         await expect(page.locator('.navds-skeleton')).toHaveCount(0, { timeout: 10000 })
     }
@@ -19,7 +18,7 @@ test.describe('Tester cummulative-layout-shift', () => {
             return parseInt(window.getComputedStyle(el).height, 10)
         })
         expect(mainHoyde).toBe(hoyde)
-}
+    }
 
     test('Høyden endres ikke i happy case i listevisninga etter at dataene er lastet', async ({ page }) => {
         await page.goto('/syk/sykepengesoknad?testperson=cummulative-layout-shift')
@@ -39,7 +38,7 @@ test.describe('Tester cummulative-layout-shift', () => {
         await page.goto(
             '/syk/sykepengesoknad/soknader/04247ad5-9c15-4b7d-ae55-f23807777777/3?testperson=cummulative-layout-shift',
         )
-        
+
         await mainSkalHaHoyde(page, 1148)
         await ventPåHeading(page, 'Ferie', 2)
         await ventTilIngenSkeletons(page)

@@ -1,7 +1,8 @@
 import { test, expect } from '@playwright/test'
 
-import { setPeriodeFraTil, sporsmalOgSvar, fjernAnimasjoner, svarTekstboks, trykkPaSoknadMedId } from './utilities'
 import { arbeidtakerMedGammelOppsummering } from '../src/data/mock/data/soknad/arbeidstaker'
+
+import { setPeriodeFraTil, sporsmalOgSvar, fjernAnimasjoner, svarTekstboks, trykkPaSoknadMedId } from './utilities'
 
 test.describe('Sjekker at søknader med gammel oppsummering ser ok ut', () => {
     test('Full søknadsflyt med gammel oppsummering', async ({ page }) => {

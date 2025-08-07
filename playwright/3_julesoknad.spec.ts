@@ -8,7 +8,6 @@ test.describe('Julesøkand med informasjon på introside og kvittering', () => {
     const soknad = julesoknadPerson.soknader[0]
 
     test('Gjennomfører hele søknadsflyten for julesøknad', async ({ page }) => {
-
         await test.step('Laster introside', async () => {
             await page.goto(`/syk/sykepengesoknad/soknader/${soknad.id}/1?testperson=julesoknad`)
             await expect(page.getByRole('heading', { name: 'Søknad om sykepenger' })).toBeVisible()
@@ -27,20 +26,20 @@ test.describe('Julesøkand med informasjon på introside og kvittering', () => {
         })
 
         await test.step('Søknad TILBAKE_I_ARBEID', async () => {
-            expect(page).toHaveURL(new RegExp(`${soknad.id}/2`))
+            await expect(page).toHaveURL(new RegExp(`${soknad.id}/2`))
 
             await page.locator('[data-cy="ja-nei-stor"] input[value="NEI"]').click()
             await klikkGaVidere(page)
         })
 
         await test.step('Søknad TIL_SLUTT (oppsummering)', async () => {
-             expect(page).toHaveURL(new RegExp(`${soknad.id}/3`))
+            await expect(page).toHaveURL(new RegExp(`${soknad.id}/3`))
 
             await page.getByRole('button', { name: 'Send søknaden' }).click()
         })
 
         await test.step('Søknad kvittering - med julesøknad informasjon', async () => {
-             expect(page).toHaveURL(new RegExp(`/kvittering/${soknad.id}`))
+            await expect(page).toHaveURL(new RegExp(`/kvittering/${soknad.id}`))
 
             await expect(page.getByRole('heading', { name: 'Søknaden er sendt' })).toBeVisible()
 

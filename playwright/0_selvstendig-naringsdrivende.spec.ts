@@ -44,8 +44,6 @@ export async function svarRadioSporsmal(page: Page, question: string, answer: st
     await svarRadioGruppe(page, question, answer)
 }
 
-
-
 test.describe('Tester selvstendig naringsdrivende søknad med data fra Sigrun', () => {
     test.beforeEach(async ({ page }) => {
         await page.goto(
@@ -128,10 +126,10 @@ test.describe('Tester selvstendig naringsdrivende søknad uten data fra Sigrun',
         await klikkGaVidere(page, true)
 
         await tilSlutt(page)
-        
+
         await expect(page).toHaveURL(/visSurvey=true/)
         await modalIkkeAktiv(page)
-        
+
         await kvitteringen(page)
     })
 })

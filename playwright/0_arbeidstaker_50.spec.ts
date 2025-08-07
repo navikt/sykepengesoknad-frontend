@@ -1,4 +1,5 @@
 import { test, expect, Page } from '@playwright/test'
+
 import { arbeidstakerGradert } from '../src/data/mock/data/soknad/arbeidstaker-gradert'
 const fillTextFieldByLabel = async (page: Page, labelText: string, value: string, fallbackSelector?: string) => {
     try {
@@ -13,7 +14,6 @@ const fillTextFieldByLabel = async (page: Page, labelText: string, value: string
 }
 
 const setPeriodeFraTil = async (page: Page, fom: number, tom: number, periodeIndex = 0) => {
-
     const periodeComponent = page.locator(`[data-cy="periode"]`).nth(periodeIndex)
 
     await periodeComponent.locator('.navds-date__field-button').nth(0).click()
@@ -34,7 +34,7 @@ test.describe('Tester arbeidstakersøknad - gradert 50%', () => {
 
             await expect(page.locator('.navds-heading--large')).toBeVisible()
             await expect(page.locator('.navds-heading--large')).toHaveText('Søknader')
-            await page.locator(`a[href*="${soknadId}"]`).click() 
+            await page.locator(`a[href*="${soknadId}"]`).click()
         })
 
         await test.step('Søknad ANSVARSERKLARING', async () => {
@@ -42,7 +42,6 @@ test.describe('Tester arbeidstakersøknad - gradert 50%', () => {
             await expect(page.getByRole('heading', { name: 'Før du søker' })).toBeVisible()
 
             await expect(page).toHaveURL(new RegExp(`.*${soknadId}\\/1`))
-       
 
             await page.getByLabel('Jeg bekrefter at jeg vil svare så riktig som jeg kan.').check()
 
@@ -63,7 +62,6 @@ test.describe('Tester arbeidstakersøknad - gradert 50%', () => {
             await page.locator('.navds-date__field-button').click()
             await page.locator('.rdp-day:has-text("20")').click()
             await page.locator('button').filter({ hasText: 'Gå videre' }).click()
-
         })
 
         await test.step('Søknad FERIE_V2', async () => {
@@ -102,21 +100,12 @@ test.describe('Tester arbeidstakersøknad - gradert 50%', () => {
             await expect(page.locator('text=Velg timer eller prosent')).toBeVisible()
 
             await page.locator('.undersporsmal input[value="Prosent"]').click()
-            await fillTextFieldByLabel(
-                page,
-                'Oppgi prosent',
-                '51',
-            )
+            await fillTextFieldByLabel(page, 'Oppgi prosent', '51')
 
             await page.locator('.undersporsmal input[value="Timer"]').click()
 
-            await fillTextFieldByLabel(
-                page,
-                'Oppgi timer totalt',
-                '10.7',
-            )
+            await fillTextFieldByLabel(page, 'Oppgi timer totalt', '10.7')
 
-      
             await page.locator('button').filter({ hasText: 'Gå videre' }).click()
 
             await expect(
@@ -137,11 +126,7 @@ test.describe('Tester arbeidstakersøknad - gradert 50%', () => {
                 ),
             ).toBeVisible()
 
-            await fillTextFieldByLabel(
-                page,
-                'Oppgi timer totalt',
-                '11',
-            )
+            await fillTextFieldByLabel(page, 'Oppgi timer totalt', '11')
 
             await page.locator('button').filter({ hasText: 'Gå videre' }).click()
         })

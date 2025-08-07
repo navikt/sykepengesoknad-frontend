@@ -10,14 +10,13 @@ import {
 } from './utilities'
 
 const arbeidsledig = {
-    id: '934f39f4-cb47-459f-8209-0dbef6d30059'
+    id: '934f39f4-cb47-459f-8209-0dbef6d30059',
 }
 
 test.describe('Tester arbeidsledigsøknad', () => {
     test('Gjennomfører hele søknadsflyten for arbeidsledig søknad', async ({ page }) => {
         // Forberedelser: Fjern animasjoner for stabil testing (valgfritt, men anbefalt for flakiness)
         await fjernAnimasjoner(page)
-
 
         await test.step('Laster startside', async () => {
             // Naviger til startsiden (hvis ikke allerede gjort i et tidligere steg; tilpass om nødvendig)
@@ -84,7 +83,6 @@ test.describe('Tester arbeidsledigsøknad', () => {
                 .getByRole('radio', { name: 'Ja' })
                 .click()
 
-
             await klikkGaVidere(page) // Gå videre
         })
 
@@ -143,7 +141,6 @@ test.describe('Tester arbeidsledigsøknad', () => {
         })
 
         await test.step('Søknad kvittering', async () => {
-    
             await expect(page).toHaveURL(new RegExp(`/kvittering/${arbeidsledig.id}`))
 
             await expect(page.getByRole('heading', { name: 'Søknaden er sendt til NAV' })).toBeVisible()
