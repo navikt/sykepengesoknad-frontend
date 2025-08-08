@@ -100,7 +100,6 @@ describe('Tester arbeidsledigsøknad', () => {
         cy.realPress('Tab')
         cy.focused().contains('Send søknaden').should('have.css', 'box-shadow')
 
-
         cy.realPress('Enter')
         sjekkMainContentFokus()
 
