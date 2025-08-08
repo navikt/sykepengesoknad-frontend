@@ -13,13 +13,11 @@ import {
     sporsmalOgSvar,
 } from './utilities'
 
-// Helper function for selecting date - equivalent to velgDato in Cypress
 async function velgDato(page: any, dato = 10) {
     await page.locator('.navds-date__field-button').first().click()
     await page.locator('.rdp-day').getByText(dato.toString()).first().click()
 }
 
-// Helper function for answering free text questions - equivalent to svarFritekst
 async function svarFritekst(page: any, sporsmal: string, svar: string) {
     await svarTekstboks(page, sporsmal, svar)
 }

@@ -1,4 +1,3 @@
-
 import { test, expect } from '@playwright/test'
 
 import { behandlingsdager } from '../src/data/mock/data/soknad/behandlingsdager'

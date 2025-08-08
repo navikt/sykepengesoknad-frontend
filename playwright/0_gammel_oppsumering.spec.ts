@@ -16,7 +16,6 @@ test.describe('Sjekker at søknader med gammel oppsummering ser ok ut', () => {
             })
             await expect(heading).toBeVisible()
 
-
             await trykkPaSoknadMedId(page, arbeidtakerMedGammelOppsummering().id)
         })
 
@@ -119,7 +118,6 @@ test.describe('Sjekker at søknader med gammel oppsummering ser ok ut', () => {
                 ),
             ).toBeVisible()
 
-      
             await svarTekstboks(
                 page,
                 'Oppgi hvor mange prosent av din normale arbeidstid du jobbet hos Posten Norge AS, Bærum i perioden 1. - 24. april 2020?',
@@ -133,7 +131,6 @@ test.describe('Sjekker at søknader med gammel oppsummering ser ok ut', () => {
                 ),
             ).toBeVisible()
             await expect(page.getByText('Antall timer du skrev inn, betyr at du har jobbet')).toBeHidden()
-    
 
             await svarTekstboks(
                 page,

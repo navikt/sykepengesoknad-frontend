@@ -20,7 +20,6 @@ test.describe('Tester arbeidstakersøknad - 100%', () => {
         await page.goto('/syk/sykepengesoknad')
     })
     test('Full søknadsflyt', async ({ page }) => {
-   
         await test.step('Laster startside', async () => {
             await harSoknaderlisteHeading(page)
             await trykkPaSoknadMedId(page, soknadId)

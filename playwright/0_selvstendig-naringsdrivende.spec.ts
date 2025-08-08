@@ -10,7 +10,6 @@ import {
     modalIkkeAktiv,
 } from './utilities'
 
-
 export async function harFeilISkjemaet(page: Page, errorMessage: string) {
     const errorLocator = page.getByText(errorMessage).first()
     await expect(errorLocator).toBeVisible()
