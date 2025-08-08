@@ -12,17 +12,9 @@ const createOptions = (): OptionsType => {
     const baseURL = `http://localhost:3000`
     if (process.env.CI) {
         return {
-            // baseURL,
-            // timeout: 30 * 1000,
-            // server: undefined,
             baseURL,
-            timeout,
-            server: {
-                command: 'npm run dev-ingen-dekorator',
-                port: 3000,
-                timeout: 120 * 1000, // Wait up to 2 minutes for the server to start
-                reuseExistingServer: true,
-            },
+            timeout: 30 * 1000,
+            server: undefined,
         }
     }
 
