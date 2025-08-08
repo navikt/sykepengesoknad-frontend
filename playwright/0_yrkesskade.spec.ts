@@ -11,15 +11,12 @@ import {
 
 test.describe('Tester yrkesskadesspørsmål', () => {
     test('Full flow for yrkesskadesspørsmål', async ({ page }) => {
-        // Setup: Clear cookies and navigate to the test page
         await page.context().clearCookies()
         await page.goto('/syk/sykepengesoknad?testperson=yrkesskade-v2')
 
-        // Laster listevisng
         await expect(page.getByRole('heading', { name: 'Søknader', level: 1 })).toBeVisible()
         await page.getByRole('link', { name: /søknad om sykepenger/i }).click()
 
-        // Svarer på spørsmål før yrkesskade
         await checkViStolerPaDeg(page)
 
         await neiOgVidere(page, [
@@ -32,14 +29,12 @@ test.describe('Tester yrkesskadesspørsmål', () => {
 
         await neiOgVidere(page, ['Andre inntektskilder', 'Reise utenfor EU/EØS'])
 
-        // Kommer til spørsmål om yrkesskade
         const main = page.locator('main')
         await expect(main.getByRole('heading', { name: 'Yrkesskade', level: 2 })).toBeVisible()
 
         const registrerteYrkesskaderText = page.getByText('Registrerte yrkesskader:')
         await expect(registrerteYrkesskaderText).toBeVisible()
 
-        // Check the list exists and has 2 items
         const listLocator = registrerteYrkesskaderText.locator('xpath=following-sibling::ul').first()
         await expect(listLocator).toBeVisible()
 
@@ -51,13 +46,11 @@ test.describe('Tester yrkesskadesspørsmål', () => {
             'Skadedato 2. april 1997 (Vedtaksdato 3. desember 1999)',
         ]
 
-        // Check each list item contains the expected text
         for (const [i, text] of expectedTexts.entries()) {
             await expect(listItems.nth(i)).toContainText(text)
             await expect(listItems.nth(i)).toBeVisible()
         }
 
-        // Har forventa hjelpetekst
         const helpButton = main.getByRole('button', { name: 'Spørsmålet forklart' })
         await helpButton.click()
 
@@ -68,23 +61,19 @@ test.describe('Tester yrkesskadesspørsmål', () => {
             ),
         ).toBeVisible()
 
-        // Svarer ja og går videre
         await svarJaHovedsporsmal(page)
-        await klikkGaVidere(page, true) // forventFeil = true
+        await klikkGaVidere(page, true)
 
-        // Men får feilmelding
         await harFeilISkjemaet(page, 'Du må velge minst en skadedato')
         const errorLink = page.getByRole('link', { name: /Du må velge minst en skadedato/i })
         await expect(errorLink).toBeVisible()
         await errorLink.click()
 
-        // Vi velger to med keyboard og går videre med enter
         await page.keyboard.press('Space')
         await page.keyboard.press('Tab')
         await page.keyboard.press('Space')
         await page.keyboard.press('Enter')
 
-        // Vi ser de valgte skadedatoene i oppsummeringa
         const oppsummeringContainer = page.locator('[data-cy="oppsummering-fra-søknaden"]')
 
         await sporsmalOgSvar(

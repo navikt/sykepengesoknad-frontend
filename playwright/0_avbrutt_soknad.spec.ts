@@ -2,13 +2,9 @@ import { test, expect } from '@playwright/test'
 
 import { avbruttSoknad } from '../src/data/mock/data/soknad/arbeidstaker-avbrutt'
 
-// Import all the provided utility functions here (assuming they are in a utils file or inline)
 import { checkViStolerPaDeg, modalAktiv, avbryterSoknad, harSynligTekst } from './utilities' // Adjust the import path if these are in a separate file
 
 test.describe('Tester avbryting av søknad', () => {
-    // Since Cypress tests share state across 'it' blocks, but Playwright tests are isolated,
-    // we'll combine into a single test for simplicity to maintain the linear flow without repeating setup.
-    // In a real scenario, consider fixtures or beforeEach for shared setup if splitting.
     test('Full flow for avbryting av søknad', async ({ page }) => {
         await page.goto('/syk/sykepengesoknad?testperson=integrasjon-soknader')
 

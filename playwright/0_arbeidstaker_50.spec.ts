@@ -45,7 +45,6 @@ test.describe('Tester arbeidstakersøknad - gradert 50%', () => {
 
             await page.getByLabel('Jeg bekrefter at jeg vil svare så riktig som jeg kan.').check()
 
-            // Klikk "Start søknaden"
             await expect(page.getByRole('button', { name: 'Start søknad' })).toBeVisible()
             await page.getByRole('button', { name: 'Start søknad' }).click()
         })

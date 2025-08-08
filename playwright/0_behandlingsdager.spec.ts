@@ -1,11 +1,8 @@
-// playwright-test.ts (or similar file name)
-// Note: Run with `npx playwright test` assuming Playwright is installed.
 
 import { test, expect } from '@playwright/test'
 
 import { behandlingsdager } from '../src/data/mock/data/soknad/behandlingsdager'
 
-// Translated utilities (only those used in the test)
 async function checkViStolerPaDeg(page, gaVidere = true) {
     await page
         .getByRole('checkbox', {
@@ -31,8 +28,6 @@ async function klikkGaVidere(page, forventFeil = false, skipFocusCheck = false) 
     expect(newPathParam).toEqual(currentPathParam + 1)
 
     if (!skipFocusCheck) {
-        // Approximate focus check (Playwright doesn't have direct 'focused' like Cypress;
-        // use if needed, or skip as focus is often implicit)
         await expect(page.locator('#maincontent')).toBeFocused()
     }
 }
@@ -49,7 +44,6 @@ async function klikkTilbake(page) {
     const newPathParam = parseInt(newUrl.split('/').pop()!, 10)
     expect(newPathParam).toEqual(currentPathParam - 1)
 
-    // Approximate focus check
     await expect(page.locator('#maincontent')).toBeFocused()
 }
 

@@ -16,8 +16,6 @@ test.describe('Sjekker at søknader med gammel oppsummering ser ok ut', () => {
             })
             await expect(heading).toBeVisible()
 
-            // Click on the søknad link - we'll need to find the specific soknad ID from the mock data
-            // await page.locator('a[href*="soknader/"]').first().click() .. you do not need to click twice
 
             await trykkPaSoknadMedId(page, arbeidtakerMedGammelOppsummering().id)
         })
@@ -30,10 +28,8 @@ test.describe('Sjekker at søknader med gammel oppsummering ser ok ut', () => {
                 page.getByText('Det du fyller ut brukes til å vurdere om du har rett til sykepenger'),
             ).toBeHidden()
 
-            // Personvern erklæring
             await page.getByText('Slik behandler NAV personopplysningene dine').click()
 
-            // Avbryt dialog vises
             await page
                 .getByRole('button', {
                     name: 'Jeg vil slette denne søknaden',
@@ -41,7 +37,6 @@ test.describe('Sjekker at søknader med gammel oppsummering ser ok ut', () => {
                 .click()
             await page.getByRole('button', { name: 'Nei, jeg har behov for søknaden' }).click()
 
-            // Må godkjenne ANSVARSERKLARING først
             await page.getByText('Start søknad').click()
             await expect(page.getByText('Det er 1 feil i skjemaet')).toBeVisible()
             await expect(page.locator('.navds-confirmation-panel__inner')).toBeVisible()
@@ -72,14 +67,12 @@ test.describe('Sjekker at søknader med gammel oppsummering ser ok ut', () => {
         })
 
         await test.step('Søknad TILBAKE_I_ARBEID går videre', async () => {
-            // I egen test for å sjekke axe på hjelpetekst
             await page.getByText('Gå videre').click()
         })
 
         await test.step('Søknad FERIE_V2', async () => {
             await expect(page).toHaveURL(/\/soknader\/.*\/3/)
 
-            // Test spørsmål
             await page.locator('[data-cy="ja-nei-stor"] input[value=JA]').click()
             await expect(page.getByText('Når tok du ut feriedager?')).toBeVisible()
 
@@ -100,7 +93,6 @@ test.describe('Sjekker at søknader med gammel oppsummering ser ok ut', () => {
                 page.getByText('Permisjon er dager du var borte fra jobb av andre grunner enn sykdom'),
             ).toBeVisible()
 
-            // Test spørsmål
             await page.locator('[data-cy="ja-nei-stor"] input[value=JA]').click()
             await expect(page.getByText('Når tok du permisjon?')).toBeVisible()
 
@@ -112,7 +104,6 @@ test.describe('Sjekker at søknader med gammel oppsummering ser ok ut', () => {
         await test.step('Søknad ARBEID_UNDERVEIS_100_PROSENT', async () => {
             await expect(page).toHaveURL(/\/soknader\/.*\/5/)
 
-            // Test spørsmål
             await expect(
                 page.getByText(
                     'I perioden 1. - 24. april 2020 var du 100 % sykmeldt fra Posten Norge AS, Bærum. Jobbet du noe hos Posten Norge AS, Bærum i denne perioden?',
@@ -120,9 +111,7 @@ test.describe('Sjekker at søknader med gammel oppsummering ser ok ut', () => {
             ).toBeVisible()
             await page.locator('[data-cy="ja-nei-stor"] input[value=JA]').click()
 
-            // Underspørsmål 1
             await expect(page.getByText('Oppgi arbeidsmengde i timer eller prosent')).toBeVisible()
-            // Svarer prosent
             await page.locator('.undersporsmal input[value=Prosent]').click()
             await expect(
                 page.getByText(
@@ -130,16 +119,13 @@ test.describe('Sjekker at søknader med gammel oppsummering ser ok ut', () => {
                 ),
             ).toBeVisible()
 
-            // await page
-            //     .locator('.undersporsmal .navds-text-field__input#796cf7ed-8a7e-39de-9cbc-6e789aa5af3f')
-            //     .fill('21')
+      
             await svarTekstboks(
                 page,
                 'Oppgi hvor mange prosent av din normale arbeidstid du jobbet hos Posten Norge AS, Bærum i perioden 1. - 24. april 2020?',
                 '21',
             )
 
-            // Velger timer
             await page.locator('.undersporsmal input[value=Timer]').click()
             await expect(
                 page.getByText(
@@ -147,9 +133,7 @@ test.describe('Sjekker at søknader med gammel oppsummering ser ok ut', () => {
                 ),
             ).toBeVisible()
             await expect(page.getByText('Antall timer du skrev inn, betyr at du har jobbet')).toBeHidden()
-            //     .locator('.undersporsmal .navds-text-field__input#6cc620d8-d4b0-3e82-a038-2757df6fc311')
-
-            //     .fill('21')
+    
 
             await svarTekstboks(
                 page,
@@ -159,7 +143,6 @@ test.describe('Sjekker at søknader med gammel oppsummering ser ok ut', () => {
 
             await expect(page.getByText('Er prosenten lavere enn du forventet?')).toBeHidden()
 
-            // Underspørsmål 2
             await expect(
                 page.getByText('Jobber du vanligvis 37,5 timer i uka hos Posten Norge AS, Bærum?'),
             ).toBeVisible()
@@ -193,7 +176,6 @@ test.describe('Sjekker at søknader med gammel oppsummering ser ok ut', () => {
         await test.step('Søknad OPPHOLD_UTENFOR_EOS', async () => {
             await expect(page).toHaveURL(/\/soknader\/.*\/7/)
 
-            // Test spørsmål
             await page.locator('[data-cy="ja-nei-stor"] input[value=JA]').click()
             await expect(page.getByText('Når var du utenfor EU/EØS?')).toBeVisible()
 
@@ -218,7 +200,6 @@ test.describe('Sjekker at søknader med gammel oppsummering ser ok ut', () => {
             await sporsmalOgSvar(oppsummering, 'Søknaden sendes til', 'NAV')
             await expect(oppsummering).toContainText('Posten Norge AS, Bærum')
 
-            //Arbeid underveis i sykefravær
             await sporsmalOgSvar(oppsummering, 'Oppgi arbeidsmengde i timer eller prosent:', 'Timer')
             await sporsmalOgSvar(
                 oppsummering,
@@ -227,7 +208,6 @@ test.describe('Sjekker at søknader med gammel oppsummering ser ok ut', () => {
             )
             await sporsmalOgSvar(oppsummering, 'Jobber du vanligvis 37,5 timer i uka', 'Ja')
 
-            //Andre inntektskilder
             await sporsmalOgSvar(oppsummering, 'Har du andre inntektskilder enn Butikken?', 'Ja')
             await sporsmalOgSvar(
                 oppsummering,
@@ -247,11 +227,9 @@ test.describe('Sjekker at søknader med gammel oppsummering ser ok ut', () => {
 
             await expect(page.getByText('Det er 1 feil i skjemaet')).toBeHidden()
 
-            //kan trykke på forrige steg knapp øverst
             const forrigeStegLink = page.getByText('Forrige steg')
             await expect(forrigeStegLink).toHaveAttribute('href', /\/soknader\/.*\/7\?testperson=gammel-oppsummering/)
             await page.getByRole('button', { name: 'Tilbake' }).click()
-            // forventer forrige overskrift skal dukke opp
             await expect(page.getByRole('heading', { name: 'Reise utenfor EU/EØS' })).toBeVisible()
             await expect(page.getByRole('button', { name: 'Gå videre' })).toBeVisible()
             await page.getByRole('button', { name: 'Gå videre' }).click()

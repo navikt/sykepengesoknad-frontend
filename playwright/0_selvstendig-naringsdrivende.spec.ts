@@ -10,8 +10,6 @@ import {
     modalIkkeAktiv,
 } from './utilities'
 
-// New utilities implemented for missing Cypress equivalents
-// Placed at the top as instructed
 
 export async function harFeilISkjemaet(page: Page, errorMessage: string) {
     const errorLocator = page.getByText(errorMessage).first()
@@ -22,7 +20,6 @@ export async function harFlereFeilISkjemaet(page: Page, count: number, errorMess
     for (const message of errorMessages) {
         await harFeilISkjemaet(page, message)
     }
-    // Optionally, count the number of visible errors if needed, but based on Cypress, just check presence
     const allErrors = page.locator('.navds-error-message') // Assuming error class; adjust if needed
     await expect(allErrors).toHaveCount(count)
 }
@@ -213,10 +210,8 @@ async function fellesInnholdEtterVisningAvSigrunData(page: Page) {
 }
 
 async function tilSlutt(page: Page) {
-    // Use the form summary container that contains all the questions and answers
     const summaryContainer = page.locator('.navds-form-summary, form') // Target the form summary or fallback to form
 
-    // Verify the main questions and answers in the summary
     await sporsmalOgSvar(summaryContainer, 'Har du avviklet virksomheten din før du ble sykmeldt?', 'Nei')
     await sporsmalOgSvar(summaryContainer, 'Er du ny i arbeidslivet etter 1. januar 2019?', 'Nei')
     await sporsmalOgSvar(

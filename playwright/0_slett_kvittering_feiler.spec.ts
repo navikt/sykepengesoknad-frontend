@@ -22,7 +22,6 @@ test.describe('Test sletting av kvittering som feiler', () => {
             await page.locator('select[name=transportmiddel]').selectOption('TAXI')
             await page.locator('input[name=belop_input]').fill('1234')
 
-            // Upload file
             const fileInput = page.locator('[data-cy="filopplasteren"] input[type=file]')
             const filePath = path.join(test.info().project.testDir, 'fixtures', 'kvittering.jpg')
             await fileInput.setInputFiles(filePath)
@@ -38,7 +37,6 @@ test.describe('Test sletting av kvittering som feiler', () => {
         })
 
         await test.step('Sletting av kvittering fra liste', async () => {
-            // Scope the "Slett" button to the table to avoid ambiguity with other "Slett" buttons
             await page.locator('.navds-table').getByRole('button', { name: 'Slett' }).click()
             await page.getByRole('button', { name: 'Ja, jeg er sikker' }).click()
 

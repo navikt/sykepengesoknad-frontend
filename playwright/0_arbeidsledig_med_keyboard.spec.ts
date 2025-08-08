@@ -2,7 +2,6 @@ import { test, expect, Page } from '@playwright/test'
 
 import { tabUntilFocusedContainsText } from './utilities'
 
-// Utility function
 async function sjekkMainContentFokus(page: Page) {
     const mainContent = page.locator('main')
     await expect(mainContent).toBeFocused()
