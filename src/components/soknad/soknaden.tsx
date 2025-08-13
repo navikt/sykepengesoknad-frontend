@@ -114,15 +114,27 @@ export const Soknaden = () => {
             {sporsmal && <SporsmalForm sporsmal={sporsmal} key={sporsmal.id} />}
             {!sporsmal && <SkeletonSporsmalForm />}
             {erForstesiden && !erUtenlandssoknad && (
-                <Button
-                    variant="tertiary"
-                    target="_blank"
-                    as="a"
-                    href="https://www.nav.no/sykepenger-og-personopplysninger"
-                    className="-ml-5 text-left"
-                >
-                    Slik behandler NAV personopplysningene dine
-                </Button>
+                <>
+                    <Button
+                        variant="tertiary"
+                        target="_blank"
+                        as="a"
+                        href="https://www.nav.no/sykepenger-og-personopplysninger"
+                        className="-ml-5 text-left"
+                    >
+                        Slik behandler NAV personopplysningene dine
+                    </Button>
+                    
+                    {/* Accessibility violations for testing */}
+                    <div style={{color: '#ccc', backgroundColor: '#ddd'}}>Low contrast text</div>
+                    <img src="/static/test-image.jpg" />
+                    <button onClick={() => console.log('clicked')}>Unlabeled button</button>
+                    <input type="text" placeholder="Enter text" />
+                    <div onClick={() => console.log('clicked')}>Not focusable clickable div</div>
+                    <h1>Heading</h1>
+                    <h3>Wrong heading level (skipped h2)</h3>
+                    <iframe src="about:blank"></iframe>
+                </>
             )}
             {(flexjarToggle.enabled ||
                 valgtSoknad?.julesoknad ||
