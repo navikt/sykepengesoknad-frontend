@@ -1,4 +1,4 @@
-import React, { CSSProperties, useCallback, useEffect, useRef, useState } from 'react'
+import React, { CSSProperties, useRef, useState } from 'react'
 import { BodyShort, Button, Heading, LinkPanel, Modal, Popover, Tooltip } from '@navikt/ds-react'
 import { SandboxIcon } from '@navikt/aksel-icons'
 
@@ -9,68 +9,48 @@ export default function Person() {
     const buttonRef = useRef<HTMLButtonElement>(null)
     const [openState, setOpenState] = useState(false)
 
-    const dismissHint = useCallback(() => {
-        localStorage.setItem('devtools-hint', 'false')
-        setShowHint(false)
-    }, [])
-
-    useEffect(() => {
-        if (localStorage.getItem('devtools-hint') === null) {
-            localStorage.setItem('devtools-hint', 'true')
-        }
-
-        setTimeout(() => {
-            if (localStorage.getItem('devtools-hint') === 'true') {
-                setShowHint(true)
-            }
-        }, 1000)
-    }, [])
-
     return (
         <>
             <div hidden={openState}>
-                <Tooltip content="Verktøy for testing">
-                    <Button
-                        type="button"
-                        ref={buttonRef}
-                        onClick={() => setOpenState((b) => !b)}
-                        icon={<SandboxIcon title="Åpne testdataverktøy" aria-hidden />}
-                        variant="tertiary-neutral"
-                    />
-                </Tooltip>
-                <div
-                    style={
-                        {
-                            '--ac-popover-bg': 'var(--a-surface-info-subtle)',
-                            '--ac-popover-border': 'var(--a-border-info)',
-                        } as CSSProperties
-                    }
-                >
-                    <Popover open={showHint} onClose={() => void 0} placement="bottom-end" anchorEl={buttonRef.current}>
-                        <Popover.Content>
-                            <Heading size="small" level="2" className="motion-safe:animate-bounce">
-                                Tips!
-                            </Heading>
-                            <div className="w-[220px]">
-                                Her finner du verktøy for å endre mellom forskjellige brukere
-                            </div>
-                            <Button
-                                type="button"
-                                onClick={dismissHint}
-                                className="mt-2"
-                                variant="secondary-neutral"
-                                size="small"
-                            >
-                                OK!
-                            </Button>
-                        </Popover.Content>
-                    </Popover>
+                <div onMouseEnter={() => setShowHint(true)} onMouseLeave={() => setShowHint(false)}>
+                    <Tooltip content="Verktøy for testing">
+                        <Button
+                            type="button"
+                            ref={buttonRef}
+                            onClick={() => setOpenState((b) => !b)}
+                            icon={<SandboxIcon title="Åpne testdataverktøy" aria-hidden />}
+                            variant="tertiary-neutral"
+                        />
+                    </Tooltip>
+                    <div
+                        style={
+                            {
+                                '--ac-popover-bg': 'var(--a-surface-info-subtle)',
+                                '--ac-popover-border': 'var(--a-border-info)',
+                            } as CSSProperties
+                        }
+                    >
+                        <Popover
+                            open={showHint}
+                            onClose={() => void 0}
+                            placement="bottom-end"
+                            anchorEl={buttonRef.current}
+                        >
+                            <Popover.Content>
+                                <Heading size="small" level="2" className="motion-safe:animate-bounce">
+                                    Tips!
+                                </Heading>
+                                <div className="w-[220px]">
+                                    Her finner du verktøy for å endre mellom forskjellige brukere
+                                </div>
+                            </Popover.Content>
+                        </Popover>
+                    </div>
                 </div>
             </div>
             <Modal
                 open={openState}
                 onClose={() => {
-                    if (showHint) dismissHint()
                     setOpenState(false)
                 }}
                 header={{ heading: 'Testdataverktøy', closeButton: true }}
