@@ -7,6 +7,27 @@ import { captureViolationScreenshots } from './screenshot-capture'
 import { generateHtmlReport } from './report-generator'
 import { IgnoreRule, ValidationOptions } from './types'
 
+
+export async function validerAxeUtilityWrapper(
+    page: Page, 
+    testInfo: TestInfo,
+    disableRules: string[] = [], 
+    ignoreRules: IgnoreRule[] = []
+) {
+    if (!page) {
+        throw new Error('Page object is required but was undefined')
+    }
+
+    const browser = page.context().browser()
+    if (!browser) {
+        throw new Error('Browser is not available from page context')
+    }
+
+    const browserName = browser.browserType().name()
+
+    await validerAxe(browserName, page, testInfo, disableRules, ignoreRules)
+}
+
 export async function validerAxe(
     browserName: string,
     page: Page,
