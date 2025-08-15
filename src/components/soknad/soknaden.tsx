@@ -114,8 +114,16 @@ export const Soknaden = () => {
             {sporsmal && <SporsmalForm sporsmal={sporsmal} key={sporsmal.id} />}
             {!sporsmal && <SkeletonSporsmalForm />}
             {erForstesiden && !erUtenlandssoknad && (
-                
-            
+                <Button
+                    variant="tertiary"
+                    target="_blank"
+                    as="a"
+                    href="https://www.nav.no/sykepenger-og-personopplysninger"
+                    className="-ml-5 text-left"
+                >
+                    Slik behandler NAV personopplysningene dine
+                </Button>
+            )}
             {(flexjarToggle.enabled ||
                 valgtSoknad?.julesoknad ||
                 valgtSoknad?.soknadstype == RSSoknadstype.FRISKMELDT_TIL_ARBEIDSFORMIDLING ||

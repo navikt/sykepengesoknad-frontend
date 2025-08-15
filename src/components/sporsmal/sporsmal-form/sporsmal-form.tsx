@@ -148,8 +148,8 @@ const SporsmalForm = ({ sporsmal }: SpmProps) => {
 
     return (
         <>
-            <EndringUtenEndringModal aapen={endringUtenEndringAapen} setAapen={setEndringUtenEndringAapen} /
-                
+            <EndringUtenEndringModal aapen={endringUtenEndringAapen} setAapen={setEndringUtenEndringAapen} />
+
             <FormProvider {...methods}>
                 <form
                     onSubmit={methods.handleSubmit(onSubmit)}
