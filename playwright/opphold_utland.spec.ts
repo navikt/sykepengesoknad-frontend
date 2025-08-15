@@ -26,19 +26,12 @@ test.describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
         const nyeSoknaderSection = page.locator('[data-cy="Nye søknader"]')
         await expect(nyeSoknaderSection).toBeVisible()
 
-
-
         await nyeSoknaderSection.getByRole('link', { name: 'Søknad om å beholde sykepenger utenfor EU/EØS' }).click()
 
         const header = page.locator('main').locator('h1').first()
         await expect(header).toBeVisible()
 
-        
-
-
         await expect(header).toContainText('Søknad om å beholde sykepenger utenfor EU/EØS')
-
-        
 
         // Viser infoside og starter søknaden', async () => {
         await expect(page.getByText('Du trenger ikke søke hvis du')).toBeVisible()
@@ -50,8 +43,6 @@ test.describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
 
         // Velger land innenfor EU/EØS og får info om å ikke søke', async () => {
         await expect(page).toHaveURL(new RegExp(`${soknad.id}/1`))
-        
-
 
         // Klikk gå videre utan å fylle inn -> forventa feil
         await klikkGaVidere(page, true)
@@ -111,7 +102,6 @@ test.describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
 
         await validerAxeUtilityWrapper(page, test.info())
 
-
         await klikkGaVidere(page)
 
         // Avbryter søknaden og havner på avbrutt-siden', async () => {
@@ -128,14 +118,11 @@ test.describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
         await expect(page).toHaveURL(new RegExp(`${soknad.id}/2`))
         await expect(page.getByText('Gå videre')).toBeVisible()
 
-
-       // Velger periode for utenlandsopphold', async () => {
+        // Velger periode for utenlandsopphold', async () => {
         await expect(page).toHaveURL(new RegExp(`${soknad.id}/2`))
         await setPeriodeFraTil(page, 17, 24)
 
-
         await validerAxeUtilityWrapper(page, test.info())
-
 
         await klikkGaVidere(page)
 
