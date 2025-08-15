@@ -7,12 +7,11 @@ import { captureViolationScreenshots } from './screenshot-capture'
 import { generateHtmlReport } from './report-generator'
 import { IgnoreRule, ValidationOptions } from './types'
 
-
 export async function validerAxeUtilityWrapper(
-    page: Page, 
+    page: Page,
     testInfo: TestInfo,
-    disableRules: string[] = [], 
-    ignoreRules: IgnoreRule[] = []
+    disableRules: string[] = [],
+    ignoreRules: IgnoreRule[] = [],
 ) {
     if (!page) {
         throw new Error('Page object is required but was undefined')
