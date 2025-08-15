@@ -10,6 +10,7 @@ import {
     svarCombobox,
     svarRadioGruppe,
 } from './utilities'
+import { validerAxeUtilityWrapper } from './uuvalidering'
 
 test.describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
     const soknad = oppholdUtland
@@ -22,6 +23,7 @@ test.describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
         await expect(page.locator('.navds-heading--large')).toBeVisible()
         await expect(page.locator('.navds-heading--large')).toHaveText('Søknader')
 
+        validerAxeUtilityWrapper(page, test.info())
         const nyeSoknaderSection = page.locator('[data-cy="Nye søknader"]')
         await expect(nyeSoknaderSection).toBeVisible()
 
@@ -29,6 +31,9 @@ test.describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
 
         const header = page.locator('main').locator('h1').first()
         await expect(header).toBeVisible()
+
+        validerAxeUtilityWrapper(page, test.info())
+
 
         await expect(header).toContainText('Søknad om å beholde sykepenger utenfor EU/EØS')
 
@@ -40,6 +45,8 @@ test.describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
 
         // Velger land innenfor EU/EØS og får info om å ikke søke', async () => {
         await expect(page).toHaveURL(new RegExp(`${soknad.id}/1`))
+        validerAxeUtilityWrapper(page, test.info())
+
 
         // Klikk gå videre utan å fylle inn -> forventa feil
         await klikkGaVidere(page, true)
