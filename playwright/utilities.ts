@@ -463,3 +463,15 @@ export async function lastOppKvittering(page: Page) {
         .setInputFiles('playwright/fixtures/kvittering.jpg')
     await page.getByRole('button', { name: 'Bekreft' }).click()
 }
+
+export async function flexjarSurvey(page: Page) {
+    await modalAktiv(page)
+    await expect(
+        page.getByText('Hvis du hadde fått dette spørsmålet, hvor enkelt eller vanskelig hadde det vært å svare på?'),
+    ).toBeVisible()
+    await page.getByRole('radio', { name: 'Veldig enkelt' }).click()
+    await svarFritekst(page, 'Vil du forklare hvorfor? (valgfritt)', 'Fordi det er enkelt å svare på')
+    await page.getByRole('button', { name: 'Send tilbakemelding' }).click()
+    await expect(page.getByText('Takk for tilbakemeldingen!')).toBeVisible()
+    await page.getByRole('button', { name: 'Lukk vindu' }).click()
+}

@@ -21,8 +21,8 @@ import {
     svarCombobox,
     sjekkMainContentFokus,
     trykkPaSoknadMedId,
+    flexjarSurvey,
 } from './utilities'
-import { flexjarSurvey } from './0_selvstendig-naringsdrivende.spec'
 
 test.describe('Kvittering integrasjon', () => {
     test('Arbeidsledig - nylig sendt', async ({ page }) => {
