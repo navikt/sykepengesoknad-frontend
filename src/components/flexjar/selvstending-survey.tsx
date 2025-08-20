@@ -1,3 +1,4 @@
+// file: src/components/flexjar/selvstending-survey.tsx
 import React, { useCallback, useEffect, useState } from 'react'
 import { Alert, BodyShort, Button, Heading, Modal, Radio, RadioGroup, Textarea } from '@navikt/ds-react'
 import { PaperplaneIcon } from '@navikt/aksel-icons'
@@ -14,9 +15,10 @@ const DIFFICULTY_OPTIONS = ['Veldig enkelt', 'Ganske enkelt', 'Litt vanskelig', 
 
 export const SelvstendingSurveyModal = ({ onSubmit, visSurvey }: { onSubmit: () => void; visSurvey: boolean }) => {
     const [thanksFeedback, setThanksFeedback] = useState(false)
-    const [selectedDifficulty, setSelectedDifficulty] = useState('')
-    const [textValue, setTextValue] = useState('')
+    const [valgtSvaralternativ, setValgtSvaralternativ] = useState('')
+    const [utfyllendeSvar, setUtfyllendeSvar] = useState('')
     const [errorMsg, setErrorMsg] = useState<string | null>(null)
+    const [validationError, setValidationError] = useState<string | null>(null)
 
     const { valgtSoknad } = useSoknadMedDetaljer()
     const { mobile, width } = useWindowSize()
@@ -25,9 +27,9 @@ export const SelvstendingSurveyModal = ({ onSubmit, visSurvey }: { onSubmit: () 
 
     const submitFeedback = useCallback(async () => {
         const body = {
-            feedback: textValue,
+            feedback: utfyllendeSvar,
             feedbackId: FEEDBACK_ID,
-            svar: selectedDifficulty,
+            svar: valgtSvaralternativ,
         }
 
         if (data?.id) {
@@ -37,19 +39,27 @@ export const SelvstendingSurveyModal = ({ onSubmit, visSurvey }: { onSubmit: () 
                 cb: () => {
                     setThanksFeedback(true)
                     setErrorMsg(null)
+                    setValidationError(null)
                 },
             })
         } else {
             giFeedback(body)
         }
-    }, [data?.id, giFeedback, oppdaterFeedback, textValue, selectedDifficulty])
+    }, [data?.id, giFeedback, oppdaterFeedback, utfyllendeSvar, valgtSvaralternativ])
 
     const handleSend = async () => {
+        if (!valgtSvaralternativ) {
+            setValidationError('Du må velge hvor enkelt eller vanskelig spørsmålet hadde vært å svare på.')
+            return
+        }
+
+        setValidationError(null)
+
         logEvent('knapp klikket', {
             komponent: 'flexjar',
             feedbackId: FEEDBACK_ID,
-            svar: selectedDifficulty,
-            tekst: textValue,
+            svar: valgtSvaralternativ,
+            tekst: utfyllendeSvar,
         })
         await submitFeedback()
     }
@@ -61,6 +71,11 @@ export const SelvstendingSurveyModal = ({ onSubmit, visSurvey }: { onSubmit: () 
             component: FEEDBACK_ID,
         })
         onSubmit()
+    }
+
+    const handleDifficultyChange = (value: string) => {
+        setValgtSvaralternativ(value)
+        setValidationError(null)
     }
 
     const modalStyle =
@@ -106,7 +121,9 @@ export const SelvstendingSurveyModal = ({ onSubmit, visSurvey }: { onSubmit: () 
                                 <RadioGroup
                                     className="mt-8 mb-8"
                                     legend="Hvis du hadde fått dette spørsmålet, hvor enkelt eller vanskelig hadde det vært å svare på?"
-                                    onChange={setSelectedDifficulty}
+                                    onChange={handleDifficultyChange}
+                                    value={valgtSvaralternativ}
+                                    error={validationError}
                                 >
                                     {DIFFICULTY_OPTIONS.map((option) => (
                                         <Radio value={option} key={option}>
@@ -119,10 +136,10 @@ export const SelvstendingSurveyModal = ({ onSubmit, visSurvey }: { onSubmit: () 
                                     error={errorMsg}
                                     label="Vil du forklare hvorfor? (valgfritt)"
                                     description="Unngå å skrive inn navn, fødselsnummer eller andre personlige opplysninger."
-                                    value={textValue}
+                                    value={utfyllendeSvar}
                                     onChange={(e) => {
                                         setErrorMsg(null)
-                                        setTextValue(e.target.value)
+                                        setUtfyllendeSvar(e.target.value)
                                     }}
                                     onKeyDown={(e) => {
                                         if (e.key === 'Enter' && e.ctrlKey) {
