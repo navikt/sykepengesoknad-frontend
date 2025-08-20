@@ -7,8 +7,6 @@ import {
     sporsmalOgSvar,
     svarNeiHovedsporsmal,
     modalIkkeAktiv,
-    modalAktiv,
-    svarFritekst,
     flexjarSurvey,
 } from './utilities'
 
