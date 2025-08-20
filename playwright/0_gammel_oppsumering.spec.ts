@@ -3,13 +3,14 @@ import { test, expect } from '@playwright/test'
 import { arbeidtakerMedGammelOppsummering } from '../src/data/mock/data/soknad/arbeidstaker'
 
 import { setPeriodeFraTil, sporsmalOgSvar, fjernAnimasjoner, svarTekstboks, trykkPaSoknadMedId } from './utilities'
+import { testStepWithUu } from './customTestStep'
 
 test.describe('Sjekker at søknader med gammel oppsummering ser ok ut', () => {
-    test('Full søknadsflyt med gammel oppsummering', async ({ page }) => {
+    test('Full søknadsflyt med gammel oppsummering', async ({ page, browserName }, testInfo) => {
         await fjernAnimasjoner(page)
         await page.goto('/syk/sykepengesoknad?testperson=gammel-oppsummering')
 
-        await test.step('Laster startside', async () => {
+        await testStepWithUu('Laster startside', page, browserName, testInfo, async () => {
             const heading = page.getByRole('heading', {
                 name: 'Søknader',
                 level: 1,
@@ -18,6 +19,21 @@ test.describe('Sjekker at søknader med gammel oppsummering ser ok ut', () => {
 
             await trykkPaSoknadMedId(page, arbeidtakerMedGammelOppsummering().id)
         })
+
+
+        // await test.step('Laster startside', async () => {
+        //     const heading = page.getByRole('heading', {
+        //         name: 'Søknader',
+        //         level: 1,
+        //     })
+        //     await expect(heading).toBeVisible()
+
+        //     await trykkPaSoknadMedId(page, arbeidtakerMedGammelOppsummering().id)
+        // })
+
+
+
+
 
         await test.step('Søknad ANSVARSERKLARING', async () => {
             await expect(page).toHaveURL(/\/soknader\/.*\/1/)
