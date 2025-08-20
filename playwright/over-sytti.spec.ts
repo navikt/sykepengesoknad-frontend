@@ -6,7 +6,7 @@ test.describe('Tester søknader tilhørende person over 70', () => {
 
     test('Person over 70', async ({ page }) => {
         await page.goto(`/syk/sykepengesoknad/soknader/${soknadId}/1${testpersonQuery}`)
-        const alert = page.locator('.navds-alert')
+        const alert = page.locator('.navds-alert', { hasText: 'Viktig informasjon' })
         await expect(alert).toBeVisible()
         await expect(alert).toContainText('Viktig informasjon')
         await expect(alert).toContainText('Når du har passert 70 år, har du ikke lenger rett til sykepenger.')

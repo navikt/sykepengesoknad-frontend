@@ -22,6 +22,7 @@ import {
     sjekkMainContentFokus,
     trykkPaSoknadMedId,
 } from './utilities'
+import { flexjarSurvey } from './0_selvstendig-naringsdrivende.spec'
 
 test.describe('Kvittering integrasjon', () => {
     test('Arbeidsledig - nylig sendt', async ({ page }) => {
@@ -112,7 +113,8 @@ test.describe('Kvittering integrasjon', () => {
             await trykkPaSoknadMedId(page, selvstendigKvittering.id)
             await checkViStolerPaDeg(page)
             await svarNeiHovedsporsmal(page)
-            await klikkGaVidere(page)
+            await klikkGaVidere(page, false, true)
+            await flexjarSurvey(page)
             await page.getByRole('button', { name: 'Send søknaden' }).click()
         })
         await test.step('Verifiserer selvstendig kvittering', async () => {

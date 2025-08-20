@@ -19,7 +19,9 @@ import { SkeletonSporsmalForm } from '../sporsmal/sporsmal-form/skeleton-sporsma
 import { FeilStateView } from '../feil/refresh-hvis-feil-state'
 import { erSisteSide } from '../sporsmal/sporsmal-utils'
 import { Tilbake } from '../sporsmal/tilbake-knapp/tilbake'
+import { SelvstendingSurveyModal } from '../flexjar/selvstending-survey'
 import { Introside } from '../soknad-intro/introside'
+import { RSArbeidssituasjon } from '../../types/rs-types/rs-arbeidssituasjon'
 
 import { urlTilSoknad } from './soknad-link'
 import { SporsmalTittel } from './sporsmal-tittel'
@@ -29,6 +31,15 @@ export const Soknaden = () => {
     const router = useRouter()
     const { erUtenlandssoknad, stegId, stegNo, valgtSoknad, soknader, sykmeldinger, spmIndex, valgtSoknadError } =
         useSoknadMedDetaljer()
+
+    const sporsmal = valgtSoknad?.sporsmal[spmIndex]
+    const erSistesiden = valgtSoknad && sporsmal ? erSisteSide(valgtSoknad, stegNo) : false
+
+    const [visSurvey, setVisSurvey] = useState<boolean>(false)
+
+    useEffect(() => {
+        setVisSurvey(valgtSoknad?.arbeidssituasjon === RSArbeidssituasjon.NAERINGSDRIVENDE && erSistesiden)
+    }, [valgtSoknad, erSistesiden])
 
     useUpdateBreadcrumbs(() => [{ ...soknadBreadcrumb, handleInApp: true }], [])
 
@@ -94,10 +105,8 @@ export const Soknaden = () => {
             return <EldreUsendtSoknad eldreSoknad={eldreUsendtSoknad.eldsteSoknad} antall={eldreUsendtSoknad.antall} />
         }
     }
-    const sporsmal = valgtSoknad?.sporsmal[spmIndex]
 
     const erForstesiden = stegNo === 1 && !erUtenlandssoknad
-    const erSistesiden = valgtSoknad && sporsmal ? erSisteSide(valgtSoknad, stegNo) : false
     const erForstesidenMedReisetilskudd = stegNo === 1 && (erReisetilskuddsoknad || erGradertReisetilskuddsoknad)
 
     return (
@@ -135,6 +144,10 @@ export const Soknaden = () => {
                 sporsmal?.tag == 'ARBEID_UNDERVEIS_100_PROSENT') && (
                 <FlexjarSporsmal soknad={valgtSoknad} sporsmal={sporsmal} steg={stegNo} />
             )}
+            <SelvstendingSurveyModal
+                visSurvey={visSurvey}
+                onSubmit={() => setVisSurvey(false)}
+            ></SelvstendingSurveyModal>
         </>
     )
 }

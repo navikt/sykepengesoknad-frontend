@@ -29,7 +29,7 @@ const soknadOmÅBeholdeSykepengerUtenforEUEøsSpecialCase = () => {
     )
 }
 
-const Knapperad = ({ poster, setVisFlexjar }: { poster: boolean; setVisFlexjar: (value: boolean) => void }) => {
+const Knapperad = ({ poster }: { poster: boolean }) => {
     const { valgtSoknad: soknad, sporsmal, stegNo } = useSoknadMedDetaljer()
 
     const { getValues } = useFormContext()
@@ -102,15 +102,6 @@ const Knapperad = ({ poster, setVisFlexjar }: { poster: boolean; setVisFlexjar: 
                     className="mb-12 mt-6 inline-flex"
                     iconPosition="right"
                     icon={knappetekst() !== tekst('sykepengesoknad.send') && <ArrowRightIcon aria-hidden />}
-                    onClick={() => {
-                        if (soknad) {
-                            const formValues = getValues()
-                            const varigEndring = hentSporsmal(soknad, 'INNTEKTSOPPLYSNINGER_VIRKSOMHETEN_AVVIKLET')?.id
-                            if (varigEndring && formValues[varigEndring]) {
-                                setVisFlexjar(true)
-                            }
-                        }
-                    }}
                 >
                     {knappetekst()}
                 </Button>

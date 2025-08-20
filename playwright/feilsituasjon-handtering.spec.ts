@@ -91,7 +91,7 @@ test.describe('Tester feilsituasjoner', () => {
 
             await checkViStolerPaDeg(page)
             await expect(page).toHaveURL(new RegExp(`${soknad.id}/1`))
-            await expect(page.locator('form')).not.toContainText(OOPS_ERROR)
+            await expect(page.getByText(OOPS_ERROR)).toBeHidden()
             await expect(checkbox).not.toBeChecked()
         })
     })

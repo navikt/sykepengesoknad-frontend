@@ -21,7 +21,6 @@ import { useTestpersonQuery } from '../../../hooks/useTestpersonQuery'
 import { useOppdaterSporsmal } from '../../../hooks/useOppdaterSporsmal'
 import { FeilStateView } from '../../feil/refresh-hvis-feil-state'
 import { useSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
-import { visFlexjarSurvey } from '../../flexjar/utils'
 import { logEvent } from '../../amplitude/amplitude'
 import { tekst } from '../../../utils/tekster'
 
@@ -51,8 +50,6 @@ const SporsmalForm = ({ sporsmal }: SpmProps) => {
         shouldUnregister: true,
         defaultValues: hentFormState(sporsmal),
     })
-
-    const [visFlexjar, setVisFlexjar] = useState<boolean>(false)
 
     const erSisteSpm = () => {
         const snartSlutt = [
@@ -122,17 +119,10 @@ const SporsmalForm = ({ sporsmal }: SpmProps) => {
                         spørsmål: sporsmal.tag,
                         component: 'Sporsmal form',
                     })
-                    if (visFlexjar) {
-                        await visFlexjarSurvey(
-                            router,
-                            pathUtenSteg(router.asPath) + SEPARATOR + (spmIndex + 2),
-                            testpersonQuery.query(),
-                        )
-                    } else {
-                        await router.push(
-                            pathUtenSteg(router.asPath) + SEPARATOR + (spmIndex + 2) + testpersonQuery.query(),
-                        )
-                    }
+                    await router.push(
+                        pathUtenSteg(router.asPath) + SEPARATOR + (spmIndex + 2) + testpersonQuery.query(),
+                    )
+
                     resolve() // Resolver promise her når alt ovenfor er utført
                 }
             }
@@ -173,7 +163,7 @@ const SporsmalForm = ({ sporsmal }: SpmProps) => {
                     {oppdaterError && !oppdatererSporsmal && (
                         <FeilStateView feilmelding={oppdaterError?.status}></FeilStateView>
                     )}
-                    <Knapperad poster={oppdatererSporsmal || senderSoknad} setVisFlexjar={setVisFlexjar} />
+                    <Knapperad poster={oppdatererSporsmal || senderSoknad} />
                 </form>
             </FormProvider>
         </>
