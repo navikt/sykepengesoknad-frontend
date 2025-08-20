@@ -10,6 +10,8 @@ import {
     svarRadioSporsmal,
     modalIkkeAktiv,
     sjekkMainContentFokus,
+    svarFritekst,
+    modalAktiv,
 } from '../../support/utilities'
 
 describe('Tester selvstendig naringsdrivende søknad med data fra Sigrun', () => {
@@ -74,8 +76,14 @@ describe('Tester selvstendig naringsdrivende søknad uten data fra Sigrun', () =
         klikkGaVidere(true)
     })
 
-    it('Viser ikke FlexJar Survey', () => {
-        cy.url().should('include', 'visSurvey=true')
+    it('Viser FlexJar Survey', () => {
+        modalAktiv()
+        cy.contains(
+            'Har du nok informasjon til å kunne svare på spørsmålet om endring i årsinntekten, spesielt om du har hatt en endring på 25%?',
+        )
+        cy.findByRole('button', { name: 'Ja' }).click()
+        svarFritekst('Er det noe du vil trekke frem? (valgfritt)', 'Har kontroll på alt')
+        cy.contains('Send tilbakemelding').click()
         modalIkkeAktiv()
     })
 
