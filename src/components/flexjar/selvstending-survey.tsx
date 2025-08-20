@@ -88,6 +88,7 @@ export const SelvstendingSurveyModal = ({ onSubmit, visSurvey }: { onSubmit: () 
 
     // Initialize feedback on mount
     useEffect(() => {
+        // eslint-disable-next-line no-console
         submitFeedback().catch(console.error)
     }, []) // eslint-disable-line react-hooks/exhaustive-deps
 

@@ -1,4 +1,3 @@
-/*eslint-disable playwright/expect-expect*/
 import { Page } from '@playwright/test'
 
 import { arbeidstakerGradert } from '../src/data/mock/data/soknad/arbeidstaker-gradert'

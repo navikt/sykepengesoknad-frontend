@@ -6,7 +6,6 @@ import {
     svarDato,
     sporsmalOgSvar,
     svarNeiHovedsporsmal,
-    sjekkMainContentFokus,
     modalIkkeAktiv,
     modalAktiv,
     svarFritekst,
