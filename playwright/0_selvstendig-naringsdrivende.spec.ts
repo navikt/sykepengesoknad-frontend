@@ -223,12 +223,12 @@ async function tilSlutt(page: Page) {
     )
     await sporsmalOgSvar(summaryContainer, 'Når skjedde den siste varige endringen?', '12.03.2020')
 
-    await flexjarSurvey(page)
-
     await page.getByText('Send søknaden').click()
 }
 
 async function kvitteringen(page: Page) {
+    await flexjarSurvey(page)
+
     await expect(page.getByText('Søknaden er sendt til NAV')).toBeVisible()
     await expect(
         page.getByText('Du må sende inn dokumentasjon på inntekten din før vi kan behandle saken.'),
