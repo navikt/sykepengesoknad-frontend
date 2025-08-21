@@ -10,7 +10,7 @@ import { useWindowSize } from '../../utils/useWindowSize'
 import { UseOpprettFlexjarFeedback } from './queryhooks/useOpprettFlexjarFeedback'
 import { UseOppdaterFlexjarFeedback } from './queryhooks/useOppdaterFlexjarFeedback'
 
-const FEEDBACK_ID = 'sn-virkshomheten-din-survey'
+const FEEDBACK_ID = 'sn-8-2-survey'
 const DIFFICULTY_OPTIONS = ['Veldig enkelt', 'Ganske enkelt', 'Litt vanskelig', 'Veldig vanskelig']
 
 export const SelvstendingSurveyModal = ({ onSubmit, visSurvey }: { onSubmit: () => void; visSurvey: boolean }) => {
