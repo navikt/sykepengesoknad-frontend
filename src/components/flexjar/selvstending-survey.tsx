@@ -110,11 +110,11 @@ export const SelvstendingSurveyModal = ({ onSubmit, visSurvey }: { onSubmit: () 
 
                     <div className="flex flex-row-reverse flex-wrap gap-4 p-6 pt-4">
                         <div className="border-b-text-action">
-                            <BodyShort className="mb-8">
+                            <BodyShort className="mb-8 font-bold">
                                 Vi jobber med å forbedre søknaden og vil gjerne høre hva du synes om dette spørsmålet:
                             </BodyShort>
 
-                            <BodyShort className="bg-blue-50 p-4 rounded-lg font-bold">
+                            <BodyShort className="bg-blue-50 p-4 rounded-lg">
                                 Har du jobbet noe i løpet av de siste fire ukene før du ble sykmeldt?
                             </BodyShort>
 
@@ -136,7 +136,7 @@ export const SelvstendingSurveyModal = ({ onSubmit, visSurvey }: { onSubmit: () 
                                 <Textarea
                                     error={errorMsg}
                                     label="Vil du forklare hvorfor? (valgfritt)"
-                                    description="Unngå å skrive inn navn, fødselsnummer eller andre personlige opplysninger."
+                                    description="Unngå å skrive inn navn, fødselsnummer eller andre personlige opplysninger"
                                     value={utfyllendeSvar}
                                     onChange={(e) => {
                                         setErrorMsg(null)
@@ -154,7 +154,7 @@ export const SelvstendingSurveyModal = ({ onSubmit, visSurvey }: { onSubmit: () 
 
                                 <Alert variant="warning" className="mt-4">
                                     Tilbakemeldingen din er anonym og vil ikke knyttes til søknaden din. Den brukes kun
-                                    for å gjøre nettsidene bedre
+                                    for å gjøre nettsidene bedre.
                                 </Alert>
 
                                 <Button
