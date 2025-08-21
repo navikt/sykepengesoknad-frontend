@@ -30,7 +30,9 @@ test.describe('Tester flexjar', () => {
         await yesButton.click()
         await expect(yesButton).toHaveCSS('background-color', 'rgb(35, 38, 42)')
 
-        await page.getByText('Unngå å skrive inn navn, fødselsnummer eller andre personlige opplysninger.').isVisible()
+        await feedbackSection
+            .getByText('Unngå å skrive inn navn, fødselsnummer eller andre personlige opplysninger.')
+            .isVisible()
 
         const feedbackTextbox = page.getByRole('textbox')
         await feedbackTextbox.fill('Dette er en test')
@@ -70,7 +72,9 @@ test.describe('Tester flexjar', () => {
 
         await expect(braButton).toHaveCSS('background-color', 'rgb(236, 238, 240)')
 
-        await page.getByText('Unngå å skrive inn navn, fødselsnummer eller andre personlige opplysninger.').isVisible()
+        await feedbackSection
+            .getByText('Unngå å skrive inn navn, fødselsnummer eller andre personlige opplysninger.')
+            .isVisible()
 
         const feedbackTextbox = page.getByRole('textbox')
         await feedbackTextbox.fill('Dette er en test')

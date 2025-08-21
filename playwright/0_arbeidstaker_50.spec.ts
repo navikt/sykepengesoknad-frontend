@@ -50,7 +50,8 @@ test.describe('Tester arbeidstakersøknad - gradert 50%', () => {
         })
 
         await test.step('Tilbake til ANSVARSERKLARING og frem igjen', async () => {
-            await page.locator('button').filter({ hasText: 'Tilbake' }).click()
+            await expect(page).toHaveURL(new RegExp(`.*${soknadId}\\/2`))
+            await page.getByRole('button', { name: 'Tilbake' }).click()
             await page.locator('button').filter({ hasText: 'Start søknad' }).click()
         })
 

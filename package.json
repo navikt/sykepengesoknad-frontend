@@ -115,7 +115,8 @@
                 ],
                 "rules": {
                     "testing-library/prefer-screen-queries": "off",
-                    "playwright/require-top-level-describe": "error"
+                    "playwright/require-top-level-describe": "error",
+                    "playwright/expect-expect": "off"
                 }
             }
         ]

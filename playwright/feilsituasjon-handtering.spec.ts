@@ -55,7 +55,6 @@ test.describe('Tester feilsituasjoner', () => {
         const testpersonQuery = '?testperson=integrasjon-soknader'
         const soknad = soknadSomTriggerSporsmalFinnesIkkeISoknad
 
-        // eslint-disable-next-line playwright/expect-expect
         test('Feil fra backend gir refresh-mulighet', async ({ page }) => {
             await test.step('Gå til søknad og trigger feil', async () => {
                 await gaTilListeOgApneSoknad(page, '/syk/sykepengesoknad' + testpersonQuery, soknad.id)
@@ -69,7 +68,6 @@ test.describe('Tester feilsituasjoner', () => {
         const testpersonQuery = '?testperson=integrasjon-soknader'
         const soknad = soknadSomTriggerFeilStatusForOppdaterSporsmal
 
-        // eslint-disable-next-line playwright/expect-expect
         test('Feil fra backend gir refresh-mulighet', async ({ page }) => {
             await gaTilListeOgApneSoknad(page, '/syk/sykepengesoknad' + testpersonQuery, soknad.id)
             await checkViStolerPaDeg(page)
@@ -91,7 +89,7 @@ test.describe('Tester feilsituasjoner', () => {
 
             await checkViStolerPaDeg(page)
             await expect(page).toHaveURL(new RegExp(`${soknad.id}/1`))
-            await expect(page.locator('form')).not.toContainText(OOPS_ERROR)
+            await expect(page.getByText(OOPS_ERROR)).toBeHidden()
             await expect(checkbox).not.toBeChecked()
         })
     })

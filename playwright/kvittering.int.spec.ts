@@ -21,6 +21,7 @@ import {
     svarCombobox,
     sjekkMainContentFokus,
     trykkPaSoknadMedId,
+    flexjarSurvey,
 } from './utilities'
 
 test.describe('Kvittering integrasjon', () => {
@@ -112,10 +113,11 @@ test.describe('Kvittering integrasjon', () => {
             await trykkPaSoknadMedId(page, selvstendigKvittering.id)
             await checkViStolerPaDeg(page)
             await svarNeiHovedsporsmal(page)
-            await klikkGaVidere(page)
+            await klikkGaVidere(page, false, true)
             await page.getByRole('button', { name: 'Send søknaden' }).click()
         })
         await test.step('Verifiserer selvstendig kvittering', async () => {
+            await flexjarSurvey(page)
             await expect(page.locator('[data-cy="sendt-nav"]')).toBeVisible()
             await expect(page.locator('[data-cy="sendt-arbeidsgiver"]')).toHaveCount(0)
             await expect(page).toHaveURL(new RegExp(`/kvittering/${selvstendigKvittering.id}`))

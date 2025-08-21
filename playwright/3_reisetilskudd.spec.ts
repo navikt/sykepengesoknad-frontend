@@ -99,8 +99,6 @@ test.describe('Teste førsteside i reisetilskuddsøknaden', () => {
             await svarFritekst(page, 'Hvor mye betalte du i bompenger mellom hjemmet ditt og jobben?', '1000')
             await svarFritekst(page, 'Hvor mange kilometer er kjøreturen mellom hjemmet ditt og jobben én vei?', '42')
 
-            await page.waitForTimeout(2000)
-
             await expect(
                 page.getByRole('textbox', { name: 'Hvor mye betalte du i bompenger mellom hjemmet ditt og jobben?' }),
             ).toHaveValue('1000')

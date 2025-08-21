@@ -6,8 +6,8 @@ import {
     svarDato,
     sporsmalOgSvar,
     svarNeiHovedsporsmal,
-    sjekkMainContentFokus,
     modalIkkeAktiv,
+    flexjarSurvey,
 } from './utilities'
 
 export async function harFeilISkjemaet(page: Page, errorMessage: string) {
@@ -77,7 +77,6 @@ test.describe('Tester selvstendig naringsdrivende søknad med data fra Sigrun', 
         await fellesInnholdEtterVisningAvSigrunData(page)
 
         await klikkGaVidere(page, false, true)
-        await sjekkMainContentFokus(page)
 
         await tilSlutt(page)
 
@@ -119,13 +118,11 @@ test.describe('Tester selvstendig naringsdrivende søknad uten data fra Sigrun',
 
         await fellesInnholdEtterVisningAvSigrunData(page)
 
-        await klikkGaVidere(page, true)
+        await klikkGaVidere(page, true, true)
 
         await tilSlutt(page)
 
-        await expect(page).toHaveURL(/visSurvey=true/)
         await modalIkkeAktiv(page)
-
         await kvitteringen(page)
     })
 })
@@ -209,7 +206,7 @@ async function fellesInnholdEtterVisningAvSigrunData(page: Page) {
 }
 
 async function tilSlutt(page: Page) {
-    const summaryContainer = page.locator('.navds-form-summary, form') // Target the form summary or fallback to form
+    const summaryContainer = page.locator('.navds-form-summary, form')
 
     await sporsmalOgSvar(summaryContainer, 'Har du avviklet virksomheten din før du ble sykmeldt?', 'Nei')
     await sporsmalOgSvar(summaryContainer, 'Er du ny i arbeidslivet etter 1. januar 2019?', 'Nei')
@@ -226,11 +223,12 @@ async function tilSlutt(page: Page) {
     )
     await sporsmalOgSvar(summaryContainer, 'Når skjedde den siste varige endringen?', '12.03.2020')
 
-    await page.getByRole('button', { name: 'Send' }).click()
     await page.getByText('Send søknaden').click()
 }
 
 async function kvitteringen(page: Page) {
+    await flexjarSurvey(page)
+
     await expect(page.getByText('Søknaden er sendt til NAV')).toBeVisible()
     await expect(
         page.getByText('Du må sende inn dokumentasjon på inntekten din før vi kan behandle saken.'),

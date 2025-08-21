@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test'
+import { test, expect, Page } from '@playwright/test'
 
 import { veldigLangSoknad } from '../src/data/mock/data/soknad/veldig-lang-soknad'
 import { rsToSoknad } from '../src/types/mapping'
@@ -32,7 +32,7 @@ test.describe('Tester støtte for gamle spørsmål', () => {
     //-----
     const soknad = rsToSoknad(veldigLangSoknad)
 
-    async function gaVidere(page, steg: { value: number }) {
+    async function gaVidere(page: Page, steg: { value: number }) {
         await klikkGaVidere(page)
         await expect(page).toHaveURL(new RegExp(`${soknad.id}/${++steg.value}`))
     }
@@ -271,7 +271,7 @@ test.describe('Tester støtte for gamle spørsmål', () => {
         await test.step('35: UTDANNING', async () => {
             await svarJaHovedsporsmal(page)
 
-            await page.waitForSelector('.navds-date__field-button', { state: 'visible' })
+            await expect(page.locator('.navds-date__field-button')).toBeVisible()
 
             await page.locator('.navds-date__field-button').click()
 
@@ -348,7 +348,7 @@ test.describe('Tester støtte for gamle spørsmål', () => {
             await svarFritekst(page, 'Land', 'UK')
             await svarFritekst(page, 'Telefonnummer', '81549300')
 
-            await page.waitForSelector('.navds-date__field-button', { state: 'visible' })
+            await expect(page.locator('.navds-date__field-button')).toBeVisible()
             await page.locator('.navds-date__field-button').click()
 
             // Hvor lenge skal denne adressen brukes?
@@ -387,7 +387,7 @@ test.describe('Tester støtte for gamle spørsmål', () => {
         await test.step('50: Avviklet virksomhet', async () => {
             await svarJaHovedsporsmal(page)
 
-            await page.waitForSelector('.navds-date__field-button', { state: 'visible' })
+            await expect(page.locator('.navds-date__field-button')).toBeVisible()
             await page.locator('.navds-date__field-button').click()
             await velgDato(page, 14)
             await gaVidere(page, steg)
@@ -395,7 +395,7 @@ test.describe('Tester støtte for gamle spørsmål', () => {
 
         await test.step('51: Drift i virksomheten', async () => {
             await svarNeiHovedsporsmal(page)
-            await page.waitForSelector('.navds-date__field-button', { state: 'visible' })
+            await expect(page.locator('.navds-date__field-button')).toBeVisible()
             await page.locator('.navds-date__field-button').click()
             await velgDato(page, 14)
             await gaVidere(page, steg)
@@ -414,19 +414,19 @@ test.describe('Tester støtte for gamle spørsmål', () => {
         })
 
         await test.step('54: Inntekt underveis', async () => {
-            page.getByRole('heading', { name: 'Inntekt underveis' }).isVisible()
+            await page.getByRole('heading', { name: 'Inntekt underveis' }).isVisible()
             await svarNeiHovedsporsmal(page)
             await klikkGaVidere(page)
         })
 
         await test.step('55: Reise til utlandet', async () => {
-            page.getByRole('heading', { name: 'Reise til utlandet' }).isVisible()
+            await page.getByRole('heading', { name: 'Reise til utlandet' }).isVisible()
             await svarNeiHovedsporsmal(page)
             await klikkGaVidere(page)
         })
 
         await test.step('56: Søknad TIL_SLUTT', async () => {
-            page.getByRole('heading', { name: 'Oppsummering fra søknaden' }).isVisible()
+            await page.getByRole('heading', { name: 'Oppsummering fra søknaden' }).isVisible()
             // Oppsummering fra søknaden
             await sporsmalOgSvar(
                 page.locator('form'),

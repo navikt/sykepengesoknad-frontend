@@ -22,6 +22,7 @@ export async function captureViolationScreenshots(
                 const element = page.locator(selectorString).first()
 
                 if (!(await element.isVisible())) continue
+                //eslint-disable-next-line
                 await page.waitForTimeout(100)
 
                 const elementScreenshot = await element.screenshot({ type: 'png' })
