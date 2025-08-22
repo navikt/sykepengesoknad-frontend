@@ -10,6 +10,7 @@ import {
     svarCombobox,
     svarRadioGruppe,
 } from './utilities'
+import { validerAxeUtilityWrapper } from './uuvalidering'
 
 test.describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
     const soknad = oppholdUtland
@@ -35,6 +36,8 @@ test.describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
         // Viser infoside og starter søknaden', async () => {
         await expect(page.getByText('Du trenger ikke søke hvis du')).toBeVisible()
         await expect(page.getByText('Har du allerede vært på reise?')).toBeVisible()
+
+        await validerAxeUtilityWrapper(page, test.info())
         // Start søknaden
         await page.getByRole('button', { name: 'Start søknaden' }).click()
 
@@ -97,6 +100,8 @@ test.describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
         await page.getByRole('combobox', { name: 'Hvilke(t) land skal du reise til?' }).type('Sør-')
         await page.getByRole('option', { name: 'Sør-Korea' }).click()
 
+        await validerAxeUtilityWrapper(page, test.info())
+
         await klikkGaVidere(page)
 
         // Avbryter søknaden og havner på avbrutt-siden', async () => {
@@ -117,7 +122,11 @@ test.describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
         await expect(page).toHaveURL(new RegExp(`${soknad.id}/2`))
         await setPeriodeFraTil(page, 17, 24)
 
+        await validerAxeUtilityWrapper(page, test.info())
+
         await klikkGaVidere(page)
+
+        await validerAxeUtilityWrapper(page, test.info())
 
         // Går tilbake og frem igjen', async () => {
         await klikkTilbake(page)
@@ -126,6 +135,8 @@ test.describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
 
         // Oppgir arbeidsgiver', async () => {
         await expect(page).toHaveURL(new RegExp(`${soknad.id}/3`))
+
+        await validerAxeUtilityWrapper(page, test.info())
 
         // "Har du arbeidsgiver?" -> JA
         await page.getByRole('radio', { name: 'Ja', exact: true }).check()
@@ -158,6 +169,8 @@ test.describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
             page.getByText('Du må svare på om utenlandsoppholdet er avklart med arbeidsgiver eller NAV'),
         ).toBeVisible()
 
+        await validerAxeUtilityWrapper(page, test.info())
+
         // Radiogruppe: 'Har du avklart utenlandsoppholdet ... sykmeldte deg?' -> 'Nei'
         await svarRadioGruppe(page, 'Har du avklart utenlandsoppholdet med den som sykmeldte deg?', 'Nei')
         // Radiogruppe: 'Har du avklart utenlandsoppholdet ... arbeidsgiveren/NAV?' -> 'Nei'
@@ -169,6 +182,8 @@ test.describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
         await svarRadioGruppe(page, 'Har du avklart utenlandsoppholdet med arbeidsgiveren/NAV?', 'Ja')
 
         await klikkGaVidere(page)
+
+        await validerAxeUtilityWrapper(page, test.info())
 
         // Søknad TIL_SLUTT (oppsummering)', async () => {
         await expect(page).toHaveURL(new RegExp(`${soknad.id}/5`))
@@ -202,6 +217,9 @@ test.describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
         // Viser kvittering med Ferdig-knapp', async () => {
         await expect(page).toHaveURL(new RegExp(`kvittering/${soknad.id}`))
         const kvitteringPanel = page.locator('[data-cy="kvittering-panel"]')
+
+        await validerAxeUtilityWrapper(page, test.info())
+
         await expect(kvitteringPanel).toContainText('Hva skjer videre?')
         await expect(kvitteringPanel).toContainText('Du får svar på om du kan reise')
         await expect(kvitteringPanel).toContainText('Risiko ved å reise før du har mottatt svar')

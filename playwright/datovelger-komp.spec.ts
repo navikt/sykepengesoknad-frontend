@@ -2,6 +2,7 @@ import { arbeidstaker } from '../src/data/mock/data/soknad/arbeidstaker'
 
 import { test, expect } from './fixtures'
 import { klikkGaVidere, setPeriodeFraTil, svarJaHovedsporsmal } from './utilities'
+import { validerAxeUtilityWrapper } from './uuvalidering'
 
 test.describe('Tester at datovelger viser korrekt feilmelding, og at man ikke kan gå videre uten å velge datoer', () => {
     const soknad = arbeidstaker
@@ -24,6 +25,8 @@ test.describe('Tester at datovelger viser korrekt feilmelding, og at man ikke ka
             'Du må oppgi en fra og med dato i formatet dd.mm.åååå',
         )
         await expect(page).toHaveURL(new RegExp(`/syk/sykepengesoknad/soknader/${soknad.id}/3`))
+
+        await validerAxeUtilityWrapper(page, test.info)
     })
 
     test('Fyller inn korrekt dato, og går videre', async ({ page }) => {
@@ -34,5 +37,7 @@ test.describe('Tester at datovelger viser korrekt feilmelding, og at man ikke ka
 
         await expect(page.locator('.navds-error-message')).toBeHidden()
         await expect(page).toHaveURL(new RegExp(`/syk/sykepengesoknad/soknader/${soknad.id}/4`))
+
+        await validerAxeUtilityWrapper(page, test.info)
     })
 })
