@@ -25,7 +25,11 @@ export const SelvstendingSurveyModal = ({ onSubmit, visSurvey }: { onSubmit: () 
     const { mutate: giFeedback, data } = UseOpprettFlexjarFeedback()
     const { mutate: oppdaterFeedback } = UseOppdaterFlexjarFeedback()
 
-    const submitFeedback = useCallback(async () => {
+    const submitFeedback = useCallback(async (): Promise<boolean> => {
+        if (valgtSvaralternativ === '') {
+            return false
+        }
+
         const body = {
             feedback: utfyllendeSvar,
             feedbackId: FEEDBACK_ID,
@@ -42,8 +46,10 @@ export const SelvstendingSurveyModal = ({ onSubmit, visSurvey }: { onSubmit: () 
                     setValidationError(null)
                 },
             })
+            return true
         } else {
             giFeedback(body)
+            return false
         }
     }, [data?.id, giFeedback, oppdaterFeedback, utfyllendeSvar, valgtSvaralternativ])
 
@@ -86,7 +92,14 @@ export const SelvstendingSurveyModal = ({ onSubmit, visSurvey }: { onSubmit: () 
               }
             : undefined
 
-    // Initialize feedback on mount
+    useEffect(() => {
+        if (data?.id && valgtSvaralternativ !== '') {
+            setThanksFeedback(true)
+            setErrorMsg(null)
+            setValidationError(null)
+        }
+    }, [data?.id, valgtSvaralternativ])
+
     useEffect(() => {
         // eslint-disable-next-line no-console
         submitFeedback().catch(console.error)
