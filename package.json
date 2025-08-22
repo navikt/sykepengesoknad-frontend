@@ -123,6 +123,6 @@
     },
     "prettier": "@navikt/eslint-config-teamsykmelding/prettier",
     "optionalDependencies": {
-        "@rollup/rollup-linux-x64-gnu": "^4.46.2"
+        "@rollup/rollup-linux-x64-gnu": "^4.47.1"
     }
 }
