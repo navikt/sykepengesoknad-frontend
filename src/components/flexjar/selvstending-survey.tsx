@@ -115,7 +115,7 @@ export const SelvstendingSurveyModal = ({ onSubmit, visSurvey }: { onSubmit: () 
                             </BodyShort>
 
                             <BodyShort className="bg-blue-50 p-4 rounded-lg">
-                                Har du jobbet noe i løpet av de siste fire ukene før du ble sykmeldt?
+                                Har du jobbet noe i løpet av de siste fire ukene før første sykmeldingsdato?
                             </BodyShort>
 
                             <form className="mt-10 w-full">
