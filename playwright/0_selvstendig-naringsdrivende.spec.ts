@@ -6,8 +6,8 @@ import {
     svarDato,
     sporsmalOgSvar,
     svarNeiHovedsporsmal,
+    sjekkMainContentFokus,
     modalIkkeAktiv,
-    flexjarSurvey,
 } from './utilities'
 
 export async function harFeilISkjemaet(page: Page, errorMessage: string) {
@@ -77,6 +77,7 @@ test.describe('Tester selvstendig naringsdrivende søknad med data fra Sigrun', 
         await fellesInnholdEtterVisningAvSigrunData(page)
 
         await klikkGaVidere(page, false, true)
+        await sjekkMainContentFokus(page)
 
         await tilSlutt(page)
 
@@ -223,12 +224,11 @@ async function tilSlutt(page: Page) {
     )
     await sporsmalOgSvar(summaryContainer, 'Når skjedde den siste varige endringen?', '12.03.2020')
 
+    await page.getByRole('button', { name: 'Send' }).click()
     await page.getByText('Send søknaden').click()
 }
 
 async function kvitteringen(page: Page) {
-    await flexjarSurvey(page)
-
     await expect(page.getByText('Søknaden er sendt til NAV')).toBeVisible()
     await expect(
         page.getByText('Du må sende inn dokumentasjon på inntekten din før vi kan behandle saken.'),

@@ -1,5 +1,5 @@
 import { Button } from '@navikt/ds-react'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { logger } from '@navikt/next-logger'
 import { useRouter } from 'next/router'
 
@@ -20,8 +20,6 @@ import { FlexjarKvittering } from '../flexjar/flexjar-kvittering'
 import { useSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
 import { useToggle } from '../../toggles/context'
 import { JulesoknadTekstKvittering } from '../julesoknad/julesoknad-infotekst'
-import { RSArbeidssituasjon } from '../../types/rs-types/rs-arbeidssituasjon'
-import { SelvstendingSurveyModal } from '../flexjar/selvstending-survey'
 
 import Kvittering from './kvittering'
 
@@ -51,12 +49,6 @@ const KvitteringSide = () => {
         // eslint-disable-next-line
     }, [valgtSoknad])
     const flexjarToggle = useToggle('flexjar-sykepengesoknad-frontend-kvittering')
-
-    const [visSurvey, setVisSurvey] = useState<boolean>(false)
-
-    useEffect(() => {
-        setVisSurvey(valgtSoknad?.arbeidssituasjon === RSArbeidssituasjon.NAERINGSDRIVENDE)
-    }, [valgtSoknad])
 
     if (!valgtSoknad || !soknader) return <QueryStatusPanel valgSoknadId={soknadId} />
 
@@ -104,11 +96,6 @@ const KvitteringSide = () => {
             {skalViseEndre && <Endreknapp />}
             {skalViseSendTilArbeidsgiver && <Ettersending gjelder="arbeidsgiver" />}
             {skalViseFlexjar && <FlexjarKvittering />}
-
-            <SelvstendingSurveyModal
-                visSurvey={visSurvey}
-                onSubmit={() => setVisSurvey(false)}
-            ></SelvstendingSurveyModal>
         </>
     )
 }
