@@ -86,6 +86,13 @@ export async function svarCombobox(
     }
 }
 
+export async function svarCheckboxSporsmal(page: Page, groupName: string, checkboxName: string) {
+    const group = page.getByRole('group', { name: groupName })
+    const checkbox = group.getByRole('checkbox', { name: checkboxName })
+    await checkbox.check()
+    await expect(checkbox).toBeChecked()
+}
+
 // Eksempel på korleis du kan implementere desse hjelpefunksjonane:
 export async function modalIkkeAktiv(page: Page) {
     // Til dømes: vent på at eit modal-element ikkje er synleg
@@ -169,6 +176,10 @@ export async function svarRadioGruppe(page: Page, groupName: string | RegExp, ra
 
     // Finn riktig radio-knapp med radioName og "check" den
     await group.getByRole('radio', { name: radioName }).check()
+}
+
+export async function svarRadioSporsmal(page: Page, question: string, answer: string) {
+    await svarRadioGruppe(page, question, answer)
 }
 
 export async function svarFritekst(page: Page, name: string, verdi: string) {
