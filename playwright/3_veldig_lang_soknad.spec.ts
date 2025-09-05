@@ -22,6 +22,7 @@ import {
     svarSykMedEgenmelding,
     velgBehandlingsdager,
     lastOppKvittering,
+    harSynligTittel,
 } from './utilities'
 
 test.describe('Tester støtte for gamle spørsmål', () => {
@@ -421,6 +422,12 @@ test.describe('Tester støtte for gamle spørsmål', () => {
 
         await test.step('55: Reise til utlandet', async () => {
             await page.getByRole('heading', { name: 'Reise til utlandet' }).isVisible()
+            await svarNeiHovedsporsmal(page)
+            await klikkGaVidere(page)
+        })
+
+        await test.step('56: Fravær før sykmeldingen', async () => {
+            await harSynligTittel(page, 'Fravær før du ble sykmeldt', 2)
             await svarNeiHovedsporsmal(page)
             await klikkGaVidere(page)
         })
