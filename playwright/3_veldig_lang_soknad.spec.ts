@@ -45,7 +45,6 @@ test.describe('Tester støtte for gamle spørsmål', () => {
 
     test('Complete søknad flow', async ({ page }) => {
         test.setTimeout(120000) // 2 minutes timeout for the entire test
-        const steg = { value: 1 }
 
         await test.step('1: Navigate to søknad', async () => {
             await expect(page.getByRole('heading', { name: 'Søknader', level: 1 })).toBeVisible()
@@ -54,7 +53,6 @@ test.describe('Tester støtte for gamle spørsmål', () => {
 
         await test.step('2: ANSVARSERKLARING', async () => {
             await checkViStolerPaDeg(page)
-            steg.value++
         })
 
         await test.step('3: YRKESSKADE', async () => {
@@ -202,7 +200,7 @@ test.describe('Tester støtte for gamle spørsmål', () => {
                 'Hvor mange timer i uken jobber du vanligvis når du er frisk? Varierer det, kan du oppgi gjennomsnittet.',
                 '12',
             )
-            await velgTimer(page, steg.value, soknad)
+            await velgTimer(page)
             await klikkGaVidere(page)
         })
 
@@ -213,7 +211,7 @@ test.describe('Tester støtte for gamle spørsmål', () => {
                 'Hvor mange timer i uken jobber du vanligvis når du er frisk? Varierer det, kan du oppgi gjennomsnittet.',
                 '12',
             )
-            await velgTimer(page, steg.value, soknad)
+            await velgTimer(page)
             await klikkGaVidere(page)
         })
 

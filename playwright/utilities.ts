@@ -429,14 +429,13 @@ export async function velgKalenderdag(page: Page) {
     await page.locator('[aria-label="mandag 13"]').click()
 }
 
-export async function velgTimer(page: Page, steg: number, soknad: any) {
-    const id = soknad.sporsmal[steg - 1].undersporsmal[1].undersporsmal[1].undersporsmal[0].id
-    await page.locator('.undersporsmal input[value=timer]').click()
-    await page.locator(`.undersporsmal .navds-text-field__input[id="${id}"]`).type('21')
+export async function velgTimer(page: Page) {
+    await page.getByRole('radio', { name: 'timer' }).click()
+    await page.getByRole('textbox', { name: 'Oppgi timer totalt' }).fill('21')
 }
 
 export async function velgTall(page: Page, sporsmalstekst: string, verdi: string) {
-    await page.getByText(sporsmalstekst).locator('..').getByRole('textbox').type(verdi)
+    await page.getByText(sporsmalstekst).locator('..').getByRole('textbox').fill(verdi)
 }
 
 export async function velgCheckbox(page: Page, gjelder: string) {
