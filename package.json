@@ -43,7 +43,7 @@
         "@cypress/webpack-preprocessor": "^6.0.4",
         "@navikt/eslint-config-teamsykmelding": "^7.1.0",
         "@playwright/test": "^1.55.0",
-        "@tailwindcss/postcss": "^4.1.12",
+        "@tailwindcss/postcss": "^4.1.13",
         "@testing-library/cypress": "^10.1.0",
         "@types/classnames": "^2.3.4",
         "@types/jsdom": "^21.1.7",
