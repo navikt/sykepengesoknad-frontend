@@ -41,7 +41,7 @@
     "devDependencies": {
         "@axe-core/playwright": "^4.10.2",
         "@cypress/webpack-preprocessor": "^6.0.4",
-        "@navikt/eslint-config-teamsykmelding": "^7.1.0",
+        "@navikt/eslint-config-teamsykmelding": "^8.1.1",
         "@playwright/test": "^1.55.0",
         "@tailwindcss/postcss": "^4.1.13",
         "@testing-library/cypress": "^10.1.0",
