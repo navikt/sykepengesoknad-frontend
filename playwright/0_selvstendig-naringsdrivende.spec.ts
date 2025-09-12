@@ -20,7 +20,7 @@ const SELVSTENDIG_NARINGSDRIVENDE_URL =
 const SELVSTENDIG_NARINGSDRIVENDE_UTEN_SIGRUN_URL =
     '/syk/sykepengesoknad/soknader/2faff926-5261-42e5-927b-02e4aa44a7ad/8?testperson=selvstendig-naringsdrivende-uten-sigrun'
 const FRAVAR_FOR_SYKMELDING_URL =
-    '/syk/sykepengesoknad/soknader/2faff926-5261-42e5-927b-02e4aa44a7ad/7?testperson=selvstendig-naringsdrivende-uten-sigrun'
+    '/syk/sykepengesoknad/soknader/2faff926-5261-42e5-927b-02e4aa44a7ad/2?testperson=selvstendig-naringsdrivende-uten-sigrun'
 
 test.describe('Tester selvstendig næringsdrivende søknad spørsmål om virksomhet med data fra Sigrun', () => {
     test.beforeEach(async ({ page }) => {
@@ -67,10 +67,12 @@ test.describe('Tester spørsmål om fravær før sykmeldingen', () => {
     test('skal vise fravær før sykmelding og kunne svare nei', async ({ page }) => {
         await harSynligTittel(page, 'Fravær før du ble sykmeldt', 2)
         await expect(page.getByText('Som utgangspunkt må du ha jobbet')).toBeVisible()
-        await expect(page.getByText('Det kan være vi trenger flere')).toBeVisible()
 
         await klikkGaVidere(page, true, true)
         await harFeilISkjemaet(page, 'Du må svare på om du hadde fravær før sykmeldingen din')
+
+        await svarJaHovedsporsmal(page)
+        await expect(page.getByText('Det kan være vi trenger flere')).toBeVisible()
         await svarNeiHovedsporsmal(page)
     })
 })
