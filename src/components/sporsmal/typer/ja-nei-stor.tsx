@@ -23,6 +23,7 @@ import { KjentOppholdstillatelse } from '../kjent-oppholdstillatelse'
 import { NyttArbeidsforhold } from '../nytt-arbeidsforhold'
 import { logEvent } from '../../amplitude/amplitude'
 import { OppholdUtenforEUEOS } from '../opphold-utenfor-eu-eos/opphold-utenfor-eu-eos'
+import { FravarForSykmeldingV2 } from '../fravar-for-sykmelding-v2'
 
 import { jaNeiStorStyle, JaNeiStyle } from './ja-nei-stor-style'
 
@@ -86,6 +87,7 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
                     <NyttArbeidsforhold key="nytt-arbeidsforhold" spm={sporsmal} />
                 )}
                 {erOppholdUtenforEUEOS && <OppholdUtenforEUEOS />}
+                {sporsmal.tag === 'FRAVAR_FOR_SYKMELDINGEN_V2' && <FravarForSykmeldingV2 />}
 
                 <Controller
                     name={sporsmal.id}
@@ -161,6 +163,12 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
                             ),
                         )}
                     </BodyLong>
+                )}
+
+                {sporsmal.tag == 'FRAVAR_FOR_SYKMELDINGEN_V2' && watchJaNei === 'JA' && (
+                    <Alert variant="info" className="mt-8">
+                        Det kan være vi trenger flere opplysninger om fraværet ditt. Da vil en saksbehandler ta kontakt.
+                    </Alert>
                 )}
             </div>
 

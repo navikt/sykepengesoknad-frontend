@@ -365,6 +365,10 @@ describe('Tester støtte for gamle spørsmål', () => {
         svarNeiHovedsporsmal()
         klikkGaVidere()
     })
+    it('Fravær før du ble sykmeldt', () => {
+        svarNeiHovedsporsmal()
+        klikkGaVidere()
+    })
     it('Søknad TIL_SLUTT', () => {
         sporsmalOgSvar('Hvor mye har du tjent i perioden 20. – 24. april 2020?', '25000 kroner før skatt')
 
