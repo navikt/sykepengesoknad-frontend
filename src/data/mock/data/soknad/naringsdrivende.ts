@@ -43,6 +43,19 @@ export const naringsdrivendeSoknad: RSSoknad = {
             undersporsmal: [],
         },
         {
+            id: '687452',
+            tag: 'FRAVAR_FOR_SYKMELDINGEN_V2',
+            sporsmalstekst: 'Var du borte fra jobb i fire uker eller mer rett før du ble sykmeldt 1. april 2020?',
+            undertekst:
+                'Gjelder sammenhengende ferie eller annet fravær gjennom alle fire ukene. Har du jobbet underveis, kan du svare nei.',
+            svartype: 'JA_NEI',
+            min: null,
+            max: null,
+            kriterieForVisningAvUndersporsmal: null,
+            svar: [],
+            undersporsmal: [],
+        },
+        {
             id: '687429',
             tag: 'TILBAKE_I_ARBEID',
             sporsmalstekst:
@@ -315,19 +328,6 @@ export const naringsdrivendeSoknad: RSSoknad = {
             tag: 'ARBEID_UTENFOR_NORGE',
             sporsmalstekst: 'Har du arbeidet i utlandet i løpet av de siste 12 månedene?',
             undertekst: null,
-            svartype: 'JA_NEI',
-            min: null,
-            max: null,
-            kriterieForVisningAvUndersporsmal: null,
-            svar: [],
-            undersporsmal: [],
-        },
-        {
-            id: '687452',
-            tag: 'FRAVAR_FOR_SYKMELDINGEN_V2',
-            sporsmalstekst: 'Var du borte fra jobb i fire uker eller mer rett før du ble sykmeldt 1. april 2020?',
-            undertekst:
-                'Gjelder sammenhengende ferie eller annet fravær gjennom alle fire ukene. Har du jobbet underveis, kan du svare nei.',
             svartype: 'JA_NEI',
             min: null,
             max: null,
