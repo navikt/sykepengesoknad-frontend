@@ -1,6 +1,7 @@
 import { test, expect, Page } from '@playwright/test'
 
 import { tabUntilFocusedContainsText } from './utilities'
+import { validerAxeUtilityWrapper } from './uuvalidering'
 
 async function sjekkMainContentFokus(page: Page) {
     const mainContent = page.locator('main')
@@ -55,6 +56,7 @@ test.describe('Arbeidsledigsøknad med tastaturnavigasjon', () => {
 
         await expect(page.getByRole('heading', { name: 'Friskmeldt' })).toBeVisible()
         await expect(page.locator('form').getByRole('radio', { name: 'Nei' })).toHaveCount(1)
+        await validerAxeUtilityWrapper(page, test.info())
 
         await page.keyboard.press('Tab')
         await page.keyboard.press('Tab')
@@ -72,6 +74,8 @@ test.describe('Arbeidsledigsøknad med tastaturnavigasjon', () => {
 
         await expect(page.getByRole('heading', { name: 'Andre inntektskilder' })).toBeVisible()
         await expect(page.getByText('Hva mener vi med andre inntektskilder?')).toBeVisible()
+        await validerAxeUtilityWrapper(page, test.info())
+
         await page.keyboard.press('Tab')
         await page.keyboard.press('Tab')
         await page.keyboard.press('Tab')
@@ -90,6 +94,7 @@ test.describe('Arbeidsledigsøknad med tastaturnavigasjon', () => {
         await sjekkMainContentFokus(page)
 
         await expect(page.getByRole('heading', { name: 'Reise utenfor EU/EØS' })).toBeVisible()
+        await validerAxeUtilityWrapper(page, test.info())
 
         for (let i = 0; i < 8; i++) {
             await page.keyboard.press('Tab')
@@ -103,6 +108,8 @@ test.describe('Arbeidsledigsøknad med tastaturnavigasjon', () => {
         await sjekkMainContentFokus(page)
 
         await expect(page.getByRole('heading', { name: 'Oppsummering fra søknaden' })).toBeVisible()
+        await validerAxeUtilityWrapper(page, test.info())
+
         await page.keyboard.press('Tab')
         await page.keyboard.press('Tab')
         await page.keyboard.press('Tab')
@@ -118,5 +125,7 @@ test.describe('Arbeidsledigsøknad med tastaturnavigasjon', () => {
         await expect(page.getByText('Søknaden er sendt til NAV')).toBeVisible()
 
         await expect(page.getByText(/Mottatt.*kl/, { exact: false })).toBeVisible()
+
+        await validerAxeUtilityWrapper(page, test.info())
     })
 })
