@@ -26,7 +26,7 @@ test.describe('Tester at datovelger viser korrekt feilmelding, og at man ikke ka
         )
         await expect(page).toHaveURL(new RegExp(`/syk/sykepengesoknad/soknader/${soknad.id}/3`))
 
-        await validerAxeUtilityWrapper(page, test.info)
+        await validerAxeUtilityWrapper(page, test.info())
     })
 
     test('Fyller inn korrekt dato, og går videre', async ({ page }) => {
@@ -38,6 +38,6 @@ test.describe('Tester at datovelger viser korrekt feilmelding, og at man ikke ka
         await expect(page.locator('.navds-error-message')).toBeHidden()
         await expect(page).toHaveURL(new RegExp(`/syk/sykepengesoknad/soknader/${soknad.id}/4`))
 
-        await validerAxeUtilityWrapper(page, test.info)
+        await validerAxeUtilityWrapper(page, test.info())
     })
 })

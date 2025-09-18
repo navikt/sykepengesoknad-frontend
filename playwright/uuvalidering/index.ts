@@ -12,18 +12,15 @@ export async function validerAxeUtilityWrapper(
     testInfo: TestInfo,
     disableRules: string[] = [],
     ignoreRules: IgnoreRule[] = [],
-) {
+): Promise<void> {
     if (!page) {
         throw new Error('Page object is required but was undefined')
     }
-
     const browser = page.context().browser()
     if (!browser) {
         throw new Error('Browser is not available from page context')
     }
-
     const browserName = browser.browserType().name()
-
     await validerAxe(browserName, page, testInfo, disableRules, ignoreRules)
 }
 
