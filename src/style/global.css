@@ -1,5 +1,6 @@
+@layer base, dekorator-base, dekorator-utilities;
 @import 'tailwindcss';
-@import '@navikt/ds-css' layer(base);
+@import '@navikt/ds-css';
 
 @config '../../tailwind.config.js';
 
@@ -25,5 +26,15 @@
     ul {
         @apply list-disc;
         @apply list-inside;
+    }
+}
+
+/* Sikrer at dekoratørens padding ikke nulles av evt. base-resets */
+@layer base {
+    #decorator-header,
+    #decorator-header *,
+    #decorator-footer,
+    #decorator-footer * {
+        padding: revert-layer; /* faller tilbake til dekorator-base verdier */
     }
 }
