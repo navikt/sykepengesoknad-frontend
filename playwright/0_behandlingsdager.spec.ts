@@ -2,6 +2,8 @@ import { test, expect } from '@playwright/test'
 
 import { behandlingsdager } from '../src/data/mock/data/soknad/behandlingsdager'
 
+import { validerAxeUtilityWrapper } from './uuvalidering'
+
 async function checkViStolerPaDeg(page, gaVidere = true) {
     await page
         .getByRole('checkbox', {
@@ -115,6 +117,7 @@ test.describe('Tester behandlingsdagersøknad', () => {
 
             await sjekkIntroside(page)
             await checkViStolerPaDeg(page)
+            await validerAxeUtilityWrapper(page, test.info())
         })
 
         await test.step('Søknad ENKELTSTAENDE_BEHANDLINGSDAGER - steg 2', async () => {
@@ -138,6 +141,8 @@ test.describe('Tester behandlingsdagersøknad', () => {
             await page.getByRole('button', { name: 'onsdag 15' }).nth(0).click()
             await page.getByRole('button', { name: 'onsdag 1' }).nth(0).click()
 
+            await validerAxeUtilityWrapper(page, test.info())
+
             await klikkGaVidere(page)
         })
 
@@ -146,6 +151,8 @@ test.describe('Tester behandlingsdagersøknad', () => {
 
             await expect(page.getByRole('heading', { name: 'Ferie' })).toBeVisible()
             await svarNeiHovedsporsmal(page)
+
+            await validerAxeUtilityWrapper(page, test.info())
             await klikkGaVidere(page)
         })
 
@@ -168,14 +175,19 @@ test.describe('Tester behandlingsdagersøknad', () => {
                 ),
             ).toBeVisible()
 
+            await validerAxeUtilityWrapper(page, test.info())
             await klikkGaVidere(page)
         })
 
         await test.step('Tilbake og videre', async () => {
             await expect(page.getByRole('heading', { name: 'Oppsummering', exact: true })).toBeVisible()
+
+            await validerAxeUtilityWrapper(page, test.info())
             await klikkTilbake(page)
 
             await expect(page.getByRole('heading', { name: 'Andre inntektskilder', exact: true })).toBeVisible()
+
+            await validerAxeUtilityWrapper(page, test.info())
             await klikkGaVidere(page)
         })
 
@@ -193,6 +205,7 @@ test.describe('Tester behandlingsdagersøknad', () => {
             await sporsmalOgSvar(page, '13. – 17. april', '15. april')
             await sporsmalOgSvar(page, '20. – 24. april', 'Ikke til behandling')
 
+            await validerAxeUtilityWrapper(page, test.info())
             await page.getByText('Send søknaden').click()
         })
 
@@ -203,6 +216,7 @@ test.describe('Tester behandlingsdagersøknad', () => {
             await expect(kvittering).toContainText('Før NAV kan behandle søknaden')
             await expect(kvittering).toContainText('NAV behandler søknaden')
             await expect(kvittering).toContainText('Når blir pengene utbetalt')
+            await validerAxeUtilityWrapper(page, test.info())
         })
     })
 })

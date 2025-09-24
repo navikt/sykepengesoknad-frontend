@@ -1,5 +1,7 @@
 import { test, expect } from '@playwright/test'
 
+import { validerAxeUtilityWrapper } from './uuvalidering'
+
 test.describe('Tester endrefrist 12 måneder', () => {
     test('Viser popup med info om at endrefristen er ute', async ({ page }) => {
         await page.goto(
@@ -16,7 +18,11 @@ test.describe('Tester endrefrist 12 måneder', () => {
                 ),
         ).toBeVisible()
 
+        await validerAxeUtilityWrapper(page, test.info())
+
         await page.getByRole('link', { name: 'skrive til oss' }).click()
+
+        await validerAxeUtilityWrapper(page, test.info())
 
         await page.getByRole('button', { name: 'Lukk' }).click()
 

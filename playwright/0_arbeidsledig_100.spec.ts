@@ -8,6 +8,7 @@ import {
     sporsmalOgSvar,
     fjernAnimasjoner,
 } from './utilities'
+import { validerAxeUtilityWrapper } from './uuvalidering'
 
 const arbeidsledig = {
     id: '934f39f4-cb47-459f-8209-0dbef6d30059',
@@ -26,6 +27,7 @@ test.describe('Tester arbeidsledigsøknad', () => {
             const heading = page.getByRole('heading', { name: 'Søknader', level: 1 })
             await expect(heading).toBeVisible()
             await expect(heading).toHaveText('Søknader')
+            await validerAxeUtilityWrapper(page, test.info())
 
             // Klikk på lenken som inneholder soknad.id i href-attributten
             const link = page.locator(`a[href*="${arbeidsledig.id}"]`)
@@ -37,6 +39,7 @@ test.describe('Tester arbeidsledigsøknad', () => {
             await expect(page).toHaveURL(new RegExp(`${arbeidsledig.id}/1`))
             await sjekkIntroside(page) // Bruk eksisterende utility for å verifisere introside-innhold
             await checkViStolerPaDeg(page, true) // Bekreft ansvarserklæring og gå videre (gaVidere=true)
+            await validerAxeUtilityWrapper(page, test.info())
         })
 
         await test.step('Søknad FRISKMELDT', async () => {
@@ -49,6 +52,8 @@ test.describe('Tester arbeidsledigsøknad', () => {
             // Velg dato i kalender
             await page.locator('.navds-date__field-button').click()
             await page.locator('.rdp-day', { hasText: '10' }).click()
+
+            await validerAxeUtilityWrapper(page, test.info())
 
             await klikkGaVidere(page) // Gå videre uten å forvente feil
         })
@@ -63,6 +68,8 @@ test.describe('Tester arbeidsledigsøknad', () => {
 
             // Velg 'JA' på hovedspørsmål
             await page.locator('[data-cy="ja-nei-stor"] input[value=JA]').check()
+
+            await validerAxeUtilityWrapper(page, test.info())
 
             // Forsøk å gå videre uten valg for å trigge feil (ingen inntektskilder valgt)
             await klikkGaVidere(page, true) // forventFeil=true
@@ -82,6 +89,7 @@ test.describe('Tester arbeidsledigsøknad', () => {
                 .locator('xpath=..')
                 .getByRole('radio', { name: 'Ja' })
                 .click()
+            await validerAxeUtilityWrapper(page, test.info())
 
             await klikkGaVidere(page) // Gå videre
         })
@@ -100,6 +108,8 @@ test.describe('Tester arbeidsledigsøknad', () => {
             // Underspørsmål 1: Sett periode
             await expect(page.getByText('Når var du utenfor EU/EØS?')).toBeVisible()
             await setPeriodeFraTil(page, 17, 24) // Bruk utility for å sette periode
+
+            await validerAxeUtilityWrapper(page, test.info())
 
             await klikkGaVidere(page) // Gå videre
         })
@@ -133,6 +143,8 @@ test.describe('Tester arbeidsledigsøknad', () => {
             const underInntektSvar = inntektSvar.getByText('Hvilke inntektskilder har du hatt?').locator('..')
             await sporsmalOgSvar(underInntektSvar, 'Er du sykmeldt fra dette?', 'Ja')
 
+            await validerAxeUtilityWrapper(page, test.info())
+
             // Bekreft at 'Søknaden sendes til' ikke finnes
             await expect(page.getByText('Søknaden sendes til')).toBeHidden()
 
@@ -145,6 +157,7 @@ test.describe('Tester arbeidsledigsøknad', () => {
 
             await expect(page.getByRole('heading', { name: 'Søknaden er sendt til NAV' })).toBeVisible()
             const kvitteringPanel = page.locator('[data-cy="kvittering-panel"]')
+            await validerAxeUtilityWrapper(page, test.info())
             await expect(kvitteringPanel).toContainText('Hva skjer videre?')
             await expect(kvitteringPanel).toContainText('NAV behandler søknaden din')
             await expect(kvitteringPanel).toContainText('Når blir pengene utbetalt?')

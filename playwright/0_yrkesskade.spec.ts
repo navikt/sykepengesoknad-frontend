@@ -8,6 +8,7 @@ import {
     sporsmalOgSvar,
     svarJaHovedsporsmal,
 } from './utilities'
+import { validerAxeUtilityWrapper } from './uuvalidering'
 
 test.describe('Tester yrkesskadesspørsmål', () => {
     test('Full flow for yrkesskadesspørsmål', async ({ page }) => {
@@ -18,6 +19,8 @@ test.describe('Tester yrkesskadesspørsmål', () => {
         await page.getByRole('link', { name: /søknad om sykepenger/i }).click()
 
         await checkViStolerPaDeg(page)
+
+        await validerAxeUtilityWrapper(page, test.info())
 
         await neiOgVidere(page, [
             'Tilbake i fullt arbeid',
@@ -41,6 +44,8 @@ test.describe('Tester yrkesskadesspørsmål', () => {
         const listItems = listLocator.locator('li')
         await expect(listItems).toHaveCount(2)
 
+        await validerAxeUtilityWrapper(page, test.info())
+
         const expectedTexts = [
             'Skadedato 1. januar 2020 (Vedtaksdato 5. april 2021)',
             'Skadedato 2. april 1997 (Vedtaksdato 3. desember 1999)',
@@ -62,6 +67,8 @@ test.describe('Tester yrkesskadesspørsmål', () => {
         ).toBeVisible()
 
         await svarJaHovedsporsmal(page)
+
+        await validerAxeUtilityWrapper(page, test.info())
         await klikkGaVidere(page, true)
 
         await harFeilISkjemaet(page, 'Du må velge minst en skadedato')

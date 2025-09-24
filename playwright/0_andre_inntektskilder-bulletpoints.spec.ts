@@ -1,5 +1,7 @@
 import { test, expect } from '@playwright/test'
 
+import { validerAxeUtilityWrapper } from './uuvalidering'
+
 test.describe('Tester andre inntektskilder bulletpoints', () => {
     test.beforeEach(async ({ page }) => {
         await page.context().clearCookies()
@@ -19,6 +21,7 @@ test.describe('Tester andre inntektskilder bulletpoints', () => {
         for (let i = 0; i < items.length; i++) {
             await expect(items[i]).toContainText(expectedValues[i])
         }
+        await validerAxeUtilityWrapper(page, test.info())
     })
 
     test('Viser liste med en hvis vi har data fra inntektskomponenten, men ingen ekstra', async ({ page }) => {
@@ -34,6 +37,7 @@ test.describe('Tester andre inntektskilder bulletpoints', () => {
         for (let i = 0; i < items.length; i++) {
             await expect(items[i]).toContainText(expectedValues[i])
         }
+        await validerAxeUtilityWrapper(page, test.info())
     })
 
     test('Viser ikke liste når vi mangler data fra inntektskomponenten', async ({ page }) => {
@@ -45,6 +49,7 @@ test.describe('Tester andre inntektskilder bulletpoints', () => {
 
         await expect(page.getByText('Har du andre inntektskilder enn Posten Norge AS, Bærum?')).toBeVisible()
         await expect(page.locator('[data-cy="inntektskilder--fra-inntektskomponenten-liste"]')).toHaveCount(0)
+        await validerAxeUtilityWrapper(page, test.info())
     })
 
     test('Viser data primært fra metadata på spørsmålet når vi har det', async ({ page }) => {
@@ -62,5 +67,6 @@ test.describe('Tester andre inntektskilder bulletpoints', () => {
         for (let i = 0; i < items.length; i++) {
             await expect(items[i]).toContainText(expectedValues[i])
         }
+        await validerAxeUtilityWrapper(page, test.info())
     })
 })

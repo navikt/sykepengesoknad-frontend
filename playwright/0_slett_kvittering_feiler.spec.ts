@@ -2,6 +2,8 @@ import path from 'path'
 
 import { test, expect } from '@playwright/test'
 
+import { validerAxeUtilityWrapper } from './uuvalidering'
+
 test.describe('Test sletting av kvittering som feiler', () => {
     const soknadId = 'd4ce1c57-1f91-411b-ab64-beabbba29b65' // feilVedSlettingAvKvittering.id
 
@@ -26,6 +28,7 @@ test.describe('Test sletting av kvittering som feiler', () => {
             const filePath = path.join(test.info().project.testDir, 'fixtures', 'kvittering.jpg')
             await fileInput.setInputFiles(filePath)
 
+            await validerAxeUtilityWrapper(page, test.info())
             await page.getByRole('button', { name: 'Bekreft' }).click()
         })
 
@@ -34,6 +37,7 @@ test.describe('Test sletting av kvittering som feiler', () => {
             await expect(table.getByText('Taxi')).toBeVisible()
             await expect(table.getByText('1 234 kr').first()).toBeVisible()
             await expect(table.getByText('1 utgift på til sammen')).toBeVisible()
+            await validerAxeUtilityWrapper(page, test.info())
         })
 
         await test.step('Sletting av kvittering fra liste', async () => {
@@ -41,7 +45,7 @@ test.describe('Test sletting av kvittering som feiler', () => {
             await page.getByRole('button', { name: 'Ja, jeg er sikker' }).click()
 
             await expect(page.getByText('Det skjedde en feil ved sletting av kvitteringen')).toBeVisible()
-
+            await validerAxeUtilityWrapper(page, test.info())
             await page.getByLabel('Vil du slette kvitteringen?').getByRole('button', { name: 'Nei' }).click()
         })
     })

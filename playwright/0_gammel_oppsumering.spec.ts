@@ -3,6 +3,7 @@ import { test, expect } from '@playwright/test'
 import { arbeidtakerMedGammelOppsummering } from '../src/data/mock/data/soknad/arbeidstaker'
 
 import { setPeriodeFraTil, sporsmalOgSvar, fjernAnimasjoner, svarTekstboks, trykkPaSoknadMedId } from './utilities'
+import { validerAxeUtilityWrapper } from './uuvalidering'
 
 test.describe('Sjekker at søknader med gammel oppsummering ser ok ut', () => {
     test('Full søknadsflyt med gammel oppsummering', async ({ page }) => {
@@ -16,6 +17,7 @@ test.describe('Sjekker at søknader med gammel oppsummering ser ok ut', () => {
             })
             await expect(heading).toBeVisible()
 
+            await validerAxeUtilityWrapper(page, test.info())
             await trykkPaSoknadMedId(page, arbeidtakerMedGammelOppsummering().id)
         })
 
@@ -36,12 +38,15 @@ test.describe('Sjekker at søknader med gammel oppsummering ser ok ut', () => {
                 .click()
             await page.getByRole('button', { name: 'Nei, jeg har behov for søknaden' }).click()
 
+            await validerAxeUtilityWrapper(page, test.info())
+
             await page.getByText('Start søknad').click()
             await expect(page.getByText('Det er 1 feil i skjemaet')).toBeVisible()
             await expect(page.locator('.navds-confirmation-panel__inner')).toBeVisible()
             await expect(page.getByText('Du må bekrefte at du vil svare så riktig du kan')).toBeVisible()
             await page.locator('.navds-checkbox__label').click()
 
+            await validerAxeUtilityWrapper(page, test.info())
             await page.getByText('Start søknad').click()
         })
 
@@ -63,6 +68,8 @@ test.describe('Sjekker at søknader med gammel oppsummering ser ok ut', () => {
                     'Svaret ditt betyr at du har vært i fullt arbeid fra 20. – 24. april 2020. Du får ikke utbetalt sykepenger for denne perioden',
                 ),
             ).toBeVisible()
+
+            await validerAxeUtilityWrapper(page, test.info())
         })
 
         await test.step('Søknad TILBAKE_I_ARBEID går videre', async () => {
@@ -77,6 +84,7 @@ test.describe('Sjekker at søknader med gammel oppsummering ser ok ut', () => {
 
             await setPeriodeFraTil(page, 16, 23)
 
+            await validerAxeUtilityWrapper(page, test.info())
             await page.getByText('Gå videre').click()
         })
 
@@ -97,6 +105,7 @@ test.describe('Sjekker at søknader med gammel oppsummering ser ok ut', () => {
 
             await setPeriodeFraTil(page, 14, 22)
 
+            await validerAxeUtilityWrapper(page, test.info())
             await page.getByText('Gå videre').click()
         })
 
@@ -145,6 +154,7 @@ test.describe('Sjekker at søknader med gammel oppsummering ser ok ut', () => {
             ).toBeVisible()
             await page.locator('input#af302d17-f35d-38a6-ac23-ccde5db369cb_0').click()
 
+            await validerAxeUtilityWrapper(page, test.info())
             await page.getByText('Gå videre').click()
         })
 
@@ -167,6 +177,7 @@ test.describe('Sjekker at søknader med gammel oppsummering ser ok ut', () => {
 
             await checkboxParent.getByText('Selvstendig næringsdrivende').locator('..').click()
 
+            await validerAxeUtilityWrapper(page, test.info())
             await page.getByText('Gå videre').click()
         })
 
@@ -178,6 +189,7 @@ test.describe('Sjekker at søknader med gammel oppsummering ser ok ut', () => {
 
             await setPeriodeFraTil(page, 14, 22)
 
+            await validerAxeUtilityWrapper(page, test.info())
             await page.getByText('Gå videre').click()
         })
 
@@ -240,6 +252,7 @@ test.describe('Sjekker at søknader med gammel oppsummering ser ok ut', () => {
             await page.getByRole('link', { name: 'Oppsummering fra søknaden' }).click()
             await expect(page.getByText('Steg 7 av 7')).toBeVisible()
 
+            await validerAxeUtilityWrapper(page, test.info())
             await page.getByText('Send søknaden').click()
         })
 
@@ -253,6 +266,8 @@ test.describe('Sjekker at søknader med gammel oppsummering ser ok ut', () => {
             await expect(kvittering).toContainText('Før NAV kan behandle søknaden')
             await expect(kvittering).toContainText('NAV behandler søknaden')
             await expect(kvittering).toContainText('Når blir pengene utbetalt')
+
+            await validerAxeUtilityWrapper(page, test.info())
         })
     })
 })
