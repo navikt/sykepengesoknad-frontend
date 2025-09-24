@@ -35,7 +35,10 @@ const ListItemWithIcon = ({ content }: { content: string }) => (
             className="m-width-[24px] m-height-[24px] pt1  text-xl font-bold shrink-0"
             height={24}
             width={24}
+            aria-hidden="true"
+            focusable="false"
+            role="presentation"
         />
-        <BodyShort className="">{content}</BodyShort>
+        <BodyShort>{content}</BodyShort>
     </li>
 )
