@@ -1,6 +1,7 @@
 import path from 'path'
 
 import { test, expect } from '@playwright/test'
+
 import { validerAxeUtilityWrapper } from './uuvalidering'
 
 test.describe('Test sletting av kvittering som feiler', () => {

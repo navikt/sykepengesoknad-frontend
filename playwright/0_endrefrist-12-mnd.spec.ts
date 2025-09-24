@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test'
+
 import { validerAxeUtilityWrapper } from './uuvalidering'
 
 test.describe('Tester endrefrist 12 måneder', () => {
