@@ -11,6 +11,7 @@ import {
     hentFritekst,
     svarRadioClickOption,
 } from './utilities'
+import { validerAxeUtilityWrapper } from './uuvalidering'
 
 test.describe('Teste førsteside i reisetilskuddsøknaden', () => {
     test.setTimeout(180 * 1000) // Increased timeout to 3 minutes for slow navigation
@@ -48,6 +49,7 @@ test.describe('Teste førsteside i reisetilskuddsøknaden', () => {
             ).toBeVisible()
 
             await page.locator('.navds-checkbox__label').click()
+            await validerAxeUtilityWrapper(page, test.info())
             await page.getByText('Start søknad').click()
             steg.value++
         })
@@ -62,6 +64,8 @@ test.describe('Teste førsteside i reisetilskuddsøknaden', () => {
                 page.getByText('Hvor mye betaler du vanligvis i måneden for offentlig transport?'),
             ).toBeVisible()
             svarFritekst(page, 'Hvor mye betaler du vanligvis i måneden for offentlig transport?', '1000')
+            await validerAxeUtilityWrapper(page, test.info())
+
             await klikkGaVidere(page)
 
             await klikkTilbake(page)
@@ -70,6 +74,7 @@ test.describe('Teste førsteside i reisetilskuddsøknaden', () => {
                 'Hvor mye betaler du vanligvis i måneden for offentlig transport?',
             )
             expect(fritekstValue).toBe('1000')
+            await validerAxeUtilityWrapper(page, test.info())
 
             await klikkGaVidere(page)
             steg.value++
@@ -83,7 +88,7 @@ test.describe('Teste førsteside i reisetilskuddsøknaden', () => {
             await expect(page.locator('.undersporsmal > :nth-child(1) > :nth-child(1)')).toHaveText(
                 'Hvilke dager reiste du med bil i perioden 23. desember 2020 - 7. januar 2021?',
             )
-
+            await validerAxeUtilityWrapper(page, test.info())
             await klikkGaVidere(page, true)
             await expect(page.locator('[data-cy="feil-lokal"]').nth(0)).toContainText('Du må oppgi minst en dag')
 
@@ -108,6 +113,7 @@ test.describe('Teste førsteside i reisetilskuddsøknaden', () => {
                 }),
             ).toHaveValue('42')
 
+            await validerAxeUtilityWrapper(page, test.info())
             await klikkGaVidere(page)
             steg.value++
         })
@@ -136,7 +142,7 @@ test.describe('Teste førsteside i reisetilskuddsøknaden', () => {
 
             await page.getByText('Legg til reiseutgift').click()
             await expect(page.getByRole('dialog', { name: 'Legg til reiseutgift' })).toHaveAttribute('open')
-
+            await validerAxeUtilityWrapper(page, test.info())
             await page
                 .locator('[data-cy="filopplasteren"] input[type=file]')
                 .setInputFiles('playwright/fixtures/kvittering.jpg')
@@ -148,12 +154,14 @@ test.describe('Teste førsteside i reisetilskuddsøknaden', () => {
             await expect(table).toContainText('Parkering')
             await expect(table).toContainText('99 kr')
             await expect(table).toContainText('1 utgift på til sammen')
+            await validerAxeUtilityWrapper(page, test.info())
 
             await klikkGaVidere(page)
             await klikkTilbake(page)
             await expect(table).toContainText('Parkering')
             await expect(table).toContainText('99 kr')
             await expect(table).toContainText('1 utgift på til sammen')
+            await validerAxeUtilityWrapper(page, test.info())
             await klikkGaVidere(page)
             steg.value++
         })
@@ -163,6 +171,7 @@ test.describe('Teste førsteside i reisetilskuddsøknaden', () => {
             await expect(page.locator('[data-cy="sporsmal-tittel"]')).toHaveText('Utbetaling')
 
             await page.locator('[data-cy="ja-nei-stor"] input[value=JA]').click()
+            await validerAxeUtilityWrapper(page, test.info())
             await klikkGaVidere(page)
             steg.value++
         })
@@ -172,7 +181,7 @@ test.describe('Teste førsteside i reisetilskuddsøknaden', () => {
             await expect(page.locator('.navds-guide-panel__content')).toContainText(
                 'Nå kan du se over at alt er riktig før du sender inn søknaden.',
             )
-
+            await validerAxeUtilityWrapper(page, test.info())
             await page.getByText('Send søknaden').click()
         })
 
@@ -185,6 +194,7 @@ test.describe('Teste førsteside i reisetilskuddsøknaden', () => {
             await expect(kvitteringPanel).toContainText(
                 'Saksbehandlingstiden regnes fra Nav har mottatt all nødvendig dokumentasjon.',
             )
+            await validerAxeUtilityWrapper(page, test.info())
         })
     })
 })

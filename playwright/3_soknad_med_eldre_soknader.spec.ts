@@ -1,6 +1,7 @@
 import { test, expect } from '@playwright/test'
 
 import { svarNeiHovedsporsmal, klikkGaVidere } from './utilities'
+import { validerAxeUtilityWrapper } from './uuvalidering'
 
 test.describe('Eldre søknader', () => {
     // ------- CASE 1: Søknad med EN eldre søknad -------
@@ -9,6 +10,7 @@ test.describe('Eldre søknader', () => {
             await page.goto('/syk/sykepengesoknad?testperson=en-eldre-usendt-soknad')
             await expect(page.locator('.navds-heading--large')).toBeVisible()
             await expect(page.locator('.navds-heading--large')).toHaveText('Søknader')
+            await validerAxeUtilityWrapper(page, test.info())
             await page.locator('a[href*="e6e53c43-3b64-48be-b9d1-39d95198e528"]').click()
         })
 
@@ -17,6 +19,7 @@ test.describe('Eldre søknader', () => {
             await expect(
                 page.getByText('Du har en eldre søknad du må velge om du skal bruke, før du kan begynne på denne.'),
             ).toBeVisible()
+            await validerAxeUtilityWrapper(page, test.info())
             await page.getByText('Gå til eldste søknad').click()
         })
 
@@ -30,6 +33,7 @@ test.describe('Eldre søknader', () => {
             await page.goto('/syk/sykepengesoknad?testperson=to-eldre-usendte-soknader')
             await expect(page.locator('.navds-heading--large')).toBeVisible()
             await expect(page.locator('.navds-heading--large')).toHaveText('Søknader')
+            await validerAxeUtilityWrapper(page, test.info())
             await page.locator('a[href*="e6e53c43-3b64-48be-b9d1-39d95198e521"]').click()
         })
 
@@ -38,16 +42,19 @@ test.describe('Eldre søknader', () => {
             await expect(
                 page.getByText('Du har to eldre søknader du må velge om du skal bruke, før du kan begynne på denne.'),
             ).toBeVisible()
+            await validerAxeUtilityWrapper(page, test.info())
             await page.getByText('Gå til eldste søknad').click()
         })
 
         await test.step('Første eldste søknad: fyll ut', async () => {
             await expect(page).toHaveURL(/e6e53c43-3b64-48be-b9d1-39d95198e529\/1/)
+            await validerAxeUtilityWrapper(page, test.info())
             await fyllUtSoknad(page)
         })
 
         await test.step('Vi har lenke til neste søknad', async () => {
             await expect(page.getByText('Du har to søknader du må velge om du skal bruke.')).toBeVisible()
+            await validerAxeUtilityWrapper(page, test.info())
             await page.getByText('Gå til neste søknad').click()
         })
 
@@ -57,11 +64,13 @@ test.describe('Eldre søknader', () => {
 
         await test.step('Vi har lenke til siste søknad', async () => {
             await expect(page.getByText('Du har en søknad du må velge om du skal bruke.')).toBeVisible()
+            await validerAxeUtilityWrapper(page, test.info())
             await page.getByText('Gå til søknaden').click()
         })
 
         await test.step('Siste søknad: fyll ut og forvent Ferdig-knapp', async () => {
             await fyllUtSoknad(page)
+            await validerAxeUtilityWrapper(page, test.info())
             await expect(page.getByRole('button', { name: 'Ferdig' })).toBeVisible()
         })
     })

@@ -12,6 +12,7 @@ import {
     svarTekstboks,
     sporsmalOgSvar,
 } from './utilities'
+import { validerAxeUtilityWrapper } from './uuvalidering'
 
 async function velgDato(page: any, dato = 10) {
     await page.locator('.navds-date__field-button').first().click()
@@ -29,6 +30,7 @@ test.describe('Søknad med alle opprinnelige spørsmål om medlemskap', () => {
         await test.step('Laster startside', async () => {
             await page.goto(`/syk/sykepengesoknad/soknader/${soknad.id}/7?testperson=medlemskap`)
             await expect(page.locator('.navds-heading--large')).toBeVisible()
+            await validerAxeUtilityWrapper(page, test.info())
         })
 
         await test.step('Arbeid utenfor Norge', async () => {
@@ -37,6 +39,7 @@ test.describe('Søknad med alle opprinnelige spørsmål om medlemskap', () => {
             await svarCombobox(page, 'I hvilket land arbeidet du?', 'Fra', 'Frankrike')
             await svarFritekst(page, 'Hvilken arbeidsgiver jobbet du for?', 'Croissant AS')
             await setPeriodeFraTil(page, 12, 20)
+            await validerAxeUtilityWrapper(page, test.info())
             await klikkGaVidere(page)
         })
 
@@ -47,6 +50,7 @@ test.describe('Søknad med alle opprinnelige spørsmål om medlemskap', () => {
             await page.locator('.navds-combobox__button-toggle-list').click()
             await svarRadioGruppe(page, 'Hva gjorde du i utlandet?', 'Jeg studerte')
             await setPeriodeFraTil(page, 12, 20)
+            await validerAxeUtilityWrapper(page, test.info())
             await klikkGaVidere(page)
         })
 
@@ -82,12 +86,16 @@ test.describe('Søknad med alle opprinnelige spørsmål om medlemskap', () => {
                 .check()
 
             await setPeriodeFraTil(page, 12, 24, 1)
+            await validerAxeUtilityWrapper(page, test.info())
+
             await klikkGaVidere(page)
         })
 
         await test.step('Var du på reise utenfor EU/EØS mens du var sykmeldt', async () => {
             await expect(page.getByText('Var du på reise utenfor EU/EØS mens du var sykmeldt')).toBeVisible()
             await svarNeiHovedsporsmal(page)
+            await validerAxeUtilityWrapper(page, test.info())
+
             await klikkGaVidere(page)
         })
 
@@ -97,6 +105,7 @@ test.describe('Søknad med alle opprinnelige spørsmål om medlemskap', () => {
             await velgDato(page, 14)
             await svarRadioGruppe(page, 'Er oppholdstillatelsen midlertidig eller permanent?', 'Midlertidig')
             await setPeriodeFraTil(page, 12, 13)
+            await validerAxeUtilityWrapper(page, test.info())
             await klikkGaVidere(page)
         })
 
@@ -124,6 +133,7 @@ test.describe('Søknad med alle opprinnelige spørsmål om medlemskap', () => {
                 .locator('xpath=following-sibling::*')
             await expect(oppholdstillatelseAnswer.first()).toContainText('Midlertidig')
             await expect(oppholdstillatelseAnswer.first()).toContainText('12. – 13.')
+            await validerAxeUtilityWrapper(page, test.info())
         })
     })
 })
