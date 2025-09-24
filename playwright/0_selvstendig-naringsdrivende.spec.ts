@@ -9,6 +9,7 @@ import {
     sjekkMainContentFokus,
     modalIkkeAktiv,
 } from './utilities'
+import { validerAxeUtilityWrapper } from "./uuvalidering";
 
 export async function harFeilISkjemaet(page: Page, errorMessage: string) {
     const errorLocator = page.getByText(errorMessage).first()
@@ -76,6 +77,8 @@ test.describe('Tester selvstendig naringsdrivende søknad med data fra Sigrun', 
 
         await fellesInnholdEtterVisningAvSigrunData(page)
 
+
+        await validerAxeUtilityWrapper(page, test.info())
         await klikkGaVidere(page, false, true)
         await sjekkMainContentFokus(page)
 
@@ -119,6 +122,9 @@ test.describe('Tester selvstendig naringsdrivende søknad uten data fra Sigrun',
 
         await fellesInnholdEtterVisningAvSigrunData(page)
 
+
+        await validerAxeUtilityWrapper(page, test.info())
+
         await klikkGaVidere(page, true, true)
 
         await tilSlutt(page)
@@ -133,16 +139,20 @@ async function fellesInnholdFørVisningAvSigrunData(page: Page) {
     await harFeilISkjemaet(page, 'Du må svare på om virksomheten har blitt avviklet og slettet')
     await svarJaHovedsporsmal(page)
     await expect(page.getByText('Når ble virksomheten avviklet?')).toBeVisible()
+    await validerAxeUtilityWrapper(page, test.info())
     await klikkGaVidere(page, true)
     await harFeilISkjemaet(page, 'Datoen følger ikke formatet dd.mm.åååå')
     await svarNeiHovedsporsmal(page)
+    await validerAxeUtilityWrapper(page, test.info())
     await klikkGaVidere(page, true)
     await harFeilISkjemaet(page, 'Du må svare på om du er ny i arbeidslivet')
     await svarRadioSporsmal(page, 'Er du ny i arbeidslivet etter 1. januar 2019?', 'Ja')
     await expect(page.getByText('Du har oppgitt at du er ny i arbeidslivet.')).toBeVisible()
+    await validerAxeUtilityWrapper(page, test.info())
     await klikkGaVidere(page, true)
     await harFeilISkjemaet(page, 'Datoen følger ikke formatet dd.mm.åååå')
     await svarRadioSporsmal(page, 'Er du ny i arbeidslivet etter 1. januar 2019?', 'Nei')
+    await validerAxeUtilityWrapper(page, test.info())
     await klikkGaVidere(page, true)
     await harFeilISkjemaet(page, 'Du må svare på om det har skjedd en varig endring')
 
@@ -176,6 +186,7 @@ async function fellesInnholdFørVisningAvSigrunData(page: Page) {
         'Har det skjedd en varig endring i arbeidssituasjonen eller virksomheten din i mellom 1. januar 2019 og frem til sykmeldingstidspunktet?',
         'Ja',
     )
+    await validerAxeUtilityWrapper(page, test.info())
 }
 
 async function fellesInnholdEtterVisningAvSigrunData(page: Page) {
@@ -200,6 +211,8 @@ async function fellesInnholdEtterVisningAvSigrunData(page: Page) {
             'Etter du har sendt inn søknaden trenger vi dokumentasjon på inntekten din etter den varige endringen.',
         ),
     ).toBeVisible()
+
+    await validerAxeUtilityWrapper(page, test.info())
     await klikkGaVidere(page, true)
     await harFeilISkjemaet(page, 'Datoen følger ikke formatet dd.mm.åååå')
 
@@ -233,5 +246,6 @@ async function kvitteringen(page: Page) {
     await expect(
         page.getByText('Du må sende inn dokumentasjon på inntekten din før vi kan behandle saken.'),
     ).toBeVisible()
+    await validerAxeUtilityWrapper(page, test.info())
     await expect(page.getByText('Skattemelding/Næringsspesifikasjon hvis den er klar')).toBeVisible()
 }

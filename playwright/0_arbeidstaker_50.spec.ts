@@ -1,7 +1,8 @@
 import { test, expect, Page } from '@playwright/test'
 
 import { arbeidstakerGradert } from '../src/data/mock/data/soknad/arbeidstaker-gradert'
-import { validerAxeUtilityWrapper } from "./uuvalidering";
+
+import { validerAxeUtilityWrapper } from './uuvalidering'
 const fillTextFieldByLabel = async (page: Page, labelText: string, value: string, fallbackSelector?: string) => {
     try {
         await page.getByLabel(labelText).fill(value)

@@ -12,6 +12,7 @@ import {
     trykkPaSoknadMedId,
     svarFritekst,
 } from './utilities'
+import { validerAxeUtilityWrapper } from './uuvalidering'
 
 const soknadId = arbeidstaker.id
 
@@ -47,6 +48,8 @@ test.describe('Tester arbeidstakersøknad - 100%', () => {
             await expect(page.locator('.navds-confirmation-panel__inner')).toBeVisible()
             await expect(page.getByText('Du må bekrefte at du vil svare så riktig du kan')).toBeVisible()
 
+            await validerAxeUtilityWrapper(page, test.info())
+
             await checkViStolerPaDeg(page)
         })
 
@@ -68,6 +71,8 @@ test.describe('Tester arbeidstakersøknad - 100%', () => {
                     'Svaret ditt betyr at du har vært i fullt arbeid fra 20. – 24. april 2020. Du får ikke utbetalt sykepenger for denne perioden',
                 ),
             ).toBeVisible()
+
+            await validerAxeUtilityWrapper(page, test.info())
         })
 
         await test.step('Søknad TILBAKE_I_ARBEID går videre', async () => {
@@ -81,6 +86,8 @@ test.describe('Tester arbeidstakersøknad - 100%', () => {
             await expect(page.getByText('Når tok du ut feriedager?')).toBeVisible()
 
             await setPeriodeFraTil(page, 16, 23)
+
+            await validerAxeUtilityWrapper(page, test.info())
             await klikkGaVidere(page)
         })
 
@@ -100,6 +107,8 @@ test.describe('Tester arbeidstakersøknad - 100%', () => {
             await expect(page.getByText('Når tok du permisjon?')).toBeVisible()
 
             await setPeriodeFraTil(page, 14, 22)
+
+            await validerAxeUtilityWrapper(page, test.info())
             await klikkGaVidere(page)
         })
 
@@ -143,6 +152,7 @@ test.describe('Tester arbeidstakersøknad - 100%', () => {
             ).toBeVisible()
             await page.locator('input#af302d17-f35d-38a6-ac23-ccde5db369cb_0').click()
 
+            await validerAxeUtilityWrapper(page, test.info())
             await klikkGaVidere(page)
         })
 
@@ -171,6 +181,7 @@ test.describe('Tester arbeidstakersøknad - 100%', () => {
                 .locator('..')
             await selvstendingNaering.click()
 
+            await validerAxeUtilityWrapper(page, test.info())
             await klikkGaVidere(page)
         })
 
@@ -181,6 +192,8 @@ test.describe('Tester arbeidstakersøknad - 100%', () => {
             await expect(page.getByText('Når var du utenfor EU/EØS?')).toBeVisible()
 
             await setPeriodeFraTil(page, 14, 22)
+
+            await validerAxeUtilityWrapper(page, test.info())
             await klikkGaVidere(page)
         })
 
@@ -233,6 +246,7 @@ test.describe('Tester arbeidstakersøknad - 100%', () => {
 
             await page.getByRole('link', { name: 'Forrige steg' }).click()
             await expect(page).toHaveURL(new RegExp(`.*${soknadId}\\/7`))
+            await validerAxeUtilityWrapper(page, test.info())
             await klikkGaVidere(page)
 
             await page.getByRole('link', { name: 'Endre svar' }).click()
@@ -252,6 +266,7 @@ test.describe('Tester arbeidstakersøknad - 100%', () => {
             await expect(kvittering).toContainText('Før NAV kan behandle søknaden')
             await expect(kvittering).toContainText('NAV behandler søknaden')
             await expect(kvittering).toContainText('Når blir pengene utbetalt')
+            await validerAxeUtilityWrapper(page, test.info())
         })
     })
 })
