@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test'
 
 import { behandlingsdager } from '../src/data/mock/data/soknad/behandlingsdager'
-import { validerAxeUtilityWrapper } from "./uuvalidering";
+import { validerAxeUtilityWrapper } from './uuvalidering'
 
 async function checkViStolerPaDeg(page, gaVidere = true) {
     await page

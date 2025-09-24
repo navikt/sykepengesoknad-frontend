@@ -9,7 +9,7 @@ import {
     sjekkMainContentFokus,
     modalIkkeAktiv,
 } from './utilities'
-import { validerAxeUtilityWrapper } from "./uuvalidering";
+import { validerAxeUtilityWrapper } from './uuvalidering'
 
 export async function harFeilISkjemaet(page: Page, errorMessage: string) {
     const errorLocator = page.getByText(errorMessage).first()
@@ -77,7 +77,6 @@ test.describe('Tester selvstendig naringsdrivende søknad med data fra Sigrun', 
 
         await fellesInnholdEtterVisningAvSigrunData(page)
 
-
         await validerAxeUtilityWrapper(page, test.info())
         await klikkGaVidere(page, false, true)
         await sjekkMainContentFokus(page)
@@ -121,7 +120,6 @@ test.describe('Tester selvstendig naringsdrivende søknad uten data fra Sigrun',
         await expect(page.getByText('Vi skjønner at det noen ganger ')).toBeVisible()
 
         await fellesInnholdEtterVisningAvSigrunData(page)
-
 
         await validerAxeUtilityWrapper(page, test.info())
 

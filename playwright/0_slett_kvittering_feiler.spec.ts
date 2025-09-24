@@ -1,7 +1,7 @@
 import path from 'path'
 
 import { test, expect } from '@playwright/test'
-import { validerAxeUtilityWrapper } from "./uuvalidering";
+import { validerAxeUtilityWrapper } from './uuvalidering'
 
 test.describe('Test sletting av kvittering som feiler', () => {
     const soknadId = 'd4ce1c57-1f91-411b-ab64-beabbba29b65' // feilVedSlettingAvKvittering.id
@@ -26,7 +26,6 @@ test.describe('Test sletting av kvittering som feiler', () => {
             const fileInput = page.locator('[data-cy="filopplasteren"] input[type=file]')
             const filePath = path.join(test.info().project.testDir, 'fixtures', 'kvittering.jpg')
             await fileInput.setInputFiles(filePath)
-
 
             await validerAxeUtilityWrapper(page, test.info())
             await page.getByRole('button', { name: 'Bekreft' }).click()

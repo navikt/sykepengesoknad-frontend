@@ -3,7 +3,7 @@ import { test, expect } from '@playwright/test'
 import { arbeidtakerMedGammelOppsummering } from '../src/data/mock/data/soknad/arbeidstaker'
 
 import { setPeriodeFraTil, sporsmalOgSvar, fjernAnimasjoner, svarTekstboks, trykkPaSoknadMedId } from './utilities'
-import { validerAxeUtilityWrapper } from "./uuvalidering";
+import { validerAxeUtilityWrapper } from './uuvalidering'
 
 test.describe('Sjekker at søknader med gammel oppsummering ser ok ut', () => {
     test('Full søknadsflyt med gammel oppsummering', async ({ page }) => {
@@ -84,7 +84,6 @@ test.describe('Sjekker at søknader med gammel oppsummering ser ok ut', () => {
 
             await setPeriodeFraTil(page, 16, 23)
 
-
             await validerAxeUtilityWrapper(page, test.info())
             await page.getByText('Gå videre').click()
         })
@@ -105,7 +104,6 @@ test.describe('Sjekker at søknader med gammel oppsummering ser ok ut', () => {
             await expect(page.getByText('Når tok du permisjon?')).toBeVisible()
 
             await setPeriodeFraTil(page, 14, 22)
-
 
             await validerAxeUtilityWrapper(page, test.info())
             await page.getByText('Gå videre').click()
@@ -253,7 +251,6 @@ test.describe('Sjekker at søknader med gammel oppsummering ser ok ut', () => {
             await page.getByRole('button', { name: 'Vis alle steg' }).click()
             await page.getByRole('link', { name: 'Oppsummering fra søknaden' }).click()
             await expect(page.getByText('Steg 7 av 7')).toBeVisible()
-
 
             await validerAxeUtilityWrapper(page, test.info())
             await page.getByText('Send søknaden').click()

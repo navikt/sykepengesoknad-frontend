@@ -8,7 +8,7 @@ import {
     sporsmalOgSvar,
     svarJaHovedsporsmal,
 } from './utilities'
-import { validerAxeUtilityWrapper } from "./uuvalidering";
+import { validerAxeUtilityWrapper } from './uuvalidering'
 
 test.describe('Tester yrkesskadesspørsmål', () => {
     test('Full flow for yrkesskadesspørsmål', async ({ page }) => {
