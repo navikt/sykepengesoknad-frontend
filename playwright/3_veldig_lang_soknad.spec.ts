@@ -203,8 +203,6 @@ test.describe('Tester støtte for gamle spørsmål', () => {
             await gaVidere(page, steg)
         })
 
-
-
         await test.step('23: FERIE_PERMISJON_UTLAND', async () => {
             await svarJaHovedsporsmal(page)
             await velgCheckbox(page, 'Jeg tok ut ferie')
