@@ -12,7 +12,7 @@ import {
     svarTekstboks,
     sporsmalOgSvar,
 } from './utilities'
-import { validerAxeUtilityWrapper } from './uuvalidering'
+// import { validerAxeUtilityWrapper } from './uuvalidering'
 
 async function velgDato(page: any, dato = 10) {
     await page.locator('.navds-date__field-button').first().click()
