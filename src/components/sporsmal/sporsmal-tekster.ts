@@ -41,6 +41,7 @@ const SporsmalTekster = {
     'soknad.feilmelding.FULLTIDSSTUDIUM': 'Du må svare på om utdanningen er et fulltidsstudium',
     'soknad.feilmelding.HVILKE_ANDRE_INNTEKTSKILDER': 'Du må oppgi hvilke inntektskilder du har',
     'soknad.feilmelding.HVILKE_ANDRE_INNTEKTSKILDER.lokal': 'Du må velge minst et alternativ',
+    'soknad.feilmelding.FRAVAR_FOR_SYKMELDINGEN_V2': 'Du må svare på om du hadde fravær før sykmeldingen din',
 
     'soknad.feilmelding.PERMITTERT_NAA': 'Du må svare på om du var permittert',
     'soknad.feilmelding.PERMITTERT_NAA.lokal': 'Du må svare på om du var permittert',

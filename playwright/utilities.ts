@@ -86,6 +86,13 @@ export async function svarCombobox(
     }
 }
 
+export async function svarCheckboxSporsmal(page: Page, groupName: string, checkboxName: string) {
+    const group = page.getByRole('group', { name: groupName })
+    const checkbox = group.getByRole('checkbox', { name: checkboxName })
+    await checkbox.check()
+    await expect(checkbox).toBeChecked()
+}
+
 // Eksempel på korleis du kan implementere desse hjelpefunksjonane:
 export async function modalIkkeAktiv(page: Page) {
     // Til dømes: vent på at eit modal-element ikkje er synleg
@@ -169,6 +176,10 @@ export async function svarRadioGruppe(page: Page, groupName: string | RegExp, ra
 
     // Finn riktig radio-knapp med radioName og "check" den
     await group.getByRole('radio', { name: radioName }).check()
+}
+
+export async function svarRadioSporsmal(page: Page, question: string, answer: string) {
+    await svarRadioGruppe(page, question, answer)
 }
 
 export async function svarFritekst(page: Page, name: string, verdi: string) {
@@ -418,14 +429,13 @@ export async function velgKalenderdag(page: Page) {
     await page.locator('[aria-label="mandag 13"]').click()
 }
 
-export async function velgTimer(page: Page, steg: number, soknad: any) {
-    const id = soknad.sporsmal[steg - 1].undersporsmal[1].undersporsmal[1].undersporsmal[0].id
-    await page.locator('.undersporsmal input[value=timer]').click()
-    await page.locator(`.undersporsmal .navds-text-field__input[id="${id}"]`).type('21')
+export async function velgTimer(page: Page) {
+    await page.getByRole('radio', { name: 'timer' }).click()
+    await page.getByRole('textbox', { name: 'Oppgi timer totalt' }).fill('21')
 }
 
 export async function velgTall(page: Page, sporsmalstekst: string, verdi: string) {
-    await page.getByText(sporsmalstekst).locator('..').getByRole('textbox').type(verdi)
+    await page.getByText(sporsmalstekst).locator('..').getByRole('textbox').fill(verdi)
 }
 
 export async function velgCheckbox(page: Page, gjelder: string) {
