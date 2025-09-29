@@ -2,6 +2,7 @@ import { sendtArbeidsledigKvittering } from '../src/data/mock/data/soknad/soknad
 
 import { test, expect } from './fixtures'
 import { klikkGaVidere, checkViStolerPaDeg, harSynligTittel, harSoknaderlisteHeading } from './utilities'
+import { validerAxeUtilityWrapper } from "./uuvalidering";
 
 test.describe('Tester endring uten en endringer', () => {
     const soknad = sendtArbeidsledigKvittering
@@ -20,6 +21,7 @@ test.describe('Tester endring uten en endringer', () => {
             await expect(page).toHaveURL(/\/1/)
 
             await expect(page.getByText('Avslutt uten å endre søknaden')).toBeVisible()
+            await validerAxeUtilityWrapper(page, test.info())
             await expect(page.getByRole('button', { name: 'Jeg vil slette denne søknaden' })).toBeHidden()
         })
 
@@ -30,6 +32,7 @@ test.describe('Tester endring uten en endringer', () => {
             await klikkGaVidere(page)
             await klikkGaVidere(page)
             await harSynligTittel(page, 'Oppsummering fra søknaden', 2)
+            await validerAxeUtilityWrapper(page, test.info())
         })
 
         await test.step('Vi ser en popup og lander på listevisninga', async () => {
@@ -40,6 +43,7 @@ test.describe('Tester endring uten en endringer', () => {
                 page.getByRole('dialog').filter({ hasText: /Vi behandler den opprinnelige sykepengesøknaden din./i }),
             ).toBeVisible()
             await page.getByRole('button', { name: 'Ok', exact: true }).click()
+            await validerAxeUtilityWrapper(page, test.info())
             await harSoknaderlisteHeading(page)
         })
     })

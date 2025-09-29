@@ -2,6 +2,7 @@ import { gradertReisetilskudd } from '../src/data/mock/data/soknad/arbeidstaker-
 
 import { test, expect } from './fixtures'
 import { klikkGaVidere, klikkTilbake, svarJaHovedsporsmal, svarRadioGruppe } from './utilities'
+import { validerAxeUtilityWrapper } from "./uuvalidering";
 
 test.describe('Tester at riktig antall desimaler sendes til backend', () => {
     test('Oppgir desimaler på svartype TALL og PROSENT', async ({ page }) => {
@@ -14,6 +15,7 @@ test.describe('Tester at riktig antall desimaler sendes til backend', () => {
             await page.getByRole('textbox', { name: 'Hvor mange timer i uken' }).fill('37.321')
             await svarRadioGruppe(page, 'Hvor mye jobbet du tilsammen', 'Prosent')
             await page.getByRole('textbox', { name: 'Oppgi prosent' }).fill('50.321')
+            await validerAxeUtilityWrapper(page, test.info())
         })
 
         await test.step('Validerer verdier etter navigasjon', async () => {
@@ -21,6 +23,7 @@ test.describe('Tester at riktig antall desimaler sendes til backend', () => {
             await klikkTilbake(page)
             await expect(page.getByRole('textbox', { name: 'Hvor mange timer i uken' })).toHaveValue('37.32')
             await expect(page.getByRole('textbox', { name: 'Oppgi prosent' })).toHaveValue('50')
+            await validerAxeUtilityWrapper(page, test.info())
         })
     })
 
@@ -35,6 +38,7 @@ test.describe('Tester at riktig antall desimaler sendes til backend', () => {
             await svarRadioGruppe(page, 'Hadde du utgifter til bompenger', 'Ja')
             await page.getByRole('textbox', { name: 'Hvor mye betalte du i' }).fill('500.321')
             await page.getByRole('textbox', { name: 'Hvor mange kilometer er kjø' }).fill('12.321')
+            await validerAxeUtilityWrapper(page, test.info())
         })
 
         await test.step('Validerer verdier etter navigasjon', async () => {
@@ -42,6 +46,7 @@ test.describe('Tester at riktig antall desimaler sendes til backend', () => {
             await klikkTilbake(page)
             await expect(page.getByRole('textbox', { name: 'Hvor mye betalte du i' })).toHaveValue('500.32')
             await expect(page.getByRole('textbox', { name: 'Hvor mange kilometer er kjø' })).toHaveValue('12.3')
+            await validerAxeUtilityWrapper(page, test.info())
         })
     })
 
@@ -56,6 +61,7 @@ test.describe('Tester at riktig antall desimaler sendes til backend', () => {
             await page.getByRole('textbox', { name: 'Hvor mange timer i uken' }).fill('36,99')
             await svarRadioGruppe(page, 'Hvor mye jobbet du tilsammen', 'Prosent')
             await page.getByRole('textbox', { name: 'Oppgi prosent' }).fill('50.321wsergergwegr')
+            await validerAxeUtilityWrapper(page, test.info())
         })
 
         await test.step('Validerer verdier etter navigasjon', async () => {
@@ -63,6 +69,7 @@ test.describe('Tester at riktig antall desimaler sendes til backend', () => {
             await klikkTilbake(page)
             await expect(page.getByRole('textbox', { name: 'Hvor mange timer i uken' })).toHaveValue('36.99')
             await expect(page.getByRole('textbox', { name: 'Oppgi prosent' })).toHaveValue('50')
+            await validerAxeUtilityWrapper(page, test.info())
         })
     })
 
@@ -77,6 +84,7 @@ test.describe('Tester at riktig antall desimaler sendes til backend', () => {
             await page.getByRole('textbox', { name: 'Hvor mange timer i uken' }).fill('36')
             await svarRadioGruppe(page, 'Hvor mye jobbet du tilsammen', 'Prosent')
             await page.getByRole('textbox', { name: 'Oppgi prosent' }).fill('50.321wsergergwegr')
+            await validerAxeUtilityWrapper(page, test.info())
         })
 
         await test.step('Validerer verdier etter navigasjon', async () => {
@@ -84,6 +92,7 @@ test.describe('Tester at riktig antall desimaler sendes til backend', () => {
             await klikkTilbake(page)
             await expect(page.getByRole('textbox', { name: 'Hvor mange timer i uken' })).toHaveValue('36')
             await expect(page.getByRole('textbox', { name: 'Oppgi prosent' })).toHaveValue('50')
+            await validerAxeUtilityWrapper(page, test.info())
         })
     })
 })

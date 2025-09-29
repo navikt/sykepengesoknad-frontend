@@ -4,6 +4,7 @@ import { arbeidstakerGradert } from '../src/data/mock/data/soknad/arbeidstaker-g
 
 import { test, expect } from './fixtures'
 import { klikkGaVidere, svarCombobox, svarJaHovedsporsmal } from './utilities'
+import { validerAxeUtilityWrapper } from "./uuvalidering";
 
 test.describe('Tester feilmeldinger', () => {
     const soknad = arbeidstakerGradert
@@ -42,6 +43,7 @@ test.describe('Tester feilmeldinger', () => {
 
             await page.getByRole('checkbox').click()
             await verifiserIngenFeilmeldinger(page)
+            await validerAxeUtilityWrapper(page, test.info())
         })
     })
 
@@ -57,9 +59,10 @@ test.describe('Tester feilmeldinger', () => {
                 'Du må oppgi om du var tilbake i arbeid før friskmeldingsperioden utløp',
                 soknad.sporsmal[1].id + '_0',
             )
-
+            await validerAxeUtilityWrapper(page, test.info())
             await page.getByRole('radio', { name: 'Ja' }).click()
             await verifiserIngenFeilmeldinger(page)
+
         })
     })
 
@@ -88,6 +91,7 @@ test.describe('Tester feilmeldinger', () => {
                 'Datoen følger ikke formatet dd.mm.åååå',
                 sporsmalId,
             )
+            await validerAxeUtilityWrapper(page, test.info())
         })
 
         await test.step('Ugyldig format "2020"', async () => {
@@ -99,6 +103,7 @@ test.describe('Tester feilmeldinger', () => {
                 'Datoen følger ikke formatet dd.mm.åååå',
                 sporsmalId,
             )
+            await validerAxeUtilityWrapper(page, test.info())
         })
 
         await test.step('Dato mindre enn min', async () => {
@@ -110,6 +115,7 @@ test.describe('Tester feilmeldinger', () => {
                 'Datoen kan ikke være før 01.04.2020',
                 sporsmalId,
             )
+            await validerAxeUtilityWrapper(page, test.info())
         })
 
         await test.step('Dato større enn max', async () => {
@@ -121,6 +127,7 @@ test.describe('Tester feilmeldinger', () => {
                 'Datoen kan ikke være etter 24.04.2020',
                 sporsmalId,
             )
+            await validerAxeUtilityWrapper(page, test.info())
         })
     })
 
@@ -144,6 +151,7 @@ test.describe('Tester feilmeldinger', () => {
                 'Du må oppgi en fra og med dato i formatet dd.mm.åååå',
                 `${sporsmalId}_0_fom`,
             )
+            await validerAxeUtilityWrapper(page, test.info())
         })
 
         await test.step('Ingen tom', async () => {
@@ -155,6 +163,7 @@ test.describe('Tester feilmeldinger', () => {
                 'Du må oppgi en til og med dato i formatet dd.mm.åååå',
                 `${sporsmalId}_0_tom`,
             )
+            await validerAxeUtilityWrapper(page, test.info())
         })
 
         await test.step('Fom før min', async () => {
@@ -168,6 +177,7 @@ test.describe('Tester feilmeldinger', () => {
                 'Fra og med kan ikke være før 01.04.2020',
                 `${sporsmalId}_0_fom`,
             )
+            await validerAxeUtilityWrapper(page, test.info())
         })
 
         await test.step('Tom etter max', async () => {
@@ -181,6 +191,7 @@ test.describe('Tester feilmeldinger', () => {
                 'Til og med kan ikke være etter 24.04.2020',
                 `${sporsmalId}_0_tom`,
             )
+            await validerAxeUtilityWrapper(page, test.info())
         })
 
         await test.step('Ugyldig format', async () => {
@@ -194,6 +205,7 @@ test.describe('Tester feilmeldinger', () => {
                 'Du må oppgi en til og med dato i formatet dd.mm.åååå',
                 `${sporsmalId}_0_tom`,
             )
+            await validerAxeUtilityWrapper(page, test.info())
         })
 
         await test.step('Tom før fom', async () => {
@@ -207,6 +219,7 @@ test.describe('Tester feilmeldinger', () => {
                 'Til og med må være etter fra og med',
                 `${sporsmalId}_0_tom`,
             )
+            await validerAxeUtilityWrapper(page, test.info())
         })
 
         await test.step('Legg til periode uten å fylle ut', async () => {
@@ -221,6 +234,7 @@ test.describe('Tester feilmeldinger', () => {
                 'Du må oppgi en fra og med dato i formatet dd.mm.åååå',
                 `${sporsmalId}_1_fom`,
             )
+            await validerAxeUtilityWrapper(page, test.info())
         })
 
         await test.step('Overlappende perioder', async () => {
@@ -233,11 +247,13 @@ test.describe('Tester feilmeldinger', () => {
                 'Du kan ikke legge inn perioder som overlapper med hverandre',
                 `${sporsmalId}_1_tom`,
             )
+            await validerAxeUtilityWrapper(page, test.info())
         })
 
         await test.step('Slett periode', async () => {
             await page.getByRole('button', { name: 'Slett periode' }).click()
             await verifiserIngenFeilmeldinger(page)
+            await validerAxeUtilityWrapper(page, test.info())
         })
     })
 
@@ -253,18 +269,21 @@ test.describe('Tester feilmeldinger', () => {
             await page.getByRole('radio', { name: 'Prosent' }).click()
             await klikkGaVidere(page, true)
             await expect(page.getByText('Du må oppgi en verdi')).toBeVisible()
+            await validerAxeUtilityWrapper(page, test.info())
         })
 
         await test.step('Prosent: Mindre enn min', async () => {
             await prosentInput.fill('-10')
             await klikkGaVidere(page, true)
             await expect(page.getByText('Må være minimum 51')).toBeVisible()
+            await validerAxeUtilityWrapper(page, test.info())
         })
 
         await test.step('Prosent: Større enn max', async () => {
             await prosentInput.fill('1000')
             await klikkGaVidere(page, true)
             await expect(page.getByText('Må være maksimum 99')).toBeVisible()
+            await validerAxeUtilityWrapper(page, test.info())
         })
 
         await test.step('Timer: Grad mindre enn sykmeldingsgrad', async () => {
@@ -277,11 +296,13 @@ test.describe('Tester feilmeldinger', () => {
                     hasText: 'Antall timer du skrev inn, betyr at du har jobbet 2 % av det du gjør når du er frisk.',
                 }),
             ).toBeVisible()
+            await validerAxeUtilityWrapper(page, test.info())
         })
 
         await test.step('Timer: Feilmelding går bort', async () => {
             await timerInput.fill('67.5')
             await verifiserIngenFeilmeldinger(page)
+            await validerAxeUtilityWrapper(page, test.info())
         })
     })
 
@@ -297,6 +318,7 @@ test.describe('Tester feilmeldinger', () => {
                 'Du må oppgi hvilke inntektskilder du har',
                 soknad.sporsmal[6].undersporsmal[0].undersporsmal[0].id,
             )
+            await validerAxeUtilityWrapper(page, test.info())
         })
 
         await test.step('Feilmelding går bort', async () => {
@@ -306,6 +328,7 @@ test.describe('Tester feilmeldinger', () => {
                 .check()
 
             await verifiserIngenFeilmeldinger(page)
+            await validerAxeUtilityWrapper(page, test.info())
         })
     })
 
@@ -327,12 +350,13 @@ test.describe('Tester feilmeldinger', () => {
             )
             await svarCombobox(page, 'I hvilket land arbeidet du?', 'Fra', 'Frankrike')
             await verifiserIngenFeilmeldinger(page)
+            await validerAxeUtilityWrapper(page, test.info())
         })
 
         await test.step('Legg til og slett', async () => {
             await page.getByRole('button', { name: 'Legg til nytt opphold' }).click()
             await expect(page.getByRole('button', { name: 'Slett', exact: true })).toHaveCount(2)
-
+            await validerAxeUtilityWrapper(page, test.info())
             await klikkGaVidere(page, true)
             await expect(page.locator('.navds-error-message').first()).toContainText(
                 'Du må velge et alternativ fra menyen',
@@ -344,7 +368,7 @@ test.describe('Tester feilmeldinger', () => {
                 'Du må oppgi en fra og med dato i formatet dd.mm.åååå',
             )
             await expect(page.getByText('Det er 3 feil i skjemaet')).toBeVisible()
-
+            await validerAxeUtilityWrapper(page, test.info())
             await page.getByRole('button', { name: 'Slett', exact: true }).last().click()
             await verifiserIngenFeilmeldinger(page)
         })
