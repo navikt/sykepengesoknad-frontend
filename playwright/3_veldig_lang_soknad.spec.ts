@@ -72,7 +72,7 @@ test.describe('Tester støtte for gamle spørsmål', () => {
 
         await test.step('5: ARBEID_UNDERVEIS_100_PROSENT_0', async () => {
             await svarNeiHovedsporsmal(page)
-            await gaVidere(page, steg)
+            await klikkGaVidere(page)
         })
 
         await test.step('6: MEDLEMSKAP_OPPHOLDSTILLATELSE', async () => {
