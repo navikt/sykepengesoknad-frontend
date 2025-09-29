@@ -31,8 +31,8 @@ test.describe('Tester endring uten en endringer', () => {
             await klikkGaVidere(page)
             await klikkGaVidere(page)
             await klikkGaVidere(page)
-            await harSynligTittel(page, 'Oppsummering fra søknaden', 2)
             await validerAxeUtilityWrapper(page, test.info())
+            await harSynligTittel(page, 'Oppsummering fra søknaden', 2)
         })
 
         await test.step('Vi ser en popup og lander på listevisninga', async () => {
