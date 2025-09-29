@@ -2,13 +2,12 @@ import { sendtArbeidsledigKvittering } from '../src/data/mock/data/soknad/soknad
 
 import { test, expect } from './fixtures'
 import { klikkGaVidere, checkViStolerPaDeg, harSynligTittel, harSoknaderlisteHeading } from './utilities'
-import { validerAxeUtilityWrapper } from './uuvalidering'
 
 test.describe('Tester endring uten en endringer', () => {
     const soknad = sendtArbeidsledigKvittering
     const testpersonQuery = '?testperson=integrasjon-soknader'
 
-    test(   'Full flyt for endring uten endring', async ({ page }) => {
+    test('Full flyt for endring uten endring', async ({ page }) => {
         await test.step('Gå til sendt søknad', async () => {
             await page.goto(`/syk/sykepengesoknad/sendt/${soknad.id}${testpersonQuery}`)
         })
