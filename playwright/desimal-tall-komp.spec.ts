@@ -2,7 +2,7 @@ import { gradertReisetilskudd } from '../src/data/mock/data/soknad/arbeidstaker-
 
 import { test, expect } from './fixtures'
 import { klikkGaVidere, klikkTilbake, svarJaHovedsporsmal, svarRadioGruppe } from './utilities'
-import { validerAxeUtilityWrapper } from "./uuvalidering";
+import { validerAxeUtilityWrapper } from './uuvalidering'
 
 test.describe('Tester at riktig antall desimaler sendes til backend', () => {
     test('Oppgir desimaler på svartype TALL og PROSENT', async ({ page }) => {

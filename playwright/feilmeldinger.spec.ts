@@ -4,7 +4,7 @@ import { arbeidstakerGradert } from '../src/data/mock/data/soknad/arbeidstaker-g
 
 import { test, expect } from './fixtures'
 import { klikkGaVidere, svarCombobox, svarJaHovedsporsmal } from './utilities'
-import { validerAxeUtilityWrapper } from "./uuvalidering";
+import { validerAxeUtilityWrapper } from './uuvalidering'
 
 test.describe('Tester feilmeldinger', () => {
     const soknad = arbeidstakerGradert
@@ -62,7 +62,6 @@ test.describe('Tester feilmeldinger', () => {
             await validerAxeUtilityWrapper(page, test.info())
             await page.getByRole('radio', { name: 'Ja' }).click()
             await verifiserIngenFeilmeldinger(page)
-
         })
     })
 

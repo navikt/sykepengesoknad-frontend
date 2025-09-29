@@ -2,7 +2,7 @@ import { sendtArbeidsledigKvittering } from '../src/data/mock/data/soknad/soknad
 
 import { test, expect } from './fixtures'
 import { klikkGaVidere, checkViStolerPaDeg, harSynligTittel, harSoknaderlisteHeading } from './utilities'
-import { validerAxeUtilityWrapper } from "./uuvalidering";
+import { validerAxeUtilityWrapper } from './uuvalidering'
 
 test.describe('Tester endring uten en endringer', () => {
     const soknad = sendtArbeidsledigKvittering
