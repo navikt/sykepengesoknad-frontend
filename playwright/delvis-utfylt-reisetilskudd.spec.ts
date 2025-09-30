@@ -2,6 +2,7 @@ import { delvisUtfyltReisetilskudd } from '../src/data/mock/data/personas/reiset
 
 import { test, expect } from './fixtures'
 import { harSoknaderlisteHeading, klikkTilbake, trykkPaSoknadMedId } from './utilities'
+import { validerAxeUtilityWrapper } from './uuvalidering'
 
 test.describe('Delvis utfylt søknad med reisetilskudd', () => {
     test('Full testflyt for delvis utfylt søknad', async ({ page }) => {
@@ -18,10 +19,12 @@ test.describe('Delvis utfylt søknad med reisetilskudd', () => {
         await test.step('Forrige spørsmål er besvart', async () => {
             await klikkTilbake(page)
             const radioButton = page.locator('form').getByRole('radio', { name: 'Nei' }).first()
+            await validerAxeUtilityWrapper(page, test.info())
             await expect(radioButton).toBeChecked()
         })
 
         await test.step('Side for opplasting av kvitteringer er ikke besvart', async () => {
+            await validerAxeUtilityWrapper(page, test.info())
             await klikkTilbake(page)
             await expect(page.getByText('Beløp')).toBeHidden()
         })

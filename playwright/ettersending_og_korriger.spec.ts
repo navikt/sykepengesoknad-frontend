@@ -10,6 +10,7 @@ import {
     svarJaHovedsporsmal,
     trykkPaSoknadMedId,
 } from './utilities'
+import { validerAxeUtilityWrapper } from './uuvalidering'
 
 test.describe('Tester ettersending og korrigering', () => {
     const soknad = arbeidstakerGradert
@@ -39,6 +40,7 @@ test.describe('Tester ettersending og korrigering', () => {
 
         await test.step('Sender søknaden', async () => {
             await harSynligTittel(page, 'Oppsummering fra søknaden', 2)
+            await validerAxeUtilityWrapper(page, test.info())
             await page.getByRole('button', { name: 'Send søknaden' }).click()
         })
 
@@ -51,6 +53,7 @@ test.describe('Tester ettersending og korrigering', () => {
             await expect(
                 page.getByText('Arbeidsgiveren din betaler de første 16 kalenderdagene av sykefraværet.'),
             ).toBeVisible()
+            await validerAxeUtilityWrapper(page, test.info())
         })
 
         await test.step('Navigerer til sendt søknad og starter korrigering', async () => {
@@ -69,8 +72,9 @@ test.describe('Tester ettersending og korrigering', () => {
             await expect(tidligereSoknader.getByRole('link')).toHaveCount(1)
             await trykkPaSoknadMedId(page, soknad.id)
             await expect(page).toHaveURL(new RegExp(`/sendt/${soknad.id}`))
-
+            // todo her har vi uu feil await validerAxeUtilityWrapper(page, test.info())
             await page.getByRole('button', { name: 'Jeg vil endre svarene i søknaden' }).click()
+            // todo her har vi uu feil await validerAxeUtilityWrapper(page, test.info())
             await page.getByRole('button', { name: 'Ok' }).click()
         })
 
@@ -81,7 +85,7 @@ test.describe('Tester ettersending og korrigering', () => {
             const checkbox = page.locator('.navds-checkbox__input[type=checkbox]')
             await expect(checkbox).not.toBeChecked()
             await checkViStolerPaDeg(page)
-
+            await validerAxeUtilityWrapper(page, test.info())
             for (let i = 0; i < 4; i++) {
                 await klikkGaVidere(page)
             }
@@ -92,7 +96,7 @@ test.describe('Tester ettersending og korrigering', () => {
 
             await page.getByRole('button', { name: 'Send endringene' }).click()
             await expect(page).toHaveURL(new RegExp(`/kvittering/`))
-
+            await validerAxeUtilityWrapper(page, test.info())
             await page.getByRole('link', { name: 'Endre svar' }).click()
             await page.getByRole('button', { name: 'Ok', exact: true }).click()
             await expect(page).toHaveURL(new RegExp(`/1`))
