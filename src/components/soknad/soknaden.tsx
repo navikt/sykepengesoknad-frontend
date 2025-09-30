@@ -132,7 +132,8 @@ export const Soknaden = () => {
                 sporsmal?.tag == 'MEDLEMSKAP_OPPHOLDSTILLATELSE_V2' ||
                 sporsmal?.tag == 'NYTT_ARBEIDSFORHOLD_UNDERVEIS' ||
                 sporsmal?.tag == 'JOBBET_DU_GRADERT' ||
-                sporsmal?.tag == 'ARBEID_UNDERVEIS_100_PROSENT') && (
+                sporsmal?.tag == 'ARBEID_UNDERVEIS_100_PROSENT' ||
+                sporsmal?.tag == 'FRAVAR_FOR_SYKMELDINGEN_V2') && (
                 <FlexjarSporsmal soknad={valgtSoknad} sporsmal={sporsmal} steg={stegNo} />
             )}
         </>
