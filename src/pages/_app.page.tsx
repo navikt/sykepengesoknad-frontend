@@ -52,6 +52,18 @@ const queryClient = new QueryClient({
     }),
 })
 
+type Skyra = {
+    redactPathname: (path: string) => void
+    redactSearchParam: (param: string) => void
+}
+
+function konfigurerSkyra(skyra: Skyra) {
+    skyra.redactPathname('/syk/sykepengesoknad/avbrutt/:redacted')
+    skyra.redactPathname('/syk/sykepengesoknad/kvittering/:redacted')
+    skyra.redactPathname('/syk/sykepengesoknad/sendt/:redacted')
+    skyra.redactPathname('/syk/sykepengesoknad/soknader/:redacted')
+}
+
 function MyApp({ Component, pageProps }: AppProps<ServerSidePropsResult>): ReactElement {
     useHandleDecoratorClicks()
 
@@ -66,13 +78,10 @@ function MyApp({ Component, pageProps }: AppProps<ServerSidePropsResult>): React
 
     useEffect(() => {
         // @ts-expect-error - skyra er satt opp i dekoratøren
-        window?.skyra?.redactPathname('/syk/sykepengesoknad/avbrutt/:redacted')
-        // @ts-expect-error - skyra er satt opp i dekoratøren
-        window?.skyra?.redactPathname('/syk/sykepengesoknad/kvittering/:redacted')
-        // @ts-expect-error - skyra er satt opp i dekoratøren
-        window?.skyra?.redactPathname('/syk/sykepengesoknad/sendt/:redacted')
-        // @ts-expect-error - skyra er satt opp i dekoratøren
-        window?.skyra?.redactPathname('/syk/sykepengesoknad/soknader/:redacted')
+        const skyra = window?.skyra
+        if (skyra) {
+            konfigurerSkyra(skyra)
+        }
     }, [])
 
     useEffect(() => {
