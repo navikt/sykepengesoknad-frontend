@@ -65,6 +65,17 @@ function MyApp({ Component, pageProps }: AppProps<ServerSidePropsResult>): React
     }
 
     useEffect(() => {
+        // @ts-expect-error - skyra er satt opp i dekoratøren
+        window?.skyra?.redactPathname('/syk/sykepengesoknad/avbrutt/:redacted')
+        // @ts-expect-error - skyra er satt opp i dekoratøren
+        window?.skyra?.redactPathname('/syk/sykepengesoknad/kvittering/:redacted')
+        // @ts-expect-error - skyra er satt opp i dekoratøren
+        window?.skyra?.redactPathname('/syk/sykepengesoknad/sendt/:redacted')
+        // @ts-expect-error - skyra er satt opp i dekoratøren
+        window?.skyra?.redactPathname('/syk/sykepengesoknad/soknader/:redacted')
+    }, [])
+
+    useEffect(() => {
         if (isFirst.current) {
             isFirst.current = false
             return
