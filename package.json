@@ -68,7 +68,7 @@
         "start-server-and-test": "^2.1.2",
         "tailwindcss": "^4.1.11",
         "ts-loader": "^9.5.4",
-        "typescript": "^5.9.2",
+        "typescript": "^5.9.3",
         "vitest": "^3.2.4"
     },
     "scripts": {
