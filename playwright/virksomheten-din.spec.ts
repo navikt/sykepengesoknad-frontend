@@ -1,4 +1,4 @@
-import { Page } from '@playwright/test'
+import { expect, Page } from '@playwright/test'
 
 import { test } from './fixtures'
 import {
@@ -30,7 +30,7 @@ test.describe('Selvstendig næringsdrivende - Virksomheten din', () => {
         await fjernAnimasjoner(page)
     })
 
-    test('Forste', async ({ page }) => {
+    test('Valider førsteside', async ({ page }) => {
         await harSynligTittel(page, 'Søknad om sykepenger', 1)
         await harSynligTittel(page, 'Før du søker', 2)
     })
@@ -59,6 +59,15 @@ test.describe('Selvstendig næringsdrivende - Virksomheten din', () => {
         )
 
         await page.getByRole('radio', { name: 'Ja' }).click()
+
+        await klikkGaVidere(page, true)
+
+        await expect(
+            page.locator('p.navds-error-message', { hasText: 'Datoen følger ikke formatet dd.mm.åååå' }),
+        ).toBeVisible()
+
+        await expect(page.getByText('Det er 1 feil i skjemaet')).toBeVisible()
+        await expect(page.getByRole('link', { name: 'Du må velge en dato før du kan fortsette' })).toBeVisible()
 
         const dateInput = page.getByLabel('Når avviklet du virksomheten din?')
         await dateInput.fill('01.01.2025')
@@ -112,6 +121,17 @@ test.describe('Selvstendig næringsdrivende - Virksomheten din', () => {
         await harSynligTekst(page, 'Hvilken varig endring har skjedd?')
         await harSynligTekst(page, 'Du kan velge et eller flere alternativer')
         await harSynligTekst(page, 'Vi skjønner at det kan være vanskelig å svare nøyaktig, men svar så godt du kan.')
+
+        await klikkGaVidere(page, true)
+
+        await expect(page.locator('p.navds-error-message', { hasText: 'Du må velge et alternativ' })).toBeVisible()
+        await expect(
+            page.locator('p.navds-error-message', { hasText: 'Du må velge måned og år før du kan fortsette' }),
+        ).toBeVisible()
+
+        await expect(page.getByText('Det er 2 feil i skjemaet')).toBeVisible()
+        await expect(page.getByRole('link', { name: 'Du må svare på hvilken endring som har skjedd' })).toBeVisible()
+        await expect(page.getByRole('link', { name: 'Du må velge måned og år før du kan fortsette' })).toBeVisible()
 
         await page.getByRole('checkbox', { name: 'Jobbet mindre i virksomheten' }).click()
         await page.getByRole('checkbox', { name: 'Endring i kundegrunnlag' }).click()
