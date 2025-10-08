@@ -22,6 +22,7 @@ import ComboboxMultiple from './typer/combobox-multiple'
 import GruppeAvUndersporsmal from './typer/gruppe-av-undersporsmal'
 import Oppsummeringsside from './typer/oppsummeringsside'
 import MonthInput from './typer/maaned-komp'
+import DatoInput from './typer/dato-komp'
 
 interface SporsmalSwitchProps {
     sporsmal: Sporsmal
@@ -38,6 +39,8 @@ const SporsmalSwitch = ({ sporsmal, sporsmalIndex, erSisteSporsmal, erHovedspors
             return <CheckboxKomp sporsmal={sporsmal} />
 
         case RSSvartype.DATO:
+            return <DatoInput sporsmal={sporsmal} />
+
         case RSSvartype.MAANED:
             return <MonthInput sporsmal={sporsmal} />
 
