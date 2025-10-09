@@ -164,7 +164,7 @@ export function svarRadioSporsmal(sporsmal: string, svar: string) {
     })
 }
 
-export function svarDato(sporsmal: string, svar: string) {
+export function svarDato(sporsmal: RegExp, svar: string) {
     cy.get('form').within(() => {
         cy.findByRole('textbox', { name: sporsmal }).type(svar)
     })

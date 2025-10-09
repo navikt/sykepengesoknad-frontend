@@ -449,41 +449,68 @@ test.describe('Tester støtte for gamle spørsmål', () => {
             await klikkGaVidere(page)
         })
 
-        await test.step('52: Avklaring i forbindlese med reise', async () => {
+        await test.step('52: Næringsdrivende virksomheten din', async () => {
+            await svarJaHovedsporsmal(page)
+            await expect(page.locator('.navds-date__field-button')).toBeVisible()
+            await page.locator('.navds-date__field-button').click()
+            await velgDato(page, 14)
+            await validerAxeUtilityWrapper(page, test.info())
+            await klikkGaVidere(page)
+        })
+
+        await test.step('53: Næringsdrivende ny i arbeidslivet', async () => {
+            await svarJaHovedsporsmal(page)
+            await expect(page.locator('.navds-date__field-button')).toBeVisible()
+            await page.locator('.navds-date__field-button').click()
+            await velgDato(page, 14)
+            await validerAxeUtilityWrapper(page, test.info())
+            await klikkGaVidere(page)
+        })
+
+        await test.step('54: Næringsdrivende varig endring', async () => {
+            await svarJaHovedsporsmal(page)
+            await expect(page.locator('.navds-date__field-button')).toBeVisible()
+            await page.getByRole('checkbox', { name: 'Jobbet mindre i virksomheten' }).click()
+            await page.getByLabel('Når skjedde endringen?').fill('januar 2024')
+            await validerAxeUtilityWrapper(page, test.info())
+            await klikkGaVidere(page)
+        })
+
+        await test.step('55: Avklaring i forbindlese med reise', async () => {
             await svarRadioGruppe(page, 'Har du avklart utenlandsoppholdet med den som sykmeldte deg?', 'Ja')
             await svarRadioGruppe(page, 'Har du avklart utenlandsoppholdet med arbeidsgiveren/NAV?', 'Ja')
             await validerAxeUtilityWrapper(page, test.info())
             await klikkGaVidere(page)
         })
 
-        await test.step('53: Jobbsituasjonen din', async () => {
+        await test.step('56: Jobbsituasjonen din', async () => {
             await svarNeiHovedsporsmal(page)
             await svarRadioGruppe(page, 'Vil du fortsatt være friskmeldt til arbeidsformidling?', 'Ja')
             await validerAxeUtilityWrapper(page, test.info())
             await klikkGaVidere(page)
         })
 
-        await test.step('54: Inntekt underveis', async () => {
+        await test.step('57: Inntekt underveis', async () => {
             await page.getByRole('heading', { name: 'Inntekt underveis' }).isVisible()
             await svarNeiHovedsporsmal(page)
             await validerAxeUtilityWrapper(page, test.info())
             await klikkGaVidere(page)
         })
 
-        await test.step('55: Reise til utlandet', async () => {
+        await test.step('58: Reise til utlandet', async () => {
             await page.getByRole('heading', { name: 'Reise til utlandet' }).isVisible()
             await svarNeiHovedsporsmal(page)
             await validerAxeUtilityWrapper(page, test.info())
             await klikkGaVidere(page)
         })
 
-        await test.step('56: Fravær før sykmeldingen', async () => {
+        await test.step('59: Fravær før sykmeldingen', async () => {
             await harSynligTittel(page, 'Fravær før du ble sykmeldt', 2)
             await svarNeiHovedsporsmal(page)
             await klikkGaVidere(page)
         })
 
-        await test.step('56: Søknad TIL_SLUTT', async () => {
+        await test.step('60: Søknad TIL_SLUTT', async () => {
             await page.getByRole('heading', { name: 'Oppsummering fra søknaden' }).isVisible()
             // Oppsummering fra søknaden
             await sporsmalOgSvar(
@@ -495,7 +522,7 @@ test.describe('Tester støtte for gamle spørsmål', () => {
             await page.getByRole('button', { name: 'Send søknaden' }).click()
         })
 
-        await test.step('57: Søknad kvittering', async () => {
+        await test.step('61: Søknad kvittering', async () => {
             await expect(page.getByRole('heading', { name: 'Søknaden er sendt' })).toBeVisible()
 
             const kvitteringSection = page.locator('[data-cy="kvittering"]')
