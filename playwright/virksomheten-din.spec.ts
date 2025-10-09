@@ -37,10 +37,11 @@ test.describe('Selvstendig næringsdrivende - Virksomheten din', () => {
 
     test('Rekkefølge på spørsmål i søknaden', async ({ page }) => {
         await checkViStolerPaDeg(page)
+        await neiOgVidere(page, ['Fravær før du ble sykmeldt'])
         await neiOgVidere(page, ['Tilbake i fullt arbeid'])
         await neiOgVidere(page, ['Jobb underveis i sykefraværet'])
         await neiOgVidere(page, ['Andre inntektskilder'])
-        await neiOgVidere(page, ['Reise til utlandet'])
+        await neiOgVidere(page, ['Reise utenfor EU/EØS'])
         await neiOgVidere(page, ['Arbeid utenfor Norge'])
         await neiOgVidere(page, ['Virksomheten din'])
         await neiOgVidere(page, ['Ny i arbeidslivet'])
@@ -49,7 +50,7 @@ test.describe('Selvstendig næringsdrivende - Virksomheten din', () => {
     })
 
     test('Virksomheten din', async ({ page }) => {
-        await goToPage(page, 7)
+        await goToPage(page, 8)
         await harSynligTittel(page, 'Virksomheten din', 2)
 
         await page.getByRole('button', { name: 'Spørsmålet forklart' }).click()
@@ -67,7 +68,7 @@ test.describe('Selvstendig næringsdrivende - Virksomheten din', () => {
         ).toBeVisible()
 
         await expect(page.getByText('Det er 1 feil i skjemaet')).toBeVisible()
-        await expect(page.getByRole('link', { name: 'Du må velge en dato før du kan fortsette' })).toBeVisible()
+        await expect(page.getByRole('link', { name: 'Datoen følger ikke formatet dd.mm.åååå' })).toBeVisible()
 
         const dateInput = page.getByLabel('Når avviklet du virksomheten din?')
         await dateInput.fill('01.01.2025')
@@ -83,7 +84,7 @@ test.describe('Selvstendig næringsdrivende - Virksomheten din', () => {
     })
 
     test('Ny i arbeidslivet', async ({ page }) => {
-        await goToPage(page, 8)
+        await goToPage(page, 9)
         await harSynligTittel(page, 'Ny i arbeidslivet', 2)
 
         await page.getByRole('button', { name: 'Spørsmålet forklart' }).click()
@@ -108,7 +109,7 @@ test.describe('Selvstendig næringsdrivende - Virksomheten din', () => {
     })
 
     test('Endringer i arbeidssituasjonen din', async ({ page }) => {
-        await goToPage(page, 9)
+        await goToPage(page, 10)
         await harSynligTittel(page, 'Endringer i arbeidsituasjonen din', 2)
 
         await page.getByRole('button', { name: 'Spørsmålet forklart' }).click()
@@ -126,12 +127,12 @@ test.describe('Selvstendig næringsdrivende - Virksomheten din', () => {
 
         await expect(page.locator('p.navds-error-message', { hasText: 'Du må velge et alternativ' })).toBeVisible()
         await expect(
-            page.locator('p.navds-error-message', { hasText: 'Du må velge måned og år før du kan fortsette' }),
+            page.locator('p.navds-error-message', { hasText: 'Datoen følger ikke formatet dd.mm.åååå' }),
         ).toBeVisible()
 
         await expect(page.getByText('Det er 2 feil i skjemaet')).toBeVisible()
         await expect(page.getByRole('link', { name: 'Du må svare på hvilken endring som har skjedd' })).toBeVisible()
-        await expect(page.getByRole('link', { name: 'Du må velge måned og år før du kan fortsette' })).toBeVisible()
+        await expect(page.getByRole('link', { name: 'Datoen følger ikke formatet dd.mm.åååå' })).toBeVisible()
 
         await page.getByRole('checkbox', { name: 'Jobbet mindre i virksomheten' }).click()
         await page.getByRole('checkbox', { name: 'Endring i kundegrunnlag' }).click()
