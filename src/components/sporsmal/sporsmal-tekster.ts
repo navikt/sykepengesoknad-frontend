@@ -324,12 +324,14 @@ const SporsmalTekster = {
         'Du må svare på om det har skjedd en varig endring i virksomheten eller arbeidssituasjonen din',
     'soknad.feilmelding.NARINGSDRIVENDE_VARIG_ENDRING_TYPE': 'Du må svare på hvilken endring som har skjedd',
     'soknad.feilmelding.NARINGSDRIVENDE_VARIG_ENDRING_TYPE_NY_VIRKSOMHET':
-        'Du må svare på om du har startet ny virksomhet',
-    'soknad.feilmelding.NARINGSDRIVENDE_VARIG_ENDRING_TYPE_AVSLUTTET_VIRKSOMHET':
-        'Du må svare på om du har avsluttet virksomhet',
+        'Du må svare på om du har opprettet en ny virksomhet',
+    'soknad.feilmelding.NARINGSDRIVENDE_VARIG_ENDRING_TYPE_AVVIKLET_VIRKSOMHET':
+        'Du må svare på om du har avviklet en virksomhet',
     'soknad.feilmelding.NARINGSDRIVENDE_VARIG_ENDRING_TYPE_JOBBET_MINDRE':
-        'Du må svare på om du har jobbet mindre i virksomheten',
-    'soknad.feilmelding.NARINGSDRIVENDE_VARIG_ENDRING_TYPE_LAGT_OM': 'Du må svare på om du har lagt om virksomheten',
+        'Du må svare på om du har jobbet mindre i en virksomhet',
+    'soknad.feilmelding.NARINGSDRIVENDE_VARIG_ENDRING_TYPE_JOBBET_MER':
+        'Du må svare på om du har jobbet mer i en virksomhet',
+    'soknad.feilmelding.NARINGSDRIVENDE_VARIG_ENDRING_TYPE_LAGT_OM': 'Du må svare på om du har lagt om en virksomhet',
     'soknad.feilmelding.NARINGSDRIVENDE_VARIG_ENDRING_TYPE_KUNDEGRUNNLAG':
         'Du må svare på om du har fått endret kundegrunnlag',
     'soknad.feilmelding.NARINGSDRIVENDE_VARIG_ENDRING_TYPE_ANNET': 'Du må svare på om det har skjedd andre endringer',

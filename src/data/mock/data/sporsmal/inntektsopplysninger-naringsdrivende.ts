@@ -753,7 +753,7 @@ export const naringsdrivendeVarigEndring: RSSporsmal = {
                 {
                     id: v4().toString(),
                     tag: 'NARINGSDRIVENDE_VARIG_ENDRING_TYPE_NY_VIRKSOMHET',
-                    sporsmalstekst: 'Startet en ny virksomhet',
+                    sporsmalstekst: 'Opprettet en ny virksomhet',
                     undertekst: null,
                     svartype: 'CHECKBOX',
                     min: null,
@@ -764,8 +764,8 @@ export const naringsdrivendeVarigEndring: RSSporsmal = {
                 },
                 {
                     id: v4().toString(),
-                    tag: 'NARINGSDRIVENDE_VARIG_ENDRING_TYPE_AVSLUTTET_VIRKSOMHET',
-                    sporsmalstekst: 'Avsluttet en virksomhet',
+                    tag: 'NARINGSDRIVENDE_VARIG_ENDRING_TYPE_AVVIKLET_VIRKSOMHET',
+                    sporsmalstekst: 'Avviklet en virksomhet',
                     undertekst: null,
                     svartype: 'CHECKBOX',
                     min: null,
@@ -777,7 +777,19 @@ export const naringsdrivendeVarigEndring: RSSporsmal = {
                 {
                     id: v4().toString(),
                     tag: 'NARINGSDRIVENDE_VARIG_ENDRING_TYPE_JOBBET_MINDRE',
-                    sporsmalstekst: 'Jobbet mindre i virksomheten',
+                    sporsmalstekst: 'Jobbet mindre i en virksomhet',
+                    undertekst: null,
+                    svartype: 'CHECKBOX',
+                    min: null,
+                    max: null,
+                    kriterieForVisningAvUndersporsmal: null,
+                    svar: [],
+                    undersporsmal: [],
+                },
+                {
+                    id: v4().toString(),
+                    tag: 'NARINGSDRIVENDE_VARIG_ENDRING_TYPE_JOBBET_MER',
+                    sporsmalstekst: 'Jobbet mer i en virksomhet',
                     undertekst: null,
                     svartype: 'CHECKBOX',
                     min: null,
@@ -789,7 +801,7 @@ export const naringsdrivendeVarigEndring: RSSporsmal = {
                 {
                     id: v4().toString(),
                     tag: 'NARINGSDRIVENDE_VARIG_ENDRING_TYPE_LAGT_OM',
-                    sporsmalstekst: 'Lagt om virksomheten',
+                    sporsmalstekst: 'Lagt om en virksomhet',
                     undertekst: null,
                     svartype: 'CHECKBOX',
                     min: null,
@@ -801,7 +813,7 @@ export const naringsdrivendeVarigEndring: RSSporsmal = {
                 {
                     id: v4().toString(),
                     tag: 'NARINGSDRIVENDE_VARIG_ENDRING_TYPE_KUNDEGRUNNLAG',
-                    sporsmalstekst: 'Endring i kundegrunnlag',
+                    sporsmalstekst: 'Endret kundegrunnlag',
                     undertekst: null,
                     svartype: 'CHECKBOX',
                     min: null,
