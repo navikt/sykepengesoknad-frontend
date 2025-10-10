@@ -731,7 +731,7 @@ export const naringsdrivendeVarigEndring: RSSporsmal = {
     id: v4().toString(),
     tag: 'NARINGSDRIVENDE_VARIG_ENDRING',
     sporsmalstekst:
-        'Har det skjedd en varig endring i virksomheten eller arbeidssituasjonen din mellom 1.mars 2025 og frem til du ble sykmeldt 1.mai 2025?',
+        'Har det skjedd en varig endring i arbeidssituasjonen din mellom 1.mars 2025 og frem til du ble sykmeldt 1.mai 2025?',
     undertekst: null,
     svartype: 'JA_NEI',
     min: null,

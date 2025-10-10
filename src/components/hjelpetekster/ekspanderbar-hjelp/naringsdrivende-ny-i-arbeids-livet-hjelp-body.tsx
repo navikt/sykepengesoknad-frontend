@@ -9,7 +9,7 @@ export const NaringsdrivendeNyIArbeidsLivetHjelpBody = () => {
             </BodyLong>
             <BodyLong spacing>
                 Hvis du har blitt yrkesaktiv innenfor perioden over, skal sykepengene dine fastsettes ved skjønn. Da
-                trenger vi dokumentasjon på den pensjonsgivende inntekten du har hatt fra du begynte å jobbe.
+                trenger vi dokumentasjon på inntekten du har hatt fra du begynte å jobbe.
             </BodyLong>
             <BodyLong>
                 Svar ja, hvis du først ble yrkesaktiv i løpet av perioden over. Dette gjelder både yrkesaktiv som
