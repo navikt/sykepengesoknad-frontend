@@ -470,7 +470,7 @@ test.describe('Tester støtte for gamle spørsmål', () => {
         await test.step('54: Næringsdrivende varig endring', async () => {
             await svarJaHovedsporsmal(page)
             await expect(page.locator('.navds-date__field-button')).toBeVisible()
-            await page.getByRole('checkbox', { name: 'Jobbet mindre i virksomheten' }).click()
+            await page.getByRole('checkbox', { name: 'Jobbet mindre i en virksomhet' }).click()
             await page.getByLabel('Når skjedde endringen?').fill('januar 2024')
             await validerAxeUtilityWrapper(page, test.info())
             await klikkGaVidere(page)

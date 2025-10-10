@@ -360,7 +360,7 @@ describe('Tester støtte for gamle spørsmål', () => {
     })
     it('Næringsdrivende varig endring', () => {
         svarJaHovedsporsmal()
-        velgCheckbox('Jobbet mindre i virksomheten')
+        velgCheckbox('Jobbet mer i en virksomhet')
         svarDato(/Når skjedde endringen\?/, 'januar 2024')
         gaVidere()
     })

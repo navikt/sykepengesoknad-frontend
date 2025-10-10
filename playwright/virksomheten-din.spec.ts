@@ -134,8 +134,8 @@ test.describe('Selvstendig næringsdrivende - Virksomheten din', () => {
         await expect(page.getByRole('link', { name: 'Du må svare på hvilken endring som har skjedd' })).toBeVisible()
         await expect(page.getByRole('link', { name: 'Datoen følger ikke formatet dd.mm.åååå' })).toBeVisible()
 
-        await page.getByRole('checkbox', { name: 'Jobbet mindre i virksomheten' }).click()
-        await page.getByRole('checkbox', { name: 'Endring i kundegrunnlag' }).click()
+        await page.getByRole('checkbox', { name: 'Jobbet mindre i en virksomhet' }).click()
+        await page.getByRole('checkbox', { name: 'Endret kundegrunnlag' }).click()
 
         const monthInput = page.getByLabel('Når skjedde endringen?')
         await monthInput.fill('januar 2024')
@@ -155,7 +155,7 @@ test.describe('Selvstendig næringsdrivende - Virksomheten din', () => {
 
         await harSynligTekst(page, 'Når skjedde endringen?')
         await harSynligTekst(page, 'januar 2024')
-        await harSynligTekst(page, 'Jobbet mindre i virksomheten')
-        await harSynligTekst(page, 'Endring i kundegrunnlag')
+        await harSynligTekst(page, 'Jobbet mindre i en virksomhet')
+        await harSynligTekst(page, 'Endret kundegrunnlag')
     })
 })
