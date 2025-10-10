@@ -5,22 +5,22 @@ export const NaringsdrivendeVarigEndringHjelpBody = () => {
         <>
             <>
                 <BodyShort spacing>
-                    Har det skjedd en endring i virksomheten din som følge av en konkret situasjon og du forventer at
-                    endringen vil vare, trenger vi opplysninger om endringen.
+                    Spørsmålet gjelder alle arbeidsforhold du har - også de du eventuelt ikke er sykemeldt fra. Har det
+                    skjedd en varig endring som følge av en konkret situasjon, skal du svare ja på spørsmålet.
                 </BodyShort>
 
                 <BodyShort className="pt-3 font-bold">Det kan for eksempel være hvis:</BodyShort>
                 <List as="ul" size="small" className="[&>ul]:mt-2">
                     <List.Item>
-                        <BodyShort>du har startet eller avsluttet en virksomhet</BodyShort>
+                        <BodyShort>du har opprettet eller avviklet en virksomhet</BodyShort>
                     </List.Item>
                     <List.Item>
-                        <BodyShort>du har lagt om, utvidet eller nedskalert virksomheten</BodyShort>
+                        <BodyShort>du har lagt om, utvidet eller nedskalert en virksomhet</BodyShort>
                     </List.Item>
                     <List.Item>
                         <BodyShort>
-                            du har begynt eller sluttet i en annen jobb ved siden av og jobber derfor mer eller mindre i
-                            virksomheten din enn før
+                            du har begynt eller sluttet i en annen jobb du har ved siden av og jobber derfor mer eller
+                            mindre i en virksomhet enn før
                         </BodyShort>
                     </List.Item>
                     <List.Item>
@@ -29,10 +29,8 @@ export const NaringsdrivendeVarigEndringHjelpBody = () => {
                 </List>
 
                 <BodyShort spacing>
-                    Svar ja, hvis det har skjedd en endring i virksomheten eller arbeidssituasjonen din som du forventer
-                    at vil vare.
+                    Svar nei, hvis det kun har skjedd endringer i form av naturlige svingninger over tid.
                 </BodyShort>
-                <BodyShort>Svar nei, hvis det har skjedd endringer i form av naturlige svingninger over tid.</BodyShort>
             </>
         </>
     )
