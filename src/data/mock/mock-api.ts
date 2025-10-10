@@ -410,6 +410,18 @@ export async function mockApi(req: NextApiRequest, res: NextApiResponse) {
                 }
             }
 
+            if (body.tag == 'NARINGSDRIVENDE_VIRKSOMHETEN_DIN' && body.svar[0].verdi == 'JA') {
+                const tagsSomForsvinner = ['NARINGSDRIVENDE_NY_I_ARBEIDSLIVET', 'NARINGSDRIVENDE_VARIG_ENDRING']
+                soknaden.sporsmal = soknaden.sporsmal.filter((spm) => !tagsSomForsvinner.includes(spm.tag))
+                json.mutertSoknad = soknaden
+            }
+
+            if (body.tag == 'NARINGSDRIVENDE_NY_I_ARBEIDSLIVET' && body.svar[0].verdi == 'JA') {
+                const tagsSomForsvinner = ['NARINGSDRIVENDE_VARIG_ENDRING']
+                soknaden.sporsmal = soknaden.sporsmal.filter((spm) => !tagsSomForsvinner.includes(spm.tag))
+                json.mutertSoknad = soknaden
+            }
+
             return sendJson(json, 200)
         },
         [ENDPOINTS.GET_MOTTAKER]: () => {

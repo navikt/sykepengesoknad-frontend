@@ -349,13 +349,11 @@ describe('Tester støtte for gamle spørsmål', () => {
         gaVidere()
     })
     it('Næringsdrivende virksomheten din', () => {
-        svarJaHovedsporsmal()
-        velgDato(14)
+        svarNeiHovedsporsmal()
         gaVidere()
     })
     it('Næringsdrivende ny i arbeidslivet', () => {
-        svarJaHovedsporsmal()
-        velgDato(14)
+        svarNeiHovedsporsmal()
         gaVidere()
     })
     it('Næringsdrivende varig endring', () => {

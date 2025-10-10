@@ -450,19 +450,13 @@ test.describe('Tester støtte for gamle spørsmål', () => {
         })
 
         await test.step('52: Næringsdrivende virksomheten din', async () => {
-            await svarJaHovedsporsmal(page)
-            await expect(page.locator('.navds-date__field-button')).toBeVisible()
-            await page.locator('.navds-date__field-button').click()
-            await velgDato(page, 14)
+            await svarNeiHovedsporsmal(page)
             await validerAxeUtilityWrapper(page, test.info())
             await klikkGaVidere(page)
         })
 
         await test.step('53: Næringsdrivende ny i arbeidslivet', async () => {
-            await svarJaHovedsporsmal(page)
-            await expect(page.locator('.navds-date__field-button')).toBeVisible()
-            await page.locator('.navds-date__field-button').click()
-            await velgDato(page, 14)
+            await svarNeiHovedsporsmal(page)
             await validerAxeUtilityWrapper(page, test.info())
             await klikkGaVidere(page)
         })

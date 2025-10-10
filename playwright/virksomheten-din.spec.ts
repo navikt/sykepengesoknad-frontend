@@ -49,7 +49,7 @@ test.describe('Selvstendig næringsdrivende - Virksomheten din', () => {
         await sendSoknad(page)
     })
 
-    test('Virksomheten din', async ({ page }) => {
+    test('Virksomheten din ja svar', async ({ page }) => {
         await goToPage(page, 8)
         await harSynligTittel(page, 'Virksomheten din', 2)
 
@@ -74,16 +74,32 @@ test.describe('Selvstendig næringsdrivende - Virksomheten din', () => {
         await dateInput.fill('01.01.2025')
         await klikkGaVidere(page)
 
-        await neiOgVidere(page, ['Ny i arbeidslivet'])
-        await neiOgVidere(page, ['Endringer i arbeidsituasjonen din'])
-
         await sendSoknad(page)
 
         await harSynligTekst(page, 'Når avviklet du virksomheten din?')
         await harSynligTekst(page, '01.01.2025')
     })
 
-    test('Ny i arbeidslivet', async ({ page }) => {
+    test('Virksomheten din nei svar', async ({ page }) => {
+        await goToPage(page, 8)
+        await harSynligTittel(page, 'Virksomheten din', 2)
+
+        await page.getByRole('button', { name: 'Spørsmålet forklart' }).click()
+        await harSynligTekst(
+            page,
+            'Hvis du avviklet virksomheten din før du ble sykmeldt, har du ikke rett til sykepenger som selvstendig næringsdrivende',
+        )
+
+        await page.getByRole('radio', { name: 'Nei' }).click()
+        await klikkGaVidere(page)
+
+        await neiOgVidere(page, ['Ny i arbeidslivet'])
+        await neiOgVidere(page, ['Endringer i arbeidsituasjonen din'])
+
+        await sendSoknad(page)
+    })
+
+    test('Ny i arbeidslivet ja svar', async ({ page }) => {
         await goToPage(page, 9)
         await harSynligTittel(page, 'Ny i arbeidslivet', 2)
 
@@ -100,12 +116,28 @@ test.describe('Selvstendig næringsdrivende - Virksomheten din', () => {
         await dateInput.fill('01.02.2025')
         await klikkGaVidere(page)
 
-        await neiOgVidere(page, ['Endringer i arbeidsituasjonen din'])
-
         await sendSoknad(page)
 
         await harSynligTekst(page, 'Når ble du yrkesaktiv?')
         await harSynligTekst(page, '01.02.2025')
+    })
+
+    test('Ny i arbeidslivet nei svar', async ({ page }) => {
+        await goToPage(page, 9)
+        await harSynligTittel(page, 'Ny i arbeidslivet', 2)
+
+        await page.getByRole('button', { name: 'Spørsmålet forklart' }).click()
+        await harSynligTekst(
+            page,
+            'Nav bruker vanligvis gjennomsnittet av den pensjonsgivende inntekten din for de siste 3 årene før du ble syk for å beregne hvor mye sykepenger du kan få.',
+        )
+
+        await page.getByRole('radio', { name: 'Nei' }).click()
+        await klikkGaVidere(page)
+
+        await neiOgVidere(page, ['Endringer i arbeidsituasjonen din'])
+
+        await sendSoknad(page)
     })
 
     test('Endringer i arbeidssituasjonen din', async ({ page }) => {
