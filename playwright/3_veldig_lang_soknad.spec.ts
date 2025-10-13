@@ -449,7 +449,7 @@ test.describe('Tester støtte for gamle spørsmål', () => {
             await klikkGaVidere(page)
         })
 
-        await test.step('52: Næringsdrivende virksomheten din', async () => {
+        await test.step('52: Næringsdrivende virksomheten din avviklet', async () => {
             await svarNeiHovedsporsmal(page)
             await validerAxeUtilityWrapper(page, test.info())
             await klikkGaVidere(page)

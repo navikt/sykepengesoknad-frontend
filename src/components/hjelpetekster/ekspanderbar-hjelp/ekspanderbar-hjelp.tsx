@@ -129,7 +129,7 @@ export const EkspanderbarHjelp = ({ sporsmal, mb }: { sporsmal: Sporsmal; mb?: s
                 return <AvvikletVirksomhetHjelpBody />
             case 'FTA_JOBBSITUASJONEN_DIN':
                 return <JobbsituasjonenDinHjelpBody />
-            case 'NARINGSDRIVENDE_VIRKSOMHETEN_DIN':
+            case 'NARINGSDRIVENDE_VIRKSOMHETEN_DIN_AVVIKLET':
                 return <NaringsdrivendeVirksomhetenDinHjelpBody />
             case 'NARINGSDRIVENDE_NY_I_ARBEIDSLIVET':
                 return <NaringsdrivendeNyIArbeidsLivetHjelpBody />

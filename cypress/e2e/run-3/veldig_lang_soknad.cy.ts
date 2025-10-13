@@ -348,7 +348,7 @@ describe('Tester støtte for gamle spørsmål', () => {
         velgDato(14)
         gaVidere()
     })
-    it('Næringsdrivende virksomheten din', () => {
+    it('Næringsdrivende virksomheten din avviklet', () => {
         svarNeiHovedsporsmal()
         gaVidere()
     })
