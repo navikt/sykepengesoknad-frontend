@@ -131,6 +131,10 @@ export const flattenSporsmal = (sporsmal: RSSporsmal[]) => {
 }
 
 function maaDokumentereInntektsopplysninger(soknad: RSSoknad): boolean {
+    const nyIArbeidslivet =
+        flattenSporsmal(soknad.sporsmal).find((spm) => spm.tag === 'NARINGSDRIVENDE_NY_I_ARBEIDSLIVET')?.svar[0]
+            ?.verdi === 'JA'
+    if (nyIArbeidslivet) return true
     const nyIArbeidslivetJa =
         flattenSporsmal(soknad.sporsmal).find((spm) => spm.tag === 'INNTEKTSOPPLYSNINGER_NY_I_ARBEIDSLIVET_JA')?.svar[0]
             ?.verdi === 'CHECKED'
@@ -157,7 +161,8 @@ function handterNaringsdrivendeOpplysninger(soknaden: RSSoknad) {
     const erNyKvittering = soknaden.sporsmal.some(
         (spm) =>
             spm.tag === 'INNTEKTSOPPLYSNINGER_DRIFT_VIRKSOMHETEN' ||
-            spm.tag === 'INNTEKTSOPPLYSNINGER_VIRKSOMHETEN_AVVIKLET',
+            spm.tag === 'INNTEKTSOPPLYSNINGER_VIRKSOMHETEN_AVVIKLET' ||
+            spm.tag === 'NARINGSDRIVENDE_NY_I_ARBEIDSLIVET',
     )
     const maaDokumentere = maaDokumentereInntektsopplysninger(soknaden)
     soknaden.inntektsopplysningerNyKvittering = erNyKvittering

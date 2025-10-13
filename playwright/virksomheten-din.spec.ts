@@ -118,6 +118,10 @@ test.describe('Selvstendig næringsdrivende - Virksomheten din', () => {
 
         await sendSoknad(page)
 
+        await harSynligTekst(page, 'Vi trenger følgende dokumenter')
+        await harSynligTekst(page, 'Skattemelding/Næringsspesifikasjon hvis den er klar')
+        await harSynligTekst(page, 'Gå til opplasting av dokumentasjon')
+
         await harSynligTekst(page, 'Når ble du yrkesaktiv?')
         await harSynligTekst(page, '01.02.2025')
     })
