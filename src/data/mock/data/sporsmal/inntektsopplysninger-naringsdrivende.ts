@@ -677,7 +677,7 @@ export const inntektsopplysningerMedSigrunData: RSSporsmal = {
 
 export const naringsdrivendeVirksomhetenDin: RSSporsmal = {
     id: v4().toString(),
-    tag: 'NARINGSDRIVENDE_VIRKSOMHETEN_DIN',
+    tag: 'NARINGSDRIVENDE_VIRKSOMHETEN_DIN_AVVIKLET',
     sporsmalstekst: 'Avviklet du virksomheten din før du ble sykmeldt 1.mai 2025?',
     undertekst: null,
     svartype: 'JA_NEI',

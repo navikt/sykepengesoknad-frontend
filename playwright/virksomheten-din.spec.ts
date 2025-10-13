@@ -49,7 +49,7 @@ test.describe('Selvstendig næringsdrivende - Virksomheten din', () => {
         await sendSoknad(page)
     })
 
-    test('Virksomheten din ja svar', async ({ page }) => {
+    test('Virksomheten din avviklet ja svar', async ({ page }) => {
         await goToPage(page, 8)
         await harSynligTittel(page, 'Virksomheten din', 2)
 
@@ -80,7 +80,7 @@ test.describe('Selvstendig næringsdrivende - Virksomheten din', () => {
         await harSynligTekst(page, '01.01.2025')
     })
 
-    test('Virksomheten din nei svar', async ({ page }) => {
+    test('Virksomheten din avviklet nei svar', async ({ page }) => {
         await goToPage(page, 8)
         await harSynligTittel(page, 'Virksomheten din', 2)
 
