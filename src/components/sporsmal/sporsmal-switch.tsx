@@ -21,7 +21,7 @@ import ComboboxSingle from './typer/combobox-single'
 import ComboboxMultiple from './typer/combobox-multiple'
 import GruppeAvUndersporsmal from './typer/gruppe-av-undersporsmal'
 import Oppsummeringsside from './typer/oppsummeringsside'
-import MonthInput from './typer/maaned-komp'
+import AarMaanedInput from './typer/aar-maaned-komp'
 import DatoInput from './typer/dato-komp'
 
 interface SporsmalSwitchProps {
@@ -41,8 +41,8 @@ const SporsmalSwitch = ({ sporsmal, sporsmalIndex, erSisteSporsmal, erHovedspors
         case RSSvartype.DATO:
             return <DatoInput sporsmal={sporsmal} />
 
-        case RSSvartype.MAANED:
-            return <MonthInput sporsmal={sporsmal} />
+        case RSSvartype.AAR_MAANED:
+            return <AarMaanedInput sporsmal={sporsmal} />
 
         case RSSvartype.PERIODE:
         case RSSvartype.PERIODER:

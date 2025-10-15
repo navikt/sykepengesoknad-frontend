@@ -5,7 +5,7 @@ import React from 'react'
 import { OppsummeringProps } from '../oppsummering'
 import { RSSvar } from '../../../types/rs-types/rs-svar'
 
-const MaanedSum = ({ sporsmal }: OppsummeringProps) => {
+const AarMaanedSum = ({ sporsmal }: OppsummeringProps) => {
     if (sporsmal.svarliste.svar.length === 0) return null
     const datoString = (svarverdi: RSSvar) => dayjs(svarverdi?.verdi.toString()).format('MMMM YYYY')
     return (
@@ -20,4 +20,4 @@ const MaanedSum = ({ sporsmal }: OppsummeringProps) => {
     )
 }
 
-export default MaanedSum
+export default AarMaanedSum

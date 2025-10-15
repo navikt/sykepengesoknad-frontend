@@ -841,7 +841,7 @@ export const naringsdrivendeVarigEndring: RSSporsmal = {
             tag: 'NARINGSDRIVENDE_VARIG_ENDRING_DATO',
             sporsmalstekst: 'Når skjedde endringen?',
             undertekst: 'Vi skjønner at det kan være vanskelig å svare nøyaktig, men svar så godt du kan.',
-            svartype: 'MAANED',
+            svartype: 'AAR_MAANED',
             min: '2020-01-01',
             max: '2024-12-31',
             kriterieForVisningAvUndersporsmal: null,

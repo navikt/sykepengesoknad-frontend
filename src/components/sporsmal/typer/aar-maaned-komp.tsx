@@ -6,7 +6,7 @@ import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { kalenderMedDropdownCaption } from '../sporsmal-utils'
 import { validerMaaned } from '../../../utils/sporsmal/valider-dato'
 
-function MonthInput(props: SpmProps) {
+function AarMaanedInput(props: SpmProps) {
     const { sporsmal } = props
     const [monthValidation, setMonthValidation] = useState<MonthValidationT | undefined>(undefined)
 
@@ -56,4 +56,4 @@ function MonthInput(props: SpmProps) {
     )
 }
 
-export default MonthInput
+export default AarMaanedInput
