@@ -106,7 +106,7 @@ test.describe('Selvstendig næringsdrivende - Virksomheten din', () => {
         await page.getByRole('button', { name: 'Spørsmålet forklart' }).click()
         await harSynligTekst(
             page,
-            'Nav bruker vanligvis gjennomsnittet av den pensjonsgivende inntekten din for de siste 3 årene før du ble syk for å beregne hvor mye sykepenger du kan få.',
+            'Hvis du har blitt yrkesaktiv innenfor perioden over, skal sykepengene dine fastsettes ved skjønn.',
         )
 
         await page.getByRole('radio', { name: 'Ja' }).click()
@@ -133,7 +133,7 @@ test.describe('Selvstendig næringsdrivende - Virksomheten din', () => {
         await page.getByRole('button', { name: 'Spørsmålet forklart' }).click()
         await harSynligTekst(
             page,
-            'Nav bruker vanligvis gjennomsnittet av den pensjonsgivende inntekten din for de siste 3 årene før du ble syk for å beregne hvor mye sykepenger du kan få.',
+            'Hvis du har blitt yrkesaktiv innenfor perioden over, skal sykepengene dine fastsettes ved skjønn.',
         )
 
         await page.getByRole('radio', { name: 'Nei' }).click()
