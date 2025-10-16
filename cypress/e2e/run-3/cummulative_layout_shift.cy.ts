@@ -6,7 +6,7 @@ describe('Tester cummulative-layout-shift ', () => {
         cy.visit('http://localhost:3000/syk/sykepengesoknad?testperson=cummulative-layout-shift')
         cy.get('h1').should('be.visible')
         // Sjekk mains høyde
-        mainSkalHaHoyde(388)
+        mainSkalHaHoyde(371)
         cy.get('.navds-skeleton').should('have.length', 0)
 
         // Venter på at alle dataene er fetchet og rendret
@@ -14,7 +14,7 @@ describe('Tester cummulative-layout-shift ', () => {
         cy.contains('Nye søknader').should('be.visible')
         cy.get('.navds-skeleton').should('have.length', 0)
 
-        mainSkalHaHoyde(388)
+        mainSkalHaHoyde(371)
     })
 
     it('Høyden endres ikke i happy case i et vanlig spørsmål etter at dataene er lastet', () => {
@@ -22,7 +22,7 @@ describe('Tester cummulative-layout-shift ', () => {
             'http://localhost:3000/syk/sykepengesoknad/soknader/04247ad5-9c15-4b7d-ae55-f23807777777/3?testperson=cummulative-layout-shift',
         )
         // Sjekk mains høyde
-        mainSkalHaHoyde(1148)
+        mainSkalHaHoyde(891)
         cy.get('.navds-skeleton').should('have.length', 0)
 
         // Venter på at alle dataene er fetchet og rendret
@@ -30,7 +30,7 @@ describe('Tester cummulative-layout-shift ', () => {
         cy.get('h2').contains('Ferie').should('be.visible')
         cy.get('.navds-skeleton').should('have.length', 0)
 
-        mainSkalHaHoyde(1148)
+        mainSkalHaHoyde(891)
     })
 
     it('Høyden endres ikke i første spørsmålet etter at dataene er lastet', () => {
@@ -38,7 +38,7 @@ describe('Tester cummulative-layout-shift ', () => {
             'http://localhost:3000/syk/sykepengesoknad/soknader/04247ad5-9c15-4b7d-ae55-f23807777777/1?testperson=cummulative-layout-shift',
         )
         // Sjekk mains høyde
-        mainSkalHaHoyde(1657)
+        mainSkalHaHoyde(1536)
         cy.get('.navds-skeleton').should('have.length', 0)
 
         // Venter på at alle dataene er fetchet og rendret
@@ -46,7 +46,7 @@ describe('Tester cummulative-layout-shift ', () => {
         cy.contains('Jeg bekrefter at jeg vil svare så riktig som jeg kan.').should('be.visible')
         cy.get('.navds-skeleton').should('have.length', 0)
 
-        mainSkalHaHoyde(1657)
+        mainSkalHaHoyde(1536)
     })
 })
 
