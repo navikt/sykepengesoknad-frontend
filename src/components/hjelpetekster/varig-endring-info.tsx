@@ -6,7 +6,7 @@ import { Sporsmal } from '../../types/types'
 export function VarigEndringInfo({ sporsmal, jaNeiSvar }: { sporsmal: Sporsmal; jaNeiSvar: any }) {
     if (sporsmal.tag === 'NARINGSDRIVENDE_VARIG_ENDRING' && jaNeiSvar === 'JA') {
         return (
-            <Alert variant="info" data-cy="naringsdrivende-varig-endring-info" className="mt-8">
+            <Alert variant="info" className="mt-8">
                 <BodyShort spacing>
                     Det kan være vi trenger mer dokumentasjon på dette. Da vil en saksbehandler ta kontakt med deg.
                 </BodyShort>

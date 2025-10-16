@@ -1,13 +1,6 @@
 import { test, expect } from '@playwright/test'
 
-import {
-    checkViStolerPaDeg,
-    klikkGaVidere,
-    setPeriodeFraTil,
-    sjekkIntroside,
-    sporsmalOgSvar,
-    fjernAnimasjoner,
-} from './utilities'
+import { checkViStolerPaDeg, klikkGaVidere, setPeriodeFraTil, sjekkIntroside, sporsmalOgSvar } from './utilities'
 import { validerAxeUtilityWrapper } from './uuvalidering'
 
 const arbeidsledig = {
@@ -17,8 +10,6 @@ const arbeidsledig = {
 test.describe('Tester arbeidsledigsøknad', () => {
     test('Gjennomfører hele søknadsflyten for arbeidsledig søknad', async ({ page }) => {
         // Forberedelser: Fjern animasjoner for stabil testing (valgfritt, men anbefalt for flakiness)
-        await fjernAnimasjoner(page)
-
         await test.step('Laster startside', async () => {
             // Naviger til startsiden (hvis ikke allerede gjort i et tidligere steg; tilpass om nødvendig)
             await page.goto('/syk/sykepengesoknad?testperson=arbeidsledig')

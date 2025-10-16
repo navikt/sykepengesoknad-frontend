@@ -1,14 +1,7 @@
 import { expect, Page } from '@playwright/test'
 
 import { test } from './fixtures'
-import {
-    checkViStolerPaDeg,
-    fjernAnimasjoner,
-    harSynligTekst,
-    harSynligTittel,
-    klikkGaVidere,
-    neiOgVidere,
-} from './utilities'
+import { checkViStolerPaDeg, harSynligTekst, harSynligTittel, klikkGaVidere, neiOgVidere } from './utilities'
 
 export async function sendSoknad(page: Page) {
     await harSynligTittel(page, 'Oppsummering fra søknaden', 2)
@@ -25,9 +18,7 @@ test.describe('Selvstendig næringsdrivende - Virksomheten din', () => {
     }
 
     test.beforeEach(async ({ page }) => {
-        await page.context().clearCookies()
         await goToPage(page, 1)
-        await fjernAnimasjoner(page)
     })
 
     test('Valider førsteside', async ({ page }) => {
