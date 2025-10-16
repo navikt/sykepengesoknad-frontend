@@ -5,8 +5,8 @@ import { Sporsmal } from '../../types/types'
 
 const validerDato = (sporsmal: Sporsmal, value?: Date, dateValidation?: DateValidationT) => {
     if (!dateValidation && value) {
-        // Vi må bruke dateValidation fordi Datepicker ikke returnerer noe verdi når de er utenfor min/max
-        // Men Datepicker validering skjer ikke når vi laster inn et tidligere svar
+        // Vi må bruke dateValidation fordi Datepicker ikke returnerer noe verdi når de er utenfor min/max,
+        // men Datepicker validering skjer ikke når vi laster inn et tidligere svar
         return true
     }
     if (!dateValidation || dateValidation.isEmpty || dateValidation.isInvalid) {
@@ -29,8 +29,8 @@ export default validerDato
 
 export const validerMaaned = (sporsmal: Sporsmal, value?: Date, monthValidation?: MonthValidationT) => {
     if (!monthValidation && value) {
-        // Vi må bruke monthValidation fordi Monthpicker ikke returnerer noe verdi når de er utenfor min/max
-        // Men Datepicker validering skjer ikke når vi laster inn et tidligere svar
+        // Vi må bruke monthValidation fordi Monthpicker ikke returnerer noe verdi når de er utenfor min/max,
+        // men Datepicker validering skjer ikke når vi laster inn et tidligere svar
         return true
     }
     if (!monthValidation || monthValidation.isEmpty || monthValidation.isInvalid) {

@@ -33,7 +33,7 @@ import {
 } from './medlemskap-oppholdstillatelse-hjelp-body'
 import { KjenteInntektkilderHjelpBody } from './kjente-inntektkilder'
 import { VarigEndring25prosentHjelpBody } from './varig-endring25prosent-hjelp-body'
-import { DriftIVirksomhetHjelpBpdy } from './drift-i-virksomhet-hjelp-bpdy'
+import { DriftIVirksomhetHjelpBody } from './drift-i-virksomhet-hjelp-body'
 import { AvvikletVirksomhetHjelpBody } from './avviklet-virksomhet-hjelp-body'
 import { TilkommenInntektHjelpBody } from './tilkommen-inntekt-hjep-body'
 import { InntektUnderveisFtaHjelpBody } from './inntekt-underveis-fta-hjelp-body'
@@ -124,7 +124,7 @@ export const EkspanderbarHjelp = ({ sporsmal, mb }: { sporsmal: Sporsmal; mb?: s
             case 'INNTEKTSOPPLYSNINGER_VARIG_ENDRING_25_PROSENT':
                 return <VarigEndring25prosentHjelpBody sporsmal={sporsmal} />
             case 'INNTEKTSOPPLYSNINGER_DRIFT_VIRKSOMHETEN':
-                return <DriftIVirksomhetHjelpBpdy />
+                return <DriftIVirksomhetHjelpBody />
             case 'INNTEKTSOPPLYSNINGER_VIRKSOMHETEN_AVVIKLET':
                 return <AvvikletVirksomhetHjelpBody />
             case 'FTA_JOBBSITUASJONEN_DIN':
