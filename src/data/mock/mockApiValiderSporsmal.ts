@@ -24,6 +24,7 @@ function validerAntallSvar(sporsmal: RSSporsmal): void {
             case 'KILOMETER':
             case 'CHECKBOX_PANEL':
             case 'DATO':
+            case 'AAR_MAANED':
             case 'RADIO_GRUPPE_UKEKALENDER':
             case 'RADIO':
             case 'PROSENT':
@@ -104,6 +105,7 @@ function validerUndersporsmal(sporsmal: RSSporsmal): void {
         case 'BELOP':
         case 'KILOMETER':
         case 'DATO':
+        case 'AAR_MAANED':
         case 'PERIODE':
         case 'PERIODER':
         case 'TIMER':
@@ -172,6 +174,7 @@ function validerSvarverdi(sporsmal: RSSporsmal, svar: RSSvar): void {
             break
 
         case 'DATO':
+        case 'AAR_MAANED':
         case 'DATOER':
             predikat = () => erDato(verdi)
             break

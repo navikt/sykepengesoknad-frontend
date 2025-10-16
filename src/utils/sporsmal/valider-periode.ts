@@ -46,8 +46,8 @@ export const validerPeriode = (sporsmal: Sporsmal, id: string, values: Record<st
 
 export const validerFom = (sporsmal: Sporsmal, value?: FormPeriode, rangeValidation?: RangeValidationT) => {
     if (!rangeValidation && value) {
-        // Vi må bruke rangeValidation fordi Datepicker ikke returnerer noe verdi når de er utenfor min/max
-        // Men Datepicker validering skjer ikke når vi laster inn et tidligere svar
+        // Vi må bruke rangeValidation fordi Datepicker ikke returnerer noe verdi når de er utenfor min/max,
+        // men Datepicker validering skjer ikke når vi laster inn et tidligere svar
         return true
     }
     if (rangeValidation?.from === undefined || rangeValidation.from.isEmpty || rangeValidation.from.isInvalid) {
@@ -64,8 +64,8 @@ export const validerFom = (sporsmal: Sporsmal, value?: FormPeriode, rangeValidat
 }
 export const validerTom = (sporsmal: Sporsmal, value?: FormPeriode, rangeValidation?: RangeValidationT) => {
     if (!rangeValidation && value) {
-        // Vi må bruke rangeValidation fordi Datepicker ikke returnerer noe verdi når de er utenfor min/max
-        // Men Datepicker validering skjer ikke når vi laster inn et tidligere svar
+        // Vi må bruke rangeValidation fordi Datepicker ikke returnerer noe verdi når de er utenfor min/max,
+        // men Datepicker validering skjer ikke når vi laster inn et tidligere svar
         return true
     }
     if (rangeValidation?.to === undefined || rangeValidation.to.isEmpty || rangeValidation.to.isInvalid) {

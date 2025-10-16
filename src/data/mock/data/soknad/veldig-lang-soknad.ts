@@ -13,9 +13,12 @@ import { yrkesskadeV2Sporsmal } from '../sporsmal/yrkesskade-v2'
 import { yrkesskadeV1Sporsmal } from '../sporsmal/yrkesskade-v1'
 import { kjenteInntektskilder } from '../sporsmal/kjente-inntektskilder'
 import {
-    inntektsopplysningerUtenSigrunData,
+    inntektsopplysningerNaringsdrivende,
     inntektsopplysningerLegacy,
-} from '../sporsmal/inntektsopplysningerUtenSigrunData'
+    naringsdrivendeVirksomhetenDin,
+    naringsdrivendeNyIArbeidslivet,
+    naringsdrivendeVarigEndring,
+} from '../sporsmal/inntektsopplysninger-naringsdrivende'
 import { nyttArbeidsforholdSporsmal } from '../sporsmal/nytt-arbeidsforhold'
 import { avklaringIfbmReise } from '../sporsmal/avklaringIfbmReise'
 
@@ -2372,8 +2375,11 @@ export const veldigLangSoknad: RSSoknad = {
             tom: '2020-04-24',
             fom: '2020-04-20',
         }),
-        inntektsopplysningerUtenSigrunData,
+        inntektsopplysningerNaringsdrivende,
         inntektsopplysningerLegacy,
+        naringsdrivendeVirksomhetenDin,
+        naringsdrivendeNyIArbeidslivet,
+        naringsdrivendeVarigEndring,
 
         avklaringIfbmReise(),
         jobbsituasjonenDin({

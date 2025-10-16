@@ -118,6 +118,9 @@ export const hentGeneriskFeilmelding = (
         case RSSvartype.COMBOBOX_SINGLE: {
             return 'Du må velge et alternativ fra menyen'
         }
+        case RSSvartype.AAR_MAANED: {
+            return 'Du må velge en måned'
+        }
         default: {
             return undefined
         }

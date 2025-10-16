@@ -7,7 +7,6 @@ import BehDager from './typer/beh-dager'
 import CheckboxKomp from './typer/checkbox-komp'
 import CheckboxPanel from './typer/checkbox-panel'
 import DagerKomp from './typer/dager-komp'
-import DatoInput from './typer/dato-komp'
 import IkkeRelevant from './typer/ikke-relevant'
 import JaNeiStor from './typer/ja-nei-stor'
 import JaNeiLiten from './typer/ja-nei-liten'
@@ -22,6 +21,8 @@ import ComboboxSingle from './typer/combobox-single'
 import ComboboxMultiple from './typer/combobox-multiple'
 import GruppeAvUndersporsmal from './typer/gruppe-av-undersporsmal'
 import Oppsummeringsside from './typer/oppsummeringsside'
+import AarMaanedInput from './typer/aar-maaned-komp'
+import DatoInput from './typer/dato-komp'
 
 interface SporsmalSwitchProps {
     sporsmal: Sporsmal
@@ -39,6 +40,9 @@ const SporsmalSwitch = ({ sporsmal, sporsmalIndex, erSisteSporsmal, erHovedspors
 
         case RSSvartype.DATO:
             return <DatoInput sporsmal={sporsmal} />
+
+        case RSSvartype.AAR_MAANED:
+            return <AarMaanedInput sporsmal={sporsmal} />
 
         case RSSvartype.PERIODE:
         case RSSvartype.PERIODER:

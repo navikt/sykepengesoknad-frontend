@@ -314,6 +314,28 @@ const SporsmalTekster = {
     'soknad.feilmelding.FTA_REISE_TIL_UTLANDET': 'Du må svare på om du har vært utenfor EU/EØS i denne perioden',
     'soknad.feilmelding.FTA_REISE_TIL_UTLANDET_NAR': '',
     'soknad.feilmelding.FTA_JOBBSITUASJONEN_DIN_FORTSATT_FRISKMELDT_AVREGISTRERT_NAR': '',
+
+    'soknad.feilmelding.NARINGSDRIVENDE_VIRKSOMHETEN_DIN_AVVIKLET':
+        'Du må svare på om du avviklet virksomheten din før du ble sykmeldt',
+    'soknad.feilmelding.NARINGSDRIVENDE_VIRKSOMHETEN_DIN_AVVIKLET_DATO': 'Du må oppgi når du avviklet virksomheten din',
+    'soknad.feilmelding.NARINGSDRIVENDE_NY_I_ARBEIDSLIVET': 'Du må svare på om du er ny i arbeidslivet',
+    'soknad.feilmelding.NARINGSDRIVENDE_NY_I_ARBEIDSLIVET_DATO': 'Du må oppgi når du ble yrkesaktiv',
+    'soknad.feilmelding.NARINGSDRIVENDE_VARIG_ENDRING':
+        'Du må svare på om det har skjedd en varig endring i virksomheten eller arbeidssituasjonen din',
+    'soknad.feilmelding.NARINGSDRIVENDE_VARIG_ENDRING_TYPE': 'Du må svare på hvilken endring som har skjedd',
+    'soknad.feilmelding.NARINGSDRIVENDE_VARIG_ENDRING_TYPE_NY_VIRKSOMHET':
+        'Du må svare på om du har opprettet en ny virksomhet',
+    'soknad.feilmelding.NARINGSDRIVENDE_VARIG_ENDRING_TYPE_AVVIKLET_VIRKSOMHET':
+        'Du må svare på om du har avviklet en virksomhet',
+    'soknad.feilmelding.NARINGSDRIVENDE_VARIG_ENDRING_TYPE_JOBBET_MINDRE':
+        'Du må svare på om du har jobbet mindre i en virksomhet',
+    'soknad.feilmelding.NARINGSDRIVENDE_VARIG_ENDRING_TYPE_JOBBET_MER':
+        'Du må svare på om du har jobbet mer i en virksomhet',
+    'soknad.feilmelding.NARINGSDRIVENDE_VARIG_ENDRING_TYPE_LAGT_OM': 'Du må svare på om du har lagt om en virksomhet',
+    'soknad.feilmelding.NARINGSDRIVENDE_VARIG_ENDRING_TYPE_KUNDEGRUNNLAG':
+        'Du må svare på om du har fått endret kundegrunnlag',
+    'soknad.feilmelding.NARINGSDRIVENDE_VARIG_ENDRING_TYPE_ANNET': 'Du må svare på om det har skjedd andre endringer',
+    'soknad.feilmelding.NARINGSDRIVENDE_VARIG_ENDRING_DATO': 'Du må oppgi når endringen skjedde',
 }
 
 export default SporsmalTekster

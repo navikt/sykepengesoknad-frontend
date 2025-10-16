@@ -9,6 +9,7 @@ import {
     svarRadioGruppe,
     checkViStolerPaDeg,
     sporsmalOgSvar,
+    svarDato,
 } from '../../support/utilities'
 import 'cypress-file-upload'
 import { veldigLangSoknad } from '../../../src/data/mock/data/soknad/veldig-lang-soknad'
@@ -345,6 +346,20 @@ describe('Tester støtte for gamle spørsmål', () => {
     it('Drift i virksomheten', () => {
         svarNeiHovedsporsmal()
         velgDato(14)
+        gaVidere()
+    })
+    it('Næringsdrivende virksomheten din avviklet', () => {
+        svarNeiHovedsporsmal()
+        gaVidere()
+    })
+    it('Næringsdrivende ny i arbeidslivet', () => {
+        svarNeiHovedsporsmal()
+        gaVidere()
+    })
+    it('Næringsdrivende varig endring', () => {
+        svarJaHovedsporsmal()
+        velgCheckbox('Jobbet mer i en virksomhet')
+        svarDato(/Når skjedde endringen\?/, 'januar 2024')
         gaVidere()
     })
     it('Avklaring i forbindlese med reise', function () {

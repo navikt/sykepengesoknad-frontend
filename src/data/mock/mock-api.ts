@@ -131,6 +131,10 @@ export const flattenSporsmal = (sporsmal: RSSporsmal[]) => {
 }
 
 function maaDokumentereInntektsopplysninger(soknad: RSSoknad): boolean {
+    const nyIArbeidslivet =
+        flattenSporsmal(soknad.sporsmal).find((spm) => spm.tag === 'NARINGSDRIVENDE_NY_I_ARBEIDSLIVET')?.svar[0]
+            ?.verdi === 'JA'
+    if (nyIArbeidslivet) return true
     const nyIArbeidslivetJa =
         flattenSporsmal(soknad.sporsmal).find((spm) => spm.tag === 'INNTEKTSOPPLYSNINGER_NY_I_ARBEIDSLIVET_JA')?.svar[0]
             ?.verdi === 'CHECKED'
@@ -157,7 +161,8 @@ function handterNaringsdrivendeOpplysninger(soknaden: RSSoknad) {
     const erNyKvittering = soknaden.sporsmal.some(
         (spm) =>
             spm.tag === 'INNTEKTSOPPLYSNINGER_DRIFT_VIRKSOMHETEN' ||
-            spm.tag === 'INNTEKTSOPPLYSNINGER_VIRKSOMHETEN_AVVIKLET',
+            spm.tag === 'INNTEKTSOPPLYSNINGER_VIRKSOMHETEN_AVVIKLET' ||
+            spm.tag === 'NARINGSDRIVENDE_NY_I_ARBEIDSLIVET',
     )
     const maaDokumentere = maaDokumentereInntektsopplysninger(soknaden)
     soknaden.inntektsopplysningerNyKvittering = erNyKvittering
@@ -408,6 +413,18 @@ export async function mockApi(req: NextApiRequest, res: NextApiResponse) {
                     }
                     json.mutertSoknad = soknaden
                 }
+            }
+
+            if (body.tag == 'NARINGSDRIVENDE_VIRKSOMHETEN_DIN_AVVIKLET' && body.svar[0].verdi == 'JA') {
+                const tagsSomForsvinner = ['NARINGSDRIVENDE_NY_I_ARBEIDSLIVET', 'NARINGSDRIVENDE_VARIG_ENDRING']
+                soknaden.sporsmal = soknaden.sporsmal.filter((spm) => !tagsSomForsvinner.includes(spm.tag))
+                json.mutertSoknad = soknaden
+            }
+
+            if (body.tag == 'NARINGSDRIVENDE_NY_I_ARBEIDSLIVET' && body.svar[0].verdi == 'JA') {
+                const tagsSomForsvinner = ['NARINGSDRIVENDE_VARIG_ENDRING']
+                soknaden.sporsmal = soknaden.sporsmal.filter((spm) => !tagsSomForsvinner.includes(spm.tag))
+                json.mutertSoknad = soknaden
             }
 
             return sendJson(json, 200)

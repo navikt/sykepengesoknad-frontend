@@ -36,6 +36,7 @@ export const hentSvar = (sporsmal: Sporsmal): any => {
             })?.sporsmalstekst
 
         case RSSvartype.DATO:
+        case RSSvartype.AAR_MAANED:
             return svar?.verdi ? dayjs(svar.verdi).toDate() : undefined
 
         case RSSvartype.DATOER:

@@ -3,7 +3,6 @@ import { Page } from '@playwright/test'
 import { test } from './fixtures'
 import {
     checkViStolerPaDeg,
-    fjernAnimasjoner,
     harSynligTekst,
     harSynligTittel,
     klikkGaVidere,
@@ -17,7 +16,6 @@ test.describe('Friskmeldt til arbeidsformidling', () => {
 
     test.beforeEach(async ({ page }) => {
         await page.goto(nyFriskmeldtSoknad)
-        await fjernAnimasjoner(page)
     })
     test('Har egen introside', async ({ page }) => {
         await harSynligTittel(page, 'Søknad om sykepenger', 1)
@@ -97,7 +95,6 @@ test.describe('Friskmeldt til arbeidsformidling', () => {
         await page.goto(
             'http://localhost:3000/syk/sykepengesoknad/soknader/ac0ff5c0-e6bc-416d-b5d9-dfa3654e9f26/1?testperson=fta-siste',
         )
-        await fjernAnimasjoner(page)
         await checkViStolerPaDeg(page)
         await neiOgVidere(page, ['Jobbsituasjonen din', 'Inntekt underveis', 'Reise utenfor EU/EØS'])
 
