@@ -6,7 +6,7 @@ import { RSSoknad } from '../../../../types/rs-types/rs-soknad'
 import {
     inntektsopplysningerMedSigrunData,
     inntektsopplysningerNaringsdrivende,
-    naringsdrivendeVirksomhetenDin,
+    naringsdrivendeVirksomhetenAvviklet,
     naringsdrivendeNyIArbeidslivet,
     naringsdrivendeVarigEndring,
 } from '../sporsmal/inntektsopplysninger-naringsdrivende'
@@ -35,7 +35,7 @@ export const selvstendigNaringsdrivendeUtenSigrunPerson: Persona = {
 
 const soknadMedNyttSporsmalOmVirksomhetenDin = lagSoknadMedInntektsopplysninger(
     'ffa7c5d2-4766-4450-a521-3ecc5842d015',
-    [naringsdrivendeVirksomhetenDin, naringsdrivendeNyIArbeidslivet, naringsdrivendeVarigEndring],
+    [naringsdrivendeVirksomhetenAvviklet, naringsdrivendeNyIArbeidslivet, naringsdrivendeVarigEndring],
 )
 
 export const selvstendigNaringsdrivendeVirksomhetenDinPerson: Persona = {
