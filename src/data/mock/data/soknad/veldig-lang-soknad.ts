@@ -15,7 +15,7 @@ import { kjenteInntektskilder } from '../sporsmal/kjente-inntektskilder'
 import {
     inntektsopplysningerNaringsdrivende,
     inntektsopplysningerLegacy,
-    naringsdrivendeVirksomhetenDin,
+    naringsdrivendeVirksomhetenAvviklet,
     naringsdrivendeNyIArbeidslivet,
     naringsdrivendeVarigEndring,
 } from '../sporsmal/inntektsopplysninger-naringsdrivende'
@@ -2377,7 +2377,7 @@ export const veldigLangSoknad: RSSoknad = {
         }),
         inntektsopplysningerNaringsdrivende,
         inntektsopplysningerLegacy,
-        naringsdrivendeVirksomhetenDin,
+        naringsdrivendeVirksomhetenAvviklet,
         naringsdrivendeNyIArbeidslivet,
         naringsdrivendeVarigEndring,
 

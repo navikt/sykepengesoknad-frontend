@@ -38,7 +38,7 @@ import { AvvikletVirksomhetHjelpBody } from './avviklet-virksomhet-hjelp-body'
 import { TilkommenInntektHjelpBody } from './tilkommen-inntekt-hjep-body'
 import { InntektUnderveisFtaHjelpBody } from './inntekt-underveis-fta-hjelp-body'
 import { JobbsituasjonenDinHjelpBody } from './jobbsituasjonen-din-hjelp-body'
-import { NaringsdrivendeVirksomhetenDinHjelpBody } from './naringsdrivende-virksomheten-din-hjelp-body'
+import { NaringsdrivendeVirksomhetenAvvikletHjelpBody } from './naringsdrivende-virksomheten-avviklet-hjelp-body'
 import { NaringsdrivendeNyIArbeidsLivetHjelpBody } from './naringsdrivende-ny-i-arbeids-livet-hjelp-body'
 import { NaringsdrivendeVarigEndringHjelpBody } from './naringsdrivende-varig-endring-hjelp-body'
 
@@ -129,8 +129,8 @@ export const EkspanderbarHjelp = ({ sporsmal, mb }: { sporsmal: Sporsmal; mb?: s
                 return <AvvikletVirksomhetHjelpBody />
             case 'FTA_JOBBSITUASJONEN_DIN':
                 return <JobbsituasjonenDinHjelpBody />
-            case 'NARINGSDRIVENDE_VIRKSOMHETEN_DIN_AVVIKLET':
-                return <NaringsdrivendeVirksomhetenDinHjelpBody />
+            case 'NARINGSDRIVENDE_VIRKSOMHETEN_AVVIKLET':
+                return <NaringsdrivendeVirksomhetenAvvikletHjelpBody />
             case 'NARINGSDRIVENDE_NY_I_ARBEIDSLIVET':
                 return <NaringsdrivendeNyIArbeidsLivetHjelpBody />
             case 'NARINGSDRIVENDE_VARIG_ENDRING':
