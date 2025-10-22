@@ -142,7 +142,7 @@ test.describe('Selvstendig næringsdrivende - Virksomheten din', () => {
         await page.getByRole('button', { name: 'Spørsmålet forklart' }).click()
         await harSynligTekst(
             page,
-            'Har det skjedd en varig endring i arbeidssituasjonen din mellom 1.mars 2025 og frem til du ble sykmeldt 1.mai 2025?',
+            'Har det skjedd en varig endring i arbeidssituasjonen din mellom 1.januar 2020 og frem til du ble sykmeldt 1.mai 2025?',
         )
 
         await page.getByRole('radio', { name: 'Ja' }).click()
@@ -153,24 +153,34 @@ test.describe('Selvstendig næringsdrivende - Virksomheten din', () => {
         await klikkGaVidere(page, true)
 
         await expect(page.locator('p.navds-error-message', { hasText: 'Du må velge et alternativ' })).toBeVisible()
-        await expect(
-            page.locator('p.navds-error-message', { hasText: 'Datoen følger ikke formatet dd.mm.åååå' }),
-        ).toBeVisible()
+        await expect(page.locator('p.navds-error-message', { hasText: 'Datoen følger ikke formatet' })).toBeVisible()
 
         await expect(page.getByText('Det er 2 feil i skjemaet')).toBeVisible()
         await expect(page.getByRole('link', { name: 'Du må svare på hvilken endring som har skjedd' })).toBeVisible()
-        await expect(page.getByRole('link', { name: 'Datoen følger ikke formatet dd.mm.åååå' })).toBeVisible()
+        await expect(page.getByRole('link', { name: 'Datoen følger ikke formatet' })).toBeVisible()
 
         await page.getByRole('checkbox', { name: 'Jobbet mindre i en virksomhet' }).click()
         await page.getByRole('checkbox', { name: 'Endret kundegrunnlag' }).click()
-
-        const monthInput = page.getByLabel('Når skjedde endringen?')
-        await monthInput.fill('januar 2024')
 
         await harSynligTekst(
             page,
             'Det kan være vi trenger mer dokumentasjon på dette. Da vil en saksbehandler ta kontakt med deg.',
         )
+
+        const monthInput = page.getByLabel('Når skjedde endringen?')
+        await monthInput.fill('abc 2024')
+        await klikkGaVidere(page, true)
+        await expect(page.getByRole('link', { name: 'Datoen følger ikke formatet' })).toBeVisible()
+
+        await monthInput.fill('januar 2026')
+        await klikkGaVidere(page, true)
+        await expect(page.getByRole('link', { name: 'Datoen kan ikke være etter' })).toBeVisible()
+
+        await monthInput.fill('januar 2017')
+        await klikkGaVidere(page, true)
+        await expect(page.getByRole('link', { name: 'Datoen kan ikke være før' })).toBeVisible()
+
+        await monthInput.fill('januar 2024')
 
         await klikkGaVidere(page)
 

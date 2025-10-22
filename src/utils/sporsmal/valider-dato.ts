@@ -34,10 +34,16 @@ export const validerMaaned = (sporsmal: Sporsmal, value?: Date, monthValidation?
         return true
     }
     if (!monthValidation || monthValidation.isEmpty || monthValidation.isInvalid) {
-        return 'Datoen følger ikke formatet dd.mm.åååå'
+        return 'Datoen følger ikke formatet dd.mm.åååå eller måned åååå'
+    }
+    if (sporsmal.min && monthValidation.isBefore) {
+        return 'Datoen kan ikke være før ' + dayjs(sporsmal.min).format('MMMM YYYY')
+    }
+    if (sporsmal.max && monthValidation.isAfter) {
+        return 'Datoen kan ikke være etter ' + dayjs(sporsmal.max).format('MMMM YYYY')
     }
     if (!monthValidation.isValidMonth) {
-        return 'Datoen følger ikke formatet maaned'
+        return 'Datoen følger ikke formatet dd.mm.åååå eller måned åååå'
     }
     return true
 }
