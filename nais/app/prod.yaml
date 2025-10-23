@@ -5,12 +5,12 @@ env:
   AMPLITUDE_ENABLED: true
   ENVIRONMENT: prod
   SYKEFRAVAER_URL: https://www.nav.no/syk/sykefravaer
-  SYKMELDINGER_URL: https://www.nav.no/syk/sykmeldinger
+  SYKMELDINGER_URL: https://www.nav.no/syk/sykefravaer/sykmeldinger
   MINSIDE_URL: https://www.nav.no/minside
   DECORATOR_ENV: prod
   ASSET_PREFIX: https://cdn.nav.no/flex/sykepengesoknad-frontend
   VEDLIKEHOLD: false
-  SYKMELDINGER_BACKEND_CLIENT_ID: prod-gcp:teamsykmelding:sykmeldinger-backend
+  SYKMELDINGER_BACKEND_CLIENT_ID: prod-gcp:flex:flex-sykmeldinger-backend
   SYKEPENGESOKNAD_BACKEND_CLIENT_ID: prod-gcp:flex:sykepengesoknad-backend
   SYKEPENGESOKNAD_KVITTERINGER_CLIENT_ID: prod-gcp:flex:sykepengesoknad-kvitteringer
   SOKOS_KONTOREGISTER_PERSON_CLIENT_ID: prod-gcp:okonomi:sokos-kontoregister-person

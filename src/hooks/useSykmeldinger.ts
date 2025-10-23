@@ -12,7 +12,7 @@ export default function useSykmeldinger() {
         queryKey: ['sykmeldinger'],
         queryFn: () =>
             fetchJsonMedRequestId(
-                `/syk/sykepengesoknad/api/sykmeldinger-backend/api/v2/sykmeldinger${testpersonQuery.query()}`,
+                `/syk/sykepengesoknad/api/flex-sykmeldinger-backend/api/v1/sykmeldinger${testpersonQuery.query()}`,
                 {
                     method: 'GET',
                     credentials: 'include',

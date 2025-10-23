@@ -8,7 +8,7 @@ import { arbeidstaker } from './soknad/arbeidstaker'
 const enUsendt = jsonDeepCopy(arbeidstaker100Syk)
 enUsendt.sykmeldingStatus.statusEvent = 'APEN'
 enUsendt.mottattTidspunkt = new Date()
-enUsendt.id = 'APEN'
+enUsendt.id = 'id-apen-sykmelding'
 
 export const enUsendtSykmelding: Persona = {
     soknader: [deepcopyMedNyId(arbeidstaker, '5d0bd29f-7803-4945-8426-49921284435e')],
@@ -24,7 +24,7 @@ usendt.id = '943a59ef-fd95-441c-a303-d71e25680ff8'
 const eldsteUsendte = jsonDeepCopy(arbeidstaker100Syk)
 eldsteUsendte.sykmeldingStatus.statusEvent = 'APEN'
 eldsteUsendte.mottattTidspunkt = new Date()
-eldsteUsendte.id = 'APEN'
+eldsteUsendte.id = 'id-apen-sykmelding'
 eldsteUsendte.sykmeldingsperioder[0].fom = '2018-04-01' as any
 
 export const toUsendteSykmeldinger: Persona = {

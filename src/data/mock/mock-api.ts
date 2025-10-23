@@ -192,7 +192,7 @@ export async function mockApi(req: NextApiRequest, res: NextApiResponse) {
     const ENDPOINTS = {
         HENT_METADATA: 'GET /api/sykepengesoknad-backend/api/v2/soknader/metadata',
         HENT_AKTIV_KONTO: 'GET /api/sokos-kontoregister-person/api/borger/v1/hent-aktiv-konto',
-        HENT_SYKMELDINGER: 'GET /api/sykmeldinger-backend/api/v2/sykmeldinger',
+        HENT_SYKMELDINGER: 'GET /api/flex-sykmeldinger-backend/api/v1/sykmeldinger',
         GET_SOKNAD: 'GET /api/sykepengesoknad-backend/api/v2/soknad/[uuid]',
         KORRIGER_SOKNAD: 'POST /api/sykepengesoknad-backend/api/v2/soknader/[uuid]/korriger',
         ETTERSEND_TIL_ARBEIDSGIVER: 'POST /api/sykepengesoknad-backend/api/v2/soknader/[uuid]/ettersendTilArbeidsgiver',
