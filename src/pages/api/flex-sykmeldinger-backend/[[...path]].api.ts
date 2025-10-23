@@ -6,15 +6,15 @@ import { proxyKallTilBackend } from '../../../proxy/backendproxy'
 
 const { serverRuntimeConfig } = getConfig()
 
-const tillatteApier = ['GET /api/v2/sykmeldinger']
+const tillatteApier = ['GET /api/v1/sykmeldinger']
 
 const handler = beskyttetApi(async (req: NextApiRequest, res: NextApiResponse) => {
     await proxyKallTilBackend({
         req: req,
         res: res,
         tillatteApier: tillatteApier,
-        backend: 'sykmeldinger-backend',
-        hostname: 'sykmeldinger-backend.teamsykmelding',
+        backend: 'flex-sykmeldinger-backend',
+        hostname: 'flex-sykmeldinger-backend.flex',
         backendClientId: serverRuntimeConfig.sykmeldingerBackendClientId,
         https: false,
     })

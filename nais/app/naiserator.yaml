@@ -62,10 +62,9 @@ spec:
         - application: sykepengesoknad-backend
         - application: sykepengesoknad-kvitteringer
         - application: flexjar-backend
+        - application: flex-sykmeldinger-backend
         - application: sokos-kontoregister-person
           namespace: okonomi
-        - application: sykmeldinger-backend
-          namespace: teamsykmelding
         - application: nav-dekoratoren
           namespace: personbruker
       external:

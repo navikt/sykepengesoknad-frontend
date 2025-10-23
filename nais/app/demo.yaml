@@ -45,7 +45,7 @@ spec:
     - name: SYKEFRAVAER_URL
       value: "https://demo.ekstern.dev.nav.no/syk/sykefravaer"
     - name: SYKMELDINGER_URL
-      value: "https://sykmeldinger.ekstern.dev.nav.no/syk/sykmeldinger"
+      value: "https://demo.ekstern.dev.nav.no/syk/sykefravaer/sykmeldinger"
     - name: MINSIDE_URL
       value: "https://www.dev.nav.no/minside/"
     - name: OPPLAERING
