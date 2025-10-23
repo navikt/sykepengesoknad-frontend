@@ -31,7 +31,7 @@ export const EldreUsendtSykmelding = ({ usendteSykmeldinger }: UsendtSykmeldingP
                 '%ANTALL%': tallTilSpråk(usendteSykmeldinger.length),
                 '%FLERTALL%': usendteSykmeldinger.length > 1 ? 'er' : '',
             })}
-            url={sykmeldingerUrl() + '/' + sorterteUsendte[0].id}
+            url={sykmeldingerUrl() + '/' + (sorterteUsendte.length == 1 ? sorterteUsendte[0].id : '')}
             knappeTekst={knappetekst()}
             komponent="eldre usendt sykmelding"
         />
