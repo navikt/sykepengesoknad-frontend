@@ -33,7 +33,12 @@ test.describe('Tester at åpne sykmeldinger må sendes inn', () => {
                 ),
             ).toBeVisible()
 
-            await expect(page.getByText('Gå til sykmeldingen')).toBeVisible()
+            const sykmeldingerKnapp = page.getByRole('button', { name: 'Gå til sykmeldingene' })
+            await expect(sykmeldingerKnapp).toBeVisible()
+            await expect(page.getByText('Gå til sykmeldingen', { exact: true })).toBeHidden()
+
+            await sykmeldingerKnapp.click()
+            await expect(page).toHaveURL(/\/sykmeldinger$/)
         })
     })
 })

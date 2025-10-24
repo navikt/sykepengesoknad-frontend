@@ -24,14 +24,16 @@ export const EldreUsendtSykmelding = ({ usendteSykmeldinger }: UsendtSykmeldingP
         return tekst('eldre.usendt.sykmelding.gaa-til-sykmeldingene')
     }
 
+    const flereSykmeldinger = usendteSykmeldinger.length > 1
+
     return (
         <GuidepanelMedKnapp
             heading={tekst('eldre.usendt.header')}
             innhold={getLedetekst(tekst('eldre.usendt.sykmelding.alert'), {
                 '%ANTALL%': tallTilSpråk(usendteSykmeldinger.length),
-                '%FLERTALL%': usendteSykmeldinger.length > 1 ? 'er' : '',
+                '%FLERTALL%': flereSykmeldinger ? 'er' : '',
             })}
-            url={sykmeldingerUrl() + '/' + sorterteUsendte[0].id}
+            url={sykmeldingerUrl() + (flereSykmeldinger ? '' : '/' + sorterteUsendte[0].id)}
             knappeTekst={knappetekst()}
             komponent="eldre usendt sykmelding"
         />
