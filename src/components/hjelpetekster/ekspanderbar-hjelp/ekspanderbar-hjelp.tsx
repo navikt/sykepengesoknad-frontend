@@ -41,6 +41,7 @@ import { JobbsituasjonenDinHjelpBody } from './jobbsituasjonen-din-hjelp-body'
 import { NaringsdrivendeVirksomhetenAvvikletHjelpBody } from './naringsdrivende-virksomheten-avviklet-hjelp-body'
 import { NaringsdrivendeNyIArbeidsLivetHjelpBody } from './naringsdrivende-ny-i-arbeids-livet-hjelp-body'
 import { NaringsdrivendeVarigEndringHjelpBody } from './naringsdrivende-varig-endring-hjelp-body'
+import { NaringsdrivendeOppholdIUtlandetHjelpBody } from './naringsdrivende-opphold-i-utlandet-hjelp-body'
 
 export const EkspanderbarHjelp = ({ sporsmal, mb }: { sporsmal: Sporsmal; mb?: string }) => {
     const { valgtSoknad } = useSoknadMedDetaljer()
@@ -129,6 +130,8 @@ export const EkspanderbarHjelp = ({ sporsmal, mb }: { sporsmal: Sporsmal; mb?: s
                 return <AvvikletVirksomhetHjelpBody />
             case 'FTA_JOBBSITUASJONEN_DIN':
                 return <JobbsituasjonenDinHjelpBody />
+            case 'NARINGSDRIVENDE_OPPHOLD_I_UTLANDET':
+                return <NaringsdrivendeOppholdIUtlandetHjelpBody />
             case 'NARINGSDRIVENDE_VIRKSOMHETEN_AVVIKLET':
                 return <NaringsdrivendeVirksomhetenAvvikletHjelpBody />
             case 'NARINGSDRIVENDE_NY_I_ARBEIDSLIVET':

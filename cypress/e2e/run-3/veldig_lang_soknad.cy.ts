@@ -348,6 +348,10 @@ describe('Tester støtte for gamle spørsmål', () => {
         velgDato(14)
         gaVidere()
     })
+    it('Næringsdrivende opphold i utlandet', () => {
+        svarNeiHovedsporsmal()
+        gaVidere()
+    })
     it('Næringsdrivende virksomheten din avviklet', () => {
         svarNeiHovedsporsmal()
         gaVidere()

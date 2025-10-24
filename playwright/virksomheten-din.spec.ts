@@ -33,11 +33,33 @@ test.describe('Selvstendig næringsdrivende - Virksomheten din', () => {
         await neiOgVidere(page, ['Jobb underveis i sykefraværet'])
         await neiOgVidere(page, ['Andre inntektskilder'])
         await neiOgVidere(page, ['Reise utenfor EU/EØS'])
-        await neiOgVidere(page, ['Arbeid utenfor Norge'])
+        await neiOgVidere(page, ['Opphold i utlandet'])
         await neiOgVidere(page, ['Virksomheten din'])
         await neiOgVidere(page, ['Ny i arbeidslivet'])
         await neiOgVidere(page, ['Endringer i arbeidsituasjonen din'])
         await sendSoknad(page)
+    })
+
+    test('Opphold i utlandet', async ({ page }) => {
+        await goToPage(page, 7)
+        await harSynligTittel(page, 'Opphold i utlandet', 2)
+
+        await page.getByRole('button', { name: 'Spørsmålet forklart' }).click()
+        await harSynligTekst(page, 'For å ha rett til sykepenger, må du være medlem i folketrygden.')
+
+        await page.getByRole('radio', { name: 'Ja' }).click()
+
+        await klikkGaVidere(page)
+
+        await neiOgVidere(page, ['Virksomheten din'])
+        await neiOgVidere(page, ['Ny i arbeidslivet'])
+        await neiOgVidere(page, ['Endringer i arbeidsituasjonen din'])
+        await sendSoknad(page)
+
+        await harSynligTekst(
+            page,
+            'Har du vært i utlandet i løpet av de siste 12 månedene før du ble sykmeldt 1.mai 2025?',
+        )
     })
 
     test('Virksomheten din avviklet ja svar', async ({ page }) => {

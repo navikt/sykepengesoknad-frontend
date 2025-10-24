@@ -675,6 +675,19 @@ export const inntektsopplysningerMedSigrunData: RSSporsmal = {
     ],
 }
 
+export const naringsdrivendeOppholdIUtlandet: RSSporsmal = {
+    id: v4().toString(),
+    tag: 'NARINGSDRIVENDE_OPPHOLD_I_UTLANDET',
+    sporsmalstekst: 'Har du vært i utlandet i løpet av de siste 12 månedene før du ble sykmeldt 1.mai 2025?',
+    undertekst: 'Du kan se bort ifra opphold som varte kortere enn 5 uker.',
+    svartype: 'JA_NEI',
+    min: null,
+    max: null,
+    kriterieForVisningAvUndersporsmal: null,
+    svar: [],
+    undersporsmal: [],
+}
+
 export const naringsdrivendeVirksomhetenAvviklet: RSSporsmal = {
     id: v4().toString(),
     tag: 'NARINGSDRIVENDE_VIRKSOMHETEN_AVVIKLET',
