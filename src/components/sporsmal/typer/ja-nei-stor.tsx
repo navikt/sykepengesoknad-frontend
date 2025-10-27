@@ -167,9 +167,14 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
                     </BodyLong>
                 )}
 
-                {sporsmal.tag == 'FRAVAR_FOR_SYKMELDINGEN_V2' && watchJaNei === 'JA' && (
+                {sporsmal.tag === 'FRAVAR_FOR_SYKMELDINGEN_V2' && watchJaNei === 'JA' && (
                     <Alert variant="info" className="mt-8">
                         Det kan være vi trenger flere opplysninger om fraværet ditt. Da vil en saksbehandler ta kontakt.
+                    </Alert>
+                )}
+                {sporsmal.tag === 'NARINGSDRIVENDE_OPPRETTHOLDT_INNTEKT' && watchJaNei === 'JA' && (
+                    <Alert variant="info" className="mt-8">
+                        Det kan være vi trenger mer dokumentasjon på dette. Da vil en saksbehandler ta kontakt med deg.
                     </Alert>
                 )}
             </div>

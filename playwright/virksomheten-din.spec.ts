@@ -31,6 +31,7 @@ test.describe('Selvstendig næringsdrivende - Virksomheten din', () => {
         await neiOgVidere(page, ['Fravær før du ble sykmeldt'])
         await neiOgVidere(page, ['Tilbake i fullt arbeid'])
         await neiOgVidere(page, ['Jobb underveis i sykefraværet'])
+        await neiOgVidere(page, ['Inntekt mens du var sykmeldt'])
         await neiOgVidere(page, ['Andre inntektskilder'])
         await neiOgVidere(page, ['Reise utenfor EU/EØS'])
         await neiOgVidere(page, ['Opphold i utlandet'])
@@ -40,8 +41,37 @@ test.describe('Selvstendig næringsdrivende - Virksomheten din', () => {
         await sendSoknad(page)
     })
 
+    test('Opprettholdt inntekt', async ({ page }) => {
+        await goToPage(page, 5)
+        await harSynligTittel(page, 'Inntekt mens du var sykmeldt', 2)
+
+        await page.getByRole('button', { name: 'Spørsmålet forklart' }).click()
+        await harSynligTekst(page, 'Hvis du har hatt næringsinntekt mens du har vært sykmeldt')
+
+        await page.getByRole('radio', { name: 'Ja' }).click()
+        await harSynligTekst(
+            page,
+            'Det kan være vi trenger mer dokumentasjon på dette. Da vil en saksbehandler ta kontakt med deg.',
+        )
+
+        await klikkGaVidere(page)
+
+        await neiOgVidere(page, ['Andre inntektskilder'])
+        await neiOgVidere(page, ['Reise utenfor EU/EØS'])
+        await neiOgVidere(page, ['Opphold i utlandet'])
+        await neiOgVidere(page, ['Virksomheten din'])
+        await neiOgVidere(page, ['Ny i arbeidslivet'])
+        await neiOgVidere(page, ['Endringer i arbeidsituasjonen din'])
+        await sendSoknad(page)
+
+        await harSynligTekst(
+            page,
+            'Har du vært i utlandet i løpet av de siste 12 månedene før du ble sykmeldt 1.mai 2025?',
+        )
+    })
+
     test('Opphold i utlandet', async ({ page }) => {
-        await goToPage(page, 7)
+        await goToPage(page, 8)
         await harSynligTittel(page, 'Opphold i utlandet', 2)
 
         await page.getByRole('button', { name: 'Spørsmålet forklart' }).click()
@@ -63,7 +93,7 @@ test.describe('Selvstendig næringsdrivende - Virksomheten din', () => {
     })
 
     test('Virksomheten din avviklet ja svar', async ({ page }) => {
-        await goToPage(page, 8)
+        await goToPage(page, 9)
         await harSynligTittel(page, 'Virksomheten din', 2)
 
         await page.getByRole('button', { name: 'Spørsmålet forklart' }).click()
@@ -94,7 +124,7 @@ test.describe('Selvstendig næringsdrivende - Virksomheten din', () => {
     })
 
     test('Virksomheten din avviklet nei svar', async ({ page }) => {
-        await goToPage(page, 8)
+        await goToPage(page, 9)
         await harSynligTittel(page, 'Virksomheten din', 2)
 
         await page.getByRole('button', { name: 'Spørsmålet forklart' }).click()
@@ -113,7 +143,7 @@ test.describe('Selvstendig næringsdrivende - Virksomheten din', () => {
     })
 
     test('Ny i arbeidslivet ja svar', async ({ page }) => {
-        await goToPage(page, 9)
+        await goToPage(page, 10)
         await harSynligTittel(page, 'Ny i arbeidslivet', 2)
 
         await page.getByRole('button', { name: 'Spørsmålet forklart' }).click()
@@ -140,7 +170,7 @@ test.describe('Selvstendig næringsdrivende - Virksomheten din', () => {
     })
 
     test('Ny i arbeidslivet nei svar', async ({ page }) => {
-        await goToPage(page, 9)
+        await goToPage(page, 10)
         await harSynligTittel(page, 'Ny i arbeidslivet', 2)
 
         await page.getByRole('button', { name: 'Spørsmålet forklart' }).click()
@@ -158,7 +188,7 @@ test.describe('Selvstendig næringsdrivende - Virksomheten din', () => {
     })
 
     test('Endringer i arbeidssituasjonen din', async ({ page }) => {
-        await goToPage(page, 10)
+        await goToPage(page, 11)
         await harSynligTittel(page, 'Endringer i arbeidsituasjonen din', 2)
 
         await page.getByRole('button', { name: 'Spørsmålet forklart' }).click()

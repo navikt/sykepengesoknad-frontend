@@ -364,6 +364,7 @@ export async function mockApi(req: NextApiRequest, res: NextApiResponse) {
                                 'JOBBET_DU_GRADERT',
                                 'JOBBET_DU_100_PROSENT',
                                 'ARBEID_UNDERVEIS_100_PROSENT',
+                                'NARINGSDRIVENDE_OPPRETTHOLDT_INNTEKT',
                             ]
                             return !tagsSomForsvinner.some((tag) => spm.tag.includes(tag))
                         })

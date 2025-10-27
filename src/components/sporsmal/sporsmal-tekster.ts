@@ -315,6 +315,8 @@ const SporsmalTekster = {
     'soknad.feilmelding.FTA_REISE_TIL_UTLANDET_NAR': '',
     'soknad.feilmelding.FTA_JOBBSITUASJONEN_DIN_FORTSATT_FRISKMELDT_AVREGISTRERT_NAR': '',
 
+    'soknad.feilmelding.NARINGSDRIVENDE_OPPRETTHOLDT_INNTEKT':
+        'Du må svare på om du har hatt inntekt mens du var sykmeldt',
     'soknad.feilmelding.NARINGSDRIVENDE_OPPHOLD_I_UTLANDET': 'Du må svare på om du har hatt opphold i utlandet',
     'soknad.feilmelding.NARINGSDRIVENDE_VIRKSOMHETEN_AVVIKLET':
         'Du må svare på om du avviklet virksomheten din før du ble sykmeldt',

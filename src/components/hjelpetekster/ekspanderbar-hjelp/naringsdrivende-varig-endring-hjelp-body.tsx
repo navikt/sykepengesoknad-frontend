@@ -5,7 +5,7 @@ export const NaringsdrivendeVarigEndringHjelpBody = () => {
         <>
             <>
                 <BodyShort spacing>
-                    Spørsmålet gjelder alle arbeidsforhold du har - også de du eventuelt ikke er sykemeldt fra. Har det
+                    Spørsmålet gjelder alle arbeidsforhold du har - også de du eventuelt ikke er sykmeldt fra. Har det
                     skjedd en varig endring som følge av en konkret situasjon, skal du svare ja på spørsmålet.
                 </BodyShort>
 
