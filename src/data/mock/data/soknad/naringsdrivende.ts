@@ -1,6 +1,7 @@
 import { RSSoknad } from '../../../../types/rs-types/rs-soknad'
 import { oppsummering } from '../sporsmal/oppsummering'
 import { naringsdrivende100syk } from '../sykmeldinger'
+import { naringsdrivendeOppholdIUtlandet } from '../sporsmal/inntektsopplysninger-naringsdrivende'
 
 export const naringsdrivendeSoknad: RSSoknad = {
     id: 'a8e40578-682b-4a04-bfda-b7768af2ae55',
@@ -323,18 +324,7 @@ export const naringsdrivendeSoknad: RSSoknad = {
                 },
             ],
         },
-        {
-            id: '687451',
-            tag: 'ARBEID_UTENFOR_NORGE',
-            sporsmalstekst: 'Har du arbeidet i utlandet i løpet av de siste 12 månedene?',
-            undertekst: null,
-            svartype: 'JA_NEI',
-            min: null,
-            max: null,
-            kriterieForVisningAvUndersporsmal: null,
-            svar: [],
-            undersporsmal: [],
-        },
+        naringsdrivendeOppholdIUtlandet,
         oppsummering(),
     ],
     egenmeldtSykmelding: false,
