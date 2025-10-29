@@ -39,7 +39,7 @@
         "uuid": "^11.1.0"
     },
     "devDependencies": {
-        "@axe-core/playwright": "^4.10.2",
+        "@axe-core/playwright": "^4.11.0",
         "@cypress/webpack-preprocessor": "^6.0.4",
         "@navikt/eslint-config-teamsykmelding": "^7.1.0",
         "@playwright/test": "^1.56.1",
