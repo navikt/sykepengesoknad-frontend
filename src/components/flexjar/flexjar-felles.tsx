@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react'
-import { Alert, BodyShort, Button, Label, Textarea } from '@navikt/ds-react'
-import { MagnifyingGlassIcon } from '@navikt/aksel-icons'
+import { Alert, BodyShort, Button, Label, Radio, RadioGroup, Textarea } from '@navikt/ds-react'
+import { MagnifyingGlassIcon, PaperplaneIcon } from '@navikt/aksel-icons'
 
 import { cn } from '../../utils/tw-utils'
 import { logEvent } from '../amplitude/amplitude'
@@ -22,6 +22,9 @@ interface FlexjarFellesProps {
     flexjartittel: string
     feedbackProps: Record<string, string | undefined | boolean | number>
     feedbackPropsFunction?: () => Record<string, string | undefined | number | boolean>
+    additionalQuestions?: Record<string, string | undefined | boolean | number>
+    showSendFeedback?: boolean
+    showTextBox?: boolean
 }
 
 export function FlexjarFelles({
@@ -37,6 +40,9 @@ export function FlexjarFelles({
     textRequired,
     feedbackProps,
     feedbackPropsFunction,
+    additionalQuestions = {},
+    showSendFeedback = true,
+    showTextBox = true,
 }: FlexjarFellesProps) {
     const [textValue, setTextValue] = useState('')
     const [errorMsg, setErrorMsg] = useState<string | null>(null)
@@ -54,6 +60,7 @@ export function FlexjarFelles({
                 feedbackId: feedbackId,
                 svar: activeState,
                 ...feedbackProps,
+                ...additionalQuestions,
             }
             if (feedbackPropsFunction) {
                 Object.assign(body, feedbackPropsFunction())
@@ -75,17 +82,19 @@ export function FlexjarFelles({
             oppdaterFeedback,
             textValue,
             feedbackPropsFunction,
+            additionalQuestions,
         ],
     )
     useEffect(() => {
         setErrorMsg(null)
     }, [activeState])
 
+    const additionalQuestionsString = JSON.stringify(additionalQuestions)
     useEffect(() => {
         fetchFeedback().catch()
         // kan ikke bruke fetchFeedback som dependency, da blir det dobble kall
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [activeState])
+    }, [activeState, additionalQuestionsString])
 
     const feedbackPropsString = JSON.stringify(feedbackProps)
     useEffect(() => {
@@ -95,7 +104,11 @@ export function FlexjarFelles({
         reset()
     }, [feedbackPropsString, setActiveState, feedbackId, reset])
 
-    const sendTilbakemelding = 'Send tilbakemelding'
+    useEffect(() => {
+        setTextValue('')
+    }, [showTextBox])
+
+    const sendTilbakemeldingTekst = 'Send tilbakemelding'
 
     const handleSend = async (p: () => void) => {
         if (textRequired && textValue === '') {
@@ -106,7 +119,7 @@ export function FlexjarFelles({
             komponent: 'flexjar',
             feedbackId: feedbackId,
             svar: activeState + '',
-            tekst: sendTilbakemelding,
+            tekst: sendTilbakemeldingTekst,
         })
         const oppdatert = await fetchFeedback(p)
         if (oppdatert) {
@@ -131,7 +144,7 @@ export function FlexjarFelles({
                                 <Label as="h2" className="mb-2">
                                     {flexjartittel}
                                 </Label>
-                                <BodyShort>Svarene dine er anonyme</BodyShort>
+                                <BodyShort>Det er valgfritt å svare. Svarene dine er anonyme.</BodyShort>
                             </div>
                         </div>
                         <div className="px-6 py-8">
@@ -143,42 +156,51 @@ export function FlexjarFelles({
 
                             {children}
                             {activeState !== null && (
-                                <form className="mt-10 w-full">
-                                    <Textarea
-                                        ref={textAreaRef}
-                                        error={errorMsg}
-                                        label={getPlaceholder()}
-                                        description="Unngå å skrive inn navn, fødselsnummer eller andre personlige opplysninger."
-                                        onKeyDown={async (e) => {
-                                            if (e.key === 'Enter' && e.ctrlKey) {
+                                <form className="w-full">
+                                    {showTextBox && (
+                                        <>
+                                            <Textarea
+                                                className="mt-10"
+                                                ref={textAreaRef}
+                                                error={errorMsg}
+                                                label={getPlaceholder()}
+                                                description="Unngå å skrive inn navn, fødselsnummer eller andre personlige opplysninger."
+                                                onKeyDown={async (e) => {
+                                                    if (e.key === 'Enter' && e.ctrlKey) {
+                                                        e.preventDefault()
+                                                        await handleSend(() => reset())
+                                                    }
+                                                }}
+                                                value={textValue}
+                                                onChange={(e) => {
+                                                    setThanksFeedback(false)
+                                                    setErrorMsg(null)
+                                                    setTextValue(e.target.value)
+                                                }}
+                                                maxLength={600}
+                                                minRows={2}
+                                            />
+                                            <Alert variant="warning" className="mt-4">
+                                                Tilbakemeldingen din er anonym og vil ikke knyttes til søknaden din. Den
+                                                brukes kun for å gjøre nettsidene bedre
+                                            </Alert>
+                                        </>
+                                    )}
+                                    {showSendFeedback && (
+                                        <Button
+                                            className="mr-auto mt-6"
+                                            size="medium"
+                                            variant="secondary-neutral"
+                                            icon={<PaperplaneIcon title="a11y-title" fontSize="1.5rem" />}
+                                            iconPosition="right"
+                                            onClick={async (e) => {
                                                 e.preventDefault()
                                                 await handleSend(() => reset())
-                                            }
-                                        }}
-                                        value={textValue}
-                                        onChange={(e) => {
-                                            setThanksFeedback(false)
-                                            setErrorMsg(null)
-                                            setTextValue(e.target.value)
-                                        }}
-                                        maxLength={600}
-                                        minRows={2}
-                                    />
-                                    <Alert variant="warning" className="mt-4">
-                                        Tilbakemeldingen din er anonym og vil ikke knyttes til søknaden din. Den brukes
-                                        kun for å gjøre nettsidene bedre
-                                    </Alert>
-                                    <Button
-                                        className="mr-auto mt-6"
-                                        size="medium"
-                                        variant="secondary-neutral"
-                                        onClick={async (e) => {
-                                            e.preventDefault()
-                                            await handleSend(() => reset())
-                                        }}
-                                    >
-                                        {sendTilbakemelding}
-                                    </Button>
+                                            }}
+                                        >
+                                            {sendTilbakemeldingTekst}
+                                        </Button>
+                                    )}
                                 </form>
                             )}
                         </div>
@@ -241,5 +263,45 @@ export function FeedbackButton(props: FeedbackButtonProps) {
         >
             {props.tekst}
         </Button>
+    )
+}
+
+interface FeedbackRadioGroupProps {
+    feedbackId: string
+    sporsmal: string
+    undertekst?: string
+    svarAlternativer: string[][]
+    setSvar: (s: string | number | null) => void
+    svar: string | number | null
+}
+
+export function FeedbackRadioGroup(props: FeedbackRadioGroupProps) {
+    const [feilmelding, setFeilmelding] = useState<string | null>(null)
+
+    const handterSvarEndring = (value: string) => {
+        logEvent('knapp klikket', {
+            komponent: 'flexjar',
+            feedbackId: props.feedbackId,
+            tekst: props.sporsmal,
+            svar: value,
+        })
+        setFeilmelding(null)
+        props.setSvar(value)
+    }
+
+    return (
+        <RadioGroup
+            legend={props.sporsmal}
+            description={props.undertekst}
+            onChange={handterSvarEndring}
+            error={feilmelding}
+            value={props.svar}
+        >
+            {props.svarAlternativer.map(([key, value]) => (
+                <Radio value={key} key={key}>
+                    {value}
+                </Radio>
+            ))}
+        </RadioGroup>
     )
 }

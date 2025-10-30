@@ -29,7 +29,7 @@ export const FlexjarSporsmal = ({ soknad, sporsmal, steg }: FlexjarSporsmalProps
     const getPlaceholder = (): string => {
         switch (activeState) {
             case 'JA':
-                return 'Er det noe du vil trekke frem? (valgfritt)'
+                return 'Er det noe du vil trekke frem?'
             case 'NEI':
                 return 'Hva er utfordringen din med dette spørsmålet?'
             case 'FORBEDRING':
@@ -64,7 +64,7 @@ export const FlexjarSporsmal = ({ soknad, sporsmal, steg }: FlexjarSporsmalProps
             getPlaceholder={getPlaceholder}
             feedbackProps={feedbackProps}
             textRequired={activeState === 'FORBEDRING' || activeState === 'NEI'}
-            flexjartittel="Tilbakemeldingen din er viktig for oss!"
+            flexjartittel="Vil du hjelpe oss å gjøre søknaden bedre?"
             flexjarsporsmal="Har du informasjonen du trenger for å svare på spørsmålet i søknaden?"
         >
             <div className="flex w-full gap-2">
