@@ -449,6 +449,12 @@ test.describe('Tester støtte for gamle spørsmål', () => {
             await klikkGaVidere(page)
         })
 
+        await test.step('Næringsdrivende opprettholdt inntekt', async () => {
+            await svarNeiHovedsporsmal(page)
+            await validerAxeUtilityWrapper(page, test.info())
+            await klikkGaVidere(page)
+        })
+
         await test.step('Næringsdrivende opphold i utlandet', async () => {
             await svarNeiHovedsporsmal(page)
             await validerAxeUtilityWrapper(page, test.info())

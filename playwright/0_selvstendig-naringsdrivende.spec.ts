@@ -17,9 +17,9 @@ import {
 import { validerAxeUtilityWrapper } from './uuvalidering'
 
 const SELVSTENDIG_NARINGSDRIVENDE_URL =
-    '/syk/sykepengesoknad/soknader/bd6f6207-3888-4210-a4c0-cbe6806b5d00/8?testperson=selvstendig-naringsdrivende'
+    '/syk/sykepengesoknad/soknader/bd6f6207-3888-4210-a4c0-cbe6806b5d00/9?testperson=selvstendig-naringsdrivende'
 const SELVSTENDIG_NARINGSDRIVENDE_UTEN_SIGRUN_URL =
-    '/syk/sykepengesoknad/soknader/2faff926-5261-42e5-927b-02e4aa44a7ad/8?testperson=selvstendig-naringsdrivende-uten-sigrun'
+    '/syk/sykepengesoknad/soknader/2faff926-5261-42e5-927b-02e4aa44a7ad/9?testperson=selvstendig-naringsdrivende-uten-sigrun'
 const FRAVAR_FOR_SYKMELDING_URL =
     '/syk/sykepengesoknad/soknader/2faff926-5261-42e5-927b-02e4aa44a7ad/2?testperson=selvstendig-naringsdrivende-uten-sigrun'
 
