@@ -20,10 +20,19 @@ import { FeilStateView } from '../feil/refresh-hvis-feil-state'
 import { erSisteSide } from '../sporsmal/sporsmal-utils'
 import { Tilbake } from '../sporsmal/tilbake-knapp/tilbake'
 import { Introside } from '../soknad-intro/introside'
+import { FlexjarSporsmalV2 } from '../flexjar/flexjar-sporsmal-v2'
 
 import { urlTilSoknad } from './soknad-link'
 import { SporsmalTittel } from './sporsmal-tittel'
 import { SoknadHeader } from './soknad-header'
+
+const sporsmalMedNyFlexjar = [
+    'NARINGSDRIVENDE_OPPRETTHOLDT_INNTEKT',
+    'NARINGSDRIVENDE_OPPHOLD_I_UTLANDET',
+    'NARINGSDRIVENDE_VIRKSOMHETEN_AVVIKLET',
+    'NARINGSDRIVENDE_NY_I_ARBEIDSLIVET',
+    'NARINGSDRIVENDE_VARIG_ENDRING',
+]
 
 export const Soknaden = () => {
     const router = useRouter()
@@ -100,6 +109,8 @@ export const Soknaden = () => {
     const erSistesiden = valgtSoknad && sporsmal ? erSisteSide(valgtSoknad, stegNo) : false
     const erForstesidenMedReisetilskudd = stegNo === 1 && (erReisetilskuddsoknad || erGradertReisetilskuddsoknad)
 
+    const skalViseNyFlexjar = sporsmalMedNyFlexjar.includes(sporsmal?.tag ?? '')
+
     return (
         <>
             {valgtSoknadError && <FeilStateView feilmelding={valgtSoknadError?.status}></FeilStateView>}
@@ -124,23 +135,20 @@ export const Soknaden = () => {
                     Slik behandler NAV personopplysningene dine
                 </Button>
             )}
-            {(flexjarToggle.enabled ||
-                valgtSoknad?.julesoknad ||
-                valgtSoknad?.soknadstype == RSSoknadstype.FRISKMELDT_TIL_ARBEIDSFORMIDLING ||
-                sporsmal?.tag == 'INNTEKTSOPPLYSNINGER_DRIFT_VIRKSOMHETEN' ||
-                sporsmal?.tag == 'INNTEKTSOPPLYSNINGER_VIRKSOMHETEN_AVVIKLET' ||
-                sporsmal?.tag == 'MEDLEMSKAP_OPPHOLDSTILLATELSE_V2' ||
-                sporsmal?.tag == 'NYTT_ARBEIDSFORHOLD_UNDERVEIS' ||
-                sporsmal?.tag == 'JOBBET_DU_GRADERT' ||
-                sporsmal?.tag == 'ARBEID_UNDERVEIS_100_PROSENT' ||
-                sporsmal?.tag == 'FRAVAR_FOR_SYKMELDINGEN_V2' ||
-                sporsmal?.tag == 'NARINGSDRIVENDE_OPPRETTHOLDT_INNTEKT' ||
-                sporsmal?.tag == 'NARINGSDRIVENDE_OPPHOLD_I_UTLANDET' ||
-                sporsmal?.tag == 'NARINGSDRIVENDE_VIRKSOMHETEN_AVVIKLET' ||
-                sporsmal?.tag == 'NARINGSDRIVENDE_NY_I_ARBEIDSLIVET' ||
-                sporsmal?.tag == 'NARINGSDRIVENDE_VARIG_ENDRING') && (
-                <FlexjarSporsmal soknad={valgtSoknad} sporsmal={sporsmal} steg={stegNo} />
-            )}
+            {!skalViseNyFlexjar &&
+                (flexjarToggle.enabled ||
+                    valgtSoknad?.julesoknad ||
+                    valgtSoknad?.soknadstype == RSSoknadstype.FRISKMELDT_TIL_ARBEIDSFORMIDLING ||
+                    sporsmal?.tag == 'INNTEKTSOPPLYSNINGER_DRIFT_VIRKSOMHETEN' ||
+                    sporsmal?.tag == 'INNTEKTSOPPLYSNINGER_VIRKSOMHETEN_AVVIKLET' ||
+                    sporsmal?.tag == 'MEDLEMSKAP_OPPHOLDSTILLATELSE_V2' ||
+                    sporsmal?.tag == 'NYTT_ARBEIDSFORHOLD_UNDERVEIS' ||
+                    sporsmal?.tag == 'JOBBET_DU_GRADERT' ||
+                    sporsmal?.tag == 'ARBEID_UNDERVEIS_100_PROSENT' ||
+                    sporsmal?.tag == 'FRAVAR_FOR_SYKMELDINGEN_V2') && (
+                    <FlexjarSporsmal soknad={valgtSoknad} sporsmal={sporsmal} steg={stegNo} />
+                )}
+            {skalViseNyFlexjar && <FlexjarSporsmalV2 soknad={valgtSoknad} sporsmal={sporsmal} steg={stegNo} />}
         </>
     )
 }

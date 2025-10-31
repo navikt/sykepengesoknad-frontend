@@ -14,15 +14,15 @@ describe('Tester flexjar', () => {
     })
 
     it('Naviger til tilbake i arbeid', function () {
-        heading('Tilbakemeldingen din er viktig for oss!').should('not.exist')
+        heading('Vil du hjelpe oss å gjøre søknaden bedre?').should('not.exist')
         checkViStolerPaDeg()
     })
 
     it('Test å gi feedback', function () {
         cy.contains('Tilbake i fullt arbeid')
-        cy.contains('Tilbakemeldingen din er viktig for oss!')
+        cy.contains('Vil du hjelpe oss å gjøre søknaden bedre?')
 
-        heading('Tilbakemeldingen din er viktig for oss!', 2)
+        heading('Vil du hjelpe oss å gjøre søknaden bedre?', 2)
             .closest('[role="region"]')
             .within(() => {
                 cy.findByRole('button', {
@@ -34,7 +34,7 @@ describe('Tester flexjar', () => {
                 cy.contains('Unngå å skrive inn navn, fødselsnummer eller andre personlige opplysninger.')
                 cy.findByRole('textbox').type('Dette er en test')
                 cy.findByRole('button', {
-                    name: 'Send tilbakemelding',
+                    name: /Send tilbakemelding/i,
                 }).click()
             })
         cy.contains('Takk for tilbakemeldingen!')
@@ -63,15 +63,15 @@ describe('Tester flexjar', () => {
     })
 
     it('Har ikke spørsmål flexjar på de siste sidene', function () {
-        heading('Tilbakemeldingen din er viktig for oss!').should('not.exist')
+        heading('Vil du hjelpe oss å gjøre søknaden bedre?').should('not.exist')
         cy.contains('Send søknaden').click()
         cy.contains('Søknaden er sendt')
-        heading('Tilbakemeldingen din er viktig for oss!').should('exist')
+        heading('Vil du hjelpe oss å gjøre søknaden bedre?').should('exist')
     })
 
     it('Har emoji flexjar på kvitteringa', function () {
         cy.contains('Hva synes du om denne søknaden?')
-        heading('Tilbakemeldingen din er viktig for oss!')
+        heading('Vil du hjelpe oss å gjøre søknaden bedre?')
             .closest('[role="region"]')
             .within(() => {
                 cy.findByRole('button', {
@@ -85,7 +85,7 @@ describe('Tester flexjar', () => {
                 cy.contains('Unngå å skrive inn navn, fødselsnummer eller andre personlige opplysninger.')
                 cy.findByRole('textbox').type('Dette er en test')
                 cy.findByRole('button', {
-                    name: 'Send tilbakemelding',
+                    name: /Send tilbakemelding/i,
                 }).click()
             })
         cy.contains('Takk for tilbakemeldingen!')

@@ -13,7 +13,7 @@ test.describe('Tester flexjar', () => {
     })
 
     test('Naviger til tilbake i arbeid', async ({ page }) => {
-        const heading = page.getByText('Tilbakemeldingen din er viktig for oss!')
+        const heading = page.getByText('Vil du hjelpe oss å gjøre søknaden bedre?')
         await expect(heading).toHaveCount(0)
         await checkViStolerPaDeg(page)
     })
@@ -21,9 +21,9 @@ test.describe('Tester flexjar', () => {
     test('å gi feedback', async ({ page }) => {
         await checkViStolerPaDeg(page)
         await page.getByText('Tilbake i fullt arbeid').isVisible()
-        await page.getByText('Tilbakemeldingen din er viktig for oss!').isVisible()
+        await page.getByText('Vil du hjelpe oss å gjøre søknaden bedre?').isVisible()
 
-        const feedbackTittel = page.getByText('Tilbakemeldingen din er viktig for oss!')
+        const feedbackTittel = page.getByText('Vil du hjelpe oss å gjøre søknaden bedre?')
         const feedbackSection = page.getByRole('region').filter({ has: feedbackTittel })
 
         const yesButton = feedbackSection.getByRole('button', { name: 'Ja' })
@@ -47,7 +47,7 @@ test.describe('Tester flexjar', () => {
         await checkViStolerPaDeg(page)
         await navigerTilOppsummeringSide(page)
 
-        const feedbackTittel = page.getByText('Tilbakemeldingen din er viktig for oss!')
+        const feedbackTittel = page.getByText('Vil du hjelpe oss å gjøre søknaden bedre?')
         await expect(feedbackTittel).toHaveCount(0) // Should not exist
 
         await page.getByText('Send søknaden').click()
@@ -63,7 +63,7 @@ test.describe('Tester flexjar', () => {
 
         await page.getByText('Hva synes du om denne søknaden?').isVisible()
 
-        const feedbackTittel = page.getByText('Tilbakemeldingen din er viktig for oss!')
+        const feedbackTittel = page.getByText('Vil du hjelpe oss å gjøre søknaden bedre?')
         const feedbackSection = page.getByRole('region').filter({ has: feedbackTittel })
 
         const braButton = feedbackSection.getByRole('button', { name: 'Bra', exact: true })
