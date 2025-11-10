@@ -58,7 +58,7 @@
         "cypress-real-events": "^1.15.0",
         "eslint": "^8.57.1",
         "eslint-config-next": "^15.5.4",
-        "eslint-plugin-cypress": "^3.5.0",
+        "eslint-plugin-cypress": "^5.2.0",
         "eslint-plugin-playwright": "^2.2.2",
         "jsdom": "^26.1.0",
         "next": "^15.5.4",
