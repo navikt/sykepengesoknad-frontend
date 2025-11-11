@@ -109,3 +109,12 @@ export async function tabUntilFocusedLocator(
                 : 'Ingen relevant element fokusert ved siste sjekk'),
     )
 }
+
+export async function trykkTab(page: Page): Promise<Locator> {
+    if (page.context().browser()?.browserType().name() === 'webkit') {
+        await page.keyboard.press('Alt+Tab')
+    } else {
+        await page.keyboard.press('Tab')
+    }
+    return page.locator(':focus')
+}
