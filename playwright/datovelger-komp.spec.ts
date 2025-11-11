@@ -33,6 +33,7 @@ test.describe('Tester at datovelger viser korrekt feilmelding, og at man ikke ka
         await svarJaHovedsporsmal(page)
         await page.locator('[data-cy="periode"] .navds-date__field-button').first().click()
         await page.locator('[data-cy="periode"] .rdp-cell').getByText('16').click()
+        await page.locator('[data-cy="periode"] .rdp-cell').getByText('17').click()
         await klikkGaVidere(page)
 
         await expect(page.locator('.navds-error-message')).toBeHidden()
