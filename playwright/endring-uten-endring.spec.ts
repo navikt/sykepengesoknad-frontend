@@ -1,7 +1,14 @@
 import { sendtArbeidsledigKvittering } from '../src/data/mock/data/soknad/soknader-integration'
 
 import { test, expect } from './utils/fixtures'
-import { klikkGaVidere, checkViStolerPaDeg, harSynligTittel, harSoknaderlisteHeading } from './utils/utilities'
+import {
+    klikkGaVidere,
+    checkViStolerPaDeg,
+    harSynligTittel,
+    harSoknaderlisteHeading,
+    neiOgVidere,
+    svarJaHovedsporsmal,
+} from './utils/utilities'
 
 test.describe('Tester endring uten en endringer', () => {
     const soknad = sendtArbeidsledigKvittering
@@ -25,10 +32,9 @@ test.describe('Tester endring uten en endringer', () => {
 
         await test.step('Svarer det samme søknaden', async () => {
             await checkViStolerPaDeg(page)
+            await svarJaHovedsporsmal(page)
             await klikkGaVidere(page)
-            await klikkGaVidere(page)
-            await klikkGaVidere(page)
-            await klikkGaVidere(page)
+            await neiOgVidere(page, ['Andre inntektskilder', 'Reise utenfor EU/EØS', 'Arbeid utenfor Norge'])
             await harSynligTittel(page, 'Oppsummering fra søknaden', 2)
         })
 
