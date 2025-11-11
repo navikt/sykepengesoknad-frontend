@@ -1,7 +1,7 @@
 import { expect, Page } from '@playwright/test'
 
-import { test } from './fixtures'
-import { checkViStolerPaDeg, harSynligTekst, harSynligTittel, klikkGaVidere, neiOgVidere } from './utilities'
+import { test } from './utils/fixtures'
+import { checkViStolerPaDeg, harSynligTekst, harSynligTittel, klikkGaVidere, neiOgVidere } from './utils/utilities'
 
 export async function sendSoknad(page: Page) {
     await harSynligTittel(page, 'Oppsummering fra søknaden', 2)

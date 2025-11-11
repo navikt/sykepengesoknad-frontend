@@ -1,7 +1,7 @@
 import { arbeidstaker } from '../src/data/mock/data/soknad/arbeidstaker'
 
-import { test, expect } from './fixtures'
-import { klikkGaVidere, setPeriodeFraTil, svarJaHovedsporsmal } from './utilities'
+import { test, expect } from './utils/fixtures'
+import { klikkGaVidere, setPeriodeFraTil, svarJaHovedsporsmal } from './utils/utilities'
 import { validerAxeUtilityWrapper } from './uuvalidering'
 
 test.describe('Tester at datovelger viser korrekt feilmelding, og at man ikke kan gå videre uten å velge datoer', () => {

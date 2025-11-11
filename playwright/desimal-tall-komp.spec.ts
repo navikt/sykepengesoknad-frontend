@@ -1,7 +1,7 @@
 import { gradertReisetilskudd } from '../src/data/mock/data/soknad/arbeidstaker-reisetilskudd-gradert'
 
-import { test, expect } from './fixtures'
-import { klikkGaVidere, klikkTilbake, svarJaHovedsporsmal, svarRadioGruppe } from './utilities'
+import { test, expect } from './utils/fixtures'
+import { klikkGaVidere, klikkTilbake, svarJaHovedsporsmal, svarRadioGruppe } from './utils/utilities'
 import { validerAxeUtilityWrapper } from './uuvalidering'
 
 test.describe('Tester at riktig antall desimaler sendes til backend', () => {

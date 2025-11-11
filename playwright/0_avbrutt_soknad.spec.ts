@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test'
 
 import { avbruttSoknad } from '../src/data/mock/data/soknad/arbeidstaker-avbrutt'
 
-import { checkViStolerPaDeg, modalAktiv, avbryterSoknad, harSynligTekst } from './utilities' // Adjust the import path if these are in a separate file
+import { checkViStolerPaDeg, modalAktiv, avbryterSoknad, harSynligTekst } from './utils/utilities' // Adjust the import path if these are in a separate file
 
 test.describe('Tester avbryting av søknad', () => {
     test('Full flow for avbryting av søknad', async ({ page }) => {

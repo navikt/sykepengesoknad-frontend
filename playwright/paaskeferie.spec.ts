@@ -1,5 +1,5 @@
-import { test, expect } from './fixtures'
-import { svarJaHovedsporsmal, svarNeiHovedsporsmal } from './utilities'
+import { test, expect } from './utils/fixtures'
+import { svarJaHovedsporsmal, svarNeiHovedsporsmal } from './utils/utilities'
 
 test.describe('Tester påskeferiehjelpetekst', () => {
     test('Søknaden går over påskeferien', async ({ page }) => {

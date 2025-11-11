@@ -7,7 +7,7 @@ import {
     neiOgVidere,
     sporsmalOgSvar,
     svarJaHovedsporsmal,
-} from './utilities'
+} from './utils/utilities'
 import { validerAxeUtilityWrapper } from './uuvalidering'
 
 test.describe('Tester yrkesskadesspørsmål', () => {

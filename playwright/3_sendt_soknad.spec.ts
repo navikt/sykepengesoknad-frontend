@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test'
 
 import { sendtArbeidsledig } from '../src/data/mock/data/soknad/arbeidsledig-sendt'
 
-import { harSynligTittel, trykkPaSoknadMedId, harSynligTekst } from './utilities'
+import { harSynligTittel, trykkPaSoknadMedId, harSynligTekst } from './utils/utilities'
 
 const sendtArbeidsledigId = sendtArbeidsledig.id
 

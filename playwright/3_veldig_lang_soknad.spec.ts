@@ -23,7 +23,7 @@ import {
     lastOppKvittering,
     harSynligTittel,
     klikkGaVidere,
-} from './utilities'
+} from './utils/utilities'
 import { validerAxeUtilityWrapper } from './uuvalidering'
 
 test.describe('Tester støtte for gamle spørsmål', () => {

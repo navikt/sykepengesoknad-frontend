@@ -11,7 +11,7 @@ import {
     sendtArbeidsledigKvittering,
 } from '../src/data/mock/data/soknad/soknader-integration'
 
-import { test, expect } from './fixtures'
+import { test, expect } from './utils/fixtures'
 import {
     checkViStolerPaDeg,
     svarJaHovedsporsmal,
@@ -21,7 +21,7 @@ import {
     svarCombobox,
     sjekkMainContentFokus,
     trykkPaSoknadMedId,
-} from './utilities'
+} from './utils/utilities'
 
 test.describe('Kvittering integrasjon', () => {
     test('Arbeidsledig - nylig sendt', async ({ page }) => {

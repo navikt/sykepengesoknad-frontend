@@ -11,7 +11,7 @@ import {
     harSoknaderlisteHeading,
     trykkPaSoknadMedId,
     svarFritekst,
-} from './utilities'
+} from './utils/utilities'
 import { validerAxeUtilityWrapper } from './uuvalidering'
 
 const soknadId = arbeidstaker.id

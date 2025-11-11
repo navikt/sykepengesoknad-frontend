@@ -1,6 +1,6 @@
 import { arbeidstakerGradert } from '../src/data/mock/data/soknad/arbeidstaker-gradert'
 
-import { test, expect } from './fixtures'
+import { test, expect } from './utils/fixtures'
 import {
     checkViStolerPaDeg,
     harSoknaderlisteHeading,
@@ -9,7 +9,7 @@ import {
     neiOgVidere,
     svarJaHovedsporsmal,
     trykkPaSoknadMedId,
-} from './utilities'
+} from './utils/utilities'
 import { validerAxeUtilityWrapper } from './uuvalidering'
 
 test.describe('Tester ettersending og korrigering', () => {

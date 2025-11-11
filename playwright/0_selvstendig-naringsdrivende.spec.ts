@@ -13,7 +13,7 @@ import {
     harFlereFeilISkjemaet,
     svarCheckboxSporsmal,
     harSynligTittel,
-} from './utilities'
+} from './utils/utilities'
 import { validerAxeUtilityWrapper } from './uuvalidering'
 
 const SELVSTENDIG_NARINGSDRIVENDE_URL =

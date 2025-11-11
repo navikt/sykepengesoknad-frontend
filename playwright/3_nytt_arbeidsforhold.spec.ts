@@ -7,7 +7,7 @@ import {
     klikkGaVidere,
     setPeriodeFraTil,
     harSynligTekst,
-} from './utilities'
+} from './utils/utilities'
 
 test.describe('Tester nytt arbeidsforhold', () => {
     test('Åpner nytt arbeidsforhold sporsmål', async ({ page }) => {

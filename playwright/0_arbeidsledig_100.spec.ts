@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test'
 
-import { checkViStolerPaDeg, klikkGaVidere, setPeriodeFraTil, sjekkIntroside, sporsmalOgSvar } from './utilities'
+import { checkViStolerPaDeg, klikkGaVidere, setPeriodeFraTil, sjekkIntroside, sporsmalOgSvar } from './utils/utilities'
 import { validerAxeUtilityWrapper } from './uuvalidering'
 
 const arbeidsledig = {

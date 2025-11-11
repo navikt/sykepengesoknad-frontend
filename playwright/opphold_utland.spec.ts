@@ -1,6 +1,6 @@
 import { oppholdUtland } from '../src/data/mock/data/soknad/opphold-utland'
 
-import { test, expect } from './fixtures'
+import { test, expect } from './utils/fixtures'
 import {
     avbryterSoknad,
     klikkGaVidere,
@@ -9,7 +9,7 @@ import {
     sporsmalOgSvar,
     svarCombobox,
     svarRadioGruppe,
-} from './utilities'
+} from './utils/utilities'
 import { validerAxeUtilityWrapper } from './uuvalidering'
 
 test.describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {

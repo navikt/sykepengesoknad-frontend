@@ -1,6 +1,6 @@
 import { test, expect, Page } from '@playwright/test'
 
-import { tabUntilFocusedContainsText } from './utilities'
+import { tabUntilFocusedContainsText } from './utils/utilities'
 import { validerAxeUtilityWrapper } from './uuvalidering'
 
 async function sjekkMainContentFokus(page: Page) {

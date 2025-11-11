@@ -6,14 +6,14 @@ import {
     soknadSomTriggerSporsmalFinnesIkkeISoknad,
 } from '../src/data/mock/data/soknad/soknader-integration'
 
-import { test, expect } from './fixtures'
+import { test, expect } from './utils/fixtures'
 import {
     checkViStolerPaDeg,
     harSoknaderlisteHeading,
     klikkGaVidere,
     svarNeiHovedsporsmal,
     trykkPaSoknadMedId,
-} from './utilities'
+} from './utils/utilities'
 
 const OOPS_ERROR = 'Ooops! Her har det skjedd noe rart'
 const BACK_TO_LIST = 'Gå tilbake til listen over alle søknader'

@@ -2,8 +2,8 @@ import { Page } from '@playwright/test'
 
 import { arbeidstakerGradert } from '../src/data/mock/data/soknad/arbeidstaker-gradert'
 
-import { test, expect } from './fixtures'
-import { klikkGaVidere, svarCombobox, svarJaHovedsporsmal } from './utilities'
+import { test, expect } from './utils/fixtures'
+import { klikkGaVidere, svarCombobox, svarJaHovedsporsmal } from './utils/utilities'
 import { validerAxeUtilityWrapper } from './uuvalidering'
 
 test.describe('Tester feilmeldinger', () => {

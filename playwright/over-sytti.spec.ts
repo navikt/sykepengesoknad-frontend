@@ -1,4 +1,4 @@
-import { test, expect } from './fixtures'
+import { test, expect } from './utils/fixtures'
 
 test.describe('Tester søknader tilhørende person over 70', () => {
     const testpersonQuery = '?testperson=over-70'

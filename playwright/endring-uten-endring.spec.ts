@@ -1,7 +1,7 @@
 import { sendtArbeidsledigKvittering } from '../src/data/mock/data/soknad/soknader-integration'
 
-import { test, expect } from './fixtures'
-import { klikkGaVidere, checkViStolerPaDeg, harSynligTittel, harSoknaderlisteHeading } from './utilities'
+import { test, expect } from './utils/fixtures'
+import { klikkGaVidere, checkViStolerPaDeg, harSynligTittel, harSoknaderlisteHeading } from './utils/utilities'
 
 test.describe('Tester endring uten en endringer', () => {
     const soknad = sendtArbeidsledigKvittering

@@ -11,7 +11,7 @@ import {
     svarRadioGruppe,
     svarTekstboks,
     sporsmalOgSvar,
-} from './utilities'
+} from './utils/utilities'
 // import { validerAxeUtilityWrapper } from './uuvalidering'
 
 async function velgDato(page: any, dato = 10) {

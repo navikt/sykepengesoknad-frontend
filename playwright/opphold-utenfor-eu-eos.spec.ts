@@ -1,5 +1,5 @@
-import { test, expect } from './fixtures'
-import { checkViStolerPaDeg, neiOgVidere, svarRadioGruppe } from './utilities'
+import { test, expect } from './utils/fixtures'
+import { checkViStolerPaDeg, neiOgVidere, svarRadioGruppe } from './utils/utilities'
 
 test.describe('Opphold utenfor EU/EØS', () => {
     test.beforeEach(async ({ page }) => {

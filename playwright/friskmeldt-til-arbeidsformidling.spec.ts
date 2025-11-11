@@ -1,6 +1,6 @@
 import { Page } from '@playwright/test'
 
-import { test } from './fixtures'
+import { test } from './utils/fixtures'
 import {
     checkViStolerPaDeg,
     harSynligTekst,
@@ -8,7 +8,7 @@ import {
     klikkGaVidere,
     neiOgVidere,
     svarRadioGruppe,
-} from './utilities'
+} from './utils/utilities'
 
 test.describe('Friskmeldt til arbeidsformidling', () => {
     const nyFriskmeldtSoknad =

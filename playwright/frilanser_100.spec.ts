@@ -1,6 +1,6 @@
 import { frilanser } from '../src/data/mock/data/soknad/frilanser'
 
-import { test, expect } from './fixtures'
+import { test, expect } from './utils/fixtures'
 import {
     checkViStolerPaDeg,
     harSoknaderlisteHeading,
@@ -9,7 +9,7 @@ import {
     svarJaHovedsporsmal,
     svarRadioGruppe,
     trykkPaSoknadMedId,
-} from './utilities'
+} from './utils/utilities'
 
 test.describe('Tester frilansersøknad', () => {
     const soknad = frilanser

@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test'
 
 import { arbeidtakerMedGammelOppsummering } from '../src/data/mock/data/soknad/arbeidstaker'
 
-import { setPeriodeFraTil, sporsmalOgSvar, svarTekstboks, trykkPaSoknadMedId } from './utilities'
+import { setPeriodeFraTil, sporsmalOgSvar, svarTekstboks, trykkPaSoknadMedId } from './utils/utilities'
 import { validerAxeUtilityWrapper } from './uuvalidering'
 
 test.describe('Sjekker at søknader med gammel oppsummering ser ok ut', () => {

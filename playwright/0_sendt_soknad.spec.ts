@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test'
 
-import { harSynligTittel, trykkPaSoknadMedId, harSynligTekst } from './utilities'
+import { harSynligTittel, trykkPaSoknadMedId, harSynligTekst } from './utils/utilities'
 
 test.describe('Tester sendt søknad', () => {
     test.beforeEach(async ({ page }) => {
