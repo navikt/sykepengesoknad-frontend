@@ -9,6 +9,7 @@ import {
     svarJaHovedsporsmal,
 } from './utils/utilities'
 import { validerAxeUtilityWrapper } from './uuvalidering'
+import { trykkTab } from './utils/tastaturSnarvei'
 
 test.describe('Tester yrkesskadesspørsmål', () => {
     test('Full flow for yrkesskadesspørsmål', async ({ page }) => {
@@ -51,6 +52,7 @@ test.describe('Tester yrkesskadesspørsmål', () => {
             'Skadedato 2. april 1997 (Vedtaksdato 3. desember 1999)',
         ]
 
+        // @ts-expect-error todo fix ts error
         for (const [i, text] of expectedTexts.entries()) {
             await expect(listItems.nth(i)).toContainText(text)
             await expect(listItems.nth(i)).toBeVisible()
@@ -77,7 +79,7 @@ test.describe('Tester yrkesskadesspørsmål', () => {
         await errorLink.click()
 
         await page.keyboard.press('Space')
-        await page.keyboard.press('Tab')
+        await trykkTab(page)
         await page.keyboard.press('Space')
         await page.keyboard.press('Enter')
 
