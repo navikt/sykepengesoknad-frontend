@@ -32,6 +32,7 @@ const sporsmalMedNyFlexjar = [
     'NARINGSDRIVENDE_VIRKSOMHETEN_AVVIKLET',
     'NARINGSDRIVENDE_NY_I_ARBEIDSLIVET',
     'NARINGSDRIVENDE_VARIG_ENDRING',
+    'FRAVAR_FOR_SYKMELDINGEN_V2',
 ]
 
 export const Soknaden = () => {
@@ -144,8 +145,7 @@ export const Soknaden = () => {
                     sporsmal?.tag == 'MEDLEMSKAP_OPPHOLDSTILLATELSE_V2' ||
                     sporsmal?.tag == 'NYTT_ARBEIDSFORHOLD_UNDERVEIS' ||
                     sporsmal?.tag == 'JOBBET_DU_GRADERT' ||
-                    sporsmal?.tag == 'ARBEID_UNDERVEIS_100_PROSENT' ||
-                    sporsmal?.tag == 'FRAVAR_FOR_SYKMELDINGEN_V2') && (
+                    sporsmal?.tag == 'ARBEID_UNDERVEIS_100_PROSENT') && (
                     <FlexjarSporsmal soknad={valgtSoknad} sporsmal={sporsmal} steg={stegNo} />
                 )}
             {skalViseNyFlexjar && <FlexjarSporsmalV2 soknad={valgtSoknad} sporsmal={sporsmal} steg={stegNo} />}
