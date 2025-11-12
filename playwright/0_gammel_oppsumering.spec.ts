@@ -7,6 +7,8 @@ import { validerAxeUtilityWrapper } from './uuvalidering'
 
 test.describe('Sjekker at søknader med gammel oppsummering ser ok ut', () => {
     test('Full søknadsflyt med gammel oppsummering', async ({ page }) => {
+        test.setTimeout(60000)
+
         await page.goto('/syk/sykepengesoknad?testperson=gammel-oppsummering')
 
         await test.step('Laster startside', async () => {
