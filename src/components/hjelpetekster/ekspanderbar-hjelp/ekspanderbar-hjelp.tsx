@@ -43,6 +43,7 @@ import { NaringsdrivendeNyIArbeidsLivetHjelpBody } from './naringsdrivende-ny-i-
 import { NaringsdrivendeVarigEndringHjelpBody } from './naringsdrivende-varig-endring-hjelp-body'
 import { NaringsdrivendeOppholdIUtlandetHjelpBody } from './naringsdrivende-opphold-i-utlandet-hjelp-body'
 import { NaringsdrivendeOpprettholdtInntektHjelpBody } from './naringsdrivende-opprettholdt-inntekt-hjelp-body'
+import { FravarForSykmeldingenV2HjelpBody } from './fravar-for-sykmeldingen-v2-hjelp-body'
 
 export const EkspanderbarHjelp = ({ sporsmal, mb }: { sporsmal: Sporsmal; mb?: string }) => {
     const { valgtSoknad } = useSoknadMedDetaljer()
@@ -141,6 +142,8 @@ export const EkspanderbarHjelp = ({ sporsmal, mb }: { sporsmal: Sporsmal; mb?: s
                 return <NaringsdrivendeNyIArbeidsLivetHjelpBody />
             case 'NARINGSDRIVENDE_VARIG_ENDRING':
                 return <NaringsdrivendeVarigEndringHjelpBody />
+            case 'FRAVAR_FOR_SYKMELDINGEN_V2':
+                return <FravarForSykmeldingenV2HjelpBody />
             default:
                 if (harInnhold) {
                     return (

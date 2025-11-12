@@ -69,6 +69,7 @@ test.describe('Tester spørsmål om fravær før sykmeldingen', () => {
 
     test('skal vise fravær før sykmelding og kunne svare nei', async ({ page }) => {
         await harSynligTittel(page, 'Fravær før du ble sykmeldt', 2)
+        await page.getByRole('button', { name: 'Spørsmålet forklart' }).click()
         await expect(page.getByText('Som utgangspunkt må du ha jobbet')).toBeVisible()
 
         await validerAxeUtilityWrapper(page, test.info())
