@@ -97,7 +97,7 @@ test.describe('Tester feilmeldinger i reisetilskudd', () => {
         // Upload invalid file first
         await page
             .locator('[data-cy="filopplasteren"] input[type=file]')
-            .setInputFiles('./cypress/fixtures/kvittering.pdf')
+            .setInputFiles('./playwright/fixtures/kvittering.pdf')
         await page.getByRole('button', { name: 'Bekreft' }).click()
         await expect(page.locator('.navds-modal').getByText('Filtypen til kvittering.pdf er ugyldig')).toBeVisible()
         await page.locator('.navds-modal').getByRole('button', { name: 'Slett filen' }).click()
@@ -105,11 +105,11 @@ test.describe('Tester feilmeldinger i reisetilskudd', () => {
         // Try multiple files - upload first file
         await page
             .locator('[data-cy="filopplasteren"] input[type=file]')
-            .setInputFiles('./cypress/fixtures/kvittering.jpg')
+            .setInputFiles('./playwright/fixtures/kvittering.jpg')
         // Then try to upload second file to trigger multiple files error
         await page
             .locator('[data-cy="filopplasteren"] input[type=file]')
-            .setInputFiles('./cypress/fixtures/kvittering2.jpg')
+            .setInputFiles('./playwright/fixtures/kvittering2.jpg')
         await page.getByRole('button', { name: 'Bekreft' }).click()
 
         // TODO can I make this work?
@@ -119,7 +119,7 @@ test.describe('Tester feilmeldinger i reisetilskudd', () => {
         // Upload valid single file
         await page
             .locator('[data-cy="filopplasteren"] input[type=file]')
-            .setInputFiles('./cypress/fixtures/kvittering.jpg')
+            .setInputFiles('./playwright/fixtures/kvittering.jpg')
         await page.getByRole('button', { name: 'Bekreft' }).click()
         await expect(page.locator('.navds-modal').getByText('Du kan ikke laste opp mer enn en fil')).toBeHidden()
     })
@@ -131,7 +131,7 @@ test.describe('Tester feilmeldinger i reisetilskudd', () => {
         await page.locator('input[name=belop_input]').fill('99')
         await page
             .locator('[data-cy="filopplasteren"] input[type=file]')
-            .setInputFiles('./cypress/fixtures/kvittering.jpg')
+            .setInputFiles('./playwright/fixtures/kvittering.jpg')
         await page.getByRole('button', { name: 'Bekreft' }).click()
 
         // Verify the table is updated

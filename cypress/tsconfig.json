@@ -1,9 +1,0 @@
-{
-    "extends": "../tsconfig.json",
-    "include": ["**/*.ts"],
-    "compilerOptions": {
-        "noEmit": false,
-        "isolatedModules": false,
-        "types": ["cypress", "cypress-file-upload", "cypress-axe", "cypress-real-events", "@testing-library/cypress"]
-    }
-}
