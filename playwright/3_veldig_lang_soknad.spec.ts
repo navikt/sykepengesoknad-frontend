@@ -27,11 +27,11 @@ import {
 import { validerAxeUtilityWrapper } from './uuvalidering'
 
 test.describe('Tester støtte for gamle spørsmål', () => {
-    test.setTimeout(130000) // 3 minutes timeout for all tests in this describe block
-    //-----
+    test.setTimeout(180_000) // 3 minutter timeout for alle tester i denne describe blokken
+
     // Sykmelding: 7e90121c-b64b-4a1c-b7a5-93c9d95aba47, arbeidstaker - 100%
     // Søknad: 214f6e73-8150-4261-8ce5-e2b41907fa58, fom: 1.4.20, tom: 24.4.20
-    //-----
+
     const soknad = rsToSoknad(veldigLangSoknad)
 
     test.beforeEach(async ({ page }) => {
