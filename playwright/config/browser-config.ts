@@ -2,17 +2,11 @@ import { devices, type Project } from '@playwright/test'
 
 export enum Nettlesernavn {
     DESKTOP_CHROME = 'Desktop Chrome',
-    DESKTOP_CHROME_MED_DEKORATOR = 'Desktop Chrome med dekorator',
     MOBILE_CHROME = 'Mobile Chrome',
-    MOBILE_CHROMIUM_MED_DEKORATOR = 'Mobile Chromium med dekorator',
     DESKTOP_FIREFOX = 'Desktop Firefox',
-    DESKTOP_FIREFOX_MED_DEKORATOR = 'Desktop Firefox med dekorator',
     FIREFOX_RESPONSIVE = 'Firefox (responsive)',
-    MOBILE_FIREFOX_MED_DEKORATOR = 'Mobile Firefox med dekorator',
     DESKTOP_WEBKIT = 'Desktop WebKit',
-    DESKTOP_WEBKIT_MED_DEKORATOR = 'Desktop WebKit med dekorator',
     MOBILE_WEBKIT = 'Mobile WebKit',
-    MOBILE_WEBKIT_MED_DEKORATOR = 'Mobile WebKit med dekorator',
 }
 
 export type NamedProject = Project & { name: string }
