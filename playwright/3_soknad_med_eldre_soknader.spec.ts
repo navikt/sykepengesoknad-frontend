@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test'
 
-import { svarNeiHovedsporsmal, klikkGaVidere } from './utilities'
+import { svarNeiHovedsporsmal, klikkGaVidere } from './utils/utilities'
 import { validerAxeUtilityWrapper } from './uuvalidering'
 
 test.describe('Eldre søknader', () => {

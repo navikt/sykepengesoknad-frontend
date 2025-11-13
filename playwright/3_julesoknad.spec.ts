@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test'
 
 import { julesoknadPerson } from '../src/data/mock/data/personas/personas'
 
-import { checkViStolerPaDeg, klikkGaVidere } from './utilities'
+import { checkViStolerPaDeg, klikkGaVidere } from './utils/utilities'
 import { validerAxeUtilityWrapper } from './uuvalidering'
 
 test.describe('Julesøkand med informasjon på introside og kvittering', () => {

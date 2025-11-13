@@ -2,8 +2,8 @@ import { arbeidstaker } from '../src/data/mock/data/soknad/arbeidstaker'
 import { sendtArbeidsledig } from '../src/data/mock/data/soknad/arbeidsledig-sendt'
 import { foranArbeidstakerMedOppholdKvittering } from '../src/data/mock/data/soknad/soknader-integration'
 
-import { test, expect } from './fixtures'
-import { harSynligTittel } from './utilities'
+import { test, expect } from './utils/fixtures'
+import { harSynligTittel } from './utils/utilities'
 
 test.describe('Tester å åpne søknaden direkte fra sykefravaer', () => {
     const soknad = arbeidstaker

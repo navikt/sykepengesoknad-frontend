@@ -1,5 +1,5 @@
-import { test, expect } from './fixtures'
-import { avbryterSoknad } from './utilities'
+import { test, expect } from './utils/fixtures'
+import { avbryterSoknad } from './utils/utilities'
 
 test.describe('Tester opprettelse av opphold utland søknad', () => {
     test('Oppretter søknad', async ({ page }) => {

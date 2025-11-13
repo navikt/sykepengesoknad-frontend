@@ -2,7 +2,6 @@ import { Readable } from 'stream'
 import fs from 'fs'
 import path from 'path'
 
-import { serialize } from 'cookie'
 import * as uuid from 'uuid'
 import { v4 as uuidv4 } from 'uuid'
 import { NextApiRequest, NextApiResponse } from 'next'
@@ -10,6 +9,7 @@ import dayjs from 'dayjs'
 import { stream2buffer } from '@navikt/next-api-proxy/dist/proxyUtils'
 import { logger } from '@navikt/next-logger'
 import { nextleton } from 'nextleton'
+import { serialize } from 'cookie'
 
 import { cleanPathForMetric } from '../../metrics'
 import { RSSporsmal } from '../../types/rs-types/rs-sporsmal'
@@ -56,6 +56,7 @@ export const sessionStore = nextleton('sessionStore', () => {
 export function getSession(req: NextApiRequest, res: NextApiResponse): session {
     function getSessionId(): string {
         const sessionIdCookie = req.cookies['mock-session']
+
         if (sessionIdCookie) {
             return sessionIdCookie
         }
@@ -63,9 +64,8 @@ export function getSession(req: NextApiRequest, res: NextApiResponse): session {
         const cookie = serialize('mock-session', sessionId, {
             httpOnly: false,
             path: '/',
-            expires: new Date(Date.now() + 60 * 60 * 1000),
-            sameSite: 'none',
-            secure: true,
+            maxAge: 60 * 60,
+            sameSite: 'lax',
         })
         res.setHeader('Set-Cookie', cookie)
 

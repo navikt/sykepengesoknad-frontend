@@ -1,7 +1,7 @@
 import { delvisUtfylltArbeidsledig } from '../src/data/mock/data/soknad/soknader-integration'
 
-import { test, expect } from './fixtures'
-import { harSoknaderlisteHeading, klikkTilbake, trykkPaSoknadMedId } from './utilities'
+import { test, expect } from './utils/fixtures'
+import { harSoknaderlisteHeading, klikkTilbake, trykkPaSoknadMedId } from './utils/utilities'
 
 test.describe('Delvis utfylt søknad', () => {
     test('Full testflyt for delvis utfylt søknad', async ({ page }) => {

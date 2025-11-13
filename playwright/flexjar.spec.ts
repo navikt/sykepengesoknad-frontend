@@ -1,7 +1,7 @@
 import { Page } from '@playwright/test'
 
-import { checkViStolerPaDeg, klikkGaVidere, svarNeiHovedsporsmal } from './utilities'
-import { test, expect } from './fixtures'
+import { checkViStolerPaDeg, klikkGaVidere, svarNeiHovedsporsmal } from './utils/utilities'
+import { test, expect } from './utils/fixtures'
 
 test.describe('Tester flexjar', () => {
     test.beforeEach(async ({ page }) => {

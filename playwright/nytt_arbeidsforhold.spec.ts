@@ -6,7 +6,7 @@ import {
     setPeriodeFraTil,
     svarJaHovedsporsmal,
     svarNeiHovedsporsmal,
-} from './utilities'
+} from './utils/utilities'
 
 test.describe('Tester nytt arbeidsforhold', () => {
     test('Åpner nytt arbeidsforhold sporsmål', async ({ page }) => {

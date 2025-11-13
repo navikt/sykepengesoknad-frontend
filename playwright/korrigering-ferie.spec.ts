@@ -1,4 +1,4 @@
-import { test, expect } from './fixtures'
+import { test, expect } from './utils/fixtures'
 import {
     checkViStolerPaDeg,
     svarJaHovedsporsmal,
@@ -7,7 +7,7 @@ import {
     klikkGaVidere,
     harSynligTittel,
     neiOgVidere,
-} from './utilities'
+} from './utils/utilities'
 
 test.describe('Tester korrigering av ferie', () => {
     const soknadId = '5b769c04-e171-47c9-b79b-23ab8fce331e'

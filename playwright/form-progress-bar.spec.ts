@@ -1,5 +1,5 @@
-import { test, expect } from './fixtures'
-import { checkViStolerPaDeg, klikkTilbake, neiOgVidere } from './utilities'
+import { test, expect } from './utils/fixtures'
+import { checkViStolerPaDeg, klikkTilbake, neiOgVidere } from './utils/utilities'
 
 test.describe('Tester form progress bar', () => {
     const soknadId = 'bc250797-147c-4050-b193-920c508902aa'

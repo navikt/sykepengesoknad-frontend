@@ -1,5 +1,5 @@
-import { test, expect } from './fixtures'
-import { harSoknaderlisteHeading, harSynligTittel } from './utilities'
+import { test, expect } from './utils/fixtures'
+import { harSoknaderlisteHeading, harSynligTittel } from './utils/utilities'
 
 test.describe('Tester fremtidig søknad', () => {
     const testpersonQuery = '?testperson=fremtidig'

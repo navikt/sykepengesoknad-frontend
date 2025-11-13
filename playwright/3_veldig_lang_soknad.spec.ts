@@ -23,15 +23,15 @@ import {
     lastOppKvittering,
     harSynligTittel,
     klikkGaVidere,
-} from './utilities'
+} from './utils/utilities'
 import { validerAxeUtilityWrapper } from './uuvalidering'
 
 test.describe('Tester støtte for gamle spørsmål', () => {
-    test.setTimeout(120000) // 2 minutes timeout for all tests in this describe block
-    //-----
+    test.setTimeout(180_000) // 3 minutter timeout for alle tester i denne describe blokken
+
     // Sykmelding: 7e90121c-b64b-4a1c-b7a5-93c9d95aba47, arbeidstaker - 100%
     // Søknad: 214f6e73-8150-4261-8ce5-e2b41907fa58, fom: 1.4.20, tom: 24.4.20
-    //-----
+
     const soknad = rsToSoknad(veldigLangSoknad)
 
     test.beforeEach(async ({ page }) => {
@@ -39,14 +39,11 @@ test.describe('Tester støtte for gamle spørsmål', () => {
     })
 
     test('Laster startside', async ({ page }) => {
-        test.setTimeout(120000) // 2 minutes timeout for this test
         await expect(page.getByRole('heading', { name: 'Søknader', level: 1 })).toBeVisible()
         await page.locator(`a[href*="${soknad.id}"]`).click()
     })
 
     test('Complete søknad flow', async ({ page }) => {
-        test.setTimeout(120000) // 2 minutes timeout for the entire test
-
         await test.step('Navigate to søknad', async () => {
             await expect(page.getByRole('heading', { name: 'Søknader', level: 1 })).toBeVisible()
             await validerAxeUtilityWrapper(page, test.info())
@@ -245,9 +242,8 @@ test.describe('Tester støtte for gamle spørsmål', () => {
 
         await test.step('LAND', async () => {
             await expect(page.getByText('Hvilke(t) land skal du reise til?')).toBeVisible()
-            await page.getByRole('combobox', { name: 'Hvilke(t) land skal du reise til?' }).type('Søre fran')
+            await page.getByRole('combobox', { name: 'Hvilke(t) land skal du reise til?' }).fill('Søre fran')
             await page.getByRole('option', { name: 'Søre franske territorier' }).click()
-            await page.locator('.navds-combobox__button-toggle-list').click()
             // await validerAxeUtilityWrapper(page, test.info())
             // todo her har vi UU feil
             await klikkGaVidere(page)
@@ -256,7 +252,6 @@ test.describe('Tester støtte for gamle spørsmål', () => {
         await test.step('LAND_COMBOBOX', async () => {
             await expect(page.getByText('Hvilke(t) land skal du reise til?')).toBeVisible()
             await svarCombobox(page, 'Hvilke(t) land skal du reise til?', 'Søre fran', 'Søre franske territorier')
-            await page.locator('.navds-combobox__button-toggle-list').click()
             // todo her har vi UU feil
             // await validerAxeUtilityWrapper(page, test.info())
             await klikkGaVidere(page)

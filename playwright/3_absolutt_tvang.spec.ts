@@ -1,4 +1,4 @@
-import { test, expect } from './fixtures'
+import { test, expect } from './utils/fixtures'
 
 test.describe('Tester at åpne sykmeldinger må sendes inn', () => {
     test.describe('Tester med en usendt sykmelding', () => {

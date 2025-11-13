@@ -1,4 +1,4 @@
-import { test, expect } from './fixtures'
+import { test, expect } from './utils/fixtures'
 
 test.describe('Tester visning av forside', () => {
     test('Laster startside', async ({ page }) => {

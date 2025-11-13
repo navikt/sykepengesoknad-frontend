@@ -13,7 +13,7 @@ import {
     harFlereFeilISkjemaet,
     svarCheckboxSporsmal,
     harSynligTittel,
-} from './utilities'
+} from './utils/utilities'
 import { validerAxeUtilityWrapper } from './uuvalidering'
 
 const SELVSTENDIG_NARINGSDRIVENDE_URL =
@@ -244,8 +244,7 @@ async function fullforSoknad(page: Page) {
     )
     await sporsmalOgSvar(oppsummeringContainer, 'Når skjedde den siste varige endringen?', '12.03.2020')
 
-    await page.getByRole('button', { name: 'Send' }).click()
-    await page.getByText('Send søknaden').click()
+    await page.getByRole('button', { name: 'Send søknaden' }).click()
 }
 
 async function verifiserKvittering(page: Page) {

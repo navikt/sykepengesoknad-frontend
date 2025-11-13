@@ -1,5 +1,5 @@
-import { test, expect } from './fixtures'
-import { checkViStolerPaDeg, svarNeiHovedsporsmal, klikkGaVidere, harSynligTittel } from './utilities'
+import { test, expect } from './utils/fixtures'
+import { checkViStolerPaDeg, svarNeiHovedsporsmal, klikkGaVidere, harSynligTittel } from './utils/utilities'
 
 test.describe('Tester kontonummer i kvittering', () => {
     test('Har kontonummer', async ({ page }) => {

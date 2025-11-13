@@ -1,7 +1,7 @@
 import { delvisUtfyltReisetilskudd } from '../src/data/mock/data/personas/reisetilskuddTestPerson'
 
-import { test, expect } from './fixtures'
-import { harSoknaderlisteHeading, klikkTilbake, trykkPaSoknadMedId } from './utilities'
+import { test, expect } from './utils/fixtures'
+import { harSoknaderlisteHeading, klikkTilbake, trykkPaSoknadMedId } from './utils/utilities'
 import { validerAxeUtilityWrapper } from './uuvalidering'
 
 test.describe('Delvis utfylt søknad med reisetilskudd', () => {

@@ -1,4 +1,4 @@
-import { test, expect } from './fixtures'
+import { test, expect } from './utils/fixtures'
 import {
     checkViStolerPaDeg,
     klikkGaVidere,
@@ -8,7 +8,7 @@ import {
     svarJaHovedsporsmal,
     harSynligTittel,
     harSynligTekst,
-} from './utilities'
+} from './utils/utilities'
 
 test.describe('Tester søknad til utenlandsk sykmelding', () => {
     const id = '3708c4de-d16c-4835-841b-a6716b6d39e9'

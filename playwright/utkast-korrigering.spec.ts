@@ -1,7 +1,7 @@
 import { arbeidstakerTilKorrigering } from '../src/data/mock/data/soknad/soknader-integration'
 
-import { test, expect } from './fixtures'
-import { harSoknaderlisteHeading, trykkPaSoknadMedId } from './utilities'
+import { test, expect } from './utils/fixtures'
+import { harSoknaderlisteHeading, trykkPaSoknadMedId } from './utils/utilities'
 
 test.describe('Tester utkast til korrigerte søknader', () => {
     const tilKorrigering = arbeidstakerTilKorrigering

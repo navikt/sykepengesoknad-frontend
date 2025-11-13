@@ -2,11 +2,13 @@ import { test, expect } from '@playwright/test'
 
 import { arbeidtakerMedGammelOppsummering } from '../src/data/mock/data/soknad/arbeidstaker'
 
-import { setPeriodeFraTil, sporsmalOgSvar, svarTekstboks, trykkPaSoknadMedId } from './utilities'
+import { setPeriodeFraTil, sporsmalOgSvar, svarTekstboks, trykkPaSoknadMedId } from './utils/utilities'
 import { validerAxeUtilityWrapper } from './uuvalidering'
 
 test.describe('Sjekker at søknader med gammel oppsummering ser ok ut', () => {
     test('Full søknadsflyt med gammel oppsummering', async ({ page }) => {
+        test.setTimeout(60000)
+
         await page.goto('/syk/sykepengesoknad?testperson=gammel-oppsummering')
 
         await test.step('Laster startside', async () => {

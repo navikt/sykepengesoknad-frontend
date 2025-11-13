@@ -10,7 +10,7 @@ import {
     svarFritekst,
     hentFritekst,
     svarRadioClickOption,
-} from './utilities'
+} from './utils/utilities'
 import { validerAxeUtilityWrapper } from './uuvalidering'
 
 test.describe('Teste førsteside i reisetilskuddsøknaden', () => {

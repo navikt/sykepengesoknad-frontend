@@ -11,8 +11,8 @@ import {
     harSynligTittel,
     svarJaHovedsporsmal,
     avbryterSoknad,
-} from './utilities'
-import { test, expect } from './fixtures'
+} from './utils/utilities'
+import { test, expect } from './utils/fixtures'
 
 test.describe('Søknad om å beholde sykepenger utenfor EØS med ferie', () => {
     const soknad = oppholdUtland

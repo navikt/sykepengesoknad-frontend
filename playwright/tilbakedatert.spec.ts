@@ -1,4 +1,4 @@
-import { test, expect } from './fixtures'
+import { test, expect } from './utils/fixtures'
 
 test.describe('Tester søknader tilhørende tilbakedaterte sykmeldinger', () => {
     const testpersonQuery = '?testperson=tilbakedateringer'

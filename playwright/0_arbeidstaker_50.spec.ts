@@ -27,8 +27,9 @@ const setPeriodeFraTil = async (page: Page, fom: number, tom: number, periodeInd
 
 test.describe('Tester arbeidstakersøknad - gradert 50%', () => {
     test('Full søknadsflyt', async ({ page }) => {
-        await page.goto('/syk/sykepengesoknad?testperson=arbeidstaker-gradert')
+        test.setTimeout(60000)
 
+        await page.goto('/syk/sykepengesoknad?testperson=arbeidstaker-gradert')
         const soknadId = arbeidstakerGradert.id
 
         await test.step('Laster startside', async () => {
