@@ -9,9 +9,9 @@ export async function sendSoknad(page: Page) {
     await harSynligTekst(page, 'Søknaden er sendt til NAV')
 }
 
-test.describe('Selvstendig næringsdrivende - Virksomheten din', () => {
+test.describe('Selvstendig næringsdrivende', () => {
     const baseUrl = 'http://localhost:3000/syk/sykepengesoknad/soknader/ffa7c5d2-4766-4450-a521-3ecc5842d015'
-    const testperson: string = 'selvstendig-naringsdrivende-virksomheten-din'
+    const testperson: string = 'selvstendig-naringsdrivende'
 
     const goToPage = async function (page: Page, pageNumber: number) {
         await page.goto(`${baseUrl}/${pageNumber}?testperson=${testperson}`)
