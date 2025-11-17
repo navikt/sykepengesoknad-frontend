@@ -17,7 +17,7 @@ import { VarigEndringEksempler } from '../../hjelpetekster/varig-endring-eksempl
 import { VarigEndringAlert } from '../../hjelpetekster/varig-endring-alert'
 import { formatterTall } from '../../../utils/utils'
 import { erSigrunInntekt, SigrunInntekt } from '../../../types/types'
-import { logEvent } from '../../amplitude/amplitude'
+import { logEvent } from '../../umami/umami'
 import { useSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
 import { FortsattArbeidssoker } from '../../hjelpetekster/friskmeldt-til-arbeidsformidling/fortsatt-arbeidssoker'
 

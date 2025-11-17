@@ -2,7 +2,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 
 import fetchMedRequestId, { FetchError } from '../utils/fetch'
 import { Soknad } from '../types/types'
-import { logEvent } from '../components/amplitude/amplitude'
+import { logEvent } from '../components/umami/umami'
 
 import { useTestpersonQuery } from './useTestpersonQuery'
 

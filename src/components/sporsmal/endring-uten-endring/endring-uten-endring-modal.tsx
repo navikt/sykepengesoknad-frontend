@@ -3,7 +3,7 @@ import React from 'react'
 
 import { tekst } from '../../../utils/tekster'
 import useSoknader from '../../../hooks/useSoknader'
-import { logEvent } from '../../amplitude/amplitude'
+import { logEvent } from '../../umami/umami'
 import { useAvbryt } from '../../../hooks/useAvbryt'
 import { useSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
 

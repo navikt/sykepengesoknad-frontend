@@ -67,7 +67,7 @@ const nextConfig = {
         sykmeldingerUrl: process.env.SYKMELDINGER_URL,
         minSideUrl: process.env.MINSIDE_URL,
         env: process.env.ENVIRONMENT,
-        amplitudeEnabled: process.env.AMPLITUDE_ENABLED,
+        umamiEnabled: process.env.UMAMI_ENABLED,
         environment: process.env.ENVIRONMENT,
         vedlikehold: process.env.VEDLIKEHOLD,
         telemetryCollectorURL: process.env.NAIS_FRONTEND_TELEMETRY_COLLECTOR_URL,

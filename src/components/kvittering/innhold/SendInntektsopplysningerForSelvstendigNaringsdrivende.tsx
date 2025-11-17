@@ -2,7 +2,7 @@ import { BodyLong, Button, Heading } from '@navikt/ds-react'
 import React, { useEffect } from 'react'
 import { ExternalLinkIcon } from '@navikt/aksel-icons'
 
-import { logEvent } from '../../amplitude/amplitude'
+import { logEvent } from '../../umami/umami'
 import GridItems from '../grid-items'
 
 export function SendInntektsopplysningerForSelvstendigNæringsdrivende() {
