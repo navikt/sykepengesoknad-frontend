@@ -2,7 +2,7 @@ import { BodyShort, Button, GuidePanel, Heading } from '@navikt/ds-react'
 import React from 'react'
 import { useRouter } from 'next/router'
 
-import { logEvent } from '../amplitude/amplitude'
+import { logEvent } from '../umami/umami'
 
 interface GuidepanelMedKnappProps {
     heading: string

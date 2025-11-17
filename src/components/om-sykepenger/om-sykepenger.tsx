@@ -2,7 +2,7 @@ import { BodyLong, ExpansionCard, Heading, Label } from '@navikt/ds-react'
 import React, { useState } from 'react'
 
 import { tekst } from '../../utils/tekster'
-import { logEvent } from '../amplitude/amplitude'
+import { logEvent } from '../umami/umami'
 import { LenkeMedIkon } from '../lenke-med-ikon/LenkeMedIkon'
 
 const OmSykepenger = () => {

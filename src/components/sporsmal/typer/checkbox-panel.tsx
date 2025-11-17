@@ -5,7 +5,7 @@ import { Controller } from 'react-hook-form'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { hentFeilmelding } from '../sporsmal-utils'
 import { useCheckboxNavigasjon } from '../../../utils/tastatur-navigasjon'
-import { logEvent } from '../../amplitude/amplitude'
+import { logEvent } from '../../umami/umami'
 import { useSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
 
 const CheckboxInput = ({ sporsmal }: SpmProps) => {

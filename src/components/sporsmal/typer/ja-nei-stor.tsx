@@ -21,7 +21,7 @@ import { InntektsopplysningerErKonfidensielleInfo } from '../inntektsopplysninge
 import { useSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
 import { KjentOppholdstillatelse } from '../kjent-oppholdstillatelse'
 import { NyttArbeidsforhold } from '../nytt-arbeidsforhold'
-import { logEvent } from '../../amplitude/amplitude'
+import { logEvent } from '../../umami/umami'
 import { OppholdUtenforEUEOS } from '../opphold-utenfor-eu-eos/opphold-utenfor-eu-eos'
 import { NaringsdrivendeYrkesaktivInfo } from '../../hjelpetekster/yrkesaktiv-info'
 import { VarigEndringInfo } from '../../hjelpetekster/varig-endring-info'

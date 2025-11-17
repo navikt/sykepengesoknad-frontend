@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
-import { logEvent } from '../amplitude/amplitude'
+import { logEvent } from '../umami/umami'
 import Endreknapp from '../endreknapp/endreknapp'
 import Ettersending from '../ettersending/ettersending'
 import Kvittering from '../kvittering/kvittering'

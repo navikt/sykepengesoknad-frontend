@@ -1,7 +1,7 @@
 import { Alert, Button } from '@navikt/ds-react'
 import React from 'react'
 
-import { logEvent } from '../amplitude/amplitude'
+import { logEvent } from '../umami/umami'
 import { useGjenapne } from '../../hooks/useGjenapne'
 import { useSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
 

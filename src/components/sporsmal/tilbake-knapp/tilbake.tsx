@@ -3,7 +3,7 @@ import { Button, Link } from '@navikt/ds-react'
 import React from 'react'
 import { useRouter } from 'next/router'
 
-import { logEvent } from '../../amplitude/amplitude'
+import { logEvent } from '../../umami/umami'
 import { tekst } from '../../../utils/tekster'
 import { SEPARATOR } from '../../../utils/constants'
 import { useSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'

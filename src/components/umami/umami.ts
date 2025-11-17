@@ -1,7 +1,7 @@
-import { logAmplitudeEvent } from '@navikt/nav-dekoratoren-moduler'
+import { logAnalyticsEvent } from '@navikt/nav-dekoratoren-moduler'
 import { logger } from '@navikt/next-logger'
 
-import { amplitudeEnabled, isLocalBackend } from '../../utils/environment'
+import { umamiEnabled, isLocalBackend } from '../../utils/environment'
 
 type validEventNames =
     | 'readmore lukket'
@@ -41,12 +41,12 @@ export const logEvent = (eventName: validEventNames, eventData: Record<string, s
                 }
             }
         }
-        if (amplitudeEnabled()) {
-            logAmplitudeEvent({
+        if (umamiEnabled()) {
+            logAnalyticsEvent({
                 origin: 'sykepengesoknad-frontend',
                 eventName,
                 eventData: cleanedEventData,
-            }).catch((e) => logger.warn(`Feil ved amplitude logging`, e))
+            }).catch((e) => logger.warn(`Feil ved umami logging`, e))
         } else {
             // eslint-disable-next-line no-console
             console.log(`${eventName}\n${JSON.stringify(cleanedEventData, null, 4)}`)
@@ -59,7 +59,7 @@ export const logEvent = (eventName: validEventNames, eventData: Record<string, s
 
                 cleanedEventData['url'] = url
 
-                fetch('http://localhost/api/amplitude', {
+                fetch('http://localhost/api/umami', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -70,7 +70,7 @@ export const logEvent = (eventName: validEventNames, eventData: Record<string, s
                         event_properties: cleanedEventData,
                     }),
                 }).catch((e) => {
-                    logger.warn(`Feil ved lokal amplitude logging`, e)
+                    logger.warn(`Feil ved lokal umami logging`, e)
                 })
             }
         }

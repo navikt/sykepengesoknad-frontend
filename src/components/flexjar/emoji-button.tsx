@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { BodyShort } from '@navikt/ds-react'
 
-import { logEvent } from '../amplitude/amplitude'
+import { logEvent } from '../umami/umami'
 import { cn } from '../../utils/tw-utils'
 
 import { FillProps } from './emojies'

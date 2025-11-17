@@ -21,7 +21,7 @@ import { useTestpersonQuery } from '../../../hooks/useTestpersonQuery'
 import { useOppdaterSporsmal } from '../../../hooks/useOppdaterSporsmal'
 import { FeilStateView } from '../../feil/refresh-hvis-feil-state'
 import { useSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
-import { logEvent } from '../../amplitude/amplitude'
+import { logEvent } from '../../umami/umami'
 import { tekst } from '../../../utils/tekster'
 
 import Knapperad from './knapperad'
