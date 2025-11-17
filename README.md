@@ -17,7 +17,6 @@ I din `.bashrc` eller `.zshrc`, sett følgende miljøvariabel:
 Krever browsere installert. Kjør: `npx playwright install`
 
 
-
 ## Dette logges i Amplitude
 
 
