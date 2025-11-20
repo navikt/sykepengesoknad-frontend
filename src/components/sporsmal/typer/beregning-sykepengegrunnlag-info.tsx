@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { BodyShort, Heading, ReadMore } from '@navikt/ds-react'
 
-import { logEvent } from '../../amplitude/amplitude'
+import { logEvent } from '../../umami/umami'
 
 export function BeregningSykepengegrunnlagInfo() {
     const [expanded, setExpanded] = useState<boolean>(false)

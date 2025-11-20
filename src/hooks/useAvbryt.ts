@@ -5,7 +5,7 @@ import fetchMedRequestId, { FetchError } from '../utils/fetch'
 import { Soknad } from '../types/types'
 import { RSSoknadstatus } from '../types/rs-types/rs-soknadstatus'
 import { RSSoknadstype } from '../types/rs-types/rs-soknadstype'
-import { logEvent } from '../components/amplitude/amplitude'
+import { logEvent } from '../components/umami/umami'
 
 import { useTestpersonQuery } from './useTestpersonQuery'
 

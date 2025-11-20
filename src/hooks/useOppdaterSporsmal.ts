@@ -5,7 +5,7 @@ import { Soknad, Sporsmal } from '../types/types'
 import { sporsmalToRS } from '../types/rs-types/rs-sporsmal'
 import { RSOppdaterSporsmalResponse } from '../types/rs-types/rest-response/rs-oppdatersporsmalresponse'
 import { rsToSoknad, skapSporsmal } from '../types/mapping'
-import { logEvent } from '../components/amplitude/amplitude'
+import { logEvent } from '../components/umami/umami'
 
 import { useTestpersonQuery } from './useTestpersonQuery'
 

@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 
 import { tekstMedHtml } from '../../utils/html-react-parser-utils'
 import { tekst } from '../../utils/tekster'
-import { logEvent } from '../amplitude/amplitude'
+import { logEvent } from '../umami/umami'
 import { LenkeMedIkon } from '../lenke-med-ikon/LenkeMedIkon'
 
 const OmReisetilskudd = () => {

@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { ExpansionCard, Heading, Skeleton } from '@navikt/ds-react'
 
 import { tekst } from '../../utils/tekster'
-import { logEvent } from '../amplitude/amplitude'
+import { logEvent } from '../umami/umami'
 import { useSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
 
 import ArbeidsgiverInfo from './arbeidsgiver-info'

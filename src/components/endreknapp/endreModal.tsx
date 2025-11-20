@@ -1,7 +1,7 @@
 import { Alert, BodyShort, Button, Modal } from '@navikt/ds-react'
 import React from 'react'
 
-import { logEvent } from '../amplitude/amplitude'
+import { logEvent } from '../umami/umami'
 import { LenkeMedIkon } from '../lenke-med-ikon/LenkeMedIkon'
 import { ModalFooterMedLukk } from '../modal-footer-med-lukk'
 import { useSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'

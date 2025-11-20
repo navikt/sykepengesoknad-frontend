@@ -36,7 +36,7 @@ spec:
   env:
     - name: FLEX_GATEWAY_ROOT
       value: "https://flex-gateway.dev.nav.no"
-    - name: AMPLITUDE_ENABLED
+    - name: UMAMI_ENABLED
       value: "false"
     - name: MOCK_BACKEND
       value: "true"

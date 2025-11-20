@@ -1,7 +1,7 @@
 import { Button } from '@navikt/ds-react'
 import React, { useState } from 'react'
 
-import { logEvent } from '../amplitude/amplitude'
+import { logEvent } from '../umami/umami'
 import { useSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
 
 import { EndreknappTekster } from './endreknapp-tekster'
