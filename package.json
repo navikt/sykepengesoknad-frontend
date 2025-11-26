@@ -21,7 +21,7 @@
         "@types/smoothscroll-polyfill": "^0.3.4",
         "@unleash/nextjs": "^1.6.2",
         "classnames": "^2.5.1",
-        "cookie": "^1.0.2",
+        "cookie": "^1.1.0",
         "dayjs": "^1.11.19",
         "html-react-parser": "^5.2.10",
         "jose": "^6.1.2",
