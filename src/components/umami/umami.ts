@@ -1,7 +1,7 @@
 import { logAnalyticsEvent } from '@navikt/nav-dekoratoren-moduler'
 import { logger } from '@navikt/next-logger'
 
-import { umamiEnabled, isLocalBackend, isProd } from '../../utils/environment'
+import { umamiEnabled, isLocalBackend, isProd, isOpplaering } from '../../utils/environment'
 
 type validEventNames =
     | 'readmore lukket'
@@ -47,9 +47,11 @@ export const logEvent = (eventName: validEventNames, eventData: Record<string, s
                 eventName,
                 eventData: cleanedEventData,
             }).catch((e) => logger.warn(`Feil ved umami logging`, e))
-        } else if (!isProd()) {
-            // eslint-disable-next-line no-console
-            console.log(`${eventName}\n${JSON.stringify(cleanedEventData, null, 4)}`)
+        } else {
+            if (!isProd() && isOpplaering()) {
+                // eslint-disable-next-line no-console
+                console.log(`${eventName}\n${JSON.stringify(cleanedEventData, null, 4)}`)
+            }
 
             if (isLocalBackend()) {
                 let url = window.location.href
