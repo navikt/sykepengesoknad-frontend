@@ -21,8 +21,8 @@ export function isOpplaering() {
     return publicRuntimeConfig.opplaering === 'true'
 }
 
-export function amplitudeEnabled() {
-    return publicRuntimeConfig.amplitudeEnabled === 'true'
+export function umamiEnabled() {
+    return publicRuntimeConfig.umamiEnabled === 'true'
 }
 
 export function sykmeldingerUrl() {

@@ -2,7 +2,7 @@ ingress: https://www.ekstern.dev.nav.no/syk/sykepengesoknad
 cpu: 200m
 memory: 400Mi
 env:
-  AMPLITUDE_ENABLED: true
+  UMAMI_ENABLED: true
   ENVIRONMENT: q1
   SYKEFRAVAER_URL: https://www.ekstern.dev.nav.no/syk/sykefravaer
   SYKMELDINGER_URL: https://www.ekstern.dev.nav.no/syk/sykefravaer/sykmeldinger

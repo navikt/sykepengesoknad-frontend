@@ -18,7 +18,7 @@ Krever browsere installert. Kjør: `npx playwright install`
 
 
 
-## Dette logges i Amplitude
+## Dette logges i Umami
 
 
 | brukers handling/logg                                      | skjemanavn | søknadstype | søknadsstatus | spørsmålstag | tekst | svar (hoved) | komponentnavn |

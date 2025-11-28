@@ -2,7 +2,7 @@ import { Alert, BodyLong, Button, Heading, List } from '@navikt/ds-react'
 import React, { useEffect } from 'react'
 import { ExternalLinkIcon } from '@navikt/aksel-icons'
 
-import { logEvent } from '../../amplitude/amplitude'
+import { logEvent } from '../../umami/umami'
 import GridItems from '../grid-items'
 import { Soknad } from '../../../types/types'
 import { sendInnUrl } from '../../../utils/environment'

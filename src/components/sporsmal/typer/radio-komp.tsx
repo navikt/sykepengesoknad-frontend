@@ -9,7 +9,7 @@ import { NyIArbeidslivertAlert } from '../../hjelpetekster/ny-i-arbeidslivert-al
 import { cn } from '../../../utils/tw-utils'
 import { erSigrunInntekt, SigrunInntekt, Sporsmal } from '../../../types/types'
 import { useRadiogruppeTastaturNavigasjon } from '../../../utils/tastatur-navigasjon'
-import { logEvent } from '../../amplitude/amplitude'
+import { logEvent } from '../../umami/umami'
 import { useSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
 import { hentUndersporsmal } from '../../../utils/soknad-utils'
 

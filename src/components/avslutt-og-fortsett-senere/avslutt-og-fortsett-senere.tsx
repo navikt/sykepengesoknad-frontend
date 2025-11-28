@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 
 import { minSideUrl } from '../../utils/environment'
 import { tekst } from '../../utils/tekster'
-import { logEvent } from '../amplitude/amplitude'
+import { logEvent } from '../umami/umami'
 import { useSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
 import { cn } from '../../utils/tw-utils'
 

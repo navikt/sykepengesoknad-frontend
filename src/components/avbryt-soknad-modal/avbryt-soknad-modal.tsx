@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { tekst } from '../../utils/tekster'
-import { logEvent } from '../amplitude/amplitude'
+import { logEvent } from '../umami/umami'
 import { EndringUtenEndringModal } from '../sporsmal/endring-uten-endring/endring-uten-endring-modal'
 import { useAvbryt } from '../../hooks/useAvbryt'
 import { useSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'

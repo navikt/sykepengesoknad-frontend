@@ -5,7 +5,7 @@ import { useFormContext } from 'react-hook-form'
 import { RSSvartype } from '../../types/rs-types/rs-svartype'
 import { Soknad, Sporsmal } from '../../types/types'
 import { flattenSporsmal } from '../../utils/soknad-utils'
-import { logEvent } from '../amplitude/amplitude'
+import { logEvent } from '../umami/umami'
 import { FetchError } from '../../utils/fetch'
 
 const FeilOppsummering = ({

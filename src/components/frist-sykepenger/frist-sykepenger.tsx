@@ -2,7 +2,7 @@ import { BodyShort, ExpansionCard, Heading, ReadMore, Skeleton } from '@navikt/d
 import React, { useState } from 'react'
 
 import { tekst } from '../../utils/tekster'
-import { logEvent } from '../amplitude/amplitude'
+import { logEvent } from '../umami/umami'
 import { tekstMedHtml } from '../../utils/html-react-parser-utils'
 import { useSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
 
