@@ -19,6 +19,6 @@
         "incremental": true,
         "baseUrl": "/syk/sykepengesoknad"
     },
-    "include": ["src"],
+    "include": ["src", "vitest.d.ts"],
     "exclude": ["node_modules"]
 }
