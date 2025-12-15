@@ -87,7 +87,7 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
                 {sporsmal.tag === 'NYTT_ARBEIDSFORHOLD_UNDERVEIS' && (
                     <NyttArbeidsforhold key="nytt-arbeidsforhold" spm={sporsmal} />
                 )}
-                {erOppholdUtenforEUEOS && <OppholdUtenforEUEOS />}
+                {erOppholdUtenforEUEOS && <OppholdUtenforEUEOS soknadstype={valgtSoknad.soknadstype} />}
 
                 <Controller
                     name={sporsmal.id}
