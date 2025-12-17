@@ -1,13 +1,14 @@
+import { enUsendtSykmelding, toUsendteSykmeldinger } from '../src/data/mock/data/usendte-sykmeldinger'
+
 import { test, expect } from './utils/fixtures'
+import { trykkPaSoknadMedId } from './utils/utilities'
+import { validerAxeUtilityWrapper } from './uuvalidering'
 
 test.describe('Tester at åpne sykmeldinger må sendes inn', () => {
     test.describe('Tester med en usendt sykmelding', () => {
         test('Laster søknader og viser advarsel om at det finnes sykmelding', async ({ page }) => {
             await page.goto('/syk/sykepengesoknad?testperson=en-usendt-sykmelding')
-
-            await page.locator(`a[href*="5d0bd29f-7803-4945-8426-49921284435e"]`).click()
-
-            await expect(page).toHaveURL(/5d0bd29f-7803-4945-8426-49921284435e\/1/)
+            await trykkPaSoknadMedId(page, enUsendtSykmelding.soknader[0].id)
 
             await expect(
                 page.getByText(
@@ -20,12 +21,11 @@ test.describe('Tester at åpne sykmeldinger må sendes inn', () => {
     })
 
     test.describe('Tester med flere usendte sykmeldinger', () => {
-        test('Laster søknader og viser advarsel om at det finnes sykmeldinger', async ({ page }) => {
+        test('Laster søknader og viser advarsel om at det finnes sykmeldinger', async ({ page, uuOptions }) => {
+            uuOptions.skipUU = true //vi navigerer ut av appen i denne testen
+
             await page.goto('/syk/sykepengesoknad?testperson=to-usendte-sykmeldinger')
-
-            await page.locator(`a[href*="a7efa5f0-003c-41d5-ab33-5c9be9179721"]`).click()
-
-            await expect(page).toHaveURL(/a7efa5f0-003c-41d5-ab33-5c9be9179721\/1/)
+            await trykkPaSoknadMedId(page, toUsendteSykmeldinger.soknader[0].id)
 
             await expect(
                 page.getByText(
@@ -36,6 +36,7 @@ test.describe('Tester at åpne sykmeldinger må sendes inn', () => {
             const sykmeldingerKnapp = page.getByRole('button', { name: 'Gå til sykmeldingene' })
             await expect(sykmeldingerKnapp).toBeVisible()
             await expect(page.getByText('Gå til sykmeldingen', { exact: true })).toBeHidden()
+            await validerAxeUtilityWrapper(page, test.info())
 
             await sykmeldingerKnapp.click()
             await expect(page).toHaveURL(/\/sykmeldinger$/)
