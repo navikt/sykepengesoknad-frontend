@@ -10,10 +10,10 @@ import { Begrepsforklarer, BegrepsforklarerModal } from '../../../begrepsforklar
 import UtbetalingAvPenger from './gjentagende-segmenter/UtbetalingAvPenger'
 
 interface gradertReisetilskuddProps {
-    erGradert: boolean
+    erGradertReisetilskudd: boolean
 }
 
-const Over16dager = ({ erGradert }: gradertReisetilskuddProps) => {
+const Over16dager = ({ erGradertReisetilskudd }: gradertReisetilskuddProps) => {
     const [sekstenDagerOpen, set16dagerOpen] = React.useState(false)
     const [inntektsmeldingOpen, setInntektsmeldingOpen] = React.useState(false)
 
@@ -31,7 +31,7 @@ const Over16dager = ({ erGradert }: gradertReisetilskuddProps) => {
                     <Label as="h2" spacing>
                         {KvitteringTekster['kvittering.før.nav.behandler']}
                     </Label>
-                    {erGradert ? (
+                    {erGradertReisetilskudd ? (
                         <BodyShort>
                             Når sykefraværet ditt er lengre enn {begrepsForklaring16Kalenderdager}, betyr det at du får
                             sykepenger og reisetilskudd utbetalt av NAV. Noen arbeidsplasser fortsetter å utbetale
@@ -76,7 +76,7 @@ const Over16dager = ({ erGradert }: gradertReisetilskuddProps) => {
                 open={sekstenDagerOpen}
                 setOpen={set16dagerOpen}
             >
-                {erGradert ? (
+                {erGradertReisetilskudd ? (
                     <BodyLong>{tekst('kvittering.arbeidsgiveren-skal-betale-gradertreisetilskudd')}</BodyLong>
                 ) : (
                     <BodyLong>{tekst('kvittering.arbeidsgiveren-skal-betale')}</BodyLong>
