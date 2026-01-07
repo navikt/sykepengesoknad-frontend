@@ -68,7 +68,6 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
                 <legend className="sr-only">Periodevelger</legend>
                 <DatePicker
                     {...datepickerProps}
-                    locale="nb"
                     dropdownCaption={kalenderMedDropdownCaption(sporsmal.min, sporsmal.max)}
                 >
                     <div>
