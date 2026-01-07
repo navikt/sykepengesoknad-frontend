@@ -45,9 +45,7 @@ export const KvitteringTekster = {
         'Arbeidsgiveren skal betale sykepenger og reisetilskudd i en periode på opptil 16 kalenderdager, også kalt arbeidsgiverperioden. NAV overtar sykepengeutbetalingen fra og med 17. kalenderdag.',
     'kvittering.digital-inntektsmelding':
         'Digital inntektsmelding sendes fra arbeidsgivers eget lønns- og personalsystem eller fra altinn.no. Meldingen inneholder inntektsopplysninger og annen informasjon NAV må ha for å behandle søknaden arbeidstaker har sendt.',
-
-    'kvittering.før.nav.behandler': 'Før NAV kan behandle søknaden',
-
+    'kvittering.for.nav.behandler': 'Før NAV kan behandle søknaden',
     'kvittering.utenlands.overskrift1': 'Du får svar på om du kan reise',
     'kvittering.utenlands.brodtekst1':
         'NAV vurderer om reisen vil forlenge sykefraværet ditt eller hindre planlagte aktiviteter.',
