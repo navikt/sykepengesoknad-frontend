@@ -68,7 +68,6 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
                 <legend className="sr-only">Periodevelger</legend>
                 <DatePicker
                     {...datepickerProps}
-                    locale="nb"
                     dropdownCaption={kalenderMedDropdownCaption(sporsmal.min, sporsmal.max)}
                 >
                     <div>
@@ -78,7 +77,6 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
                             id={sporsmal.id + '_' + index + '_fom'}
                             className="mt-4"
                             error={fieldState.error?.type === 'fom' && fieldState.error.message}
-                            aria-label={`${sporsmal.sporsmalstekst} ${fraTekst}`}
                         />
                         <DatePicker.Input
                             {...toInputProps}
@@ -89,7 +87,6 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
                                 (fieldState.error?.type === 'tom' || fieldState.error?.type === 'periode') &&
                                 fieldState.error.message
                             }
-                            aria-label={`${sporsmal.sporsmalstekst} ${tilTekst}`}
                         />
                     </div>
                 </DatePicker>
