@@ -29,7 +29,7 @@ const Over16dager = ({ erGradertReisetilskudd }: gradertReisetilskuddProps) => {
             <div className="mt-4">
                 <div>
                     <Label as="h2" spacing>
-                        {KvitteringTekster['kvittering.før.nav.behandler']}
+                        {KvitteringTekster['kvittering.for.nav.behandler']}
                     </Label>
                     {erGradertReisetilskudd ? (
                         <BodyShort>
