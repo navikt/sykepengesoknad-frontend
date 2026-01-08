@@ -1,4 +1,4 @@
-import { Button, DatePicker, RangeValidationT, useRangeDatepicker } from '@navikt/ds-react'
+import { BodyShort, Button, DatePicker, RangeValidationT, useRangeDatepicker } from '@navikt/ds-react'
 import dayjs from 'dayjs'
 import React, { useState } from 'react'
 import { useController, useFormContext } from 'react-hook-form'
@@ -76,6 +76,7 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
                             label={fraTekst}
                             id={sporsmal.id + '_' + index + '_fom'}
                             className="mt-4"
+                            description={<BodyShort size="small">dd.mm.åååå</BodyShort>}
                             error={fieldState.error?.type === 'fom' && fieldState.error.message}
                         />
                         <DatePicker.Input
@@ -83,6 +84,7 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
                             label={tilTekst}
                             id={sporsmal.id + '_' + index + '_tom'}
                             className="mt-4"
+                            description={<BodyShort size="small">dd.mm.åååå</BodyShort>}
                             error={
                                 (fieldState.error?.type === 'tom' || fieldState.error?.type === 'periode') &&
                                 fieldState.error.message

@@ -52,6 +52,7 @@ function DatoInput(props: SpmProps) {
                         }
                         error={fieldState.error && fieldState.error.message}
                         data-cy={sporsmal.id}
+                        description={<BodyShort size="small">dd.mm.åååå</BodyShort>}
                     />
                 </DatePicker>
             </div>
