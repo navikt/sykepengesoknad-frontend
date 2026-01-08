@@ -37,7 +37,6 @@ function DatoInput(props: SpmProps) {
             <div className="axe-exclude">
                 <DatePicker
                     {...datepickerProps}
-                    locale="nb"
                     dropdownCaption={kalenderMedDropdownCaption(sporsmal.min, sporsmal.max)}
                     data-cy-sporsmalid={sporsmal.id}
                 >
@@ -52,6 +51,7 @@ function DatoInput(props: SpmProps) {
                         }
                         error={fieldState.error && fieldState.error.message}
                         data-cy={sporsmal.id}
+                        description={<BodyShort size="small">dd.mm.åååå</BodyShort>}
                     />
                 </DatePicker>
             </div>
