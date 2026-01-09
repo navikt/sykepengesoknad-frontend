@@ -64,13 +64,13 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
 
     return (
         <li id={id} data-cy="periode">
-            <fieldset className="axe-exclude p-0">
-                <legend className="sr-only">Periodevelger</legend>
+            <fieldset className="axe-exclude p-2 bg-bg-subtle">
+                <legend>Fyll ut periode {index > 0 ? index + 1 : ''}</legend>
                 <DatePicker
                     {...datepickerProps}
                     dropdownCaption={kalenderMedDropdownCaption(sporsmal.min, sporsmal.max)}
                 >
-                    <div>
+                    <div className="my-4">
                         <DatePicker.Input
                             {...fromInputProps}
                             label={fraTekst}
