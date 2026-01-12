@@ -63,19 +63,24 @@ const Teasere = ({ soknader, tittel, tomListeTekst, kanSorteres = false }: Sokna
                 )}
             </div>
 
-            {sorterteSoknader().map((soknad, idx) => {
-                switch (soknad.status) {
-                    case RSSoknadstatus.FREMTIDIG:
-                        return <FremtidigeSoknaderTeaser key={idx} soknad={soknad} />
-                    case RSSoknadstatus.SENDT:
-                    case RSSoknadstatus.AVBRUTT:
-                        return <ListevisningLenkepanel key={idx} soknad={soknad} />
-                    case RSSoknadstatus.UTGAATT:
-                        return <UtgaattSoknaderTeaser key={idx} soknad={soknad} />
-                    default:
-                        return <ListevisningLenkepanel key={idx} soknad={soknad} />
-                }
-            })}
+            <ul className="list-none">
+                {sorterteSoknader().map((soknad, idx) => {
+                    const soknadPanel = () => {
+                        switch (soknad.status) {
+                            case RSSoknadstatus.FREMTIDIG:
+                                return <FremtidigeSoknaderTeaser key={idx} soknad={soknad} />
+                            case RSSoknadstatus.SENDT:
+                            case RSSoknadstatus.AVBRUTT:
+                                return <ListevisningLenkepanel key={idx} soknad={soknad} />
+                            case RSSoknadstatus.UTGAATT:
+                                return <UtgaattSoknaderTeaser key={idx} soknad={soknad} />
+                            default:
+                                return <ListevisningLenkepanel key={idx} soknad={soknad} />
+                        }
+                    }
+                    return <li key={idx}>{soknadPanel()}</li>
+                })}
+            </ul>
             {soknader.length === 0 && <BodyShort weight="semibold">{tomListeTekst}</BodyShort>}
         </div>
     )
