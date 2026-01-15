@@ -58,13 +58,13 @@ const Perioder = ({ sporsmal }: SpmProps) => {
             {sporsmal.svartype === RSSvartype.PERIODER && (
                 <Button
                     type="button"
-                    icon={<PlusIcon aria-hidden={true} />}
+                    icon={<PlusIcon aria-hidden />}
                     size="small"
                     variant="tertiary"
                     className="mt-4"
                     onClick={leggTilPeriode}
                 >
-                    {tekst('sykepengesoknad.periodevelger.legg-til-ekstra')}
+                    Legg til ekstra periode
                 </Button>
             )}
 

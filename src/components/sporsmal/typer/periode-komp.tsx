@@ -1,10 +1,10 @@
-import { BodyShort, Button, DatePicker, RangeValidationT, useRangeDatepicker } from '@navikt/ds-react'
+import { Button, DatePicker, RangeValidationT, useRangeDatepicker } from '@navikt/ds-react'
 import dayjs from 'dayjs'
 import React, { useState } from 'react'
 import { useController, useFormContext } from 'react-hook-form'
+import { TrashIcon } from '@navikt/aksel-icons'
 
 import { validerFom, validerPeriode, validerTom } from '../../../utils/sporsmal/valider-periode'
-import { tekst } from '../../../utils/tekster'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { kalenderMedDropdownCaption, maanedKalenderApnesPa } from '../sporsmal-utils'
 
@@ -60,9 +60,6 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode, antallPerioder }: AllProps
         },
     })
 
-    const fraTekst = tekst('sykepengesoknad.periodevelger.fom')
-    const tilTekst = tekst('sykepengesoknad.periodevelger.tom')
-
     const tidsperiode: string | number = antallPerioder > 1 ? index + 1 : ''
 
     return (
@@ -76,7 +73,7 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode, antallPerioder }: AllProps
                     <div>
                         <DatePicker.Input
                             {...fromInputProps}
-                            label={fraTekst}
+                            label="Fra og med"
                             id={sporsmal.id + '_' + index + '_fom'}
                             className="mt-4"
                             description="dd.mm.åååå"
@@ -84,7 +81,7 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode, antallPerioder }: AllProps
                         />
                         <DatePicker.Input
                             {...toInputProps}
-                            label={tilTekst}
+                            label="Til og med"
                             id={sporsmal.id + '_' + index + '_tom'}
                             className="mt-4"
                             description="dd.mm.åååå"
@@ -95,18 +92,21 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode, antallPerioder }: AllProps
                         />
                     </div>
                 </DatePicker>
+
+                <div className="mt-2 flex gap-4">
+                    {index > 0 && (
+                        <Button
+                            id={'btn_' + id}
+                            variant="tertiary"
+                            size="small"
+                            icon={<TrashIcon aria-hidden />}
+                            onClick={(e) => slettPeriode(e, index)}
+                        >
+                            Slett periode
+                        </Button>
+                    )}
+                </div>
             </fieldset>
-            {index > 0 && (
-                <Button
-                    type="button"
-                    variant="tertiary"
-                    size="small"
-                    id={'btn_' + id}
-                    onClick={(e) => slettPeriode(e, index)}
-                >
-                    {tekst('sykepengesoknad.periodevelger.slett')}
-                </Button>
-            )}
         </li>
     )
 }
