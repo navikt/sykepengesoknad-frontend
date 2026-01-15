@@ -11,6 +11,7 @@ import { kalenderMedDropdownCaption, maanedKalenderApnesPa } from '../sporsmal-u
 interface PeriodeProps {
     index: number
     slettPeriode: (e: any, idx: number) => void
+    antallPerioder: number
 }
 
 export interface FormPeriode {
@@ -20,7 +21,7 @@ export interface FormPeriode {
 
 type AllProps = SpmProps & PeriodeProps
 
-const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
+const PeriodeKomp = ({ sporsmal, index, slettPeriode, antallPerioder }: AllProps) => {
     const { getValues } = useFormContext()
     const [rangeValidation, setRangeValidation] = useState<RangeValidationT | undefined>(undefined)
 
@@ -62,10 +63,12 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
     const fraTekst = tekst('sykepengesoknad.periodevelger.fom')
     const tilTekst = tekst('sykepengesoknad.periodevelger.tom')
 
+    const tidsperiode: string | number = antallPerioder > 1 ? index + 1 : ''
+
     return (
         <li id={id} data-cy="periode">
-            <fieldset className="axe-exclude p-0">
-                <legend className="sr-only">Periodevelger</legend>
+            <fieldset className="relative px-4 pb-5 pt-12 bg-lightblue-50">
+                <legend className="absolute top-0 left-0 p-4 font-bold">Tidsperiode {tidsperiode}</legend>
                 <DatePicker
                     {...datepickerProps}
                     dropdownCaption={kalenderMedDropdownCaption(sporsmal.min, sporsmal.max)}
@@ -76,7 +79,7 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
                             label={fraTekst}
                             id={sporsmal.id + '_' + index + '_fom'}
                             className="mt-4"
-                            description={<BodyShort size="small">dd.mm.åååå</BodyShort>}
+                            description="dd.mm.åååå"
                             error={fieldState.error?.type === 'fom' && fieldState.error.message}
                         />
                         <DatePicker.Input
@@ -84,7 +87,7 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
                             label={tilTekst}
                             id={sporsmal.id + '_' + index + '_tom'}
                             className="mt-4"
-                            description={<BodyShort size="small">dd.mm.åååå</BodyShort>}
+                            description="dd.mm.åååå"
                             error={
                                 (fieldState.error?.type === 'tom' || fieldState.error?.type === 'periode') &&
                                 fieldState.error.message
