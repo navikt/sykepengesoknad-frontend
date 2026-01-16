@@ -70,6 +70,7 @@ test.describe('Opphold utenfor EU/EØS', () => {
 
             const valgteLand = landVelger.locator('..').locator('..').getByRole('listitem')
 
+            await landVelger.click() // Midlertidig fix for mobile webkit og combobox
             await landVelger.fill('Belgia')
             await page.getByRole('option', { name: 'Belgia' }).click()
             await expect(valgteLand.nth(0)).toHaveText('Belgia')
