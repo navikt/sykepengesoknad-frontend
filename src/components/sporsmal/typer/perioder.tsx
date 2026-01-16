@@ -3,7 +3,6 @@ import React, { useEffect, useRef, useState } from 'react'
 import { useFormContext } from 'react-hook-form'
 import { PlusIcon } from '@navikt/aksel-icons'
 
-import { tekst } from '../../../utils/tekster'
 import { hentPerioder } from '../hent-svar'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
@@ -43,13 +42,14 @@ const Perioder = ({ sporsmal }: SpmProps) => {
         <div data-cy="perioder" className="mt-8">
             <Label as="h3">{sporsmal.sporsmalstekst}</Label>
 
-            <ul className="list-none" ref={periodeliste}>
+            <ul className="list-none mt-2 flex flex-col gap-4" ref={periodeliste}>
                 {lokal.map((idx) => (
                     <PeriodeKomp
                         sporsmal={sporsmal}
                         index={idx}
                         slettPeriode={slettPeriode}
                         key={sporsmal.id + '_' + idx}
+                        antallPerioder={lokal.length}
                     />
                 ))}
             </ul>
@@ -57,13 +57,13 @@ const Perioder = ({ sporsmal }: SpmProps) => {
             {sporsmal.svartype === RSSvartype.PERIODER && (
                 <Button
                     type="button"
-                    icon={<PlusIcon aria-hidden={true} />}
+                    icon={<PlusIcon aria-hidden />}
                     size="small"
                     variant="tertiary"
                     className="mt-4"
                     onClick={leggTilPeriode}
                 >
-                    {tekst('sykepengesoknad.periodevelger.legg-til-ekstra')}
+                    Legg til ekstra periode
                 </Button>
             )}
 

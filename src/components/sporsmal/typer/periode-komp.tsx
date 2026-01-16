@@ -1,16 +1,17 @@
-import { BodyShort, Button, DatePicker, RangeValidationT, useRangeDatepicker } from '@navikt/ds-react'
+import { Button, DatePicker, RangeValidationT, useRangeDatepicker } from '@navikt/ds-react'
 import dayjs from 'dayjs'
 import React, { useState } from 'react'
 import { useController, useFormContext } from 'react-hook-form'
+import { TrashIcon } from '@navikt/aksel-icons'
 
 import { validerFom, validerPeriode, validerTom } from '../../../utils/sporsmal/valider-periode'
-import { tekst } from '../../../utils/tekster'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { kalenderMedDropdownCaption, maanedKalenderApnesPa } from '../sporsmal-utils'
 
 interface PeriodeProps {
     index: number
     slettPeriode: (e: any, idx: number) => void
+    antallPerioder: number
 }
 
 export interface FormPeriode {
@@ -20,7 +21,7 @@ export interface FormPeriode {
 
 type AllProps = SpmProps & PeriodeProps
 
-const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
+const PeriodeKomp = ({ sporsmal, index, slettPeriode, antallPerioder }: AllProps) => {
     const { getValues } = useFormContext()
     const [rangeValidation, setRangeValidation] = useState<RangeValidationT | undefined>(undefined)
 
@@ -59,13 +60,12 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
         },
     })
 
-    const fraTekst = tekst('sykepengesoknad.periodevelger.fom')
-    const tilTekst = tekst('sykepengesoknad.periodevelger.tom')
+    const tidsperiode: string | number = antallPerioder > 1 ? index + 1 : ''
 
     return (
         <li id={id} data-cy="periode">
-            <fieldset className="axe-exclude p-0">
-                <legend className="sr-only">Periodevelger</legend>
+            <fieldset className="relative px-4 pb-5 pt-12 bg-lightblue-50">
+                <legend className="absolute top-0 left-0 p-4 font-bold">Tidsperiode {tidsperiode}</legend>
                 <DatePicker
                     {...datepickerProps}
                     dropdownCaption={kalenderMedDropdownCaption(sporsmal.min, sporsmal.max)}
@@ -73,18 +73,18 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
                     <div>
                         <DatePicker.Input
                             {...fromInputProps}
-                            label={fraTekst}
+                            label="Fra og med"
                             id={sporsmal.id + '_' + index + '_fom'}
                             className="mt-4"
-                            description={<BodyShort size="small">dd.mm.åååå</BodyShort>}
+                            description="dd.mm.åååå"
                             error={fieldState.error?.type === 'fom' && fieldState.error.message}
                         />
                         <DatePicker.Input
                             {...toInputProps}
-                            label={tilTekst}
+                            label="Til og med"
                             id={sporsmal.id + '_' + index + '_tom'}
                             className="mt-4"
-                            description={<BodyShort size="small">dd.mm.åååå</BodyShort>}
+                            description="dd.mm.åååå"
                             error={
                                 (fieldState.error?.type === 'tom' || fieldState.error?.type === 'periode') &&
                                 fieldState.error.message
@@ -92,18 +92,21 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode }: AllProps) => {
                         />
                     </div>
                 </DatePicker>
+
+                <div className="mt-2 flex gap-4">
+                    {index > 0 && (
+                        <Button
+                            id={'btn_' + id}
+                            variant="tertiary"
+                            size="small"
+                            icon={<TrashIcon aria-hidden />}
+                            onClick={(e) => slettPeriode(e, index)}
+                        >
+                            Slett periode
+                        </Button>
+                    )}
+                </div>
             </fieldset>
-            {index > 0 && (
-                <Button
-                    type="button"
-                    variant="tertiary"
-                    size="small"
-                    id={'btn_' + id}
-                    onClick={(e) => slettPeriode(e, index)}
-                >
-                    {tekst('sykepengesoknad.periodevelger.slett')}
-                </Button>
-            )}
         </li>
     )
 }
