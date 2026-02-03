@@ -77,6 +77,7 @@ export const SoknadTag = ({ soknad }: { soknad: RSSoknadmetadata }) => {
     const type = statusTilType(soknad.status)
     return (
         <Tag variant={type} size="small">
+            <span className="sr-only">, status:</span>
             {tekst}
         </Tag>
     )

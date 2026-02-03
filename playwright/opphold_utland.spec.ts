@@ -235,7 +235,7 @@ test.describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
         const tidligere = page.locator('[data-cy="Tidligere søknader"]')
         await expect(tidligere).toBeVisible()
         await tidligere
-            .getByRole('link', { name: 'Søknad om å beholde sykepenger utenfor EU/EØS Sendt til NAV' })
+            .getByRole('link', { name: 'Søknad om å beholde sykepenger utenfor EU/EØS , status: Sendt til NAV' })
             .click()
 
         // Viser sendt side', async () => {
