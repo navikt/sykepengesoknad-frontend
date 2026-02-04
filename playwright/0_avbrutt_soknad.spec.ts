@@ -15,6 +15,7 @@ test.describe('Tester avbryting av søknad', () => {
         })
 
         const avbruttLink = page.locator(`a[href*="${avbruttSoknad.id}"]`)
+
         await test.step('Avbrutt søknad har forventa tekst', async () => {
             await expect(avbruttLink).toContainText('1. – 24. april')
             await expect(avbruttLink).toContainText('Avbrutt av deg')

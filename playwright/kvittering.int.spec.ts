@@ -33,6 +33,7 @@ test.describe('Kvittering integrasjon', () => {
             await klikkGaVidere(page)
             await page.getByRole('button', { name: 'Send søknaden' }).click()
         })
+
         await test.step('Verifiserer kvittering', async () => {
             await expect(page.locator('[data-cy="sendt-nav"]')).toBeVisible()
             await expect(page.locator('[data-cy="sendt-arbeidsgiver"]')).toHaveCount(0)
@@ -54,6 +55,7 @@ test.describe('Kvittering integrasjon', () => {
             await page.goto('/syk/sykepengesoknad?testperson=integrasjon-soknader')
             await page.locator(`[data-cy="Tidligere søknader"] a[href*="${sendtArbeidsledigKvittering.id}"]`).click()
         })
+
         await test.step('Verifiserer sendt-detaljer', async () => {
             await expect(
                 page.locator('[data-cy="sendt-nav"]').getByText('Mottatt: Torsdag 23. april, kl 11:56'),
@@ -81,6 +83,7 @@ test.describe('Kvittering integrasjon', () => {
             await klikkGaVidere(page)
             await page.getByRole('button', { name: 'Send søknaden' }).click()
         })
+
         await test.step('Verifiserer utland kvittering', async () => {
             await expect(page.locator('[data-cy="sendt-nav"]')).toBeVisible()
             await expect(page.locator('[data-cy="sendt-arbeidsgiver"]')).toHaveCount(0)
@@ -115,6 +118,7 @@ test.describe('Kvittering integrasjon', () => {
             await klikkGaVidere(page)
             await page.getByRole('button', { name: 'Send søknaden' }).click()
         })
+
         await test.step('Verifiserer selvstendig kvittering', async () => {
             await expect(page.locator('[data-cy="sendt-nav"]')).toBeVisible()
             await expect(page.locator('[data-cy="sendt-arbeidsgiver"]')).toHaveCount(0)
@@ -148,6 +152,7 @@ test.describe('Kvittering integrasjon', () => {
             await trykkPaSoknadMedId(page, arbeidstakerInnenforArbeidsgiverperiodeKvittering.id)
             await besvarSoknad(page)
         })
+
         await test.step('Verifiserer kvittering', async () => {
             await expect(page).toHaveURL(
                 new RegExp(`/kvittering/${arbeidstakerInnenforArbeidsgiverperiodeKvittering.id}`),
@@ -168,6 +173,7 @@ test.describe('Kvittering integrasjon', () => {
             await trykkPaSoknadMedId(page, arbeidstakerUtenforArbeidsgiverperiodeKvittering.id)
             await besvarSoknad(page)
         })
+
         await test.step('Verifiserer kvittering', async () => {
             await expect(page).toHaveURL(
                 new RegExp(`/kvittering/${arbeidstakerUtenforArbeidsgiverperiodeKvittering.id}`),
@@ -190,6 +196,7 @@ test.describe('Kvittering integrasjon', () => {
             await trykkPaSoknadMedId(page, arbeidstakerDeltPeriodeForsteUtenforArbeidsgiverperiodeKvittering.id)
             await besvarSoknad(page)
         })
+
         await test.step('Verifiserer kvittering', async () => {
             await expect(page).toHaveURL(
                 new RegExp(`/kvittering/${arbeidstakerDeltPeriodeForsteUtenforArbeidsgiverperiodeKvittering.id}`),
@@ -210,6 +217,7 @@ test.describe('Kvittering integrasjon', () => {
             await trykkPaSoknadMedId(page, arbeidstakerUtenOppholdForsteUtenforArbeidsgiverperiodeKvittering.id)
             await besvarSoknad(page)
         })
+
         await test.step('Verifiserer kvittering', async () => {
             await expect(page).toHaveURL(
                 new RegExp(`/kvittering/${arbeidstakerUtenOppholdForsteUtenforArbeidsgiverperiodeKvittering.id}`),
@@ -230,6 +238,7 @@ test.describe('Kvittering integrasjon', () => {
             await trykkPaSoknadMedId(page, arbeidstakerUtenOppholdKvittering.id)
             await besvarSoknad(page)
         })
+
         await test.step('Verifiserer kvittering', async () => {
             await expect(page.locator('[data-cy="sendt-nav"]')).toBeVisible()
             await expect(page.locator('[data-cy="sendt-arbeidsgiver"]')).toHaveCount(0)
@@ -253,6 +262,7 @@ test.describe('Kvittering integrasjon', () => {
             await trykkPaSoknadMedId(page, arbeidstakerMedOppholdForsteUtenforArbeidsgiverperiodeKvittering.id)
             await besvarSoknad(page)
         })
+
         await test.step('Verifiserer kvittering', async () => {
             await expect(page).toHaveURL(
                 new RegExp(`/kvittering/${arbeidstakerMedOppholdForsteUtenforArbeidsgiverperiodeKvittering.id}`),
@@ -273,6 +283,7 @@ test.describe('Kvittering integrasjon', () => {
             await trykkPaSoknadMedId(page, arbeidstakerMedOppholdKvittering.id)
             await besvarSoknad(page)
         })
+
         await test.step('Verifiserer kvittering', async () => {
             await expect(page).toHaveURL(new RegExp(`/kvittering/${arbeidstakerMedOppholdKvittering.id}`))
             const panel = page.locator('[data-cy="kvittering"]')

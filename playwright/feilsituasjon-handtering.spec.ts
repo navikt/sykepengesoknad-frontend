@@ -60,6 +60,7 @@ test.describe('Tester feilsituasjoner', () => {
                 await gaTilListeOgApneSoknad(page, '/syk/sykepengesoknad' + testpersonQuery, soknad.id)
                 await checkViStolerPaDeg(page)
             })
+
             await forventOopsOgRefresh(page, soknad.id)
         })
     })

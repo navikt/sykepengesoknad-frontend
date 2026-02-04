@@ -17,6 +17,7 @@ test.describe('Friskmeldt til arbeidsformidling', () => {
     test.beforeEach(async ({ page }) => {
         await page.goto(nyFriskmeldtSoknad)
     })
+
     test('Har egen introside', async ({ page }) => {
         await harSynligTittel(page, 'Søknad om sykepenger', 1)
         await harSynligTittel(page, 'Før du søker', 2)
