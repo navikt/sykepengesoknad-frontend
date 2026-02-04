@@ -9,7 +9,7 @@ export const KvitteringTekster = {
     'kvittering.ettersending.feilet': 'Beklager, søknaden kunne ikke ettersendes',
 
     'kvittering.info.send-til-arbeidsgiver':
-        'NAV har allerede mottatt søknaden din og behandler denne. <br> <br> Hvis din arbeidsgiver har bedt deg sende en kopi, eller du av andre årsaker likevel  ønsker å sende søknaden til arbeidsgiveren din, kan du gjøre det her.',
+        '<span class="block mb-4">NAV har allerede mottatt søknaden din og behandler denne.</span> <span class="block">Hvis din arbeidsgiver har bedt deg sende en kopi, eller du av andre årsaker likevel  ønsker å sende søknaden til arbeidsgiveren din, kan du gjøre det her.</span>',
     'kvittering.knapp.bekreft.send-til-arbeidsgiver': 'Send kopi av søknaden til arbeidsgiver',
 
     'kvittering.soknaden-er-sendt-til': 'Søknaden er sendt til',
