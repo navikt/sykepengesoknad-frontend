@@ -20,6 +20,7 @@ test.describe('Tester arbeidstakersøknad - 100%', () => {
     test.beforeEach(async ({ page }) => {
         await page.goto('/syk/sykepengesoknad')
     })
+
     test('Full søknadsflyt', async ({ page }) => {
         test.setTimeout(60000)
 
