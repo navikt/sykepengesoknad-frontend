@@ -179,7 +179,8 @@ const OpplastingForm = ({ valgtSoknad, setOpenModal, openModal }: OpplastingFrom
                     {getLedetekst(tekst('opplasting_modal.filtyper'), {
                         '%FILTYPER%': formattertFiltyper,
                     })}
-                    <br />
+                </BodyShort>
+                <BodyShort>
                     {getLedetekst(tekst('opplasting_modal.maksfilstr'), {
                         '%MAKSFILSTR%': maks,
                     })}

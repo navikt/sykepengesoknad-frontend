@@ -12,7 +12,7 @@ const GuidepanelTekster = {
     'sykepengesoknad.ferie.bjorn':
         'Du lurer kanskje på hvorfor vi spør om ferie før du ble sykmeldt? Det er fordi vi må se om dette sykefraværet henger sammen med forrige periode du var syk.',
     'sykepengesoknad-utland.bjorn':
-        '<strong>Er du statsborger i et land utenfor EU/EØS?</strong><br />Skal du reise <strong>innenfor</strong> EU/EØS, må du benytte <a href="https://www.nav.no/soknader/nb/person/til-eller-fra-norge/opphold-eller-arbeid-utenfor-norge/NAV%2008-09.07/brev">søknaden på papir.</a>\n',
+        '<span class="block"><strong>Er du statsborger i et land utenfor EU/EØS?</strong></span> <span class="block">Skal du reise <strong>innenfor</strong> EU/EØS, må du benytte <a href="https://www.nav.no/soknader/nb/person/til-eller-fra-norge/opphold-eller-arbeid-utenfor-norge/NAV%2008-09.07/brev">søknaden på papir.</a></span>',
     'sykepengesoknad-utland.skjema.bjorn':
         'Det er ikke mulig å ta ut ferie de dagene eller timene du skulle arbeidet og få utbetalt sykepenger for de andre. Men har du spart opp fleksitid, kan du avspasere dagene eller timene du skulle jobbet og få sykepenger for de andre dagene. Eksempel: Er du 50 prosent sykmeldt og ønsker å reise til utlandet noen dager, kan du avspasere halvparten av dagene. Har du ikke nok fleksitid å avspasere, må du ta ut hele feriedager.',
     'sykepengesoknad-utland.kvittering.sendt.bjorn':

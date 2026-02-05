@@ -83,8 +83,9 @@ const AvbrytOppholdUtlandSoknadModal = ({ soknad }: SoknadProps) => {
                 }}
             >
                 <Modal.Body>
+                    <BodyLong size="medium">{tekstMedHtml(tekst('avbryt.popup.sporsmal.del1'))}</BodyLong>
                     <BodyLong spacing size="medium">
-                        {tekstMedHtml(tekst('avbryt.popup.sporsmal'))}
+                        {tekstMedHtml(tekst('avbryt.popup.sporsmal.del2'))}
                     </BodyLong>
                     {avbrytError && (
                         <Alert variant="error" className="mt-4">
