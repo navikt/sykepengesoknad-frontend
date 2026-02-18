@@ -468,7 +468,22 @@ export const sendtArbeidsledigKvittering: RSSoknad = {
             ],
             undersporsmal: [],
         },
-        oppsummering(),
+        {
+            id: '1623832',
+            tag: 'TIL_SLUTT',
+            sporsmalstekst: null,
+            undertekst: null,
+            svartype: 'OPPSUMMERING',
+            min: null,
+            max: null,
+            kriterieForVisningAvUndersporsmal: null,
+            svar: [
+                {
+                    verdi: 'true',
+                },
+            ],
+            undersporsmal: [],
+        },
     ],
     egenmeldtSykmelding: false,
     opprettetAvInntektsmelding: false,

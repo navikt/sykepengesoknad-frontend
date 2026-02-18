@@ -135,7 +135,7 @@ const SporsmalForm = ({ sporsmal }: SpmProps) => {
                 sporsmal: oppdatertSporsmalMedSvar(),
                 onSuccess: (oppdatertSoknad) => onSuccessLogic(erSiste, oppdatertSoknad),
                 soknad: valgtSoknad,
-                spmIndex: erSiste ? spmIndex + 1 : spmIndex,
+                spmIndex: spmIndex,
             })
         })
     }
