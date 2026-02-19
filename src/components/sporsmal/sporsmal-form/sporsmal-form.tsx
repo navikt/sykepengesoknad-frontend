@@ -69,7 +69,9 @@ const SporsmalForm = ({ sporsmal }: SpmProps) => {
         ) {
             return valgtSoknad?.sporsmal?.length === stegNo
         }
-        logger.warn(`erSisteSpm Ikke forventet tag?: ${sporsmal?.svartype}`)
+        if (valgtSoknad?.sporsmal?.length === stegNo + 1) {
+            logger.warn(`erSisteSpm Ikke forventet tag?: ${sporsmal?.svartype} `)
+        }
         return valgtSoknad?.sporsmal?.length === stegNo + 1
     }
 
