@@ -45,7 +45,7 @@ export function useOppdaterSporsmal() {
 
                     const oppdaterteSporsmal = variables.soknad.sporsmal.map((sporsmal, index) => {
                         if (index == variables.spmIndex) {
-                            if (sporsmal.tag !== spm.tag) {
+                            if (!spm.tag.includes(sporsmal.tag)) {
                                 logger.warn(`Forskjellige tags OppdatertSporsmal ${spm.tag} vs ${sporsmal.tag}`)
                             }
                             return skapSporsmal(spm, null, true)
