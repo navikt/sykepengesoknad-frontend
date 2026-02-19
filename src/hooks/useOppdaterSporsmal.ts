@@ -1,4 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { logger } from '@navikt/next-logger'
 
 import { fetchJsonMedRequestId } from '../utils/fetch'
 import { Soknad, Sporsmal } from '../types/types'
@@ -44,6 +45,9 @@ export function useOppdaterSporsmal() {
 
                     const oppdaterteSporsmal = variables.soknad.sporsmal.map((sporsmal, index) => {
                         if (index == variables.spmIndex) {
+                            if (sporsmal.tag !== spm.tag) {
+                                logger.warn(`Forskjellige tags OppdatertSporsmal ${spm.tag} vs ${sporsmal.tag}`)
+                            }
                             return skapSporsmal(spm, null, true)
                         }
                         return sporsmal
