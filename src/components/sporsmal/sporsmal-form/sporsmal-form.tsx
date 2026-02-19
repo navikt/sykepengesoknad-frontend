@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { useRouter } from 'next/router'
+import { logger } from '@navikt/next-logger'
 
 import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype'
 import { RSSvartype } from '../../../types/rs-types/rs-svartype'
@@ -68,6 +69,7 @@ const SporsmalForm = ({ sporsmal }: SpmProps) => {
         ) {
             return valgtSoknad?.sporsmal?.length === stegNo
         }
+        logger.warn(`erSisteSpm Ikke forventet tag?: ${sporsmal?.svartype}`)
         return valgtSoknad?.sporsmal?.length === stegNo + 1
     }
 
