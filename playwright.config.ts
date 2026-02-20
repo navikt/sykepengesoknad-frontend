@@ -23,51 +23,48 @@ const createOptions = (medDekorator = false, port = 3000): OptionsType => {
         return { baseURL, timeout: 30 * 1000, server: undefined }
     }
 
-    if (process.env.FAST) {
-        return {
-            baseURL,
-            timeout: 30 * 1000,
-            server: {
-                command: 'npm run start',
-                port,
-                timeout: 120 * 1000,
-                reuseExistingServer: false,
-                stderr: 'pipe',
-                stdout: 'pipe',
-            },
-        }
-    }
-
     const serverEnv = {
         ...process.env,
         MOCK_BACKEND: 'true',
         ...(medDekorator ? {} : { NO_DECORATOR: 'true' }),
     }
 
+    const serverCommand = process.env.BUILD ? 'next start' : 'next dev'
+
     return {
         baseURL,
         timeout,
         server: {
-            command: `next dev -p ${port}`,
-            port,
-            timeout: 120 * 1000,
-            reuseExistingServer: false,
+            command: `${serverCommand} -p ${port}`,
+            timeout: 15 * 1000,
+            reuseExistingServer: true,
             env: serverEnv,
+            stdout: 'pipe',
+            stderr: 'pipe',
         },
     }
 }
 
 const opts = createOptions(false, 3000)
-const servers = [opts.server].filter(Boolean) as TestConfigWebServer
+const optsMedDekorator = createOptions(true, 3001)
+const servers = [opts.server, optsMedDekorator.server].filter(Boolean) as TestConfigWebServer
 
-const alleBrowserConfigs: NamedProject[] = commonBrowserConfigs(opts)
+const alleBrowserConfigs: NamedProject[] = commonBrowserConfigs(opts, optsMedDekorator)
+
+const lokalBrowserConfig = velgBrowserConfigs(
+    alleBrowserConfigs,
+    (config) => config.name === Nettlesernavn.DESKTOP_CHROME,
+)
 
 const ciBrowserConfigs = velgBrowserConfigs(
     alleBrowserConfigs,
     (config) =>
         config.name === Nettlesernavn.DESKTOP_CHROME ||
+        config.name === Nettlesernavn.DESKTOP_CHROME_MED_DEKORATOR ||
         config.name === Nettlesernavn.MOBILE_CHROME ||
-        config.name === Nettlesernavn.MOBILE_WEBKIT,
+        config.name === Nettlesernavn.MOBILE_CHROMIUM_MED_DEKORATOR ||
+        config.name === Nettlesernavn.MOBILE_WEBKIT ||
+        config.name === Nettlesernavn.MOBILE_WEBKIT_MED_DEKORATOR,
 )
 
 export default defineConfig({
@@ -83,7 +80,9 @@ export default defineConfig({
         navigationTimeout: 60000,
         trace: 'on-first-retry',
         bypassCSP: true,
+        timezoneId: 'Europe/Oslo',
+        locale: 'nb-NO',
     },
-    projects: process.env.CI ? ciBrowserConfigs : alleBrowserConfigs,
+    projects: process.env.CI ? ciBrowserConfigs : process.env.PLAYWRIGHT_ALL ? alleBrowserConfigs : lokalBrowserConfig,
     webServer: servers,
 })
