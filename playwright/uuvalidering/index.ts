@@ -10,9 +10,15 @@ import { IgnoreRule, ValidationOptions } from './types'
 export async function validerAxeUtilityWrapper(
     page: Page,
     testInfo: TestInfo,
+    awaitAnimations: boolean = false,
     disableRules: string[] = [],
     ignoreRules: IgnoreRule[] = [],
 ): Promise<void> {
+    if (awaitAnimations) {
+        await page.evaluate(() => {
+            return Promise.all(document.getAnimations().map((animation: Animation) => animation.finished))
+        })
+    }
     if (!page) {
         throw new Error('Page object is required but was undefined')
     }
