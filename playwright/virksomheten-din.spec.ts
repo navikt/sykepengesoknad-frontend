@@ -10,7 +10,7 @@ export async function sendSoknad(page: Page) {
 }
 
 test.describe('Selvstendig næringsdrivende - Virksomheten din', () => {
-    const baseUrl = 'http://localhost:3000/syk/sykepengesoknad/soknader/ffa7c5d2-4766-4450-a521-3ecc5842d015'
+    const baseUrl = '/syk/sykepengesoknad/soknader/ffa7c5d2-4766-4450-a521-3ecc5842d015'
     const testperson: string = 'selvstendig-naringsdrivende-virksomheten-din'
 
     const goToPage = async function (page: Page, pageNumber: number) {

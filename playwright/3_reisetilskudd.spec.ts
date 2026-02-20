@@ -143,7 +143,6 @@ test.describe('Teste førsteside i reisetilskuddsøknaden', () => {
 
             await page.getByText('Legg til reiseutgift').click()
             await expect(page.getByRole('dialog', { name: 'Legg til reiseutgift' })).toHaveAttribute('open')
-            // todo fix uu feil her await validerAxeUtilityWrapper(page, test.info())
             await page
                 .locator('[data-cy="filopplasteren"] input[type=file]')
                 .setInputFiles('playwright/fixtures/kvittering.jpg')
