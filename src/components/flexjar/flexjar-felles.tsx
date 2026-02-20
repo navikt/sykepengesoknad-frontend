@@ -46,6 +46,7 @@ export function FlexjarFelles({
 }: FlexjarFellesProps) {
     const [textValue, setTextValue] = useState('')
     const [errorMsg, setErrorMsg] = useState<string | null>(null)
+    const [lagrer, setLagrer] = useState(false)
     const textAreaRef = useRef(null)
     const { mutate: giFeedback, data, reset } = UseOpprettFlexjarFeedback()
     const { mutate: oppdaterFeedback } = UseOppdaterFlexjarFeedback()
@@ -65,11 +66,19 @@ export function FlexjarFelles({
             if (feedbackPropsFunction) {
                 Object.assign(body, feedbackPropsFunction())
             }
+            setLagrer(true)
             if (data?.id) {
-                oppdaterFeedback({ body, id: data.id, cb: knappeklikk })
+                oppdaterFeedback(
+                    { body, id: data.id, cb: knappeklikk },
+                    {
+                        onSettled: () => setLagrer(false),
+                    },
+                )
                 return true
             } else {
-                giFeedback(body)
+                giFeedback(body, {
+                    onSettled: () => setLagrer(false),
+                })
                 return false
             }
         },
@@ -111,6 +120,7 @@ export function FlexjarFelles({
     const sendTilbakemeldingTekst = 'Send tilbakemelding'
 
     const handleSend = async (p: () => void) => {
+        if (lagrer) return
         if (textRequired && textValue === '') {
             setErrorMsg('Tilbakemeldingen kan ikke være tom. Legg til tekst i feltet.')
             return
@@ -166,7 +176,7 @@ export function FlexjarFelles({
                                                 label={getPlaceholder()}
                                                 description="Unngå å skrive inn navn, fødselsnummer eller andre personlige opplysninger."
                                                 onKeyDown={async (e) => {
-                                                    if (e.key === 'Enter' && e.ctrlKey) {
+                                                    if (e.key === 'Enter' && e.ctrlKey && !lagrer) {
                                                         e.preventDefault()
                                                         await handleSend(() => reset())
                                                     }
@@ -191,10 +201,12 @@ export function FlexjarFelles({
                                             className="mr-auto mt-6"
                                             size="medium"
                                             variant="secondary-neutral"
+                                            disabled={lagrer}
                                             icon={<PaperplaneIcon title="a11y-title" fontSize="1.5rem" />}
                                             iconPosition="right"
                                             onClick={async (e) => {
                                                 e.preventDefault()
+                                                if (lagrer) return
                                                 await handleSend(() => reset())
                                             }}
                                         >
