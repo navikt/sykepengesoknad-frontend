@@ -12,7 +12,7 @@ import {
 
 test.describe('Friskmeldt til arbeidsformidling', () => {
     const nyFriskmeldtSoknad =
-        'http://localhost:3000/syk/sykepengesoknad/soknader/7e89c042-a822-40e6-bb4c-d04fe5f12685/1?testperson=fta-en-ny'
+        '/syk/sykepengesoknad/soknader/7e89c042-a822-40e6-bb4c-d04fe5f12685/1?testperson=fta-en-ny'
 
     test.beforeEach(async ({ page }) => {
         await page.goto(nyFriskmeldtSoknad)
@@ -93,9 +93,7 @@ test.describe('Friskmeldt til arbeidsformidling', () => {
     })
 
     test('Siste søknad', async ({ page }) => {
-        await page.goto(
-            'http://localhost:3000/syk/sykepengesoknad/soknader/ac0ff5c0-e6bc-416d-b5d9-dfa3654e9f26/1?testperson=fta-siste',
-        )
+        await page.goto('/syk/sykepengesoknad/soknader/ac0ff5c0-e6bc-416d-b5d9-dfa3654e9f26/1?testperson=fta-siste')
         await checkViStolerPaDeg(page)
         await neiOgVidere(page, ['Jobbsituasjonen din', 'Inntekt underveis', 'Reise utenfor EU/EØS'])
 
