@@ -50,7 +50,7 @@ test.describe('Teste førsteside i reisetilskuddsøknaden', () => {
             ).toBeVisible()
 
             await page.locator('.navds-checkbox__label').click()
-            await validerAxeUtilityWrapper(page, test.info())
+            await validerAxeUtilityWrapper(page, test.info(), true)
             await page.getByText('Start søknad').click()
             steg.value++
         })
