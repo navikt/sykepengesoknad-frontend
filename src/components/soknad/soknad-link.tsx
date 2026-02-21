@@ -13,8 +13,20 @@ interface SoknadLinkProps {
     className: string
 }
 
+const sanitizeQueryParams = (queryParams: string): string => {
+    const allowedParams = ['param1', 'param2']; // List of allowed query parameters
+    const urlSearchParams = new URLSearchParams(queryParams);
+    const sanitizedParams = new URLSearchParams();
+    for (const param of allowedParams) {
+        if (urlSearchParams.has(param)) {
+            sanitizedParams.set(param, urlSearchParams.get(param) as string);
+        }
+    }
+    return sanitizedParams.toString() ? `?${sanitizedParams.toString()}` : '';
+};
+
 export const urlTilSoknad = (soknad: Soknad | RSSoknadmetadata, medQueryParams = true, skipUtlandInfoside = false) => {
-    const queryParams = medQueryParams ? window.location.search : ''
+    const queryParams = medQueryParams ? sanitizeQueryParams(window.location.search) : ''
 
     if (soknad.soknadstype == RSSoknadstype.OPPHOLD_UTLAND && !skipUtlandInfoside) {
         return utlandsoknadPath + queryParams
