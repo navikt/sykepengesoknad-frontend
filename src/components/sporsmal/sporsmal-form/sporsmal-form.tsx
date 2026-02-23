@@ -81,6 +81,7 @@ const SporsmalForm = ({ sporsmal }: SpmProps) => {
     const sendSoknad = (oppdatertSoknad: Soknad) => {
         if (oppdatertSoknad.status == RSSoknadstatus.UTKAST_TIL_KORRIGERING) {
             if (korrigerer && harLikeSvar(korrigerer, oppdatertSoknad)) {
+                logger.info('Ingen endring i korrigering.')
                 setEndringUtenEndringAapen(true)
                 return
             }
