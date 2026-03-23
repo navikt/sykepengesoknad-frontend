@@ -54,6 +54,7 @@ export class Soknad extends ObjectCopier {
         readonly kjentOppholdstillatelse?: KjentOppholdstillatelse,
         readonly julesoknad?: boolean,
         readonly friskTilArbeidVedtakId?: string,
+        readonly ventetidSykmeldingUuid?: string,
     ) {
         super()
     }

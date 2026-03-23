@@ -42,4 +42,5 @@ export interface RSSoknad {
     kjentOppholdstillatelse?: RSKjentOppholdstillatelse
     julesoknad?: boolean
     friskTilArbeidVedtakId?: string
+    ventetidSykmeldingUuid?: string
 }

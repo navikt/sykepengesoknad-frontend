@@ -70,6 +70,7 @@ export const FlexjarSporsmalV2 = ({ soknad, sporsmal, steg }: FlexjarSporsmalPro
     const feedbackProps: Record<string, string | undefined | boolean> = {
         soknadstype: soknad?.soknadstype.toString(),
         sporsmal: sporsmal?.tag.toString(),
+        ventetidsSøknad: !!soknad?.ventetidSykmeldingUuid,
     }
     const tilleggssporsmal: Record<string, string | undefined | boolean> = {
         aarsak: aarsak?.toString(),

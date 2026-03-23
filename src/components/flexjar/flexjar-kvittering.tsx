@@ -12,6 +12,7 @@ export const FlexjarKvittering = () => {
     const feedbackId = 'sykepengesoknad-kvittering'
     const feedbackProps: Record<string, string | undefined | boolean> = {
         soknadstype: valgtSoknad?.soknadstype.toString(),
+        ventetidsSøknad: !!valgtSoknad?.ventetidSykmeldingUuid,
     }
     if (valgtSoknad?.julesoknad) {
         feedbackProps['julesøknad'] = true
