@@ -50,6 +50,7 @@ export const FlexjarSporsmal = ({ soknad, sporsmal, steg }: FlexjarSporsmalProps
     const feedbackProps: Record<string, string | undefined | boolean> = {
         soknadstype: soknad?.soknadstype.toString(),
         sporsmal: sporsmal?.tag.toString(),
+        ventetidsSøknad: !!soknad?.ventetidSykmeldingUuid,
     }
     if (soknad?.julesoknad) {
         feedbackProps['julesøknad'] = true
