@@ -44,6 +44,10 @@ import { mockApiValiderSporsmal } from './mockApiValiderSporsmal'
 import { soknadInnenforArbeidsgiverperioden } from './data/personas/innenfor-ag-periode'
 import { deepcopyMedNyId } from './deepcopyMedNyId'
 import { inntektUnderveis, reiseTilUtlandet } from './data/soknad/friskmeldt-til-arbeidsformidling'
+import {
+    naringsdrivendeOpprettholdtInntekt,
+    naringsdrivendeOpprettholdtInntektGradert,
+} from './data/sporsmal/inntektsopplysninger-naringsdrivende'
 
 type session = {
     expires: dayjs.Dayjs
@@ -365,6 +369,7 @@ export async function mockApi(req: NextApiRequest, res: NextApiResponse) {
                                 'JOBBET_DU_100_PROSENT',
                                 'ARBEID_UNDERVEIS_100_PROSENT',
                                 'NARINGSDRIVENDE_OPPRETTHOLDT_INNTEKT',
+                                'NARINGSDRIVENDE_OPPRETTHOLDT_INNTEKT_GRADERT',
                             ]
                             return !tagsSomForsvinner.some((tag) => spm.tag.includes(tag))
                         })
@@ -412,6 +417,24 @@ export async function mockApi(req: NextApiRequest, res: NextApiResponse) {
                         // Legg til før det siste spørsmålet i sporsmal lista
                         soknaden.sporsmal.splice(soknaden.sporsmal.length - 1, 0, inntekt, reiste)
                     }
+                    json.mutertSoknad = soknaden
+                }
+            }
+
+            if (body.tag.startsWith('ARBEID_UNDERVEIS_100_PROSENT')) {
+                if (body.svar[0].verdi == 'JA') {
+                    soknaden.sporsmal = soknaden.sporsmal.map((spm) =>
+                        ['NARINGSDRIVENDE_OPPRETTHOLDT_INNTEKT'].includes(spm.tag)
+                            ? naringsdrivendeOpprettholdtInntektGradert
+                            : spm,
+                    )
+                    json.mutertSoknad = soknaden
+                } else if (body.svar[0].verdi == 'NEI') {
+                    soknaden.sporsmal = soknaden.sporsmal.map((spm) =>
+                        ['NARINGSDRIVENDE_OPPRETTHOLDT_INNTEKT_GRADERT'].includes(spm.tag)
+                            ? naringsdrivendeOpprettholdtInntekt
+                            : spm,
+                    )
                     json.mutertSoknad = soknaden
                 }
             }

@@ -20,6 +20,7 @@ import {
     naringsdrivendeVarigEndring,
     naringsdrivendeOppholdIUtlandet,
     naringsdrivendeOpprettholdtInntekt,
+    naringsdrivendeOpprettholdtInntektGradert,
 } from '../sporsmal/inntektsopplysninger-naringsdrivende'
 import { nyttArbeidsforholdSporsmal } from '../sporsmal/nytt-arbeidsforhold'
 import { avklaringIfbmReise } from '../sporsmal/avklaringIfbmReise'
@@ -2380,6 +2381,7 @@ export const veldigLangSoknad: RSSoknad = {
         inntektsopplysningerNaringsdrivende,
         inntektsopplysningerLegacy,
         naringsdrivendeOpprettholdtInntekt,
+        naringsdrivendeOpprettholdtInntektGradert,
         naringsdrivendeOppholdIUtlandet,
         naringsdrivendeVirksomhetenAvviklet,
         naringsdrivendeNyIArbeidslivet,

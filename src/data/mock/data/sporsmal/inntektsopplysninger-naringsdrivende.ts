@@ -678,9 +678,22 @@ export const inntektsopplysningerMedSigrunData: RSSporsmal = {
 export const naringsdrivendeOpprettholdtInntekt: RSSporsmal = {
     id: v4().toString(),
     tag: 'NARINGSDRIVENDE_OPPRETTHOLDT_INNTEKT',
+    sporsmalstekst: 'Hadde du inntekt i virksomheten din selv om du var 100 % sykmeldt og ikke jobbet selv?',
+    undertekst: 'For eksempel inntekter fra utleie eller arbeid utført av en vikar.',
+    svartype: 'JA_NEI',
+    min: null,
+    max: null,
+    kriterieForVisningAvUndersporsmal: null,
+    svar: [],
+    undersporsmal: [],
+}
+
+export const naringsdrivendeOpprettholdtInntektGradert: RSSporsmal = {
+    id: v4().toString(),
+    tag: 'NARINGSDRIVENDE_OPPRETTHOLDT_INNTEKT_GRADERT',
     sporsmalstekst:
-        'Hadde du næringsinntekt i virksomheten din i tiden du var sykmeldt  1. - 24. mai 2025 og ikke jobbet?',
-    undertekst: null,
+        'Hadde du inntekt i virksomheten din mens du var sykmeldt 8.–15. april 2024, som ikke var et resultat av at du selv jobbet?',
+    undertekst: 'For eksempel inntekter fra utleie eller arbeid utført av en vikar.',
     svartype: 'JA_NEI',
     min: null,
     max: null,

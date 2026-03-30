@@ -44,6 +44,7 @@ import { NaringsdrivendeVarigEndringHjelpBody } from './naringsdrivende-varig-en
 import { NaringsdrivendeOppholdIUtlandetHjelpBody } from './naringsdrivende-opphold-i-utlandet-hjelp-body'
 import { NaringsdrivendeOpprettholdtInntektHjelpBody } from './naringsdrivende-opprettholdt-inntekt-hjelp-body'
 import { FravarForSykmeldingenV2HjelpBody } from './fravar-for-sykmeldingen-v2-hjelp-body'
+import { NaringsdrivendeOpprettholdtInntektGradertHjelpBody } from './naringsdrivende-opprettholdt-inntekt-gradert-hjelp-body'
 
 export const EkspanderbarHjelp = ({ sporsmal, mb }: { sporsmal: Sporsmal; mb?: string }) => {
     const { valgtSoknad } = useSoknadMedDetaljer()
@@ -134,6 +135,8 @@ export const EkspanderbarHjelp = ({ sporsmal, mb }: { sporsmal: Sporsmal; mb?: s
                 return <JobbsituasjonenDinHjelpBody />
             case 'NARINGSDRIVENDE_OPPRETTHOLDT_INNTEKT':
                 return <NaringsdrivendeOpprettholdtInntektHjelpBody />
+            case 'NARINGSDRIVENDE_OPPRETTHOLDT_INNTEKT_GRADERT':
+                return <NaringsdrivendeOpprettholdtInntektGradertHjelpBody />
             case 'NARINGSDRIVENDE_OPPHOLD_I_UTLANDET':
                 return <NaringsdrivendeOppholdIUtlandetHjelpBody />
             case 'NARINGSDRIVENDE_VIRKSOMHETEN_AVVIKLET':
