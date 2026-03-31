@@ -90,7 +90,7 @@ test.describe('Selvstendig næringsdrivende - Virksomheten din', () => {
         await harSynligTittel(page, 'Inntekt mens du var sykmeldt', 2)
 
         await page.getByRole('button', { name: 'Spørsmålet forklart' }).click()
-        await harSynligTekst(page, 'hvis inntekten ikke skyldes den delen du selv jobbet i perioden.')
+        await harSynligTekst(page, 'hvis inntekten ikke skyldtes den delen du selv jobbet i perioden.')
 
         await page.getByRole('radio', { name: 'Ja' }).click()
         await harSynligTekst(

@@ -4,7 +4,7 @@ export const NaringsdrivendeOpprettholdtInntektGradertHjelpBody = () => {
     return (
         <>
             <BodyShort spacing>
-                Svar <b>ja</b> hvis inntekten ikke skyldes den delen du selv jobbet i perioden.
+                Svar <b>ja</b> hvis inntekten ikke skyldtes den delen du selv jobbet i perioden.
             </BodyShort>
             <BodyShort className="pt-3">Det kan for eksempel være:</BodyShort>
             <List as="ul" size="small" className="[&>ul]:mt-2">
