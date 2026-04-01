@@ -1,12 +1,12 @@
 import { BodyShort, List } from '@navikt/ds-react'
 
-export const NaringsdrivendeOpprettholdtInntektHjelpBody = () => {
+export const NaringsdrivendeOpprettholdtInntektGradertHjelpBody = () => {
     return (
         <>
             <BodyShort spacing>
-                Svar <b>ja</b> hvis inntekten ikke skyldtes at du selv jobbet mens du var sykmeldt.
+                Svar <b>ja</b> hvis inntekten ikke skyldtes den delen du selv jobbet i perioden.
             </BodyShort>
-            <BodyShort>Det kan for eksempel være:</BodyShort>
+            <BodyShort className="pt-3">Det kan for eksempel være:</BodyShort>
             <List as="ul" size="small" className="[&>ul]:mt-2">
                 <List.Item>
                     <BodyShort>inntekt fra utleie</BodyShort>
@@ -15,7 +15,9 @@ export const NaringsdrivendeOpprettholdtInntektHjelpBody = () => {
                     <BodyShort>arbeid som en vikar utførte for deg</BodyShort>
                 </List.Item>
                 <List.Item>
-                    <BodyShort>annen drift som gikk av seg selv uten at du jobbet</BodyShort>
+                    <BodyShort>
+                        at driften gikk av seg selv uten at du jobbet mer enn sykmeldingsprosenten din
+                    </BodyShort>
                 </List.Item>
             </List>
             <BodyShort className="pt-3">
@@ -23,7 +25,9 @@ export const NaringsdrivendeOpprettholdtInntektHjelpBody = () => {
             </BodyShort>
             <List as="ul" size="small" className="[&>ul]:mt-2">
                 <List.Item>
-                    <BodyShort>inntekten kom fordi du selv jobbet mens du var sykmeldt</BodyShort>
+                    <BodyShort>
+                        inntekten skyldes den delen du faktisk jobbet selv mens du var delvis sykmeldt
+                    </BodyShort>
                 </List.Item>
                 <List.Item>
                     <BodyShort>inntekten gjaldt et annet arbeidsforhold du ikke var sykmeldt fra</BodyShort>

@@ -1,7 +1,16 @@
 import { expect, Page } from '@playwright/test'
 
 import { test } from './utils/fixtures'
-import { checkViStolerPaDeg, harSynligTekst, harSynligTittel, klikkGaVidere, neiOgVidere } from './utils/utilities'
+import {
+    checkViStolerPaDeg,
+    harSynligTekst,
+    harSynligTittel,
+    klikkGaVidere,
+    neiOgVidere,
+    svarJaHovedsporsmal,
+    svarRadio,
+    velgTall,
+} from './utils/utilities'
 
 export async function sendSoknad(page: Page) {
     await harSynligTittel(page, 'Oppsummering fra søknaden', 2)
@@ -46,12 +55,47 @@ test.describe('Selvstendig næringsdrivende - Virksomheten din', () => {
         await harSynligTittel(page, 'Inntekt mens du var sykmeldt', 2)
 
         await page.getByRole('button', { name: 'Spørsmålet forklart' }).click()
-        await harSynligTekst(page, 'Hvis du har hatt næringsinntekt mens du har vært sykmeldt')
+        await harSynligTekst(page, 'hvis inntekten ikke skyldtes at du selv jobbet mens du var sykmeldt.')
 
         await page.getByRole('radio', { name: 'Ja' }).click()
         await harSynligTekst(
             page,
-            'Det kan være vi trenger mer dokumentasjon på dette. Da vil en saksbehandler ta kontakt med deg.',
+            'Vi trenger mer informasjon om denne inntekten. En saksbehandler vil derfor ta kontakt med deg.',
+        )
+
+        await klikkGaVidere(page)
+
+        await neiOgVidere(page, ['Andre inntektskilder'])
+        await neiOgVidere(page, ['Reise utenfor EU/EØS'])
+        await neiOgVidere(page, ['Opphold i utlandet'])
+        await neiOgVidere(page, ['Virksomheten din'])
+        await neiOgVidere(page, ['Ny i arbeidslivet'])
+        await neiOgVidere(page, ['Endringer i arbeidsituasjonen din'])
+        await sendSoknad(page)
+
+        await harSynligTekst(
+            page,
+            'Har du vært i utlandet i løpet av de siste 12 månedene før du ble sykmeldt 1.mai 2025?',
+        )
+    })
+
+    test('Opprettholdt inntekt gradert', async ({ page }) => {
+        await goToPage(page, 4)
+        await svarJaHovedsporsmal(page)
+        await svarRadio(page, 'Oppgi arbeidsmengde i timer eller prosent:', 'Timer')
+        await velgTall(page, 'Oppgi totalt antall timer du jobbet i perioden 1. - 24. april 2020', '12')
+        await svarRadio(page, 'Jobber du vanligvis 37,5 timer i uka?', 'JA')
+        await klikkGaVidere(page)
+
+        await harSynligTittel(page, 'Inntekt mens du var sykmeldt', 2)
+
+        await page.getByRole('button', { name: 'Spørsmålet forklart' }).click()
+        await harSynligTekst(page, 'hvis inntekten ikke skyldtes den delen du selv jobbet i perioden.')
+
+        await page.getByRole('radio', { name: 'Ja' }).click()
+        await harSynligTekst(
+            page,
+            'Vi trenger mer informasjon om denne inntekten. En saksbehandler vil derfor ta kontakt med deg.',
         )
 
         await klikkGaVidere(page)

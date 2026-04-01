@@ -123,6 +123,7 @@ const SoknadenTekster = {
     'sykepengesoknad.inntektsopplysninger_virksomheten_avviklet.tittel': 'Virksomheten din',
 
     'sykepengesoknad.naringsdrivende_opprettholdt_inntekt.tittel': 'Inntekt mens du var sykmeldt',
+    'sykepengesoknad.naringsdrivende_opprettholdt_inntekt_gradert.tittel': 'Inntekt mens du var sykmeldt',
     'sykepengesoknad.naringsdrivende_opphold_i_utlandet.tittel': 'Opphold i utlandet',
     'sykepengesoknad.naringsdrivende_virksomheten_avviklet.tittel': 'Virksomheten din',
     'sykepengesoknad.naringsdrivende_ny_i_arbeidslivet.tittel': 'Ny i arbeidslivet',
