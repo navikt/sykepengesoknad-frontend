@@ -65,7 +65,7 @@
         "prettier-plugin-tailwindcss": "^0.7.2",
         "start-server-and-test": "^2.1.5",
         "tailwindcss": "^4.1.16",
-        "ts-loader": "^9.5.4",
+        "ts-loader": "^9.5.7",
         "typescript": "^5.9.3",
         "vitest": "^3.2.4"
     },
