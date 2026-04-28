@@ -22,7 +22,7 @@ import {
     medlemskapOppholdstillatelseV2Tittel,
 } from './medlemskap-oppholdstillatelse-hjelp-body'
 
-export const medlemskapMapping: Record<string, ReadmoreTittelOgKomponent> = {
+export const medlemskapMapping = (): Record<string, ReadmoreTittelOgKomponent> => ({
     ARBEID_UTENFOR_NORGE: { tittel: arbeidUtenforNorgeTittel, komponent: <ArbeidUtenforNorgeHjelpBody /> },
     MEDLEMSKAP_OPPHOLD_UTENFOR_EOS: {
         tittel: medlemskapOppholdUtenforEOSTittel,
@@ -44,4 +44,4 @@ export const medlemskapMapping: Record<string, ReadmoreTittelOgKomponent> = {
         tittel: medlemskapOppholdstillatelseV2Tittel,
         komponent: <MedlemskapOppholdstillatelseV2HjelpBody />,
     },
-}
+})

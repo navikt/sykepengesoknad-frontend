@@ -11,7 +11,7 @@ import {
 } from './utdatert/fravar-for-sykmeldingen-hjelp-body'
 import { BrukteReisetilskuddetHjelpBody, brukteReisetilskuddetTittel } from './brukte-reisetilskuddet-hjelp-body'
 import { KvitteringerHjelpBody, kvitteringerTittel } from './kvitteringer-hjelp-body'
-import { KjenteInntektkilderHjelpBody, kjenteInntektkilderTittel } from './kjente-inntektkilder'
+import { KjenteInntektkilderHjelpBody, kjenteInntektkilderTittel } from './utdatert/kjente-inntektkilder-hjelp-body'
 import { TilkommenInntektHjelpBody, tilkommenInntektTittel } from './tilkommen-inntekt-hjelp-body'
 import {
     FravarForSykmeldingenV2HjelpBody,
@@ -19,8 +19,9 @@ import {
 } from './fravar-for-sykmeldingen-v2-hjelp-body'
 import { TransportTilDagligHjelpBody, transportTilDagligTittel } from './transport-til-daglig-hjelp-body'
 import { ProsentenLavereHjelpBody, prosentenLavereTittel } from './prosenten-lavere-hjelp-body'
+import { JobbetDuGradertArbeidstakerHjelpBody } from './jobbet-du-gradert-arbeidstaker-hjelp-body'
 
-export const arbeidstakerMapping: Record<string, ReadmoreTittelOgKomponent> = {
+export const arbeidstakerMapping = (): Record<string, ReadmoreTittelOgKomponent> => ({
     TILBAKE_I_ARBEID: { tittel: tilbakeIArbeidTittel, komponent: <TilbakeIArbeidHjelpBody /> },
     TILBAKE_I_ARBEID_GRADERT_REISETILSKUDD: {
         tittel: tilbakeIArbeidTittel,
@@ -31,7 +32,10 @@ export const arbeidstakerMapping: Record<string, ReadmoreTittelOgKomponent> = {
         tittel: arbeidUnderveisTittel,
         komponent: <ArbeidUnderveisHjelpBody />,
     },
-    JOBBET_DU_GRADERT_ARBEIDSTAKER: { tittel: arbeidUnderveisTittel, komponent: <ArbeidUnderveisHjelpBody /> },
+    JOBBET_DU_GRADERT_ARBEIDSTAKER: {
+        tittel: arbeidUnderveisTittel,
+        komponent: <JobbetDuGradertArbeidstakerHjelpBody />,
+    },
     FRAVAR_FOR_SYKMELDINGEN: {
         tittel: fravarForSykmeldingenTittel,
         komponent: <FravarForSykmeldingenHjelpBody />,
@@ -52,4 +56,4 @@ export const arbeidstakerMapping: Record<string, ReadmoreTittelOgKomponent> = {
         tittel: prosentenLavereTittel,
         komponent: <ProsentenLavereHjelpBody />,
     },
-}
+})

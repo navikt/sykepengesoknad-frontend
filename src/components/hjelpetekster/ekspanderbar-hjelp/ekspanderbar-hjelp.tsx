@@ -50,11 +50,11 @@ export const EkspanderbarHjelp = ({ sporsmal, mb }: { sporsmal: Sporsmal; mb?: s
     const sporsmalTag = sporsmalTagMedSoknadstypeEllerArbeidssituasjon()
 
     const sporsmalTagTilReadmoreMapping: Record<string, ReadmoreTittelOgKomponent> = {
-        ...arbeidstakerMapping,
-        ...naringsdrivendeMapping,
-        ...medlemskapMapping,
-        ...fellesMapping,
-        ...ftaMapping,
+        ...fellesMapping(),
+        ...arbeidstakerMapping(),
+        ...naringsdrivendeMapping(sporsmal),
+        ...medlemskapMapping(),
+        ...ftaMapping(),
     }
 
     const readmore = sporsmalTagTilReadmoreMapping[sporsmalTag as SporsmalTagMedHjelpetekst]

@@ -19,7 +19,7 @@ import { PermittertNaaHjelpBody, permittertNaaTittel } from './utdatert/permitte
 import { PermittertPeriodeHjelpBody, permittertPeriodeTittel } from './utdatert/permittert-periode-hjelp-body'
 import { UtdanningHjelpBody, utdanningTittel } from './utdanning-hjelp-body'
 
-export const fellesMapping: Record<string, ReadmoreTittelOgKomponent> = {
+export const fellesMapping = (): Record<string, ReadmoreTittelOgKomponent> => ({
     YRKESSKADE: { tittel: deprecatedYrkesskadeTittel, komponent: <DeprecatedYrkesskadeHjelpBody /> },
     YRKESSKADE_V2: { tittel: yrkesskadeTittel, komponent: <YrkesskadeHjelpBody /> },
     FERIE_V2: { tittel: ferieTittel, komponent: <FerieHjelpBody /> },
@@ -34,4 +34,4 @@ export const fellesMapping: Record<string, ReadmoreTittelOgKomponent> = {
     PERMITTERT_NAA: { tittel: permittertNaaTittel, komponent: <PermittertNaaHjelpBody /> },
     PERMITTERT_PERIODE: { tittel: permittertPeriodeTittel, komponent: <PermittertPeriodeHjelpBody /> },
     UTDANNING: { tittel: utdanningTittel, komponent: <UtdanningHjelpBody /> },
-}
+})
