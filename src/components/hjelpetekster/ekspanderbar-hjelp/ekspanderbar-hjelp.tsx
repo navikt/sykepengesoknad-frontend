@@ -1,50 +1,127 @@
-import { BodyLong, ReadMore } from '@navikt/ds-react'
+import { ReadMore } from '@navikt/ds-react'
 import React, { useEffect, useState } from 'react'
 
 import { RSArbeidssituasjon } from '../../../types/rs-types/rs-arbeidssituasjon'
 import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype'
-import { tekst } from '../../../utils/tekster'
 import { logEvent } from '../../umami/umami'
-import { tekstMedHtml } from '../../../utils/html-react-parser-utils'
 import { useSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
 import { erSigrunInntekt, SigrunInntekt, Sporsmal } from '../../../types/types'
 import { formatterTall } from '../../../utils/utils'
 
-import { AndreInntektskilderHjelpBody } from './andre-inntektskilder-hjelp-body'
-import { EkspanderbarHjelpTekster } from './ekspanderbar-hjelp-tekst'
-import { TilbakeIArbeidHjelpBody } from './tilbake-i-arbeid-hjelp-body'
-import { DeprecatedYrkesskadeHjelpBody, YrkesskadeHjelpBody } from './yrkesskade-hjelp-body'
-import { FerieHjelpBody } from './ferie-hjelp-body'
-import { PermisjonHjelpBody } from './permisjon-hjelp-body'
-import { UtlandHjelpBody } from './utland-hjelp-body'
-import { ArbeidUnderveisHjelpBody } from './arbeid-underveis-hjelp-body'
-import { ArbeidUtenforNorgeHjelpBody } from './arbeid-utenfor-norge-hjelp-body'
-import { FravarForSykmeldingenHjelpBody } from './fravar-for-sykmeldingen-hjelp-body'
-import { JobbetDuGradertArbeidstakerHjelpBody } from './jobbet-du-gradert-arbeidstaker-hjelp'
-import { BrukteReisetilskuddetHjelpBody } from './brukte-reisetilskuddet-hjelp-body'
-import { KvitteringerHjelpBody } from './kvitteringer-hjelp-body'
-import { EndringSNHjelpBody } from './endring-sn-hjelp-body'
-import { MedlemskapArbeidUtenforNorgeHjelpBody } from './medlemskap-arbeid-utenfor-norge-hjelp-body'
-import { MedlemskapOppholdUtenforEOSHjelpBody } from './medlemskap-opphold-utenfor-eos-hjelp-body'
-import { MedlemskapOppholdUtenforNorgeHjelpBody } from './medlemskap-opphold-utenfor-Norge-hjelp-body'
+import { SporsmalTagMedHjelpetekst } from './types'
+import { AndreInntektskilderHjelpBody, andreInntektskilderTittel } from './felles/andre-inntektskilder-hjelp-body'
+import {
+    AndreInntektskilderGammelHjelpBody,
+    andreInntektskilderGammelTittel,
+} from './felles/utdatert/andre-inntektskilder-gammel-hjelp-body'
+import { TilbakeIArbeidHjelpBody, tilbakeIArbeidTittel } from './arbeidstaker/tilbake-i-arbeid-hjelp-body'
+import {
+    DeprecatedYrkesskadeHjelpBody,
+    deprecatedYrkesskadeTittel,
+    YrkesskadeHjelpBody,
+    yrkesskadeTittel,
+} from './felles/yrkesskade-hjelp-body'
+import { FerieHjelpBody, ferieTittel } from './felles/ferie-hjelp-body'
+import { PermisjonHjelpBody, permisjonTittel } from './arbeidstaker/permisjon-hjelp-body'
+import { UtlandHjelpBody, utlandTittel } from './felles/utland-hjelp-body'
+import { ArbeidUnderveisHjelpBody, arbeidUnderveisTittel } from './arbeidstaker/arbeid-underveis-hjelp-body'
+import { ArbeidUtenforNorgeHjelpBody, arbeidUtenforNorgeTittel } from './medlemskap/arbeid-utenfor-norge-hjelp-body'
+import {
+    FravarForSykmeldingenHjelpBody,
+    fravarForSykmeldingenTittel,
+} from './arbeidstaker/utdatert/fravar-for-sykmeldingen-hjelp-body'
+import {
+    BrukteReisetilskuddetHjelpBody,
+    brukteReisetilskuddetTittel,
+} from './arbeidstaker/brukte-reisetilskuddet-hjelp-body'
+import { KvitteringerHjelpBody, kvitteringerTittel } from './arbeidstaker/kvitteringer-hjelp-body'
+import { EndringSNHjelpBody, endringSNTittel } from './naeringsdrivende/utdatert/endring-sn-hjelp-body'
+import {
+    MedlemskapArbeidUtenforNorgeHjelpBody,
+    medlemskapArbeidUtenforNorgeTittel,
+} from './medlemskap/medlemskap-arbeid-utenfor-norge-hjelp-body'
+import {
+    MedlemskapOppholdUtenforEOSHjelpBody,
+    medlemskapOppholdUtenforEOSTittel,
+} from './medlemskap/medlemskap-opphold-utenfor-eos-hjelp-body'
+import {
+    MedlemskapOppholdUtenforNorgeHjelpBody,
+    medlemskapOppholdUtenforNorgeTittel,
+} from './medlemskap/medlemskap-opphold-utenfor-Norge-hjelp-body'
 import {
     MedlemskapOppholdstillatelseHjelpBody,
+    medlemskapOppholdstillatelseTittel,
     MedlemskapOppholdstillatelseV2HjelpBody,
-} from './medlemskap-oppholdstillatelse-hjelp-body'
-import { KjenteInntektkilderHjelpBody } from './kjente-inntektkilder'
-import { VarigEndring25prosentHjelpBody } from './varig-endring25prosent-hjelp-body'
-import { DriftIVirksomhetHjelpBody } from './drift-i-virksomhet-hjelp-body'
-import { AvvikletVirksomhetHjelpBody } from './avviklet-virksomhet-hjelp-body'
-import { TilkommenInntektHjelpBody } from './tilkommen-inntekt-hjep-body'
-import { InntektUnderveisFtaHjelpBody } from './inntekt-underveis-fta-hjelp-body'
-import { JobbsituasjonenDinHjelpBody } from './jobbsituasjonen-din-hjelp-body'
-import { NaringsdrivendeVirksomhetenAvvikletHjelpBody } from './naringsdrivende-virksomheten-avviklet-hjelp-body'
-import { NaringsdrivendeNyIArbeidsLivetHjelpBody } from './naringsdrivende-ny-i-arbeids-livet-hjelp-body'
-import { NaringsdrivendeVarigEndringHjelpBody } from './naringsdrivende-varig-endring-hjelp-body'
-import { NaringsdrivendeOppholdIUtlandetHjelpBody } from './naringsdrivende-opphold-i-utlandet-hjelp-body'
-import { NaringsdrivendeOpprettholdtInntektHjelpBody } from './naringsdrivende-opprettholdt-inntekt-hjelp-body'
-import { FravarForSykmeldingenV2HjelpBody } from './fravar-for-sykmeldingen-v2-hjelp-body'
-import { NaringsdrivendeOpprettholdtInntektGradertHjelpBody } from './naringsdrivende-opprettholdt-inntekt-gradert-hjelp-body'
+    medlemskapOppholdstillatelseV2Tittel,
+} from './medlemskap/medlemskap-oppholdstillatelse-hjelp-body'
+import { KjenteInntektkilderHjelpBody, kjenteInntektkilderTittel } from './arbeidstaker/kjente-inntektkilder'
+import {
+    VarigEndring25prosentHjelpBody,
+    varigEndring25prosentTittel,
+} from './naeringsdrivende/utdatert/varig-endring25prosent-hjelp-body'
+import {
+    DriftIVirksomhetHjelpBody,
+    driftIVirksomhetTittel,
+} from './naeringsdrivende/utdatert/drift-i-virksomhet-hjelp-body'
+import {
+    AvvikletVirksomhetHjelpBody,
+    avvikletVirksomhetTittel,
+} from './naeringsdrivende/utdatert/avviklet-virksomhet-hjelp-body'
+import { TilkommenInntektHjelpBody, tilkommenInntektTittel } from './arbeidstaker/tilkommen-inntekt-hjelp-body'
+import {
+    InntektUnderveisFtaHjelpBody,
+    inntektUnderveisFtaTittel,
+} from './friskmeldt-til-arbeidsformidling/inntekt-underveis-fta-hjelp-body'
+import {
+    JobbsituasjonenDinHjelpBody,
+    jobbsituasjonenDinTittel,
+} from './friskmeldt-til-arbeidsformidling/jobbsituasjonen-din-hjelp-body'
+import {
+    NaringsdrivendeVirksomhetenAvvikletHjelpBody,
+    naringsdrivendeVirksomhetenAvvikletTittel,
+} from './naeringsdrivende/naringsdrivende-virksomheten-avviklet-hjelp-body'
+import {
+    NaringsdrivendeNyIArbeidsLivetHjelpBody,
+    naringsdrivendeNyIArbeidsLivetTittel,
+} from './naeringsdrivende/naringsdrivende-ny-i-arbeids-livet-hjelp-body'
+import {
+    NaringsdrivendeVarigEndringHjelpBody,
+    naringsdrivendeVarigEndringTittel,
+} from './naeringsdrivende/naringsdrivende-varig-endring-hjelp-body'
+import {
+    NaringsdrivendeOppholdIUtlandetHjelpBody,
+    naringsdrivendeOppholdIUtlandetTittel,
+} from './naeringsdrivende/naringsdrivende-opphold-i-utlandet-hjelp-body'
+import {
+    NaringsdrivendeOpprettholdtInntektHjelpBody,
+    naringsdrivendeOpprettholdtInntektTittel,
+} from './naeringsdrivende/naringsdrivende-opprettholdt-inntekt-hjelp-body'
+import {
+    FravarForSykmeldingenV2HjelpBody,
+    fravarForSykmeldingenV2Tittel,
+} from './arbeidstaker/fravar-for-sykmeldingen-v2-hjelp-body'
+import {
+    NaringsdrivendeOpprettholdtInntektGradertHjelpBody,
+    naringsdrivendeOpprettholdtInntektGradertTittel,
+} from './naeringsdrivende/naringsdrivende-opprettholdt-inntekt-gradert-hjelp-body'
+import {
+    ArbeidUnderveisNaeringsdrivendeHjelpBody,
+    arbeidUnderveisNaeringsdrivendeTittel,
+} from './naeringsdrivende/arbeid-underveis-naeringsdrivende-hjelp-body'
+import { TransportTilDagligHjelpBody, transportTilDagligTittel } from './arbeidstaker/transport-til-daglig-hjelp-body'
+import { PermittertNaaHjelpBody, permittertNaaTittel } from './felles/utdatert/permittert-naa-hjelp-body'
+import { PermittertPeriodeHjelpBody, permittertPeriodeTittel } from './felles/utdatert/permittert-periode-hjelp-body'
+import { UtdanningHjelpBody, utdanningTittel } from './felles/utdanning-hjelp-body'
+import { ProsentenLavereHjelpBody, prosentenLavereTittel } from './arbeidstaker/prosenten-lavere-hjelp-body'
+import {
+    InntektsopplysningerNyIArbeidslivetHjelpBody,
+    inntektsopplysningerNyIArbeidslivetTittel,
+} from './naeringsdrivende/utdatert/inntektsopplysninger-ny-i-arbeidslivet-hjelp-body'
+
+interface ReadmoreTittelOgKomponent {
+    tittel: string
+    komponent: React.ReactNode
+}
 
 export const EkspanderbarHjelp = ({ sporsmal, mb }: { sporsmal: Sporsmal; mb?: string }) => {
     const { valgtSoknad } = useSoknadMedDetaljer()
@@ -58,132 +135,164 @@ export const EkspanderbarHjelp = ({ sporsmal, mb }: { sporsmal: Sporsmal; mb?: s
 
     if (!valgtSoknad) return null
 
-    const skapNokkel = () => {
+    if (sporsmal.tag == 'ANDRE_INNTEKTSKILDER' && valgtSoknad.arbeidssituasjon == RSArbeidssituasjon.FRILANSER) {
+        // Hjelpeteksten er ikke kompatibel med svaralternativene for frilanser
+        return null
+    }
+
+    const sporsmalTagMedSoknadstypeEllerArbeidssituasjon = (): string => {
         if (sporsmal.tag == 'TILBAKE_I_ARBEID' && valgtSoknad.soknadstype == RSSoknadstype.GRADERT_REISETILSKUDD) {
             return 'TILBAKE_I_ARBEID_GRADERT_REISETILSKUDD'
         }
-        if (sporsmal.tag == 'JOBBET_DU_GRADERT' && valgtSoknad.arbeidssituasjon == RSArbeidssituasjon.ARBEIDSTAKER) {
-            return 'JOBBET_DU_GRADERT_ARBEIDSTAKER'
-        }
-        if (sporsmal.tag == 'ANDRE_INNTEKTSKILDER' && valgtSoknad.arbeidssituasjon == RSArbeidssituasjon.FRILANSER) {
-            // Hjelpeteksten er ikke kompatibel med svaralternativene for frilanser
-            return null
+        if (sporsmal.tag == 'JOBBET_DU_GRADERT' || sporsmal.tag == 'ARBEID_UNDERVEIS_100_PROSENT') {
+            return sporsmal.tag + '_' + valgtSoknad.arbeidssituasjon
         }
         return sporsmal.tag
     }
 
-    const nokkel = skapNokkel()
-    const harInnhold = `ekspanderbarhjelp.${nokkel?.toLowerCase()}.innhold` in EkspanderbarHjelpTekster
+    const sporsmalTag = sporsmalTagMedSoknadstypeEllerArbeidssituasjon()
 
-    const EkspanderbarInnhold = () => {
-        switch (sporsmal.tag) {
-            case 'TILBAKE_I_ARBEID':
-                return <TilbakeIArbeidHjelpBody />
-            case 'YRKESSKADE':
-                return <DeprecatedYrkesskadeHjelpBody />
-            case 'YRKESSKADE_V2':
-                return <YrkesskadeHjelpBody />
-            case 'FERIE_V2':
-                return <FerieHjelpBody />
-            case 'ANDRE_INNTEKTSKILDER_V2':
-                return <AndreInntektskilderHjelpBody />
-            case 'NYTT_ARBEIDSFORHOLD_UNDERVEIS':
-                return <TilkommenInntektHjelpBody />
-            case 'PERMISJON_V2':
-                return <PermisjonHjelpBody />
-            case 'UTLAND_V2':
-                return <UtlandHjelpBody medNei={true} />
-            case 'OPPHOLD_UTENFOR_EOS':
-                return <UtlandHjelpBody medNei={true} />
-            case 'FTA_REISE_TIL_UTLANDET':
-                return <UtlandHjelpBody medNei={false} />
-            case 'ARBEID_UNDERVEIS_100_PROSENT':
-                return <ArbeidUnderveisHjelpBody />
-            case 'FTA_INNTEKT_UNDERVEIS':
-                return <InntektUnderveisFtaHjelpBody />
-            case 'ARBEID_UTENFOR_NORGE':
-                return <ArbeidUtenforNorgeHjelpBody />
-            case 'FRAVAR_FOR_SYKMELDINGEN':
-                return <FravarForSykmeldingenHjelpBody />
-            case 'JOBBET_DU_GRADERT':
-                return <JobbetDuGradertArbeidstakerHjelpBody />
-            case 'BRUKTE_REISETILSKUDDET':
-                return <BrukteReisetilskuddetHjelpBody />
-            case 'KVITTERINGER':
-                return <KvitteringerHjelpBody />
-            case 'INNTEKTSKILDE_SELVSTENDIG_VARIG_ENDRING_GRUPPE':
-                return <EndringSNHjelpBody />
-            case 'MEDLEMSKAP_OPPHOLD_UTENFOR_EOS':
-                return <MedlemskapOppholdUtenforEOSHjelpBody />
-            case 'MEDLEMSKAP_OPPHOLD_UTENFOR_NORGE':
-                return <MedlemskapOppholdUtenforNorgeHjelpBody />
-            case 'MEDLEMSKAP_UTFORT_ARBEID_UTENFOR_NORGE':
-                return <MedlemskapArbeidUtenforNorgeHjelpBody />
-            case 'MEDLEMSKAP_OPPHOLDSTILLATELSE':
-                return <MedlemskapOppholdstillatelseHjelpBody />
-            case 'MEDLEMSKAP_OPPHOLDSTILLATELSE_V2':
-                return <MedlemskapOppholdstillatelseV2HjelpBody />
-            case 'KJENTE_INNTEKTSKILDER':
-                return <KjenteInntektkilderHjelpBody />
-            case 'INNTEKTSOPPLYSNINGER_VARIG_ENDRING_25_PROSENT':
-                return <VarigEndring25prosentHjelpBody sporsmal={sporsmal} />
-            case 'INNTEKTSOPPLYSNINGER_DRIFT_VIRKSOMHETEN':
-                return <DriftIVirksomhetHjelpBody />
-            case 'INNTEKTSOPPLYSNINGER_VIRKSOMHETEN_AVVIKLET':
-                return <AvvikletVirksomhetHjelpBody />
-            case 'FTA_JOBBSITUASJONEN_DIN':
-                return <JobbsituasjonenDinHjelpBody />
-            case 'NARINGSDRIVENDE_OPPRETTHOLDT_INNTEKT':
-                return <NaringsdrivendeOpprettholdtInntektHjelpBody />
-            case 'NARINGSDRIVENDE_OPPRETTHOLDT_INNTEKT_GRADERT':
-                return <NaringsdrivendeOpprettholdtInntektGradertHjelpBody />
-            case 'NARINGSDRIVENDE_OPPHOLD_I_UTLANDET':
-                return <NaringsdrivendeOppholdIUtlandetHjelpBody />
-            case 'NARINGSDRIVENDE_VIRKSOMHETEN_AVVIKLET':
-                return <NaringsdrivendeVirksomhetenAvvikletHjelpBody />
-            case 'NARINGSDRIVENDE_NY_I_ARBEIDSLIVET':
-                return <NaringsdrivendeNyIArbeidsLivetHjelpBody />
-            case 'NARINGSDRIVENDE_VARIG_ENDRING':
-                return <NaringsdrivendeVarigEndringHjelpBody />
-            case 'FRAVAR_FOR_SYKMELDINGEN_V2':
-                return <FravarForSykmeldingenV2HjelpBody />
-            default:
-                if (harInnhold) {
-                    return (
-                        <BodyLong>
-                            {tekstMedHtml(tekst(`ekspanderbarhjelp.${nokkel?.toLowerCase()}.innhold` as any))}
-                        </BodyLong>
-                    )
-                }
-        }
+    const sporsmalTagTilReadmoreMapping: Record<SporsmalTagMedHjelpetekst, ReadmoreTittelOgKomponent> = {
+        TILBAKE_I_ARBEID: { tittel: tilbakeIArbeidTittel, komponent: <TilbakeIArbeidHjelpBody /> },
+        TILBAKE_I_ARBEID_GRADERT_REISETILSKUDD: {
+            tittel: tilbakeIArbeidTittel,
+            komponent: <TilbakeIArbeidHjelpBody />,
+        },
+        YRKESSKADE: { tittel: deprecatedYrkesskadeTittel, komponent: <DeprecatedYrkesskadeHjelpBody /> },
+        YRKESSKADE_V2: { tittel: yrkesskadeTittel, komponent: <YrkesskadeHjelpBody /> },
+        FERIE_V2: { tittel: ferieTittel, komponent: <FerieHjelpBody /> },
+        ANDRE_INNTEKTSKILDER: {
+            tittel: andreInntektskilderGammelTittel,
+            komponent: <AndreInntektskilderGammelHjelpBody />,
+        },
+        ANDRE_INNTEKTSKILDER_V2: { tittel: andreInntektskilderTittel, komponent: <AndreInntektskilderHjelpBody /> },
+        NYTT_ARBEIDSFORHOLD_UNDERVEIS: { tittel: tilkommenInntektTittel, komponent: <TilkommenInntektHjelpBody /> },
+        PERMISJON_V2: { tittel: permisjonTittel, komponent: <PermisjonHjelpBody /> },
+        UTLAND_V2: { tittel: utlandTittel, komponent: <UtlandHjelpBody medNei={true} /> },
+        OPPHOLD_UTENFOR_EOS: { tittel: utlandTittel, komponent: <UtlandHjelpBody medNei={true} /> },
+        FTA_REISE_TIL_UTLANDET: { tittel: utlandTittel, komponent: <UtlandHjelpBody medNei={false} /> },
+        ARBEID_UNDERVEIS_100_PROSENT_ARBEIDSTAKER: {
+            tittel: arbeidUnderveisTittel,
+            komponent: <ArbeidUnderveisHjelpBody />,
+        },
+        JOBBET_DU_GRADERT_ARBEIDSTAKER: { tittel: arbeidUnderveisTittel, komponent: <ArbeidUnderveisHjelpBody /> },
+        ARBEID_UNDERVEIS_100_PROSENT_NARINGSDRIVENDE: {
+            tittel: arbeidUnderveisNaeringsdrivendeTittel,
+            komponent: <ArbeidUnderveisNaeringsdrivendeHjelpBody gradert={false} />,
+        },
+        JOBBET_DU_GRADERT_NARINGSDRIVENDE: {
+            tittel: arbeidUnderveisNaeringsdrivendeTittel,
+            komponent: <ArbeidUnderveisNaeringsdrivendeHjelpBody gradert={true} />,
+        },
+        FTA_INNTEKT_UNDERVEIS: { tittel: inntektUnderveisFtaTittel, komponent: <InntektUnderveisFtaHjelpBody /> },
+        ARBEID_UTENFOR_NORGE: { tittel: arbeidUtenforNorgeTittel, komponent: <ArbeidUtenforNorgeHjelpBody /> },
+        FRAVAR_FOR_SYKMELDINGEN: {
+            tittel: fravarForSykmeldingenTittel,
+            komponent: <FravarForSykmeldingenHjelpBody />,
+        },
+        FRAVAR_FOR_SYKMELDINGEN_V2: {
+            tittel: fravarForSykmeldingenV2Tittel,
+            komponent: <FravarForSykmeldingenV2HjelpBody />,
+        },
+        BRUKTE_REISETILSKUDDET: {
+            tittel: brukteReisetilskuddetTittel,
+            komponent: <BrukteReisetilskuddetHjelpBody />,
+        },
+        KVITTERINGER: { tittel: kvitteringerTittel, komponent: <KvitteringerHjelpBody /> },
+        INNTEKTSKILDE_SELVSTENDIG_VARIG_ENDRING_GRUPPE: { tittel: endringSNTittel, komponent: <EndringSNHjelpBody /> },
+        MEDLEMSKAP_OPPHOLD_UTENFOR_EOS: {
+            tittel: medlemskapOppholdUtenforEOSTittel,
+            komponent: <MedlemskapOppholdUtenforEOSHjelpBody />,
+        },
+        MEDLEMSKAP_OPPHOLD_UTENFOR_NORGE: {
+            tittel: medlemskapOppholdUtenforNorgeTittel,
+            komponent: <MedlemskapOppholdUtenforNorgeHjelpBody />,
+        },
+        MEDLEMSKAP_UTFORT_ARBEID_UTENFOR_NORGE: {
+            tittel: medlemskapArbeidUtenforNorgeTittel,
+            komponent: <MedlemskapArbeidUtenforNorgeHjelpBody />,
+        },
+        MEDLEMSKAP_OPPHOLDSTILLATELSE: {
+            tittel: medlemskapOppholdstillatelseTittel,
+            komponent: <MedlemskapOppholdstillatelseHjelpBody />,
+        },
+        MEDLEMSKAP_OPPHOLDSTILLATELSE_V2: {
+            tittel: medlemskapOppholdstillatelseV2Tittel,
+            komponent: <MedlemskapOppholdstillatelseV2HjelpBody />,
+        },
+        KJENTE_INNTEKTSKILDER: { tittel: kjenteInntektkilderTittel, komponent: <KjenteInntektkilderHjelpBody /> },
+        INNTEKTSOPPLYSNINGER_VARIG_ENDRING_25_PROSENT: {
+            tittel: varigEndring25prosentTittel,
+            komponent: <VarigEndring25prosentHjelpBody sporsmal={sporsmal} />,
+        },
+        INNTEKTSOPPLYSNINGER_DRIFT_VIRKSOMHETEN: {
+            tittel: driftIVirksomhetTittel,
+            komponent: <DriftIVirksomhetHjelpBody />,
+        },
+        INNTEKTSOPPLYSNINGER_VIRKSOMHETEN_AVVIKLET: {
+            tittel: avvikletVirksomhetTittel,
+            komponent: <AvvikletVirksomhetHjelpBody />,
+        },
+        INNTEKTSOPPLYSNINGER_NY_I_ARBEIDSLIVET: {
+            tittel: inntektsopplysningerNyIArbeidslivetTittel,
+            komponent: <InntektsopplysningerNyIArbeidslivetHjelpBody />,
+        },
+        FTA_JOBBSITUASJONEN_DIN: { tittel: jobbsituasjonenDinTittel, komponent: <JobbsituasjonenDinHjelpBody /> },
+        NARINGSDRIVENDE_OPPRETTHOLDT_INNTEKT: {
+            tittel: naringsdrivendeOpprettholdtInntektTittel,
+            komponent: <NaringsdrivendeOpprettholdtInntektHjelpBody />,
+        },
+        NARINGSDRIVENDE_OPPRETTHOLDT_INNTEKT_GRADERT: {
+            tittel: naringsdrivendeOpprettholdtInntektGradertTittel,
+            komponent: <NaringsdrivendeOpprettholdtInntektGradertHjelpBody />,
+        },
+        NARINGSDRIVENDE_OPPHOLD_I_UTLANDET: {
+            tittel: naringsdrivendeOppholdIUtlandetTittel,
+            komponent: <NaringsdrivendeOppholdIUtlandetHjelpBody />,
+        },
+        NARINGSDRIVENDE_VIRKSOMHETEN_AVVIKLET: {
+            tittel: naringsdrivendeVirksomhetenAvvikletTittel,
+            komponent: <NaringsdrivendeVirksomhetenAvvikletHjelpBody />,
+        },
+        NARINGSDRIVENDE_NY_I_ARBEIDSLIVET: {
+            tittel: naringsdrivendeNyIArbeidsLivetTittel,
+            komponent: <NaringsdrivendeNyIArbeidsLivetHjelpBody />,
+        },
+        NARINGSDRIVENDE_VARIG_ENDRING: {
+            tittel: naringsdrivendeVarigEndringTittel,
+            komponent: <NaringsdrivendeVarigEndringHjelpBody />,
+        },
+        TRANSPORT_TIL_DAGLIG: { tittel: transportTilDagligTittel, komponent: <TransportTilDagligHjelpBody /> },
+        PERMITTERT_NAA: { tittel: permittertNaaTittel, komponent: <PermittertNaaHjelpBody /> },
+        PERMITTERT_PERIODE: { tittel: permittertPeriodeTittel, komponent: <PermittertPeriodeHjelpBody /> },
+        UTDANNING: { tittel: utdanningTittel, komponent: <UtdanningHjelpBody /> },
+        PROSENTEN_LAVERE_ENN_FORVENTET_ARBEIDSTAKER: {
+            tittel: prosentenLavereTittel,
+            komponent: <ProsentenLavereHjelpBody />,
+        },
     }
 
-    const ekspanderbarInnhold = EkspanderbarInnhold()
+    const readmore = sporsmalTagTilReadmoreMapping[sporsmalTag as SporsmalTagMedHjelpetekst]
 
-    if (!nokkel || !ekspanderbarInnhold) {
+    if (!readmore) {
         return null
     }
 
-    function lagTittel(nokkel: string): string {
+    function lagTittel(): string {
         if (
             sporsmal.tag === 'INNTEKTSOPPLYSNINGER_VARIG_ENDRING_25_PROSENT' &&
             erSigrunInntekt(sporsmal.metadata?.sigrunInntekt)
         ) {
             const { beregnet } = sporsmal.metadata?.sigrunInntekt as SigrunInntekt
             return `Hvordan har vi kommet frem til ${formatterTall(beregnet.snitt)} kroner?`
-        } else {
-            return (
-                EkspanderbarHjelpTekster[
-                    `ekspanderbarhjelp.${nokkel.toLowerCase()}.tittel` as keyof typeof EkspanderbarHjelpTekster
-                ] || 'Spørsmålet forklart'
-            )
         }
+        return readmore.tittel
     }
 
     return (
         <ReadMore
             className={`${mb ?? 'mb-8'} mt-4 w-full`}
-            header={lagTittel(nokkel)}
+            header={lagTittel()}
             open={expanded}
             onClick={() => {
                 function vaskTittel(tittel: string): string {
@@ -194,15 +303,15 @@ export const EkspanderbarHjelp = ({ sporsmal, mb }: { sporsmal: Sporsmal; mb?: s
                 }
 
                 logEvent(expanded ? 'readmore lukket' : 'readmore åpnet', {
-                    tittel: vaskTittel(lagTittel(nokkel)),
+                    tittel: vaskTittel(lagTittel()),
                     component: 'hjelpetekst',
-                    spørsmål: nokkel,
+                    spørsmål: sporsmalTag || '',
                 })
 
                 setExpanded((prev) => !prev)
             }}
         >
-            <div className="mt-4">{ekspanderbarInnhold}</div>
+            <div className="mt-4">{readmore.komponent}</div>
         </ReadMore>
     )
 }
