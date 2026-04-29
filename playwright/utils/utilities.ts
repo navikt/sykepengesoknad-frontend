@@ -358,3 +358,11 @@ export async function lastOppKvittering(page: Page) {
         .setInputFiles('playwright/fixtures/kvittering.jpg')
     await page.getByRole('button', { name: 'Bekreft' }).click()
 }
+
+export async function apneReadmore(page: Page, tittel: string, forventetTekst: string[]) {
+    await page.getByRole('button', { name: tittel }).click()
+
+    for (const tekst of forventetTekst) {
+        await expect(page.getByText(tekst)).toBeVisible()
+    }
+}
