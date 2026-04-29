@@ -1,6 +1,7 @@
 import { test, expect } from '@playwright/test'
 
 import {
+    apneReadmore,
     harSynligTittel,
     klikkGaVidere,
     setPeriodeFraTil,
@@ -16,6 +17,12 @@ test.describe('Tester nytt arbeidsforhold', () => {
         )
 
         await harSynligTittel(page, 'Nytt arbeidsforhold', 2)
+
+        await apneReadmore(page, 'Spørsmålet forklart', [
+            'Sykepengene skal erstatte inntektstapet ditt',
+            'Det nye arbeidsforhold har vi fått via Arbeidsgiver- og arbeidstakerregisteret',
+        ])
+
         // todo make this test work
         // await expect(page.getByText('Kaffebrenneriet')).toHaveCSS('background-color', 'rgb(236, 238, 240)')
     })
