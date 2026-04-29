@@ -41,8 +41,8 @@ export const EkspanderbarHjelp = ({ sporsmal, mb }: { sporsmal: Sporsmal; mb?: s
         if (sporsmal.tag == 'TILBAKE_I_ARBEID' && valgtSoknad.soknadstype == RSSoknadstype.GRADERT_REISETILSKUDD) {
             return 'TILBAKE_I_ARBEID_GRADERT_REISETILSKUDD'
         }
-        if (sporsmal.tag == 'JOBBET_DU_GRADERT' || sporsmal.tag == 'ARBEID_UNDERVEIS_100_PROSENT') {
-            return sporsmal.tag + '_' + valgtSoknad.arbeidssituasjon
+        if (sporsmal.tag.startsWith('JOBBET_DU_GRADERT') || sporsmal.tag.startsWith('ARBEID_UNDERVEIS_100_PROSENT')) {
+            return sporsmal.tag.replace(/_\d+$/, '') + '_' + valgtSoknad.arbeidssituasjon
         }
         return sporsmal.tag
     }

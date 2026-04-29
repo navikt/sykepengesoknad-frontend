@@ -85,11 +85,11 @@ export const naringsdrivendeMapping = (sporsmal: Sporsmal): Record<string, Readm
         tittel: naringsdrivendeVarigEndringTittel,
         komponent: <NaringsdrivendeVarigEndringHjelpBody />,
     },
-    ARBEID_UNDERVEIS_100_PROSENT_NARINGSDRIVENDE: {
+    ARBEID_UNDERVEIS_100_PROSENT_NAERINGSDRIVENDE: {
         tittel: arbeidUnderveisNaeringsdrivendeTittel,
         komponent: <ArbeidUnderveisNaeringsdrivendeHjelpBody gradert={false} />,
     },
-    JOBBET_DU_GRADERT_NARINGSDRIVENDE: {
+    JOBBET_DU_GRADERT_NAERINGSDRIVENDE: {
         tittel: arbeidUnderveisNaeringsdrivendeTittel,
         komponent: <ArbeidUnderveisNaeringsdrivendeHjelpBody gradert={true} />,
     },
