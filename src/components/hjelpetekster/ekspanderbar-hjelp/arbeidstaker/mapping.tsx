@@ -9,24 +9,17 @@ import {
     FravarForSykmeldingenHjelpBody,
     fravarForSykmeldingenTittel,
 } from './utdatert/fravar-for-sykmeldingen-hjelp-body'
-import { BrukteReisetilskuddetHjelpBody, brukteReisetilskuddetTittel } from './brukte-reisetilskuddet-hjelp-body'
-import { KvitteringerHjelpBody, kvitteringerTittel } from './kvitteringer-hjelp-body'
 import { KjenteInntektkilderHjelpBody, kjenteInntektkilderTittel } from './utdatert/kjente-inntektkilder-hjelp-body'
 import { TilkommenInntektHjelpBody, tilkommenInntektTittel } from './tilkommen-inntekt-hjelp-body'
 import {
     FravarForSykmeldingenV2HjelpBody,
     fravarForSykmeldingenV2Tittel,
 } from './fravar-for-sykmeldingen-v2-hjelp-body'
-import { TransportTilDagligHjelpBody, transportTilDagligTittel } from './transport-til-daglig-hjelp-body'
 import { ProsentenLavereHjelpBody, prosentenLavereTittel } from './prosenten-lavere-hjelp-body'
 import { JobbetDuGradertArbeidstakerHjelpBody } from './jobbet-du-gradert-arbeidstaker-hjelp-body'
 
 export const arbeidstakerMapping = (): Record<string, ReadmoreTittelOgKomponent> => ({
     TILBAKE_I_ARBEID: { tittel: tilbakeIArbeidTittel, komponent: <TilbakeIArbeidHjelpBody /> },
-    TILBAKE_I_ARBEID_GRADERT_REISETILSKUDD: {
-        tittel: tilbakeIArbeidTittel,
-        komponent: <TilbakeIArbeidHjelpBody />,
-    },
     PERMISJON_V2: { tittel: permisjonTittel, komponent: <PermisjonHjelpBody /> },
     ARBEID_UNDERVEIS_100_PROSENT_ARBEIDSTAKER: {
         tittel: arbeidUnderveisTittel,
@@ -44,14 +37,8 @@ export const arbeidstakerMapping = (): Record<string, ReadmoreTittelOgKomponent>
         tittel: fravarForSykmeldingenV2Tittel,
         komponent: <FravarForSykmeldingenV2HjelpBody />,
     },
-    BRUKTE_REISETILSKUDDET: {
-        tittel: brukteReisetilskuddetTittel,
-        komponent: <BrukteReisetilskuddetHjelpBody />,
-    },
-    KVITTERINGER: { tittel: kvitteringerTittel, komponent: <KvitteringerHjelpBody /> },
     KJENTE_INNTEKTSKILDER: { tittel: kjenteInntektkilderTittel, komponent: <KjenteInntektkilderHjelpBody /> },
     NYTT_ARBEIDSFORHOLD_UNDERVEIS: { tittel: tilkommenInntektTittel, komponent: <TilkommenInntektHjelpBody /> },
-    TRANSPORT_TIL_DAGLIG: { tittel: transportTilDagligTittel, komponent: <TransportTilDagligHjelpBody /> },
     PROSENTEN_LAVERE_ENN_FORVENTET_ARBEIDSTAKER: {
         tittel: prosentenLavereTittel,
         komponent: <ProsentenLavereHjelpBody />,

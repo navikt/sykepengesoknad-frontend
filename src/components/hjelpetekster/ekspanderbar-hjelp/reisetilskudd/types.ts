@@ -1,0 +1,5 @@
+export type ReisetilskuddSporsmalTag =
+    | 'BRUKTE_REISETILSKUDDET'
+    | 'TILBAKE_I_ARBEID_GRADERT_REISETILSKUDD'
+    | 'TRANSPORT_TIL_DAGLIG'
+    | 'KVITTERINGER'
