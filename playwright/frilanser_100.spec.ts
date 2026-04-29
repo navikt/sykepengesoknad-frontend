@@ -2,6 +2,7 @@ import { frilanser } from '../src/data/mock/data/soknad/frilanser'
 
 import { test, expect } from './utils/fixtures'
 import {
+    apneReadmore,
     checkViStolerPaDeg,
     harSoknaderlisteHeading,
     klikkGaVidere,
@@ -69,11 +70,17 @@ test.describe('Tester frilansersøknad', () => {
             await klikkGaVidere(page)
         })
 
-        await test.step('Søknad UTLAND - steg 5', async () => {
+        await test.step('Søknad OPPHOLD_UTENFOR_EOS - steg 5', async () => {
             await expect(page).toHaveURL(new RegExp(`${soknad.id}/5`))
             await expect(
                 page.getByText('Har du vært utenfor EU/EØS mens du var sykmeldt 1. - 24. april 2020?'),
             ).toBeVisible()
+
+            await apneReadmore(page, 'Spørsmålet forklart', [
+                'Svar ja, dersom du har oppholdt deg utenfor EU/EØS i løpet av perioden du var sykmeldt',
+                'Da oppretter vi en egen søknad som du må sende inn',
+            ])
+
             await svarJaHovedsporsmal(page)
             await expect(page.getByText('Når var du utenfor EU/EØS?')).toBeVisible()
             await setPeriodeFraTil(page, 14, 22)
