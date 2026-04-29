@@ -23,6 +23,7 @@ import {
     lastOppKvittering,
     harSynligTittel,
     klikkGaVidere,
+    apneReadmore,
 } from './utils/utilities'
 import { validerAxeUtilityWrapper } from './uuvalidering'
 
@@ -295,6 +296,11 @@ test.describe('Tester støtte for gamle spørsmål', () => {
         })
 
         await test.step('UTDANNING', async () => {
+            await apneReadmore(page, 'Sykepenger under utdanning', [
+                'I noen tilfeller kan du ha rett til sykepenger fra NAV mens du studerer',
+                'Les om hvilken type utdanning det gjelder',
+            ])
+
             await svarJaHovedsporsmal(page)
 
             await expect(page.locator('.navds-date__field-button')).toBeVisible()

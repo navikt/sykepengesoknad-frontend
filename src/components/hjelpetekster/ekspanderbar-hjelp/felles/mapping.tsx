@@ -17,7 +17,7 @@ import { FerieHjelpBody, ferieTittel } from './ferie-hjelp-body'
 import { UtlandHjelpBody, utlandTittel } from './utland-hjelp-body'
 import { PermittertNaaHjelpBody, permittertNaaTittel } from './utdatert/permittert-naa-hjelp-body'
 import { PermittertPeriodeHjelpBody, permittertPeriodeTittel } from './utdatert/permittert-periode-hjelp-body'
-import { UtdanningHjelpBody, utdanningTittel } from './utdanning-hjelp-body'
+import { UtdanningHjelpBody, utdanningTittel } from './utdatert/utdanning-hjelp-body'
 
 export const fellesMapping = (): Record<string, ReadmoreTittelOgKomponent> => ({
     YRKESSKADE: { tittel: deprecatedYrkesskadeTittel, komponent: <DeprecatedYrkesskadeHjelpBody /> },
