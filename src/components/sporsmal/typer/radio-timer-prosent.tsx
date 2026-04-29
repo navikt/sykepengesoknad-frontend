@@ -83,8 +83,6 @@ const RadioTimerProsent = ({ sporsmal }: SpmProps) => {
 
     const { beregnGradNy } = validerArbeidsgrad(sporsmal)
 
-    const lavereProsentHjelpTittel = tekst('ekspanderbarhjelp.prosenten_lavere_enn_forventet_arbeidstaker.tittel')
-
     return (
         <>
             <Controller
@@ -133,12 +131,14 @@ const RadioTimerProsent = ({ sporsmal }: SpmProps) => {
             )}
 
             {errorTimer && rodeUkeDagerIPerioden(valgtSoknad!.fom, valgtSoknad!.tom) && (
-                <ReadMore header={lavereProsentHjelpTittel}>
+                <ReadMore header="Er prosenten lavere enn du forventet?">
                     <BodyLong spacing>
-                        {tekst('ekspanderbarhjelp.prosenten_lavere_enn_forventet_arbeidstaker.innhold1')}
+                        Grunnen kan være at helligdager eller røde dager som havner på mandag-fredag regnes som
+                        sykepengedager hos NAV. Derfor fordeles timene dine også på disse dagene selv om du hadde fri.
                     </BodyLong>
                     <BodyLong spacing>
-                        {tekst('ekspanderbarhjelp.prosenten_lavere_enn_forventet_arbeidstaker.innhold2')}
+                        Hvis du har fylt inn riktig antall timer, og likevel får beskjed om at timene utgjør mindre enn
+                        sykmeldingsprosenten din, kan du svare nei på spørsmålet og gå videre.
                     </BodyLong>
                 </ReadMore>
             )}
