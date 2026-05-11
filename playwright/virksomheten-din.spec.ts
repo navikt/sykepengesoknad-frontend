@@ -53,8 +53,9 @@ test.describe('Selvstendig næringsdrivende - Virksomheten din', () => {
         await harSynligTittel(page, 'Jobb underveis i sykefraværet', 2)
 
         await apneReadmore(page, 'Spørsmålet forklart', [
-            'Du kan jobbe selv om du er 100 % sykmeldt',
-            'Dersom du har gjort færre arbeidsoppgaver enn vanlig',
+            'Du kan begynne å jobbe selv om du er helt sykmeldt',
+            'Jobber du når du er sykmeldt må du registrere antall timer eller prosent',
+            'Opplysningene om arbeidsmengden er med på å beregne hvor mye du skal få utbetalt',
         ])
     })
 
