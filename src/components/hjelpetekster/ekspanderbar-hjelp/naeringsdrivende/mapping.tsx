@@ -36,10 +36,7 @@ import {
     NaringsdrivendeOpprettholdtInntektGradertHjelpBody,
     naringsdrivendeOpprettholdtInntektGradertTittel,
 } from './naringsdrivende-opprettholdt-inntekt-gradert-hjelp-body'
-import {
-    ArbeidUnderveisNaeringsdrivendeHjelpBody,
-    arbeidUnderveisNaeringsdrivendeTittel,
-} from './arbeid-underveis-naeringsdrivende-hjelp-body'
+import { arbeidUnderveisNaeringsdrivendeTittel } from './arbeid-underveis-naeringsdrivende-hjelp-body'
 import {
     InntektsopplysningerNyIArbeidslivetHjelpBody,
     inntektsopplysningerNyIArbeidslivetTittel,

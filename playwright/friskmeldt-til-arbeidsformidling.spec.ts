@@ -108,7 +108,7 @@ test.describe('Friskmeldt til arbeidsformidling', () => {
         await klikkGaVidere(page)
 
         await harSynligTittel(page, 'Inntekt underveis', 2)
-        await svarRadioGruppe(page, /Hadde du  inntekt i perioden/i, 'Nei')
+        await svarRadioGruppe(page, /Hadde du inntekt i perioden/i, 'Nei')
         await klikkGaVidere(page)
 
         await harSynligTittel(page, 'Reise utenfor EU/EØS', 2)
