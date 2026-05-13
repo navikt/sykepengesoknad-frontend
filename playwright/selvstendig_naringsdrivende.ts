@@ -4,11 +4,15 @@ import { test } from './utils/fixtures'
 import {
     apneReadmore,
     checkViStolerPaDeg,
+    harFeilISkjemaet,
     harSynligTekst,
     harSynligTittel,
     klikkGaVidere,
     neiOgVidere,
+    svarJaHovedsporsmal,
+    svarNeiHovedsporsmal,
 } from './utils/utilities'
+import { validerAxeUtilityWrapper } from './uuvalidering'
 
 export async function sendSoknad(page: Page) {
     await harSynligTittel(page, 'Oppsummering fra søknaden', 2)
@@ -46,6 +50,22 @@ test.describe('Selvstendig næringsdrivende - Virksomheten din', () => {
         await neiOgVidere(page, ['Ny i arbeidslivet'])
         await neiOgVidere(page, ['Endringer i arbeidsituasjonen din'])
         await sendSoknad(page)
+    })
+
+    test('Fravær før sykmelding', async ({ page }) => {
+        await goToPage(page, 2)
+        await harSynligTittel(page, 'Fravær før du ble sykmeldt', 2)
+        await apneReadmore(page, 'Spørsmålet forklart', [
+            'Som utgangspunkt må du ha jobbet i løpet av de siste fire ukene før du ble syk for å få sykepenger.',
+        ])
+
+        await validerAxeUtilityWrapper(page, test.info())
+        await klikkGaVidere(page, true, true)
+        await harFeilISkjemaet(page, 'Du må svare på om du hadde fravær før sykmeldingen din')
+
+        await svarJaHovedsporsmal(page)
+        await expect(page.getByText('Det kan være vi trenger flere')).toBeVisible()
+        await svarNeiHovedsporsmal(page)
     })
 
     test('Arbeid mens du var syk 100%', async ({ page }) => {
