@@ -27,7 +27,7 @@ export const arbeidstakerMapping = (): Record<string, ReadmoreTittelOgKomponent>
     },
     JOBBET_DU_GRADERT_ARBEIDSTAKER: {
         tittel: arbeidUnderveisTittel,
-        komponent: <JobbetDuGradertArbeidstakerHjelpBody />,
+        komponent: <ArbeidUnderveisHjelpBody />,
     },
     FRAVAR_FOR_SYKMELDINGEN: {
         tittel: fravarForSykmeldingenTittel,

@@ -6,13 +6,13 @@ export const ArbeidUnderveisHjelpBody = () => {
     return (
         <>
             <BodyShort spacing>
-                Du kan begynne å jobbe selv om du er helt sykmeldt. Jobber du når du er sykmeldt må du registrere antall
-                timer eller prosent du har jobbet i denne perioden.
+                Du kan avtale med lederen din å jobbe mer enn det som står i sykmeldingen. Da skal du oppgi hvor mange
+                timer eller prosent du har jobbet til sammen i perioden du har vært sykmeldt. Dette inkluderer også den
+                prosenten du kunne jobbe ifølge sykmeldingen.
             </BodyShort>
             <BodyShort>
-                Opplysningene om arbeidsmengden er med på å beregne hvor mye du skal få utbetalt i sykepenger. Det
-                utbetales ikke sykepenger for den delen du er i arbeid eller hvis din arbeidsuførhet er nedsatt med
-                mindre enn 20%.
+                Dersom du har gjort færre arbeidsoppgaver enn vanlig, men brukt lengre tid på dem, skal du svare i
+                prosent hvor stor del av arbeidsoppgavene dine du har utført.
             </BodyShort>
         </>
     )
