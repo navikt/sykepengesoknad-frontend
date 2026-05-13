@@ -108,7 +108,7 @@ export const landlisteUtenforEøs = [
     'Libya',
     'Macao',
     'Madagaskar',
-    'Makedonia',
+    'Nord-Makedonia',
     'Malawi',
     'Malaysia',
     'Maldivene',
