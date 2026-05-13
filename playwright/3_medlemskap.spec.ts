@@ -3,6 +3,7 @@ import { test, expect } from '@playwright/test'
 import { medlemskapPerson } from '../src/data/mock/data/personas/medlemskap'
 
 import {
+    apneReadmore,
     klikkGaVidere,
     setPeriodeFraTil,
     svarCombobox,
@@ -35,6 +36,12 @@ test.describe('Søknad med alle opprinnelige spørsmål om medlemskap', () => {
 
         await test.step('Arbeid utenfor Norge', async () => {
             await expect(page.getByRole('heading', { name: 'Arbeid utenfor Norge' })).toBeVisible()
+
+            await apneReadmore(page, 'Spørsmålet forklart', [
+                'For å ha rett til sykepenger, må du være medlem i folketrygden',
+                'Du kan svare nei, hvis du har deltatt på tjenestereiser',
+            ])
+
             await svarJaHovedsporsmal(page)
             await svarCombobox(page, 'I hvilket land arbeidet du?', 'Fra', 'Frankrike')
             await svarFritekst(page, 'Hvilken arbeidsgiver jobbet du for?', 'Croissant AS')
@@ -45,6 +52,12 @@ test.describe('Søknad med alle opprinnelige spørsmål om medlemskap', () => {
 
         await test.step('Opphold utenfor Norge', async () => {
             await expect(page.getByRole('heading', { name: 'Opphold utenfor Norge', level: 2 })).toBeVisible()
+
+            await apneReadmore(page, 'Spørsmålet forklart', [
+                'Dette spørsmålet gjelder opphold i utlandet hvor du ikke har arbeidet',
+                'Svar nei, hvis oppholdet var kortere enn 5 uker',
+            ])
+
             await svarJaHovedsporsmal(page)
             await svarCombobox(page, 'I hvilket land utenfor Norge har du oppholdt deg?', 'Sve', 'Sveits')
             await page.locator('.navds-combobox__button-toggle-list').click()
@@ -56,6 +69,12 @@ test.describe('Søknad med alle opprinnelige spørsmål om medlemskap', () => {
 
         await test.step('Opphold utenfor EØS', async () => {
             await expect(page.getByRole('heading', { name: 'Opphold utenfor EU/EØS', level: 2 })).toBeVisible()
+
+            await apneReadmore(page, 'Spørsmålet forklart', [
+                'Dette spørsmålet gjelder opphold utenfor EU/EØS eller Sveits',
+                'Svar nei, hvis oppholdet var kortere enn 5 uker',
+            ])
+
             await svarJaHovedsporsmal(page)
             await svarCombobox(
                 page,
@@ -206,22 +225,11 @@ test.describe('Søknad med nytt spørsmål om oppholdstillatelse og kjent midler
                 page.getByText('Har Utlendingsdirektoratet gitt deg en oppholdstillatelse før 1. mai 2024?'),
             ).toBeVisible()
 
-            await page.getByText('Spørsmålet forklart').click()
-            await expect(
-                page.getByText(
-                    'Når du ikke er norsk statsborger, må du ha oppholdstillatelse i Norge for å være medlem i folketrygden og ha rett til sykepenger.',
-                ),
-            ).toBeVisible()
-            await expect(
-                page.getByText(
-                    'Har du ikke hatt en oppholdstillatelse som gjelder for en periode før den vi har mottatt fra Utlendingsdirektoratet, svarer du nei.',
-                ),
-            ).toBeVisible()
-            await expect(
-                page.getByText(
-                    'Har du hatt én eller flere tidligere oppholdstillatelser, svarer du ja. Vi ber deg oppgi den siste tillatelsen før perioden vi har mottatt fra Utlendingsdirektoratet.',
-                ),
-            ).toBeVisible()
+            await apneReadmore(page, 'Spørsmålet forklart', [
+                'Når du ikke er norsk statsborger, må du ha oppholdstillatelse i Norge for å være medlem i folketrygden og ha rett til sykepenger.',
+                'Har du ikke hatt en oppholdstillatelse som gjelder for en periode før den vi har mottatt fra Utlendingsdirektoratet, svarer du nei.',
+                'Har du hatt én eller flere tidligere oppholdstillatelser, svarer du ja. Vi ber deg oppgi den siste tillatelsen før perioden vi har mottatt fra Utlendingsdirektoratet.',
+            ])
 
             await svarJaHovedsporsmal(page)
             await expect(page.getByText('Fra og med')).toBeVisible()

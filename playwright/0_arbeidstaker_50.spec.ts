@@ -2,6 +2,7 @@ import { test, expect, Page } from '@playwright/test'
 
 import { arbeidstakerGradert } from '../src/data/mock/data/soknad/arbeidstaker-gradert'
 
+import { apneReadmore } from './utils/utilities'
 import { validerAxeUtilityWrapper } from './uuvalidering'
 const fillTextFieldByLabel = async (page: Page, labelText: string, value: string, fallbackSelector?: string) => {
     try {
@@ -93,6 +94,13 @@ test.describe('Tester arbeidstakersøknad - gradert 50%', () => {
 
         await test.step('Søknad JOBBET_DU_GRADERT', async () => {
             await expect(page).toHaveURL(new RegExp(`.*${soknadId}\/5`))
+
+            await apneReadmore(page, 'Spørsmålet forklart', [
+                'Du kan avtale med lederen din å jobbe mer enn det sykmeldingen tilsier',
+                'Tiden du har jobbet totalt inkluderer det legen din har oppgitt',
+                'Dette kan også bety at du kan ha færre arbeidsoppgaver men bruke lenger tid på dem',
+            ])
+
             await page.locator('[data-cy="ja-nei-stor"] input[value="JA"]').click()
             await expect(page.locator('text=Antall timer du skrev inn, betyr at du har jobbet')).toBeHidden()
 

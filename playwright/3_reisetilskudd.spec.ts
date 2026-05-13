@@ -10,6 +10,7 @@ import {
     svarFritekst,
     hentFritekst,
     svarRadioClickOption,
+    apneReadmore,
 } from './utils/utilities'
 import { validerAxeUtilityWrapper } from './uuvalidering'
 
@@ -58,6 +59,11 @@ test.describe('Teste førsteside i reisetilskuddsøknaden', () => {
         await test.step('Før du fikk sykmelding - Reisetilskudd', async () => {
             await expect(page).toHaveURL(new RegExp(`${nyttReisetilskudd.id}/2`))
             await expect(page.locator('[data-cy="sporsmal-tittel"]')).toHaveText('Før du fikk sykmelding')
+
+            await apneReadmore(page, 'Hva mener vi med offentlig transport?', [
+                'Offentlig transport er blant annet buss, tog og båt som går i fast rute.',
+                'Det kan også være bysykkel og el-sparkesykkel.',
+            ])
 
             await page.locator('[data-cy="ja-nei-stor"] input[value=JA]').click()
             velgCheckbox(page, 'Offentlig transport')
@@ -121,6 +127,14 @@ test.describe('Teste førsteside i reisetilskuddsøknaden', () => {
 
         await test.step('Opplasting - Reisetilskudd', async () => {
             await expect(page).toHaveURL(new RegExp(`${nyttReisetilskudd.id}/4`))
+
+            await apneReadmore(page, 'Spørsmålet forklart', [
+                'Du må laste opp kvitteringer, faktura eller annen dokumentasjon',
+                'taxi',
+                'offentlig transport',
+                'parkering',
+                'Kvitteringene må kunne leses av en saksbehandler',
+            ])
 
             await lastOppKvittering(page)
 

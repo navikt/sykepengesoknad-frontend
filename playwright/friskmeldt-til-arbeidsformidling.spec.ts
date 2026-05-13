@@ -2,6 +2,7 @@ import { Page } from '@playwright/test'
 
 import { test } from './utils/fixtures'
 import {
+    apneReadmore,
     checkViStolerPaDeg,
     harSynligTekst,
     harSynligTittel,
@@ -33,6 +34,12 @@ test.describe('Friskmeldt til arbeidsformidling', () => {
         await checkViStolerPaDeg(page)
 
         await harSynligTittel(page, 'Jobbsituasjonen din', 2)
+
+        await apneReadmore(page, 'Spørsmålet forklart', [
+            'Svar ja hvis du har begynt i ny jobb',
+            'Svar nei hvis du har fått ny jobb, men ikke hatt din første arbeidsdag enda',
+        ])
+
         await svarRadioGruppe(page, /Begynte du i ny jobb i perioden/i, 'Ja')
         await svarRadioGruppe(page, /Vil du fortsatt være friskmeldt til arbeidsformidling?/i, 'Ja')
         await page.getByRole('textbox', { name: 'Når begynte du i ny jobb?' }).fill('08.04.2025')
@@ -95,8 +102,24 @@ test.describe('Friskmeldt til arbeidsformidling', () => {
     test('Siste søknad', async ({ page }) => {
         await page.goto('/syk/sykepengesoknad/soknader/ac0ff5c0-e6bc-416d-b5d9-dfa3654e9f26/1?testperson=fta-siste')
         await checkViStolerPaDeg(page)
-        await neiOgVidere(page, ['Jobbsituasjonen din', 'Inntekt underveis', 'Reise utenfor EU/EØS'])
 
+        await harSynligTittel(page, 'Jobbsituasjonen din', 2)
+        await svarRadioGruppe(page, /Begynte du i ny jobb i perioden/i, 'Nei')
+        await klikkGaVidere(page)
+
+        await harSynligTittel(page, 'Inntekt underveis', 2)
+        await svarRadioGruppe(page, /Hadde du inntekt i perioden/i, 'Nei')
+        await klikkGaVidere(page)
+
+        await harSynligTittel(page, 'Reise utenfor EU/EØS', 2)
+        await apneReadmore(page, 'Spørsmålet forklart', [
+            'Svar ja, dersom du har oppholdt deg utenfor EU/EØS i løpet av perioden du var sykmeldt',
+            'Da oppretter vi en egen søknad som du må sende inn',
+        ])
+        await svarRadioGruppe(page, /Var du på reise utenfor EU\/EØS/i, 'Nei')
+        await klikkGaVidere(page)
+
+        await harSynligTittel(page, 'Oppsummering', 2)
         await page.getByRole('button', { name: 'Send søknaden' }).click()
         await harSynligTittel(page, 'Søknaden er sendt til NAV', 2)
         await harSynligTekst(page, /Du har nå sendt inn den siste søknaden for friskmeldt til arbeidsformidling./i)
@@ -105,6 +128,13 @@ test.describe('Friskmeldt til arbeidsformidling', () => {
 
     async function fullforSoknad(page: Page) {
         await klikkGaVidere(page)
+
+        await harSynligTittel(page, 'Inntekt underveis', 2)
+        await apneReadmore(page, 'Spørsmålet forklart', [
+            'Sykepenger skal erstatte inntekten du ville hatt hvis du hadde jobbet som normalt',
+            'Du kan kun få sykepenger for pensjonsgivende inntekt',
+        ])
+
         await neiOgVidere(page, ['Inntekt underveis', 'Reise utenfor EU/EØS'])
         await harSynligTittel(page, 'Oppsummering', 2)
         await page.getByRole('button', { name: 'Send søknaden' }).click()

@@ -3,6 +3,7 @@ import { test, expect } from '@playwright/test'
 import { arbeidstaker } from '../src/data/mock/data/soknad/arbeidstaker'
 
 import {
+    apneReadmore,
     checkViStolerPaDeg,
     klikkGaVidere,
     setPeriodeFraTil,
@@ -85,6 +86,12 @@ test.describe('Tester arbeidstakersøknad - 100%', () => {
         await test.step('Søknad FERIE_V2', async () => {
             await expect(page).toHaveURL(new RegExp(`.*${soknadId}\\/3`))
 
+            await apneReadmore(page, 'Spørsmålet forklart', [
+                'Som arbeidstaker har du krav på lovbestemt ferie hvert år',
+                'Ferie betyr at du har avtalt med arbeidsgiver å ta fri fra arbeidet',
+                'Du kan dra på ferie mens du er sykmeldt, men du får ikke utbetalt sykepenger når du har ferie',
+            ])
+
             await page.locator('[data-cy="ja-nei-stor"] input[value="JA"]').click()
             await expect(page.getByText('Når tok du ut feriedager?')).toBeVisible()
 
@@ -123,6 +130,12 @@ test.describe('Tester arbeidstakersøknad - 100%', () => {
                     'I perioden 1. - 24. april 2020 var du 100 % sykmeldt fra Posten Norge AS, Bærum. Jobbet du noe hos Posten Norge AS, Bærum i denne perioden?',
                 ),
             ).toBeVisible()
+
+            await apneReadmore(page, 'Spørsmålet forklart', [
+                'Du kan begynne å jobbe selv om du er helt sykmeldt',
+                'Jobber du når du er sykmeldt må du registrere antall timer eller prosent',
+                'Opplysningene om arbeidsmengden er med på å beregne hvor mye du skal få utbetalt',
+            ])
 
             await page.locator('[data-cy="ja-nei-stor"] input[value="JA"]').click()
 
@@ -163,6 +176,13 @@ test.describe('Tester arbeidstakersøknad - 100%', () => {
             await expect(page).toHaveURL(new RegExp(`.*${soknadId}\\/6`))
 
             await expect(page.getByText('Har du andre inntektskilder enn nevnt over?')).toBeVisible()
+
+            await apneReadmore(page, 'Spørsmålet forklart', [
+                'Kun pensjonsgivende inntekt gir rett til sykepenger',
+                'Begynt i ny jobb',
+                'Jobbet mer i en annen jobb etter at du ble sykmeldt',
+            ])
+
             await page.locator('[data-cy="ja-nei-stor"] input[value="JA"]').click()
 
             const ansattAndreSteder = page
@@ -190,6 +210,11 @@ test.describe('Tester arbeidstakersøknad - 100%', () => {
 
         await test.step('Søknad OPPHOLD_UTENFOR_EOS', async () => {
             await expect(page).toHaveURL(new RegExp(`.*${soknadId}\\/7`))
+
+            await apneReadmore(page, 'Spørsmålet forklart', [
+                'Svar ja, dersom du har oppholdt deg utenfor EU/EØS i løpet av perioden du var sykmeldt',
+                'Da oppretter vi en egen søknad som du må sende inn',
+            ])
 
             await page.locator('[data-cy="ja-nei-stor"] input[value="JA"]').click()
             await expect(page.getByText('Når var du utenfor EU/EØS?')).toBeVisible()

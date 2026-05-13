@@ -58,7 +58,7 @@ export async function validerAxe(
     const errorMessage = formatErrorMessage(violations)
     console.log(`${violations.length} UU-violation(s) detected - se attachments i Playwright GUI for detaljer`)
 
-    expect(violations.length, `${violations.length} UU-violation(s) funnet:\n\n${errorMessage}`).toBe(0)
+    expect(violations, `${violations.length} UU-violation(s) funnet:\n\n${errorMessage}`).toHaveLength(0)
 }
 
 export * from './types'

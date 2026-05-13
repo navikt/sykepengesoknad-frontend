@@ -2,14 +2,12 @@ import { expect, Page } from '@playwright/test'
 
 import { test } from './utils/fixtures'
 import {
+    apneReadmore,
     checkViStolerPaDeg,
     harSynligTekst,
     harSynligTittel,
     klikkGaVidere,
     neiOgVidere,
-    svarJaHovedsporsmal,
-    svarRadio,
-    velgTall,
 } from './utils/utilities'
 
 export async function sendSoknad(page: Page) {
@@ -50,47 +48,27 @@ test.describe('Selvstendig næringsdrivende - Virksomheten din', () => {
         await sendSoknad(page)
     })
 
+    test('Jobb underveis i sykefraværet 100%', async ({ page }) => {
+        await goToPage(page, 4)
+        await harSynligTittel(page, 'Jobb underveis i sykefraværet', 2)
+
+        await apneReadmore(page, 'Spørsmålet forklart', [
+            'Du kan begynne å jobbe selv om du er helt sykmeldt',
+            'Jobber du når du er sykmeldt må du registrere antall timer eller prosent',
+            'Opplysningene om arbeidsmengden er med på å beregne hvor mye du skal få utbetalt',
+        ])
+    })
+
     test('Opprettholdt inntekt', async ({ page }) => {
         await goToPage(page, 5)
         await harSynligTittel(page, 'Inntekt mens du var sykmeldt', 2)
 
-        await page.getByRole('button', { name: 'Spørsmålet forklart' }).click()
-        await harSynligTekst(page, 'hvis inntekten ikke skyldtes at du selv jobbet mens du var sykmeldt.')
-
-        await page.getByRole('radio', { name: 'Ja' }).click()
-        await harSynligTekst(
-            page,
-            'Vi trenger mer informasjon om denne inntekten. En saksbehandler vil derfor ta kontakt med deg.',
-        )
-
-        await klikkGaVidere(page)
-
-        await neiOgVidere(page, ['Andre inntektskilder'])
-        await neiOgVidere(page, ['Reise utenfor EU/EØS'])
-        await neiOgVidere(page, ['Opphold i utlandet'])
-        await neiOgVidere(page, ['Virksomheten din'])
-        await neiOgVidere(page, ['Ny i arbeidslivet'])
-        await neiOgVidere(page, ['Endringer i arbeidsituasjonen din'])
-        await sendSoknad(page)
-
-        await harSynligTekst(
-            page,
-            'Har du vært i utlandet i løpet av de siste 12 månedene før du ble sykmeldt 1.mai 2025?',
-        )
-    })
-
-    test('Opprettholdt inntekt gradert', async ({ page }) => {
-        await goToPage(page, 4)
-        await svarJaHovedsporsmal(page)
-        await svarRadio(page, 'Oppgi arbeidsmengde i timer eller prosent:', 'Timer')
-        await velgTall(page, 'Oppgi totalt antall timer du jobbet i perioden 1. - 24. april 2020', '12')
-        await svarRadio(page, 'Jobber du vanligvis 37,5 timer i uka?', 'JA')
-        await klikkGaVidere(page)
-
-        await harSynligTittel(page, 'Inntekt mens du var sykmeldt', 2)
-
-        await page.getByRole('button', { name: 'Spørsmålet forklart' }).click()
-        await harSynligTekst(page, 'hvis inntekten ikke skyldtes den delen du selv jobbet i perioden.')
+        await apneReadmore(page, 'Spørsmålet forklart', [
+            'hvis inntekten ikke skyldtes at du selv jobbet mens du var sykmeldt.',
+            'inntekt fra utleie',
+            'arbeid som en vikar utførte for deg',
+            'annen drift som gikk av seg selv uten at du jobbet',
+        ])
 
         await page.getByRole('radio', { name: 'Ja' }).click()
         await harSynligTekst(
@@ -118,8 +96,11 @@ test.describe('Selvstendig næringsdrivende - Virksomheten din', () => {
         await goToPage(page, 8)
         await harSynligTittel(page, 'Opphold i utlandet', 2)
 
-        await page.getByRole('button', { name: 'Spørsmålet forklart' }).click()
-        await harSynligTekst(page, 'For å ha rett til sykepenger, må du være medlem i folketrygden.')
+        await apneReadmore(page, 'Spørsmålet forklart', [
+            'For å ha rett til sykepenger, må du være medlem i folketrygden',
+            'kan det påvirke medlemskapet ditt',
+            'kun har hatt opphold som varte kortere enn 5 uker',
+        ])
 
         await page.getByRole('radio', { name: 'Ja' }).click()
 
@@ -140,11 +121,11 @@ test.describe('Selvstendig næringsdrivende - Virksomheten din', () => {
         await goToPage(page, 9)
         await harSynligTittel(page, 'Virksomheten din', 2)
 
-        await page.getByRole('button', { name: 'Spørsmålet forklart' }).click()
-        await harSynligTekst(
-            page,
+        await apneReadmore(page, 'Spørsmålet forklart', [
             'Hvis du avviklet virksomheten din før du ble sykmeldt, har du ikke rett til sykepenger som selvstendig næringsdrivende',
-        )
+            'slettet virksomheten din i Brønnøysundregistrene',
+            'virksomheten din fortsatt er i drift',
+        ])
 
         await page.getByRole('radio', { name: 'Ja' }).click()
 
@@ -171,11 +152,11 @@ test.describe('Selvstendig næringsdrivende - Virksomheten din', () => {
         await goToPage(page, 9)
         await harSynligTittel(page, 'Virksomheten din', 2)
 
-        await page.getByRole('button', { name: 'Spørsmålet forklart' }).click()
-        await harSynligTekst(
-            page,
+        await apneReadmore(page, 'Spørsmålet forklart', [
             'Hvis du avviklet virksomheten din før du ble sykmeldt, har du ikke rett til sykepenger som selvstendig næringsdrivende',
-        )
+            'slettet virksomheten din i Brønnøysundregistrene',
+            'virksomheten din fortsatt er i drift',
+        ])
 
         await page.getByRole('radio', { name: 'Nei' }).click()
         await klikkGaVidere(page)
@@ -190,11 +171,11 @@ test.describe('Selvstendig næringsdrivende - Virksomheten din', () => {
         await goToPage(page, 10)
         await harSynligTittel(page, 'Ny i arbeidslivet', 2)
 
-        await page.getByRole('button', { name: 'Spørsmålet forklart' }).click()
-        await harSynligTekst(
-            page,
-            'Hvis du har blitt yrkesaktiv innenfor perioden over, skal sykepengene dine fastsettes ved skjønn.',
-        )
+        await apneReadmore(page, 'Spørsmålet forklart', [
+            'Hvis du har blitt yrkesaktiv innenfor perioden over, skal sykepengene dine fastsettes ved skjønn',
+            'trenger vi dokumentasjon på inntekten du har hatt',
+            'næringsdrivende eller i andre arbeidsforhold',
+        ])
 
         await page.getByRole('radio', { name: 'Ja' }).click()
         await harSynligTekst(page, 'Når ble du yrkesaktiv?')
@@ -217,11 +198,11 @@ test.describe('Selvstendig næringsdrivende - Virksomheten din', () => {
         await goToPage(page, 10)
         await harSynligTittel(page, 'Ny i arbeidslivet', 2)
 
-        await page.getByRole('button', { name: 'Spørsmålet forklart' }).click()
-        await harSynligTekst(
-            page,
-            'Hvis du har blitt yrkesaktiv innenfor perioden over, skal sykepengene dine fastsettes ved skjønn.',
-        )
+        await apneReadmore(page, 'Spørsmålet forklart', [
+            'Hvis du har blitt yrkesaktiv innenfor perioden over, skal sykepengene dine fastsettes ved skjønn',
+            'trenger vi dokumentasjon på inntekten du har hatt',
+            'næringsdrivende eller i andre arbeidsforhold',
+        ])
 
         await page.getByRole('radio', { name: 'Nei' }).click()
         await klikkGaVidere(page)
@@ -235,11 +216,12 @@ test.describe('Selvstendig næringsdrivende - Virksomheten din', () => {
         await goToPage(page, 11)
         await harSynligTittel(page, 'Endringer i arbeidsituasjonen din', 2)
 
-        await page.getByRole('button', { name: 'Spørsmålet forklart' }).click()
-        await harSynligTekst(
-            page,
-            'Har det skjedd en varig endring i arbeidssituasjonen din mellom 1.januar 2020 og frem til du ble sykmeldt 1.mai 2025?',
-        )
+        await apneReadmore(page, 'Spørsmålet forklart', [
+            'Har det skjedd en varig endring i arbeidssituasjonen din',
+            'du har opprettet eller avviklet en virksomhet',
+            'du har lagt om, utvidet eller nedskalert en virksomhet',
+            'kundegrunnlaget ditt har endret seg',
+        ])
 
         await page.getByRole('radio', { name: 'Ja' }).click()
         await harSynligTekst(page, 'Hvilken varig endring har skjedd?')
