@@ -37,7 +37,7 @@ test.describe('Selvstendig næringsdrivende - Virksomheten din', () => {
         await checkViStolerPaDeg(page)
         await neiOgVidere(page, ['Fravær før du ble sykmeldt'])
         await neiOgVidere(page, ['Tilbake i fullt arbeid'])
-        await neiOgVidere(page, ['Jobb underveis i sykefraværet'])
+        await neiOgVidere(page, ['Arbeid mens du var syk'])
         await neiOgVidere(page, ['Inntekt mens du var sykmeldt'])
         await neiOgVidere(page, ['Andre inntektskilder'])
         await neiOgVidere(page, ['Reise utenfor EU/EØS'])
@@ -48,9 +48,9 @@ test.describe('Selvstendig næringsdrivende - Virksomheten din', () => {
         await sendSoknad(page)
     })
 
-    test('Jobb underveis i sykefraværet 100%', async ({ page }) => {
+    test('Arbeid mens du var syk 100%', async ({ page }) => {
         await goToPage(page, 4)
-        await harSynligTittel(page, 'Jobb underveis i sykefraværet', 2)
+        await harSynligTittel(page, 'Arbeid mens du var syk', 2)
 
         await apneReadmore(page, 'Spørsmålet forklart', [
             'Du kan begynne å jobbe selv om du er helt sykmeldt',
