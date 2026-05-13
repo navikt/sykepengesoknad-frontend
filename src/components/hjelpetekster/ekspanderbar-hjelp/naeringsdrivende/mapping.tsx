@@ -36,7 +36,10 @@ import {
     NaringsdrivendeOpprettholdtInntektGradertHjelpBody,
     naringsdrivendeOpprettholdtInntektGradertTittel,
 } from './naringsdrivende-opprettholdt-inntekt-gradert-hjelp-body'
-import { arbeidUnderveisNaeringsdrivendeTittel } from './arbeid-underveis-naeringsdrivende-hjelp-body'
+import {
+    ArbeidUnderveisNaeringsdrivendeHjelpBody,
+    arbeidUnderveisNaeringsdrivendeTittel,
+} from './arbeid-underveis-naeringsdrivende-hjelp-body'
 import {
     InntektsopplysningerNyIArbeidslivetHjelpBody,
     inntektsopplysningerNyIArbeidslivetTittel,
@@ -86,10 +89,10 @@ export const naringsdrivendeMapping = (sporsmal: Sporsmal): Record<string, Readm
     },
     ARBEID_UNDERVEIS_100_PROSENT_NAERINGSDRIVENDE: {
         tittel: arbeidUnderveisNaeringsdrivendeTittel,
-        komponent: <ArbeidUnderveisHjelpBody />,
+        komponent: <ArbeidUnderveisNaeringsdrivendeHjelpBody gradert={false} />,
     },
     JOBBET_DU_GRADERT_NAERINGSDRIVENDE: {
         tittel: arbeidUnderveisNaeringsdrivendeTittel,
-        komponent: <JobbetDuGradertArbeidstakerHjelpBody />,
+        komponent: <ArbeidUnderveisNaeringsdrivendeHjelpBody gradert={true} />,
     },
 })
