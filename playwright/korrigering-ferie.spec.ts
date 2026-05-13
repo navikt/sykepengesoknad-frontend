@@ -37,7 +37,7 @@ test.describe('Tester korrigering av ferie', () => {
         await test.step('Besvarer resten av søknaden med nei', async () => {
             await neiOgVidere(page, [
                 'Permisjon',
-                'Jobb underveis',
+                'Arbeid mens du var syk',
                 'Arbeid utenfor Norge',
                 'Andre inntektskilder',
                 'Reise utenfor EU/EØS',

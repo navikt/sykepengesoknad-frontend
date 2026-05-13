@@ -132,9 +132,8 @@ test.describe('Tester arbeidstakersøknad - 100%', () => {
             ).toBeVisible()
 
             await apneReadmore(page, 'Spørsmålet forklart', [
-                'Du kan begynne å jobbe selv om du er helt sykmeldt',
-                'Jobber du når du er sykmeldt må du registrere antall timer eller prosent',
-                'Opplysningene om arbeidsmengden er med på å beregne hvor mye du skal få utbetalt',
+                'Du kan avtale med lederen din å jobbe mer enn det som står i sykmeldingen.',
+                'Dersom du har gjort færre arbeidsoppgaver enn vanlig, men brukt lengre tid på dem',
             ])
 
             await page.locator('[data-cy="ja-nei-stor"] input[value="JA"]').click()

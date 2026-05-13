@@ -31,7 +31,7 @@ test.describe('Tester ettersending og korrigering', () => {
                 'Tilbake i fullt arbeid',
                 'Ferie',
                 'Permisjon',
-                'Jobb underveis i sykefraværet',
+                'Arbeid mens du var syk',
                 'Arbeid utenfor Norge',
                 'Andre inntektskilder',
                 'Reise utenfor EU/EØS',

@@ -96,9 +96,8 @@ test.describe('Tester arbeidstakersøknad - gradert 50%', () => {
             await expect(page).toHaveURL(new RegExp(`.*${soknadId}\/5`))
 
             await apneReadmore(page, 'Spørsmålet forklart', [
-                'Du kan avtale med lederen din å jobbe mer enn det sykmeldingen tilsier',
-                'Tiden du har jobbet totalt inkluderer det legen din har oppgitt',
-                'Dette kan også bety at du kan ha færre arbeidsoppgaver men bruke lenger tid på dem',
+                'Du kan avtale med lederen din å jobbe mer enn det som står i sykmeldingen.',
+                'Dersom du har gjort færre arbeidsoppgaver enn vanlig, men brukt lengre tid på dem',
             ])
 
             await page.locator('[data-cy="ja-nei-stor"] input[value="JA"]').click()

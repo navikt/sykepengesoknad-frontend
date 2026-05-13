@@ -17,7 +17,7 @@ test.describe('Opphold utenfor EU/EØS', () => {
                 'Tilbake i fullt arbeid',
                 'Ferie',
                 'Permisjon',
-                'Jobb underveis i sykefraværet',
+                'Arbeid mens du var syk',
                 'Andre inntektskilder',
             ])
             await expect(page.getByRole('heading', { level: 2, name: 'Reise utenfor EU/EØS' })).toBeVisible()

@@ -103,7 +103,7 @@ test.describe('Tester søknad til utenlandsk sykmelding', () => {
                 'Tilbake i fullt arbeid',
                 'Ferie',
                 'Permisjon',
-                'Jobb underveis i sykefraværet',
+                'Arbeid mens du var syk',
                 'Arbeid utenfor Norge',
             ])
             await neiOgVidere(page, ['Andre inntektskilder', 'Reise utenfor EU/EØS'])

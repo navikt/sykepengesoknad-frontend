@@ -2,8 +2,6 @@ import React from 'react'
 
 import { Sporsmal } from '../../../../types/types'
 import { ReadmoreTittelOgKomponent } from '../ekspanderbar-hjelp'
-import { ArbeidUnderveisHjelpBody } from '../arbeidstaker/arbeid-underveis-hjelp-body'
-import { JobbetDuGradertArbeidstakerHjelpBody } from '../arbeidstaker/jobbet-du-gradert-arbeidstaker-hjelp-body'
 
 import { EndringSNHjelpBody, endringSNTittel } from './utdatert/endring-sn-hjelp-body'
 import {
@@ -36,7 +34,10 @@ import {
     NaringsdrivendeOpprettholdtInntektGradertHjelpBody,
     naringsdrivendeOpprettholdtInntektGradertTittel,
 } from './naringsdrivende-opprettholdt-inntekt-gradert-hjelp-body'
-import { arbeidUnderveisNaeringsdrivendeTittel } from './arbeid-underveis-naeringsdrivende-hjelp-body'
+import {
+    ArbeidUnderveisNaeringsdrivendeHjelpBody,
+    arbeidUnderveisNaeringsdrivendeTittel,
+} from './arbeid-underveis-naeringsdrivende-hjelp-body'
 import {
     InntektsopplysningerNyIArbeidslivetHjelpBody,
     inntektsopplysningerNyIArbeidslivetTittel,
@@ -86,10 +87,10 @@ export const naringsdrivendeMapping = (sporsmal: Sporsmal): Record<string, Readm
     },
     ARBEID_UNDERVEIS_100_PROSENT_NAERINGSDRIVENDE: {
         tittel: arbeidUnderveisNaeringsdrivendeTittel,
-        komponent: <ArbeidUnderveisHjelpBody />,
+        komponent: <ArbeidUnderveisNaeringsdrivendeHjelpBody gradert={false} />,
     },
     JOBBET_DU_GRADERT_NAERINGSDRIVENDE: {
         tittel: arbeidUnderveisNaeringsdrivendeTittel,
-        komponent: <JobbetDuGradertArbeidstakerHjelpBody />,
+        komponent: <ArbeidUnderveisNaeringsdrivendeHjelpBody gradert={true} />,
     },
 })
