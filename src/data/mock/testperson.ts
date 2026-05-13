@@ -76,7 +76,6 @@ type PersonaKey =
     | 'to-eldre-usendte-soknader'
     | 'bare-utland'
     | 'selvstendig-naringsdrivende'
-    | 'selvstendig-naringsdrivende-uten-sigrun'
     | 'brukertest'
     | 'har-kontonummer'
     | 'har-ikke-kontonummer'

@@ -5,21 +5,19 @@ import { RSSporsmal } from '../../../../types/rs-types/rs-sporsmal'
 import { RSSoknad } from '../../../../types/rs-types/rs-soknad'
 import {
     inntektsopplysningerNaringsdrivende,
-    naringsdrivendeVirksomhetenAvviklet,
     naringsdrivendeNyIArbeidslivet,
     naringsdrivendeVarigEndring,
+    naringsdrivendeVirksomhetenAvviklet,
 } from '../sporsmal/inntektsopplysninger-naringsdrivende'
 
 import { Persona } from './personas'
 
-const soknadMedInntektsopplysninger1 = lagSoknadMedInntektsopplysninger('bd6f6207-3888-4210-a4c0-cbe6806b5d00', [
-    inntektsopplysningerNaringsdrivende,
-])
-lagSoknadMedInntektsopplysninger('2faff926-5261-42e5-927b-02e4aa44a7ad', [inntektsopplysningerNaringsdrivende])
 export const selvstendigNaringsdrivendePerson: Persona = {
-    soknader: [soknadMedInntektsopplysninger1],
+    soknader: [
+        lagSoknadMedInntektsopplysninger('bd6f6207-3888-4210-a4c0-cbe6806b5d00', [inntektsopplysningerNaringsdrivende]),
+    ],
     sykmeldinger: [naringsdrivende100syk],
-    beskrivelse: 'Selvstendig næringsdrivende med inntektsopplysninger',
+    beskrivelse: 'Selvstendig næringsdrivende',
 }
 
 const soknadMedNyttSporsmalOmVirksomhetenDin = lagSoknadMedInntektsopplysninger(
