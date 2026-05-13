@@ -2,8 +2,6 @@ import React from 'react'
 
 import { Sporsmal } from '../../../../types/types'
 import { ReadmoreTittelOgKomponent } from '../ekspanderbar-hjelp'
-import { ArbeidUnderveisHjelpBody } from '../arbeidstaker/arbeid-underveis-hjelp-body'
-import { JobbetDuGradertArbeidstakerHjelpBody } from '../arbeidstaker/jobbet-du-gradert-arbeidstaker-hjelp-body'
 
 import { EndringSNHjelpBody, endringSNTittel } from './utdatert/endring-sn-hjelp-body'
 import {

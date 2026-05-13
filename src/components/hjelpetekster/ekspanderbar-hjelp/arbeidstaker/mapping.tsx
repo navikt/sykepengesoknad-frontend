@@ -16,7 +16,6 @@ import {
     fravarForSykmeldingenV2Tittel,
 } from './fravar-for-sykmeldingen-v2-hjelp-body'
 import { ProsentenLavereHjelpBody, prosentenLavereTittel } from './prosenten-lavere-hjelp-body'
-import { JobbetDuGradertArbeidstakerHjelpBody } from './jobbet-du-gradert-arbeidstaker-hjelp-body'
 
 export const arbeidstakerMapping = (): Record<string, ReadmoreTittelOgKomponent> => ({
     TILBAKE_I_ARBEID: { tittel: tilbakeIArbeidTittel, komponent: <TilbakeIArbeidHjelpBody /> },
