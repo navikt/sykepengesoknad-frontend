@@ -15,8 +15,6 @@ import { tekstMedHtml } from '../../../utils/html-react-parser-utils'
 import { EkspanderbarHjelp } from '../../hjelpetekster/ekspanderbar-hjelp/ekspanderbar-hjelp'
 import { VarigEndringEksempler } from '../../hjelpetekster/varig-endring-eksempler'
 import { VarigEndringAlert } from '../../hjelpetekster/varig-endring-alert'
-import { formatterTall } from '../../../utils/utils'
-import { erSigrunInntekt, SigrunInntekt } from '../../../types/types'
 import { logEvent } from '../../umami/umami'
 import { useSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
 import { FortsattArbeidssoker } from '../../hjelpetekster/friskmeldt-til-arbeidsformidling/fortsatt-arbeidssoker'
@@ -66,13 +64,6 @@ const JaNeiLiten = ({ sporsmal }: SpmProps) => {
         } else return <></>
     }
 
-    const erVarigEndring25Prosent = sporsmal.tag === 'INNTEKTSOPPLYSNINGER_VARIG_ENDRING_25_PROSENT'
-    let sigrunInntekt: SigrunInntekt | null = null
-
-    if (erVarigEndring25Prosent && erSigrunInntekt(sporsmal.metadata?.sigrunInntekt)) {
-        sigrunInntekt = sporsmal.metadata?.sigrunInntekt as SigrunInntekt
-    }
-
     return (
         <>
             <div
@@ -115,19 +106,6 @@ const JaNeiLiten = ({ sporsmal }: SpmProps) => {
                             description={sporsmal.undertekst}
                             error={fieldState.error && feilmelding.lokal}
                         >
-                            {erVarigEndring25Prosent && sigrunInntekt && (
-                                <>
-                                    <BodyShort spacing>
-                                        Din gjennomsnittlige årsinntekt på sykmeldingstidspunktet:{' '}
-                                        <strong>{formatterTall(sigrunInntekt.beregnet.snitt)}</strong> kroner.
-                                    </BodyShort>
-                                    <BodyShort>
-                                        Har du en årsinntekt som gjør at du tjener mindre enn{' '}
-                                        <strong>{formatterTall(sigrunInntekt.beregnet.m25)}</strong> kroner eller mer
-                                        enn <strong>{formatterTall(sigrunInntekt.beregnet.p25)}</strong> kroner?
-                                    </BodyShort>
-                                </>
-                            )}
                             <EkspanderbarHjelp sporsmal={sporsmal} mb="mb-4" />
 
                             <Fragment key={sporsmal.id}>

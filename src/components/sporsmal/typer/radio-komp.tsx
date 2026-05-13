@@ -1,4 +1,4 @@
-import { BodyShort, Radio, RadioGroup } from '@navikt/ds-react'
+import { Radio, RadioGroup } from '@navikt/ds-react'
 import React from 'react'
 import { Controller, useFormContext } from 'react-hook-form'
 
@@ -7,11 +7,10 @@ import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
 import { EkspanderbarHjelp } from '../../hjelpetekster/ekspanderbar-hjelp/ekspanderbar-hjelp'
 import { NyIArbeidslivertAlert } from '../../hjelpetekster/ny-i-arbeidslivert-alert'
 import { cn } from '../../../utils/tw-utils'
-import { erSigrunInntekt, SigrunInntekt, Sporsmal } from '../../../types/types'
+import { Sporsmal } from '../../../types/types'
 import { useRadiogruppeTastaturNavigasjon } from '../../../utils/tastatur-navigasjon'
 import { logEvent } from '../../umami/umami'
 import { useSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
-import { hentUndersporsmal } from '../../../utils/soknad-utils'
 
 import { jaNeiStorStyle, JaNeiStyle } from './ja-nei-stor-style'
 import { BeregningSykepengegrunnlagInfo } from './beregning-sykepengegrunnlag-info'
@@ -36,11 +35,6 @@ const RadioKomp = ({ sporsmal, erHovedsporsmal }: { sporsmal: Sporsmal; erHoveds
         sporsmal.undersporsmal.some((uspm) => uspm.sporsmalstekst == 'Ja') &&
         sporsmal.undersporsmal.some((uspm) => uspm.sporsmalstekst == 'Nei') &&
         erHovedsporsmal
-
-    const varigEndringSporsmal = hentUndersporsmal(sporsmal, 'INNTEKTSOPPLYSNINGER_VARIG_ENDRING_25_PROSENT')
-    const inntektMetadata = erSigrunInntekt(varigEndringSporsmal?.metadata?.sigrunInntekt)
-        ? (varigEndringSporsmal.metadata?.sigrunInntekt as SigrunInntekt)
-        : undefined
 
     return (
         <>
@@ -74,12 +68,6 @@ const RadioKomp = ({ sporsmal, erHovedsporsmal }: { sporsmal: Sporsmal; erHoveds
                         className={cn({ 'mt-8': !erHovedJaNei })}
                         data-cy="radio-komp"
                     >
-                        {sporsmal.tag === 'INNTEKTSOPPLYSNINGER_NY_I_ARBEIDSLIVET' && inntektMetadata !== undefined && (
-                            <BodyShort size="small" className="text-text-subtle">
-                                Datoen er første dag i det første av tre av de ferdiglignede årene.
-                            </BodyShort>
-                        )}
-
                         <EkspanderbarHjelp
                             sporsmal={sporsmal}
                             key="radio-komp-hjelp"

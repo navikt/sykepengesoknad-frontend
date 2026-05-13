@@ -37,7 +37,6 @@ import { egenmeldingSykmeldingaPerson } from './data/personas/egenmeldingsdager-
 import {
     selvstendigNaringsdrivendePerson,
     selvstendigNaringsdrivendeSendtPerson,
-    selvstendigNaringsdrivendeUtenSigrunPerson,
     selvstendigNaringsdrivendeVirksomhetenDinPerson,
 } from './data/personas/naringsdrivende'
 import { korrigeringsfristUtloptPerson } from './data/personas/korrigeringsfrist-utlopt'
@@ -151,7 +150,6 @@ export function testpersonerGruppert(): PersonaGroup {
         },
         ['selvstendig-naringsdrivende']: {
             ['selvstendig-naringsdrivende']: jsonDeepCopy(selvstendigNaringsdrivendePerson),
-            ['selvstendig-naringsdrivende-uten-sigrun']: jsonDeepCopy(selvstendigNaringsdrivendeUtenSigrunPerson),
             ['selvstendig-naringsdrivende-sendt']: jsonDeepCopy(selvstendigNaringsdrivendeSendtPerson),
             ['selvstendig-naringsdrivende-virksomheten-din']: jsonDeepCopy(
                 selvstendigNaringsdrivendeVirksomhetenDinPerson,

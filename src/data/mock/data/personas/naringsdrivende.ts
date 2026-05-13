@@ -4,7 +4,6 @@ import { deepcopyMedNyId } from '../../deepcopyMedNyId'
 import { RSSporsmal } from '../../../../types/rs-types/rs-sporsmal'
 import { RSSoknad } from '../../../../types/rs-types/rs-soknad'
 import {
-    inntektsopplysningerMedSigrunData,
     inntektsopplysningerNaringsdrivende,
     naringsdrivendeVirksomhetenAvviklet,
     naringsdrivendeNyIArbeidslivet,
@@ -13,24 +12,14 @@ import {
 
 import { Persona } from './personas'
 
-const soknadMedSigrunData = lagSoknadMedInntektsopplysninger('bd6f6207-3888-4210-a4c0-cbe6806b5d00', [
-    inntektsopplysningerMedSigrunData,
-])
-
-const soknadUtenSigrunData = lagSoknadMedInntektsopplysninger('2faff926-5261-42e5-927b-02e4aa44a7ad', [
+const soknadMedInntektsopplysninger1 = lagSoknadMedInntektsopplysninger('bd6f6207-3888-4210-a4c0-cbe6806b5d00', [
     inntektsopplysningerNaringsdrivende,
 ])
-
+lagSoknadMedInntektsopplysninger('2faff926-5261-42e5-927b-02e4aa44a7ad', [inntektsopplysningerNaringsdrivende])
 export const selvstendigNaringsdrivendePerson: Persona = {
-    soknader: [soknadMedSigrunData],
+    soknader: [soknadMedInntektsopplysninger1],
     sykmeldinger: [naringsdrivende100syk],
-    beskrivelse: 'Selvstendig næringsdrivende med Sigrun-data',
-}
-
-export const selvstendigNaringsdrivendeUtenSigrunPerson: Persona = {
-    soknader: [soknadUtenSigrunData],
-    sykmeldinger: [naringsdrivende100syk],
-    beskrivelse: 'Selvstendig næringsdrivende uten Sigrun-data',
+    beskrivelse: 'Selvstendig næringsdrivende med inntektsopplysninger',
 }
 
 const soknadMedNyttSporsmalOmVirksomhetenDin = lagSoknadMedInntektsopplysninger(
