@@ -39,7 +39,7 @@
         "uuid": "^14.0.0"
     },
     "devDependencies": {
-        "@axe-core/playwright": "^4.11.2",
+        "@axe-core/playwright": "^4.11.3",
         "@navikt/eslint-config-teamsykmelding": "^7.1.0",
         "@playwright/test": "^1.59.1",
         "@tailwindcss/postcss": "^4.2.2",
