@@ -1,6 +1,5 @@
 import React from 'react'
 
-import { Sporsmal } from '../../../../types/types'
 import { ReadmoreTittelOgKomponent } from '../ekspanderbar-hjelp'
 
 import { EndringSNHjelpBody, endringSNTittel } from './utdatert/endring-sn-hjelp-body'
@@ -43,11 +42,11 @@ import {
     inntektsopplysningerNyIArbeidslivetTittel,
 } from './utdatert/inntektsopplysninger-ny-i-arbeidslivet-hjelp-body'
 
-export const naringsdrivendeMapping = (sporsmal: Sporsmal): Record<string, ReadmoreTittelOgKomponent> => ({
+export const naringsdrivendeMapping = (): Record<string, ReadmoreTittelOgKomponent> => ({
     INNTEKTSKILDE_SELVSTENDIG_VARIG_ENDRING_GRUPPE: { tittel: endringSNTittel, komponent: <EndringSNHjelpBody /> },
     INNTEKTSOPPLYSNINGER_VARIG_ENDRING_25_PROSENT: {
         tittel: varigEndring25prosentTittel,
-        komponent: <VarigEndring25prosentHjelpBody sporsmal={sporsmal} />,
+        komponent: <VarigEndring25prosentHjelpBody />,
     },
     INNTEKTSOPPLYSNINGER_DRIFT_VIRKSOMHETEN: {
         tittel: driftIVirksomhetTittel,

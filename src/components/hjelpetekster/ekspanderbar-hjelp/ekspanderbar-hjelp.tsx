@@ -5,8 +5,7 @@ import { RSArbeidssituasjon } from '../../../types/rs-types/rs-arbeidssituasjon'
 import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype'
 import { logEvent } from '../../umami/umami'
 import { useSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
-import { erSigrunInntekt, SigrunInntekt, Sporsmal } from '../../../types/types'
-import { formatterTall } from '../../../utils/utils'
+import { Sporsmal } from '../../../types/types'
 
 import { SporsmalTagMedHjelpetekst } from './types'
 import { arbeidstakerMapping } from './arbeidstaker/mapping'
@@ -53,7 +52,7 @@ export const EkspanderbarHjelp = ({ sporsmal, mb }: { sporsmal: Sporsmal; mb?: s
     const sporsmalTagTilReadmoreMapping: Record<string, ReadmoreTittelOgKomponent> = {
         ...fellesMapping(),
         ...arbeidstakerMapping(),
-        ...naringsdrivendeMapping(sporsmal),
+        ...naringsdrivendeMapping(),
         ...medlemskapMapping(),
         ...ftaMapping(),
         ...reisetilskuddMapping(),
@@ -65,21 +64,10 @@ export const EkspanderbarHjelp = ({ sporsmal, mb }: { sporsmal: Sporsmal; mb?: s
         return null
     }
 
-    function lagTittel(): string {
-        if (
-            sporsmal.tag === 'INNTEKTSOPPLYSNINGER_VARIG_ENDRING_25_PROSENT' &&
-            erSigrunInntekt(sporsmal.metadata?.sigrunInntekt)
-        ) {
-            const { beregnet } = sporsmal.metadata?.sigrunInntekt as SigrunInntekt
-            return `Hvordan har vi kommet frem til ${formatterTall(beregnet.snitt)} kroner?`
-        }
-        return readmore.tittel
-    }
-
     return (
         <ReadMore
             className={`${mb ?? 'mb-8'} mt-4 w-full`}
-            header={lagTittel()}
+            header={readmore.tittel}
             open={expanded}
             onClick={() => {
                 function vaskTittel(tittel: string): string {
@@ -90,7 +78,7 @@ export const EkspanderbarHjelp = ({ sporsmal, mb }: { sporsmal: Sporsmal; mb?: s
                 }
 
                 logEvent(expanded ? 'readmore lukket' : 'readmore åpnet', {
-                    tittel: vaskTittel(lagTittel()),
+                    tittel: vaskTittel(readmore.tittel),
                     component: 'hjelpetekst',
                     spørsmål: sporsmalTag || '',
                 })
