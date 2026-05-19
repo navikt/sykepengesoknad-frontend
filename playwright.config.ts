@@ -17,7 +17,9 @@ type OptionsType = {
 
 const createOptions = (medDekorator = false, port = 3000): OptionsType => {
     const timeout = process.env.CI ? 30 * 1000 : 120 * 2 * 1000
-    const baseURL = `http://localhost:${port}`
+    const baseURL = process.env.CI
+        ? ((medDekorator ? process.env.APP_DECORATOR_BASEURL : process.env.APP_BASEURL) ?? `http://localhost:${port}`)
+        : `http://localhost:${port}`
 
     if (process.env.CI) {
         return { baseURL, timeout: 30 * 1000, server: undefined }

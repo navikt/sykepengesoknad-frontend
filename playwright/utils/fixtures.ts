@@ -16,10 +16,12 @@ export const test = base.extend<{ uuOptions: UUOptions }>({
 })
 
 test.beforeEach(async ({ context, page }) => {
+    await context.clearCookies()
+
+    // Skjul dev-tools hint så de ikke er i veien for visuelle tester.
     await page.addInitScript(() => {
         window.localStorage.setItem('devtools-hint', 'false')
     })
-    await context.clearCookies()
     await fjernAnimasjoner(page)
 })
 
@@ -30,12 +32,3 @@ test.afterEach(async ({ page, uuOptions, browserName }, testInfo) => {
 })
 
 export { expect }
-
-export const testUtenUU = base.extend<{ uuOptions: UUOptions }>({
-    uuOptions: [{ skipUU: true, disableRules: [] }, { option: true }],
-})
-
-export const testMedDisabledRules = (rules: string[]) =>
-    base.extend<{ uuOptions: UUOptions }>({
-        uuOptions: [{ skipUU: false, disableRules: rules }, { option: true }],
-    })
