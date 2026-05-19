@@ -14,7 +14,7 @@ export const NaringsdrivendeOpprettholdtInntektHjelpBody = () => {
                     <BodyShort>inntekt fra utleie</BodyShort>
                 </List.Item>
                 <List.Item>
-                    <BodyShort>arbeid som en vikar utførte for deg</BodyShort>
+                    <BodyShort>arbeid som en vikar utførte for deg, som gir et overskudd</BodyShort>
                 </List.Item>
                 <List.Item>
                     <BodyShort>annen drift som gikk av seg selv uten at du jobbet</BodyShort>
