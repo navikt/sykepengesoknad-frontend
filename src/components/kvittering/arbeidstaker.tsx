@@ -93,7 +93,11 @@ const Arbeidstaker = () => {
             case 'inntil16dager':
                 return <Inntil16dager />
             case 'over16dager':
-                return <Over16dager erGradert={valgtSoknad?.soknadstype === RSSoknadstype.GRADERT_REISETILSKUDD} />
+                return (
+                    <Over16dager
+                        erGradertReisetilskudd={valgtSoknad?.soknadstype === RSSoknadstype.GRADERT_REISETILSKUDD}
+                    />
+                )
             case 'utenOpphold':
                 return <PerioderUtenOpphold />
             case 'medOpphold':
