@@ -37,17 +37,19 @@ export class RSSoknadmetadata {
         this.soknadstype = json.soknadstype
         this.status = json.status
         this.arbeidssituasjon = json.arbeidssituasjon
-        this.fom = toDate(json.fom)
-        this.tom = toDate(json.tom)
+        this.fom = json.fom ? toDate(json.fom) : undefined
+        this.tom = json.tom ? toDate(json.tom) : undefined
         this.korrigerer = json.korrigerer
         this.korrigertAv = json.korrigertAv
         this.egenmeldtSykmelding = json.egenmeldtSykmelding
-        this.avbruttDato = toDate(json.avbruttDato)
-        this.sykmeldingUtskrevet = toDate(json.sykmeldingUtskrevet)
-        this.startSykeforlop = toDate(json.startSykeforlop)
+        this.avbruttDato = json.avbruttDato ? toDate(json.avbruttDato) : undefined
+        this.sykmeldingUtskrevet = json.sykmeldingUtskrevet ? toDate(json.sykmeldingUtskrevet) : undefined
+        this.startSykeforlop = json.startSykeforlop ? toDate(json.startSykeforlop) : undefined
         this.opprettetDato = toDate(json.opprettetDato)!
-        this.sendtTilNAVDato = toDate(json.sendtTilNAVDato)
-        this.sendtTilArbeidsgiverDato = toDate(json.sendtTilArbeidsgiverDato)
+        this.sendtTilNAVDato = json.sendtTilNAVDato ? toDate(json.sendtTilNAVDato) : undefined
+        this.sendtTilArbeidsgiverDato = json.sendtTilArbeidsgiverDato
+            ? toDate(json.sendtTilArbeidsgiverDato)
+            : undefined
         if (json.arbeidsgiver) {
             this.arbeidsgiver = {
                 navn: json.arbeidsgiver.navn,
