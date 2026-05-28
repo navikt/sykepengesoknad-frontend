@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useController } from 'react-hook-form'
 import { BodyShort, DatePicker, DateValidationT, useDatepicker } from '@navikt/ds-react'
 
+import { toDate } from '../../../utils/dato-utils'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
 import validerDato from '../../../utils/sporsmal/valider-dato'
@@ -20,8 +21,8 @@ function DatoInput(props: SpmProps) {
     })
 
     const { datepickerProps, inputProps } = useDatepicker({
-        fromDate: sporsmal.min ? new Date(sporsmal.min) : new Date('1900'),
-        toDate: sporsmal.max ? new Date(sporsmal.max) : new Date('2100'),
+        fromDate: sporsmal.min ? toDate(sporsmal.min) : new Date('1900'),
+        toDate: sporsmal.max ? toDate(sporsmal.max) : new Date('2100'),
         defaultMonth: maanedKalenderApnesPa(sporsmal.min, sporsmal.max),
         allowTwoDigitYear: false,
         defaultSelected: field.value,

@@ -1,10 +1,10 @@
-import dayjs from 'dayjs'
+import { getDay, isBefore as isBeforeDate } from 'date-fns'
 import { useFormContext } from 'react-hook-form'
 
 import { hentPeriodeListe, hentSvar } from '../../components/sporsmal/hent-svar'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 import { Sporsmal } from '../../types/types'
-import { ukeDatoListe } from '../dato-utils'
+import { toDate, ukeDatoListe } from '../dato-utils'
 import { finnHovedSporsmal, hentSporsmal, hentUndersporsmal } from '../soknad-utils'
 import { getLedetekst, tekst } from '../tekster'
 import { useSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
@@ -26,10 +26,10 @@ const useValiderArbeidsgrad = (sporsmal: Sporsmal) => {
 
     const sykedagerForFrilansere = () => {
         return periodeDager
-            .filter((dag) => dag.day() !== 0 && dag.day() !== 6)
+            .filter((dag) => getDay(dag) !== 0 && getDay(dag) !== 6)
             .filter((dag) => {
                 if (tilbake !== '') {
-                    return dag < dayjs(tilbake)
+                    return isBeforeDate(dag, toDate(tilbake))
                 } else {
                     return true
                 }
@@ -47,10 +47,10 @@ const useValiderArbeidsgrad = (sporsmal: Sporsmal) => {
 
         return periodeDager
             .filter((dag) => !ekskluderteDager.find((ekskludertDag) => ekskludertDag.toString() === dag.toString()))
-            .filter((dag) => dag.day() !== 0 && dag.day() !== 6)
+            .filter((dag) => getDay(dag) !== 0 && getDay(dag) !== 6)
             .filter((dag) => {
                 if (tilbake !== '') {
-                    return dag < dayjs(tilbake)
+                    return isBeforeDate(dag, toDate(tilbake))
                 } else {
                     return true
                 }

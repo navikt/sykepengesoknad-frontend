@@ -1,9 +1,10 @@
 import { Button, DatePicker, RangeValidationT, useRangeDatepicker } from '@navikt/ds-react'
-import dayjs from 'dayjs'
+import { format } from 'date-fns'
 import React, { useState } from 'react'
 import { useController, useFormContext } from 'react-hook-form'
 import { TrashIcon } from '@navikt/aksel-icons'
 
+import { toDate } from '../../../utils/dato-utils'
 import { validerFom, validerPeriode, validerTom } from '../../../utils/sporsmal/valider-periode'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { kalenderMedDropdownCaption, maanedKalenderApnesPa } from '../sporsmal-utils'
@@ -39,19 +40,19 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode, antallPerioder }: AllProps
     })
 
     const { datepickerProps, toInputProps, fromInputProps } = useRangeDatepicker({
-        fromDate: sporsmal.min ? new Date(sporsmal.min) : new Date('1900'),
-        toDate: sporsmal.max ? new Date(sporsmal.max) : new Date('2100'),
+        fromDate: sporsmal.min ? toDate(sporsmal.min) : new Date('1900'),
+        toDate: sporsmal.max ? toDate(sporsmal.max) : new Date('2100'),
         defaultMonth: maanedKalenderApnesPa(sporsmal.min, sporsmal.max),
         allowTwoDigitYear: false,
         defaultSelected: field.value
             ? {
-                  from: dayjs(field.value.fom).toDate(),
-                  to: dayjs(field.value.tom).toDate(),
+                  from: toDate(field.value.fom),
+                  to: toDate(field.value.tom),
               }
             : undefined,
         onRangeChange: (range) => {
-            const fom = range?.from ? dayjs(range.from).format('YYYY-MM-DD') : ''
-            const tom = range?.to ? dayjs(range.to).format('YYYY-MM-DD') : ''
+            const fom = range?.from ? format(range.from, 'yyyy-MM-dd') : ''
+            const tom = range?.to ? format(range.to, 'yyyy-MM-dd') : ''
             const nyPeriode = { fom: fom, tom: tom }
             field.onChange(nyPeriode)
         },
