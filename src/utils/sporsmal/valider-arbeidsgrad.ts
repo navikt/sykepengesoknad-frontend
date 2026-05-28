@@ -46,7 +46,7 @@ const useValiderArbeidsgrad = (sporsmal: Sporsmal) => {
         const ekskluderteDager = [feriedager, permisjonsdager].flat()
 
         return periodeDager
-            .filter((dag) => !ekskluderteDager.find((ekskludertDag) => ekskludertDag.toString() === dag.toString()))
+            .filter((dag) => !ekskluderteDager.find((ekskludertDag) => ekskludertDag.getTime() === dag.getTime()))
             .filter((dag) => getDay(dag) !== 0 && getDay(dag) !== 6)
             .filter((dag) => {
                 if (tilbake !== '') {

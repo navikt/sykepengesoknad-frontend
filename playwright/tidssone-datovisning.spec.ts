@@ -76,9 +76,7 @@ test.describe('Tidssone: DatePicker fromDate-grense', () => {
         test('DatePicker blokkerer navigering forbi januar 2020', async ({ page }) => {
             test.setTimeout(60000)
 
-            await page.goto(
-                `/syk/sykepengesoknad/soknader/${arbeidsledigId}/1?testperson=integrasjon-soknader`,
-            )
+            await page.goto(`/syk/sykepengesoknad/soknader/${arbeidsledigId}/1?testperson=integrasjon-soknader`)
 
             await checkViStolerPaDeg(page)
 
@@ -102,9 +100,7 @@ test.describe('Tidssone: DatePicker fromDate-grense', () => {
         test('DatePicker blokkerer navigering forbi januar 2020', async ({ page }) => {
             test.setTimeout(60000)
 
-            await page.goto(
-                `/syk/sykepengesoknad/soknader/${arbeidsledigId}/1?testperson=integrasjon-soknader`,
-            )
+            await page.goto(`/syk/sykepengesoknad/soknader/${arbeidsledigId}/1?testperson=integrasjon-soknader`)
 
             await checkViStolerPaDeg(page)
 

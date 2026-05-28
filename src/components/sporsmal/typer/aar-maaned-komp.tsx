@@ -19,9 +19,9 @@ function AarMaanedInput(props: SpmProps) {
     })
 
     const { monthpickerProps, inputProps } = useMonthpicker({
-        fromDate: sporsmal.min ? toDate(sporsmal.min) : new Date('1900'),
-        toDate: sporsmal.max ? toDate(sporsmal.max) : new Date('2100'),
-        defaultYear: sporsmal.max ? toDate(sporsmal.max) : new Date('2100'),
+        fromDate: sporsmal.min ? toDate(sporsmal.min) : toDate('1900-01-01'),
+        toDate: sporsmal.max ? toDate(sporsmal.max) : toDate('2100-01-01'),
+        defaultYear: sporsmal.max ? toDate(sporsmal.max) : toDate('2100-01-01'),
         allowTwoDigitYear: false,
         locale: 'nb',
         onMonthChange: field.onChange,
