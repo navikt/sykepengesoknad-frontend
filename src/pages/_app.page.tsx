@@ -1,8 +1,6 @@
 import '../style/global.css'
 
 import { configureLogger, logger } from '@navikt/next-logger'
-import dayjs from 'dayjs'
-import nb from 'dayjs/locale/nb'
 import { AppProps } from 'next/app'
 import Head from 'next/head'
 import React, { ReactElement, useEffect, useRef } from 'react'
@@ -17,11 +15,6 @@ import { getFaro, initInstrumentation, pinoLevelToFaroLevel } from '../faro/faro
 import { AuthenticationError } from '../utils/fetch'
 import { FlagProvider } from '../toggles/context'
 import { ServerSidePropsResult } from '../auth/beskyttetSide'
-
-dayjs.locale({
-    ...nb,
-    weekStart: 1,
-})
 
 initInstrumentation()
 configureLogger({
