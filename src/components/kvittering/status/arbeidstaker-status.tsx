@@ -1,5 +1,6 @@
 import { Detail } from '@navikt/ds-react'
-import dayjs from 'dayjs'
+import { format } from 'date-fns'
+import { nb } from 'date-fns/locale/nb'
 import React from 'react'
 
 import { tekst } from '../../../utils/tekster'
@@ -17,12 +18,12 @@ const ArbeidstakerStatus = () => {
     }
 
     const tilNavDato = () => {
-        const datoNav = dayjs(valgtSoknad?.sendtTilNAVDato).format('dddd D. MMM, kl HH:mm')
+        const datoNav = format(valgtSoknad!.sendtTilNAVDato!, "EEEE d. MMM, 'kl' HH:mm", { locale: nb })
         return datoNav.charAt(0).toUpperCase() + datoNav.slice(1)
     }
 
     const tilArbDato = () => {
-        const datoArb = dayjs(valgtSoknad?.sendtTilArbeidsgiverDato).format('dddd D. MMM, kl HH:mm')
+        const datoArb = format(valgtSoknad!.sendtTilArbeidsgiverDato!, "EEEE d. MMM, 'kl' HH:mm", { locale: nb })
         return datoArb.charAt(0).toUpperCase() + datoArb.slice(1)
     }
 

@@ -1,5 +1,6 @@
 import { Alert, BodyShort, Heading } from '@navikt/ds-react'
-import dayjs from 'dayjs'
+import { format } from 'date-fns'
+import { nb } from 'date-fns/locale/nb'
 import React from 'react'
 
 import { tekst } from '../../../utils/tekster'
@@ -14,7 +15,7 @@ const KvitteringStatus = () => {
     const { valgtSoknad } = useSoknadMedDetaljer()
 
     const tilNavDato = () => {
-        const datoNav = dayjs(valgtSoknad!.sendtTilNAVDato).format('dddd D. MMM, kl HH:mm')
+        const datoNav = format(valgtSoknad!.sendtTilNAVDato!, "EEEE d. MMM, 'kl' HH:mm", { locale: nb })
         return datoNav.charAt(0).toUpperCase() + datoNav.slice(1)
     }
 

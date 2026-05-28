@@ -1,4 +1,5 @@
-import dayjs from 'dayjs'
+import { format } from 'date-fns'
+import { nb } from 'date-fns/locale/nb'
 import { BodyShort, Box, Label, VStack } from '@navikt/ds-react'
 import React from 'react'
 
@@ -9,9 +10,9 @@ export const KjentOppholdstillatelse = ({ soknad }: { soknad: Soknad }) => {
         return null
     }
 
-    const fomDato = dayjs(soknad.kjentOppholdstillatelse?.fom).format('D. MMMM YYYY')
+    const fomDato = format(soknad.kjentOppholdstillatelse!.fom!, 'd. MMMM yyyy', { locale: nb })
     const tomDato = soknad.kjentOppholdstillatelse?.tom
-        ? dayjs(soknad.kjentOppholdstillatelse?.tom).format('D. MMMM YYYY')
+        ? format(soknad.kjentOppholdstillatelse.tom, 'd. MMMM yyyy', { locale: nb })
         : null
 
     const tittel = tomDato === null ? `Permanent oppholdstillatelse` : `Midlertidig oppholdstillatelse`

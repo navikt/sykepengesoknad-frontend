@@ -1,7 +1,9 @@
-import dayjs from 'dayjs'
+import { format } from 'date-fns'
+import { nb } from 'date-fns/locale/nb'
 import { DateValidationT, MonthValidationT } from '@navikt/ds-react'
 
 import { Sporsmal } from '../../types/types'
+import { toDate } from '../dato-utils'
 
 const validerDato = (sporsmal: Sporsmal, value?: Date, dateValidation?: DateValidationT) => {
     if (!dateValidation && value) {
@@ -13,10 +15,10 @@ const validerDato = (sporsmal: Sporsmal, value?: Date, dateValidation?: DateVali
         return 'Datoen følger ikke formatet dd.mm.åååå'
     }
     if (sporsmal.min && dateValidation.isBefore) {
-        return 'Datoen kan ikke være før ' + dayjs(sporsmal.min).format('DD.MM.YYYY')
+        return 'Datoen kan ikke være før ' + format(toDate(sporsmal.min), 'dd.MM.yyyy')
     }
     if (sporsmal.max && dateValidation.isAfter) {
-        return 'Datoen kan ikke være etter ' + dayjs(sporsmal.max).format('DD.MM.YYYY')
+        return 'Datoen kan ikke være etter ' + format(toDate(sporsmal.max), 'dd.MM.yyyy')
     }
     if (!dateValidation.isValidDate) {
         return 'Datoen følger ikke formatet dd.mm.åååå'
@@ -37,10 +39,10 @@ export const validerMaaned = (sporsmal: Sporsmal, value?: Date, monthValidation?
         return 'Datoen følger ikke formatet dd.mm.åååå eller måned åååå'
     }
     if (sporsmal.min && monthValidation.isBefore) {
-        return 'Datoen kan ikke være før ' + dayjs(sporsmal.min).format('MMMM YYYY')
+        return 'Datoen kan ikke være før ' + format(toDate(sporsmal.min), 'MMMM yyyy', { locale: nb })
     }
     if (sporsmal.max && monthValidation.isAfter) {
-        return 'Datoen kan ikke være etter ' + dayjs(sporsmal.max).format('MMMM YYYY')
+        return 'Datoen kan ikke være etter ' + format(toDate(sporsmal.max), 'MMMM yyyy', { locale: nb })
     }
     if (!monthValidation.isValidMonth) {
         return 'Datoen følger ikke formatet dd.mm.åååå eller måned åååå'
