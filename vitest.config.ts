@@ -3,6 +3,7 @@ import react from '@vitejs/plugin-react'
 
 export default defineConfig({
     plugins: [react()],
+    envDir: '/tmp/vitest-env-dir',
     test: {
         exclude: ['**/node_modules/**', '**/playwright/**'],
         environment: 'jsdom',
