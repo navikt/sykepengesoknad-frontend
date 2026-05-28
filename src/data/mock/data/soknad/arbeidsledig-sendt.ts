@@ -1,5 +1,3 @@
-import dayjs from 'dayjs'
-
 import { RSSoknad } from '../../../../types/rs-types/rs-soknad'
 import { arbeidstaker100Syk } from '../sykmeldinger'
 import { oppsummering } from '../sporsmal/oppsummering'
@@ -12,7 +10,7 @@ export const sendtArbeidsledig: RSSoknad = {
     fom: '2020-05-27',
     tom: '2020-06-11',
     opprettetDato: '2020-06-12',
-    sendtTilNAVDato: dayjs().toISOString(),
+    sendtTilNAVDato: new Date().toISOString(),
     sendtTilArbeidsgiverDato: null,
     avbruttDato: null,
     startSykeforlop: '2020-05-27',

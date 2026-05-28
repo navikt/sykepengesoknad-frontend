@@ -1,4 +1,4 @@
-import dayjs from 'dayjs'
+import { format, subDays } from 'date-fns'
 
 import { RSSoknad } from '../../../../types/rs-types/rs-soknad'
 import { arbeidstaker100Syk } from '../sykmeldinger'
@@ -11,7 +11,7 @@ export const avbruttSoknad: RSSoknad = {
     status: 'AVBRUTT',
     fom: '2020-04-01',
     tom: '2020-04-24',
-    opprettetDato: dayjs().add(-1, 'days').format('YYYY-MM-DD'),
+    opprettetDato: format(subDays(new Date(), 1), 'yyyy-MM-dd'),
     sendtTilNAVDato: null,
     sendtTilArbeidsgiverDato: null,
     avbruttDato: '2020-06-12',
