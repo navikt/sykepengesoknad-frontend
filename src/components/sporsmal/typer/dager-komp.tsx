@@ -1,10 +1,10 @@
 import { DatePicker, Label } from '@navikt/ds-react'
-import dayjs from 'dayjs'
 import React from 'react'
 import { Controller } from 'react-hook-form'
 
 import FeilLokal from '../../feil/feil-lokal'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
+import { toDate } from '../../../utils/dato-utils'
 
 const DagerKomp = ({ sporsmal }: SpmProps) => {
     const labelen = 'dager-kalender-label'
@@ -28,8 +28,8 @@ const DagerKomp = ({ sporsmal }: SpmProps) => {
                             mode="multiple"
                             aria-describedby={labelen}
                             fixedWeeks={false}
-                            fromDate={dayjs(sporsmal.min).toDate()}
-                            toDate={dayjs(sporsmal.max).toDate()}
+                            fromDate={toDate(sporsmal.min!)}
+                            toDate={toDate(sporsmal.max!)}
                             selected={field.value}
                             onSelect={(a) => {
                                 field.onChange(a)

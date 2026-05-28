@@ -1,6 +1,6 @@
 import { Heading } from '@navikt/ds-react'
 import { logger } from '@navikt/next-logger'
-import dayjs from 'dayjs'
+import { differenceInDays } from 'date-fns'
 import React, { useEffect, useState } from 'react'
 import { CheckmarkCircleFillIcon } from '@navikt/aksel-icons'
 import { useQueryClient } from '@tanstack/react-query'
@@ -41,23 +41,23 @@ const Arbeidstaker = () => {
     }
 
     const erSykmeldingperiodeDeltOverFlereSoknader = () => {
-        const fom = dayjs(valgtSoknad!.fom).date()
-        const sykFom = dayjs(valgtSykmelding!.sykmeldingsperioder[0].fom).date()
+        const fom = valgtSoknad!.fom!.getDate()
+        const sykFom = valgtSykmelding!.sykmeldingsperioder[0].fom.getDate()
         return fom !== sykFom
     }
 
     const tidligereSoknaderInnenfor16Dager = (d1: Date, d2: Date): boolean => {
-        return dayjs(d2).diff(d1, 'day') <= 16
+        return differenceInDays(d2, d1) <= 16
     }
 
     const harTidligereUtenOpphold = (tidligereSoknader: RSSoknadmetadata[]) => {
-        return tidligereSoknader.filter((sok) => dayjs(valgtSoknad!.fom!).diff(sok.tom!, 'day') <= 1).length > 0
+        return tidligereSoknader.filter((sok) => differenceInDays(valgtSoknad!.fom!, sok.tom!) <= 1).length > 0
     }
 
     const utenOppholdSjekkArbeidsgiverperiode = async (tidligereSoknader: RSSoknadmetadata[]) => {
         if (!valgtSoknad) return
 
-        const forrigeSoknad = tidligereSoknader.find((sok) => dayjs(valgtSoknad.fom).diff(sok.tom!, 'day') <= 1)
+        const forrigeSoknad = tidligereSoknader.find((sok) => differenceInDays(valgtSoknad.fom!, sok.tom!) <= 1)
         const forste = await erForsteSoknadUtenforArbeidsgiverperiode(forrigeSoknad?.id)
         if (forste) {
             setKvitteringTekst('over16dager')

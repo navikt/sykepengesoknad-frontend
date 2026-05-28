@@ -1,5 +1,5 @@
 import { Alert, BodyLong, BodyShort } from '@navikt/ds-react'
-import dayjs from 'dayjs'
+import { isAfter, subSeconds } from 'date-fns'
 import React, { useEffect } from 'react'
 import { useRouter } from 'next/router'
 
@@ -83,7 +83,7 @@ const AvbruttSoknad = () => {
                     </BodyLong>
                 </>
             )}
-            {dayjs(valgtSoknad.avbruttDato).isAfter(dayjs().subtract(2, 'seconds')) && (
+            {isAfter(valgtSoknad.avbruttDato!, subSeconds(new Date(), 2)) && (
                 <GjenstaendeSoknader
                     style={{ marginTop: '1rem', marginBottom: '1rem' }}
                     soknader={gjenstaendeSoknader}

@@ -1,17 +1,15 @@
 import { DatePicker, Label, useDatepicker } from '@navikt/ds-react'
 import React from 'react'
-import dayjs from 'dayjs'
-import weekOfYear from 'dayjs/plugin/weekOfYear'
+import { getISOWeek } from 'date-fns'
 import { Controller } from 'react-hook-form'
 
 import GuidepanelUnderSporsmalstekst from '../guidepanel/GuidepanelUnderSporsmalstekst'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
+import { toDate } from '../../../utils/dato-utils'
 
 const BehDager = ({ sporsmal }: SpmProps) => {
-    dayjs.extend(weekOfYear)
-
-    const minDate = dayjs(sporsmal.undersporsmal[0].min).toDate()
-    const maxDate = dayjs(sporsmal.undersporsmal[sporsmal.undersporsmal.length - 1].max).toDate()
+    const minDate = toDate(sporsmal.undersporsmal[0].min!)
+    const maxDate = toDate(sporsmal.undersporsmal[sporsmal.undersporsmal.length - 1].max!)
 
     const { inputProps } = useDatepicker()
 
@@ -35,7 +33,7 @@ const BehDager = ({ sporsmal }: SpmProps) => {
                             disableWeekends={true}
                             onSelect={(date) => {
                                 if (date) {
-                                    const weekNrs = date.map((day) => dayjs(day).week())
+                                    const weekNrs = date.map((day) => getISOWeek(day))
 
                                     // om disse ikke er like er det mer enn en dag i samme uke som er valgt
                                     if (weekNrs.length === new Set(weekNrs).size) {
@@ -45,7 +43,7 @@ const BehDager = ({ sporsmal }: SpmProps) => {
                                         const nyDag = date.pop()
                                         // filtrerer ut alle dager som er i samme uke som den nye dagen
                                         const valgteDagerMinusDenISammeUkeSomNyDag = date.filter((dag) => {
-                                            return dayjs(dag).week() !== dayjs(nyDag).week()
+                                            return getISOWeek(dag) !== getISOWeek(nyDag!)
                                         })
 
                                         // legger den nye dagen tilbake

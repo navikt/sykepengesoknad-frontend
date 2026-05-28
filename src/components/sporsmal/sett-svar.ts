@@ -1,9 +1,10 @@
-import dayjs from 'dayjs'
+import { format } from 'date-fns'
 
 import { RSSvartype } from '../../types/rs-types/rs-svartype'
 import { Sporsmal } from '../../types/types'
 import { SvarEnums } from '../../types/enums'
 import { RSSvar } from '../../types/rs-types/rs-svar'
+import { toDate } from '../../utils/dato-utils'
 
 const hentVerdier = (sporsmal: Sporsmal, verdier: Record<string, any>) => {
     let verdi = verdier[sporsmal.id]
@@ -123,10 +124,10 @@ const behandlingsdagerSvar = (sporsmal: Sporsmal, verdi: Date[]): Sporsmal => {
         })
         .map((spm) => {
             for (const date of selectedDays) {
-                if (date <= dayjs(spm.max).toDate() && date >= dayjs(spm.min).toDate()) {
+                if (date <= toDate(spm.max!) && date >= toDate(spm.min!)) {
                     return spm.copyWith({
                         svarliste: {
-                            svar: [{ verdi: dayjs(date).format('YYYY-MM-DD') }],
+                            svar: [{ verdi: format(date, 'yyyy-MM-dd') }],
                         },
                     })
                 }
@@ -195,7 +196,7 @@ const datoSvar = (sporsmal: Sporsmal, verdi: any) => {
     const svar: RSSvar[] = []
     if (verdi !== undefined) {
         svar.push({
-            verdi: dayjs(verdi).format('YYYY-MM-DD'),
+            verdi: format(verdi, 'yyyy-MM-dd'),
         })
     }
     const svarliste = {
@@ -208,9 +209,9 @@ const datoSvar = (sporsmal: Sporsmal, verdi: any) => {
 const datoerSvar = (sporsmal: Sporsmal, verdi: any) => {
     const svar: RSSvar[] = []
     if (verdi !== undefined) {
-        verdi.map((dag: string) =>
+        verdi.map((dag: Date) =>
             svar.push({
-                verdi: dayjs(dag).format('YYYY-MM-DD'),
+                verdi: format(dag, 'yyyy-MM-dd'),
             }),
         )
     }

@@ -1,12 +1,10 @@
-import dayjs from 'dayjs'
-
 import { Periode, Sykmelding } from '../types/sykmelding'
 import { TidsPeriode } from '../types/types'
 
 import { tilLesbarDatoUtenAarstall } from './dato-utils'
 
 export const sorterEtterEldsteTom = (p1: Periode, p2: Periode) => {
-    return dayjs(p1.tom).unix() - dayjs(p2.tom).unix()
+    return p1.tom.getTime() - p2.tom.getTime()
 }
 
 export const hentArbeidssituasjon = (valgtSykmelding: Sykmelding) => {

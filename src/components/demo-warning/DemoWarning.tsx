@@ -1,6 +1,6 @@
 import { Alert } from '@navikt/ds-react'
 import React, { useState } from 'react'
-import dayjs from 'dayjs'
+import { differenceInDays, parseISO } from 'date-fns'
 
 import { isOpplaering } from '../../utils/environment'
 
@@ -8,8 +8,8 @@ const DemoWarning = () => {
     const [alertLukket, setAlertLukket] = useState(() => {
         const lukketDato = localStorage.getItem('demo-warning-lukket')
         if (lukketDato) {
-            const lagretDato = dayjs(lukketDato)
-            const forskjellIDager = dayjs().diff(lagretDato, 'day')
+            const lagretDato = parseISO(lukketDato)
+            const forskjellIDager = differenceInDays(new Date(), lagretDato)
 
             // Sjekk om det har gått mer enn 14 dager
             return forskjellIDager < 14
@@ -30,7 +30,7 @@ const DemoWarning = () => {
             closeButton={true}
             onClose={() => {
                 setAlertLukket(true)
-                localStorage.setItem('demo-warning-lukket', dayjs().toString())
+                localStorage.setItem('demo-warning-lukket', new Date().toISOString())
             }}
         >
             Dette er en demoside og inneholder ikke dine personlige data.
