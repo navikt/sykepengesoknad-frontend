@@ -1,4 +1,4 @@
-import dayjs from 'dayjs'
+import { isAfter, isBefore, subDays } from 'date-fns'
 
 import { getSykmeldingStartDate, Sykmelding } from '../../types/sykmelding'
 
@@ -13,10 +13,10 @@ export function eldreUsendteSykmeldinger(
             return sykmelding.sykmeldingStatus.statusEvent == 'APEN'
         })
         .filter((sykmelding) => {
-            return dayjs(sykmelding.mottattTidspunkt).isAfter(dayjs().subtract(365, 'days'))
+            return isAfter(sykmelding.mottattTidspunkt, subDays(new Date(), 365))
         })
         .filter((sykmelding) => {
             const smFom = getSykmeldingStartDate(sykmelding)
-            return smFom.isBefore(dayjs(soknadTom))
+            return isBefore(smFom, soknadTom)
         })
 }

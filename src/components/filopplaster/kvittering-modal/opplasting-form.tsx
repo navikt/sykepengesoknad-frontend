@@ -1,6 +1,5 @@
 import { Alert, BodyLong, BodyShort, Button, FileObject, ReadMore, Select, TextField } from '@navikt/ds-react'
 import { logger } from '@navikt/next-logger'
-import dayjs from 'dayjs'
 import React, { useEffect, useState } from 'react'
 import { Controller, FormProvider, useForm } from 'react-hook-form'
 import { useQueryClient } from '@tanstack/react-query'
@@ -154,7 +153,7 @@ const OpplastingForm = ({ valgtSoknad, setOpenModal, openModal }: OpplastingFrom
             blobId: opplastingResponse.id,
             belop: methods.getValues('belop_input') * 100,
             typeUtgift: methods.getValues('transportmiddel'),
-            opprettet: dayjs().toISOString(),
+            opprettet: new Date().toISOString(),
         }
         const svar: RSSvar = { verdi: JSON.stringify(kvittering) }
 

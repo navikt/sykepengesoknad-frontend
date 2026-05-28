@@ -2,7 +2,6 @@
 // Interface for all other objects.
 // Type for string literals.
 // Enum for string literals with corresponding value.
-import dayjs from 'dayjs'
 
 import { dayjsToDate } from '../utils/dato-utils'
 
@@ -166,13 +165,8 @@ export class Sykmelding {
     }
 }
 
-export function getSykmeldingStartDate(sykmelding: Sykmelding): dayjs.Dayjs {
-    return dayjs(
-        sykmelding.sykmeldingsperioder.reduce((acc, value) => {
-            if (dayjs(value.fom).isBefore(dayjs(acc.fom))) {
-                return value
-            }
-            return acc
-        }).fom,
-    )
+export function getSykmeldingStartDate(sykmelding: Sykmelding): Date {
+    return sykmelding.sykmeldingsperioder.reduce((acc, value) => {
+        return value.fom < acc.fom ? value : acc
+    }).fom
 }
