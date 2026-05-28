@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useController } from 'react-hook-form'
 import { BodyShort, MonthPicker, MonthValidationT, useMonthpicker } from '@navikt/ds-react'
+import dayjs from 'dayjs'
 
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { kalenderMedDropdownCaption } from '../sporsmal-utils'
@@ -18,9 +19,9 @@ function AarMaanedInput(props: SpmProps) {
     })
 
     const { monthpickerProps, inputProps } = useMonthpicker({
-        fromDate: sporsmal.min ? new Date(sporsmal.min) : new Date('1900'),
-        toDate: sporsmal.max ? new Date(sporsmal.max) : new Date('2100'),
-        defaultYear: sporsmal.max ? new Date(sporsmal.max) : new Date('2100'),
+        fromDate: sporsmal.min ? dayjs(sporsmal.min).toDate() : new Date('1900'),
+        toDate: sporsmal.max ? dayjs(sporsmal.max).toDate() : new Date('2100'),
+        defaultYear: sporsmal.max ? dayjs(sporsmal.max).toDate() : new Date('2100'),
         allowTwoDigitYear: false,
         locale: 'nb',
         onMonthChange: field.onChange,

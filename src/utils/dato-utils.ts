@@ -9,7 +9,7 @@ export const fraInputdatoTilJSDato = (inputDato: any) => {
         ar = `20${ar}`
     }
     const s = `${ar}-${datoSplit[1]}-${datoSplit[0]}`
-    return new Date(s)
+    return dayjs(s).toDate()
 }
 
 export const maaneder = [

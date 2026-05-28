@@ -40,7 +40,7 @@ export const hentSvar = (sporsmal: Sporsmal): any => {
             return svar?.verdi ? dayjs(svar.verdi).toDate() : undefined
 
         case RSSvartype.DATOER:
-            return svarliste.svar.map((i) => new Date(i.verdi))
+            return svarliste.svar.map((i) => dayjs(i.verdi).toDate())
 
         case RSSvartype.LAND:
         case RSSvartype.COMBOBOX_MULTI:

@@ -39,8 +39,8 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode, antallPerioder }: AllProps
     })
 
     const { datepickerProps, toInputProps, fromInputProps } = useRangeDatepicker({
-        fromDate: sporsmal.min ? new Date(sporsmal.min) : new Date('1900'),
-        toDate: sporsmal.max ? new Date(sporsmal.max) : new Date('2100'),
+        fromDate: sporsmal.min ? dayjs(sporsmal.min).toDate() : new Date('1900'),
+        toDate: sporsmal.max ? dayjs(sporsmal.max).toDate() : new Date('2100'),
         defaultMonth: maanedKalenderApnesPa(sporsmal.min, sporsmal.max),
         allowTwoDigitYear: false,
         defaultSelected: field.value
