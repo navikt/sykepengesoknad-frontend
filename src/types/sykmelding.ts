@@ -3,7 +3,7 @@
 // Type for string literals.
 // Enum for string literals with corresponding value.
 
-import { dayjsToDate } from '../utils/dato-utils'
+import { toDate } from '../utils/dato-utils'
 
 export enum MedisinskArsakType {
     TILSTAND_HINDRER_AKTIVITET = 'Helsetilstanden hindrer pasienten i å være i aktivitet',
@@ -71,8 +71,8 @@ export class Periode {
     type: Periodetype
 
     constructor(periode: any) {
-        this.fom = dayjsToDate(periode.fom)!
-        this.tom = dayjsToDate(periode.tom)!
+        this.fom = toDate(periode.fom)!
+        this.tom = toDate(periode.tom)!
         this.aktivitetIkkeMulig = periode.aktivitetIkkeMulig
             ? new AktivitetIkkeMulig(periode.aktivitetIkkeMulig)
             : undefined
@@ -134,7 +134,7 @@ class SykmeldingStatus {
     brukerSvar?: BrukerSvar
 
     constructor(sykmeldingStatus: any) {
-        this.timestamp = dayjsToDate(sykmeldingStatus.timestamp)!
+        this.timestamp = toDate(sykmeldingStatus.timestamp)!
         this.statusEvent = sykmeldingStatus.statusEvent
         this.arbeidsgiver = sykmeldingStatus.arbeidsgiver
         this.sporsmalOgSvarListe = sykmeldingStatus.sporsmalOgSvarListe
@@ -156,11 +156,11 @@ export class Sykmelding {
 
     constructor(sykmelding: any) {
         this.id = sykmelding.id
-        this.mottattTidspunkt = dayjsToDate(sykmelding.mottattTidspunkt)!
+        this.mottattTidspunkt = toDate(sykmelding.mottattTidspunkt)!
         this.sykmeldingsperioder = sykmelding.sykmeldingsperioder.map((periode: any) => new Periode(periode))
         this.sykmeldingStatus = new SykmeldingStatus(sykmelding.sykmeldingStatus)
-        this.behandletTidspunkt = dayjsToDate(sykmelding.behandletTidspunkt)!
-        this.syketilfelleStartDato = dayjsToDate(sykmelding.syketilfelleStartDato)!
+        this.behandletTidspunkt = toDate(sykmelding.behandletTidspunkt)!
+        this.syketilfelleStartDato = toDate(sykmelding.syketilfelleStartDato)!
         this.pasient = sykmelding.pasient
     }
 }

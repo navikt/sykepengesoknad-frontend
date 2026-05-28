@@ -142,10 +142,6 @@ export const ukeDatoListe = (min: string, max: string) => {
     return ukeListe
 }
 
-export const dayjsToDate = (dato: string) => {
-    return dato ? toDate(dato) : undefined
-}
-
 export const parseDate = (dato: string) => {
     return toDate(dato)
 }
