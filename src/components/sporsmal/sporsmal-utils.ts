@@ -1,12 +1,11 @@
 import { FieldError, FieldErrorsImpl, Merge } from 'react-hook-form'
 import { isBefore, isAfter, differenceInYears } from 'date-fns'
-import { TZDate } from '@date-fns/tz'
 
 import { RSSvartype } from '../../types/rs-types/rs-svartype'
 import { Soknad, Sporsmal } from '../../types/types'
 import { SEPARATOR } from '../../utils/constants'
 import { tekst } from '../../utils/tekster'
-import { toDate } from '../../utils/dato-utils'
+import { now, toDate } from '../../utils/dato-utils'
 
 export const erSisteSide = (soknad: Soknad, sidenummer: number) => {
     const sporsmal = soknad.sporsmal[sidenummer - 1]
@@ -130,7 +129,7 @@ export const hentGeneriskFeilmelding = (
 }
 
 export const maanedKalenderApnesPa = (sporsmalMin: string | null, sporsmalMax: string | null) => {
-    const iDag = new TZDate(new Date(), 'Europe/Oslo')
+    const iDag = now()
     const min = sporsmalMin ? toDate(sporsmalMin) : toDate('1900-01-01')
     const max = sporsmalMax ? toDate(sporsmalMax) : toDate('2100-01-01')
 

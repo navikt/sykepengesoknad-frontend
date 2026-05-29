@@ -1,7 +1,6 @@
 import { addDays, subDays, isSameDay, isBefore, isAfter, getDay } from 'date-fns'
-import { TZDate } from '@date-fns/tz'
 
-const OSLO = 'Europe/Oslo'
+import { osloDate } from './dato-utils'
 
 export function easterSunday(InputYear: number): Date {
     const a = InputYear % 19
@@ -20,9 +19,7 @@ export function easterSunday(InputYear: number): Date {
     let p = (h + l - 7 * m + 114) % 31
     p++
 
-    const month = String(n).padStart(2, '0')
-    const day = String(p).padStart(2, '0')
-    return new TZDate(`${InputYear}-${month}-${day}`, OSLO)
+    return osloDate(InputYear, n, p)
 }
 
 function paskedager(inputYear: number): Date[] {
@@ -52,13 +49,13 @@ export function innenforPaske(min?: Date, max?: Date) {
 }
 
 export const førsteNyttårsdag = (inputYear: number) => {
-    return new TZDate(`${inputYear}-01-01`, OSLO)
+    return osloDate(inputYear, 1, 1)
 }
 export const arbeidernesDag = (inputYear: number) => {
-    return new TZDate(`${inputYear}-05-01`, OSLO)
+    return osloDate(inputYear, 5, 1)
 }
 export const grunnlovsdagen = (inputYear: number) => {
-    return new TZDate(`${inputYear}-05-17`, OSLO)
+    return osloDate(inputYear, 5, 17)
 }
 export const kristiHimmelfartsdag = (inputYear: number) => {
     return addDays(easterSunday(inputYear), 39)
@@ -70,10 +67,10 @@ export const andrePinsedag = (inputYear: number) => {
     return addDays(easterSunday(inputYear), 50)
 }
 export const førsteJuledag = (inputYear: number) => {
-    return new TZDate(`${inputYear}-12-25`, OSLO)
+    return osloDate(inputYear, 12, 25)
 }
 export const andreJuledag = (inputYear: number) => {
-    return new TZDate(`${inputYear}-12-26`, OSLO)
+    return osloDate(inputYear, 12, 26)
 }
 
 export const rodeDager = (inputYear: number) => {

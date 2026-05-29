@@ -14,6 +14,18 @@ export function toDate(date: string): Date {
     return new TZDate(date, OSLO)
 }
 
+/** Nåtidspunkt i Oslo-tidssone. */
+export function now(): Date {
+    return new TZDate(new Date(), OSLO)
+}
+
+/** Bygger en dato fra år, måned og dag i Oslo-tidssone. */
+export function osloDate(year: number, month: number, day: number): Date {
+    const m = String(month).padStart(2, '0')
+    const d = String(day).padStart(2, '0')
+    return new TZDate(`${year}-${m}-${d}`, OSLO)
+}
+
 export const fraInputdatoTilJSDato = (inputDato: any) => {
     const datoSplit = inputDato.split('.')
     let ar = datoSplit[2]
@@ -123,14 +135,14 @@ export const parseDate = (dato: string) => {
 }
 
 export const sendtForMerEnn30DagerSiden = (sendtTilArbeidsgiverDato?: Date, sendtTilNAVDato?: Date) => {
-    const now = new TZDate(new Date(), OSLO)
+    const iDag = now()
     let dagerSidenArb = true
     let dagerSidenNav = true
     if (sendtTilArbeidsgiverDato) {
-        dagerSidenArb = differenceInDays(now, sendtTilArbeidsgiverDato) > 30
+        dagerSidenArb = differenceInDays(iDag, sendtTilArbeidsgiverDato) > 30
     }
     if (sendtTilNAVDato) {
-        dagerSidenNav = differenceInDays(now, sendtTilNAVDato) > 30
+        dagerSidenNav = differenceInDays(iDag, sendtTilNAVDato) > 30
     }
     return dagerSidenArb && dagerSidenNav
 }
@@ -144,7 +156,7 @@ export const sammeAar = (sporsmal: Sporsmal): boolean => {
 }
 
 export function kalkulerStartsmaneden(sporsmal: Sporsmal) {
-    const idag = new TZDate(new Date(), OSLO)
+    const idag = now()
     if (isAfter(idag, toDate(sporsmal.max!)) || isBefore(idag, toDate(sporsmal.min!))) {
         return fraBackendTilDate(sporsmal.max!)
     }
