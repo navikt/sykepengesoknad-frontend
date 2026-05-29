@@ -4,7 +4,7 @@ import { useFormContext } from 'react-hook-form'
 import { hentPeriodeListe, hentSvar } from '../../components/sporsmal/hent-svar'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 import { Sporsmal } from '../../types/types'
-import { toDate, ukeDatoListe } from '../dato-utils'
+import { ukeDatoListe } from '../dato-utils'
 import { finnHovedSporsmal, hentSporsmal, hentUndersporsmal } from '../soknad-utils'
 import { getLedetekst, tekst } from '../tekster'
 import { useSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
@@ -24,12 +24,14 @@ const useValiderArbeidsgrad = (sporsmal: Sporsmal) => {
     const periode = valgtSoknad.soknadPerioder[hovedSporsmal!.tagIndex!]
     const periodeDager = ukeDatoListe(periode.fom.toString(), periode.tom.toString())
 
+    const tilbakeDato = tilbake instanceof Date ? tilbake : undefined
+
     const sykedagerForFrilansere = () => {
         return periodeDager
             .filter((dag) => getDay(dag) !== 0 && getDay(dag) !== 6)
             .filter((dag) => {
-                if (tilbake !== '') {
-                    return isBeforeDate(dag, toDate(tilbake))
+                if (tilbakeDato) {
+                    return isBeforeDate(dag, tilbakeDato)
                 } else {
                     return true
                 }
@@ -49,8 +51,8 @@ const useValiderArbeidsgrad = (sporsmal: Sporsmal) => {
             .filter((dag) => !ekskluderteDager.find((ekskludertDag) => ekskludertDag.getTime() === dag.getTime()))
             .filter((dag) => getDay(dag) !== 0 && getDay(dag) !== 6)
             .filter((dag) => {
-                if (tilbake !== '') {
-                    return isBeforeDate(dag, toDate(tilbake))
+                if (tilbakeDato) {
+                    return isBeforeDate(dag, tilbakeDato)
                 } else {
                     return true
                 }
@@ -61,9 +63,13 @@ const useValiderArbeidsgrad = (sporsmal: Sporsmal) => {
         const faktiskArbeidsGrad = beregnGrad()
         const forventetArbeidsGrad = 1.0 - periode.grad / 100
 
+        if (faktiskArbeidsGrad === undefined) {
+            return true
+        }
+
         return faktiskArbeidsGrad < forventetArbeidsGrad
             ? getLedetekst(tekst('soknad.feilmelding.MINDRE_TIMER_ENN_FORVENTET'), {
-                  '%PROSENT%': Math.floor(faktiskArbeidsGrad! * 100),
+                  '%PROSENT%': Math.floor(faktiskArbeidsGrad * 100),
               })
             : true
     }
@@ -107,7 +113,15 @@ const useValiderArbeidsgrad = (sporsmal: Sporsmal) => {
         const timerPerUke = timerPerUkeVanligvis()
         const faktiskTimer = timerDennePerioden()
 
-        if (!faktiskTimer || !timerPerUke) {
+        if (
+            faktiskTimer === undefined ||
+            timerPerUke === undefined ||
+            !Number.isFinite(faktiskTimer) ||
+            !Number.isFinite(timerPerUke) ||
+            !Number.isFinite(uker) ||
+            uker <= 0 ||
+            timerPerUke <= 0
+        ) {
             return undefined
         } else {
             return faktiskTimer / uker / timerPerUke
@@ -130,6 +144,16 @@ const useValiderArbeidsgrad = (sporsmal: Sporsmal) => {
         const dagerIPeriode = faktiskeSykedager.length
 
         const uker = dagerIPeriode / 5
+
+        if (
+            !Number.isFinite(faktiskTimer) ||
+            !Number.isFinite(timerPerUke) ||
+            !Number.isFinite(uker) ||
+            uker <= 0 ||
+            timerPerUke <= 0
+        ) {
+            return undefined
+        }
 
         return faktiskTimer / uker / timerPerUke
     }
