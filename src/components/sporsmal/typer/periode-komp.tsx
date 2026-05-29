@@ -44,12 +44,13 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode, antallPerioder }: AllProps
         toDate: sporsmal.max ? toDate(sporsmal.max) : toDate('2100-01-01'),
         defaultMonth: maanedKalenderApnesPa(sporsmal.min, sporsmal.max),
         allowTwoDigitYear: false,
-        defaultSelected: field.value
-            ? {
-                  from: toDate(field.value.fom),
-                  to: toDate(field.value.tom),
-              }
-            : undefined,
+        defaultSelected:
+            field.value?.fom && field.value?.tom
+                ? {
+                      from: toDate(field.value.fom),
+                      to: toDate(field.value.tom),
+                  }
+                : undefined,
         onRangeChange: (range) => {
             const fom = range?.from ? format(range.from, 'yyyy-MM-dd') : ''
             const tom = range?.to ? format(range.to, 'yyyy-MM-dd') : ''

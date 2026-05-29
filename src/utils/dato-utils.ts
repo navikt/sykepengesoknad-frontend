@@ -115,7 +115,7 @@ export const ukeDatoListe = (min: string, max: string) => {
 }
 
 export const dayjsToDate = (dato: string) => {
-    return dato !== null ? toDate(dato) : undefined
+    return dato ? toDate(dato) : undefined
 }
 
 export const parseDate = (dato: string) => {
