@@ -1,6 +1,6 @@
 import { Button, LinkPanel, Tag, BodyShort } from '@navikt/ds-react'
+import { addDays } from 'date-fns'
 import React from 'react'
-import dayjs from 'dayjs'
 import Link from 'next/link'
 
 import { cn } from '../../utils/tw-utils'
@@ -103,7 +103,7 @@ const hentTeaserStatustekst = (soknad: RSSoknadmetadata) => {
     }
     if (soknad.status === RSSoknadstatus.FREMTIDIG) {
         return getLedetekst(tekst(`soknad.teaser.status.${soknad.status}` as any), {
-            '%DATO%': tilLesbarDatoMedArstall(dayjs(soknad.tom).add(1, 'day')),
+            '%DATO%': tilLesbarDatoMedArstall(addDays(soknad.tom!, 1)),
         })
     }
     if (soknad.status === RSSoknadstatus.SENDT) {

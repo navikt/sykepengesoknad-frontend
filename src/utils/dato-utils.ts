@@ -76,9 +76,6 @@ function ensureDate(val: any): Date | undefined {
     if (!val) return undefined
     if (val instanceof Date) return val
     if (typeof val === 'string') return toDate(val)
-    // Midlertidig bridge for dayjs-objekter i mock-data (fjernes når PR #4038 merger).
-    // Bruker .format() i stedet for .toDate() for å unngå UTC-midnatt-problemet.
-    if (typeof val === 'object' && typeof val.format === 'function') return toDate(val.format('YYYY-MM-DD'))
     return undefined
 }
 

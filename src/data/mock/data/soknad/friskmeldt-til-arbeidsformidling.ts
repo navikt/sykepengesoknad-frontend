@@ -1,5 +1,4 @@
 import { v4 } from 'uuid'
-import dayjs from 'dayjs'
 
 import { RSSoknad } from '../../../../types/rs-types/rs-soknad'
 import { RSSoknadstatusType } from '../../../../types/rs-types/rs-soknadstatus'
@@ -136,7 +135,7 @@ function fortsattArbeidssoker({
 export function jobbsituasjonenDin(opts: { fom: string; tom: string; sisteSoknad: boolean }): RSSporsmal {
     const { fom, tom } = opts
 
-    const periodeTekst = tilLesbarPeriodeMedArstall(dayjs(fom), dayjs(tom))
+    const periodeTekst = tilLesbarPeriodeMedArstall(fom, tom)
 
     const ja: RSSporsmal = {
         id: v4().toString(),
@@ -212,7 +211,7 @@ export function jobbsituasjonenDin(opts: { fom: string; tom: string; sisteSoknad
 export function inntektUnderveis(opts: { fom: string; tom: string }): RSSporsmal {
     const { fom, tom } = opts
 
-    const periodeTekst = tilLesbarPeriodeMedArstall(dayjs(fom), dayjs(tom))
+    const periodeTekst = tilLesbarPeriodeMedArstall(fom, tom)
 
     return {
         id: v4().toString(),
@@ -244,7 +243,7 @@ export function inntektUnderveis(opts: { fom: string; tom: string }): RSSporsmal
 export function reiseTilUtlandet(opts: { fom: string; tom: string }): RSSporsmal {
     const { fom, tom } = opts
 
-    const periodeTekst = tilLesbarPeriodeMedArstall(dayjs(fom), dayjs(tom))
+    const periodeTekst = tilLesbarPeriodeMedArstall(fom, tom)
 
     return {
         id: v4().toString(),

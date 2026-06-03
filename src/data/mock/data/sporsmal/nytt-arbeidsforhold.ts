@@ -1,5 +1,4 @@
 import { v4 } from 'uuid'
-import dayjs from 'dayjs'
 
 import { RSSporsmal } from '../../../../types/rs-types/rs-sporsmal'
 import { tilLesbarPeriodeMedArstall } from '../../../../utils/dato-utils'
@@ -15,7 +14,7 @@ export const nyttArbeidsforholdSporsmal = ({
     tom: string
     fom: string
 }): RSSporsmal => {
-    const periodeTekst = tilLesbarPeriodeMedArstall(dayjs(fom), dayjs(tom))
+    const periodeTekst = tilLesbarPeriodeMedArstall(fom, tom)
 
     return {
         id: v4().toString(),
