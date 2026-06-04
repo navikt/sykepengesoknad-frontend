@@ -143,7 +143,7 @@ export const sendtArbeidsledigKvittering: RSSoknad = {
     fom: '2020-01-01',
     tom: '2020-01-10',
     opprettetDato: '2020-06-23',
-    sendtTilNAVDato: '2020-04-23T11:56:10.624',
+    sendtTilNAVDato: '2020-04-23T09:56:10.624Z',
     sendtTilArbeidsgiverDato: null,
     avbruttDato: null,
     startSykeforlop: '2020-01-01',

@@ -1,17 +1,23 @@
-import { differenceInDays, format, isSameMonth, isSameYear, isAfter, isBefore, addDays } from 'date-fns'
+import { differenceInDays, format, isSameMonth, isSameYear, isAfter, isBefore, addDays, parseISO } from 'date-fns'
 import { TZDate } from '@date-fns/tz'
 
 import { Sporsmal } from '../types/types'
 
 const OSLO = 'Europe/Oslo'
 
-/**
- * Parser en ISO-datostreng til en Date i Oslo-tidssone.
- * Unngår problemet med new Date('2020-01-01') som gir UTC midnight
- * og dermed feil dato i tidssoner vest for UTC.
- */
-export function toDate(date: string): Date {
-    return new TZDate(date, OSLO)
+// Parser dato-streng til Date med riktig tidssone.
+// Strenger med tz-info (Z eller ±HH:MM) parses korrekt med parseISO.
+// Strenger uten tz-info (dato og datetime) tolkes som Europe/Oslo for å unngå
+// at UTC-midnatt forskyver datoen for brukere vest for UTC.
+export function toDate(date: string, defaultTimezone = OSLO): Date {
+    if (isoTimestampHarTidssone(date)) {
+        return parseISO(date)
+    }
+    return new TZDate(date, defaultTimezone)
+}
+
+function isoTimestampHarTidssone(iso: string): boolean {
+    return /([Zz]|[+-]\d{2}:\d{2})$/.test(iso)
 }
 
 /** Nåtidspunkt i Oslo-tidssone. */
