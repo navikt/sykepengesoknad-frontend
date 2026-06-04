@@ -1,15 +1,16 @@
 import { Alert } from '@navikt/ds-react'
 import React, { useState } from 'react'
-import { differenceInDays, parseISO } from 'date-fns'
+import { differenceInDays } from 'date-fns'
 
 import { isOpplaering } from '../../utils/environment'
+import { now, toDate } from '../../utils/dato-utils'
 
 const DemoWarning = () => {
     const [alertLukket, setAlertLukket] = useState(() => {
         const lukketDato = localStorage.getItem('demo-warning-lukket')
         if (lukketDato) {
-            const lagretDato = parseISO(lukketDato)
-            const forskjellIDager = differenceInDays(new Date(), lagretDato)
+            const lagretDato = toDate(lukketDato)
+            const forskjellIDager = differenceInDays(now(), lagretDato)
 
             // Sjekk om det har gått mer enn 14 dager
             return forskjellIDager < 14

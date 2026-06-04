@@ -4,7 +4,7 @@ import React, { useEffect } from 'react'
 import { useRouter } from 'next/router'
 
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
-import { tilLesbarDatoMedArstall } from '../../utils/dato-utils'
+import { now, tilLesbarDatoMedArstall } from '../../utils/dato-utils'
 import { tekst } from '../../utils/tekster'
 import { logEvent } from '../umami/umami'
 import FristSykepenger from '../frist-sykepenger/frist-sykepenger'
@@ -83,7 +83,7 @@ const AvbruttSoknad = () => {
                     </BodyLong>
                 </>
             )}
-            {isAfter(valgtSoknad.avbruttDato!, subSeconds(new Date(), 2)) && (
+            {isAfter(valgtSoknad.avbruttDato!, subSeconds(now(), 2)) && (
                 <GjenstaendeSoknader
                     style={{ marginTop: '1rem', marginBottom: '1rem' }}
                     soknader={gjenstaendeSoknader}

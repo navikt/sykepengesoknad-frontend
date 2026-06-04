@@ -32,18 +32,6 @@ export function osloDate(year: number, month: number, day: number): Date {
     return new TZDate(`${year}-${m}-${d}`, OSLO)
 }
 
-/** Nåtidspunkt i Oslo-tidssone. */
-export function now(): Date {
-    return new TZDate(new Date(), OSLO)
-}
-
-/** Bygger en dato fra år, måned og dag i Oslo-tidssone. */
-export function osloDate(year: number, month: number, day: number): Date {
-    const m = String(month).padStart(2, '0')
-    const d = String(day).padStart(2, '0')
-    return new TZDate(`${year}-${m}-${d}`, OSLO)
-}
-
 export const fraInputdatoTilJSDato = (inputDato: any) => {
     const datoSplit = inputDato.split('.')
     let ar = datoSplit[2]
