@@ -29,8 +29,9 @@ export const KvitteringTekster = {
     'kvittering.viktig-for-arbeidstaker': 'Viktig for arbeidstaker',
     'kvittering.soker-du-etter':
         'Søker du etter arbeidsgiverperioden må arbeidsgiveren din sende inn inntekts-melding så fort som mulig. Er du usikker på om den er sendt, bør du forhøre deg med arbeidsgiveren din.',
+
     'kvittering.hva-er-arbeidsgiverperioden': 'Hva er arbeidsgiverperioden?',
-    'kvittering.hva-er-inntektsmelding': 'Hva er en inntektsmelding?',
+
     'kvittering.viktig-for-selvstendige': 'Viktig for selvstendige næringsdrivende og frilansere',
     'kvittering.for-at-nav.1': 'For at NAV skal kunne behandle søknaden må du',
     'kvittering.for-at-nav.2': 'sende inn skjema om inntekts-opplysninger',
@@ -39,10 +40,6 @@ export const KvitteringTekster = {
     'kvittering.for-at-nav.3':
         '. Du skal kunne fylle ut og sende inn dette skjemaet én gang. Hvis du sender inn nye sykepengekrav (forlengelser), skal du ikke fylle ut skjemaet.',
 
-    'kvittering.arbeidsgiveren-skal-betale':
-        'Arbeidsgiveren skal betale sykepenger i en periode på opptil 16 kalenderdager, også kalt arbeidsgiverperioden. NAV overtar sykepengeutbetalingen fra og med 17. kalenderdag.',
-    'kvittering.arbeidsgiveren-skal-betale-gradertreisetilskudd':
-        'Arbeidsgiveren skal betale sykepenger og reisetilskudd i en periode på opptil 16 kalenderdager, også kalt arbeidsgiverperioden. NAV overtar sykepengeutbetalingen fra og med 17. kalenderdag.',
     'kvittering.digital-inntektsmelding':
         'Digital inntektsmelding sendes fra arbeidsgivers eget lønns- og personalsystem eller fra altinn.no. Meldingen inneholder inntektsopplysninger og annen informasjon NAV må ha for å behandle søknaden arbeidstaker har sendt.',
     'kvittering.for.nav.behandler': 'Før NAV kan behandle søknaden',
@@ -60,15 +57,12 @@ export const KvitteringTekster = {
         'Etter at sykefraværsperioden er over, søker du om sykepenger på vanlig måte. Du får en melding fra NAV når søknaden er klar til å fylles ut.',
 
     'kvittering.arbeidstaker.tittel': 'Du får sykepengene fra arbeidsgiveren din',
-    'kvittering.arbeidstaker.hvorfor-skille-ved-16-dager': 'Hvorfor går det et skille ved 16 dager?',
     'kvittering.arbeidstaker.saksbehandlingstid':
         'Saksbehandlingstiden regnes fra Nav har mottatt all nødvendig dokumentasjon.',
     'kvittering.arbeidstaker.saksbehandlingstid.lenke': 'Sjekk de oppdaterte saksbehandlingstidene',
     'kvittering.arbeidstaker.saksbehandlingstid.lenke.url': 'https://www.nav.no/saksbehandlingstider#sykepenger',
     'kvittering.arbeidstaker.brodtekst':
         'Arbeidsgiveren din betaler de første 16 kalenderdagene av sykefraværet. Noen arbeidsplasser fortsetter å utbetale sykepenger fra dag 17, men da får de penger tilbake fra NAV.',
-    'kvittering.arbeidstaker.over16.inntektsmelding.brodtekst':
-        'Arbeidsplassen din sender inntektsopplysninger og annen informasjon som NAV trenger for å behandle søkaden din. Inntektsmeldingen sendes digitalt fra arbeidsplassens lønns- og personalsystem eller fra Altinn.no.',
     'kvittering.arbeidstaker.over16.utbetaling':
         'Du får vanligvis utbetalt sykepengene enten innen den 25. i måneden, eller innen fem dager etter at vi har sendt deg svar på søknaden din. Hvis søknaden din gjelder dager i to ulike kalendermåneder, kan utbetalingen bli delt i to. <a href="https://www.nav.no/utbetalingsdatoer#sykepenger" target="_blank" rel="noreferrer">Les mer om når du kan forvente å få pengene.</a>',
     'kvittering.arbeidstaker.over16.utbetaling-arbeidsgiver':
