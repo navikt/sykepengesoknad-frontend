@@ -1,8 +1,6 @@
 import { Periode, Sykmelding } from '../types/sykmelding'
 import { Soknad, TidsPeriode } from '../types/types'
 
-import { toDate } from './dato-utils'
-
 export const tidligsteFom = (perioder: TidsPeriode[]) => {
     if (perioder.length === 0) {
         return null
@@ -66,8 +64,8 @@ const tilTidsperiode = (p: Periode) => {
 }
 
 export const erOppdelt = (soknad: Soknad, sykmelding: Sykmelding) => {
-    const fomSykmelding = toDate(tidligsteFom(sykmelding.sykmeldingsperioder.map(tilTidsperiode))!)
-    const tomSykmelding = toDate(senesteTom(sykmelding.sykmeldingsperioder.map(tilTidsperiode))!)
+    const fomSykmelding = tidligsteFom(sykmelding.sykmeldingsperioder.map(tilTidsperiode))!
+    const tomSykmelding = senesteTom(sykmelding.sykmeldingsperioder.map(tilTidsperiode))!
 
     return !(soknad.fom!.getTime() === fomSykmelding.getTime() && soknad.tom!.getTime() === tomSykmelding.getTime())
 }
