@@ -19,7 +19,9 @@ test.beforeEach(async ({ context, page }) => {
     await context.clearCookies()
 
     // Skjul dev-tools hint så de ikke er i veien for visuelle tester.
-    await page.addInitScript(() => {
+    // Bruker context.addInitScript slik at scriptet kjøres på alle sider i konteksten,
+    // ikke bare den første — nødvendig når test.use({ timezoneId }) oppretter ny kontekst.
+    await context.addInitScript(() => {
         window.localStorage.setItem('devtools-hint', 'false')
     })
     await fjernAnimasjoner(page)
