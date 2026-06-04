@@ -1,19 +1,18 @@
-# AGENTS.md - `spinnsyn-frontend`
-Repoet `spinnsyn-frontend` er en React-app for søknader om sykepenger i Nav.
+# AGENTS.md - `sykepengesoknad-frontend`
+Repoet `sykepengesoknad-frontend` er en React-app for søknader om sykepenger i Nav.
 
 ## 1) Kommandoer
 
 ```sh
-npm run dev
-npm run test
-npm run test:ci
-npm run build
-npm run format
-npm run play-headless
+npm run dev # kjør lokalt
+npm run test # kjør tester i watch-mode
+npm run test:ci # kjør tester i CI-mode (uten watch)
+npm run build # bygg for produksjon (verifiserer også at build ikke feiler)
+npm run format # formater kode med Prettier
+npm run play-headless # kjør E2E-tester i headless mode (brukes i CI)
 ```
 
 - `npm run dev` bruker mock-backend lokalt (`MOCK_BACKEND=true`)
-- Bruk pnpm-ekvivalenter hvis du kjører pnpm lokalt (f.eks. `pnpm build`)
 
 ### Før commit (obligatorisk)
 
