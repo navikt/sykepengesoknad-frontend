@@ -82,6 +82,7 @@ gh pr create --fill
 - `src/pages/api/**/*.api.ts` - API-proxy, whitelist og sikkerhetsmønstre
 - `src/hooks/` - anbefalt mønster for datahenting
 - `src/utils/dato-utils.ts` - korrekt parsing av dato-strenger
+- `playwright/utils/` - hjelpefunksjoner for E2E-testing
 
 ## Hurtigsjekk før levering
 
