@@ -79,7 +79,7 @@ export function getSession(req: NextApiRequest, res: NextApiResponse): session {
 
     const sessionId = getSessionId()
 
-    if (!sessionStore[sessionId] || sessionStore[sessionId].expires < new Date()) {
+    if (!sessionStore[sessionId] || sessionStore[sessionId].expires < now()) {
         sessionStore[sessionId] = {
             expires: new Date(Date.now() + 3600000),
             testpersoner: testpersoner(),

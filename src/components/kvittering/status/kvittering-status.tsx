@@ -1,10 +1,8 @@
 import { Alert, BodyShort, Heading } from '@navikt/ds-react'
-import { format } from 'date-fns'
-import { nb } from 'date-fns/locale/nb'
-import { TZDate } from '@date-fns/tz'
 import React from 'react'
 
 import { tekst } from '../../../utils/tekster'
+import { tilLesbarDatoOgTid } from '../../../utils/dato-utils'
 import { useSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
 
 export enum Mottaker {
@@ -14,13 +12,6 @@ export enum Mottaker {
 
 const KvitteringStatus = () => {
     const { valgtSoknad } = useSoknadMedDetaljer()
-
-    const tilNavDato = () => {
-        const datoNav = format(new TZDate(valgtSoknad!.sendtTilNAVDato!, 'Europe/Oslo'), "EEEE d. MMMM, 'kl' HH:mm", {
-            locale: nb,
-        })
-        return datoNav.charAt(0).toUpperCase() + datoNav.slice(1)
-    }
 
     if (!valgtSoknad) return null
 
@@ -32,7 +23,7 @@ const KvitteringStatus = () => {
                         {tekst('kvittering.soknaden-er-sendt-til')} {Mottaker.NAV}
                     </Heading>
                     <BodyShort>
-                        {tekst('kvittering.mottatt')}: {tilNavDato()}
+                        {tekst('kvittering.mottatt')}: {tilLesbarDatoOgTid(valgtSoknad.sendtTilNAVDato)}
                     </BodyShort>
                 </Alert>
             )}
