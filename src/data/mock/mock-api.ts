@@ -47,7 +47,7 @@ import { inntektUnderveis, reiseTilUtlandet } from './data/soknad/friskmeldt-til
 import {
     naringsdrivendeOpprettholdtInntekt,
     naringsdrivendeOpprettholdtInntektGradert,
-} from './data/sporsmal/inntektsopplysninger-naringsdrivende'
+} from './data/sporsmal/naringsdrivende'
 
 type session = {
     expires: dayjs.Dayjs
@@ -135,21 +135,10 @@ export const flattenSporsmal = (sporsmal: RSSporsmal[]) => {
 }
 
 function maaDokumentereInntektsopplysninger(soknad: RSSoknad): boolean {
-    const nyIArbeidslivet =
+    return (
         flattenSporsmal(soknad.sporsmal).find((spm) => spm.tag === 'NARINGSDRIVENDE_NY_I_ARBEIDSLIVET')?.svar[0]
             ?.verdi === 'JA'
-    if (nyIArbeidslivet) return true
-    const nyIArbeidslivetJa =
-        flattenSporsmal(soknad.sporsmal).find((spm) => spm.tag === 'INNTEKTSOPPLYSNINGER_NY_I_ARBEIDSLIVET_JA')?.svar[0]
-            ?.verdi === 'CHECKED'
-    if (nyIArbeidslivetJa) return true
-    const nyIArbeidslivetNei =
-        flattenSporsmal(soknad.sporsmal).find((spm) => spm.tag === 'INNTEKTSOPPLYSNINGER_NY_I_ARBEIDSLIVET_NEI')
-            ?.svar[0]?.verdi === 'CHECKED'
-    const varigEndring25ProsentJa =
-        flattenSporsmal(soknad.sporsmal).find((spm) => spm.tag === 'INNTEKTSOPPLYSNINGER_VARIG_ENDRING_25_PROSENT')
-            ?.svar[0]?.verdi === 'JA'
-    return nyIArbeidslivetNei && varigEndring25ProsentJa
+    )
 }
 
 function handterNaringsdrivendeOpplysninger(soknaden: RSSoknad) {
@@ -162,12 +151,7 @@ function handterNaringsdrivendeOpplysninger(soknaden: RSSoknad) {
     if (!soknaden.forstegangssoknad) {
         return
     }
-    const erNyKvittering = soknaden.sporsmal.some(
-        (spm) =>
-            spm.tag === 'INNTEKTSOPPLYSNINGER_DRIFT_VIRKSOMHETEN' ||
-            spm.tag === 'INNTEKTSOPPLYSNINGER_VIRKSOMHETEN_AVVIKLET' ||
-            spm.tag === 'NARINGSDRIVENDE_NY_I_ARBEIDSLIVET',
-    )
+    const erNyKvittering = soknaden.sporsmal.some((spm) => spm.tag === 'NARINGSDRIVENDE_NY_I_ARBEIDSLIVET')
     const maaDokumentere = maaDokumentereInntektsopplysninger(soknaden)
     soknaden.inntektsopplysningerNyKvittering = erNyKvittering
     soknaden.inntektsopplysningerInnsendingId = maaDokumentere ? uuid.v4() : undefined

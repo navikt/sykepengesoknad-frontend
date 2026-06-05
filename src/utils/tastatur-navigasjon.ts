@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef } from 'react'
+import { useEffect, useRef } from 'react'
 
 import { Sporsmal } from '../types/types'
 
@@ -59,67 +59,6 @@ export function useGruppeAvUndersporsmalTastaturNavigasjon(sporsmal: Sporsmal) {
         }
     }
     useTastaturNavigasjon(handleKeyDown)
-}
-
-export function useRadiogruppeTastaturNavigasjon(sporsmal: Sporsmal, erHovedsporsmal: boolean) {
-    const refJaSpm = useRef<HTMLElement | null>(null)
-    const refNeiSpm = useRef<HTMLElement | null>(null)
-    const alleSpm = useMemo(() => flattenSporsmal(sporsmal.undersporsmal), [sporsmal.undersporsmal])
-
-    const velgNeiSvarForInntektssporsmal = async () => {
-        if (sporsmal.tag === 'INNTEKTSOPPLYSNINGER_VIRKSOMHETEN_AVVIKLET') {
-            const neiSpm = alleSpm.find((spm) => spm.tag === 'INNTEKTSOPPLYSNINGER_VIRKSOMHETEN_AVVIKLET_NEI')
-            if (neiSpm) {
-                refNeiSpm.current = document.getElementById(neiSpm.id)
-                refNeiSpm.current?.click()
-
-                await vent(20)
-                const nyIArbeidslivetNei = alleSpm.find(
-                    (spm) => spm.tag === 'INNTEKTSOPPLYSNINGER_NY_I_ARBEIDSLIVET_NEI',
-                )
-                if (nyIArbeidslivetNei) {
-                    const inputfelt = document.getElementById(nyIArbeidslivetNei.id) as HTMLInputElement
-                    inputfelt.click()
-                    inputfelt.focus()
-                }
-
-                await vent(20)
-                const varigEndring = alleSpm.find((spm) => spm.tag === 'INNTEKTSOPPLYSNINGER_VARIG_ENDRING')
-                if (varigEndring) {
-                    const inputfelt = document.getElementById(varigEndring.id + '_1') as HTMLInputElement
-                    inputfelt.click()
-                    inputfelt.focus()
-                }
-            }
-        }
-    }
-
-    const velgJaSvarForInntektssporsmal = () => {
-        if (sporsmal.tag === 'INNTEKTSOPPLYSNINGER_VIRKSOMHETEN_AVVIKLET') {
-            const jaSpm = alleSpm.find((spm) => spm.tag === 'INNTEKTSOPPLYSNINGER_VIRKSOMHETEN_AVVIKLET_JA')
-            if (jaSpm) {
-                refJaSpm.current = jaSpm ? document.getElementById(jaSpm.id) : null
-                refJaSpm.current?.click()
-            }
-        }
-    }
-
-    const handterTasteTrykk = (event: KeyboardEvent) => {
-        if (isProd() || !erHovedsporsmal) return
-        if (erInputEllerTextareaAktiv()) return
-
-        switch (event.key) {
-            case 'j':
-                velgJaSvarForInntektssporsmal()
-                break
-            case 'n':
-                velgNeiSvarForInntektssporsmal().then()
-                break
-            default:
-                return
-        }
-    }
-    useTastaturNavigasjon(handterTasteTrykk)
 }
 
 function useTastaturNavigasjon(handterTasteTrykk: (event: KeyboardEvent) => void) {

@@ -34,12 +34,7 @@ import {
 import { utenlandskSykmeldingPerson } from './data/utenlandsk-sykmelding-person'
 import { yrkesskadePerson, yrkesskadeV2Person } from './data/yrkesskade'
 import { egenmeldingSykmeldingaPerson } from './data/personas/egenmeldingsdager-i-sykmeldingen'
-import {
-    selvstendigNaringsdrivendePerson,
-    selvstendigNaringsdrivendeSendtPerson,
-    selvstendigNaringsdrivendeUtenSigrunPerson,
-    selvstendigNaringsdrivendeVirksomhetenDinPerson,
-} from './data/personas/naringsdrivende'
+import { selvstendigNaringsdrivendeSendtPerson, selvstendigNaringsdrivende } from './data/personas/naringsdrivende'
 import { korrigeringsfristUtloptPerson } from './data/personas/korrigeringsfrist-utlopt'
 import { medlemskapPerson } from './data/personas/medlemskap'
 import { fiskePerson } from './data/personas/fisker'
@@ -77,7 +72,6 @@ type PersonaKey =
     | 'to-eldre-usendte-soknader'
     | 'bare-utland'
     | 'selvstendig-naringsdrivende'
-    | 'selvstendig-naringsdrivende-uten-sigrun'
     | 'brukertest'
     | 'har-kontonummer'
     | 'har-ikke-kontonummer'
@@ -150,12 +144,8 @@ export function testpersonerGruppert(): PersonaGroup {
             ['medlemskap']: jsonDeepCopy(medlemskapPerson),
         },
         ['selvstendig-naringsdrivende']: {
-            ['selvstendig-naringsdrivende']: jsonDeepCopy(selvstendigNaringsdrivendePerson),
-            ['selvstendig-naringsdrivende-uten-sigrun']: jsonDeepCopy(selvstendigNaringsdrivendeUtenSigrunPerson),
+            ['selvstendig-naringsdrivende']: jsonDeepCopy(selvstendigNaringsdrivende),
             ['selvstendig-naringsdrivende-sendt']: jsonDeepCopy(selvstendigNaringsdrivendeSendtPerson),
-            ['selvstendig-naringsdrivende-virksomheten-din']: jsonDeepCopy(
-                selvstendigNaringsdrivendeVirksomhetenDinPerson,
-            ),
         },
         ['friskmeldt-til-arbeidsformidling']: {
             ['fta-to-fremtidige']: jsonDeepCopy(fremtidigeFriskTilArbeidPerson),

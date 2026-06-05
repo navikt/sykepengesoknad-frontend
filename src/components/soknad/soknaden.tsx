@@ -141,8 +141,6 @@ export const Soknaden = () => {
                 (flexjarToggle.enabled ||
                     valgtSoknad?.julesoknad ||
                     valgtSoknad?.soknadstype == RSSoknadstype.FRISKMELDT_TIL_ARBEIDSFORMIDLING ||
-                    sporsmal?.tag == 'INNTEKTSOPPLYSNINGER_DRIFT_VIRKSOMHETEN' ||
-                    sporsmal?.tag == 'INNTEKTSOPPLYSNINGER_VIRKSOMHETEN_AVVIKLET' ||
                     sporsmal?.tag == 'MEDLEMSKAP_OPPHOLDSTILLATELSE_V2' ||
                     sporsmal?.tag == 'NYTT_ARBEIDSFORHOLD_UNDERVEIS' ||
                     sporsmal?.tag == 'JOBBET_DU_GRADERT' ||
