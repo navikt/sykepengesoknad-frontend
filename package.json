@@ -24,7 +24,7 @@
         "classnames": "^2.5.1",
         "cookie": "^1.1.1",
         "date-fns": "^4.3.0",
-        "dayjs": "^1.11.20",
+        "dayjs": "^1.11.21",
         "html-react-parser": "^5.2.17",
         "jose": "^6.2.2",
         "next-logger": "^5.0.2",
