@@ -1,8 +1,7 @@
-import { test, expect } from './utils/fixtures'
-
 import { arbeidstaker } from '../src/data/mock/data/soknad/arbeidstaker'
 import { arbeidsledigKvittering } from '../src/data/mock/data/soknad/soknader-integration'
 
+import { test, expect } from './utils/fixtures'
 import { checkViStolerPaDeg, harSoknaderlisteHeading, trykkPaSoknadMedId } from './utils/utilities'
 
 /**

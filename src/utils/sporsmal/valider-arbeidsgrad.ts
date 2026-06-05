@@ -1,4 +1,4 @@
-import { getDay, isBefore as isBeforeDate } from 'date-fns'
+import { isBefore as isBeforeDate, isSaturday, isSunday } from 'date-fns'
 import { useFormContext } from 'react-hook-form'
 
 import { hentPeriodeListe, hentSvar } from '../../components/sporsmal/hent-svar'
@@ -28,7 +28,7 @@ const useValiderArbeidsgrad = (sporsmal: Sporsmal) => {
 
     const sykedagerForFrilansere = () => {
         return periodeDager
-            .filter((dag) => getDay(dag) !== 0 && getDay(dag) !== 6)
+            .filter((dag) => !isSaturday(dag) && !isSunday(dag))
             .filter((dag) => {
                 if (tilbakeDato) {
                     return isBeforeDate(dag, tilbakeDato)
@@ -49,7 +49,7 @@ const useValiderArbeidsgrad = (sporsmal: Sporsmal) => {
 
         return periodeDager
             .filter((dag) => !ekskluderteDager.find((ekskludertDag) => ekskludertDag.getTime() === dag.getTime()))
-            .filter((dag) => getDay(dag) !== 0 && getDay(dag) !== 6)
+            .filter((dag) => !isSaturday(dag) && !isSunday(dag))
             .filter((dag) => {
                 if (tilbakeDato) {
                     return isBeforeDate(dag, tilbakeDato)

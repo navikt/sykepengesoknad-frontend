@@ -1,4 +1,4 @@
-import { addDays, subDays, isSameDay, isBefore, isAfter, getDay } from 'date-fns'
+import { addDays, subDays, isSameDay, isBefore, isAfter, isSaturday, isSunday } from 'date-fns'
 
 import { osloDate } from './dato-utils'
 
@@ -98,8 +98,8 @@ export function rodeUkeDagerIPerioden(min?: Date, max?: Date) {
     roodeDager.forEach((dag) => {
         if (
             (isSameDay(min, dag) || isSameDay(max, dag) || (isBefore(min, dag) && isAfter(max, dag))) &&
-            getDay(dag) !== 0 &&
-            getDay(dag) !== 6
+            !isSaturday(dag) &&
+            !isSunday(dag)
         ) {
             rodDagErIUkeDag = true
         }
