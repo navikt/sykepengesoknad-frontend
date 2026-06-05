@@ -21,7 +21,7 @@ import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { RSSvar } from '../../types/rs-types/rs-svar'
 import { RSArbeidssituasjon } from '../../types/rs-types/rs-arbeidssituasjon'
 import { RSOppdaterSporsmalResponse } from '../../types/rs-types/rest-response/rs-oppdatersporsmalresponse'
-import { now } from '../../utils/dato-utils'
+import { now, toDate } from '../../utils/dato-utils'
 
 import { Persona } from './data/personas/personas'
 import { testpersoner } from './testperson'
@@ -390,7 +390,7 @@ export async function mockApi(req: NextApiRequest, res: NextApiResponse) {
                 const begrensendeDato = finnBegrensendeDato()
 
                 if (begrensendeDato) {
-                    const dagForBegrensende = format(subDays(new Date(begrensendeDato), 1), 'yyyy-MM-dd')
+                    const dagForBegrensende = format(subDays(toDate(begrensendeDato), 1), 'yyyy-MM-dd')
 
                     soknaden.sporsmal = soknaden.sporsmal.filter((spm) => {
                         const tagsSomForsvinner = ['FTA_INNTEKT_UNDERVEIS', 'FTA_REISE_TIL_UTLANDET']
