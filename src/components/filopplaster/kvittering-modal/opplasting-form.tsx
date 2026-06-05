@@ -11,6 +11,7 @@ import { formaterFilstørrelse, formattertFiltyper, maxFilstørrelse, tillatteFi
 import { getLedetekst, tekst } from '../../../utils/tekster'
 import { useTestpersonQuery } from '../../../hooks/useTestpersonQuery'
 import { useSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
+import { now } from '../../../utils/dato-utils'
 import FilOpplaster from '../fil-opplaster/fil-opplaster'
 
 import OpplastingTekster from './opplasting-tekster'
@@ -153,7 +154,7 @@ const OpplastingForm = ({ valgtSoknad, setOpenModal, openModal }: OpplastingFrom
             blobId: opplastingResponse.id,
             belop: methods.getValues('belop_input') * 100,
             typeUtgift: methods.getValues('transportmiddel'),
-            opprettet: new Date().toISOString(),
+            opprettet: now().toISOString(),
         }
         const svar: RSSvar = { verdi: JSON.stringify(kvittering) }
 
