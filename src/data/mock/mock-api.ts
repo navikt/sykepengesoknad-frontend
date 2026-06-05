@@ -21,6 +21,7 @@ import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { RSSvar } from '../../types/rs-types/rs-svar'
 import { RSArbeidssituasjon } from '../../types/rs-types/rs-arbeidssituasjon'
 import { RSOppdaterSporsmalResponse } from '../../types/rs-types/rest-response/rs-oppdatersporsmalresponse'
+import { now } from '../../utils/dato-utils'
 
 import { Persona } from './data/personas/personas'
 import { testpersoner } from './testperson'
@@ -272,7 +273,7 @@ export async function mockApi(req: NextApiRequest, res: NextApiResponse) {
         [ENDPOINTS.ETTERSEND_TIL_ARBEIDSGIVER]: async () => {
             const soknad = getSoknadEllerFeilmld(soknadId)
             if (!soknad) return
-            soknad.sendtTilArbeidsgiverDato = new Date().toJSON()
+            soknad.sendtTilArbeidsgiverDato = now().toISOString()
             return sendJson()
         },
         [ENDPOINTS.AVBRYT_SOKNAD]: async () => {
@@ -283,7 +284,7 @@ export async function mockApi(req: NextApiRequest, res: NextApiResponse) {
                 return sendJson()
             }
             soknad.status = 'AVBRUTT'
-            soknad.avbruttDato = new Date().toJSON()
+            soknad.avbruttDato = now().toISOString()
             return sendJson()
         },
         [ENDPOINTS.GJENAPNE_SOKNAD]: async () => {
@@ -463,7 +464,7 @@ export async function mockApi(req: NextApiRequest, res: NextApiResponse) {
             const soknaden = getSoknadEllerFeilmld(soknadId)
             if (!soknaden) return
             const sendesTil = mottaker(soknadId!)
-            const tidspunkt = new Date().toJSON()
+            const tidspunkt = now().toISOString()
             if ([RSMottaker.ARBEIDSGIVER_OG_NAV, RSMottaker.ARBEIDSGIVER].includes(sendesTil)) {
                 soknaden.sendtTilArbeidsgiverDato = tidspunkt
             }

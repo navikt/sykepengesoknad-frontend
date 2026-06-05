@@ -1,6 +1,7 @@
 import { RSSoknad } from '../../../../types/rs-types/rs-soknad'
 import { arbeidstaker100Syk } from '../sykmeldinger'
 import { oppsummering } from '../sporsmal/oppsummering'
+import { now } from '../../../../utils/dato-utils'
 
 export const sendtArbeidsledig: RSSoknad = {
     id: '3848e75e-4069-4076-95c0-3f9f0b63e498',
@@ -10,7 +11,7 @@ export const sendtArbeidsledig: RSSoknad = {
     fom: '2020-05-27',
     tom: '2020-06-11',
     opprettetDato: '2020-06-12',
-    sendtTilNAVDato: new Date().toISOString(),
+    sendtTilNAVDato: now().toISOString(),
     sendtTilArbeidsgiverDato: null,
     avbruttDato: null,
     startSykeforlop: '2020-05-27',
