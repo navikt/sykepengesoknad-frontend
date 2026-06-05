@@ -449,63 +449,43 @@ test.describe('Tester støtte for gamle spørsmål', () => {
         await klikkGaVidere(page)
     })
 
-    test('Side 49 - Avviklet virksomhet', async ({ page }) => {
+    test('Side 49 - Næringsdrivende opprettholdt inntekt', async ({ page }) => {
         await page.goto(`/syk/sykepengesoknad/soknader/${soknad.id}/49?testperson=integrasjon-soknader`)
-        await svarJaHovedsporsmal(page)
-        await expect(page.locator('.navds-date__field-button')).toBeVisible()
-        await page.locator('.navds-date__field-button').click()
-        await velgDato(page, 14)
+        await svarNeiHovedsporsmal(page)
 
         await klikkGaVidere(page)
     })
 
-    test('Side 50 - Drift i virksomheten', async ({ page }) => {
+    test('Side 50 - Næringsdrivende opprettholdt inntekt gradert', async ({ page }) => {
         await page.goto(`/syk/sykepengesoknad/soknader/${soknad.id}/50?testperson=integrasjon-soknader`)
         await svarNeiHovedsporsmal(page)
-        await expect(page.locator('.navds-date__field-button')).toBeVisible()
-        await page.locator('.navds-date__field-button').click()
-        await velgDato(page, 14)
 
         await klikkGaVidere(page)
     })
 
-    test('Side 51 - Næringsdrivende opprettholdt inntekt', async ({ page }) => {
+    test('Side 51 - Næringsdrivende opphold i utlandet', async ({ page }) => {
         await page.goto(`/syk/sykepengesoknad/soknader/${soknad.id}/51?testperson=integrasjon-soknader`)
         await svarNeiHovedsporsmal(page)
 
         await klikkGaVidere(page)
     })
 
-    test('Side 52 - Næringsdrivende opprettholdt inntekt gradert', async ({ page }) => {
+    test('Side 52 - Næringsdrivende virksomheten din avviklet', async ({ page }) => {
         await page.goto(`/syk/sykepengesoknad/soknader/${soknad.id}/52?testperson=integrasjon-soknader`)
         await svarNeiHovedsporsmal(page)
 
         await klikkGaVidere(page)
     })
 
-    test('Side 53 - Næringsdrivende opphold i utlandet', async ({ page }) => {
+    test('Side 53 - Næringsdrivende ny i arbeidslivet', async ({ page }) => {
         await page.goto(`/syk/sykepengesoknad/soknader/${soknad.id}/53?testperson=integrasjon-soknader`)
         await svarNeiHovedsporsmal(page)
 
         await klikkGaVidere(page)
     })
 
-    test('Side 54 - Næringsdrivende virksomheten din avviklet', async ({ page }) => {
+    test('Side 54 - Næringsdrivende varig endring', async ({ page }) => {
         await page.goto(`/syk/sykepengesoknad/soknader/${soknad.id}/54?testperson=integrasjon-soknader`)
-        await svarNeiHovedsporsmal(page)
-
-        await klikkGaVidere(page)
-    })
-
-    test('Side 55 - Næringsdrivende ny i arbeidslivet', async ({ page }) => {
-        await page.goto(`/syk/sykepengesoknad/soknader/${soknad.id}/55?testperson=integrasjon-soknader`)
-        await svarNeiHovedsporsmal(page)
-
-        await klikkGaVidere(page)
-    })
-
-    test('Side 56 - Næringsdrivende varig endring', async ({ page }) => {
-        await page.goto(`/syk/sykepengesoknad/soknader/${soknad.id}/56?testperson=integrasjon-soknader`)
         await svarJaHovedsporsmal(page)
         await expect(page.locator('.navds-date__field-button')).toBeVisible()
         await page.getByRole('checkbox', { name: 'Jobbet mindre i en virksomhet' }).click()
@@ -514,48 +494,48 @@ test.describe('Tester støtte for gamle spørsmål', () => {
         await klikkGaVidere(page)
     })
 
-    test('Side 57 - Avklaring i forbindelse med reise', async ({ page }) => {
-        await page.goto(`/syk/sykepengesoknad/soknader/${soknad.id}/57?testperson=integrasjon-soknader`)
+    test('Side 55 - Avklaring i forbindelse med reise', async ({ page }) => {
+        await page.goto(`/syk/sykepengesoknad/soknader/${soknad.id}/55?testperson=integrasjon-soknader`)
         await svarRadioGruppe(page, 'Har du avklart utenlandsoppholdet med den som sykmeldte deg?', 'Ja')
         await svarRadioGruppe(page, 'Har du avklart utenlandsoppholdet med arbeidsgiveren/NAV?', 'Ja')
 
         await klikkGaVidere(page)
     })
 
-    test('Side 58 - Jobbsituasjonen din', async ({ page }) => {
-        await page.goto(`/syk/sykepengesoknad/soknader/${soknad.id}/58?testperson=integrasjon-soknader`)
+    test('Side 56 - Jobbsituasjonen din', async ({ page }) => {
+        await page.goto(`/syk/sykepengesoknad/soknader/${soknad.id}/56?testperson=integrasjon-soknader`)
         await svarNeiHovedsporsmal(page)
         await svarRadioGruppe(page, 'Vil du fortsatt være friskmeldt til arbeidsformidling?', 'Ja')
 
         await klikkGaVidere(page)
     })
 
-    test('Side 59 - Inntekt underveis', async ({ page }) => {
-        await page.goto(`/syk/sykepengesoknad/soknader/${soknad.id}/59?testperson=integrasjon-soknader`)
+    test('Side 57 - Inntekt underveis', async ({ page }) => {
+        await page.goto(`/syk/sykepengesoknad/soknader/${soknad.id}/57?testperson=integrasjon-soknader`)
         await page.getByRole('heading', { name: 'Inntekt underveis' }).isVisible()
         await svarNeiHovedsporsmal(page)
 
         await klikkGaVidere(page)
     })
 
-    test('Side 60 - Reise til utlandet', async ({ page }) => {
-        await page.goto(`/syk/sykepengesoknad/soknader/${soknad.id}/60?testperson=integrasjon-soknader`)
+    test('Side 58 - Reise til utlandet', async ({ page }) => {
+        await page.goto(`/syk/sykepengesoknad/soknader/${soknad.id}/58?testperson=integrasjon-soknader`)
         await page.getByRole('heading', { name: 'Reise til utlandet' }).isVisible()
         await svarNeiHovedsporsmal(page)
 
         await klikkGaVidere(page)
     })
 
-    test('Side 61 - Fravær før sykmeldingen', async ({ page }) => {
-        await page.goto(`/syk/sykepengesoknad/soknader/${soknad.id}/61?testperson=integrasjon-soknader`)
+    test('Side 59 - Fravær før sykmeldingen', async ({ page }) => {
+        await page.goto(`/syk/sykepengesoknad/soknader/${soknad.id}/59?testperson=integrasjon-soknader`)
         await harSynligTittel(page, 'Fravær før du ble sykmeldt', 2)
         await svarNeiHovedsporsmal(page)
 
         await klikkGaVidere(page)
     })
 
-    test('Side 62 - Oppsummering, innnsendig og kvittering', async ({ page }) => {
-        await page.goto(`/syk/sykepengesoknad/soknader/${soknad.id}/62?testperson=integrasjon-soknader`)
+    test('Side 60 - Oppsummering, innnsendig og kvittering', async ({ page }) => {
+        await page.goto(`/syk/sykepengesoknad/soknader/${soknad.id}/60?testperson=integrasjon-soknader`)
         await harSynligTittel(page, 'Oppsummering', 1)
         await validerAxeUtilityWrapper(page, test.info())
 
