@@ -1,6 +1,8 @@
-import dayjs, { Dayjs } from 'dayjs'
+import { addDays, subDays, isSameDay, isBefore, isAfter, isSaturday, isSunday } from 'date-fns'
 
-export function easterSunday(InputYear: number): Dayjs {
+import { osloDate } from './dato-utils'
+
+export function easterSunday(InputYear: number): Date {
     const a = InputYear % 19
     const b = Math.floor(InputYear / 100)
     const c = InputYear % 100
@@ -17,14 +19,14 @@ export function easterSunday(InputYear: number): Dayjs {
     let p = (h + l - 7 * m + 114) % 31
     p++
 
-    return dayjs(`${InputYear}-${n}-${p}`)
+    return osloDate(InputYear, n, p)
 }
 
-function paskedager(inputYear: number): Dayjs[] {
+function paskedager(inputYear: number): Date[] {
     const forstePaskeDag = easterSunday(inputYear)
-    const andrePaskeDag = forstePaskeDag.add(1, 'days')
-    const langfredag = forstePaskeDag.subtract(2, 'days')
-    const skjertorsdag = forstePaskeDag.subtract(3, 'days')
+    const andrePaskeDag = addDays(forstePaskeDag, 1)
+    const langfredag = subDays(forstePaskeDag, 2)
+    const skjertorsdag = subDays(forstePaskeDag, 3)
 
     return [skjertorsdag, langfredag, forstePaskeDag, andrePaskeDag]
 }
@@ -34,13 +36,11 @@ export function innenforPaske(min?: Date, max?: Date) {
         return false
     }
 
-    const start = dayjs(min)
-    const slutt = dayjs(max)
-    const paske = paskedager(start.year())
+    const paske = paskedager(min.getFullYear())
     let erInnenforPaske = false
 
     paske.forEach((dag) => {
-        if (start.isSame(dag, 'day') || slutt.isSame(dag, 'day') || (start.isBefore(dag) && slutt.isAfter(dag))) {
+        if (isSameDay(min, dag) || isSameDay(max, dag) || (isBefore(min, dag) && isAfter(max, dag))) {
             erInnenforPaske = true
         }
     })
@@ -49,29 +49,29 @@ export function innenforPaske(min?: Date, max?: Date) {
 }
 
 export const førsteNyttårsdag = (inputYear: number) => {
-    return dayjs(`${inputYear}-1-1`)
-} // New Year's Day
+    return osloDate(inputYear, 1, 1)
+}
 export const arbeidernesDag = (inputYear: number) => {
-    return dayjs(`${inputYear}-5-1`)
-} // labor day
+    return osloDate(inputYear, 5, 1)
+}
 export const grunnlovsdagen = (inputYear: number) => {
-    return dayjs(`${inputYear}-5-17`)
-} // constitution day
+    return osloDate(inputYear, 5, 17)
+}
 export const kristiHimmelfartsdag = (inputYear: number) => {
-    return easterSunday(inputYear).add(39, 'days')
-} // ascension day
+    return addDays(easterSunday(inputYear), 39)
+}
 export const førstePinsedag = (inputYear: number) => {
-    return easterSunday(inputYear).add(49, 'days')
-} // white sunday
+    return addDays(easterSunday(inputYear), 49)
+}
 export const andrePinsedag = (inputYear: number) => {
-    return easterSunday(inputYear).add(50, 'days')
-} // white monday
+    return addDays(easterSunday(inputYear), 50)
+}
 export const førsteJuledag = (inputYear: number) => {
-    return dayjs(`${inputYear}-12-25`)
-} // Christmas day
+    return osloDate(inputYear, 12, 25)
+}
 export const andreJuledag = (inputYear: number) => {
-    return dayjs(`${inputYear}-12-26`)
-} // boxing day
+    return osloDate(inputYear, 12, 26)
+}
 
 export const rodeDager = (inputYear: number) => {
     const rodeDagerMinusPaske = [
@@ -92,16 +92,14 @@ export function rodeUkeDagerIPerioden(min?: Date, max?: Date) {
         return false
     }
 
-    const start = dayjs(min)
-    const slutt = dayjs(max)
-    const roodeDager = rodeDager(start.year())
+    const roodeDager = rodeDager(min.getFullYear())
     let rodDagErIUkeDag = false
 
     roodeDager.forEach((dag) => {
         if (
-            (start.isSame(dag, 'day') || slutt.isSame(dag, 'day') || (start.isBefore(dag) && slutt.isAfter(dag))) &&
-            dag.day() !== 0 &&
-            dag.day() !== 6
+            (isSameDay(min, dag) || isSameDay(max, dag) || (isBefore(min, dag) && isAfter(max, dag))) &&
+            !isSaturday(dag) &&
+            !isSunday(dag)
         ) {
             rodDagErIUkeDag = true
         }

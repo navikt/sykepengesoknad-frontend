@@ -1,5 +1,5 @@
 import { BodyLong, Modal, ReadMore } from '@navikt/ds-react'
-import dayjs from 'dayjs'
+import { addDays } from 'date-fns'
 import React, { useState } from 'react'
 import { ClockDashedIcon } from '@navikt/aksel-icons'
 
@@ -34,7 +34,7 @@ const FremtidigeSoknaderTeaser = ({ soknad }: SykepengesoknadTeaserProps) => {
             >
                 <Modal.Body>
                     <BodyLong spacing>
-                        {`Du må vente med å søke om sykepenger til perioden er over ${tilLesbarDatoMedArstall(dayjs(soknad.tom).add(1, 'day'))}. Vi sender deg en melding når søknaden er klar til å fylles ut.`}
+                        {`Du må vente med å søke om sykepenger til perioden er over ${tilLesbarDatoMedArstall(addDays(soknad.tom!, 1))}. Vi sender deg en melding når søknaden er klar til å fylles ut.`}
                     </BodyLong>
 
                     <ReadMore header="Hvorfor kan jeg ikke søke nå?">

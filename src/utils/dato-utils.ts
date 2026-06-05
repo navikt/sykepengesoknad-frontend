@@ -1,6 +1,36 @@
-import dayjs from 'dayjs'
+import { differenceInDays, format, isSameMonth, isSameYear, isAfter, isBefore, addDays, parseISO } from 'date-fns'
+import { TZDate } from '@date-fns/tz'
 
 import { Sporsmal } from '../types/types'
+
+const OSLO = 'Europe/Oslo'
+
+// Parser dato-streng til Date med riktig tidssone.
+// Strenger med tz-info (Z eller ±HH:MM) parses korrekt med parseISO.
+// Strenger uten tz-info (dato og datetime) tolkes som Europe/Oslo for å unngå
+// at UTC-midnatt forskyver datoen for brukere vest for UTC.
+export function toDate(date: string, defaultTimezone = OSLO): Date {
+    if (isoTimestampHarTidssone(date)) {
+        return parseISO(date)
+    }
+    return new TZDate(date, defaultTimezone)
+}
+
+function isoTimestampHarTidssone(iso: string): boolean {
+    return /([Zz]|[+-]\d{2}:\d{2})$/.test(iso)
+}
+
+/** Nåtidspunkt i Oslo-tidssone. */
+export function now(): Date {
+    return new TZDate(new Date(), OSLO)
+}
+
+/** Bygger en dato fra år, måned og dag i Oslo-tidssone. */
+export function osloDate(year: number, month: number, day: number): Date {
+    const m = String(month).padStart(2, '0')
+    const d = String(day).padStart(2, '0')
+    return new TZDate(`${year}-${m}-${d}`, OSLO)
+}
 
 export const fraInputdatoTilJSDato = (inputDato: any) => {
     const datoSplit = inputDato.split('.')
@@ -9,7 +39,7 @@ export const fraInputdatoTilJSDato = (inputDato: any) => {
         ar = `20${ar}`
     }
     const s = `${ar}-${datoSplit[1]}-${datoSplit[0]}`
-    return new Date(s)
+    return toDate(s)
 }
 
 export const maaneder = [
@@ -29,16 +59,17 @@ export const maaneder = [
 const SKILLETEGN_PERIODE = '–'
 
 export const tilBackendDato = (datoArg: string) => {
-    return dayjs(datoArg).format('YYYY-MM-DD')
+    return format(toDate(datoArg), 'yyyy-MM-dd')
 }
 
 export const fraBackendTilDate = (datoArg: string) => {
-    if (datoArg && datoArg.match(RegExp('\\d{4}-\\d{2}-\\d{2}'))) return dayjs(datoArg).toDate()
+    if (datoArg && datoArg.match(RegExp('\\d{4}-\\d{2}-\\d{2}'))) return toDate(datoArg)
 }
 
 export const tilLesbarDatoUtenAarstall = (datoArg: any): string => {
     if (datoArg) {
-        const dato = dayjsToDate(datoArg)!
+        const dato = ensureDate(datoArg)
+        if (!dato) return ''
         const dag = dato.getDate()
         const manedIndex = dato.getMonth()
         const maned = maaneder[manedIndex]
@@ -47,13 +78,23 @@ export const tilLesbarDatoUtenAarstall = (datoArg: any): string => {
     return ''
 }
 
+function ensureDate(val: any): Date | undefined {
+    if (!val) return undefined
+    if (val instanceof Date) return val
+    if (typeof val === 'string') return toDate(val)
+    return undefined
+}
+
 export const tilLesbarDatoMedArstall = (datoArg: any) => {
-    return datoArg ? `${tilLesbarDatoUtenAarstall(dayjsToDate(datoArg))} ${dayjsToDate(datoArg)!.getFullYear()}` : null
+    if (!datoArg) return null
+    const dato = ensureDate(datoArg)
+    if (!dato) return null
+    return `${tilLesbarDatoUtenAarstall(dato)} ${dato.getFullYear()}`
 }
 
 export const tilLesbarPeriodeMedArstall = (fomArg: any, tomArg: any) => {
-    const fom = dayjsToDate(fomArg)
-    const tom = dayjsToDate(tomArg)
+    const fom = ensureDate(fomArg)
+    const tom = ensureDate(tomArg)
     const erSammeAar = fom?.getFullYear() === tom?.getFullYear()
     const erSammeMaaned = fom?.getMonth() === tom?.getMonth()
     return erSammeAar && erSammeMaaned
@@ -64,8 +105,8 @@ export const tilLesbarPeriodeMedArstall = (fomArg: any, tomArg: any) => {
 }
 
 export const tilLesbarPeriodeUtenArstall = (fomArg: any, tomArg: any) => {
-    const fom = dayjsToDate(fomArg)!
-    const tom = dayjsToDate(tomArg)!
+    const fom = ensureDate(fomArg)!
+    const tom = ensureDate(tomArg)!
     const erSammeMaaned = fom.getMonth() === tom.getMonth()
     return erSammeMaaned
         ? `${fom.getDate()}. ${SKILLETEGN_PERIODE} ${tilLesbarDatoUtenAarstall(tom)}`
@@ -73,55 +114,55 @@ export const tilLesbarPeriodeUtenArstall = (fomArg: any, tomArg: any) => {
 }
 
 export const getDuration = (from: any, to: any) => {
-    return dayjs(to).diff(from, 'days') + 1
+    const fromDate = typeof from === 'string' ? toDate(from) : from
+    const toDateVal = typeof to === 'string' ? toDate(to) : to
+    return differenceInDays(toDateVal, fromDate) + 1
 }
 
 export const ukeDatoListe = (min: string, max: string) => {
-    const ukeListe = []
-    let dato = dayjs(min)
-    while (dato.toDate() <= dayjs(max).toDate()) {
+    const ukeListe: Date[] = []
+    let dato = toDate(min)
+    const maxDate = toDate(max)
+    while (dato <= maxDate) {
         ukeListe.push(dato)
-        dato = dato.add(1, 'day')
+        dato = addDays(dato, 1)
     }
     return ukeListe
 }
 
 export const dayjsToDate = (dato: string) => {
-    return dato !== null ? dayjs(dato).toDate() : undefined
+    return dato ? toDate(dato) : undefined
 }
 
 export const parseDate = (dato: string) => {
-    return dayjs(dato).toDate()
+    return toDate(dato)
 }
 
 export const sendtForMerEnn30DagerSiden = (sendtTilArbeidsgiverDato?: Date, sendtTilNAVDato?: Date) => {
+    const iDag = now()
     let dagerSidenArb = true
     let dagerSidenNav = true
     if (sendtTilArbeidsgiverDato) {
-        dagerSidenArb = dayjs(new Date()).diff(dayjs(sendtTilArbeidsgiverDato), 'day') > 30
+        dagerSidenArb = differenceInDays(iDag, sendtTilArbeidsgiverDato) > 30
     }
     if (sendtTilNAVDato) {
-        dagerSidenNav = dayjs(new Date()).diff(dayjs(sendtTilNAVDato), 'day') > 30
+        dagerSidenNav = differenceInDays(iDag, sendtTilNAVDato) > 30
     }
     return dagerSidenArb && dagerSidenNav
 }
 
 export const sammeMnd = (sporsmal: Sporsmal): boolean => {
-    const firstMonth = dayjs(sporsmal.min!).month()
-    const lastMonth = dayjs(sporsmal.max!).month()
-    return firstMonth === lastMonth
+    return isSameMonth(toDate(sporsmal.min!), toDate(sporsmal.max!))
 }
 
 export const sammeAar = (sporsmal: Sporsmal): boolean => {
-    const firstYear = dayjs(sporsmal.min!).year().toString()
-    const lastYear = dayjs(sporsmal.max!).year().toString()
-    return firstYear === lastYear
+    return isSameYear(toDate(sporsmal.min!), toDate(sporsmal.max!))
 }
 
 export function kalkulerStartsmaneden(sporsmal: Sporsmal) {
-    const idag = dayjs()
-    if (idag.isAfter(sporsmal.max) || idag.isBefore(sporsmal.min)) {
+    const idag = now()
+    if (isAfter(idag, toDate(sporsmal.max!)) || isBefore(idag, toDate(sporsmal.min!))) {
         return fraBackendTilDate(sporsmal.max!)
     }
-    return fraBackendTilDate(idag.toString())
+    return idag
 }

@@ -1,9 +1,8 @@
-import dayjs from 'dayjs'
-
 import { SvarEnums } from '../../types/enums'
 import { RSSvar } from '../../types/rs-types/rs-svar'
 import { RSSvartype } from '../../types/rs-types/rs-svartype'
 import { Sporsmal, svarverdiToKvittering } from '../../types/types'
+import { toDate } from '../../utils/dato-utils'
 
 import { FormPeriode } from './typer/periode-komp'
 
@@ -16,7 +15,7 @@ export const hentSvar = (sporsmal: Sporsmal): any => {
             return sporsmal.undersporsmal
                 .map((uspm) => uspm.svarliste.svar[0]?.verdi)
                 .filter((v) => v !== undefined && v !== 'Ikke til behandling')
-                .map((s) => dayjs(s).toDate())
+                .map((s) => toDate(s))
 
         case RSSvartype.CHECKBOX_PANEL:
         case RSSvartype.CHECKBOX:
@@ -37,10 +36,10 @@ export const hentSvar = (sporsmal: Sporsmal): any => {
 
         case RSSvartype.DATO:
         case RSSvartype.AAR_MAANED:
-            return svar?.verdi ? dayjs(svar.verdi).toDate() : undefined
+            return svar?.verdi ? toDate(svar.verdi) : undefined
 
         case RSSvartype.DATOER:
-            return svarliste.svar.map((i) => new Date(i.verdi))
+            return svarliste.svar.map((i) => toDate(i.verdi))
 
         case RSSvartype.LAND:
         case RSSvartype.COMBOBOX_MULTI:

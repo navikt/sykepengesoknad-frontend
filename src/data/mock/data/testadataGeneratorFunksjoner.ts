@@ -1,5 +1,3 @@
-import dayjs from 'dayjs'
-
 import { Sykmelding } from '../../../types/sykmelding'
 import { ArbeidsforholdFraInntektskomponenten } from '../../../types/rs-types/rs-arbeidsforholdfrainntektskomponenten'
 import { RSSoknad } from '../../../types/rs-types/rs-soknad'
@@ -145,7 +143,7 @@ export function skapSoknad(opts: {
 }): RSSoknad {
     const { fom, tom, hovedjobb, sykmeldingId, soknadId } = opts
 
-    const periodeTekst = tilLesbarPeriodeMedArstall(dayjs(fom), dayjs(tom))
+    const periodeTekst = tilLesbarPeriodeMedArstall(fom, tom)
 
     const inntektskilderDataFraInntektskomponenten: ArbeidsforholdFraInntektskomponenten[] = [
         {
