@@ -1,5 +1,5 @@
 import { Arbeidsgiver } from '../types'
-import { dayjsToDate } from '../../utils/dato-utils'
+import { toDate, toDateEllerUndefined } from '../../utils/dato-utils'
 
 import { RSArbeidssituasjonType } from './rs-arbeidssituasjon'
 import { RSMerknad } from './rs-merknad'
@@ -37,17 +37,17 @@ export class RSSoknadmetadata {
         this.soknadstype = json.soknadstype
         this.status = json.status
         this.arbeidssituasjon = json.arbeidssituasjon
-        this.fom = dayjsToDate(json.fom)
-        this.tom = dayjsToDate(json.tom)
+        this.fom = toDateEllerUndefined(json.fom)
+        this.tom = toDateEllerUndefined(json.tom)
         this.korrigerer = json.korrigerer
         this.korrigertAv = json.korrigertAv
         this.egenmeldtSykmelding = json.egenmeldtSykmelding
-        this.avbruttDato = dayjsToDate(json.avbruttDato)
-        this.sykmeldingUtskrevet = dayjsToDate(json.sykmeldingUtskrevet)
-        this.startSykeforlop = dayjsToDate(json.startSykeforlop)
-        this.opprettetDato = dayjsToDate(json.opprettetDato)!
-        this.sendtTilNAVDato = dayjsToDate(json.sendtTilNAVDato)
-        this.sendtTilArbeidsgiverDato = dayjsToDate(json.sendtTilArbeidsgiverDato)
+        this.avbruttDato = toDateEllerUndefined(json.avbruttDato)
+        this.sykmeldingUtskrevet = toDateEllerUndefined(json.sykmeldingUtskrevet)
+        this.startSykeforlop = toDateEllerUndefined(json.startSykeforlop)
+        this.opprettetDato = toDate(json.opprettetDato)!
+        this.sendtTilNAVDato = toDateEllerUndefined(json.sendtTilNAVDato)
+        this.sendtTilArbeidsgiverDato = toDateEllerUndefined(json.sendtTilArbeidsgiverDato)
         if (json.arbeidsgiver) {
             this.arbeidsgiver = {
                 navn: json.arbeidsgiver.navn,

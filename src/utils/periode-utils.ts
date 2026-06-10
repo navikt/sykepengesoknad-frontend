@@ -1,5 +1,3 @@
-import dayjs from 'dayjs'
-
 import { Periode, Sykmelding } from '../types/sykmelding'
 import { Soknad, TidsPeriode } from '../types/types'
 
@@ -66,8 +64,8 @@ const tilTidsperiode = (p: Periode) => {
 }
 
 export const erOppdelt = (soknad: Soknad, sykmelding: Sykmelding) => {
-    const fomSykmelding = dayjs(tidligsteFom(sykmelding.sykmeldingsperioder.map(tilTidsperiode))!).toDate()
-    const tomSykmelding = dayjs(senesteTom(sykmelding.sykmeldingsperioder.map(tilTidsperiode))!).toDate()
+    const fomSykmelding = tidligsteFom(sykmelding.sykmeldingsperioder.map(tilTidsperiode))!
+    const tomSykmelding = senesteTom(sykmelding.sykmeldingsperioder.map(tilTidsperiode))!
 
     return !(soknad.fom!.getTime() === fomSykmelding.getTime() && soknad.tom!.getTime() === tomSykmelding.getTime())
 }

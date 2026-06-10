@@ -5,7 +5,7 @@ import path from 'path'
 import * as uuid from 'uuid'
 import { v4 as uuidv4 } from 'uuid'
 import { NextApiRequest, NextApiResponse } from 'next'
-import dayjs from 'dayjs'
+import { format, subDays } from 'date-fns'
 import { stream2buffer } from '@navikt/next-api-proxy/dist/proxyUtils'
 import { logger } from '@navikt/next-logger'
 import { nextleton } from 'nextleton'
@@ -21,6 +21,7 @@ import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { RSSvar } from '../../types/rs-types/rs-svar'
 import { RSArbeidssituasjon } from '../../types/rs-types/rs-arbeidssituasjon'
 import { RSOppdaterSporsmalResponse } from '../../types/rs-types/rest-response/rs-oppdatersporsmalresponse'
+import { now, toDate } from '../../utils/dato-utils'
 
 import { Persona } from './data/personas/personas'
 import { testpersoner } from './testperson'
@@ -50,7 +51,7 @@ import {
 } from './data/sporsmal/naringsdrivende'
 
 type session = {
-    expires: dayjs.Dayjs
+    expires: Date
     testpersoner: { [index: string]: Persona }
 }
 export const sessionStore = nextleton('sessionStore', () => {
@@ -78,9 +79,9 @@ export function getSession(req: NextApiRequest, res: NextApiResponse): session {
 
     const sessionId = getSessionId()
 
-    if (!sessionStore[sessionId] || sessionStore[sessionId].expires.isBefore(dayjs())) {
+    if (!sessionStore[sessionId] || sessionStore[sessionId].expires < now()) {
         sessionStore[sessionId] = {
-            expires: dayjs().add(1, 'hour'),
+            expires: new Date(Date.now() + 3600000),
             testpersoner: testpersoner(),
         }
     }
@@ -272,7 +273,7 @@ export async function mockApi(req: NextApiRequest, res: NextApiResponse) {
         [ENDPOINTS.ETTERSEND_TIL_ARBEIDSGIVER]: async () => {
             const soknad = getSoknadEllerFeilmld(soknadId)
             if (!soknad) return
-            soknad.sendtTilArbeidsgiverDato = dayjs().toJSON()
+            soknad.sendtTilArbeidsgiverDato = now().toISOString()
             return sendJson()
         },
         [ENDPOINTS.AVBRYT_SOKNAD]: async () => {
@@ -283,7 +284,7 @@ export async function mockApi(req: NextApiRequest, res: NextApiResponse) {
                 return sendJson()
             }
             soknad.status = 'AVBRUTT'
-            soknad.avbruttDato = dayjs().toJSON()
+            soknad.avbruttDato = now().toISOString()
             return sendJson()
         },
         [ENDPOINTS.GJENAPNE_SOKNAD]: async () => {
@@ -389,7 +390,7 @@ export async function mockApi(req: NextApiRequest, res: NextApiResponse) {
                 const begrensendeDato = finnBegrensendeDato()
 
                 if (begrensendeDato) {
-                    const dagForBegrensende = dayjs(begrensendeDato).subtract(1, 'day').format('YYYY-MM-DD')
+                    const dagForBegrensende = format(subDays(toDate(begrensendeDato), 1), 'yyyy-MM-dd')
 
                     soknaden.sporsmal = soknaden.sporsmal.filter((spm) => {
                         const tagsSomForsvinner = ['FTA_INNTEKT_UNDERVEIS', 'FTA_REISE_TIL_UTLANDET']
@@ -463,7 +464,7 @@ export async function mockApi(req: NextApiRequest, res: NextApiResponse) {
             const soknaden = getSoknadEllerFeilmld(soknadId)
             if (!soknaden) return
             const sendesTil = mottaker(soknadId!)
-            const tidspunkt = dayjs().toJSON()
+            const tidspunkt = now().toISOString()
             if ([RSMottaker.ARBEIDSGIVER_OG_NAV, RSMottaker.ARBEIDSGIVER].includes(sendesTil)) {
                 soknaden.sendtTilArbeidsgiverDato = tidspunkt
             }

@@ -1,5 +1,3 @@
-import dayjs from 'dayjs'
-
 import { RSSoknad } from '../../../../types/rs-types/rs-soknad'
 import { jsonDeepCopy } from '../../../../utils/json-deep-copy'
 import {
@@ -1283,7 +1281,7 @@ export const arbeidstakerMedOppholdKvittering: RSSoknad = {
 export const foranArbeidstakerMedOppholdKvittering: RSSoknad = jsonDeepCopy(arbeidstakerMedOppholdKvittering)
 foranArbeidstakerMedOppholdKvittering.id = '35dc9bfb-e935-4f02-931f-9fa5306bbceb'
 foranArbeidstakerMedOppholdKvittering.status = 'SENDT'
-foranArbeidstakerMedOppholdKvittering.sendtTilArbeidsgiverDato = dayjs().subtract(1, 'day').toISOString()
+foranArbeidstakerMedOppholdKvittering.sendtTilArbeidsgiverDato = new Date(Date.now() - 86400000).toISOString()
 foranArbeidstakerMedOppholdKvittering.fom = '2020-03-25'
 foranArbeidstakerMedOppholdKvittering.tom = '2020-03-27'
 

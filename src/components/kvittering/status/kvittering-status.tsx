@@ -1,8 +1,8 @@
 import { Alert, BodyShort, Heading } from '@navikt/ds-react'
-import dayjs from 'dayjs'
 import React from 'react'
 
 import { tekst } from '../../../utils/tekster'
+import { tilLesbarDatoOgTid } from '../../../utils/dato-utils'
 import { useSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
 
 export enum Mottaker {
@@ -12,11 +12,6 @@ export enum Mottaker {
 
 const KvitteringStatus = () => {
     const { valgtSoknad } = useSoknadMedDetaljer()
-
-    const tilNavDato = () => {
-        const datoNav = dayjs(valgtSoknad!.sendtTilNAVDato).format('dddd D. MMM, kl HH:mm')
-        return datoNav.charAt(0).toUpperCase() + datoNav.slice(1)
-    }
 
     if (!valgtSoknad) return null
 
@@ -28,7 +23,7 @@ const KvitteringStatus = () => {
                         {tekst('kvittering.soknaden-er-sendt-til')} {Mottaker.NAV}
                     </Heading>
                     <BodyShort>
-                        {tekst('kvittering.mottatt')}: {tilNavDato()}
+                        {tekst('kvittering.mottatt')}: {tilLesbarDatoOgTid(valgtSoknad.sendtTilNAVDato)}
                     </BodyShort>
                 </Alert>
             )}

@@ -1,5 +1,6 @@
 import { BodyShort, Label } from '@navikt/ds-react'
-import dayjs from 'dayjs'
+import { format } from 'date-fns'
+import { nb } from 'date-fns/locale/nb'
 import React from 'react'
 
 import { Periode, Sykmelding } from '../../types/sykmelding'
@@ -37,8 +38,8 @@ const SykmeldingPerioder = ({ valgtSykmelding }: SykmeldingPerioderProps) => {
     return (
         <section>
             {sortertePerioder.map((periode: Periode, index: number) => {
-                const fom = dayjs(periode.fom).format('D. MMM')
-                const tom = dayjs(periode.tom).format('D. MMM YYYY')
+                const fom = format(periode.fom, 'd. MMM', { locale: nb })
+                const tom = format(periode.tom, 'd. MMM yyyy', { locale: nb })
                 const dager = getDuration(periode.fom, periode.tom)
 
                 return (

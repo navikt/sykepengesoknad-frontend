@@ -1,9 +1,9 @@
-import dayjs from 'dayjs'
+import { format } from 'date-fns'
 import { RangeValidationT } from '@navikt/ds-react'
 
 import { FormPeriode } from '../../components/sporsmal/typer/periode-komp'
 import { Sporsmal } from '../../types/types'
-import { fraBackendTilDate } from '../dato-utils'
+import { fraBackendTilDate, toDate } from '../dato-utils'
 
 interface Periode {
     fom: Date
@@ -54,7 +54,7 @@ export const validerFom = (sporsmal: Sporsmal, value?: FormPeriode, rangeValidat
         return 'Du må oppgi en fra og med dato i formatet dd.mm.åååå'
     }
     if (sporsmal.min && rangeValidation.from.isBefore) {
-        return 'Fra og med kan ikke være før ' + dayjs(sporsmal.min).format('DD.MM.YYYY')
+        return 'Fra og med kan ikke være før ' + format(toDate(sporsmal.min), 'dd.MM.yyyy')
     }
     if (!rangeValidation.from.isValidDate) {
         return 'Du må oppgi en fra og med dato i formatet dd.mm.åååå'
@@ -72,7 +72,7 @@ export const validerTom = (sporsmal: Sporsmal, value?: FormPeriode, rangeValidat
         return 'Du må oppgi en til og med dato i formatet dd.mm.åååå'
     }
     if (sporsmal.max && rangeValidation.to.isAfter) {
-        return 'Til og med kan ikke være etter ' + dayjs(sporsmal.max).format('DD.MM.YYYY')
+        return 'Til og med kan ikke være etter ' + format(toDate(sporsmal.max), 'dd.MM.yyyy')
     }
     if (rangeValidation.to.isBeforeFrom) {
         return 'Til og med må være etter fra og med'

@@ -1,4 +1,5 @@
 import { differenceInDays, format, isSameMonth, isSameYear, isAfter, isBefore, addDays, parseISO } from 'date-fns'
+import { nb } from 'date-fns/locale/nb'
 import { TZDate } from '@date-fns/tz'
 
 import { Sporsmal } from '../types/types'
@@ -30,6 +31,17 @@ export function osloDate(year: number, month: number, day: number): Date {
     const m = String(month).padStart(2, '0')
     const d = String(day).padStart(2, '0')
     return new TZDate(`${year}-${m}-${d}`, OSLO)
+}
+
+/**
+ * Formaterer en dato til lesbar dato og klokkeslett i Oslo-tidssone,
+ * f.eks. «Torsdag 23. april, kl 11:56». Brukes på kvitteringssiden.
+ */
+export function tilLesbarDatoOgTid(dato: Date | string): string {
+    // TZDate har ikke overload for Date | string — bruk instanceof for å hjelpe TypeScript
+    const tzDato = dato instanceof Date ? new TZDate(dato, OSLO) : new TZDate(dato, OSLO)
+    const formatert = format(tzDato, "EEEE d. MMMM, 'kl' HH:mm", { locale: nb })
+    return formatert.charAt(0).toUpperCase() + formatert.slice(1)
 }
 
 export const fraInputdatoTilJSDato = (inputDato: any) => {
@@ -130,12 +142,12 @@ export const ukeDatoListe = (min: string, max: string) => {
     return ukeListe
 }
 
-export const dayjsToDate = (dato: string) => {
-    return dato ? toDate(dato) : undefined
-}
-
 export const parseDate = (dato: string) => {
     return toDate(dato)
+}
+
+export function toDateEllerUndefined(dato: string | null | undefined): Date | undefined {
+    return dato ? toDate(dato) : undefined
 }
 
 export const sendtForMerEnn30DagerSiden = (sendtTilArbeidsgiverDato?: Date, sendtTilNAVDato?: Date) => {

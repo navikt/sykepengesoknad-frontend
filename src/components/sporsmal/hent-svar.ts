@@ -2,7 +2,7 @@ import { SvarEnums } from '../../types/enums'
 import { RSSvar } from '../../types/rs-types/rs-svar'
 import { RSSvartype } from '../../types/rs-types/rs-svartype'
 import { Sporsmal, svarverdiToKvittering } from '../../types/types'
-import { toDate } from '../../utils/dato-utils'
+import { toDate, toDateEllerUndefined } from '../../utils/dato-utils'
 
 import { FormPeriode } from './typer/periode-komp'
 
@@ -36,7 +36,7 @@ export const hentSvar = (sporsmal: Sporsmal): any => {
 
         case RSSvartype.DATO:
         case RSSvartype.AAR_MAANED:
-            return svar?.verdi ? toDate(svar.verdi) : undefined
+            return toDateEllerUndefined(svar?.verdi)
 
         case RSSvartype.DATOER:
             return svarliste.svar.map((i) => toDate(i.verdi))

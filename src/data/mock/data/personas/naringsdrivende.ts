@@ -3,6 +3,7 @@ import { deepcopyMedNyId } from '../../deepcopyMedNyId'
 import { naringsdrivendeSoknad } from '../soknad/naringsdrivende'
 import { RSSporsmal } from '../../../../types/rs-types/rs-sporsmal'
 import { RSSoknad } from '../../../../types/rs-types/rs-soknad'
+import { now } from '../../../../utils/dato-utils'
 import {
     naringsdrivendeNyIArbeidslivet,
     naringsdrivendeVarigEndring,
@@ -24,7 +25,7 @@ export const selvstendigNaringsdrivende: Persona = {
 const sendtSoknadMedGammelKvittering = deepcopyMedNyId(naringsdrivendeSoknad, '3708c4de-d16c-4835-841b-a6716b688888')
 
 sendtSoknadMedGammelKvittering.status = 'SENDT'
-sendtSoknadMedGammelKvittering.sendtTilNAVDato = new Date().toISOString()
+sendtSoknadMedGammelKvittering.sendtTilNAVDato = now().toISOString()
 sendtSoknadMedGammelKvittering.sporsmal.forEach((sporsmal) => {
     sporsmal.svar = [{ verdi: 'NEI' }]
 })

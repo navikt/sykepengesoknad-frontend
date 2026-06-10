@@ -2,6 +2,7 @@ import { logAnalyticsEvent } from '@navikt/nav-dekoratoren-moduler'
 import { logger } from '@navikt/next-logger'
 
 import { umamiEnabled, isLocalBackend, isProd, isOpplaering } from '../../utils/environment'
+import { now } from '../../utils/dato-utils'
 
 type validEventNames =
     | 'readmore lukket'
@@ -68,7 +69,7 @@ export const logEvent = (eventName: validEventNames, eventData: Record<string, s
                     },
                     body: JSON.stringify({
                         event_type: eventName,
-                        client_event_time: new Date().toISOString(),
+                        client_event_time: now().toISOString(),
                         event_properties: cleanedEventData,
                     }),
                 }).catch((e) => {

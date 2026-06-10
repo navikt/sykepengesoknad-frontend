@@ -1,4 +1,4 @@
-import { dayjsToDate, parseDate } from '../utils/dato-utils'
+import { toDate, parseDate, toDateEllerUndefined } from '../utils/dato-utils'
 
 import { RSSporsmal } from './rs-types/rs-sporsmal'
 import { RSVisningskriterieType } from './rs-types/rs-visningskriterie'
@@ -96,7 +96,7 @@ export function rsToSoknad(soknad: RSSoknad): Soknad {
     if (soknad.kjentOppholdstillatelse) {
         kjentOppholdstillatelse = {
             fom: parseDate(soknad.kjentOppholdstillatelse.fom),
-            tom: soknad.kjentOppholdstillatelse.tom ? dayjsToDate(soknad.kjentOppholdstillatelse.tom) : undefined,
+            tom: toDateEllerUndefined(soknad.kjentOppholdstillatelse.tom),
         }
     }
 
@@ -106,12 +106,12 @@ export function rsToSoknad(soknad: RSSoknad): Soknad {
         RSSoknadstype[type],
         RSSoknadstatus[stat],
         soknad.arbeidssituasjon ? RSArbeidssituasjon[soknad.arbeidssituasjon] : undefined,
-        dayjsToDate(soknad.fom!)!,
-        dayjsToDate(soknad.tom!)!,
-        dayjsToDate(soknad.avbruttDato!)!,
-        dayjsToDate(soknad.opprettetDato!)!,
-        dayjsToDate(soknad.sendtTilNAVDato!)!,
-        dayjsToDate(soknad.sendtTilArbeidsgiverDato!)!,
+        toDate(soknad.fom!)!,
+        toDate(soknad.tom!)!,
+        toDateEllerUndefined(soknad.avbruttDato),
+        toDate(soknad.opprettetDato!)!,
+        toDateEllerUndefined(soknad.sendtTilNAVDato),
+        toDateEllerUndefined(soknad.sendtTilArbeidsgiverDato),
         soknad.utenlandskSykmelding,
         arbeidsgiver,
         rsToSporsmal(soknad.sporsmal, undefined as any, true),

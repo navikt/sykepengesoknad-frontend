@@ -1,8 +1,8 @@
 import { Detail } from '@navikt/ds-react'
-import dayjs from 'dayjs'
 import React from 'react'
 
 import { tekst } from '../../../utils/tekster'
+import { tilLesbarDatoOgTid } from '../../../utils/dato-utils'
 import Avkrysset from '../../oppsummering/utdrag/avkrysset'
 import { useSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
 
@@ -14,16 +14,6 @@ const ArbeidstakerStatus = () => {
     let medKopi = tekst('kvittering.med-kopi-til-nav')
     if (valgtSoknad!.sendtTilArbeidsgiverDato && valgtSoknad!.sendtTilNAVDato) {
         medKopi = ''
-    }
-
-    const tilNavDato = () => {
-        const datoNav = dayjs(valgtSoknad?.sendtTilNAVDato).format('dddd D. MMM, kl HH:mm')
-        return datoNav.charAt(0).toUpperCase() + datoNav.slice(1)
-    }
-
-    const tilArbDato = () => {
-        const datoArb = dayjs(valgtSoknad?.sendtTilArbeidsgiverDato).format('dddd D. MMM, kl HH:mm')
-        return datoArb.charAt(0).toUpperCase() + datoArb.slice(1)
     }
 
     const tilArbNavn = () => {
@@ -41,13 +31,13 @@ const ArbeidstakerStatus = () => {
             {valgtSoknad.sendtTilArbeidsgiverDato && (
                 <div data-cy="sendt-arbeidsgiver">
                     <Avkrysset tekst={`${tilArbNavn()} ${tilOrg()}${medKopi}`} />
-                    <Detail className="pl-6">{tilArbDato()}</Detail>
+                    <Detail className="pl-6">{tilLesbarDatoOgTid(valgtSoknad.sendtTilArbeidsgiverDato)}</Detail>
                 </div>
             )}
             {valgtSoknad.sendtTilNAVDato && (
                 <div data-cy="sendt-nav">
                     <Avkrysset tekst={Mottaker.NAV} />
-                    <Detail className="pl-6">{tilNavDato()}</Detail>
+                    <Detail className="pl-6">{tilLesbarDatoOgTid(valgtSoknad.sendtTilNAVDato)}</Detail>
                 </div>
             )}
         </>

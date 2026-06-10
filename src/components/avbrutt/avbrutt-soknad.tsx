@@ -1,10 +1,10 @@
 import { Alert, BodyLong, BodyShort } from '@navikt/ds-react'
-import dayjs from 'dayjs'
+import { isAfter, subSeconds } from 'date-fns'
 import React, { useEffect } from 'react'
 import { useRouter } from 'next/router'
 
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
-import { tilLesbarDatoMedArstall } from '../../utils/dato-utils'
+import { now, tilLesbarDatoMedArstall } from '../../utils/dato-utils'
 import { tekst } from '../../utils/tekster'
 import { logEvent } from '../umami/umami'
 import FristSykepenger from '../frist-sykepenger/frist-sykepenger'
@@ -83,7 +83,7 @@ const AvbruttSoknad = () => {
                     </BodyLong>
                 </>
             )}
-            {dayjs(valgtSoknad.avbruttDato).isAfter(dayjs().subtract(2, 'seconds')) && (
+            {isAfter(valgtSoknad.avbruttDato!, subSeconds(now(), 2)) && (
                 <GjenstaendeSoknader
                     style={{ marginTop: '1rem', marginBottom: '1rem' }}
                     soknader={gjenstaendeSoknader}

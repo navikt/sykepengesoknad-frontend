@@ -12,8 +12,8 @@ interface UsendtSykmeldingProps {
 }
 
 export const EldreUsendtSykmelding = ({ usendteSykmeldinger }: UsendtSykmeldingProps) => {
-    const sorterteUsendte = [...usendteSykmeldinger].sort((a, b) =>
-        getSykmeldingStartDate(a).diff(getSykmeldingStartDate(b)),
+    const sorterteUsendte = [...usendteSykmeldinger].sort(
+        (a, b) => getSykmeldingStartDate(a).getTime() - getSykmeldingStartDate(b).getTime(),
     )
 
     const knappetekst = () => {
