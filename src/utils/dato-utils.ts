@@ -38,6 +38,7 @@ export function osloDate(year: number, month: number, day: number): Date {
  * f.eks. «Torsdag 23. april, kl 11:56». Brukes på kvitteringssiden.
  */
 export function tilLesbarDatoOgTid(dato: Date | string): string {
+    // TZDate har ikke overload for Date | string — bruk instanceof for å hjelpe TypeScript
     const tzDato = dato instanceof Date ? new TZDate(dato, OSLO) : new TZDate(dato, OSLO)
     const formatert = format(tzDato, "EEEE d. MMMM, 'kl' HH:mm", { locale: nb })
     return formatert.charAt(0).toUpperCase() + formatert.slice(1)
