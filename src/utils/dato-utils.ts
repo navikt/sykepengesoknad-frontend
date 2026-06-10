@@ -145,6 +145,10 @@ export const parseDate = (dato: string) => {
     return toDate(dato)
 }
 
+export function toDateEllerUndefined(dato: string | null | undefined): Date | undefined {
+    return dato ? toDate(dato) : undefined
+}
+
 export const sendtForMerEnn30DagerSiden = (sendtTilArbeidsgiverDato?: Date, sendtTilNAVDato?: Date) => {
     const iDag = now()
     let dagerSidenArb = true

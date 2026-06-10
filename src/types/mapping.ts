@@ -1,4 +1,4 @@
-import { toDate, parseDate } from '../utils/dato-utils'
+import { toDate, parseDate, toDateEllerUndefined } from '../utils/dato-utils'
 
 import { RSSporsmal } from './rs-types/rs-sporsmal'
 import { RSVisningskriterieType } from './rs-types/rs-visningskriterie'
@@ -96,7 +96,7 @@ export function rsToSoknad(soknad: RSSoknad): Soknad {
     if (soknad.kjentOppholdstillatelse) {
         kjentOppholdstillatelse = {
             fom: parseDate(soknad.kjentOppholdstillatelse.fom),
-            tom: soknad.kjentOppholdstillatelse.tom ? toDate(soknad.kjentOppholdstillatelse.tom) : undefined,
+            tom: toDateEllerUndefined(soknad.kjentOppholdstillatelse.tom),
         }
     }
 
@@ -108,10 +108,10 @@ export function rsToSoknad(soknad: RSSoknad): Soknad {
         soknad.arbeidssituasjon ? RSArbeidssituasjon[soknad.arbeidssituasjon] : undefined,
         toDate(soknad.fom!)!,
         toDate(soknad.tom!)!,
-        soknad.avbruttDato ? toDate(soknad.avbruttDato) : undefined,
+        toDateEllerUndefined(soknad.avbruttDato),
         toDate(soknad.opprettetDato!)!,
-        soknad.sendtTilNAVDato ? toDate(soknad.sendtTilNAVDato) : undefined,
-        soknad.sendtTilArbeidsgiverDato ? toDate(soknad.sendtTilArbeidsgiverDato) : undefined,
+        toDateEllerUndefined(soknad.sendtTilNAVDato),
+        toDateEllerUndefined(soknad.sendtTilArbeidsgiverDato),
         soknad.utenlandskSykmelding,
         arbeidsgiver,
         rsToSporsmal(soknad.sporsmal, undefined as any, true),
