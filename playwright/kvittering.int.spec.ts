@@ -182,8 +182,9 @@ test.describe('Kvittering integrasjon', () => {
             await expect(page.locator('[data-cy="sendt-arbeidsgiver"]')).toBeVisible()
             const panel = page.locator('[data-cy="kvittering"]')
             await expect(panel).toContainText('Hva skjer videre?')
-            await expect(panel).toContainText('Før NAV kan behandle søknaden')
-            await expect(panel).toContainText('Når sykefraværet ditt er lengre enn 16 kalenderdager')
+            await expect(panel).toContainText(
+                'For å behandle søknaden trenger vi en inntektsmelding fra arbeidsgiveren din',
+            )
             await expect(panel).toContainText('NAV behandler søknaden')
             await expect(panel).toContainText('Når blir pengene utbetalt')
             await expect(page.getByRole('button', { name: 'Jeg vil endre svarene i søknaden' })).toBeVisible()
@@ -203,8 +204,10 @@ test.describe('Kvittering integrasjon', () => {
             )
             const panel = page.locator('[data-cy="kvittering"]')
             await expect(panel).toContainText('Hva skjer videre?')
-            await expect(panel).toContainText('Før NAV kan behandle søknaden')
-            await expect(panel).toContainText('Når sykefraværet ditt er lengre enn 16 kalenderdager')
+            await expect(panel).toContainText('Nav ber arbeidsgiveren din om inntektsmelding')
+            await expect(panel).toContainText(
+                'For å behandle søknaden trenger vi en inntektsmelding fra arbeidsgiveren din',
+            )
             await expect(panel).toContainText('NAV behandler søknaden')
             await expect(panel).toContainText('Når blir pengene utbetalt')
             await expect(page.getByRole('button', { name: 'Jeg vil endre svarene i søknaden' })).toBeVisible()
@@ -224,8 +227,10 @@ test.describe('Kvittering integrasjon', () => {
             )
             const panel = page.locator('[data-cy="kvittering"]')
             await expect(panel).toContainText('Hva skjer videre?')
-            await expect(panel).toContainText('Før NAV kan behandle søknaden')
-            await expect(panel).toContainText('Når sykefraværet ditt er lengre enn 16 kalenderdager')
+            await expect(panel).toContainText('Nav ber arbeidsgiveren din om inntektsmelding')
+            await expect(panel).toContainText(
+                'For å behandle søknaden trenger vi en inntektsmelding fra arbeidsgiveren din',
+            )
             await expect(panel).toContainText('NAV behandler søknaden')
             await expect(panel).toContainText('Når blir pengene utbetalt')
             await expect(page.getByRole('button', { name: 'Jeg vil endre svarene i søknaden' })).toBeVisible()
@@ -269,7 +274,10 @@ test.describe('Kvittering integrasjon', () => {
             )
             const panel = page.locator('[data-cy="kvittering"]')
             await expect(panel).toContainText('Hva skjer videre?')
-            await expect(panel).toContainText('Før NAV kan behandle søknaden')
+            await expect(panel).toContainText('Nav ber arbeidsgiveren din om inntektsmelding')
+            await expect(panel).toContainText(
+                'For å behandle søknaden trenger vi en inntektsmelding fra arbeidsgiveren din',
+            )
             await expect(panel).toContainText('NAV behandler søknaden')
             await expect(panel).toContainText('Når blir pengene utbetalt')
             await expect(page.getByRole('button', { name: 'Jeg vil endre svarene i søknaden' })).toBeVisible()

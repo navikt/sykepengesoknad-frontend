@@ -264,7 +264,10 @@ test.describe('Sjekker at søknader med gammel oppsummering ser ok ut', () => {
 
             const kvittering = page.locator('[data-cy="kvittering"]')
             await expect(kvittering).toContainText('Hva skjer videre?')
-            await expect(kvittering).toContainText('Før NAV kan behandle søknaden')
+            await expect(kvittering).toContainText('Nav ber arbeidsgiveren din om inntektsmelding')
+            await expect(kvittering).toContainText(
+                'For å behandle søknaden trenger vi en inntektsmelding fra arbeidsgiveren din',
+            )
             await expect(kvittering).toContainText('NAV behandler søknaden')
             await expect(kvittering).toContainText('Når blir pengene utbetalt')
 

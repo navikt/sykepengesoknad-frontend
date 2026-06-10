@@ -544,7 +544,8 @@ test.describe('Tester støtte for gamle spørsmål', () => {
         await test.step('Kvittering', async () => {
             await harSynligTittel(page, 'Søknaden er sendt', 2)
             await harSynligTekst(page, 'Hva skjer videre?')
-            await harSynligTekst(page, 'Før NAV kan behandle søknaden')
+            await harSynligTekst(page, 'Nav ber arbeidsgiveren din om inntektsmelding')
+            await harSynligTekst(page, 'For å behandle søknaden trenger vi en inntektsmelding fra arbeidsgiveren din')
             await harSynligTekst(page, 'NAV behandler søknaden')
             await harSynligTekst(page, 'Når blir pengene utbetalt')
         })

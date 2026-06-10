@@ -1,10 +1,10 @@
-import { test, expect } from '@playwright/test'
+import { test, expect, Page } from '@playwright/test'
 
 import { behandlingsdager } from '../src/data/mock/data/soknad/behandlingsdager'
 
 import { validerAxeUtilityWrapper } from './uuvalidering'
 
-async function checkViStolerPaDeg(page, gaVidere = true) {
+async function checkViStolerPaDeg(page: Page, gaVidere = true) {
     await page
         .getByRole('checkbox', {
             name: /Jeg bekrefter at jeg vil svare så riktig som jeg kan./i,
@@ -15,7 +15,7 @@ async function checkViStolerPaDeg(page, gaVidere = true) {
     }
 }
 
-async function klikkGaVidere(page, forventFeil = false, skipFocusCheck = false) {
+async function klikkGaVidere(page: Page, forventFeil = false, skipFocusCheck = false) {
     const currentUrl = page.url()
     const currentPathParam = parseInt(currentUrl.split('/').pop()!, 10)
 
@@ -33,7 +33,7 @@ async function klikkGaVidere(page, forventFeil = false, skipFocusCheck = false) 
     }
 }
 
-async function klikkTilbake(page) {
+async function klikkTilbake(page: Page) {
     const currentUrl = page.url()
     const currentPathParam = parseInt(currentUrl.split('/').pop()!, 10)
 
@@ -48,7 +48,7 @@ async function klikkTilbake(page) {
     await expect(page.locator('#maincontent')).toBeFocused()
 }
 
-async function sjekkIntroside(page) {
+async function sjekkIntroside(page: Page) {
     await expect(
         page.getByText(
             'Her kan du søke om sykepenger mens du er sykmeldt. ' +
@@ -87,12 +87,12 @@ async function sjekkIntroside(page) {
     ).toHaveAttribute('href', 'https://www.nav.no/endringer')
 }
 
-async function svarNeiHovedsporsmal(page) {
+async function svarNeiHovedsporsmal(page: Page) {
     await page.getByRole('radio', { name: 'Nei' }).first().check()
     await expect(page.getByRole('radio', { name: 'Nei' }).first()).toBeChecked()
 }
 
-async function sporsmalOgSvar(page, sporsmal: string, svar: string) {
+async function sporsmalOgSvar(page: Page, sporsmal: string, svar: string) {
     const question = page.getByText(sporsmal)
     await expect(question).toBeVisible()
     const answer = question.locator('xpath=following-sibling::*').first()
@@ -213,7 +213,10 @@ test.describe('Tester behandlingsdagersøknad', () => {
             await expect(page).toHaveURL(new RegExp('/kvittering/'))
             const kvittering = page.locator('[data-cy="kvittering"]')
             await expect(kvittering).toContainText('Hva skjer videre?')
-            await expect(kvittering).toContainText('Før NAV kan behandle søknaden')
+            await expect(kvittering).toContainText('Nav ber arbeidsgiveren din om inntektsmelding')
+            await expect(kvittering).toContainText(
+                'For å behandle søknaden trenger vi en inntektsmelding fra arbeidsgiveren din',
+            )
             await expect(kvittering).toContainText('NAV behandler søknaden')
             await expect(kvittering).toContainText('Når blir pengene utbetalt')
             await validerAxeUtilityWrapper(page, test.info())
