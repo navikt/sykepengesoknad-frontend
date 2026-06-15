@@ -105,7 +105,6 @@ export function skapSykmelding(opts: { fom: string; tom: string; hovedjobb: stri
         navnFastlege: 'Victor Frankenstein',
         egenmeldt: false,
         papirsykmelding: false,
-        harRedusertArbeidsgiverperiode: false,
         merknader: null,
         utdypendeOpplysninger: {
             '6.2': {
