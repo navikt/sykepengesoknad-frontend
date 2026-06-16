@@ -138,7 +138,6 @@ export const arbeidstaker100Syk = new Sykmelding({
     navnFastlege: 'Victor Frankenstein',
     egenmeldt: false,
     papirsykmelding: false,
-    harRedusertArbeidsgiverperiode: false,
     merknader: null,
 })
 export const arbeidstaker50Syk = new Sykmelding({
@@ -269,7 +268,6 @@ export const arbeidstaker50Syk = new Sykmelding({
     navnFastlege: 'Victor Frankenstein',
     egenmeldt: false,
     papirsykmelding: false,
-    harRedusertArbeidsgiverperiode: false,
     merknader: null,
 })
 export const arbeidsledig100Syk = new Sykmelding({
@@ -402,7 +400,6 @@ export const arbeidsledig100Syk = new Sykmelding({
     navnFastlege: 'Victor Frankenstein',
     egenmeldt: false,
     papirsykmelding: false,
-    harRedusertArbeidsgiverperiode: false,
     merknader: null,
 })
 export const frilanser100Syk = new Sykmelding({
@@ -559,7 +556,6 @@ export const frilanser100Syk = new Sykmelding({
     navnFastlege: 'Victor Frankenstein',
     egenmeldt: false,
     papirsykmelding: false,
-    harRedusertArbeidsgiverperiode: false,
     merknader: null,
 })
 export const naringsdrivende100syk = jsonDeepCopy(frilanser100Syk)
@@ -691,7 +687,6 @@ export const arbeidstakerBehandlingsdagSyk = new Sykmelding({
     navnFastlege: 'Victor Frankenstein',
     egenmeldt: false,
     papirsykmelding: false,
-    harRedusertArbeidsgiverperiode: false,
     merknader: null,
 })
 export const arbeidstakerReisetilskuddSyk = new Sykmelding({
@@ -819,7 +814,6 @@ export const arbeidstakerReisetilskuddSyk = new Sykmelding({
     navnFastlege: 'Victor Frankenstein',
     egenmeldt: false,
     papirsykmelding: false,
-    harRedusertArbeidsgiverperiode: false,
     merknader: null,
 })
 
@@ -1112,7 +1106,6 @@ export const gradertReisetilskuddSm = new Sykmelding({
     navnFastlege: 'Victor Frankenstein',
     egenmeldt: false,
     papirsykmelding: false,
-    harRedusertArbeidsgiverperiode: false,
     merknader: null,
 })
 
@@ -1226,7 +1219,6 @@ export const sykmeldingMedEgenmeldingsdager = new Sykmelding({
     navnFastlege: null,
     egenmeldt: false,
     papirsykmelding: false,
-    harRedusertArbeidsgiverperiode: false,
     merknader: null,
     rulesetVersion: '3',
     utenlandskSykmelding: null,
