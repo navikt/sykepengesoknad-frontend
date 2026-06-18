@@ -79,12 +79,20 @@ const SporsmalForm = ({ sporsmal }: SpmProps) => {
     const nesteSporsmal = valgtSoknad?.sporsmal[spmIndex + 1]
 
     const sendSoknad = (oppdatertSoknad: Soknad) => {
+        const kanKorrigeres = '6646adc5-079a-3637-9d9d-96e1458d4477'
         if (oppdatertSoknad.status == RSSoknadstatus.UTKAST_TIL_KORRIGERING) {
-            if (korrigerer && harLikeSvar(korrigerer, oppdatertSoknad)) {
+            if (
+                korrigerer &&
+                harLikeSvar(korrigerer, oppdatertSoknad) &&
+                oppdatertSoknad.korrigerer !== kanKorrigeres
+            ) {
                 logger.info('Ingen endring i korrigering.')
                 setEndringUtenEndringAapen(true)
                 return
             }
+        }
+        if (oppdatertSoknad.korrigerer == kanKorrigeres) {
+            logger.info(`Tillater korrigering med like svar for søknad:[${kanKorrigeres}]`)
         }
         sendSoknadMutation(oppdatertSoknad)
     }
