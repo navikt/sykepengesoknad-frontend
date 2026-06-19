@@ -3,28 +3,38 @@ Repoet `sykepengesoknad-frontend` er en React-app for søknader om sykepenger i 
 
 ## 1) Kommandoer
 
-```sh
-npm run dev # kjør lokalt
-npm run test # kjør tester i watch-mode
-npm run test:ci # kjør tester i CI-mode (uten watch)
-npm run build # bygg for produksjon (verifiserer også at build ikke feiler)
-npm run format # formater kode med Prettier
-npm run play-headless # kjør E2E-tester i headless mode (brukes i CI)
-```
+Bruk IntelliJ MCP (`execute_run_configuration`) for alle scripts — se **`AGENTS-intellij.md`**. Scripts for referanse:
 
-- `npm run dev` bruker mock-backend lokalt (`MOCK_BACKEND=true`)
+```sh
+npm run dev           # kjør lokalt (mock-backend)
+npm run test:ci       # enhetstester uten watch
+npm run build         # bygg for produksjon
+npm run format        # formater med Prettier + ESLint
+npm run play-headless # E2E-tester headless
+```
 
 ### Før commit (obligatorisk)
 
-```sh
-npm run format && npm run test:ci && npm run build
-```
+Kjør i rekkefølge via `execute_run_configuration`:
+
+1. `format`
+2. `test:ci`
+3. `play-headless`
+4. `build`
 
 ## 2) Testing
 
 - Enhet/integrasjon: **Vitest** (`.test.ts` / `.test.tsx`) i `src/`
 - E2E: **Playwright** i `playwright/**/*.spec.ts`
+- «Kjør tester» betyr alltid begge — `test:ci` **og** `play-headless` via IntelliJ MCP. Spesifiser eksplisitt hvis bare én type ønskes.
 - Prioriter tester for endret domenelogikk
+
+### Playwright-mønstre
+
+- Naviger direkte til vedtak med `?testperson=X&id=Y` i URL — unngår `trykkPaVedtakMedId` og `beforeEach`
+- Én test per `describe` er normen — slå sammen assertions som krever samme interaksjon
+- Selektorer: bruk `getByRole('button', ...)` fremfor `getByText(...)` når det finnes flere treff
+- `playwright/utils/` - hjelpefunksjoner for E2E-testing
 
 ## 3) Prosjektstruktur
 
@@ -57,11 +67,12 @@ Standard flyt:
 
 ```sh
 git checkout -b kort-beskrivende-navn
-npm run format && npm run test:ci && npm run build
+# kjør format, tester og bygg via IntelliJ MCP (se «Før commit» i seksjon 1)
 git commit -m "Kort beskrivelse"
 git push origin <branch>
-gh pr create --fill
 ```
+
+Opprett PR via GitHub MCP (`create_pull_request`) eller `gh pr create --fill`.
 
 ## 6) Grenser (aldri gjør dette)
 
@@ -87,5 +98,5 @@ gh pr create --fill
 
 - [ ] Endringen følger eksisterende mønster i berørte filer
 - [ ] Tester er oppdatert der domenelogikk er endret
-- [ ] `npm run format && npm run test:ci && npm run build` er grønn
+- [ ] Format, enhetstester, E2E-tester og bygg er grønn (se «Før commit» i seksjon 1)
 
