@@ -1,0 +1,9 @@
+{
+    "mcpServers": {
+        "com.jetbrains/intellij": {
+            "type": "sse",
+            "url": "http://127.0.0.1:64342/sse",
+            "tools": ["*"]
+        }
+    }
+}
