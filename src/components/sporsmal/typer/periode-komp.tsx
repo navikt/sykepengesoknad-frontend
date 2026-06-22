@@ -3,11 +3,11 @@ import React, { useState } from 'react'
 import { useController, useFormContext } from 'react-hook-form'
 import { TrashIcon } from '@navikt/aksel-icons'
 
+import { tilBackendDatoFraDatoobjekt } from '../../../utils/dato-utils'
 import { validerFom, validerPeriode, validerTom } from '../../../utils/sporsmal/valider-periode'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { kalenderMedDropdownCaption, maanedKalenderApnesPa } from '../sporsmal-utils'
 import {
-    tilBackendDatoFraKalenderDato,
     tilLokalKalenderDatoEllerUndefined,
     tilLokalKalenderDatoFraStrengEllerStandard,
 } from './kalender-dato-utils'
@@ -55,8 +55,8 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode, antallPerioder }: AllProps
                   }
                 : undefined,
         onRangeChange: (range) => {
-            const fom = tilBackendDatoFraKalenderDato(range?.from)
-            const tom = tilBackendDatoFraKalenderDato(range?.to)
+            const fom = range?.from ? tilBackendDatoFraDatoobjekt(range.from) : ''
+            const tom = range?.to ? tilBackendDatoFraDatoobjekt(range.to) : ''
             const nyPeriode = { fom: fom, tom: tom }
             field.onChange(nyPeriode)
         },

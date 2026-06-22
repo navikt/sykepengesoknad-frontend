@@ -56,7 +56,6 @@ Ved nytt backend-endepunkt:
 - Bruk eksisterende mønstre i koden fremfor nye varianter
 - Bruk props-basert dataflyt og hooks (ingen Redux/Zustand)
 - Dato-strenger skal parses med `toDate()` (ikke `new Date('YYYY-MM-DD')`)
-- I datovelgere: normaliser kalenderdato før sammenligning/lagring (`tilOsloDatoFraDato` / `tilLokalDatoFraDato`)
 
 ## 5) Git-workflow
 
@@ -100,4 +99,3 @@ Opprett PR via GitHub MCP (`create_pull_request`) eller `gh pr create --fill`.
 - [ ] Endringen følger eksisterende mønster i berørte filer
 - [ ] Tester er oppdatert der domenelogikk er endret
 - [ ] Format, enhetstester, E2E-tester og bygg er grønn (se «Før commit» i seksjon 1)
-

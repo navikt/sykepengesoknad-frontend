@@ -12,12 +12,13 @@ function velgDato(datoerFraKalender: Date[], tidligereValgteDatoer: Date[]): Dat
     if (endring.type === 'avvalgt') {
         return fjernKalenderDato(tidligereValgteDatoer, endring.dato)
     }
-    if (endring.type === 'ingen') return datoerFraKalender
+    if (endring.type === 'ingen') return tidligereValgteDatoer
 
-    const valgtUke = ukeNummer(endring.dato)
+    const nyDatoMedOsloTidssone = tilOsloDatoFraDato(endring.dato)
+    const valgtUke = ukeNummer(nyDatoMedOsloTidssone)
     const beholdteDatoer = tidligereValgteDatoer.filter((tidligereDato) => ukeNummer(tidligereDato) !== valgtUke)
 
-    return [...beholdteDatoer, endring.dato]
+    return [...beholdteDatoer, nyDatoMedOsloTidssone]
 }
 
 describe('Behandlingsdager — en dag per uke', () => {

@@ -15,7 +15,7 @@ import {
 import { validerAxeUtilityWrapper } from './uuvalidering'
 
 test.describe('Teste førsteside i reisetilskuddsøknaden', () => {
-    test.setTimeout(180 * 1000)
+    test.setTimeout(180 * 1000) // Increased timeout to 3 minutes for slow navigation
 
     test.beforeEach(async ({ page }) => {
         await page.context().clearCookies()

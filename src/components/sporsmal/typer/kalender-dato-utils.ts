@@ -1,5 +1,3 @@
-import { format } from 'date-fns'
-
 import { tilLokalDatoFraDato, tilOsloDatoFraDato, toDate } from '../../../utils/dato-utils'
 
 export const erSammeKalenderDag = (forsteDato: Date, andreDato: Date) => {
@@ -58,8 +56,4 @@ export function tilOsloDato(dato: Date): Date {
 
 export function tilOsloDatoEllerUndefined(dato?: Date): Date | undefined {
     return dato ? tilOsloDatoFraDato(dato) : undefined
-}
-
-export function tilBackendDatoFraKalenderDato(dato?: Date): string {
-    return dato ? format(tilOsloDatoFraDato(dato), 'yyyy-MM-dd') : ''
 }
