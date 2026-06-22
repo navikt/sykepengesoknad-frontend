@@ -46,7 +46,10 @@ export function tilLokalKalenderDatoEllerUndefined(dato?: Date | string | null):
     return dato ? tilLokalKalenderDato(dato) : undefined
 }
 
-export function tilLokalKalenderDatoFraStrengEllerStandard(dato: string | null | undefined, standardDato: string): Date {
+export function tilLokalKalenderDatoFraStrengEllerStandard(
+    dato: string | null | undefined,
+    standardDato: string,
+): Date {
     return tilLokalKalenderDato(dato ?? standardDato)
 }
 

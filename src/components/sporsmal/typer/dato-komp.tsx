@@ -7,6 +7,7 @@ import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
 import validerDato from '../../../utils/sporsmal/valider-dato'
 import { TilbakeIArbeidBesvart } from '../../hjelpetekster/tilbake-i-arbeid-besvart/tilbake-i-arbeid-besvart'
 import { kalenderMedDropdownCaption, maanedKalenderApnesPa } from '../sporsmal-utils'
+
 import {
     tilLokalKalenderDatoEllerUndefined,
     tilLokalKalenderDatoFraStrengEllerStandard,

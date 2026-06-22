@@ -5,6 +5,7 @@ import { BodyShort, MonthPicker, MonthValidationT, useMonthpicker } from '@navik
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { kalenderMedDropdownCaption } from '../sporsmal-utils'
 import { validerMaaned } from '../../../utils/sporsmal/valider-dato'
+
 import {
     tilLokalKalenderDatoEllerUndefined,
     tilLokalKalenderDatoFraStrengEllerStandard,

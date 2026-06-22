@@ -4,11 +4,8 @@ import { Controller } from 'react-hook-form'
 
 import FeilLokal from '../../feil/feil-lokal'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
-import {
-    tilLokalKalenderDato,
-    tilLokalKalenderDatoFraStrengEllerStandard,
-    tilOsloDato,
-} from './kalender-dato-utils'
+
+import { tilLokalKalenderDato, tilLokalKalenderDatoFraStrengEllerStandard, tilOsloDato } from './kalender-dato-utils'
 
 const DagerKomp = ({ sporsmal }: SpmProps) => {
     const labelen = 'dager-kalender-label'

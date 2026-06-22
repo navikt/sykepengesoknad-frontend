@@ -7,10 +7,8 @@ import { tilBackendDatoFraDatoobjekt } from '../../../utils/dato-utils'
 import { validerFom, validerPeriode, validerTom } from '../../../utils/sporsmal/valider-periode'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { kalenderMedDropdownCaption, maanedKalenderApnesPa } from '../sporsmal-utils'
-import {
-    tilLokalKalenderDatoEllerUndefined,
-    tilLokalKalenderDatoFraStrengEllerStandard,
-} from './kalender-dato-utils'
+
+import { tilLokalKalenderDatoEllerUndefined, tilLokalKalenderDatoFraStrengEllerStandard } from './kalender-dato-utils'
 
 interface PeriodeProps {
     index: number

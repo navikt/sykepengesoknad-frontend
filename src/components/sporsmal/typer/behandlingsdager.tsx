@@ -6,6 +6,7 @@ import { Controller } from 'react-hook-form'
 import GuidepanelUnderSporsmalstekst from '../guidepanel/GuidepanelUnderSporsmalstekst'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { tilLokalDatoFraDato } from '../../../utils/dato-utils'
+
 import {
     fjernKalenderDato,
     finnEndringIValgteDatoer,
