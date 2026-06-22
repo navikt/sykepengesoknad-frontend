@@ -4,10 +4,17 @@ import { Controller } from 'react-hook-form'
 
 import FeilLokal from '../../feil/feil-lokal'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
-import { toDate } from '../../../utils/dato-utils'
+import {
+    tilLokalKalenderDato,
+    tilLokalKalenderDatoFraStrengEllerStandard,
+    tilOsloDato,
+} from './kalender-dato-utils'
 
 const DagerKomp = ({ sporsmal }: SpmProps) => {
     const labelen = 'dager-kalender-label'
+    const minDato = tilLokalKalenderDatoFraStrengEllerStandard(sporsmal.min, '1900-01-01')
+    const maxDato = tilLokalKalenderDatoFraStrengEllerStandard(sporsmal.max, '2100-01-01')
+
     return (
         <>
             <Label as="h3">{sporsmal.sporsmalstekst}</Label>
@@ -17,7 +24,7 @@ const DagerKomp = ({ sporsmal }: SpmProps) => {
                     name={sporsmal.id}
                     rules={{
                         validate: (value) => {
-                            if (value.length === 0) {
+                            if (!value || value.length === 0) {
                                 return 'Du må oppgi hvilke dager du brukte bil'
                             }
                             return true
@@ -28,11 +35,11 @@ const DagerKomp = ({ sporsmal }: SpmProps) => {
                             mode="multiple"
                             aria-describedby={labelen}
                             fixedWeeks={false}
-                            fromDate={toDate(sporsmal.min!)}
-                            toDate={toDate(sporsmal.max!)}
-                            selected={field.value}
-                            onSelect={(a) => {
-                                field.onChange(a)
+                            fromDate={minDato}
+                            toDate={maxDato}
+                            selected={field.value?.map(tilLokalKalenderDato)}
+                            onSelect={(datoerFraKalender) => {
+                                field.onChange((datoerFraKalender ?? []).map(tilOsloDato))
                             }}
                         />
                     )}

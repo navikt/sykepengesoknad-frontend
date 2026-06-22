@@ -3,9 +3,11 @@ import { describe, expect, it } from 'vitest'
 import {
     fraInputdatoTilJSDato,
     fraBackendTilDate,
+    tilBackendDatoFraDatoobjekt,
     tilLesbarDatoMedArstall,
     tilLesbarPeriodeMedArstall,
     tilLesbarDatoUtenAarstall,
+    tilOsloDatoFraDato,
     toDate,
 } from './dato-utils'
 
@@ -75,6 +77,11 @@ describe('dato-utils tidssone-sikkerhet (date-fns/tz)', () => {
         it('viser korrekt periode over årsskifte', () => {
             expect(tilLesbarPeriodeMedArstall('2023-12-01', '2024-01-15')).toBe('1. desember 2023 – 15. januar 2024')
         })
+
+        it('viser korrekt periode når fom er Date-objekt med tidssoneforskyvning', () => {
+            const fomSomDateObjekt = new Date('2020-03-31T22:00:00.000Z')
+            expect(tilLesbarPeriodeMedArstall(fomSomDateObjekt, '2020-04-24')).toBe('1. – 24. april 2020')
+        })
     })
 
     describe('fraBackendTilDate', () => {
@@ -88,6 +95,18 @@ describe('dato-utils tidssone-sikkerhet (date-fns/tz)', () => {
             const dato = fraBackendTilDate('2024-01-01')!
             expect(dato.getDate()).toBe(1)
             expect(dato.getMonth()).toBe(0)
+        })
+    })
+
+    describe('tilBackendDatoFraDatoobjekt', () => {
+        it('beholder Oslo-kalenderdag når datoobjekt er UTC-midnatt', () => {
+            const utcMidnatt = new Date('2021-01-04T00:00:00.000Z')
+            expect(tilBackendDatoFraDatoobjekt(utcMidnatt)).toBe('2021-01-04')
+        })
+
+        it('beholder Oslo-kalenderdag når datoobjekt er Oslo-midnatt som UTC-instant', () => {
+            const osloMidnattSomUtcInstant = new Date('2020-03-31T22:00:00.000Z')
+            expect(tilBackendDatoFraDatoobjekt(osloMidnattSomUtcInstant)).toBe('2020-04-01')
         })
     })
 
@@ -111,6 +130,33 @@ describe('dato-utils tidssone-sikkerhet (date-fns/tz)', () => {
             expect(dato.getDate()).toBe(31)
             expect(dato.getMonth()).toBe(11)
             expect(dato.getFullYear()).toBe(2023)
+        })
+    })
+
+    describe('tilOsloDatoFraDato', () => {
+        it('konverterer UTC-midnatt dato korrekt til Oslo (regresjon: NYC-tidssone-bug)', () => {
+            // UTC midnatt 4. januar = NY 3. januar kl 19:00.
+            // Feil implementasjon brukte lokal getDate() og ga Oslo jan 3.
+            const utcMidnatt = new Date('2021-01-04T00:00:00.000Z')
+            const oslo = tilOsloDatoFraDato(utcMidnatt)
+            expect(oslo.getFullYear()).toBe(2021)
+            expect(oslo.getMonth()).toBe(0)
+            expect(oslo.getDate()).toBe(4)
+        })
+
+        it('konverterer lokal midnatt dato korrekt til Oslo', () => {
+            const lokalDato = new Date(2021, 0, 4)
+            const oslo = tilOsloDatoFraDato(lokalDato)
+            expect(oslo.getFullYear()).toBe(2021)
+            expect(oslo.getMonth()).toBe(0)
+            expect(oslo.getDate()).toBe(4)
+        })
+
+        it('round-trip: tilOsloDatoFraDato(toDate(str)) gir riktig dag', () => {
+            const oslo = tilOsloDatoFraDato(toDate('2021-01-04'))
+            expect(oslo.getFullYear()).toBe(2021)
+            expect(oslo.getMonth()).toBe(0)
+            expect(oslo.getDate()).toBe(4)
         })
     })
 })

@@ -1,13 +1,16 @@
 import { Button, DatePicker, RangeValidationT, useRangeDatepicker } from '@navikt/ds-react'
-import { format } from 'date-fns'
 import React, { useState } from 'react'
 import { useController, useFormContext } from 'react-hook-form'
 import { TrashIcon } from '@navikt/aksel-icons'
 
-import { toDate } from '../../../utils/dato-utils'
 import { validerFom, validerPeriode, validerTom } from '../../../utils/sporsmal/valider-periode'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { kalenderMedDropdownCaption, maanedKalenderApnesPa } from '../sporsmal-utils'
+import {
+    tilBackendDatoFraKalenderDato,
+    tilLokalKalenderDatoEllerUndefined,
+    tilLokalKalenderDatoFraStrengEllerStandard,
+} from './kalender-dato-utils'
 
 interface PeriodeProps {
     index: number
@@ -40,20 +43,20 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode, antallPerioder }: AllProps
     })
 
     const { datepickerProps, toInputProps, fromInputProps } = useRangeDatepicker({
-        fromDate: sporsmal.min ? toDate(sporsmal.min) : toDate('1900-01-01'),
-        toDate: sporsmal.max ? toDate(sporsmal.max) : toDate('2100-01-01'),
-        defaultMonth: maanedKalenderApnesPa(sporsmal.min, sporsmal.max),
+        fromDate: tilLokalKalenderDatoFraStrengEllerStandard(sporsmal.min, '1900-01-01'),
+        toDate: tilLokalKalenderDatoFraStrengEllerStandard(sporsmal.max, '2100-01-01'),
+        defaultMonth: tilLokalKalenderDatoEllerUndefined(maanedKalenderApnesPa(sporsmal.min, sporsmal.max)),
         allowTwoDigitYear: false,
         defaultSelected:
             field.value?.fom && field.value?.tom
                 ? {
-                      from: toDate(field.value.fom),
-                      to: toDate(field.value.tom),
+                      from: tilLokalKalenderDatoEllerUndefined(field.value.fom),
+                      to: tilLokalKalenderDatoEllerUndefined(field.value.tom),
                   }
                 : undefined,
         onRangeChange: (range) => {
-            const fom = range?.from ? format(range.from, 'yyyy-MM-dd') : ''
-            const tom = range?.to ? format(range.to, 'yyyy-MM-dd') : ''
+            const fom = tilBackendDatoFraKalenderDato(range?.from)
+            const tom = tilBackendDatoFraKalenderDato(range?.to)
             const nyPeriode = { fom: fom, tom: tom }
             field.onChange(nyPeriode)
         },

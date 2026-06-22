@@ -222,4 +222,29 @@ test.describe('Tester behandlingsdagersøknad', () => {
             await validerAxeUtilityWrapper(page, test.info())
         })
     })
+
+    test('Mandager forblir valgt etter tilbake-navigering', async ({ page }) => {
+        await page.goto('/syk/sykepengesoknad?testperson=behandlingsdager')
+        await page.locator(`a[href*=${soknad.id}]`).click()
+
+        await expect(page).toHaveURL(new RegExp(`${soknad.id}/1`))
+        await checkViStolerPaDeg(page)
+
+        await expect(page).toHaveURL(new RegExp(`${soknad.id}/2`))
+        await page.getByRole('button', { name: 'mandag 6' }).click()
+        await page.getByRole('button', { name: 'mandag 13' }).click()
+        await page.getByRole('button', { name: 'mandag 20' }).click()
+
+        await expect(page.getByRole('button', { name: 'mandag 6' })).toHaveAttribute('aria-pressed', 'true')
+        await expect(page.getByRole('button', { name: 'mandag 13' })).toHaveAttribute('aria-pressed', 'true')
+        await expect(page.getByRole('button', { name: 'mandag 20' })).toHaveAttribute('aria-pressed', 'true')
+
+        await klikkGaVidere(page)
+        await klikkTilbake(page)
+
+        await expect(page).toHaveURL(new RegExp(`${soknad.id}/2`))
+        await expect(page.getByRole('button', { name: 'mandag 6' })).toHaveAttribute('aria-pressed', 'true')
+        await expect(page.getByRole('button', { name: 'mandag 13' })).toHaveAttribute('aria-pressed', 'true')
+        await expect(page.getByRole('button', { name: 'mandag 20' })).toHaveAttribute('aria-pressed', 'true')
+    })
 })
