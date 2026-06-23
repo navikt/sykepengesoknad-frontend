@@ -61,7 +61,7 @@
         "eslint-plugin-playwright": "^2.10.1",
         "jsdom": "^26.1.0",
         "next": "^15.5.18",
-        "postcss": "^8.5.14",
+        "postcss": "^8.5.15",
         "prettier": "^3.8.4",
         "prettier-plugin-tailwindcss": "^0.8.0",
         "start-server-and-test": "^2.1.5",
