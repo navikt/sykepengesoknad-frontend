@@ -3,12 +3,12 @@ import React, { useState } from 'react'
 import { useController, useFormContext } from 'react-hook-form'
 import { TrashIcon } from '@navikt/aksel-icons'
 
-import { tilBackendDatoFraDatoobjekt } from '../../../utils/dato-utils'
+import { serializerDatoTilOslo } from '../../../utils/dato-utils'
 import { validerFom, validerPeriode, validerTom } from '../../../utils/sporsmal/valider-periode'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { kalenderMedDropdownCaption, maanedKalenderApnesPa } from '../sporsmal-utils'
 
-import { tilLokalKalenderDatoEllerUndefined, tilLokalKalenderDatoFraStrengEllerStandard } from './kalender-dato-utils'
+import { tilLokalKalenderDatoOpt, tilLokalKalenderDatoEllerStandard } from './kalender-dato-utils'
 
 interface PeriodeProps {
     index: number
@@ -41,20 +41,20 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode, antallPerioder }: AllProps
     })
 
     const { datepickerProps, toInputProps, fromInputProps } = useRangeDatepicker({
-        fromDate: tilLokalKalenderDatoFraStrengEllerStandard(sporsmal.min, '1900-01-01'),
-        toDate: tilLokalKalenderDatoFraStrengEllerStandard(sporsmal.max, '2100-01-01'),
-        defaultMonth: tilLokalKalenderDatoEllerUndefined(maanedKalenderApnesPa(sporsmal.min, sporsmal.max)),
+        fromDate: tilLokalKalenderDatoEllerStandard(sporsmal.min, '1900-01-01'),
+        toDate: tilLokalKalenderDatoEllerStandard(sporsmal.max, '2100-01-01'),
+        defaultMonth: tilLokalKalenderDatoOpt(maanedKalenderApnesPa(sporsmal.min, sporsmal.max)),
         allowTwoDigitYear: false,
         defaultSelected:
             field.value?.fom && field.value?.tom
                 ? {
-                      from: tilLokalKalenderDatoEllerUndefined(field.value.fom),
-                      to: tilLokalKalenderDatoEllerUndefined(field.value.tom),
+                      from: tilLokalKalenderDatoOpt(field.value.fom),
+                      to: tilLokalKalenderDatoOpt(field.value.tom),
                   }
                 : undefined,
         onRangeChange: (range) => {
-            const fom = range?.from ? tilBackendDatoFraDatoobjekt(range.from) : ''
-            const tom = range?.to ? tilBackendDatoFraDatoobjekt(range.to) : ''
+            const fom = range?.from ? serializerDatoTilOslo(range.from) : ''
+            const tom = range?.to ? serializerDatoTilOslo(range.to) : ''
             const nyPeriode = { fom: fom, tom: tom }
             field.onChange(nyPeriode)
         },

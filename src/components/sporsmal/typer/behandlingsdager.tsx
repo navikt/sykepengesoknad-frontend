@@ -11,15 +11,15 @@ import {
     fjernKalenderDato,
     finnEndringIValgteDatoer,
     tilLokalKalenderDato,
-    tilLokalKalenderDatoFraStrengEllerStandard,
+    tilLokalKalenderDatoEllerStandard,
     tilOsloDato,
 } from './kalender-dato-utils'
 
 const ukeNummer = (dato: Date) => getISOWeek(tilLokalDatoFraDato(tilOsloDato(dato)))
 
 const Behandlingsdager = ({ sporsmal }: SpmProps) => {
-    const minDate = tilLokalKalenderDatoFraStrengEllerStandard(sporsmal.undersporsmal[0].min, '1900-01-01')
-    const maxDate = tilLokalKalenderDatoFraStrengEllerStandard(
+    const minDate = tilLokalKalenderDatoEllerStandard(sporsmal.undersporsmal[0].min, '1900-01-01')
+    const maxDate = tilLokalKalenderDatoEllerStandard(
         sporsmal.undersporsmal[sporsmal.undersporsmal.length - 1].max,
         '2100-01-01',
     )

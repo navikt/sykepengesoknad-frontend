@@ -5,12 +5,12 @@ import { Controller } from 'react-hook-form'
 import FeilLokal from '../../feil/feil-lokal'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 
-import { tilLokalKalenderDato, tilLokalKalenderDatoFraStrengEllerStandard, tilOsloDato } from './kalender-dato-utils'
+import { tilLokalKalenderDato, tilLokalKalenderDatoEllerStandard, tilOsloDato } from './kalender-dato-utils'
 
 const DagerKomp = ({ sporsmal }: SpmProps) => {
     const labelen = 'dager-kalender-label'
-    const minDato = tilLokalKalenderDatoFraStrengEllerStandard(sporsmal.min, '1900-01-01')
-    const maxDato = tilLokalKalenderDatoFraStrengEllerStandard(sporsmal.max, '2100-01-01')
+    const minDato = tilLokalKalenderDatoEllerStandard(sporsmal.min, '1900-01-01')
+    const maxDato = tilLokalKalenderDatoEllerStandard(sporsmal.max, '2100-01-01')
 
     return (
         <>

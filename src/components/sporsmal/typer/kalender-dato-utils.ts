@@ -42,14 +42,11 @@ export function tilLokalKalenderDato(dato: Date | string): Date {
     return tilLokalDatoFraDato(osloDato)
 }
 
-export function tilLokalKalenderDatoEllerUndefined(dato?: Date | string | null): Date | undefined {
+export function tilLokalKalenderDatoOpt(dato?: Date | string | null): Date | undefined {
     return dato ? tilLokalKalenderDato(dato) : undefined
 }
 
-export function tilLokalKalenderDatoFraStrengEllerStandard(
-    dato: string | null | undefined,
-    standardDato: string,
-): Date {
+export function tilLokalKalenderDatoEllerStandard(dato: string | null | undefined, standardDato: string): Date {
     return tilLokalKalenderDato(dato ?? standardDato)
 }
 
@@ -57,6 +54,6 @@ export function tilOsloDato(dato: Date): Date {
     return tilOsloDatoFraDato(dato)
 }
 
-export function tilOsloDatoEllerUndefined(dato?: Date): Date | undefined {
+export function tilOsloDatoOpt(dato?: Date): Date | undefined {
     return dato ? tilOsloDatoFraDato(dato) : undefined
 }

@@ -83,7 +83,7 @@ export const tilBackendDato = (datoArg: string) => {
     return format(toDate(datoArg), 'yyyy-MM-dd')
 }
 
-export const tilBackendDatoFraDatoobjekt = (dato: Date) => {
+export const serializerDatoTilOslo = (dato: Date): string => {
     return format(tilOsloDatoFraDato(dato), 'yyyy-MM-dd')
 }
 

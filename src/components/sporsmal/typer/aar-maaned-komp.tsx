@@ -6,11 +6,7 @@ import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { kalenderMedDropdownCaption } from '../sporsmal-utils'
 import { validerMaaned } from '../../../utils/sporsmal/valider-dato'
 
-import {
-    tilLokalKalenderDatoEllerUndefined,
-    tilLokalKalenderDatoFraStrengEllerStandard,
-    tilOsloDatoEllerUndefined,
-} from './kalender-dato-utils'
+import { tilLokalKalenderDatoOpt, tilLokalKalenderDatoEllerStandard, tilOsloDatoOpt } from './kalender-dato-utils'
 
 function AarMaanedInput(props: SpmProps) {
     const { sporsmal } = props
@@ -24,14 +20,14 @@ function AarMaanedInput(props: SpmProps) {
     })
 
     const { monthpickerProps, inputProps } = useMonthpicker({
-        fromDate: tilLokalKalenderDatoFraStrengEllerStandard(sporsmal.min, '1900-01-01'),
-        toDate: tilLokalKalenderDatoFraStrengEllerStandard(sporsmal.max, '2100-01-01'),
-        defaultYear: tilLokalKalenderDatoFraStrengEllerStandard(sporsmal.max, '2100-01-01'),
-        defaultSelected: tilLokalKalenderDatoEllerUndefined(field.value),
+        fromDate: tilLokalKalenderDatoEllerStandard(sporsmal.min, '1900-01-01'),
+        toDate: tilLokalKalenderDatoEllerStandard(sporsmal.max, '2100-01-01'),
+        defaultYear: tilLokalKalenderDatoEllerStandard(sporsmal.max, '2100-01-01'),
+        defaultSelected: tilLokalKalenderDatoOpt(field.value),
         allowTwoDigitYear: false,
         locale: 'nb',
         onMonthChange: (maaned) => {
-            field.onChange(tilOsloDatoEllerUndefined(maaned))
+            field.onChange(tilOsloDatoOpt(maaned))
         },
         required: true,
         onValidate: (validate) => {

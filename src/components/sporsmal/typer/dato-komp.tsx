@@ -8,11 +8,7 @@ import validerDato from '../../../utils/sporsmal/valider-dato'
 import { TilbakeIArbeidBesvart } from '../../hjelpetekster/tilbake-i-arbeid-besvart/tilbake-i-arbeid-besvart'
 import { kalenderMedDropdownCaption, maanedKalenderApnesPa } from '../sporsmal-utils'
 
-import {
-    tilLokalKalenderDatoEllerUndefined,
-    tilLokalKalenderDatoFraStrengEllerStandard,
-    tilOsloDatoEllerUndefined,
-} from './kalender-dato-utils'
+import { tilLokalKalenderDatoOpt, tilLokalKalenderDatoEllerStandard, tilOsloDatoOpt } from './kalender-dato-utils'
 
 function DatoInput(props: SpmProps) {
     const { sporsmal } = props
@@ -26,13 +22,13 @@ function DatoInput(props: SpmProps) {
     })
 
     const { datepickerProps, inputProps } = useDatepicker({
-        fromDate: tilLokalKalenderDatoFraStrengEllerStandard(sporsmal.min, '1900-01-01'),
-        toDate: tilLokalKalenderDatoFraStrengEllerStandard(sporsmal.max, '2100-01-01'),
-        defaultMonth: tilLokalKalenderDatoEllerUndefined(maanedKalenderApnesPa(sporsmal.min, sporsmal.max)),
+        fromDate: tilLokalKalenderDatoEllerStandard(sporsmal.min, '1900-01-01'),
+        toDate: tilLokalKalenderDatoEllerStandard(sporsmal.max, '2100-01-01'),
+        defaultMonth: tilLokalKalenderDatoOpt(maanedKalenderApnesPa(sporsmal.min, sporsmal.max)),
         allowTwoDigitYear: false,
-        defaultSelected: tilLokalKalenderDatoEllerUndefined(field.value),
+        defaultSelected: tilLokalKalenderDatoOpt(field.value),
         onDateChange: (dato) => {
-            field.onChange(tilOsloDatoEllerUndefined(dato))
+            field.onChange(tilOsloDatoOpt(dato))
         },
         required: true,
         onValidate: (validate) => {

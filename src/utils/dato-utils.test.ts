@@ -3,7 +3,7 @@ import { describe, expect, it } from 'vitest'
 import {
     fraInputdatoTilJSDato,
     fraBackendTilDate,
-    tilBackendDatoFraDatoobjekt,
+    serializerDatoTilOslo,
     tilLesbarDatoMedArstall,
     tilLesbarPeriodeMedArstall,
     tilLesbarDatoUtenAarstall,
@@ -103,13 +103,13 @@ describe('dato-utils tidssone-sikkerhet (date-fns/tz)', () => {
         })
     })
 
-    describe('tilBackendDatoFraDatoobjekt', () => {
+    describe('serializerDatoTilOslo', () => {
         it('beholder kalenderdag når datoobjekt kommer fra New York-midnatt', () => {
-            expect(tilBackendDatoFraDatoobjekt(nyYorkDato('2021-01-04T05:00:00.000Z'))).toBe('2021-01-04')
+            expect(serializerDatoTilOslo(nyYorkDato('2021-01-04T05:00:00.000Z'))).toBe('2021-01-04')
         })
 
         it('beholder kalenderdag når datoobjekt kommer fra New York og vises i Oslo', () => {
-            expect(tilBackendDatoFraDatoobjekt(nyYorkDato('2020-04-01T04:00:00.000Z'))).toBe('2020-04-01')
+            expect(serializerDatoTilOslo(nyYorkDato('2020-04-01T04:00:00.000Z'))).toBe('2020-04-01')
         })
     })
 
