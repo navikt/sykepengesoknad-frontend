@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 
-import { erSammeKalenderDag, tilLokalKalenderDato, tilOsloDato } from './kalender-dato-utils'
-
+import { erSammeKalenderDag, tilLokalKalenderDato } from './kalender-dato-utils'
+import { tilOsloDatoFraDato } from '../../../utils/dato-utils'
 describe('kalender-dato-utils', () => {
     it('sammenligner samme kalenderdag i Oslo selv om Date-objekter har ulik tidssonevisning', () => {
         const utcMidnatt = new Date('2021-01-04T00:00:00.000Z')
@@ -21,7 +21,7 @@ describe('kalender-dato-utils', () => {
 
     it('beholder samme kalenderdag når vi går lokal -> oslo -> lokal', () => {
         const lokalKlikkDato = new Date(2021, 0, 4)
-        const lagretSomOslo = tilOsloDato(lokalKlikkDato)
+        const lagretSomOslo = tilOsloDatoFraDato(lokalKlikkDato)
         const vistILokalKalender = tilLokalKalenderDato(lagretSomOslo)
 
         expect(vistILokalKalender.getFullYear()).toBe(2021)

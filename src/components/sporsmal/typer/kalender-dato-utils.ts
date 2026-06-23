@@ -50,10 +50,6 @@ export function tilLokalKalenderDatoEllerStandard(dato: string | null | undefine
     return tilLokalKalenderDato(dato ?? standardDato)
 }
 
-export function tilOsloDato(dato: Date): Date {
-    return tilOsloDatoFraDato(dato)
-}
-
 export function tilOsloDatoOpt(dato?: Date): Date | undefined {
     return dato ? tilOsloDatoFraDato(dato) : undefined
 }
