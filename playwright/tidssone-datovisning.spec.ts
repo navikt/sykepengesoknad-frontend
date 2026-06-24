@@ -1,8 +1,18 @@
 import { arbeidstaker } from '../src/data/mock/data/soknad/arbeidstaker'
 import { arbeidsledigKvittering } from '../src/data/mock/data/soknad/soknader-integration'
+import { nyttReisetilskudd } from '../src/data/mock/data/soknad/arbeidstaker-reisetilskudd'
 
 import { test, expect } from './utils/fixtures'
-import { checkViStolerPaDeg, harSoknaderlisteHeading, trykkPaSoknadMedId } from './utils/utilities'
+import {
+    checkViStolerPaDeg,
+    harSoknaderlisteHeading,
+    trykkPaSoknadMedId,
+    klikkGaVidere,
+    klikkTilbake,
+    svarRadioGruppe,
+    svarFritekst,
+    svarJaHovedsporsmal,
+} from './utils/utilities'
 
 /**
  * Tidssone-tester som verifiserer at datoer håndteres korrekt i vest-tidssoner.
@@ -17,6 +27,7 @@ import { checkViStolerPaDeg, harSoknaderlisteHeading, trykkPaSoknadMedId } from 
 
 const arbeidstakerId = arbeidstaker.id
 const arbeidsledigId = arbeidsledigKvittering.id
+const forventDagValgt = (dagNavnOgNummer: string) => `button[aria-label="${dagNavnOgNummer}"][aria-pressed="true"]`
 
 test.describe('Tidssone: periodevisning', () => {
     test.describe('New York (UTC-5)', () => {
@@ -113,6 +124,70 @@ test.describe('Tidssone: DatePicker fromDate-grense', () => {
 
             const prevButton = page.getByRole('button', { name: /Forrige måned|Go to previous month/i })
             await expect(prevButton).toBeDisabled()
+        })
+    })
+})
+
+test.describe('Tidssone: DATOER-kalender persistering', () => {
+    test.describe('New York (UTC-5)', () => {
+        test.use({ timezoneId: 'America/New_York' })
+
+        test('Valgte bildager forblir markert etter gå videre og tilbake', async ({ page }) => {
+            await page.goto(`/syk/sykepengesoknad/soknader/${nyttReisetilskudd.id}/3?testperson=reisetilskudd`)
+
+            await svarJaHovedsporsmal(page)
+
+            await page.getByRole('button', { name: 'mandag 4' }).click()
+            await expect(page.locator(forventDagValgt('mandag 4'))).toBeVisible()
+            await page.getByRole('button', { name: 'tirsdag 5' }).click()
+            await expect(page.locator(forventDagValgt('tirsdag 5'))).toBeVisible()
+            await page.getByRole('button', { name: 'onsdag 6' }).click()
+            await expect(page.locator(forventDagValgt('onsdag 6'))).toBeVisible()
+
+            await expect(page.locator(forventDagValgt('mandag 4'))).toBeVisible()
+            await expect(page.locator(forventDagValgt('tirsdag 5'))).toBeVisible()
+            await expect(page.locator(forventDagValgt('onsdag 6'))).toBeVisible()
+
+            await svarRadioGruppe(page, /bompenger/i, 'Nei')
+            await svarFritekst(page, 'kilometer', '10')
+
+            await klikkGaVidere(page)
+            await klikkTilbake(page)
+
+            await expect(page.locator(forventDagValgt('mandag 4'))).toBeVisible()
+            await expect(page.locator(forventDagValgt('tirsdag 5'))).toBeVisible()
+            await expect(page.locator(forventDagValgt('onsdag 6'))).toBeVisible()
+        })
+    })
+
+    test.describe('Oslo (UTC+1)', () => {
+        test.use({ timezoneId: 'Europe/Oslo' })
+
+        test('Valgte bildager forblir markert etter gå videre og tilbake', async ({ page }) => {
+            await page.goto(`/syk/sykepengesoknad/soknader/${nyttReisetilskudd.id}/3?testperson=reisetilskudd`)
+
+            await svarJaHovedsporsmal(page)
+
+            await page.getByRole('button', { name: 'mandag 4' }).click()
+            await expect(page.locator(forventDagValgt('mandag 4'))).toBeVisible()
+            await page.getByRole('button', { name: 'tirsdag 5' }).click()
+            await expect(page.locator(forventDagValgt('tirsdag 5'))).toBeVisible()
+            await page.getByRole('button', { name: 'onsdag 6' }).click()
+            await expect(page.locator(forventDagValgt('onsdag 6'))).toBeVisible()
+
+            await expect(page.locator(forventDagValgt('mandag 4'))).toBeVisible()
+            await expect(page.locator(forventDagValgt('tirsdag 5'))).toBeVisible()
+            await expect(page.locator(forventDagValgt('onsdag 6'))).toBeVisible()
+
+            await svarRadioGruppe(page, /bompenger/i, 'Nei')
+            await svarFritekst(page, 'kilometer', '10')
+
+            await klikkGaVidere(page)
+            await klikkTilbake(page)
+
+            await expect(page.locator(forventDagValgt('mandag 4'))).toBeVisible()
+            await expect(page.locator(forventDagValgt('tirsdag 5'))).toBeVisible()
+            await expect(page.locator(forventDagValgt('onsdag 6'))).toBeVisible()
         })
     })
 })

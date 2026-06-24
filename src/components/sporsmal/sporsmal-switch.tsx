@@ -3,7 +3,7 @@ import React from 'react'
 import { RSSvartype } from '../../types/rs-types/rs-svartype'
 import { Sporsmal } from '../../types/types'
 
-import BehDager from './typer/beh-dager'
+import Behandlingsdager from './typer/behandlingsdager'
 import CheckboxKomp from './typer/checkbox-komp'
 import CheckboxPanel from './typer/checkbox-panel'
 import DagerKomp from './typer/dager-komp'
@@ -78,7 +78,7 @@ const SporsmalSwitch = ({ sporsmal, sporsmalIndex, erSisteSporsmal, erHovedspors
             return <ComboboxSingle sporsmal={sporsmal} />
 
         case RSSvartype.INFO_BEHANDLINGSDAGER:
-            return <BehDager sporsmal={sporsmal} />
+            return <Behandlingsdager sporsmal={sporsmal} />
 
         case RSSvartype.LAND:
         case RSSvartype.COMBOBOX_MULTI:

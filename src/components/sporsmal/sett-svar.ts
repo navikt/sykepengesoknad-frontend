@@ -1,10 +1,8 @@
-import { format } from 'date-fns'
-
 import { RSSvartype } from '../../types/rs-types/rs-svartype'
 import { Sporsmal } from '../../types/types'
 import { SvarEnums } from '../../types/enums'
 import { RSSvar } from '../../types/rs-types/rs-svar'
-import { toDate } from '../../utils/dato-utils'
+import { serializerDatoTilOslo, toDate } from '../../utils/dato-utils'
 
 const hentVerdier = (sporsmal: Sporsmal, verdier: Record<string, any>) => {
     let verdi = verdier[sporsmal.id]
@@ -127,7 +125,7 @@ const behandlingsdagerSvar = (sporsmal: Sporsmal, verdi: Date[]): Sporsmal => {
                 if (date <= toDate(spm.max!) && date >= toDate(spm.min!)) {
                     return spm.copyWith({
                         svarliste: {
-                            svar: [{ verdi: format(date, 'yyyy-MM-dd') }],
+                            svar: [{ verdi: serializerDatoTilOslo(date) }],
                         },
                     })
                 }
@@ -196,7 +194,7 @@ const datoSvar = (sporsmal: Sporsmal, verdi: any) => {
     const svar: RSSvar[] = []
     if (verdi !== undefined) {
         svar.push({
-            verdi: format(verdi, 'yyyy-MM-dd'),
+            verdi: serializerDatoTilOslo(verdi),
         })
     }
     const svarliste = {
@@ -211,7 +209,7 @@ const datoerSvar = (sporsmal: Sporsmal, verdi: any) => {
     if (verdi !== undefined) {
         verdi.map((dag: Date) =>
             svar.push({
-                verdi: format(dag, 'yyyy-MM-dd'),
+                verdi: serializerDatoTilOslo(dag),
             }),
         )
     }

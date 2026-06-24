@@ -33,6 +33,15 @@ export function osloDate(year: number, month: number, day: number): Date {
     return new TZDate(`${year}-${m}-${d}`, OSLO)
 }
 
+export function tilOsloDatoFraDato(dato: Date): Date {
+    const osloView = new TZDate(dato, OSLO)
+    return osloDate(osloView.getFullYear(), osloView.getMonth() + 1, osloView.getDate())
+}
+
+export function tilLokalDatoFraDato(dato: Date): Date {
+    return new Date(dato.getFullYear(), dato.getMonth(), dato.getDate())
+}
+
 /**
  * Formaterer en dato til lesbar dato og klokkeslett i Oslo-tidssone,
  * f.eks. «Torsdag 23. april, kl 11:56». Brukes på kvitteringssiden.
@@ -74,6 +83,10 @@ export const tilBackendDato = (datoArg: string) => {
     return format(toDate(datoArg), 'yyyy-MM-dd')
 }
 
+export const serializerDatoTilOslo = (dato: Date): string => {
+    return format(tilOsloDatoFraDato(dato), 'yyyy-MM-dd')
+}
+
 export const fraBackendTilDate = (datoArg: string) => {
     if (datoArg && datoArg.match(RegExp('\\d{4}-\\d{2}-\\d{2}'))) return toDate(datoArg)
 }
@@ -92,7 +105,7 @@ export const tilLesbarDatoUtenAarstall = (datoArg: any): string => {
 
 function ensureDate(val: any): Date | undefined {
     if (!val) return undefined
-    if (val instanceof Date) return val
+    if (val instanceof Date) return tilOsloDatoFraDato(val)
     if (typeof val === 'string') return toDate(val)
     return undefined
 }

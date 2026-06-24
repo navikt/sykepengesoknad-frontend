@@ -99,4 +99,3 @@ Opprett PR via GitHub MCP (`create_pull_request`) eller `gh pr create --fill`.
 - [ ] Endringen følger eksisterende mønster i berørte filer
 - [ ] Tester er oppdatert der domenelogikk er endret
 - [ ] Format, enhetstester, E2E-tester og bygg er grønn (se «Før commit» i seksjon 1)
-

@@ -2,10 +2,11 @@ import React, { useState } from 'react'
 import { useController } from 'react-hook-form'
 import { BodyShort, MonthPicker, MonthValidationT, useMonthpicker } from '@navikt/ds-react'
 
-import { toDate } from '../../../utils/dato-utils'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { kalenderMedDropdownCaption } from '../sporsmal-utils'
 import { validerMaaned } from '../../../utils/sporsmal/valider-dato'
+
+import { tilLokalKalenderDatoOpt, tilLokalKalenderDatoEllerStandard, tilOsloDatoOpt } from './kalender-dato-utils'
 
 function AarMaanedInput(props: SpmProps) {
     const { sporsmal } = props
@@ -19,12 +20,15 @@ function AarMaanedInput(props: SpmProps) {
     })
 
     const { monthpickerProps, inputProps } = useMonthpicker({
-        fromDate: sporsmal.min ? toDate(sporsmal.min) : toDate('1900-01-01'),
-        toDate: sporsmal.max ? toDate(sporsmal.max) : toDate('2100-01-01'),
-        defaultYear: sporsmal.max ? toDate(sporsmal.max) : toDate('2100-01-01'),
+        fromDate: tilLokalKalenderDatoEllerStandard(sporsmal.min, '1900-01-01'),
+        toDate: tilLokalKalenderDatoEllerStandard(sporsmal.max, '2100-01-01'),
+        defaultYear: tilLokalKalenderDatoEllerStandard(sporsmal.max, '2100-01-01'),
+        defaultSelected: tilLokalKalenderDatoOpt(field.value),
         allowTwoDigitYear: false,
         locale: 'nb',
-        onMonthChange: field.onChange,
+        onMonthChange: (maaned) => {
+            field.onChange(tilOsloDatoOpt(maaned))
+        },
         required: true,
         onValidate: (validate) => {
             setMonthValidation(validate)

@@ -2,12 +2,13 @@ import React, { useState } from 'react'
 import { useController } from 'react-hook-form'
 import { BodyShort, DatePicker, DateValidationT, useDatepicker } from '@navikt/ds-react'
 
-import { toDate } from '../../../utils/dato-utils'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
 import validerDato from '../../../utils/sporsmal/valider-dato'
 import { TilbakeIArbeidBesvart } from '../../hjelpetekster/tilbake-i-arbeid-besvart/tilbake-i-arbeid-besvart'
 import { kalenderMedDropdownCaption, maanedKalenderApnesPa } from '../sporsmal-utils'
+
+import { tilLokalKalenderDatoOpt, tilLokalKalenderDatoEllerStandard, tilOsloDatoOpt } from './kalender-dato-utils'
 
 function DatoInput(props: SpmProps) {
     const { sporsmal } = props
@@ -21,12 +22,14 @@ function DatoInput(props: SpmProps) {
     })
 
     const { datepickerProps, inputProps } = useDatepicker({
-        fromDate: sporsmal.min ? toDate(sporsmal.min) : toDate('1900-01-01'),
-        toDate: sporsmal.max ? toDate(sporsmal.max) : toDate('2100-01-01'),
-        defaultMonth: maanedKalenderApnesPa(sporsmal.min, sporsmal.max),
+        fromDate: tilLokalKalenderDatoEllerStandard(sporsmal.min, '1900-01-01'),
+        toDate: tilLokalKalenderDatoEllerStandard(sporsmal.max, '2100-01-01'),
+        defaultMonth: tilLokalKalenderDatoOpt(maanedKalenderApnesPa(sporsmal.min, sporsmal.max)),
         allowTwoDigitYear: false,
-        defaultSelected: field.value,
-        onDateChange: field.onChange,
+        defaultSelected: tilLokalKalenderDatoOpt(field.value),
+        onDateChange: (dato) => {
+            field.onChange(tilOsloDatoOpt(dato))
+        },
         required: true,
         onValidate: (validate) => {
             setDateValidation(validate)
