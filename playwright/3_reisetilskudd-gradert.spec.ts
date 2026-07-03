@@ -11,7 +11,7 @@ test.describe('Teste gradert reisetilskudd med ReadMore-hjelpetekster', () => {
     })
 
     test('TILBAKE_I_ARBEID_GRADERT_REISETILSKUDD ReadMore', async ({ page }) => {
-        await page.goto(`/syk/sykepengesoknad/soknader/${gradertReisetilskudd.id}/3?testperson=reisetilskudd`)
+        await page.goto(`/syk/sykepengesoknad/soknader/${gradertReisetilskudd.id}/2?testperson=reisetilskudd`)
 
         await test.step('Tilbake i arbeid - Gradert reisetilskudd', async () => {
             await expect(page.locator('[data-cy="sporsmal-tittel"]')).toHaveText('Tilbake i fullt arbeid')
@@ -28,7 +28,7 @@ test.describe('Teste gradert reisetilskudd med ReadMore-hjelpetekster', () => {
     })
 
     test('BRUKTE_REISETILSKUDDET ReadMore', async ({ page }) => {
-        await page.goto(`/syk/sykepengesoknad/soknader/${gradertReisetilskudd.id}/10?testperson=reisetilskudd`)
+        await page.goto(`/syk/sykepengesoknad/soknader/${gradertReisetilskudd.id}/9?testperson=reisetilskudd`)
 
         await test.step('Brukte reisetilskuddet - Gradert reisetilskudd', async () => {
             await expect(page.getByText('Hadde du ekstra reiseutgifter mens du var sykmeldt?')).toBeVisible()

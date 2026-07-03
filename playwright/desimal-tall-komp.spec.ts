@@ -7,7 +7,7 @@ import { validerAxeUtilityWrapper } from './uuvalidering'
 test.describe('Tester at riktig antall desimaler sendes til backend', () => {
     test('Oppgir desimaler på svartype TALL og PROSENT', async ({ page }) => {
         await test.step('Navigerer til riktig søknadsside', async () => {
-            await page.goto(`/syk/sykepengesoknad/soknader/${gradertReisetilskudd.id}/6?testperson=reisetilskudd`)
+            await page.goto(`/syk/sykepengesoknad/soknader/${gradertReisetilskudd.id}/5?testperson=reisetilskudd`)
         })
 
         await test.step('Fyller inn verdier for TALL og PROSENT', async () => {
@@ -29,7 +29,7 @@ test.describe('Tester at riktig antall desimaler sendes til backend', () => {
 
     test('Oppgir desimaler på svartype BELOP og KILOMETER', async ({ page }) => {
         await test.step('Navigerer til riktig søknadsside', async () => {
-            await page.goto(`/syk/sykepengesoknad/soknader/${gradertReisetilskudd.id}/12?testperson=reisetilskudd`)
+            await page.goto(`/syk/sykepengesoknad/soknader/${gradertReisetilskudd.id}/11?testperson=reisetilskudd`)
         })
 
         await test.step('Fyller inn verdier for BELOP og KILOMETER', async () => {
@@ -53,7 +53,7 @@ test.describe('Tester at riktig antall desimaler sendes til backend', () => {
     test('Håndterer at man bruker komma istedenfor punktum', async ({ page }) => {
         await test.step('Navigerer til riktig søknadsside', async () => {
             await page.context().clearCookies()
-            await page.goto(`/syk/sykepengesoknad/soknader/${gradertReisetilskudd.id}/6?testperson=reisetilskudd`)
+            await page.goto(`/syk/sykepengesoknad/soknader/${gradertReisetilskudd.id}/5?testperson=reisetilskudd`)
         })
 
         await test.step('Fyller inn verdier med komma', async () => {
@@ -76,7 +76,7 @@ test.describe('Tester at riktig antall desimaler sendes til backend', () => {
     test('Legger ikke til desimaler', async ({ page }) => {
         await test.step('Navigerer til riktig søknadsside', async () => {
             await page.context().clearCookies()
-            await page.goto(`/syk/sykepengesoknad/soknader/${gradertReisetilskudd.id}/6?testperson=reisetilskudd`)
+            await page.goto(`/syk/sykepengesoknad/soknader/${gradertReisetilskudd.id}/5?testperson=reisetilskudd`)
         })
 
         await test.step('Fyller inn verdier uten desimaler', async () => {
