@@ -1,11 +1,16 @@
 import { describe, expect, it } from 'vitest'
 import { getISOWeek } from 'date-fns'
 
-import { osloDate, tilLokalDatoFraDato, tilOsloDatoFraDato } from '../../../utils/dato-utils'
+import { osloDate, tilLokalDatoFraDato } from '../../../utils/dato-utils'
 
-import { erSammeKalenderDag, fjernKalenderDato, finnEndringIValgteDatoer } from './kalender-dato-utils'
+import {
+    erSammeKalenderDag,
+    fjernKalenderDato,
+    finnEndringIValgteDatoer,
+    tilOsloKalenderDato,
+} from './kalender-dato-utils'
 
-const ukeNummer = (dato: Date) => getISOWeek(tilLokalDatoFraDato(tilOsloDatoFraDato(dato)))
+const ukeNummer = (dato: Date) => getISOWeek(tilLokalDatoFraDato(tilOsloKalenderDato(dato)))
 
 function velgDato(datoerFraKalender: Date[], tidligereValgteDatoer: Date[]): Date[] {
     const endring = finnEndringIValgteDatoer(datoerFraKalender, tidligereValgteDatoer)
@@ -14,7 +19,7 @@ function velgDato(datoerFraKalender: Date[], tidligereValgteDatoer: Date[]): Dat
     }
     if (endring.type === 'ingen') return tidligereValgteDatoer
 
-    const nyDatoMedOsloTidssone = tilOsloDatoFraDato(endring.dato)
+    const nyDatoMedOsloTidssone = tilOsloKalenderDato(endring.dato)
     const valgtUke = ukeNummer(nyDatoMedOsloTidssone)
     const beholdteDatoer = tidligereValgteDatoer.filter((tidligereDato) => ukeNummer(tidligereDato) !== valgtUke)
 

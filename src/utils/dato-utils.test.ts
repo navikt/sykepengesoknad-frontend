@@ -1,9 +1,11 @@
 import { describe, expect, it } from 'vitest'
+import { TZDate } from '@date-fns/tz'
 
 import {
     fraInputdatoTilJSDato,
     fraBackendTilDate,
     serializerDatoTilOslo,
+    tilOsloKalenderDatoFraDato,
     tilLesbarDatoMedArstall,
     tilLesbarPeriodeMedArstall,
     tilLesbarDatoUtenAarstall,
@@ -110,6 +112,22 @@ describe('dato-utils tidssone-sikkerhet (date-fns/tz)', () => {
 
         it('beholder kalenderdag når datoobjekt kommer fra New York og vises i Oslo', () => {
             expect(serializerDatoTilOslo(nyYorkDato('2020-04-01T04:00:00.000Z'))).toBe('2020-04-01')
+        })
+
+        it('konverterer Bangkok-midnatt til Oslo-kalenderdag', () => {
+            const bangkokDato = new TZDate('2021-01-04', 'Asia/Bangkok')
+            expect(serializerDatoTilOslo(bangkokDato)).toBe('2021-01-04')
+        })
+    })
+
+    describe('tilOsloKalenderDatoFraDato', () => {
+        it('bevarer år, måned og dag uten tidssoneforskyvning', () => {
+            const bangkokDato = new TZDate('2021-01-04', 'Asia/Bangkok')
+            const osloKalenderdato = tilOsloKalenderDatoFraDato(bangkokDato)
+
+            expect(osloKalenderdato.getFullYear()).toBe(2021)
+            expect(osloKalenderdato.getMonth()).toBe(0)
+            expect(osloKalenderdato.getDate()).toBe(4)
         })
     })
 

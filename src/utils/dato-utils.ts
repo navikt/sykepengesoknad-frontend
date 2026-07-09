@@ -38,6 +38,10 @@ export function tilOsloDatoFraDato(dato: Date): Date {
     return osloDate(osloView.getFullYear(), osloView.getMonth() + 1, osloView.getDate())
 }
 
+export function tilOsloKalenderDatoFraDato(dato: Date): Date {
+    return osloDate(dato.getFullYear(), dato.getMonth() + 1, dato.getDate())
+}
+
 export function tilLokalDatoFraDato(dato: Date): Date {
     return new Date(dato.getFullYear(), dato.getMonth(), dato.getDate())
 }

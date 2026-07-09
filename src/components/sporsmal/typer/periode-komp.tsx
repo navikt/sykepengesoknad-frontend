@@ -8,7 +8,7 @@ import { validerFom, validerPeriode, validerTom } from '../../../utils/sporsmal/
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { kalenderMedDropdownCaption, maanedKalenderApnesPa } from '../sporsmal-utils'
 
-import { tilLokalKalenderDatoOpt, tilLokalKalenderDatoEllerStandard } from './kalender-dato-utils'
+import { tilLokalKalenderDatoOpt, tilLokalKalenderDatoEllerStandard, tilOsloKalenderDato } from './kalender-dato-utils'
 
 interface PeriodeProps {
     index: number
@@ -53,8 +53,8 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode, antallPerioder }: AllProps
                   }
                 : undefined,
         onRangeChange: (range) => {
-            const fom = range?.from ? serializerDatoTilOslo(range.from) : ''
-            const tom = range?.to ? serializerDatoTilOslo(range.to) : ''
+            const fom = range?.from ? serializerDatoTilOslo(tilOsloKalenderDato(range.from)) : ''
+            const tom = range?.to ? serializerDatoTilOslo(tilOsloKalenderDato(range.to)) : ''
             const nyPeriode = { fom: fom, tom: tom }
             field.onChange(nyPeriode)
         },
