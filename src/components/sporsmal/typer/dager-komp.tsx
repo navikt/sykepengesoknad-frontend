@@ -5,7 +5,12 @@ import { Controller } from 'react-hook-form'
 import FeilLokal from '../../feil/feil-lokal'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 
-import { tilLokalKalenderDato, tilLokalKalenderDatoEllerStandard, tilOsloKalenderDato } from './kalender-dato-utils'
+import {
+    tilLokalKalenderDato,
+    tilLokalKalenderDatoEllerStandard,
+    tilOsloKalenderDatoFraDato,
+} from './kalender-dato-utils'
+
 const DagerKomp = ({ sporsmal }: SpmProps) => {
     const labelen = 'dager-kalender-label'
     const minDato = tilLokalKalenderDatoEllerStandard(sporsmal.min, '1900-01-01')
@@ -35,7 +40,7 @@ const DagerKomp = ({ sporsmal }: SpmProps) => {
                             toDate={maxDato}
                             selected={field.value?.map(tilLokalKalenderDato)}
                             onSelect={(datoerFraKalender) => {
-                                field.onChange((datoerFraKalender ?? []).map(tilOsloKalenderDato))
+                                field.onChange((datoerFraKalender ?? []).map(tilOsloKalenderDatoFraDato))
                             }}
                         />
                     )}

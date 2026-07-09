@@ -6,7 +6,11 @@ import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { kalenderMedDropdownCaption } from '../sporsmal-utils'
 import { validerMaaned } from '../../../utils/sporsmal/valider-dato'
 
-import { tilLokalKalenderDatoOpt, tilLokalKalenderDatoEllerStandard, tilOsloDatoOpt } from './kalender-dato-utils'
+import {
+    tilLokalKalenderDatoOpt,
+    tilLokalKalenderDatoEllerStandard,
+    tilOsloKalenderDatoOpt,
+} from './kalender-dato-utils'
 
 function AarMaanedInput(props: SpmProps) {
     const { sporsmal } = props
@@ -27,7 +31,7 @@ function AarMaanedInput(props: SpmProps) {
         allowTwoDigitYear: false,
         locale: 'nb',
         onMonthChange: (maaned) => {
-            field.onChange(tilOsloDatoOpt(maaned))
+            field.onChange(tilOsloKalenderDatoOpt(maaned))
         },
         required: true,
         onValidate: (validate) => {

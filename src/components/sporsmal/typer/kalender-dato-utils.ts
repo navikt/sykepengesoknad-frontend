@@ -1,4 +1,6 @@
-import { tilLokalDatoFraDato, tilOsloDatoFraDato, tilOsloKalenderDatoFraDato, toDate } from '../../../utils/dato-utils'
+import { format } from 'date-fns'
+
+import { osloDate, tilLokalDatoFraDato, tilOsloDatoFraDato, toDate } from '../../../utils/dato-utils'
 
 export const erSammeKalenderDag = (forsteDato: Date, andreDato: Date) => {
     const forsteOsloDato = tilOsloDatoFraDato(forsteDato)
@@ -50,10 +52,14 @@ export function tilLokalKalenderDatoEllerStandard(dato: string | null | undefine
     return tilLokalKalenderDato(dato ?? standardDato)
 }
 
-export function tilOsloKalenderDato(dato: Date): Date {
-    return tilOsloKalenderDatoFraDato(dato)
+export function tilOsloKalenderDatoFraDato(dato: Date): Date {
+    return osloDate(dato.getFullYear(), dato.getMonth() + 1, dato.getDate())
 }
 
-export function tilOsloDatoOpt(dato?: Date): Date | undefined {
-    return dato ? tilOsloKalenderDato(dato) : undefined
+export function tilOsloKalenderDatoOpt(dato?: Date): Date | undefined {
+    return dato ? tilOsloKalenderDatoFraDato(dato) : undefined
+}
+
+export function tilOsloKalenderDatoIsoStreng(dato: Date): string {
+    return format(tilOsloKalenderDatoFraDato(dato), 'yyyy-MM-dd')
 }

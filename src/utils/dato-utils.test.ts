@@ -5,7 +5,6 @@ import {
     fraInputdatoTilJSDato,
     fraBackendTilDate,
     serializerDatoTilOslo,
-    tilOsloKalenderDatoFraDato,
     tilLesbarDatoMedArstall,
     tilLesbarPeriodeMedArstall,
     tilLesbarDatoUtenAarstall,
@@ -117,17 +116,6 @@ describe('dato-utils tidssone-sikkerhet (date-fns/tz)', () => {
         it('konverterer Bangkok-midnatt til Oslo-kalenderdag', () => {
             const bangkokDato = new TZDate('2021-01-04', 'Asia/Bangkok')
             expect(serializerDatoTilOslo(bangkokDato)).toBe('2021-01-04')
-        })
-    })
-
-    describe('tilOsloKalenderDatoFraDato', () => {
-        it('bevarer år, måned og dag uten tidssoneforskyvning', () => {
-            const bangkokDato = new TZDate('2021-01-04', 'Asia/Bangkok')
-            const osloKalenderdato = tilOsloKalenderDatoFraDato(bangkokDato)
-
-            expect(osloKalenderdato.getFullYear()).toBe(2021)
-            expect(osloKalenderdato.getMonth()).toBe(0)
-            expect(osloKalenderdato.getDate()).toBe(4)
         })
     })
 

@@ -5,17 +5,14 @@ import { Controller } from 'react-hook-form'
 
 import GuidepanelUnderSporsmalstekst from '../guidepanel/GuidepanelUnderSporsmalstekst'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
-import { tilLokalDatoFraDato } from '../../../utils/dato-utils'
 
+import { tilOsloKalenderDatoFraDato } from './kalender-dato-utils'
 import {
-    fjernKalenderDato,
     finnEndringIValgteDatoer,
+    fjernKalenderDato,
     tilLokalKalenderDato,
     tilLokalKalenderDatoEllerStandard,
-    tilOsloKalenderDato,
 } from './kalender-dato-utils'
-
-const ukeNummer = (dato: Date) => getISOWeek(tilLokalDatoFraDato(tilOsloKalenderDato(dato)))
 
 const Behandlingsdager = ({ sporsmal }: SpmProps) => {
     const minDate = tilLokalKalenderDatoEllerStandard(sporsmal.undersporsmal[0].min, '1900-01-01')
@@ -52,10 +49,10 @@ const Behandlingsdager = ({ sporsmal }: SpmProps) => {
                                 }
                                 if (endring.type === 'ingen') return
 
-                                const nyDatoMedOsloTidssone = tilOsloKalenderDato(endring.dato)
-                                const valgtUke = ukeNummer(nyDatoMedOsloTidssone)
+                                const nyDatoMedOsloTidssone = tilOsloKalenderDatoFraDato(endring.dato)
+                                const valgtUke = getISOWeek(nyDatoMedOsloTidssone)
                                 const beholdteDatoer = tidligereValgteDatoer.filter(
-                                    (tidligereDato) => ukeNummer(tidligereDato) !== valgtUke,
+                                    (tidligereDato) => getISOWeek(tidligereDato) !== valgtUke,
                                 )
 
                                 field.onChange([...beholdteDatoer, nyDatoMedOsloTidssone])

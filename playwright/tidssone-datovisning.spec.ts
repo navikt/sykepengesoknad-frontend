@@ -1,6 +1,7 @@
 import { arbeidstaker } from '../src/data/mock/data/soknad/arbeidstaker'
 import { arbeidsledigKvittering } from '../src/data/mock/data/soknad/soknader-integration'
 import { nyttReisetilskudd } from '../src/data/mock/data/soknad/arbeidstaker-reisetilskudd'
+import { behandlingsdager as behandlingsdagerSoknad } from '../src/data/mock/data/soknad/behandlingsdager'
 
 import { test, expect } from './utils/fixtures'
 import {
@@ -42,7 +43,6 @@ test.describe('Tidssone: periodevisning', () => {
         })
 
         test('Manuell dato-input viser riktig periode', async ({ page }) => {
-            test.setTimeout(60000)
             await page.goto('/syk/sykepengesoknad')
             await harSoknaderlisteHeading(page)
             await trykkPaSoknadMedId(page, arbeidstakerId)
@@ -96,8 +96,6 @@ test.describe('Tidssone: DatePicker fromDate-grense', () => {
         test.use({ timezoneId: 'America/New_York' })
 
         test('DatePicker blokkerer navigering forbi januar 2020', async ({ page }) => {
-            test.setTimeout(60000)
-
             await page.goto(`/syk/sykepengesoknad/soknader/${arbeidsledigId}/1?testperson=integrasjon-soknader`)
 
             await checkViStolerPaDeg(page)
@@ -120,8 +118,6 @@ test.describe('Tidssone: DatePicker fromDate-grense', () => {
         test.use({ timezoneId: 'Europe/Oslo' })
 
         test('DatePicker blokkerer navigering forbi januar 2020', async ({ page }) => {
-            test.setTimeout(60000)
-
             await page.goto(`/syk/sykepengesoknad/soknader/${arbeidsledigId}/1?testperson=integrasjon-soknader`)
 
             await checkViStolerPaDeg(page)
@@ -143,8 +139,6 @@ test.describe('Tidssone: DatePicker fromDate-grense', () => {
         test.use({ timezoneId: 'Asia/Bangkok' })
 
         test('DatePicker blokkerer navigering forbi januar 2020', async ({ page }) => {
-            test.setTimeout(60000)
-
             await page.goto(`/syk/sykepengesoknad/soknader/${arbeidsledigId}/1?testperson=integrasjon-soknader`)
 
             await checkViStolerPaDeg(page)
@@ -254,6 +248,174 @@ test.describe('Tidssone: DATOER-kalender persistering', () => {
             await expect(page.locator(forventDagValgt('mandag 4'))).toBeVisible()
             await expect(page.locator(forventDagValgt('tirsdag 5'))).toBeVisible()
             await expect(page.locator(forventDagValgt('onsdag 6'))).toBeVisible()
+        })
+    })
+})
+
+test.describe('Tidssone: periode-komp fromDate-grense', () => {
+    const åpnePeriodeKalender = async (page: import('@playwright/test').Page) => {
+        await page.goto(`/syk/sykepengesoknad/soknader/${arbeidstaker.id}/3`)
+        await page.locator('[data-cy="ja-nei-stor"] input[value="JA"]').click()
+        const periodeLocator = page.locator('[data-cy="periode"]').first()
+        await periodeLocator.locator('.navds-date__field-button').first().click()
+        await expect(page.getByRole('grid')).toBeVisible()
+    }
+
+    test.describe('New York (UTC-5)', () => {
+        test.use({ timezoneId: 'America/New_York' })
+
+        test('DatePicker blokkerer navigering forbi april 2020', async ({ page }) => {
+            await åpnePeriodeKalender(page)
+            const prevButton = page.getByRole('button', { name: /Forrige måned|Go to previous month/i })
+            await expect(prevButton).toBeDisabled()
+        })
+    })
+
+    test.describe('Oslo (kontroll)', () => {
+        test.use({ timezoneId: 'Europe/Oslo' })
+
+        test('DatePicker blokkerer navigering forbi april 2020', async ({ page }) => {
+            await åpnePeriodeKalender(page)
+            const prevButton = page.getByRole('button', { name: /Forrige måned|Go to previous month/i })
+            await expect(prevButton).toBeDisabled()
+        })
+    })
+
+    test.describe('Thailand (UTC+7)', () => {
+        test.use({ timezoneId: 'Asia/Bangkok' })
+
+        test('DatePicker blokkerer navigering forbi april 2020', async ({ page }) => {
+            await åpnePeriodeKalender(page)
+            const prevButton = page.getByRole('button', { name: /Forrige måned|Go to previous month/i })
+            await expect(prevButton).toBeDisabled()
+        })
+    })
+})
+
+test.describe('Tidssone: periode-komp datoer persistering', () => {
+    const velgPeriodeOgNavigerTilbake = async (page: import('@playwright/test').Page) => {
+        await page.goto(`/syk/sykepengesoknad/soknader/${arbeidstaker.id}/3`)
+        await page.locator('[data-cy="ja-nei-stor"] input[value="JA"]').click()
+        const periodeLocator = page.locator('[data-cy="periode"]').first()
+        await periodeLocator.locator('.navds-date__field-button').first().click()
+        await periodeLocator.locator('[data-day="2020-04-05"]').click()
+        await periodeLocator.locator('[data-day="2020-04-10"]').click()
+        await klikkGaVidere(page)
+        await klikkTilbake(page)
+    }
+
+    test.describe('New York (UTC-5)', () => {
+        test.use({ timezoneId: 'America/New_York' })
+
+        test('Valgt periode forblir etter gå videre og tilbake', async ({ page }) => {
+            await velgPeriodeOgNavigerTilbake(page)
+            const fomInput = page.locator('[id$="_fom"]').first()
+            const tomInput = page.locator('[id$="_tom"]').first()
+            await expect(fomInput).toHaveValue('05.04.2020')
+            await expect(tomInput).toHaveValue('10.04.2020')
+        })
+    })
+
+    test.describe('Oslo (kontroll)', () => {
+        test.use({ timezoneId: 'Europe/Oslo' })
+
+        test('Valgt periode forblir etter gå videre og tilbake', async ({ page }) => {
+            await velgPeriodeOgNavigerTilbake(page)
+            const fomInput = page.locator('[id$="_fom"]').first()
+            const tomInput = page.locator('[id$="_tom"]').first()
+            await expect(fomInput).toHaveValue('05.04.2020')
+            await expect(tomInput).toHaveValue('10.04.2020')
+        })
+    })
+
+    test.describe('Thailand (UTC+7)', () => {
+        test.use({ timezoneId: 'Asia/Bangkok' })
+
+        test('Valgt periode forblir etter gå videre og tilbake', async ({ page }) => {
+            await velgPeriodeOgNavigerTilbake(page)
+            const fomInput = page.locator('[id$="_fom"]').first()
+            const tomInput = page.locator('[id$="_tom"]').first()
+            await expect(fomInput).toHaveValue('05.04.2020')
+            await expect(tomInput).toHaveValue('10.04.2020')
+        })
+    })
+})
+
+test.describe('Tidssone: behandlingsdager kalender persistering', () => {
+    const velgDagOgNavigerTilbake = async (page: import('@playwright/test').Page) => {
+        await page.goto(`/syk/sykepengesoknad/soknader/${behandlingsdagerSoknad.id}/2?testperson=behandlingsdager`)
+        await page.getByRole('button', { name: 'torsdag 16' }).first().click()
+        await expect(page.locator('button[aria-label="torsdag 16"][aria-pressed="true"]')).toBeVisible()
+        await klikkGaVidere(page)
+        await klikkTilbake(page)
+    }
+
+    test.describe('New York (UTC-5)', () => {
+        test.use({ timezoneId: 'America/New_York' })
+
+        test('Valgt behandlingsdag forblir markert etter gå videre og tilbake', async ({ page }) => {
+            await velgDagOgNavigerTilbake(page)
+            await expect(page.locator('button[aria-label="torsdag 16"][aria-pressed="true"]')).toBeVisible()
+        })
+    })
+
+    test.describe('Oslo (kontroll)', () => {
+        test.use({ timezoneId: 'Europe/Oslo' })
+
+        test('Valgt behandlingsdag forblir markert etter gå videre og tilbake', async ({ page }) => {
+            await velgDagOgNavigerTilbake(page)
+            await expect(page.locator('button[aria-label="torsdag 16"][aria-pressed="true"]')).toBeVisible()
+        })
+    })
+
+    test.describe('Thailand (UTC+7)', () => {
+        test.use({ timezoneId: 'Asia/Bangkok' })
+
+        test('Valgt behandlingsdag forblir markert etter gå videre og tilbake', async ({ page }) => {
+            await velgDagOgNavigerTilbake(page)
+            await expect(page.locator('button[aria-label="torsdag 16"][aria-pressed="true"]')).toBeVisible()
+        })
+    })
+})
+
+test.describe('Tidssone: aar-maaned-komp persistering', () => {
+    const selvstendigId = 'ffa7c5d2-4766-4450-a521-3ecc5842d015'
+    const testperson = 'selvstendig-naringsdrivende'
+
+    const velgMaanedOgNavigerTilbake = async (page: import('@playwright/test').Page) => {
+        await page.goto(`/syk/sykepengesoknad/soknader/${selvstendigId}/11?testperson=${testperson}`)
+        await page.getByRole('radio', { name: 'Ja' }).click()
+        await page.getByRole('checkbox', { name: 'Jobbet mindre i en virksomhet' }).click()
+        const monthInput = page.getByLabel('Når skjedde endringen?')
+        await monthInput.fill('januar 2024')
+        await klikkGaVidere(page)
+        await klikkTilbake(page)
+    }
+
+    test.describe('New York (UTC-5)', () => {
+        test.use({ timezoneId: 'America/New_York' })
+
+        test('Valgt måned forblir korrekt etter gå videre og tilbake', async ({ page }) => {
+            await velgMaanedOgNavigerTilbake(page)
+            await expect(page.getByLabel('Når skjedde endringen?')).toHaveValue('januar 2024')
+        })
+    })
+
+    test.describe('Oslo (kontroll)', () => {
+        test.use({ timezoneId: 'Europe/Oslo' })
+
+        test('Valgt måned forblir korrekt etter gå videre og tilbake', async ({ page }) => {
+            await velgMaanedOgNavigerTilbake(page)
+            await expect(page.getByLabel('Når skjedde endringen?')).toHaveValue('januar 2024')
+        })
+    })
+
+    test.describe('Thailand (UTC+7)', () => {
+        test.use({ timezoneId: 'Asia/Bangkok' })
+
+        test('Valgt måned forblir korrekt etter gå videre og tilbake', async ({ page }) => {
+            await velgMaanedOgNavigerTilbake(page)
+            await expect(page.getByLabel('Når skjedde endringen?')).toHaveValue('januar 2024')
         })
     })
 })
