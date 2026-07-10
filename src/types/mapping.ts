@@ -1,4 +1,4 @@
-import { toDate, parseDate, toDateEllerUndefined } from '../utils/dato-utils'
+import { toDate, toDateEllerUndefined } from '../utils/dato-utils'
 
 import { RSSporsmal } from './rs-types/rs-sporsmal'
 import { RSVisningskriterieType } from './rs-types/rs-visningskriterie'
@@ -95,7 +95,7 @@ export function rsToSoknad(soknad: RSSoknad): Soknad {
     let kjentOppholdstillatelse = undefined
     if (soknad.kjentOppholdstillatelse) {
         kjentOppholdstillatelse = {
-            fom: parseDate(soknad.kjentOppholdstillatelse.fom),
+            fom: toDate(soknad.kjentOppholdstillatelse.fom),
             tom: toDateEllerUndefined(soknad.kjentOppholdstillatelse.tom),
         }
     }

@@ -12,6 +12,7 @@ import {
     finnEndringIValgteDatoer,
     tilLokalKalenderDato,
     tilLokalKalenderDatoEllerStandard,
+    tilOsloKalenderDatoFraDato,
 } from './kalender-dato-utils'
 
 const ukeNummer = (dato: Date) => getISOWeek(tilLokalDatoFraDato(tilOsloDatoFraDato(dato)))
@@ -43,21 +44,19 @@ const Behandlingsdager = ({ sporsmal }: SpmProps) => {
                             onSelect={(datoerFraKalender) => {
                                 if (!datoerFraKalender) return
 
+                                const datoerIOslo = datoerFraKalender.map(tilOsloKalenderDatoFraDato)
                                 const tidligereValgteDatoer: Date[] = field.value ?? []
-                                const endring = finnEndringIValgteDatoer(datoerFraKalender, tidligereValgteDatoer)
+                                const endring = finnEndringIValgteDatoer(datoerIOslo, tidligereValgteDatoer)
                                 if (endring.type === 'avvalgt') {
                                     field.onChange(fjernKalenderDato(tidligereValgteDatoer, endring.dato))
                                     return
                                 }
                                 if (endring.type === 'ingen') return
-
-                                const nyDatoMedOsloTidssone = tilOsloDatoFraDato(endring.dato)
-                                const valgtUke = ukeNummer(nyDatoMedOsloTidssone)
+                                const valgtUke = ukeNummer(endring.dato)
                                 const beholdteDatoer = tidligereValgteDatoer.filter(
                                     (tidligereDato) => ukeNummer(tidligereDato) !== valgtUke,
                                 )
-
-                                field.onChange([...beholdteDatoer, nyDatoMedOsloTidssone])
+                                field.onChange([...beholdteDatoer, endring.dato])
                             }}
                         ></DatePicker.Standalone>
                     </>

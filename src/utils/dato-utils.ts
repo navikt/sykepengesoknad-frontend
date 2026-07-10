@@ -1,8 +1,6 @@
-import { differenceInDays, format, isSameMonth, isSameYear, isAfter, isBefore, addDays, parseISO } from 'date-fns'
+import { differenceInDays, format, addDays, parseISO } from 'date-fns'
 import { nb } from 'date-fns/locale/nb'
 import { TZDate } from '@date-fns/tz'
-
-import { Sporsmal } from '../types/types'
 
 const OSLO = 'Europe/Oslo'
 
@@ -79,10 +77,6 @@ export const maaneder = [
 ]
 const SKILLETEGN_PERIODE = '–'
 
-export const tilBackendDato = (datoArg: string) => {
-    return format(toDate(datoArg), 'yyyy-MM-dd')
-}
-
 export const serializerDatoTilOslo = (dato: Date): string => {
     return format(tilOsloDatoFraDato(dato), 'yyyy-MM-dd')
 }
@@ -155,10 +149,6 @@ export const ukeDatoListe = (min: string, max: string) => {
     return ukeListe
 }
 
-export const parseDate = (dato: string) => {
-    return toDate(dato)
-}
-
 export function toDateEllerUndefined(dato: string | null | undefined): Date | undefined {
     return dato ? toDate(dato) : undefined
 }
@@ -174,20 +164,4 @@ export const sendtForMerEnn30DagerSiden = (sendtTilArbeidsgiverDato?: Date, send
         dagerSidenNav = differenceInDays(iDag, sendtTilNAVDato) > 30
     }
     return dagerSidenArb && dagerSidenNav
-}
-
-export const sammeMnd = (sporsmal: Sporsmal): boolean => {
-    return isSameMonth(toDate(sporsmal.min!), toDate(sporsmal.max!))
-}
-
-export const sammeAar = (sporsmal: Sporsmal): boolean => {
-    return isSameYear(toDate(sporsmal.min!), toDate(sporsmal.max!))
-}
-
-export function kalkulerStartsmaneden(sporsmal: Sporsmal) {
-    const idag = now()
-    if (isAfter(idag, toDate(sporsmal.max!)) || isBefore(idag, toDate(sporsmal.min!))) {
-        return fraBackendTilDate(sporsmal.max!)
-    }
-    return idag
 }

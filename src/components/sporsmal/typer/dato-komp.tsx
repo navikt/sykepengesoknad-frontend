@@ -8,7 +8,11 @@ import validerDato from '../../../utils/sporsmal/valider-dato'
 import { TilbakeIArbeidBesvart } from '../../hjelpetekster/tilbake-i-arbeid-besvart/tilbake-i-arbeid-besvart'
 import { kalenderMedDropdownCaption, maanedKalenderApnesPa } from '../sporsmal-utils'
 
-import { tilLokalKalenderDatoOpt, tilLokalKalenderDatoEllerStandard, tilOsloDatoOpt } from './kalender-dato-utils'
+import {
+    tilLokalKalenderDatoOpt,
+    tilLokalKalenderDatoEllerStandard,
+    tilOsloKalenderDatoOpt,
+} from './kalender-dato-utils'
 
 function DatoInput(props: SpmProps) {
     const { sporsmal } = props
@@ -28,7 +32,7 @@ function DatoInput(props: SpmProps) {
         allowTwoDigitYear: false,
         defaultSelected: tilLokalKalenderDatoOpt(field.value),
         onDateChange: (dato) => {
-            field.onChange(tilOsloDatoOpt(dato))
+            field.onChange(tilOsloKalenderDatoOpt(dato))
         },
         required: true,
         onValidate: (validate) => {
