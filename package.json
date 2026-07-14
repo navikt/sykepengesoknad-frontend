@@ -17,7 +17,7 @@
         "@navikt/next-api-proxy": "^4.1.5",
         "@navikt/next-logger": "^5.0.0",
         "@navikt/oasis": "^4.1.4",
-        "@tanstack/react-query": "^5.91.0",
+        "@tanstack/react-query": "^5.101.2",
         "@tanstack/react-query-devtools": "^5.100.14",
         "@types/smoothscroll-polyfill": "^0.3.4",
         "@unleash/nextjs": "^1.6.7",
