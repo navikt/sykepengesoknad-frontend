@@ -37,7 +37,7 @@
         "react-hook-form": "^7.72.0",
         "remeda": "^2.34.0",
         "tailwind-merge": "^3.6.0",
-        "uuid": "^14.0.0"
+        "uuid": "^14.0.1"
     },
     "devDependencies": {
         "@axe-core/playwright": "^4.11.3",
