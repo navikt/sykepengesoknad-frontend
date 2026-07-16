@@ -48,6 +48,11 @@ test.describe('Tester arbeidstakersøknad - gradert 50%', () => {
 
             await expect(page).toHaveURL(new RegExp(`.*${soknadId}\/1`))
 
+            await expect(page.getByText('Sykmeldt fra: Posten Norge AS, Bærum')).toBeVisible()
+            await expect(
+                page.getByText('Perioder: 1. – 24. april 2020 (50%), 25. april – 10. mai 2020 (100%)'),
+            ).toBeVisible()
+
             await page.getByLabel('Jeg bekrefter at jeg vil svare så riktig som jeg kan.').check()
 
             await expect(page.getByRole('button', { name: 'Start søknad' })).toBeVisible()

@@ -34,6 +34,9 @@ test.describe('Tester arbeidstakersøknad - 100%', () => {
             await expect(page.getByRole('heading', { name: 'Før du søker' })).toBeVisible()
             await expect(page).toHaveURL(new RegExp(`.*${soknadId}\\/1`))
 
+            await expect(page.getByText('Sykmeldt fra: Posten Norge AS, Bærum')).toBeVisible()
+            await expect(page.getByText('Periode: 1. – 24. april 2020 (100%)')).toBeVisible()
+
             await sjekkIntroside(page)
 
             await expect(
