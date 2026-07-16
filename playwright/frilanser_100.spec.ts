@@ -28,6 +28,10 @@ test.describe('Tester frilansersøknad', () => {
 
         await test.step('Søknad ANSVARSERKLARING - steg 1', async () => {
             await expect(page).toHaveURL(new RegExp(`${soknad.id}/1`))
+
+            await expect(page.getByText('Sykmeldt som: frilanser')).toBeVisible()
+            await expect(page.getByText('Periode: 1. – 24. april 2020 (100%)')).toBeVisible()
+
             await checkViStolerPaDeg(page)
         })
 

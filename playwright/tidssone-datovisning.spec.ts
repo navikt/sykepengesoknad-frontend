@@ -56,7 +56,9 @@ test.describe('Tidssone: periodevisning', () => {
             await datoInput.fill('01.04.2020')
             await datoInput.blur()
 
-            await expect(page.getByText('1. – 24. april 2020', { exact: false })).toBeVisible()
+            await expect(
+                page.getByText('Svaret ditt betyr at du har vært i fullt arbeid fra 1. – 24. april 2020'),
+            ).toBeVisible()
         })
     })
 
