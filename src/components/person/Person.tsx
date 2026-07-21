@@ -15,11 +15,12 @@ export default function Person() {
                 <div onMouseEnter={() => setShowHint(true)} onMouseLeave={() => setShowHint(false)}>
                     <Tooltip content="Verktøy for testing">
                         <Button
+                            data-color="neutral"
                             type="button"
                             ref={buttonRef}
                             onClick={() => setOpenState((b) => !b)}
                             icon={<SandboxIcon title="Åpne testdataverktøy" aria-hidden />}
-                            variant="tertiary-neutral"
+                            variant="tertiary"
                         />
                     </Tooltip>
                     <div

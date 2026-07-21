@@ -71,12 +71,12 @@ const GruppeAvUndersporsmal = ({ sporsmal, sporsmalIndex, erSisteSporsmal }: Gru
             {sporsmal.sporsmalstekst && <BodyShort>{sporsmal.sporsmalstekst}</BodyShort>}
             <EkspanderbarHjelp sporsmal={sporsmal} />
             <UndersporsmalListe oversporsmal={sporsmal} />
-
             {kanSlette && (
                 <Button
+                    data-color="danger"
                     size="small"
                     icon={<TrashIcon aria-hidden={true} />}
-                    variant="danger"
+                    variant="primary"
                     className="my-4 flex"
                     type="button"
                     onClick={slett}
@@ -85,7 +85,6 @@ const GruppeAvUndersporsmal = ({ sporsmal, sporsmalIndex, erSisteSporsmal }: Gru
                     Slett
                 </Button>
             )}
-
             {kanLeggeTil && (
                 <Button
                     icon={<PlusIcon aria-hidden={true} />}

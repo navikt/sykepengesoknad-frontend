@@ -54,7 +54,6 @@ const Slettknapp = ({ sporsmal, kvittering }: SlettknappProps) => {
             >
                 {tekst('opplasting_modal.slett')}
             </Button>
-
             <Modal
                 className="text-left"
                 onClose={() => setVilSlette(false)}
@@ -71,7 +70,13 @@ const Slettknapp = ({ sporsmal, kvittering }: SlettknappProps) => {
                     </div>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="danger" loading={sletter} type="button" onClick={slettKvittering}>
+                    <Button
+                        data-color="danger"
+                        variant="primary"
+                        loading={sletter}
+                        type="button"
+                        onClick={slettKvittering}
+                    >
                         {tekst('opplasting_modal.vil-slette.ja')}
                     </Button>
 

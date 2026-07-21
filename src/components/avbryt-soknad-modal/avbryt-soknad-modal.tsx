@@ -82,7 +82,8 @@ const AvbrytSoknadModal = ({ euEøsSpecialCase = false }: AvbrytSoknadModalProps
             )}
             {euEøsSpecialCase && (
                 <Button
-                    variant="danger"
+                    data-color="danger"
+                    variant="primary"
                     type="button"
                     data-cy="avbryt-soknad"
                     onClick={() => {
@@ -97,7 +98,6 @@ const AvbrytSoknadModal = ({ euEøsSpecialCase = false }: AvbrytSoknadModalProps
                     Avbryt søknad
                 </Button>
             )}
-
             <Modal
                 open={aapen}
                 header={{ heading: tekst('avbryt.popup.tittel') }}
@@ -123,7 +123,8 @@ const AvbrytSoknadModal = ({ euEøsSpecialCase = false }: AvbrytSoknadModalProps
                 </Modal.Body>
                 <Modal.Footer>
                     <Button
-                        variant="danger"
+                        data-color="danger"
+                        variant="primary"
                         type="button"
                         className="mr-4 mt-4"
                         loading={avbryter}

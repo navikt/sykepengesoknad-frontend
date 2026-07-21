@@ -198,9 +198,10 @@ export function FlexjarFelles({
                                     )}
                                     {showSendFeedback && (
                                         <Button
+                                            data-color="neutral"
                                             className="mr-auto mt-6"
                                             size="medium"
-                                            variant="secondary-neutral"
+                                            variant="secondary"
                                             disabled={lagrer}
                                             icon={<PaperplaneIcon title="a11y-title" fontSize="1.5rem" />}
                                             iconPosition="right"
@@ -250,7 +251,8 @@ interface FeedbackButtonProps {
 export function FeedbackButton(props: FeedbackButtonProps) {
     return (
         <Button
-            variant="secondary-neutral"
+            data-color="neutral"
+            variant="secondary"
             size="medium"
             className={cn({
                 'bg-surface-neutral-active text-text-on-inverted hover:bg-surface-neutral-active':

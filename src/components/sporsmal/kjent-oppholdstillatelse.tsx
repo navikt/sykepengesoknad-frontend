@@ -20,10 +20,10 @@ export const KjentOppholdstillatelse = ({ soknad }: { soknad: Soknad }) => {
 
     return (
         <>
-            <VStack gap="4" marginBlock="4">
+            <VStack gap="space-16" marginBlock="space-16">
                 <Label as="p">Vi har mottatt denne oppholdstillatelsen fra Utlendingsdirektoratet:</Label>
-                <Box background="surface-info-subtle" borderRadius="medium" padding="3">
-                    <VStack gap="2">
+                <Box background="info-soft" borderRadius="4" padding="space-12">
+                    <VStack gap="space-8">
                         <Label as="p">{tittel}</Label>
                         <BodyShort>{periode}</BodyShort>
                     </VStack>
