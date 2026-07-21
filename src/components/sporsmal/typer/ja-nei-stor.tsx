@@ -116,8 +116,8 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
                             style={
                                 {
                                     '--ac-radio-checkbox-border': error
-                                        ? 'var(--a-border-danger)'
-                                        : 'var(--a-border-default)',
+                                        ? 'var(--ax-border-danger)'
+                                        : 'var(--ax-border-neutral)',
                                     '--ac-radio-checkbox-action-hover-bg': 'white',
                                 } as React.CSSProperties
                             }

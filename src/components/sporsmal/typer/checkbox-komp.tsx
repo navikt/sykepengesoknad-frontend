@@ -48,7 +48,7 @@ const CheckboxKomp = ({ sporsmal }: SpmProps) => {
                                     <Fragment key={uspm.id + '_fragment'}>
                                         <div
                                             className={cn('flex items-center gap-4', {
-                                                'bx-4 mt-2 rounded-lg bg-gray-50 w-full md:max-w-[320px]':
+                                                'bx-4 mt-2 rounded-lg bg-ax-neutral-100 w-full ax-md:max-w-[320px]':
                                                     checkboxesSkalHaSpesiellStyling(sporsmal.tag),
                                             })}
                                         >
@@ -59,7 +59,7 @@ const CheckboxKomp = ({ sporsmal }: SpmProps) => {
                                                     'pl-3': checkboxesSkalHaSpesiellStyling(sporsmal.tag),
                                                 })}
                                             >
-                                                <BodyShort className={erChecked ? 'font-bold' : ''}>
+                                                <BodyShort className={erChecked ? 'font-ax-bold' : ''}>
                                                     {uspm.sporsmalstekst}
                                                 </BodyShort>
                                             </Checkbox>

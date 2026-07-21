@@ -26,8 +26,8 @@ export default function Person() {
                     <div
                         style={
                             {
-                                '--ac-popover-bg': 'var(--a-surface-info-subtle)',
-                                '--ac-popover-border': 'var(--a-border-info)',
+                                '--ac-popover-bg': 'var(--ax-bg-info-soft)',
+                                '--ac-popover-border': 'var(--ax-border-info)',
                             } as CSSProperties
                         }
                     >

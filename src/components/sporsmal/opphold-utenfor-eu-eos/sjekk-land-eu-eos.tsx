@@ -16,7 +16,7 @@ export const SjekkLandEuEos = () => {
         [alleLand, inputValue],
     )
     return (
-        <div className="my-8 rounded border border-gray-400 p-4">
+        <div className="my-8 rounded border border-ax-neutral-500 p-4">
             <Controller
                 name="land-i-eu-eos"
                 render={({ field }) => {
