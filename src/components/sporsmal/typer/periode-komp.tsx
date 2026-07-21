@@ -70,7 +70,7 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode, antallPerioder }: AllProps
 
     return (
         <li id={id} data-cy="periode">
-            <fieldset className="relative px-4 pb-5 pt-12 bg-lightblue-50">
+            <fieldset className="relative px-4 pb-5 pt-12 bg-ax-bg-info-soft">
                 <legend className="absolute top-0 left-0 p-4 font-ax-bold">Tidsperiode {tidsperiode}</legend>
                 <DatePicker
                     {...datepickerProps}

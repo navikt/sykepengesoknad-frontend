@@ -32,7 +32,7 @@ const CheckboxKomp = ({ sporsmal }: SpmProps) => {
             render={({ field }) => (
                 <div
                     className={cn('', {
-                        'md:max-w-sm': checkboxesSkalHaSpesiellStyling(sporsmal.tag),
+                        'ax-md:max-w-sm': checkboxesSkalHaSpesiellStyling(sporsmal.tag),
                     })}
                 >
                     <CheckboxGroup

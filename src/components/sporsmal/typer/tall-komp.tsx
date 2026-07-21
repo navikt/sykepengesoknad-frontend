@@ -76,7 +76,7 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
                 return (
                     <>
                         <BodyShort>{tekstDescription}</BodyShort>
-                        <Alert variant="warning" className="mt-2 bg-white border-0 p-0">
+                        <Alert variant="warning" className="mt-2 bg-[white] border-0 p-0">
                             {`Ikke ta med det du eventuelt tjente de dagene du hadde ${feriePermisjonTekst()} fra ${valgtSoknad?.arbeidsgiver?.navn}.`}
                         </Alert>
                     </>
@@ -95,7 +95,7 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
                         : sporsmal.sporsmalstekst
                 }
                 description={description()}
-                className="md:[&>input]:w-1/2"
+                className="ax-md:[&>input]:w-1/2"
                 type="text"
                 id={sporsmal.id}
                 min={sporsmal.min!}
