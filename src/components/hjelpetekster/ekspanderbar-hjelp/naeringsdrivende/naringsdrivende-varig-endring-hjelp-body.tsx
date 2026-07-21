@@ -11,7 +11,7 @@ export const NaringsdrivendeVarigEndringHjelpBody = () => {
                     skjedd en varig endring som følge av en konkret situasjon, skal du svare ja på spørsmålet.
                 </BodyShort>
 
-                <BodyShort className="pt-3 font-bold">Det kan for eksempel være hvis:</BodyShort>
+                <BodyShort className="pt-3 font-ax-bold">Det kan for eksempel være hvis:</BodyShort>
                 <List as="ul" size="small" className="[&>ul]:mt-2">
                     <List.Item>
                         <BodyShort>du har opprettet eller avviklet en virksomhet</BodyShort>

@@ -21,7 +21,7 @@ const erLandIEuEos = (land: string) => {
 
 const soknadOmÅBeholdeSykepengerUtenforEUEøsSpecialCase = () => {
     return (
-        <div className="my-8 border-t border-gray-400" data-cy="knapperad">
+        <div className="my-8 border-t border-ax-neutral-500" data-cy="knapperad">
             <div className="mt-4">
                 <AvbrytSoknadModal euEøsSpecialCase={true} />
             </div>
@@ -91,7 +91,7 @@ const Knapperad = ({ poster }: { poster: boolean }) => {
     }
 
     return (
-        <div className="my-8 border-t border-gray-400" data-cy="knapperad">
+        <div className="my-8 border-t border-ax-neutral-500" data-cy="knapperad">
             <div className="flex w-full justify-between">
                 {skalViseTilbakeKnapp() && <Tilbake variant="stor" />}
                 <Button

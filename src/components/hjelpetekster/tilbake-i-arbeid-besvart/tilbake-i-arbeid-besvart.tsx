@@ -15,7 +15,7 @@ export function TilbakeIArbeidBesvart({ sporsmal, fieldValue }: { sporsmal: Spor
             {TilbakeIArbeidBesvartHjeletekstTekster.del1}
             {tilLesbarPeriodeMedArstall(fieldValue, sporsmal.max)}
             {TilbakeIArbeidBesvartHjeletekstTekster.del2}
-            <span className="mt-4 block text-gray-700">{TilbakeIArbeidBesvartHjeletekstTekster.span}</span>
+            <span className="mt-4 block text-ax-neutral-800">{TilbakeIArbeidBesvartHjeletekstTekster.span}</span>
         </Alert>
     )
 }

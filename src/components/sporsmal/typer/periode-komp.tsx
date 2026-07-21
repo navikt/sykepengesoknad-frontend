@@ -71,7 +71,7 @@ const PeriodeKomp = ({ sporsmal, index, slettPeriode, antallPerioder }: AllProps
     return (
         <li id={id} data-cy="periode">
             <fieldset className="relative px-4 pb-5 pt-12 bg-lightblue-50">
-                <legend className="absolute top-0 left-0 p-4 font-bold">Tidsperiode {tidsperiode}</legend>
+                <legend className="absolute top-0 left-0 p-4 font-ax-bold">Tidsperiode {tidsperiode}</legend>
                 <DatePicker
                     {...datepickerProps}
                     dropdownCaption={kalenderMedDropdownCaption(sporsmal.min, sporsmal.max)}

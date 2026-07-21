@@ -19,7 +19,7 @@ const FeilLokal = ({ sporsmal }: FeilProps) => {
         <>
             {errors[sporsmal.id] && (
                 <div role="alert" aria-live="assertive">
-                    <BodyShort as="span" className="mt-2 block font-bold text-surface-danger" data-cy="feil-lokal">
+                    <BodyShort as="span" className="mt-2 block font-ax-bold text-ax-bg-danger-strong" data-cy="feil-lokal">
                         {feilmelding.lokal}
                     </BodyShort>
                 </div>

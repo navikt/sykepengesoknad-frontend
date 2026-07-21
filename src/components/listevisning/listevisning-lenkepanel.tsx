@@ -23,7 +23,7 @@ export const ListevisningLenkepanel = ({ soknad, onClick }: { soknad: RSSoknadme
             <LinkPanel
                 className={cn('p-6 [&>div]:w-full', {
                     'mb-4': paddingBottom,
-                    'border-orange-300 bg-orange-50 hover:border-orange-500': orange(),
+                    'border-ax-warning-400 bg-ax-warning-100 hover:border-ax-warning-600': orange(),
                 })}
                 as="div"
                 border

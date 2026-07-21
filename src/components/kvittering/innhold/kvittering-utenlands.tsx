@@ -27,7 +27,7 @@ export const KvitteringUtenlands = () => {
                             aria-hidden={true}
                             title=""
                             fontSize="1.5rem"
-                            className="text-icon-info"
+                            className="text-ax-text-info-decoration"
                         />
                     </div>
                 }

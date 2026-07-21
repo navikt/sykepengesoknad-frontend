@@ -53,13 +53,13 @@ const FilListe = () => {
                             />
                         ))}
                         <Table.Row>
-                            <Table.DataCell colSpan={2} className="border-b-0 font-bold">
+                            <Table.DataCell colSpan={2} className="border-b-0 font-ax-bold">
                                 {getLedetekst(tekst('fil_liste.utlegg.sum'), {
                                     '%ANTALL_BILAG%': kvitteringer.length,
                                     '%FLERTALL%': kvitteringer.length > 1 ? 'er' : '',
                                 })}
                             </Table.DataCell>
-                            <Table.DataCell colSpan={2} className="border-b-0 font-bold">
+                            <Table.DataCell colSpan={2} className="border-b-0 font-ax-bold">
                                 {formatterTall(totaltBeløp())} kr
                             </Table.DataCell>
                         </Table.Row>
