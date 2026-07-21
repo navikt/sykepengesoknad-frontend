@@ -82,7 +82,7 @@ function MedAvsluttendeHr({ children }: { children: React.ReactNode }) {
     return (
         <>
             {children}
-            <hr className="my-10 border-ax-neutral-600" />
+            <hr className="my-10 border-ax-border-neutral" />
         </>
     )
 }
