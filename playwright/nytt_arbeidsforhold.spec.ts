@@ -29,7 +29,7 @@ test.describe('Tester nytt arbeidsforhold', () => {
         await test.step('Verifiserer Kaffebrenneriet element og styling', async () => {
             const kaffebrennerietElement = page.getByText('Kaffebrenneriet', { exact: true })
             await expect(kaffebrennerietElement).toBeVisible()
-            await expect(kaffebrennerietElement).toHaveCSS('background-color', 'rgb(236, 238, 240)')
+            await expect(kaffebrennerietElement).toHaveCSS('background-color', 'rgb(245, 246, 247)')
         })
     })
 
