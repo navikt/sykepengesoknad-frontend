@@ -3,12 +3,14 @@ import path from 'path'
 import { test, expect } from '@playwright/test'
 
 import { validerAxeUtilityWrapper } from './uuvalidering'
+import { fjernAnimasjoner } from './utils/utilities'
 
 test.describe('Test sletting av kvittering som feiler', () => {
     const soknadId = 'd4ce1c57-1f91-411b-ab64-beabbba29b65' // feilVedSlettingAvKvittering.id
 
     test.beforeEach(async ({ page }) => {
         await page.goto(`/syk/sykepengesoknad/soknader/${soknadId}/4?testperson=reisetilskudd-test`)
+        await fjernAnimasjoner(page)
     })
 
     test('Full flyt - sletting av kvittering som feiler', async ({ page }) => {

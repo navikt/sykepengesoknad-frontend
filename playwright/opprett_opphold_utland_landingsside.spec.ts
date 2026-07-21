@@ -57,6 +57,12 @@ test.describe('Tester opprettelse av opphold utland søknad', () => {
             ),
         ).toBeVisible()
     })
+})
+
+// UU-validering hoppes over her: testen redirecter til en mocket ekstern JSON-respons
+// (sykefravaer) som ikke er en del av appens tilgjengelighetsflate.
+test.describe('Avbryter opphold utland søknad (redirect til ekstern side)', () => {
+    test.use({ uuOptions: { skipUU: true } })
 
     test('Avbryter en ikke-opprettet opphold utland søknad', async ({ page }) => {
         await page.goto('/syk/sykepengesoknad/sykepengesoknad-utland')
