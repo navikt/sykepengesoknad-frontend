@@ -76,7 +76,7 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
                 return (
                     <>
                         <BodyShort>{tekstDescription}</BodyShort>
-                        <Alert variant="warning" className="mt-2 bg-[white] border-0 p-0">
+                        <Alert variant="warning" className="mt-2 bg-ax-bg-default border-0 p-0">
                             {`Ikke ta med det du eventuelt tjente de dagene du hadde ${feriePermisjonTekst()} fra ${valgtSoknad?.arbeidsgiver?.navn}.`}
                         </Alert>
                     </>
