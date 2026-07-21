@@ -52,7 +52,7 @@ test.describe('Tidssone: periodevisning', () => {
             await page.locator('[data-cy="ja-nei-stor"] input[value="JA"]').click()
             await expect(page.getByText('Når begynte du å jobbe igjen?')).toBeVisible()
 
-            const datoInput = page.locator('.navds-date__field-input')
+            const datoInput = page.locator('.aksel-date__field-input')
             await datoInput.fill('01.04.2020')
             await datoInput.blur()
 
@@ -257,7 +257,7 @@ test.describe('Tidssone: periode-komp fromDate-grense', () => {
         await page.goto(`/syk/sykepengesoknad/soknader/${arbeidstaker.id}/3`)
         await page.locator('[data-cy="ja-nei-stor"] input[value="JA"]').click()
         const periodeLocator = page.locator('[data-cy="periode"]').first()
-        await periodeLocator.locator('.navds-date__field-button').first().click()
+        await periodeLocator.locator('.aksel-date__field-button').first().click()
         await expect(page.getByRole('grid')).toBeVisible()
     }
 
@@ -297,7 +297,7 @@ test.describe('Tidssone: periode-komp datoer persistering', () => {
         await page.goto(`/syk/sykepengesoknad/soknader/${arbeidstaker.id}/3`)
         await page.locator('[data-cy="ja-nei-stor"] input[value="JA"]').click()
         const periodeLocator = page.locator('[data-cy="periode"]').first()
-        await periodeLocator.locator('.navds-date__field-button').first().click()
+        await periodeLocator.locator('.aksel-date__field-button').first().click()
         await periodeLocator.locator('[data-day="2020-04-05"]').click()
         await periodeLocator.locator('[data-day="2020-04-10"]').click()
         await klikkGaVidere(page)

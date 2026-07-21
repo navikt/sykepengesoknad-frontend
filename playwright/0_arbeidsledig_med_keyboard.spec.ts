@@ -16,8 +16,8 @@ test.describe('Arbeidsledigsøknad med tastaturnavigasjon', () => {
     test('Full arbeidsledigsøknad flow', async ({ page, browserName }) => {
         await page.goto('/syk/sykepengesoknad?testperson=arbeidsledig')
 
-        await expect(page.locator('.navds-heading--large')).toBeVisible()
-        await expect(page.locator('.navds-heading--large')).toHaveText('Søknader')
+        await expect(page.locator('.aksel-heading--large')).toBeVisible()
+        await expect(page.locator('.aksel-heading--large')).toHaveText('Søknader')
         await page.locator(`a[href*="${soknad.id}"]`).click()
 
         await sjekkMainContentFokus(page)

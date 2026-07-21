@@ -21,6 +21,6 @@ test.describe('Tester utkast til korrigerte søknader', () => {
     test('Korrigert første spørsmål er ubesvart', async ({ page }) => {
         await trykkPaSoknadMedId(page, tilKorrigering.id)
         await expect(page).toHaveURL(new RegExp(`${tilKorrigering.id}/1`))
-        await expect(page.locator('.navds-checkbox__input')).not.toBeChecked()
+        await expect(page.locator('.aksel-checkbox__input')).not.toBeChecked()
     })
 })

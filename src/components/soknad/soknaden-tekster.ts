@@ -9,7 +9,7 @@ const SoknadenTekster = {
     'sykepengesoknad.til_slutt.tittel': 'Oppsummering fra søknaden',
     'sykepengesoknad.nytt_arbeidsforhold_underveis.tittel': 'Nytt arbeidsforhold',
     'sykepengesoknad.sykepengeinfo.til-nav':
-        'Sykepenger utbetales etter at NAV har innvilget søknaden. <a class="navds-link" href="https://www.nav.no/saksbehandlingstider#sykepenger" target="_blank">Les om sykepenger og saksbehandlingstider.</a>',
+        'Sykepenger utbetales etter at NAV har innvilget søknaden. <a class="aksel-link" href="https://www.nav.no/saksbehandlingstider#sykepenger" target="_blank">Les om sykepenger og saksbehandlingstider.</a>',
 
     'sykepengesoknad.periodeutland.tittel': 'Når skal du reise',
     'sykepengesoknad.land.tittel': 'Destinasjon for reisen',

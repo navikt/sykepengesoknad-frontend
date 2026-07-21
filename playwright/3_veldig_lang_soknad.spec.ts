@@ -281,7 +281,7 @@ test.describe('Tester støtte for gamle spørsmål', () => {
     test('Side 31 - PERMITTERT_NAA', async ({ page }) => {
         await page.goto(`/syk/sykepengesoknad/soknader/${soknad.id}/31?testperson=integrasjon-soknader`)
         await svarJaHovedsporsmal(page)
-        await page.locator('.navds-date__field-button').click()
+        await page.locator('.aksel-date__field-button').click()
         await velgDato(page, 10)
 
         await klikkGaVidere(page)
@@ -297,7 +297,7 @@ test.describe('Tester støtte for gamle spørsmål', () => {
     test('Side 33 - TILBAKE_I_ARBEID', async ({ page }) => {
         await page.goto(`/syk/sykepengesoknad/soknader/${soknad.id}/33?testperson=integrasjon-soknader`)
         await svarJaHovedsporsmal(page)
-        await page.locator('.navds-date__field-button').click()
+        await page.locator('.aksel-date__field-button').click()
         await velgDato(page, 10)
 
         await klikkGaVidere(page)
@@ -312,9 +312,9 @@ test.describe('Tester støtte for gamle spørsmål', () => {
 
         await svarJaHovedsporsmal(page)
 
-        await expect(page.locator('.navds-date__field-button')).toBeVisible()
+        await expect(page.locator('.aksel-date__field-button')).toBeVisible()
 
-        await page.locator('.navds-date__field-button').click()
+        await page.locator('.aksel-date__field-button').click()
 
         await velgDato(page, 10)
 
@@ -407,8 +407,8 @@ test.describe('Tester støtte for gamle spørsmål', () => {
         await svarFritekst(page, 'Vegnavn og husnummer, evt. postboks', 'Downing Street 10')
         await svarFritekst(page, 'Land', 'UK')
         await svarFritekst(page, 'Telefonnummer', '81549300')
-        await expect(page.locator('.navds-date__field-button')).toBeVisible()
-        await page.locator('.navds-date__field-button').click()
+        await expect(page.locator('.aksel-date__field-button')).toBeVisible()
+        await page.locator('.aksel-date__field-button').click()
         await velgDato(page, 10)
 
         await klikkGaVidere(page)
@@ -487,7 +487,7 @@ test.describe('Tester støtte for gamle spørsmål', () => {
     test('Side 54 - Næringsdrivende varig endring', async ({ page }) => {
         await page.goto(`/syk/sykepengesoknad/soknader/${soknad.id}/54?testperson=integrasjon-soknader`)
         await svarJaHovedsporsmal(page)
-        await expect(page.locator('.navds-date__field-button')).toBeVisible()
+        await expect(page.locator('.aksel-date__field-button')).toBeVisible()
         await page.getByRole('checkbox', { name: 'Jobbet mindre i en virksomhet' }).click()
         await page.getByLabel('Når skjedde endringen?').fill('januar 2024')
 

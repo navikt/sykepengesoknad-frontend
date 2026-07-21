@@ -19,7 +19,7 @@ const fillTextFieldByLabel = async (page: Page, labelText: string, value: string
 const setPeriodeFraTil = async (page: Page, fom: number, tom: number, periodeIndex = 0) => {
     const periodeComponent = page.locator(`[data-cy="periode"]`).nth(periodeIndex)
 
-    await periodeComponent.locator('.navds-date__field-button').nth(0).click()
+    await periodeComponent.locator('.aksel-date__field-button').nth(0).click()
 
     await periodeComponent.locator('.rdp-cell').filter({ hasText: fom.toString() }).click()
 
@@ -36,8 +36,8 @@ test.describe('Tester arbeidstakersøknad - gradert 50%', () => {
         await test.step('Laster startside', async () => {
             await page.waitForLoadState('load')
 
-            await expect(page.locator('.navds-heading--large')).toBeVisible()
-            await expect(page.locator('.navds-heading--large')).toHaveText('Søknader')
+            await expect(page.locator('.aksel-heading--large')).toBeVisible()
+            await expect(page.locator('.aksel-heading--large')).toHaveText('Søknader')
             await validerAxeUtilityWrapper(page, test.info())
             await page.locator(`a[href*="${soknadId}"]`).click()
         })
@@ -68,7 +68,7 @@ test.describe('Tester arbeidstakersøknad - gradert 50%', () => {
             await expect(page).toHaveURL(new RegExp(`.*${soknadId}\/2`))
             await page.locator('[data-cy="ja-nei-stor"] input[value="JA"]').click()
             await expect(page.locator('text=Når begynte du å jobbe igjen?')).toBeVisible()
-            await page.locator('.navds-date__field-button').click()
+            await page.locator('.aksel-date__field-button').click()
             await page.locator('.rdp-day').getByText('20', { exact: true }).click()
             await validerAxeUtilityWrapper(page, test.info())
             await page.locator('button').filter({ hasText: 'Gå videre' }).click()
@@ -129,7 +129,7 @@ test.describe('Tester arbeidstakersøknad - gradert 50%', () => {
             await page.locator('button').filter({ hasText: 'Gå videre' }).click()
 
             await expect(
-                page.locator('.navds-read-more__button').filter({ hasText: 'Er prosenten lavere enn du forventet?' }),
+                page.locator('.aksel-read-more__button').filter({ hasText: 'Er prosenten lavere enn du forventet?' }),
             ).toBeVisible()
 
             await expect(
@@ -170,7 +170,7 @@ test.describe('Tester arbeidstakersøknad - gradert 50%', () => {
                 ),
             ).toBeVisible()
             await expect(
-                page.locator('.undersporsmal .navds-checkbox label[for="d9ac4359-5519-34f1-b59d-b5ab24e55821"]'),
+                page.locator('.undersporsmal .aksel-checkbox label[for="d9ac4359-5519-34f1-b59d-b5ab24e55821"]'),
             ).toHaveText(/ansatt et annet sted enn nevnt over/)
             await page.locator('input[type="checkbox"]#d9ac4359-5519-34f1-b59d-b5ab24e55821').check()
             await validerAxeUtilityWrapper(page, test.info())

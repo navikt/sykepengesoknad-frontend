@@ -49,7 +49,7 @@ test.describe('Tester arbeidstakersøknad - 100%', () => {
 
             await page.getByText('Start søknad').click()
             await expect(page.getByText('Det er 1 feil i skjemaet')).toBeVisible()
-            await expect(page.locator('.navds-confirmation-panel__inner')).toBeVisible()
+            await expect(page.locator('.aksel-confirmation-panel__inner')).toBeVisible()
             await expect(page.getByText('Du må bekrefte at du vil svare så riktig du kan')).toBeVisible()
 
             await validerAxeUtilityWrapper(page, test.info())
@@ -60,14 +60,14 @@ test.describe('Tester arbeidstakersøknad - 100%', () => {
         await test.step('Søknad TILBAKE_I_ARBEID', async () => {
             await expect(page).toHaveURL(new RegExp(`.*${soknadId}\\/2`))
 
-            await expect(page.locator('.navds-progress-bar')).toHaveAttribute('aria-valuenow', '1')
-            await expect(page.locator('.navds-progress-bar')).toHaveAttribute('aria-valuemax', '7')
-            await expect(page.locator('.navds-progress-bar')).toHaveAttribute('aria-valuetext', '1 av 7')
+            await expect(page.locator('.aksel-progress-bar')).toHaveAttribute('aria-valuenow', '1')
+            await expect(page.locator('.aksel-progress-bar')).toHaveAttribute('aria-valuemax', '7')
+            await expect(page.locator('.aksel-progress-bar')).toHaveAttribute('aria-valuetext', '1 av 7')
 
             await page.locator('[data-cy="ja-nei-stor"] input[value="JA"]').click()
             await expect(page.getByText('Når begynte du å jobbe igjen?')).toBeVisible()
 
-            await page.locator('.navds-date__field-button').click()
+            await page.locator('.aksel-date__field-button').click()
             await page.locator('.rdp-day').filter({ hasText: '20' }).click()
 
             await expect(
@@ -227,13 +227,13 @@ test.describe('Tester arbeidstakersøknad - 100%', () => {
         await test.step('Søknad TIL_SLUTT', async () => {
             await expect(page).toHaveURL(new RegExp(`.*${soknadId}\\/8`))
 
-            await expect(page.locator('.navds-progress-bar')).toHaveAttribute('aria-valuenow', '7')
-            await expect(page.locator('.navds-progress-bar')).toHaveAttribute('aria-valuemax', '7')
-            await expect(page.locator('.navds-progress-bar')).toHaveAttribute('aria-valuetext', '7 av 7')
+            await expect(page.locator('.aksel-progress-bar')).toHaveAttribute('aria-valuenow', '7')
+            await expect(page.locator('.aksel-progress-bar')).toHaveAttribute('aria-valuemax', '7')
+            await expect(page.locator('.aksel-progress-bar')).toHaveAttribute('aria-valuetext', '7 av 7')
 
             await expect(
                 page
-                    .locator('.navds-guide-panel__content')
+                    .locator('.aksel-guide-panel__content')
                     .getByText(
                         'Nå kan du se over at alt er riktig før du sender inn søknaden. Ved behov kan du endre opplysningene inntil 12 måneder etter innsending.',
                     ),

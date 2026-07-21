@@ -33,7 +33,7 @@ test.describe('Test sletting av kvittering som feiler', () => {
         })
 
         await test.step('Liste med kvitteringer er oppdatert', async () => {
-            const table = page.locator('.navds-table')
+            const table = page.locator('.aksel-table')
             await expect(table.getByText('Taxi')).toBeVisible()
             await expect(table.getByText('1 234 kr').first()).toBeVisible()
             await expect(table.getByText('1 utgift på til sammen')).toBeVisible()
@@ -41,7 +41,7 @@ test.describe('Test sletting av kvittering som feiler', () => {
         })
 
         await test.step('Sletting av kvittering fra liste', async () => {
-            await page.locator('.navds-table').getByRole('button', { name: 'Slett' }).click()
+            await page.locator('.aksel-table').getByRole('button', { name: 'Slett' }).click()
             await page.getByRole('button', { name: 'Ja, jeg er sikker' }).click()
 
             await expect(page.getByText('Det skjedde en feil ved sletting av kvitteringen')).toBeVisible()
