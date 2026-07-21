@@ -67,7 +67,7 @@ const GruppeAvUndersporsmal = ({ sporsmal, sporsmalIndex, erSisteSporsmal }: Gru
     }
 
     return (
-        <div className={!erSisteSporsmal && erMedlemskap ? 'mb-8 border-b border-dashed border-ax-neutral-500' : ''}>
+        <div className={!erSisteSporsmal && erMedlemskap ? 'mb-8 border-b border-dashed border-ax-border-neutral' : ''}>
             {sporsmal.sporsmalstekst && <BodyShort>{sporsmal.sporsmalstekst}</BodyShort>}
             <EkspanderbarHjelp sporsmal={sporsmal} />
             <UndersporsmalListe oversporsmal={sporsmal} />

@@ -18,8 +18,8 @@ const EksempelFrist = ({ normalTekst, boldTekst, mndEn, mndTo, mndTre, mndFire }
                 <strong>{boldTekst}</strong>
             </BodyShort>
             <div className="relative">
-                <div className="absolute right-0 top-0 -mr-1 -mt-1 h-0 w-0 border-b-4 border-l-8 border-t-4 border-ax-neutral-500 border-y-transparent" />
-                <div className="mr-1 flex w-full gap-2 border-t border-ax-neutral-500 pt-4">
+                <div className="absolute right-0 top-0 -mr-1 -mt-1 h-0 w-0 border-b-4 border-l-8 border-t-4 border-ax-border-neutral border-y-transparent" />
+                <div className="mr-1 flex w-full gap-2 border-t border-ax-border-neutral pt-4">
                     <Tag data-color="neutral" variant="outline" className="w-full bg-ax-accent-100 py-2">
                         {mndEn}
                     </Tag>
