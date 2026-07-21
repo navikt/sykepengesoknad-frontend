@@ -25,7 +25,7 @@ const AvbrytKorrigeringOppholdutland = ({ soknad }: SoknadProps) => {
                 variant="tertiary"
                 as={Button}
                 type="button"
-                className="text-ax-bg-danger-strong hover:bg-ax-danger-100 hover:text-ax-bg-danger-strong -ml-5"
+                className="text-ax-text-danger-subtle hover:bg-ax-danger-100 hover:text-ax-text-danger-subtle -ml-5"
                 onClick={() => {
                     logEvent('modal åpnet', {
                         component: tekst('avbryt.korrigering.knapp'),
@@ -57,7 +57,7 @@ const AvbrytOppholdUtlandSoknadModal = ({ soknad }: SoknadProps) => {
                 variant="tertiary"
                 type="button"
                 as={Button}
-                className="text-ax-bg-danger-strong hover:bg-ax-danger-100 hover:text-ax-bg-danger-strong -ml-5"
+                className="text-ax-text-danger-subtle hover:bg-ax-danger-100 hover:text-ax-text-danger-subtle -ml-5"
                 data-cy="avbryt-soknad"
                 onClick={() => {
                     setAapen(true)

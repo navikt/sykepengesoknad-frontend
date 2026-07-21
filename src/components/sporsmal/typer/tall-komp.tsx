@@ -152,7 +152,7 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
                         {errors[sporsmal.id]?.type !== 'validate' && (
                             <BodyShort
                                 as="span"
-                                className="mt-2 block font-ax-bold text-ax-bg-danger-strong"
+                                className="mt-2 block font-ax-bold text-ax-text-danger-subtle"
                                 data-cy="feil-lokal"
                             >
                                 {feilmelding.lokal}
@@ -161,7 +161,7 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
                         {errors[sporsmal.id]?.type === 'validate' && sporsmal.tag === 'HVOR_MYE_TIMER_VERDI' && (
                             <BodyShort
                                 as="span"
-                                className="mt-2 block font-ax-bold text-ax-bg-danger-strong"
+                                className="mt-2 block font-ax-bold text-ax-text-danger-subtle"
                                 data-cy="feil-lokal"
                             >
                                 {getLedetekst(tekst('soknad.feilmelding.MINDRE_TIMER_ENN_FORVENTET.lokal'), {

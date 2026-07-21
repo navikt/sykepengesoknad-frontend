@@ -23,7 +23,7 @@ const AvbrytKorrigering = () => {
                 variant="tertiary"
                 as={Button}
                 type="button"
-                className={cn('text-ax-bg-danger-strong hover:bg-ax-danger-100 hover:text-ax-bg-danger-strong', {
+                className={cn('text-ax-text-danger-subtle hover:bg-ax-danger-100 hover:text-ax-text-danger-subtle', {
                     '-ml-5': valgtSoknad,
                 })}
                 onClick={() => {
@@ -64,9 +64,12 @@ const AvbrytSoknadModal = ({ euEøsSpecialCase = false }: AvbrytSoknadModalProps
                     variant="tertiary"
                     type="button"
                     as={valgtSoknad ? Button : Skeleton}
-                    className={cn('text-ax-bg-danger-strong hover:bg-ax-danger-100 hover:text-ax-bg-danger-strong', {
-                        '-ml-5': valgtSoknad,
-                    })}
+                    className={cn(
+                        'text-ax-text-danger-subtle hover:bg-ax-danger-100 hover:text-ax-text-danger-subtle',
+                        {
+                            '-ml-5': valgtSoknad,
+                        },
+                    )}
                     data-cy="avbryt-soknad"
                     onClick={() => {
                         setAapen(true)

@@ -39,7 +39,7 @@ const FilOpplaster = ({ valgtFil, setValgtFil }: FilOpplasterProps) => {
                 {errors.fil_input && errors.fil_input.message && typeof errors.fil_input?.message === 'string' && (
                     <BodyShort
                         as="span"
-                        className="mt-2 flex gap-2 font-ax-bold text-ax-bg-danger-strong before:content-['•']"
+                        className="mt-2 flex gap-2 font-ax-bold text-ax-text-danger-subtle before:content-['•']"
                         data-cy="feil-lokal"
                     >
                         <>{errors.fil_input?.message}</>
