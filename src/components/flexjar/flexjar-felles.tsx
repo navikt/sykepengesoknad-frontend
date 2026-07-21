@@ -148,7 +148,7 @@ export function FlexjarFelles({
                     <div className="mt-1 border-4 border-ax-bg-neutral-soft rounded-sm">
                         <div className="bg-ax-bg-neutral-soft p-6 flex gap-4 items-center">
                             <div className="bg-ax-neutral-1000 w-10 h-10 rounded-full flex justify-center items-center">
-                                <MagnifyingGlassIcon aria-hidden={true} className="text-white axe-exclude" />
+                                <MagnifyingGlassIcon aria-hidden={true} className="text-[white] axe-exclude" />
                             </div>
                             <div>
                                 <Label as="h2" className="mb-2">

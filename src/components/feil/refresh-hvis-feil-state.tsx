@@ -16,7 +16,7 @@ export function FeilStateView({ feilmelding }: FeilStateProps) {
                     {tekst('feilstate.tittel')}
                 </Heading>
                 <Button
-                    className="mt-4 bg-white"
+                    className="mt-4 bg-[white]"
                     variant="secondary"
                     type="button"
                     size="small"
