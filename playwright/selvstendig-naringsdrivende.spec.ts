@@ -131,7 +131,7 @@ test.describe('Selvstendig næringsdrivende', () => {
         await klikkGaVidere(page, true)
 
         await expect(
-            page.locator('p.navds-error-message', { hasText: 'Datoen følger ikke formatet dd.mm.åååå' }),
+            page.locator('p.aksel-error-message', { hasText: 'Datoen følger ikke formatet dd.mm.åååå' }),
         ).toBeVisible()
 
         await expect(page.getByText('Det er 1 feil i skjemaet')).toBeVisible()
@@ -229,8 +229,8 @@ test.describe('Selvstendig næringsdrivende', () => {
 
         await klikkGaVidere(page, true)
 
-        await expect(page.locator('p.navds-error-message', { hasText: 'Du må velge et alternativ' })).toBeVisible()
-        await expect(page.locator('p.navds-error-message', { hasText: 'Datoen følger ikke formatet' })).toBeVisible()
+        await expect(page.locator('p.aksel-error-message', { hasText: 'Du må velge et alternativ' })).toBeVisible()
+        await expect(page.locator('p.aksel-error-message', { hasText: 'Datoen følger ikke formatet' })).toBeVisible()
 
         await expect(page.getByText('Det er 2 feil i skjemaet')).toBeVisible()
         await expect(page.getByRole('link', { name: 'Du må svare på hvilken endring som har skjedd' })).toBeVisible()

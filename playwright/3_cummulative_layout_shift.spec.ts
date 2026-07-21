@@ -2,7 +2,7 @@ import { test, expect, Page } from '@playwright/test'
 
 test.describe('Tester cummulative-layout-shift', () => {
     async function ventTilIngenSkeletons(page: Page) {
-        await expect(page.locator('.navds-skeleton')).toHaveCount(0, { timeout: 10000 })
+        await expect(page.locator('.aksel-skeleton')).toHaveCount(0, { timeout: 10000 })
     }
 
     async function ventPåHeading(page: Page, text: string, level: number) {

@@ -21,7 +21,7 @@ test.describe('Tester arbeidsledigsøknad', () => {
             // Naviger til startsiden (hvis ikke allerede gjort i et tidligere steg; tilpass om nødvendig)
             await page.goto('/syk/sykepengesoknad?testperson=arbeidsledig')
 
-            // Verifiser at heading er synlig og har riktig tekst (antatt som h1 basert på '.navds-heading--large')
+            // Verifiser at heading er synlig og har riktig tekst (antatt som h1 basert på '.aksel-heading--large')
             const heading = page.getByRole('heading', { name: 'Søknader', level: 1 })
             await expect(heading).toBeVisible()
             await expect(heading).toHaveText('Søknader')
@@ -48,7 +48,7 @@ test.describe('Tester arbeidsledigsøknad', () => {
             await expect(page.getByText('Fra hvilken dato trengte du ikke lenger sykmeldingen?')).toBeVisible()
 
             // Velg dato i kalender
-            await page.locator('.navds-date__field-button').click()
+            await page.locator('.aksel-date__field-button').click()
             await page.locator('.rdp-day', { hasText: '10' }).click()
 
             await validerAxeUtilityWrapper(page, test.info())
@@ -121,7 +121,7 @@ test.describe('Tester arbeidsledigsøknad', () => {
             await expect(page).toHaveURL(new RegExp(`${arbeidsledig.id}/5`))
 
             // Verifiser guide-panel innhold
-            await expect(page.locator('.navds-guide-panel__content')).toContainText(
+            await expect(page.locator('.aksel-guide-panel__content')).toContainText(
                 'Nå kan du se over at alt er riktig før du sender inn søknaden. Ved behov kan du endre opplysningene inntil 12 måneder etter innsending.',
             )
 

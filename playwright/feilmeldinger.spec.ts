@@ -17,14 +17,14 @@ test.describe('Tester feilmeldinger', () => {
         forventetFokusId: string,
         antallFeil = 1,
     ) {
-        await expect(page.locator('.navds-error-message')).toContainText(lokalFeilmelding)
+        await expect(page.locator('.aksel-error-message')).toContainText(lokalFeilmelding)
         await expect(page.getByText(`Det er ${antallFeil} feil i skjemaet`)).toBeVisible()
         await page.getByRole('link', { name: globalFeilmelding }).click()
         await expect(page.locator(`[id="${forventetFokusId}"]`)).toBeFocused()
     }
 
     async function verifiserIngenFeilmeldinger(page: Page) {
-        await expect(page.locator('.navds-error-message')).toHaveCount(0)
+        await expect(page.locator('.aksel-error-message')).toHaveCount(0)
         await expect(page.getByTestId('feil-oppsumering')).toBeHidden()
     }
 
@@ -357,13 +357,13 @@ test.describe('Tester feilmeldinger', () => {
             await expect(page.getByRole('button', { name: 'Slett', exact: true })).toHaveCount(2)
             await validerAxeUtilityWrapper(page, test.info())
             await klikkGaVidere(page, true)
-            await expect(page.locator('.navds-error-message').first()).toContainText(
+            await expect(page.locator('.aksel-error-message').first()).toContainText(
                 'Du må velge et alternativ fra menyen',
             )
-            await expect(page.locator('.navds-error-message').nth(1)).toContainText(
+            await expect(page.locator('.aksel-error-message').nth(1)).toContainText(
                 'Du må oppgi arbeidsgiveren du har jobbet hos utenfor Norge',
             )
-            await expect(page.locator('.navds-error-message').nth(2)).toContainText(
+            await expect(page.locator('.aksel-error-message').nth(2)).toContainText(
                 'Du må oppgi en fra og med dato i formatet dd.mm.åååå',
             )
             await expect(page.getByText('Det er 3 feil i skjemaet')).toBeVisible()
