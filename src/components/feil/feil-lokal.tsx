@@ -21,7 +21,7 @@ const FeilLokal = ({ sporsmal }: FeilProps) => {
                 <div role="alert" aria-live="assertive">
                     <BodyShort
                         as="span"
-                        className="mt-2 block font-ax-bold text-ax-bg-danger-strong"
+                        className="mt-2 block font-ax-bold text-ax-text-danger-subtle"
                         data-cy="feil-lokal"
                     >
                         {feilmelding.lokal}
