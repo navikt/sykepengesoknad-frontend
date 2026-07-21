@@ -95,7 +95,8 @@ const AvbrytOppholdUtlandSoknadModal = ({ soknad }: SoknadProps) => {
                 </Modal.Body>
                 <Modal.Footer>
                     <Button
-                        variant="danger"
+                        data-color="danger"
+                        variant="primary"
                         type="button"
                         className="mr-4 mt-4"
                         loading={avbryter}
