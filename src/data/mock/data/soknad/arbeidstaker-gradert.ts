@@ -48,6 +48,12 @@ export const arbeidstakerGradert: RSSoknad = {
             grad: 50,
             sykmeldingstype: 'GRADERT',
         },
+        {
+            fom: '2020-04-25',
+            tom: '2020-05-10',
+            grad: 100,
+            sykmeldingstype: 'AKTIVITET_IKKE_MULIG',
+        },
     ],
     sporsmal: [
         {
