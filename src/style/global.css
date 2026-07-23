@@ -27,4 +27,15 @@
         @apply list-disc;
         @apply list-inside;
     }
+
+    /*
+     * Tailwind v4 setter display: none !important på [hidden] i @layer base.
+     * Aksel FormProgress / Collapsible bruker hidden-attributt for å styre synlighet,
+     * og er avhengig av display: grid for å animere expand/collapse.
+     * Denne regelen med høyere spesifisitet og !important overvinner Tailwinds override.
+     */
+    .aksel-form-progress__collapsible[hidden] {
+        display: grid !important;
+    }
 }
+
