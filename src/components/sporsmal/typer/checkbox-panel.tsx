@@ -38,6 +38,7 @@ const CheckboxInput = ({ sporsmal }: SpmProps) => {
                     label={spm.sporsmalstekst}
                     error={fieldState.error && feilmelding.lokal}
                     data-cy="bekreftCheckboksPanel"
+                    className="block w-full [&_.aksel-checkbox:focus-within::after]:hidden cursor-pointer"
                 />
             )}
         />
