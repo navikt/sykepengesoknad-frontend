@@ -142,13 +142,16 @@ export function FlexjarFelles({
     }
 
     return (
-        <div role="region" className="w-full mt-16 md:w-3/4">
+        <div role="region" className="w-full mt-16 ax-md:w-3/4">
             <div>
                 {!thanksFeedback && (
-                    <div className="mt-1 border-4 border-surface-subtle rounded-medium">
-                        <div className="bg-surface-subtle p-6 flex gap-4 items-center">
-                            <div className="bg-gray-900 w-10 h-10 rounded-full flex justify-center items-center">
-                                <MagnifyingGlassIcon aria-hidden={true} className="text-white axe-exclude" />
+                    <div className="mt-1 border-4 border-ax-border-neutral-subtle rounded-sm">
+                        <div className="bg-ax-bg-neutral-soft p-6 flex gap-4 items-center">
+                            <div className="bg-ax-neutral-1000 w-10 h-10 rounded-full flex justify-center items-center">
+                                <MagnifyingGlassIcon
+                                    aria-hidden={true}
+                                    className="text-ax-text-neutral-contrast axe-exclude"
+                                />
                             </div>
                             <div>
                                 <Label as="h2" className="mb-2">
@@ -198,9 +201,10 @@ export function FlexjarFelles({
                                     )}
                                     {showSendFeedback && (
                                         <Button
+                                            data-color="neutral"
                                             className="mr-auto mt-6"
                                             size="medium"
-                                            variant="secondary-neutral"
+                                            variant="secondary"
                                             disabled={lagrer}
                                             icon={<PaperplaneIcon title="a11y-title" fontSize="1.5rem" />}
                                             iconPosition="right"
@@ -220,7 +224,7 @@ export function FlexjarFelles({
                 )}
                 <div aria-live="polite">
                     {thanksFeedback && (
-                        <div className="mt-2 border-4 border-green-100 rounded-medium bg-green-100 p-6 flex flex-row items-center">
+                        <div className="mt-2 border-4 border-ax-border-success-subtle rounded-sm bg-ax-bg-success-soft p-6 flex flex-row items-center">
                             {tommelOpp()}
                             <div className="pl-6">
                                 <Label as="h3" className="mb-2">
@@ -250,10 +254,11 @@ interface FeedbackButtonProps {
 export function FeedbackButton(props: FeedbackButtonProps) {
     return (
         <Button
-            variant="secondary-neutral"
+            data-color="neutral"
+            variant="secondary"
             size="medium"
             className={cn({
-                'bg-surface-neutral-active text-text-on-inverted hover:bg-surface-neutral-active':
+                'bg-ax-bg-neutral-strong-pressed text-ax-text-neutral-contrast hover:bg-ax-bg-neutral-strong-pressed':
                     props.activeState === props.svar,
             })}
             aria-pressed={props.activeState === props.svar}

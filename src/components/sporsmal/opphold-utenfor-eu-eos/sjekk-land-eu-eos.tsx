@@ -16,7 +16,7 @@ export const SjekkLandEuEos = () => {
         [alleLand, inputValue],
     )
     return (
-        <div className="my-8 rounded border border-gray-400 p-4">
+        <div className="my-8 rounded border border-ax-border-neutral p-4">
             <Controller
                 name="land-i-eu-eos"
                 render={({ field }) => {
@@ -52,13 +52,13 @@ export const SjekkLandEuEos = () => {
                             />
 
                             {valgtLandIEOS.length > 0 && valgtLandUtenforEOS.length === 0 && (
-                                <Alert inline className="mt-8 bg-white" variant="info">
+                                <Alert inline className="mt-8 bg-ax-bg-default" variant="info">
                                     Du har ikke reist utenfor EU/EØS. Svar nei på dette spørsmålet.
                                 </Alert>
                             )}
 
                             {valgtLandUtenforEOS.length > 0 && (
-                                <Alert inline className="mt-8 bg-white" variant="info">
+                                <Alert inline className="mt-8 bg-ax-bg-default" variant="info">
                                     Du har reist utenfor EU/EØS.
                                 </Alert>
                             )}

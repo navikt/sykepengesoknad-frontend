@@ -36,12 +36,12 @@ test.describe('Tester sortering av søknader', () => {
     })
 
     test('Laster startside', async ({ page }) => {
-        await expect(page.locator('.navds-heading--large')).toBeVisible()
-        await expect(page.locator('.navds-heading--large')).toHaveText('Søknader')
+        await expect(page.locator('.aksel-heading--large')).toBeVisible()
+        await expect(page.locator('.aksel-heading--large')).toHaveText('Søknader')
     })
 
     test('Nye søknader sorteres etter tidligste tom dato', async ({ page }) => {
-        const articles = page.locator('[data-cy="Nye søknader"] .navds-link-panel')
+        const articles = page.locator('[data-cy="Nye søknader"] .aksel-link-panel')
         const soknader = await articleTilSoknad(articles)
 
         let forrigeSoknad = soknader[0]
@@ -54,7 +54,7 @@ test.describe('Tester sortering av søknader', () => {
     test('Sorter etter Status', async ({ page }) => {
         await page.locator('select').selectOption('Status')
 
-        const articles = page.locator('[data-cy="Tidligere søknader"] .navds-link-panel')
+        const articles = page.locator('[data-cy="Tidligere søknader"] .aksel-link-panel')
         const soknader = await articleTilSoknad(articles)
 
         let forrigeSoknad = soknader[0]
@@ -67,7 +67,7 @@ test.describe('Tester sortering av søknader', () => {
     test('Sorter etter Dato', async ({ page }) => {
         await page.locator('select').selectOption('Dato')
 
-        const articles = page.locator('[data-cy="Tidligere søknader"] .navds-link-panel')
+        const articles = page.locator('[data-cy="Tidligere søknader"] .aksel-link-panel')
         const soknader = await articleTilSoknad(articles)
 
         let forrigeSoknad = soknader[0]
@@ -77,10 +77,10 @@ test.describe('Tester sortering av søknader', () => {
         }
 
         await expect(page.locator('select')).toHaveValue('Dato')
-        await expect(page.locator('[data-cy="Tidligere søknader"] .navds-link-panel').nth(0)).toContainText(
+        await expect(page.locator('[data-cy="Tidligere søknader"] .aksel-link-panel').nth(0)).toContainText(
             '27. mai – 11. juni 2020',
         )
-        await expect(page.locator('[data-cy="Tidligere søknader"] .navds-link-panel').nth(1)).toContainText(
+        await expect(page.locator('[data-cy="Tidligere søknader"] .aksel-link-panel').nth(1)).toContainText(
             '23. mai – 7. juni 2020',
         )
     })
@@ -89,14 +89,14 @@ test.describe('Tester sortering av søknader', () => {
         await page.locator('select').selectOption('Sendt')
         await expect(page.locator('select')).toHaveValue('Sendt')
 
-        await expect(page.locator('[data-cy="Tidligere søknader"] .navds-link-panel').nth(0)).toContainText(
+        await expect(page.locator('[data-cy="Tidligere søknader"] .aksel-link-panel').nth(0)).toContainText(
             '27. mai – 11. juni 2020',
         )
-        await expect(page.locator('[data-cy="Tidligere søknader"] .navds-link-panel').nth(1)).toContainText(
+        await expect(page.locator('[data-cy="Tidligere søknader"] .aksel-link-panel').nth(1)).toContainText(
             '25. – 27. mars 2020',
         )
 
-        const articles = page.locator('[data-cy="Tidligere søknader"] .navds-link-panel')
+        const articles = page.locator('[data-cy="Tidligere søknader"] .aksel-link-panel')
         const soknader = await articleTilSoknad(articles)
 
         let forrigeSoknad = soknader[0]

@@ -20,8 +20,8 @@ test.describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
 
         await page.goto('/syk/sykepengesoknad?testperson=bare-utland')
 
-        await expect(page.locator('.navds-heading--large')).toBeVisible()
-        await expect(page.locator('.navds-heading--large')).toHaveText('Søknader')
+        await expect(page.locator('.aksel-heading--large')).toBeVisible()
+        await expect(page.locator('.aksel-heading--large')).toHaveText('Søknader')
 
         const nyeSoknaderSection = page.locator('[data-cy="Nye søknader"]')
         await expect(nyeSoknaderSection).toBeVisible()
@@ -53,21 +53,21 @@ test.describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
         // Velger land innanfor EØS
         await svarCombobox(page, 'Hvilke(t) land skal du reise til?', 'Hel', 'Hellas', true)
         await expect(
-            page.locator('.navds-alert', {
+            page.locator('.aksel-alert', {
                 hasText: 'Du har kun vært innenfor EU/EØS, så du trenger ikke sende inn søknad.',
             }),
         ).toContainText('Du har kun vært innenfor EU/EØS, så du trenger ikke sende inn søknad.')
 
         await svarCombobox(page, 'Hvilke(t) land skal du reise til?', 'Svei', 'Sveits', true)
         await expect(
-            page.locator('.navds-alert', {
+            page.locator('.aksel-alert', {
                 hasText: 'Du har kun vært innenfor EU/EØS, så du trenger ikke sende inn søknad.',
             }),
         ).toContainText('Du har kun vært innenfor EU/EØS, så du trenger ikke sende inn søknad.')
 
         await svarCombobox(page, 'Hvilke(t) land skal du reise til?', 'Lit', 'Litauen', true)
         await expect(
-            page.locator('.navds-alert', {
+            page.locator('.aksel-alert', {
                 hasText: 'Du har kun vært innenfor EU/EØS, så du trenger ikke sende inn søknad.',
             }),
         ).toContainText('Du har kun vært innenfor EU/EØS, så du trenger ikke sende inn søknad.')
@@ -94,7 +94,7 @@ test.describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
 
         // Velger Fransk Polynesia, lukker med chip
         await svarCombobox(page, 'Hvilke(t) land skal du reise til?', 'Fransk', 'Fransk Polynesia')
-        await page.locator('.navds-chips__chip-text', { hasText: 'Fransk Polynesia' }).click()
+        await page.locator('.aksel-chips__chip-text', { hasText: 'Fransk Polynesia' }).click()
 
         // Velger Sør-Korea med musepeker
         await page.getByRole('combobox', { name: 'Hvilke(t) land skal du reise til?' }).type('Sør-')
@@ -188,7 +188,7 @@ test.describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
         // Søknad TIL_SLUTT (oppsummering)', async () => {
         await expect(page).toHaveURL(new RegExp(`${soknad.id}/5`))
         await expect(
-            page.locator('.navds-guide-panel__content', {
+            page.locator('.aksel-guide-panel__content', {
                 hasText: 'Nå kan du se over at alt er riktig før du sender inn søknaden.',
             }),
         ).toBeVisible()

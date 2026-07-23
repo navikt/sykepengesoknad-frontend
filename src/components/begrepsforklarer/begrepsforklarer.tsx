@@ -14,7 +14,7 @@ export const Begrepsforklarer = ({
         <BodyShort
             as="button"
             type="button"
-            className="border-b-2 border-dotted border-border-action hover:bg-gray-100"
+            className="border-b-2 border-dotted border-ax-border-accent hover:bg-ax-neutral-200"
             onClick={(e) => {
                 e.preventDefault()
                 setOpen(true)

@@ -50,7 +50,7 @@ export function SendInntektsopplysningerForSelvstendigNæringsdrivende() {
                     </Button>
                 </>
             </GridItems>
-            <div className="col-span-12 mx-4 mb-8 border-b-2 border-b-gray-200 pb-2" />
+            <div className="col-span-12 mx-4 mb-8 border-b-2 border-b-ax-neutral-300 pb-2" />
         </>
     )
 }

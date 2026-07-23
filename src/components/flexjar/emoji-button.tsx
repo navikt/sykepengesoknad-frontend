@@ -48,11 +48,11 @@ export const EmojiButton = (props: EmojiButtonProps) => {
             type="button"
             aria-pressed={isActive}
             className={cn(
-                'rounded-xl flex flex-col items-center py-2 gap-y-2 text-gray-900 h-[128px] hover:bg-gray-100',
+                'rounded-xl flex flex-col items-center py-2 gap-y-2 text-ax-neutral-1000 h-[128px] hover:bg-ax-neutral-200',
                 props.hoverColor,
                 props.width || 'w-[78px]',
                 {
-                    [`${props.hoverColor.split(':')[1]} bg-gray-100`]: isActive,
+                    [`${props.hoverColor.split(':')[1]} bg-ax-neutral-200`]: isActive,
                 },
             )}
             onClick={handleOnClick}

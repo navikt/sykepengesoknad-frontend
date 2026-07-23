@@ -142,21 +142,21 @@ const Arbeidstaker = () => {
         <KvtteringPanel className="mt-2">
             <GridItems
                 venstre={
-                    <div className="flex h-full items-center justify-center border-b border-b-border-default bg-surface-success-subtle">
+                    <div className="flex h-full items-center justify-center border-b border-b-ax-border-neutral bg-ax-bg-success-soft">
                         <CheckmarkCircleFillIcon
                             aria-hidden={true}
                             title=""
                             fontSize="1.5rem"
-                            className="text-icon-success"
+                            className="text-ax-text-success-decoration"
                         />
                     </div>
                 }
-                hoyre={<div className="h-full border-b border-b-border-default bg-surface-success-subtle" />}
+                hoyre={<div className="h-full border-b border-b-ax-border-neutral bg-ax-bg-success-soft" />}
             >
                 <Heading
                     size="small"
                     level="2"
-                    className="border-b border-b-border-default bg-surface-success-subtle py-4"
+                    className="border-b border-b-ax-border-neutral bg-ax-bg-success-soft py-4"
                 >
                     {tekst('kvittering.sendt-til')}
                 </Heading>
@@ -165,7 +165,7 @@ const Arbeidstaker = () => {
                 <ArbeidstakerStatus />
             </GridItems>
 
-            <div className="col-span-12 mx-4 mb-8 border-b-2 border-b-gray-200 pb-2" />
+            <div className="col-span-12 mx-4 mb-8 border-b-2 border-b-ax-neutral-300 pb-2" />
 
             {!sendtForMerEnn30DagerSiden(valgtSoknad.sendtTilArbeidsgiverDato, valgtSoknad.sendtTilNAVDato) && (
                 <>

@@ -1,12 +1,14 @@
 import { test, expect } from '@playwright/test'
 
 import { validerAxeUtilityWrapper } from './uuvalidering'
+import { fjernAnimasjoner } from './utils/utilities'
 
 test.describe('Tester endrefrist 12 måneder', () => {
     test('Viser popup med info om at endrefristen er ute', async ({ page }) => {
         await page.goto(
             '/syk/sykepengesoknad/sendt/46cd957d-0d62-4091-81ec-7bac2bf6a628?testperson=korrigeringsfrist-utlopt',
         )
+        await fjernAnimasjoner(page)
 
         await page.getByRole('button', { name: 'Jeg vil endre svarene i søknaden' }).click()
 

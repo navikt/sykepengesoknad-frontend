@@ -1,5 +1,6 @@
 @import 'tailwindcss';
-@import '@navikt/ds-css' layer(base);
+/* Aksel 8: ds-css legges i components-laget slik at Tailwind-utilities (spesifisitet 0) vinner over designsystemets stiler */
+@import '@navikt/ds-css' layer(components);
 
 @config '../../tailwind.config.js';
 

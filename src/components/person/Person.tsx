@@ -1,4 +1,4 @@
-import React, { CSSProperties, useRef, useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { BodyShort, Button, Heading, LinkPanel, Modal, Popover, Tooltip } from '@navikt/ds-react'
 import { SandboxIcon } from '@navikt/aksel-icons'
 
@@ -15,37 +15,30 @@ export default function Person() {
                 <div onMouseEnter={() => setShowHint(true)} onMouseLeave={() => setShowHint(false)}>
                     <Tooltip content="Verktøy for testing">
                         <Button
+                            data-color="neutral"
                             type="button"
                             ref={buttonRef}
                             onClick={() => setOpenState((b) => !b)}
                             icon={<SandboxIcon title="Åpne testdataverktøy" aria-hidden />}
-                            variant="tertiary-neutral"
+                            variant="tertiary"
                         />
                     </Tooltip>
-                    <div
-                        style={
-                            {
-                                '--ac-popover-bg': 'var(--a-surface-info-subtle)',
-                                '--ac-popover-border': 'var(--a-border-info)',
-                            } as CSSProperties
-                        }
+                    <Popover
+                        className="bg-ax-bg-info-soft border-ax-border-info"
+                        open={showHint}
+                        onClose={() => void 0}
+                        placement="bottom-end"
+                        anchorEl={buttonRef.current}
                     >
-                        <Popover
-                            open={showHint}
-                            onClose={() => void 0}
-                            placement="bottom-end"
-                            anchorEl={buttonRef.current}
-                        >
-                            <Popover.Content>
-                                <Heading size="small" level="2" className="motion-safe:animate-bounce">
-                                    Tips!
-                                </Heading>
-                                <div className="w-[220px]">
-                                    Her finner du verktøy for å endre mellom forskjellige brukere
-                                </div>
-                            </Popover.Content>
-                        </Popover>
-                    </div>
+                        <Popover.Content>
+                            <Heading size="small" level="2" className="motion-safe:animate-bounce">
+                                Tips!
+                            </Heading>
+                            <div className="w-[220px]">
+                                Her finner du verktøy for å endre mellom forskjellige brukere
+                            </div>
+                        </Popover.Content>
+                    </Popover>
                 </div>
             </div>
             <Modal

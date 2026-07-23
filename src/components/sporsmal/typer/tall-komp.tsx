@@ -76,7 +76,7 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
                 return (
                     <>
                         <BodyShort>{tekstDescription}</BodyShort>
-                        <Alert variant="warning" className="mt-2 bg-white border-0 p-0">
+                        <Alert variant="warning" className="mt-2 bg-ax-bg-default border-0 p-0">
                             {`Ikke ta med det du eventuelt tjente de dagene du hadde ${feriePermisjonTekst()} fra ${valgtSoknad?.arbeidsgiver?.navn}.`}
                         </Alert>
                     </>
@@ -95,7 +95,7 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
                         : sporsmal.sporsmalstekst
                 }
                 description={description()}
-                className="md:[&>input]:w-1/2"
+                className="ax-md:[&>input]:w-1/2"
                 type="text"
                 id={sporsmal.id}
                 min={sporsmal.min!}
@@ -152,7 +152,7 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
                         {errors[sporsmal.id]?.type !== 'validate' && (
                             <BodyShort
                                 as="span"
-                                className="mt-2 block font-bold text-surface-danger"
+                                className="mt-2 block font-ax-bold text-ax-text-danger-subtle"
                                 data-cy="feil-lokal"
                             >
                                 {feilmelding.lokal}
@@ -161,7 +161,7 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
                         {errors[sporsmal.id]?.type === 'validate' && sporsmal.tag === 'HVOR_MYE_TIMER_VERDI' && (
                             <BodyShort
                                 as="span"
-                                className="mt-2 block font-bold text-surface-danger"
+                                className="mt-2 block font-ax-bold text-ax-text-danger-subtle"
                                 data-cy="feil-lokal"
                             >
                                 {getLedetekst(tekst('soknad.feilmelding.MINDRE_TIMER_ENN_FORVENTET.lokal'), {

@@ -16,7 +16,7 @@ import {
 // import { validerAxeUtilityWrapper } from './uuvalidering'
 
 async function velgDato(page: any, dato = 10) {
-    await page.locator('.navds-date__field-button').first().click()
+    await page.locator('.aksel-date__field-button').first().click()
     await page.locator('.rdp-day').getByText(dato.toString()).first().click()
 }
 
@@ -30,7 +30,7 @@ test.describe('Søknad med alle opprinnelige spørsmål om medlemskap', () => {
     test('Gjennomfører hele søknadsflyten for medlemskap', async ({ page }) => {
         await test.step('Laster startside', async () => {
             await page.goto(`/syk/sykepengesoknad/soknader/${soknad.id}/7?testperson=medlemskap`)
-            await expect(page.locator('.navds-heading--large')).toBeVisible()
+            await expect(page.locator('.aksel-heading--large')).toBeVisible()
             // todo put this back later await validerAxeUtilityWrapper(page, test.info())
         })
 
@@ -60,7 +60,7 @@ test.describe('Søknad med alle opprinnelige spørsmål om medlemskap', () => {
 
             await svarJaHovedsporsmal(page)
             await svarCombobox(page, 'I hvilket land utenfor Norge har du oppholdt deg?', 'Sve', 'Sveits')
-            await page.locator('.navds-combobox__button-toggle-list').click()
+            await page.locator('.aksel-combobox__button-toggle-list').click()
             await svarRadioGruppe(page, 'Hva gjorde du i utlandet?', 'Jeg studerte')
             await setPeriodeFraTil(page, 12, 20)
             // todo put this back later await validerAxeUtilityWrapper(page, test.info())
@@ -82,7 +82,7 @@ test.describe('Søknad med alle opprinnelige spørsmål om medlemskap', () => {
                 'Fra',
                 'Fransk Polynesia',
             )
-            await page.locator('.navds-combobox__button-toggle-list').click()
+            await page.locator('.aksel-combobox__button-toggle-list').click()
             await svarRadioGruppe(page, 'Hva gjorde du i utlandet?', 'Jeg var på ferie')
             await setPeriodeFraTil(page, 12, 20, 0)
 
@@ -97,9 +97,9 @@ test.describe('Søknad med alle opprinnelige spørsmål om medlemskap', () => {
                 .type('Ba')
             await page.getByRole('option', { name: 'Barbados' }).click()
 
-            await expect(page.getByRole('group', { name: 'Hva gjorde du i utlandet?' })).toHaveCount(2)
+            await expect(page.getByRole('radiogroup', { name: 'Hva gjorde du i utlandet?' })).toHaveCount(2)
             await page
-                .getByRole('group', { name: 'Hva gjorde du i utlandet?' })
+                .getByRole('radiogroup', { name: 'Hva gjorde du i utlandet?' })
                 .last()
                 .getByRole('radio', { name: 'Jeg bodde der' })
                 .check()
@@ -163,7 +163,7 @@ test.describe('Søknad med nytt spørsmål om oppholdstillatelse og kjent perman
     test('Gjennomfører søknadsflyten med permanent oppholdstillatelse', async ({ page }) => {
         await test.step('Laster startside', async () => {
             await page.goto(`/syk/sykepengesoknad/soknader/${soknad.id}/11?testperson=medlemskap`)
-            await expect(page.locator('.navds-heading--large')).toBeVisible()
+            await expect(page.locator('.aksel-heading--large')).toBeVisible()
         })
 
         await test.step('Har kjent permanent oppholdstillatelse', async () => {
@@ -211,7 +211,7 @@ test.describe('Søknad med nytt spørsmål om oppholdstillatelse og kjent midler
     test('Gjennomfører søknadsflyten med midlertidig oppholdstillatelse', async ({ page }) => {
         await test.step('Laster startside', async () => {
             await page.goto(`/syk/sykepengesoknad/soknader/${soknad.id}/11?testperson=medlemskap`)
-            await expect(page.locator('.navds-heading--large')).toBeVisible()
+            await expect(page.locator('.aksel-heading--large')).toBeVisible()
         })
 
         await test.step('Har kjent midlertidig oppholdstillatelse', async () => {
