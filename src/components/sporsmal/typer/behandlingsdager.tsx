@@ -35,7 +35,6 @@ const Behandlingsdager = ({ sporsmal }: SpmProps) => {
                 render={({ field }) => (
                     <>
                         <DatePicker.Standalone
-                            locale="nb"
                             selected={field.value?.map(tilLokalKalenderDato)}
                             mode="multiple"
                             fromDate={minDate}
