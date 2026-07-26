@@ -13,6 +13,7 @@ import {
     svarRadioGruppe,
     svarFritekst,
     svarJaHovedsporsmal,
+    svarJaNeiStor,
 } from './utils/utilities'
 
 /**
@@ -49,7 +50,7 @@ test.describe('Tidssone: periodevisning', () => {
 
             await checkViStolerPaDeg(page)
 
-            await page.locator('[data-cy="ja-nei-stor"] input[value="JA"]').check()
+            await svarJaNeiStor(page, 'JA')
             await expect(page.getByText('Når begynte du å jobbe igjen?')).toBeVisible()
 
             const datoInput = page.locator('.aksel-date__field-input')
@@ -255,7 +256,7 @@ test.describe('Tidssone: DATOER-kalender persistering', () => {
 test.describe('Tidssone: periode-komp fromDate-grense', () => {
     const åpnePeriodeKalender = async (page: import('@playwright/test').Page) => {
         await page.goto(`/syk/sykepengesoknad/soknader/${arbeidstaker.id}/3`)
-        await page.locator('[data-cy="ja-nei-stor"] input[value="JA"]').check()
+        await svarJaNeiStor(page, 'JA')
         const periodeLocator = page.locator('[data-cy="periode"]').first()
         await periodeLocator.locator('.aksel-date__field-button').first().click()
         await expect(page.getByRole('grid')).toBeVisible()
@@ -295,7 +296,7 @@ test.describe('Tidssone: periode-komp fromDate-grense', () => {
 test.describe('Tidssone: periode-komp datoer persistering', () => {
     const velgPeriodeOgNavigerTilbake = async (page: import('@playwright/test').Page) => {
         await page.goto(`/syk/sykepengesoknad/soknader/${arbeidstaker.id}/3`)
-        await page.locator('[data-cy="ja-nei-stor"] input[value="JA"]').check()
+        await svarJaNeiStor(page, 'JA')
         const periodeLocator = page.locator('[data-cy="periode"]').first()
         await periodeLocator.locator('.aksel-date__field-button').first().click()
         await periodeLocator.locator('[data-day="2020-04-05"]').click()
