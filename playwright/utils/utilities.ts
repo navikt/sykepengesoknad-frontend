@@ -315,7 +315,7 @@ export async function velgKalenderdag(page: Page) {
 }
 
 export async function velgTimer(page: Page) {
-    await page.getByRole('radio', { name: 'timer' }).click()
+    await page.getByRole('radio', { name: 'timer' }).check()
     await page.getByRole('textbox', { name: 'Oppgi timer totalt' }).fill('21')
 }
 
@@ -328,16 +328,15 @@ export async function velgCheckbox(page: Page, gjelder: string) {
 }
 
 export async function svarRadio(page: Page, gjelder: string, svar: 'JA' | 'NEI' | 'Prosent' | 'Timer') {
-    const questionElement = page.getByText(gjelder)
-    const parentElement = questionElement.locator('..')
-    await parentElement.locator(`input[value="${svar}"]`).click()
+    await svarRadioGruppe(page, gjelder, svar)
 }
 
 export async function svarRadioClickOption(page: Page, gjelder: string, svar: string) {
-    const questionElement = page.getByText(gjelder)
-    const parentElement = questionElement.locator('..')
-    await parentElement.getByText(svar).click()
-    await expect(parentElement.getByText(svar)).toBeChecked()
+    const group = page.getByRole('radiogroup', { name: gjelder })
+    const radio = group.getByRole('radio', { name: svar })
+
+    await radio.check()
+    await expect(radio).toBeChecked()
 }
 
 export async function svarSykMedEgenmelding(page: Page) {

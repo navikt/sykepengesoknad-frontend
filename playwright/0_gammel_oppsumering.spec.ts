@@ -60,7 +60,7 @@ test.describe('Sjekker at søknader med gammel oppsummering ser ok ut', () => {
             await expect(progressBar).toHaveAttribute('aria-valuetext', '1 av 7')
 
             // Test spørsmål
-            await page.locator('[data-cy="ja-nei-stor"] input[value=JA]').click()
+            await page.locator('[data-cy="ja-nei-stor"] input[value=JA]').check()
             await expect(page.getByText('Når begynte du å jobbe igjen?')).toBeVisible()
             await page.locator('.aksel-date__field-button').click()
             await page.locator('.rdp-day').getByText('20').click()
@@ -80,7 +80,7 @@ test.describe('Sjekker at søknader med gammel oppsummering ser ok ut', () => {
         await test.step('Søknad FERIE_V2', async () => {
             await expect(page).toHaveURL(/\/soknader\/.*\/3/)
 
-            await page.locator('[data-cy="ja-nei-stor"] input[value=JA]').click()
+            await page.locator('[data-cy="ja-nei-stor"] input[value=JA]').check()
             await expect(page.getByText('Når tok du ut feriedager?')).toBeVisible()
 
             await setPeriodeFraTil(page, 16, 23)
@@ -101,7 +101,7 @@ test.describe('Sjekker at søknader med gammel oppsummering ser ok ut', () => {
                 page.getByText('Permisjon er dager du var borte fra jobb av andre grunner enn sykdom'),
             ).toBeVisible()
 
-            await page.locator('[data-cy="ja-nei-stor"] input[value=JA]').click()
+            await page.locator('[data-cy="ja-nei-stor"] input[value=JA]').check()
             await expect(page.getByText('Når tok du permisjon?')).toBeVisible()
 
             await setPeriodeFraTil(page, 14, 22)
@@ -118,7 +118,7 @@ test.describe('Sjekker at søknader med gammel oppsummering ser ok ut', () => {
                     'I perioden 1. - 24. april 2020 var du 100 % sykmeldt fra Posten Norge AS, Bærum. Jobbet du noe hos Posten Norge AS, Bærum i denne perioden?',
                 ),
             ).toBeVisible()
-            await page.locator('[data-cy="ja-nei-stor"] input[value=JA]').click()
+            await page.locator('[data-cy="ja-nei-stor"] input[value=JA]').check()
 
             await expect(page.getByText('Oppgi arbeidsmengde i timer eller prosent')).toBeVisible()
             await page.locator('.undersporsmal input[value=Prosent]').click()
@@ -164,7 +164,7 @@ test.describe('Sjekker at søknader med gammel oppsummering ser ok ut', () => {
 
             await expect(page.getByText('Har du andre inntektskilder enn nevnt over?')).toBeVisible()
 
-            await page.locator('[data-cy="ja-nei-stor"] input[value=JA]').click()
+            await page.locator('[data-cy="ja-nei-stor"] input[value=JA]').check()
 
             const checkboxParent = page.getByText('Velg inntektskildene som passer for deg:').locator('..')
             await checkboxParent.getByText('Ansatt andre steder enn nevnt over').locator('..').click()
@@ -174,7 +174,7 @@ test.describe('Sjekker at søknader med gammel oppsummering ser ok ut', () => {
                     'Har du jobbet for eller mottatt inntekt fra én eller flere av disse arbeidsgiverne de siste 14 dagene før du ble sykmeldt?',
                 )
                 .locator('..')
-            await radioParent.locator('input[type="radio"][value="JA"]').click()
+            await radioParent.locator('input[type="radio"][value="JA"]').check()
 
             await checkboxParent.getByText('Selvstendig næringsdrivende').locator('..').click()
 
@@ -185,7 +185,7 @@ test.describe('Sjekker at søknader med gammel oppsummering ser ok ut', () => {
         await test.step('Søknad OPPHOLD_UTENFOR_EOS', async () => {
             await expect(page).toHaveURL(/\/soknader\/.*\/7/)
 
-            await page.locator('[data-cy="ja-nei-stor"] input[value=JA]').click()
+            await page.locator('[data-cy="ja-nei-stor"] input[value=JA]').check()
             await expect(page.getByText('Når var du utenfor EU/EØS?')).toBeVisible()
 
             await setPeriodeFraTil(page, 14, 22)
