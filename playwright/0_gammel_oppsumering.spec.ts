@@ -49,7 +49,7 @@ test.describe('Sjekker at søknader med gammel oppsummering ser ok ut', () => {
 
             await page.getByText('Start søknad').click()
             await expect(page.getByText('Det er 1 feil i skjemaet')).toBeVisible()
-            await expect(page.locator('.aksel-confirmation-panel__inner')).toBeVisible()
+            await expect(page.locator('[data-cy="bekreftCheckboksPanel"]')).toBeVisible()
             await expect(page.getByText('Du må bekrefte at du vil svare så riktig du kan')).toBeVisible()
             await page.locator('.aksel-checkbox__label').click()
 

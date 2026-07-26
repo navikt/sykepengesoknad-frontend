@@ -50,7 +50,7 @@ test.describe('Tester arbeidstakersøknad - 100%', () => {
 
             await page.getByText('Start søknad').click()
             await expect(page.getByText('Det er 1 feil i skjemaet')).toBeVisible()
-            await expect(page.locator('.aksel-confirmation-panel__inner')).toBeVisible()
+            await expect(page.locator('[data-cy="bekreftCheckboksPanel"]')).toBeVisible()
             await expect(page.getByText('Du må bekrefte at du vil svare så riktig du kan')).toBeVisible()
 
             await validerAxeUtilityWrapper(page, test.info())
