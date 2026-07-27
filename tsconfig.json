@@ -1,6 +1,6 @@
 {
     "compilerOptions": {
-        "target": "es5",
+        "target": "es2015",
         "lib": ["dom", "dom.iterable", "esnext"],
         "allowJs": false,
         "skipLibCheck": true,
@@ -16,9 +16,8 @@
         "jsx": "preserve",
         "strictNullChecks": true,
         "noFallthroughCasesInSwitch": true,
-        "incremental": true,
-        "baseUrl": "/syk/sykepengesoknad"
+        "incremental": true
     },
     "include": ["src", "vitest.d.ts"],
-    "exclude": ["node_modules"]
+    "exclude": ["node_modules", "eslint.config.ts"]
 }
