@@ -2,7 +2,6 @@ import { logger } from '@navikt/next-logger'
 import { collectDefaultMetrics, Counter } from 'prom-client'
 
 declare global {
-    // eslint-disable-next-line no-var
     var _metrics: AppMetrics
 }
 const PUBLIC_FILE = /\.(.*)$/
