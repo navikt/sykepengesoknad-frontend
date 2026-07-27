@@ -19,7 +19,10 @@ export async function svarJaHovedsporsmal(page: Page) {
 }
 
 export async function svarJaNeiStor(page: Page, svar: 'JA' | 'NEI' = 'JA') {
-    await page.locator(`[data-cy="ja-nei-stor"] input[value="${svar}"]`).check()
+    const tekst = svar === 'JA' ? 'Ja' : 'Nei'
+    const radio = page.locator('form').getByRole('radio', { name: tekst }).first()
+    await radio.check()
+    await expect(radio).toBeChecked()
 }
 
 export async function svarNeiHovedsporsmal(page: Page) {
