@@ -19,9 +19,7 @@
     ::file-selector-button {
         border-color: var(--color-gray-200, currentcolor);
     }
-}
 
-@layer base {
     ul {
         @apply list-disc;
         @apply list-inside;
@@ -36,4 +34,12 @@
     .aksel-form-progress__collapsible[hidden] {
         display: grid !important;
     }
+}
+
+/*
+ * Fiks for lenker inne i <decorator-utils> (brødsmulene) som får feil farge
+ */
+decorator-utils,
+decorator-footer a {
+    color: var(--ax-text-subtle);
 }
