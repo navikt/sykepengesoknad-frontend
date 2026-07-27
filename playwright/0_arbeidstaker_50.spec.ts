@@ -48,7 +48,7 @@ test.describe('Tester arbeidstakersøknad - gradert 50%', () => {
 
             await expect(page).toHaveURL(new RegExp(`.*${soknadId}\/1`))
 
-            await page.getByLabel('Jeg bekrefter at jeg vil svare så riktig som jeg kan.').check()
+            await page.getByRole('checkbox', { name: 'Jeg bekrefter at jeg vil svare så riktig som jeg kan.' }).check()
 
             await expect(page.getByRole('button', { name: 'Start søknad' })).toBeVisible()
             await validerAxeUtilityWrapper(page, test.info())
