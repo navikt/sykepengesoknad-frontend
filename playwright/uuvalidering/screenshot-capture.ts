@@ -46,7 +46,7 @@ export async function captureViolationScreenshots(
                         body: elementScreenshot,
                     }),
                 ])
-            } catch (error) {
+            } catch {
                 // eslint-disable-next-line no-console
                 console.log(`Kunne ikke ta screenshot av element: ${node.target.join(' ')}`)
             }
