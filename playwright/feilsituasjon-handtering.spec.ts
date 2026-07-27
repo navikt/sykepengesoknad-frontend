@@ -85,7 +85,9 @@ test.describe('Tester feilsituasjoner', () => {
             await page.goto(`/syk/sykepengesoknad/soknader/${soknad.id}/1${testpersonQuery}`)
             await expect(page.getByRole('heading', { name: SOKNAD_OM_SYKEPENGER })).toBeVisible()
 
-            const checkbox = page.locator('[data-cy="bekreftCheckboksPanel"]')
+            const checkbox = page.getByRole('checkbox', {
+                name: 'Jeg bekrefter at jeg vil svare så riktig som jeg kan.',
+            })
             await expect(checkbox).not.toBeChecked()
 
             await checkViStolerPaDeg(page)

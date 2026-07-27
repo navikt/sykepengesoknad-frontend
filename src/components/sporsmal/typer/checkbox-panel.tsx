@@ -49,9 +49,7 @@ const CheckboxInput = ({ sporsmal }: SpmProps) => {
                             })
                         }}
                     >
-                        <Checkbox value={spm.id} data-cy="bekreftCheckboksPanel">
-                            {spm.sporsmalstekst}
-                        </Checkbox>
+                        <Checkbox value={spm.id}>{spm.sporsmalstekst}</Checkbox>
                     </CheckboxGroup>
                 </div>
             )}
