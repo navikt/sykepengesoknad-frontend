@@ -49,7 +49,7 @@ test.describe('Tester arbeidstakersøknad - 100%', () => {
 
             await page.getByText('Start søknad').click()
             await expect(page.getByText('Det er 1 feil i skjemaet')).toBeVisible()
-            await expect(page.locator('.navds-confirmation-panel__inner')).toBeVisible()
+            await expect(page.locator('.aksel-confirmation-panel__inner')).toBeVisible()
             await expect(page.getByText('Du må bekrefte at du vil svare så riktig du kan')).toBeVisible()
 
             await validerAxeUtilityWrapper(page, test.info())
@@ -60,14 +60,14 @@ test.describe('Tester arbeidstakersøknad - 100%', () => {
         await test.step('Søknad TILBAKE_I_ARBEID', async () => {
             await expect(page).toHaveURL(new RegExp(`.*${soknadId}\\/2`))
 
-            await expect(page.locator('.navds-progress-bar')).toHaveAttribute('aria-valuenow', '1')
-            await expect(page.locator('.navds-progress-bar')).toHaveAttribute('aria-valuemax', '7')
-            await expect(page.locator('.navds-progress-bar')).toHaveAttribute('aria-valuetext', '1 av 7')
+            await expect(page.locator('.aksel-progress-bar')).toHaveAttribute('aria-valuenow', '1')
+            await expect(page.locator('.aksel-progress-bar')).toHaveAttribute('aria-valuemax', '7')
+            await expect(page.locator('.aksel-progress-bar')).toHaveAttribute('aria-valuetext', '1 av 7')
 
-            await page.locator('[data-cy="ja-nei-stor"] input[value="JA"]').click()
+            await page.locator('[data-cy="ja-nei-stor"] input[value="JA"]').check()
             await expect(page.getByText('Når begynte du å jobbe igjen?')).toBeVisible()
 
-            await page.locator('.navds-date__field-button').click()
+            await page.locator('.aksel-date__field-button').click()
             await page.locator('.rdp-day').filter({ hasText: '20' }).click()
 
             await expect(
@@ -92,7 +92,7 @@ test.describe('Tester arbeidstakersøknad - 100%', () => {
                 'Du kan dra på ferie mens du er sykmeldt, men du får ikke utbetalt sykepenger når du har ferie',
             ])
 
-            await page.locator('[data-cy="ja-nei-stor"] input[value="JA"]').click()
+            await page.locator('[data-cy="ja-nei-stor"] input[value="JA"]').check()
             await expect(page.getByText('Når tok du ut feriedager?')).toBeVisible()
 
             await setPeriodeFraTil(page, 16, 23)
@@ -113,7 +113,7 @@ test.describe('Tester arbeidstakersøknad - 100%', () => {
                 page.getByText('Permisjon er dager du var borte fra jobb av andre grunner enn sykdom'),
             ).toBeVisible()
 
-            await page.locator('[data-cy="ja-nei-stor"] input[value="JA"]').click()
+            await page.locator('[data-cy="ja-nei-stor"] input[value="JA"]').check()
             await expect(page.getByText('Når tok du permisjon?')).toBeVisible()
 
             await setPeriodeFraTil(page, 14, 22)
@@ -136,7 +136,7 @@ test.describe('Tester arbeidstakersøknad - 100%', () => {
                 'Dersom du har gjort færre arbeidsoppgaver enn vanlig, men brukt lengre tid på dem',
             ])
 
-            await page.locator('[data-cy="ja-nei-stor"] input[value="JA"]').click()
+            await page.locator('[data-cy="ja-nei-stor"] input[value="JA"]').check()
 
             await expect(page.getByText('Oppgi arbeidsmengde i timer eller prosent')).toBeVisible()
 
@@ -182,7 +182,7 @@ test.describe('Tester arbeidstakersøknad - 100%', () => {
                 'Jobbet mer i en annen jobb etter at du ble sykmeldt',
             ])
 
-            await page.locator('[data-cy="ja-nei-stor"] input[value="JA"]').click()
+            await page.locator('[data-cy="ja-nei-stor"] input[value="JA"]').check()
 
             const ansattAndreSteder = page
                 .getByText('Velg inntektskildene som passer for deg:')
@@ -194,7 +194,7 @@ test.describe('Tester arbeidstakersøknad - 100%', () => {
             const subQuestion = page.getByText(
                 'Har du jobbet for eller mottatt inntekt fra én eller flere av disse arbeidsgiverne de siste 14 dagene før du ble sykmeldt?',
             )
-            await subQuestion.locator('..').locator('input[type="radio"][value="JA"]').click()
+            await subQuestion.locator('..').locator('input[type="radio"][value="JA"]').check()
 
             const selvstendingNaering = page
                 .getByText('Velg inntektskildene som passer for deg:')
@@ -215,7 +215,7 @@ test.describe('Tester arbeidstakersøknad - 100%', () => {
                 'Da oppretter vi en egen søknad som du må sende inn',
             ])
 
-            await page.locator('[data-cy="ja-nei-stor"] input[value="JA"]').click()
+            await page.locator('[data-cy="ja-nei-stor"] input[value="JA"]').check()
             await expect(page.getByText('Når var du utenfor EU/EØS?')).toBeVisible()
 
             await setPeriodeFraTil(page, 14, 22)
@@ -227,13 +227,13 @@ test.describe('Tester arbeidstakersøknad - 100%', () => {
         await test.step('Søknad TIL_SLUTT', async () => {
             await expect(page).toHaveURL(new RegExp(`.*${soknadId}\\/8`))
 
-            await expect(page.locator('.navds-progress-bar')).toHaveAttribute('aria-valuenow', '7')
-            await expect(page.locator('.navds-progress-bar')).toHaveAttribute('aria-valuemax', '7')
-            await expect(page.locator('.navds-progress-bar')).toHaveAttribute('aria-valuetext', '7 av 7')
+            await expect(page.locator('.aksel-progress-bar')).toHaveAttribute('aria-valuenow', '7')
+            await expect(page.locator('.aksel-progress-bar')).toHaveAttribute('aria-valuemax', '7')
+            await expect(page.locator('.aksel-progress-bar')).toHaveAttribute('aria-valuetext', '7 av 7')
 
             await expect(
                 page
-                    .locator('.navds-guide-panel__content')
+                    .locator('.aksel-guide-panel__content')
                     .getByText(
                         'Nå kan du se over at alt er riktig før du sender inn søknaden. Ved behov kan du endre opplysningene inntil 12 måneder etter innsending.',
                     ),

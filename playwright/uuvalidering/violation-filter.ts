@@ -3,8 +3,8 @@ import { Result } from 'axe-core'
 import { IgnoreRule } from './types'
 
 export const DEFAULT_IGNORE_RULES: IgnoreRule[] = [
-    { selector: '.navds-accordion', rules: ['color-contrast'] },
-    { selector: '.navds-link', rules: ['color-contrast'] },
+    { selector: '.aksel-accordion', rules: ['color-contrast'] },
+    { selector: '.aksel-link', rules: ['color-contrast'] },
 ]
 
 export function filterAxeViolations(violations: Result[], ignoreRules: IgnoreRule[]): Result[] {

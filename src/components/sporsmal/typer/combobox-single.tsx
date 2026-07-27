@@ -28,7 +28,7 @@ const ComboboxSingle = ({ sporsmal }: SpmProps) => {
                     label={sporsmal.sporsmalstekst}
                     error={fieldState.error && feilmelding.lokal}
                     options={options}
-                    className="mt-4 w-full md:w-1/2"
+                    className="mt-4 w-full ax-md:w-1/2"
                     selectedOptions={[field.value]}
                     shouldShowSelectedOptions={true}
                     shouldAutocomplete={true}

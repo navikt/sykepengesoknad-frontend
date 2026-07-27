@@ -162,7 +162,7 @@ test.describe('Tester behandlingsdagersøknad', () => {
             await page.locator('[data-cy="ja-nei-stor"] input[value=JA]').check()
 
             await expect(page.getByText('Hvilke andre inntektskilder har du?')).toBeVisible()
-            await expect(page.locator('.undersporsmal .navds-checkbox label[for="687382"]')).toHaveText(
+            await expect(page.locator('.undersporsmal .aksel-checkbox label[for="687382"]')).toHaveText(
                 /andre arbeidsforhold/,
             )
             await page.locator('input[type=checkbox]#\\36 87382').check()
@@ -194,7 +194,7 @@ test.describe('Tester behandlingsdagersøknad', () => {
         await test.step('Søknad TIL_SLUTT - steg 4', async () => {
             await expect(page).toHaveURL(new RegExp(`${soknad.id}/5`))
             await expect(page.getByRole('heading', { name: 'Oppsummering fra søknaden', exact: true })).toBeVisible()
-            await expect(page.locator('.navds-guide-panel__content')).toHaveText(
+            await expect(page.locator('.aksel-guide-panel__content')).toHaveText(
                 /Nå kan du se over at alt er riktig før du sender inn søknaden. Ved behov kan du endre opplysningene inntil 12 måneder etter innsending./,
             )
 

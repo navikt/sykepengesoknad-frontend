@@ -26,8 +26,8 @@ test.describe('Teste førsteside i reisetilskuddsøknaden', () => {
         const steg = { value: 1 }
 
         await test.step('Landingside og listevisning', async () => {
-            await expect(page.locator('.navds-heading--large')).toBeVisible()
-            await expect(page.locator('.navds-heading--large')).toHaveText('Søknader')
+            await expect(page.locator('.aksel-heading--large')).toBeVisible()
+            await expect(page.locator('.aksel-heading--large')).toHaveText('Søknader')
             await page.getByRole('link', { name: 'Søknad om reisetilskudd' }).click()
 
             await expect(page).toHaveURL(new RegExp(`${nyttReisetilskudd.id}/1`))
@@ -37,20 +37,20 @@ test.describe('Teste førsteside i reisetilskuddsøknaden', () => {
             await expect(page).toHaveURL(new RegExp(`${nyttReisetilskudd.id}/1`))
 
             await page.locator('[data-cy="om-reisetilskudd"]').click()
-            await expect(page.locator('.navds-label').filter({ hasText: 'Hva dekker reisetilskuddet' })).toBeVisible()
+            await expect(page.locator('.aksel-label').filter({ hasText: 'Hva dekker reisetilskuddet' })).toBeVisible()
             await expect(
                 page
-                    .locator('p.navds-body-long')
+                    .locator('p.aksel-body-long')
                     .filter({ hasText: 'Reisetilskuddet dekker nødvendige ekstra reiseutgifter' }),
             ).toBeVisible()
 
-            await expect(page.locator('.navds-label').filter({ hasText: 'De første 16 dagene' })).toBeVisible()
-            await expect(page.locator('.navds-label').filter({ hasText: 'Legg ved kvitteringer' })).toBeVisible()
+            await expect(page.locator('.aksel-label').filter({ hasText: 'De første 16 dagene' })).toBeVisible()
+            await expect(page.locator('.aksel-label').filter({ hasText: 'Legg ved kvitteringer' })).toBeVisible()
             await expect(
-                page.locator('p.navds-body-long').filter({ hasText: 'Du må legge ved bilde av kvitteringene dine' }),
+                page.locator('p.aksel-body-long').filter({ hasText: 'Du må legge ved bilde av kvitteringene dine' }),
             ).toBeVisible()
 
-            await page.locator('.navds-checkbox__label').click()
+            await page.locator('.aksel-checkbox__label').click()
             await validerAxeUtilityWrapper(page, test.info(), true)
             await page.getByText('Start søknad').click()
             steg.value++
@@ -65,7 +65,7 @@ test.describe('Teste førsteside i reisetilskuddsøknaden', () => {
                 'Det kan også være bysykkel og el-sparkesykkel.',
             ])
 
-            await page.locator('[data-cy="ja-nei-stor"] input[value=JA]').click()
+            await page.locator('[data-cy="ja-nei-stor"] input[value=JA]').check()
             velgCheckbox(page, 'Offentlig transport')
             await expect(
                 page.getByText('Hvor mye betaler du vanligvis i måneden for offentlig transport?'),
@@ -91,7 +91,7 @@ test.describe('Teste førsteside i reisetilskuddsøknaden', () => {
             await expect(page).toHaveURL(new RegExp(`${nyttReisetilskudd.id}/3`))
             await expect(page.locator('[data-cy="sporsmal-tittel"]')).toHaveText('Reise med bil')
 
-            await page.locator('[data-cy="ja-nei-stor"] input[value=JA]').click()
+            await page.locator('[data-cy="ja-nei-stor"] input[value=JA]').check()
             await expect(page.locator('.undersporsmal > :nth-child(1) > :nth-child(1)')).toHaveText(
                 'Hvilke dager reiste du med bil i perioden 23. desember 2020 - 7. januar 2021?',
             )
@@ -138,15 +138,15 @@ test.describe('Teste førsteside i reisetilskuddsøknaden', () => {
 
             await lastOppKvittering(page)
 
-            const table = page.locator('.navds-table')
+            const table = page.locator('.aksel-table')
             await expect(table).toContainText('Taxi')
             await expect(table).toContainText('1 234 kr')
             await expect(table).toContainText('1 utgift på til sammen')
             await expect(table).toContainText('1 234 kr')
 
-            await table.locator('.navds-table__toggle-expand-button').click()
+            await table.locator('.aksel-table__toggle-expand-button').click()
             await expect(
-                page.locator('.navds-table__expanded-row-content img[alt="kvittering for taxi"]'),
+                page.locator('.aksel-table__expanded-row-content img[alt="kvittering for taxi"]'),
             ).toBeVisible()
 
             await table.getByRole('button', { name: 'Slett' }).click()
@@ -184,7 +184,7 @@ test.describe('Teste førsteside i reisetilskuddsøknaden', () => {
             await expect(page).toHaveURL(new RegExp(`${nyttReisetilskudd.id}/5`))
             await expect(page.locator('[data-cy="sporsmal-tittel"]')).toHaveText('Utbetaling')
 
-            await page.locator('[data-cy="ja-nei-stor"] input[value=JA]').click()
+            await page.locator('[data-cy="ja-nei-stor"] input[value=JA]').check()
             await validerAxeUtilityWrapper(page, test.info())
             await klikkGaVidere(page)
             steg.value++
@@ -192,7 +192,7 @@ test.describe('Teste førsteside i reisetilskuddsøknaden', () => {
 
         await test.step('Oppsummering - Reisetilskudd', async () => {
             await expect(page).toHaveURL(new RegExp(`${nyttReisetilskudd.id}/6`))
-            await expect(page.locator('.navds-guide-panel__content')).toContainText(
+            await expect(page.locator('.aksel-guide-panel__content')).toContainText(
                 'Nå kan du se over at alt er riktig før du sender inn søknaden.',
             )
             await validerAxeUtilityWrapper(page, test.info())

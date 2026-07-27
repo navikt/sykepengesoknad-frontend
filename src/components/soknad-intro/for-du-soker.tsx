@@ -1,4 +1,4 @@
-import { Heading, List } from '@navikt/ds-react'
+import { BodyShort, Heading, List } from '@navikt/ds-react'
 import React from 'react'
 
 import { LenkeMedIkon } from '../lenke-med-ikon/LenkeMedIkon'
@@ -21,7 +21,8 @@ export const ForDuSoker = () => {
                 </List.Item>
                 <List.Item>{huskAaSokeTekst}</List.Item>
                 <List.Item>
-                    <List description="Husk å melde fra til NAV hvis du i sykmeldingsperioden:">
+                    <BodyShort>Husk å melde fra til NAV hvis du i sykmeldingsperioden:</BodyShort>
+                    <List>
                         <List.Item className="mb-0! -mt-2!" icon={<StrekPunkt />}>
                             har startet i studier som ikke er avklart med NAV
                         </List.Item>

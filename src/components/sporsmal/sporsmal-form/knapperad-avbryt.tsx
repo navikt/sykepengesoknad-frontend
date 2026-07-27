@@ -17,7 +17,8 @@ const KnapperadAvbryt = () => {
     return (
         <>
             <Button
-                variant="danger"
+                data-color="danger"
+                variant="primary"
                 type="button"
                 loading={avbryter}
                 onClick={(event) => {

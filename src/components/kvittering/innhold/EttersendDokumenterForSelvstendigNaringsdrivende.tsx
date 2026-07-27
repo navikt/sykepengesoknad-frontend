@@ -1,4 +1,4 @@
-import { Alert, BodyLong, Button, Heading, List } from '@navikt/ds-react'
+import { Alert, BodyLong, Box, Button, Heading, List } from '@navikt/ds-react'
 import React, { useEffect } from 'react'
 import { ExternalLinkIcon } from '@navikt/aksel-icons'
 
@@ -27,11 +27,16 @@ export function EttersendDokumenterForSelvstendigNaringsdrivende({ soknad }: { s
                     <BodyLong spacing>
                         Du må sende inn dokumentasjon på inntekten din før vi kan behandle saken.
                     </BodyLong>
-                    <List title="Vi trenger følgende dokumenter">
-                        {soknad.inntektsopplysningerInnsendingDokumenter?.map((dokument) => (
-                            <List.Item key={dokument}>{dokument}</List.Item>
-                        ))}
-                    </List>
+                    <Heading as="h4" size="xsmall">
+                        Vi trenger følgende dokumenter
+                    </Heading>
+                    <Box marginBlock="space-16" asChild>
+                        <List>
+                            {soknad.inntektsopplysningerInnsendingDokumenter?.map((dokument) => (
+                                <List.Item key={dokument}>{dokument}</List.Item>
+                            ))}
+                        </List>
+                    </Box>
 
                     <Button
                         type="button"
@@ -52,7 +57,7 @@ export function EttersendDokumenterForSelvstendigNaringsdrivende({ soknad }: { s
                     </Alert>
                 </>
             </GridItems>
-            <div className="col-span-12 mx-4 mb-8 border-b-2 border-b-gray-200 pb-2" />
+            <div className="col-span-12 mx-4 mb-8 border-b-2 border-b-ax-neutral-300 pb-2" />
         </>
     )
 }

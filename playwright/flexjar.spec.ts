@@ -28,7 +28,7 @@ test.describe('Tester flexjar', () => {
 
         const yesButton = feedbackSection.getByRole('button', { name: 'Ja' })
         await yesButton.click()
-        await expect(yesButton).toHaveCSS('background-color', 'rgb(35, 38, 42)')
+        await expect(yesButton).toHaveCSS('background-color', 'rgb(73, 81, 94)')
 
         await feedbackSection
             .getByText('Unngå å skrive inn navn, fødselsnummer eller andre personlige opplysninger.')
@@ -70,7 +70,7 @@ test.describe('Tester flexjar', () => {
         await expect(braButton).toHaveCSS('background-color', 'rgba(0, 0, 0, 0)')
         await braButton.click()
 
-        await expect(braButton).toHaveCSS('background-color', 'rgb(236, 238, 240)')
+        await expect(braButton).toHaveCSS('background-color', 'rgb(236, 237, 239)')
 
         await feedbackSection
             .getByText('Unngå å skrive inn navn, fødselsnummer eller andre personlige opplysninger.')

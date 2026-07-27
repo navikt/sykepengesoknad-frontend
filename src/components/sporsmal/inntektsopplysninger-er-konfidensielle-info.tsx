@@ -7,7 +7,7 @@ export const InntektsopplysningerErKonfidensielleInfo = () => {
         <div className="mt-4 flex max-w-sm gap-4 rounded-lg py-6">
             <InformationIcon
                 title="informasjon"
-                className="shrink-0 rounded-full bg-gray-200 p-2 text-sm font-bold"
+                className="shrink-0 rounded-full bg-ax-neutral-300 p-2 text-sm font-ax-bold"
                 height={37}
                 width={37}
             />

@@ -3,12 +3,14 @@ import path from 'path'
 import { test, expect } from '@playwright/test'
 
 import { validerAxeUtilityWrapper } from './uuvalidering'
+import { fjernAnimasjoner } from './utils/utilities'
 
 test.describe('Test sletting av kvittering som feiler', () => {
     const soknadId = 'd4ce1c57-1f91-411b-ab64-beabbba29b65' // feilVedSlettingAvKvittering.id
 
     test.beforeEach(async ({ page }) => {
         await page.goto(`/syk/sykepengesoknad/soknader/${soknadId}/4?testperson=reisetilskudd-test`)
+        await fjernAnimasjoner(page)
     })
 
     test('Full flyt - sletting av kvittering som feiler', async ({ page }) => {
@@ -33,7 +35,7 @@ test.describe('Test sletting av kvittering som feiler', () => {
         })
 
         await test.step('Liste med kvitteringer er oppdatert', async () => {
-            const table = page.locator('.navds-table')
+            const table = page.locator('.aksel-table')
             await expect(table.getByText('Taxi')).toBeVisible()
             await expect(table.getByText('1 234 kr').first()).toBeVisible()
             await expect(table.getByText('1 utgift på til sammen')).toBeVisible()
@@ -41,7 +43,7 @@ test.describe('Test sletting av kvittering som feiler', () => {
         })
 
         await test.step('Sletting av kvittering fra liste', async () => {
-            await page.locator('.navds-table').getByRole('button', { name: 'Slett' }).click()
+            await page.locator('.aksel-table').getByRole('button', { name: 'Slett' }).click()
             await page.getByRole('button', { name: 'Ja, jeg er sikker' }).click()
 
             await expect(page.getByText('Det skjedde en feil ved sletting av kvitteringen')).toBeVisible()

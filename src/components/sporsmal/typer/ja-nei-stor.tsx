@@ -113,14 +113,6 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
                             className="w-full"
                             key={sporsmal.id}
                             error={fieldState.error && feilmelding.lokal}
-                            style={
-                                {
-                                    '--ac-radio-checkbox-border': error
-                                        ? 'var(--a-border-danger)'
-                                        : 'var(--a-border-default)',
-                                    '--ac-radio-checkbox-action-hover-bg': 'white',
-                                } as React.CSSProperties
-                            }
                         >
                             <GuidepanelUnderSporsmalstekst sporsmal={sporsmal} key="ja-nei-stor-guidepanel" />
 

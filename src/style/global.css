@@ -1,5 +1,5 @@
 @import 'tailwindcss';
-@import '@navikt/ds-css' layer(base);
+@import '@navikt/ds-css' layer(components);
 
 @config '../../tailwind.config.js';
 
@@ -19,11 +19,27 @@
     ::file-selector-button {
         border-color: var(--color-gray-200, currentcolor);
     }
-}
 
-@layer base {
     ul {
         @apply list-disc;
         @apply list-inside;
     }
+
+    /*
+     * Tailwind v4 setter display: none !important på [hidden] i @layer base.
+     * Aksel FormProgress / Collapsible bruker hidden-attributt for å styre synlighet,
+     * og er avhengig av display: grid for å animere expand/collapse.
+     * Denne regelen med høyere spesifisitet og !important overvinner Tailwinds override.
+     */
+    .aksel-form-progress__collapsible[hidden] {
+        display: grid !important;
+    }
+}
+
+/*
+ * Fiks for lenker inne i <decorator-utils> (brødsmulene) som får feil farge
+ */
+decorator-utils,
+decorator-footer a {
+    color: var(--ax-text-subtle);
 }

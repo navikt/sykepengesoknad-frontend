@@ -9,7 +9,7 @@ test.describe('Tester avbryting av søknad', () => {
         await page.goto('/syk/sykepengesoknad?testperson=integrasjon-soknader')
 
         await test.step('Laster startside', async () => {
-            const heading = page.locator('.navds-heading--large')
+            const heading = page.locator('.aksel-heading--large')
             await expect(heading).toBeVisible()
             await expect(heading).toHaveText('Søknader')
         })

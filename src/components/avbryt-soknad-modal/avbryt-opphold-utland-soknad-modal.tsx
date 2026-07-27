@@ -25,7 +25,7 @@ const AvbrytKorrigeringOppholdutland = ({ soknad }: SoknadProps) => {
                 variant="tertiary"
                 as={Button}
                 type="button"
-                className="text-surface-danger hover:bg-red-50 hover:text-surface-danger -ml-5"
+                className="text-ax-text-danger-subtle hover:bg-ax-danger-100 hover:text-ax-text-danger-subtle -ml-5"
                 onClick={() => {
                     logEvent('modal åpnet', {
                         component: tekst('avbryt.korrigering.knapp'),
@@ -57,7 +57,7 @@ const AvbrytOppholdUtlandSoknadModal = ({ soknad }: SoknadProps) => {
                 variant="tertiary"
                 type="button"
                 as={Button}
-                className="text-surface-danger hover:bg-red-50 hover:text-surface-danger -ml-5"
+                className="text-ax-text-danger-subtle hover:bg-ax-danger-100 hover:text-ax-text-danger-subtle -ml-5"
                 data-cy="avbryt-soknad"
                 onClick={() => {
                     setAapen(true)
@@ -95,7 +95,8 @@ const AvbrytOppholdUtlandSoknadModal = ({ soknad }: SoknadProps) => {
                 </Modal.Body>
                 <Modal.Footer>
                     <Button
-                        variant="danger"
+                        data-color="danger"
+                        variant="primary"
                         type="button"
                         className="mr-4 mt-4"
                         loading={avbryter}

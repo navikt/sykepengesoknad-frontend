@@ -5,7 +5,7 @@ test.describe('Tester søknader tilhørende tilbakedaterte sykmeldinger', () => 
 
     test('Tilbakedatering under behandling', async ({ page }) => {
         await page.goto(`/syk/sykepengesoknad/soknader/9205cc51-145b-4bda-8e99-aeaade949daf/1${testpersonQuery}`)
-        const alert = page.locator('.navds-alert').filter({ has: page.getByText('Viktig informasjon') })
+        const alert = page.locator('.aksel-alert').filter({ has: page.getByText('Viktig informasjon') })
         await expect(alert).toBeVisible()
         await expect(alert).toContainText('Viktig informasjon')
         await expect(alert).toContainText(
@@ -15,7 +15,7 @@ test.describe('Tester søknader tilhørende tilbakedaterte sykmeldinger', () => 
 
     test('Tilbakedatering avvist', async ({ page }) => {
         await page.goto(`/syk/sykepengesoknad/soknader/9205cc51-145b-4bda-8e99-aeaade949daa/1${testpersonQuery}`)
-        const alert = page.locator('.navds-alert').filter({ has: page.getByText('Viktig informasjon') })
+        const alert = page.locator('.aksel-alert').filter({ has: page.getByText('Viktig informasjon') })
         await expect(alert).toBeVisible()
         await expect(alert).toContainText('Viktig informasjon')
         await expect(alert).toContainText(

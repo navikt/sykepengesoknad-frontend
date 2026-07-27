@@ -33,9 +33,9 @@ test.describe('Tester søknad til utenlandsk sykmelding', () => {
             await harSynligTekst(page, 'Oppgi utenlandsk kontaktadresse')
             await klikkGaVidere(page, true)
 
-            await expect(page.locator('.navds-error-message').getByText('Du må oppgi et vegnavn')).toBeVisible()
-            await expect(page.locator('.navds-error-message').getByText('Du må oppgi et land')).toBeVisible()
-            await expect(page.locator('.navds-error-message').getByText('Du må oppgi et telefonnummer')).toBeVisible()
+            await expect(page.locator('.aksel-error-message').getByText('Du må oppgi et vegnavn')).toBeVisible()
+            await expect(page.locator('.aksel-error-message').getByText('Du må oppgi et land')).toBeVisible()
+            await expect(page.locator('.aksel-error-message').getByText('Du må oppgi et telefonnummer')).toBeVisible()
             await svarFritekst(page, 'Vegnavn og husnummer, evt. postboks', 'Downing Street 10')
             await svarFritekst(page, 'Land', 'UK')
             await svarFritekst(page, 'Telefonnummer', '81549300')

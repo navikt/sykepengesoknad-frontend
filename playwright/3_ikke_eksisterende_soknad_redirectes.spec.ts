@@ -10,7 +10,7 @@ test.describe('Tester direktenavigering til søknad som ikke eksisterer', () => 
         // bør redirecte til listevisning
         await expect(page).toHaveURL('/syk/sykepengesoknad')
 
-        await expect(page.locator('.navds-heading--large')).toBeVisible()
-        await expect(page.locator('.navds-heading--large')).toHaveText('Søknader')
+        await expect(page.locator('.aksel-heading--large')).toBeVisible()
+        await expect(page.locator('.aksel-heading--large')).toHaveText('Søknader')
     })
 })

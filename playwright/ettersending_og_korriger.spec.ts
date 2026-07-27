@@ -82,7 +82,7 @@ test.describe('Tester ettersending og korrigering', () => {
             await expect(page).not.toHaveURL(new RegExp(`/kvittering/${soknad.id}`))
             await expect(page).toHaveURL(new RegExp(`/1`))
 
-            const checkbox = page.locator('.navds-checkbox__input[type=checkbox]')
+            const checkbox = page.locator('.aksel-checkbox__input[type=checkbox]')
             await expect(checkbox).not.toBeChecked()
             await checkViStolerPaDeg(page)
             await validerAxeUtilityWrapper(page, test.info())

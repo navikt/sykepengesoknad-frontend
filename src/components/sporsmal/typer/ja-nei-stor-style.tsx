@@ -4,26 +4,15 @@ import { cn } from '../../../utils/tw-utils'
 
 export function jaNeiStorStyle(value: string, watch: any, error: boolean, mt = false) {
     return cn(
-        'focus-within:shadow-focus mb-2 block w-full [&>label]:rounded-sm [&>label]:border-2 [&>label]:border-border-default [&>label]:px-4 [&>label]:py-4 text-text-default hover:[&>label]:bg-surface-action-subtle-hover md:mb-0 md:w-1/2 rounded-sm focus:outline-hidden focus:ring-3 focus:ring-blue-800 focus:ring-opacity-50',
+        '[&:focus-within::after]:hidden focus-within:outline focus-within:outline-[3px] focus-within:outline-ax-border-focus focus-within:outline-offset-[3px] relative mb-2 grid w-full grid-cols-[auto_1fr] items-center rounded-sm border-2 border-ax-border-neutral px-4 py-4 text-ax-text-neutral hover:bg-ax-bg-accent-moderate-hover ax-md:mb-0 ax-md:w-1/2 [&>input]:relative [&>input]:z-[1] [&>label]:absolute [&>label]:inset-0 [&>label]:flex [&>label]:cursor-pointer [&>label]:items-center [&>label]:rounded-sm [&>label]:pl-12 [&>label]:pr-4',
         {
-            '[&>label]:bg-surface-action-subtle [&>label]:border-border-selected': watch === value,
+            'bg-ax-bg-accent-soft border-ax-border-accent': watch === value,
             'mt-4': mt,
-            '[&>label]:border-b-border-danger [&>label]:border-border-danger text-text-danger': error,
+            'border-ax-border-danger text-ax-text-danger-subtle': error,
         },
     )
 }
 
 export function JaNeiStyle({ children }: { children: ReactNode[] | ReactNode }) {
-    return (
-        <div
-            key="ja-nei-stor-style"
-            style={
-                {
-                    '--a-shadow-focus': '0 0 0 0',
-                } as React.CSSProperties
-            }
-        >
-            {children}
-        </div>
-    )
+    return <div key="ja-nei-stor-style">{children}</div>
 }

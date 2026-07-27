@@ -55,7 +55,7 @@ const ComboboxMultiple = ({ sporsmal }: SpmProps) => {
                                 description={sporsmal.undertekst}
                                 error={fieldState.error && feilmelding.lokal}
                                 options={options}
-                                className="mt-4 w-full md:w-1/2"
+                                className="mt-4 w-full ax-md:w-1/2"
                                 shouldShowSelectedOptions={true}
                                 shouldAutocomplete={true}
                                 selectedOptions={field.value}

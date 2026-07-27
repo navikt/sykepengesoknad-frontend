@@ -23,7 +23,7 @@ const AvbrytKorrigering = () => {
                 variant="tertiary"
                 as={Button}
                 type="button"
-                className={cn('text-surface-danger hover:bg-red-50 hover:text-surface-danger', {
+                className={cn('text-ax-text-danger-subtle hover:bg-ax-danger-100 hover:text-ax-text-danger-subtle', {
                     '-ml-5': valgtSoknad,
                 })}
                 onClick={() => {
@@ -64,9 +64,12 @@ const AvbrytSoknadModal = ({ euEøsSpecialCase = false }: AvbrytSoknadModalProps
                     variant="tertiary"
                     type="button"
                     as={valgtSoknad ? Button : Skeleton}
-                    className={cn('text-surface-danger hover:bg-red-50 hover:text-surface-danger', {
-                        '-ml-5': valgtSoknad,
-                    })}
+                    className={cn(
+                        'text-ax-text-danger-subtle hover:bg-ax-danger-100 hover:text-ax-text-danger-subtle',
+                        {
+                            '-ml-5': valgtSoknad,
+                        },
+                    )}
                     data-cy="avbryt-soknad"
                     onClick={() => {
                         setAapen(true)
@@ -82,7 +85,8 @@ const AvbrytSoknadModal = ({ euEøsSpecialCase = false }: AvbrytSoknadModalProps
             )}
             {euEøsSpecialCase && (
                 <Button
-                    variant="danger"
+                    data-color="danger"
+                    variant="primary"
                     type="button"
                     data-cy="avbryt-soknad"
                     onClick={() => {
@@ -97,7 +101,6 @@ const AvbrytSoknadModal = ({ euEøsSpecialCase = false }: AvbrytSoknadModalProps
                     Avbryt søknad
                 </Button>
             )}
-
             <Modal
                 open={aapen}
                 header={{ heading: tekst('avbryt.popup.tittel') }}
@@ -123,7 +126,8 @@ const AvbrytSoknadModal = ({ euEøsSpecialCase = false }: AvbrytSoknadModalProps
                 </Modal.Body>
                 <Modal.Footer>
                     <Button
-                        variant="danger"
+                        data-color="danger"
+                        variant="primary"
                         type="button"
                         className="mr-4 mt-4"
                         loading={avbryter}

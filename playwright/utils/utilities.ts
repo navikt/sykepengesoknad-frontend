@@ -78,11 +78,11 @@ export async function svarCombobox(
     await expect(comboBox).toHaveValue('')
 
     //Lukker listen
-    await page.locator('.navds-combobox__button-toggle-list').click()
+    await page.locator('.aksel-combobox__button-toggle-list').click()
 
     // Dersom vi ikkje skal fjerne verdien, sjekk at ho er synleg i den valde-lista
     if (!fjernVerdi) {
-        await expect(page.locator('.navds-combobox__selected-options')).toContainText(autocompleteVerdi)
+        await expect(page.locator('.aksel-combobox__selected-options')).toContainText(autocompleteVerdi)
     }
 }
 
@@ -162,7 +162,7 @@ export async function setPeriodeFraTil(page: Page, fom: number, tom: number, per
     const periodeLocator = page.locator('[data-cy="periode"]').nth(periodeIndex)
 
     // 2. Klikk på kalender-knappen ("fra og med"-felt)
-    await periodeLocator.locator('.navds-date__field-button').nth(0).click()
+    await periodeLocator.locator('.aksel-date__field-button').nth(0).click()
 
     // 3. Velg dato for fra- og til-dag i kalenderen
     //    Her brukar me `locator('.rdp-cell', { hasText: ... })` for å finne elementet
@@ -172,7 +172,7 @@ export async function setPeriodeFraTil(page: Page, fom: number, tom: number, per
 
 export async function svarRadioGruppe(page: Page, groupName: string | RegExp, radioName: string) {
     // Finn riktig "gruppe" med groupName
-    const group = page.getByRole('group', { name: groupName })
+    const group = page.getByRole('radiogroup', { name: groupName })
 
     // Finn riktig radio-knapp med radioName og "check" den
     await group.getByRole('radio', { name: radioName }).check()
@@ -315,7 +315,7 @@ export async function velgKalenderdag(page: Page) {
 }
 
 export async function velgTimer(page: Page) {
-    await page.getByRole('radio', { name: 'timer' }).click()
+    await page.getByRole('radio', { name: 'timer' }).check()
     await page.getByRole('textbox', { name: 'Oppgi timer totalt' }).fill('21')
 }
 
@@ -324,20 +324,19 @@ export async function velgTall(page: Page, sporsmalstekst: string, verdi: string
 }
 
 export async function velgCheckbox(page: Page, gjelder: string) {
-    await page.locator('.undersporsmal .navds-checkbox').getByText(gjelder).click()
+    await page.locator('.undersporsmal .aksel-checkbox').getByText(gjelder).click()
 }
 
 export async function svarRadio(page: Page, gjelder: string, svar: 'JA' | 'NEI' | 'Prosent' | 'Timer') {
-    const questionElement = page.getByText(gjelder)
-    const parentElement = questionElement.locator('..')
-    await parentElement.locator(`input[value="${svar}"]`).click()
+    await svarRadioGruppe(page, gjelder, svar)
 }
 
 export async function svarRadioClickOption(page: Page, gjelder: string, svar: string) {
-    const questionElement = page.getByText(gjelder)
-    const parentElement = questionElement.locator('..')
-    await parentElement.getByText(svar).click()
-    await expect(parentElement.getByText(svar)).toBeChecked()
+    const group = page.getByRole('radiogroup', { name: gjelder })
+    const radio = group.getByRole('radio', { name: svar })
+
+    await radio.check()
+    await expect(radio).toBeChecked()
 }
 
 export async function svarSykMedEgenmelding(page: Page) {

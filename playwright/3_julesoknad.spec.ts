@@ -31,7 +31,7 @@ test.describe('Julesøkand med informasjon på introside og kvittering', () => {
         await test.step('Søknad TILBAKE_I_ARBEID', async () => {
             await expect(page).toHaveURL(new RegExp(`${soknad.id}/2`))
 
-            await page.locator('[data-cy="ja-nei-stor"] input[value="NEI"]').click()
+            await page.locator('[data-cy="ja-nei-stor"] input[value="NEI"]').check()
             await validerAxeUtilityWrapper(page, test.info())
 
             await klikkGaVidere(page)

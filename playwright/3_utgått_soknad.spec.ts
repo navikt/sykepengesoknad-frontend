@@ -8,8 +8,8 @@ test.describe('Tester utgått søknad', () => {
     })
 
     test('Laster startside', async ({ page }) => {
-        await expect(page.locator('.navds-heading--large')).toBeVisible()
-        await expect(page.locator('.navds-heading--large')).toHaveText('Søknader')
+        await expect(page.locator('.aksel-heading--large')).toBeVisible()
+        await expect(page.locator('.aksel-heading--large')).toHaveText('Søknader')
     })
 
     test('Utgått søknad har forventa tekst', async ({ page }) => {
