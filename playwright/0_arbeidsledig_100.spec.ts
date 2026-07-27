@@ -7,7 +7,8 @@ import {
     setPeriodeFraTil,
     sjekkIntroside,
     sporsmalOgSvar,
-    svarJaNeiStor,
+    svarJaHovedsporsmal,
+    svarNeiHovedsporsmal,
 } from './utils/utilities'
 import { validerAxeUtilityWrapper } from './uuvalidering'
 
@@ -45,7 +46,7 @@ test.describe('Tester arbeidsledigsøknad', () => {
             await expect(page).toHaveURL(new RegExp(`${arbeidsledig.id}/2`))
 
             // Test spørsmål: Velg 'NEI' på hovedspørsmål
-            await svarJaNeiStor(page, 'NEI')
+            await svarNeiHovedsporsmal(page)
             await expect(page.getByText('Fra hvilken dato trengte du ikke lenger sykmeldingen?')).toBeVisible()
 
             // Velg dato i kalender
@@ -66,7 +67,7 @@ test.describe('Tester arbeidsledigsøknad', () => {
             ).toBeVisible()
 
             // Velg 'JA' på hovedspørsmål
-            await svarJaNeiStor(page, 'JA')
+            await svarJaHovedsporsmal(page)
 
             await validerAxeUtilityWrapper(page, test.info())
 
@@ -107,7 +108,7 @@ test.describe('Tester arbeidsledigsøknad', () => {
             ])
 
             // Velg 'JA' på hovedspørsmål
-            await svarJaNeiStor(page, 'JA')
+            await svarJaHovedsporsmal(page)
 
             // Underspørsmål 1: Sett periode
             await expect(page.getByText('Når var du utenfor EU/EØS?')).toBeVisible()

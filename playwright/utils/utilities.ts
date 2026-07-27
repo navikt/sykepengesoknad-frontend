@@ -18,13 +18,6 @@ export async function svarJaHovedsporsmal(page: Page) {
     await expect(radioButton).toBeChecked()
 }
 
-export async function svarJaNeiStor(page: Page, svar: 'JA' | 'NEI' = 'JA') {
-    const tekst = svar === 'JA' ? 'Ja' : 'Nei'
-    const radio = page.locator('form').getByRole('radio', { name: tekst }).first()
-    await radio.check()
-    await expect(radio).toBeChecked()
-}
-
 export async function svarNeiHovedsporsmal(page: Page) {
     const radioButton = page.locator('form').getByRole('radio', { name: 'Nei' }).first()
     await radioButton.click()

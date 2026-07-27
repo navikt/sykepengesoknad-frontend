@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test'
 
 import { julesoknadPerson } from '../src/data/mock/data/personas/personas'
 
-import { checkViStolerPaDeg, klikkGaVidere, svarJaNeiStor } from './utils/utilities'
+import { checkViStolerPaDeg, klikkGaVidere, svarNeiHovedsporsmal } from './utils/utilities'
 import { validerAxeUtilityWrapper } from './uuvalidering'
 
 test.describe('Julesøkand med informasjon på introside og kvittering', () => {
@@ -31,7 +31,7 @@ test.describe('Julesøkand med informasjon på introside og kvittering', () => {
         await test.step('Søknad TILBAKE_I_ARBEID', async () => {
             await expect(page).toHaveURL(new RegExp(`${soknad.id}/2`))
 
-            await svarJaNeiStor(page, 'NEI')
+            await svarNeiHovedsporsmal(page)
             await validerAxeUtilityWrapper(page, test.info())
 
             await klikkGaVidere(page)
