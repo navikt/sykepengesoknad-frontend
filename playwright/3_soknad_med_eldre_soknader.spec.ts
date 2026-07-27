@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test'
 
-import { svarNeiHovedsporsmal, klikkGaVidere } from './utils/utilities'
+import { svarNeiHovedsporsmal, klikkGaVidere, checkViStolerPaDeg } from './utils/utilities'
 import { validerAxeUtilityWrapper } from './uuvalidering'
 
 test.describe('Eldre søknader', () => {
@@ -78,8 +78,7 @@ test.describe('Eldre søknader', () => {
 
 // Felles hjelpefunksjon – async!
 async function fyllUtSoknad(page) {
-    await page.getByRole('checkbox', { name: 'Jeg bekrefter at jeg vil svare så riktig som jeg kan.' }).check()
-    await page.getByText('Start søknad').click()
+    await checkViStolerPaDeg(page)
     await svarNeiHovedsporsmal(page)
     await klikkGaVidere(page)
     await page.getByText('Send søknaden').click()
