@@ -52,7 +52,9 @@ const CheckboxInput = ({ sporsmal }: SpmProps) => {
                             })
                         }}
                     >
-                        <Checkbox value={spm.id}>{spm.sporsmalstekst}</Checkbox>
+                        <Checkbox id={spm.id} value={spm.id}>
+                            {spm.sporsmalstekst}
+                        </Checkbox>
                     </CheckboxGroup>
                 </Box>
             )}
