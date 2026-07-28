@@ -29,7 +29,12 @@ const CheckboxInput = ({ sporsmal }: SpmProps) => {
                     borderRadius="8"
                     borderWidth="1"
                     padding="space-16"
-                    className="transition-colors duration-100 [&_.aksel-checkbox:focus-within::after]:hidden"
+                    className="cursor-pointer transition-colors duration-100 [&_.aksel-checkbox:focus-within::after]:hidden"
+                    onClick={(e) => {
+                        if (!(e.target as HTMLElement).closest('.aksel-checkbox')) {
+                            field.onChange(!field.value)
+                        }
+                    }}
                 >
                     <CheckboxGroup
                         legend={spm.sporsmalstekst}
