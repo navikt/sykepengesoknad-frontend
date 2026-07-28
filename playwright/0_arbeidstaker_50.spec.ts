@@ -2,7 +2,7 @@ import { test, expect, Page } from '@playwright/test'
 
 import { arbeidstakerGradert } from '../src/data/mock/data/soknad/arbeidstaker-gradert'
 
-import { apneReadmore, svarJaHovedsporsmal } from './utils/utilities'
+import { apneReadmore, checkViStolerPaDeg, svarJaHovedsporsmal } from './utils/utilities'
 import { validerAxeUtilityWrapper } from './uuvalidering'
 const fillTextFieldByLabel = async (page: Page, labelText: string, value: string, fallbackSelector?: string) => {
     try {
@@ -48,7 +48,7 @@ test.describe('Tester arbeidstakersøknad - gradert 50%', () => {
 
             await expect(page).toHaveURL(new RegExp(`.*${soknadId}\/1`))
 
-            await page.getByLabel('Jeg bekrefter at jeg vil svare så riktig som jeg kan.').check()
+            await checkViStolerPaDeg(page, false)
 
             await expect(page.getByRole('button', { name: 'Start søknad' })).toBeVisible()
             await validerAxeUtilityWrapper(page, test.info())

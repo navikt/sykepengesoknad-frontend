@@ -1,4 +1,4 @@
-import { ConfirmationPanel } from '@navikt/ds-react'
+import { Box, Checkbox, CheckboxGroup } from '@navikt/ds-react'
 import React from 'react'
 import { Controller } from 'react-hook-form'
 
@@ -19,26 +19,44 @@ const CheckboxInput = ({ sporsmal }: SpmProps) => {
         <Controller
             defaultValue={false}
             name={spm.id}
-            rules={{
-                required: feilmelding.global,
-                onChange: (event) => {
-                    logEvent('skjema spørsmål besvart', {
-                        soknadstype: valgtSoknad?.soknadstype,
-                        skjemanavn: 'sykepengesoknad',
-                        spørsmål: sporsmal.tag,
-                        svar: event.target.value ? 'CHECKED' : 'UNCHECKED',
-                    })
-                },
-            }}
+            rules={{ required: feilmelding.global }}
             render={({ field, fieldState }) => (
-                <ConfirmationPanel
-                    {...field}
-                    checked={field.value}
-                    id={field.name}
-                    label={spm.sporsmalstekst}
-                    error={fieldState.error && feilmelding.lokal}
-                    data-cy="bekreftCheckboksPanel"
-                />
+                <Box
+                    background={
+                        fieldState.error ? 'danger-moderate' : field.value ? 'success-moderate' : 'warning-moderate'
+                    }
+                    borderColor={fieldState.error ? 'danger' : field.value ? 'success' : 'warning'}
+                    borderRadius="8"
+                    borderWidth="1"
+                    padding="space-16"
+                    className="cursor-pointer transition-colors duration-100 [&_.aksel-checkbox:focus-within::after]:hidden"
+                    onClick={(e) => {
+                        if (!(e.target as HTMLElement).closest('.aksel-checkbox')) {
+                            field.onChange(!field.value)
+                        }
+                    }}
+                >
+                    <CheckboxGroup
+                        legend={spm.sporsmalstekst}
+                        hideLegend
+                        error={fieldState.error && feilmelding.lokal}
+                        value={field.value ? [spm.id] : []}
+                        onChange={(vals) => {
+                            const erBekreftet = vals.includes(spm.id)
+                            field.onChange(erBekreftet)
+                            logEvent('skjema spørsmål besvart', {
+                                soknadstype: valgtSoknad?.soknadstype,
+                                skjemanavn: 'sykepengesoknad',
+                                spørsmål: sporsmal.tag,
+                                svar: erBekreftet ? 'CHECKED' : 'UNCHECKED',
+                            })
+                        }}
+                    >
+                        <Checkbox id={spm.id} value={spm.id}>
+                            {spm.sporsmalstekst}
+                        </Checkbox>
+                    </CheckboxGroup>
+                </Box>
             )}
         />
     )
