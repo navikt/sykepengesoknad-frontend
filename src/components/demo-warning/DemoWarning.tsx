@@ -26,7 +26,6 @@ const DemoWarning = () => {
 
     return (
         <Alert
-            role="banner"
             variant="warning"
             closeButton={true}
             onClose={() => {

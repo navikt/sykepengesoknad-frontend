@@ -26,8 +26,9 @@ test.describe('Tester endrefrist 12 måneder', () => {
 
         await validerAxeUtilityWrapper(page, test.info())
 
-        await page.getByRole('button', { name: 'Lukk' }).click()
+        const dialog = page.getByRole('dialog', { name: 'Jeg vil endre svarene i søknaden' })
+        await dialog.getByRole('button', { name: 'Lukk' }).click()
 
-        await expect(page.getByRole('button', { name: 'Lukk' })).toBeHidden()
+        await expect(dialog.getByRole('button', { name: 'Lukk' })).toBeHidden()
     })
 })

@@ -1,10 +1,8 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import getConfig from 'next/config'
 
 import { beskyttetApi } from '../../../auth/beskyttetApi'
 import { proxyKallTilBackend } from '../../../proxy/backendproxy'
-
-const { serverRuntimeConfig } = getConfig()
+import { getServerEnv } from '../../../utils/env'
 
 const tillatteApier = ['GET /api/v2/kvittering/[uuid]', 'POST /api/v2/opplasting']
 
@@ -15,7 +13,7 @@ const handler = beskyttetApi(async (req: NextApiRequest, res: NextApiResponse) =
         tillatteApier: tillatteApier,
         backend: 'sykepengesoknad-kvitteringer',
         hostname: 'sykepengesoknad-kvitteringer',
-        backendClientId: serverRuntimeConfig.sykepengesoknadKvitteringerClientId,
+        backendClientId: getServerEnv().SYKEPENGESOKNAD_KVITTERINGER_CLIENT_ID,
         https: false,
     })
 })

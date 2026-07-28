@@ -1,13 +1,10 @@
 import 'node-fetch'
 
 import { DecoratorComponentsReact, fetchDecoratorReact } from '@navikt/nav-dekoratoren-moduler/ssr'
-import getConfig from 'next/config'
 import Document, { DocumentContext, DocumentInitialProps, Head, Html, Main, NextScript } from 'next/document'
 import React from 'react'
 
 import { createInitialServerSideBreadcrumbs } from '../hooks/useBreadcrumbs'
-
-const { serverRuntimeConfig } = getConfig()
 
 // The 'head'-field of the document initialProps contains data from <head> (meta-tags etc)
 const getDocumentParameter = (initialProps: DocumentInitialProps, name: string) => {
@@ -24,7 +21,7 @@ class MyDocument extends Document<Props> {
         const initialProps = await Document.getInitialProps(ctx)
 
         const Decorator = await fetchDecoratorReact({
-            env: serverRuntimeConfig.decoratorEnv,
+            env: (process.env.DECORATOR_ENV ?? 'dev') as 'prod' | 'dev',
             params: {
                 simple: true,
                 chatbot: false,
@@ -40,7 +37,7 @@ class MyDocument extends Document<Props> {
 
     render() {
         const { Decorator, language } = this.props
-        const showDecorator = serverRuntimeConfig.noDecorator != 'true'
+        const showDecorator = process.env.NO_DECORATOR != 'true'
 
         return (
             <Html lang={language || 'no'}>

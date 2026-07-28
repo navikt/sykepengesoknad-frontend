@@ -1,10 +1,8 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import getConfig from 'next/config'
 
 import { beskyttetApi } from '../../../auth/beskyttetApi'
 import { proxyKallTilBackend } from '../../../proxy/backendproxy'
-
-const { serverRuntimeConfig } = getConfig()
+import { getServerEnv } from '../../../utils/env'
 
 const tillatteApier = ['GET /api/borger/v1/hent-aktiv-konto']
 
@@ -15,7 +13,7 @@ const handler = beskyttetApi(async (req: NextApiRequest, res: NextApiResponse) =
         tillatteApier,
         backend: 'sokos-kontoregister-person',
         hostname: 'sokos-kontoregister-person.okonomi',
-        backendClientId: serverRuntimeConfig.sokosKontoregisterPersonClientId,
+        backendClientId: getServerEnv().SOKOS_KONTOREGISTER_PERSON_CLIENT_ID,
         https: false,
     })
 })
