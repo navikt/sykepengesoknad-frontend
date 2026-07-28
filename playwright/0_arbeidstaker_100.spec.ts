@@ -12,6 +12,7 @@ import {
     harSoknaderlisteHeading,
     trykkPaSoknadMedId,
     svarFritekst,
+    svarJaHovedsporsmal,
 } from './utils/utilities'
 import { validerAxeUtilityWrapper } from './uuvalidering'
 
@@ -64,7 +65,7 @@ test.describe('Tester arbeidstakersøknad - 100%', () => {
             await expect(page.locator('.aksel-progress-bar')).toHaveAttribute('aria-valuemax', '7')
             await expect(page.locator('.aksel-progress-bar')).toHaveAttribute('aria-valuetext', '1 av 7')
 
-            await page.locator('[data-cy="ja-nei-stor"] input[value="JA"]').check()
+            await svarJaHovedsporsmal(page)
             await expect(page.getByText('Når begynte du å jobbe igjen?')).toBeVisible()
 
             await page.locator('.aksel-date__field-button').click()
@@ -92,7 +93,7 @@ test.describe('Tester arbeidstakersøknad - 100%', () => {
                 'Du kan dra på ferie mens du er sykmeldt, men du får ikke utbetalt sykepenger når du har ferie',
             ])
 
-            await page.locator('[data-cy="ja-nei-stor"] input[value="JA"]').check()
+            await svarJaHovedsporsmal(page)
             await expect(page.getByText('Når tok du ut feriedager?')).toBeVisible()
 
             await setPeriodeFraTil(page, 16, 23)
@@ -113,7 +114,7 @@ test.describe('Tester arbeidstakersøknad - 100%', () => {
                 page.getByText('Permisjon er dager du var borte fra jobb av andre grunner enn sykdom'),
             ).toBeVisible()
 
-            await page.locator('[data-cy="ja-nei-stor"] input[value="JA"]').check()
+            await svarJaHovedsporsmal(page)
             await expect(page.getByText('Når tok du permisjon?')).toBeVisible()
 
             await setPeriodeFraTil(page, 14, 22)
@@ -136,7 +137,7 @@ test.describe('Tester arbeidstakersøknad - 100%', () => {
                 'Dersom du har gjort færre arbeidsoppgaver enn vanlig, men brukt lengre tid på dem',
             ])
 
-            await page.locator('[data-cy="ja-nei-stor"] input[value="JA"]').check()
+            await svarJaHovedsporsmal(page)
 
             await expect(page.getByText('Oppgi arbeidsmengde i timer eller prosent')).toBeVisible()
 
@@ -182,7 +183,7 @@ test.describe('Tester arbeidstakersøknad - 100%', () => {
                 'Jobbet mer i en annen jobb etter at du ble sykmeldt',
             ])
 
-            await page.locator('[data-cy="ja-nei-stor"] input[value="JA"]').check()
+            await svarJaHovedsporsmal(page)
 
             const ansattAndreSteder = page
                 .getByText('Velg inntektskildene som passer for deg:')
@@ -215,7 +216,7 @@ test.describe('Tester arbeidstakersøknad - 100%', () => {
                 'Da oppretter vi en egen søknad som du må sende inn',
             ])
 
-            await page.locator('[data-cy="ja-nei-stor"] input[value="JA"]').check()
+            await svarJaHovedsporsmal(page)
             await expect(page.getByText('Når var du utenfor EU/EØS?')).toBeVisible()
 
             await setPeriodeFraTil(page, 14, 22)

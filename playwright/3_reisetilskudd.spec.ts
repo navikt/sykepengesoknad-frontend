@@ -11,6 +11,7 @@ import {
     hentFritekst,
     svarRadioClickOption,
     apneReadmore,
+    svarJaHovedsporsmal,
 } from './utils/utilities'
 import { validerAxeUtilityWrapper } from './uuvalidering'
 
@@ -65,7 +66,7 @@ test.describe('Teste førsteside i reisetilskuddsøknaden', () => {
                 'Det kan også være bysykkel og el-sparkesykkel.',
             ])
 
-            await page.locator('[data-cy="ja-nei-stor"] input[value=JA]').check()
+            await svarJaHovedsporsmal(page)
             velgCheckbox(page, 'Offentlig transport')
             await expect(
                 page.getByText('Hvor mye betaler du vanligvis i måneden for offentlig transport?'),
@@ -91,7 +92,7 @@ test.describe('Teste førsteside i reisetilskuddsøknaden', () => {
             await expect(page).toHaveURL(new RegExp(`${nyttReisetilskudd.id}/3`))
             await expect(page.locator('[data-cy="sporsmal-tittel"]')).toHaveText('Reise med bil')
 
-            await page.locator('[data-cy="ja-nei-stor"] input[value=JA]').check()
+            await svarJaHovedsporsmal(page)
             await expect(page.locator('.undersporsmal > :nth-child(1) > :nth-child(1)')).toHaveText(
                 'Hvilke dager reiste du med bil i perioden 23. desember 2020 - 7. januar 2021?',
             )
@@ -184,7 +185,7 @@ test.describe('Teste førsteside i reisetilskuddsøknaden', () => {
             await expect(page).toHaveURL(new RegExp(`${nyttReisetilskudd.id}/5`))
             await expect(page.locator('[data-cy="sporsmal-tittel"]')).toHaveText('Utbetaling')
 
-            await page.locator('[data-cy="ja-nei-stor"] input[value=JA]').check()
+            await svarJaHovedsporsmal(page)
             await validerAxeUtilityWrapper(page, test.info())
             await klikkGaVidere(page)
             steg.value++

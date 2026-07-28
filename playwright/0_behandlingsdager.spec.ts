@@ -3,6 +3,7 @@ import { test, expect, Page } from '@playwright/test'
 import { behandlingsdager } from '../src/data/mock/data/soknad/behandlingsdager'
 
 import { validerAxeUtilityWrapper } from './uuvalidering'
+import { svarJaHovedsporsmal } from './utils/utilities'
 
 async function checkViStolerPaDeg(page: Page, gaVidere = true) {
     await page
@@ -159,7 +160,7 @@ test.describe('Tester behandlingsdagersøknad', () => {
         await test.step('Søknad ANDRE_INNTEKTSKILDER - steg 4', async () => {
             await expect(page).toHaveURL(new RegExp(`${soknad.id}/4`))
 
-            await page.locator('[data-cy="ja-nei-stor"] input[value=JA]').check()
+            await svarJaHovedsporsmal(page)
 
             await expect(page.getByText('Hvilke andre inntektskilder har du?')).toBeVisible()
             await expect(page.locator('.undersporsmal .aksel-checkbox label[for="687382"]')).toHaveText(

@@ -2,7 +2,7 @@ import { test, expect, Page } from '@playwright/test'
 
 import { arbeidstakerGradert } from '../src/data/mock/data/soknad/arbeidstaker-gradert'
 
-import { apneReadmore } from './utils/utilities'
+import { apneReadmore, svarJaHovedsporsmal } from './utils/utilities'
 import { validerAxeUtilityWrapper } from './uuvalidering'
 const fillTextFieldByLabel = async (page: Page, labelText: string, value: string, fallbackSelector?: string) => {
     try {
@@ -66,7 +66,7 @@ test.describe('Tester arbeidstakersøknad - gradert 50%', () => {
 
         await test.step('Søknad TILBAKE_I_ARBEID', async () => {
             await expect(page).toHaveURL(new RegExp(`.*${soknadId}\/2`))
-            await page.locator('[data-cy="ja-nei-stor"] input[value="JA"]').check()
+            await svarJaHovedsporsmal(page)
             await expect(page.locator('text=Når begynte du å jobbe igjen?')).toBeVisible()
             await page.locator('.aksel-date__field-button').click()
             await page.locator('.rdp-day').getByText('20', { exact: true }).click()
@@ -76,7 +76,7 @@ test.describe('Tester arbeidstakersøknad - gradert 50%', () => {
 
         await test.step('Søknad FERIE_V2', async () => {
             await expect(page).toHaveURL(new RegExp(`.*${soknadId}\/3`))
-            await page.locator('[data-cy="ja-nei-stor"] input[value="JA"]').check()
+            await svarJaHovedsporsmal(page)
             await expect(page.locator('text=Når tok du ut feriedager?')).toBeVisible()
             await setPeriodeFraTil(page, 16, 23)
             await validerAxeUtilityWrapper(page, test.info())
@@ -85,7 +85,7 @@ test.describe('Tester arbeidstakersøknad - gradert 50%', () => {
 
         await test.step('Søknad PERMISJON_V2', async () => {
             await expect(page).toHaveURL(new RegExp(`.*${soknadId}\/4`))
-            await page.locator('[data-cy="ja-nei-stor"] input[value="JA"]').check()
+            await svarJaHovedsporsmal(page)
             await expect(page.locator('text=Når tok du permisjon?')).toBeVisible()
             await setPeriodeFraTil(page, 14, 22)
             await validerAxeUtilityWrapper(page, test.info())
@@ -100,7 +100,7 @@ test.describe('Tester arbeidstakersøknad - gradert 50%', () => {
                 'Dersom du har gjort færre arbeidsoppgaver enn vanlig, men brukt lengre tid på dem',
             ])
 
-            await page.locator('[data-cy="ja-nei-stor"] input[value="JA"]').check()
+            await svarJaHovedsporsmal(page)
             await expect(page.locator('text=Antall timer du skrev inn, betyr at du har jobbet')).toBeHidden()
 
             await expect(
@@ -154,7 +154,7 @@ test.describe('Tester arbeidstakersøknad - gradert 50%', () => {
 
         await test.step('Søknad ARBEID_UTENFOR_NORGE', async () => {
             await expect(page).toHaveURL(new RegExp(`.*${soknadId}\/6`))
-            await page.locator('[data-cy="ja-nei-stor"] input[value="JA"]').check()
+            await svarJaHovedsporsmal(page)
             await expect(page.locator('text=Har du arbeidet i utlandet i løpet av de siste 12 månedene?')).toBeVisible()
             await validerAxeUtilityWrapper(page, test.info())
             await page.locator('button').filter({ hasText: 'Gå videre' }).click()
@@ -163,7 +163,7 @@ test.describe('Tester arbeidstakersøknad - gradert 50%', () => {
         await test.step('Søknad ANDRE_INNTEKTSKILDER_V2', async () => {
             await expect(page).toHaveURL(new RegExp(`.*${soknadId}\/7`))
             await expect(page.locator('text=Har du andre inntektskilder enn nevnt over?')).toBeVisible()
-            await page.locator('[data-cy="ja-nei-stor"] input[value="JA"]').check()
+            await svarJaHovedsporsmal(page)
             await expect(
                 page.locator(
                     'text=Velg inntektskildene som passer for deg. Finner du ikke noe som passer for deg, svarer du nei',
@@ -179,7 +179,7 @@ test.describe('Tester arbeidstakersøknad - gradert 50%', () => {
 
         await test.step('Søknad OPPHOLD_UTENFOR_EOS', async () => {
             await expect(page).toHaveURL(new RegExp(`.*${soknadId}\/8`))
-            await page.locator('[data-cy="ja-nei-stor"] input[value="JA"]').check()
+            await svarJaHovedsporsmal(page)
             await expect(page.locator('text=Når var du utenfor EU/EØS?')).toBeVisible()
             await setPeriodeFraTil(page, 14, 22)
             await validerAxeUtilityWrapper(page, test.info())

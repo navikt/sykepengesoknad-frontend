@@ -109,7 +109,6 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
                             {...field}
                             legend={sporsmalstekst()}
                             description={sporsmal.undertekst}
-                            data-cy="ja-nei-stor"
                             className="w-full"
                             key={sporsmal.id}
                             error={fieldState.error && feilmelding.lokal}
