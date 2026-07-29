@@ -1,10 +1,8 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import getConfig from 'next/config'
 
 import { beskyttetApi } from '../../../auth/beskyttetApi'
 import { proxyKallTilBackend } from '../../../proxy/backendproxy'
-
-const { serverRuntimeConfig } = getConfig()
+import { getServerEnv } from '../../../utils/env'
 
 const tillatteApier = ['GET /api/v1/sykmeldinger']
 
@@ -15,7 +13,7 @@ const handler = beskyttetApi(async (req: NextApiRequest, res: NextApiResponse) =
         tillatteApier: tillatteApier,
         backend: 'flex-sykmeldinger-backend',
         hostname: 'flex-sykmeldinger-backend.flex',
-        backendClientId: serverRuntimeConfig.sykmeldingerBackendClientId,
+        backendClientId: getServerEnv().SYKMELDINGER_BACKEND_CLIENT_ID,
         https: false,
     })
 })

@@ -1,12 +1,12 @@
-import getConfig from 'next/config'
+import { bundledEnv } from './env'
 
-const { publicRuntimeConfig } = getConfig()
+const BASE_PATH = '/syk/sykepengesoknad'
 
 export function isProd() {
-    return publicRuntimeConfig.env === 'prod'
+    return bundledEnv.NEXT_PUBLIC_RUNTIME_ENV === 'prod-gcp'
 }
 export function isLabs() {
-    return publicRuntimeConfig.env === 'labs'
+    return bundledEnv.NEXT_PUBLIC_RUNTIME_ENV === 'demo'
 }
 
 export function isIntegrationtest() {
@@ -14,52 +14,52 @@ export function isIntegrationtest() {
 }
 
 export function isMockBackend() {
-    return publicRuntimeConfig.mockBackend === 'true'
+    return bundledEnv.NEXT_PUBLIC_MOCK_BACKEND
 }
 
 export function isOpplaering() {
-    return publicRuntimeConfig.opplaering === 'true'
+    return bundledEnv.NEXT_PUBLIC_OPPLAERING
 }
 
 export function umamiEnabled() {
-    return publicRuntimeConfig.umamiEnabled === 'true'
+    return bundledEnv.NEXT_PUBLIC_UMAMI_ENABLED
 }
 
 export function sykmeldingerUrl() {
-    return publicRuntimeConfig.sykmeldingerUrl
+    return bundledEnv.NEXT_PUBLIC_SYKMELDINGER_URL
 }
 
 export function sykefravaerUrl() {
-    return publicRuntimeConfig.sykefravaerUrl
+    return bundledEnv.NEXT_PUBLIC_SYKEFRAVAER_URL
 }
 
 export function minSideUrl() {
-    return publicRuntimeConfig.minSideUrl
+    return bundledEnv.NEXT_PUBLIC_MINSIDE_URL
 }
 
 export function vedlikehold(): boolean {
-    return publicRuntimeConfig.vedlikehold === 'true'
+    return bundledEnv.NEXT_PUBLIC_VEDLIKEHOLD
 }
 
 export function isLocalBackend(): boolean {
-    return publicRuntimeConfig.localBackend === 'true'
+    return bundledEnv.NEXT_PUBLIC_LOCAL_BACKEND
 }
 
-export function telemetryCollectorURL() {
-    return publicRuntimeConfig.telemetryCollectorURL
+export function telemetryCollectorURL(): string | undefined {
+    return bundledEnv.NEXT_PUBLIC_TELEMETRY_URL ?? undefined
 }
 
 export function naisAppImage() {
-    return publicRuntimeConfig.naisAppImage
+    return bundledEnv.NEXT_PUBLIC_VERSION ?? undefined
 }
 
 export function naisAppName() {
-    return publicRuntimeConfig.naisAppName
+    return bundledEnv.NEXT_PUBLIC_APP_NAME
 }
 
 export function basePath() {
-    return publicRuntimeConfig.basePath
+    return BASE_PATH
 }
 export function sendInnUrl() {
-    return publicRuntimeConfig.sendInnUrl
+    return bundledEnv.NEXT_PUBLIC_SEND_INN_URL
 }

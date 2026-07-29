@@ -5,7 +5,7 @@ on:
 
 jobs:
   felles-workflow:
-    uses: navikt/flex-github-actions-workflows/.github/workflows/next-js-docker.yml@main
+    uses: navikt/flex-github-actions-workflows/.github/workflows/next-js16-docker.yml@main
     permissions:
       packages: write
       contents: read
@@ -16,4 +16,3 @@ jobs:
     with:
       app: sykepengesoknad
       base-path: syk/sykepengesoknad
-      port: 3000

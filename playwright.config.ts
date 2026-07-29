@@ -27,7 +27,7 @@ const createOptions = (medDekorator = false, port = 3000): OptionsType => {
 
     const serverEnv = {
         ...process.env,
-        MOCK_BACKEND: 'true',
+        NEXT_PUBLIC_MOCK_BACKEND: 'true',
         ...(medDekorator ? {} : { NO_DECORATOR: 'true' }),
     }
 

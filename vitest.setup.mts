@@ -5,14 +5,6 @@ import * as matchers from '@testing-library/jest-dom/matchers'
 
 expect.extend(matchers)
 
-vi.mock('next/config', () => ({
-    default: () => ({
-        publicRuntimeConfig: {
-            umamiEnabled: 'false',
-        },
-    }),
-}))
-
 vi.mock('next/router', () => ({
     useRouter: () => ({
         query: {},
