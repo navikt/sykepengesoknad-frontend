@@ -63,7 +63,7 @@
         "eslint-plugin-playwright": "^2.10.5",
         "jiti": "^2.7.0",
         "jsdom": "^29.1.1",
-        "next": "^15.5.18",
+        "next": "^15.5.22",
         "postcss": "^8.5.19",
         "prettier": "^3.8.4",
         "prettier-plugin-tailwindcss": "^0.8.0",
