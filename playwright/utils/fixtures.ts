@@ -1,4 +1,3 @@
-/* eslint-disable playwright/require-top-level-describe */
 import { test as base, expect } from '@playwright/test'
 
 import { IgnoreRule, validerAxe } from '../uuvalidering'

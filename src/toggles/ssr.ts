@@ -32,17 +32,15 @@ export async function getFlagsServerSide(
     } catch (e) {
         logger.error(new Error('Failed to get flags from Unleash. Falling back to default flags.', { cause: e }))
         return {
-            toggles: EXPECTED_TOGGLES.map(
-                (it): IToggle => ({
-                    name: it,
-                    variant: {
-                        name: 'default',
-                        enabled: false,
-                    },
-                    impressionData: false,
+            toggles: EXPECTED_TOGGLES.map((it): IToggle => ({
+                name: it,
+                variant: {
+                    name: 'default',
                     enabled: false,
-                }),
-            ),
+                },
+                impressionData: false,
+                enabled: false,
+            })),
         }
     }
 }

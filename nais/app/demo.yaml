@@ -34,8 +34,6 @@ spec:
   {{/if}}
 
   env:
-    - name: DECORATOR_ENV
-      value: "prod"
     - name: NO_DECORATOR
       value: "false"
     - name: TZ

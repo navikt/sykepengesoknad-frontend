@@ -17,6 +17,8 @@ const BoolString = z
 
 const BundledEnvSchema = z.object({
     NEXT_PUBLIC_RUNTIME_ENV: z.enum(['demo', 'dev-gcp', 'prod-gcp']),
+    NEXT_PUBLIC_DECORATOR_ENV: z.enum(['dev', 'prod']),
+    NEXT_PUBLIC_ASSET_PREFIX: z.string().nullish(),
     NEXT_PUBLIC_MOCK_BACKEND: BoolString,
     NEXT_PUBLIC_LOCAL_BACKEND: BoolString,
     NEXT_PUBLIC_OPPLAERING: BoolString,
@@ -35,6 +37,8 @@ export type BundledEnv = z.infer<typeof BundledEnvSchema>
 
 export const bundledEnv: BundledEnv = BundledEnvSchema.parse({
     NEXT_PUBLIC_RUNTIME_ENV: process.env.NEXT_PUBLIC_RUNTIME_ENV,
+    NEXT_PUBLIC_DECORATOR_ENV: process.env.NEXT_PUBLIC_DECORATOR_ENV,
+    NEXT_PUBLIC_ASSET_PREFIX: process.env.NEXT_PUBLIC_ASSET_PREFIX,
     NEXT_PUBLIC_MOCK_BACKEND: process.env.NEXT_PUBLIC_MOCK_BACKEND,
     NEXT_PUBLIC_LOCAL_BACKEND: process.env.NEXT_PUBLIC_LOCAL_BACKEND,
     NEXT_PUBLIC_OPPLAERING: process.env.NEXT_PUBLIC_OPPLAERING,
@@ -58,7 +62,6 @@ export const bundledEnv: BundledEnv = BundledEnvSchema.parse({
 // ──────────────────────────────────────────────────────────────────────────────
 
 const ServerEnvSchema = z.object({
-    DECORATOR_ENV: z.enum(['dev', 'prod']),
     NO_DECORATOR: z.string().optional(),
     SYKMELDINGER_BACKEND_CLIENT_ID: z.string().min(1),
     FLEXJAR_BACKEND_CLIENT_ID: z.string().min(1),
@@ -71,7 +74,6 @@ export type ServerEnv = z.infer<typeof ServerEnvSchema>
 
 export function getServerEnv(): ServerEnv {
     return ServerEnvSchema.parse({
-        DECORATOR_ENV: process.env.DECORATOR_ENV,
         NO_DECORATOR: process.env.NO_DECORATOR,
         SYKMELDINGER_BACKEND_CLIENT_ID: process.env.SYKMELDINGER_BACKEND_CLIENT_ID,
         FLEXJAR_BACKEND_CLIENT_ID: process.env.FLEXJAR_BACKEND_CLIENT_ID,

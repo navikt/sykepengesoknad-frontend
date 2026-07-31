@@ -37,7 +37,6 @@ export const logEvent = (eventName: validEventNames, eventData: Record<string, s
             if (!godkjenteSvarKeys.includes(svar as string)) {
                 cleanedEventData['svar'] = '[redacted]'
                 if (isLocalBackend()) {
-                    // eslint-disable-next-line no-console
                     console.log('Redacted svar: ', svar)
                 }
             }
@@ -50,7 +49,6 @@ export const logEvent = (eventName: validEventNames, eventData: Record<string, s
             }).catch((e) => logger.warn(`Feil ved umami logging`, e))
         } else {
             if (!isProd() && isOpplaering()) {
-                // eslint-disable-next-line no-console
                 console.log(`${eventName}\n${JSON.stringify(cleanedEventData, null, 4)}`)
             }
 

@@ -6,3 +6,4 @@ node_modules
 package-lock.json
 *.yaml
 *.md
+next-env.d.ts

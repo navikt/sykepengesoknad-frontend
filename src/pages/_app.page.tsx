@@ -3,7 +3,7 @@ import '../style/global.css'
 import { configureLogger, logger } from '@navikt/next-logger'
 import { AppProps } from 'next/app'
 import Head from 'next/head'
-import React, { ReactElement, useEffect, useRef } from 'react'
+import React, { ReactElement, useEffect, useRef, useState } from 'react'
 import { QueryCache, QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { useRouter } from 'next/router'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
@@ -16,6 +16,10 @@ import { AuthenticationError } from '../utils/fetch'
 import { FlagProvider } from '../toggles/context'
 import { ServerSidePropsResult } from '../auth/beskyttetSide'
 
+const DemoWarning = dynamic(() => import('../components/demo-warning/DemoWarning'), {
+    ssr: false,
+})
+
 initInstrumentation()
 configureLogger({
     basePath: basePath(),
@@ -23,26 +27,6 @@ configureLogger({
         getFaro()?.api.pushLog(log.messages, {
             level: pinoLevelToFaroLevel(log.level.label),
         }),
-})
-
-const queryClient = new QueryClient({
-    defaultOptions: {
-        queries: {
-            // Setting this to true causes query request after initial
-            // mount even if the query was hydrated from the server side.
-            refetchOnMount: false,
-            refetchOnWindowFocus: false,
-        },
-    },
-    queryCache: new QueryCache({
-        onError: (error) => {
-            // kjøres en gang for hver queryKey i useQuery etter at retries er brukt opp
-            // hvorfor dette ikke plasseres sammen med useQuery: https://tkdodo.eu/blog/breaking-react-querys-api-on-purpose
-            if (!(error instanceof AuthenticationError)) {
-                logger.warn(error)
-            }
-        },
-    }),
 })
 
 type Skyra = {
@@ -62,13 +46,29 @@ function MyApp({ Component, pageProps }: AppProps<ServerSidePropsResult>): React
 
     const router = useRouter()
     const isFirst = useRef(true)
-    const DemoWarning = () => {
-        const DemoWarning = dynamic(() => import('../components/demo-warning/DemoWarning'), {
-            ssr: false,
-        })
-        return <DemoWarning />
-    }
 
+    const [queryClient] = useState(
+        () =>
+            new QueryClient({
+                defaultOptions: {
+                    queries: {
+                        // Setting this to true causes query request after initial
+                        // mount even if the query was hydrated from the server side.
+                        refetchOnMount: false,
+                        refetchOnWindowFocus: false,
+                    },
+                },
+                queryCache: new QueryCache({
+                    onError: (error) => {
+                        // kjøres en gang for hver queryKey i useQuery etter at retries er brukt opp
+                        // hvorfor dette ikke plasseres sammen med useQuery: https://tkdodo.eu/blog/breaking-react-querys-api-on-purpose
+                        if (!(error instanceof AuthenticationError)) {
+                            logger.warn(error)
+                        }
+                    },
+                }),
+            }),
+    )
     useEffect(() => {
         // @ts-expect-error - skyra er satt opp i dekoratøren
         const skyra = window?.skyra

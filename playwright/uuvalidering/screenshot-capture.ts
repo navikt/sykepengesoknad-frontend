@@ -22,7 +22,7 @@ export async function captureViolationScreenshots(
                 const element = page.locator(selectorString).first()
 
                 if (!(await element.isVisible())) continue
-                //eslint-disable-next-line
+
                 await page.waitForTimeout(100)
 
                 const elementScreenshot = await element.screenshot({ type: 'png' })
@@ -47,7 +47,6 @@ export async function captureViolationScreenshots(
                     }),
                 ])
             } catch {
-                // eslint-disable-next-line no-console
                 console.log(`Kunne ikke ta screenshot av element: ${node.target.join(' ')}`)
             }
         }

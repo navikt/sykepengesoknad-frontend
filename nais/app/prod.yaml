@@ -2,7 +2,6 @@ ingress: https://www.nav.no/syk/sykepengesoknad
 cpu: 600m
 memory: 600Mi
 env:
-  DECORATOR_ENV: prod
   SYKMELDINGER_BACKEND_CLIENT_ID: prod-gcp:flex:flex-sykmeldinger-backend
   SYKEPENGESOKNAD_BACKEND_CLIENT_ID: prod-gcp:flex:sykepengesoknad-backend
   SYKEPENGESOKNAD_KVITTERINGER_CLIENT_ID: prod-gcp:flex:sykepengesoknad-kvitteringer

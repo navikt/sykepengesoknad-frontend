@@ -5,7 +5,7 @@ on:
 
 jobs:
   felles-workflow:
-    uses: navikt/flex-github-actions-workflows/.github/workflows/next-js16-docker.yml@main
+    uses: navikt/flex-github-actions-workflows/.github/workflows/next-js-docker-bygg-pr-miljo.yml@main
     permissions:
       packages: write
       contents: read

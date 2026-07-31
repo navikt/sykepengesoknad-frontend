@@ -10,11 +10,4 @@ export enum RSSoknadstatus {
 }
 
 export type RSSoknadstatusType =
-    | 'NY'
-    | 'SENDT'
-    | 'FREMTIDIG'
-    | 'UTKAST_TIL_KORRIGERING'
-    | 'KORRIGERT'
-    | 'AVBRUTT'
-    | 'SLETTET'
-    | 'UTGAATT'
+    'NY' | 'SENDT' | 'FREMTIDIG' | 'UTKAST_TIL_KORRIGERING' | 'KORRIGERT' | 'AVBRUTT' | 'SLETTET' | 'UTGAATT'

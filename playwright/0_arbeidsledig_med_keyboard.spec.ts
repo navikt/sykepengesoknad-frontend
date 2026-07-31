@@ -32,7 +32,6 @@ test.describe('Arbeidsledigsøknad med tastaturnavigasjon', () => {
             page.getByText('Vi lagrer svarene dine mens du fyller ut, så du kan ta pauser underveis'),
         ).toBeVisible()
 
-        // eslint-disable-next-line playwright/no-conditional-in-test
         if (browserName === 'webkit') {
             await page.keyboard.press('Alt+Tab')
             await page.keyboard.press('Alt+Tab')
