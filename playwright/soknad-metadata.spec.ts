@@ -12,10 +12,8 @@ test.describe('SoknadMetadata', () => {
         await page.locator(`a[href*="${arbeidstaker.id}"]`).click()
         await page.waitForLoadState('load')
 
-        const perioder = page.locator('[data-cy="soknad-perioder"]')
-        await expect(perioder).toBeVisible()
-        await expect(perioder.locator('strong', { hasText: 'Periode:' })).toBeVisible()
-        await expect(perioder.locator('ul')).toHaveCount(0)
+        await expect(page.getByText('Periode:', { exact: true })).toBeVisible()
+        await expect(page.getByRole('list', { name: 'Sykmeldingsperioder' })).toHaveCount(0)
     })
 
     test('viser 2 perioder som bullet-liste med strong label', async ({ page }) => {
@@ -25,13 +23,12 @@ test.describe('SoknadMetadata', () => {
         await page.locator(`a[href*="${arbeidstakerGradert.id}"]`).click()
         await page.waitForLoadState('load')
 
-        const perioder = page.locator('[data-cy="soknad-perioder"]')
-        await expect(perioder.locator('strong', { hasText: 'Perioder:' })).toBeVisible()
+        await expect(page.getByText('Perioder:', { exact: true })).toBeVisible()
 
-        const listeItems = perioder.locator('li')
-        await expect(listeItems).toHaveCount(2)
-        await expect(listeItems.first()).toContainText('april 2020')
-        await expect(listeItems.first()).toContainText('50%')
+        const liste = page.getByRole('list', { name: 'Sykmeldingsperioder' })
+        await expect(liste.getByRole('listitem')).toHaveCount(2)
+        await expect(liste.getByRole('listitem').first()).toContainText('april 2020')
+        await expect(liste.getByRole('listitem').first()).toContainText('50%')
     })
 
     test('viser 4+ perioder i ReadMore dropdown', async ({ page }) => {
@@ -41,16 +38,17 @@ test.describe('SoknadMetadata', () => {
         await page.locator(`a[href*="${arbeidstakerMangePerioder.id}"]`).click()
         await page.waitForLoadState('load')
 
-        const perioder = page.locator('[data-cy="soknad-perioder"]')
-        await expect(perioder.locator('strong', { hasText: 'Perioder:' })).toBeVisible()
+        await expect(page.getByText('Perioder:', { exact: true })).toBeVisible()
 
-        const readMoreKnapp = perioder.getByRole('button', { name: 'Vis alle 4 perioder' })
+        const readMoreKnapp = page.getByRole('button', { name: 'Vis alle 4 perioder' })
         await expect(readMoreKnapp).toBeVisible()
-        await expect(perioder.locator('ul')).not.toBeVisible()
+
+        const liste = page.getByRole('list', { name: 'Sykmeldingsperioder' })
+        await expect(liste).toBeHidden()
 
         await readMoreKnapp.click()
 
-        await expect(perioder.locator('ul')).toBeVisible()
-        await expect(perioder.locator('li')).toHaveCount(4)
+        await expect(liste).toBeVisible()
+        await expect(liste.getByRole('listitem')).toHaveCount(4)
     })
 })

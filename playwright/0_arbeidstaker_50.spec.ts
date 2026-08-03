@@ -48,15 +48,14 @@ test.describe('Tester arbeidstakersøknad - gradert 50%', () => {
 
             await expect(page).toHaveURL(new RegExp(`.*${soknadId}\/1`))
 
-            await expect(page.locator('strong', { hasText: 'Sykmeldt fra:' })).toBeVisible()
+            await expect(page.getByText('Sykmeldt fra:', { exact: true })).toBeVisible()
             await expect(page.getByText('Posten Norge AS, Bærum')).toBeVisible()
 
-            const soknadPerioder = page.locator('[data-cy="soknad-perioder"]')
-            await expect(soknadPerioder.locator('strong', { hasText: 'Perioder:' })).toBeVisible()
-            const listeItems = soknadPerioder.locator('li')
-            await expect(listeItems).toHaveCount(2)
-            await expect(listeItems.first()).toContainText('april 2020')
-            await expect(listeItems.first()).toContainText('50%')
+            await expect(page.getByText('Perioder:', { exact: true })).toBeVisible()
+            const soknadPerioder = page.getByRole('list', { name: 'Sykmeldingsperioder' })
+            await expect(soknadPerioder.getByRole('listitem')).toHaveCount(2)
+            await expect(soknadPerioder.getByRole('listitem').first()).toContainText('april 2020')
+            await expect(soknadPerioder.getByRole('listitem').first()).toContainText('50%')
 
             await checkViStolerPaDeg(page, false)
 
