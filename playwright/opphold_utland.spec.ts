@@ -21,8 +21,8 @@ test.describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
 
         await page.goto('/syk/sykepengesoknad?testperson=bare-utland')
 
-        await expect(page.locator('.aksel-heading--large')).toBeVisible()
-        await expect(page.locator('.aksel-heading--large')).toHaveText('Søknader')
+        await expect(page.getByRole('heading', { level: 1 })).toBeVisible()
+        await expect(page.getByRole('heading', { level: 1 })).toHaveText('Søknader')
 
         const nyeSoknaderSection = page.getByRole('region', { name: 'Nye søknader' })
         await expect(nyeSoknaderSection).toBeVisible()

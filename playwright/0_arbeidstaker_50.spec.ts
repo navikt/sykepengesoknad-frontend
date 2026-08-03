@@ -36,8 +36,8 @@ test.describe('Tester arbeidstakersøknad - gradert 50%', () => {
         await test.step('Laster startside', async () => {
             await page.waitForLoadState('load')
 
-            await expect(page.locator('.aksel-heading--large')).toBeVisible()
-            await expect(page.locator('.aksel-heading--large')).toHaveText('Søknader')
+            await expect(page.getByRole('heading', { level: 1 })).toBeVisible()
+            await expect(page.getByRole('heading', { level: 1 })).toHaveText('Søknader')
             await validerAxeUtilityWrapper(page, test.info())
             await page.locator(`a[href*="${soknadId}"]`).click()
         })

@@ -36,8 +36,8 @@ test.describe('Tester sortering av søknader', () => {
     })
 
     test('Laster startside', async ({ page }) => {
-        await expect(page.locator('.aksel-heading--large')).toBeVisible()
-        await expect(page.locator('.aksel-heading--large')).toHaveText('Søknader')
+        await expect(page.getByRole('heading', { level: 1 })).toBeVisible()
+        await expect(page.getByRole('heading', { level: 1 })).toHaveText('Søknader')
     })
 
     test('Nye søknader sorteres etter tidligste tom dato', async ({ page }) => {

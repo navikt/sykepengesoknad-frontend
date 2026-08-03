@@ -27,8 +27,8 @@ test.describe('Teste førsteside i reisetilskuddsøknaden', () => {
         const steg = { value: 1 }
 
         await test.step('Landingside og listevisning', async () => {
-            await expect(page.locator('.aksel-heading--large')).toBeVisible()
-            await expect(page.locator('.aksel-heading--large')).toHaveText('Søknader')
+            await expect(page.getByRole('heading', { level: 1 })).toBeVisible()
+            await expect(page.getByRole('heading', { level: 1 })).toHaveText('Søknader')
             await page.getByRole('link', { name: 'Søknad om reisetilskudd' }).click()
 
             await expect(page).toHaveURL(new RegExp(`${nyttReisetilskudd.id}/1`))

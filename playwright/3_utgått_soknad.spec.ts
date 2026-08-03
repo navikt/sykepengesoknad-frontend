@@ -8,8 +8,8 @@ test.describe('Tester utgått søknad', () => {
     })
 
     test('Laster startside', async ({ page }) => {
-        await expect(page.locator('.aksel-heading--large')).toBeVisible()
-        await expect(page.locator('.aksel-heading--large')).toHaveText('Søknader')
+        await expect(page.getByRole('heading', { level: 1 })).toBeVisible()
+        await expect(page.getByRole('heading', { level: 1 })).toHaveText('Søknader')
     })
 
     test('Utgått søknad har forventa tekst', async ({ page }) => {

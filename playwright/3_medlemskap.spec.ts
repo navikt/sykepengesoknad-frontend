@@ -30,7 +30,7 @@ test.describe('Søknad med alle opprinnelige spørsmål om medlemskap', () => {
     test('Gjennomfører hele søknadsflyten for medlemskap', async ({ page }) => {
         await test.step('Laster startside', async () => {
             await page.goto(`/syk/sykepengesoknad/soknader/${soknad.id}/7?testperson=medlemskap`)
-            await expect(page.locator('.aksel-heading--large')).toBeVisible()
+            await expect(page.getByRole('heading', { level: 1 })).toBeVisible()
             // todo put this back later await validerAxeUtilityWrapper(page, test.info())
         })
 
@@ -163,7 +163,7 @@ test.describe('Søknad med nytt spørsmål om oppholdstillatelse og kjent perman
     test('Gjennomfører søknadsflyten med permanent oppholdstillatelse', async ({ page }) => {
         await test.step('Laster startside', async () => {
             await page.goto(`/syk/sykepengesoknad/soknader/${soknad.id}/11?testperson=medlemskap`)
-            await expect(page.locator('.aksel-heading--large')).toBeVisible()
+            await expect(page.getByRole('heading', { level: 1 })).toBeVisible()
         })
 
         await test.step('Har kjent permanent oppholdstillatelse', async () => {
@@ -211,7 +211,7 @@ test.describe('Søknad med nytt spørsmål om oppholdstillatelse og kjent midler
     test('Gjennomfører søknadsflyten med midlertidig oppholdstillatelse', async ({ page }) => {
         await test.step('Laster startside', async () => {
             await page.goto(`/syk/sykepengesoknad/soknader/${soknad.id}/11?testperson=medlemskap`)
-            await expect(page.locator('.aksel-heading--large')).toBeVisible()
+            await expect(page.getByRole('heading', { level: 1 })).toBeVisible()
         })
 
         await test.step('Har kjent midlertidig oppholdstillatelse', async () => {
