@@ -77,12 +77,12 @@ export async function svarCombobox(
     // Verifiser at comboboxen no er tømt
     await expect(comboBox).toHaveValue('')
 
-    //Lukker listen
-    await page.locator('.aksel-combobox__button-toggle-list').click()
+    // Lukker listen med Escape sidan toggle-knappen er aria-hidden
+    await page.keyboard.press('Escape')
 
     // Dersom vi ikkje skal fjerne verdien, sjekk at ho er synleg i den valde-lista
     if (!fjernVerdi) {
-        await expect(page.locator('.aksel-combobox__selected-options')).toContainText(autocompleteVerdi)
+        await expect(page.getByText(autocompleteVerdi)).toBeVisible()
     }
 }
 
@@ -158,16 +158,12 @@ export async function klikkTilbake(page: Page) {
 }
 
 export async function setPeriodeFraTil(page: Page, fom: number, tom: number, periodeIndex = 0) {
-    // 1. Finn riktig periodekomponent ut frå data-cy="periode"
-    const periodeLocator = page.locator('[data-cy="periode"]').nth(periodeIndex)
+    const periodeLocator = page.getByRole('group', { name: /Tidsperiode/ }).nth(periodeIndex)
 
-    // 2. Klikk på kalender-knappen ("fra og med"-felt)
-    await periodeLocator.locator('.aksel-date__field-button').nth(0).click()
+    await periodeLocator.getByRole('button', { name: /Åpne datovelger/i }).nth(0).click()
 
-    // 3. Velg dato for fra- og til-dag i kalenderen
-    //    Her brukar me `locator('.rdp-cell', { hasText: ... })` for å finne elementet
-    await periodeLocator.locator('.rdp-cell', { hasText: fom.toString() }).click()
-    await periodeLocator.locator('.rdp-cell', { hasText: tom.toString() }).click()
+    await periodeLocator.getByRole('grid').getByRole('button', { name: new RegExp(`^${fom}$`) }).click()
+    await periodeLocator.getByRole('grid').getByRole('button', { name: new RegExp(`^${tom}$`) }).click()
 }
 
 export async function svarRadioGruppe(page: Page, groupName: string | RegExp, radioName: string) {
@@ -303,10 +299,9 @@ export async function harFlereFeilISkjemaet(page: Page, antall: number, feilmeld
 
 export async function velgDato(page: Page, dag?: number) {
     if (dag) {
-        await page.locator('.rdp-day').getByText(dag.toString()).click()
+        await page.getByRole('grid').getByRole('button', { name: new RegExp(`^${dag}$`) }).click()
     } else {
-        // Default behavior - click first available date
-        await page.locator('.rdp-day').first().click()
+        await page.getByRole('grid').getByRole('button').first().click()
     }
 }
 
@@ -324,7 +319,7 @@ export async function velgTall(page: Page, sporsmalstekst: string, verdi: string
 }
 
 export async function velgCheckbox(page: Page, gjelder: string) {
-    await page.locator('.undersporsmal .aksel-checkbox').getByText(gjelder).click()
+    await page.getByRole('checkbox', { name: gjelder }).click()
 }
 
 export async function svarRadio(page: Page, gjelder: string, svar: 'JA' | 'NEI' | 'Prosent' | 'Timer') {
@@ -344,8 +339,8 @@ export async function svarSykMedEgenmelding(page: Page) {
 }
 
 export async function velgBehandlingsdager(page: Page) {
-    await page.locator('.rdp-day').getByText('10').click()
-    await page.locator('.rdp-day').getByText('16').click()
+    await page.getByRole('grid').getByRole('button', { name: /^10$/ }).click()
+    await page.getByRole('grid').getByRole('button', { name: /^16$/ }).click()
 }
 
 export async function lastOppKvittering(page: Page) {
@@ -353,7 +348,7 @@ export async function lastOppKvittering(page: Page) {
     await page.locator('select[name=transportmiddel]').selectOption('TAXI')
     await page.locator('input[name=belop_input]').type('1234')
     await page
-        .locator('[data-cy="filopplasteren"] input[type=file]')
+        .locator('[aria-label="Filopplasteren"] input[type=file]')
         .setInputFiles('playwright/fixtures/kvittering.jpg')
     await page.getByRole('button', { name: 'Bekreft' }).click()
 }
