@@ -21,7 +21,7 @@ const periodeTekst = (periode: RSSoknadsperiode): string =>
     `${tilLesbarPeriodeMedArstall(periode.fom, periode.tom)}${periode.grad > 0 ? ` (${periode.grad}%)` : ''}`
 
 const PeriodeListe = ({ perioder }: { perioder: ReadonlyArray<RSSoknadsperiode> }) => (
-    <BodyShort as="ul" size="small" className="mt-1 list-none" aria-label="Sykmeldingsperioder">
+    <BodyShort as="ul" size="small" className="mt-1 list-disc pl-5" aria-label="Sykmeldingsperioder">
         {perioder.map((periode, i) => (
             <BodyShort as="li" size="small" key={i}>
                 {periodeTekst(periode)}

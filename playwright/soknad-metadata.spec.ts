@@ -1,7 +1,8 @@
 import { test, expect } from '@playwright/test'
 
 import { arbeidstaker } from '../src/data/mock/data/soknad/arbeidstaker'
-import { arbeidstakerGradert } from '../src/data/mock/data/soknad/arbeidstaker-gradert'
+import { arbeidstakerToPerioder } from '../src/data/mock/data/soknad/arbeidstaker-to-perioder'
+import { arbeidstakerTrePerioder } from '../src/data/mock/data/soknad/arbeidstaker-tre-perioder'
 import { arbeidstakerMangePerioder } from '../src/data/mock/data/soknad/arbeidstaker-mange-perioder'
 
 test.describe('SoknadMetadata', () => {
@@ -16,11 +17,11 @@ test.describe('SoknadMetadata', () => {
         await expect(page.getByRole('list', { name: 'Sykmeldingsperioder' })).toHaveCount(0)
     })
 
-    test('viser 2 perioder som bullet-liste med strong label', async ({ page }) => {
-        await page.goto(`/syk/sykepengesoknad?testperson=arbeidstaker-gradert`)
+    test('viser 2 perioder som bullet-liste i samme måned', async ({ page }) => {
+        await page.goto(`/syk/sykepengesoknad?testperson=arbeidstaker-periode-varianter`)
         await page.waitForLoadState('load')
 
-        await page.locator(`a[href*="${arbeidstakerGradert.id}"]`).click()
+        await page.locator(`a[href*="${arbeidstakerToPerioder.id}"]`).click()
         await page.waitForLoadState('load')
 
         await expect(page.getByText('Perioder:', { exact: true })).toBeVisible()
@@ -28,11 +29,26 @@ test.describe('SoknadMetadata', () => {
         const liste = page.getByRole('list', { name: 'Sykmeldingsperioder' })
         await expect(liste.getByRole('listitem')).toHaveCount(2)
         await expect(liste.getByRole('listitem').first()).toContainText('april 2020')
-        await expect(liste.getByRole('listitem').first()).toContainText('50%')
+        await expect(liste.getByRole('listitem').last()).toContainText('april 2020')
+    })
+
+    test('viser 3 perioder som bullet-liste i samme måned', async ({ page }) => {
+        await page.goto(`/syk/sykepengesoknad?testperson=arbeidstaker-periode-varianter`)
+        await page.waitForLoadState('load')
+
+        await page.locator(`a[href*="${arbeidstakerTrePerioder.id}"]`).click()
+        await page.waitForLoadState('load')
+
+        await expect(page.getByText('Perioder:', { exact: true })).toBeVisible()
+
+        const liste = page.getByRole('list', { name: 'Sykmeldingsperioder' })
+        await expect(liste.getByRole('listitem')).toHaveCount(3)
+        await expect(liste.getByRole('listitem').first()).toContainText('april 2020')
+        await expect(liste.getByRole('listitem').last()).toContainText('april 2020')
     })
 
     test('viser 4+ perioder i ReadMore dropdown', async ({ page }) => {
-        await page.goto(`/syk/sykepengesoknad?testperson=arbeidstaker-mange-perioder`)
+        await page.goto(`/syk/sykepengesoknad?testperson=arbeidstaker-periode-varianter`)
         await page.waitForLoadState('load')
 
         await page.locator(`a[href*="${arbeidstakerMangePerioder.id}"]`).click()
