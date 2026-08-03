@@ -9,6 +9,7 @@ import {
     sporsmalOgSvar,
     svarJaHovedsporsmal,
     svarNeiHovedsporsmal,
+    harSynligTittel,
 } from './utils/utilities'
 import { validerAxeUtilityWrapper } from './uuvalidering'
 
@@ -23,7 +24,7 @@ test.describe('Tester arbeidsledigsøknad', () => {
             // Naviger til startsiden (hvis ikke allerede gjort i et tidligere steg; tilpass om nødvendig)
             await page.goto('/syk/sykepengesoknad?testperson=arbeidsledig')
 
-            const heading = page.getByRole('heading', { name: 'Søknader', level: 1 })
+            const heading = await harSynligTittel(page, 'Søknader', 1)
             await expect(heading).toBeVisible()
             await expect(heading).toHaveText('Søknader')
             await validerAxeUtilityWrapper(page, test.info())
@@ -49,8 +50,8 @@ test.describe('Tester arbeidsledigsøknad', () => {
             await expect(page.getByText('Fra hvilken dato trengte du ikke lenger sykmeldingen?')).toBeVisible()
 
             // Velg dato i kalender
-            await page.locator('.aksel-date__field-button').click()
-            await page.locator('.rdp-day', { hasText: '10' }).click()
+            await page.getByRole('button', { name: /Åpne datovelger/i }).click()
+            await page.getByRole('grid').getByRole('button').filter({ hasText: /^10$/ }).click()
 
             await validerAxeUtilityWrapper(page, test.info())
 
@@ -122,9 +123,11 @@ test.describe('Tester arbeidsledigsøknad', () => {
             await expect(page).toHaveURL(new RegExp(`${arbeidsledig.id}/5`))
 
             // Verifiser guide-panel innhold
-            await expect(page.locator('.aksel-guide-panel__content')).toContainText(
-                'Nå kan du se over at alt er riktig før du sender inn søknaden. Ved behov kan du endre opplysningene inntil 12 måneder etter innsending.',
-            )
+            await expect(
+                page.getByText(
+                    'Nå kan du se over at alt er riktig før du sender inn søknaden. Ved behov kan du endre opplysningene inntil 12 måneder etter innsending.',
+                ),
+            ).toBeVisible()
 
             // Verifiser oppsummering med sporsmalOgSvar (bruk container for oppsummering)
             const oppsummering = page.locator('[role="region"][aria-label="Oppsummering fra søknaden"]')
@@ -159,7 +162,7 @@ test.describe('Tester arbeidsledigsøknad', () => {
         await test.step('Søknad kvittering', async () => {
             await expect(page).toHaveURL(new RegExp(`/kvittering/${arbeidsledig.id}`))
 
-            await expect(page.getByRole('heading', { name: 'Søknaden er sendt til NAV' })).toBeVisible()
+            await harSynligTittel(page, 'Søknaden er sendt til NAV', 2)
             const kvitteringPanel = page.locator('[role="region"][aria-label="Hva skjer videre?"]')
             await validerAxeUtilityWrapper(page, test.info())
             await expect(kvitteringPanel).toContainText('Hva skjer videre?')

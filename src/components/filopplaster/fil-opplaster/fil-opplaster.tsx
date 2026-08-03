@@ -40,7 +40,6 @@ const FilOpplaster = ({ valgtFil, setValgtFil }: FilOpplasterProps) => {
                     <BodyShort
                         as="span"
                         className="mt-2 flex gap-2 font-ax-bold text-ax-text-danger-subtle before:content-['•']"
-                       
                     >
                         <>{errors.fil_input?.message}</>
                     </BodyShort>

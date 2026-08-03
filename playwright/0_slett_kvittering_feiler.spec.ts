@@ -3,7 +3,7 @@ import path from 'path'
 import { test, expect } from '@playwright/test'
 
 import { validerAxeUtilityWrapper } from './uuvalidering'
-import { fjernAnimasjoner } from './utils/utilities'
+import { fjernAnimasjoner, harSynligTittel } from './utils/utilities'
 
 test.describe('Test sletting av kvittering som feiler', () => {
     const soknadId = 'd4ce1c57-1f91-411b-ab64-beabbba29b65' // feilVedSlettingAvKvittering.id
@@ -16,8 +16,8 @@ test.describe('Test sletting av kvittering som feiler', () => {
     test('Full flyt - sletting av kvittering som feiler', async ({ page }) => {
         await test.step('URL er riktig', async () => {
             await expect(page).toHaveURL(new RegExp(`/syk/sykepengesoknad/soknader/${soknadId}/4`))
-            await expect(page.getByRole('heading', { name: 'Kvitteringer', level: 2 })).toBeVisible()
-            await expect(page.getByRole('heading', { name: 'Kvitteringer', level: 2 })).toHaveText('Kvitteringer')
+            await harSynligTittel(page, 'Kvitteringer', 2, true)
+            await expect(await harSynligTittel(page, 'Kvitteringer', 2, true)).toHaveText('Kvitteringer')
         })
 
         await test.step('Laster opp Taxi-kvittering', async () => {
@@ -35,7 +35,7 @@ test.describe('Test sletting av kvittering som feiler', () => {
         })
 
         await test.step('Liste med kvitteringer er oppdatert', async () => {
-            const table = page.locator('.aksel-table')
+            const table = page.getByRole('table')
             await expect(table.getByText('Taxi')).toBeVisible()
             await expect(table.getByText('1 234 kr').first()).toBeVisible()
             await expect(table.getByText('1 utgift på til sammen')).toBeVisible()
@@ -43,7 +43,7 @@ test.describe('Test sletting av kvittering som feiler', () => {
         })
 
         await test.step('Sletting av kvittering fra liste', async () => {
-            await page.locator('.aksel-table').getByRole('button', { name: 'Slett' }).click()
+            await page.getByRole('table').getByRole('button', { name: 'Slett' }).click()
             await page.getByRole('button', { name: 'Ja, jeg er sikker' }).click()
 
             await expect(page.getByText('Det skjedde en feil ved sletting av kvitteringen')).toBeVisible()

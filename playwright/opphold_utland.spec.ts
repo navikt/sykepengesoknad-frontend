@@ -54,24 +54,18 @@ test.describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
         // Velger land innanfor EØS
         await svarCombobox(page, 'Hvilke(t) land skal du reise til?', 'Hel', 'Hellas', true)
         await expect(
-            page.locator('.aksel-alert', {
-                hasText: 'Du har kun vært innenfor EU/EØS, så du trenger ikke sende inn søknad.',
-            }),
-        ).toContainText('Du har kun vært innenfor EU/EØS, så du trenger ikke sende inn søknad.')
+            page.getByText('Du har kun vært innenfor EU/EØS, så du trenger ikke sende inn søknad.'),
+        ).toBeVisible()
 
         await svarCombobox(page, 'Hvilke(t) land skal du reise til?', 'Svei', 'Sveits', true)
         await expect(
-            page.locator('.aksel-alert', {
-                hasText: 'Du har kun vært innenfor EU/EØS, så du trenger ikke sende inn søknad.',
-            }),
-        ).toContainText('Du har kun vært innenfor EU/EØS, så du trenger ikke sende inn søknad.')
+            page.getByText('Du har kun vært innenfor EU/EØS, så du trenger ikke sende inn søknad.'),
+        ).toBeVisible()
 
         await svarCombobox(page, 'Hvilke(t) land skal du reise til?', 'Lit', 'Litauen', true)
         await expect(
-            page.locator('.aksel-alert', {
-                hasText: 'Du har kun vært innenfor EU/EØS, så du trenger ikke sende inn søknad.',
-            }),
-        ).toContainText('Du har kun vært innenfor EU/EØS, så du trenger ikke sende inn søknad.')
+            page.getByText('Du har kun vært innenfor EU/EØS, så du trenger ikke sende inn søknad.'),
+        ).toBeVisible()
 
         await expect(page.getByRole('button', { name: 'Avbryt søknad' })).toBeVisible()
         // Assert "Avslutt og fortsett senere" er borte
@@ -95,7 +89,7 @@ test.describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
 
         // Velger Fransk Polynesia, lukker med chip
         await svarCombobox(page, 'Hvilke(t) land skal du reise til?', 'Fransk', 'Fransk Polynesia')
-        await page.locator('.aksel-chips__chip-text', { hasText: 'Fransk Polynesia' }).click()
+        await page.getByRole('button', { name: 'Fransk Polynesia' }).click()
 
         // Velger Sør-Korea med musepeker
         const landvelger = page.getByRole('combobox', { name: 'Hvilke(t) land skal du reise til?' })
@@ -193,9 +187,7 @@ test.describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
         // Søknad TIL_SLUTT (oppsummering)', async () => {
         await expect(page).toHaveURL(new RegExp(`${soknad.id}/5`))
         await expect(
-            page.locator('.aksel-guide-panel__content', {
-                hasText: 'Nå kan du se over at alt er riktig før du sender inn søknaden.',
-            }),
+            page.getByText('Nå kan du se over at alt er riktig før du sender inn søknaden.'),
         ).toBeVisible()
 
         // Oppsummering

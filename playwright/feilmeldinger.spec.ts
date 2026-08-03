@@ -17,7 +17,7 @@ test.describe('Tester feilmeldinger', () => {
         forventetFokusId: string,
         antallFeil = 1,
     ) {
-        await expect(page.locator('.aksel-error-message')).toContainText(lokalFeilmelding)
+        await expect(page.getByText(lokalFeilmelding).first()).toBeVisible()
         await expect(page.getByText(`Det er ${antallFeil} feil i skjemaet`)).toBeVisible()
         await page.getByRole('link', { name: globalFeilmelding }).click()
         await expect(page.locator(`[id="${forventetFokusId}"]`)).toBeFocused()
@@ -357,15 +357,11 @@ test.describe('Tester feilmeldinger', () => {
             await expect(page.getByRole('button', { name: 'Slett', exact: true })).toHaveCount(2)
             await validerAxeUtilityWrapper(page, test.info())
             await klikkGaVidere(page, true)
-            await expect(page.locator('.aksel-error-message').first()).toContainText(
-                'Du må velge et alternativ fra menyen',
-            )
-            await expect(page.locator('.aksel-error-message').nth(1)).toContainText(
-                'Du må oppgi arbeidsgiveren du har jobbet hos utenfor Norge',
-            )
-            await expect(page.locator('.aksel-error-message').nth(2)).toContainText(
-                'Du må oppgi en fra og med dato i formatet dd.mm.åååå',
-            )
+            await expect(page.getByText('Du må velge et alternativ fra menyen').first()).toBeVisible()
+            await expect(
+                page.getByText('Du må oppgi arbeidsgiveren du har jobbet hos utenfor Norge').first(),
+            ).toBeVisible()
+            await expect(page.getByText('Du må oppgi en fra og med dato i formatet dd.mm.åååå').first()).toBeVisible()
             await expect(page.getByText('Det er 3 feil i skjemaet')).toBeVisible()
             await validerAxeUtilityWrapper(page, test.info())
             await page.getByRole('button', { name: 'Slett', exact: true }).last().click()

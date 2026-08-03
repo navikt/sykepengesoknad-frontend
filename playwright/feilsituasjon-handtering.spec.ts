@@ -13,6 +13,7 @@ import {
     klikkGaVidere,
     svarNeiHovedsporsmal,
     trykkPaSoknadMedId,
+    harSynligTittel,
 } from './utils/utilities'
 
 const OOPS_ERROR = 'Ooops! Her har det skjedd noe rart'
@@ -27,7 +28,7 @@ async function gaTilListeOgApneSoknad(page: Page, url: string, soknadId: string)
     await harSoknaderlisteHeading(page)
     await trykkPaSoknadMedId(page, soknadId)
     await expect(page).toHaveURL(new RegExp(`${soknadId}/1`))
-    await expect(page.getByRole('heading', { name: SOKNAD_OM_SYKEPENGER })).toBeVisible()
+    await harSynligTittel(page, SOKNAD_OM_SYKEPENGER, 1)
 }
 
 async function forventOopsOgRefresh(page: Page, soknadId: string) {
@@ -36,7 +37,7 @@ async function forventOopsOgRefresh(page: Page, soknadId: string) {
         await expect(page.getByText(BACK_TO_LIST)).toBeHidden()
         await page.getByText(REFRESH_PAGE).click()
         await expect(page).toHaveURL(new RegExp(`${soknadId}/1`))
-        await expect(page.getByRole('heading', { name: SOKNAD_OM_SYKEPENGER })).toBeVisible()
+        await harSynligTittel(page, SOKNAD_OM_SYKEPENGER, 1)
     })
 }
 
@@ -83,7 +84,7 @@ test.describe('Tester feilsituasjoner', () => {
 
         test('401 gjør appen en refresh', async ({ page }) => {
             await page.goto(`/syk/sykepengesoknad/soknader/${soknad.id}/1${testpersonQuery}`)
-            await expect(page.getByRole('heading', { name: SOKNAD_OM_SYKEPENGER })).toBeVisible()
+            await harSynligTittel(page, SOKNAD_OM_SYKEPENGER, 1)
 
             const checkbox = page.getByRole('checkbox', {
                 name: 'Jeg bekrefter at jeg vil svare så riktig som jeg kan.',
@@ -103,7 +104,7 @@ test.describe('Tester feilsituasjoner', () => {
 
         test('400 gir feilmelding og refresh-mulighet', async ({ page }) => {
             await page.goto(`/syk/sykepengesoknad/soknader/${soknadId}/2${testpersonQuery}`)
-            await expect(page.getByRole('heading', { name: SOKNAD_OM_SYKEPENGER })).toBeVisible()
+            await harSynligTittel(page, SOKNAD_OM_SYKEPENGER, 1)
 
             await svarNeiHovedsporsmal(page)
             await klikkGaVidere(page, true)
@@ -116,7 +117,7 @@ test.describe('Tester feilsituasjoner', () => {
             await expect(page).toHaveURL(
                 new RegExp(`/syk/sykepengesoknad/soknader/${soknadId}/1\\?testperson=http-400-ved-send-soknad`),
             )
-            await expect(page.getByRole('heading', { name: SOKNAD_OM_SYKEPENGER })).toBeVisible()
+            await harSynligTittel(page, SOKNAD_OM_SYKEPENGER, 1)
         })
     })
 
@@ -140,7 +141,7 @@ test.describe('Tester feilsituasjoner', () => {
 
         test('404 gir alert og knapp for å gå tilbake til listen', async ({ page }) => {
             await page.goto(`/syk/sykepengesoknad/soknader/${soknadId}/2${testpersonQuery}`)
-            await expect(page.getByRole('heading', { name: SOKNAD_OM_SYKEPENGER })).toBeVisible()
+            await harSynligTittel(page, SOKNAD_OM_SYKEPENGER, 1)
 
             await svarNeiHovedsporsmal(page)
             await klikkGaVidere(page, true)
@@ -169,7 +170,7 @@ test.describe('Tester feilsituasjoner', () => {
 
         test('500 gir feilmelding og refresh-mulighet', async ({ page }) => {
             await page.goto(`/syk/sykepengesoknad/soknader/${soknadId}/2${testpersonQuery}`)
-            await expect(page.getByRole('heading', { name: SOKNAD_OM_SYKEPENGER })).toBeVisible()
+            await harSynligTittel(page, SOKNAD_OM_SYKEPENGER, 1)
 
             await svarNeiHovedsporsmal(page)
             await klikkGaVidere(page, true)

@@ -4,6 +4,8 @@ import { Soknad } from '../src/types/types'
 import { rsToSoknad } from '../src/types/mapping'
 import { soknaderIntegration } from '../src/data/mock/data/soknad/soknader-integration'
 
+import { harSynligTittel } from './utils/utilities'
+
 const articleTilSoknad = async (locators: any) => {
     const soknader: Soknad[] = []
     const count = await locators.count()
@@ -36,8 +38,8 @@ test.describe('Tester sortering av søknader', () => {
     })
 
     test('Laster startside', async ({ page }) => {
-        await expect(page.getByRole('heading', { level: 1 })).toBeVisible()
-        await expect(page.getByRole('heading', { level: 1 })).toHaveText('Søknader')
+        await harSynligTittel(page, 'Søknader', 1)
+        await expect(await harSynligTittel(page, 'Søknader', 1)).toHaveText('Søknader')
     })
 
     test('Nye søknader sorteres etter tidligste tom dato', async ({ page }) => {
@@ -77,24 +79,36 @@ test.describe('Tester sortering av søknader', () => {
         }
 
         await expect(page.locator('select')).toHaveValue('Dato')
-        await expect(page.getByRole('region', { name: 'Tidligere søknader' }).getByRole('link').nth(0)).toContainText(
-            '27. mai – 11. juni 2020',
-        )
-        await expect(page.getByRole('region', { name: 'Tidligere søknader' }).getByRole('link').nth(1)).toContainText(
-            '23. mai – 7. juni 2020',
-        )
+        await expect(
+            page
+                .getByRole('region', { name: 'Tidligere søknader' })
+                .getByTestId(/listevisning/)
+                .nth(0),
+        ).toContainText('27. mai – 11. juni 2020')
+        await expect(
+            page
+                .getByRole('region', { name: 'Tidligere søknader' })
+                .getByTestId(/listevisning/)
+                .nth(1),
+        ).toContainText('23. mai – 7. juni 2020')
     })
 
     test('Sorter etter Sendt', async ({ page }) => {
         await page.locator('select').selectOption('Sendt')
         await expect(page.locator('select')).toHaveValue('Sendt')
 
-        await expect(page.getByRole('region', { name: 'Tidligere søknader' }).getByRole('link').nth(0)).toContainText(
-            '27. mai – 11. juni 2020',
-        )
-        await expect(page.getByRole('region', { name: 'Tidligere søknader' }).getByRole('link').nth(1)).toContainText(
-            '25. – 27. mars 2020',
-        )
+        await expect(
+            page
+                .getByRole('region', { name: 'Tidligere søknader' })
+                .getByTestId(/listevisning/)
+                .nth(0),
+        ).toContainText('27. mai – 11. juni 2020')
+        await expect(
+            page
+                .getByRole('region', { name: 'Tidligere søknader' })
+                .getByTestId(/listevisning/)
+                .nth(1),
+        ).toContainText('25. – 27. mars 2020')
 
         const articles = page.getByRole('region', { name: 'Tidligere søknader' }).getByRole('link')
         const soknader = await articleTilSoknad(articles)

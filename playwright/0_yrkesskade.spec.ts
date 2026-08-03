@@ -7,6 +7,7 @@ import {
     neiOgVidere,
     sporsmalOgSvar,
     svarJaHovedsporsmal,
+    harSynligTittel,
 } from './utils/utilities'
 import { validerAxeUtilityWrapper } from './uuvalidering'
 import { trykkTab } from './utils/tastaturSnarvei'
@@ -16,7 +17,7 @@ test.describe('Tester yrkesskadesspørsmål', () => {
         await page.context().clearCookies()
         await page.goto('/syk/sykepengesoknad?testperson=yrkesskade-v2')
 
-        await expect(page.getByRole('heading', { name: 'Søknader', level: 1 })).toBeVisible()
+        await harSynligTittel(page, 'Søknader', 1)
         await page.getByRole('link', { name: /søknad om sykepenger/i }).click()
 
         await checkViStolerPaDeg(page)
@@ -34,7 +35,7 @@ test.describe('Tester yrkesskadesspørsmål', () => {
         await neiOgVidere(page, ['Andre inntektskilder', 'Reise utenfor EU/EØS'])
 
         const main = page.locator('main')
-        await expect(main.getByRole('heading', { name: 'Yrkesskade', level: 2 })).toBeVisible()
+        await harSynligTittel(main, 'Yrkesskade', 2)
 
         const registrerteYrkesskaderText = page.getByText('Registrerte yrkesskader:')
         await expect(registrerteYrkesskaderText).toBeVisible()

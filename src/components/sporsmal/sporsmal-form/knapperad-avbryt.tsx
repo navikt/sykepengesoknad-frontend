@@ -27,7 +27,6 @@ const KnapperadAvbryt = () => {
                         valgtSoknad: valgtSoknad,
                     })
                 }}
-               
             >
                 {tekst('sykepengesoknad.avbryt.simpel')}
             </Button>

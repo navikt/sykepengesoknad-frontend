@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test'
 
-import { svarNeiHovedsporsmal, klikkGaVidere, checkViStolerPaDeg } from './utils/utilities'
+import { svarNeiHovedsporsmal, klikkGaVidere, checkViStolerPaDeg, harSynligTittel } from './utils/utilities'
 import { validerAxeUtilityWrapper } from './uuvalidering'
 
 test.describe('Eldre søknader', () => {
@@ -8,8 +8,8 @@ test.describe('Eldre søknader', () => {
     test('Bruker må velge mellom to søknader (én eldre)', async ({ page }) => {
         await test.step('Gå til startsiden og klikk på riktig søknad', async () => {
             await page.goto('/syk/sykepengesoknad?testperson=en-eldre-usendt-soknad')
-            await expect(page.getByRole('heading', { level: 1 })).toBeVisible()
-            await expect(page.getByRole('heading', { level: 1 })).toHaveText('Søknader')
+            await harSynligTittel(page, 'Søknader', 1)
+            await expect(await harSynligTittel(page, 'Søknader', 1)).toHaveText('Søknader')
             await validerAxeUtilityWrapper(page, test.info())
             await page.locator('a[href*="e6e53c43-3b64-48be-b9d1-39d95198e528"]').click()
         })
@@ -31,8 +31,8 @@ test.describe('Eldre søknader', () => {
     test('Bruker må gå gjennom tre søknader (to eldre)', async ({ page }) => {
         await test.step('Gå til startsiden og klikk på riktig søknad', async () => {
             await page.goto('/syk/sykepengesoknad?testperson=to-eldre-usendte-soknader')
-            await expect(page.getByRole('heading', { level: 1 })).toBeVisible()
-            await expect(page.getByRole('heading', { level: 1 })).toHaveText('Søknader')
+            await harSynligTittel(page, 'Søknader', 1)
+            await expect(await harSynligTittel(page, 'Søknader', 1)).toHaveText('Søknader')
             await validerAxeUtilityWrapper(page, test.info())
             await page.locator('a[href*="e6e53c43-3b64-48be-b9d1-39d95198e521"]').click()
         })

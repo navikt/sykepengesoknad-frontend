@@ -17,7 +17,6 @@ const GjenapneSoknad = () => {
             {gjenapneError && <Alert variant="error">Beklager, klarte ikke gjenåpne søknaden din</Alert>}
 
             <Button
-               
                 variant="tertiary"
                 className="-ml-5"
                 type="button"

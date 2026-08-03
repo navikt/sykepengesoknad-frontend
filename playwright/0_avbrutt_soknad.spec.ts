@@ -2,14 +2,14 @@ import { test, expect } from '@playwright/test'
 
 import { avbruttSoknad } from '../src/data/mock/data/soknad/arbeidstaker-avbrutt'
 
-import { checkViStolerPaDeg, modalAktiv, avbryterSoknad, harSynligTekst } from './utils/utilities' // Adjust the import path if these are in a separate file
+import { checkViStolerPaDeg, modalAktiv, avbryterSoknad, harSynligTekst, harSynligTittel } from './utils/utilities' // Adjust the import path if these are in a separate file
 
 test.describe('Tester avbryting av søknad', () => {
     test('Full flow for avbryting av søknad', async ({ page }) => {
         await page.goto('/syk/sykepengesoknad?testperson=integrasjon-soknader')
 
         await test.step('Laster startside', async () => {
-            const heading = page.getByRole('heading', { level: 1 })
+            const heading = await harSynligTittel(page, 'Søknader', 1)
             await expect(heading).toBeVisible()
             await expect(heading).toHaveText('Søknader')
         })
@@ -59,7 +59,7 @@ test.describe('Tester avbryting av søknad', () => {
         })
 
         await test.step('Søknad kan avsluttes og fortsette senere', async () => {
-            await expect(page.getByRole('heading', { name: 'Fravær før sykmeldingen' })).toBeVisible()
+            await harSynligTittel(page, 'Fravær før sykmeldingen', 2)
             await expect(page.getByRole('button', { name: 'Avslutt og fortsett senere' })).toBeVisible()
             await page.getByRole('button', { name: 'Avslutt og fortsett senere' }).click()
             await modalAktiv(page)

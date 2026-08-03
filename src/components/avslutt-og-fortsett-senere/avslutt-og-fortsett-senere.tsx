@@ -19,7 +19,6 @@ const AvsluttOgFortsettSenere = () => {
                 variant="tertiary"
                 type="button"
                 as={valgtSoknad ? Button : Skeleton}
-               
                 onClick={(e) => {
                     logEvent('modal åpnet', {
                         component: tekst('avslutt.popup.tittel'),

@@ -105,7 +105,6 @@ const FeilOppsummering = ({
                     size="medium"
                     heading={sendError ? 'Beklager, det oppstod en feil' : 'Det er ' + antall + ' feil i skjemaet'}
                     className="mt-8"
-                   
                 >
                     {entries.map((list) => (
                         <ErrorSummary.Item

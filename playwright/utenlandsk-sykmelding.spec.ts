@@ -33,9 +33,9 @@ test.describe('Tester søknad til utenlandsk sykmelding', () => {
             await harSynligTekst(page, 'Oppgi utenlandsk kontaktadresse')
             await klikkGaVidere(page, true)
 
-            await expect(page.locator('.aksel-error-message').getByText('Du må oppgi et vegnavn')).toBeVisible()
-            await expect(page.locator('.aksel-error-message').getByText('Du må oppgi et land')).toBeVisible()
-            await expect(page.locator('.aksel-error-message').getByText('Du må oppgi et telefonnummer')).toBeVisible()
+            await expect(page.getByRole('link', { name: 'Du må oppgi et vegnavn' })).toBeVisible()
+            await expect(page.getByRole('link', { name: 'Du må oppgi et land' })).toBeVisible()
+            await expect(page.getByRole('link', { name: 'Du må oppgi et telefonnummer' })).toBeVisible()
             await svarFritekst(page, 'Vegnavn og husnummer, evt. postboks', 'Downing Street 10')
             await svarFritekst(page, 'Land', 'UK')
             await svarFritekst(page, 'Telefonnummer', '81549300')
@@ -61,12 +61,9 @@ test.describe('Tester søknad til utenlandsk sykmelding', () => {
                 'Veldig lang tekstteksttekstteksttekstteksttekstteksttekstteksttekstteksttekstteksttekstteksttekstteksttekstteksttekstteksttekstteksttekstteksttekstteksttekstteksttekstteksttekstteksttekstteksttekstteksttekstteksttekstteksttekstteksttekstteksttekstteksttekstteksttekstteksttekstteksttekstteksttekstteksttekstteksttekstteksttekstteksttekstteksttekstteksttekst',
             )
             await expect(
-                page
-                    .getByRole('textbox', { name: /arbeid utenfor Norge/i })
-                    .locator('..')
-                    .locator('..'),
+                page.getByRole('textbox', { name: /Oppgi nærmere opplysninger/i }).locator('..'),
             ).toContainText('Du kan skrive maks 200 tegn')
-            await expect(page.getByRole('alert')).toContainText('Du kan skrive maks 200 tegn')
+            await expect(page.getByRole('link', { name: 'Du kan skrive maks 200 tegn' })).toBeVisible()
             await svarFritekst(
                 page,
                 'Oppgi nærmere opplysninger om arbeid/virksomhet utenfor Norge',

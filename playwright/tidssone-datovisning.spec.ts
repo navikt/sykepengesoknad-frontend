@@ -52,7 +52,7 @@ test.describe('Tidssone: periodevisning', () => {
             await svarJaHovedsporsmal(page)
             await expect(page.getByText('Når begynte du å jobbe igjen?')).toBeVisible()
 
-            const datoInput = page.locator('.aksel-date__field-input')
+            const datoInput = page.getByRole('textbox', { name: /Når begynte du å jobbe igjen/ })
             await datoInput.fill('01.04.2020')
             await datoInput.blur()
 
@@ -257,7 +257,10 @@ test.describe('Tidssone: periode-komp fromDate-grense', () => {
         await page.goto(`/syk/sykepengesoknad/soknader/${arbeidstaker.id}/3`)
         await svarJaHovedsporsmal(page)
         const periodeLocator = page.getByRole('group', { name: /Tidsperiode/ }).first()
-        await periodeLocator.getByRole('button', { name: /Åpne datovelger/i }).first().click()
+        await periodeLocator
+            .getByRole('button', { name: /Åpne datovelger/i })
+            .first()
+            .click()
         await expect(page.getByRole('grid')).toBeVisible()
     }
 
@@ -297,7 +300,10 @@ test.describe('Tidssone: periode-komp datoer persistering', () => {
         await page.goto(`/syk/sykepengesoknad/soknader/${arbeidstaker.id}/3`)
         await svarJaHovedsporsmal(page)
         const periodeLocator = page.getByRole('group', { name: /Tidsperiode/ }).first()
-        await periodeLocator.getByRole('button', { name: /Åpne datovelger/i }).first().click()
+        await periodeLocator
+            .getByRole('button', { name: /Åpne datovelger/i })
+            .first()
+            .click()
         await periodeLocator.locator('[data-day="2020-04-05"]').click()
         await periodeLocator.locator('[data-day="2020-04-10"]').click()
         await klikkGaVidere(page)

@@ -2,7 +2,7 @@ import { test, expect, Page } from '@playwright/test'
 
 import { arbeidstakerGradert } from '../src/data/mock/data/soknad/arbeidstaker-gradert'
 
-import { apneReadmore, checkViStolerPaDeg, svarJaHovedsporsmal } from './utils/utilities'
+import { apneReadmore, checkViStolerPaDeg, svarJaHovedsporsmal, harSynligTittel } from './utils/utilities'
 import { validerAxeUtilityWrapper } from './uuvalidering'
 const fillTextFieldByLabel = async (page: Page, labelText: string, value: string, fallbackSelector?: string) => {
     try {
@@ -19,11 +19,22 @@ const fillTextFieldByLabel = async (page: Page, labelText: string, value: string
 const setPeriodeFraTil = async (page: Page, fom: number, tom: number, periodeIndex = 0) => {
     const periodeComponent = page.getByRole('group', { name: /Tidsperiode/ }).nth(periodeIndex)
 
-    await periodeComponent.locator('.aksel-date__field-button').nth(0).click()
+    await periodeComponent
+        .getByRole('button', { name: /Åpne datovelger/i })
+        .first()
+        .click()
 
-    await periodeComponent.locator('.rdp-cell').filter({ hasText: fom.toString() }).click()
+    await periodeComponent
+        .getByRole('grid')
+        .getByRole('button')
+        .filter({ hasText: new RegExp(`^${fom}$`) })
+        .click()
 
-    await periodeComponent.locator('.rdp-cell').filter({ hasText: tom.toString() }).click()
+    await periodeComponent
+        .getByRole('grid')
+        .getByRole('button')
+        .filter({ hasText: new RegExp(`^${tom}$`) })
+        .click()
 }
 
 test.describe('Tester arbeidstakersøknad - gradert 50%', () => {
@@ -36,15 +47,15 @@ test.describe('Tester arbeidstakersøknad - gradert 50%', () => {
         await test.step('Laster startside', async () => {
             await page.waitForLoadState('load')
 
-            await expect(page.getByRole('heading', { level: 1 })).toBeVisible()
-            await expect(page.getByRole('heading', { level: 1 })).toHaveText('Søknader')
+            await harSynligTittel(page, 'Søknader', 1)
+            await expect(await harSynligTittel(page, 'Søknader', 1)).toHaveText('Søknader')
             await validerAxeUtilityWrapper(page, test.info())
             await page.locator(`a[href*="${soknadId}"]`).click()
         })
 
         await test.step('Søknad ANSVARSERKLARING', async () => {
             await page.waitForLoadState('load')
-            await expect(page.getByRole('heading', { name: 'Før du søker' })).toBeVisible()
+            await harSynligTittel(page, 'Før du søker', 2)
 
             await expect(page).toHaveURL(new RegExp(`.*${soknadId}\/1`))
 
@@ -61,35 +72,35 @@ test.describe('Tester arbeidstakersøknad - gradert 50%', () => {
             await page.getByRole('button', { name: 'Tilbake' }).click()
             await expect(page).toHaveURL(new RegExp(`.*${soknadId}\/1`))
             await validerAxeUtilityWrapper(page, test.info())
-            await page.locator('button').filter({ hasText: 'Start søknad' }).click()
+            await page.getByRole('button', { name: /Start søknad/i }).click()
         })
 
         await test.step('Søknad TILBAKE_I_ARBEID', async () => {
             await expect(page).toHaveURL(new RegExp(`.*${soknadId}\/2`))
             await svarJaHovedsporsmal(page)
-            await expect(page.locator('text=Når begynte du å jobbe igjen?')).toBeVisible()
-            await page.locator('.aksel-date__field-button').click()
-            await page.locator('.rdp-day').getByText('20', { exact: true }).click()
+            await expect(page.getByText('Når begynte du å jobbe igjen?')).toBeVisible()
+            await page.getByRole('button', { name: /Åpne datovelger/i }).click()
+            await page.getByRole('grid').getByRole('button').filter({ hasText: /^20$/ }).click()
             await validerAxeUtilityWrapper(page, test.info())
-            await page.locator('button').filter({ hasText: 'Gå videre' }).click()
+            await page.getByRole('button', { name: /Gå videre/i }).click()
         })
 
         await test.step('Søknad FERIE_V2', async () => {
             await expect(page).toHaveURL(new RegExp(`.*${soknadId}\/3`))
             await svarJaHovedsporsmal(page)
-            await expect(page.locator('text=Når tok du ut feriedager?')).toBeVisible()
+            await expect(page.getByText('Når tok du ut feriedager?')).toBeVisible()
             await setPeriodeFraTil(page, 16, 23)
             await validerAxeUtilityWrapper(page, test.info())
-            await page.locator('button').filter({ hasText: 'Gå videre' }).click()
+            await page.getByRole('button', { name: /Gå videre/i }).click()
         })
 
         await test.step('Søknad PERMISJON_V2', async () => {
             await expect(page).toHaveURL(new RegExp(`.*${soknadId}\/4`))
             await svarJaHovedsporsmal(page)
-            await expect(page.locator('text=Når tok du permisjon?')).toBeVisible()
+            await expect(page.getByText('Når tok du permisjon?')).toBeVisible()
             await setPeriodeFraTil(page, 14, 22)
             await validerAxeUtilityWrapper(page, test.info())
-            await page.locator('button').filter({ hasText: 'Gå videre' }).click()
+            await page.getByRole('button', { name: /Gå videre/i }).click()
         })
 
         await test.step('Søknad JOBBET_DU_GRADERT', async () => {
@@ -101,7 +112,7 @@ test.describe('Tester arbeidstakersøknad - gradert 50%', () => {
             ])
 
             await svarJaHovedsporsmal(page)
-            await expect(page.locator('text=Antall timer du skrev inn, betyr at du har jobbet')).toBeHidden()
+            await expect(page.getByText('Antall timer du skrev inn, betyr at du har jobbet')).toBeHidden()
 
             await expect(
                 page.locator(
@@ -114,8 +125,8 @@ test.describe('Tester arbeidstakersøknad - gradert 50%', () => {
                 '12',
             )
 
-            await expect(page.locator('text=Hvor mye jobbet du tilsammen 1. - 24. april 2020?')).toBeVisible()
-            await expect(page.locator('text=Velg timer eller prosent')).toBeVisible()
+            await expect(page.getByText('Hvor mye jobbet du tilsammen 1. - 24. april 2020?')).toBeVisible()
+            await expect(page.getByText('Velg timer eller prosent')).toBeVisible()
 
             await page.locator('.undersporsmal input[value="Prosent"]').click()
             await fillTextFieldByLabel(page, 'Oppgi prosent', '51')
@@ -126,15 +137,11 @@ test.describe('Tester arbeidstakersøknad - gradert 50%', () => {
 
             // First attempt (should show validation messages on same page)
             await validerAxeUtilityWrapper(page, test.info())
-            await page.locator('button').filter({ hasText: 'Gå videre' }).click()
+            await page.getByRole('button', { name: /Gå videre/i }).click()
 
-            await expect(
-                page.locator('.aksel-read-more__button').filter({ hasText: 'Er prosenten lavere enn du forventet?' }),
-            ).toBeVisible()
+            await expect(page.getByRole('button', { name: /Er prosenten lavere enn du forventet/i })).toBeVisible()
 
-            await expect(
-                page.getByText('Timene utgjør mindre enn 50 %.'),
-            ).toBeVisible()
+            await expect(page.getByText('Timene utgjør mindre enn 50 %.')).toBeVisible()
             await expect(
                 page.locator(
                     'text=Antall timer du skrev inn, betyr at du har jobbet 49 % av det du gjør når du er frisk. Du må enten svare nei på øverste spørsmålet eller endre antall timer totalt.',
@@ -149,51 +156,49 @@ test.describe('Tester arbeidstakersøknad - gradert 50%', () => {
             await fillTextFieldByLabel(page, 'Oppgi timer totalt', '11')
 
             await validerAxeUtilityWrapper(page, test.info())
-            await page.locator('button').filter({ hasText: 'Gå videre' }).click()
+            await page.getByRole('button', { name: /Gå videre/i }).click()
         })
 
         await test.step('Søknad ARBEID_UTENFOR_NORGE', async () => {
             await expect(page).toHaveURL(new RegExp(`.*${soknadId}\/6`))
             await svarJaHovedsporsmal(page)
-            await expect(page.locator('text=Har du arbeidet i utlandet i løpet av de siste 12 månedene?')).toBeVisible()
+            await expect(page.getByText('Har du arbeidet i utlandet i løpet av de siste 12 månedene?')).toBeVisible()
             await validerAxeUtilityWrapper(page, test.info())
-            await page.locator('button').filter({ hasText: 'Gå videre' }).click()
+            await page.getByRole('button', { name: /Gå videre/i }).click()
         })
 
         await test.step('Søknad ANDRE_INNTEKTSKILDER_V2', async () => {
             await expect(page).toHaveURL(new RegExp(`.*${soknadId}\/7`))
-            await expect(page.locator('text=Har du andre inntektskilder enn nevnt over?')).toBeVisible()
+            await expect(page.getByText('Har du andre inntektskilder enn nevnt over?')).toBeVisible()
             await svarJaHovedsporsmal(page)
             await expect(
                 page.locator(
                     'text=Velg inntektskildene som passer for deg. Finner du ikke noe som passer for deg, svarer du nei',
                 ),
             ).toBeVisible()
-            await expect(
-                page.locator('.undersporsmal .aksel-checkbox label[for="d9ac4359-5519-34f1-b59d-b5ab24e55821"]'),
-            ).toHaveText(/ansatt et annet sted enn nevnt over/)
+            await expect(page.getByRole('checkbox', { name: /ansatt et annet sted enn nevnt over/ })).toBeVisible()
             await page.locator('input[type="checkbox"]#d9ac4359-5519-34f1-b59d-b5ab24e55821').check()
             await validerAxeUtilityWrapper(page, test.info())
-            await page.locator('button').filter({ hasText: 'Gå videre' }).click()
+            await page.getByRole('button', { name: /Gå videre/i }).click()
         })
 
         await test.step('Søknad OPPHOLD_UTENFOR_EOS', async () => {
             await expect(page).toHaveURL(new RegExp(`.*${soknadId}\/8`))
             await svarJaHovedsporsmal(page)
-            await expect(page.locator('text=Når var du utenfor EU/EØS?')).toBeVisible()
+            await expect(page.getByText('Når var du utenfor EU/EØS?')).toBeVisible()
             await setPeriodeFraTil(page, 14, 22)
             await validerAxeUtilityWrapper(page, test.info())
-            await page.locator('button').filter({ hasText: 'Gå videre' }).click()
+            await page.getByRole('button', { name: /Gå videre/i }).click()
         })
 
         await test.step('Søknad TIL_SLUTT', async () => {
             await expect(page).toHaveURL(new RegExp(`.*${soknadId}\/9`))
-            await expect(page.getByRole('heading', { name: 'Oppsummering fra søknaden' })).toBeVisible()
+            await harSynligTittel(page, 'Oppsummering fra søknaden', 2)
             const oppsummering = page.locator('[role="region"][aria-label="Oppsummering fra søknaden"]')
             await expect(oppsummering).toContainText('Søknaden sendes til')
             await expect(oppsummering).toContainText('Posten Norge AS, Bærum')
             await validerAxeUtilityWrapper(page, test.info())
-            await page.locator('button').filter({ hasText: 'Send søknaden' }).click()
+            await page.getByRole('button', { name: /Send søknaden/i }).click()
         })
 
         await test.step('Søknad kvittering', async () => {

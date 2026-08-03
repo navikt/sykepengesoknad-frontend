@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test'
 
 import { gradertReisetilskudd } from '../src/data/mock/data/soknad/arbeidstaker-reisetilskudd-gradert'
 
-import { apneReadmore } from './utils/utilities'
+import { apneReadmore, harSynligTittel } from './utils/utilities'
 import { validerAxeUtilityWrapper } from './uuvalidering'
 
 test.describe('Teste gradert reisetilskudd med ReadMore-hjelpetekster', () => {
@@ -14,7 +14,7 @@ test.describe('Teste gradert reisetilskudd med ReadMore-hjelpetekster', () => {
         await page.goto(`/syk/sykepengesoknad/soknader/${gradertReisetilskudd.id}/2?testperson=reisetilskudd`)
 
         await test.step('Tilbake i arbeid - Gradert reisetilskudd', async () => {
-            await expect(page.getByRole('heading', { level: 2 })).toHaveText('Tilbake i fullt arbeid')
+            await harSynligTittel(page, 'Tilbake i fullt arbeid', 2)
 
             await apneReadmore(page, 'Spørsmålet forklart', [
                 'Du kan begynne å jobbe fullt igjen før sykmeldingen er slutt.',

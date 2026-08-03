@@ -53,7 +53,10 @@ test.describe('Kvittering integrasjon', () => {
     test('Arbeidsledig - etter 30 dager', async ({ page }) => {
         await test.step('Åpner sendt søknad', async () => {
             await page.goto('/syk/sykepengesoknad?testperson=integrasjon-soknader')
-            await page.getByRole('region', { name: 'Tidligere søknader' }).locator(`a[href*="${sendtArbeidsledigKvittering.id}"]`).click()
+            await page
+                .getByRole('region', { name: 'Tidligere søknader' })
+                .locator(`a[href*="${sendtArbeidsledigKvittering.id}"]`)
+                .click()
         })
 
         await test.step('Verifiserer sendt-detaljer', async () => {

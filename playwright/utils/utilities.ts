@@ -78,11 +78,15 @@ export async function svarCombobox(
     await expect(comboBox).toHaveValue('')
 
     // Lukker listen med Escape sidan toggle-knappen er aria-hidden
-    await page.keyboard.press('Escape')
+    // Escape må sendast til sjølve inputen, elles blir tastetrykket ikkje handtert av comboboxen
+    await comboBox.press('Escape')
+
+    // Ei open liste gjev UU-brudd i Aksel sin combobox, så vi ventar til ho faktisk er lukka
+    await expect(page.getByRole('listbox')).toBeHidden()
 
     // Dersom vi ikkje skal fjerne verdien, sjekk at ho er synleg i den valde-lista
     if (!fjernVerdi) {
-        await expect(page.getByText(autocompleteVerdi)).toBeVisible()
+        await expect(page.getByText(autocompleteVerdi, { exact: true }).first()).toBeVisible()
     }
 }
 
@@ -160,10 +164,21 @@ export async function klikkTilbake(page: Page) {
 export async function setPeriodeFraTil(page: Page, fom: number, tom: number, periodeIndex = 0) {
     const periodeLocator = page.getByRole('group', { name: /Tidsperiode/ }).nth(periodeIndex)
 
-    await periodeLocator.getByRole('button', { name: /Åpne datovelger/i }).nth(0).click()
+    await periodeLocator
+        .getByRole('button', { name: /Åpne datovelger/i })
+        .nth(0)
+        .click()
 
-    await periodeLocator.getByRole('grid').getByRole('button', { name: new RegExp(`^${fom}$`) }).click()
-    await periodeLocator.getByRole('grid').getByRole('button', { name: new RegExp(`^${tom}$`) }).click()
+    await periodeLocator
+        .getByRole('grid')
+        .getByRole('button')
+        .filter({ hasText: new RegExp(`^${fom}$`) })
+        .click()
+    await periodeLocator
+        .getByRole('grid')
+        .getByRole('button')
+        .filter({ hasText: new RegExp(`^${tom}$`) })
+        .click()
 }
 
 export async function svarRadioGruppe(page: Page, groupName: string | RegExp, radioName: string) {
@@ -200,8 +215,13 @@ export async function sporsmalOgSvar(container: Locator, sporsmal: string, svar:
     await expect(siblingLocator.filter({ hasText: svar })).toBeVisible()
 }
 
-export async function harSynligTittel(page: Page, tittelTekst: string, level: number, exact: boolean = false) {
-    const locator = page.getByRole('heading', { level, name: tittelTekst, exact: exact })
+export async function harSynligTittel(
+    omrade: Page | Locator,
+    tittelTekst: string | RegExp,
+    level: number,
+    exact: boolean = false,
+) {
+    const locator = omrade.getByRole('heading', { level, name: tittelTekst, exact: exact })
     await expect(locator).toBeVisible()
     return locator
 }
@@ -290,7 +310,7 @@ export async function harFlereFeilISkjemaet(page: Page, antall: number, feilmeld
     const form = page.locator('form')
     const alert = form.getByRole('alert')
 
-    await expect(alert.getByRole('heading', { name: `Det er ${antall} feil i skjemaet`, level: 2 })).toBeVisible()
+    await harSynligTittel(alert, `Det er ${antall} feil i skjemaet`, 2)
 
     for (const melding of feilmelding) {
         await expect(alert.getByText(melding)).toBeVisible()
@@ -299,7 +319,11 @@ export async function harFlereFeilISkjemaet(page: Page, antall: number, feilmeld
 
 export async function velgDato(page: Page, dag?: number) {
     if (dag) {
-        await page.getByRole('grid').getByRole('button', { name: new RegExp(`^${dag}$`) }).click()
+        await page
+            .getByRole('grid')
+            .getByRole('button')
+            .filter({ hasText: new RegExp(`^${dag}$`) })
+            .click()
     } else {
         await page.getByRole('grid').getByRole('button').first().click()
     }
@@ -339,8 +363,8 @@ export async function svarSykMedEgenmelding(page: Page) {
 }
 
 export async function velgBehandlingsdager(page: Page) {
-    await page.getByRole('grid').getByRole('button', { name: /^10$/ }).click()
-    await page.getByRole('grid').getByRole('button', { name: /^16$/ }).click()
+    await page.getByRole('grid').getByRole('button').filter({ hasText: /^10$/ }).click()
+    await page.getByRole('grid').getByRole('button').filter({ hasText: /^16$/ }).click()
 }
 
 export async function lastOppKvittering(page: Page) {

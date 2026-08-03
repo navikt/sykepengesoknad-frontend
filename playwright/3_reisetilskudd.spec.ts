@@ -12,6 +12,7 @@ import {
     svarRadioClickOption,
     apneReadmore,
     svarJaHovedsporsmal,
+    harSynligTittel,
 } from './utils/utilities'
 import { validerAxeUtilityWrapper } from './uuvalidering'
 
@@ -27,8 +28,8 @@ test.describe('Teste førsteside i reisetilskuddsøknaden', () => {
         const steg = { value: 1 }
 
         await test.step('Landingside og listevisning', async () => {
-            await expect(page.getByRole('heading', { level: 1 })).toBeVisible()
-            await expect(page.getByRole('heading', { level: 1 })).toHaveText('Søknader')
+            await harSynligTittel(page, 'Søknader', 1)
+            await expect(await harSynligTittel(page, 'Søknader', 1)).toHaveText('Søknader')
             await page.getByRole('link', { name: 'Søknad om reisetilskudd' }).click()
 
             await expect(page).toHaveURL(new RegExp(`${nyttReisetilskudd.id}/1`))
@@ -38,20 +39,14 @@ test.describe('Teste førsteside i reisetilskuddsøknaden', () => {
             await expect(page).toHaveURL(new RegExp(`${nyttReisetilskudd.id}/1`))
 
             await page.getByRole('button', { name: /Om reisetilskudd/i }).click()
-            await expect(page.locator('.aksel-label').filter({ hasText: 'Hva dekker reisetilskuddet' })).toBeVisible()
-            await expect(
-                page
-                    .locator('p.aksel-body-long')
-                    .filter({ hasText: 'Reisetilskuddet dekker nødvendige ekstra reiseutgifter' }),
-            ).toBeVisible()
+            await expect(page.getByText('Hva dekker reisetilskuddet')).toBeVisible()
+            await expect(page.getByText('Reisetilskuddet dekker nødvendige ekstra reiseutgifter')).toBeVisible()
 
-            await expect(page.locator('.aksel-label').filter({ hasText: 'De første 16 dagene' })).toBeVisible()
-            await expect(page.locator('.aksel-label').filter({ hasText: 'Legg ved kvitteringer' })).toBeVisible()
-            await expect(
-                page.locator('p.aksel-body-long').filter({ hasText: 'Du må legge ved bilde av kvitteringene dine' }),
-            ).toBeVisible()
+            await expect(page.getByText('De første 16 dagene')).toBeVisible()
+            await expect(page.getByText('Legg ved kvitteringer')).toBeVisible()
+            await expect(page.getByText('Du må legge ved bilde av kvitteringene dine')).toBeVisible()
 
-            await page.locator('.aksel-checkbox__label').click()
+            await page.getByRole('checkbox', { name: /Jeg bekrefter/i }).click()
             await validerAxeUtilityWrapper(page, test.info(), true)
             await page.getByText('Start søknad').click()
             steg.value++
@@ -59,7 +54,7 @@ test.describe('Teste førsteside i reisetilskuddsøknaden', () => {
 
         await test.step('Før du fikk sykmelding - Reisetilskudd', async () => {
             await expect(page).toHaveURL(new RegExp(`${nyttReisetilskudd.id}/2`))
-            await expect(page.getByRole('heading', { level: 2 })).toHaveText('Før du fikk sykmelding')
+            await expect(await harSynligTittel(page, 'Før du fikk sykmelding', 2)).toHaveText('Før du fikk sykmelding')
 
             await apneReadmore(page, 'Hva mener vi med offentlig transport?', [
                 'Offentlig transport er blant annet buss, tog og båt som går i fast rute.',
@@ -90,7 +85,7 @@ test.describe('Teste førsteside i reisetilskuddsøknaden', () => {
 
         await test.step('Reise med bil - Reisetilskudd', async () => {
             await expect(page).toHaveURL(new RegExp(`${nyttReisetilskudd.id}/3`))
-            await expect(page.getByRole('heading', { level: 2 })).toHaveText('Reise med bil')
+            await expect(await harSynligTittel(page, 'Reise med bil', 2)).toHaveText('Reise med bil')
 
             await svarJaHovedsporsmal(page)
             await expect(page.locator('.undersporsmal > :nth-child(1) > :nth-child(1)')).toHaveText(
@@ -139,16 +134,14 @@ test.describe('Teste førsteside i reisetilskuddsøknaden', () => {
 
             await lastOppKvittering(page)
 
-            const table = page.locator('.aksel-table')
+            const table = page.getByRole('table')
             await expect(table).toContainText('Taxi')
             await expect(table).toContainText('1 234 kr')
             await expect(table).toContainText('1 utgift på til sammen')
             await expect(table).toContainText('1 234 kr')
 
-            await table.locator('.aksel-table__toggle-expand-button').click()
-            await expect(
-                page.locator('.aksel-table__expanded-row-content img[alt="kvittering for taxi"]'),
-            ).toBeVisible()
+            await table.locator('[aria-expanded]').click()
+            await expect(page.getByRole('img', { name: 'kvittering for taxi' })).toBeVisible()
 
             await table.getByRole('button', { name: 'Slett' }).click()
             await expect(page.getByRole('dialog').filter({ hasText: 'Vil du slette kvitteringen?' })).toBeVisible()
@@ -183,7 +176,7 @@ test.describe('Teste førsteside i reisetilskuddsøknaden', () => {
 
         await test.step('Utbetaling - Reisetilskudd', async () => {
             await expect(page).toHaveURL(new RegExp(`${nyttReisetilskudd.id}/5`))
-            await expect(page.getByRole('heading', { level: 2 })).toHaveText('Utbetaling')
+            await expect(await harSynligTittel(page, 'Utbetaling', 2)).toHaveText('Utbetaling')
 
             await svarJaHovedsporsmal(page)
             await validerAxeUtilityWrapper(page, test.info())
@@ -193,9 +186,7 @@ test.describe('Teste førsteside i reisetilskuddsøknaden', () => {
 
         await test.step('Oppsummering - Reisetilskudd', async () => {
             await expect(page).toHaveURL(new RegExp(`${nyttReisetilskudd.id}/6`))
-            await expect(page.locator('.aksel-guide-panel__content')).toContainText(
-                'Nå kan du se over at alt er riktig før du sender inn søknaden.',
-            )
+            await expect(page.getByText('Nå kan du se over at alt er riktig før du sender inn søknaden.')).toBeVisible()
             await validerAxeUtilityWrapper(page, test.info())
             await page.getByText('Send søknaden').click()
         })
