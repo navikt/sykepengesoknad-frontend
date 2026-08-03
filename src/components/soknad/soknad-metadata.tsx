@@ -75,10 +75,7 @@ export const SoknadMetadata = ({ soknad }: { soknad: Soknad }) => {
 
         return (
             <div className="mb-4">
-                <BodyShort size="small">
-                    <strong>{label}:</strong>
-                </BodyShort>
-                <ReadMore header={`Vis alle ${perioder.length} perioder`} size="small" className="mt-1">
+                <ReadMore header={<BodyShort size="small">{label}</BodyShort>} size="small" className="mt-1">
                     <PeriodeListe perioder={perioder} />
                 </ReadMore>
             </div>
