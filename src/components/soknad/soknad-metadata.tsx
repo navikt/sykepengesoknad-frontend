@@ -21,7 +21,7 @@ const periodeTekst = (periode: RSSoknadsperiode): string =>
     `${tilLesbarPeriodeMedArstall(periode.fom, periode.tom)}${periode.grad > 0 ? ` (${periode.grad}%)` : ''}`
 
 const PeriodeListe = ({ perioder }: { perioder: ReadonlyArray<RSSoknadsperiode> }) => (
-    <BodyShort as="ul" size="small" className="mt-1 list-none">
+    <BodyShort as="ul" size="small" className="mt-1 list-none" aria-label="Sykmeldingsperioder">
         {perioder.map((periode, i) => (
             <BodyShort as="li" size="small" key={i}>
                 {periodeTekst(periode)}
@@ -56,7 +56,7 @@ export const SoknadMetadata = ({ soknad }: { soknad: Soknad }) => {
 
         if (perioder.length === 1) {
             return (
-                <BodyShort size="small" spacing data-cy="soknad-perioder">
+                <BodyShort size="small" spacing>
                     <strong>{label}:</strong> {periodeTekst(perioder[0])}
                 </BodyShort>
             )
@@ -64,7 +64,7 @@ export const SoknadMetadata = ({ soknad }: { soknad: Soknad }) => {
 
         if (perioder.length <= 3) {
             return (
-                <div className="mb-4" data-cy="soknad-perioder">
+                <div className="mb-4">
                     <BodyShort size="small">
                         <strong>{label}:</strong>
                     </BodyShort>
@@ -74,7 +74,7 @@ export const SoknadMetadata = ({ soknad }: { soknad: Soknad }) => {
         }
 
         return (
-            <div className="mb-4" data-cy="soknad-perioder">
+            <div className="mb-4">
                 <BodyShort size="small">
                     <strong>{label}:</strong>
                 </BodyShort>
