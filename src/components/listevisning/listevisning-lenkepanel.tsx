@@ -49,7 +49,7 @@ export const ListevisningLenkepanel = ({ soknad, onClick }: { soknad: RSSoknadme
         return (
             <Button
                 type="button"
-                data-cy={`button-listevisning-${soknad.id}`}
+                data-testid={`button-listevisning-${soknad.id}`}
                 className="mb-4 w-full p-0  text-left [&>span]:w-full"
                 onClick={() => {
                     onClick()
@@ -62,7 +62,7 @@ export const ListevisningLenkepanel = ({ soknad, onClick }: { soknad: RSSoknadme
     const skipUtlandInfoside =
         (soknad.status == 'AVBRUTT' || soknad.status == 'SENDT') && soknad.soknadstype == 'OPPHOLD_UTLAND'
     return (
-        <Link href={urlTilSoknad(soknad, true, skipUtlandInfoside)} data-cy={`link-listevisning-${soknad.id}`}>
+        <Link href={urlTilSoknad(soknad, true, skipUtlandInfoside)} data-testid={`link-listevisning-${soknad.id}`}>
             <StyletLinkPanel soknad={soknad} paddingBottom={true} />
         </Link>
     )

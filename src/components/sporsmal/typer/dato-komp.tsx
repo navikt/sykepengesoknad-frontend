@@ -41,12 +41,11 @@ function DatoInput(props: SpmProps) {
     })
 
     return (
-        <div className="mt-8" data-cy="dato-komp">
+        <div className="mt-8">
             <div className="axe-exclude">
                 <DatePicker
                     {...datepickerProps}
                     dropdownCaption={kalenderMedDropdownCaption(sporsmal.min, sporsmal.max)}
-                    data-cy-sporsmalid={sporsmal.id}
                 >
                     <DatePicker.Input
                         {...inputProps}
@@ -58,7 +57,6 @@ function DatoInput(props: SpmProps) {
                             </>
                         }
                         error={fieldState.error && fieldState.error.message}
-                        data-cy={sporsmal.id}
                         description={<BodyShort size="small">dd.mm.åååå</BodyShort>}
                     />
                 </DatePicker>

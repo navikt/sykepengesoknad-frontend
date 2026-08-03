@@ -174,7 +174,7 @@ const OpplastingForm = ({ valgtSoknad, setOpenModal, openModal }: OpplastingFrom
 
     return (
         <FormProvider {...methods}>
-            <form key="opplasting_form" data-cy="opplasting-form">
+            <form key="opplasting_form" aria-label="Opplastingsskjema">
                 <BodyShort>
                     {getLedetekst(tekst('opplasting_modal.filtyper'), {
                         '%FILTYPER%': formattertFiltyper,
@@ -267,7 +267,6 @@ const OpplastingForm = ({ valgtSoknad, setOpenModal, openModal }: OpplastingFrom
                         onClick={() => {
                             setOpenModal(false)
                         }}
-                        data-cy="opplasting-modal-tilbake"
                     >
                         {tekst('opplasting_modal.tilbake')}
                     </Button>

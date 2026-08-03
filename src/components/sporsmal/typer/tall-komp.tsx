@@ -153,7 +153,7 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
                             <BodyShort
                                 as="span"
                                 className="mt-2 block font-ax-bold text-ax-text-danger-subtle"
-                                data-cy="feil-lokal"
+                               
                             >
                                 {feilmelding.lokal}
                             </BodyShort>
@@ -162,7 +162,7 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
                             <BodyShort
                                 as="span"
                                 className="mt-2 block font-ax-bold text-ax-text-danger-subtle"
-                                data-cy="feil-lokal"
+                               
                             >
                                 {getLedetekst(tekst('soknad.feilmelding.MINDRE_TIMER_ENN_FORVENTET.lokal'), {
                                     '%GRAD%': 100 - periode!.grad,

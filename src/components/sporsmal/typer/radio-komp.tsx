@@ -56,7 +56,7 @@ const RadioKomp = ({ sporsmal, erHovedsporsmal }: { sporsmal: Sporsmal; erHoveds
                         error={errors[sporsmal.id] !== undefined && feilmelding.lokal}
                         key={sporsmal.id}
                         className={cn({ 'mt-8': !erHovedJaNei })}
-                        data-cy="radio-komp"
+                       
                     >
                         <EkspanderbarHjelp
                             sporsmal={sporsmal}
