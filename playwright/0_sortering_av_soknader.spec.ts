@@ -10,10 +10,10 @@ const articleTilSoknad = async (locators: any) => {
 
     for (let i = 0; i < count; i++) {
         const element = locators.nth(i)
-        const dataCy = await element.getAttribute('data-cy')
-        if (dataCy) {
-            const id = dataCy.split('-listevisning-')[1]
-            const rsSoknad = soknaderIntegration.find((s) => s.id === id)
+        const href = await element.getAttribute('href')
+        if (href) {
+            const id = href.split('/soknader/')[1]?.split('?')[0]
+            const rsSoknad = id ? soknaderIntegration.find((s) => s.id === id) : undefined
             if (rsSoknad) soknader.push(rsToSoknad(rsSoknad))
         }
     }
@@ -41,7 +41,7 @@ test.describe('Tester sortering av søknader', () => {
     })
 
     test('Nye søknader sorteres etter tidligste tom dato', async ({ page }) => {
-        const articles = page.locator('[data-cy="Nye søknader"] .aksel-link-panel')
+        const articles = page.getByRole('region', { name: 'Nye søknader' }).getByRole('link')
         const soknader = await articleTilSoknad(articles)
 
         let forrigeSoknad = soknader[0]
@@ -54,7 +54,7 @@ test.describe('Tester sortering av søknader', () => {
     test('Sorter etter Status', async ({ page }) => {
         await page.locator('select').selectOption('Status')
 
-        const articles = page.locator('[data-cy="Tidligere søknader"] .aksel-link-panel')
+        const articles = page.getByRole('region', { name: 'Tidligere søknader' }).getByRole('link')
         const soknader = await articleTilSoknad(articles)
 
         let forrigeSoknad = soknader[0]
@@ -67,7 +67,7 @@ test.describe('Tester sortering av søknader', () => {
     test('Sorter etter Dato', async ({ page }) => {
         await page.locator('select').selectOption('Dato')
 
-        const articles = page.locator('[data-cy="Tidligere søknader"] .aksel-link-panel')
+        const articles = page.getByRole('region', { name: 'Tidligere søknader' }).getByRole('link')
         const soknader = await articleTilSoknad(articles)
 
         let forrigeSoknad = soknader[0]
@@ -77,10 +77,10 @@ test.describe('Tester sortering av søknader', () => {
         }
 
         await expect(page.locator('select')).toHaveValue('Dato')
-        await expect(page.locator('[data-cy="Tidligere søknader"] .aksel-link-panel').nth(0)).toContainText(
+        await expect(page.getByRole('region', { name: 'Tidligere søknader' }).getByRole('link').nth(0)).toContainText(
             '27. mai – 11. juni 2020',
         )
-        await expect(page.locator('[data-cy="Tidligere søknader"] .aksel-link-panel').nth(1)).toContainText(
+        await expect(page.getByRole('region', { name: 'Tidligere søknader' }).getByRole('link').nth(1)).toContainText(
             '23. mai – 7. juni 2020',
         )
     })
@@ -89,14 +89,14 @@ test.describe('Tester sortering av søknader', () => {
         await page.locator('select').selectOption('Sendt')
         await expect(page.locator('select')).toHaveValue('Sendt')
 
-        await expect(page.locator('[data-cy="Tidligere søknader"] .aksel-link-panel').nth(0)).toContainText(
+        await expect(page.getByRole('region', { name: 'Tidligere søknader' }).getByRole('link').nth(0)).toContainText(
             '27. mai – 11. juni 2020',
         )
-        await expect(page.locator('[data-cy="Tidligere søknader"] .aksel-link-panel').nth(1)).toContainText(
+        await expect(page.getByRole('region', { name: 'Tidligere søknader' }).getByRole('link').nth(1)).toContainText(
             '25. – 27. mars 2020',
         )
 
-        const articles = page.locator('[data-cy="Tidligere søknader"] .aksel-link-panel')
+        const articles = page.getByRole('region', { name: 'Tidligere søknader' }).getByRole('link')
         const soknader = await articleTilSoknad(articles)
 
         let forrigeSoknad = soknader[0]

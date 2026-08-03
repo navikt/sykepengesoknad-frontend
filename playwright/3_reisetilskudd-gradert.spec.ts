@@ -14,7 +14,7 @@ test.describe('Teste gradert reisetilskudd med ReadMore-hjelpetekster', () => {
         await page.goto(`/syk/sykepengesoknad/soknader/${gradertReisetilskudd.id}/2?testperson=reisetilskudd`)
 
         await test.step('Tilbake i arbeid - Gradert reisetilskudd', async () => {
-            await expect(page.locator('[data-cy="sporsmal-tittel"]')).toHaveText('Tilbake i fullt arbeid')
+            await expect(page.getByRole('heading', { level: 2 })).toHaveText('Tilbake i fullt arbeid')
 
             await apneReadmore(page, 'Spørsmålet forklart', [
                 'Du kan begynne å jobbe fullt igjen før sykmeldingen er slutt.',

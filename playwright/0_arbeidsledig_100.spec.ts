@@ -128,7 +128,7 @@ test.describe('Tester arbeidsledigsøknad', () => {
             )
 
             // Verifiser oppsummering med sporsmalOgSvar (bruk container for oppsummering)
-            const oppsummering = page.locator('[data-cy="oppsummering-fra-søknaden"]')
+            const oppsummering = page.locator('[role="region"][aria-label="Oppsummering fra søknaden"]')
             await sporsmalOgSvar(oppsummering, 'Brukte du hele sykmeldingen fram til 24. april 2020?', 'Nei')
             // Nestede spørsmål (bruk .locator for undernivå)
             const friskmeldtSvar = oppsummering
@@ -161,7 +161,7 @@ test.describe('Tester arbeidsledigsøknad', () => {
             await expect(page).toHaveURL(new RegExp(`/kvittering/${arbeidsledig.id}`))
 
             await expect(page.getByRole('heading', { name: 'Søknaden er sendt til NAV' })).toBeVisible()
-            const kvitteringPanel = page.locator('[data-cy="kvittering-panel"]')
+            const kvitteringPanel = page.locator('[role="region"][aria-label="Hva skjer videre?"]')
             await validerAxeUtilityWrapper(page, test.info())
             await expect(kvitteringPanel).toContainText('Hva skjer videre?')
             await expect(kvitteringPanel).toContainText('NAV behandler søknaden din')

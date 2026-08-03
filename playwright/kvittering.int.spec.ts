@@ -35,10 +35,10 @@ test.describe('Kvittering integrasjon', () => {
         })
 
         await test.step('Verifiserer kvittering', async () => {
-            await expect(page.locator('[data-cy="sendt-nav"]')).toBeVisible()
-            await expect(page.locator('[data-cy="sendt-arbeidsgiver"]')).toHaveCount(0)
+            await expect(page.locator('[aria-label="Sendt til NAV"]')).toBeVisible()
+            await expect(page.locator('[aria-label="Sendt til arbeidsgiver"]')).toHaveCount(0)
             await expect(page).toHaveURL(new RegExp(`/kvittering/${arbeidsledigKvittering.id}`))
-            const panel = page.locator('[data-cy="kvittering-panel"]')
+            const panel = page.getByRole('region', { name: 'Hva skjer videre?' })
             await expect(panel).toContainText('Hva skjer videre?')
             await expect(panel).toContainText('NAV behandler søknaden din')
             await expect(panel).toContainText(
@@ -53,16 +53,16 @@ test.describe('Kvittering integrasjon', () => {
     test('Arbeidsledig - etter 30 dager', async ({ page }) => {
         await test.step('Åpner sendt søknad', async () => {
             await page.goto('/syk/sykepengesoknad?testperson=integrasjon-soknader')
-            await page.locator(`[data-cy="Tidligere søknader"] a[href*="${sendtArbeidsledigKvittering.id}"]`).click()
+            await page.getByRole('region', { name: 'Tidligere søknader' }).locator(`a[href*="${sendtArbeidsledigKvittering.id}"]`).click()
         })
 
         await test.step('Verifiserer sendt-detaljer', async () => {
             await expect(
-                page.locator('[data-cy="sendt-nav"]').getByText('Mottatt: Torsdag 23. april, kl 11:56'),
+                page.locator('[aria-label="Sendt til NAV"]').getByText('Mottatt: Torsdag 23. april, kl 11:56'),
             ).toBeVisible()
-            await expect(page.locator('[data-cy="sendt-arbeidsgiver"]')).toHaveCount(0)
+            await expect(page.locator('[aria-label="Sendt til arbeidsgiver"]')).toHaveCount(0)
             await expect(page).toHaveURL(new RegExp(`/sendt/${sendtArbeidsledigKvittering.id}`))
-            await expect(page.locator('[data-cy="kvittering-panel"]')).toHaveCount(0)
+            await expect(page.getByRole('region', { name: 'Hva skjer videre?' })).not.toBeAttached()
             await expect(page.getByRole('button', { name: 'Jeg vil endre svarene i søknaden' })).toBeVisible()
         })
     })
@@ -71,7 +71,7 @@ test.describe('Kvittering integrasjon', () => {
         await test.step('Sender utland søknad', async () => {
             await page.goto('/syk/sykepengesoknad?testperson=integrasjon-soknader')
             await page
-                .locator('[data-cy="Nye søknader"]')
+                .getByRole('region', { name: 'Nye søknader' })
                 .getByRole('link', { name: /beholde sykepenger utenfor EU\/EØS/ })
                 .click()
             await page.getByRole('button', { name: 'Start søknaden' }).click()
@@ -85,9 +85,9 @@ test.describe('Kvittering integrasjon', () => {
         })
 
         await test.step('Verifiserer utland kvittering', async () => {
-            await expect(page.locator('[data-cy="sendt-nav"]')).toBeVisible()
-            await expect(page.locator('[data-cy="sendt-arbeidsgiver"]')).toHaveCount(0)
-            const panel = page.locator('[data-cy="kvittering-panel"]')
+            await expect(page.locator('[aria-label="Sendt til NAV"]')).toBeVisible()
+            await expect(page.locator('[aria-label="Sendt til arbeidsgiver"]')).toHaveCount(0)
+            const panel = page.getByRole('region', { name: 'Hva skjer videre?' })
             await expect(panel).toContainText('Hva skjer videre?')
             await expect(panel).toContainText('Du får svar på om du kan reise')
             await expect(panel).toContainText(
@@ -120,10 +120,10 @@ test.describe('Kvittering integrasjon', () => {
         })
 
         await test.step('Verifiserer selvstendig kvittering', async () => {
-            await expect(page.locator('[data-cy="sendt-nav"]')).toBeVisible()
-            await expect(page.locator('[data-cy="sendt-arbeidsgiver"]')).toHaveCount(0)
+            await expect(page.locator('[aria-label="Sendt til NAV"]')).toBeVisible()
+            await expect(page.locator('[aria-label="Sendt til arbeidsgiver"]')).toHaveCount(0)
             await expect(page).toHaveURL(new RegExp(`/kvittering/${selvstendigKvittering.id}`))
-            const panel = page.locator('[data-cy="kvittering-panel"]')
+            const panel = page.getByRole('region', { name: 'Hva skjer videre?' })
             await expect(panel).toContainText('Hva skjer videre?')
             await expect(panel).toContainText('NAV behandler søknaden din')
             await expect(panel).toContainText(
@@ -143,7 +143,7 @@ test.describe('Kvittering integrasjon', () => {
         await klikkGaVidere(page)
         await page.getByRole('button', { name: 'Send søknaden' }).click()
         await sjekkMainContentFokus(page)
-        await expect(page.locator('[data-cy="kvittering"]')).toBeVisible()
+        await expect(page.getByRole('main')).toBeVisible()
     }
 
     test('Arbeidstaker - innenfor arbeidsgiverperiode', async ({ page }) => {
@@ -157,9 +157,9 @@ test.describe('Kvittering integrasjon', () => {
             await expect(page).toHaveURL(
                 new RegExp(`/kvittering/${arbeidstakerInnenforArbeidsgiverperiodeKvittering.id}`),
             )
-            await expect(page.locator('[data-cy="sendt-nav"]')).toHaveCount(0)
-            await expect(page.locator('[data-cy="sendt-arbeidsgiver"]')).toBeVisible()
-            const panel = page.locator('[data-cy="kvittering"]')
+            await expect(page.locator('[aria-label="Sendt til NAV"]')).toHaveCount(0)
+            await expect(page.locator('[aria-label="Sendt til arbeidsgiver"]')).toBeVisible()
+            const panel = page.getByRole('main')
             await expect(panel).toContainText('Hva skjer videre?')
             await expect(panel).toContainText('Du får sykepengene fra arbeidsgiveren din')
             await expect(panel).toContainText('Arbeidsgiveren din betaler de første 16 kalenderdagene av sykefraværet.')
@@ -178,9 +178,9 @@ test.describe('Kvittering integrasjon', () => {
             await expect(page).toHaveURL(
                 new RegExp(`/kvittering/${arbeidstakerUtenforArbeidsgiverperiodeKvittering.id}`),
             )
-            await expect(page.locator('[data-cy="sendt-nav"]')).toBeVisible()
-            await expect(page.locator('[data-cy="sendt-arbeidsgiver"]')).toBeVisible()
-            const panel = page.locator('[data-cy="kvittering"]')
+            await expect(page.locator('[aria-label="Sendt til NAV"]')).toBeVisible()
+            await expect(page.locator('[aria-label="Sendt til arbeidsgiver"]')).toBeVisible()
+            const panel = page.getByRole('main')
             await expect(panel).toContainText('Hva skjer videre?')
             await expect(panel).toContainText(
                 'For å behandle søknaden trenger vi en inntektsmelding fra arbeidsgiveren din',
@@ -202,7 +202,7 @@ test.describe('Kvittering integrasjon', () => {
             await expect(page).toHaveURL(
                 new RegExp(`/kvittering/${arbeidstakerDeltPeriodeForsteUtenforArbeidsgiverperiodeKvittering.id}`),
             )
-            const panel = page.locator('[data-cy="kvittering"]')
+            const panel = page.getByRole('main')
             await expect(panel).toContainText('Hva skjer videre?')
             await expect(panel).toContainText('Nav ber arbeidsgiveren din om inntektsmelding')
             await expect(panel).toContainText(
@@ -225,7 +225,7 @@ test.describe('Kvittering integrasjon', () => {
             await expect(page).toHaveURL(
                 new RegExp(`/kvittering/${arbeidstakerUtenOppholdForsteUtenforArbeidsgiverperiodeKvittering.id}`),
             )
-            const panel = page.locator('[data-cy="kvittering"]')
+            const panel = page.getByRole('main')
             await expect(panel).toContainText('Hva skjer videre?')
             await expect(panel).toContainText('Nav ber arbeidsgiveren din om inntektsmelding')
             await expect(panel).toContainText(
@@ -245,9 +245,9 @@ test.describe('Kvittering integrasjon', () => {
         })
 
         await test.step('Verifiserer kvittering', async () => {
-            await expect(page.locator('[data-cy="sendt-nav"]')).toBeVisible()
-            await expect(page.locator('[data-cy="sendt-arbeidsgiver"]')).toHaveCount(0)
-            const panel = page.locator('[data-cy="kvittering"]')
+            await expect(page.locator('[aria-label="Sendt til NAV"]')).toBeVisible()
+            await expect(page.locator('[aria-label="Sendt til arbeidsgiver"]')).toHaveCount(0)
+            const panel = page.getByRole('main')
             await expect(panel).toContainText('Hva skjer videre?')
             await expect(panel).toContainText('NAV behandler søknaden')
             await expect(panel).toContainText(
@@ -272,7 +272,7 @@ test.describe('Kvittering integrasjon', () => {
             await expect(page).toHaveURL(
                 new RegExp(`/kvittering/${arbeidstakerMedOppholdForsteUtenforArbeidsgiverperiodeKvittering.id}`),
             )
-            const panel = page.locator('[data-cy="kvittering"]')
+            const panel = page.getByRole('main')
             await expect(panel).toContainText('Hva skjer videre?')
             await expect(panel).toContainText('Nav ber arbeidsgiveren din om inntektsmelding')
             await expect(panel).toContainText(
@@ -294,7 +294,7 @@ test.describe('Kvittering integrasjon', () => {
 
         await test.step('Verifiserer kvittering', async () => {
             await expect(page).toHaveURL(new RegExp(`/kvittering/${arbeidstakerMedOppholdKvittering.id}`))
-            const panel = page.locator('[data-cy="kvittering"]')
+            const panel = page.getByRole('main')
             await expect(panel).toContainText('Viktig informasjon')
             await expect(panel).toContainText('Før NAV kan behandle søknaden')
             await expect(panel).toContainText('NAV behandler søknaden')

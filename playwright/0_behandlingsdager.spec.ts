@@ -212,7 +212,7 @@ test.describe('Tester behandlingsdagersøknad', () => {
 
         await test.step('Søknad kvittering', async () => {
             await expect(page).toHaveURL(new RegExp('/kvittering/'))
-            const kvittering = page.locator('[data-cy="kvittering"]')
+            const kvittering = page.getByRole('main')
             await expect(kvittering).toContainText('Hva skjer videre?')
             await expect(kvittering).toContainText('Nav ber arbeidsgiveren din om inntektsmelding')
             await expect(kvittering).toContainText(

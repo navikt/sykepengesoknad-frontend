@@ -83,7 +83,7 @@ test.describe('Tester yrkesskadesspørsmål', () => {
         await page.keyboard.press('Space')
         await page.keyboard.press('Enter')
 
-        const oppsummeringContainer = page.locator('[data-cy="oppsummering-fra-søknaden"]')
+        const oppsummeringContainer = page.locator('[role="region"][aria-label="Oppsummering fra søknaden"]')
 
         await sporsmalOgSvar(
             oppsummeringContainer,

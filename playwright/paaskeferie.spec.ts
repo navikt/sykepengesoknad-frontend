@@ -7,13 +7,13 @@ test.describe('Tester påskeferiehjelpetekst', () => {
             '/syk/sykepengesoknad/soknader/5b769c04-e171-47c9-b79b-23ab8fce331e/3?testperson=arbeidstaker-gradert',
         )
 
-        await expect(page.locator('[data-cy="sporsmal-tittel"]')).toContainText('Ferie')
+        await expect(page.getByRole('heading', { level: 2 })).toContainText('Ferie')
 
-        await expect(page.locator('[data-cy="paskeferiehjelp"]')).toHaveCount(0)
+        await expect(page.getByRole('alert').filter({ hasText: 'påsken' })).toHaveCount(0)
         await svarJaHovedsporsmal(page)
         await expect(page.getByText('Når tok du ut feriedager?')).toBeVisible()
 
-        const paskeferiehjelp = page.locator('[data-cy="paskeferiehjelp"]')
+        const paskeferiehjelp = page.getByRole('alert').filter({ hasText: 'påsken' })
         await expect(paskeferiehjelp).toBeVisible()
         await expect(paskeferiehjelp).toContainText('Jeg var syk på de røde dagene i påsken. Er det ferie?')
         await expect(paskeferiehjelp).toContainText(
@@ -21,16 +21,16 @@ test.describe('Tester påskeferiehjelpetekst', () => {
         )
 
         await svarNeiHovedsporsmal(page)
-        await expect(page.locator('[data-cy="paskeferiehjelp"]')).toHaveCount(0)
+        await expect(page.getByRole('alert').filter({ hasText: 'påsken' })).toHaveCount(0)
     })
 
     test('Søknaden går ikke over påskeferien', async ({ page }) => {
         await page.goto('/syk/sykepengesoknad/soknader/963e816f-7b3c-4513-818b-95595d84dd91/3?testperson=brukertest')
 
-        await expect(page.locator('[data-cy="sporsmal-tittel"]')).toContainText('Ferie')
+        await expect(page.getByRole('heading', { level: 2 })).toContainText('Ferie')
 
         await svarJaHovedsporsmal(page)
         await expect(page.getByText('Når tok du ut feriedager?')).toBeVisible()
-        await expect(page.locator('[data-cy="paskeferiehjelp"]')).toHaveCount(0)
+        await expect(page.getByRole('alert').filter({ hasText: 'påsken' })).toHaveCount(0)
     })
 })

@@ -131,7 +131,7 @@ test.describe('Søknad med alle opprinnelige spørsmål om medlemskap', () => {
         await test.step('Søknad TIL_SLUTT (oppsummering)', async () => {
             await expect(page.getByRole('heading', { name: 'Oppsummering fra søknaden' })).toBeVisible()
 
-            const oppsummeringContainer = page.locator('[data-cy="oppsummering-fra-søknaden"]')
+            const oppsummeringContainer = page.locator('[role="region"][aria-label="Oppsummering fra søknaden"]')
 
             // Arbeid utenfor Norge
             await sporsmalOgSvar(
@@ -189,7 +189,7 @@ test.describe('Søknad med nytt spørsmål om oppholdstillatelse og kjent perman
         await test.step('Søknad TIL_SLUTT (oppsummering)', async () => {
             await expect(page.getByRole('heading', { name: 'Oppsummering fra søknaden', level: 2 })).toBeVisible()
 
-            const oppsummeringContainer = page.locator('[data-cy="oppsummering-fra-søknaden"]')
+            const oppsummeringContainer = page.locator('[role="region"][aria-label="Oppsummering fra søknaden"]')
             await sporsmalOgSvar(
                 oppsummeringContainer,
                 'Har Utlendingsdirektoratet gitt deg en oppholdstillatelse før 1. mai 2024?',
@@ -243,7 +243,7 @@ test.describe('Søknad med nytt spørsmål om oppholdstillatelse og kjent midler
         await test.step('Søknad TIL_SLUTT (oppsummering)', async () => {
             await expect(page.getByRole('heading', { name: 'Oppsummering fra søknaden', level: 2 })).toBeVisible()
 
-            const oppsummeringContainer = page.locator('[data-cy="oppsummering-fra-søknaden"]')
+            const oppsummeringContainer = page.locator('[role="region"][aria-label="Oppsummering fra søknaden"]')
             await sporsmalOgSvar(
                 oppsummeringContainer,
                 'Har Utlendingsdirektoratet gitt deg en oppholdstillatelse før 1. mai 2024?',

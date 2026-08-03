@@ -16,8 +16,8 @@ test.describe('Test sletting av kvittering som feiler', () => {
     test('Full flyt - sletting av kvittering som feiler', async ({ page }) => {
         await test.step('URL er riktig', async () => {
             await expect(page).toHaveURL(new RegExp(`/syk/sykepengesoknad/soknader/${soknadId}/4`))
-            await expect(page.locator('h2[data-cy="sporsmal-tittel"]')).toBeVisible()
-            await expect(page.locator('h2[data-cy="sporsmal-tittel"]')).toHaveText('Kvitteringer')
+            await expect(page.getByRole('heading', { name: 'Kvitteringer', level: 2 })).toBeVisible()
+            await expect(page.getByRole('heading', { name: 'Kvitteringer', level: 2 })).toHaveText('Kvitteringer')
         })
 
         await test.step('Laster opp Taxi-kvittering', async () => {
@@ -26,7 +26,7 @@ test.describe('Test sletting av kvittering som feiler', () => {
             await page.locator('select[name=transportmiddel]').selectOption('TAXI')
             await page.locator('input[name=belop_input]').fill('1234')
 
-            const fileInput = page.locator('[data-cy="filopplasteren"] input[type=file]')
+            const fileInput = page.locator('[aria-label="Filopplasteren"] input[type=file]')
             const filePath = path.join(test.info().project.testDir, 'fixtures', 'kvittering.jpg')
             await fileInput.setInputFiles(filePath)
 

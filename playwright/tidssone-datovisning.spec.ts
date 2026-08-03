@@ -38,7 +38,7 @@ test.describe('Tidssone: periodevisning', () => {
             await page.goto('/syk/sykepengesoknad')
             await harSoknaderlisteHeading(page)
 
-            const soknadLink = page.locator(`[data-cy="link-listevisning-${arbeidstakerId}"]`)
+            const soknadLink = page.locator(`a[href*="${arbeidstakerId}"]`)
             await expect(soknadLink).toContainText('1. april – 24. mai 2020')
         })
 
@@ -67,7 +67,7 @@ test.describe('Tidssone: periodevisning', () => {
             await page.goto('/syk/sykepengesoknad')
             await harSoknaderlisteHeading(page)
 
-            const soknadLink = page.locator(`[data-cy="link-listevisning-${arbeidstakerId}"]`)
+            const soknadLink = page.locator(`a[href*="${arbeidstakerId}"]`)
             await expect(soknadLink).toContainText('1. april – 24. mai 2020')
         })
     })
@@ -79,7 +79,7 @@ test.describe('Tidssone: periodevisning', () => {
             await page.goto('/syk/sykepengesoknad')
             await harSoknaderlisteHeading(page)
 
-            const soknadLink = page.locator(`[data-cy="link-listevisning-${arbeidstakerId}"]`)
+            const soknadLink = page.locator(`a[href*="${arbeidstakerId}"]`)
             await expect(soknadLink).toContainText('1. april – 24. mai 2020')
         })
     })
@@ -256,8 +256,8 @@ test.describe('Tidssone: periode-komp fromDate-grense', () => {
     const åpnePeriodeKalender = async (page: import('@playwright/test').Page) => {
         await page.goto(`/syk/sykepengesoknad/soknader/${arbeidstaker.id}/3`)
         await svarJaHovedsporsmal(page)
-        const periodeLocator = page.locator('[data-cy="periode"]').first()
-        await periodeLocator.locator('.aksel-date__field-button').first().click()
+        const periodeLocator = page.getByRole('group', { name: /Tidsperiode/ }).first()
+        await periodeLocator.getByRole('button', { name: /Åpne datovelger/i }).first().click()
         await expect(page.getByRole('grid')).toBeVisible()
     }
 
@@ -296,8 +296,8 @@ test.describe('Tidssone: periode-komp datoer persistering', () => {
     const velgPeriodeOgNavigerTilbake = async (page: import('@playwright/test').Page) => {
         await page.goto(`/syk/sykepengesoknad/soknader/${arbeidstaker.id}/3`)
         await svarJaHovedsporsmal(page)
-        const periodeLocator = page.locator('[data-cy="periode"]').first()
-        await periodeLocator.locator('.aksel-date__field-button').first().click()
+        const periodeLocator = page.getByRole('group', { name: /Tidsperiode/ }).first()
+        await periodeLocator.getByRole('button', { name: /Åpne datovelger/i }).first().click()
         await periodeLocator.locator('[data-day="2020-04-05"]').click()
         await periodeLocator.locator('[data-day="2020-04-10"]').click()
         await klikkGaVidere(page)

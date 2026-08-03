@@ -17,7 +17,7 @@ const fillTextFieldByLabel = async (page: Page, labelText: string, value: string
 }
 
 const setPeriodeFraTil = async (page: Page, fom: number, tom: number, periodeIndex = 0) => {
-    const periodeComponent = page.locator(`[data-cy="periode"]`).nth(periodeIndex)
+    const periodeComponent = page.getByRole('group', { name: /Tidsperiode/ }).nth(periodeIndex)
 
     await periodeComponent.locator('.aksel-date__field-button').nth(0).click()
 
@@ -133,7 +133,7 @@ test.describe('Tester arbeidstakersøknad - gradert 50%', () => {
             ).toBeVisible()
 
             await expect(
-                page.locator('[data-cy="feil-lokal"]').filter({ hasText: 'Timene utgjør mindre enn 50 %.' }),
+                page.getByText('Timene utgjør mindre enn 50 %.'),
             ).toBeVisible()
             await expect(
                 page.locator(
@@ -189,7 +189,7 @@ test.describe('Tester arbeidstakersøknad - gradert 50%', () => {
         await test.step('Søknad TIL_SLUTT', async () => {
             await expect(page).toHaveURL(new RegExp(`.*${soknadId}\/9`))
             await expect(page.getByRole('heading', { name: 'Oppsummering fra søknaden' })).toBeVisible()
-            const oppsummering = page.locator('[data-cy="oppsummering-fra-søknaden"]')
+            const oppsummering = page.locator('[role="region"][aria-label="Oppsummering fra søknaden"]')
             await expect(oppsummering).toContainText('Søknaden sendes til')
             await expect(oppsummering).toContainText('Posten Norge AS, Bærum')
             await validerAxeUtilityWrapper(page, test.info())
@@ -198,7 +198,7 @@ test.describe('Tester arbeidstakersøknad - gradert 50%', () => {
 
         await test.step('Søknad kvittering', async () => {
             await expect(page).toHaveURL(new RegExp(`.*\/kvittering\/${soknadId}`))
-            const kvittering = page.locator('[data-cy="kvittering"]')
+            const kvittering = page.getByRole('main')
             await expect(kvittering).toContainText('Hva skjer videre?')
             await expect(kvittering).toContainText('Du får sykepengene fra arbeidsgiveren din')
             await expect(kvittering).not.toContainText('Vi trenger inntektsopplysninger fra deg')

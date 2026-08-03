@@ -214,7 +214,7 @@ test.describe('Sjekker at søknader med gammel oppsummering ser ok ut', () => {
                 'Nå kan du se over at alt er riktig før du sender inn søknaden. Ved behov kan du endre opplysningene inntil 12 måneder etter innsending.',
             )
 
-            const oppsummering = page.locator('[data-cy="oppsummering-fra-søknaden"]')
+            const oppsummering = page.locator('[role="region"][aria-label="Oppsummering fra søknaden"]')
             await sporsmalOgSvar(oppsummering, 'Søknaden sendes til', 'NAV')
             await expect(oppsummering).toContainText('Posten Norge AS, Bærum')
 
@@ -270,7 +270,7 @@ test.describe('Sjekker at søknader med gammel oppsummering ser ok ut', () => {
 
             await expect(page).toHaveURL(/\/kvittering\/.*/)
 
-            const kvittering = page.locator('[data-cy="kvittering"]')
+            const kvittering = page.getByRole('main')
             await expect(kvittering).toContainText('Hva skjer videre?')
             await expect(kvittering).toContainText('Nav ber arbeidsgiveren din om inntektsmelding')
             await expect(kvittering).toContainText(

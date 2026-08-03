@@ -27,11 +27,11 @@ test.describe('Tester korrigering av ferie', () => {
         await test.step('Svarer nei på ferie, så ja og fyller periode', async () => {
             await harSynligTittel(page, 'Ferie', 2)
             await svarNeiHovedsporsmal(page)
-            await expect(page.locator('[data-cy="sporsmal-tittel"]')).toContainText('Ferie')
+            await expect(page.getByRole('heading', { level: 2 })).toContainText('Ferie')
             await svarJaHovedsporsmal(page)
             await setPeriodeFraTil(page, 12, 15)
             await expect(page.getByText('Når tok du ut feriedager?')).toBeVisible()
-            await expect(page.locator('[data-cy="feriekorrigeringvarsel"]')).toBeHidden()
+            await expect(page.getByRole('alert').filter({ hasText: 'ferie' })).toBeHidden()
             await klikkGaVidere(page)
         })
 
@@ -60,7 +60,7 @@ test.describe('Tester korrigering av ferie', () => {
             await harSynligTittel(page, 'Ferie', 2, true)
             await svarJaHovedsporsmal(page)
             await expect(page.getByText('Når tok du ut feriedager?')).toBeVisible()
-            await expect(page.locator('[data-cy="feriekorrigeringvarsel"]')).toBeVisible()
+            await expect(page.getByRole('alert').filter({ hasText: 'ferie' })).toBeVisible()
         })
     })
 })

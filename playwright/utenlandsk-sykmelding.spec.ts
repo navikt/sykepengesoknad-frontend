@@ -62,11 +62,11 @@ test.describe('Tester søknad til utenlandsk sykmelding', () => {
             )
             await expect(
                 page
-                    .locator('[data-cy="UTENLANDSK_SYKMELDING_LONNET_ARBEID_UTENFOR_NORGE_FRITEKST"]')
+                    .getByRole('textbox', { name: /arbeid utenfor Norge/i })
                     .locator('..')
                     .locator('..'),
             ).toContainText('Du kan skrive maks 200 tegn')
-            await expect(page.locator('[data-cy="feil-oppsumering"]')).toContainText('Du kan skrive maks 200 tegn')
+            await expect(page.getByRole('alert')).toContainText('Du kan skrive maks 200 tegn')
             await svarFritekst(
                 page,
                 'Oppgi nærmere opplysninger om arbeid/virksomhet utenfor Norge',

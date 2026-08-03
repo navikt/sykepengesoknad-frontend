@@ -242,7 +242,7 @@ test.describe('Tester arbeidstakersøknad - 100%', () => {
                     ),
             ).toBeVisible()
 
-            const oppsummering = page.locator('[data-cy="oppsummering-fra-søknaden"]')
+            const oppsummering = page.locator('[role="region"][aria-label="Oppsummering fra søknaden"]')
 
             await sporsmalOgSvar(oppsummering, 'Søknaden sendes til', 'NAV')
             await expect(oppsummering.getByText('Posten Norge AS, Bærum', { exact: true })).toBeVisible()
@@ -291,7 +291,7 @@ test.describe('Tester arbeidstakersøknad - 100%', () => {
         await test.step('Søknad kvittering', async () => {
             await expect(page).toHaveURL(new RegExp(`.*\\/kvittering\\/${soknadId}`))
 
-            const kvittering = page.locator('[data-cy="kvittering"]')
+            const kvittering = page.getByRole('main')
             await expect(kvittering).toContainText('Hva skjer videre?')
             await expect(kvittering).toContainText('Nav ber arbeidsgiveren din om inntektsmelding')
             await expect(kvittering).toContainText(

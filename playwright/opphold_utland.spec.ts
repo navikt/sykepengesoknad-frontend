@@ -24,7 +24,7 @@ test.describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
         await expect(page.locator('.aksel-heading--large')).toBeVisible()
         await expect(page.locator('.aksel-heading--large')).toHaveText('Søknader')
 
-        const nyeSoknaderSection = page.locator('[data-cy="Nye søknader"]')
+        const nyeSoknaderSection = page.getByRole('region', { name: 'Nye søknader' })
         await expect(nyeSoknaderSection).toBeVisible()
 
         await nyeSoknaderSection.getByRole('link', { name: 'Søknad om å beholde sykepenger utenfor EU/EØS' }).click()
@@ -199,7 +199,7 @@ test.describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
         ).toBeVisible()
 
         // Oppsummering
-        const oppsummering = page.locator('[data-cy="oppsummering-fra-søknaden"]')
+        const oppsummering = page.locator('[role="region"][aria-label="Oppsummering fra søknaden"]')
 
         await sporsmalOgSvar(oppsummering, 'Når skal du reise?', '17. – 24. desember 2020')
         await sporsmalOgSvar(oppsummering, 'Hvilke(t) land skal du reise til?', 'Hellas')
@@ -221,7 +221,7 @@ test.describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
 
         // Viser kvittering med Ferdig-knapp', async () => {
         await expect(page).toHaveURL(new RegExp(`kvittering/${soknad.id}`))
-        const kvitteringPanel = page.locator('[data-cy="kvittering-panel"]')
+        const kvitteringPanel = page.locator('[role="region"][aria-label="Hva skjer videre?"]')
 
         await validerAxeUtilityWrapper(page, test.info())
 
@@ -237,7 +237,7 @@ test.describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
         await expect(page.locator('h1').first()).toHaveText('Søknader')
 
         // Navigerer til den sendte søknaden igjen', async () => {
-        const tidligere = page.locator('[data-cy="Tidligere søknader"]')
+        const tidligere = page.getByRole('region', { name: 'Tidligere søknader' })
         await expect(tidligere).toBeVisible()
         await tidligere
             .getByRole('link', { name: 'Søknad om å beholde sykepenger utenfor EU/EØS , status: Sendt til NAV' })
