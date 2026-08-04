@@ -60,13 +60,7 @@ const lokalBrowserConfig = velgBrowserConfigs(
 
 const ciBrowserConfigs = velgBrowserConfigs(
     alleBrowserConfigs,
-    (config) =>
-        config.name === Nettlesernavn.DESKTOP_CHROME ||
-        config.name === Nettlesernavn.DESKTOP_CHROME_MED_DEKORATOR ||
-        config.name === Nettlesernavn.MOBILE_CHROME ||
-        config.name === Nettlesernavn.MOBILE_CHROMIUM_MED_DEKORATOR ||
-        config.name === Nettlesernavn.MOBILE_WEBKIT ||
-        config.name === Nettlesernavn.MOBILE_WEBKIT_MED_DEKORATOR,
+    (config) => config.name === Nettlesernavn.DESKTOP_CHROME || config.name === Nettlesernavn.MOBILE_WEBKIT,
 )
 
 export default defineConfig({
