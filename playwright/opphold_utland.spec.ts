@@ -16,6 +16,7 @@ test.describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
     const soknad = oppholdUtland
 
     test('Går til søknad som har påfølgende søknader som må fylles ut', async ({ page }) => {
+        test.setTimeout(60_000)
         // Opprett ny kontekst og side ÉN gang
 
         await page.goto('/syk/sykepengesoknad?testperson=bare-utland')

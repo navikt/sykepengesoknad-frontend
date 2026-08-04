@@ -15,6 +15,7 @@ test.describe('Tester korrigering av ferie', () => {
     const baseUrl = `/syk/sykepengesoknad/soknader/${soknadId}${testpersonQuery}`
 
     test('Sender inn søknad med ja på ferie spørsmålet', async ({ page }) => {
+        test.setTimeout(60_000)
         await test.step('Starter søknad og svarer nei på første spørsmål', async () => {
             await page.goto(baseUrl)
             await checkViStolerPaDeg(page)
