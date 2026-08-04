@@ -6,7 +6,6 @@ import * as uuid from 'uuid'
 import { v4 as uuidv4 } from 'uuid'
 import { NextApiRequest, NextApiResponse } from 'next'
 import { format, subDays } from 'date-fns'
-import { stream2buffer } from '@navikt/next-api-proxy/dist/proxyUtils'
 import { logger } from '@navikt/next-logger'
 import { nextleton } from 'nextleton'
 import { serialize } from 'cookie'
@@ -113,6 +112,15 @@ export function hentSoknader(req: NextApiRequest, res: NextApiResponse): RSSokna
         })
 
     return soknader
+}
+
+async function stream2buffer(stream: NodeJS.ReadableStream): Promise<Buffer> {
+    return new Promise((resolve, reject) => {
+        const buffer: Buffer[] = []
+        stream.on('data', (chunk) => buffer.push(Buffer.from(chunk)))
+        stream.on('end', () => resolve(Buffer.concat(buffer)))
+        stream.on('error', (err) => reject(`Feil ved konvertering av stream: ${err}`))
+    })
 }
 
 async function parseRequest<T>(req: NextApiRequest): Promise<T> {
