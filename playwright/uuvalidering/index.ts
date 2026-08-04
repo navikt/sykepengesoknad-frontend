@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import { expect, Page, TestInfo } from '@playwright/test'
 
 import { runAxeAnalysis, addAnnotations, attachHtmlReport } from './axe-runner'

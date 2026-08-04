@@ -2,7 +2,6 @@ ingress: https://www.ekstern.dev.nav.no/syk/sykepengesoknad
 cpu: 200m
 memory: 400Mi
 env:
-  DECORATOR_ENV: dev
   SYKMELDINGER_BACKEND_CLIENT_ID: dev-gcp:flex:flex-sykmeldinger-backend
   SYKEPENGESOKNAD_BACKEND_CLIENT_ID: dev-gcp:flex:sykepengesoknad-backend
   SYKEPENGESOKNAD_KVITTERINGER_CLIENT_ID: dev-gcp:flex:sykepengesoknad-kvitteringer

@@ -13,41 +13,38 @@ import { getLedetekst, tekst } from '../../utils/tekster'
 
 import { periodeListevisning, teaserTittel } from './teaser-util'
 
-export const ListevisningLenkepanel = ({ soknad, onClick }: { soknad: RSSoknadmetadata; onClick?: () => void }) => {
-    const orange = (): boolean => {
-        return soknad.status === 'NY' || soknad.status === 'UTKAST_TIL_KORRIGERING'
-    }
-
-    const StyletLinkPanel = ({ paddingBottom }: { paddingBottom: boolean }) => {
-        return (
-            <LinkPanel
-                className={cn('p-6 [&>div]:w-full', {
-                    'mb-4': paddingBottom,
-                    'border-ax-warning-400 bg-ax-warning-100 hover:border-ax-warning-600': orange(),
-                })}
-                as="div"
-                border
-            >
-                <div className="flex gap-3 max-[560px]:flex-col">
-                    <div className="grow">
-                        <LinkPanel.Title>
-                            {soknad.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND && (
-                                <BodyShort size="small" spacing>
-                                    {tilLesbarPeriodeMedArstall(soknad.fom, soknad.tom)}
-                                </BodyShort>
-                            )}
-                            {teaserTittel(soknad)}
-                        </LinkPanel.Title>
-                        <LinkPanel.Description>{periodeListevisning(soknad)}</LinkPanel.Description>
-                    </div>
-                    <div className="flex shrink-0 items-center">
-                        <SoknadTag soknad={soknad} />
-                    </div>
+const StyletLinkPanel = ({ soknad, paddingBottom }: { soknad: RSSoknadmetadata; paddingBottom: boolean }) => {
+    const orange = soknad.status === 'NY' || soknad.status === 'UTKAST_TIL_KORRIGERING'
+    return (
+        <LinkPanel
+            className={cn('p-6 [&>div]:w-full', {
+                'mb-4': paddingBottom,
+                'border-ax-warning-400 bg-ax-warning-100 hover:border-ax-warning-600': orange,
+            })}
+            as="div"
+            border
+        >
+            <div className="flex gap-3 max-[560px]:flex-col">
+                <div className="grow">
+                    <LinkPanel.Title>
+                        {soknad.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND && (
+                            <BodyShort size="small" spacing>
+                                {tilLesbarPeriodeMedArstall(soknad.fom, soknad.tom)}
+                            </BodyShort>
+                        )}
+                        {teaserTittel(soknad)}
+                    </LinkPanel.Title>
+                    <LinkPanel.Description>{periodeListevisning(soknad)}</LinkPanel.Description>
                 </div>
-            </LinkPanel>
-        )
-    }
+                <div className="flex shrink-0 items-center">
+                    <SoknadTag soknad={soknad} />
+                </div>
+            </div>
+        </LinkPanel>
+    )
+}
 
+export const ListevisningLenkepanel = ({ soknad, onClick }: { soknad: RSSoknadmetadata; onClick?: () => void }) => {
     if (onClick) {
         return (
             <Button
@@ -58,7 +55,7 @@ export const ListevisningLenkepanel = ({ soknad, onClick }: { soknad: RSSoknadme
                     onClick()
                 }}
             >
-                <StyletLinkPanel paddingBottom={false}></StyletLinkPanel>
+                <StyletLinkPanel soknad={soknad} paddingBottom={false} />
             </Button>
         )
     }
@@ -66,7 +63,7 @@ export const ListevisningLenkepanel = ({ soknad, onClick }: { soknad: RSSoknadme
         (soknad.status == 'AVBRUTT' || soknad.status == 'SENDT') && soknad.soknadstype == 'OPPHOLD_UTLAND'
     return (
         <Link href={urlTilSoknad(soknad, true, skipUtlandInfoside)} data-cy={`link-listevisning-${soknad.id}`}>
-            <StyletLinkPanel paddingBottom={true}></StyletLinkPanel>
+            <StyletLinkPanel soknad={soknad} paddingBottom={true} />
         </Link>
     )
 }

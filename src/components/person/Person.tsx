@@ -28,6 +28,7 @@ export default function Person() {
                         open={showHint}
                         onClose={() => void 0}
                         placement="bottom-end"
+                        // eslint-disable-next-line react-hooks/refs
                         anchorEl={buttonRef.current}
                     >
                         <Popover.Content>

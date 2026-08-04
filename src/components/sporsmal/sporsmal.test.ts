@@ -71,7 +71,6 @@ test('Alle tags har global feilmelding', () => {
 
     tags.forEach((tag) => {
         if (tekst(`soknad.feilmelding.${tag}` as any) === undefined) {
-            // eslint-disable-next-line no-console
             console.log('Mangler feilmelding for tag:', tag)
             manglerFeilmelding = true
         }
@@ -86,7 +85,6 @@ test('Alle svartyper har generiskfeilmelding', () => {
 
     svartyper.forEach((svartype) => {
         if (hentGeneriskFeilmelding(svartype, { message: 'test' } as any) === undefined) {
-            // eslint-disable-next-line no-console
             console.log('Mangler generisk feilmelding for svartype:', svartype)
             manglerFeilmelding = true
         }
@@ -114,7 +112,6 @@ test('Alle sporsmal tag ligger i veldigLangSoknad', () => {
     // Mangler tags i soknaden
     tagsSomSkalStottes.forEach((tag) => {
         if (!sporsmalTagsUtenIndex.has(tag)) {
-            // eslint-disable-next-line no-console
             console.log(`Mangler sporsmal tag i veldigLangSoknad [ ${tag} ]`)
             manglerTagsISoknad = true
         }
@@ -144,7 +141,6 @@ test('Alle sporsmal tag fra testdata ligger i kjenteTags', () => {
     const kjenteTagsSet = new Set(kjenteTags)
     testdataTags.forEach((tag) => {
         if (!kjenteTagsSet.has(tag)) {
-            // eslint-disable-next-line no-console
             console.log(`Mangler sporsmal tag i kjenteTags [ ${tag} ]`)
             manglerTagsIKoden = true
         }

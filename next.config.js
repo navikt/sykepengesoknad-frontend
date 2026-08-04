@@ -16,7 +16,7 @@ const appDirectives = {
  */
 const nextConfig = {
     async headers() {
-        const csp = await buildCspHeader(appDirectives, { env: process.env.DECORATOR_ENV })
+        const csp = await buildCspHeader(appDirectives, { env: process.env.NEXT_PUBLIC_DECORATOR_ENV })
 
         return [
             {
@@ -45,7 +45,7 @@ const nextConfig = {
     },
     basePath: '/syk/sykepengesoknad',
     pageExtensions: ['page.tsx', 'api.ts'],
-    assetPrefix: process.env.ASSET_PREFIX || undefined,
+    assetPrefix: process.env.NEXT_PUBLIC_ASSET_PREFIX || undefined,
     generateEtags: false, //Disabler etag i pages
 }
 

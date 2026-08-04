@@ -97,12 +97,7 @@ interface Svar {
 }
 
 type SporsmalShortName =
-    | 'ARBEIDSSITUASJON'
-    | 'NY_NARMESTE_LEDER'
-    | 'FRAVAER'
-    | 'PERIODE'
-    | 'FORSIKRING'
-    | 'EGENMELDINGSDAGER'
+    'ARBEIDSSITUASJON' | 'NY_NARMESTE_LEDER' | 'FRAVAER' | 'PERIODE' | 'FORSIKRING' | 'EGENMELDINGSDAGER'
 
 interface SporsmalOgSvar {
     tekst: string

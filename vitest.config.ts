@@ -23,7 +23,7 @@ export default defineConfig({
             NEXT_PUBLIC_MINSIDE_URL: 'http://example.com/minside',
             NEXT_PUBLIC_SEND_INN_URL: 'http://example.com/sendinn',
             NEXT_PUBLIC_APP_NAME: 'sykepengesoknad',
-            DECORATOR_ENV: 'dev',
+            NEXT_PUBLIC_DECORATOR_ENV: 'dev',
         },
     },
 })

@@ -1,32 +1,25 @@
 import { defineConfig } from 'eslint/config'
-import { FlatCompat } from '@eslint/eslintrc'
-
-const compat = new FlatCompat({
-    baseDirectory: import.meta.dirname,
-})
+import nextVitals from 'eslint-config-next/core-web-vitals'
+import nextTs from 'eslint-config-next/typescript'
+import prettierRecommended from 'eslint-plugin-prettier/recommended'
 
 export default defineConfig([
-    { ignores: ['src/registerServiceWorker.js'] },
-    ...compat.config({
-        extends: ['@navikt/eslint-config-teamsykmelding', 'next/core-web-vitals'],
+    ...nextVitals,
+    ...nextTs,
+    {
         rules: {
-            '@typescript-eslint/explicit-function-return-type': 'off',
+            '@next/next/no-img-element': 'off',
             '@typescript-eslint/no-explicit-any': 'off',
             '@typescript-eslint/no-non-null-assertion': 'off',
-            '@next/next/no-img-element': 'off',
+            '@typescript-eslint/explicit-function-return-type': 'off',
+            'react-hooks/exhaustive-deps': ['warn', { additionalHooks: '(useUpdateBreadcrumbs)' }],
+            'react-hooks/set-state-in-effect': 'off',
         },
-    }),
-    ...compat.config({
-        overrides: [
-            {
-                files: ['playwright/**/*.{js,ts}'],
-                extends: ['plugin:playwright/recommended'],
-                rules: {
-                    'testing-library/prefer-screen-queries': 'off',
-                    'playwright/require-top-level-describe': 'error',
-                    'playwright/expect-expect': 'off',
-                },
-            },
-        ],
-    }),
+    },
+    {
+        extends: [prettierRecommended],
+        rules: {
+            'prettier/prettier': 'warn',
+        },
+    },
 ])
