@@ -8,7 +8,7 @@ import { NextApiRequest, NextApiResponse } from 'next'
 import { format, subDays } from 'date-fns'
 import { logger } from '@navikt/next-logger'
 import { nextleton } from 'nextleton'
-import { serialize } from 'cookie'
+import { stringifySetCookie } from 'cookie'
 
 import { cleanPathForMetric } from '../../metrics'
 import { RSSporsmal } from '../../types/rs-types/rs-sporsmal'
@@ -65,7 +65,9 @@ export function getSession(req: NextApiRequest, res: NextApiResponse): session {
             return sessionIdCookie
         }
         const sessionId = uuidv4()
-        const cookie = serialize('mock-session', sessionId, {
+        const cookie = stringifySetCookie({
+            name: 'mock-session',
+            value: sessionId,
             httpOnly: false,
             path: '/',
             maxAge: 60 * 60,
