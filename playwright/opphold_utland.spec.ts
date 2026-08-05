@@ -99,10 +99,9 @@ test.describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
 
         // Velger Sør-Korea med musepeker
         const landvelger = page.getByRole('combobox', { name: 'Hvilke(t) land skal du reise til?' })
-        await landvelger.type('Sør-')
+        await landvelger.fill('Sør-')
         await page.getByRole('option', { name: 'Sør-Korea' }).click()
 
-        // Aksel lar listen stå åpen etter valg i multiselect, og ei open liste gjev UU-brudd
         await landvelger.press('Escape')
         await expect(page.getByRole('listbox')).toBeHidden()
 

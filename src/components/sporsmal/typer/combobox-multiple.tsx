@@ -34,6 +34,8 @@ const ComboboxMultiple = ({ sporsmal }: SpmProps) => {
                         <>
                             <UNSAFE_Combobox
                                 id={sporsmal.id}
+                                ref={field.ref}
+                                name={field.name}
                                 isMultiSelect
                                 label={sporsmal.sporsmalstekst}
                                 description={sporsmal.undertekst}
@@ -43,6 +45,7 @@ const ComboboxMultiple = ({ sporsmal }: SpmProps) => {
                                 shouldShowSelectedOptions={true}
                                 shouldAutocomplete={true}
                                 selectedOptions={field.value}
+                                onBlur={field.onBlur}
                                 onKeyDownCapture={(event) => {
                                     if (event.key === 'Enter') {
                                         event.preventDefault()
