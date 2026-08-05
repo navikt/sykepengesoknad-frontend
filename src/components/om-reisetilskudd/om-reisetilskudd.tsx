@@ -11,7 +11,7 @@ const OmReisetilskudd = () => {
 
     const tittel = tekst('tilskudd.start.om-reisetilskudd')
     return (
-        <ExpansionCard open={open} data-cy="om-reisetilskudd" aria-label={tittel} className="mb-4">
+        <ExpansionCard open={open} aria-label={tittel} className="mb-4">
             <ExpansionCard.Header
                 onClick={() => {
                     logEvent(open ? 'accordion lukket' : 'accordion åpnet', {

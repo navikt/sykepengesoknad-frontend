@@ -13,7 +13,7 @@ test.describe('Tester andre inntektskilder bulletpoints', () => {
         )
 
         await expect(page.getByText('Arbeidsforhold vi har registrert på deg:')).toBeVisible()
-        const list = page.locator('[data-cy="inntektskilder--fra-inntektskomponenten-liste"]')
+        const list = page.locator('[aria-label="Inntektskilder fra Aa-registeret"]')
         await expect(list.locator('li')).toHaveCount(4)
         const expectedValues = ['Posten Norge AS, Bærum', 'Ruter', 'Blomsterbutikken', 'Bensinstasjonen']
 
@@ -29,7 +29,7 @@ test.describe('Tester andre inntektskilder bulletpoints', () => {
 
         await expect(page.getByText('Arbeidsforhold vi har registrert på deg:')).toBeVisible()
         await expect(page.getByText('Har du andre inntektskilder enn nevnt over?')).toBeVisible()
-        const list = page.locator('[data-cy="inntektskilder--fra-inntektskomponenten-liste"]')
+        const list = page.locator('[aria-label="Inntektskilder fra Aa-registeret"]')
         await expect(list.locator('li')).toHaveCount(1)
         const expectedValues = ['Posten Norge AS, Bærum']
 
@@ -48,7 +48,7 @@ test.describe('Tester andre inntektskilder bulletpoints', () => {
         await expect(page.getByText('Har du andre inntektskilder enn nevnt over?')).toHaveCount(0)
 
         await expect(page.getByText('Har du andre inntektskilder enn Posten Norge AS, Bærum?')).toBeVisible()
-        await expect(page.locator('[data-cy="inntektskilder--fra-inntektskomponenten-liste"]')).toHaveCount(0)
+        await expect(page.locator('[aria-label="Inntektskilder fra Aa-registeret"]')).toHaveCount(0)
         await validerAxeUtilityWrapper(page, test.info())
     })
 
@@ -59,7 +59,7 @@ test.describe('Tester andre inntektskilder bulletpoints', () => {
 
         await expect(page.getByText('Arbeidsforhold vi har registrert på deg:')).toBeVisible()
         await expect(page.getByText('Har du andre inntektskilder enn nevnt over?')).toBeVisible()
-        const list = page.locator('[data-cy="inntektskilder--fra-inntektskomponenten-liste"]')
+        const list = page.locator('[aria-label="Inntektskilder fra Aa-registeret"]')
         await expect(list.locator('li')).toHaveCount(3)
         const expectedValues = ['Matbutikken AS', 'Smørebussen AS', 'Kaffebrenneriet']
 

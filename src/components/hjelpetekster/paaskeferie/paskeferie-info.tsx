@@ -25,7 +25,7 @@ export function PaskeferieInfo({ sporsmal, jaNeiSvar }: { sporsmal: Sporsmal; ja
         )
     ) {
         return (
-            <Alert data-cy="paskeferiehjelp" variant="info" className="mt-8">
+            <Alert variant="info" className="mt-8">
                 <Label as="h2">{PaskeferieInfoTekster.label}</Label>
                 <BodyShort className="mt-2">{PaskeferieInfoTekster.tekst}</BodyShort>
             </Alert>

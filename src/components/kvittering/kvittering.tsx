@@ -19,7 +19,7 @@ const Kvittering = () => {
         valgtSoknad.soknadstype !== RSSoknadstype.REISETILSKUDD
 
     return (
-        <div data-cy="kvittering">
+        <div>
             {arbeidstakerKvittering ? <Arbeidstaker /> : <AlleAndre />}
             <Oppsummering />
 

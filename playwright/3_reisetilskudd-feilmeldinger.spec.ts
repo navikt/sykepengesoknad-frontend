@@ -12,35 +12,43 @@ test.describe('Tester feilmeldinger i reisetilskudd', () => {
     test('Feilmeldinger når ingenting er valgt', async ({ page }) => {
         await page.getByRole('button', { name: 'Legg til reiseutgift' }).click()
 
-        await page.locator('.aksel-modal').getByText('Bekreft').click()
+        await page.getByRole('dialog').getByText('Bekreft').click()
 
-        await expect(page.locator('[data-cy="opplasting-form"]').getByText('Du må velge transportmiddel')).toBeVisible()
-        await expect(page.locator('[data-cy="opplasting-form"]').getByText('Du må skrive inn beløp')).toBeVisible()
-        await expect(page.locator('[data-cy="opplasting-form"]').getByText('Du må laste opp kvittering')).toBeVisible()
+        await expect(
+            page.locator('[aria-label="Opplastingsskjema"]').getByText('Du må velge transportmiddel'),
+        ).toBeVisible()
+        await expect(page.locator('[aria-label="Opplastingsskjema"]').getByText('Du må skrive inn beløp')).toBeVisible()
+        await expect(
+            page.locator('[aria-label="Opplastingsskjema"]').getByText('Du må laste opp kvittering'),
+        ).toBeVisible()
     })
 
     test('Ugyldig valg', async ({ page }) => {
         await page.getByRole('button', { name: 'Legg til reiseutgift' }).click()
 
         await page.locator('select[name=transportmiddel]').selectOption('')
-        await page.locator('.aksel-modal').getByText('Bekreft').click()
+        await page.getByRole('dialog').getByText('Bekreft').click()
 
         await expect(page.getByRole('dialog', { name: 'Legg til reiseutgift' })).toHaveAttribute('open')
-        await expect(page.locator('[data-cy="opplasting-form"]').getByText('Du må velge transportmiddel')).toBeVisible()
+        await expect(
+            page.locator('[aria-label="Opplastingsskjema"]').getByText('Du må velge transportmiddel'),
+        ).toBeVisible()
 
         await page.locator('select[name=transportmiddel]').selectOption('PARKERING')
         await expect(page.locator('#transportmiddel')).toContainText('Parkering')
-        await page.locator('.aksel-modal').getByText('Bekreft').click()
-        await expect(page.locator('[data-cy="opplasting-form"]').getByText('Du må velge transportmiddel')).toBeHidden()
+        await page.getByRole('dialog').getByText('Bekreft').click()
+        await expect(
+            page.locator('[aria-label="Opplastingsskjema"]').getByText('Du må velge transportmiddel'),
+        ).toBeHidden()
     })
 
     test('Negative beløp', async ({ page }) => {
         await page.getByRole('button', { name: 'Legg til reiseutgift' }).click()
 
         await page.locator('input[name=belop_input]').fill('-100')
-        await page.locator('.aksel-modal').getByText('Bekreft').click()
+        await page.getByRole('dialog').getByText('Bekreft').click()
         await expect(
-            page.locator('[data-cy="opplasting-form"]').getByText('Beløp kan ikke være negativt'),
+            page.locator('[aria-label="Opplastingsskjema"]').getByText('Beløp kan ikke være negativt'),
         ).toBeVisible()
     })
 
@@ -49,9 +57,9 @@ test.describe('Tester feilmeldinger i reisetilskudd', () => {
 
         await page.locator('input[name=belop_input]').clear()
         await page.locator('input[name=belop_input]').fill('1000000000')
-        await page.locator('.aksel-modal').getByText('Bekreft').click()
+        await page.getByRole('dialog').getByText('Bekreft').click()
         await expect(
-            page.locator('[data-cy="opplasting-form"]').getByText('Beløp kan ikke være større enn 1 000 000'),
+            page.locator('[aria-label="Opplastingsskjema"]').getByText('Beløp kan ikke være større enn 1 000 000'),
         ).toBeVisible()
     })
 
@@ -60,7 +68,7 @@ test.describe('Tester feilmeldinger i reisetilskudd', () => {
 
         await page.locator('input[name=belop_input]').clear()
         await page.locator('input[name=belop_input]').fill('100.253')
-        await page.locator('.aksel-modal').getByText('Bekreft').click()
+        await page.getByRole('dialog').getByText('Bekreft').click()
 
         const inputValue = page.locator('input[name=belop_input]')
         await expect(inputValue).toHaveValue('100.25')
@@ -71,9 +79,9 @@ test.describe('Tester feilmeldinger i reisetilskudd', () => {
 
         await page.locator('input[name=belop_input]').clear()
         await page.locator('input[name=belop_input]').fill('100.30')
-        await page.locator('.aksel-modal').getByText('Bekreft').click()
+        await page.getByRole('dialog').getByText('Bekreft').click()
         await expect(
-            page.locator('[data-cy="opplasting-form"]').getByText('Beløp kan ikke være større enn 10 000'),
+            page.locator('[aria-label="Opplastingsskjema"]').getByText('Beløp kan ikke være større enn 10 000'),
         ).toBeHidden()
     })
 
@@ -82,9 +90,9 @@ test.describe('Tester feilmeldinger i reisetilskudd', () => {
 
         await page.locator('input[name=belop_input]').clear()
         await page.locator('input[name=belop_input]').fill('99')
-        await page.locator('.aksel-modal').getByText('Bekreft').click()
+        await page.getByRole('dialog').getByText('Bekreft').click()
         await expect(
-            page.locator('[data-cy="opplasting-form"]').getByText('Beløp kan ikke være større enn 10 000'),
+            page.locator('[aria-label="Opplastingsskjema"]').getByText('Beløp kan ikke være større enn 10 000'),
         ).toBeHidden()
     })
 
@@ -96,32 +104,32 @@ test.describe('Tester feilmeldinger i reisetilskudd', () => {
 
         // Upload invalid file first
         await page
-            .locator('[data-cy="filopplasteren"] input[type=file]')
+            .locator('[aria-label="Filopplasteren"] input[type=file]')
             .setInputFiles('./playwright/fixtures/kvittering.pdf')
         await page.getByRole('button', { name: 'Bekreft' }).click()
-        await expect(page.locator('.aksel-modal').getByText('Filtypen til kvittering.pdf er ugyldig')).toBeVisible()
-        await page.locator('.aksel-modal').getByRole('button', { name: 'Slett filen' }).click()
+        await expect(page.getByRole('dialog').getByText('Filtypen til kvittering.pdf er ugyldig')).toBeVisible()
+        await page.getByRole('dialog').getByRole('button', { name: 'Slett filen' }).click()
 
         // Try multiple files - upload first file
         await page
-            .locator('[data-cy="filopplasteren"] input[type=file]')
+            .locator('[aria-label="Filopplasteren"] input[type=file]')
             .setInputFiles('./playwright/fixtures/kvittering.jpg')
         // Then try to upload second file to trigger multiple files error
         await page
-            .locator('[data-cy="filopplasteren"] input[type=file]')
+            .locator('[aria-label="Filopplasteren"] input[type=file]')
             .setInputFiles('./playwright/fixtures/kvittering2.jpg')
         await page.getByRole('button', { name: 'Bekreft' }).click()
 
         // TODO can I make this work?
-        // await expect(page.locator('.aksel-modal').getByText('Du kan ikke laste opp mer enn en fil')).toBeVisible()
-        await page.locator('.aksel-modal').getByRole('button', { name: 'Slett filen' }).click()
+        // await expect(page.getByRole('dialog').getByText('Du kan ikke laste opp mer enn en fil')).toBeVisible()
+        await page.getByRole('dialog').getByRole('button', { name: 'Slett filen' }).click()
 
         // Upload valid single file
         await page
-            .locator('[data-cy="filopplasteren"] input[type=file]')
+            .locator('[aria-label="Filopplasteren"] input[type=file]')
             .setInputFiles('./playwright/fixtures/kvittering.jpg')
         await page.getByRole('button', { name: 'Bekreft' }).click()
-        await expect(page.locator('.aksel-modal').getByText('Du kan ikke laste opp mer enn en fil')).toBeHidden()
+        await expect(page.getByRole('dialog').getByText('Du kan ikke laste opp mer enn en fil')).toBeHidden()
     })
 
     test('Fil list oppdateres med kvittering', async ({ page }) => {
@@ -130,12 +138,12 @@ test.describe('Tester feilmeldinger i reisetilskudd', () => {
         await page.locator('select[name=transportmiddel]').selectOption('TAXI')
         await page.locator('input[name=belop_input]').fill('99')
         await page
-            .locator('[data-cy="filopplasteren"] input[type=file]')
+            .locator('[aria-label="Filopplasteren"] input[type=file]')
             .setInputFiles('./playwright/fixtures/kvittering.jpg')
         await page.getByRole('button', { name: 'Bekreft' }).click()
 
         // Verify the table is updated
-        const table = page.locator('.aksel-table')
+        const table = page.getByRole('table')
         await expect(table.getByText('Taxi')).toBeVisible()
         await expect(table.getByText('99 kr').first()).toBeVisible()
         await expect(table.getByText('1 utgift på til sammen')).toBeVisible()

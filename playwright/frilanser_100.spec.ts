@@ -101,7 +101,7 @@ test.describe('Tester frilansersøknad', () => {
 
         await test.step('Søknad kvittering', async () => {
             await expect(page).toHaveURL(new RegExp(`/kvittering/${soknad.id}`))
-            const kvitteringPanel = page.locator('[data-cy="kvittering-panel"]')
+            const kvitteringPanel = page.locator('[role="region"][aria-label="Hva skjer videre?"]')
             await expect(kvitteringPanel).toContainText('Hva skjer videre?')
             await expect(kvitteringPanel).toContainText('NAV behandler søknaden din')
             await expect(kvitteringPanel).toContainText('Når blir pengene utbetalt?')

@@ -1,5 +1,5 @@
 import { test, expect } from './utils/fixtures'
-import { avbryterSoknad } from './utils/utilities'
+import { avbryterSoknad, harSynligTittel } from './utils/utilities'
 
 test.describe('Tester opprettelse av opphold utland søknad', () => {
     test('Oppretter søknad', async ({ page }) => {
@@ -11,14 +11,10 @@ test.describe('Tester opprettelse av opphold utland søknad', () => {
         await page.goto('/syk/sykepengesoknad/sykepengesoknad-utland')
 
         // Sjekk overskrifter og tekster
-        await expect(
-            page.getByRole('heading', { level: 1, name: 'Søknad om å beholde sykepenger utenfor EU/EØS' }),
-        ).toBeVisible()
+        await harSynligTittel(page, 'Søknad om å beholde sykepenger utenfor EU/EØS', 1)
         await expect(page.getByText('Du trenger ikke søke hvis du')).toBeVisible()
-        await expect(page.getByRole('heading', { level: 2, name: 'Har du allerede vært på reise?' })).toBeVisible()
-        await expect(
-            page.getByRole('heading', { level: 3, name: 'Er du statsborger i et land utenfor EU/EØS?' }),
-        ).toBeVisible()
+        await harSynligTittel(page, 'Har du allerede vært på reise?', 2)
+        await harSynligTittel(page, 'Er du statsborger i et land utenfor EU/EØS?', 3)
 
         // Klikk "Start søknaden"
         await expect(page.getByRole('button', { name: 'Start søknaden' })).toBeVisible()

@@ -2,6 +2,7 @@ import { test, expect, Page } from '@playwright/test'
 
 import { validerAxeUtilityWrapper } from './uuvalidering'
 import { tabUntilFocusedContainsText, tabUntilFocusedLocator } from './utils/tastaturSnarvei'
+import { harSynligTittel } from './utils/utilities'
 
 async function sjekkMainContentFokus(page: Page) {
     const mainContent = page.locator('main')
@@ -16,12 +17,12 @@ test.describe('Arbeidsledigsøknad med tastaturnavigasjon', () => {
     test('Full arbeidsledigsøknad flow', async ({ page, browserName }) => {
         await page.goto('/syk/sykepengesoknad?testperson=arbeidsledig')
 
-        await expect(page.locator('.aksel-heading--large')).toBeVisible()
-        await expect(page.locator('.aksel-heading--large')).toHaveText('Søknader')
+        await harSynligTittel(page, 'Søknader', 1)
+        await expect(await harSynligTittel(page, 'Søknader', 1)).toHaveText('Søknader')
         await page.locator(`a[href*="${soknad.id}"]`).click()
 
         await sjekkMainContentFokus(page)
-        await expect(page.getByRole('heading', { name: 'Før du søker' })).toBeVisible()
+        await harSynligTittel(page, 'Før du søker', 2)
         await expect(page).toHaveURL(new RegExp(`${soknad.id}/1`))
         await tabUntilFocusedContainsText(browserName, page, 'Hvordan behandler vi personopplysninger')
         await page.keyboard.press('Space')
@@ -52,7 +53,7 @@ test.describe('Arbeidsledigsøknad med tastaturnavigasjon', () => {
         await page.keyboard.press('Enter')
         await sjekkMainContentFokus(page)
 
-        await expect(page.getByRole('heading', { name: 'Friskmeldt' })).toBeVisible()
+        await harSynligTittel(page, 'Friskmeldt', 2)
         await expect(page.locator('form').getByRole('radio', { name: 'Nei' })).toHaveCount(1)
         await validerAxeUtilityWrapper(page, test.info())
 
@@ -66,7 +67,7 @@ test.describe('Arbeidsledigsøknad med tastaturnavigasjon', () => {
         await page.keyboard.press('Enter')
         await sjekkMainContentFokus(page)
 
-        await expect(page.getByRole('heading', { name: 'Andre inntektskilder' })).toBeVisible()
+        await harSynligTittel(page, 'Andre inntektskilder', 2)
         await expect(page.getByText('Hva mener vi med andre inntektskilder?')).toBeVisible()
         await validerAxeUtilityWrapper(page, test.info())
 
@@ -79,7 +80,7 @@ test.describe('Arbeidsledigsøknad med tastaturnavigasjon', () => {
         await page.keyboard.press('Enter')
         await sjekkMainContentFokus(page)
 
-        await expect(page.getByRole('heading', { name: 'Reise utenfor EU/EØS' })).toBeVisible()
+        await harSynligTittel(page, 'Reise utenfor EU/EØS', 2)
         await validerAxeUtilityWrapper(page, test.info())
 
         await tabUntilFocusedLocator(browserName, page, page.getByRole('radio', { name: 'Ja' }))
@@ -92,7 +93,7 @@ test.describe('Arbeidsledigsøknad med tastaturnavigasjon', () => {
         await page.keyboard.press('Enter')
         await sjekkMainContentFokus(page)
 
-        await expect(page.getByRole('heading', { name: 'Oppsummering fra søknaden' })).toBeVisible()
+        await harSynligTittel(page, 'Oppsummering fra søknaden', 2)
         await validerAxeUtilityWrapper(page, test.info())
 
         const sendSoknad = await tabUntilFocusedLocator(

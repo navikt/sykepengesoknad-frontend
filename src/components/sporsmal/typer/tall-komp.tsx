@@ -150,20 +150,12 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
                 {errors[sporsmal.id] && (
                     <>
                         {errors[sporsmal.id]?.type !== 'validate' && (
-                            <BodyShort
-                                as="span"
-                                className="mt-2 block font-ax-bold text-ax-text-danger-subtle"
-                                data-cy="feil-lokal"
-                            >
+                            <BodyShort as="span" className="mt-2 block font-ax-bold text-ax-text-danger-subtle">
                                 {feilmelding.lokal}
                             </BodyShort>
                         )}
                         {errors[sporsmal.id]?.type === 'validate' && sporsmal.tag === 'HVOR_MYE_TIMER_VERDI' && (
-                            <BodyShort
-                                as="span"
-                                className="mt-2 block font-ax-bold text-ax-text-danger-subtle"
-                                data-cy="feil-lokal"
-                            >
+                            <BodyShort as="span" className="mt-2 block font-ax-bold text-ax-text-danger-subtle">
                                 {getLedetekst(tekst('soknad.feilmelding.MINDRE_TIMER_ENN_FORVENTET.lokal'), {
                                     '%GRAD%': 100 - periode!.grad,
                                 })}

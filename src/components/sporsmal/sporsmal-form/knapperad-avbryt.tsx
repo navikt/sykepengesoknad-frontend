@@ -27,7 +27,6 @@ const KnapperadAvbryt = () => {
                         valgtSoknad: valgtSoknad,
                     })
                 }}
-                data-cy="avbryt-soknad"
             >
                 {tekst('sykepengesoknad.avbryt.simpel')}
             </Button>

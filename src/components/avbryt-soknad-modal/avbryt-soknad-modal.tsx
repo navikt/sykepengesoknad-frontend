@@ -70,7 +70,6 @@ const AvbrytSoknadModal = ({ euEøsSpecialCase = false }: AvbrytSoknadModalProps
                             '-ml-5': valgtSoknad,
                         },
                     )}
-                    data-cy="avbryt-soknad"
                     onClick={() => {
                         setAapen(true)
                         logEvent('modal åpnet', {
@@ -88,7 +87,6 @@ const AvbrytSoknadModal = ({ euEøsSpecialCase = false }: AvbrytSoknadModalProps
                     data-color="danger"
                     variant="primary"
                     type="button"
-                    data-cy="avbryt-soknad"
                     onClick={() => {
                         setAapen(true)
                         logEvent('modal åpnet', {

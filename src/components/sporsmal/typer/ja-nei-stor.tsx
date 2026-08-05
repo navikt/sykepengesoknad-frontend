@@ -185,7 +185,7 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
                         {valgtSoknad?.status === RSSoknadstatus.UTKAST_TIL_KORRIGERING &&
                             sporsmal.tag === 'FERIE_V2' &&
                             watchJaNei === 'JA' && (
-                                <Alert data-cy="feriekorrigeringvarsel" className="mt-8" variant="info">
+                                <Alert className="mt-8" variant="info">
                                     Du kan dra på ferie mens du er sykmeldt, men du får ikke utbetalt sykepenger når du
                                     har ferie.
                                 </Alert>
