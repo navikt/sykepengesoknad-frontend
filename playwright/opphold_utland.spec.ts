@@ -98,8 +98,12 @@ test.describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
         await page.locator('.aksel-chips__chip-text', { hasText: 'Fransk Polynesia' }).click()
 
         // Velger Sør-Korea med musepeker
-        await page.getByRole('combobox', { name: 'Hvilke(t) land skal du reise til?' }).type('Sør-')
+        const landvelger = page.getByRole('combobox', { name: 'Hvilke(t) land skal du reise til?' })
+        await landvelger.fill('Sør-')
         await page.getByRole('option', { name: 'Sør-Korea' }).click()
+
+        await landvelger.press('Escape')
+        await expect(page.getByRole('listbox')).toBeHidden()
 
         await validerAxeUtilityWrapper(page, test.info())
 

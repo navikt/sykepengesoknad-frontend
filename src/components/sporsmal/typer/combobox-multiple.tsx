@@ -1,28 +1,13 @@
 import { Controller } from 'react-hook-form'
 import { Alert, UNSAFE_Combobox } from '@navikt/ds-react'
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useMemo } from 'react'
 
 import { landlisteEøs, landlisteUtenforEøs } from '../landliste'
 import { hentFeilmelding } from '../sporsmal-utils'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
-import useKlikkUtenfor from '../../../hooks/useKlikkUtenfor'
 
 const ComboboxMultiple = ({ sporsmal }: SpmProps) => {
-    const [apneListe, setApneListe] = useState(false)
-    const { ref, erKlikketUtenfor, settErKlikketUtenfor, erBokstavEllerMellomrom } = useKlikkUtenfor(false)
     const feilmelding = hentFeilmelding(sporsmal)
-
-    const handleToggle = () => {
-        setApneListe(!apneListe)
-        settErKlikketUtenfor(false)
-    }
-
-    useEffect(() => {
-        if (erKlikketUtenfor && apneListe) {
-            setApneListe(false)
-            settErKlikketUtenfor(false)
-        }
-    }, [erKlikketUtenfor, apneListe, settErKlikketUtenfor])
 
     const options = useMemo(() => {
         if (sporsmal.tag == 'LAND') {
@@ -35,7 +20,7 @@ const ComboboxMultiple = ({ sporsmal }: SpmProps) => {
     }, [sporsmal])
 
     return (
-        <div ref={ref}>
+        <div>
             <Controller
                 name={sporsmal.id}
                 rules={{ required: feilmelding.global }}
@@ -49,8 +34,9 @@ const ComboboxMultiple = ({ sporsmal }: SpmProps) => {
                         <>
                             <UNSAFE_Combobox
                                 id={sporsmal.id}
+                                ref={field.ref}
+                                name={field.name}
                                 isMultiSelect
-                                isListOpen={apneListe}
                                 label={sporsmal.sporsmalstekst}
                                 description={sporsmal.undertekst}
                                 error={fieldState.error && feilmelding.lokal}
@@ -59,14 +45,10 @@ const ComboboxMultiple = ({ sporsmal }: SpmProps) => {
                                 shouldShowSelectedOptions={true}
                                 shouldAutocomplete={true}
                                 selectedOptions={field.value}
-                                onFocus={handleToggle}
+                                onBlur={field.onBlur}
                                 onKeyDownCapture={(event) => {
-                                    if (erBokstavEllerMellomrom(event.key)) {
-                                        setApneListe(true)
-                                    } else if (event.key === 'Enter') {
+                                    if (event.key === 'Enter') {
                                         event.preventDefault()
-                                    } else if (event.key === 'Tab') {
-                                        setApneListe(false)
                                     }
                                 }}
                                 onToggleSelected={(option, isSelected) => {
