@@ -20,6 +20,9 @@ import { deepcopyMedNyId } from '../../deepcopyMedNyId'
 import { oppholdUtland } from '../soknad/opphold-utland'
 import { kortSoknadMedID } from '../../kort-soknad-med-id'
 import { arbeidstakerGradert } from '../soknad/arbeidstaker-gradert'
+import { arbeidstakerMangePerioder } from '../soknad/arbeidstaker-mange-perioder'
+import { arbeidstakerToPerioder } from '../soknad/arbeidstaker-to-perioder'
+import { arbeidstakerTrePerioder } from '../soknad/arbeidstaker-tre-perioder'
 import { arbeidstaker, arbeidtakerMedGammelOppsummering } from '../soknad/arbeidstaker'
 import { arbeidsledig } from '../soknad/arbeidsledig'
 import { frilanser } from '../soknad/frilanser'
@@ -107,6 +110,12 @@ export const arbeidstakerPerson: Persona = {
     soknader: [arbeidstaker],
     sykmeldinger: [arbeidstaker100Syk],
     beskrivelse: 'Arbeidstakersøknad 100%',
+}
+
+export const arbeidstakerPeriodeVarianter_Person: Persona = {
+    soknader: [arbeidstakerToPerioder, arbeidstakerTrePerioder, arbeidstakerMangePerioder],
+    sykmeldinger: [arbeidstaker100Syk],
+    beskrivelse: 'Arbeidstakersøknader med 2, 3 og 4 perioder',
 }
 
 export const arbeidstakerGradertPerson: Persona = {

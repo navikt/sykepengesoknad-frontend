@@ -25,6 +25,7 @@ import { FlexjarSporsmalV2 } from '../flexjar/flexjar-sporsmal-v2'
 import { urlTilSoknad } from './soknad-link'
 import { SporsmalTittel } from './sporsmal-tittel'
 import { SoknadHeader } from './soknad-header'
+import { SoknadMetadata } from './soknad-metadata'
 
 const sporsmalMedNyFlexjar = [
     'NARINGSDRIVENDE_OPPRETTHOLDT_INNTEKT',
@@ -119,6 +120,7 @@ export const Soknaden = () => {
             {!erForstesiden && <Tilbake variant="liten" />}
 
             <SoknadHeader overskrivTittel={erSistesiden ? 'Oppsummering' : undefined} />
+            {valgtSoknad && <SoknadMetadata soknad={valgtSoknad} />}
 
             {!erForstesiden && <Fremdriftsbar />}
             {erForstesiden && <Introside></Introside>}
