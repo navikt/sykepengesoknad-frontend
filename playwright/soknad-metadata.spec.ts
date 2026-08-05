@@ -4,6 +4,7 @@ import { arbeidstaker } from '../src/data/mock/data/soknad/arbeidstaker'
 import { arbeidstakerToPerioder } from '../src/data/mock/data/soknad/arbeidstaker-to-perioder'
 import { arbeidstakerTrePerioder } from '../src/data/mock/data/soknad/arbeidstaker-tre-perioder'
 import { arbeidstakerMangePerioder } from '../src/data/mock/data/soknad/arbeidstaker-mange-perioder'
+import { apneReadmore } from './utils/utilities'
 
 test.describe('SoknadMetadata', () => {
     test('viser én periode inline med strong label', async ({ page }) => {
@@ -54,17 +55,11 @@ test.describe('SoknadMetadata', () => {
         await page.locator(`a[href*="${arbeidstakerMangePerioder.id}"]`).click()
         await page.waitForLoadState('load')
 
-        await expect(page.getByText('Perioder:', { exact: true })).toBeVisible()
-
-        const readMoreKnapp = page.getByRole('button', { name: 'Vis alle 4 perioder' })
-        await expect(readMoreKnapp).toBeVisible()
-
-        const liste = page.getByRole('list', { name: 'Sykmeldingsperioder' })
-        await expect(liste).toBeHidden()
-
-        await readMoreKnapp.click()
-
-        await expect(liste).toBeVisible()
-        await expect(liste.getByRole('listitem')).toHaveCount(4)
+        await apneReadmore(page, 'Perioder', [
+            '1. – 7. april 2020 (100%)',
+            '8. – 14. april 2020 (60%)',
+            '15. – 21. april 2020 (80%)',
+            '22. – 30. april 2020 (100%)',
+        ])
     })
 })
