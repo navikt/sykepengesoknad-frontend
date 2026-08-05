@@ -186,9 +186,7 @@ test.describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
 
         // Søknad TIL_SLUTT (oppsummering)', async () => {
         await expect(page).toHaveURL(new RegExp(`${soknad.id}/5`))
-        await expect(
-            page.getByText('Nå kan du se over at alt er riktig før du sender inn søknaden.'),
-        ).toBeVisible()
+        await expect(page.getByText('Nå kan du se over at alt er riktig før du sender inn søknaden.')).toBeVisible()
 
         // Oppsummering
         const oppsummering = page.locator('[role="region"][aria-label="Oppsummering fra søknaden"]')
