@@ -1,6 +1,12 @@
 import { test, expect } from '@playwright/test'
 
-import { svarNeiHovedsporsmal, klikkGaVidere, checkViStolerPaDeg, harSynligTittel } from './utils/utilities'
+import {
+    svarNeiHovedsporsmal,
+    klikkGaVidere,
+    checkViStolerPaDeg,
+    harSynligTittel,
+    harSynligTekst,
+} from './utils/utilities'
 import { validerAxeUtilityWrapper } from './uuvalidering'
 
 test.describe('Eldre søknader', () => {
@@ -53,7 +59,7 @@ test.describe('Eldre søknader', () => {
         })
 
         await test.step('Vi har lenke til neste søknad', async () => {
-            await expect(page.getByText('Du har to søknader du må velge om du skal bruke.')).toBeVisible()
+            await harSynligTekst(page, 'Du har to søknader du må velge om du skal bruke.')
             await validerAxeUtilityWrapper(page, test.info())
             await page.getByText('Gå til neste søknad').click()
         })
@@ -63,7 +69,7 @@ test.describe('Eldre søknader', () => {
         })
 
         await test.step('Vi har lenke til siste søknad', async () => {
-            await expect(page.getByText('Du har en søknad du må velge om du skal bruke.')).toBeVisible()
+            await harSynligTekst(page, 'Du har en søknad du må velge om du skal bruke.')
             await validerAxeUtilityWrapper(page, test.info())
             await page.getByText('Gå til søknaden').click()
         })

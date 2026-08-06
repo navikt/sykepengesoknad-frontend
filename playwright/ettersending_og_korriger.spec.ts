@@ -9,6 +9,7 @@ import {
     neiOgVidere,
     svarJaHovedsporsmal,
     trykkPaSoknadMedId,
+    harSynligTekst,
 } from './utils/utilities'
 import { validerAxeUtilityWrapper } from './uuvalidering'
 
@@ -49,7 +50,7 @@ test.describe('Tester ettersending og korrigering', () => {
             await expect(page.getByRole('main')).toContainText(
                 'Posten Norge AS, Bærum (Org.nr. 974654458), med kopi til NAV',
             )
-            await expect(page.getByText('Du får sykepengene fra arbeidsgiveren din')).toBeVisible()
+            await harSynligTekst(page, 'Du får sykepengene fra arbeidsgiveren din')
             await expect(
                 page.getByText('Arbeidsgiveren din betaler de første 16 kalenderdagene av sykefraværet.'),
             ).toBeVisible()

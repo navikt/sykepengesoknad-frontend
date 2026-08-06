@@ -3,7 +3,7 @@ import { sendtArbeidsledig } from '../src/data/mock/data/soknad/arbeidsledig-sen
 import { foranArbeidstakerMedOppholdKvittering } from '../src/data/mock/data/soknad/soknader-integration'
 
 import { test, expect } from './utils/fixtures'
-import { harSynligTittel } from './utils/utilities'
+import { harSynligTittel, harSynligTekst } from './utils/utilities'
 
 test.describe('Tester å åpne søknaden direkte fra sykefravaer', () => {
     const soknad = arbeidstaker
@@ -22,7 +22,7 @@ test.describe('Tester å åpne søknaden direkte fra sykefravaer', () => {
                 new RegExp(`/syk/sykepengesoknad/kvittering/${sendtArbeidsledig.id}\\?testperson=integrasjon-soknader`),
             )
             await harSynligTittel(page, 'Søknad om sykepenger', 1)
-            await expect(page.getByText('NAV behandler søknaden din')).toBeVisible()
+            await harSynligTekst(page, 'NAV behandler søknaden din')
         })
 
         await test.step('Forsøker å åpne en spesifikk side i sendt søknad', async () => {
@@ -31,7 +31,7 @@ test.describe('Tester å åpne søknaden direkte fra sykefravaer', () => {
                 new RegExp(`/syk/sykepengesoknad/kvittering/${sendtArbeidsledig.id}\\?testperson=integrasjon-soknader`),
             )
             await harSynligTittel(page, 'Søknad om sykepenger', 1)
-            await expect(page.getByText('NAV behandler søknaden din')).toBeVisible()
+            await harSynligTekst(page, 'NAV behandler søknaden din')
         })
     })
 
@@ -48,8 +48,8 @@ test.describe('Tester å åpne søknaden direkte fra sykefravaer', () => {
                 ),
             )
             await harSynligTittel(page, 'Søknad om sykepenger', 1)
-            await expect(page.getByText('Søknaden er sendt')).toBeVisible()
-            await expect(page.getByText('Du får sykepengene fra arbeidsgiveren din')).toBeVisible()
+            await harSynligTekst(page, 'Søknaden er sendt')
+            await harSynligTekst(page, 'Du får sykepengene fra arbeidsgiveren din')
         })
     })
 
@@ -57,7 +57,7 @@ test.describe('Tester å åpne søknaden direkte fra sykefravaer', () => {
         await test.step('Navigerer til listevisning', async () => {
             await page.goto('/syk/sykepengesoknad/soknader/')
             await expect(page).toHaveURL(new RegExp(`/syk/sykepengesoknad/soknader`))
-            await expect(page.getByText('Nye søknader')).toBeVisible()
+            await harSynligTekst(page, 'Nye søknader')
         })
     })
 

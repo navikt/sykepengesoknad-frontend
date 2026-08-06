@@ -1,7 +1,7 @@
 import { arbeidstaker } from '../src/data/mock/data/soknad/arbeidstaker'
 
 import { test, expect } from './utils/fixtures'
-import { klikkGaVidere, setPeriodeFraTil, svarJaHovedsporsmal } from './utils/utilities'
+import { klikkGaVidere, setPeriodeFraTil, svarJaHovedsporsmal, harSynligTekst } from './utils/utilities'
 import { validerAxeUtilityWrapper } from './uuvalidering'
 
 test.describe('Tester at datovelger viser korrekt feilmelding, og at man ikke kan gå videre uten å velge datoer', () => {
@@ -14,7 +14,7 @@ test.describe('Tester at datovelger viser korrekt feilmelding, og at man ikke ka
 
     test('Trigger feilmelding', async ({ page }) => {
         await svarJaHovedsporsmal(page)
-        await expect(page.getByText('Når tok du ut feriedager?')).toBeVisible()
+        await harSynligTekst(page, 'Når tok du ut feriedager?')
 
         await setPeriodeFraTil(page, 16, 23)
         await page

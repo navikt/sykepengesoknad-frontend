@@ -250,7 +250,7 @@ test.describe('Tester støtte for gamle spørsmål', () => {
 
     test('Side 27 - LAND', async ({ page }) => {
         await page.goto(`/syk/sykepengesoknad/soknader/${soknad.id}/27?testperson=integrasjon-soknader`)
-        await expect(page.getByText('Hvilke(t) land skal du reise til?')).toBeVisible()
+        await harSynligTekst(page, 'Hvilke(t) land skal du reise til?')
         await page.getByRole('combobox', { name: 'Hvilke(t) land skal du reise til?' }).fill('Søre fran')
         await page.getByRole('option', { name: 'Søre franske territorier' }).click()
         await klikkGaVidere(page)
@@ -258,7 +258,7 @@ test.describe('Tester støtte for gamle spørsmål', () => {
 
     test('Side 28 - LAND_COMBOBOX', async ({ page }) => {
         await page.goto(`/syk/sykepengesoknad/soknader/${soknad.id}/28?testperson=integrasjon-soknader`)
-        await expect(page.getByText('Hvilke(t) land skal du reise til?')).toBeVisible()
+        await harSynligTekst(page, 'Hvilke(t) land skal du reise til?')
         await svarCombobox(page, 'Hvilke(t) land skal du reise til?', 'Søre fran', 'Søre franske territorier')
         await klikkGaVidere(page)
     })

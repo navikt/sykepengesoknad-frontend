@@ -3,7 +3,7 @@ import { test, expect, Page } from '@playwright/test'
 import { behandlingsdager } from '../src/data/mock/data/soknad/behandlingsdager'
 
 import { validerAxeUtilityWrapper } from './uuvalidering'
-import { svarJaHovedsporsmal, harSynligTittel } from './utils/utilities'
+import { svarJaHovedsporsmal, harSynligTittel, harSynligTekst } from './utils/utilities'
 
 async function checkViStolerPaDeg(page: Page, gaVidere = true) {
     await page
@@ -59,7 +59,7 @@ async function sjekkIntroside(page: Page) {
     ).toBeVisible()
     const sykepengerLink = page.getByRole('link', { name: 'nav.no/sykepenger' })
     await expect(sykepengerLink).toHaveAttribute('href', 'https://www.nav.no/sykepenger')
-    await expect(page.getByText('Før du søker')).toBeVisible()
+    await harSynligTekst(page, 'Før du søker')
     await expect(page.getByRole('link', { name: 'Meld fra til NAV her' })).toHaveAttribute(
         'href',
         'https://innboks.nav.no/s/beskjed-til-oss?category=Beskjed-sykepenger',
@@ -162,7 +162,7 @@ test.describe('Tester behandlingsdagersøknad', () => {
 
             await svarJaHovedsporsmal(page)
 
-            await expect(page.getByText('Hvilke andre inntektskilder har du?')).toBeVisible()
+            await harSynligTekst(page, 'Hvilke andre inntektskilder har du?')
             await expect(page.getByRole('checkbox', { name: /andre arbeidsforhold/ })).toBeVisible()
             await page.locator('input[type=checkbox]#\\36 87382').check()
 

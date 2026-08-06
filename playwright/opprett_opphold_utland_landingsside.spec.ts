@@ -1,5 +1,5 @@
 import { test, expect } from './utils/fixtures'
-import { avbryterSoknad, harSynligTittel } from './utils/utilities'
+import { avbryterSoknad, harSynligTittel, harSynligTekst } from './utils/utilities'
 
 test.describe('Tester opprettelse av opphold utland søknad', () => {
     test('Oppretter søknad', async ({ page }) => {
@@ -12,7 +12,7 @@ test.describe('Tester opprettelse av opphold utland søknad', () => {
 
         // Sjekk overskrifter og tekster
         await harSynligTittel(page, 'Søknad om å beholde sykepenger utenfor EU/EØS', 1)
-        await expect(page.getByText('Du trenger ikke søke hvis du')).toBeVisible()
+        await harSynligTekst(page, 'Du trenger ikke søke hvis du')
         await harSynligTittel(page, 'Har du allerede vært på reise?', 2)
         await harSynligTittel(page, 'Er du statsborger i et land utenfor EU/EØS?', 3)
 
@@ -21,8 +21,8 @@ test.describe('Tester opprettelse av opphold utland søknad', () => {
         await page.getByRole('button', { name: 'Start søknaden' }).click()
 
         // Sjekk at vi nå er på 1. steg i skjemaet
-        await expect(page.getByText('Hvilke(t) land skal du reise til?')).toBeVisible()
-        await expect(page.getByText('Du kan velge flere.')).toBeVisible()
+        await harSynligTekst(page, 'Hvilke(t) land skal du reise til?')
+        await harSynligTekst(page, 'Du kan velge flere.')
 
         // 'Kan gå tilbake til forside, og starte søknad igjen
         // Klikk "Forrige steg"
@@ -42,8 +42,8 @@ test.describe('Tester opprettelse av opphold utland søknad', () => {
 
         // Forventer at vi nå er på /avbrutt/...
         await expect(page).toHaveURL(/avbrutt\//)
-        await expect(page.getByText('Søknaden ble avbrutt og fjernet av deg')).toBeVisible()
-        await expect(page.getByText('Fjernet søknad om å beholde sykepenger utenfor EU/EØS')).toBeVisible()
+        await harSynligTekst(page, 'Søknaden ble avbrutt og fjernet av deg')
+        await harSynligTekst(page, 'Fjernet søknad om å beholde sykepenger utenfor EU/EØS')
 
         // Sjekk lenke og tekst
         await expect(page.getByRole('link', { name: 'nav.no/sykepenger#utland' })).toBeVisible()

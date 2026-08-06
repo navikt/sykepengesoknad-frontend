@@ -1,7 +1,7 @@
 import { enUsendtSykmelding, toUsendteSykmeldinger } from '../src/data/mock/data/usendte-sykmeldinger'
 
 import { test, expect } from './utils/fixtures'
-import { trykkPaSoknadMedId } from './utils/utilities'
+import { trykkPaSoknadMedId, harSynligTekst } from './utils/utilities'
 import { validerAxeUtilityWrapper } from './uuvalidering'
 
 test.describe('Tester at åpne sykmeldinger må sendes inn', () => {
@@ -16,7 +16,7 @@ test.describe('Tester at åpne sykmeldinger må sendes inn', () => {
                 ),
             ).toBeVisible()
 
-            await expect(page.getByText('Gå til sykmeldingen')).toBeVisible()
+            await harSynligTekst(page, 'Gå til sykmeldingen')
         })
     })
 

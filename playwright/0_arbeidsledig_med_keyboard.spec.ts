@@ -2,7 +2,7 @@ import { test, expect, Page } from '@playwright/test'
 
 import { validerAxeUtilityWrapper } from './uuvalidering'
 import { tabUntilFocusedContainsText, tabUntilFocusedLocator } from './utils/tastaturSnarvei'
-import { harSynligTittel } from './utils/utilities'
+import { harSynligTittel, harSynligTekst } from './utils/utilities'
 
 async function sjekkMainContentFokus(page: Page) {
     const mainContent = page.locator('main')
@@ -26,7 +26,7 @@ test.describe('Arbeidsledigsøknad med tastaturnavigasjon', () => {
         await expect(page).toHaveURL(new RegExp(`${soknad.id}/1`))
         await tabUntilFocusedContainsText(browserName, page, 'Hvordan behandler vi personopplysninger')
         await page.keyboard.press('Space')
-        await expect(page.getByText('Les mer om hvordan NAV behandler personopplysningene dine')).toBeVisible()
+        await harSynligTekst(page, 'Les mer om hvordan NAV behandler personopplysningene dine')
         await tabUntilFocusedContainsText(browserName, page, 'Vi lagrer svarene underveis')
         await page.keyboard.press('Space')
         await expect(
@@ -68,7 +68,7 @@ test.describe('Arbeidsledigsøknad med tastaturnavigasjon', () => {
         await sjekkMainContentFokus(page)
 
         await harSynligTittel(page, 'Andre inntektskilder', 2)
-        await expect(page.getByText('Hva mener vi med andre inntektskilder?')).toBeVisible()
+        await harSynligTekst(page, 'Hva mener vi med andre inntektskilder?')
         await validerAxeUtilityWrapper(page, test.info())
 
         await tabUntilFocusedLocator(browserName, page, page.getByRole('radio', { name: 'Ja' }))
@@ -106,7 +106,7 @@ test.describe('Arbeidsledigsøknad med tastaturnavigasjon', () => {
         await page.keyboard.press('Enter')
         await sjekkMainContentFokus(page)
 
-        await expect(page.getByText('Søknaden er sendt til NAV')).toBeVisible()
+        await harSynligTekst(page, 'Søknaden er sendt til NAV')
 
         await expect(page.getByText(/Mottatt.*kl/, { exact: false })).toBeVisible()
 

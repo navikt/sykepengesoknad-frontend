@@ -2,7 +2,13 @@ import { test, expect } from '@playwright/test'
 
 import { julesoknadPerson } from '../src/data/mock/data/personas/personas'
 
-import { checkViStolerPaDeg, klikkGaVidere, svarNeiHovedsporsmal, harSynligTittel } from './utils/utilities'
+import {
+    checkViStolerPaDeg,
+    klikkGaVidere,
+    svarNeiHovedsporsmal,
+    harSynligTittel,
+    harSynligTekst,
+} from './utils/utilities'
 import { validerAxeUtilityWrapper } from './uuvalidering'
 
 test.describe('Julesøkand med informasjon på introside og kvittering', () => {
@@ -48,7 +54,7 @@ test.describe('Julesøkand med informasjon på introside og kvittering', () => {
 
             await harSynligTittel(page, 'Søknaden er sendt', 2)
 
-            await expect(page.getByText('Endre søknaden hvis situasjonen din endrer seg')).toBeVisible()
+            await harSynligTekst(page, 'Endre søknaden hvis situasjonen din endrer seg')
             await validerAxeUtilityWrapper(page, test.info())
             await expect(
                 page.getByText(

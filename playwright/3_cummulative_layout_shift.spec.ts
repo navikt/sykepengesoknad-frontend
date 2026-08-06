@@ -1,6 +1,6 @@
 import { test, expect, Page } from '@playwright/test'
 
-import { harSynligTittel } from './utils/utilities'
+import { harSynligTittel, harSynligTekst } from './utils/utilities'
 
 test.describe('Tester cummulative-layout-shift', () => {
     async function ventTilIngenSkeletons(page: Page) {
@@ -32,7 +32,7 @@ test.describe('Tester cummulative-layout-shift', () => {
         // await mainSkalHaHoyde(page, 388)
         await ventTilIngenSkeletons(page)
 
-        await expect(page.getByText('Nye søknader')).toBeVisible()
+        await harSynligTekst(page, 'Nye søknader')
         await ventTilIngenSkeletons(page)
 
         // await mainSkalHaHoyde(page, 388)

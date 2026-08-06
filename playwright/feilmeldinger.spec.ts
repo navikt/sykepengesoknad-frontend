@@ -3,7 +3,7 @@ import { Page } from '@playwright/test'
 import { arbeidstakerGradert } from '../src/data/mock/data/soknad/arbeidstaker-gradert'
 
 import { test, expect } from './utils/fixtures'
-import { klikkGaVidere, svarCombobox, svarJaHovedsporsmal } from './utils/utilities'
+import { klikkGaVidere, svarCombobox, svarJaHovedsporsmal, harSynligTekst } from './utils/utilities'
 import { validerAxeUtilityWrapper } from './uuvalidering'
 
 test.describe('Tester feilmeldinger', () => {
@@ -18,7 +18,7 @@ test.describe('Tester feilmeldinger', () => {
         antallFeil = 1,
     ) {
         await expect(page.getByText(lokalFeilmelding).first()).toBeVisible()
-        await expect(page.getByText(`Det er ${antallFeil} feil i skjemaet`)).toBeVisible()
+        await harSynligTekst(page, `Det er ${antallFeil} feil i skjemaet`)
         await page.getByRole('link', { name: globalFeilmelding }).click()
         await expect(page.locator(`[id="${forventetFokusId}"]`)).toBeFocused()
     }
@@ -267,21 +267,21 @@ test.describe('Tester feilmeldinger', () => {
         await test.step('Prosent: Ingen verdi', async () => {
             await page.getByRole('radio', { name: 'Prosent' }).click()
             await klikkGaVidere(page, true)
-            await expect(page.getByText('Du må oppgi en verdi')).toBeVisible()
+            await harSynligTekst(page, 'Du må oppgi en verdi')
             await validerAxeUtilityWrapper(page, test.info())
         })
 
         await test.step('Prosent: Mindre enn min', async () => {
             await prosentInput.fill('-10')
             await klikkGaVidere(page, true)
-            await expect(page.getByText('Må være minimum 51')).toBeVisible()
+            await harSynligTekst(page, 'Må være minimum 51')
             await validerAxeUtilityWrapper(page, test.info())
         })
 
         await test.step('Prosent: Større enn max', async () => {
             await prosentInput.fill('1000')
             await klikkGaVidere(page, true)
-            await expect(page.getByText('Må være maksimum 99')).toBeVisible()
+            await harSynligTekst(page, 'Må være maksimum 99')
             await validerAxeUtilityWrapper(page, test.info())
         })
 
@@ -362,7 +362,7 @@ test.describe('Tester feilmeldinger', () => {
                 page.getByText('Du må oppgi arbeidsgiveren du har jobbet hos utenfor Norge').first(),
             ).toBeVisible()
             await expect(page.getByText('Du må oppgi en fra og med dato i formatet dd.mm.åååå').first()).toBeVisible()
-            await expect(page.getByText('Det er 3 feil i skjemaet')).toBeVisible()
+            await harSynligTekst(page, 'Det er 3 feil i skjemaet')
             await validerAxeUtilityWrapper(page, test.info())
             await page.getByRole('button', { name: 'Slett', exact: true }).last().click()
             await verifiserIngenFeilmeldinger(page)

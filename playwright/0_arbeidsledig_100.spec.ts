@@ -10,6 +10,7 @@ import {
     svarJaHovedsporsmal,
     svarNeiHovedsporsmal,
     harSynligTittel,
+    harSynligTekst,
 } from './utils/utilities'
 import { validerAxeUtilityWrapper } from './uuvalidering'
 
@@ -47,7 +48,7 @@ test.describe('Tester arbeidsledigsøknad', () => {
 
             // Test spørsmål: Velg 'NEI' på hovedspørsmål
             await svarNeiHovedsporsmal(page)
-            await expect(page.getByText('Fra hvilken dato trengte du ikke lenger sykmeldingen?')).toBeVisible()
+            await harSynligTekst(page, 'Fra hvilken dato trengte du ikke lenger sykmeldingen?')
 
             // Velg dato i kalender
             await page.getByRole('button', { name: /Åpne datovelger/i }).click()
@@ -73,8 +74,8 @@ test.describe('Tester arbeidsledigsøknad', () => {
 
             // Forsøk å gå videre uten valg for å trigge feil (ingen inntektskilder valgt)
             await klikkGaVidere(page, true) // forventFeil=true
-            await expect(page.getByText('Det er 1 feil i skjemaet')).toBeVisible()
-            await expect(page.getByText('Du må oppgi hvilke inntektskilder du har')).toBeVisible()
+            await harSynligTekst(page, 'Det er 1 feil i skjemaet')
+            await harSynligTekst(page, 'Du må oppgi hvilke inntektskilder du har')
 
             const checkbox = page.getByLabel('andre arbeidsforhold')
             await checkbox.click()
@@ -111,7 +112,7 @@ test.describe('Tester arbeidsledigsøknad', () => {
             await svarJaHovedsporsmal(page)
 
             // Underspørsmål 1: Sett periode
-            await expect(page.getByText('Når var du utenfor EU/EØS?')).toBeVisible()
+            await harSynligTekst(page, 'Når var du utenfor EU/EØS?')
             await setPeriodeFraTil(page, 17, 24) // Bruk utility for å sette periode
 
             await validerAxeUtilityWrapper(page, test.info())

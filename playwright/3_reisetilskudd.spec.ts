@@ -13,6 +13,7 @@ import {
     apneReadmore,
     svarJaHovedsporsmal,
     harSynligTittel,
+    harSynligTekst,
 } from './utils/utilities'
 import { validerAxeUtilityWrapper } from './uuvalidering'
 
@@ -38,13 +39,13 @@ test.describe('Teste førsteside i reisetilskuddsøknaden', () => {
         await test.step('Ansvarserklæring - Reisetilskudd', async () => {
             await expect(page).toHaveURL(new RegExp(`${nyttReisetilskudd.id}/1`))
 
-            await page.getByRole('button', { name: /Om reisetilskudd/i }).click()
-            await expect(page.getByText('Hva dekker reisetilskuddet')).toBeVisible()
-            await expect(page.getByText('Reisetilskuddet dekker nødvendige ekstra reiseutgifter')).toBeVisible()
+            await page.getByLabel('Om reisetilskudd').click()
+            await harSynligTekst(page, 'Hva dekker reisetilskuddet')
+            await harSynligTekst(page, 'Reisetilskuddet dekker nødvendige ekstra reiseutgifter')
 
-            await expect(page.getByText('De første 16 dagene')).toBeVisible()
-            await expect(page.getByText('Legg ved kvitteringer')).toBeVisible()
-            await expect(page.getByText('Du må legge ved bilde av kvitteringene dine')).toBeVisible()
+            await harSynligTittel(page, 'De første 16 dagene', 3)
+            await harSynligTekst(page, 'Legg ved kvitteringer')
+            await harSynligTekst(page, 'Du må legge ved bilde av kvitteringene dine')
 
             await page.getByRole('checkbox', { name: /Jeg bekrefter/i }).click()
             await validerAxeUtilityWrapper(page, test.info(), true)
@@ -186,7 +187,7 @@ test.describe('Teste førsteside i reisetilskuddsøknaden', () => {
 
         await test.step('Oppsummering - Reisetilskudd', async () => {
             await expect(page).toHaveURL(new RegExp(`${nyttReisetilskudd.id}/6`))
-            await expect(page.getByText('Nå kan du se over at alt er riktig før du sender inn søknaden.')).toBeVisible()
+            await harSynligTekst(page, 'Nå kan du se over at alt er riktig før du sender inn søknaden.')
             await validerAxeUtilityWrapper(page, test.info())
             await page.getByText('Send søknaden').click()
         })

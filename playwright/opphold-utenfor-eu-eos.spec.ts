@@ -1,5 +1,5 @@
 import { test, expect } from './utils/fixtures'
-import { checkViStolerPaDeg, neiOgVidere, svarRadioGruppe, harSynligTittel } from './utils/utilities'
+import { checkViStolerPaDeg, neiOgVidere, svarRadioGruppe, harSynligTittel, harSynligTekst } from './utils/utilities'
 
 test.describe('Opphold utenfor EU/EØS', () => {
     test.beforeEach(async ({ page }) => {
@@ -85,7 +85,7 @@ test.describe('Opphold utenfor EU/EØS', () => {
             await expect(valgteLand.nth(1)).toHaveText('Afghanistan')
 
             await landVelger.press('Escape')
-            await expect(page.getByText('Du har reist utenfor EU/EØS.')).toBeVisible()
+            await harSynligTekst(page, 'Du har reist utenfor EU/EØS.')
         })
 
         await test.step('Viser info om opprettelse av egen søknad', async () => {

@@ -9,6 +9,7 @@ import {
     sporsmalOgSvar,
     svarCombobox,
     svarRadioGruppe,
+    harSynligTekst,
 } from './utils/utilities'
 import { validerAxeUtilityWrapper } from './uuvalidering'
 
@@ -35,8 +36,8 @@ test.describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
         await expect(header).toContainText('Søknad om å beholde sykepenger utenfor EU/EØS')
 
         // Viser infoside og starter søknaden', async () => {
-        await expect(page.getByText('Du trenger ikke søke hvis du')).toBeVisible()
-        await expect(page.getByText('Har du allerede vært på reise?')).toBeVisible()
+        await harSynligTekst(page, 'Du trenger ikke søke hvis du')
+        await harSynligTekst(page, 'Har du allerede vært på reise?')
 
         await validerAxeUtilityWrapper(page, test.info())
         // Start søknaden
@@ -47,9 +48,9 @@ test.describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
 
         // Klikk gå videre utan å fylle inn -> forventa feil
         await klikkGaVidere(page, true)
-        await expect(page.getByText('Du må velge minst et alternativ fra menyen')).toBeVisible()
-        await expect(page.getByText('Det er 1 feil i skjemaet')).toBeVisible()
-        await expect(page.getByText('Du må oppgi hvilket land du skal reise til')).toBeVisible()
+        await harSynligTekst(page, 'Du må velge minst et alternativ fra menyen')
+        await harSynligTekst(page, 'Det er 1 feil i skjemaet')
+        await harSynligTekst(page, 'Du må oppgi hvilket land du skal reise til')
 
         // Velger land innanfor EØS
         await svarCombobox(page, 'Hvilke(t) land skal du reise til?', 'Hel', 'Hellas', true)
@@ -106,7 +107,7 @@ test.describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
         // Avbryter søknaden og havner på avbrutt-siden', async () => {
         await avbryterSoknad(page)
         await expect(page).toHaveURL(new RegExp(`avbrutt/${soknad.id}`))
-        await expect(page.getByText('Fjernet søknad om å beholde sykepenger utenfor EU/EØS')).toBeVisible()
+        await harSynligTekst(page, 'Fjernet søknad om å beholde sykepenger utenfor EU/EØS')
         await expect(page.getByRole('link', { name: 'nav.no/sykepenger#utland' })).toBeVisible()
         await expect(
             page.getByText('I utgangspunktet bør du søke før du reiser til land utenfor EU/EØS. Du kan likevel søke'),
@@ -115,7 +116,7 @@ test.describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
         // Gjenåpner søknaden', async () => {
         await page.getByRole('button', { name: 'Jeg vil bruke denne søknaden likevel' }).click()
         await expect(page).toHaveURL(new RegExp(`${soknad.id}/2`))
-        await expect(page.getByText('Gå videre')).toBeVisible()
+        await harSynligTekst(page, 'Gå videre')
 
         // Velger periode for utenlandsopphold', async () => {
         await expect(page).toHaveURL(new RegExp(`${soknad.id}/2`))
@@ -186,7 +187,7 @@ test.describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
 
         // Søknad TIL_SLUTT (oppsummering)', async () => {
         await expect(page).toHaveURL(new RegExp(`${soknad.id}/5`))
-        await expect(page.getByText('Nå kan du se over at alt er riktig før du sender inn søknaden.')).toBeVisible()
+        await harSynligTekst(page, 'Nå kan du se over at alt er riktig før du sender inn søknaden.')
 
         // Oppsummering
         const oppsummering = page.locator('[role="region"][aria-label="Oppsummering fra søknaden"]')
@@ -235,6 +236,6 @@ test.describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
 
         // Viser sendt side', async () => {
         await expect(page).toHaveURL(new RegExp(`sendt/${soknad.id}`))
-        await expect(page.getByText('Oppsummering fra søknaden')).toBeVisible()
+        await harSynligTekst(page, 'Oppsummering fra søknaden')
     })
 })

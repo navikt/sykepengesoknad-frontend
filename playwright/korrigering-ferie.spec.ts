@@ -7,6 +7,7 @@ import {
     klikkGaVidere,
     harSynligTittel,
     neiOgVidere,
+    harSynligTekst,
 } from './utils/utilities'
 
 test.describe('Tester korrigering av ferie', () => {
@@ -29,7 +30,7 @@ test.describe('Tester korrigering av ferie', () => {
             await svarNeiHovedsporsmal(page)
             await svarJaHovedsporsmal(page)
             await setPeriodeFraTil(page, 12, 15)
-            await expect(page.getByText('Når tok du ut feriedager?')).toBeVisible()
+            await harSynligTekst(page, 'Når tok du ut feriedager?')
             //TODO Forstå denne:
             // await expect(page.locator('.aksel-alert').filter({ hasText: 'ferie' })).toBeHidden()
             await klikkGaVidere(page)
@@ -59,7 +60,7 @@ test.describe('Tester korrigering av ferie', () => {
             await klikkGaVidere(page)
             await harSynligTittel(page, 'Ferie', 2, true)
             await svarJaHovedsporsmal(page)
-            await expect(page.getByText('Når tok du ut feriedager?')).toBeVisible()
+            await harSynligTekst(page, 'Når tok du ut feriedager?')
             await expect(
                 page.getByText(
                     'Du kan dra på ferie mens du er sykmeldt, men du får ikke utbetalt sykepenger når du har ferie.',

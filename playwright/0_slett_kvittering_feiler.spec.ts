@@ -3,7 +3,7 @@ import path from 'path'
 import { test, expect } from '@playwright/test'
 
 import { validerAxeUtilityWrapper } from './uuvalidering'
-import { fjernAnimasjoner, harSynligTittel } from './utils/utilities'
+import { fjernAnimasjoner, harSynligTittel, harSynligTekst } from './utils/utilities'
 
 test.describe('Test sletting av kvittering som feiler', () => {
     const soknadId = 'd4ce1c57-1f91-411b-ab64-beabbba29b65' // feilVedSlettingAvKvittering.id
@@ -46,7 +46,7 @@ test.describe('Test sletting av kvittering som feiler', () => {
             await page.getByRole('table').getByRole('button', { name: 'Slett' }).click()
             await page.getByRole('button', { name: 'Ja, jeg er sikker' }).click()
 
-            await expect(page.getByText('Det skjedde en feil ved sletting av kvitteringen')).toBeVisible()
+            await harSynligTekst(page, 'Det skjedde en feil ved sletting av kvitteringen')
             await validerAxeUtilityWrapper(page, test.info())
             await page.getByLabel('Vil du slette kvitteringen?').getByRole('button', { name: 'Nei' }).click()
         })

@@ -1,5 +1,5 @@
 import { test, expect } from './utils/fixtures'
-import { checkViStolerPaDeg, klikkTilbake, neiOgVidere } from './utils/utilities'
+import { checkViStolerPaDeg, klikkTilbake, neiOgVidere, harSynligTekst } from './utils/utilities'
 
 test.describe('Tester form progress bar', () => {
     const soknadId = 'bc250797-147c-4050-b193-920c508902aa'
@@ -14,7 +14,7 @@ test.describe('Tester form progress bar', () => {
         })
 
         await test.step('Første spørsmål har form progress, og ingen navigerbare', async () => {
-            await expect(page.getByText('Steg 1 av 13')).toBeVisible()
+            await harSynligTekst(page, 'Steg 1 av 13')
             await page.getByRole('button', { name: 'Vis alle steg' }).click()
             const stepper = page.locator('.aksel-stepper')
             await expect(stepper.locator('[data-completed="true"]')).toHaveCount(0)
@@ -30,7 +30,7 @@ test.describe('Tester form progress bar', () => {
         })
 
         await test.step('Vi har besvart en del spørsmål og en del er checked', async () => {
-            await expect(page.getByText('Steg 6 av 13')).toBeVisible()
+            await harSynligTekst(page, 'Steg 6 av 13')
             const stepper = page.locator('.aksel-stepper')
             await expect(stepper.locator('[data-completed="true"]')).toHaveCount(5)
             await expect(stepper.locator('li[data-interactive="false"]')).toHaveCount(8)
@@ -39,9 +39,9 @@ test.describe('Tester form progress bar', () => {
 
         await test.step('Vi går tilbake en med å klikke tilbake knappen', async () => {
             await klikkTilbake(page)
-            await expect(page.getByText('Steg 5 av 13')).toBeVisible()
+            await harSynligTekst(page, 'Steg 5 av 13')
             await klikkTilbake(page)
-            await expect(page.getByText('Steg 4 av 13')).toBeVisible()
+            await harSynligTekst(page, 'Steg 4 av 13')
             const stepper = page.locator('.aksel-stepper')
             await expect(stepper.locator('[data-completed="true"]')).toHaveCount(5)
             await expect(stepper.locator('li[data-interactive="false"]')).toHaveCount(8)
@@ -50,7 +50,7 @@ test.describe('Tester form progress bar', () => {
 
         await test.step('Vi navigerer tilbake til start', async () => {
             await page.getByRole('link', { name: 'Tilbake i fullt arbeid' }).click()
-            await expect(page.getByText('Steg 1 av 13')).toBeVisible()
+            await harSynligTekst(page, 'Steg 1 av 13')
             const stepper = page.locator('.aksel-stepper')
             await expect(stepper.locator('[data-completed="true"]')).toHaveCount(5)
             await expect(stepper.locator('li[data-interactive="false"]')).toHaveCount(8)
@@ -59,7 +59,7 @@ test.describe('Tester form progress bar', () => {
 
         await test.step('Vi navigerer til Andre inntektskilder', async () => {
             await page.getByRole('link', { name: 'Andre inntektskilder' }).click()
-            await expect(page.getByText('Steg 6 av 13')).toBeVisible()
+            await harSynligTekst(page, 'Steg 6 av 13')
             const stepper = page.locator('.aksel-stepper')
             await expect(stepper.locator('[data-completed="true"]')).toHaveCount(5)
             await expect(stepper.locator('li[data-interactive="false"]')).toHaveCount(8)
@@ -81,9 +81,9 @@ test.describe('Tester form progress bar', () => {
         })
 
         await test.step('Kvittering er litt rar siden vi kan gå til neste uten å svare', async () => {
-            await expect(page.getByText('Steg 11 av 13')).toBeVisible()
+            await harSynligTekst(page, 'Steg 11 av 13')
             await page.getByRole('link', { name: 'Utbetaling' }).click()
-            await expect(page.getByText('Steg 12 av 13')).toBeVisible()
+            await harSynligTekst(page, 'Steg 12 av 13')
             await neiOgVidere(page, ['Utbetaling'])
             const stepper = page.locator('.aksel-stepper')
             await expect(stepper.locator('[data-completed="true"]')).toHaveCount(11)

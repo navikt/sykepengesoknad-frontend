@@ -132,7 +132,7 @@ test.describe('Selvstendig næringsdrivende', () => {
 
         await expect(page.getByText('Datoen følger ikke formatet dd.mm.åååå').first()).toBeVisible()
 
-        await expect(page.getByText('Det er 1 feil i skjemaet')).toBeVisible()
+        await harSynligTekst(page, 'Det er 1 feil i skjemaet')
         await expect(page.getByRole('link', { name: 'Datoen følger ikke formatet dd.mm.åååå' })).toBeVisible()
 
         const dateInput = page.getByLabel('Når avviklet du virksomheten din?')
@@ -227,10 +227,10 @@ test.describe('Selvstendig næringsdrivende', () => {
 
         await klikkGaVidere(page, true)
 
-        await expect(page.getByText('Du må velge et alternativ')).toBeVisible()
+        await harSynligTekst(page, 'Du må velge et alternativ')
         await expect(page.getByText('Datoen følger ikke formatet dd.mm.åååå').first()).toBeVisible()
 
-        await expect(page.getByText('Det er 2 feil i skjemaet')).toBeVisible()
+        await harSynligTekst(page, 'Det er 2 feil i skjemaet')
         await expect(page.getByRole('link', { name: 'Du må svare på hvilken endring som har skjedd' })).toBeVisible()
         await expect(page.getByRole('link', { name: 'Datoen følger ikke formatet' })).toBeVisible()
 

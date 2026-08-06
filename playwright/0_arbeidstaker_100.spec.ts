@@ -14,6 +14,7 @@ import {
     svarFritekst,
     svarJaHovedsporsmal,
     harSynligTittel,
+    harSynligTekst,
 } from './utils/utilities'
 import { validerAxeUtilityWrapper } from './uuvalidering'
 
@@ -50,11 +51,11 @@ test.describe('Tester arbeidstakersøknad - 100%', () => {
             await page.getByRole('button', { name: 'Nei, jeg har behov for søknaden' }).click()
 
             await page.getByText('Start søknad').click()
-            await expect(page.getByText('Det er 1 feil i skjemaet')).toBeVisible()
+            await harSynligTekst(page, 'Det er 1 feil i skjemaet')
             await expect(
                 page.getByRole('checkbox', { name: 'Jeg bekrefter at jeg vil svare så riktig som jeg kan.' }),
             ).toBeVisible()
-            await expect(page.getByText('Du må bekrefte at du vil svare så riktig du kan')).toBeVisible()
+            await harSynligTekst(page, 'Du må bekrefte at du vil svare så riktig du kan')
 
             await validerAxeUtilityWrapper(page, test.info())
 
@@ -65,7 +66,7 @@ test.describe('Tester arbeidstakersøknad - 100%', () => {
             await expect(page).toHaveURL(new RegExp(`.*${soknadId}\\/2`))
 
             await svarJaHovedsporsmal(page)
-            await expect(page.getByText('Når begynte du å jobbe igjen?')).toBeVisible()
+            await harSynligTekst(page, 'Når begynte du å jobbe igjen?')
 
             await page.getByRole('button', { name: /Åpne datovelger/i }).click()
             await page.getByRole('grid').getByRole('button').filter({ hasText: /^20$/ }).click()
@@ -93,7 +94,7 @@ test.describe('Tester arbeidstakersøknad - 100%', () => {
             ])
 
             await svarJaHovedsporsmal(page)
-            await expect(page.getByText('Når tok du ut feriedager?')).toBeVisible()
+            await harSynligTekst(page, 'Når tok du ut feriedager?')
 
             await setPeriodeFraTil(page, 16, 23)
 
@@ -104,7 +105,7 @@ test.describe('Tester arbeidstakersøknad - 100%', () => {
         await test.step('Søknad PERMISJON_V2', async () => {
             await expect(page).toHaveURL(new RegExp(`.*${soknadId}\\/4`))
 
-            await expect(page.getByText('Spørsmålet forklart')).toBeVisible()
+            await harSynligTekst(page, 'Spørsmålet forklart')
             await expect(
                 page.getByText('Permisjon er dager du var borte fra jobb av andre grunner enn sykdom'),
             ).toBeHidden()
@@ -114,7 +115,7 @@ test.describe('Tester arbeidstakersøknad - 100%', () => {
             ).toBeVisible()
 
             await svarJaHovedsporsmal(page)
-            await expect(page.getByText('Når tok du permisjon?')).toBeVisible()
+            await harSynligTekst(page, 'Når tok du permisjon?')
 
             await setPeriodeFraTil(page, 14, 22)
 
@@ -138,7 +139,7 @@ test.describe('Tester arbeidstakersøknad - 100%', () => {
 
             await svarJaHovedsporsmal(page)
 
-            await expect(page.getByText('Oppgi arbeidsmengde i timer eller prosent')).toBeVisible()
+            await harSynligTekst(page, 'Oppgi arbeidsmengde i timer eller prosent')
 
             await page.locator('.undersporsmal input[value="Prosent"]').click()
             await expect(
@@ -174,7 +175,7 @@ test.describe('Tester arbeidstakersøknad - 100%', () => {
         await test.step('Søknad ANDRE_INNTEKTSKILDER_V2', async () => {
             await expect(page).toHaveURL(new RegExp(`.*${soknadId}\\/6`))
 
-            await expect(page.getByText('Har du andre inntektskilder enn nevnt over?')).toBeVisible()
+            await harSynligTekst(page, 'Har du andre inntektskilder enn nevnt over?')
 
             await apneReadmore(page, 'Spørsmålet forklart', [
                 'Kun pensjonsgivende inntekt gir rett til sykepenger',
@@ -216,7 +217,7 @@ test.describe('Tester arbeidstakersøknad - 100%', () => {
             ])
 
             await svarJaHovedsporsmal(page)
-            await expect(page.getByText('Når var du utenfor EU/EØS?')).toBeVisible()
+            await harSynligTekst(page, 'Når var du utenfor EU/EØS?')
 
             await setPeriodeFraTil(page, 14, 22)
 
@@ -271,10 +272,10 @@ test.describe('Tester arbeidstakersøknad - 100%', () => {
             await klikkGaVidere(page)
 
             await page.getByRole('link', { name: 'Endre svar' }).click()
-            await expect(page.getByText('Steg 1 av 7')).toBeVisible()
+            await harSynligTekst(page, 'Steg 1 av 7')
             await page.getByRole('button', { name: 'Vis alle steg' }).click()
             await page.getByRole('link', { name: 'Oppsummering fra søknaden' }).click()
-            await expect(page.getByText('Steg 7 av 7')).toBeVisible()
+            await harSynligTekst(page, 'Steg 7 av 7')
 
             await page.getByText('Send søknaden').click()
         })

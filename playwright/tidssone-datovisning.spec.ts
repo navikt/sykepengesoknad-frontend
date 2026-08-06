@@ -13,6 +13,7 @@ import {
     svarRadioGruppe,
     svarFritekst,
     svarJaHovedsporsmal,
+    harSynligTekst,
 } from './utils/utilities'
 
 /**
@@ -50,7 +51,7 @@ test.describe('Tidssone: periodevisning', () => {
             await checkViStolerPaDeg(page)
 
             await svarJaHovedsporsmal(page)
-            await expect(page.getByText('Når begynte du å jobbe igjen?')).toBeVisible()
+            await harSynligTekst(page, 'Når begynte du å jobbe igjen?')
 
             const datoInput = page.getByRole('textbox', { name: /Når begynte du å jobbe igjen/ })
             await datoInput.fill('01.04.2020')
@@ -101,7 +102,7 @@ test.describe('Tidssone: DatePicker fromDate-grense', () => {
             await checkViStolerPaDeg(page)
 
             await page.getByRole('radio', { name: 'Nei' }).click()
-            await expect(page.getByText('Fra hvilken dato trengte du ikke lenger sykmeldingen?')).toBeVisible()
+            await harSynligTekst(page, 'Fra hvilken dato trengte du ikke lenger sykmeldingen?')
 
             const openButton = page.getByRole('button', { name: 'Åpne datovelger' })
             await openButton.click()
@@ -123,7 +124,7 @@ test.describe('Tidssone: DatePicker fromDate-grense', () => {
             await checkViStolerPaDeg(page)
 
             await page.getByRole('radio', { name: 'Nei' }).click()
-            await expect(page.getByText('Fra hvilken dato trengte du ikke lenger sykmeldingen?')).toBeVisible()
+            await harSynligTekst(page, 'Fra hvilken dato trengte du ikke lenger sykmeldingen?')
 
             const openButton = page.getByRole('button', { name: 'Åpne datovelger' })
             await openButton.click()
@@ -144,7 +145,7 @@ test.describe('Tidssone: DatePicker fromDate-grense', () => {
             await checkViStolerPaDeg(page)
 
             await page.getByRole('radio', { name: 'Nei' }).click()
-            await expect(page.getByText('Fra hvilken dato trengte du ikke lenger sykmeldingen?')).toBeVisible()
+            await harSynligTekst(page, 'Fra hvilken dato trengte du ikke lenger sykmeldingen?')
 
             const openButton = page.getByRole('button', { name: 'Åpne datovelger' })
             await openButton.click()

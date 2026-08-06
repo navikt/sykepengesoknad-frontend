@@ -1,5 +1,5 @@
 import { test, expect } from './utils/fixtures'
-import { harSynligTittel, svarJaHovedsporsmal, svarNeiHovedsporsmal } from './utils/utilities'
+import { harSynligTittel, svarJaHovedsporsmal, svarNeiHovedsporsmal, harSynligTekst } from './utils/utilities'
 
 test.describe('Tester påskeferiehjelpetekst', () => {
     test('Søknaden går over påskeferien', async ({ page }) => {
@@ -11,7 +11,7 @@ test.describe('Tester påskeferiehjelpetekst', () => {
 
         await expect(page.locator('.aksel-alert').filter({ hasText: 'påsken' })).toHaveCount(0)
         await svarJaHovedsporsmal(page)
-        await expect(page.getByText('Når tok du ut feriedager?')).toBeVisible()
+        await harSynligTekst(page, 'Når tok du ut feriedager?')
 
         const paskeferiehjelp = page.locator('.aksel-alert').filter({ hasText: 'påsken' })
         await expect(paskeferiehjelp).toBeVisible()
@@ -30,7 +30,7 @@ test.describe('Tester påskeferiehjelpetekst', () => {
         await harSynligTittel(page, 'Ferie', 2)
 
         await svarJaHovedsporsmal(page)
-        await expect(page.getByText('Når tok du ut feriedager?')).toBeVisible()
+        await harSynligTekst(page, 'Når tok du ut feriedager?')
         await expect(page.locator('.aksel-alert').filter({ hasText: 'påsken' })).toHaveCount(0)
     })
 })

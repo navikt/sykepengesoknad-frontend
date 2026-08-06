@@ -13,6 +13,7 @@ import {
     svarTekstboks,
     sporsmalOgSvar,
     harSynligTittel,
+    harSynligTekst,
 } from './utils/utilities'
 // import { validerAxeUtilityWrapper } from './uuvalidering'
 
@@ -120,7 +121,7 @@ test.describe('Søknad med alle opprinnelige spørsmål om medlemskap', () => {
         })
 
         await test.step('Var du på reise utenfor EU/EØS mens du var sykmeldt', async () => {
-            await expect(page.getByText('Var du på reise utenfor EU/EØS mens du var sykmeldt')).toBeVisible()
+            await harSynligTekst(page, 'Var du på reise utenfor EU/EØS mens du var sykmeldt')
             await svarNeiHovedsporsmal(page)
             // todo put this back later await validerAxeUtilityWrapper(page, test.info())
 
@@ -180,15 +181,15 @@ test.describe('Søknad med nytt spørsmål om oppholdstillatelse og kjent perman
             await expect(
                 page.getByText('Vi har mottatt denne oppholdstillatelsen fra Utlendingsdirektoratet:'),
             ).toBeVisible()
-            await expect(page.getByText('Permanent oppholdstillatelse')).toBeVisible()
-            await expect(page.getByText('Fra 1. mai 2024.')).toBeVisible()
+            await harSynligTekst(page, 'Permanent oppholdstillatelse')
+            await harSynligTekst(page, 'Fra 1. mai 2024.')
             await expect(
                 page.getByText('Har Utlendingsdirektoratet gitt deg en oppholdstillatelse før 1. mai 2024?'),
             ).toBeVisible()
 
             await svarJaHovedsporsmal(page)
-            await expect(page.getByText('Fra og med')).toBeVisible()
-            await expect(page.getByText('Til og med')).toBeVisible()
+            await harSynligTekst(page, 'Fra og med')
+            await harSynligTekst(page, 'Til og med')
 
             await velgDato(page, 1)
             await setPeriodeFraTil(page, 10, 15)
@@ -228,8 +229,8 @@ test.describe('Søknad med nytt spørsmål om oppholdstillatelse og kjent midler
             await expect(
                 page.getByText('Vi har mottatt denne oppholdstillatelsen fra Utlendingsdirektoratet:'),
             ).toBeVisible()
-            await expect(page.getByText('Midlertidig oppholdstillatelse')).toBeVisible()
-            await expect(page.getByText('Fra 1. mai 2024 til 31. desember 2024.')).toBeVisible()
+            await harSynligTekst(page, 'Midlertidig oppholdstillatelse')
+            await harSynligTekst(page, 'Fra 1. mai 2024 til 31. desember 2024.')
             await expect(
                 page.getByText('Har Utlendingsdirektoratet gitt deg en oppholdstillatelse før 1. mai 2024?'),
             ).toBeVisible()
@@ -241,8 +242,8 @@ test.describe('Søknad med nytt spørsmål om oppholdstillatelse og kjent midler
             ])
 
             await svarJaHovedsporsmal(page)
-            await expect(page.getByText('Fra og med')).toBeVisible()
-            await expect(page.getByText('Til og med')).toBeVisible()
+            await harSynligTekst(page, 'Fra og med')
+            await harSynligTekst(page, 'Til og med')
 
             await velgDato(page, 1)
             await setPeriodeFraTil(page, 10, 15)
