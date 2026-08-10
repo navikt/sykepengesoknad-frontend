@@ -9,6 +9,7 @@ import { enUsendtSykmelding, toUsendteSykmeldinger } from './data/usendte-sykmel
 import {
     arbeidsledigPerson,
     arbeidstakerGradertPerson,
+    arbeidstakerPeriodeVarianter_Person,
     arbeidstakerPerson,
     behandlingsdagerPerson,
     clsPerson,
@@ -52,6 +53,7 @@ type PersonaKey =
     | 'uten-data'
     | 'arbeidstaker'
     | 'arbeidstaker-gradert'
+    | 'arbeidstaker-periode-varianter'
     | 'arbeidsledig'
     | 'reisetilskudd'
     | 'reisetilskudd-test'
@@ -156,6 +158,7 @@ export function testpersonerGruppert(): PersonaGroup {
             ['julesoknad']: jsonDeepCopy(julesoknadPerson),
         },
         ['testing']: {
+            ['arbeidstaker-periode-varianter']: jsonDeepCopy(arbeidstakerPeriodeVarianter_Person),
             ['brukertest']: jsonDeepCopy(brukertestPerosn),
             ['over-70']: over70(),
             ['korrigeringsfrist-utlopt']: jsonDeepCopy(korrigeringsfristUtloptPerson),

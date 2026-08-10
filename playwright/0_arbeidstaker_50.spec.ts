@@ -74,6 +74,14 @@ test.describe('Tester arbeidstakersøknad - gradert 50%', () => {
 
         await test.step('Tilbake til ANSVARSERKLARING og frem igjen', async () => {
             await expect(page).toHaveURL(new RegExp(`.*${soknadId}\/2`))
+
+            await harSynligTekst(page, 'Sykmeldt fra: Posten Norge AS, Bærum')
+            await harSynligTekst(page, 'Perioder:')
+            const soknadPerioder = page.getByRole('list', { name: 'Sykmeldingsperioder' })
+            await expect(soknadPerioder.getByRole('listitem')).toHaveCount(2)
+            await expect(soknadPerioder.getByRole('listitem').first()).toContainText('april 2020')
+            await expect(soknadPerioder.getByRole('listitem').first()).toContainText('50%')
+
             await validerAxeUtilityWrapper(page, test.info())
             await page.getByRole('button', { name: 'Tilbake' }).click()
             await expect(page).toHaveURL(new RegExp(`.*${soknadId}\/1`))

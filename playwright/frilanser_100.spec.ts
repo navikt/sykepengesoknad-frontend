@@ -29,11 +29,15 @@ test.describe('Tester frilansersøknad', () => {
 
         await test.step('Søknad ANSVARSERKLARING - steg 1', async () => {
             await expect(page).toHaveURL(new RegExp(`${soknad.id}/1`))
+
             await checkViStolerPaDeg(page)
         })
 
         await test.step('Søknad TILBAKE_I_ARBEID - steg 2', async () => {
             await expect(page).toHaveURL(new RegExp(`${soknad.id}/2`))
+
+            await harSynligTekst(page, 'Sykmeldt som: frilanser')
+            await harSynligTekst(page, 'Periode: 1. – 24. april 2020 (100%)')
             await svarJaHovedsporsmal(page)
             await harSynligTekst(page, 'Når begynte du å jobbe igjen?')
             await page.getByRole('button', { name: 'Åpne datovelger' }).click()

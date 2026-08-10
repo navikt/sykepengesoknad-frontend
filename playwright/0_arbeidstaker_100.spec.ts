@@ -65,6 +65,8 @@ test.describe('Tester arbeidstakersøknad - 100%', () => {
         await test.step('Søknad TILBAKE_I_ARBEID', async () => {
             await expect(page).toHaveURL(new RegExp(`.*${soknadId}\\/2`))
 
+            await harSynligTekst(page, 'Sykmeldt fra: Posten Norge AS, Bærum')
+            await harSynligTekst(page, 'Periode: 1. – 24. april 2020 (100%)')
             await svarJaHovedsporsmal(page)
             await harSynligTekst(page, 'Når begynte du å jobbe igjen?')
 
