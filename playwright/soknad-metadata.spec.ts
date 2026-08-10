@@ -9,10 +9,8 @@ import { apneReadmore } from './utils/utilities'
 test.describe('SoknadMetadata', () => {
     test('viser én periode inline med strong label', async ({ page }) => {
         await page.goto(`/syk/sykepengesoknad?testperson=arbeidstaker`)
-        await page.waitForLoadState('load')
 
         await page.locator(`a[href*="${arbeidstaker.id}"]`).click()
-        await page.waitForLoadState('load')
 
         await expect(page.getByText('Periode:', { exact: true })).toBeVisible()
         await expect(page.getByRole('list', { name: 'Sykmeldingsperioder' })).toHaveCount(0)
@@ -20,10 +18,8 @@ test.describe('SoknadMetadata', () => {
 
     test('viser 2 perioder som bullet-liste i samme måned', async ({ page }) => {
         await page.goto(`/syk/sykepengesoknad?testperson=arbeidstaker-periode-varianter`)
-        await page.waitForLoadState('load')
 
         await page.locator(`a[href*="${arbeidstakerToPerioder.id}"]`).click()
-        await page.waitForLoadState('load')
 
         await expect(page.getByText('Perioder:', { exact: true })).toBeVisible()
 
@@ -35,10 +31,8 @@ test.describe('SoknadMetadata', () => {
 
     test('viser 3 perioder som bullet-liste i samme måned', async ({ page }) => {
         await page.goto(`/syk/sykepengesoknad?testperson=arbeidstaker-periode-varianter`)
-        await page.waitForLoadState('load')
 
         await page.locator(`a[href*="${arbeidstakerTrePerioder.id}"]`).click()
-        await page.waitForLoadState('load')
 
         await expect(page.getByText('Perioder:', { exact: true })).toBeVisible()
 
@@ -50,10 +44,8 @@ test.describe('SoknadMetadata', () => {
 
     test('viser 4+ perioder i ReadMore dropdown', async ({ page }) => {
         await page.goto(`/syk/sykepengesoknad?testperson=arbeidstaker-periode-varianter`)
-        await page.waitForLoadState('load')
 
         await page.locator(`a[href*="${arbeidstakerMangePerioder.id}"]`).click()
-        await page.waitForLoadState('load')
 
         await apneReadmore(page, 'Perioder', [
             '1. – 7. april 2020 (100%)',
