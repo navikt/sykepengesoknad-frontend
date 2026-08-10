@@ -1,4 +1,4 @@
-import { logAnalyticsEvent } from '@navikt/nav-dekoratoren-moduler'
+import { logAnalyticsCustomEvent } from '@navikt/nav-dekoratoren-moduler'
 import { logger } from '@navikt/next-logger'
 
 import { umamiEnabled, isLocalBackend, isProd, isOpplaering } from '../../utils/environment'
@@ -42,7 +42,7 @@ export const logEvent = (eventName: validEventNames, eventData: Record<string, s
             }
         }
         if (umamiEnabled()) {
-            logAnalyticsEvent({
+            logAnalyticsCustomEvent({
                 origin: 'sykepengesoknad-frontend',
                 eventName,
                 eventData: cleanedEventData,
