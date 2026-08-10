@@ -120,7 +120,7 @@ export const Soknaden = () => {
             {!erForstesiden && <Tilbake variant="liten" />}
 
             <SoknadHeader overskrivTittel={erSistesiden ? 'Oppsummering' : undefined} />
-            {valgtSoknad && <SoknadMetadata soknad={valgtSoknad} />}
+            {valgtSoknad && !erForstesiden && <SoknadMetadata soknad={valgtSoknad} />}
 
             {!erForstesiden && <Fremdriftsbar />}
             {erForstesiden && <Introside></Introside>}

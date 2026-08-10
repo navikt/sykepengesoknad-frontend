@@ -39,9 +39,6 @@ test.describe('Tester arbeidsledigsøknad', () => {
         await test.step('Søknad ANSVARSERKLARING', async () => {
             await expect(page).toHaveURL(new RegExp(`${arbeidsledig.id}/1`))
 
-            await expect(page.getByText('Sykmeldt som: arbeidsledig')).toBeVisible()
-            await expect(page.getByText('Periode: 1. – 24. april 2020 (100%)')).toBeVisible()
-
             await sjekkIntroside(page) // Bruk eksisterende utility for å verifisere introside-innhold
             await checkViStolerPaDeg(page, true) // Bekreft ansvarserklæring og gå videre (gaVidere=true)
             await validerAxeUtilityWrapper(page, test.info())
@@ -49,6 +46,9 @@ test.describe('Tester arbeidsledigsøknad', () => {
 
         await test.step('Søknad FRISKMELDT', async () => {
             await expect(page).toHaveURL(new RegExp(`${arbeidsledig.id}/2`))
+
+            await harSynligTekst(page, 'Sykmeldt som: arbeidsledig')
+            await harSynligTekst(page, 'Periode: 1. – 24. april 2020 (100%)')
 
             // Test spørsmål: Velg 'NEI' på hovedspørsmål
             await svarNeiHovedsporsmal(page)

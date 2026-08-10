@@ -4,13 +4,14 @@ import { arbeidstaker } from '../src/data/mock/data/soknad/arbeidstaker'
 import { arbeidstakerToPerioder } from '../src/data/mock/data/soknad/arbeidstaker-to-perioder'
 import { arbeidstakerTrePerioder } from '../src/data/mock/data/soknad/arbeidstaker-tre-perioder'
 import { arbeidstakerMangePerioder } from '../src/data/mock/data/soknad/arbeidstaker-mange-perioder'
-import { apneReadmore } from './utils/utilities'
+import { apneReadmore, checkViStolerPaDeg } from './utils/utilities'
 
 test.describe('SoknadMetadata', () => {
     test('viser én periode inline med strong label', async ({ page }) => {
         await page.goto(`/syk/sykepengesoknad?testperson=arbeidstaker`)
 
         await page.locator(`a[href*="${arbeidstaker.id}"]`).click()
+        await checkViStolerPaDeg(page)
 
         await expect(page.getByText('Periode:', { exact: true })).toBeVisible()
         await expect(page.getByRole('list', { name: 'Sykmeldingsperioder' })).toHaveCount(0)
@@ -20,6 +21,7 @@ test.describe('SoknadMetadata', () => {
         await page.goto(`/syk/sykepengesoknad?testperson=arbeidstaker-periode-varianter`)
 
         await page.locator(`a[href*="${arbeidstakerToPerioder.id}"]`).click()
+        await checkViStolerPaDeg(page)
 
         await expect(page.getByText('Perioder:', { exact: true })).toBeVisible()
 
@@ -33,6 +35,7 @@ test.describe('SoknadMetadata', () => {
         await page.goto(`/syk/sykepengesoknad?testperson=arbeidstaker-periode-varianter`)
 
         await page.locator(`a[href*="${arbeidstakerTrePerioder.id}"]`).click()
+        await checkViStolerPaDeg(page)
 
         await expect(page.getByText('Perioder:', { exact: true })).toBeVisible()
 
@@ -46,6 +49,7 @@ test.describe('SoknadMetadata', () => {
         await page.goto(`/syk/sykepengesoknad?testperson=arbeidstaker-periode-varianter`)
 
         await page.locator(`a[href*="${arbeidstakerMangePerioder.id}"]`).click()
+        await checkViStolerPaDeg(page)
 
         await apneReadmore(page, 'Perioder', [
             '1. – 7. april 2020 (100%)',
