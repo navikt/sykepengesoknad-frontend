@@ -10,6 +10,7 @@ import {
     svarJaHovedsporsmal,
     svarRadioGruppe,
     trykkPaSoknadMedId,
+    harSynligTekst,
 } from './utils/utilities'
 
 test.describe('Tester frilansersøknad', () => {
@@ -34,7 +35,7 @@ test.describe('Tester frilansersøknad', () => {
         await test.step('Søknad TILBAKE_I_ARBEID - steg 2', async () => {
             await expect(page).toHaveURL(new RegExp(`${soknad.id}/2`))
             await svarJaHovedsporsmal(page)
-            await expect(page.getByText('Når begynte du å jobbe igjen?')).toBeVisible()
+            await harSynligTekst(page, 'Når begynte du å jobbe igjen?')
             await page.getByRole('button', { name: 'Åpne datovelger' }).click()
             await page.getByRole('button', { name: 'mandag 20' }).click()
             await klikkGaVidere(page)
@@ -43,7 +44,7 @@ test.describe('Tester frilansersøknad', () => {
         await test.step('Søknad ARBEID_UNDERVEIS_100_PROSENT - steg 3', async () => {
             await expect(page).toHaveURL(new RegExp(`${soknad.id}/3`))
             await svarJaHovedsporsmal(page)
-            await expect(page.getByText('Oppgi arbeidsmengde i timer eller prosent')).toBeVisible()
+            await harSynligTekst(page, 'Oppgi arbeidsmengde i timer eller prosent')
             await page.getByRole('radio', { name: 'Prosent' }).click()
             await expect(
                 page.getByText(
@@ -51,7 +52,7 @@ test.describe('Tester frilansersøknad', () => {
                 ),
             ).toBeVisible()
             await page.getByRole('textbox', { name: 'Oppgi hvor mange prosent av' }).fill('21')
-            await expect(page.getByText('Jobber du vanligvis 37,5 timer i uka?')).toBeVisible()
+            await harSynligTekst(page, 'Jobber du vanligvis 37,5 timer i uka?')
             await svarRadioGruppe(page, 'Jobber du vanligvis 37,5 timer i uka?', 'Ja')
             await klikkGaVidere(page)
         })
@@ -59,7 +60,7 @@ test.describe('Tester frilansersøknad', () => {
         await test.step('Søknad ANDRE_INNTEKTSKILDER - steg 4', async () => {
             await expect(page).toHaveURL(new RegExp(`${soknad.id}/4`))
             await svarJaHovedsporsmal(page)
-            await expect(page.getByText('Hvilke inntektskilder har du?')).toBeVisible()
+            await harSynligTekst(page, 'Hvilke inntektskilder har du?')
             await page.getByRole('checkbox', { name: 'arbeidsforhold' }).click()
             await svarRadioGruppe(page, 'Er du sykmeldt fra dette?', 'Ja')
             await expect(
@@ -82,14 +83,14 @@ test.describe('Tester frilansersøknad', () => {
             ])
 
             await svarJaHovedsporsmal(page)
-            await expect(page.getByText('Når var du utenfor EU/EØS?')).toBeVisible()
+            await harSynligTekst(page, 'Når var du utenfor EU/EØS?')
             await setPeriodeFraTil(page, 14, 22)
             await klikkGaVidere(page)
         })
 
         await test.step('Søknad ARBEID_UTENFOR_NORGE - steg 6', async () => {
             await expect(page).toHaveURL(new RegExp(`${soknad.id}/6`))
-            await expect(page.getByText('Har du arbeidet i utlandet i løpet av de siste 12 månedene?')).toBeVisible()
+            await harSynligTekst(page, 'Har du arbeidet i utlandet i løpet av de siste 12 månedene?')
             await svarJaHovedsporsmal(page)
             await klikkGaVidere(page)
         })
@@ -101,7 +102,7 @@ test.describe('Tester frilansersøknad', () => {
 
         await test.step('Søknad kvittering', async () => {
             await expect(page).toHaveURL(new RegExp(`/kvittering/${soknad.id}`))
-            const kvitteringPanel = page.locator('[data-cy="kvittering-panel"]')
+            const kvitteringPanel = page.locator('[role="region"][aria-label="Hva skjer videre?"]')
             await expect(kvitteringPanel).toContainText('Hva skjer videre?')
             await expect(kvitteringPanel).toContainText('NAV behandler søknaden din')
             await expect(kvitteringPanel).toContainText('Når blir pengene utbetalt?')

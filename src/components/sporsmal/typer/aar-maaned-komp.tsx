@@ -40,12 +40,11 @@ function AarMaanedInput(props: SpmProps) {
     })
 
     return (
-        <div className="mt-8" data-cy="dato-komp">
+        <div className="mt-8">
             <div className="axe-exclude">
                 <MonthPicker
                     {...monthpickerProps}
                     dropdownCaption={kalenderMedDropdownCaption(sporsmal.min, sporsmal.max)}
-                    data-cy-sporsmalid={sporsmal.id}
                 >
                     <MonthPicker.Input
                         {...inputProps}
@@ -57,7 +56,6 @@ function AarMaanedInput(props: SpmProps) {
                             </>
                         }
                         error={fieldState.error && fieldState.error.message}
-                        data-cy={sporsmal.id}
                     />
                 </MonthPicker>
             </div>

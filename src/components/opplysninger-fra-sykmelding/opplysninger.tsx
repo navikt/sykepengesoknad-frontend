@@ -31,7 +31,7 @@ const Opplysninger = ({ ekspandert, steg }: OpplysningerProps) => {
         return <Skeleton variant="rectangle" className="my-8 rounded-xl" height="418px"></Skeleton>
 
     return (
-        <ExpansionCard className="my-8" data-cy="opplysninger-fra-sykmeldingen" open={open} aria-label={tittel}>
+        <ExpansionCard className="my-8" open={open} aria-label={tittel}>
             <ExpansionCard.Header
                 onClick={() => {
                     logEvent(open ? 'accordion lukket' : 'accordion åpnet', {

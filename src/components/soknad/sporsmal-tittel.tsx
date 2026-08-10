@@ -11,13 +11,7 @@ export const SporsmalTittel = () => {
     const { valgtSoknad, stegNo, sporsmal } = useSoknadMedDetaljer()
 
     return (
-        <Heading
-            as={valgtSoknad && sporsmal ? 'h2' : Skeleton}
-            level="2"
-            size="medium"
-            data-cy="sporsmal-tittel"
-            className="mb-4 mt-16"
-        >
+        <Heading as={valgtSoknad && sporsmal ? 'h2' : Skeleton} level="2" size="medium" className="mb-4 mt-16">
             {valgtSoknad && sporsmal ? hentTekst(valgtSoknad, stegNo, sporsmal) : 'Placeholder'}
         </Heading>
     )

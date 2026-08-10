@@ -1,7 +1,7 @@
 import { delvisUtfylltArbeidsledig } from '../src/data/mock/data/soknad/soknader-integration'
 
 import { test, expect } from './utils/fixtures'
-import { harSoknaderlisteHeading, klikkTilbake, trykkPaSoknadMedId } from './utils/utilities'
+import { harSoknaderlisteHeading, klikkTilbake, trykkPaSoknadMedId, harSynligTittel } from './utils/utilities'
 
 test.describe('Delvis utfylt søknad', () => {
     test('Full testflyt for delvis utfylt søknad', async ({ page }) => {
@@ -22,7 +22,7 @@ test.describe('Delvis utfylt søknad', () => {
 
         await test.step('Forrige spørsmål er besvart', async () => {
             await klikkTilbake(page)
-            await expect(page.getByRole('heading', { level: 2, name: 'Arbeid utenfor Norge' })).toBeVisible()
+            await harSynligTittel(page, 'Arbeid utenfor Norge', 2)
             await expect(page.getByRole('radio', { name: 'Nei' })).toBeChecked()
         })
     })

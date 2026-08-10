@@ -8,6 +8,7 @@ import {
     harSoknaderlisteHeading,
     neiOgVidere,
     svarJaHovedsporsmal,
+    harSynligTekst,
 } from './utils/utilities'
 
 test.describe('Tester endring uten en endringer', () => {
@@ -26,7 +27,7 @@ test.describe('Tester endring uten en endringer', () => {
             await expect(page).not.toHaveURL(new RegExp(`/sendt/${soknad.id}`))
             await expect(page).toHaveURL(/\/1/)
 
-            await expect(page.getByText('Avslutt uten å endre søknaden')).toBeVisible()
+            await harSynligTekst(page, 'Avslutt uten å endre søknaden')
             await expect(page.getByRole('button', { name: 'Jeg vil slette denne søknaden' })).toBeHidden()
         })
 

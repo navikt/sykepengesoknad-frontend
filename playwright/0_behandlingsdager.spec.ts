@@ -3,7 +3,7 @@ import { test, expect, Page } from '@playwright/test'
 import { behandlingsdager } from '../src/data/mock/data/soknad/behandlingsdager'
 
 import { validerAxeUtilityWrapper } from './uuvalidering'
-import { svarJaHovedsporsmal } from './utils/utilities'
+import { svarJaHovedsporsmal, harSynligTittel, harSynligTekst } from './utils/utilities'
 
 async function checkViStolerPaDeg(page: Page, gaVidere = true) {
     await page
@@ -59,7 +59,7 @@ async function sjekkIntroside(page: Page) {
     ).toBeVisible()
     const sykepengerLink = page.getByRole('link', { name: 'nav.no/sykepenger' })
     await expect(sykepengerLink).toHaveAttribute('href', 'https://www.nav.no/sykepenger')
-    await expect(page.getByText('Før du søker')).toBeVisible()
+    await harSynligTekst(page, 'Før du søker')
     await expect(page.getByRole('link', { name: 'Meld fra til NAV her' })).toHaveAttribute(
         'href',
         'https://innboks.nav.no/s/beskjed-til-oss?category=Beskjed-sykepenger',
@@ -109,7 +109,7 @@ test.describe('Tester behandlingsdagersøknad', () => {
         })
 
         await test.step('Laster startside', async () => {
-            await expect(page.getByRole('heading', { level: 1 })).toHaveText('Søknader')
+            await expect(await harSynligTittel(page, 'Søknader', 1)).toHaveText('Søknader')
             await page.locator(`a[href*=${soknad.id}]`).click()
         })
 
@@ -150,7 +150,7 @@ test.describe('Tester behandlingsdagersøknad', () => {
         await test.step('Søknad FERIE - steg 3', async () => {
             await expect(page).toHaveURL(new RegExp(`${soknad.id}/3`))
 
-            await expect(page.getByRole('heading', { name: 'Ferie' })).toBeVisible()
+            await harSynligTittel(page, 'Ferie', 2)
             await svarNeiHovedsporsmal(page)
 
             await validerAxeUtilityWrapper(page, test.info())
@@ -162,10 +162,8 @@ test.describe('Tester behandlingsdagersøknad', () => {
 
             await svarJaHovedsporsmal(page)
 
-            await expect(page.getByText('Hvilke andre inntektskilder har du?')).toBeVisible()
-            await expect(page.locator('.undersporsmal .aksel-checkbox label[for="687382"]')).toHaveText(
-                /andre arbeidsforhold/,
-            )
+            await harSynligTekst(page, 'Hvilke andre inntektskilder har du?')
+            await expect(page.getByRole('checkbox', { name: /andre arbeidsforhold/ })).toBeVisible()
             await page.locator('input[type=checkbox]#\\36 87382').check()
 
             await page.locator('input[type=radio]#\\36 87383_0 ').check()
@@ -181,12 +179,12 @@ test.describe('Tester behandlingsdagersøknad', () => {
         })
 
         await test.step('Tilbake og videre', async () => {
-            await expect(page.getByRole('heading', { name: 'Oppsummering', exact: true })).toBeVisible()
+            await harSynligTittel(page, 'Oppsummering', 1, true)
 
             await validerAxeUtilityWrapper(page, test.info())
             await klikkTilbake(page)
 
-            await expect(page.getByRole('heading', { name: 'Andre inntektskilder', exact: true })).toBeVisible()
+            await harSynligTittel(page, 'Andre inntektskilder', 2, true)
 
             await validerAxeUtilityWrapper(page, test.info())
             await klikkGaVidere(page)
@@ -194,12 +192,14 @@ test.describe('Tester behandlingsdagersøknad', () => {
 
         await test.step('Søknad TIL_SLUTT - steg 4', async () => {
             await expect(page).toHaveURL(new RegExp(`${soknad.id}/5`))
-            await expect(page.getByRole('heading', { name: 'Oppsummering fra søknaden', exact: true })).toBeVisible()
-            await expect(page.locator('.aksel-guide-panel__content')).toHaveText(
-                /Nå kan du se over at alt er riktig før du sender inn søknaden. Ved behov kan du endre opplysningene inntil 12 måneder etter innsending./,
-            )
+            await harSynligTittel(page, 'Oppsummering fra søknaden', 2, true)
+            await expect(
+                page.getByText(
+                    /Nå kan du se over at alt er riktig før du sender inn søknaden. Ved behov kan du endre opplysningene inntil 12 måneder etter innsending./,
+                ),
+            ).toBeVisible()
 
-            await expect(page.getByRole('heading', { name: 'Oppsummering fra søknaden', exact: true })).toBeVisible()
+            await harSynligTittel(page, 'Oppsummering fra søknaden', 2, true)
             await sporsmalOgSvar(page, 'Søknaden sendes til', 'NAV')
             await sporsmalOgSvar(page, '1. – 3. april', 'Ikke til behandling')
             await sporsmalOgSvar(page, '6. – 10. april', '10. april')
@@ -212,7 +212,7 @@ test.describe('Tester behandlingsdagersøknad', () => {
 
         await test.step('Søknad kvittering', async () => {
             await expect(page).toHaveURL(new RegExp('/kvittering/'))
-            const kvittering = page.locator('[data-cy="kvittering"]')
+            const kvittering = page.getByRole('main')
             await expect(kvittering).toContainText('Hva skjer videre?')
             await expect(kvittering).toContainText('Nav ber arbeidsgiveren din om inntektsmelding')
             await expect(kvittering).toContainText(

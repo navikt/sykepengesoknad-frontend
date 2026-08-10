@@ -1,8 +1,8 @@
-import { test, expect } from '@playwright/test'
+import { test } from '@playwright/test'
 
 import { gradertReisetilskudd } from '../src/data/mock/data/soknad/arbeidstaker-reisetilskudd-gradert'
 
-import { apneReadmore } from './utils/utilities'
+import { apneReadmore, harSynligTittel, harSynligTekst } from './utils/utilities'
 import { validerAxeUtilityWrapper } from './uuvalidering'
 
 test.describe('Teste gradert reisetilskudd med ReadMore-hjelpetekster', () => {
@@ -14,7 +14,7 @@ test.describe('Teste gradert reisetilskudd med ReadMore-hjelpetekster', () => {
         await page.goto(`/syk/sykepengesoknad/soknader/${gradertReisetilskudd.id}/2?testperson=reisetilskudd`)
 
         await test.step('Tilbake i arbeid - Gradert reisetilskudd', async () => {
-            await expect(page.locator('[data-cy="sporsmal-tittel"]')).toHaveText('Tilbake i fullt arbeid')
+            await harSynligTittel(page, 'Tilbake i fullt arbeid', 2)
 
             await apneReadmore(page, 'Spørsmålet forklart', [
                 'Du kan begynne å jobbe fullt igjen før sykmeldingen er slutt.',
@@ -31,7 +31,7 @@ test.describe('Teste gradert reisetilskudd med ReadMore-hjelpetekster', () => {
         await page.goto(`/syk/sykepengesoknad/soknader/${gradertReisetilskudd.id}/9?testperson=reisetilskudd`)
 
         await test.step('Brukte reisetilskuddet - Gradert reisetilskudd', async () => {
-            await expect(page.getByText('Hadde du ekstra reiseutgifter mens du var sykmeldt?')).toBeVisible()
+            await harSynligTekst(page, 'Hadde du ekstra reiseutgifter mens du var sykmeldt?')
 
             await apneReadmore(page, 'Spørsmålet forklart', [
                 'Har du hatt ekstra reiseutgifter til og fra jobben mens du var sykmeldt',

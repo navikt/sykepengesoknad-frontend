@@ -1,5 +1,5 @@
 import { test, expect } from './utils/fixtures'
-import { harSoknaderlisteHeading, harSynligTittel } from './utils/utilities'
+import { harSoknaderlisteHeading, harSynligTittel, harSynligTekst } from './utils/utilities'
 
 test.describe('Tester fremtidig søknad', () => {
     const testpersonQuery = '?testperson=fremtidig'
@@ -14,6 +14,6 @@ test.describe('Tester fremtidig søknad', () => {
 
         await button.click()
         await harSynligTittel(page, 'Du er litt tidlig ute', 1)
-        await expect(page.getByText('Hvorfor kan jeg ikke søke nå?')).toBeVisible()
+        await harSynligTekst(page, 'Hvorfor kan jeg ikke søke nå?')
     })
 })

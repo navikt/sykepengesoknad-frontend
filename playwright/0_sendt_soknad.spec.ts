@@ -15,7 +15,7 @@ test.describe('Tester sendt søknad', () => {
     test('Sendt søknad har forventa tekst', async ({ page }) => {
         const sendtArbeidsledigId = '3848e75e-4069-4076-95c0-3f9f0b63e498'
 
-        const soknadLink = page.locator(`[data-cy="link-listevisning-${sendtArbeidsledigId}"]`)
+        const soknadLink = page.locator(`[data-testid="link-listevisning-${sendtArbeidsledigId}"]`)
 
         await expect(soknadLink).toContainText('27. mai – 11. juni 2020')
         await expect(soknadLink).toContainText('Sendt til NAV')

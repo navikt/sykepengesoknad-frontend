@@ -29,13 +29,13 @@ const ArbeidstakerStatus = () => {
     return (
         <>
             {valgtSoknad.sendtTilArbeidsgiverDato && (
-                <div data-cy="sendt-arbeidsgiver">
+                <div aria-label="Sendt til arbeidsgiver">
                     <Avkrysset tekst={`${tilArbNavn()} ${tilOrg()}${medKopi}`} />
                     <Detail className="pl-6">{tilLesbarDatoOgTid(valgtSoknad.sendtTilArbeidsgiverDato)}</Detail>
                 </div>
             )}
             {valgtSoknad.sendtTilNAVDato && (
-                <div data-cy="sendt-nav">
+                <div aria-label="Sendt til NAV">
                     <Avkrysset tekst={Mottaker.NAV} />
                     <Detail className="pl-6">{tilLesbarDatoOgTid(valgtSoknad.sendtTilNAVDato)}</Detail>
                 </div>

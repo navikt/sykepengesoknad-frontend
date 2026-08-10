@@ -9,6 +9,7 @@ import {
     neiOgVidere,
     svarJaHovedsporsmal,
     trykkPaSoknadMedId,
+    harSynligTekst,
 } from './utils/utilities'
 import { validerAxeUtilityWrapper } from './uuvalidering'
 
@@ -46,10 +47,10 @@ test.describe('Tester ettersending og korrigering', () => {
 
         await test.step('Viser kvittering etter innsending', async () => {
             await expect(page).toHaveURL(new RegExp(`/kvittering/${soknad.id}`))
-            await expect(page.locator('[data-cy="kvittering"]')).toContainText(
+            await expect(page.getByRole('main')).toContainText(
                 'Posten Norge AS, Bærum (Org.nr. 974654458), med kopi til NAV',
             )
-            await expect(page.getByText('Du får sykepengene fra arbeidsgiveren din')).toBeVisible()
+            await harSynligTekst(page, 'Du får sykepengene fra arbeidsgiveren din')
             await expect(
                 page.getByText('Arbeidsgiveren din betaler de første 16 kalenderdagene av sykefraværet.'),
             ).toBeVisible()
@@ -68,7 +69,7 @@ test.describe('Tester ettersending og korrigering', () => {
 
         await test.step('Navigerer til tidligere søknader og starter korrigering', async () => {
             await page.goto(`/syk/sykepengesoknad?testperson=arbeidstaker-gradert`)
-            const tidligereSoknader = page.locator('[data-cy="Tidligere søknader"]')
+            const tidligereSoknader = page.getByRole('region', { name: 'Tidligere søknader' })
             await expect(tidligereSoknader.getByRole('link')).toHaveCount(1)
             await trykkPaSoknadMedId(page, soknad.id)
             await expect(page).toHaveURL(new RegExp(`/sendt/${soknad.id}`))
@@ -82,7 +83,7 @@ test.describe('Tester ettersending og korrigering', () => {
             await expect(page).not.toHaveURL(new RegExp(`/kvittering/${soknad.id}`))
             await expect(page).toHaveURL(new RegExp(`/1`))
 
-            const checkbox = page.locator('.aksel-checkbox__input[type=checkbox]')
+            const checkbox = page.getByRole('checkbox')
             await expect(checkbox).not.toBeChecked()
             await checkViStolerPaDeg(page)
             await validerAxeUtilityWrapper(page, test.info())

@@ -29,7 +29,6 @@ export const Fritekst = ({ sporsmal }: SpmProps) => {
         label: sporsmal.sporsmalstekst,
         description: description(),
         className: 'mt-8 w-full ax-md:w-1/2',
-        'data-cy': sporsmal.tag,
         id: sporsmal.id,
         error: errors[sporsmal.id] !== undefined && (errors[sporsmal.id]!.message as string),
         autoComplete: 'off',

@@ -35,11 +35,11 @@ export function useKorriger() {
         onSuccess: async (data, variables) => {
             const soknad = rsToSoknad(data as RSSoknad)
             queryClient.setQueryData(['soknad', soknad.id], soknad)
-            queryClient
-                .invalidateQueries({
-                    queryKey: ['soknader'],
-                })
-                .catch()
+            // Søknadslista må være oppdatert før navigasjon, ellers finner ikke
+            // den nye siden søknaden og sender brukeren tilbake til forsiden.
+            await queryClient.invalidateQueries({
+                queryKey: ['soknader'],
+            })
             variables.onSuccess()
             await router.push(urlTilSoknad(soknad))
         },

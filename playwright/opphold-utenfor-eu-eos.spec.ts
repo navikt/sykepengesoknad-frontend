@@ -1,5 +1,5 @@
 import { test, expect } from './utils/fixtures'
-import { checkViStolerPaDeg, neiOgVidere, svarRadioGruppe } from './utils/utilities'
+import { checkViStolerPaDeg, neiOgVidere, svarRadioGruppe, harSynligTittel, harSynligTekst } from './utils/utilities'
 
 test.describe('Opphold utenfor EU/EØS', () => {
     test.beforeEach(async ({ page }) => {
@@ -7,7 +7,7 @@ test.describe('Opphold utenfor EU/EØS', () => {
 
         const link = page.getByRole('link', { name: 'Søknad Om Sykepenger' })
         await link.click()
-        await expect(page.getByRole('heading', { level: 1, name: 'Søknad om sykepenger' })).toBeVisible()
+        await harSynligTittel(page, 'Søknad om sykepenger', 1)
     })
 
     test('Opphold utenfor EU/EØS', async ({ page }) => {
@@ -20,7 +20,7 @@ test.describe('Opphold utenfor EU/EØS', () => {
                 'Arbeid mens du var syk',
                 'Andre inntektskilder',
             ])
-            await expect(page.getByRole('heading', { level: 2, name: 'Reise utenfor EU/EØS' })).toBeVisible()
+            await harSynligTittel(page, 'Reise utenfor EU/EØS', 2)
         })
 
         await test.step('Viser riktig info for opphold utenfor EU/EØS', async () => {
@@ -85,7 +85,7 @@ test.describe('Opphold utenfor EU/EØS', () => {
             await expect(valgteLand.nth(1)).toHaveText('Afghanistan')
 
             await landVelger.press('Escape')
-            await expect(page.getByText('Du har reist utenfor EU/EØS.')).toBeVisible()
+            await harSynligTekst(page, 'Du har reist utenfor EU/EØS.')
         })
 
         await test.step('Viser info om opprettelse av egen søknad', async () => {

@@ -13,6 +13,7 @@ import {
     svarRadioGruppe,
     svarFritekst,
     svarJaHovedsporsmal,
+    harSynligTekst,
 } from './utils/utilities'
 
 /**
@@ -38,7 +39,7 @@ test.describe('Tidssone: periodevisning', () => {
             await page.goto('/syk/sykepengesoknad')
             await harSoknaderlisteHeading(page)
 
-            const soknadLink = page.locator(`[data-cy="link-listevisning-${arbeidstakerId}"]`)
+            const soknadLink = page.locator(`a[href*="${arbeidstakerId}"]`)
             await expect(soknadLink).toContainText('1. april – 24. mai 2020')
         })
 
@@ -50,9 +51,9 @@ test.describe('Tidssone: periodevisning', () => {
             await checkViStolerPaDeg(page)
 
             await svarJaHovedsporsmal(page)
-            await expect(page.getByText('Når begynte du å jobbe igjen?')).toBeVisible()
+            await harSynligTekst(page, 'Når begynte du å jobbe igjen?')
 
-            const datoInput = page.locator('.aksel-date__field-input')
+            const datoInput = page.getByRole('textbox', { name: /Når begynte du å jobbe igjen/ })
             await datoInput.fill('01.04.2020')
             await datoInput.blur()
 
@@ -67,7 +68,7 @@ test.describe('Tidssone: periodevisning', () => {
             await page.goto('/syk/sykepengesoknad')
             await harSoknaderlisteHeading(page)
 
-            const soknadLink = page.locator(`[data-cy="link-listevisning-${arbeidstakerId}"]`)
+            const soknadLink = page.locator(`a[href*="${arbeidstakerId}"]`)
             await expect(soknadLink).toContainText('1. april – 24. mai 2020')
         })
     })
@@ -79,7 +80,7 @@ test.describe('Tidssone: periodevisning', () => {
             await page.goto('/syk/sykepengesoknad')
             await harSoknaderlisteHeading(page)
 
-            const soknadLink = page.locator(`[data-cy="link-listevisning-${arbeidstakerId}"]`)
+            const soknadLink = page.locator(`a[href*="${arbeidstakerId}"]`)
             await expect(soknadLink).toContainText('1. april – 24. mai 2020')
         })
     })
@@ -101,7 +102,7 @@ test.describe('Tidssone: DatePicker fromDate-grense', () => {
             await checkViStolerPaDeg(page)
 
             await page.getByRole('radio', { name: 'Nei' }).click()
-            await expect(page.getByText('Fra hvilken dato trengte du ikke lenger sykmeldingen?')).toBeVisible()
+            await harSynligTekst(page, 'Fra hvilken dato trengte du ikke lenger sykmeldingen?')
 
             const openButton = page.getByRole('button', { name: 'Åpne datovelger' })
             await openButton.click()
@@ -123,7 +124,7 @@ test.describe('Tidssone: DatePicker fromDate-grense', () => {
             await checkViStolerPaDeg(page)
 
             await page.getByRole('radio', { name: 'Nei' }).click()
-            await expect(page.getByText('Fra hvilken dato trengte du ikke lenger sykmeldingen?')).toBeVisible()
+            await harSynligTekst(page, 'Fra hvilken dato trengte du ikke lenger sykmeldingen?')
 
             const openButton = page.getByRole('button', { name: 'Åpne datovelger' })
             await openButton.click()
@@ -144,7 +145,7 @@ test.describe('Tidssone: DatePicker fromDate-grense', () => {
             await checkViStolerPaDeg(page)
 
             await page.getByRole('radio', { name: 'Nei' }).click()
-            await expect(page.getByText('Fra hvilken dato trengte du ikke lenger sykmeldingen?')).toBeVisible()
+            await harSynligTekst(page, 'Fra hvilken dato trengte du ikke lenger sykmeldingen?')
 
             const openButton = page.getByRole('button', { name: 'Åpne datovelger' })
             await openButton.click()
@@ -256,8 +257,11 @@ test.describe('Tidssone: periode-komp fromDate-grense', () => {
     const åpnePeriodeKalender = async (page: import('@playwright/test').Page) => {
         await page.goto(`/syk/sykepengesoknad/soknader/${arbeidstaker.id}/3`)
         await svarJaHovedsporsmal(page)
-        const periodeLocator = page.locator('[data-cy="periode"]').first()
-        await periodeLocator.locator('.aksel-date__field-button').first().click()
+        const periodeLocator = page.getByRole('group', { name: /Tidsperiode/ }).first()
+        await periodeLocator
+            .getByRole('button', { name: /Åpne datovelger/i })
+            .first()
+            .click()
         await expect(page.getByRole('grid')).toBeVisible()
     }
 
@@ -296,8 +300,11 @@ test.describe('Tidssone: periode-komp datoer persistering', () => {
     const velgPeriodeOgNavigerTilbake = async (page: import('@playwright/test').Page) => {
         await page.goto(`/syk/sykepengesoknad/soknader/${arbeidstaker.id}/3`)
         await svarJaHovedsporsmal(page)
-        const periodeLocator = page.locator('[data-cy="periode"]').first()
-        await periodeLocator.locator('.aksel-date__field-button').first().click()
+        const periodeLocator = page.getByRole('group', { name: /Tidsperiode/ }).first()
+        await periodeLocator
+            .getByRole('button', { name: /Åpne datovelger/i })
+            .first()
+            .click()
         await periodeLocator.locator('[data-day="2020-04-05"]').click()
         await periodeLocator.locator('[data-day="2020-04-10"]').click()
         await klikkGaVidere(page)

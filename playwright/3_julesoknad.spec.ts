@@ -2,7 +2,13 @@ import { test, expect } from '@playwright/test'
 
 import { julesoknadPerson } from '../src/data/mock/data/personas/personas'
 
-import { checkViStolerPaDeg, klikkGaVidere, svarNeiHovedsporsmal } from './utils/utilities'
+import {
+    checkViStolerPaDeg,
+    klikkGaVidere,
+    svarNeiHovedsporsmal,
+    harSynligTittel,
+    harSynligTekst,
+} from './utils/utilities'
 import { validerAxeUtilityWrapper } from './uuvalidering'
 
 test.describe('Julesøkand med informasjon på introside og kvittering', () => {
@@ -11,7 +17,7 @@ test.describe('Julesøkand med informasjon på introside og kvittering', () => {
     test('Gjennomfører hele søknadsflyten for julesøknad', async ({ page }) => {
         await test.step('Laster introside', async () => {
             await page.goto(`/syk/sykepengesoknad/soknader/${soknad.id}/1?testperson=julesoknad`)
-            await expect(page.getByRole('heading', { name: 'Søknad om sykepenger' })).toBeVisible()
+            await harSynligTittel(page, 'Søknad om sykepenger', 1)
             await validerAxeUtilityWrapper(page, test.info())
         })
 
@@ -46,9 +52,9 @@ test.describe('Julesøkand med informasjon på introside og kvittering', () => {
         await test.step('Søknad kvittering - med julesøknad informasjon', async () => {
             await expect(page).toHaveURL(new RegExp(`/kvittering/${soknad.id}`))
 
-            await expect(page.getByRole('heading', { name: 'Søknaden er sendt' })).toBeVisible()
+            await harSynligTittel(page, 'Søknaden er sendt', 2)
 
-            await expect(page.getByText('Endre søknaden hvis situasjonen din endrer seg')).toBeVisible()
+            await harSynligTekst(page, 'Endre søknaden hvis situasjonen din endrer seg')
             await validerAxeUtilityWrapper(page, test.info())
             await expect(
                 page.getByText(

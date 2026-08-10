@@ -41,7 +41,7 @@ const Teasere = ({ soknader, tittel, tomListeTekst, kanSorteres = false }: Sokna
     const harSoknader = sorterteSoknader().length > 0
 
     return (
-        <div data-cy={tittel} className="mb-12">
+        <div role="region" aria-label={tittel} className="mb-12">
             <div className="mb-3 flex justify-between">
                 {(harSoknader || tomListeTekst) && (
                     <Heading size="medium" spacing level="2">

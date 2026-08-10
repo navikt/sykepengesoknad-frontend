@@ -58,7 +58,6 @@ const AvbrytOppholdUtlandSoknadModal = ({ soknad }: SoknadProps) => {
                 type="button"
                 as={Button}
                 className="text-ax-text-danger-subtle hover:bg-ax-danger-100 hover:text-ax-text-danger-subtle -ml-5"
-                data-cy="avbryt-soknad"
                 onClick={() => {
                     setAapen(true)
                     logEvent('modal åpnet', {

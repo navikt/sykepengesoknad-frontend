@@ -37,7 +37,7 @@ test.describe('Tester støtte for gamle spørsmål', () => {
 
     test('Laster startside', async ({ page }) => {
         await page.goto('/syk/sykepengesoknad?testperson=integrasjon-soknader')
-        await expect(page.getByRole('heading', { name: 'Søknader', level: 1 })).toBeVisible()
+        await harSynligTittel(page, 'Søknader', 1)
         await page.locator(`a[href*="${soknad.id}"]`).click()
     })
 
@@ -250,7 +250,7 @@ test.describe('Tester støtte for gamle spørsmål', () => {
 
     test('Side 27 - LAND', async ({ page }) => {
         await page.goto(`/syk/sykepengesoknad/soknader/${soknad.id}/27?testperson=integrasjon-soknader`)
-        await expect(page.getByText('Hvilke(t) land skal du reise til?')).toBeVisible()
+        await harSynligTekst(page, 'Hvilke(t) land skal du reise til?')
         await page.getByRole('combobox', { name: 'Hvilke(t) land skal du reise til?' }).fill('Søre fran')
         await page.getByRole('option', { name: 'Søre franske territorier' }).click()
         await klikkGaVidere(page)
@@ -258,7 +258,7 @@ test.describe('Tester støtte for gamle spørsmål', () => {
 
     test('Side 28 - LAND_COMBOBOX', async ({ page }) => {
         await page.goto(`/syk/sykepengesoknad/soknader/${soknad.id}/28?testperson=integrasjon-soknader`)
-        await expect(page.getByText('Hvilke(t) land skal du reise til?')).toBeVisible()
+        await harSynligTekst(page, 'Hvilke(t) land skal du reise til?')
         await svarCombobox(page, 'Hvilke(t) land skal du reise til?', 'Søre fran', 'Søre franske territorier')
         await klikkGaVidere(page)
     })
@@ -281,7 +281,7 @@ test.describe('Tester støtte for gamle spørsmål', () => {
     test('Side 31 - PERMITTERT_NAA', async ({ page }) => {
         await page.goto(`/syk/sykepengesoknad/soknader/${soknad.id}/31?testperson=integrasjon-soknader`)
         await svarJaHovedsporsmal(page)
-        await page.locator('.aksel-date__field-button').click()
+        await page.getByRole('button', { name: /Åpne datovelger/i }).click()
         await velgDato(page, 10)
 
         await klikkGaVidere(page)
@@ -297,7 +297,7 @@ test.describe('Tester støtte for gamle spørsmål', () => {
     test('Side 33 - TILBAKE_I_ARBEID', async ({ page }) => {
         await page.goto(`/syk/sykepengesoknad/soknader/${soknad.id}/33?testperson=integrasjon-soknader`)
         await svarJaHovedsporsmal(page)
-        await page.locator('.aksel-date__field-button').click()
+        await page.getByRole('button', { name: /Åpne datovelger/i }).click()
         await velgDato(page, 10)
 
         await klikkGaVidere(page)
@@ -312,9 +312,9 @@ test.describe('Tester støtte for gamle spørsmål', () => {
 
         await svarJaHovedsporsmal(page)
 
-        await expect(page.locator('.aksel-date__field-button')).toBeVisible()
+        await expect(page.getByRole('button', { name: /Åpne datovelger/i })).toBeVisible()
 
-        await page.locator('.aksel-date__field-button').click()
+        await page.getByRole('button', { name: /Åpne datovelger/i }).click()
 
         await velgDato(page, 10)
 
@@ -407,8 +407,8 @@ test.describe('Tester støtte for gamle spørsmål', () => {
         await svarFritekst(page, 'Vegnavn og husnummer, evt. postboks', 'Downing Street 10')
         await svarFritekst(page, 'Land', 'UK')
         await svarFritekst(page, 'Telefonnummer', '81549300')
-        await expect(page.locator('.aksel-date__field-button')).toBeVisible()
-        await page.locator('.aksel-date__field-button').click()
+        await expect(page.getByRole('button', { name: /Åpne datovelger/i })).toBeVisible()
+        await page.getByRole('button', { name: /Åpne datovelger/i }).click()
         await velgDato(page, 10)
 
         await klikkGaVidere(page)
@@ -487,7 +487,7 @@ test.describe('Tester støtte for gamle spørsmål', () => {
     test('Side 54 - Næringsdrivende varig endring', async ({ page }) => {
         await page.goto(`/syk/sykepengesoknad/soknader/${soknad.id}/54?testperson=integrasjon-soknader`)
         await svarJaHovedsporsmal(page)
-        await expect(page.locator('.aksel-date__field-button')).toBeVisible()
+        await expect(page.getByRole('button', { name: /Åpne månedsvelger/i })).toBeVisible()
         await page.getByRole('checkbox', { name: 'Jobbet mindre i en virksomhet' }).click()
         await page.getByLabel('Når skjedde endringen?').fill('januar 2024')
 
@@ -512,7 +512,7 @@ test.describe('Tester støtte for gamle spørsmål', () => {
 
     test('Side 57 - Inntekt underveis', async ({ page }) => {
         await page.goto(`/syk/sykepengesoknad/soknader/${soknad.id}/57?testperson=integrasjon-soknader`)
-        await page.getByRole('heading', { name: 'Inntekt underveis' }).isVisible()
+        await harSynligTittel(page, 'Inntekt underveis', 2)
         await svarNeiHovedsporsmal(page)
 
         await klikkGaVidere(page)
@@ -520,7 +520,7 @@ test.describe('Tester støtte for gamle spørsmål', () => {
 
     test('Side 58 - Reise til utlandet', async ({ page }) => {
         await page.goto(`/syk/sykepengesoknad/soknader/${soknad.id}/58?testperson=integrasjon-soknader`)
-        await page.getByRole('heading', { name: 'Reise til utlandet' }).isVisible()
+        await harSynligTittel(page, 'Reise utenfor EU/EØS', 2)
         await svarNeiHovedsporsmal(page)
 
         await klikkGaVidere(page)

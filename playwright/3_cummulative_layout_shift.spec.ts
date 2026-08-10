@@ -1,12 +1,14 @@
 import { test, expect, Page } from '@playwright/test'
 
+import { harSynligTittel, harSynligTekst } from './utils/utilities'
+
 test.describe('Tester cummulative-layout-shift', () => {
     async function ventTilIngenSkeletons(page: Page) {
         await expect(page.locator('.aksel-skeleton')).toHaveCount(0, { timeout: 10000 })
     }
 
     async function ventPåHeading(page: Page, text: string, level: number) {
-        await expect(page.getByRole('heading', { name: text, level })).toBeVisible({ timeout: 10000 })
+        await harSynligTittel(page, text, level)
     }
 
     // async function mainSkalHaHoyde(page: Page, hoyde: number) {
@@ -30,7 +32,7 @@ test.describe('Tester cummulative-layout-shift', () => {
         // await mainSkalHaHoyde(page, 388)
         await ventTilIngenSkeletons(page)
 
-        await expect(page.getByText('Nye søknader')).toBeVisible()
+        await harSynligTekst(page, 'Nye søknader')
         await ventTilIngenSkeletons(page)
 
         // await mainSkalHaHoyde(page, 388)

@@ -22,7 +22,7 @@ const Behandlingsdager = ({ sporsmal }: OppsummeringProps) => {
                 {sporsmal.undersporsmal.length > 0 && (
                     <FormSummary.Answers>
                         {sporsmal.undersporsmal.map((uspm, idx) => (
-                            <FormSummary.Answer data-cy="oppsummering__behandlingsdager" key={idx}>
+                            <FormSummary.Answer key={idx}>
                                 <FormSummary.Label className="behandlingsdager-label">
                                     {tilLesbarPeriodeUtenArstall(uspm.min, uspm.max)}
                                 </FormSummary.Label>

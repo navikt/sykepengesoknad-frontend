@@ -16,7 +16,7 @@ const Kontonummer = () => {
         kontonummer.length === 11 ? kontonummer.replace(/^(.{4})(.{2})(.*)$/, '$1 $2 $3') : kontonummer
 
     return (
-        <div data-cy="kontonummer" className="mt-8">
+        <div className="mt-8">
             <Label as="h2" spacing>
                 {tekst('kvittering.kontonummer.tittel')}
             </Label>

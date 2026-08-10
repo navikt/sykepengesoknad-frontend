@@ -9,6 +9,8 @@ import {
     sporsmalOgSvar,
     svarJaHovedsporsmal,
     svarNeiHovedsporsmal,
+    harSynligTittel,
+    harSynligTekst,
 } from './utils/utilities'
 import { validerAxeUtilityWrapper } from './uuvalidering'
 
@@ -23,8 +25,7 @@ test.describe('Tester arbeidsledigsøknad', () => {
             // Naviger til startsiden (hvis ikke allerede gjort i et tidligere steg; tilpass om nødvendig)
             await page.goto('/syk/sykepengesoknad?testperson=arbeidsledig')
 
-            // Verifiser at heading er synlig og har riktig tekst (antatt som h1 basert på '.aksel-heading--large')
-            const heading = page.getByRole('heading', { name: 'Søknader', level: 1 })
+            const heading = await harSynligTittel(page, 'Søknader', 1)
             await expect(heading).toBeVisible()
             await expect(heading).toHaveText('Søknader')
             await validerAxeUtilityWrapper(page, test.info())
@@ -47,11 +48,11 @@ test.describe('Tester arbeidsledigsøknad', () => {
 
             // Test spørsmål: Velg 'NEI' på hovedspørsmål
             await svarNeiHovedsporsmal(page)
-            await expect(page.getByText('Fra hvilken dato trengte du ikke lenger sykmeldingen?')).toBeVisible()
+            await harSynligTekst(page, 'Fra hvilken dato trengte du ikke lenger sykmeldingen?')
 
             // Velg dato i kalender
-            await page.locator('.aksel-date__field-button').click()
-            await page.locator('.rdp-day', { hasText: '10' }).click()
+            await page.getByRole('button', { name: /Åpne datovelger/i }).click()
+            await page.getByRole('grid').getByRole('button').filter({ hasText: /^10$/ }).click()
 
             await validerAxeUtilityWrapper(page, test.info())
 
@@ -73,8 +74,8 @@ test.describe('Tester arbeidsledigsøknad', () => {
 
             // Forsøk å gå videre uten valg for å trigge feil (ingen inntektskilder valgt)
             await klikkGaVidere(page, true) // forventFeil=true
-            await expect(page.getByText('Det er 1 feil i skjemaet')).toBeVisible()
-            await expect(page.getByText('Du må oppgi hvilke inntektskilder du har')).toBeVisible()
+            await harSynligTekst(page, 'Det er 1 feil i skjemaet')
+            await harSynligTekst(page, 'Du må oppgi hvilke inntektskilder du har')
 
             const checkbox = page.getByLabel('andre arbeidsforhold')
             await checkbox.click()
@@ -111,7 +112,7 @@ test.describe('Tester arbeidsledigsøknad', () => {
             await svarJaHovedsporsmal(page)
 
             // Underspørsmål 1: Sett periode
-            await expect(page.getByText('Når var du utenfor EU/EØS?')).toBeVisible()
+            await harSynligTekst(page, 'Når var du utenfor EU/EØS?')
             await setPeriodeFraTil(page, 17, 24) // Bruk utility for å sette periode
 
             await validerAxeUtilityWrapper(page, test.info())
@@ -123,12 +124,14 @@ test.describe('Tester arbeidsledigsøknad', () => {
             await expect(page).toHaveURL(new RegExp(`${arbeidsledig.id}/5`))
 
             // Verifiser guide-panel innhold
-            await expect(page.locator('.aksel-guide-panel__content')).toContainText(
-                'Nå kan du se over at alt er riktig før du sender inn søknaden. Ved behov kan du endre opplysningene inntil 12 måneder etter innsending.',
-            )
+            await expect(
+                page.getByText(
+                    'Nå kan du se over at alt er riktig før du sender inn søknaden. Ved behov kan du endre opplysningene inntil 12 måneder etter innsending.',
+                ),
+            ).toBeVisible()
 
             // Verifiser oppsummering med sporsmalOgSvar (bruk container for oppsummering)
-            const oppsummering = page.locator('[data-cy="oppsummering-fra-søknaden"]')
+            const oppsummering = page.locator('[role="region"][aria-label="Oppsummering fra søknaden"]')
             await sporsmalOgSvar(oppsummering, 'Brukte du hele sykmeldingen fram til 24. april 2020?', 'Nei')
             // Nestede spørsmål (bruk .locator for undernivå)
             const friskmeldtSvar = oppsummering
@@ -160,8 +163,8 @@ test.describe('Tester arbeidsledigsøknad', () => {
         await test.step('Søknad kvittering', async () => {
             await expect(page).toHaveURL(new RegExp(`/kvittering/${arbeidsledig.id}`))
 
-            await expect(page.getByRole('heading', { name: 'Søknaden er sendt til NAV' })).toBeVisible()
-            const kvitteringPanel = page.locator('[data-cy="kvittering-panel"]')
+            await harSynligTittel(page, 'Søknaden er sendt til NAV', 2)
+            const kvitteringPanel = page.locator('[role="region"][aria-label="Hva skjer videre?"]')
             await validerAxeUtilityWrapper(page, test.info())
             await expect(kvitteringPanel).toContainText('Hva skjer videre?')
             await expect(kvitteringPanel).toContainText('NAV behandler søknaden din')

@@ -15,7 +15,7 @@ const FilOpplaster = ({ valgtFil, setValgtFil }: FilOpplasterProps) => {
     } = useFormContext()
 
     return (
-        <div data-cy="filopplasteren">
+        <div aria-label="Filopplasteren">
             <div className="mb-6">
                 <FileUpload.Dropzone
                     accept=".png,.jpeg,.jpg"
@@ -40,7 +40,6 @@ const FilOpplaster = ({ valgtFil, setValgtFil }: FilOpplasterProps) => {
                     <BodyShort
                         as="span"
                         className="mt-2 flex gap-2 font-ax-bold text-ax-text-danger-subtle before:content-['•']"
-                        data-cy="feil-lokal"
                     >
                         <>{errors.fil_input?.message}</>
                     </BodyShort>

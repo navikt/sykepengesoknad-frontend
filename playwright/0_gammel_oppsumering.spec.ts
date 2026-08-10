@@ -8,6 +8,8 @@ import {
     svarJaHovedsporsmal,
     svarTekstboks,
     trykkPaSoknadMedId,
+    harSynligTittel,
+    harSynligTekst,
 } from './utils/utilities'
 import { validerAxeUtilityWrapper } from './uuvalidering'
 
@@ -18,10 +20,7 @@ test.describe('Sjekker at søknader med gammel oppsummering ser ok ut', () => {
         await page.goto('/syk/sykepengesoknad?testperson=gammel-oppsummering')
 
         await test.step('Laster startside', async () => {
-            const heading = page.getByRole('heading', {
-                name: 'Søknader',
-                level: 1,
-            })
+            const heading = await harSynligTittel(page, 'Søknader', 1)
             await expect(heading).toBeVisible()
 
             await validerAxeUtilityWrapper(page, test.info())
@@ -48,11 +47,11 @@ test.describe('Sjekker at søknader med gammel oppsummering ser ok ut', () => {
             await validerAxeUtilityWrapper(page, test.info())
 
             await page.getByText('Start søknad').click()
-            await expect(page.getByText('Det er 1 feil i skjemaet')).toBeVisible()
+            await harSynligTekst(page, 'Det er 1 feil i skjemaet')
             await expect(
                 page.getByRole('checkbox', { name: 'Jeg bekrefter at jeg vil svare så riktig som jeg kan.' }),
             ).toBeVisible()
-            await expect(page.getByText('Du må bekrefte at du vil svare så riktig du kan')).toBeVisible()
+            await harSynligTekst(page, 'Du må bekrefte at du vil svare så riktig du kan')
             await page.getByRole('checkbox', { name: 'Jeg bekrefter at jeg vil svare så riktig som jeg kan.' }).check()
 
             await validerAxeUtilityWrapper(page, test.info())
@@ -62,16 +61,11 @@ test.describe('Sjekker at søknader med gammel oppsummering ser ok ut', () => {
         await test.step('Søknad TILBAKE_I_ARBEID', async () => {
             await expect(page).toHaveURL(/\/soknader\/.*\/2/)
 
-            const progressBar = page.locator('.aksel-progress-bar')
-            await expect(progressBar).toHaveAttribute('aria-valuenow', '1')
-            await expect(progressBar).toHaveAttribute('aria-valuemax', '7')
-            await expect(progressBar).toHaveAttribute('aria-valuetext', '1 av 7')
-
             // Test spørsmål
             await svarJaHovedsporsmal(page)
-            await expect(page.getByText('Når begynte du å jobbe igjen?')).toBeVisible()
-            await page.locator('.aksel-date__field-button').click()
-            await page.locator('.rdp-day').getByText('20').click()
+            await harSynligTekst(page, 'Når begynte du å jobbe igjen?')
+            await page.getByRole('button', { name: /Åpne datovelger/i }).click()
+            await page.getByRole('grid').getByRole('button').filter({ hasText: /^20$/ }).click()
             await expect(
                 page.getByText(
                     'Svaret ditt betyr at du har vært i fullt arbeid fra 20. – 24. april 2020. Du får ikke utbetalt sykepenger for denne perioden',
@@ -89,7 +83,7 @@ test.describe('Sjekker at søknader med gammel oppsummering ser ok ut', () => {
             await expect(page).toHaveURL(/\/soknader\/.*\/3/)
 
             await svarJaHovedsporsmal(page)
-            await expect(page.getByText('Når tok du ut feriedager?')).toBeVisible()
+            await harSynligTekst(page, 'Når tok du ut feriedager?')
 
             await setPeriodeFraTil(page, 16, 23)
 
@@ -100,7 +94,7 @@ test.describe('Sjekker at søknader med gammel oppsummering ser ok ut', () => {
         await test.step('Søknad PERMISJON_V2', async () => {
             await expect(page).toHaveURL(/\/soknader\/.*\/4/)
 
-            await expect(page.getByText('Spørsmålet forklart')).toBeVisible()
+            await harSynligTekst(page, 'Spørsmålet forklart')
             await expect(
                 page.getByText('Permisjon er dager du var borte fra jobb av andre grunner enn sykdom'),
             ).toBeHidden()
@@ -110,7 +104,7 @@ test.describe('Sjekker at søknader med gammel oppsummering ser ok ut', () => {
             ).toBeVisible()
 
             await svarJaHovedsporsmal(page)
-            await expect(page.getByText('Når tok du permisjon?')).toBeVisible()
+            await harSynligTekst(page, 'Når tok du permisjon?')
 
             await setPeriodeFraTil(page, 14, 22)
 
@@ -128,7 +122,7 @@ test.describe('Sjekker at søknader med gammel oppsummering ser ok ut', () => {
             ).toBeVisible()
             await svarJaHovedsporsmal(page)
 
-            await expect(page.getByText('Oppgi arbeidsmengde i timer eller prosent')).toBeVisible()
+            await harSynligTekst(page, 'Oppgi arbeidsmengde i timer eller prosent')
             await page.locator('.undersporsmal input[value=Prosent]').click()
             await expect(
                 page.getByText(
@@ -170,7 +164,7 @@ test.describe('Sjekker at søknader med gammel oppsummering ser ok ut', () => {
         await test.step('Søknad ANDRE_INNTEKTSKILDER_V2', async () => {
             await expect(page).toHaveURL(/\/soknader\/.*\/6/)
 
-            await expect(page.getByText('Har du andre inntektskilder enn nevnt over?')).toBeVisible()
+            await harSynligTekst(page, 'Har du andre inntektskilder enn nevnt over?')
 
             await svarJaHovedsporsmal(page)
 
@@ -194,7 +188,7 @@ test.describe('Sjekker at søknader med gammel oppsummering ser ok ut', () => {
             await expect(page).toHaveURL(/\/soknader\/.*\/7/)
 
             await svarJaHovedsporsmal(page)
-            await expect(page.getByText('Når var du utenfor EU/EØS?')).toBeVisible()
+            await harSynligTekst(page, 'Når var du utenfor EU/EØS?')
 
             await setPeriodeFraTil(page, 14, 22)
 
@@ -205,16 +199,13 @@ test.describe('Sjekker at søknader med gammel oppsummering ser ok ut', () => {
         await test.step('Søknad TIL_SLUTT', async () => {
             await expect(page).toHaveURL(/\/soknader\/.*\/8/)
 
-            const progressBar = page.locator('.aksel-progress-bar')
-            await expect(progressBar).toHaveAttribute('aria-valuenow', '7')
-            await expect(progressBar).toHaveAttribute('aria-valuemax', '7')
-            await expect(progressBar).toHaveAttribute('aria-valuetext', '7 av 7')
+            await expect(
+                page.getByText(
+                    'Nå kan du se over at alt er riktig før du sender inn søknaden. Ved behov kan du endre opplysningene inntil 12 måneder etter innsending.',
+                ),
+            ).toBeVisible()
 
-            await expect(page.locator('.aksel-guide-panel__content')).toContainText(
-                'Nå kan du se over at alt er riktig før du sender inn søknaden. Ved behov kan du endre opplysningene inntil 12 måneder etter innsending.',
-            )
-
-            const oppsummering = page.locator('[data-cy="oppsummering-fra-søknaden"]')
+            const oppsummering = page.locator('[role="region"][aria-label="Oppsummering fra søknaden"]')
             await sporsmalOgSvar(oppsummering, 'Søknaden sendes til', 'NAV')
             await expect(oppsummering).toContainText('Posten Norge AS, Bærum')
 
@@ -248,29 +239,29 @@ test.describe('Sjekker at søknader med gammel oppsummering ser ok ut', () => {
             const forrigeStegLink = page.getByText('Forrige steg')
             await expect(forrigeStegLink).toHaveAttribute('href', /\/soknader\/.*\/7\?testperson=gammel-oppsummering/)
             await page.getByRole('button', { name: 'Tilbake' }).click()
-            await expect(page.getByRole('heading', { name: 'Reise utenfor EU/EØS' })).toBeVisible()
+            await harSynligTittel(page, 'Reise utenfor EU/EØS', 2)
             await expect(page.getByRole('button', { name: 'Gå videre' })).toBeVisible()
             await page.getByRole('button', { name: 'Gå videre' }).click()
 
             await page.getByText('Søknaden sendes til NAV').isVisible()
             await page.getByRole('link', { name: 'Endre svar' }).click()
 
-            await page.getByRole('heading', { name: 'Tilbake i fullt arbeid' }).click()
-            await expect(page.getByText('Steg 1 av 7')).toBeVisible()
+            await (await harSynligTittel(page, 'Tilbake i fullt arbeid', 2)).click()
+            await harSynligTekst(page, 'Steg 1 av 7')
             await page.getByRole('button', { name: 'Vis alle steg' }).click()
             await page.getByRole('link', { name: 'Oppsummering fra søknaden' }).click()
-            await expect(page.getByText('Steg 7 av 7')).toBeVisible()
+            await harSynligTekst(page, 'Steg 7 av 7')
 
             await validerAxeUtilityWrapper(page, test.info())
             await page.getByText('Send søknaden').click()
         })
 
         await test.step('Søknad kvittering', async () => {
-            await expect(page.getByRole('heading', { name: 'Søknaden er sendt' })).toBeVisible()
+            await harSynligTittel(page, 'Søknaden er sendt', 2)
 
             await expect(page).toHaveURL(/\/kvittering\/.*/)
 
-            const kvittering = page.locator('[data-cy="kvittering"]')
+            const kvittering = page.getByRole('main')
             await expect(kvittering).toContainText('Hva skjer videre?')
             await expect(kvittering).toContainText('Nav ber arbeidsgiveren din om inntektsmelding')
             await expect(kvittering).toContainText(
