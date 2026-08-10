@@ -63,7 +63,7 @@
         "eslint-config-prettier": "^10.1.5",
         "eslint-plugin-prettier": "^5.4.0",
         "jiti": "^2.7.0",
-        "jsdom": "^29.1.1",
+        "jsdom": "^30.0.1",
         "next": "^16.2.12",
         "postcss": "^8.5.25",
         "prettier": "^3.8.4",
