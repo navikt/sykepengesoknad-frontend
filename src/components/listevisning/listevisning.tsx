@@ -1,5 +1,6 @@
 import React from 'react'
-import { Alert, Skeleton } from '@navikt/ds-react'
+import { BodyShort, Box, HStack, Skeleton } from '@navikt/ds-react'
+import { InformationIcon } from '@navikt/aksel-icons'
 
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { sorterEtterNyesteFom } from '../../utils/sorter-soknader'
@@ -63,13 +64,19 @@ const Listevisning = () => {
         <>
             <Banner overskrift={tekst('soknader.sidetittel')} />
             {erDemo && personaBeskrivelse && (
-                <Alert
-                    variant="info"
-                    size="small"
-                    className="bg-ax-bg-meta-lime-moderate border-ax-border-meta-lime-subtle mb-4"
+                <Box
+                    background="meta-lime-moderate"
+                    borderColor="meta-lime-subtle"
+                    borderWidth="1"
+                    borderRadius="4"
+                    padding="space-12"
+                    marginBlock="space-0 space-16"
                 >
-                    Demoinfo: {personaBeskrivelse}
-                </Alert>
+                    <HStack gap="space-8" wrap={false} align="center">
+                        <InformationIcon aria-hidden fontSize="1.5rem" />
+                        <BodyShort size="small">Demoinfo: {personaBeskrivelse}</BodyShort>
+                    </HStack>
+                </Box>
             )}
 
             <OmSykepenger />
