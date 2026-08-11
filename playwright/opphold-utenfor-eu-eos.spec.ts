@@ -1,12 +1,20 @@
+import { arbeidstaker } from '../src/data/mock/data/soknad/arbeidstaker'
+
 import { test, expect } from './utils/fixtures'
-import { checkViStolerPaDeg, neiOgVidere, svarRadioGruppe, harSynligTittel, harSynligTekst } from './utils/utilities'
+import {
+    checkViStolerPaDeg,
+    neiOgVidere,
+    svarRadioGruppe,
+    harSynligTittel,
+    harSynligTekst,
+    trykkPaSoknadMedId,
+} from './utils/utilities'
 
 test.describe('Opphold utenfor EU/EØS', () => {
     test.beforeEach(async ({ page }) => {
         await page.goto('/syk/sykepengesoknad?testperson=arbeidstaker')
 
-        const link = page.getByRole('link', { name: 'Søknad Om Sykepenger' })
-        await link.click()
+        await trykkPaSoknadMedId(page, arbeidstaker.id)
         await harSynligTittel(page, 'Søknad om sykepenger', 1)
     })
 
