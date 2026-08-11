@@ -46,6 +46,7 @@ import { nyttArbeidsforholdPerson } from './data/personas/nytt-arbeidsforhold'
 import {
     fremtidigeFriskTilArbeidPerson,
     friskTilArbeidPerson,
+    friskmeldtTilArbeidsformidlingPerson,
     sisteSoknadFriskTilArbeidPerson,
 } from './data/personas/friskmeldt-til-arbeidsformidling'
 
@@ -97,6 +98,7 @@ type PersonaKey =
     | 'fta-to-fremtidige'
     | 'fta-en-ny'
     | 'fta-siste'
+    | 'friskmeldt-til-arbeidsformidling'
 
 export type PersonaData = Partial<Record<PersonaKey, Persona>>
 
@@ -133,11 +135,15 @@ export function testpersonerGruppert(): PersonaGroup {
             ['arbeidsledig']: jsonDeepCopy(arbeidsledigPerson),
             ['frilanser']: jsonDeepCopy(frilanserPerson),
             ['selvstendig-naringsdrivende']: jsonDeepCopy(selvstendigNaringsdrivende),
+            ['fisker']: jsonDeepCopy(fiskePerson),
         },
         ['andre-soknader']: {
             ['behandlingsdager']: jsonDeepCopy(behandlingsdagerPerson),
             ['reisetilskudd']: jsonDeepCopy(reisetilskuddPerson),
             ['opphold-utenfor-eos']: jsonDeepCopy(oppholdUtenforEosPerson),
+            ['bare-utland']: jsonDeepCopy(utlandPerson),
+            ['friskmeldt-til-arbeidsformidling']: jsonDeepCopy(friskmeldtTilArbeidsformidlingPerson),
+            ['utenlandsk-sykmelding']: jsonDeepCopy(utenlandskSykmeldingPerson),
             ['uten-data']: jsonDeepCopy(utenDataPerson),
             ['medlemskap']: jsonDeepCopy(medlemskapPerson),
             ['over-70']: over70(),
@@ -145,6 +151,9 @@ export function testpersonerGruppert(): PersonaGroup {
         ['historiske-soknader']: {
             ['kjente-inntektskilder']: jsonDeepCopy(kjenteInntektskilderPerson),
             ['yrkesskade']: jsonDeepCopy(yrkesskadePerson),
+            ['gammel-oppsummering']: jsonDeepCopy(gammelOppsummeringPerson),
+            ['utgatt']: jsonDeepCopy(kunUtgattSoknadPerson),
+            ['korrigeringsfrist-utlopt']: jsonDeepCopy(korrigeringsfristUtloptPerson),
         },
     }
 }
@@ -153,18 +162,14 @@ function skjultePersoner(): PersonaData {
     return {
         ['arbeidstaker-gradert']: jsonDeepCopy(arbeidstakerGradertPerson),
         ['arbeidstaker-periode-varianter']: jsonDeepCopy(arbeidstakerPeriodeVarianter_Person),
-        ['fisker']: jsonDeepCopy(fiskePerson),
         ['fremtidig']: jsonDeepCopy(fremtidigPerson),
-        ['bare-utland']: jsonDeepCopy(utlandPerson),
-        ['utenlandsk-sykmelding']: jsonDeepCopy(utenlandskSykmeldingPerson),
         ['sykmelding-med-egenmeldingsdager']: jsonDeepCopy(egenmeldingSykmeldingaPerson),
         ['selvstendig-naringsdrivende-sendt']: jsonDeepCopy(selvstendigNaringsdrivendeSendtPerson),
-        ['fta-to-fremtidige']: jsonDeepCopy(fremtidigeFriskTilArbeidPerson),
         ['fta-en-ny']: jsonDeepCopy(friskTilArbeidPerson),
+        ['fta-to-fremtidige']: jsonDeepCopy(fremtidigeFriskTilArbeidPerson),
         ['fta-siste']: jsonDeepCopy(sisteSoknadFriskTilArbeidPerson),
         ['julesoknad']: jsonDeepCopy(julesoknadPerson),
         ['brukertest']: jsonDeepCopy(brukertestPerosn),
-        ['korrigeringsfrist-utlopt']: jsonDeepCopy(korrigeringsfristUtloptPerson),
         ['har-kontonummer']: jsonDeepCopy(harKontonummerPerson),
         ['har-ikke-kontonummer']: jsonDeepCopy(harIkkeKontonummerPerson),
         ['tilbakedateringer']: jsonDeepCopy(tilbakedateringer()),
@@ -179,8 +184,6 @@ function skjultePersoner(): PersonaData {
         ['http-500-ved-send-soknad']: jsonDeepCopy(http500vedSendSoknad),
         ['cummulative-layout-shift']: jsonDeepCopy(clsPerson),
         ['integrasjon-soknader']: jsonDeepCopy(integrasjonstestPerson),
-        ['gammel-oppsummering']: jsonDeepCopy(gammelOppsummeringPerson),
-        ['utgatt']: jsonDeepCopy(kunUtgattSoknadPerson),
         ['yrkesskade-v2']: jsonDeepCopy(yrkesskadeV2Person),
         ['nytt-arbeidsforhold']: jsonDeepCopy(nyttArbeidsforholdPerson),
         ['innenfor-arbeidsgiver-perioden']: jsonDeepCopy(innenforArbeidsgiverPeriodenPerson),

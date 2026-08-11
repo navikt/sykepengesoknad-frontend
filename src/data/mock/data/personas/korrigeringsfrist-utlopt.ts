@@ -12,5 +12,5 @@ korrigeringsfristUtloptSoknad.korrigeringsfristUtlopt = true
 export const korrigeringsfristUtloptPerson = {
     soknader: [korrigeringsfristUtloptSoknad],
     sykmeldinger: [arbeidstaker100Syk],
-    beskrivelse: 'Korrigering frist utløpt',
+    beskrivelse: 'Korrigeringsfrist utløpt',
 }
