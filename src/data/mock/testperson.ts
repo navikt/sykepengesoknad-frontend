@@ -102,6 +102,9 @@ type PersonaKey =
 
 export type PersonaData = Partial<Record<PersonaKey, Persona>>
 
+// Testpersonen mock-backend bruker når ingen er valgt i demomenyen
+export const STANDARD_TESTPERSON: PersonaKey = 'arbeidstaker'
+
 export type PersonaGroupKey = 'arbeidssituasjon' | 'andre-soknader' | 'historiske-soknader'
 type PersonaGroup = Record<PersonaGroupKey, PersonaData>
 

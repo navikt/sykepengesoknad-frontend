@@ -10,7 +10,7 @@ import OmSykepenger from '../om-sykepenger/om-sykepenger'
 import useSoknader from '../../hooks/useSoknader'
 import QueryStatusPanel from '../queryStatusPanel/QueryStatusPanel'
 import { useUpdateBreadcrumbs } from '../../hooks/useBreadcrumbs'
-import { testpersoner } from '../../data/mock/testperson'
+import { STANDARD_TESTPERSON, testpersoner } from '../../data/mock/testperson'
 import { isMockBackend, isOpplaering } from '../../utils/environment'
 
 import Teasere from './teasere'
@@ -23,7 +23,8 @@ function erTestpersonNokkel(testperson: string): testperson is keyof typeof pers
 }
 
 function hentPersonaBeskrivelse(testperson: string | string[] | undefined): string | undefined {
-    const valgtTestperson = Array.isArray(testperson) ? testperson[0] : testperson
+    // Mock-backend bruker standardpersonen når ingen er valgt i demomenyen
+    const valgtTestperson = (Array.isArray(testperson) ? testperson[0] : testperson) ?? STANDARD_TESTPERSON
 
     if (!valgtTestperson || !erTestpersonNokkel(valgtTestperson)) {
         return undefined

@@ -35,14 +35,14 @@ describe('Listevisning', () => {
         expect(screen.getByText('Demoinfo: Arbeidstaker')).toBeInTheDocument()
     })
 
-    it('viser ingen alert når det ikke er valgt en testperson', () => {
+    it('viser standardpersonen når det ikke er valgt en testperson', () => {
         mockUseRouter.mockReturnValue({
             query: {},
         })
 
         render(<Listevisning />)
 
-        expect(screen.queryByText(/^Demoinfo:/)).not.toBeInTheDocument()
+        expect(screen.getByText('Demoinfo: Arbeidstaker')).toBeInTheDocument()
     })
 
     it('viser ingen alert når testpersonen ikke finnes', () => {
