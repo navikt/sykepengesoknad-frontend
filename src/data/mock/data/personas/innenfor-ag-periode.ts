@@ -26,3 +26,5 @@ export const innenforArbeidsgiverPeriodenPerson: Persona = {
     sykmeldinger: [sykmelding],
     beskrivelse: 'Kort søknad innenfor arbeidsgiverperioden',
 }
+
+export { sykmelding as innenforArbeidsgiverperiodenSykmelding }

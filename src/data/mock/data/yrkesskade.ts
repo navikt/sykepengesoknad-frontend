@@ -18,8 +18,10 @@ export const yrkesskadePerson: Persona = {
     soknader: [yrkesskadeSoknadV1],
     sykmeldinger: [brukertestSykmelding],
     kontonummer: '12340000000',
-    beskrivelse: 'Yrkesskade v1',
+    beskrivelse: 'Yrkesskade 1',
 }
+
+export { yrkesskadeSoknadV1 }
 
 const yrkesskadeSoknad = deepcopyMedNyId(brukertestSoknad, '04247ad5-9c15-4b7d-ae55-f238003db133')
 const sporsmalene: RSSporsmal[] = []
@@ -35,3 +37,5 @@ export const yrkesskadeV2Person: Persona = {
     kontonummer: '12340000000',
     beskrivelse: 'Yrkesskade v2',
 }
+
+export { yrkesskadeSoknad }
