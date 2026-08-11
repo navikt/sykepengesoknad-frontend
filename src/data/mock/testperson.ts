@@ -104,17 +104,16 @@ export type PersonaGroupKey = 'arbeidssituasjon' | 'andre-soknader' | 'historisk
 type PersonaGroup = Record<PersonaGroupKey, PersonaData>
 
 export function testpersoner(): PersonaData {
-    const gruppert = testpersonerGruppert()
-    const skjulte = skjultePersoner()
-
-    const alle: PersonaData = {}
-    Object.assign(alle, ...Object.values(gruppert), ...Object.values(skjulte))
+    let alle: PersonaData = {}
+    Object.values(testpersonerGruppert()).forEach((gruppe) => {
+        alle = { ...alle, ...gruppe }
+    })
+    alle = { ...alle, ...skjultePersoner() }
 
     // Valider at alle søknader har unik ID, det gjør logikken i API mye lettere da vi kan anta at alle søknadsider er unike per sesjon
     const soknadsIder = new Set<string>()
-    const allePersoner = { ...gruppert.arbeidssituasjon, ...gruppert['andre-soknader'], ...gruppert['historiske-soknader'], ...skjulte }
-    Object.entries(allePersoner).forEach(([key, person]) => {
-        person!.soknader.forEach((soknad) => {
+    Object.entries(alle).forEach(([key, person]) => {
+        person.soknader.forEach((soknad) => {
             if (soknadsIder.has(soknad.id)) {
                 const message = `Søknad med id ${soknad.id} finnes flere ganger. sist funnet i ${key}`
                 logger.error(message)

@@ -35,10 +35,7 @@ import { utgattSoknad } from '../soknad/arbeidstaker-utgatt'
 import arbeidstakerJulesoknad from '../soknad/arbeidstaker-julesoknad'
 import { yrkesskadeSoknad, yrkesskadeSoknadV1 } from '../yrkesskade'
 import { nyttArbeidsforholdSoknad } from './nytt-arbeidsforhold'
-import {
-    soknadInnenforArbeidsgiverperioden,
-    innenforArbeidsgiverperiodenSykmelding,
-} from './innenfor-ag-periode'
+import { soknadInnenforArbeidsgiverperioden, innenforArbeidsgiverperiodenSykmelding } from './innenfor-ag-periode'
 
 import { brukertestSoknad, brukertestSykmelding } from './brukertestPerosn'
 
