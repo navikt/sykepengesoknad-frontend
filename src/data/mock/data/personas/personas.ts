@@ -109,32 +109,43 @@ export const clsPerson: Persona = {
     beskrivelse: 'Test av Cummulative Layout Shift',
 }
 
+// Egne IDer for demo-kopiene i arbeidstaker-persona, slik at samme søknad kan vises flere steder
+export const demoIder = {
+    gradert: 'a0000001-0000-4000-a000-000000000001',
+    innenforArbeidsgiverperioden: 'a0000001-0000-4000-a000-000000000002',
+    yrkesskade: 'a0000001-0000-4000-a000-000000000003',
+    yrkesskadeHistorisk: 'a0000001-0000-4000-a000-000000000004',
+    nyttArbeidsforhold: 'a0000001-0000-4000-a000-000000000005',
+    toPerioder: 'a0000001-0000-4000-a000-000000000006',
+    firePerioder: 'a0000001-0000-4000-a000-000000000007',
+}
+
 export const arbeidstakerPerson: Persona = {
     soknader: [
         { ...jsonDeepCopy(arbeidstaker), demoinfo: '100% sykmeldt' },
         {
-            ...deepcopyMedNyId(arbeidstakerGradert, 'a0000001-0000-0000-0000-000000000001'),
+            ...deepcopyMedNyId(arbeidstakerGradert, demoIder.gradert),
             demoinfo: '50% sykmeldt',
         },
         {
-            ...deepcopyMedNyId(soknadInnenforArbeidsgiverperioden, 'a0000001-0000-0000-0000-000000000002'),
+            ...deepcopyMedNyId(soknadInnenforArbeidsgiverperioden, demoIder.innenforArbeidsgiverperioden),
             demoinfo: 'Innafor arbeidsgiverperioden',
         },
-        { ...deepcopyMedNyId(yrkesskadeSoknad, 'a0000001-0000-0000-0000-000000000003'), demoinfo: 'Yrkesskade' },
+        { ...deepcopyMedNyId(yrkesskadeSoknad, demoIder.yrkesskade), demoinfo: 'Yrkesskade' },
         {
-            ...deepcopyMedNyId(yrkesskadeSoknadV1, 'a0000001-0000-0000-0000-000000000004'),
+            ...deepcopyMedNyId(yrkesskadeSoknadV1, demoIder.yrkesskadeHistorisk),
             demoinfo: 'Yrkesskade (historisk)',
         },
         {
-            ...deepcopyMedNyId(nyttArbeidsforholdSoknad, 'a0000001-0000-0000-0000-000000000005'),
+            ...deepcopyMedNyId(nyttArbeidsforholdSoknad, demoIder.nyttArbeidsforhold),
             demoinfo: 'Nytt arbeidsforhold/tilkommen inntekt',
         },
         {
-            ...deepcopyMedNyId(arbeidstakerToPerioder, 'a0000001-0000-0000-0000-000000000006'),
+            ...deepcopyMedNyId(arbeidstakerToPerioder, demoIder.toPerioder),
             demoinfo: '2 perioder',
         },
         {
-            ...deepcopyMedNyId(arbeidstakerMangePerioder, 'a0000001-0000-0000-0000-000000000007'),
+            ...deepcopyMedNyId(arbeidstakerMangePerioder, demoIder.firePerioder),
             demoinfo: '4 perioder',
         },
     ],

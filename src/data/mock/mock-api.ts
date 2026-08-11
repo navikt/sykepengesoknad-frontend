@@ -22,7 +22,7 @@ import { RSArbeidssituasjon } from '../../types/rs-types/rs-arbeidssituasjon'
 import { RSOppdaterSporsmalResponse } from '../../types/rs-types/rest-response/rs-oppdatersporsmalresponse'
 import { now, toDate } from '../../utils/dato-utils'
 
-import { Persona } from './data/personas/personas'
+import { demoIder, Persona } from './data/personas/personas'
 import { testpersoner } from './testperson'
 import {
     arbeidstakerDeltPeriodeForsteUtenforArbeidsgiverperiodeKvittering,
@@ -609,7 +609,9 @@ const mottaker = (soknadId: string): RSMottaker => {
         soknadId === arbeidstakerGradert.id ||
         soknadId === arbeidstakerInnenforArbeidsgiverperiodeKvittering.id ||
         soknadId === sok6.id ||
-        soknadId === soknadInnenforArbeidsgiverperioden.id
+        soknadId === soknadInnenforArbeidsgiverperioden.id ||
+        soknadId === demoIder.gradert ||
+        soknadId === demoIder.innenforArbeidsgiverperioden
     ) {
         return RSMottaker.ARBEIDSGIVER
     }

@@ -13,20 +13,31 @@ import { tilLesbarDatoMedArstall, tilLesbarPeriodeMedArstall } from '../../utils
 import { getLedetekst, tekst } from '../../utils/tekster'
 
 import { periodeListevisning, teaserTittel } from './teaser-util'
+import { isMockBackend, isOpplaering } from '../../utils/environment'
 
 const StyletLinkPanel = ({ soknad, paddingBottom }: { soknad: RSSoknadmetadata; paddingBottom: boolean }) => {
     const orange = soknad.status === 'NY' || soknad.status === 'UTKAST_TIL_KORRIGERING'
+    const erDemo = isMockBackend() || isOpplaering()
+
     return (
         <LinkPanel
             className={cn('p-6 [&>div]:w-full', {
                 'mb-4': paddingBottom,
-                'border-ax-warning-400 bg-ax-warning-100 hover:border-ax-warning-600': orange,
+                'border-ax-border-warning-subtle bg-ax-bg-warning-soft hover:border-ax-border-warning': orange,
             })}
             as="div"
             border
         >
             <div className="flex gap-3 max-[560px]:flex-col">
                 <div className="grow">
+                    {erDemo && (
+                        <Tag
+                            className="mb-2 inline-flex items-center gap-1 rounded px-2 py-1 text-sm bg-ax-bg-meta-lime-moderate"
+                            icon={<InformationIcon aria-hidden />}
+                        >
+                            {`Demoinfo: ${soknad.demoinfo}`}
+                        </Tag>
+                    )}
                     <LinkPanel.Title>
                         {soknad.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND && (
                             <BodyShort size="small" spacing>
@@ -36,15 +47,6 @@ const StyletLinkPanel = ({ soknad, paddingBottom }: { soknad: RSSoknadmetadata; 
                         {teaserTittel(soknad)}
                     </LinkPanel.Title>
                     <LinkPanel.Description>{periodeListevisning(soknad)}</LinkPanel.Description>
-                    {soknad.demoinfo && (
-                        <div
-                            className="mt-2 inline-flex items-center gap-1 rounded px-2 py-1 text-sm"
-                            style={{ background: 'var(--ax-bg-meta-lime-moderate)' }}
-                        >
-                            <InformationIcon aria-hidden />
-                            {`Demoinfo: ${soknad.demoinfo}`}
-                        </div>
-                    )}
                 </div>
                 <div className="flex shrink-0 items-center">
                     <SoknadTag soknad={soknad} />
