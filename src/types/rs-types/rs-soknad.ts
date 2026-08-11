@@ -43,4 +43,5 @@ export interface RSSoknad {
     julesoknad?: boolean
     friskTilArbeidVedtakId?: string
     ventetidSykmeldingUuid?: string
+    demoinfo?: string
 }
