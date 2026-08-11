@@ -10,6 +10,7 @@ import useSoknader from '../../hooks/useSoknader'
 import QueryStatusPanel from '../queryStatusPanel/QueryStatusPanel'
 import { useUpdateBreadcrumbs } from '../../hooks/useBreadcrumbs'
 import { testpersoner } from '../../data/mock/testperson'
+import { isMockBackend, isOpplaering } from '../../utils/environment'
 
 import Teasere from './teasere'
 import { useTestpersonQuery } from '../../hooks/useTestpersonQuery'
@@ -33,6 +34,7 @@ function hentPersonaBeskrivelse(testperson: string | string[] | undefined): stri
 const Listevisning = () => {
     const { data: soknader, isPending } = useSoknader()
     const testpersonQuery = useTestpersonQuery()
+    const erDemo = isMockBackend() || isOpplaering()
 
     useUpdateBreadcrumbs(() => [], [])
 
@@ -60,8 +62,8 @@ const Listevisning = () => {
     return (
         <>
             <Banner overskrift={tekst('soknader.sidetittel')} />
-            {personaBeskrivelse && (
-                <Alert variant={'info'} className="bg-ax-bg-meta-lime-moderate mb-4">
+            {erDemo && personaBeskrivelse && (
+                <Alert variant="info" size="small" className="mb-4">
                     Demoinfo: {personaBeskrivelse}
                 </Alert>
             )}
