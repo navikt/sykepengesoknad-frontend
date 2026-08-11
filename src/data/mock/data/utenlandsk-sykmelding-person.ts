@@ -15,7 +15,7 @@ sporsmalene.push(...soknadTilUtenlandskSykmelding.sporsmal.slice(1))
 soknadTilUtenlandskSykmelding.sporsmal = sporsmalene
 
 export const utenlandskSykmeldingPerson: Persona = {
-    soknader: [soknadTilUtenlandskSykmelding],
+    soknader: [{ ...soknadTilUtenlandskSykmelding, demoinfo: 'Søknad basert på sykmelding fra utlandet' }],
     sykmeldinger: [brukertestSykmelding],
     kontonummer: '12340000000',
     beskrivelse: 'Søknad fra utenlandsk sykmelding',

@@ -30,7 +30,7 @@ const StyletLinkPanel = ({ soknad, paddingBottom }: { soknad: RSSoknadmetadata; 
         >
             <div className="flex gap-3 max-[560px]:flex-col">
                 <div className="grow">
-                    {erDemo && (
+                    {erDemo && soknad.demoinfo && (
                         <Tag
                             className="mb-2 inline-flex items-center gap-1 rounded px-2 py-1 text-sm bg-ax-bg-meta-lime-moderate"
                             icon={<InformationIcon aria-hidden />}

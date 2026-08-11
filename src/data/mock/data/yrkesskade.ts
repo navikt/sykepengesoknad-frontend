@@ -15,7 +15,7 @@ sporsmaleneV1.push(...yrkesskadeSoknadV1.sporsmal.slice(splittStedV1))
 yrkesskadeSoknadV1.sporsmal = sporsmaleneV1
 
 export const yrkesskadePerson: Persona = {
-    soknader: [yrkesskadeSoknadV1],
+    soknader: [{ ...yrkesskadeSoknadV1, demoinfo: 'Yrkesskade med gammel spørsmålsstilling' }],
     sykmeldinger: [brukertestSykmelding],
     kontonummer: '12340000000',
     beskrivelse: 'Yrkesskade 1',
@@ -32,7 +32,7 @@ sporsmalene.push(...yrkesskadeSoknad.sporsmal.slice(splittSted))
 yrkesskadeSoknad.sporsmal = sporsmalene
 
 export const yrkesskadeV2Person: Persona = {
-    soknader: [yrkesskadeSoknad],
+    soknader: [{ ...yrkesskadeSoknad, demoinfo: 'Yrkesskade med ny spørsmålsstilling' }],
     sykmeldinger: [brukertestSykmelding],
     kontonummer: '12340000000',
     beskrivelse: 'Yrkesskade v2',

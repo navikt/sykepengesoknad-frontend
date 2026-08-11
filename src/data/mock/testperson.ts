@@ -112,6 +112,13 @@ export function testpersoner(): PersonaData {
     })
     alle = { ...alle, ...skjultePersoner() }
 
+    // Alle søknader skal ha demoinfo. Mangler den, faller vi tilbake på beskrivelsen av testpersonen
+    Object.values(alle).forEach((person) => {
+        person.soknader.forEach((soknad) => {
+            soknad.demoinfo = soknad.demoinfo ?? person.beskrivelse
+        })
+    })
+
     // Valider at alle søknader har unik ID, det gjør logikken i API mye lettere da vi kan anta at alle søknadsider er unike per sesjon
     const soknadsIder = new Set<string>()
     Object.entries(alle).forEach(([key, person]) => {

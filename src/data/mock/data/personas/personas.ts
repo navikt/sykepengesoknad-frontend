@@ -166,31 +166,31 @@ export const arbeidstakerGradertPerson: Persona = {
 }
 
 export const gammelOppsummeringPerson: Persona = {
-    soknader: [arbeidtakerMedGammelOppsummering()],
+    soknader: [{ ...arbeidtakerMedGammelOppsummering(), demoinfo: 'Sendt søknad med gammel oppsummering' }],
     sykmeldinger: [arbeidstaker100Syk],
     beskrivelse: 'Søknad med gammel oppsummering',
 }
 
 export const arbeidsledigPerson: Persona = {
-    soknader: [arbeidsledig],
+    soknader: [{ ...arbeidsledig, demoinfo: '100% sykmeldt arbeidsledig' }],
     sykmeldinger: [arbeidsledig100Syk],
     beskrivelse: 'Arbeidsledig',
 }
 
 export const frilanserPerson: Persona = {
-    soknader: [frilanser],
+    soknader: [{ ...frilanser, demoinfo: '100% sykmeldt frilanser' }],
     sykmeldinger: [frilanser100Syk],
     beskrivelse: 'Frilanser',
 }
 
 export const behandlingsdagerPerson: Persona = {
-    soknader: [behandlingsdager],
+    soknader: [{ ...behandlingsdager, demoinfo: 'Sykmelding med behandlingsdager' }],
     sykmeldinger: [arbeidstakerBehandlingsdagSyk],
     beskrivelse: 'Behandlingsdager',
 }
 
 export const utlandPerson: Persona = {
-    soknader: [oppholdUtland],
+    soknader: [{ ...oppholdUtland, demoinfo: 'Søknad om å beholde sykepengene utenfor EU/EØS' }],
     sykmeldinger: [],
     beskrivelse: 'Egen søknad om å beholde sykepenger i utlandet',
 }
@@ -217,7 +217,12 @@ export const integrasjonstestPerson: Persona = {
 }
 
 export const kunUtgattSoknadPerson: Persona = {
-    soknader: [deepcopyMedNyId(utgattSoknad, 'df1371a4-2773-41c2-a895-49f561424aaa')],
+    soknader: [
+        {
+            ...deepcopyMedNyId(utgattSoknad, 'df1371a4-2773-41c2-a895-49f561424aaa'),
+            demoinfo: 'Søknad som gikk ut på tid før den ble sendt',
+        },
+    ],
     sykmeldinger: sykmeldinger,
     beskrivelse: 'Utgått søknad',
 }
@@ -228,7 +233,12 @@ export function over70(): Persona {
         overSyttiAar: true,
     }
     return jsonDeepCopy({
-        soknader: [deepcopyMedNyId(arbeidsledig, 'df1371a4-2773-41c2-a895-49f56142496c')],
+        soknader: [
+            {
+                ...deepcopyMedNyId(arbeidsledig, 'df1371a4-2773-41c2-a895-49f56142496c'),
+                demoinfo: 'Sykmeldt som er over 70 år',
+            },
+        ],
         sykmeldinger: [sykmeldingOver70],
         beskrivelse: 'Sykmeldt er over 70 år',
     })
