@@ -34,6 +34,7 @@ import { jsonDeepCopy } from '../../../../utils/json-deep-copy'
 import { utgattSoknad } from '../soknad/arbeidstaker-utgatt'
 import arbeidstakerJulesoknad from '../soknad/arbeidstaker-julesoknad'
 import { yrkesskadeSoknad, yrkesskadeSoknadV1 } from '../yrkesskade'
+
 import { nyttArbeidsforholdSoknad } from './nytt-arbeidsforhold'
 import { soknadInnenforArbeidsgiverperioden, innenforArbeidsgiverperiodenSykmelding } from './innenfor-ag-periode'
 
@@ -118,18 +119,18 @@ export const demoIder = {
     nyttArbeidsforhold: 'a0000001-0000-4000-a000-000000000005',
     toPerioder: 'a0000001-0000-4000-a000-000000000006',
     firePerioder: 'a0000001-0000-4000-a000-000000000007',
-}
+} as const
 
 export const arbeidstakerPerson: Persona = {
     soknader: [
-        { ...jsonDeepCopy(arbeidstaker), demoinfo: '100% sykmeldt' },
+        { ...arbeidstaker, demoinfo: '100 % sykmeldt' },
         {
             ...deepcopyMedNyId(arbeidstakerGradert, demoIder.gradert),
-            demoinfo: '50% sykmeldt',
+            demoinfo: '50 % sykmeldt',
         },
         {
             ...deepcopyMedNyId(soknadInnenforArbeidsgiverperioden, demoIder.innenforArbeidsgiverperioden),
-            demoinfo: 'Innafor arbeidsgiverperioden',
+            demoinfo: 'Innenfor arbeidsgiverperioden',
         },
         { ...deepcopyMedNyId(yrkesskadeSoknad, demoIder.yrkesskade), demoinfo: 'Yrkesskade' },
         {
@@ -172,13 +173,13 @@ export const gammelOppsummeringPerson: Persona = {
 }
 
 export const arbeidsledigPerson: Persona = {
-    soknader: [{ ...arbeidsledig, demoinfo: '100% sykmeldt arbeidsledig' }],
+    soknader: [{ ...arbeidsledig, demoinfo: '100 % sykmeldt arbeidsledig' }],
     sykmeldinger: [arbeidsledig100Syk],
     beskrivelse: 'Arbeidsledig',
 }
 
 export const frilanserPerson: Persona = {
-    soknader: [{ ...frilanser, demoinfo: '100% sykmeldt frilanser' }],
+    soknader: [{ ...frilanser, demoinfo: '100 % sykmeldt frilanser' }],
     sykmeldinger: [frilanser100Syk],
     beskrivelse: 'Frilanser',
 }

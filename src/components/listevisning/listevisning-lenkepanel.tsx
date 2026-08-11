@@ -32,9 +32,13 @@ const StyletLinkPanel = ({ soknad, paddingBottom }: { soknad: RSSoknadmetadata; 
                 <div className="grow">
                     {erDemo && soknad.demoinfo && (
                         <Tag
-                            className="mb-2 inline-flex items-center gap-1 rounded px-2 py-1 text-sm bg-ax-bg-meta-lime-moderate"
+                            className="mb-2"
+                            data-color="meta-lime"
+                            variant="moderate"
+                            size="small"
                             icon={<InformationIcon aria-hidden />}
                         >
+                            <span className="sr-only">, </span>
                             {`Demoinfo: ${soknad.demoinfo}`}
                         </Tag>
                     )}

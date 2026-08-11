@@ -1,10 +1,10 @@
 import { deepcopyMedNyId } from '../../deepcopyMedNyId'
 import { nyttArbeidsforholdSporsmal } from '../sporsmal/nytt-arbeidsforhold'
 
-import { Persona } from './personas'
+import type { Persona } from './personas'
 import { brukertestSoknad, brukertestSykmelding } from './brukertestPerosn'
 
-const nyttArbeidsforholdSoknad = deepcopyMedNyId(brukertestSoknad, '260f06b5-9fd0-4b30-94d2-4f90851b4cac')
+export const nyttArbeidsforholdSoknad = deepcopyMedNyId(brukertestSoknad, '260f06b5-9fd0-4b30-94d2-4f90851b4cac')
 
 const splittSted = nyttArbeidsforholdSoknad.sporsmal.findIndex((spm) => spm.tag === 'ANDRE_INNTEKTSKILDER_V2')
 if (splittSted === -1) {
@@ -40,5 +40,3 @@ export const nyttArbeidsforholdPerson: Persona = {
     kontonummer: '12340000000',
     beskrivelse: 'Spørsmål om nytt arbeidsforhold',
 }
-
-export { nyttArbeidsforholdSoknad }
