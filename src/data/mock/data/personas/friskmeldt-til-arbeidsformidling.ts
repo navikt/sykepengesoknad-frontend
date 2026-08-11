@@ -10,8 +10,42 @@ import { Persona } from './personas'
 export const fremtidigeFriskTilArbeidPerson: Persona = {
     soknader: [fremtidigFriskmeldtTilArbeidsformidling1, fremtidigFriskmeldtTilArbeidsformidling2],
     sykmeldinger: [],
-    beskrivelse: 'To fremtidige friskmeldt til arbeidsformidling søknader',
+    beskrivelse: 'Friskmeldt til arbeidsformidling (to fremtidige)',
 }
+
+export const friskmeldtTilArbeidsformidlingPerson: Persona = {
+    soknader: [
+        {
+            ...nyFriskmeldtTilArbeidsformidling({
+                fom: '2025-03-31',
+                tom: '2025-04-13',
+                uuid: 'b0000002-0000-4000-a000-000000000001',
+                sisteSoknad: false,
+            }),
+            demoinfo: 'Ny søknad i vedtaksperioden',
+        },
+        {
+            ...nyFriskmeldtTilArbeidsformidling({
+                fom: '2025-03-31',
+                tom: '2025-04-13',
+                uuid: 'b0000002-0000-4000-a000-000000000002',
+                sisteSoknad: true,
+            }),
+            demoinfo: 'Siste søknad i vedtaksperioden',
+        },
+        {
+            ...deepcopyMedNyId(fremtidigFriskmeldtTilArbeidsformidling1, 'b0000002-0000-4000-a000-000000000003'),
+            demoinfo: 'Fremtidig søknad',
+        },
+        {
+            ...deepcopyMedNyId(fremtidigFriskmeldtTilArbeidsformidling2, 'b0000002-0000-4000-a000-000000000004'),
+            demoinfo: 'Fremtidig søknad, neste periode',
+        },
+    ],
+    sykmeldinger: [],
+    beskrivelse: 'Friskmeldt til arbeidsformidling',
+}
+
 export const friskTilArbeidPerson: Persona = {
     soknader: [
         nyFriskmeldtTilArbeidsformidling({
@@ -24,7 +58,7 @@ export const friskTilArbeidPerson: Persona = {
         deepcopyMedNyId(fremtidigFriskmeldtTilArbeidsformidling1, '3a5ca70f-d14c-4012-aaab-21dcaa019d4b'),
     ],
     sykmeldinger: [],
-    beskrivelse: 'Søknad om sykepenger grunnet friskmeldt til arbeidsformidling',
+    beskrivelse: 'Friskmeldt til arbeidsformidling (ny søknad)',
 }
 
 export const sisteSoknadFriskTilArbeidPerson: Persona = {
@@ -37,5 +71,5 @@ export const sisteSoknadFriskTilArbeidPerson: Persona = {
         }),
     ],
     sykmeldinger: [],
-    beskrivelse: 'Siste søknad i vedtaksperiode om sykepenger grunnet friskmeldt til arbeidsformidling',
+    beskrivelse: 'Friskmeldt til arbeidsformidling (siste i vedtaksperioden)',
 }

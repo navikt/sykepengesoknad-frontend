@@ -69,9 +69,9 @@ medlemskapOppholdstillatelseMidlertidig.kjentOppholdstillatelse = { fom: '2024-0
 
 export const medlemskapPerson: Persona = {
     soknader: [
-        medlemskapOriginalOppholdstillatelse,
-        medlemskapOppholdstillatelsePermanent,
-        medlemskapOppholdstillatelseMidlertidig,
+        { ...medlemskapOriginalOppholdstillatelse, demoinfo: 'Opprinnelig spørsmål om oppholdstillatelse' },
+        { ...medlemskapOppholdstillatelsePermanent, demoinfo: 'Kjent permanent oppholdstillatelse' },
+        { ...medlemskapOppholdstillatelseMidlertidig, demoinfo: 'Kjent midlertidig oppholdstillatelse' },
     ],
     sykmeldinger: [brukertestSykmelding],
     kontonummer: '12340000000',
