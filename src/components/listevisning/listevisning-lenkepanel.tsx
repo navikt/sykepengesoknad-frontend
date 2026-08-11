@@ -2,6 +2,7 @@ import { Button, LinkPanel, Tag, BodyShort } from '@navikt/ds-react'
 import { addDays } from 'date-fns'
 import React from 'react'
 import Link from 'next/link'
+import { InformationIcon } from '@navikt/aksel-icons'
 
 import { cn } from '../../utils/tw-utils'
 import { RSSoknadstatus, RSSoknadstatusType } from '../../types/rs-types/rs-soknadstatus'
@@ -35,6 +36,15 @@ const StyletLinkPanel = ({ soknad, paddingBottom }: { soknad: RSSoknadmetadata; 
                         {teaserTittel(soknad)}
                     </LinkPanel.Title>
                     <LinkPanel.Description>{periodeListevisning(soknad)}</LinkPanel.Description>
+                    {soknad.demoinfo && (
+                        <div
+                            className="mt-2 inline-flex items-center gap-1 rounded px-2 py-1 text-sm"
+                            style={{ background: 'var(--ax-bg-meta-lime-moderate)' }}
+                        >
+                            <InformationIcon aria-hidden />
+                            {`Demoinfo: ${soknad.demoinfo}`}
+                        </div>
+                    )}
                 </div>
                 <div className="flex shrink-0 items-center">
                     <SoknadTag soknad={soknad} />
