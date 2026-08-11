@@ -1,5 +1,5 @@
 import React from 'react'
-import { Skeleton } from '@navikt/ds-react'
+import { Alert, Skeleton } from '@navikt/ds-react'
 
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { sorterEtterNyesteFom } from '../../utils/sorter-soknader'
@@ -9,13 +9,34 @@ import OmSykepenger from '../om-sykepenger/om-sykepenger'
 import useSoknader from '../../hooks/useSoknader'
 import QueryStatusPanel from '../queryStatusPanel/QueryStatusPanel'
 import { useUpdateBreadcrumbs } from '../../hooks/useBreadcrumbs'
+import { testpersoner } from '../../data/mock/testperson'
 
 import Teasere from './teasere'
+import { useTestpersonQuery } from '../../hooks/useTestpersonQuery'
+
+const personer = testpersoner()
+
+function erTestpersonNokkel(testperson: string): testperson is keyof typeof personer {
+    return testperson in personer
+}
+
+function hentPersonaBeskrivelse(testperson: string | string[] | undefined): string | undefined {
+    const valgtTestperson = Array.isArray(testperson) ? testperson[0] : testperson
+
+    if (!valgtTestperson || !erTestpersonNokkel(valgtTestperson)) {
+        return undefined
+    }
+
+    return personer[valgtTestperson]?.beskrivelse
+}
 
 const Listevisning = () => {
     const { data: soknader, isPending } = useSoknader()
+    const testpersonQuery = useTestpersonQuery()
 
     useUpdateBreadcrumbs(() => [], [])
+
+    const personaBeskrivelse = hentPersonaBeskrivelse(testpersonQuery.testperson)
 
     const nyeSoknader = (soknader || [])
         .filter(
@@ -39,6 +60,11 @@ const Listevisning = () => {
     return (
         <>
             <Banner overskrift={tekst('soknader.sidetittel')} />
+            {personaBeskrivelse && (
+                <Alert variant={'info'} className="bg-ax-bg-meta-lime-moderate mb-4">
+                    Demoinfo: {personaBeskrivelse}
+                </Alert>
+            )}
 
             <OmSykepenger />
 
