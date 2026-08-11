@@ -33,6 +33,12 @@ import { fremtidigSoknad } from '../soknad/arbeidstaker-fremtidig'
 import { jsonDeepCopy } from '../../../../utils/json-deep-copy'
 import { utgattSoknad } from '../soknad/arbeidstaker-utgatt'
 import arbeidstakerJulesoknad from '../soknad/arbeidstaker-julesoknad'
+import { yrkesskadeSoknad, yrkesskadeSoknadV1 } from '../yrkesskade'
+import { nyttArbeidsforholdSoknad } from './nytt-arbeidsforhold'
+import {
+    soknadInnenforArbeidsgiverperioden,
+    innenforArbeidsgiverperiodenSykmelding,
+} from './innenfor-ag-periode'
 
 import { brukertestSoknad, brukertestSykmelding } from './brukertestPerosn'
 
@@ -46,7 +52,7 @@ export interface Persona {
 export const utenDataPerson: Persona = {
     soknader: [],
     sykmeldinger: [],
-    beskrivelse: 'Søknad uten data',
+    beskrivelse: 'Ingen søknader',
 }
 
 export const http400vedSendSoknad: Persona = {
@@ -107,9 +113,36 @@ export const clsPerson: Persona = {
 }
 
 export const arbeidstakerPerson: Persona = {
-    soknader: [arbeidstaker],
-    sykmeldinger: [arbeidstaker100Syk],
-    beskrivelse: 'Arbeidstakersøknad 100%',
+    soknader: [
+        { ...jsonDeepCopy(arbeidstaker), demoinfo: '100% sykmeldt' },
+        {
+            ...deepcopyMedNyId(arbeidstakerGradert, 'a0000001-0000-0000-0000-000000000001'),
+            demoinfo: '50% sykmeldt',
+        },
+        {
+            ...deepcopyMedNyId(soknadInnenforArbeidsgiverperioden, 'a0000001-0000-0000-0000-000000000002'),
+            demoinfo: 'Innafor arbeidsgiverperioden',
+        },
+        { ...deepcopyMedNyId(yrkesskadeSoknad, 'a0000001-0000-0000-0000-000000000003'), demoinfo: 'Yrkesskade' },
+        {
+            ...deepcopyMedNyId(yrkesskadeSoknadV1, 'a0000001-0000-0000-0000-000000000004'),
+            demoinfo: 'Yrkesskade (historisk)',
+        },
+        {
+            ...deepcopyMedNyId(nyttArbeidsforholdSoknad, 'a0000001-0000-0000-0000-000000000005'),
+            demoinfo: 'Nytt arbeidsforhold/tilkommen inntekt',
+        },
+        {
+            ...deepcopyMedNyId(arbeidstakerToPerioder, 'a0000001-0000-0000-0000-000000000006'),
+            demoinfo: '2 perioder',
+        },
+        {
+            ...deepcopyMedNyId(arbeidstakerMangePerioder, 'a0000001-0000-0000-0000-000000000007'),
+            demoinfo: '4 perioder',
+        },
+    ],
+    sykmeldinger: [arbeidstaker100Syk, arbeidstaker50Syk, brukertestSykmelding, innenforArbeidsgiverperiodenSykmelding],
+    beskrivelse: 'Arbeidstaker',
 }
 
 export const arbeidstakerPeriodeVarianter_Person: Persona = {
@@ -133,19 +166,19 @@ export const gammelOppsummeringPerson: Persona = {
 export const arbeidsledigPerson: Persona = {
     soknader: [arbeidsledig],
     sykmeldinger: [arbeidsledig100Syk],
-    beskrivelse: 'Arbeidsledigsøknad',
+    beskrivelse: 'Arbeidsledig',
 }
 
 export const frilanserPerson: Persona = {
     soknader: [frilanser],
     sykmeldinger: [frilanser100Syk],
-    beskrivelse: 'Frilansersøknad',
+    beskrivelse: 'Frilanser',
 }
 
 export const behandlingsdagerPerson: Persona = {
     soknader: [behandlingsdager],
     sykmeldinger: [arbeidstakerBehandlingsdagSyk],
-    beskrivelse: 'Arbeidstaker med behandlingsdager',
+    beskrivelse: 'Behandlingsdager',
 }
 
 export const utlandPerson: Persona = {
@@ -157,7 +190,7 @@ export const utlandPerson: Persona = {
 export const reisetilskuddPerson: Persona = {
     soknader: [nyttReisetilskudd, gradertReisetilskudd],
     sykmeldinger: [arbeidstakerReisetilskuddSyk, gradertReisetilskuddSm],
-    beskrivelse: 'Søknader med reisetilskudd og gradert reisetilskudd',
+    beskrivelse: 'Reisetilskudd',
 }
 
 export const fremtidigPerson: Persona = {
@@ -186,7 +219,7 @@ export function over70(): Persona {
     return jsonDeepCopy({
         soknader: [deepcopyMedNyId(arbeidsledig, 'df1371a4-2773-41c2-a895-49f56142496c')],
         sykmeldinger: [sykmeldingOver70],
-        beskrivelse: 'Søknad fra person som er over 70',
+        beskrivelse: 'Sykmeldt er over 70 år',
     })
 }
 

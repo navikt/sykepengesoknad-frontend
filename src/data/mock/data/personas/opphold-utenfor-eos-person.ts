@@ -12,5 +12,5 @@ export const oppholdUtenforEosPerson: Persona = {
         frilanserMedNyOppholdUtenfoeEOSSporsmal,
     ],
     sykmeldinger: sykmeldinger,
-    beskrivelse: 'Opphold utenfor EØS',
+    beskrivelse: 'Beholde sykepengene utenfor EU/EØS',
 }

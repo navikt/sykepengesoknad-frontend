@@ -19,7 +19,7 @@ const naringsdrivendeSoknadMedVirksomhetsSporsmal = lagNaringsdrivendeSoknadMedV
 export const selvstendigNaringsdrivende: Persona = {
     soknader: [naringsdrivendeSoknadMedVirksomhetsSporsmal],
     sykmeldinger: [naringsdrivende100syk],
-    beskrivelse: 'Selvstendig næringsdrivende',
+    beskrivelse: 'Selvstendig Næringsdrivende',
 }
 
 const sendtSoknadMedGammelKvittering = deepcopyMedNyId(naringsdrivendeSoknad, '3708c4de-d16c-4835-841b-a6716b688888')

@@ -20,5 +20,5 @@ export const kjenteInntektskilderPerson: Persona = {
     soknader: [soknad],
     sykmeldinger: [brukertestSykmelding],
     kontonummer: '12340000000',
-    beskrivelse: 'Søknad med avviklet kjente inntektskilder spørsmål',
+    beskrivelse: 'Avviklet kjente inntektskilder',
 }

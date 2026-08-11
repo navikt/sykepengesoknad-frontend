@@ -75,5 +75,5 @@ export const medlemskapPerson: Persona = {
     ],
     sykmeldinger: [brukertestSykmelding],
     kontonummer: '12340000000',
-    beskrivelse: 'Søknader med forskjellig spørsmål om medlemskap',
+    beskrivelse: 'Medlemskap (LovMe)',
 }
