@@ -63,7 +63,11 @@ const Listevisning = () => {
         <>
             <Banner overskrift={tekst('soknader.sidetittel')} />
             {erDemo && personaBeskrivelse && (
-                <Alert variant="info" size="small" className="mb-4">
+                <Alert
+                    variant="info"
+                    size="small"
+                    className="bg-ax-bg-meta-lime-moderate border-ax-border-meta-lime-subtle mb-4"
+                >
                     Demoinfo: {personaBeskrivelse}
                 </Alert>
             )}
