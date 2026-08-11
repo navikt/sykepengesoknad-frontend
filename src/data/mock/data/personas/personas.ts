@@ -192,11 +192,14 @@ export const behandlingsdagerPerson: Persona = {
 export const utlandPerson: Persona = {
     soknader: [oppholdUtland],
     sykmeldinger: [],
-    beskrivelse: 'Opphold utland søknad',
+    beskrivelse: 'Egen søknad om å beholde sykepenger i utlandet',
 }
 
 export const reisetilskuddPerson: Persona = {
-    soknader: [nyttReisetilskudd, gradertReisetilskudd],
+    soknader: [
+        { ...nyttReisetilskudd, demoinfo: 'Kun reisetilskudd' },
+        { ...gradertReisetilskudd, demoinfo: 'Gradert sykmelding med reisetilskudd' },
+    ],
     sykmeldinger: [arbeidstakerReisetilskuddSyk, gradertReisetilskuddSm],
     beskrivelse: 'Reisetilskudd',
 }
