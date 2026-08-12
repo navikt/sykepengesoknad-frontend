@@ -17,9 +17,9 @@ const naringsdrivendeSoknadMedVirksomhetsSporsmal = lagNaringsdrivendeSoknadMedV
 )
 
 export const selvstendigNaringsdrivende: Persona = {
-    soknader: [naringsdrivendeSoknadMedVirksomhetsSporsmal],
+    soknader: [{ ...naringsdrivendeSoknadMedVirksomhetsSporsmal, demoinfo: 'Spørsmål om virksomheten din' }],
     sykmeldinger: [naringsdrivende100syk],
-    beskrivelse: 'Selvstendig næringsdrivende',
+    beskrivelse: 'Selvstendig Næringsdrivende',
 }
 
 const sendtSoknadMedGammelKvittering = deepcopyMedNyId(naringsdrivendeSoknad, '3708c4de-d16c-4835-841b-a6716b688888')
@@ -48,7 +48,10 @@ function lagNaringsdrivendeSoknadMedVirksomhetsSporsmal(id: string, ekstraSporsm
 }
 
 export const selvstendigNaringsdrivendeSendtPerson: Persona = {
-    soknader: [sendtSoknadMedGammelKvittering, sendtSoknadMedNyKvitteringMedDokumenter],
+    soknader: [
+        { ...sendtSoknadMedGammelKvittering, demoinfo: 'Sendt søknad med gammel kvittering' },
+        { ...sendtSoknadMedNyKvitteringMedDokumenter, demoinfo: 'Sendt søknad med ny kvittering og dokumenter' },
+    ],
     sykmeldinger: [naringsdrivende100syk],
     beskrivelse: 'Selvstendig næringsdrivende med sendt søknad',
 }

@@ -46,6 +46,7 @@ import { nyttArbeidsforholdPerson } from './data/personas/nytt-arbeidsforhold'
 import {
     fremtidigeFriskTilArbeidPerson,
     friskTilArbeidPerson,
+    friskmeldtTilArbeidsformidlingPerson,
     sisteSoknadFriskTilArbeidPerson,
 } from './data/personas/friskmeldt-til-arbeidsformidling'
 
@@ -97,104 +98,111 @@ type PersonaKey =
     | 'fta-to-fremtidige'
     | 'fta-en-ny'
     | 'fta-siste'
+    | 'friskmeldt-til-arbeidsformidling'
 
 export type PersonaData = Partial<Record<PersonaKey, Persona>>
 
-export type PersonaGroupKey =
-    | 'soknad-typer'
-    | 'soknad-sporsmal'
-    | 'medlemskap-sporsmal'
-    | 'arbeidstaker-julesoknad'
-    | 'testing'
-    | 'friskmeldt-til-arbeidsformidling'
-    | 'selvstendig-naringsdrivende'
+// Testpersonen mock-backend bruker når ingen er valgt i demomenyen
+export const STANDARD_TESTPERSON: PersonaKey = 'arbeidstaker'
+
+export type PersonaGroupKey = 'arbeidssituasjon' | 'andre-soknader' | 'historiske-soknader'
 type PersonaGroup = Record<PersonaGroupKey, PersonaData>
 
 export function testpersoner(): PersonaData {
     let alle: PersonaData = {}
-    Object.values(testpersonerGruppert()).forEach((group) => {
-        alle = { ...alle, ...group }
+    Object.values(testpersonerGruppert()).forEach((gruppe) => {
+        alle = { ...alle, ...gruppe }
     })
+    alle = { ...alle, ...skjultePersoner() }
+
+    // Alle søknader skal ha demoinfo. Mangler den, faller vi tilbake på beskrivelsen av testpersonen
+    alle = Object.fromEntries(
+        Object.entries(alle).map(([key, person]) => [
+            key,
+            {
+                ...person,
+                soknader: person.soknader.map((soknad) => ({
+                    ...soknad,
+                    demoinfo: soknad.demoinfo ?? person.beskrivelse,
+                })),
+            },
+        ]),
+    )
+
+    // Valider at alle søknader har unik ID, det gjør logikken i API mye lettere da vi kan anta at alle søknadsider er unike per sesjon
+    const soknadsIder = new Set<string>()
+    Object.entries(alle).forEach(([key, person]) => {
+        person.soknader.forEach((soknad) => {
+            if (soknadsIder.has(soknad.id)) {
+                const message = `Søknad med id ${soknad.id} finnes flere ganger. sist funnet i ${key}`
+                logger.error(message)
+                throw Error(message)
+            }
+            soknadsIder.add(soknad.id)
+        })
+    })
+
     return alle
 }
 
 export function testpersonerGruppert(): PersonaGroup {
-    const data: PersonaGroup = {
-        ['soknad-typer']: {
+    return {
+        ['arbeidssituasjon']: {
             ['arbeidstaker']: jsonDeepCopy(arbeidstakerPerson),
-            ['arbeidstaker-gradert']: jsonDeepCopy(arbeidstakerGradertPerson),
             ['arbeidsledig']: jsonDeepCopy(arbeidsledigPerson),
             ['frilanser']: jsonDeepCopy(frilanserPerson),
+            ['selvstendig-naringsdrivende']: jsonDeepCopy(selvstendigNaringsdrivende),
             ['fisker']: jsonDeepCopy(fiskePerson),
+        },
+        ['andre-soknader']: {
             ['behandlingsdager']: jsonDeepCopy(behandlingsdagerPerson),
             ['reisetilskudd']: jsonDeepCopy(reisetilskuddPerson),
-            ['bare-utland']: jsonDeepCopy(utlandPerson),
-            ['fremtidig']: jsonDeepCopy(fremtidigPerson),
-            ['uten-data']: jsonDeepCopy(utenDataPerson),
-            ['innenfor-arbeidsgiver-perioden']: jsonDeepCopy(innenforArbeidsgiverPeriodenPerson),
-            ['nytt-arbeidsforhold']: jsonDeepCopy(nyttArbeidsforholdPerson),
-        },
-        ['soknad-sporsmal']: {
             ['opphold-utenfor-eos']: jsonDeepCopy(oppholdUtenforEosPerson),
+            ['bare-utland']: jsonDeepCopy(utlandPerson),
+            ['friskmeldt-til-arbeidsformidling']: jsonDeepCopy(friskmeldtTilArbeidsformidlingPerson),
+            ['utenlandsk-sykmelding']: jsonDeepCopy(utenlandskSykmeldingPerson),
+            ['uten-data']: jsonDeepCopy(utenDataPerson),
+            ['medlemskap']: jsonDeepCopy(medlemskapPerson),
+            ['over-70']: over70(),
+        },
+        ['historiske-soknader']: {
             ['kjente-inntektskilder']: jsonDeepCopy(kjenteInntektskilderPerson),
             ['yrkesskade']: jsonDeepCopy(yrkesskadePerson),
-            ['yrkesskade-v2']: jsonDeepCopy(yrkesskadeV2Person),
-            ['utenlandsk-sykmelding']: jsonDeepCopy(utenlandskSykmeldingPerson),
-            ['sykmelding-med-egenmeldingsdager']: jsonDeepCopy(egenmeldingSykmeldingaPerson),
-        },
-        ['medlemskap-sporsmal']: {
-            ['medlemskap']: jsonDeepCopy(medlemskapPerson),
-        },
-        ['selvstendig-naringsdrivende']: {
-            ['selvstendig-naringsdrivende']: jsonDeepCopy(selvstendigNaringsdrivende),
-            ['selvstendig-naringsdrivende-sendt']: jsonDeepCopy(selvstendigNaringsdrivendeSendtPerson),
-        },
-        ['friskmeldt-til-arbeidsformidling']: {
-            ['fta-to-fremtidige']: jsonDeepCopy(fremtidigeFriskTilArbeidPerson),
-            ['fta-en-ny']: jsonDeepCopy(friskTilArbeidPerson),
-            ['fta-siste']: jsonDeepCopy(sisteSoknadFriskTilArbeidPerson),
-        },
-        ['arbeidstaker-julesoknad']: {
-            ['julesoknad']: jsonDeepCopy(julesoknadPerson),
-        },
-        ['testing']: {
-            ['arbeidstaker-periode-varianter']: jsonDeepCopy(arbeidstakerPeriodeVarianter_Person),
-            ['brukertest']: jsonDeepCopy(brukertestPerosn),
-            ['over-70']: over70(),
-            ['korrigeringsfrist-utlopt']: jsonDeepCopy(korrigeringsfristUtloptPerson),
-            ['har-kontonummer']: jsonDeepCopy(harKontonummerPerson),
-            ['har-ikke-kontonummer']: jsonDeepCopy(harIkkeKontonummerPerson),
-            ['tilbakedateringer']: jsonDeepCopy(tilbakedateringer()),
-            ['reisetilskudd-test']: jsonDeepCopy(reisetilskuddTestPerson),
-            ['en-usendt-sykmelding']: jsonDeepCopy(enUsendtSykmelding),
-            ['to-usendte-sykmeldinger']: jsonDeepCopy(toUsendteSykmeldinger),
-            ['en-eldre-usendt-soknad']: jsonDeepCopy(eldreUsendtSoknad),
-            ['to-eldre-usendte-soknader']: jsonDeepCopy(flereEldreUsendteSoknader),
-            ['http-400-ved-send-soknad']: jsonDeepCopy(http400vedSendSoknad),
-            ['http-403-ved-get-soknad']: jsonDeepCopy(http403vedGetSoknad),
-            ['http-404-ved-put-soknad']: jsonDeepCopy(http404vedPutOgGetSoknad),
-            ['http-500-ved-send-soknad']: jsonDeepCopy(http500vedSendSoknad),
-            ['cummulative-layout-shift']: jsonDeepCopy(clsPerson),
-            ['integrasjon-soknader']: jsonDeepCopy(integrasjonstestPerson),
             ['gammel-oppsummering']: jsonDeepCopy(gammelOppsummeringPerson),
             ['utgatt']: jsonDeepCopy(kunUtgattSoknadPerson),
+            ['korrigeringsfrist-utlopt']: jsonDeepCopy(korrigeringsfristUtloptPerson),
         },
     }
+}
 
-    // Valider at alle søknader har unik ID, det gjør logikken i API mye lettere da vi kan anta at alle søknadsider er unike per sesjon
-    const soknadsIder = new Set<string>()
-    Object.values(data).forEach((group) => {
-        Object.entries(group).forEach(([key, person]) => {
-            person.soknader.forEach((soknad) => {
-                if (soknadsIder.has(soknad.id)) {
-                    const message = `Søknad med id ${soknad.id} finnes flere ganger. sist funnet i ${key}`
-                    logger.error(message)
-                    throw Error(message)
-                }
-                soknadsIder.add(soknad.id)
-            })
-        })
-    })
-
-    return data
+function skjultePersoner(): PersonaData {
+    return {
+        ['arbeidstaker-gradert']: jsonDeepCopy(arbeidstakerGradertPerson),
+        ['arbeidstaker-periode-varianter']: jsonDeepCopy(arbeidstakerPeriodeVarianter_Person),
+        ['fremtidig']: jsonDeepCopy(fremtidigPerson),
+        ['sykmelding-med-egenmeldingsdager']: jsonDeepCopy(egenmeldingSykmeldingaPerson),
+        ['selvstendig-naringsdrivende-sendt']: jsonDeepCopy(selvstendigNaringsdrivendeSendtPerson),
+        ['fta-en-ny']: jsonDeepCopy(friskTilArbeidPerson),
+        ['fta-to-fremtidige']: jsonDeepCopy(fremtidigeFriskTilArbeidPerson),
+        ['fta-siste']: jsonDeepCopy(sisteSoknadFriskTilArbeidPerson),
+        ['julesoknad']: jsonDeepCopy(julesoknadPerson),
+        ['brukertest']: jsonDeepCopy(brukertestPerosn),
+        ['har-kontonummer']: jsonDeepCopy(harKontonummerPerson),
+        ['har-ikke-kontonummer']: jsonDeepCopy(harIkkeKontonummerPerson),
+        ['tilbakedateringer']: jsonDeepCopy(tilbakedateringer()),
+        ['reisetilskudd-test']: jsonDeepCopy(reisetilskuddTestPerson),
+        ['en-usendt-sykmelding']: jsonDeepCopy(enUsendtSykmelding),
+        ['to-usendte-sykmeldinger']: jsonDeepCopy(toUsendteSykmeldinger),
+        ['en-eldre-usendt-soknad']: jsonDeepCopy(eldreUsendtSoknad),
+        ['to-eldre-usendte-soknader']: jsonDeepCopy(flereEldreUsendteSoknader),
+        ['http-400-ved-send-soknad']: jsonDeepCopy(http400vedSendSoknad),
+        ['http-403-ved-get-soknad']: jsonDeepCopy(http403vedGetSoknad),
+        ['http-404-ved-put-soknad']: jsonDeepCopy(http404vedPutOgGetSoknad),
+        ['http-500-ved-send-soknad']: jsonDeepCopy(http500vedSendSoknad),
+        ['cummulative-layout-shift']: jsonDeepCopy(clsPerson),
+        ['integrasjon-soknader']: jsonDeepCopy(integrasjonstestPerson),
+        ['yrkesskade-v2']: jsonDeepCopy(yrkesskadeV2Person),
+        ['nytt-arbeidsforhold']: jsonDeepCopy(nyttArbeidsforholdPerson),
+        ['innenfor-arbeidsgiver-perioden']: jsonDeepCopy(innenforArbeidsgiverPeriodenPerson),
+    }
 }

@@ -8,9 +8,10 @@ const korrigeringsfristUtloptSoknad: RSSoknad = deepcopyMedNyId(
     '46cd957d-0d62-4091-81ec-7bac2bf6a628',
 )
 korrigeringsfristUtloptSoknad.korrigeringsfristUtlopt = true
+korrigeringsfristUtloptSoknad.demoinfo = 'Sendt søknad som ikke lenger kan korrigeres'
 
 export const korrigeringsfristUtloptPerson = {
     soknader: [korrigeringsfristUtloptSoknad],
     sykmeldinger: [arbeidstaker100Syk],
-    beskrivelse: 'Korrigering frist utløpt',
+    beskrivelse: 'Korrigeringsfrist utløpt',
 }

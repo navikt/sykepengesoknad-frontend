@@ -6,11 +6,11 @@ Repoet `sykepengesoknad-frontend` er en React-app for søknader om sykepenger i 
 Bruk IntelliJ MCP (`execute_run_configuration`) for alle scripts — se **`AGENTS-intellij.md`**. Scripts for referanse:
 
 ```sh
-npm run dev           # kjør lokalt (mock-backend)
-npm run test:ci       # enhetstester uten watch
-npm run build         # bygg for produksjon
-npm run format        # formater med Prettier + ESLint
-npm run play-headless # E2E-tester headless
+npm run dev                 # kjør lokalt (mock-backend)
+npm run test:ci             # enhetstester uten watch
+npm run build               # bygg for produksjon
+npm run format              # formater med Prettier + ESLint
+npm run play-headless-build # E2E-tester headless med bygg først
 ```
 
 ### Før commit (obligatorisk)
@@ -18,15 +18,15 @@ npm run play-headless # E2E-tester headless
 Kjør i rekkefølge via `execute_run_configuration`:
 
 1. `format`
-2. `test:ci`
-3. `play-headless`
-4. `build`
+2. `Tests in src/` (Vitest)
+3. `play-headless-build` (bygger og kjører E2E — dekker også `build`)
 
 ## 2) Testing
 
 - Enhet/integrasjon: **Vitest** (`.test.ts` / `.test.tsx`) i `src/`
 - E2E: **Playwright** i `playwright/**/*.spec.ts`
-- «Kjør tester» betyr alltid begge — `test:ci` **og** `play-headless` via IntelliJ MCP. Spesifiser eksplisitt hvis bare én type ønskes.
+- «Kjør tester» betyr alltid begge — `Tests in src/` **og** `play-headless-build` via IntelliJ MCP. Spesifiser eksplisitt hvis bare én type ønskes.
+- Foretrekk alltid `play-headless-build` fremfor `play-headless`, slik at byggfeil fanges opp før E2E-testene kjører
 - Prioriter tester for endret domenelogikk
 
 ### Playwright-mønstre

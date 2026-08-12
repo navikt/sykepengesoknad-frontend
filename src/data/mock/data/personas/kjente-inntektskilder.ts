@@ -17,8 +17,8 @@ soknad.sporsmal = [
 ]
 
 export const kjenteInntektskilderPerson: Persona = {
-    soknader: [soknad],
+    soknader: [{ ...soknad, demoinfo: 'Sendt søknad med avviklede kjente inntektskilder' }],
     sykmeldinger: [brukertestSykmelding],
     kontonummer: '12340000000',
-    beskrivelse: 'Søknad med avviklet kjente inntektskilder spørsmål',
+    beskrivelse: 'Avviklet kjente inntektskilder',
 }

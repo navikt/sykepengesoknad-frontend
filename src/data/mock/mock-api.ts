@@ -22,8 +22,8 @@ import { RSArbeidssituasjon } from '../../types/rs-types/rs-arbeidssituasjon'
 import { RSOppdaterSporsmalResponse } from '../../types/rs-types/rest-response/rs-oppdatersporsmalresponse'
 import { now, toDate } from '../../utils/dato-utils'
 
-import { Persona } from './data/personas/personas'
-import { testpersoner } from './testperson'
+import { demoIder, Persona } from './data/personas/personas'
+import { STANDARD_TESTPERSON, testpersoner } from './testperson'
 import {
     arbeidstakerDeltPeriodeForsteUtenforArbeidsgiverperiodeKvittering,
     arbeidstakerInnenforArbeidsgiverperiodeKvittering,
@@ -93,7 +93,7 @@ export function getSession(req: NextApiRequest, res: NextApiResponse): session {
 function nokkel(req: NextApiRequest): string {
     const query = req.query['testperson']
     if (query) return query.toString()
-    return 'arbeidstaker'
+    return STANDARD_TESTPERSON
 }
 
 export function hentTestperson(req: NextApiRequest, res: NextApiResponse): Persona {
@@ -609,7 +609,9 @@ const mottaker = (soknadId: string): RSMottaker => {
         soknadId === arbeidstakerGradert.id ||
         soknadId === arbeidstakerInnenforArbeidsgiverperiodeKvittering.id ||
         soknadId === sok6.id ||
-        soknadId === soknadInnenforArbeidsgiverperioden.id
+        soknadId === soknadInnenforArbeidsgiverperioden.id ||
+        soknadId === demoIder.gradert ||
+        soknadId === demoIder.innenforArbeidsgiverperioden
     ) {
         return RSMottaker.ARBEIDSGIVER
     }

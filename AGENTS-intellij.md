@@ -6,24 +6,27 @@ Bruk alltid IntelliJ MCP-verktøy (`com-jetbrains-intellij-*`) fremfor bash/grep
 
 Bruk `execute_run_configuration` med `configurationName` lik script-navnet fra `package.json`:
 
-| Oppgave           | configurationName  |
-|-------------------|--------------------|
-| Enhetstester      | `test:ci`          |
-| E2E-tester        | `play-headless`    |
-| Dev-server        | `dev`              |
-| Format            | `format`           |
+| Oppgave           | configurationName       |
+|-------------------|-------------------------|
+| Enhetstester      | `Tests in src/`         |
+| E2E-tester        | `play-headless-build`   |
+| Dev-server        | `dev`                   |
+| Format            | `format`                |
+| Bygg              | `build`                 |
+
+Bruk alltid `play-headless-build` for E2E — den bygger først, så typefeil fanges opp før testene kjører. `play-headless` kjører mot dev-serveren og skjuler byggfeil.
 
 Eksempel:
 ```
 execute_run_configuration(
-  configurationName: "test:ci",
-  projectPath: "/Users/.../spinnsyn-frontend",
+  configurationName: "play-headless-build",
+  projectPath: "/Users/.../sykepengesoknad-frontend",
   waitForExit: true,
-  timeout: 120000
+  timeout: 900000
 )
 ```
 
-E2E-tester starter dev-serveren automatisk via `webServer`-konfig i `playwright.config.ts` (`reuseExistingServer: true`).
+E2E-tester starter serveren automatisk via `webServer`-konfig i `playwright.config.ts` (`reuseExistingServer: true`). Stopp eventuelle dev-servere som allerede kjører på port 3000/3001 først — en kjørende `next dev` gir portkonflikt og falske feil.
 
 ### Kjøre én enkelt Playwright spec-fil
 

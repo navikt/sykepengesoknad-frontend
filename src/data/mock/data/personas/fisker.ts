@@ -535,7 +535,7 @@ const sykmelding = new Sykmelding({
 })
 
 export const fiskePerson: Persona = {
-    soknader: [soknad],
+    soknader: [{ ...soknad, demoinfo: 'Fisker på hyre og lott' }],
     sykmeldinger: [sykmelding],
     beskrivelse: 'Fisker',
 }

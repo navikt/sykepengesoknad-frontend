@@ -2,6 +2,7 @@ import { Button, LinkPanel, Tag, BodyShort } from '@navikt/ds-react'
 import { addDays } from 'date-fns'
 import React from 'react'
 import Link from 'next/link'
+import { InformationIcon } from '@navikt/aksel-icons'
 
 import { cn } from '../../utils/tw-utils'
 import { RSSoknadstatus, RSSoknadstatusType } from '../../types/rs-types/rs-soknadstatus'
@@ -12,20 +13,35 @@ import { tilLesbarDatoMedArstall, tilLesbarPeriodeMedArstall } from '../../utils
 import { getLedetekst, tekst } from '../../utils/tekster'
 
 import { periodeListevisning, teaserTittel } from './teaser-util'
+import { isMockBackend, isOpplaering } from '../../utils/environment'
 
 const StyletLinkPanel = ({ soknad, paddingBottom }: { soknad: RSSoknadmetadata; paddingBottom: boolean }) => {
     const orange = soknad.status === 'NY' || soknad.status === 'UTKAST_TIL_KORRIGERING'
+    const erDemo = isMockBackend() || isOpplaering()
+
     return (
         <LinkPanel
             className={cn('p-6 [&>div]:w-full', {
                 'mb-4': paddingBottom,
-                'border-ax-warning-400 bg-ax-warning-100 hover:border-ax-warning-600': orange,
+                'border-ax-border-warning-subtle bg-ax-bg-warning-soft hover:border-ax-border-warning': orange,
             })}
             as="div"
             border
         >
             <div className="flex gap-3 max-[560px]:flex-col">
                 <div className="grow">
+                    {erDemo && soknad.demoinfo && (
+                        <Tag
+                            className="mb-2"
+                            data-color="meta-lime"
+                            variant="moderate"
+                            size="small"
+                            icon={<InformationIcon aria-hidden />}
+                        >
+                            <span className="sr-only">, </span>
+                            {`Demoinfo: ${soknad.demoinfo}`}
+                        </Tag>
+                    )}
                     <LinkPanel.Title>
                         {soknad.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND && (
                             <BodyShort size="small" spacing>

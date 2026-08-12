@@ -30,6 +30,7 @@ export class RSSoknadmetadata {
     readonly opprettetAvInntektsmelding: boolean
     readonly forstegangssoknad?: boolean
     readonly friskTilArbeidVedtakId?: string
+    readonly demoinfo?: string
 
     constructor(json: any) {
         this.id = json.id
@@ -59,5 +60,6 @@ export class RSSoknadmetadata {
         this.opprettetAvInntektsmelding = json.opprettetAvInntektsmelding
         this.forstegangssoknad = json.forstegangssoknad
         this.friskTilArbeidVedtakId = json.friskTilArbeidVedtakId
+        this.demoinfo = json.demoinfo
     }
 }

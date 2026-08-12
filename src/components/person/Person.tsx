@@ -84,26 +84,14 @@ function PersonPicker() {
 function PersonGruppeVisning({ gruppe, personer }: { gruppe: PersonaGroupKey; personer: PersonaData }) {
     function heading() {
         switch (gruppe) {
-            case 'soknad-typer': {
-                return 'Søknadstyper'
+            case 'arbeidssituasjon': {
+                return 'Søknader basert på arbeidssituasjon'
             }
-            case 'soknad-sporsmal': {
-                return 'Spørsmålsvarianter'
+            case 'andre-soknader': {
+                return 'Andre søknader'
             }
-            case 'medlemskap-sporsmal': {
-                return 'Spørsmål om Medlemskap'
-            }
-            case 'arbeidstaker-julesoknad': {
-                return 'Julesøknad'
-            }
-            case 'testing': {
-                return 'Forskjellige Testscenarios'
-            }
-            case 'friskmeldt-til-arbeidsformidling': {
-                return 'Friskmeldt til arbeidsformidling'
-            }
-            case 'selvstendig-naringsdrivende': {
-                return 'Selvstendig Næringsdrivende'
+            case 'historiske-soknader': {
+                return 'Historiske søknader'
             }
             default: {
                 return gruppe

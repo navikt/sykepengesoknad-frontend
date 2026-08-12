@@ -33,6 +33,10 @@ import { fremtidigSoknad } from '../soknad/arbeidstaker-fremtidig'
 import { jsonDeepCopy } from '../../../../utils/json-deep-copy'
 import { utgattSoknad } from '../soknad/arbeidstaker-utgatt'
 import arbeidstakerJulesoknad from '../soknad/arbeidstaker-julesoknad'
+import { yrkesskadeSoknad, yrkesskadeSoknadV1 } from '../yrkesskade'
+
+import { nyttArbeidsforholdSoknad } from './nytt-arbeidsforhold'
+import { soknadInnenforArbeidsgiverperioden, innenforArbeidsgiverperiodenSykmelding } from './innenfor-ag-periode'
 
 import { brukertestSoknad, brukertestSykmelding } from './brukertestPerosn'
 
@@ -46,7 +50,7 @@ export interface Persona {
 export const utenDataPerson: Persona = {
     soknader: [],
     sykmeldinger: [],
-    beskrivelse: 'Søknad uten data',
+    beskrivelse: 'Ingen søknader',
 }
 
 export const http400vedSendSoknad: Persona = {
@@ -106,10 +110,48 @@ export const clsPerson: Persona = {
     beskrivelse: 'Test av Cummulative Layout Shift',
 }
 
+// Egne IDer for demo-kopiene i arbeidstaker-persona, slik at samme søknad kan vises flere steder
+export const demoIder = {
+    gradert: 'a0000001-0000-4000-a000-000000000001',
+    innenforArbeidsgiverperioden: 'a0000001-0000-4000-a000-000000000002',
+    yrkesskade: 'a0000001-0000-4000-a000-000000000003',
+    yrkesskadeHistorisk: 'a0000001-0000-4000-a000-000000000004',
+    nyttArbeidsforhold: 'a0000001-0000-4000-a000-000000000005',
+    toPerioder: 'a0000001-0000-4000-a000-000000000006',
+    firePerioder: 'a0000001-0000-4000-a000-000000000007',
+} as const
+
 export const arbeidstakerPerson: Persona = {
-    soknader: [arbeidstaker],
-    sykmeldinger: [arbeidstaker100Syk],
-    beskrivelse: 'Arbeidstakersøknad 100%',
+    soknader: [
+        { ...arbeidstaker, demoinfo: '100 % sykmeldt' },
+        {
+            ...deepcopyMedNyId(arbeidstakerGradert, demoIder.gradert),
+            demoinfo: '50 % sykmeldt',
+        },
+        {
+            ...deepcopyMedNyId(soknadInnenforArbeidsgiverperioden, demoIder.innenforArbeidsgiverperioden),
+            demoinfo: 'Innenfor arbeidsgiverperioden',
+        },
+        { ...deepcopyMedNyId(yrkesskadeSoknad, demoIder.yrkesskade), demoinfo: 'Yrkesskade' },
+        {
+            ...deepcopyMedNyId(yrkesskadeSoknadV1, demoIder.yrkesskadeHistorisk),
+            demoinfo: 'Yrkesskade (historisk)',
+        },
+        {
+            ...deepcopyMedNyId(nyttArbeidsforholdSoknad, demoIder.nyttArbeidsforhold),
+            demoinfo: 'Nytt arbeidsforhold/tilkommen inntekt',
+        },
+        {
+            ...deepcopyMedNyId(arbeidstakerToPerioder, demoIder.toPerioder),
+            demoinfo: '2 perioder',
+        },
+        {
+            ...deepcopyMedNyId(arbeidstakerMangePerioder, demoIder.firePerioder),
+            demoinfo: '4 perioder',
+        },
+    ],
+    sykmeldinger: [arbeidstaker100Syk, arbeidstaker50Syk, brukertestSykmelding, innenforArbeidsgiverperiodenSykmelding],
+    beskrivelse: 'Arbeidstaker',
 }
 
 export const arbeidstakerPeriodeVarianter_Person: Persona = {
@@ -125,39 +167,42 @@ export const arbeidstakerGradertPerson: Persona = {
 }
 
 export const gammelOppsummeringPerson: Persona = {
-    soknader: [arbeidtakerMedGammelOppsummering()],
+    soknader: [{ ...arbeidtakerMedGammelOppsummering(), demoinfo: 'Sendt søknad med gammel oppsummering' }],
     sykmeldinger: [arbeidstaker100Syk],
     beskrivelse: 'Søknad med gammel oppsummering',
 }
 
 export const arbeidsledigPerson: Persona = {
-    soknader: [arbeidsledig],
+    soknader: [{ ...arbeidsledig, demoinfo: '100 % sykmeldt arbeidsledig' }],
     sykmeldinger: [arbeidsledig100Syk],
-    beskrivelse: 'Arbeidsledigsøknad',
+    beskrivelse: 'Arbeidsledig',
 }
 
 export const frilanserPerson: Persona = {
-    soknader: [frilanser],
+    soknader: [{ ...frilanser, demoinfo: '100 % sykmeldt frilanser' }],
     sykmeldinger: [frilanser100Syk],
-    beskrivelse: 'Frilansersøknad',
+    beskrivelse: 'Frilanser',
 }
 
 export const behandlingsdagerPerson: Persona = {
-    soknader: [behandlingsdager],
+    soknader: [{ ...behandlingsdager, demoinfo: 'Sykmelding med behandlingsdager' }],
     sykmeldinger: [arbeidstakerBehandlingsdagSyk],
-    beskrivelse: 'Arbeidstaker med behandlingsdager',
+    beskrivelse: 'Behandlingsdager',
 }
 
 export const utlandPerson: Persona = {
-    soknader: [oppholdUtland],
+    soknader: [{ ...oppholdUtland, demoinfo: 'Søknad om å beholde sykepengene utenfor EU/EØS' }],
     sykmeldinger: [],
-    beskrivelse: 'Opphold utland søknad',
+    beskrivelse: 'Egen søknad om å beholde sykepenger i utlandet',
 }
 
 export const reisetilskuddPerson: Persona = {
-    soknader: [nyttReisetilskudd, gradertReisetilskudd],
+    soknader: [
+        { ...nyttReisetilskudd, demoinfo: 'Kun reisetilskudd' },
+        { ...gradertReisetilskudd, demoinfo: 'Gradert sykmelding med reisetilskudd' },
+    ],
     sykmeldinger: [arbeidstakerReisetilskuddSyk, gradertReisetilskuddSm],
-    beskrivelse: 'Søknader med reisetilskudd og gradert reisetilskudd',
+    beskrivelse: 'Reisetilskudd',
 }
 
 export const fremtidigPerson: Persona = {
@@ -173,7 +218,12 @@ export const integrasjonstestPerson: Persona = {
 }
 
 export const kunUtgattSoknadPerson: Persona = {
-    soknader: [deepcopyMedNyId(utgattSoknad, 'df1371a4-2773-41c2-a895-49f561424aaa')],
+    soknader: [
+        {
+            ...deepcopyMedNyId(utgattSoknad, 'df1371a4-2773-41c2-a895-49f561424aaa'),
+            demoinfo: 'Søknad som gikk ut på tid før den ble sendt',
+        },
+    ],
     sykmeldinger: sykmeldinger,
     beskrivelse: 'Utgått søknad',
 }
@@ -184,9 +234,14 @@ export function over70(): Persona {
         overSyttiAar: true,
     }
     return jsonDeepCopy({
-        soknader: [deepcopyMedNyId(arbeidsledig, 'df1371a4-2773-41c2-a895-49f56142496c')],
+        soknader: [
+            {
+                ...deepcopyMedNyId(arbeidsledig, 'df1371a4-2773-41c2-a895-49f56142496c'),
+                demoinfo: 'Sykmeldt som er over 70 år',
+            },
+        ],
         sykmeldinger: [sykmeldingOver70],
-        beskrivelse: 'Søknad fra person som er over 70',
+        beskrivelse: 'Sykmeldt er over 70 år',
     })
 }
 
