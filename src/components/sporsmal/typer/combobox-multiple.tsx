@@ -8,16 +8,17 @@ import { SpmProps } from '../sporsmal-form/sporsmal-form'
 
 const ComboboxMultiple = ({ sporsmal }: SpmProps) => {
     const feilmelding = hentFeilmelding(sporsmal)
+    const utlandskSykmeldingTrygd = sporsmal.tag == 'UTENLANDSK_SYKMELDING_TRYGD_HVILKET_LAND'
 
     const options = useMemo(() => {
         if (sporsmal.tag == 'LAND') {
             return landlisteUtenforEøs.concat(landlisteEøs).sort()
         }
-        if (sporsmal.tag == 'UTENLANDSK_SYKMELDING_TRYGD_HVILKET_LAND') {
+        if (utlandskSykmeldingTrygd) {
             return landlisteEøs
         }
         throw new Error('Ugyldig tag for landvelger: ' + sporsmal.tag)
-    }, [sporsmal])
+    }, [sporsmal.tag, utlandskSykmeldingTrygd])
 
     return (
         <div>
@@ -65,7 +66,7 @@ const ComboboxMultiple = ({ sporsmal }: SpmProps) => {
                                     }
                                 }}
                             />
-                            {alleValgteErIEOS && (
+                            {alleValgteErIEOS && !utlandskSykmeldingTrygd && (
                                 <Alert className="mt-8" variant="info" closeButton={true}>
                                     Du har kun vært innenfor EU/EØS, så du trenger ikke sende inn søknad.
                                 </Alert>
