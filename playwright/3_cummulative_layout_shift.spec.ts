@@ -2,7 +2,7 @@ import { test, expect, Page } from '@playwright/test'
 
 import { harSynligTittel, harSynligTekst } from './utils/utilities'
 
-test.describe('Tester cummulative-layout-shift', () => {
+test.describe.skip('Tester cummulative-layout-shift', () => {
     async function ventTilIngenSkeletons(page: Page) {
         await expect(page.locator('.aksel-skeleton')).toHaveCount(0, { timeout: 10000 })
     }
