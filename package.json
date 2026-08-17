@@ -24,7 +24,7 @@
         "classnames": "^2.5.1",
         "cookie": "^2.0.1",
         "date-fns": "^4.4.0",
-        "html-react-parser": "^6.1.4",
+        "html-react-parser": "^6.1.7",
         "jose": "^6.2.8",
         "next-logger": "^5.0.2",
         "nextleton": "^0.6.1",
