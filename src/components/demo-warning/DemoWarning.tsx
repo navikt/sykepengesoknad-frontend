@@ -1,4 +1,4 @@
-import { Alert } from '@navikt/ds-react'
+import { GlobalAlert } from '@navikt/ds-react'
 import React, { useState } from 'react'
 import { differenceInDays } from 'date-fns'
 
@@ -25,16 +25,17 @@ const DemoWarning = () => {
     }
 
     return (
-        <Alert
-            variant="warning"
-            closeButton={true}
-            onClose={() => {
-                setAlertLukket(true)
-                localStorage.setItem('demo-warning-lukket', new Date().toISOString())
-            }}
-        >
-            Dette er en demoside og inneholder ikke dine personlige data.
-        </Alert>
+        <GlobalAlert status="warning">
+            <GlobalAlert.Header>
+                <GlobalAlert.Title>Dette er en demoside og inneholder ikke dine personlige data.</GlobalAlert.Title>
+                <GlobalAlert.CloseButton
+                    onClick={() => {
+                        setAlertLukket(true)
+                        localStorage.setItem('demo-warning-lukket', new Date().toISOString())
+                    }}
+                />
+            </GlobalAlert.Header>
+        </GlobalAlert>
     )
 }
 
