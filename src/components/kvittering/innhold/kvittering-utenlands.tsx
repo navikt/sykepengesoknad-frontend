@@ -6,7 +6,7 @@ import { sendtForMerEnn30DagerSiden } from '../../../utils/dato-utils'
 import { tekst } from '../../../utils/tekster'
 import { LenkeMedIkon } from '../../lenke-med-ikon/LenkeMedIkon'
 import { useSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
-import { KvtteringPanel } from '../kvittering-panel'
+import { KvitteringPanel } from '../kvittering-panel'
 import GridItems from '../grid-items'
 
 export const KvitteringUtenlands = () => {
@@ -19,7 +19,7 @@ export const KvitteringUtenlands = () => {
     }
 
     return (
-        <KvtteringPanel>
+        <KvitteringPanel>
             <GridItems
                 venstre={
                     <div className="flex h-full items-center justify-center">
@@ -63,6 +63,6 @@ export const KvitteringUtenlands = () => {
                     </BodyLong>
                 </div>
             </GridItems>
-        </KvtteringPanel>
+        </KvitteringPanel>
     )
 }

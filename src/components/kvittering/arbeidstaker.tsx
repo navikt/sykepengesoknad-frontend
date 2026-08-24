@@ -22,7 +22,7 @@ import PerioderMedOpphold from './innhold/arbeidstaker/perioder-med-opphold'
 import PerioderUtenOpphold from './innhold/arbeidstaker/perioder-uten-opphold'
 import ArbeidstakerStatus from './status/arbeidstaker-status'
 import GridItems from './grid-items'
-import { KvtteringPanel } from './kvittering-panel'
+import { KvitteringPanel } from './kvittering-panel'
 
 type ArbeidstakerKvitteringTekst = 'inntil16dager' | 'over16dager' | 'utenOpphold' | 'medOpphold' | undefined
 
@@ -139,7 +139,7 @@ const Arbeidstaker = () => {
     if (!valgtSoknad || !soknader) return null
 
     return (
-        <KvtteringPanel className="mt-2">
+        <KvitteringPanel className="mt-2">
             <GridItems
                 venstre={
                     <div className="flex h-full items-center justify-center border-b border-b-ax-border-neutral bg-ax-bg-success-soft">
@@ -185,7 +185,7 @@ const Arbeidstaker = () => {
                     <GridItems>{kvitteringInnhold()}</GridItems>
                 </>
             )}
-        </KvtteringPanel>
+        </KvitteringPanel>
     )
 }
 

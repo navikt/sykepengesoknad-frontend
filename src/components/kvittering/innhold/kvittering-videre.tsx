@@ -9,7 +9,7 @@ import Kontonummer from '../kontonummer/kontonummer'
 import { tekstMedHtml } from '../../../utils/html-react-parser-utils'
 import { LenkeMedIkon } from '../../lenke-med-ikon/LenkeMedIkon'
 import { useSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
-import { KvtteringPanel } from '../kvittering-panel'
+import { KvitteringPanel } from '../kvittering-panel'
 import GridItems from '../grid-items'
 
 import { SendInntektsopplysningerForSelvstendigNæringsdrivende } from './SendInntektsopplysningerForSelvstendigNaringsdrivende'
@@ -33,7 +33,7 @@ const KvitteringVidere = () => {
         valgtSoknad.forstegangssoknad
 
     return (
-        <KvtteringPanel>
+        <KvitteringPanel>
             {naringsdrivendeForstegangssoknad && (
                 <>
                     <div className="mt-8 col-span-12"></div>
@@ -77,7 +77,7 @@ const KvitteringVidere = () => {
                     <Kontonummer />
                 </div>
             </GridItems>
-        </KvtteringPanel>
+        </KvitteringPanel>
     )
 }
 

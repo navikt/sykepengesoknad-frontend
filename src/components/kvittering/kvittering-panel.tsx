@@ -3,7 +3,7 @@ import { Panel } from '@navikt/ds-react'
 
 import { cn } from '../../utils/tw-utils'
 
-export function KvtteringPanel({ children, className }: { children: ReactNode[] | ReactNode; className?: string }) {
+export function KvitteringPanel({ children, className }: { children: ReactNode[] | ReactNode; className?: string }) {
     return (
         <Panel
             role="region"
