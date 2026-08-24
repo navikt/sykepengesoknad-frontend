@@ -1,4 +1,4 @@
-import { RSSporsmal } from '../../../types/rs-types/rs-sporsmal'
+import type { RSSoknad } from '../../../types/rs-types/rs-soknad'
 import { deepcopyMedNyId } from '../deepcopyMedNyId'
 
 import type { Persona } from './personas/personas'
@@ -6,13 +6,23 @@ import { brukertestSoknad, brukertestSykmelding } from './personas/brukertestPer
 import { yrkesskadeV2Sporsmal } from './sporsmal/yrkesskade-v2'
 import { yrkesskadeV1Sporsmal } from './sporsmal/yrkesskade-v1'
 
-export const yrkesskadeSoknadV1 = deepcopyMedNyId(brukertestSoknad, '04247ad5-9c15-4b7d-ae55-f238003db1af')
-const sporsmaleneV1: RSSporsmal[] = []
-const splittStedV1 = 8
-sporsmaleneV1.push(...yrkesskadeSoknadV1.sporsmal.slice(0, splittStedV1))
-sporsmaleneV1.push(yrkesskadeV1Sporsmal)
-sporsmaleneV1.push(...yrkesskadeSoknadV1.sporsmal.slice(splittStedV1))
-yrkesskadeSoknadV1.sporsmal = sporsmaleneV1
+export function medYrkesskadeV1Sporsmal(soknad: RSSoknad): RSSoknad {
+    return {
+        ...soknad,
+        sporsmal: [...soknad.sporsmal.slice(0, 8), yrkesskadeV1Sporsmal, ...soknad.sporsmal.slice(8)],
+    }
+}
+
+export function medYrkesskadeV2Sporsmal(soknad: RSSoknad): RSSoknad {
+    return {
+        ...soknad,
+        sporsmal: [...soknad.sporsmal.slice(0, 8), yrkesskadeV2Sporsmal, ...soknad.sporsmal.slice(8)],
+    }
+}
+
+export const yrkesskadeSoknadV1 = medYrkesskadeV1Sporsmal(
+    deepcopyMedNyId(brukertestSoknad, '04247ad5-9c15-4b7d-ae55-f238003db1af'),
+)
 
 export const yrkesskadePerson: Persona = {
     soknader: [{ ...yrkesskadeSoknadV1, demoinfo: 'Yrkesskade med gammel spørsmålsstilling' }],
@@ -21,13 +31,9 @@ export const yrkesskadePerson: Persona = {
     beskrivelse: 'Yrkesskade 1',
 }
 
-export const yrkesskadeSoknad = deepcopyMedNyId(brukertestSoknad, '04247ad5-9c15-4b7d-ae55-f238003db133')
-const sporsmalene: RSSporsmal[] = []
-const splittSted = 8
-sporsmalene.push(...yrkesskadeSoknad.sporsmal.slice(0, splittSted))
-sporsmalene.push(yrkesskadeV2Sporsmal)
-sporsmalene.push(...yrkesskadeSoknad.sporsmal.slice(splittSted))
-yrkesskadeSoknad.sporsmal = sporsmalene
+export const yrkesskadeSoknad = medYrkesskadeV2Sporsmal(
+    deepcopyMedNyId(brukertestSoknad, '04247ad5-9c15-4b7d-ae55-f238003db133'),
+)
 
 export const yrkesskadeV2Person: Persona = {
     soknader: [{ ...yrkesskadeSoknad, demoinfo: 'Yrkesskade med ny spørsmålsstilling' }],

@@ -33,12 +33,17 @@ import { fremtidigSoknad } from '../soknad/arbeidstaker-fremtidig'
 import { jsonDeepCopy } from '../../../../utils/json-deep-copy'
 import { utgattSoknad } from '../soknad/arbeidstaker-utgatt'
 import arbeidstakerJulesoknad from '../soknad/arbeidstaker-julesoknad'
-import { yrkesskadeSoknad, yrkesskadeSoknadV1 } from '../yrkesskade'
+import { medYrkesskadeV1Sporsmal, medYrkesskadeV2Sporsmal } from '../yrkesskade'
 
-import { nyttArbeidsforholdSoknad } from './nytt-arbeidsforhold'
-import { soknadInnenforArbeidsgiverperioden, innenforArbeidsgiverperiodenSykmelding } from './innenfor-ag-periode'
+import { medNyttArbeidsforholdSporsmal } from './nytt-arbeidsforhold'
+import { lagInnenforArbeidsgiverperiodenSoknad, lagInnenforArbeidsgiverperiodenSykmelding } from './innenfor-ag-periode'
 
-import { brukertestSoknad, brukertestSykmelding } from './brukertestPerosn'
+import {
+    brukertestSoknad,
+    brukertestSykmelding,
+    lagBrukertestSoknad,
+    lagBrukertestSykmelding,
+} from './brukertestPerosn'
 
 export interface Persona {
     soknader: RSSoknad[]
@@ -121,6 +126,37 @@ export const demoIder = {
     firePerioder: 'a0000001-0000-4000-a000-000000000007',
 } as const
 
+const DEMO_FOM = '2020-04-01'
+const DEMO_TOM = '2020-04-14'
+const DEMO_AG_TOM = '2020-04-04'
+
+const demoSykmeldingIder = {
+    brukertest: 'a0000002-0000-4000-a000-000000000001',
+    innenforArbeidsgiverperioden: 'a0000002-0000-4000-a000-000000000002',
+} as const
+
+const demoBrukertestSykmelding = lagBrukertestSykmelding({
+    fom: DEMO_FOM,
+    tom: DEMO_TOM,
+    id: demoSykmeldingIder.brukertest,
+})
+
+const demoInnenforAgSykmelding = lagInnenforArbeidsgiverperiodenSykmelding({
+    fom: DEMO_FOM,
+    tom: DEMO_AG_TOM,
+    id: demoSykmeldingIder.innenforArbeidsgiverperioden,
+})
+
+function lagDemoBrukertestSoknad(soknadId: string) {
+    return lagBrukertestSoknad({
+        fom: DEMO_FOM,
+        tom: DEMO_TOM,
+        soknadId,
+        sykmeldingId: demoBrukertestSykmelding.id,
+        opprettetDato: DEMO_FOM,
+    })
+}
+
 export const arbeidstakerPerson: Persona = {
     soknader: [
         { ...arbeidstaker, demoinfo: '100 % sykmeldt' },
@@ -129,16 +165,25 @@ export const arbeidstakerPerson: Persona = {
             demoinfo: '50 % sykmeldt',
         },
         {
-            ...deepcopyMedNyId(soknadInnenforArbeidsgiverperioden, demoIder.innenforArbeidsgiverperioden),
+            ...lagInnenforArbeidsgiverperiodenSoknad({
+                fom: DEMO_FOM,
+                tom: DEMO_AG_TOM,
+                soknadId: demoIder.innenforArbeidsgiverperioden,
+                sykmeldingId: demoInnenforAgSykmelding.id,
+                opprettetDato: DEMO_FOM,
+            }),
             demoinfo: 'Innenfor arbeidsgiverperioden',
         },
-        { ...deepcopyMedNyId(yrkesskadeSoknad, demoIder.yrkesskade), demoinfo: 'Yrkesskade' },
         {
-            ...deepcopyMedNyId(yrkesskadeSoknadV1, demoIder.yrkesskadeHistorisk),
+            ...medYrkesskadeV2Sporsmal(lagDemoBrukertestSoknad(demoIder.yrkesskade)),
+            demoinfo: 'Yrkesskade',
+        },
+        {
+            ...medYrkesskadeV1Sporsmal(lagDemoBrukertestSoknad(demoIder.yrkesskadeHistorisk)),
             demoinfo: 'Yrkesskade (historisk)',
         },
         {
-            ...deepcopyMedNyId(nyttArbeidsforholdSoknad, demoIder.nyttArbeidsforhold),
+            ...medNyttArbeidsforholdSporsmal(lagDemoBrukertestSoknad(demoIder.nyttArbeidsforhold)),
             demoinfo: 'Nytt arbeidsforhold/tilkommen inntekt',
         },
         {
@@ -150,7 +195,7 @@ export const arbeidstakerPerson: Persona = {
             demoinfo: '4 perioder',
         },
     ],
-    sykmeldinger: [arbeidstaker100Syk, arbeidstaker50Syk, brukertestSykmelding, innenforArbeidsgiverperiodenSykmelding],
+    sykmeldinger: [arbeidstaker100Syk, arbeidstaker50Syk, demoBrukertestSykmelding, demoInnenforAgSykmelding],
     beskrivelse: 'Arbeidstaker',
 }
 
