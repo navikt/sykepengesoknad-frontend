@@ -4,10 +4,12 @@
 .idea
 *.iml
 mise.toml
+/.omo/
 # dependencies
 /node_modules
 /.pnp
 .pnp.js
+next-env.d.ts
 
 # testing
 /coverage
