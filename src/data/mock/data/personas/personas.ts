@@ -39,6 +39,7 @@ import { nyttArbeidsforholdSoknad } from './nytt-arbeidsforhold'
 import { soknadInnenforArbeidsgiverperioden, innenforArbeidsgiverperiodenSykmelding } from './innenfor-ag-periode'
 
 import { brukertestSoknad, brukertestSykmelding } from './brukertestPerosn'
+import { arbeidstakerFlereInntektskilderGhost } from '../soknad/arbeidstaker-flere-inntektskilder-ghost'
 
 export interface Persona {
     soknader: RSSoknad[]
@@ -119,6 +120,7 @@ export const demoIder = {
     nyttArbeidsforhold: 'a0000001-0000-4000-a000-000000000005',
     toPerioder: 'a0000001-0000-4000-a000-000000000006',
     firePerioder: 'a0000001-0000-4000-a000-000000000007',
+    flereInntektskilderGhost: 'a0000001-0000-4000-a000-000000000008',
 } as const
 
 export const arbeidstakerPerson: Persona = {
@@ -148,6 +150,10 @@ export const arbeidstakerPerson: Persona = {
         {
             ...deepcopyMedNyId(arbeidstakerMangePerioder, demoIder.firePerioder),
             demoinfo: '4 perioder',
+        },
+        {
+            ...deepcopyMedNyId(arbeidstakerFlereInntektskilderGhost, demoIder.flereInntektskilderGhost),
+            demoinfo: 'flere inntektskilder ghost',
         },
     ],
     sykmeldinger: [arbeidstaker100Syk, arbeidstaker50Syk, brukertestSykmelding, innenforArbeidsgiverperiodenSykmelding],
