@@ -83,6 +83,7 @@ Opprett PR via GitHub MCP (`create_pull_request`) eller `gh pr create --fill`.
 - Aldri kall backend direkte fra tilfeldige komponenter når hook/API-mønster finnes
 - Aldri fjern sikkerhetsmekanismer i API-ruter (`beskyttetApi`, whitelist)
 - Aldri commit med rød format/test/build
+- Aldri bruk IntelliJ-terminalen (`execute_terminal_command`) for å omgå sandkasse-begrensninger i bash. Kjør kommandoer via `execute_run_configuration`. Se `AGENTS-intellij.md`
 
 ## Når du trenger mer kontekst
 
