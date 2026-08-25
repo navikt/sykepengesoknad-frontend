@@ -1,4 +1,4 @@
-import { BodyShort, Checkbox, CheckboxGroup } from '@navikt/ds-react'
+import { BodyShort, Checkbox, CheckboxGroup, InlineMessage, ReadMore } from '@navikt/ds-react'
 import React, { Fragment } from 'react'
 import { Controller, useFormContext } from 'react-hook-form'
 import cn from 'classnames'
@@ -23,18 +23,12 @@ const CheckboxKomp = ({ sporsmal }: SpmProps) => {
     }
     const feilmelding = hentFeilmelding(sporsmal)
 
-    const checkboxesSkalHaSpesiellStyling = (sporsmalTag: string) => sporsmalTag == 'HVILKE_ANDRE_INNTEKTSKILDER'
-
     return (
         <Controller
             name={sporsmal.id}
             rules={{ required: feilmelding.global }}
             render={({ field }) => (
-                <div
-                    className={cn('', {
-                        'ax-md:max-w-sm': checkboxesSkalHaSpesiellStyling(sporsmal.tag),
-                    })}
-                >
+                <div>
                     <CheckboxGroup
                         {...field}
                         legend={sporsmal.sporsmalstekst}
@@ -46,18 +40,11 @@ const CheckboxKomp = ({ sporsmal }: SpmProps) => {
                                 const erChecked = watchCheckbox?.includes(uspm.sporsmalstekst)
                                 return (
                                     <Fragment key={uspm.id + '_fragment'}>
-                                        <div
-                                            className={cn('flex items-center gap-4', {
-                                                'bx-4 mt-2 rounded-lg bg-ax-neutral-100 w-full ax-md:max-w-[320px]':
-                                                    checkboxesSkalHaSpesiellStyling(sporsmal.tag),
-                                            })}
-                                        >
+                                        <div className={cn('flex items-center gap-4')}>
                                             <Checkbox
                                                 id={uspm.id}
                                                 value={uspm.sporsmalstekst}
-                                                className={cn({
-                                                    'pl-3': checkboxesSkalHaSpesiellStyling(sporsmal.tag),
-                                                })}
+                                                description={uspm.undertekst ?? ''}
                                             >
                                                 <BodyShort className={erChecked ? 'font-ax-bold' : ''}>
                                                     {uspm.sporsmalstekst}
@@ -65,11 +52,7 @@ const CheckboxKomp = ({ sporsmal }: SpmProps) => {
                                             </Checkbox>
                                         </div>
                                         {erChecked && (
-                                            <div
-                                                className={cn({
-                                                    'pl-3': checkboxesSkalHaSpesiellStyling(sporsmal.tag),
-                                                })}
-                                            >
+                                            <div>
                                                 <SvaralternativCheckboxForklaring svaralternativTag={uspm.tag} />
                                                 {uspm.undersporsmal.length > 0 && (
                                                     <div aria-live="assertive" className="my-4">
@@ -86,6 +69,23 @@ const CheckboxKomp = ({ sporsmal }: SpmProps) => {
                             })}
                         </div>
                     </CheckboxGroup>
+                    {sporsmal.tag === 'HVILKE_ANDRE_INNTEKTSKILDER' && (
+                        <>
+                            <ReadMore header={'Finner du ikke riktig alternativ?'}>
+                                <BodyShort spacing>
+                                    Da kan det være at det ikke er pensjonsgivende inntekt.  Pensjonsgivende inntekt er
+                                    som regel lønn eller betaling for arbeid du har utført, og som det betales skatt av.
+                                    Det er bare slik inntekt som kan gi rett til sykepenger.
+                                </BodyShort>
+                                <BodyShort>Svar heller “nei” på spørsmål om du har inntekt fra annet arbeid.</BodyShort>
+                            </ReadMore>
+
+                            <InlineMessage status={'info'}>
+                                Informasjon om andre inntektskilder vises kun til Nav, og blir ikke delt med
+                                arbeidsgiver
+                            </InlineMessage>
+                        </>
+                    )}
                 </div>
             )}
         />
