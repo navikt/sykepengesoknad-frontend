@@ -2,6 +2,10 @@
 
 Bruk alltid IntelliJ MCP-verktøy (`com-jetbrains-intellij-*`) fremfor bash/grep/glob der det finnes ekvivalent funksjonalitet.
 
+## `execute_terminal_command` skal ALDRI brukes for å omgå bash-sandkasse
+
+`jetbrains-intellij_execute_terminal_command` er IKKE en generell shell-utvei. Ikke bruk den til å kjøre kommandoer (f.eks. `lsof`/`kill`/`ps`) bare fordi bash-verktøyet nekter pga. sandkasse-begrensninger (permission-feil på `kill`/`ps` mot andre prosesser er normalt i dette miljøet).
+
 ## Kjøre tester og scripts
 
 Bruk `execute_run_configuration` med `configurationName` lik script-navnet fra `package.json`:

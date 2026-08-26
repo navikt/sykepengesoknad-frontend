@@ -139,8 +139,9 @@ export function skapSoknad(opts: {
     hovedjobb: string
     sykmeldingId: string
     soknadId: string
+    opprettetDato?: string
 }): RSSoknad {
-    const { fom, tom, hovedjobb, sykmeldingId, soknadId } = opts
+    const { fom, tom, hovedjobb, sykmeldingId, soknadId, opprettetDato } = opts
 
     const periodeTekst = tilLesbarPeriodeMedArstall(fom, tom)
 
@@ -169,7 +170,7 @@ export function skapSoknad(opts: {
         inntektskilderDataFraInntektskomponenten: inntektskilderDataFraInntektskomponenten,
         fom: fom,
         tom: tom,
-        opprettetDato: '2022-11-17',
+        opprettetDato: opprettetDato ?? '2022-11-17',
         sendtTilNAVDato: null,
         sendtTilArbeidsgiverDato: null,
         avbruttDato: null,

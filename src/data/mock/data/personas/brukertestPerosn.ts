@@ -8,14 +8,36 @@ const hovedjobb = url.searchParams.get('hovedjobb') ?? 'MATBUTIKKEN AS'
 const fom = url.searchParams.get('fom') ?? '2022-09-08'
 const tom = url.searchParams.get('tom') ?? '2022-09-21'
 
-export const brukertestSykmelding = skapSykmelding({
+export function lagBrukertestSykmelding(opts: { fom: string; tom: string; id: string; hovedjobb?: string }) {
+    return skapSykmelding({ fom: opts.fom, tom: opts.tom, hovedjobb: opts.hovedjobb ?? 'MATBUTIKKEN AS', id: opts.id })
+}
+
+export function lagBrukertestSoknad(opts: {
+    fom: string
+    tom: string
+    soknadId: string
+    sykmeldingId: string
+    hovedjobb?: string
+    opprettetDato?: string
+}) {
+    return skapSoknad({
+        fom: opts.fom,
+        tom: opts.tom,
+        hovedjobb: opts.hovedjobb ?? 'MATBUTIKKEN AS',
+        sykmeldingId: opts.sykmeldingId,
+        soknadId: opts.soknadId,
+        opprettetDato: opts.opprettetDato,
+    })
+}
+
+export const brukertestSykmelding = lagBrukertestSykmelding({
     fom,
     tom,
     hovedjobb,
     id: 'abc5acf2-a44f-42e5-87b2-02c9d0b39ce8',
 })
 
-export const brukertestSoknad = skapSoknad({
+export const brukertestSoknad = lagBrukertestSoknad({
     fom,
     tom,
     hovedjobb,
