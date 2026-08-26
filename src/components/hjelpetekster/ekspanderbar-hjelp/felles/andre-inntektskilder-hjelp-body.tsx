@@ -5,8 +5,8 @@ export const andreInntektskilderTittel = 'Spørsmålet forklart'
 export const AndreInntektskilderHjelpBody = () => {
     return (
         <>
-            <BodyShort spacing>Svar ja hvis du har hatt pensjonsgivende inntekt fordi du:</BodyShort>
-            <List as="ul" size="small" className="[&>ul]:mt-2">
+            <BodyShort className="my-6">Svar ja hvis du har hatt pensjonsgivende inntekt fordi du:</BodyShort>
+            <List as="ul" size="small" className="my-4">
                 <List.Item>
                     <BodyShort>begynt i ny jobb</BodyShort>
                 </List.Item>
@@ -29,9 +29,8 @@ export const AndreInntektskilderHjelpBody = () => {
                     <BodyShort>fått fosterhjemsgodgjørelse har utført arbeid i styreverv</BodyShort>
                 </List.Item>
             </List>
-
-            <BodyShort className="pt-3">Svar nei hvis inntekten er:</BodyShort>
-            <List as="ul" size="small" className="[&>ul]:mt-2">
+            <BodyShort className="my-6">Svar nei hvis inntekten er:</BodyShort>
+            <List as="ul" size="small" className="my-4">
                 <List.Item>
                     <BodyShort>renter, utleie eller salg (kapitalinntekt)</BodyShort>
                 </List.Item>

@@ -94,8 +94,8 @@ export const flereInntektskilderGhost = (): RSSporsmal => {
             {
                 id: 'ed62a3b3-4203-3b61-a684-2300bea2ffac',
                 tag: 'ANDRE_INNTEKTSKILDER_V2',
-                sporsmalstekst: 'Har du andre inntektskilder enn Posten Norge AS, Bærum?',
-                undertekst: null,
+                sporsmalstekst: 'Har du hatt annen inntekt eller oppdrag?',
+                undertekst: 'Med inntekt mener vi betaling som du får for arbeid du har gjort.',
                 svartype: 'JA_NEI',
                 min: null,
                 max: null,
@@ -106,8 +106,8 @@ export const flereInntektskilderGhost = (): RSSporsmal => {
                         id: 'd25b338d-9a9a-379f-b474-517738a9523b',
                         tag: 'HVILKE_ANDRE_INNTEKTSKILDER',
                         sporsmalstekst:
-                            'Velg inntektskildene som passer for deg. Finner du ikke noe som passer for deg, svarer du nei',
-                        undertekst: null,
+                            'Hva slags arbeid eller inntekt gjelder dette?',
+                        undertekst: 'Du kan velge en eller flere.',
                         svartype: 'CHECKBOX_GRUPPE',
                         min: null,
                         max: null,
