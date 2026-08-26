@@ -3,7 +3,7 @@ import { arbeidstaker50Syk } from '../sykmeldinger'
 import { oppsummering } from '../sporsmal/oppsummering'
 import { ArbeidsforholdFraInntektskomponenten } from '../../../../types/rs-types/rs-arbeidsforholdfrainntektskomponenten'
 
-const  inntektskilderDataFraInntektskomponenten: ArbeidsforholdFraInntektskomponenten[] = [
+const inntektskilderDataFraInntektskomponenten: ArbeidsforholdFraInntektskomponenten[] = [
     {
         navn: 'Ruter',
         orgnummer: '222',

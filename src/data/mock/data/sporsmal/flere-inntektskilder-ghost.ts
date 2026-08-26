@@ -1,10 +1,7 @@
 import { RSSporsmal } from '../../../../types/rs-types/rs-sporsmal'
-import {
-    ArbeidsforholdFraInntektskomponenten
-} from '../../../../types/rs-types/rs-arbeidsforholdfrainntektskomponenten'
+import { ArbeidsforholdFraInntektskomponenten } from '../../../../types/rs-types/rs-arbeidsforholdfrainntektskomponenten'
 
 export const flereInntektskilderGhost = (): RSSporsmal => {
-
     return {
         id: 'ee6a8e84-07c2-30c3-99d0-2aad85124890',
         tag: 'FLERE_INNTEKTSKILDER_GHOST',
@@ -105,8 +102,7 @@ export const flereInntektskilderGhost = (): RSSporsmal => {
                     {
                         id: 'd25b338d-9a9a-379f-b474-517738a9523b',
                         tag: 'HVILKE_ANDRE_INNTEKTSKILDER',
-                        sporsmalstekst:
-                            'Hva slags arbeid eller inntekt gjelder dette?',
+                        sporsmalstekst: 'Hva slags arbeid eller inntekt gjelder dette?',
                         undertekst: 'Du kan velge en eller flere.',
                         svartype: 'CHECKBOX_GRUPPE',
                         min: null,
