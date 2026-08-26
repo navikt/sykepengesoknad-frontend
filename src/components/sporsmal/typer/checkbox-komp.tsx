@@ -70,12 +70,14 @@ const CheckboxKomp = ({ sporsmal }: SpmProps) => {
                     {sporsmal.tag === 'HVILKE_ANDRE_INNTEKTSKILDER' && (
                         <>
                             <ReadMore header={'Finner du ikke riktig alternativ?'}>
-                                <BodyShort className={"my-4"}>
+                                <BodyShort className={'my-4'}>
                                     Da kan det være at det ikke er pensjonsgivende inntekt. Pensjonsgivende inntekt er
                                     som regel lønn eller betaling for arbeid du har utført, og som det betales skatt av.
                                     Det er bare slik inntekt som kan gi rett til sykepenger.
                                 </BodyShort>
-                                <BodyShort className={"my-4"}>Svar heller “nei” på spørsmål om du har inntekt fra annet arbeid.</BodyShort>
+                                <BodyShort className={'my-4'}>
+                                    Svar heller “nei” på spørsmål om du har inntekt fra annet arbeid.
+                                </BodyShort>
                             </ReadMore>
 
                             <InlineMessage status={'info'} className="mt-6">

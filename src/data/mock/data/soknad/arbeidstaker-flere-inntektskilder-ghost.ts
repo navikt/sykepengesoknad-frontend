@@ -2,9 +2,7 @@ import { RSSoknad } from '../../../../types/rs-types/rs-soknad'
 import { arbeidstaker100Syk } from '../sykmeldinger'
 import { flereInntektskilderGhost } from '../sporsmal/flere-inntektskilder-ghost'
 import { oppsummering } from '../sporsmal/oppsummering'
-import {
-    ArbeidsforholdFraInntektskomponenten
-} from '../../../../types/rs-types/rs-arbeidsforholdfrainntektskomponenten'
+import { ArbeidsforholdFraInntektskomponenten } from '../../../../types/rs-types/rs-arbeidsforholdfrainntektskomponenten'
 
 const inntektskilderDataFraInntektskomponenten: ArbeidsforholdFraInntektskomponenten[] = [
     {
@@ -278,4 +276,3 @@ export const arbeidstakerFlereInntektskilderGhost: RSSoknad = {
     opprettetAvInntektsmelding: false,
     klippet: false,
 }
-

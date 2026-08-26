@@ -66,10 +66,10 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
         sporsmal.tag === 'MEDLEMSKAP_OPPHOLDSTILLATELSE_V2' && valgtSoknad.kjentOppholdstillatelse
 
     function sporsmalstekst() {
-    //     if (skalHaInntektsbulletpoints) {
-    //         return 'Har du andre inntektskilder enn nevnt over?'
-    //     }
-         return sporsmal.sporsmalstekst
+        //     if (skalHaInntektsbulletpoints) {
+        //         return 'Har du andre inntektskilder enn nevnt over?'
+        //     }
+        return sporsmal.sporsmalstekst
     }
 
     const erOppholdUtenforEUEOS = sporsmal.tag === 'OPPHOLD_UTENFOR_EOS' || sporsmal.tag === 'FTA_REISE_TIL_UTLANDET'
