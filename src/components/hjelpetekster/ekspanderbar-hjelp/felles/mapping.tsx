@@ -18,7 +18,6 @@ import { UtlandHjelpBody, utlandTittel } from './utland-hjelp-body'
 import { PermittertNaaHjelpBody, permittertNaaTittel } from './utdatert/permittert-naa-hjelp-body'
 import { PermittertPeriodeHjelpBody, permittertPeriodeTittel } from './utdatert/permittert-periode-hjelp-body'
 import { UtdanningHjelpBody, utdanningTittel } from './utdatert/utdanning-hjelp-body'
-import { FlereInntektskilderGhostHelpBody } from './flere-inntektskilder-ghost-hjelp-body'
 
 export const fellesMapping = (): Record<string, ReadmoreTittelOgKomponent> => ({
     YRKESSKADE: { tittel: deprecatedYrkesskadeTittel, komponent: <DeprecatedYrkesskadeHjelpBody /> },
@@ -29,7 +28,6 @@ export const fellesMapping = (): Record<string, ReadmoreTittelOgKomponent> => ({
         komponent: <AndreInntektskilderGammelHjelpBody />,
     },
     ANDRE_INNTEKTSKILDER_V2: { tittel: andreInntektskilderTittel, komponent: <AndreInntektskilderHjelpBody /> },
-    FLERE_INNTEKTSKILDER_GHOST: { tittel: andreInntektskilderTittel, komponent: <FlereInntektskilderGhostHelpBody /> },
     UTLAND_V2: { tittel: utlandTittel, komponent: <UtlandHjelpBody medNei={true} /> },
     OPPHOLD_UTENFOR_EOS: { tittel: utlandTittel, komponent: <UtlandHjelpBody medNei={true} /> },
     FTA_REISE_TIL_UTLANDET: { tittel: utlandTittel, komponent: <UtlandHjelpBody medNei={false} /> },

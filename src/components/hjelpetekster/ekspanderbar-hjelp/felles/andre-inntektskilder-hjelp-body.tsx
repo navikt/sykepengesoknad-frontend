@@ -5,56 +5,50 @@ export const andreInntektskilderTittel = 'Spørsmålet forklart'
 export const AndreInntektskilderHjelpBody = () => {
     return (
         <>
-            <BodyShort spacing>
-                Kun pensjonsgivende inntekt gir rett til sykepenger, som oftest inntekt du har mottatt for arbeid du har
-                utført og betalt skatt av. NAV trenger å vite om din pensjonsgivende inntekt for å beregne riktig
-                utbetaling. Arbeidsforholdene dine henter NAV fra offentlige registre.
-            </BodyShort>
-            <BodyShort className="pt-3">Svar ja hvis du har:</BodyShort>
+            <BodyShort spacing>Svar ja hvis du har hatt pensjonsgivende inntekt fordi du:</BodyShort>
             <List as="ul" size="small" className="[&>ul]:mt-2">
                 <List.Item>
-                    <BodyShort>Begynt i ny jobb</BodyShort>
+                    <BodyShort>begynt i ny jobb</BodyShort>
                 </List.Item>
                 <List.Item>
-                    <BodyShort>Jobbet mer i en annen jobb etter at du ble sykmeldt</BodyShort>
+                    <BodyShort>jobbet mer i en annen jobb etter at du ble sykmeldt</BodyShort>
                 </List.Item>
                 <List.Item>
-                    <BodyShort>Inntekt som selvstendig næringsdrivende</BodyShort>
+                    <BodyShort>inntekt som selvstendig næringsdrivende</BodyShort>
                 </List.Item>
                 <List.Item>
-                    <BodyShort>
-                        Jobbet frilans, som vil si at du mottar lønn for enkeltstående oppdrag uten å være fast eller
-                        midlertidig ansatt hos den du utfører arbeidet for, men heller ikke er selvstendig
-                        næringsdrivende. For eksempel: kommunal omsorgsstønad, dagmamma, styreverv
-                    </BodyShort>
+                    <BodyShort>jobbet frilans (fått betalt for enkeltoppdrag uten å være ansatt)</BodyShort>
                 </List.Item>
                 <List.Item>
-                    <BodyShort>Fått annen pensjonsgivende inntekt</BodyShort>
+                    <BodyShort>jobbet som barnepasser/dagmamma</BodyShort>
+                </List.Item>
+                <List.Item>
+                    <BodyShort>fått kommunal omsorgsstønad</BodyShort>
+                </List.Item>
+                <List.Item>
+                    <BodyShort>fått fosterhjemsgodgjørelse har utført arbeid i styreverv</BodyShort>
                 </List.Item>
             </List>
 
-            <BodyShort className="pt-3">Svar nei hvis du mottar:</BodyShort>
+            <BodyShort className="pt-3">Svar nei hvis inntekten er:</BodyShort>
             <List as="ul" size="small" className="[&>ul]:mt-2">
                 <List.Item>
-                    <BodyShort>
-                        Kapitalinntekt (utleie/salg av bolig utenom enkeltpersonforetak, aksjeselskap eller annen
-                        selskapsform, renteinntekter, leieinntekter, kapitalgevinster)
-                    </BodyShort>
+                    <BodyShort>renter, utleie eller salg (kapitalinntekt)</BodyShort>
                 </List.Item>
                 <List.Item>
-                    <BodyShort>Stønader fra folketrygden (uføretrygd, foreldrepenger, AAP, pleiepenger osv.)</BodyShort>
+                    <BodyShort>andre stønader fra Nav (uføretrygd, foreldrepenger, AAP, pleiepenger osv.)</BodyShort>
                 </List.Item>
                 <List.Item>
-                    <BodyShort>Utbetalinger fra forsikringsordninger (som AFP)</BodyShort>
+                    <BodyShort>pensjon</BodyShort>
                 </List.Item>
                 <List.Item>
-                    <BodyShort>Inntekt fra salg av personlige gjenstander</BodyShort>
+                    <BodyShort>forsikringsutbetalinger</BodyShort>
                 </List.Item>
                 <List.Item>
-                    <BodyShort>Lotterigevinster</BodyShort>
+                    <BodyShort>lottogevinster</BodyShort>
                 </List.Item>
                 <List.Item>
-                    <BodyShort>Pensjon</BodyShort>
+                    <BodyShort>inntekt fra salg av personlige gjenstander</BodyShort>
                 </List.Item>
             </List>
         </>
