@@ -6,7 +6,6 @@ import cn from 'classnames'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { hentFeilmelding } from '../sporsmal-utils'
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
-import { SvaralternativCheckboxForklaring } from '../svaralternativ-checkbox-forklaring'
 
 const undertekst = (tekst: string | null) => {
     return <BodyShort size="small">{tekst}</BodyShort>
@@ -53,7 +52,6 @@ const CheckboxKomp = ({ sporsmal }: SpmProps) => {
                                         </div>
                                         {erChecked && (
                                             <div>
-                                                <SvaralternativCheckboxForklaring svaralternativTag={uspm.tag} />
                                                 {uspm.undersporsmal.length > 0 && (
                                                     <div aria-live="assertive" className="my-4">
                                                         <UndersporsmalListe
@@ -73,7 +71,7 @@ const CheckboxKomp = ({ sporsmal }: SpmProps) => {
                         <>
                             <ReadMore header={'Finner du ikke riktig alternativ?'}>
                                 <BodyShort spacing>
-                                    Da kan det være at det ikke er pensjonsgivende inntekt.  Pensjonsgivende inntekt er
+                                    Da kan det være at det ikke er pensjonsgivende inntekt. Pensjonsgivende inntekt er
                                     som regel lønn eller betaling for arbeid du har utført, og som det betales skatt av.
                                     Det er bare slik inntekt som kan gi rett til sykepenger.
                                 </BodyShort>

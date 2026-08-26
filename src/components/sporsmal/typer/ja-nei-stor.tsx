@@ -17,7 +17,6 @@ import { YrkesskadeInfo } from '../../hjelpetekster/yrkesskade-info'
 import { useJaNeiTastaturNavigasjon } from '../../../utils/tastatur-navigasjon'
 import { Inntektsbulletpoints } from '../inntektsbulletpoints'
 import { Yrkesskadebulletpoints } from '../yrkesskade-bulletpoints'
-import { InntektsopplysningerErKonfidensielleInfo } from '../inntektsopplysninger-er-konfidensielle-info'
 import { useSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
 import { KjentOppholdstillatelse } from '../kjent-oppholdstillatelse'
 import { NyttArbeidsforhold } from '../nytt-arbeidsforhold'
@@ -139,8 +138,6 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
                         </RadioGroup>
                     )}
                 />
-
-                {sporsmal.tag === 'ANDRE_INNTEKTSKILDER_V2' && <InntektsopplysningerErKonfidensielleInfo />}
 
                 {sporsmal?.tag === 'UTLANDSOPPHOLD_SOKT_SYKEPENGER' && watchJaNei && (
                     <BodyLong spacing className="utland_infotekst">
