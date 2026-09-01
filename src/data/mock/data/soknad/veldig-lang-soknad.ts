@@ -24,6 +24,7 @@ import { nyttArbeidsforholdSporsmal } from '../sporsmal/nytt-arbeidsforhold'
 import { avklaringIfbmReise } from '../sporsmal/avklaringIfbmReise'
 
 import { inntektUnderveis, jobbsituasjonenDin, reiseTilUtlandet } from './friskmeldt-til-arbeidsformidling'
+import { flereInntektskilderGhost } from '../sporsmal/flere-inntektskilder-ghost'
 
 export const veldigLangSoknad: RSSoknad = {
     id: '214f6e73-8150-4261-8ce5-e2b41907fa58',
@@ -2409,6 +2410,7 @@ export const veldigLangSoknad: RSSoknad = {
             svar: [],
             undersporsmal: [],
         },
+        flereInntektskilderGhost(),
         oppsummering(),
     ],
     egenmeldtSykmelding: false,

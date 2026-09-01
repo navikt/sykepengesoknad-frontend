@@ -180,7 +180,7 @@ test.describe('Tester arbeidstakersøknad - 100%', () => {
             await harSynligTekst(page, 'Har du andre inntektskilder enn nevnt over?')
 
             await apneReadmore(page, 'Spørsmålet forklart', [
-                'Kun pensjonsgivende inntekt gir rett til sykepenger',
+                'andre stønader fra Nav (uføretrygd, foreldrepenger, AAP, pleiepenger osv.)',
                 'Begynt i ny jobb',
                 'Jobbet mer i en annen jobb etter at du ble sykmeldt',
             ])
