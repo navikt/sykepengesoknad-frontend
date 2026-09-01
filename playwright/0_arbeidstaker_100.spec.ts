@@ -249,7 +249,7 @@ test.describe('Tester arbeidstakersøknad - 100%', () => {
             )
             await sporsmalOgSvar(oppsummering, 'Jobber du vanligvis 37,5 timer i uka', 'Ja')
 
-            await sporsmalOgSvar(oppsummering, 'Har du andre inntektskilder enn Butikken?', 'Ja')
+            await sporsmalOgSvar(oppsummering, 'Har du andre inntektskilder enn nevnt over?', 'Ja')
             await sporsmalOgSvar(
                 oppsummering,
                 'Velg inntektskildene som passer for deg:',

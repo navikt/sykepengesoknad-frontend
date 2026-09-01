@@ -4,7 +4,7 @@ export const andreInntektskilderV2 = (): RSSporsmal => {
     return {
         id: 'ee6a8e84-07c2-30c3-99d0-2aad85124890',
         tag: 'ANDRE_INNTEKTSKILDER_V2',
-        sporsmalstekst: 'Har du andre inntektskilder enn Butikken?',
+        sporsmalstekst: 'Har du andre inntektskilder enn nevnt over?',
         undertekst: null,
         svartype: 'JA_NEI',
         min: null,

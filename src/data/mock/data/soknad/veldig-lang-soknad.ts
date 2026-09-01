@@ -181,7 +181,7 @@ export const veldigLangSoknad: RSSoknad = {
         {
             id: '687356',
             tag: 'ANDRE_INNTEKTSKILDER',
-            sporsmalstekst: 'Har du andre inntektskilder enn Posten Norge AS, Bærum?',
+            sporsmalstekst: 'Har du andre inntektskilder enn nevnt over?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -779,7 +779,7 @@ export const veldigLangSoknad: RSSoknad = {
         {
             id: 'ee6a8e84-07c2-30c3-99d0-2aad85124890',
             tag: 'ANDRE_INNTEKTSKILDER_V2',
-            sporsmalstekst: 'Har du andre inntektskilder enn Butikken?',
+            sporsmalstekst: 'Har du andre inntektskilder enn nevnt over?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -965,7 +965,7 @@ export const veldigLangSoknad: RSSoknad = {
         {
             id: 'aa6a8e85-07c2-30c3-99d0-2aad85124890',
             tag: 'ANDRE_INNTEKTSKILDER_V2',
-            sporsmalstekst: 'Har du andre inntektskilder enn Butikken?',
+            sporsmalstekst: 'Har du andre inntektskilder enn nevnt over?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,

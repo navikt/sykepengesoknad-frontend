@@ -229,7 +229,7 @@ export const soknadUtenEgenmeldingSporsmal: RSSoknad = {
         {
             id: '590d4485-3a1d-3980-bbbe-eb739409852d',
             tag: 'ANDRE_INNTEKTSKILDER_V2',
-            sporsmalstekst: 'Har du andre inntektskilder enn Sauefabrikk?',
+            sporsmalstekst: 'Har du andre inntektskilder enn nevnt over?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
