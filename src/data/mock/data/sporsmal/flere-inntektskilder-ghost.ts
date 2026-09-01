@@ -1,5 +1,4 @@
 import { RSSporsmal } from '../../../../types/rs-types/rs-sporsmal'
-import { ArbeidsforholdFraInntektskomponenten } from '../../../../types/rs-types/rs-arbeidsforholdfrainntektskomponenten'
 
 export const flereInntektskilderGhost = (): RSSporsmal => {
     return {
