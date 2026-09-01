@@ -46,9 +46,7 @@ test.describe('Tester andre inntektskilder bulletpoints', () => {
             '/syk/sykepengesoknad/soknader/214f6e73-8150-4261-8ce5-e2b41907fa58/10?testperson=integrasjon-soknader',
         )
 
-        await expect(page.getByText('Har du andre inntektskilder enn nevnt over?')).toHaveCount(0)
-
-        await harSynligTekst(page, 'Har du andre inntektskilder enn Posten Norge AS, Bærum?')
+        await harSynligTekst(page, 'Har du andre inntektskilder enn nevnt over?')
         await expect(page.locator('[aria-label="Inntektskilder fra Aa-registeret"]')).toHaveCount(0)
         await validerAxeUtilityWrapper(page, test.info())
     })

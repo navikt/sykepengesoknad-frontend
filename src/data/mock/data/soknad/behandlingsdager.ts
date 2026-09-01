@@ -133,7 +133,7 @@ export const behandlingsdager: RSSoknad = {
         {
             id: '687380',
             tag: 'ANDRE_INNTEKTSKILDER',
-            sporsmalstekst: 'Har du andre inntektskilder enn Posten Norge AS, Bærum?',
+            sporsmalstekst: 'Har du andre inntektskilder enn nevnt over?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,

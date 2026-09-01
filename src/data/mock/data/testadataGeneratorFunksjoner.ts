@@ -391,7 +391,7 @@ export function skapSoknad(opts: {
             {
                 id: 'ed62a3b3-4203-3b61-a684-2300bea2ffac',
                 tag: 'ANDRE_INNTEKTSKILDER_V2',
-                sporsmalstekst: `Har du andre inntektskilder enn ${hovedjobb}?`,
+                sporsmalstekst: `Har du andre inntektskilder enn nevnt over?`,
                 undertekst: null,
                 svartype: 'JA_NEI',
                 min: null,
