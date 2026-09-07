@@ -183,7 +183,7 @@ test.describe('Tester arbeidstakersøknad - gradert 50%', () => {
 
         await test.step('Søknad ANDRE_INNTEKTSKILDER_V2', async () => {
             await expect(page).toHaveURL(new RegExp(`.*${soknadId}\/7`))
-            await harSynligTekst(page, 'Har du andre inntektskilder enn nevnt over?')
+            await harSynligTekst(page, 'Har du hatt annen inntekt eller oppdrag enn det du er sykmeldt fra?')
             await svarJaHovedsporsmal(page)
             await expect(
                 page.locator(

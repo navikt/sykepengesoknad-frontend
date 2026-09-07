@@ -24,7 +24,6 @@ import { nyttArbeidsforholdSporsmal } from '../sporsmal/nytt-arbeidsforhold'
 import { avklaringIfbmReise } from '../sporsmal/avklaringIfbmReise'
 
 import { inntektUnderveis, jobbsituasjonenDin, reiseTilUtlandet } from './friskmeldt-til-arbeidsformidling'
-import { flereInntektskilderGhost } from '../sporsmal/flere-inntektskilder-ghost'
 
 export const veldigLangSoknad: RSSoknad = {
     id: '214f6e73-8150-4261-8ce5-e2b41907fa58',
@@ -182,7 +181,7 @@ export const veldigLangSoknad: RSSoknad = {
         {
             id: '687356',
             tag: 'ANDRE_INNTEKTSKILDER',
-            sporsmalstekst: 'Har du andre inntektskilder enn nevnt over?',
+            sporsmalstekst: 'Har du hatt annen inntekt eller oppdrag enn det du er sykmeldt fra?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -780,7 +779,7 @@ export const veldigLangSoknad: RSSoknad = {
         {
             id: 'ee6a8e84-07c2-30c3-99d0-2aad85124890',
             tag: 'ANDRE_INNTEKTSKILDER_V2',
-            sporsmalstekst: 'Har du andre inntektskilder enn nevnt over?',
+            sporsmalstekst: 'Har du hatt annen inntekt eller oppdrag enn det du er sykmeldt fra?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -966,7 +965,7 @@ export const veldigLangSoknad: RSSoknad = {
         {
             id: 'aa6a8e85-07c2-30c3-99d0-2aad85124890',
             tag: 'ANDRE_INNTEKTSKILDER_V2',
-            sporsmalstekst: 'Har du andre inntektskilder enn nevnt over?',
+            sporsmalstekst: 'Har du hatt annen inntekt eller oppdrag enn det du er sykmeldt fra?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -2410,7 +2409,6 @@ export const veldigLangSoknad: RSSoknad = {
             svar: [],
             undersporsmal: [],
         },
-        flereInntektskilderGhost(),
         oppsummering(),
     ],
     egenmeldtSykmelding: false,

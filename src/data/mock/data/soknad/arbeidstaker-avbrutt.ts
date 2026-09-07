@@ -306,7 +306,7 @@ export const avbruttSoknad: RSSoknad = {
         {
             id: 'ed62a3b3-4203-3b61-a684-2300bea2ffac',
             tag: 'ANDRE_INNTEKTSKILDER_V2',
-            sporsmalstekst: 'Har du andre inntektskilder enn nevnt over?',
+            sporsmalstekst: 'Har du hatt annen inntekt eller oppdrag enn det du er sykmeldt fra?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,

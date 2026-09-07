@@ -59,9 +59,9 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
 
     const error = errors[sporsmal.id] !== undefined
 
-    const skalHaInntektsbulletpoints =
-        sporsmal.tag === 'ANDRE_INNTEKTSKILDER_V2' &&
-        (valgtSoknad.inntektskilderDataFraInntektskomponenten || sporsmal.metadata)
+    // const skalHaInntektsbulletpoints =
+    //     sporsmal.tag === 'ANDRE_INNTEKTSKILDER_V2' &&
+    //     (valgtSoknad.inntektskilderDataFraInntektskomponenten || sporsmal.metadata)
     const skalViseKjentOppholdstillatelse =
         sporsmal.tag === 'MEDLEMSKAP_OPPHOLDSTILLATELSE_V2' && valgtSoknad.kjentOppholdstillatelse
 
@@ -74,9 +74,10 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
     return (
         <>
             <div>
-                {skalHaInntektsbulletpoints && (
-                    <Inntektsbulletpoints key="inntekt-bulletpoints" soknad={valgtSoknad} sporsmal={sporsmal} />
-                )}
+                { // skalHaInntektsbulletpoints && (
+                //    <Inntektsbulletpoints key="inntekt-bulletpoints" soknad={valgtSoknad} sporsmal={sporsmal} />
+                //)
+                }
                 {skalViseKjentOppholdstillatelse && (
                     <KjentOppholdstillatelse key="kjent-opphold" soknad={valgtSoknad} />
                 )}

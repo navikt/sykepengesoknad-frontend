@@ -133,7 +133,7 @@ export const behandlingsdager: RSSoknad = {
         {
             id: '687380',
             tag: 'ANDRE_INNTEKTSKILDER',
-            sporsmalstekst: 'Har du andre inntektskilder enn nevnt over?',
+            sporsmalstekst: 'Har du hatt annen inntekt eller oppdrag enn det du er sykmeldt fra?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,

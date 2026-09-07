@@ -177,7 +177,7 @@ test.describe('Tester arbeidstakersøknad - 100%', () => {
         await test.step('Søknad ANDRE_INNTEKTSKILDER_V2', async () => {
             await expect(page).toHaveURL(new RegExp(`.*${soknadId}\\/6`))
 
-            await harSynligTekst(page, 'Har du andre inntektskilder enn nevnt over?')
+            await harSynligTekst(page, 'Har du hatt annen inntekt eller oppdrag enn det du er sykmeldt fra?')
 
             await apneReadmore(page, 'Spørsmålet forklart', [
                 'andre stønader fra Nav (uføretrygd, foreldrepenger, AAP, pleiepenger osv.)',
@@ -249,7 +249,7 @@ test.describe('Tester arbeidstakersøknad - 100%', () => {
             )
             await sporsmalOgSvar(oppsummering, 'Jobber du vanligvis 37,5 timer i uka', 'Ja')
 
-            await sporsmalOgSvar(oppsummering, 'Har du andre inntektskilder enn nevnt over?', 'Ja')
+            await sporsmalOgSvar(oppsummering, 'Har du hatt annen inntekt eller oppdrag enn det du er sykmeldt fra?', 'Ja')
             await sporsmalOgSvar(
                 oppsummering,
                 'Velg inntektskildene som passer for deg:',

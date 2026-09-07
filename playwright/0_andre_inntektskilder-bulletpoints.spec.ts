@@ -29,7 +29,7 @@ test.describe('Tester andre inntektskilder bulletpoints', () => {
         await page.goto('/syk/sykepengesoknad/soknader/d9ac193d-9b67-4a51-80c2-fe4289214878/6')
 
         await harSynligTekst(page, 'Arbeidsforhold vi har registrert på deg:')
-        await harSynligTekst(page, 'Har du andre inntektskilder enn nevnt over?')
+        await harSynligTekst(page, 'Har du hatt annen inntekt eller oppdrag enn det du er sykmeldt fra?')
         const list = page.locator('[aria-label="Inntektskilder fra Aa-registeret"]')
         await expect(list.locator('li')).toHaveCount(1)
         const expectedValues = ['Posten Norge AS, Bærum']
@@ -46,7 +46,7 @@ test.describe('Tester andre inntektskilder bulletpoints', () => {
             '/syk/sykepengesoknad/soknader/214f6e73-8150-4261-8ce5-e2b41907fa58/10?testperson=integrasjon-soknader',
         )
 
-        await harSynligTekst(page, 'Har du andre inntektskilder enn nevnt over?')
+        await harSynligTekst(page, 'Har du hatt annen inntekt eller oppdrag enn det du er sykmeldt fra?')
         await expect(page.locator('[aria-label="Inntektskilder fra Aa-registeret"]')).toHaveCount(0)
         await validerAxeUtilityWrapper(page, test.info())
     })
@@ -57,7 +57,7 @@ test.describe('Tester andre inntektskilder bulletpoints', () => {
         )
 
         await harSynligTekst(page, 'Arbeidsforhold vi har registrert på deg:')
-        await harSynligTekst(page, 'Har du andre inntektskilder enn nevnt over?')
+        await harSynligTekst(page, 'Har du hatt annen inntekt eller oppdrag enn det du er sykmeldt fra?')
         const list = page.locator('[aria-label="Inntektskilder fra Aa-registeret"]')
         await expect(list.locator('li')).toHaveCount(3)
         const expectedValues = ['Matbutikken AS', 'Smørebussen AS', 'Kaffebrenneriet']
