@@ -270,6 +270,18 @@ export const arbeidstakerGradert: RSSoknad = {
                     svar: [],
                     undersporsmal: [
                         {
+                            id: 'd9ac4359-5519-34f1-b59d-b5ab24e5776',
+                            tag: 'INNTEKTSKILDE_GHOST_0',
+                            sporsmalstekst: 'Blomsterbutikken',
+                            undertekst: null,
+                            svartype: 'CHECKBOX',
+                            min: null,
+                            max: null,
+                            kriterieForVisningAvUndersporsmal: null,
+                            svar: [],
+                            undersporsmal: [],
+                        },
+                        {
                             id: 'd9ac4359-5519-34f1-b59d-b5ab24e55821',
                             tag: 'INNTEKTSKILDE_ANDRE_ARBEIDSFORHOLD',
                             sporsmalstekst: 'ansatt et annet sted enn nevnt over',

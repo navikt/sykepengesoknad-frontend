@@ -8,6 +8,7 @@ import {
     svarJaHovedsporsmal,
     harSynligTittel,
     harSynligTekst,
+    svarCheckboxSporsmal,
 } from './utils/utilities'
 import { validerAxeUtilityWrapper } from './uuvalidering'
 const fillTextFieldByLabel = async (page: Page, labelText: string, value: string, fallbackSelector?: string) => {
@@ -191,7 +192,7 @@ test.describe('Tester arbeidstakersøknad - gradert 50%', () => {
                 ),
             ).toBeVisible()
             await expect(page.getByRole('checkbox', { name: /ansatt et annet sted enn nevnt over/ })).toBeVisible()
-            await page.locator('input[type="checkbox"]#d9ac4359-5519-34f1-b59d-b5ab24e55821').check()
+            await svarCheckboxSporsmal(page, 'Velg inntektskildene som', 'ansatt et annet sted enn nevnt over')
             await validerAxeUtilityWrapper(page, test.info())
             await page.getByRole('button', { name: /Gå videre/i }).click()
         })

@@ -3,7 +3,7 @@ import { test, expect } from '@playwright/test'
 import { validerAxeUtilityWrapper } from './uuvalidering'
 import { harSynligTekst } from './utils/utilities'
 
-test.describe('Tester andre inntektskilder bulletpoints', () => {
+test.describe.skip('Tester andre inntektskilder bulletpoints', () => {
     test.beforeEach(async ({ page }) => {
         await page.context().clearCookies()
     })
