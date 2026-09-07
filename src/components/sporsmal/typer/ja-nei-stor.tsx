@@ -60,16 +60,13 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
     const error = errors[sporsmal.id] !== undefined
 
     const skalHaInntektsbulletpoints =
-        (sporsmal.tag === 'ANDRE_INNTEKTSKILDER_V2' || sporsmal.tag === 'FLERE_INNTEKTSKILDER_GHOST') &&
+        sporsmal.tag === 'ANDRE_INNTEKTSKILDER_V2' &&
         (valgtSoknad.inntektskilderDataFraInntektskomponenten || sporsmal.metadata)
     const skalViseKjentOppholdstillatelse =
         sporsmal.tag === 'MEDLEMSKAP_OPPHOLDSTILLATELSE_V2' && valgtSoknad.kjentOppholdstillatelse
 
     function sporsmalstekst() {
-        //     if (skalHaInntektsbulletpoints) {
-        //         return 'Har du andre inntektskilder enn nevnt over?'
-        //     }
-        return sporsmal.sporsmalstekst
+         return sporsmal.sporsmalstekst
     }
 
     const erOppholdUtenforEUEOS = sporsmal.tag === 'OPPHOLD_UTENFOR_EOS' || sporsmal.tag === 'FTA_REISE_TIL_UTLANDET'
