@@ -43,9 +43,18 @@ const CheckboxKomp = ({ sporsmal }: SpmProps) => {
                             <div className="mt-4">
                                 {komplettListe.map((uspm) => {
                                     const erChecked = watchCheckbox?.includes(uspm.sporsmalstekst)
+                                    const skalHaStrek = andreArbeidsforhold[andreArbeidsforhold.length-1]?.tag == uspm.tag
+                                    console.log('Skal ha strek', skalHaStrek)
+                                    console.log('tag 1:', andreArbeidsforhold[andreArbeidsforhold.length-1]?.tag)
+                                    console.log('tag 2:', uspm.tag)
                                     return (
                                         <Fragment key={uspm.id + '_fragment'}>
-                                            <div className={cn('flex items-center gap-4')}>
+                                            <div
+                                                className={cn('flex items-center gap-4', {
+                                                    'border-b border-ax-border-neutral':
+                                                        skalHaStrek,
+                                                })}
+                                            >
                                                 <Checkbox
                                                     id={uspm.id}
                                                     value={uspm.sporsmalstekst}

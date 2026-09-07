@@ -24,6 +24,18 @@ export const andreInntektskilderV2 = (): RSSporsmal => {
                 svar: [],
                 undersporsmal: [
                     {
+                        id: 'b17742a1-3b53-3633-b4e0-7e67f6bba994',
+                        tag: 'INNTEKTSKILDER_GHOST_0',
+                        sporsmalstekst: 'Blomsterbutikken',
+                        undertekst: null,
+                        svartype: 'CHECKBOX',
+                        min: null,
+                        max: null,
+                        kriterieForVisningAvUndersporsmal: 'CHECKED',
+                        svar: [],
+                        undersporsmal: [],
+                    },
+                    {
                         id: 'eb6317b7-a5e2-3576-a5aa-2b47f696b631',
                         tag: 'INNTEKTSKILDE_ANDRE_ARBEIDSFORHOLD',
                         sporsmalstekst: 'Ansatt andre steder enn nevnt over',
