@@ -9,7 +9,6 @@ export const Inntektsbulletpoints = ({ soknad, sporsmal }: { soknad: Soknad; spo
         const items = sporsmal.metadata.kjenteInntektskilder as KjentInntektskilde[]
         items.forEach((item) => navnListe.push(item.navn))
     } else {
-        navnListe.push(soknad.arbeidsgiver!.navn)
         soknad.inntektskilderDataFraInntektskomponenten?.forEach((inntektskilde) => navnListe.push(inntektskilde.navn))
     }
 
