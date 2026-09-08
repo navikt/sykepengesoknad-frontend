@@ -16,7 +16,7 @@ export const Inntektsbulletpoints = ({ soknad, sporsmal }: { soknad: Soknad; spo
     return (
         <>
             <Label as="p" className="mt-10">
-                Arbeidsforhold vi har registrert på deg:
+                Andre arbeidsforhold vi har registrert på deg:
             </Label>
             <BodyShort>Hentet fra offentlige register.</BodyShort>
 

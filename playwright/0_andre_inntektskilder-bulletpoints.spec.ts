@@ -13,7 +13,7 @@ test.describe('Tester andre inntektskilder bulletpoints', () => {
             '/syk/sykepengesoknad/soknader/5b769c04-e171-47c9-b79b-23ab8fce331e/7?testperson=arbeidstaker-gradert',
         )
 
-        await harSynligTekst(page, 'Arbeidsforhold vi har registrert på deg:')
+        await harSynligTekst(page, 'Andre arbeidsforhold vi har registrert på deg:')
         const list = page.locator('[aria-label="Inntektskilder fra Aa-registeret"]')
         await expect(list.locator('li')).toHaveCount(4)
         const expectedValues = ['Posten Norge AS, Bærum', 'Ruter', 'Blomsterbutikken', 'Bensinstasjonen']
@@ -28,7 +28,7 @@ test.describe('Tester andre inntektskilder bulletpoints', () => {
     test('Viser liste med en hvis vi har data fra inntektskomponenten, men ingen ekstra', async ({ page }) => {
         await page.goto('/syk/sykepengesoknad/soknader/d9ac193d-9b67-4a51-80c2-fe4289214878/6')
 
-        await harSynligTekst(page, 'Arbeidsforhold vi har registrert på deg:')
+        await harSynligTekst(page, 'ANdre arbeidsforhold vi har registrert på deg:')
         await harSynligTekst(page, 'Har du andre inntektskilder enn nevnt over?')
         const list = page.locator('[aria-label="Inntektskilder fra Aa-registeret"]')
         await expect(list.locator('li')).toHaveCount(1)
@@ -56,7 +56,7 @@ test.describe('Tester andre inntektskilder bulletpoints', () => {
             '/syk/sykepengesoknad/soknader/260f06b5-9fd0-4b30-94d2-4f90851b4cac/8?testperson=nytt-arbeidsforhold',
         )
 
-        await harSynligTekst(page, 'Arbeidsforhold vi har registrert på deg:')
+        await harSynligTekst(page, 'Andre arbeidsforhold vi har registrert på deg:')
         await harSynligTekst(page, 'Har du andre inntektskilder enn nevnt over?')
         const list = page.locator('[aria-label="Inntektskilder fra Aa-registeret"]')
         await expect(list.locator('li')).toHaveCount(3)
