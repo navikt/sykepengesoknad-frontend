@@ -23,7 +23,7 @@ const inntektskilderDataFraInntektskomponenten: ArbeidsforholdFraInntektskompone
 ]
 
 export const arbeidstakerFlereInntektskilderGhost: RSSoknad = {
-    id: 'd9ac193d-9b67-4a51-80c2-fe4289214878',
+    id: 'd9ac193d-9b67-4a51-80c2-fe4289214978',
     sykmeldingId: arbeidstaker100Syk.id,
     soknadstype: 'ARBEIDSTAKERE',
     status: 'NY',

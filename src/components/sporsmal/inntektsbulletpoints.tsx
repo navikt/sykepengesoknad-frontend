@@ -1,4 +1,4 @@
-import { BodyShort, Label, List } from '@navikt/ds-react'
+import { BodyShort, Heading, Label, List } from '@navikt/ds-react'
 import React from 'react'
 
 import { KjentInntektskilde, Soknad, Sporsmal } from '../../types/types'
@@ -12,14 +12,13 @@ export const Inntektsbulletpoints = ({ soknad, sporsmal }: { soknad: Soknad; spo
         soknad.inntektskilderDataFraInntektskomponenten?.forEach((inntektskilde) => navnListe.push(inntektskilde.navn))
     }
 
+    if (navnListe.length == 0) return null
     return (
         <>
-            <Label as="p" className="mt-10">
-                Andre arbeidsforhold vi har registrert på deg:
-            </Label>
-            <BodyShort>Hentet fra offentlige register.</BodyShort>
+            <Heading className="mt-10" size={"small"}>Andre arbeidsforhold vi har registrert på deg:</Heading>
 
-            <List aria-label="Inntektskilder fra Aa-registeret" className="mt-4 mb-10">
+
+            <List className="mt-4 mb-10">
                 {navnListe?.map((bedriftNavn, index) => (
                     <List.Item key={index}>{bedriftNavn}</List.Item>
                 ))}
