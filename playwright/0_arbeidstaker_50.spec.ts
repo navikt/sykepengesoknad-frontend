@@ -7,7 +7,7 @@ import {
     checkViStolerPaDeg,
     svarJaHovedsporsmal,
     harSynligTittel,
-    harSynligTekst,
+    harSynligTekst, svarRadio, klikkGaVidere, svarCheckboxSporsmal,
 } from './utils/utilities'
 import { validerAxeUtilityWrapper } from './uuvalidering'
 const fillTextFieldByLabel = async (page: Page, labelText: string, value: string, fallbackSelector?: string) => {
@@ -181,19 +181,19 @@ test.describe('Tester arbeidstakersøknad - gradert 50%', () => {
             await page.getByRole('button', { name: /Gå videre/i }).click()
         })
 
-        await test.step('Søknad ANDRE_INNTEKTSKILDER_V2', async () => {
+        await test.step('Søknad FLERE_INNTEKTSKILDER_GHOST', async () => {
             await expect(page).toHaveURL(new RegExp(`.*${soknadId}\/7`))
-            await harSynligTekst(page, 'Har du andre inntektskilder enn nevnt over?')
+            await harSynligTekst(
+                page,
+                'Har du jobbet noe mer i disse enn du vanligvis gjør, mens du var sykemeldt i perioden 1. April - 24. Mai 2020?',
+            )
             await svarJaHovedsporsmal(page)
-            await expect(
-                page.locator(
-                    'text=Velg inntektskildene som passer for deg. Finner du ikke noe som passer for deg, svarer du nei',
-                ),
-            ).toBeVisible()
-            await expect(page.getByRole('checkbox', { name: /ansatt et annet sted enn nevnt over/ })).toBeVisible()
-            await page.locator('input[type="checkbox"]#d9ac4359-5519-34f1-b59d-b5ab24e55821').check()
+            await harSynligTekst(page, 'Har du hatt annen inntekt eller oppdrag?')
+            await svarRadio(page, 'Har du hatt annen inntekt eller oppdrag?', 'JA')
+            await harSynligTekst(page, 'Hva slags arbeid eller inntekt gjelder dette?')
+            await svarCheckboxSporsmal(page, 'Hva slags arbeid eller', 'Dagmamma')
             await validerAxeUtilityWrapper(page, test.info())
-            await page.getByRole('button', { name: /Gå videre/i }).click()
+            await klikkGaVidere(page)
         })
 
         await test.step('Søknad OPPHOLD_UTENFOR_EOS', async () => {
