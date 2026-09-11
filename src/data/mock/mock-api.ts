@@ -306,9 +306,12 @@ export async function mockApi(req: NextApiRequest, res: NextApiResponse) {
         },
         [ENDPOINTS.UPDATE_SPORSMAL]: async () => {
             const soknaden = getSoknadEllerFeilmld(soknadId)
+            logger.info('Sørsmål ikke funnet')
             if (!soknaden) return
             const spm = findSporsmalById(soknaden, sporsmalId)
             if (!spm) {
+                logger.info('Spørsmål ikke funnet')
+
                 return sendJson({}, 404)
             }
             const body = await parseRequest<RSSporsmal>(req)

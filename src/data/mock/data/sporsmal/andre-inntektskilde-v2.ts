@@ -4,7 +4,7 @@ export const andreInntektskilderV2 = (): RSSporsmal => {
     return {
         id: 'ee6a8e84-07c2-30c3-99d0-2aad85124890',
         tag: 'ANDRE_INNTEKTSKILDER_V2',
-        sporsmalstekst: 'Har du andre inntektskilder enn nevnt over?',
+        sporsmalstekst: 'Har du hatt annen inntekt eller oppdrag?',
         undertekst: null,
         svartype: 'JA_NEI',
         min: null,
@@ -15,8 +15,8 @@ export const andreInntektskilderV2 = (): RSSporsmal => {
             {
                 id: 'c074d0dd-849d-3357-9c43-af930017d62c',
                 tag: 'HVILKE_ANDRE_INNTEKTSKILDER',
-                sporsmalstekst: 'Velg inntektskildene som passer for deg:',
-                undertekst: 'Finner du ikke noe som passer for deg, velger du nei øverst',
+                sporsmalstekst: 'Hva slags arbeid eller inntekt gjelder dette?',
+                undertekst: 'Du kan velge en eller flere',
                 svartype: 'CHECKBOX_GRUPPE',
                 min: null,
                 max: null,
@@ -26,8 +26,8 @@ export const andreInntektskilderV2 = (): RSSporsmal => {
                     {
                         id: 'eb6317b7-a5e2-3576-a5aa-2b47f696b631',
                         tag: 'INNTEKTSKILDE_ANDRE_ARBEIDSFORHOLD',
-                        sporsmalstekst: 'Ansatt andre steder enn nevnt over',
-                        undertekst: null,
+                        sporsmalstekst: 'Ansatt andre steder',
+                        undertekst: 'En annen jobb enn Nav har registrert',
                         svartype: 'CHECKBOX',
                         min: null,
                         max: null,
@@ -64,7 +64,7 @@ export const andreInntektskilderV2 = (): RSSporsmal => {
                     {
                         id: '880d24a6-cdd7-30e0-a2ea-78d8282325b3',
                         tag: 'INNTEKTSKILDE_SELVSTENDIG_DAGMAMMA',
-                        sporsmalstekst: 'Dagmamma',
+                        sporsmalstekst: 'Barnepasser / Dagmamma',
                         undertekst: null,
                         svartype: 'CHECKBOX',
                         min: null,
