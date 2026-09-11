@@ -534,10 +534,10 @@ test.describe('Tester støtte for gamle spørsmål', () => {
         await klikkGaVidere(page)
     })
 
-    test('Side 60 - ANDRE_INNTEKTSKILDER_V2 - first instance', async ({ page }) => {
+    test('Side 60 - FLERE_INNTEKTSKILDER_GHOST', async ({ page }) => {
         await page.goto(`/syk/sykepengesoknad/soknader/${soknad.id}/60?testperson=integrasjon-soknader`)
         await svarJaHovedsporsmal(page)
-        await velgCheckbox(page, 'Ansatt andre steder enn nevnt')
+        await velgCheckbox(page, 'Blomsterbutikken AS')
         await svarRadio(page, 'Har du hatt annen inntekt eller oppdrag?', 'NEI')
         await klikkGaVidere(page)
     })
