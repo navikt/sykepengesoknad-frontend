@@ -3,7 +3,7 @@ import { andreInntektskilderV2 } from './andre-inntektskilde-v2'
 
 export const flereInntektskilderGhost = (): RSSporsmal => {
     return {
-        id: 'ee6a8e84-07c2-30c3-99d0-2aad85124890',
+        id: 'ee6a8e84-07c2-30c3-99d0-2aad85124867',
         tag: 'FLERE_INNTEKTSKILDER_GHOST',
         sporsmalstekst:
             'Har du jobbet noe mer i disse enn du vanligvis gjør, mens du var sykemeldt i perioden 1. April - 24. Mai 2020?',

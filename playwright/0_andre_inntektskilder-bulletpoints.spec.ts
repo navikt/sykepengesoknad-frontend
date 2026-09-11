@@ -27,18 +27,19 @@ test.describe('Tester andre inntektskilder bulletpoints', () => {
     test('Viser ikke liste dersom vi kun har arbeidsgiver fra søknad', async ({ page }) => {
         await page.goto('/syk/sykepengesoknad/soknader/d9ac193d-9b67-4a51-80c2-fe4289214878/6')
 
-        await harSynligTekst(page, 'Har du andre inntektskilder enn nevnt over?')
+        await harSynligTekst(page, 'Har du hatt annen inntekt eller oppdrag?')
         const list = page.getByRole('list').filter({ hasText: 'Blomsterbutikken' })
         await expect(list).toHaveCount(0)
         await validerAxeUtilityWrapper(page, test.info())
     })
 
+    //TODO: Fikse denne testen, den feiler fordi vi ikke har metadata på spørsmålet i testdataen
     test('Viser ikke liste når vi mangler data fra inntektskomponenten', async ({ page }) => {
         await page.goto(
             '/syk/sykepengesoknad/soknader/214f6e73-8150-4261-8ce5-e2b41907fa58/10?testperson=integrasjon-soknader',
         )
 
-        await harSynligTekst(page, 'Har du andre inntektskilder enn nevnt over?')
+        await harSynligTekst(page, 'Har du hatt annen inntekt eller oppdrag?')
         const list = page.getByRole('list').filter({ hasText: 'Blomsterbutikken' })
         await expect(list).toHaveCount(0)
         await validerAxeUtilityWrapper(page, test.info())
@@ -65,7 +66,7 @@ test.describe('Tester andre inntektskilder bulletpoints', () => {
         //TODO: Fikse denne
         await svarJaHovedsporsmal(page)
 
-        await harSynligTekst(page, 'Har du andre inntektskilder enn nevnt over?')
+        await harSynligTekst(page, 'Har du hatt annen inntekt eller oppdrag?')
         await validerAxeUtilityWrapper(page, test.info())
     })
 })
