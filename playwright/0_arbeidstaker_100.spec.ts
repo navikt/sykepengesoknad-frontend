@@ -19,7 +19,6 @@ import {
     svarRadio,
 } from './utils/utilities'
 import { validerAxeUtilityWrapper } from './uuvalidering'
-import checkboxGruppe from '../src/components/oppsummering/utdrag/checkbox-gruppe'
 
 const soknadId = arbeidstaker.id
 

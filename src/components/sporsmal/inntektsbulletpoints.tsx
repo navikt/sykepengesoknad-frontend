@@ -1,4 +1,4 @@
-import { BodyShort, Heading, Label, List } from '@navikt/ds-react'
+import { Heading, List } from '@navikt/ds-react'
 import React from 'react'
 
 import { KjentInntektskilde, Soknad, Sporsmal } from '../../types/types'

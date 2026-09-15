@@ -4,7 +4,6 @@ import { RSSoknad } from '../../../types/rs-types/rs-soknad'
 import { tilLesbarPeriodeMedArstall } from '../../../utils/dato-utils'
 
 import { oppsummering } from './sporsmal/oppsummering'
-import { andreInntektskilderV2 } from './sporsmal/andre-inntektskilde-v2'
 import { flereInntektskilderGhost } from './sporsmal/flere-inntektskilder-ghost'
 
 export function skapSykmelding(opts: { fom: string; tom: string; hovedjobb: string; id: string }) {

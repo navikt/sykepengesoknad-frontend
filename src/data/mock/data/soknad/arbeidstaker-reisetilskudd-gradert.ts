@@ -1,7 +1,6 @@
 import { RSSoknad } from '../../../../types/rs-types/rs-soknad'
 import { gradertReisetilskuddSm } from '../sykmeldinger'
 import { oppsummering } from '../sporsmal/oppsummering'
-import { flereInntektskilderGhost } from '../sporsmal/flere-inntektskilder-ghost'
 import { andreInntektskilderV2 } from '../sporsmal/andre-inntektskilde-v2'
 
 export const gradertReisetilskudd: RSSoknad = {
