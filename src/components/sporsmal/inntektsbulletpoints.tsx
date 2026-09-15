@@ -15,8 +15,9 @@ export const Inntektsbulletpoints = ({ soknad, sporsmal }: { soknad: Soknad; spo
     if (navnListe.length == 0) return null
     return (
         <>
-            <Heading className="mt-10" size={"small"}>Andre arbeidsforhold vi har registrert på deg:</Heading>
-
+            <Heading className="mt-10" size={'small'}>
+                Andre arbeidsforhold vi har registrert på deg:
+            </Heading>
 
             <List className="mt-4 mb-10">
                 {navnListe?.map((bedriftNavn, index) => (

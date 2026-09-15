@@ -7,7 +7,10 @@ import {
     checkViStolerPaDeg,
     svarJaHovedsporsmal,
     harSynligTittel,
-    harSynligTekst, svarRadio, klikkGaVidere, svarCheckboxSporsmal,
+    harSynligTekst,
+    svarRadio,
+    klikkGaVidere,
+    svarCheckboxSporsmal,
 } from './utils/utilities'
 import { validerAxeUtilityWrapper } from './uuvalidering'
 const fillTextFieldByLabel = async (page: Page, labelText: string, value: string, fallbackSelector?: string) => {
@@ -188,6 +191,8 @@ test.describe('Tester arbeidstakersøknad - gradert 50%', () => {
                 'Har du jobbet noe mer i disse enn du vanligvis gjør, mens du var sykemeldt i perioden 1. April - 24. Mai 2020?',
             )
             await svarJaHovedsporsmal(page)
+            await harSynligTekst(page, 'Hvilke jobbet du mer i?')
+            await svarCheckboxSporsmal(page, 'Hvilke jobbet du mer i?', 'Ruter')
             await harSynligTekst(page, 'Har du hatt annen inntekt eller oppdrag?')
             await svarRadio(page, 'Har du hatt annen inntekt eller oppdrag?', 'JA')
             await harSynligTekst(page, 'Hva slags arbeid eller inntekt gjelder dette?')
