@@ -20,7 +20,7 @@ const CheckboxKomp = ({ sporsmal }: SpmProps) => {
     if (watchCheckbox === undefined) {
         watchCheckbox = getValues(sporsmal.id)
     }
-    const feilmelding = hentFeilmelding(sporsmal)
+    const feilmelding = hentFeilmelding(sporsmal, errors[sporsmal.id])
 
     return (
         <Controller
@@ -30,6 +30,7 @@ const CheckboxKomp = ({ sporsmal }: SpmProps) => {
                 <div>
                     <CheckboxGroup
                         {...field}
+                        value={field.value ?? []}
                         legend={sporsmal.sporsmalstekst}
                         description={undertekst(sporsmal.undertekst)}
                         error={errors[sporsmal.id] !== undefined && feilmelding.lokal}
