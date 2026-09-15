@@ -14,7 +14,9 @@ import {
     svarFritekst,
     svarJaHovedsporsmal,
     harSynligTittel,
-    harSynligTekst, svarCheckboxSporsmal, svarRadio,
+    harSynligTekst,
+    svarCheckboxSporsmal,
+    svarRadio,
 } from './utils/utilities'
 import { validerAxeUtilityWrapper } from './uuvalidering'
 import checkboxGruppe from '../src/components/oppsummering/utdrag/checkbox-gruppe'
@@ -191,8 +193,16 @@ test.describe('Tester arbeidstakersøknad - 100%', () => {
             await harSynligTekst(page, 'Hva slags arbeid eller inntekt gjelder dette?')
             await svarCheckboxSporsmal(page, 'Hva slags arbeid eller inntekt gjelder dette?', 'Ansatt andre steder')
 
-            await svarRadio(page, 'Har du jobbet for eller mottatt inntekt fra én eller flere av disse arbeidsgiverne de siste 14 dagene før du ble sykmeldt?', 'JA')
-            await svarCheckboxSporsmal(page, 'Hva slags arbeid eller inntekt gjelder dette?', 'Selvstendig næringsdrivende')
+            await svarRadio(
+                page,
+                'Har du jobbet for eller mottatt inntekt fra én eller flere av disse arbeidsgiverne de siste 14 dagene før du ble sykmeldt?',
+                'JA',
+            )
+            await svarCheckboxSporsmal(
+                page,
+                'Hva slags arbeid eller inntekt gjelder dette?',
+                'Selvstendig næringsdrivende',
+            )
 
             await validerAxeUtilityWrapper(page, test.info())
             await klikkGaVidere(page)
@@ -238,11 +248,7 @@ test.describe('Tester arbeidstakersøknad - 100%', () => {
             await sporsmalOgSvar(oppsummering, 'Jobber du vanligvis 37,5 timer i uka', 'Ja')
 
             await sporsmalOgSvar(oppsummering, 'Har du hatt annen inntekt eller oppdrag?', 'Ja')
-            await sporsmalOgSvar(
-                oppsummering,
-                'Hva slags arbeid eller inntekt gjelder dette?',
-                'Ansatt andre steder',
-            )
+            await sporsmalOgSvar(oppsummering, 'Hva slags arbeid eller inntekt gjelder dette?', 'Ansatt andre steder')
             await sporsmalOgSvar(
                 oppsummering,
                 'Har du jobbet for eller mottatt inntekt fra én eller flere av disse arbeidsgiverne de siste 14 dagene før du ble sykmeldt?',

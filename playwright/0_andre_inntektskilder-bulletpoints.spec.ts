@@ -33,19 +33,18 @@ test.describe('Tester andre inntektskilder bulletpoints', () => {
         await validerAxeUtilityWrapper(page, test.info())
     })
 
-    //TODO: Fikse denne testen, den feiler fordi vi ikke har metadata på spørsmålet i testdataen
     test('Viser ikke liste når vi mangler data fra inntektskomponenten', async ({ page }) => {
         await page.goto(
             '/syk/sykepengesoknad/soknader/214f6e73-8150-4261-8ce5-e2b41907fa58/10?testperson=integrasjon-soknader',
         )
 
-        await harSynligTekst(page, 'Har du hatt annen inntekt eller oppdrag?')
+        await harSynligTekst(page, 'Har du andre inntektskilder enn Posten Norge AS, Bærum?')
         const list = page.getByRole('list').filter({ hasText: 'Blomsterbutikken' })
         await expect(list).toHaveCount(0)
         await validerAxeUtilityWrapper(page, test.info())
     })
 
-    test.skip('Viser data primært fra metadata på spørsmålet når vi har det', async ({ page }) => {
+    test('Viser data primært fra metadata på spørsmålet når vi har det', async ({ page }) => {
         await page.goto(
             '/syk/sykepengesoknad/soknader/260f06b5-9fd0-4b30-94d2-4f90851b4cac/8?testperson=nytt-arbeidsforhold',
         )
@@ -63,7 +62,6 @@ test.describe('Tester andre inntektskilder bulletpoints', () => {
         for (let i = 0; i < items.length; i++) {
             await expect(items[i]).toContainText(expectedValues[i])
         }
-        //TODO: Fikse denne
         await svarJaHovedsporsmal(page)
 
         await harSynligTekst(page, 'Har du hatt annen inntekt eller oppdrag?')

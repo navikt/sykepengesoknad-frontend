@@ -183,7 +183,7 @@ export const veldigLangSoknad: RSSoknad = {
         {
             id: '687356',
             tag: 'ANDRE_INNTEKTSKILDER',
-            sporsmalstekst: 'Har du andre inntektskilder enn nevnt over?',
+            sporsmalstekst: 'Har du andre inntektskilder enn Posten Norge AS, Bærum?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
