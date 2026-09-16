@@ -46,23 +46,14 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
     useJaNeiTastaturNavigasjon(sporsmal)
     if (!valgtSoknad) return null
 
-    const valider = (value: any) => {
-        if (value === 'JA' || value === 'NEI') {
-            if (sporsmal.erHovedsporsmal) {
-                clearErrors()
-            } else {
-                clearErrors(sporsmalIdListe(sporsmal.undersporsmal))
-            }
-            return true
-        }
-        return false
-    }
+    const valider = (value: any) => value === 'JA' || value === 'NEI'
 
     const error = errors[sporsmal.id] !== undefined
 
     const skalHaInntektsbulletpoints =
         sporsmal.tag === 'ANDRE_INNTEKTSKILDER_V2' &&
         (valgtSoknad.inntektskilderDataFraInntektskomponenten || sporsmal.metadata)
+
     const skalViseKjentOppholdstillatelse =
         sporsmal.tag === 'MEDLEMSKAP_OPPHOLDSTILLATELSE_V2' && valgtSoknad.kjentOppholdstillatelse
 
@@ -107,6 +98,14 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
                     render={({ field, fieldState }) => (
                         <RadioGroup
                             {...field}
+                            onChange={(value: string) => {
+                                field.onChange(value)
+                                if (sporsmal.erHovedsporsmal) {
+                                    clearErrors()
+                                } else {
+                                    clearErrors(sporsmalIdListe(sporsmal.undersporsmal))
+                                }
+                            }}
                             legend={sporsmalstekst()}
                             description={sporsmal.undertekst}
                             className="w-full"
