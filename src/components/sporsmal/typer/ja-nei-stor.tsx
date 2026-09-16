@@ -17,7 +17,6 @@ import { YrkesskadeInfo } from '../../hjelpetekster/yrkesskade-info'
 import { useJaNeiTastaturNavigasjon } from '../../../utils/tastatur-navigasjon'
 import { Inntektsbulletpoints } from '../inntektsbulletpoints'
 import { Yrkesskadebulletpoints } from '../yrkesskade-bulletpoints'
-import { InntektsopplysningerErKonfidensielleInfo } from '../inntektsopplysninger-er-konfidensielle-info'
 import { useSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
 import { KjentOppholdstillatelse } from '../kjent-oppholdstillatelse'
 import { NyttArbeidsforhold } from '../nytt-arbeidsforhold'
@@ -46,32 +45,16 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
     useJaNeiTastaturNavigasjon(sporsmal)
     if (!valgtSoknad) return null
 
-    const valider = (value: any) => {
-        if (value === 'JA' || value === 'NEI') {
-            if (sporsmal.erHovedsporsmal) {
-                clearErrors()
-            } else {
-                clearErrors(sporsmalIdListe(sporsmal.undersporsmal))
-            }
-            return true
-        }
-        return false
-    }
+    const valider = (value: any) => value === 'JA' || value === 'NEI'
 
     const error = errors[sporsmal.id] !== undefined
 
     const skalHaInntektsbulletpoints =
-        sporsmal.tag === 'ANDRE_INNTEKTSKILDER_V2' &&
+        (sporsmal.tag === 'ANDRE_INNTEKTSKILDER_V2' || sporsmal.tag === 'FLERE_INNTEKTSKILDER_GHOST') &&
         (valgtSoknad.inntektskilderDataFraInntektskomponenten || sporsmal.metadata)
+
     const skalViseKjentOppholdstillatelse =
         sporsmal.tag === 'MEDLEMSKAP_OPPHOLDSTILLATELSE_V2' && valgtSoknad.kjentOppholdstillatelse
-
-    function sporsmalstekst() {
-        if (skalHaInntektsbulletpoints) {
-            return 'Har du andre inntektskilder enn nevnt over?'
-        }
-        return sporsmal.sporsmalstekst
-    }
 
     const erOppholdUtenforEUEOS = sporsmal.tag === 'OPPHOLD_UTENFOR_EOS' || sporsmal.tag === 'FTA_REISE_TIL_UTLANDET'
 
@@ -107,7 +90,15 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
                     render={({ field, fieldState }) => (
                         <RadioGroup
                             {...field}
-                            legend={sporsmalstekst()}
+                            onChange={(value: string) => {
+                                field.onChange(value)
+                                if (sporsmal.erHovedsporsmal) {
+                                    clearErrors()
+                                } else {
+                                    clearErrors(sporsmalIdListe(sporsmal.undersporsmal))
+                                }
+                            }}
+                            legend={sporsmal.sporsmalstekst}
                             description={sporsmal.undertekst}
                             className="w-full"
                             key={sporsmal.id}
@@ -139,8 +130,6 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
                         </RadioGroup>
                     )}
                 />
-
-                {sporsmal.tag === 'ANDRE_INNTEKTSKILDER_V2' && <InntektsopplysningerErKonfidensielleInfo />}
 
                 {sporsmal?.tag === 'UTLANDSOPPHOLD_SOKT_SYKEPENGER' && watchJaNei && (
                     <BodyLong spacing className="utland_infotekst">

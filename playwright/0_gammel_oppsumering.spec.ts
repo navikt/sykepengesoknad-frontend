@@ -10,6 +10,8 @@ import {
     trykkPaSoknadMedId,
     harSynligTittel,
     harSynligTekst,
+    svarCheckboxSporsmal,
+    svarRadioSporsmal,
 } from './utils/utilities'
 import { validerAxeUtilityWrapper } from './uuvalidering'
 
@@ -164,21 +166,23 @@ test.describe('Sjekker at søknader med gammel oppsummering ser ok ut', () => {
         await test.step('Søknad ANDRE_INNTEKTSKILDER_V2', async () => {
             await expect(page).toHaveURL(/\/soknader\/.*\/6/)
 
-            await harSynligTekst(page, 'Har du andre inntektskilder enn nevnt over?')
+            await harSynligTekst(page, 'Har du hatt annen inntekt eller oppdrag?')
 
             await svarJaHovedsporsmal(page)
 
-            const checkboxParent = page.getByText('Velg inntektskildene som passer for deg:').locator('..')
-            await checkboxParent.getByText('Ansatt andre steder enn nevnt over').locator('..').click()
+            await svarCheckboxSporsmal(page, 'Hva slags arbeid eller inntekt gjelder dette?', 'Ansatt andre steder')
 
-            const radioParent = page
-                .getByText(
-                    'Har du jobbet for eller mottatt inntekt fra én eller flere av disse arbeidsgiverne de siste 14 dagene før du ble sykmeldt?',
-                )
-                .locator('..')
-            await radioParent.locator('input[type="radio"][value="JA"]').check()
+            await svarRadioSporsmal(
+                page,
+                'Har du jobbet for eller mottatt inntekt fra én eller flere av disse arbeidsgiverne de siste 14 dagene før du ble sykmeldt?',
+                'Ja',
+            )
 
-            await checkboxParent.getByText('Selvstendig næringsdrivende').locator('..').click()
+            await svarCheckboxSporsmal(
+                page,
+                'Hva slags arbeid eller inntekt gjelder dette?',
+                'Selvstendig næringsdrivende',
+            )
 
             await validerAxeUtilityWrapper(page, test.info())
             await page.getByText('Gå videre').click()
@@ -217,12 +221,8 @@ test.describe('Sjekker at søknader med gammel oppsummering ser ok ut', () => {
             )
             await sporsmalOgSvar(oppsummering, 'Jobber du vanligvis 37,5 timer i uka', 'Ja')
 
-            await sporsmalOgSvar(oppsummering, 'Har du andre inntektskilder enn Butikken?', 'Ja')
-            await sporsmalOgSvar(
-                oppsummering,
-                'Velg inntektskildene som passer for deg:',
-                'Ansatt andre steder enn nevnt over',
-            )
+            await sporsmalOgSvar(oppsummering, 'Har du hatt annen inntekt eller oppdrag?', 'Ja')
+            await sporsmalOgSvar(oppsummering, 'Hva slags arbeid eller inntekt gjelder dette?', 'Ansatt andre steder')
             await sporsmalOgSvar(
                 oppsummering,
                 'Har du jobbet for eller mottatt inntekt fra én eller flere av disse arbeidsgiverne de siste 14 dagene før du ble sykmeldt?',
@@ -230,7 +230,7 @@ test.describe('Sjekker at søknader med gammel oppsummering ser ok ut', () => {
             )
             await sporsmalOgSvar(
                 oppsummering,
-                'Velg inntektskildene som passer for deg:',
+                'Hva slags arbeid eller inntekt gjelder dette?',
                 'Selvstendig næringsdrivende',
             )
 

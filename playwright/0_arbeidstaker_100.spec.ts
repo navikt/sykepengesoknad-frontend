@@ -15,6 +15,8 @@ import {
     svarJaHovedsporsmal,
     harSynligTittel,
     harSynligTekst,
+    svarCheckboxSporsmal,
+    svarRadio,
 } from './utils/utilities'
 import { validerAxeUtilityWrapper } from './uuvalidering'
 
@@ -177,34 +179,29 @@ test.describe('Tester arbeidstakersøknad - 100%', () => {
         await test.step('Søknad ANDRE_INNTEKTSKILDER_V2', async () => {
             await expect(page).toHaveURL(new RegExp(`.*${soknadId}\\/6`))
 
-            await harSynligTekst(page, 'Har du andre inntektskilder enn nevnt over?')
+            await harSynligTekst(page, 'Har du hatt annen inntekt eller oppdrag?')
 
             await apneReadmore(page, 'Spørsmålet forklart', [
-                'Kun pensjonsgivende inntekt gir rett til sykepenger',
+                'andre stønader fra Nav (uføretrygd, foreldrepenger, AAP, pleiepenger osv.)',
                 'Begynt i ny jobb',
                 'Jobbet mer i en annen jobb etter at du ble sykmeldt',
             ])
 
             await svarJaHovedsporsmal(page)
 
-            const ansattAndreSteder = page
-                .getByText('Velg inntektskildene som passer for deg:')
-                .locator('..')
-                .getByText('Ansatt andre steder enn nevnt over')
-                .locator('..')
-            await ansattAndreSteder.click()
+            await harSynligTekst(page, 'Hva slags arbeid eller inntekt gjelder dette?')
+            await svarCheckboxSporsmal(page, 'Hva slags arbeid eller inntekt gjelder dette?', 'Ansatt andre steder')
 
-            const subQuestion = page.getByText(
+            await svarRadio(
+                page,
                 'Har du jobbet for eller mottatt inntekt fra én eller flere av disse arbeidsgiverne de siste 14 dagene før du ble sykmeldt?',
+                'JA',
             )
-            await subQuestion.locator('..').locator('input[type="radio"][value="JA"]').check()
-
-            const selvstendingNaering = page
-                .getByText('Velg inntektskildene som passer for deg:')
-                .locator('..')
-                .getByText('Selvstendig næringsdrivende')
-                .locator('..')
-            await selvstendingNaering.click()
+            await svarCheckboxSporsmal(
+                page,
+                'Hva slags arbeid eller inntekt gjelder dette?',
+                'Selvstendig næringsdrivende',
+            )
 
             await validerAxeUtilityWrapper(page, test.info())
             await klikkGaVidere(page)
@@ -249,12 +246,8 @@ test.describe('Tester arbeidstakersøknad - 100%', () => {
             )
             await sporsmalOgSvar(oppsummering, 'Jobber du vanligvis 37,5 timer i uka', 'Ja')
 
-            await sporsmalOgSvar(oppsummering, 'Har du andre inntektskilder enn Butikken?', 'Ja')
-            await sporsmalOgSvar(
-                oppsummering,
-                'Velg inntektskildene som passer for deg:',
-                'Ansatt andre steder enn nevnt over',
-            )
+            await sporsmalOgSvar(oppsummering, 'Har du hatt annen inntekt eller oppdrag?', 'Ja')
+            await sporsmalOgSvar(oppsummering, 'Hva slags arbeid eller inntekt gjelder dette?', 'Ansatt andre steder')
             await sporsmalOgSvar(
                 oppsummering,
                 'Har du jobbet for eller mottatt inntekt fra én eller flere av disse arbeidsgiverne de siste 14 dagene før du ble sykmeldt?',
@@ -262,7 +255,7 @@ test.describe('Tester arbeidstakersøknad - 100%', () => {
             )
             await sporsmalOgSvar(
                 oppsummering,
-                'Velg inntektskildene som passer for deg:',
+                'Hva slags arbeid eller inntekt gjelder dette?',
                 'Selvstendig næringsdrivende',
             )
 

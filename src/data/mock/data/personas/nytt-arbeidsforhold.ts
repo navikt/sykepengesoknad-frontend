@@ -8,10 +8,10 @@ import { brukertestSoknad, brukertestSykmelding } from './brukertestPerosn'
 
 export function medNyttArbeidsforholdSporsmal(soknad: RSSoknad): RSSoknad {
     const kopi = jsonDeepCopy(soknad)
-    const splittSted = kopi.sporsmal.findIndex((spm) => spm.tag === 'ANDRE_INNTEKTSKILDER_V2')
+    const splittSted = kopi.sporsmal.findIndex((spm) => spm.tag === 'FLERE_INNTEKTSKILDER_GHOST')
 
     if (splittSted === -1) {
-        throw new Error('Søknad mangler spørsmål ANDRE_INNTEKTSKILDER_V2')
+        throw new Error('Søknad mangler spørsmål FLERE_INNTEKTSKILDER_GHOST')
     }
 
     kopi.sporsmal.splice(
@@ -30,7 +30,7 @@ export function medNyttArbeidsforholdSporsmal(soknad: RSSoknad): RSSoknad {
         arbeidsforholdstype: 'ARBEIDSTAKER',
     })
 
-    kopi.sporsmal.find((spm) => spm.tag === 'ANDRE_INNTEKTSKILDER_V2')!.metadata = {
+    kopi.sporsmal.find((spm) => spm.tag === 'FLERE_INNTEKTSKILDER_GHOST')!.metadata = {
         kjenteInntektskilder: [
             { orgnummer: '123324', navn: 'Matbutikken AS' },
             { orgnummer: '123324', navn: 'Smørebussen AS' },

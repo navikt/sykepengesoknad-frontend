@@ -1,8 +1,8 @@
 import { RSSoknad } from '../../../../types/rs-types/rs-soknad'
-import { arbeidstaker50Syk } from '../sykmeldinger'
+import { arbeidstaker100Syk } from '../sykmeldinger'
+import { flereInntektskilderGhost } from '../sporsmal/flere-inntektskilder-ghost'
 import { oppsummering } from '../sporsmal/oppsummering'
 import { ArbeidsforholdFraInntektskomponenten } from '../../../../types/rs-types/rs-arbeidsforholdfrainntektskomponenten'
-import { flereInntektskilderGhost } from '../sporsmal/flere-inntektskilder-ghost'
 
 const inntektskilderDataFraInntektskomponenten: ArbeidsforholdFraInntektskomponenten[] = [
     {
@@ -21,14 +21,15 @@ const inntektskilderDataFraInntektskomponenten: ArbeidsforholdFraInntektskompone
         arbeidsforholdstype: 'ARBEIDSTAKER',
     },
 ]
-export const arbeidstakerGradert: RSSoknad = {
-    id: '5b769c04-e171-47c9-b79b-23ab8fce331e',
-    sykmeldingId: arbeidstaker50Syk.id,
+
+export const arbeidstakerFlereInntektskilderGhost: RSSoknad = {
+    id: 'd9ac193d-9b67-4a51-80c2-fe4289214978',
+    sykmeldingId: arbeidstaker100Syk.id,
     soknadstype: 'ARBEIDSTAKERE',
     status: 'NY',
     fom: '2020-04-01',
-    tom: '2020-04-24',
-    opprettetDato: '2020-05-13',
+    tom: '2020-05-24',
+    opprettetDato: '2020-06-13',
     inntektskilderDataFraInntektskomponenten: inntektskilderDataFraInntektskomponenten,
     sendtTilNAVDato: null,
     sendtTilArbeidsgiverDato: null,
@@ -46,19 +47,13 @@ export const arbeidstakerGradert: RSSoknad = {
         {
             fom: '2020-04-01',
             tom: '2020-04-24',
-            grad: 50,
-            sykmeldingstype: 'GRADERT',
-        },
-        {
-            fom: '2020-04-25',
-            tom: '2020-05-10',
             grad: 100,
             sykmeldingstype: 'AKTIVITET_IKKE_MULIG',
         },
     ],
     sporsmal: [
         {
-            id: '687291',
+            id: '687336',
             tag: 'ANSVARSERKLARING',
             sporsmalstekst: 'Jeg bekrefter at jeg vil svare så riktig som jeg kan.',
             undertekst: null,
@@ -70,7 +65,7 @@ export const arbeidstakerGradert: RSSoknad = {
             undersporsmal: [],
         },
         {
-            id: '687302',
+            id: '687341',
             tag: 'TILBAKE_I_ARBEID',
             sporsmalstekst:
                 'Var du tilbake i fullt arbeid hos Posten Norge AS, Bærum i løpet av perioden 1. - 24. april 2020?',
@@ -82,7 +77,7 @@ export const arbeidstakerGradert: RSSoknad = {
             svar: [],
             undersporsmal: [
                 {
-                    id: '687303',
+                    id: '687342',
                     tag: 'TILBAKE_NAR',
                     sporsmalstekst: 'Når begynte du å jobbe igjen?',
                     undertekst: null,
@@ -96,7 +91,7 @@ export const arbeidstakerGradert: RSSoknad = {
             ],
         },
         {
-            id: '687304',
+            id: '687343',
             tag: 'FERIE_V2',
             sporsmalstekst: 'Tok du ut feriedager i tidsrommet 1. - 24. april 2020?',
             undertekst: null,
@@ -107,7 +102,7 @@ export const arbeidstakerGradert: RSSoknad = {
             svar: [],
             undersporsmal: [
                 {
-                    id: '687305',
+                    id: '687344',
                     tag: 'FERIE_NAR_V2',
                     sporsmalstekst: 'Når tok du ut feriedager?',
                     undertekst: null,
@@ -121,7 +116,7 @@ export const arbeidstakerGradert: RSSoknad = {
             ],
         },
         {
-            id: '687306',
+            id: '687345',
             tag: 'PERMISJON_V2',
             sporsmalstekst: 'Tok du permisjon mens du var sykmeldt 1. - 24. april 2020?',
             undertekst: null,
@@ -132,7 +127,7 @@ export const arbeidstakerGradert: RSSoknad = {
             svar: [],
             undersporsmal: [
                 {
-                    id: '687307',
+                    id: '687346',
                     tag: 'PERMISJON_NAR_V2',
                     sporsmalstekst: 'Når tok du permisjon?',
                     undertekst: null,
@@ -146,10 +141,10 @@ export const arbeidstakerGradert: RSSoknad = {
             ],
         },
         {
-            id: 'd146b1c5-661f-35ed-b72f-172fc17ead5d',
-            tag: 'JOBBET_DU_GRADERT_0',
+            id: '63448066-fa24-3d9b-bf38-fb2ea23a353f',
+            tag: 'ARBEID_UNDERVEIS_100_PROSENT_0',
             sporsmalstekst:
-                'I perioden 1. - 24. april 2020 sier sykmeldingen at du kunne jobbe 50 % i jobben din hos Posten Norge AS, Bærum. Jobbet du mer enn det?',
+                'I perioden 1. - 24. april 2020 var du 100 % sykmeldt fra Posten Norge AS, Bærum. Jobbet du noe hos Posten Norge AS, Bærum i denne perioden?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -158,23 +153,10 @@ export const arbeidstakerGradert: RSSoknad = {
             svar: [],
             undersporsmal: [
                 {
-                    id: '495730df-717d-3774-bd19-e6bcf76e3ba2',
-                    tag: 'HVOR_MANGE_TIMER_PER_UKE_0',
-                    sporsmalstekst:
-                        'Hvor mange timer i uken jobber du vanligvis når du er frisk? Varierer det, kan du oppgi gjennomsnittet.',
-                    undertekst: null,
-                    svartype: 'TALL',
-                    min: '1',
-                    max: '150',
-                    kriterieForVisningAvUndersporsmal: null,
-                    svar: [],
-                    undersporsmal: [],
-                },
-                {
-                    id: 'e3a6bd7d-8f10-381c-8cd3-cdab3e410c95',
+                    id: '9f5b48c7-f461-359d-a27c-a0ad42ab6c22',
                     tag: 'HVOR_MYE_HAR_DU_JOBBET_0',
-                    sporsmalstekst: 'Hvor mye jobbet du tilsammen 1. - 24. april 2020?',
-                    undertekst: 'Velg timer eller prosent',
+                    sporsmalstekst: 'Oppgi arbeidsmengde i timer eller prosent:',
+                    undertekst: null,
                     svartype: 'RADIO_GRUPPE_TIMER_PROSENT',
                     min: null,
                     max: null,
@@ -182,7 +164,7 @@ export const arbeidstakerGradert: RSSoknad = {
                     svar: [],
                     undersporsmal: [
                         {
-                            id: '0e368ffc-1840-35e5-bbb5-b994cbaa8ef1',
+                            id: '8ba29062-f412-30ad-8851-33577d8034ab',
                             tag: 'HVOR_MYE_PROSENT_0',
                             sporsmalstekst: 'Prosent',
                             undertekst: null,
@@ -193,12 +175,13 @@ export const arbeidstakerGradert: RSSoknad = {
                             svar: [],
                             undersporsmal: [
                                 {
-                                    id: '13acfccb-3f39-3893-8054-058270add6ab',
+                                    id: '796cf7ed-8a7e-39de-9cbc-6e789aa5af3f',
                                     tag: 'HVOR_MYE_PROSENT_VERDI_0',
-                                    sporsmalstekst: null,
-                                    undertekst: null,
+                                    sporsmalstekst:
+                                        'Oppgi hvor mange prosent av din normale arbeidstid du jobbet hos Posten Norge AS, Bærum i perioden 1. - 24. april 2020?',
+                                    undertekst: 'Oppgi i prosent. Eksempel: 40',
                                     svartype: 'PROSENT',
-                                    min: '51',
+                                    min: '1',
                                     max: '99',
                                     kriterieForVisningAvUndersporsmal: null,
                                     svar: [],
@@ -207,7 +190,7 @@ export const arbeidstakerGradert: RSSoknad = {
                             ],
                         },
                         {
-                            id: '348f75cd-a87d-397b-8428-cbcb9e50a5d7',
+                            id: '27d3d9f1-d31f-3c0e-a1ec-3246c3b48b0a',
                             tag: 'HVOR_MYE_TIMER_0',
                             sporsmalstekst: 'Timer',
                             undertekst: null,
@@ -218,10 +201,11 @@ export const arbeidstakerGradert: RSSoknad = {
                             svar: [],
                             undersporsmal: [
                                 {
-                                    id: '34c3cb3f-1aeb-3095-9ac6-d8f4f4c9e539',
+                                    id: '6cc620d8-d4b0-3e82-a038-2757df6fc311',
                                     tag: 'HVOR_MYE_TIMER_VERDI_0',
-                                    sporsmalstekst: null,
-                                    undertekst: null,
+                                    sporsmalstekst:
+                                        'Oppgi totalt antall timer du jobbet i perioden 1. - 24. april 2020 hos Posten Norge AS, Bærum',
+                                    undertekst: 'Oppgi i timer. Eksempel: 12',
                                     svartype: 'TIMER',
                                     min: '1',
                                     max: '364',
@@ -233,23 +217,36 @@ export const arbeidstakerGradert: RSSoknad = {
                         },
                     ],
                 },
+                {
+                    id: 'af302d17-f35d-38a6-ac23-ccde5db369cb',
+                    tag: 'JOBBER_DU_NORMAL_ARBEIDSUKE_0',
+                    sporsmalstekst: 'Jobber du vanligvis 37,5 timer i uka hos Posten Norge AS, Bærum?',
+                    undertekst: null,
+                    svartype: 'JA_NEI',
+                    min: null,
+                    max: null,
+                    kriterieForVisningAvUndersporsmal: 'NEI',
+                    svar: [],
+                    undersporsmal: [
+                        {
+                            id: 'ecc14b80-402a-32e6-9f93-e832ff0560d6',
+                            tag: 'HVOR_MANGE_TIMER_PER_UKE_0',
+                            sporsmalstekst: 'Oppgi timer per uke',
+                            undertekst: null,
+                            svartype: 'TIMER',
+                            min: '1',
+                            max: '150',
+                            kriterieForVisningAvUndersporsmal: null,
+                            svar: [],
+                            undersporsmal: [],
+                        },
+                    ],
+                },
             ],
-        },
-        {
-            id: '687310',
-            tag: 'ARBEID_UTENFOR_NORGE',
-            sporsmalstekst: 'Har du arbeidet i utlandet i løpet av de siste 12 månedene?',
-            undertekst: null,
-            svartype: 'JA_NEI',
-            min: null,
-            max: null,
-            kriterieForVisningAvUndersporsmal: null,
-            svar: [],
-            undersporsmal: [],
         },
         flereInntektskilderGhost(),
         {
-            id: '687308',
+            id: '687347',
             tag: 'OPPHOLD_UTENFOR_EOS',
             sporsmalstekst: 'Var du på reise utenfor EU/EØS mens du var sykmeldt 1. - 24. april 2020?',
             undertekst: null,
@@ -260,7 +257,7 @@ export const arbeidstakerGradert: RSSoknad = {
             svar: [],
             undersporsmal: [
                 {
-                    id: '687309',
+                    id: '687348',
                     tag: 'OPPHOLD_UTENFOR_EOS_NAR',
                     sporsmalstekst: 'Når var du utenfor EU/EØS?',
                     undertekst: null,
