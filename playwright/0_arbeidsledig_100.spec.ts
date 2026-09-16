@@ -84,12 +84,6 @@ test.describe('Tester arbeidsledigsøknad', () => {
             const checkbox = page.getByLabel('andre arbeidsforhold')
             await checkbox.click()
 
-            // TODO: Må avklares hva som skal gjøres med arbeidsledig
-            // await expect(
-            //     page.getByText(
-            //         'Dette betyr at du er ansatt hos en eller flere arbeidsgiverne som ikke er kjent for oss enda og derfor ikke ligger i listen ovenfor.',
-            //     ),
-            // ).toBeVisible()
             await page
                 .getByText('Er du sykmeldt fra dette?')
                 .locator('xpath=..')
