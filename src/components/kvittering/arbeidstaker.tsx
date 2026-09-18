@@ -1,8 +1,7 @@
-import { Box, Heading, HStack } from '@navikt/ds-react'
+import { Box, Heading } from '@navikt/ds-react'
 import { logger } from '@navikt/next-logger'
 import { differenceInDays } from 'date-fns'
 import React, { useEffect, useState } from 'react'
-import { CheckmarkCircleFillIcon } from '@navikt/aksel-icons'
 import { useQueryClient } from '@tanstack/react-query'
 
 import { RSMottaker } from '../../types/rs-types/rs-mottaker'
@@ -139,30 +138,13 @@ const Arbeidstaker = () => {
 
     return (
         <KvitteringPanel>
-            <HStack
-                padding="space-16"
-                className="border-b border-b-ax-border-neutral bg-ax-bg-success-soft"
-                gap="space-16"
-            >
-                <CheckmarkCircleFillIcon
-                    aria-hidden={true}
-                    title=""
-                    fontSize="1.5rem"
-                    className="text-ax-text-success-decoration"
-                />
-                <Heading size="small" level="2">
-                    {tekst('kvittering.sendt-til')}
-                </Heading>
-            </HStack>
-            <Box padding="space-12" paddingInline="space-56 space-0">
+            <Box className="border-b-2 border-b-ax-neutral-300 pb-2 mb-8">
                 <ArbeidstakerStatus />
             </Box>
 
-            <div className="col-span-12 mx-4 mb-8 border-b-2 border-b-ax-neutral-300 pb-2" />
-
             {!sendtForMerEnn30DagerSiden(valgtSoknad.sendtTilArbeidsgiverDato, valgtSoknad.sendtTilNAVDato) && (
                 <>
-                    <Box padding="space-8" paddingInline="space-56 space-56" className="pb-8">
+                    <Box>
                         {kvitteringTekst === 'medOpphold' && (
                             <Heading size="small" level="3">
                                 {tekst('kvittering.viktig-informasjon')}

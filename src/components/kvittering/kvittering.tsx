@@ -7,7 +7,7 @@ import Oppsummering from '../oppsummering/oppsummering'
 import { useSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
 
 import Arbeidstaker from './arbeidstaker'
-import AlleAndre from './alle-andre'
+import KvitteringVidere from './innhold/kvittering-videre'
 
 const Kvittering = () => {
     const { valgtSoknad } = useSoknadMedDetaljer()
@@ -20,7 +20,7 @@ const Kvittering = () => {
 
     return (
         <div>
-            {arbeidstakerKvittering ? <Arbeidstaker /> : <AlleAndre />}
+            {arbeidstakerKvittering ? <Arbeidstaker /> : <KvitteringVidere />}
             <Oppsummering />
 
             {valgtSoknad.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND &&
