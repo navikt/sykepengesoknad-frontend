@@ -1,17 +1,51 @@
 import React, { ReactNode } from 'react'
-import { Panel } from '@navikt/ds-react'
+import { BodyShort, Box, Heading, HStack, VStack } from '@navikt/ds-react'
+import { CheckmarkCircleFillIcon } from '@navikt/aksel-icons'
+import { tekst } from '../../utils/tekster'
+import { tilLesbarDatoOgTid } from '../../utils/dato-utils'
+import { useSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
 
-import { cn } from '../../utils/tw-utils'
+export function KvitteringPanel({ children }: { children: ReactNode[] | ReactNode; className?: string }) {
+    const { valgtSoknad } = useSoknadMedDetaljer()
 
-export function KvitteringPanel({ children, className }: { children: ReactNode[] | ReactNode; className?: string }) {
+    if (!valgtSoknad) return null
+
+    const dato = valgtSoknad.sendtTilNAVDato
+
     return (
-        <Panel
-            role="region"
-            aria-label="Hva skjer videre?"
-            border
-            className={cn('grid grid-cols-12 gap-y-2 p-0 pb-8', className)}
-        >
-            {children}
-        </Panel>
+        <div>
+            <Box borderRadius="12" borderWidth="1" borderColor="neutral-strong" overflow="hidden">
+                <Box>
+                    <HStack
+                        padding="space-16"
+                        className="border-b border-b-ax-border-neutral bg-ax-bg-success-soft"
+                        gap="space-16"
+                        align="center"
+                    >
+                        <CheckmarkCircleFillIcon
+                            aria-hidden={true}
+                            title=""
+                            fontSize="1.5rem"
+                            className="text-ax-text-success-decoration"
+                        />
+                        <VStack>
+                            <Heading size="small" level="2">
+                                {tekst('kvittering.sendt-til')}
+                            </Heading>
+                            {valgtSoknad.arbeidssituasjon != 'ARBEIDSTAKER' && dato && (
+                                <div>
+                                    <BodyShort>
+                                        {tekst('kvittering.mottatt')}: {tilLesbarDatoOgTid(dato)}
+                                    </BodyShort>
+                                </div>
+                            )}
+                        </VStack>
+                    </HStack>
+                </Box>
+                <Box padding="space-8" paddingInline="space-56 space-56" className="pb-8">
+                    {children}
+                </Box>
+            </Box>
+        </div>
     )
 }
