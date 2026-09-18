@@ -1,4 +1,4 @@
-import { Heading } from '@navikt/ds-react'
+import { Box, Heading, HStack } from '@navikt/ds-react'
 import { logger } from '@navikt/next-logger'
 import { differenceInDays } from 'date-fns'
 import React, { useEffect, useState } from 'react'
@@ -21,7 +21,6 @@ import Over16dager from './innhold/arbeidstaker/over16dager'
 import PerioderMedOpphold from './innhold/arbeidstaker/perioder-med-opphold'
 import PerioderUtenOpphold from './innhold/arbeidstaker/perioder-uten-opphold'
 import ArbeidstakerStatus from './status/arbeidstaker-status'
-import GridItems from './grid-items'
 import { KvitteringPanel } from './kvittering-panel'
 
 type ArbeidstakerKvitteringTekst = 'inntil16dager' | 'over16dager' | 'utenOpphold' | 'medOpphold' | undefined
@@ -139,37 +138,31 @@ const Arbeidstaker = () => {
     if (!valgtSoknad || !soknader) return null
 
     return (
-        <KvitteringPanel className="mt-2">
-            <GridItems
-                venstre={
-                    <div className="flex h-full items-center justify-center border-b border-b-ax-border-neutral bg-ax-bg-success-soft">
-                        <CheckmarkCircleFillIcon
-                            aria-hidden={true}
-                            title=""
-                            fontSize="1.5rem"
-                            className="text-ax-text-success-decoration"
-                        />
-                    </div>
-                }
-                hoyre={<div className="h-full border-b border-b-ax-border-neutral bg-ax-bg-success-soft" />}
+        <KvitteringPanel>
+            <HStack
+                padding="space-16"
+                className="border-b border-b-ax-border-neutral bg-ax-bg-success-soft"
+                gap="space-16"
             >
-                <Heading
-                    size="small"
-                    level="2"
-                    className="border-b border-b-ax-border-neutral bg-ax-bg-success-soft py-4"
-                >
+                <CheckmarkCircleFillIcon
+                    aria-hidden={true}
+                    title=""
+                    fontSize="1.5rem"
+                    className="text-ax-text-success-decoration"
+                />
+                <Heading size="small" level="2">
                     {tekst('kvittering.sendt-til')}
                 </Heading>
-            </GridItems>
-            <GridItems>
+            </HStack>
+            <Box padding="space-12" paddingInline="space-56 space-0">
                 <ArbeidstakerStatus />
-            </GridItems>
+            </Box>
 
             <div className="col-span-12 mx-4 mb-8 border-b-2 border-b-ax-neutral-300 pb-2" />
 
             {!sendtForMerEnn30DagerSiden(valgtSoknad.sendtTilArbeidsgiverDato, valgtSoknad.sendtTilNAVDato) && (
                 <>
-                    <GridItems>
+                    <Box padding="space-8" paddingInline="space-56 space-56" className="pb-8">
                         {kvitteringTekst === 'medOpphold' && (
                             <Heading size="small" level="3">
                                 {tekst('kvittering.viktig-informasjon')}
@@ -180,9 +173,8 @@ const Arbeidstaker = () => {
                                 {tekst('kvittering.hva-skjer-videre')}
                             </Heading>
                         )}
-                    </GridItems>
-
-                    <GridItems>{kvitteringInnhold()}</GridItems>
+                        {kvitteringInnhold()}
+                    </Box>
                 </>
             )}
         </KvitteringPanel>
