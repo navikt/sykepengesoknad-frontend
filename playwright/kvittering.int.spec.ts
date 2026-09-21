@@ -21,6 +21,8 @@ import {
     svarCombobox,
     sjekkMainContentFokus,
     trykkPaSoknadMedId,
+    harSynligTittel,
+    harSynligTekst,
 } from './utils/utilities'
 
 test.describe('Kvittering integrasjon', () => {
@@ -35,17 +37,13 @@ test.describe('Kvittering integrasjon', () => {
         })
 
         await test.step('Verifiserer kvittering', async () => {
-            await expect(page.locator('[aria-label="Sendt til NAV"]')).toBeVisible()
-            await expect(page.locator('[aria-label="Sendt til arbeidsgiver"]')).toHaveCount(0)
             await expect(page).toHaveURL(new RegExp(`/kvittering/${arbeidsledigKvittering.id}`))
-            const panel = page.getByRole('region', { name: 'Hva skjer videre?' })
-            await expect(panel).toContainText('Hva skjer videre?')
-            await expect(panel).toContainText('NAV behandler søknaden din')
-            await expect(panel).toContainText(
-                'Saksbehandlingstiden regnes fra Nav har mottatt all nødvendig dokumentasjon',
-            )
-            await expect(panel).toContainText('Når blir pengene utbetalt?')
-            await expect(panel).toContainText('Du får vanligvis utbetalt sykepengene enten innen den 25. i måneden')
+            await harSynligTekst(page, 'Mottatt:')
+            await harSynligTittel(page, 'Hva skjer videre?', 2)
+            await harSynligTittel(page, 'Nav behandler søknaden din', 3)
+            await harSynligTekst(page, 'Saksbehandlingstiden regnes fra Nav har mottatt all nødvendig dokumentasjon')
+            await harSynligTittel(page, 'Når blir pengene utbetalt?', 3)
+            await harSynligTekst(page, 'Du får vanligvis utbetalt sykepengene enten innen den 25. i måneden')
             await expect(page.getByRole('button', { name: 'Jeg vil endre svarene i søknaden' })).toBeVisible()
         })
     })
@@ -60,12 +58,8 @@ test.describe('Kvittering integrasjon', () => {
         })
 
         await test.step('Verifiserer sendt-detaljer', async () => {
-            await expect(
-                page.locator('[aria-label="Sendt til NAV"]').getByText('Mottatt: Torsdag 23. april, kl 11:56'),
-            ).toBeVisible()
-            await expect(page.locator('[aria-label="Sendt til arbeidsgiver"]')).toHaveCount(0)
+            await harSynligTittel(page, 'Søknaden er sendt', 2)
             await expect(page).toHaveURL(new RegExp(`/sendt/${sendtArbeidsledigKvittering.id}`))
-            await expect(page.getByRole('region', { name: 'Hva skjer videre?' })).not.toBeAttached()
             await expect(page.getByRole('button', { name: 'Jeg vil endre svarene i søknaden' })).toBeVisible()
         })
     })
@@ -88,25 +82,22 @@ test.describe('Kvittering integrasjon', () => {
         })
 
         await test.step('Verifiserer utland kvittering', async () => {
-            await expect(page.locator('[aria-label="Sendt til NAV"]')).toBeVisible()
-            await expect(page.locator('[aria-label="Sendt til arbeidsgiver"]')).toHaveCount(0)
-            const panel = page.getByRole('region', { name: 'Hva skjer videre?' })
-            await expect(panel).toContainText('Hva skjer videre?')
-            await expect(panel).toContainText('Du får svar på om du kan reise')
-            await expect(panel).toContainText(
-                'NAV vurderer om reisen vil forlenge sykefraværet ditt eller hindre planlagte aktiviteter.',
+            await harSynligTittel(page, 'Hva skjer videre?', 2)
+            await harSynligTittel(page, 'Du får svar på om du kan reise', 3)
+            await harSynligTekst(
+                page,
+                'Nav vurderer om reisen vil forlenge sykefraværet ditt eller hindre planlagte aktiviteter.',
             )
-            await expect(panel).toContainText('Risiko ved å reise før du har mottatt svar')
-            await expect(panel).toContainText('Du kan risikere at sykepengene stanses i perioden du er på reise.')
-            await expect(panel).toContainText('Sykepengene kan beregnes etter et lavere grunnlag når du er tilbake.')
-            await expect(panel).toContainText(
-                'Du kan få avslag på videre sykepenger hvis reisen varer fire uker eller mer.',
-            )
-            await expect(panel).toContainText('Les mer om sykepenger når du er på reise.')
-            await expect(panel).toContainText('Du søker om sykepenger')
-            await expect(panel).toContainText(
-                'Etter at sykefraværsperioden er over, søker du om sykepenger på vanlig måte.',
-            )
+
+            await harSynligTittel(page, 'Risiko ved å reise før du har mottatt svar', 3)
+            await harSynligTekst(page, 'Du kan risikere at sykepengene stanses i perioden du er på reise.')
+            await harSynligTekst(page, 'Sykepengene kan beregnes etter et lavere grunnlag når du er tilbake.')
+            await harSynligTekst(page, 'Du kan få avslag på videre sykepenger hvis reisen varer fire uker eller mer.')
+
+            await expect(page.getByRole('link', { name: 'Les mer om sykepenger når du er på reise' })).toBeVisible()
+            await harSynligTittel(page, 'Du søker om sykepenger', 3)
+            await harSynligTekst(page, 'Etter at sykefraværsperioden er over, søker du om sykepenger på vanlig måte.')
+
             await expect(page.getByRole('button', { name: 'Jeg vil endre svarene i søknaden' })).toHaveCount(0)
             await expect(page.getByText('Jeg vil sende en kopi av søknaden til arbeidsgiveren min')).toHaveCount(0)
         })
@@ -123,17 +114,14 @@ test.describe('Kvittering integrasjon', () => {
         })
 
         await test.step('Verifiserer selvstendig kvittering', async () => {
-            await expect(page.locator('[aria-label="Sendt til NAV"]')).toBeVisible()
-            await expect(page.locator('[aria-label="Sendt til arbeidsgiver"]')).toHaveCount(0)
+            await harSynligTittel(page, 'Søknaden er sendt', 2)
+            await harSynligTittel(page, 'Hva skjer videre?', 2)
+            await harSynligTittel(page, 'Nav behandler søknaden din', 3)
+            await harSynligTekst(page, 'Saksbehandlingstiden regnes fra Nav har mottatt all nødvendig dokumentasjon')
             await expect(page).toHaveURL(new RegExp(`/kvittering/${selvstendigKvittering.id}`))
-            const panel = page.getByRole('region', { name: 'Hva skjer videre?' })
-            await expect(panel).toContainText('Hva skjer videre?')
-            await expect(panel).toContainText('NAV behandler søknaden din')
-            await expect(panel).toContainText(
-                'Saksbehandlingstiden regnes fra Nav har mottatt all nødvendig dokumentasjon',
-            )
-            await expect(panel).toContainText('Når blir pengene utbetalt?')
-            await expect(panel).toContainText('Du får vanligvis utbetalt sykepengene enten innen den 25. i måneden')
+
+            await harSynligTittel(page, 'Når blir pengene utbetalt?', 3)
+            await harSynligTekst(page, 'Du får vanligvis utbetalt sykepengene enten innen den 25. i måneden')
             await expect(page.getByRole('button', { name: 'Jeg vil endre svarene i søknaden' })).toBeVisible()
             await expect(page.getByText('Jeg vil sende en kopi av søknaden til arbeidsgiveren min')).toHaveCount(0)
         })
@@ -160,8 +148,6 @@ test.describe('Kvittering integrasjon', () => {
             await expect(page).toHaveURL(
                 new RegExp(`/kvittering/${arbeidstakerInnenforArbeidsgiverperiodeKvittering.id}`),
             )
-            await expect(page.locator('[aria-label="Sendt til NAV"]')).toHaveCount(0)
-            await expect(page.locator('[aria-label="Sendt til arbeidsgiver"]')).toBeVisible()
             const panel = page.getByRole('main')
             await expect(panel).toContainText('Hva skjer videre?')
             await expect(panel).toContainText('Du får sykepengene fra arbeidsgiveren din')
@@ -181,14 +167,12 @@ test.describe('Kvittering integrasjon', () => {
             await expect(page).toHaveURL(
                 new RegExp(`/kvittering/${arbeidstakerUtenforArbeidsgiverperiodeKvittering.id}`),
             )
-            await expect(page.locator('[aria-label="Sendt til NAV"]')).toBeVisible()
-            await expect(page.locator('[aria-label="Sendt til arbeidsgiver"]')).toBeVisible()
             const panel = page.getByRole('main')
             await expect(panel).toContainText('Hva skjer videre?')
             await expect(panel).toContainText(
                 'For å behandle søknaden trenger vi en inntektsmelding fra arbeidsgiveren din',
             )
-            await expect(panel).toContainText('NAV behandler søknaden')
+            await expect(panel).toContainText('Nav behandler søknaden')
             await expect(panel).toContainText('Når blir pengene utbetalt')
             await expect(page.getByRole('button', { name: 'Jeg vil endre svarene i søknaden' })).toBeVisible()
         })
@@ -211,7 +195,7 @@ test.describe('Kvittering integrasjon', () => {
             await expect(panel).toContainText(
                 'For å behandle søknaden trenger vi en inntektsmelding fra arbeidsgiveren din',
             )
-            await expect(panel).toContainText('NAV behandler søknaden')
+            await expect(panel).toContainText('Nav behandler søknaden')
             await expect(panel).toContainText('Når blir pengene utbetalt')
             await expect(page.getByRole('button', { name: 'Jeg vil endre svarene i søknaden' })).toBeVisible()
         })
@@ -234,7 +218,7 @@ test.describe('Kvittering integrasjon', () => {
             await expect(panel).toContainText(
                 'For å behandle søknaden trenger vi en inntektsmelding fra arbeidsgiveren din',
             )
-            await expect(panel).toContainText('NAV behandler søknaden')
+            await expect(panel).toContainText('Nav behandler søknaden')
             await expect(panel).toContainText('Når blir pengene utbetalt')
             await expect(page.getByRole('button', { name: 'Jeg vil endre svarene i søknaden' })).toBeVisible()
         })
@@ -248,11 +232,9 @@ test.describe('Kvittering integrasjon', () => {
         })
 
         await test.step('Verifiserer kvittering', async () => {
-            await expect(page.locator('[aria-label="Sendt til NAV"]')).toBeVisible()
-            await expect(page.locator('[aria-label="Sendt til arbeidsgiver"]')).toHaveCount(0)
             const panel = page.getByRole('main')
             await expect(panel).toContainText('Hva skjer videre?')
-            await expect(panel).toContainText('NAV behandler søknaden')
+            await expect(panel).toContainText('Nav behandler søknaden')
             await expect(panel).toContainText(
                 'Saksbehandlingstiden regnes fra Nav har mottatt all nødvendig dokumentasjon',
             )
@@ -281,7 +263,7 @@ test.describe('Kvittering integrasjon', () => {
             await expect(panel).toContainText(
                 'For å behandle søknaden trenger vi en inntektsmelding fra arbeidsgiveren din',
             )
-            await expect(panel).toContainText('NAV behandler søknaden')
+            await expect(panel).toContainText('Nav behandler søknaden')
             await expect(panel).toContainText('Når blir pengene utbetalt')
             await expect(page.getByRole('button', { name: 'Jeg vil endre svarene i søknaden' })).toBeVisible()
         })
@@ -299,8 +281,8 @@ test.describe('Kvittering integrasjon', () => {
             await expect(page).toHaveURL(new RegExp(`/kvittering/${arbeidstakerMedOppholdKvittering.id}`))
             const panel = page.getByRole('main')
             await expect(panel).toContainText('Viktig informasjon')
-            await expect(panel).toContainText('Før NAV kan behandle søknaden')
-            await expect(panel).toContainText('NAV behandler søknaden')
+            await expect(panel).toContainText('Før Nav kan behandle søknaden')
+            await expect(panel).toContainText('Nav behandler søknaden')
             await expect(panel).toContainText('Når blir pengene utbetalt')
             await expect(page.getByRole('button', { name: 'Jeg vil endre svarene i søknaden' })).toBeVisible()
             await expect(page.getByRole('button', { name: 'Jeg vil sende en kopi av søknaden' })).toBeVisible()

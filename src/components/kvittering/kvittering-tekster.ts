@@ -9,17 +9,17 @@ export const KvitteringTekster = {
     'kvittering.ettersending.feilet': 'Beklager, søknaden kunne ikke ettersendes',
 
     'kvittering.info.send-til-arbeidsgiver':
-        '<span class="block mb-4">NAV har allerede mottatt søknaden din og behandler denne.</span> <span class="block">Hvis din arbeidsgiver har bedt deg sende en kopi, eller du av andre årsaker likevel  ønsker å sende søknaden til arbeidsgiveren din, kan du gjøre det her.</span>',
+        '<span class="block mb-4">Nav har allerede mottatt søknaden din og behandler denne.</span> <span class="block">Hvis din arbeidsgiver har bedt deg sende en kopi, eller du av andre årsaker likevel  ønsker å sende søknaden til arbeidsgiveren din, kan du gjøre det her.</span>',
     'kvittering.knapp.bekreft.send-til-arbeidsgiver': 'Send kopi av søknaden til arbeidsgiver',
 
     'kvittering.soknaden-er-sendt-til': 'Søknaden er sendt til',
     'kvittering.soknaden-er-sendt': 'Søknaden er sendt',
     'kvittering.sendt-til': 'Søknaden er sendt',
-    'kvittering.med-kopi-til-nav': ', med kopi til NAV.',
+    'kvittering.med-kopi-til-nav': ', med kopi til Nav.',
     'kvittering.mottatt': 'Mottatt',
     'kvittering.hva-skjer-videre': 'Hva skjer videre?',
     'kvittering.viktig-informasjon': 'Viktig informasjon',
-    'kvittering.nav-behandler-soknaden': 'NAV behandler søknaden din',
+    'kvittering.nav-behandler-soknaden': 'Nav behandler søknaden din',
     'kvittering.naar-blir-pengene': 'Når blir pengene utbetalt?',
     'kvittering.det-er-ulike-regler':
         'Det er ulike regler for sykepenger avhengig av hva slags arbeid du har eller hvilken situasjon du er i.',
@@ -33,7 +33,7 @@ export const KvitteringTekster = {
     'kvittering.hva-er-arbeidsgiverperioden': 'Hva er arbeidsgiverperioden?',
 
     'kvittering.viktig-for-selvstendige': 'Viktig for selvstendige næringsdrivende og frilansere',
-    'kvittering.for-at-nav.1': 'For at NAV skal kunne behandle søknaden må du',
+    'kvittering.for-at-nav.1': 'For at Nav skal kunne behandle søknaden må du',
     'kvittering.for-at-nav.2': 'sende inn skjema om inntekts-opplysninger',
     'kvittering.for-at-nav.2.url':
         'https://www.nav.no/no/bedrift/tjenester-og-skjemaer/nav-og-altinn-tjenester/inntektsmelding',
@@ -41,11 +41,11 @@ export const KvitteringTekster = {
         '. Du skal kunne fylle ut og sende inn dette skjemaet én gang. Hvis du sender inn nye sykepengekrav (forlengelser), skal du ikke fylle ut skjemaet.',
 
     'kvittering.digital-inntektsmelding':
-        'Digital inntektsmelding sendes fra arbeidsgivers eget lønns- og personalsystem eller fra altinn.no. Meldingen inneholder inntektsopplysninger og annen informasjon NAV må ha for å behandle søknaden arbeidstaker har sendt.',
-    'kvittering.for.nav.behandler': 'Før NAV kan behandle søknaden',
+        'Digital inntektsmelding sendes fra arbeidsgivers eget lønns- og personalsystem eller fra altinn.no. Meldingen inneholder inntektsopplysninger og annen informasjon Nav må ha for å behandle søknaden arbeidstaker har sendt.',
+    'kvittering.for.nav.behandler': 'Før Nav kan behandle søknaden',
     'kvittering.utenlands.overskrift1': 'Du får svar på om du kan reise',
     'kvittering.utenlands.brodtekst1':
-        'NAV vurderer om reisen vil forlenge sykefraværet ditt eller hindre planlagte aktiviteter.',
+        'Nav vurderer om reisen vil forlenge sykefraværet ditt eller hindre planlagte aktiviteter.',
     'kvittering.utenlands.overskrift2': 'Risiko ved å reise før du har mottatt svar',
     'kvittering.utenlands.liste1': 'Du kan risikere at sykepengene stanses i perioden du er på reise.',
     'kvittering.utenlands.liste2': 'Sykepengene kan beregnes etter et lavere grunnlag når du er tilbake.',
@@ -54,7 +54,7 @@ export const KvitteringTekster = {
     'kvittering.utenlands.lenke.url': 'https://www.nav.no/sykepenger#utland',
     'kvittering.utenlands.overskrift3': 'Du søker om sykepenger',
     'kvittering.utenlands.brodtekst3':
-        'Etter at sykefraværsperioden er over, søker du om sykepenger på vanlig måte. Du får en melding fra NAV når søknaden er klar til å fylles ut.',
+        'Etter at sykefraværsperioden er over, søker du om sykepenger på vanlig måte. Du får en melding fra Nav når søknaden er klar til å fylles ut.',
 
     'kvittering.arbeidstaker.tittel': 'Du får sykepengene fra arbeidsgiveren din',
     'kvittering.arbeidstaker.saksbehandlingstid':
@@ -62,13 +62,13 @@ export const KvitteringTekster = {
     'kvittering.arbeidstaker.saksbehandlingstid.lenke': 'Sjekk de oppdaterte saksbehandlingstidene',
     'kvittering.arbeidstaker.saksbehandlingstid.lenke.url': 'https://www.nav.no/saksbehandlingstider#sykepenger',
     'kvittering.arbeidstaker.brodtekst':
-        'Arbeidsgiveren din betaler de første 16 kalenderdagene av sykefraværet. Noen arbeidsplasser fortsetter å utbetale sykepenger fra dag 17, men da får de penger tilbake fra NAV.',
+        'Arbeidsgiveren din betaler de første 16 kalenderdagene av sykefraværet. Noen arbeidsplasser fortsetter å utbetale sykepenger fra dag 17, men da får de penger tilbake fra Nav.',
     'kvittering.arbeidstaker.over16.utbetaling':
-        'Du får vanligvis utbetalt sykepengene enten innen den 25. i måneden, eller innen fem dager etter at vi har sendt deg svar på søknaden din. Hvis søknaden din gjelder dager i to ulike kalendermåneder, kan utbetalingen bli delt i to. <a href="https://www.nav.no/utbetalingsdatoer#sykepenger" target="_blank" rel="noreferrer">Les mer om når du kan forvente å få pengene.</a>',
+        'Du får vanligvis utbetalt sykepengene enten innen den 25. i måneden, eller innen fem dager etter at vi har sendt deg svar på søknaden din. Hvis søknaden din gjelder dager i to ulike kalendermåneder, kan utbetalingen bli delt i to.',
     'kvittering.arbeidstaker.over16.utbetaling-arbeidsgiver':
         'Hvis du får sykepenger fra arbeidsgiveren din, vil du vanligvis få sykepenger til samme tid som du ellers får lønn.',
-    'kvittering.arbeidstaker.over16.utbetaling-NAV':
-        ' Hvis du får sykepenger utbetalt fra NAV, får du vanligvis utbetalt sykepengene enten innen den 25. i måneden, eller innen fem dager etter at vi har sendt deg svar på søknaden din. Hvis søknaden din gjelder dager i to ulike kalendermåneder, kan utbetalingen bli delt i to. <a href="https://www.nav.no/utbetalingsdatoer#sykepenger" target="_blank" rel="noreferrer">Les mer om når du kan forvente å få pengene.</a>',
+    'kvittering.arbeidstaker.over16.utbetaling-Nav':
+        ' Hvis du får sykepenger utbetalt fra Nav, får du vanligvis utbetalt sykepengene enten innen den 25. i måneden, eller innen fem dager etter at vi har sendt deg svar på søknaden din. Hvis søknaden din gjelder dager i to ulike kalendermåneder, kan utbetalingen bli delt i to. <a href="https://www.nav.no/utbetalingsdatoer#sykepenger" target="_blank" rel="noreferrer">Les mer om når du kan forvente å få pengene.</a>',
 
     'kvittering.arbeidstaker.med-opphold':
         'Du har vært friskmeldt inntil 16 dager siden sist du søkte om sykepenger. Da må arbeidsgiver sende oss inntektsmelding på nytt. Hør gjerne med arbeidsgiveren din hvis du er usikker på om den er sendt.',
@@ -80,6 +80,6 @@ export const KvitteringTekster = {
     'kvittering.kontonummer.mangler':
         'Vi har ikke registrert noe kontonummer på deg, og anbefaler at du legger det inn på <a target="_blank" href="https://www.nav.no/person/personopplysninger/#utbetaling">Min side</a>',
     'kvittering.kontonummer.endre':
-        'Dersom du vil benytte et annet kontonummer for utbetaling fra NAV, kan du endre det på <a target="_blank" href="https://www.nav.no/person/personopplysninger/#utbetaling">Min side</a>',
+        'Dersom du vil benytte et annet kontonummer for utbetaling fra Nav, kan du endre det på <a target="_blank" href="https://www.nav.no/person/personopplysninger/#utbetaling">Min side</a>',
     'kvittering.ferdig': 'Ferdig',
 }

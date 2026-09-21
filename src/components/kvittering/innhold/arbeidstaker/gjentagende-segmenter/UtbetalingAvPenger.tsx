@@ -13,7 +13,7 @@ function UtbetalingAvPenger() {
             <BodyShort spacing>
                 {tekstMedHtml(tekst('kvittering.arbeidstaker.over16.utbetaling-arbeidsgiver'))}
             </BodyShort>
-            <BodyShort spacing>{tekstMedHtml(tekst('kvittering.arbeidstaker.over16.utbetaling-NAV'))}</BodyShort>
+            <BodyShort spacing>{tekstMedHtml(tekst('kvittering.arbeidstaker.over16.utbetaling-Nav'))}</BodyShort>
         </div>
     )
 }

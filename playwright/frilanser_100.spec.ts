@@ -11,6 +11,7 @@ import {
     svarRadioGruppe,
     trykkPaSoknadMedId,
     harSynligTekst,
+    harSynligTittel,
 } from './utils/utilities'
 
 test.describe('Tester frilansersøknad', () => {
@@ -106,10 +107,10 @@ test.describe('Tester frilansersøknad', () => {
 
         await test.step('Søknad kvittering', async () => {
             await expect(page).toHaveURL(new RegExp(`/kvittering/${soknad.id}`))
-            const kvitteringPanel = page.locator('[role="region"][aria-label="Hva skjer videre?"]')
-            await expect(kvitteringPanel).toContainText('Hva skjer videre?')
-            await expect(kvitteringPanel).toContainText('NAV behandler søknaden din')
-            await expect(kvitteringPanel).toContainText('Når blir pengene utbetalt?')
+
+            await harSynligTittel(page, 'Hva skjer videre?', 2)
+            await harSynligTittel(page, 'Nav behandler søknaden din', 3)
+            await harSynligTekst(page, 'Saksbehandlingstiden regnes fra Nav har mottatt all nødvendig dokumentasjon.')
         })
     })
 })

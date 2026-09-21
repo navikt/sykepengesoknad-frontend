@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test'
 
 import { sendtArbeidsledig } from '../src/data/mock/data/soknad/arbeidsledig-sendt'
 
-import { harSynligTittel, trykkPaSoknadMedId, harSynligTekst } from './utils/utilities'
+import { harSynligTittel, trykkPaSoknadMedId } from './utils/utilities'
 
 const sendtArbeidsledigId = sendtArbeidsledig.id
 
@@ -25,17 +25,16 @@ test.describe('Tester sendt søknad', () => {
 
     test('Ved klikk så åpnes kvittering søknad visning', async ({ page }) => {
         await trykkPaSoknadMedId(page, sendtArbeidsledigId)
-
         await expect(page).toHaveURL(new RegExp(`.*\\/sendt\\/${sendtArbeidsledigId}.*testperson=integrasjon-soknader`))
-        await harSynligTekst(page, 'Søknaden er sendt til NAV')
+        await harSynligTittel(page, 'Søknaden er sendt', 2)
     })
 
     test('Siden kan refreshes', async ({ page }) => {
         await page.goto(`/syk/sykepengesoknad/sendt/${sendtArbeidsledigId}?testperson=integrasjon-soknader`)
-        await harSynligTekst(page, 'Søknaden er sendt til NAV')
+        await harSynligTittel(page, 'Søknaden er sendt', 2)
 
         await page.reload()
-        await harSynligTekst(page, 'Søknaden er sendt til NAV')
+        await harSynligTittel(page, 'Søknaden er sendt', 2)
 
         await expect(page).toHaveURL(new RegExp(`.*\\/sendt\\/${sendtArbeidsledigId}.*testperson=integrasjon-soknader`))
     })

@@ -48,7 +48,7 @@ test.describe('Tester ettersending og korrigering', () => {
         await test.step('Viser kvittering etter innsending', async () => {
             await expect(page).toHaveURL(new RegExp(`/kvittering/${soknad.id}`))
             await expect(page.getByRole('main')).toContainText(
-                'Posten Norge AS, Bærum (Org.nr. 974654458), med kopi til NAV',
+                'Posten Norge AS, Bærum (Org.nr. 974654458), med kopi til Nav',
             )
             await harSynligTekst(page, 'Du får sykepengene fra arbeidsgiveren din')
             await expect(

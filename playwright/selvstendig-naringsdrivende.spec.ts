@@ -13,7 +13,7 @@ import {
 export async function sendSoknad(page: Page) {
     await harSynligTittel(page, 'Oppsummering fra søknaden', 2)
     await page.getByRole('button', { name: 'Send søknaden' }).click()
-    await harSynligTekst(page, 'Søknaden er sendt til NAV')
+    await harSynligTekst(page, 'Søknaden er sendt')
 }
 
 test.describe('Selvstendig næringsdrivende', () => {

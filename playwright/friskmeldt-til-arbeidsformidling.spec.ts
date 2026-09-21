@@ -121,7 +121,7 @@ test.describe('Friskmeldt til arbeidsformidling', () => {
 
         await harSynligTittel(page, 'Oppsummering', 2)
         await page.getByRole('button', { name: 'Send søknaden' }).click()
-        await harSynligTittel(page, 'Søknaden er sendt til NAV', 2)
+        await harSynligTittel(page, 'Søknaden er sendt', 2)
         await harSynligTekst(page, /Du har nå sendt inn den siste søknaden for friskmeldt til arbeidsformidling./i)
         await harSynligTekst(page, /Fra og med 13. april 2025 stanser vi sykepengene dine./i)
     })
@@ -138,6 +138,6 @@ test.describe('Friskmeldt til arbeidsformidling', () => {
         await neiOgVidere(page, ['Inntekt underveis', 'Reise utenfor EU/EØS'])
         await harSynligTittel(page, 'Oppsummering', 2)
         await page.getByRole('button', { name: 'Send søknaden' }).click()
-        await harSynligTittel(page, 'Søknaden er sendt til NAV', 2)
+        await harSynligTittel(page, 'Søknaden er sendt', 2)
     }
 })

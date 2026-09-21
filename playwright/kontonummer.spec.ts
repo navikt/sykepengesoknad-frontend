@@ -13,7 +13,7 @@ test.describe('Tester kontonummer i kvittering', () => {
         const kontonummer = (await harSynligTittel(page, 'Kontonummer for utbetaling', 2)).locator('..')
         await expect(kontonummer).toContainText('1234 00 12345')
         await expect(kontonummer).toContainText(
-            'Dersom du vil benytte et annet kontonummer for utbetaling fra NAV, kan du endre det på Min side',
+            'Dersom du vil benytte et annet kontonummer for utbetaling fra Nav, kan du endre det på Min side',
         )
     })
 
