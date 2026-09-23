@@ -34,7 +34,7 @@ const sendtSoknadMedNyKvitteringMedDokumenter = deepcopyMedNyId(
     '3708c4de-d16c-4835-841b-a6716b688999',
 )
 
-sendtSoknadMedNyKvitteringMedDokumenter.inntektsopplysningerNyKvittering = true
+sendtSoknadMedNyKvitteringMedDokumenter.inntektsopplysningerNyKvittering = false
 sendtSoknadMedNyKvitteringMedDokumenter.inntektsopplysningerInnsendingId = '1234'
 sendtSoknadMedNyKvitteringMedDokumenter.inntektsopplysningerInnsendingDokumenter = [
     'Skattemelding/Næringsspesifikasjon hvis den er klar',
