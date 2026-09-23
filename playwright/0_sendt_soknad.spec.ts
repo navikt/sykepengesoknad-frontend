@@ -27,17 +27,17 @@ test.describe('Tester sendt søknad', () => {
         await trykkPaSoknadMedId(page, sendtArbeidsledigId)
 
         await expect(page).toHaveURL(new RegExp(`.*\\/sendt\\/${sendtArbeidsledigId}.*testperson=integrasjon-soknader`))
-        await harSynligTekst(page, 'Søknaden er sendt til NAV')
+        await harSynligTekst(page, 'Søknaden er sendt')
     })
 
     test('Siden kan refreshes', async ({ page }) => {
         const sendtArbeidsledigId = '3848e75e-4069-4076-95c0-3f9f0b63e498'
 
         await page.goto(`/syk/sykepengesoknad/sendt/${sendtArbeidsledigId}?testperson=integrasjon-soknader`)
-        await harSynligTekst(page, 'Søknaden er sendt til NAV')
+        await harSynligTekst(page, 'Søknaden er sendt')
 
         await page.reload()
-        await harSynligTekst(page, 'Søknaden er sendt til NAV')
+        await harSynligTekst(page, 'Søknaden er sendt')
 
         await expect(page).toHaveURL(new RegExp(`.*\\/sendt\\/${sendtArbeidsledigId}.*testperson=integrasjon-soknader`))
     })

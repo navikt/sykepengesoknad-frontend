@@ -166,13 +166,12 @@ test.describe('Tester arbeidsledigsøknad', () => {
 
         await test.step('Søknad kvittering', async () => {
             await expect(page).toHaveURL(new RegExp(`/kvittering/${arbeidsledig.id}`))
-
-            await harSynligTittel(page, 'Søknaden er sendt til NAV', 2)
-            const kvitteringPanel = page.locator('[role="region"][aria-label="Hva skjer videre?"]')
+            await harSynligTittel(page, 'Søknaden er sendt', 2)
+            await harSynligTittel(page, 'Hva skjer videre?', 2, true)
+            await harSynligTittel(page, 'NAV behandler søknaden din', 3)
+            await harSynligTittel(page, 'Når blir pengene utbetalt?', 3)
+            await harSynligTittel(page, 'Kontonummer for utbetaling', 2)
             await validerAxeUtilityWrapper(page, test.info())
-            await expect(kvitteringPanel).toContainText('Hva skjer videre?')
-            await expect(kvitteringPanel).toContainText('NAV behandler søknaden din')
-            await expect(kvitteringPanel).toContainText('Når blir pengene utbetalt?')
         })
     })
 })

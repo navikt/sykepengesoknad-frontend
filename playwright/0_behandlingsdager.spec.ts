@@ -218,7 +218,7 @@ test.describe('Tester behandlingsdagersøknad', () => {
             await expect(kvittering).toContainText(
                 'For å behandle søknaden trenger vi en inntektsmelding fra arbeidsgiveren din',
             )
-            await expect(kvittering).toContainText('NAV behandler søknaden')
+            await expect(kvittering).toContainText('Nav behandler søknaden')
             await expect(kvittering).toContainText('Når blir pengene utbetalt')
             await validerAxeUtilityWrapper(page, test.info())
         })

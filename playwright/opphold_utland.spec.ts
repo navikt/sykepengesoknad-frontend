@@ -10,6 +10,7 @@ import {
     svarCombobox,
     svarRadioGruppe,
     harSynligTekst,
+    harSynligTittel,
 } from './utils/utilities'
 import { validerAxeUtilityWrapper } from './uuvalidering'
 
@@ -212,15 +213,15 @@ test.describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
 
         // Viser kvittering med Ferdig-knapp', async () => {
         await expect(page).toHaveURL(new RegExp(`kvittering/${soknad.id}`))
-        const kvitteringPanel = page.locator('[role="region"][aria-label="Hva skjer videre?"]')
 
         await validerAxeUtilityWrapper(page, test.info())
 
-        await expect(kvitteringPanel).toContainText('Hva skjer videre?')
-        await expect(kvitteringPanel).toContainText('Du får svar på om du kan reise')
-        await expect(kvitteringPanel).toContainText('Risiko ved å reise før du har mottatt svar')
-        await expect(kvitteringPanel).toContainText('Les mer om sykepenger når du er på reise.')
-        await expect(kvitteringPanel).toContainText('Du søker om sykepenger')
+        await harSynligTittel(page, 'Hva skjer videre?', 2)
+        await harSynligTittel(page, 'Du får svar på om du kan reise', 3)
+        await harSynligTittel(page, 'Risiko ved å reise før du har mottatt svar', 3)
+        await harSynligTittel(page, 'Du søker om sykepenger', 3)
+
+        await expect(page.getByRole('link', { name: 'Les mer om sykepenger når du er på reise' })).toBeVisible()
 
         // Går til listevisningen', async () => {
         // Gjer som i Cypress, men her: naviger direkte tilbake
@@ -231,7 +232,7 @@ test.describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
         const tidligere = page.getByRole('region', { name: 'Tidligere søknader' })
         await expect(tidligere).toBeVisible()
         await tidligere
-            .getByRole('link', { name: 'Søknad om å beholde sykepenger utenfor EU/EØS , status: Sendt til NAV' })
+            .getByRole('link', { name: 'Søknad om å beholde sykepenger utenfor EU/EØS , status: Sendt til Nav' })
             .click()
 
         // Viser sendt side', async () => {

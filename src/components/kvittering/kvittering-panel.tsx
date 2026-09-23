@@ -1,17 +1,47 @@
 import React, { ReactNode } from 'react'
-import { Panel } from '@navikt/ds-react'
+import { BodyShort, Box, HStack, InfoCard, VStack } from '@navikt/ds-react'
+import { CheckmarkCircleFillIcon } from '@navikt/aksel-icons'
+import { tekst } from '../../utils/tekster'
+import { tilLesbarDatoOgTid } from '../../utils/dato-utils'
+import { useSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
 
-import { cn } from '../../utils/tw-utils'
+export function KvitteringPanel({ children }: { children?: ReactNode[] | ReactNode; className?: string }) {
+    const { valgtSoknad } = useSoknadMedDetaljer()
 
-export function KvitteringPanel({ children, className }: { children: ReactNode[] | ReactNode; className?: string }) {
+    if (!valgtSoknad) return null
+
+    const dato = valgtSoknad.sendtTilNAVDato
+
     return (
-        <Panel
-            role="region"
-            aria-label="Hva skjer videre?"
-            border
-            className={cn('grid grid-cols-12 gap-y-2 p-0 pb-8', className)}
-        >
-            {children}
-        </Panel>
+        <InfoCard data-color="success">
+            <InfoCard.Header>
+                <HStack padding="space-16" gap="space-16" align="center">
+                    <CheckmarkCircleFillIcon
+                        aria-hidden={true}
+                        title=""
+                        fontSize="1.5rem"
+                        className="text-ax-text-success-decoration"
+                    />
+
+                    <VStack>
+                        <InfoCard.Title>{tekst('kvittering.sendt-til')}</InfoCard.Title>
+                        {valgtSoknad.arbeidssituasjon != 'ARBEIDSTAKER' && dato && (
+                            <div>
+                                <BodyShort>
+                                    {tekst('kvittering.mottatt')}: {tilLesbarDatoOgTid(dato)}
+                                </BodyShort>
+                            </div>
+                        )}
+                    </VStack>
+                </HStack>
+            </InfoCard.Header>
+            {children && (
+                <InfoCard.Content>
+                    <Box padding="space-8" paddingInline="space-56 space-56" className="pb-8">
+                        {children}
+                    </Box>
+                </InfoCard.Content>
+            )}
+        </InfoCard>
     )
 }

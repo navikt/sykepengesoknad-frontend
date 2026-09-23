@@ -106,7 +106,7 @@ test.describe('Arbeidsledigsøknad med tastaturnavigasjon', () => {
         await page.keyboard.press('Enter')
         await sjekkMainContentFokus(page)
 
-        await harSynligTekst(page, 'Søknaden er sendt til NAV')
+        await harSynligTekst(page, 'Søknaden er sendt')
 
         await expect(page.getByText(/Mottatt.*kl/, { exact: false })).toBeVisible()
 
