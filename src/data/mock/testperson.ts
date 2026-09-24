@@ -35,7 +35,7 @@ import {
 import { utenlandskSykmeldingPerson } from './data/utenlandsk-sykmelding-person'
 import { yrkesskadePerson, yrkesskadeV2Person } from './data/yrkesskade'
 import { egenmeldingSykmeldingaPerson } from './data/personas/egenmeldingsdager-i-sykmeldingen'
-import { selvstendigNaringsdrivendeSendtPerson, selvstendigNaringsdrivende } from './data/personas/naringsdrivende'
+import { selvstendigNaringsdrivende } from './data/personas/naringsdrivende'
 import { korrigeringsfristUtloptPerson } from './data/personas/korrigeringsfrist-utlopt'
 import { medlemskapPerson } from './data/personas/medlemskap'
 import { fiskePerson } from './data/personas/fisker'
@@ -89,7 +89,6 @@ type PersonaKey =
     | 'cummulative-layout-shift'
     | 'tilbakedateringer'
     | 'nytt-arbeidsforhold'
-    | 'selvstendig-naringsdrivende-sendt'
     | 'selvstendig-naringsdrivende-virksomheten-din'
     | 'innenfor-arbeidsgiver-perioden'
     | 'gammel-oppsummering'
@@ -181,7 +180,6 @@ function skjultePersoner(): PersonaData {
         ['arbeidstaker-periode-varianter']: jsonDeepCopy(arbeidstakerPeriodeVarianter_Person),
         ['fremtidig']: jsonDeepCopy(fremtidigPerson),
         ['sykmelding-med-egenmeldingsdager']: jsonDeepCopy(egenmeldingSykmeldingaPerson),
-        ['selvstendig-naringsdrivende-sendt']: jsonDeepCopy(selvstendigNaringsdrivendeSendtPerson),
         ['fta-en-ny']: jsonDeepCopy(friskTilArbeidPerson),
         ['fta-to-fremtidige']: jsonDeepCopy(fremtidigeFriskTilArbeidPerson),
         ['fta-siste']: jsonDeepCopy(sisteSoknadFriskTilArbeidPerson),

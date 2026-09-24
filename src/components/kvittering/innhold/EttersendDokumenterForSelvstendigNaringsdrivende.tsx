@@ -1,9 +1,8 @@
-import { Alert, BodyLong, Box, Button, Heading, List } from '@navikt/ds-react'
+import { BodyLong, Box, Button, Heading, InfoCard, List, VStack } from '@navikt/ds-react'
 import React, { useEffect } from 'react'
-import { ExternalLinkIcon } from '@navikt/aksel-icons'
+import { ExternalLinkIcon, InformationSquareIcon } from '@navikt/aksel-icons'
 
 import { logEvent } from '../../umami/umami'
-import GridItems from '../grid-items'
 import { Soknad } from '../../../types/types'
 import { sendInnUrl } from '../../../utils/environment'
 
@@ -17,16 +16,12 @@ export function EttersendDokumenterForSelvstendigNaringsdrivende({ soknad }: { s
 
     return (
         <>
-            <GridItems>
+            <VStack gap="space-16" className="my-2 border-b-2 border-b-ax-neutral-300 pb-2" align="start">
                 <Heading size="small" level="3">
                     Opplasting av dokumentasjon
                 </Heading>
-            </GridItems>
-            <GridItems>
-                <>
-                    <BodyLong spacing>
-                        Du må sende inn dokumentasjon på inntekten din før vi kan behandle saken.
-                    </BodyLong>
+                <BodyLong spacing>Du må sende inn dokumentasjon på inntekten din før vi kan behandle saken.</BodyLong>
+                <Box>
                     <Heading as="h4" size="xsmall">
                         Vi trenger følgende dokumenter
                     </Heading>
@@ -37,27 +32,27 @@ export function EttersendDokumenterForSelvstendigNaringsdrivende({ soknad }: { s
                             ))}
                         </List>
                     </Box>
-
-                    <Button
-                        type="button"
-                        as="a"
-                        href={`${sendInnUrl()}/${soknad.inntektsopplysningerInnsendingId}`}
-                        rel="noopener"
-                        target="_blank"
-                        iconPosition="right"
-                        variant="secondary"
-                        icon={<ExternalLinkIcon aria-hidden />}
-                        className="mb-8"
-                    >
-                        Gå til opplasting av dokumentasjon
-                    </Button>
-                    <Alert variant="info">
+                </Box>
+                <Button
+                    type="button"
+                    as="a"
+                    href={`${sendInnUrl()}/${soknad.inntektsopplysningerInnsendingId}`}
+                    rel="noopener"
+                    target="_blank"
+                    iconPosition="right"
+                    variant="secondary"
+                    icon={<ExternalLinkIcon aria-hidden />}
+                    className="mb-8"
+                >
+                    Gå til opplasting av dokumentasjon
+                </Button>
+                <InfoCard data-color="info" className="mb-4">
+                    <InfoCard.Message icon={<InformationSquareIcon aria-hidden />}>
                         Du kan laste opp dokumentasjonen senere. Du finner skjemaet for opplasting ved å logge inn på
                         nav.no.
-                    </Alert>
-                </>
-            </GridItems>
-            <div className="col-span-12 mx-4 mb-8 border-b-2 border-b-ax-neutral-300 pb-2" />
+                    </InfoCard.Message>
+                </InfoCard>
+            </VStack>
         </>
     )
 }
