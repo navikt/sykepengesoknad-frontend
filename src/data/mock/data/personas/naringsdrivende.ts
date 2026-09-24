@@ -16,12 +16,6 @@ const naringsdrivendeSoknadMedVirksomhetsSporsmal = lagNaringsdrivendeSoknadMedV
     [naringsdrivendeVirksomhetenAvviklet, naringsdrivendeNyIArbeidslivet, naringsdrivendeVarigEndring],
 )
 
-export const selvstendigNaringsdrivende: Persona = {
-    soknader: [{ ...naringsdrivendeSoknadMedVirksomhetsSporsmal, demoinfo: 'Spørsmål om virksomheten din' }],
-    sykmeldinger: [naringsdrivende100syk],
-    beskrivelse: 'Selvstendig Næringsdrivende',
-}
-
 const sendtSoknadMedGammelKvittering = deepcopyMedNyId(naringsdrivendeSoknad, '3708c4de-d16c-4835-841b-a6716b688888')
 
 sendtSoknadMedGammelKvittering.status = 'SENDT'
@@ -34,7 +28,7 @@ const sendtSoknadMedNyKvitteringMedDokumenter = deepcopyMedNyId(
     '3708c4de-d16c-4835-841b-a6716b688999',
 )
 
-sendtSoknadMedNyKvitteringMedDokumenter.inntektsopplysningerNyKvittering = false
+sendtSoknadMedNyKvitteringMedDokumenter.inntektsopplysningerNyKvittering = true
 sendtSoknadMedNyKvitteringMedDokumenter.inntektsopplysningerInnsendingId = '1234'
 sendtSoknadMedNyKvitteringMedDokumenter.inntektsopplysningerInnsendingDokumenter = [
     'Skattemelding/Næringsspesifikasjon hvis den er klar',
@@ -47,11 +41,12 @@ function lagNaringsdrivendeSoknadMedVirksomhetsSporsmal(id: string, ekstraSporsm
     return soknad
 }
 
-export const selvstendigNaringsdrivendeSendtPerson: Persona = {
+export const selvstendigNaringsdrivende: Persona = {
     soknader: [
-        { ...sendtSoknadMedGammelKvittering, demoinfo: 'Sendt søknad med gammel kvittering' },
+        { ...naringsdrivendeSoknadMedVirksomhetsSporsmal, demoinfo: 'Spørsmål om virksomheten din' },
+        { ...sendtSoknadMedGammelKvittering, demoinfo: 'Søknad med gammel kvittering' },
         { ...sendtSoknadMedNyKvitteringMedDokumenter, demoinfo: 'Sendt søknad med ny kvittering og dokumenter' },
     ],
     sykmeldinger: [naringsdrivende100syk],
-    beskrivelse: 'Selvstendig næringsdrivende med sendt søknad',
+    beskrivelse: 'Selvstendig Næringsdrivende',
 }

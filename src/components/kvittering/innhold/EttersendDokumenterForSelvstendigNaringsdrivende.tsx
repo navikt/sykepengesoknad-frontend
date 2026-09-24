@@ -16,7 +16,7 @@ export function EttersendDokumenterForSelvstendigNaringsdrivende({ soknad }: { s
 
     return (
         <>
-            <VStack gap="space-16" className="my-2" align="start">
+            <VStack gap="space-16" className="my-2 border-b-2 border-b-ax-neutral-300 pb-2" align="start">
                 <Heading size="small" level="3">
                     Opplasting av dokumentasjon
                 </Heading>
@@ -46,14 +46,13 @@ export function EttersendDokumenterForSelvstendigNaringsdrivende({ soknad }: { s
                 >
                     Gå til opplasting av dokumentasjon
                 </Button>
-                <InfoCard data-color="info">
+                <InfoCard data-color="info" className="mb-4">
                     <InfoCard.Message icon={<InformationSquareIcon aria-hidden />}>
                         Du kan laste opp dokumentasjonen senere. Du finner skjemaet for opplasting ved å logge inn på
                         nav.no.
                     </InfoCard.Message>
                 </InfoCard>
             </VStack>
-            <div className="col-span-12 mb-8 border-b-2 border-b-ax-neutral-300 pb-2" />
         </>
     )
 }
