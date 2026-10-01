@@ -13,7 +13,7 @@
         "@navikt/ds-react": "8.16.2",
         "@navikt/ds-tailwind": "8.16.2",
         "@navikt/ds-tokens": "8.16.2",
-        "@navikt/nav-dekoratoren-moduler": "^4.3.0",
+        "@navikt/nav-dekoratoren-moduler": "^4.5.0",
         "@navikt/next-api-proxy": "^5.0.5",
         "@navikt/next-logger": "^5.0.1",
         "@navikt/oasis": "^4.2.2",
