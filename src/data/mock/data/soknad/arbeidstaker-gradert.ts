@@ -1,24 +1,24 @@
 import { RSSoknad } from '../../../../types/rs-types/rs-soknad'
 import { arbeidstaker50Syk } from '../sykmeldinger'
 import { oppsummering } from '../sporsmal/oppsummering'
-import { ArbeidsforholdFraInntektskomponenten } from '../../../../types/rs-types/rs-arbeidsforholdfrainntektskomponenten'
 import { flereInntektskilderGhost } from '../sporsmal/flere-inntektskilder-ghost'
+import { RSKilde, RSKjentInntektskilde } from '../../../../types/rs-types/rs-kjenteinntektskilder'
 
-const inntektskilderDataFraInntektskomponenten: ArbeidsforholdFraInntektskomponenten[] = [
+const ghostInntekter: RSKjentInntektskilde[] = [
     {
         navn: 'Ruter',
         orgnummer: '222',
-        arbeidsforholdstype: 'ARBEIDSTAKER',
+        kilde: RSKilde.INNTEKTSKOMPONENTEN,
     },
     {
         navn: 'Blomsterbutikken',
         orgnummer: '111',
-        arbeidsforholdstype: 'ARBEIDSTAKER',
+        kilde: RSKilde.INNTEKTSKOMPONENTEN,
     },
     {
         navn: 'Bensinstasjonen med det veldig lange navnet, Stavanger (ved det røde huset som ligger ved Shell)',
         orgnummer: '333',
-        arbeidsforholdstype: 'ARBEIDSTAKER',
+        kilde: RSKilde.INNTEKTSKOMPONENTEN,
     },
 ]
 export const arbeidstakerGradert: RSSoknad = {
@@ -29,7 +29,6 @@ export const arbeidstakerGradert: RSSoknad = {
     fom: '2020-04-01',
     tom: '2020-04-24',
     opprettetDato: '2020-05-13',
-    inntektskilderDataFraInntektskomponenten: inntektskilderDataFraInntektskomponenten,
     sendtTilNAVDato: null,
     sendtTilArbeidsgiverDato: null,
     avbruttDato: null,
@@ -278,4 +277,5 @@ export const arbeidstakerGradert: RSSoknad = {
     egenmeldtSykmelding: false,
     opprettetAvInntektsmelding: false,
     klippet: false,
+    ghostInntekter: ghostInntekter,
 }

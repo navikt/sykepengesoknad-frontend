@@ -130,5 +130,6 @@ export function rsToSoknad(soknad: RSSoknad): Soknad {
         soknad.julesoknad,
         soknad.friskTilArbeidVedtakId,
         soknad.ventetidSykmeldingUuid,
+        soknad.ghostInntekter,
     )
 }

@@ -5,6 +5,7 @@ import type { RSSoknad } from '../../../../types/rs-types/rs-soknad'
 
 import type { Persona } from './personas'
 import { brukertestSoknad, brukertestSykmelding } from './brukertestPerosn'
+import { RSKilde } from '../../../../types/rs-types/rs-kjenteinntektskilder'
 
 export function medNyttArbeidsforholdSporsmal(soknad: RSSoknad): RSSoknad {
     const kopi = jsonDeepCopy(soknad)
@@ -24,25 +25,11 @@ export function medNyttArbeidsforholdSporsmal(soknad: RSSoknad): RSSoknad {
             tom: kopi.tom!,
         }),
     )
-    kopi.inntektskilderDataFraInntektskomponenten?.push({
-        orgnummer: '123324',
-        navn: 'Kaffebrenneriet',
-        arbeidsforholdstype: 'ARBEIDSTAKER',
-    })
-
-    const ghostSporsmal = kopi.sporsmal.find((spm) => spm.tag === 'FLERE_INNTEKTSKILDER_GRUPPE')
-    const ghostUndersporsmal = ghostSporsmal?.undersporsmal.find((spm) => spm.tag === 'FLERE_INNTEKTSKILDER_GHOST')
-
-    if (ghostUndersporsmal) {
-        ghostUndersporsmal.metadata = {
-            kjenteInntektskilder: [
-                { orgnummer: '123324', navn: 'Matbutikken AS' },
-                { orgnummer: '123324', navn: 'Smørebussen AS' },
-                { orgnummer: '123324', navn: 'Kaffebrenneriet' },
-            ],
-        }
-    }
-
+    kopi.ghostInntekter?.push(
+        { orgnummer: '123324', kilde: RSKilde.INNTEKTSKOMPONENTEN, navn: 'Matbutikken AS' },
+        { orgnummer: '123324', kilde: RSKilde.INNTEKTSKOMPONENTEN, navn: 'Smørebussen AS' },
+        { orgnummer: '123324', kilde: RSKilde.INNTEKTSKOMPONENTEN, navn: 'Kaffebrenneriet' },
+    )
     return kopi
 }
 

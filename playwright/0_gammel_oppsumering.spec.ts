@@ -11,7 +11,6 @@ import {
     harSynligTittel,
     harSynligTekst,
     svarCheckboxSporsmal,
-    svarRadioSporsmal,
 } from './utils/utilities'
 import { validerAxeUtilityWrapper } from './uuvalidering'
 

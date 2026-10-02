@@ -58,7 +58,7 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
         <>
             <div>
                 {sporsmal.tag === 'FLERE_INNTEKTSKILDER_GHOST' && (
-                    <Inntektsbulletpoints key="inntekt-bulletpoints" soknad={valgtSoknad} sporsmal={sporsmal} />
+                    <Inntektsbulletpoints key="inntekt-bulletpoints" soknad={valgtSoknad} />
                 )}
                 {skalViseKjentOppholdstillatelse && (
                     <KjentOppholdstillatelse key="kjent-opphold" soknad={valgtSoknad} />
