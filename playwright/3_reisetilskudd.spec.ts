@@ -89,9 +89,7 @@ test.describe('Teste førsteside i reisetilskuddsøknaden', () => {
             await expect(await harSynligTittel(page, 'Reise med bil', 2)).toHaveText('Reise med bil')
 
             await svarJaHovedsporsmal(page)
-            await expect(page.locator('.undersporsmal > :nth-child(1) > :nth-child(1)')).toHaveText(
-                'Hvilke dager reiste du med bil i perioden 23. desember 2020 - 7. januar 2021?',
-            )
+            await harSynligTekst(page, 'Hvilke dager reiste du med bil i perioden 23. desember 2020 - 7. januar 2021?')
             await validerAxeUtilityWrapper(page, test.info())
             await klikkGaVidere(page, true)
             await expect(page.getByText('Du må oppgi minst en dag')).toContainText('Du må oppgi minst en dag')
