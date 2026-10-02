@@ -192,11 +192,6 @@ test.describe('Tester arbeidstakersøknad - 100%', () => {
             await harSynligTekst(page, 'Hva slags arbeid eller inntekt gjelder dette?')
             await svarCheckboxSporsmal(page, 'Hva slags arbeid eller inntekt gjelder dette?', 'Ansatt andre steder')
 
-            await svarRadio(
-                page,
-                'Har du jobbet for eller mottatt inntekt fra én eller flere av disse arbeidsgiverne de siste 14 dagene før du ble sykmeldt?',
-                'JA',
-            )
             await svarCheckboxSporsmal(
                 page,
                 'Hva slags arbeid eller inntekt gjelder dette?',
@@ -248,11 +243,6 @@ test.describe('Tester arbeidstakersøknad - 100%', () => {
 
             await sporsmalOgSvar(oppsummering, 'Har du hatt annen inntekt eller oppdrag?', 'Ja')
             await sporsmalOgSvar(oppsummering, 'Hva slags arbeid eller inntekt gjelder dette?', 'Ansatt andre steder')
-            await sporsmalOgSvar(
-                oppsummering,
-                'Har du jobbet for eller mottatt inntekt fra én eller flere av disse arbeidsgiverne de siste 14 dagene før du ble sykmeldt?',
-                'Ja',
-            )
             await sporsmalOgSvar(
                 oppsummering,
                 'Hva slags arbeid eller inntekt gjelder dette?',

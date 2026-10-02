@@ -172,12 +172,6 @@ test.describe('Sjekker at søknader med gammel oppsummering ser ok ut', () => {
 
             await svarCheckboxSporsmal(page, 'Hva slags arbeid eller inntekt gjelder dette?', 'Ansatt andre steder')
 
-            await svarRadioSporsmal(
-                page,
-                'Har du jobbet for eller mottatt inntekt fra én eller flere av disse arbeidsgiverne de siste 14 dagene før du ble sykmeldt?',
-                'Ja',
-            )
-
             await svarCheckboxSporsmal(
                 page,
                 'Hva slags arbeid eller inntekt gjelder dette?',
@@ -223,11 +217,6 @@ test.describe('Sjekker at søknader med gammel oppsummering ser ok ut', () => {
 
             await sporsmalOgSvar(oppsummering, 'Har du hatt annen inntekt eller oppdrag?', 'Ja')
             await sporsmalOgSvar(oppsummering, 'Hva slags arbeid eller inntekt gjelder dette?', 'Ansatt andre steder')
-            await sporsmalOgSvar(
-                oppsummering,
-                'Har du jobbet for eller mottatt inntekt fra én eller flere av disse arbeidsgiverne de siste 14 dagene før du ble sykmeldt?',
-                'Ja',
-            )
             await sporsmalOgSvar(
                 oppsummering,
                 'Hva slags arbeid eller inntekt gjelder dette?',
