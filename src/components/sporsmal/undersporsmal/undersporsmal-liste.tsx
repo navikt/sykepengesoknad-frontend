@@ -30,6 +30,7 @@ const UndersporsmalListe = ({ oversporsmal, oversporsmalSvar }: UndersporsmalLis
                 .map((underspm: Sporsmal, idx: number) => (
                     <div className="mb-10" key={underspm.id}>
                         <SporsmalSwitch
+                            key={underspm.id}
                             sporsmal={underspm}
                             sporsmalIndex={idx}
                             erHovedsporsmal={false}
