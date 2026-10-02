@@ -66,7 +66,7 @@ export const EkspanderbarHjelp = ({ sporsmal, mb }: { sporsmal: Sporsmal; mb?: s
 
     return (
         <ReadMore
-            className={`${mb ?? 'mb-8'} mt-4 w-full`}
+            className={`${mb ?? 'mb-8'} w-full`}
             header={readmore.tittel}
             open={expanded}
             onClick={() => {

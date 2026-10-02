@@ -8,6 +8,7 @@ import { RSSvartype } from './rs-types/rs-svartype'
 import { RSVisningskriterieType } from './rs-types/rs-visningskriterie'
 import { ArbeidsforholdFraInntektskomponenten } from './rs-types/rs-arbeidsforholdfrainntektskomponenten'
 import { ObjectCopier } from './object-copier'
+import { RSKjentInntektskilde } from './rs-types/rs-kjenteinntektskilder'
 
 export interface TidsPeriode {
     fom: Date
@@ -55,6 +56,7 @@ export class Soknad extends ObjectCopier {
         readonly julesoknad?: boolean,
         readonly friskTilArbeidVedtakId?: string,
         readonly ventetidSykmeldingUuid?: string,
+        readonly ghostInntekter?: ReadonlyArray<RSKjentInntektskilde>,
     ) {
         super()
     }
@@ -75,15 +77,10 @@ export class Sporsmal extends ObjectCopier {
         readonly undersporsmal: ReadonlyArray<Sporsmal>,
         readonly parentKriterie: RSVisningskriterieType | null,
         readonly erHovedsporsmal: boolean,
-        readonly metadata: Record<string, string | number | KjentInntektskilde[]> | undefined,
+        readonly metadata: Record<string, string | number> | undefined,
     ) {
         super()
     }
-}
-
-export interface KjentInntektskilde {
-    navn: string
-    orgnummer: string
 }
 
 export interface Ettersend {

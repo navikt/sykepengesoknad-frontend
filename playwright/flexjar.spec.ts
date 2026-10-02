@@ -1,6 +1,6 @@
 import { Page } from '@playwright/test'
 
-import { checkViStolerPaDeg, klikkGaVidere, svarNeiHovedsporsmal } from './utils/utilities'
+import { checkViStolerPaDeg, klikkGaVidere, svarNeiHovedsporsmal, svarRadioSporsmal } from './utils/utilities'
 import { test, expect } from './utils/fixtures'
 
 test.describe('Tester flexjar', () => {
@@ -102,6 +102,7 @@ async function navigerTilOppsummeringSide(page: Page) {
     await svarNeiHovedsporsmal(page)
     await klikkGaVidere(page)
 
+    await svarRadioSporsmal(page, 'Har du hatt annen inntekt eller oppdrag?', 'Nei')
     await svarNeiHovedsporsmal(page)
     await klikkGaVidere(page)
 
