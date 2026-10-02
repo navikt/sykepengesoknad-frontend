@@ -322,7 +322,7 @@ test.describe('Tester feilmeldinger', () => {
                 page,
                 'Du må velge et alternativ',
                 'Du må svare på om du har jobbet mer enn du pleier i et eller flere arbeidsforhold',
-                soknad.sporsmal[6].undersporsmal[0].undersporsmal[0].id,
+                soknad.sporsmal[6].undersporsmal[0].undersporsmal[0].undersporsmal[0].id,
                 2,
             )
             await validerAxeUtilityWrapper(page, test.info())

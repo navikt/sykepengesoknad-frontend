@@ -40,7 +40,8 @@ function Wrapper({ children }: { children: React.ReactNode }) {
 
 const hentJobbetMerISporsmal = (): Sporsmal => {
     const ghost = flereInntektskilderGhost()
-    const jobbetMerI = ghost.undersporsmal.find((spm) => spm.tag === 'JOBBET_MER_I')!
+    const flInntektskilderGhost = ghost.undersporsmal.find((spm) => spm.tag === 'FLERE_INNTEKTSKILDER_GHOST')!
+    const jobbetMerI = flInntektskilderGhost.undersporsmal.find((spm) => spm.tag === 'JOBBET_MER_I')!
     return skapSporsmal(jobbetMerI, null, false)
 }
 
@@ -114,6 +115,7 @@ describe('FLERE_INNTEKTSKILDER_GHOST - fullt scenario med underspørsmål', () =
 
         render(<UndersporsmalListe oversporsmal={ghost} oversporsmalSvar="JA" />, { wrapper: GhostWrapper })
 
+        await velgJaPaaFlereInntektskilderGhost()
         await userEvent.click(screen.getByRole('button', { name: 'Send' }))
 
         // JOBBET_MER_I (checkbox-gruppe)
@@ -130,8 +132,10 @@ describe('FLERE_INNTEKTSKILDER_GHOST - fullt scenario med underspørsmål', () =
 
         render(<UndersporsmalListe oversporsmal={ghost} oversporsmalSvar="JA" />, { wrapper: GhostWrapper })
 
-        await userEvent.click(screen.getByText('Ruter'))
-        await userEvent.click(screen.getByRole('radio', { name: 'Nei' }))
+        await velgJaPaaFlereInntektskilderGhost()
+        await userEvent.click(screen.getByRole('checkbox', { name: 'Ruter' }))
+        const andreInntektskilder = screen.getByRole('radiogroup', { name: andreInntektskilderNavn })
+        await userEvent.click(within(andreInntektskilder).getByRole('radio', { name: 'Nei' }))
         await userEvent.click(screen.getByRole('button', { name: 'Send' }))
 
         expect(within(checkboxGruppe()).queryByText(feilmeldingJobbetMerI)).not.toBeInTheDocument()
@@ -146,13 +150,16 @@ describe('FLERE_INNTEKTSKILDER_GHOST - fullt scenario med underspørsmål', () =
 // bare underspørsmålene isolert.
 function HovedSporsmalWrapper({ children }: { children: React.ReactNode }) {
     const methods = useForm(skjemaOppsett)
+    const queryClient = new QueryClient({ defaultOptions: { queries: { retry: false } } })
     return (
-        <FormProvider {...methods}>
-            <form onSubmit={methods.handleSubmit(() => {})}>
-                {children}
-                <button type="submit">Send</button>
-            </form>
-        </FormProvider>
+        <QueryClientProvider client={queryClient}>
+            <FormProvider {...methods}>
+                <form onSubmit={methods.handleSubmit(() => {})}>
+                    {children}
+                    <button type="submit">Send</button>
+                </form>
+            </FormProvider>
+        </QueryClientProvider>
     )
 }
 
@@ -210,3 +217,11 @@ describe('FLERE_INNTEKTSKILDER_GHOST - hele spørsmålsvisningen', () => {
         ).not.toBeInTheDocument()
     })
 })
+
+const velgJaPaaFlereInntektskilderGhost = async () => {
+    const innerSporsmal = screen.getByRole('radiogroup', {
+        name: /Har du jobbet noe mer i disse enn du vanligvis gjør/,
+    })
+    await userEvent.click(within(innerSporsmal).getByRole('radio', { name: 'Ja' }))
+    await screen.findByRole('group', { name: /Hvilke jobbet du mer i/ })
+}

@@ -8,10 +8,10 @@ import { brukertestSoknad, brukertestSykmelding } from './brukertestPerosn'
 
 export function medNyttArbeidsforholdSporsmal(soknad: RSSoknad): RSSoknad {
     const kopi = jsonDeepCopy(soknad)
-    const splittSted = kopi.sporsmal.findIndex((spm) => spm.tag === 'FLERE_INNTEKTSKILDER_GHOST')
+    const splittSted = kopi.sporsmal.findIndex((spm) => spm.tag === 'FLERE_INNTEKTSKILDER_GRUPPE')
 
     if (splittSted === -1) {
-        throw new Error('Søknad mangler spørsmål FLERE_INNTEKTSKILDER_GHOST')
+        throw new Error('Søknad mangler spørsmål FLERE_INNTEKTSKILDER_GRUPPE')
     }
 
     kopi.sporsmal.splice(
@@ -30,12 +30,17 @@ export function medNyttArbeidsforholdSporsmal(soknad: RSSoknad): RSSoknad {
         arbeidsforholdstype: 'ARBEIDSTAKER',
     })
 
-    kopi.sporsmal.find((spm) => spm.tag === 'FLERE_INNTEKTSKILDER_GHOST')!.metadata = {
-        kjenteInntektskilder: [
-            { orgnummer: '123324', navn: 'Matbutikken AS' },
-            { orgnummer: '123324', navn: 'Smørebussen AS' },
-            { orgnummer: '123324', navn: 'Kaffebrenneriet' },
-        ],
+    const ghostSporsmal = kopi.sporsmal.find((spm) => spm.tag === 'FLERE_INNTEKTSKILDER_GRUPPE')
+    const ghostUndersporsmal = ghostSporsmal?.undersporsmal.find((spm) => spm.tag === 'FLERE_INNTEKTSKILDER_GHOST')
+
+    if (ghostUndersporsmal) {
+        ghostUndersporsmal.metadata = {
+            kjenteInntektskilder: [
+                { orgnummer: '123324', navn: 'Matbutikken AS' },
+                { orgnummer: '123324', navn: 'Smørebussen AS' },
+                { orgnummer: '123324', navn: 'Kaffebrenneriet' },
+            ],
+        }
     }
 
     return kopi

@@ -8,6 +8,8 @@ const SporsmalTekster = {
 
     'soknad.feilmelding.ANSVARSERKLARING': 'Du må bekrefte at du vil svare så riktig du kan',
     'soknad.feilmelding.ANDRE_INNTEKTSKILDER': 'Du må svare på om du har andre inntektskilder eller arbeidsforhold',
+    'soknad.feilmelding.FLERE_INNTEKTSKILDER_GRUPPE':
+        'Du må svare på om du har andre inntektskilder eller arbeidsforhold',
     'soknad.feilmelding.FLERE_INNTEKTSKILDER_GHOST':
         'Du må svare på om du har jobbet mer enn du pleier i et eller flere arbeidsforhold',
     'soknad.feilmelding.JOBBET_MER_I':

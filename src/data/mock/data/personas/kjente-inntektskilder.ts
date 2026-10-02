@@ -6,9 +6,9 @@ import { brukertestSoknad, brukertestSykmelding } from './brukertestPerosn'
 
 const soknad = deepcopyMedNyId(brukertestSoknad, '7fdc72b9-30a9-435c-9eb1-f7cc68a8b444')
 
-const splittSted = soknad.sporsmal.findIndex((spm) => spm.tag === 'FLERE_INNTEKTSKILDER_GHOST')
+const splittSted = soknad.sporsmal.findIndex((spm) => spm.tag === 'FLERE_INNTEKTSKILDER_GRUPPE')
 if (splittSted === -1) {
-    throw new Error('Søknad mangler spørsmål FLERE_INNTEKTSKILDER_GHOST')
+    throw new Error('Søknad mangler spørsmål FLERE_INNTEKTSKILDER_GRUPPE')
 }
 soknad.sporsmal = [
     ...soknad.sporsmal.slice(0, splittSted),

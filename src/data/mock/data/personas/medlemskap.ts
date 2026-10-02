@@ -24,10 +24,10 @@ medlemskapOriginalOppholdstillatelse.sporsmal = medlemskapOriginalOppholdstillat
     .filter((spm) => spm.tag !== 'UTLAND_V2')
     .filter((spm) => spm.tag !== 'OPPHOLD_UTENFOR_EOS')
 const splittSted = medlemskapOriginalOppholdstillatelse.sporsmal.findIndex(
-    (spm) => spm.tag === 'FLERE_INNTEKTSKILDER_GHOST',
+    (spm) => spm.tag === 'FLERE_INNTEKTSKILDER_GRUPPE',
 )
 if (splittSted === -1) {
-    throw new Error('Søknad mangler spørsmål FLERE_INNTEKTSKILDER_GHOST')
+    throw new Error('Søknad mangler spørsmål FLERE_INNTEKTSKILDER_GRUPPE')
 }
 medlemskapOriginalOppholdstillatelse.sporsmal = [
     ...medlemskapOriginalOppholdstillatelse.sporsmal.slice(0, splittSted + 1),
