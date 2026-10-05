@@ -35,6 +35,7 @@ const sporsmalMedNyFlexjar = [
     'NARINGSDRIVENDE_NY_I_ARBEIDSLIVET',
     'NARINGSDRIVENDE_VARIG_ENDRING',
     'FRAVAR_FOR_SYKMELDINGEN_V2',
+    'FLERE_INNTEKTSKILDER_GRUPPE',
 ]
 
 export const Soknaden = () => {
