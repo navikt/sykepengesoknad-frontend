@@ -1,10 +1,9 @@
 import { Sykmelding } from '../../../types/sykmelding'
-import { ArbeidsforholdFraInntektskomponenten } from '../../../types/rs-types/rs-arbeidsforholdfrainntektskomponenten'
 import { RSSoknad } from '../../../types/rs-types/rs-soknad'
 import { tilLesbarPeriodeMedArstall } from '../../../utils/dato-utils'
 
 import { oppsummering } from './sporsmal/oppsummering'
-import { flereInntektskilderGhost } from './sporsmal/flere-inntektskilder-ghost'
+import { andreInntektskilderV2 } from './sporsmal/andre-inntektskilde-v2'
 
 export function skapSykmelding(opts: { fom: string; tom: string; hovedjobb: string; id: string }) {
     const { fom, tom, hovedjobb, id } = opts
@@ -145,30 +144,11 @@ export function skapSoknad(opts: {
     const { fom, tom, hovedjobb, sykmeldingId, soknadId, opprettetDato } = opts
 
     const periodeTekst = tilLesbarPeriodeMedArstall(fom, tom)
-
-    const inntektskilderDataFraInntektskomponenten: ArbeidsforholdFraInntektskomponenten[] = [
-        {
-            navn: 'Ruter',
-            orgnummer: '222',
-            arbeidsforholdstype: 'ARBEIDSTAKER',
-        },
-        {
-            navn: 'Blomsterbutikken',
-            orgnummer: '111',
-            arbeidsforholdstype: 'ARBEIDSTAKER',
-        },
-        {
-            navn: 'Bensinstasjonen',
-            orgnummer: '333',
-            arbeidsforholdstype: 'ARBEIDSTAKER',
-        },
-    ]
     return {
         id: soknadId,
         sykmeldingId: sykmeldingId,
         soknadstype: 'ARBEIDSTAKERE',
         status: 'NY',
-        inntektskilderDataFraInntektskomponenten: inntektskilderDataFraInntektskomponenten,
         fom: fom,
         tom: tom,
         opprettetDato: opprettetDato ?? '2022-11-17',
@@ -390,7 +370,7 @@ export function skapSoknad(opts: {
                 svar: [],
                 undersporsmal: [],
             },
-            flereInntektskilderGhost(),
+            andreInntektskilderV2(),
             {
                 id: '1623814',
                 tag: 'OPPHOLD_UTENFOR_EOS',

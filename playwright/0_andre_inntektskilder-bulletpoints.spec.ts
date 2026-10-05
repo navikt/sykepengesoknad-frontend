@@ -9,14 +9,12 @@ test.describe('Tester andre inntektskilder bulletpoints', () => {
     })
 
     test('Viser liste med flere hvis vi har ghost inntekter', async ({ page }) => {
-        await page.goto(
-            '/syk/sykepengesoknad/soknader/5b769c04-e171-47c9-b79b-23ab8fce331e/7?testperson=arbeidstaker-gradert',
-        )
+        await page.goto('/syk/sykepengesoknad/soknader/a0000001-0000-4000-a000-000000000008/6')
 
         await harSynligTekst(page, 'Andre arbeidsforhold vi har registrert på deg:')
         const list = page.getByRole('list').filter({ hasText: 'Blomsterbutikken' })
         await expect(list.locator('li')).toHaveCount(3)
-        const expectedValues = ['Ruter', 'Blomsterbutikken', 'Bensinstasjonen']
+        const expectedValues = ['Ruter', 'Blomsterbutikken AS', 'Bensinstasjonen']
         const items = await list.locator('li').all()
         for (let i = 0; i < items.length; i++) {
             await expect(items[i]).toContainText(expectedValues[i])

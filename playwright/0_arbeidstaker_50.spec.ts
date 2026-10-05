@@ -184,15 +184,8 @@ test.describe('Tester arbeidstakersøknad - gradert 50%', () => {
             await page.getByRole('button', { name: /Gå videre/i }).click()
         })
 
-        await test.step('Søknad FLERE_INNTEKTSKILDER_GHOST', async () => {
+        await test.step('Søknad ANDRE_INNTEKTSKILDER_V2', async () => {
             await expect(page).toHaveURL(new RegExp(`.*${soknadId}\/7`))
-            await harSynligTekst(
-                page,
-                'Har du jobbet noe mer i disse enn du vanligvis gjør, mens du var sykemeldt i perioden 1. April - 24. Mai 2020?',
-            )
-            await svarJaHovedsporsmal(page)
-            await harSynligTekst(page, 'Hvilke jobbet du mer i?')
-            await svarCheckboxSporsmal(page, 'Hvilke jobbet du mer i?', 'Ruter')
             await harSynligTekst(page, 'Har du hatt annen inntekt eller oppdrag?')
             await svarRadio(page, 'Har du hatt annen inntekt eller oppdrag?', 'JA')
             await harSynligTekst(page, 'Hva slags arbeid eller inntekt gjelder dette?')

@@ -1,8 +1,8 @@
 import { RSSoknad } from '../../../../types/rs-types/rs-soknad'
 import { arbeidstaker50Syk } from '../sykmeldinger'
 import { oppsummering } from '../sporsmal/oppsummering'
-import { flereInntektskilderGhost } from '../sporsmal/flere-inntektskilder-ghost'
 import { RSKilde, RSKjentInntektskilde } from '../../../../types/rs-types/rs-kjenteinntektskilder'
+import { andreInntektskilderV2 } from '../sporsmal/andre-inntektskilde-v2'
 
 const ghostInntekter: RSKjentInntektskilde[] = [
     {
@@ -246,7 +246,7 @@ export const arbeidstakerGradert: RSSoknad = {
             svar: [],
             undersporsmal: [],
         },
-        flereInntektskilderGhost(),
+        andreInntektskilderV2(),
         {
             id: '687308',
             tag: 'OPPHOLD_UTENFOR_EOS',

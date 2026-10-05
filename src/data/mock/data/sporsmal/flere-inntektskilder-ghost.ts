@@ -37,9 +37,9 @@ export const flereInntektskilderGhost = (): RSSporsmal => {
                         svar: [],
                         undersporsmal: [
                             {
-                                id: '2920104UNDAKSDNAKLSDENUMNA',
+                                id: '292901ndkadniedandøswjwondamdaø',
                                 tag: 'JOBBET_MER_I_VALG',
-                                sporsmalstekst: 'Blomsterbutikken AS',
+                                sporsmalstekst: 'Ruter',
                                 undertekst: null,
                                 svartype: 'CHECKBOX',
                                 min: null,
@@ -49,9 +49,9 @@ export const flereInntektskilderGhost = (): RSSporsmal => {
                                 undersporsmal: [],
                             },
                             {
-                                id: '292901ndkadniedandøswjwondamdaø',
+                                id: '2920104UNDAKSDNAKLSDENUMNA',
                                 tag: 'JOBBET_MER_I_VALG',
-                                sporsmalstekst: 'Ruter',
+                                sporsmalstekst: 'Blomsterbutikken AS',
                                 undertekst: null,
                                 svartype: 'CHECKBOX',
                                 min: null,

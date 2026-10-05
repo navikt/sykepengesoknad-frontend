@@ -11,7 +11,7 @@ const ghostInntekter: RSKjentInntektskilde[] = [
         kilde: RSKilde.INNTEKTSKOMPONENTEN,
     },
     {
-        navn: 'Blomsterbutikken',
+        navn: 'Blomsterbutikken AS',
         orgnummer: '111',
         kilde: RSKilde.INNTEKTSKOMPONENTEN,
     },

@@ -5,14 +5,13 @@ import type { RSSoknad } from '../../../../types/rs-types/rs-soknad'
 
 import type { Persona } from './personas'
 import { brukertestSoknad, brukertestSykmelding } from './brukertestPerosn'
-import { RSKilde } from '../../../../types/rs-types/rs-kjenteinntektskilder'
 
 export function medNyttArbeidsforholdSporsmal(soknad: RSSoknad): RSSoknad {
     const kopi = jsonDeepCopy(soknad)
-    const splittSted = kopi.sporsmal.findIndex((spm) => spm.tag === 'FLERE_INNTEKTSKILDER_GRUPPE')
+    const splittSted = kopi.sporsmal.findIndex((spm) => spm.tag === 'ANDRE_INNTEKTSKILDER_V2')
 
     if (splittSted === -1) {
-        throw new Error('Søknad mangler spørsmål FLERE_INNTEKTSKILDER_GRUPPE')
+        throw new Error('Søknad mangler spørsmål ANDRE_INNTEKTSKILDER_V2')
     }
 
     kopi.sporsmal.splice(
@@ -24,11 +23,6 @@ export function medNyttArbeidsforholdSporsmal(soknad: RSSoknad): RSSoknad {
             fom: kopi.fom!,
             tom: kopi.tom!,
         }),
-    )
-    kopi.ghostInntekter?.push(
-        { orgnummer: '123324', kilde: RSKilde.INNTEKTSKOMPONENTEN, navn: 'Matbutikken AS' },
-        { orgnummer: '123324', kilde: RSKilde.INNTEKTSKOMPONENTEN, navn: 'Smørebussen AS' },
-        { orgnummer: '123324', kilde: RSKilde.INNTEKTSKOMPONENTEN, navn: 'Kaffebrenneriet' },
     )
     return kopi
 }
