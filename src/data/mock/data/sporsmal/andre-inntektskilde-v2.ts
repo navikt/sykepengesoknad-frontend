@@ -5,7 +5,7 @@ export const andreInntektskilderV2 = (): RSSporsmal => {
         id: 'ee6a8e84-07c2-30c3-99d0-2aad85124890',
         tag: 'ANDRE_INNTEKTSKILDER_V2',
         sporsmalstekst: 'Har du hatt annen inntekt eller oppdrag?',
-        undertekst: null,
+        undertekst: 'Med inntekt mener vi betaling som du får for arbeid du har gjort.',
         svartype: 'JA_NEI',
         min: null,
         max: null,

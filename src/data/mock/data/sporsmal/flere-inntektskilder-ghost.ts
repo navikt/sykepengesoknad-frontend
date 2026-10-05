@@ -17,7 +17,7 @@ export const flereInntektskilderGhost = (): RSSporsmal => {
                 id: 'ee6a8e84-07c2-30c3-99d0-2aad85124867',
                 tag: 'FLERE_INNTEKTSKILDER_GHOST',
                 sporsmalstekst:
-                    'Har du jobbet noe mer i disse enn du vanligvis gjør, mens du var sykemeldt i perioden 1. April - 24. Mai 2020?',
+                    'Har du jobbet noe mer i disse enn du vanligvis gjør, mens du var sykemeldt i perioden 1. april - 24. mai 2020?',
                 undertekst: null,
                 svartype: 'JA_NEI',
                 min: null,

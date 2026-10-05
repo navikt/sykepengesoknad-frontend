@@ -1,4 +1,4 @@
-import { Heading, List } from '@navikt/ds-react'
+import { Heading, List, BodyShort } from '@navikt/ds-react'
 import React from 'react'
 
 import { Soknad } from '../../types/types'
@@ -12,6 +12,7 @@ export const Inntektsbulletpoints = ({ soknad }: { soknad: Soknad }) => {
             <Heading className="mt-10" size={'small'}>
                 Andre arbeidsforhold vi har registrert på deg:
             </Heading>
+            <BodyShort textColor={'subtle'}>Hentet fra offentlige register.</BodyShort>
 
             <List className="mt-4 mb-10">
                 {navnListe?.map((bedriftNavn, index) => (
