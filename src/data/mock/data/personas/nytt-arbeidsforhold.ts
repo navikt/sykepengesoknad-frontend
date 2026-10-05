@@ -24,20 +24,6 @@ export function medNyttArbeidsforholdSporsmal(soknad: RSSoknad): RSSoknad {
             tom: kopi.tom!,
         }),
     )
-    kopi.inntektskilderDataFraInntektskomponenten?.push({
-        orgnummer: '123324',
-        navn: 'Kaffebrenneriet',
-        arbeidsforholdstype: 'ARBEIDSTAKER',
-    })
-
-    kopi.sporsmal.find((spm) => spm.tag === 'ANDRE_INNTEKTSKILDER_V2')!.metadata = {
-        kjenteInntektskilder: [
-            { orgnummer: '123324', navn: 'Matbutikken AS' },
-            { orgnummer: '123324', navn: 'Smørebussen AS' },
-            { orgnummer: '123324', navn: 'Kaffebrenneriet' },
-        ],
-    }
-
     return kopi
 }
 

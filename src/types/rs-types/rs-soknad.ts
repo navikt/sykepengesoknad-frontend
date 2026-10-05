@@ -8,6 +8,7 @@ import { RSSoknadstypeType } from './rs-soknadstype'
 import { RSSporsmal } from './rs-sporsmal'
 import { ArbeidsforholdFraInntektskomponenten } from './rs-arbeidsforholdfrainntektskomponenten'
 import { RSKjentOppholdstillatelse } from './rs-kjentoppholdstillatelse'
+import { RSKjentInntektskilde } from './rs-kjenteinntektskilder'
 
 export interface RSSoknad {
     id: string
@@ -43,5 +44,6 @@ export interface RSSoknad {
     julesoknad?: boolean
     friskTilArbeidVedtakId?: string
     ventetidSykmeldingUuid?: string
+    ghostInntekter?: RSKjentInntektskilde[]
     demoinfo?: string
 }

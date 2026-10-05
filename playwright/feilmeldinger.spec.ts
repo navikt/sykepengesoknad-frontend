@@ -3,7 +3,7 @@ import { Page } from '@playwright/test'
 import { arbeidstakerGradert } from '../src/data/mock/data/soknad/arbeidstaker-gradert'
 
 import { test, expect } from './utils/fixtures'
-import { klikkGaVidere, svarCombobox, svarJaHovedsporsmal, harSynligTekst } from './utils/utilities'
+import { klikkGaVidere, svarCombobox, svarJaHovedsporsmal, harSynligTekst, svarRadioSporsmal } from './utils/utilities'
 import { validerAxeUtilityWrapper } from './uuvalidering'
 
 test.describe('Tester feilmeldinger', () => {
@@ -316,16 +316,13 @@ test.describe('Tester feilmeldinger', () => {
                 'Du må velge minst et alternativ',
                 'Du må oppgi hvilke inntektskilder du har',
                 soknad.sporsmal[6].undersporsmal[0].undersporsmal[0].id,
+                1,
             )
             await validerAxeUtilityWrapper(page, test.info())
         })
 
         await test.step('Feilmelding går bort', async () => {
-            await page
-                .getByRole('group', { name: 'Velg inntektskildene som' })
-                .getByRole('checkbox', { name: 'Dagmamma' })
-                .check()
-
+            await svarRadioSporsmal(page, 'Har du hatt annen inntekt eller oppdrag?', 'Nei')
             await verifiserIngenFeilmeldinger(page)
             await validerAxeUtilityWrapper(page, test.info())
         })

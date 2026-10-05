@@ -17,7 +17,6 @@ import { YrkesskadeInfo } from '../../hjelpetekster/yrkesskade-info'
 import { useJaNeiTastaturNavigasjon } from '../../../utils/tastatur-navigasjon'
 import { Inntektsbulletpoints } from '../inntektsbulletpoints'
 import { Yrkesskadebulletpoints } from '../yrkesskade-bulletpoints'
-import { InntektsopplysningerErKonfidensielleInfo } from '../inntektsopplysninger-er-konfidensielle-info'
 import { useSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
 import { KjentOppholdstillatelse } from '../kjent-oppholdstillatelse'
 import { NyttArbeidsforhold } from '../nytt-arbeidsforhold'
@@ -50,27 +49,16 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
 
     const error = errors[sporsmal.id] !== undefined
 
-    const skalHaInntektsbulletpoints =
-        sporsmal.tag === 'ANDRE_INNTEKTSKILDER_V2' &&
-        (valgtSoknad.inntektskilderDataFraInntektskomponenten || sporsmal.metadata)
-
     const skalViseKjentOppholdstillatelse =
         sporsmal.tag === 'MEDLEMSKAP_OPPHOLDSTILLATELSE_V2' && valgtSoknad.kjentOppholdstillatelse
-
-    function sporsmalstekst() {
-        if (skalHaInntektsbulletpoints) {
-            return 'Har du andre inntektskilder enn nevnt over?'
-        }
-        return sporsmal.sporsmalstekst
-    }
 
     const erOppholdUtenforEUEOS = sporsmal.tag === 'OPPHOLD_UTENFOR_EOS' || sporsmal.tag === 'FTA_REISE_TIL_UTLANDET'
 
     return (
         <>
             <div>
-                {skalHaInntektsbulletpoints && (
-                    <Inntektsbulletpoints key="inntekt-bulletpoints" soknad={valgtSoknad} sporsmal={sporsmal} />
+                {sporsmal.tag === 'FLERE_INNTEKTSKILDER_GHOST' && (
+                    <Inntektsbulletpoints key="inntekt-bulletpoints" soknad={valgtSoknad} />
                 )}
                 {skalViseKjentOppholdstillatelse && (
                     <KjentOppholdstillatelse key="kjent-opphold" soknad={valgtSoknad} />
@@ -106,7 +94,7 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
                                     clearErrors(sporsmalIdListe(sporsmal.undersporsmal))
                                 }
                             }}
-                            legend={sporsmalstekst()}
+                            legend={sporsmal.sporsmalstekst}
                             description={sporsmal.undertekst}
                             className="w-full"
                             key={sporsmal.id}
@@ -138,8 +126,6 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
                         </RadioGroup>
                     )}
                 />
-
-                {sporsmal.tag === 'ANDRE_INNTEKTSKILDER_V2' && <InntektsopplysningerErKonfidensielleInfo />}
 
                 {sporsmal?.tag === 'UTLANDSOPPHOLD_SOKT_SYKEPENGER' && watchJaNei && (
                     <BodyLong spacing className="utland_infotekst">

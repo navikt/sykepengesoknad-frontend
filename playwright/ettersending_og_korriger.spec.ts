@@ -10,6 +10,7 @@ import {
     svarJaHovedsporsmal,
     trykkPaSoknadMedId,
     harSynligTekst,
+    svarRadioSporsmal,
 } from './utils/utilities'
 import { validerAxeUtilityWrapper } from './uuvalidering'
 
@@ -34,10 +35,11 @@ test.describe('Tester ettersending og korrigering', () => {
                 'Permisjon',
                 'Arbeid mens du var syk',
                 'Arbeid utenfor Norge',
-                'Andre inntektskilder',
-                'Reise utenfor EU/EØS',
             ])
         })
+
+        await svarRadioSporsmal(page, 'Har du hatt annen inntekt eller oppdrag?', 'Nei')
+        await neiOgVidere(page, ['Andre inntektskilder', 'Reise utenfor EU/EØS'])
 
         await test.step('Sender søknaden', async () => {
             await harSynligTittel(page, 'Oppsummering fra søknaden', 2)

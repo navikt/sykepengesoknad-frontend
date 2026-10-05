@@ -8,16 +8,13 @@ test.describe('Tester andre inntektskilder bulletpoints', () => {
         await page.context().clearCookies()
     })
 
-    test('Viser liste med flere hvis vi har data fra inntektskomponenten', async ({ page }) => {
-        await page.goto(
-            '/syk/sykepengesoknad/soknader/5b769c04-e171-47c9-b79b-23ab8fce331e/7?testperson=arbeidstaker-gradert',
-        )
+    test('Viser liste med flere hvis vi har ghost inntekter', async ({ page }) => {
+        await page.goto('/syk/sykepengesoknad/soknader/a0000001-0000-4000-a000-000000000008/6')
 
-        await harSynligTekst(page, 'Arbeidsforhold vi har registrert på deg:')
-        const list = page.locator('[aria-label="Inntektskilder fra Aa-registeret"]')
-        await expect(list.locator('li')).toHaveCount(4)
-        const expectedValues = ['Posten Norge AS, Bærum', 'Ruter', 'Blomsterbutikken', 'Bensinstasjonen']
-
+        await harSynligTekst(page, 'Andre arbeidsforhold vi har registrert på deg:')
+        const list = page.getByRole('list').filter({ hasText: 'Blomsterbutikken' })
+        await expect(list.locator('li')).toHaveCount(3)
+        const expectedValues = ['Ruter', 'Blomsterbutikken AS', 'Bensinstasjonen']
         const items = await list.locator('li').all()
         for (let i = 0; i < items.length; i++) {
             await expect(items[i]).toContainText(expectedValues[i])
@@ -25,49 +22,23 @@ test.describe('Tester andre inntektskilder bulletpoints', () => {
         await validerAxeUtilityWrapper(page, test.info())
     })
 
-    test('Viser liste med en hvis vi har data fra inntektskomponenten, men ingen ekstra', async ({ page }) => {
+    test('Viser ikke liste dersom vi kun har arbeidsgiver fra søknad', async ({ page }) => {
         await page.goto('/syk/sykepengesoknad/soknader/d9ac193d-9b67-4a51-80c2-fe4289214878/6')
 
-        await harSynligTekst(page, 'Arbeidsforhold vi har registrert på deg:')
-        await harSynligTekst(page, 'Har du andre inntektskilder enn nevnt over?')
-        const list = page.locator('[aria-label="Inntektskilder fra Aa-registeret"]')
-        await expect(list.locator('li')).toHaveCount(1)
-        const expectedValues = ['Posten Norge AS, Bærum']
-
-        const items = await list.locator('li').all()
-        for (let i = 0; i < items.length; i++) {
-            await expect(items[i]).toContainText(expectedValues[i])
-        }
+        await harSynligTekst(page, 'Har du hatt annen inntekt eller oppdrag?')
+        const list = page.getByRole('list').filter({ hasText: 'Blomsterbutikken' })
+        await expect(list).toHaveCount(0)
         await validerAxeUtilityWrapper(page, test.info())
     })
 
-    test('Viser ikke liste når vi mangler data fra inntektskomponenten', async ({ page }) => {
+    test('Viser ikke liste når vi mangler ghost inntekter', async ({ page }) => {
         await page.goto(
             '/syk/sykepengesoknad/soknader/214f6e73-8150-4261-8ce5-e2b41907fa58/10?testperson=integrasjon-soknader',
         )
 
-        await expect(page.getByText('Har du andre inntektskilder enn nevnt over?')).toHaveCount(0)
-
         await harSynligTekst(page, 'Har du andre inntektskilder enn Posten Norge AS, Bærum?')
-        await expect(page.locator('[aria-label="Inntektskilder fra Aa-registeret"]')).toHaveCount(0)
-        await validerAxeUtilityWrapper(page, test.info())
-    })
-
-    test('Viser data primært fra metadata på spørsmålet når vi har det', async ({ page }) => {
-        await page.goto(
-            '/syk/sykepengesoknad/soknader/260f06b5-9fd0-4b30-94d2-4f90851b4cac/8?testperson=nytt-arbeidsforhold',
-        )
-
-        await harSynligTekst(page, 'Arbeidsforhold vi har registrert på deg:')
-        await harSynligTekst(page, 'Har du andre inntektskilder enn nevnt over?')
-        const list = page.locator('[aria-label="Inntektskilder fra Aa-registeret"]')
-        await expect(list.locator('li')).toHaveCount(3)
-        const expectedValues = ['Matbutikken AS', 'Smørebussen AS', 'Kaffebrenneriet']
-
-        const items = await list.locator('li').all()
-        for (let i = 0; i < items.length; i++) {
-            await expect(items[i]).toContainText(expectedValues[i])
-        }
+        const list = page.getByRole('list').filter({ hasText: 'Blomsterbutikken' })
+        await expect(list).toHaveCount(0)
         await validerAxeUtilityWrapper(page, test.info())
     })
 })
