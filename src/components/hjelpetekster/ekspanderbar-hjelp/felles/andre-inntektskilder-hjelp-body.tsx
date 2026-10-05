@@ -26,7 +26,10 @@ export const AndreInntektskilderHjelpBody = () => {
                     <BodyShort>fått kommunal omsorgsstønad</BodyShort>
                 </List.Item>
                 <List.Item>
-                    <BodyShort>fått fosterhjemsgodgjørelse har utført arbeid i styreverv</BodyShort>
+                    <BodyShort>fått fosterhjemsgodtgjørelse</BodyShort>
+                </List.Item>
+                <List.Item>
+                    <BodyShort>har utført arbeid i styreverv</BodyShort>
                 </List.Item>
             </List>
             <BodyShort className="my-6">Svar nei hvis inntekten er:</BodyShort>
