@@ -618,18 +618,6 @@ export const oppholdUtlandKvittering: RSSoknad = {
             svar: [],
             undersporsmal: [
                 {
-                    id: '4',
-                    tag: 'SYKMELDINGSGRAD',
-                    sporsmalstekst: 'Er du 100 % sykmeldt?',
-                    undertekst: null,
-                    svartype: 'JA_NEI',
-                    min: null,
-                    max: null,
-                    kriterieForVisningAvUndersporsmal: null,
-                    svar: [],
-                    undersporsmal: [],
-                },
-                {
                     id: '5',
                     tag: 'FERIE',
                     sporsmalstekst: 'Har du avtalt med arbeidsgiveren din at du skal ta ut feriedager i hele perioden?',
