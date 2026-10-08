@@ -142,12 +142,6 @@ test.describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
         // "Har du arbeidsgiver?" -> JA
         await page.getByRole('radio', { name: 'Ja', exact: true }).check()
 
-        // "Er du 100 % sykmeldt?" -> JA
-        await page
-            .locator('fieldset', { hasText: 'Er du 100 % sykmeldt?' })
-            .getByRole('radio', { name: 'Ja', exact: true })
-            .check()
-
         // "Har du avtalt feriedager?" -> NEI
         await page
             .locator('fieldset', {
@@ -200,7 +194,6 @@ test.describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
         await sporsmalOgSvar(oppsummering, 'Hvilke(t) land skal du reise til?', 'Afghanistan')
         await sporsmalOgSvar(oppsummering, 'Hvilke(t) land skal du reise til?', 'Sør-Korea')
         await sporsmalOgSvar(oppsummering, 'Har du arbeidsgiver?', 'Ja')
-        await sporsmalOgSvar(oppsummering, 'Er du 100 % sykmeldt?', 'Ja')
         await sporsmalOgSvar(
             oppsummering,
             'Har du avtalt med arbeidsgiveren din at du skal ta ut feriedager i hele perioden?',

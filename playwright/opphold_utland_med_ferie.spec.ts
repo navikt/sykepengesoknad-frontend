@@ -51,15 +51,6 @@ test.describe('Søknad om å beholde sykepenger utenfor EØS med ferie', () => {
         await test.step('Vi svarer Ja på arbeidsgiverspørsmålet', async () => {
             await harSynligTittel(page, 'Har du arbeidsgiver', 2)
             await svarJaHovedsporsmal(page)
-            await svarRadioGruppe(page, 'Er du 100 % sykmeldt?', 'Ja')
-        })
-
-        await test.step('Vi svarer Nei på 100% sykmeldt spørsmålet og får en bjørn', async () => {
-            await svarRadioGruppe(page, 'Er du 100 % sykmeldt?', 'Nei')
-            await harSynligTekst(
-                page,
-                'Det er ikke mulig å ta ut ferie de dagene eller timene du skulle arbeidet og få utbetalt sykepenger for de andre.',
-            )
         })
 
         await test.step('Gå videre forsvinner og bjørn vises når man har avtalt ferie', async () => {
@@ -75,11 +66,12 @@ test.describe('Søknad om å beholde sykepenger utenfor EØS med ferie', () => {
                 'Du får ikke sykepenger mens du har ferie. Det betyr at du ikke trenger å sende denne søknaden. God tur!',
             )
             await expect(page.getByRole('button', { name: 'Gå videre' })).toBeHidden()
+            await expect(page.getByText('Har du avtalt med arbeidsgiveren din')).toBeVisible()
         })
 
         await test.step('Sykmeldt sporsmalet forsvinner når vi klikker nei', async () => {
             await svarNeiHovedsporsmal(page)
-            await expect(page.getByText('Er du 100 % sykmeldt?')).toBeHidden()
+            await expect(page.getByText('Har du avtalt med arbeidsgiveren din')).toBeHidden()
         })
 
         await test.step('Avbryter søknaden og havner på avbrutt-siden', async () => {
