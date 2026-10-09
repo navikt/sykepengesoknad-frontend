@@ -27,7 +27,7 @@ describe('hentAlertTekst', () => {
                 valgtLand: ['England', 'Danmark'],
                 utlandskSykmeldingTrygd: false,
             }),
-        ).toBe('Ved reiser til Storbritannia og EU/EØS-land trenger du ikke å søke.')
+        ).toBe('Ved reiser til Storbritannia og EU-/EØS-land trenger du ikke å søke.')
     })
 
     it('returnerer ingen tekst for land utenfor EU/EØS og Storbritannia', () => {

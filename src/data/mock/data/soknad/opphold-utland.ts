@@ -24,8 +24,8 @@ export const oppholdUtland: RSSoknad = {
         {
             id: 'eafa7256-2486-419c-96d9-d077418fa8a2',
             tag: 'LAND',
-            sporsmalstekst: 'Hvilke(t) land skal du reise til?',
-            undertekst: 'Du kan velge flere.',
+            sporsmalstekst: 'Hvor skal du reise?',
+            undertekst: 'Du kan velge flere land.',
             svartype: 'COMBOBOX_MULTI',
             min: null,
             max: '50',
@@ -48,7 +48,7 @@ export const oppholdUtland: RSSoknad = {
         {
             id: 'acd5a489-2624-40c3-8dd1-a651b41b25aa',
             tag: 'ARBEIDSGIVER',
-            sporsmalstekst: 'Har du arbeidsgiver?',
+            sporsmalstekst: 'Har du én eller flere arbeidsgivere?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
