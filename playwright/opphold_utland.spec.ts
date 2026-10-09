@@ -55,18 +55,17 @@ test.describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
 
         // Velger land innanfor EØS
         await svarCombobox(page, 'Hvilke(t) land skal du reise til?', 'Hel', 'Hellas', true)
-        await expect(
-            page.getByText('Du har kun vært innenfor EU/EØS, så du trenger ikke sende inn søknad.'),
-        ).toBeVisible()
+        await expect(page.getByText('Du har valgt land innenfor EU/EØS og trenger derfor ikke å søke')).toBeVisible()
 
         await svarCombobox(page, 'Hvilke(t) land skal du reise til?', 'Svei', 'Sveits', true)
-        await expect(
-            page.getByText('Du har kun vært innenfor EU/EØS, så du trenger ikke sende inn søknad.'),
-        ).toBeVisible()
+        await expect(page.getByText('Du har valgt land innenfor EU/EØS og trenger derfor ikke å søke')).toBeVisible()
 
         await svarCombobox(page, 'Hvilke(t) land skal du reise til?', 'Lit', 'Litauen', true)
+        await expect(page.getByText('Du har valgt land innenfor EU/EØS og trenger derfor ikke å søke')).toBeVisible()
+
+        await svarCombobox(page, 'Hvilke(t) land skal du reise til?', 'Eng', 'England', true)
         await expect(
-            page.getByText('Du har kun vært innenfor EU/EØS, så du trenger ikke sende inn søknad.'),
+            page.getByText('Ved reiser til Storbritannia og EU/EØS-land trenger du ikke å søke.'),
         ).toBeVisible()
 
         await expect(page.getByRole('button', { name: 'Avbryt søknad' })).toBeVisible()
