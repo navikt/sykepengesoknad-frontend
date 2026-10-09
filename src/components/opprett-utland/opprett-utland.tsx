@@ -60,15 +60,13 @@ const OpprettUtland = () => {
                 {tekst('opprett-utland.tittel')}
             </Heading>
             <BodyLong className="mb-3">
-                Du må søke om å beholde sykepengene hvis du planlegger å reise utenfor EU/EØS, eller har reist, mens du
-                er sykmeldt. Du bør sende søknaden før du reiser, for å være sikker på at du beholder sykepengene dine.
+                Er du sykmeldt og skal reise utenfor EU/EØS? Da må du søke om å beholde sykepengene før du reiser. Søker
+                du i god tid, kan du planlegge behandling eller oppfølging slik at reisen ikke påvirker sykepengene. Du
+                kan ha rett til sykepenger i opptil 4 uker i løpet av 12 måneder.
             </BodyLong>
             <BodyLong className="mb-3">
-                Du kan ha rett til sykepenger under opphold utenfor EU/EØS i opptil 4 uker i løpet av en
-                tolvmånedersperiode.
-            </BodyLong>
-            <BodyLong className="mb-3">
-                Dersom noen av dagene du er utenfor EU/EØS ikke er feriedager, må du sende inn søknad for disse dagene.
+                Om du allerede har reist, kan du fortsatt søke. Vi vurderer da om du hadde rett til sykepenger mens du
+                var borte, og om du har rett til sykepenger videre.
             </BodyLong>
             <BodyLong className="mb-10">
                 <LenkeMedIkon
@@ -77,51 +75,50 @@ const OpprettUtland = () => {
                 />
             </BodyLong>
             <Heading spacing size="small" level="2">
-                Du trenger ikke søke hvis du
+                Du trenger ikke søke hvis
             </Heading>
             <List className="mb-10">
                 <List.Item>har avtalt med arbeidsgiveren din at du tar ut lovbestemt ferie</List.Item>
                 <List.Item>er sykmeldt på grunn av godkjent yrkesskade</List.Item>
+                <List.Item>du skal være i et EU-/EØS-land</List.Item>
+                <List.Item>
+                    du skal på en{' '}
+                    <LenkeMedIkon
+                        href="https://www.oslo-universitetssykehus.no/avdelinger/prehospital-klinikk/avdeling-for-utenlandskontor-og-behandlingsreiser/behandlingsreiser/"
+                        text="behandlingsreise i regi av Oslo Universitetsykehus"
+                    />
+                </List.Item>
             </List>
 
-            <Heading spacing size="small" level="2">
-                Har du allerede vært på reise?
-            </Heading>
-            <BodyLong className="mb-10">
-                I utgangspunktet bør du søke før du reiser til land utenfor EU/EØS. Du kan likevel søke NAV om å få
-                beholde sykepengene etter du har reist.
-            </BodyLong>
+            <Alert variant="warning">
+                <Heading spacing size="small" level="2">
+                    Søk før du reiser
+                </Heading>
+                Reiser du uten godkjent søknad og er borte i mer enn 14 dager, kan det påvirke sykepengene dine også
+                etter at du er kommet hjem. Du kan miste dem, eller få mindre i sykepenger resten av perioden du er
+                sykmeldt. Det samme kan skje hvis du blir borte lenger enn perioden du har fått godkjenning til.
+            </Alert>
 
             <ExpansionCard
                 aria-label="Informasjon om reise og søknadskrav for statsborgere utenfor EU/EØS"
-                className="mb-16"
+                className="mt-16"
             >
                 <ExpansionCard.Header>
                     <ExpansionCard.Title>Er du statsborger i et land utenfor EU/EØS?</ExpansionCard.Title>
                 </ExpansionCard.Header>
                 <ExpansionCard.Content>
                     <ul>
-                        <BodyLong as="li" spacing>
-                            Skal du reise innenfor Norden, trenger du ikke å søke.
-                        </BodyLong>
-                        <BodyLong as="li" spacing>
-                            Skal du reise til et annet land innenfor EU/EØS, må du benytte{' '}
+                        <BodyLong as="li">Skal du reise innenfor Norden, trenger du ikke søke</BodyLong>
+                        <BodyLong as="li">
+                            Skal du reise til et annet land i EU/EØS, må du bruke{' '}
                             <LenkeMedIkon
                                 href="https://www.nav.no/fyllut/nav080907?sub=paper"
-                                text="søknaden på papir."
+                                text="søknaden på papir"
                             ></LenkeMedIkon>
                         </BodyLong>
                     </ul>
                 </ExpansionCard.Content>
             </ExpansionCard>
-
-            <Alert variant="warning">
-                <Heading spacing size="small" level="2">
-                    Viktig informasjon
-                </Heading>
-                Hvis du reiser uten å søke på forhånd eller ikke søker i ettertid, kan søknaden om sykepenger bli
-                avslått. Det kan også påvirke videre søknader.
-            </Alert>
 
             <Button variant="primary" type="button" onClick={opprettEllerFinnEksisterende} className="mb-8 mt-16">
                 {tekst('opprett-utland.fortsett')}

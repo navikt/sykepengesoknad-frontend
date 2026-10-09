@@ -28,9 +28,9 @@ export const avklaringIfbmReise = (): RSSporsmal => {
             {
                 id: 'f75c9e39-1990-4788-b2b6-7933b8fdb166',
                 tag: 'AVKLART_MED_ARBEIDSGIVER_ELLER_NAV',
-                sporsmalstekst: 'Har du avklart utenlandsoppholdet med arbeidsgiveren/NAV?',
+                sporsmalstekst: 'Har du avklart utenlandsoppholdet med arbeidsgiver/Nav?',
                 undertekst:
-                    'Utenlandsoppholdet må avklares med arbeidsgiveren din, eller NAV om du ikke har en arbeidsgiver, før du reiser. Utenlandsoppholdet kan ikke hindre planlagt aktivitet pả arbeidsplassen eller NAV.',
+                    'Før du reiser må du avklare oppholdet med arbeidsgiveren din, eller med Nav hvis du ikke har en arbeidsgiver. Oppholdet kan ikke hindre planlagt aktivitet på arbeidsplassen eller hos Nav.',
                 svartype: 'JA_NEI',
                 min: null,
                 max: null,
