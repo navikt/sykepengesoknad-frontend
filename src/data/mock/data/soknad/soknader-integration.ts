@@ -585,8 +585,8 @@ export const oppholdUtlandKvittering: RSSoknad = {
         {
             id: '2',
             tag: 'LAND',
-            sporsmalstekst: 'Hvilke(t) land skal du reise til?',
-            undertekst: null,
+            sporsmalstekst: 'Hvor skal du reise?',
+            undertekst: 'Du kan velge flere land.',
             svartype: 'COMBOBOX_MULTI',
             min: null,
             max: '50',
@@ -609,7 +609,7 @@ export const oppholdUtlandKvittering: RSSoknad = {
         {
             id: '3',
             tag: 'ARBEIDSGIVER',
-            sporsmalstekst: 'Har du arbeidsgiver?',
+            sporsmalstekst: 'Har du én eller flere arbeidsgivere?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,

@@ -994,7 +994,7 @@ export const veldigLangSoknad: RSSoknad = {
         {
             id: '3',
             tag: 'ARBEIDSGIVER',
-            sporsmalstekst: 'Har du arbeidsgiver?',
+            sporsmalstekst: 'Har du én eller flere arbeidsgivere?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -1660,7 +1660,7 @@ export const veldigLangSoknad: RSSoknad = {
         {
             id: '2',
             tag: 'LAND',
-            sporsmalstekst: 'Hvilke(t) land skal du reise til?',
+            sporsmalstekst: 'Hvor skal du reise?',
             undertekst: null,
             svartype: 'LAND',
             min: null,
@@ -1672,7 +1672,7 @@ export const veldigLangSoknad: RSSoknad = {
         {
             id: '926',
             tag: 'LAND',
-            sporsmalstekst: 'Hvilke(t) land skal du reise til?',
+            sporsmalstekst: 'Hvor skal du reise?',
             undertekst: null,
             svartype: 'COMBOBOX_MULTI',
             min: null,

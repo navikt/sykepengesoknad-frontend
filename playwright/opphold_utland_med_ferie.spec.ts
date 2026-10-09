@@ -29,15 +29,15 @@ test.describe('Søknad om å beholde sykepenger utenfor EØS med ferie', () => {
         })
 
         await test.step('Viser infoside og starter søknaden', async () => {
-            await harSynligTekst(page, 'Du trenger ikke søke hvis du')
-            await harSynligTekst(page, 'Har du allerede vært på reise?')
+            await harSynligTekst(page, 'Du trenger ikke søke hvis')
+            await harSynligTekst(page, 'Søk før du reiser')
             await page.getByRole('button', { name: 'Start søknaden' }).click()
         })
 
         await test.step('LAND - steg 1', async () => {
-            await harSynligTekst(page, 'Hvilke(t) land skal du reise til?')
-            await harSynligTekst(page, 'Du kan velge flere.')
-            await svarCombobox(page, 'Hvilke(t) land skal du reise til?', 'Søre', 'Søre franske territorier', true)
+            await harSynligTekst(page, 'Hvor skal du reise?')
+            await harSynligTekst(page, 'Du kan velge flere land.')
+            await svarCombobox(page, 'Hvor skal du reise?', 'Søre', 'Søre franske territorier', true)
             await klikkGaVidere(page)
         })
 
@@ -49,7 +49,7 @@ test.describe('Søknad om å beholde sykepenger utenfor EØS med ferie', () => {
         })
 
         await test.step('Vi svarer Ja på arbeidsgiverspørsmålet', async () => {
-            await harSynligTittel(page, 'Har du arbeidsgiver', 2)
+            await harSynligTittel(page, 'Din jobbsituasjon', 2)
             await svarJaHovedsporsmal(page)
         })
 

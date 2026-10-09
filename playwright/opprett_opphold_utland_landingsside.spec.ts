@@ -12,8 +12,8 @@ test.describe('Tester opprettelse av opphold utland søknad', () => {
 
         // Sjekk overskrifter og tekster
         await harSynligTittel(page, 'Søknad om å beholde sykepenger utenfor EU/EØS', 1)
-        await harSynligTekst(page, 'Du trenger ikke søke hvis du')
-        await harSynligTittel(page, 'Har du allerede vært på reise?', 2)
+        await harSynligTekst(page, 'Du trenger ikke søke hvis')
+        await harSynligTittel(page, 'Søk før du reiser', 2)
         await harSynligTittel(page, 'Er du statsborger i et land utenfor EU/EØS?', 3)
 
         // Klikk "Start søknaden"
@@ -21,8 +21,8 @@ test.describe('Tester opprettelse av opphold utland søknad', () => {
         await page.getByRole('button', { name: 'Start søknaden' }).click()
 
         // Sjekk at vi nå er på 1. steg i skjemaet
-        await harSynligTekst(page, 'Hvilke(t) land skal du reise til?')
-        await harSynligTekst(page, 'Du kan velge flere.')
+        await harSynligTekst(page, 'Hvor skal du reise?')
+        await harSynligTekst(page, 'Du kan velge flere land.')
 
         // 'Kan gå tilbake til forside, og starte søknad igjen
         // Klikk "Forrige steg"

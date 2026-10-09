@@ -4,7 +4,7 @@ const GuidepanelTekster = {
     'soknad.bjorn.fraver_for_behandling':
         'Vi trenger å vite om du har brukt egenmeldinger eller en papirsykmelding noen dager før denne sykmeldingen. Det er for å kunne beregne sykepengene dine riktig.',
     'soknad.bjorn.periodeutland':
-        'Vil du beholde sykepengene mens du er utenfor EU/EØS, kan du ikke være borte i mer enn 28 kalenderdager i løpet av en 12 måneders periode.',
+        'Du kan beholde sykepengene i opptil 4 uker i løpet av 12 måneder når du er utenfor EU/EØS.',
     'bekreft-sykmelding.skal-opprettes-soknad.bjorn':
         '<p>Du lurer kanskje på hvorfor du må søke som sykepenger på papir?</p>\n<p>Vi jobber med å digitalisere søknaden om sykepenger for selvstendig næringsdrivende og frilansere, men vi er dessverre ikke helt ferdige ennå.</p>',
     'sykepengesoknad.angi-tid.bjorn':
