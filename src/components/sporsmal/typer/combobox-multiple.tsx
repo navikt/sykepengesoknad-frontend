@@ -3,8 +3,41 @@ import { Alert, UNSAFE_Combobox } from '@navikt/ds-react'
 import React, { useMemo } from 'react'
 
 import { landlisteEøs, landlisteUtenforEøs } from '../landliste'
+import { erLandIEuEos, erLandIEuEosEllerStorbritannia, erStorbritanniaLand } from '../land-utils'
 import { hentFeilmelding } from '../sporsmal-utils'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
+
+export const hentAlertTekst = ({
+    valgtLand,
+    utlandskSykmeldingTrygd,
+}: {
+    valgtLand: string[]
+    utlandskSykmeldingTrygd: boolean
+}) => {
+    if (utlandskSykmeldingTrygd) {
+        return undefined
+    }
+
+    if (valgtLand.length === 0) {
+        return undefined
+    }
+
+    const harKunStorbritannia = valgtLand.every(erStorbritanniaLand)
+    const harKunEøs = valgtLand.every(erLandIEuEos)
+    const harKunStorbritanniaEllerEøs = valgtLand.every(erLandIEuEosEllerStorbritannia)
+
+    if (harKunStorbritannia) {
+        return 'Ved reiser til Storbritannia trenger du ikke å søke.'
+    }
+    if (harKunEøs) {
+        return 'Du har valgt land innenfor EU/EØS og trenger derfor ikke å søke.'
+    }
+    if (harKunStorbritanniaEllerEøs) {
+        return 'Ved reiser til Storbritannia og EU/EØS-land trenger du ikke å søke.'
+    }
+
+    return undefined
+}
 
 const ComboboxMultiple = ({ sporsmal }: SpmProps) => {
     const feilmelding = hentFeilmelding(sporsmal)
@@ -26,10 +59,11 @@ const ComboboxMultiple = ({ sporsmal }: SpmProps) => {
                 name={sporsmal.id}
                 rules={{ required: feilmelding.global }}
                 render={({ field, fieldState }) => {
-                    const alleValgteErIEOS =
-                        field.value &&
-                        field.value.length > 0 &&
-                        field.value.every((land: string) => landlisteEøs.includes(land))
+                    const valgtLand = field.value ?? []
+                    const alertTekst = hentAlertTekst({
+                        valgtLand,
+                        utlandskSykmeldingTrygd,
+                    })
 
                     return (
                         <>
@@ -47,12 +81,12 @@ const ComboboxMultiple = ({ sporsmal }: SpmProps) => {
                                 shouldAutocomplete={true}
                                 selectedOptions={field.value}
                                 onBlur={field.onBlur}
-                                onKeyDownCapture={(event) => {
+                                onKeyDownCapture={(event: React.KeyboardEvent<HTMLInputElement>) => {
                                     if (event.key === 'Enter') {
                                         event.preventDefault()
                                     }
                                 }}
-                                onToggleSelected={(option, isSelected) => {
+                                onToggleSelected={(option: string, isSelected: boolean) => {
                                     const optionLowerCase = option.toLowerCase()
                                     const valgtLand = options.find((land) => optionLowerCase === land.toLowerCase())
                                     if (!valgtLand) return
@@ -66,9 +100,9 @@ const ComboboxMultiple = ({ sporsmal }: SpmProps) => {
                                     }
                                 }}
                             />
-                            {alleValgteErIEOS && !utlandskSykmeldingTrygd && (
+                            {alertTekst && (
                                 <Alert className="mt-8" variant="info" closeButton={true}>
-                                    Du har kun vært innenfor EU/EØS, så du trenger ikke sende inn søknad.
+                                    {alertTekst}
                                 </Alert>
                             )}
                         </>

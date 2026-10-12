@@ -11,23 +11,7 @@ import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus'
 import AvsluttOgFortsettSenere from '../../avslutt-og-fortsett-senere/avslutt-og-fortsett-senere'
 import AvbrytSoknadModal from '../../avbryt-soknad-modal/avbryt-soknad-modal'
 import { Tilbake } from '../tilbake-knapp/tilbake'
-import { landlisteEøs } from '../../sporsmal/landliste'
-
-const euEosLand = landlisteEøs
-
-const erLandIEuEos = (land: string) => {
-    return euEosLand.includes(land.trim())
-}
-
-const soknadOmÅBeholdeSykepengerUtenforEUEøsSpecialCase = () => {
-    return (
-        <div className="my-8 border-t border-ax-border-neutral">
-            <div className="mt-4">
-                <AvbrytSoknadModal euEøsSpecialCase={true} />
-            </div>
-        </div>
-    )
-}
+import { harAlleLandIEuEosEllerStorbritannia } from '../land-utils'
 
 const Knapperad = ({ poster }: { poster: boolean }) => {
     const { valgtSoknad: soknad, sporsmal, stegNo } = useSoknadMedDetaljer()
@@ -47,7 +31,7 @@ const Knapperad = ({ poster }: { poster: boolean }) => {
         name: landSporsmalId,
     })
 
-    const alleLandIEuEos = hvilkenLandVerdi?.every((land) => erLandIEuEos(land)) && hvilkenLandVerdi.length > 0
+    const alleLandIEuEosEllerStorbritannia = harAlleLandIEuEosEllerStorbritannia(hvilkenLandVerdi ?? [])
 
     const skalSkjuleKnapperad = () => {
         if (!soknad || !sporsmal) return false
@@ -62,7 +46,12 @@ const Knapperad = ({ poster }: { poster: boolean }) => {
 
     if (skalSkjuleKnapperad()) return null
 
-    if (soknad && soknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND && stegNo === 1 && alleLandIEuEos) {
+    if (
+        soknad &&
+        soknad.soknadstype === RSSoknadstype.OPPHOLD_UTLAND &&
+        stegNo === 1 &&
+        alleLandIEuEosEllerStorbritannia
+    ) {
         return soknadOmÅBeholdeSykepengerUtenforEUEøsSpecialCase()
     }
 
@@ -108,6 +97,16 @@ const Knapperad = ({ poster }: { poster: boolean }) => {
             </div>
             <AvsluttOgFortsettSenere />
             <AvbrytSoknadModal />
+        </div>
+    )
+}
+
+const soknadOmÅBeholdeSykepengerUtenforEUEøsSpecialCase = () => {
+    return (
+        <div className="my-8 border-t border-ax-border-neutral">
+            <div className="mt-4">
+                <AvbrytSoknadModal euEøsSpecialCase={true} />
+            </div>
         </div>
     )
 }
