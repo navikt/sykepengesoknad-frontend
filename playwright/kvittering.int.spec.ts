@@ -72,7 +72,7 @@ test.describe('Kvittering integrasjon', () => {
                 .getByRole('link', { name: /beholde sykepenger utenfor EU\/EØS/ })
                 .click()
             await page.getByRole('button', { name: 'Start søknaden' }).click()
-            await svarCombobox(page, 'Hvilke(t) land skal du reise til?', 'Søre fran', 'Søre franske territorier')
+            await svarCombobox(page, 'Hvor skal du reise?', 'Søre fran', 'Søre franske territorier')
             await klikkGaVidere(page)
             await setPeriodeFraTil(page, 14, 22)
             await klikkGaVidere(page)

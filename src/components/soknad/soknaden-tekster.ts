@@ -13,8 +13,8 @@ const SoknadenTekster = {
 
     'sykepengesoknad.periodeutland.tittel': 'Når skal du reise',
     'sykepengesoknad.land.tittel': 'Destinasjon for reisen',
-    'sykepengesoknad.arbeidsgiver.tittel': 'Har du arbeidsgiver',
-    'sykepengesoknad.avklaring_i_forbindelse_med_reise.tittel': 'Avklaring i forbindelse med reise',
+    'sykepengesoknad.arbeidsgiver.tittel': 'Din jobbsituasjon',
+    'sykepengesoknad.avklaring_i_forbindelse_med_reise.tittel': 'Dette må du avklare før du reiser',
 
     'sykepengesoknad.permittert_naa.tittel': 'Permittert av arbeidsgiveren',
     'sykepengesoknad.permittert_periode.tittel': 'Permittert av arbeidsgiveren',

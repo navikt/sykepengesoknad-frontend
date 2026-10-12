@@ -37,8 +37,8 @@ test.describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
         await expect(header).toContainText('Søknad om å beholde sykepenger utenfor EU/EØS')
 
         // Viser infoside og starter søknaden', async () => {
-        await harSynligTekst(page, 'Du trenger ikke søke hvis du')
-        await harSynligTekst(page, 'Har du allerede vært på reise?')
+        await harSynligTekst(page, 'Du trenger ikke søke hvis')
+        await harSynligTekst(page, 'Søk før du reiser')
 
         await validerAxeUtilityWrapper(page, test.info())
         // Start søknaden
@@ -54,18 +54,18 @@ test.describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
         await harSynligTekst(page, 'Du må oppgi hvilket land du skal reise til')
 
         // Velger land innanfor EØS
-        await svarCombobox(page, 'Hvilke(t) land skal du reise til?', 'Hel', 'Hellas', true)
+        await svarCombobox(page, 'Hvor skal du reise?', 'Hel', 'Hellas', true)
         await expect(page.getByText('Du har valgt land innenfor EU/EØS og trenger derfor ikke å søke')).toBeVisible()
 
-        await svarCombobox(page, 'Hvilke(t) land skal du reise til?', 'Svei', 'Sveits', true)
+        await svarCombobox(page, 'Hvor skal du reise?', 'Svei', 'Sveits', true)
         await expect(page.getByText('Du har valgt land innenfor EU/EØS og trenger derfor ikke å søke')).toBeVisible()
 
-        await svarCombobox(page, 'Hvilke(t) land skal du reise til?', 'Lit', 'Litauen', true)
+        await svarCombobox(page, 'Hvor skal du reise?', 'Lit', 'Litauen', true)
         await expect(page.getByText('Du har valgt land innenfor EU/EØS og trenger derfor ikke å søke')).toBeVisible()
 
-        await svarCombobox(page, 'Hvilke(t) land skal du reise til?', 'Eng', 'England', true)
+        await svarCombobox(page, 'Hvor skal du reise?', 'Eng', 'England', true)
         await expect(
-            page.getByText('Ved reiser til Storbritannia og EU/EØS-land trenger du ikke å søke.'),
+            page.getByText('Ved reiser til Storbritannia og EU-/EØS-land trenger du ikke å søke.'),
         ).toBeVisible()
 
         await expect(page.getByRole('button', { name: 'Avbryt søknad' })).toBeVisible()
@@ -80,7 +80,7 @@ test.describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
         await expect(page).toHaveURL(new RegExp(`${soknad.id}/1`))
 
         // Velger Afghanistan
-        await svarCombobox(page, 'Hvilke(t) land skal du reise til?', 'Afg', 'Afghanistan')
+        await svarCombobox(page, 'Hvor skal du reise?', 'Afg', 'Afghanistan')
 
         // Assert "Avslutt og fortsett senere" er der igjen
         await expect(page.getByRole('button', { name: 'Avslutt og fortsett senere' })).toHaveCount(1)
@@ -89,11 +89,11 @@ test.describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
         await expect(page.getByRole('button', { name: 'Jeg vil slette denne søknaden' })).toHaveCount(1)
 
         // Velger Fransk Polynesia, lukker med chip
-        await svarCombobox(page, 'Hvilke(t) land skal du reise til?', 'Fransk', 'Fransk Polynesia')
+        await svarCombobox(page, 'Hvor skal du reise?', 'Fransk', 'Fransk Polynesia')
         await page.getByRole('button', { name: 'Fransk Polynesia' }).click()
 
         // Velger Sør-Korea med musepeker
-        const landvelger = page.getByRole('combobox', { name: 'Hvilke(t) land skal du reise til?' })
+        const landvelger = page.getByRole('combobox', { name: 'Hvor skal du reise?' })
         await landvelger.fill('Sør-')
         await page.getByRole('option', { name: 'Sør-Korea' }).click()
 
@@ -138,7 +138,7 @@ test.describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
 
         await validerAxeUtilityWrapper(page, test.info())
 
-        // "Har du arbeidsgiver?" -> JA
+        // "Har du én eller flere arbeidsgivere?" -> JA
         await page.getByRole('radio', { name: 'Ja', exact: true }).check()
 
         // "Har du avtalt feriedager?" -> NEI
@@ -151,7 +151,7 @@ test.describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
 
         await klikkGaVidere(page)
 
-        // Avklaring i forbindelse med reise', async () => {
+        // Dette må du avklare før du reiser
         // Klikk "Gå videre" -> forventa feil
         await klikkGaVidere(page, true)
 
@@ -167,13 +167,13 @@ test.describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
 
         // Radiogruppe: 'Har du avklart utenlandsoppholdet ... sykmeldte deg?' -> 'Nei'
         await svarRadioGruppe(page, 'Har du avklart utenlandsoppholdet med den som sykmeldte deg?', 'Nei')
-        // Radiogruppe: 'Har du avklart utenlandsoppholdet ... arbeidsgiveren/NAV?' -> 'Nei'
-        await svarRadioGruppe(page, 'Har du avklart utenlandsoppholdet med arbeidsgiveren/NAV?', 'Nei')
+        // Radiogruppe: 'Har du avklart utenlandsoppholdet ... arbeidsgiver/Nav?' -> 'Nei'
+        await svarRadioGruppe(page, 'Har du avklart utenlandsoppholdet med arbeidsgiver/Nav?', 'Nei')
         // Info-boksar dukkar opp
 
         // Sett begge til 'Ja'
         await svarRadioGruppe(page, 'Har du avklart utenlandsoppholdet med den som sykmeldte deg?', 'Ja')
-        await svarRadioGruppe(page, 'Har du avklart utenlandsoppholdet med arbeidsgiveren/NAV?', 'Ja')
+        await svarRadioGruppe(page, 'Har du avklart utenlandsoppholdet med arbeidsgiver/Nav?', 'Ja')
 
         await klikkGaVidere(page)
 
@@ -187,12 +187,12 @@ test.describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
         const oppsummering = page.locator('[role="region"][aria-label="Oppsummering fra søknaden"]')
 
         await sporsmalOgSvar(oppsummering, 'Når skal du reise?', '17. – 24. desember 2020')
-        await sporsmalOgSvar(oppsummering, 'Hvilke(t) land skal du reise til?', 'Hellas')
-        await sporsmalOgSvar(oppsummering, 'Hvilke(t) land skal du reise til?', 'Sveits')
-        await sporsmalOgSvar(oppsummering, 'Hvilke(t) land skal du reise til?', 'Litauen')
-        await sporsmalOgSvar(oppsummering, 'Hvilke(t) land skal du reise til?', 'Afghanistan')
-        await sporsmalOgSvar(oppsummering, 'Hvilke(t) land skal du reise til?', 'Sør-Korea')
-        await sporsmalOgSvar(oppsummering, 'Har du arbeidsgiver?', 'Ja')
+        await sporsmalOgSvar(oppsummering, 'Hvor skal du reise?', 'Hellas')
+        await sporsmalOgSvar(oppsummering, 'Hvor skal du reise?', 'Sveits')
+        await sporsmalOgSvar(oppsummering, 'Hvor skal du reise?', 'Litauen')
+        await sporsmalOgSvar(oppsummering, 'Hvor skal du reise?', 'Afghanistan')
+        await sporsmalOgSvar(oppsummering, 'Hvor skal du reise?', 'Sør-Korea')
+        await sporsmalOgSvar(oppsummering, 'Har du én eller flere arbeidsgivere?', 'Ja')
         await sporsmalOgSvar(
             oppsummering,
             'Har du avtalt med arbeidsgiveren din at du skal ta ut feriedager i hele perioden?',
