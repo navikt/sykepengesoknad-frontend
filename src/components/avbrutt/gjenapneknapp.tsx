@@ -1,4 +1,5 @@
-import { Alert, Button } from '@navikt/ds-react'
+import { Button, InfoCard } from '@navikt/ds-react'
+import { XMarkOctagonIcon } from '@navikt/aksel-icons'
 import React from 'react'
 
 import { logEvent } from '../umami/umami'
@@ -14,8 +15,13 @@ const GjenapneSoknad = () => {
 
     return (
         <>
-            {gjenapneError && <Alert variant="error">Beklager, klarte ikke gjenåpne søknaden din</Alert>}
-
+            {gjenapneError && (
+                <InfoCard data-color="danger">
+                    <InfoCard.Message icon=<XMarkOctagonIcon/>>
+                        Beklager, klarte ikke gjenåpne søknaden din
+                    </InfoCard.Message>
+                </InfoCard>
+            )}
             <Button
                 variant="tertiary"
                 className="-ml-5"

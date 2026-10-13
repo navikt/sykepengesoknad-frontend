@@ -1,4 +1,4 @@
-import { Alert, BodyLong, BodyShort } from '@navikt/ds-react'
+import { BodyLong, InfoCard } from '@navikt/ds-react'
 import { isAfter, subSeconds } from 'date-fns'
 import React, { useEffect } from 'react'
 import { useRouter } from 'next/router'
@@ -20,6 +20,7 @@ import { tekstMedHtml } from '../../utils/html-react-parser-utils'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 
 import GjenapneSoknad from './gjenapneknapp'
+import { ExclamationmarkTriangleIcon } from '@navikt/aksel-icons'
 
 const AvbruttSoknad = () => {
     const router = useRouter()
@@ -52,11 +53,11 @@ const AvbruttSoknad = () => {
     return (
         <>
             <SoknadHeader />
-            <Alert variant="warning" style={{ marginBottom: '1rem' }}>
-                <BodyShort>
+            <InfoCard data-color="warning" style={{ marginBottom: '1rem' }}>
+                <InfoCard.Message icon={<ExclamationmarkTriangleIcon aria-hidden />}>
                     {tekst('sykepengesoknad.avbrutt.tidspunkt')} {tilLesbarDatoMedArstall(valgtSoknad.avbruttDato)}.
-                </BodyShort>
-            </Alert>
+                </InfoCard.Message>
+            </InfoCard>
             <BodyLong size="large" spacing weight="semibold">
                 {tekstMedHtml(tekst('sykepengesoknad.avbrutt.informasjon-innhold-1'))}
             </BodyLong>

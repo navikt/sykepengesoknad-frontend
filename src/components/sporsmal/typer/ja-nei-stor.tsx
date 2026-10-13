@@ -1,4 +1,4 @@
-import { Alert, BodyLong, Radio, RadioGroup } from '@navikt/ds-react'
+import { Alert, BodyLong, InfoCard, Radio, RadioGroup } from '@navikt/ds-react'
 import { Controller, useFormContext } from 'react-hook-form'
 import React from 'react'
 
@@ -26,6 +26,15 @@ import { NaringsdrivendeYrkesaktivInfo } from '../../hjelpetekster/yrkesaktiv-in
 import { VarigEndringInfo } from '../../hjelpetekster/varig-endring-info'
 
 import { jaNeiStorStyle, JaNeiStyle } from './ja-nei-stor-style'
+import { InformationSquareIcon } from '@navikt/aksel-icons'
+
+function MerInfoAlert({ info }: { info: string }) {
+    return (
+        <InfoCard data-color="info" className="mt-8">
+            <InfoCard.Message icon={<InformationSquareIcon aria-hidden />}>{info}</InfoCard.Message>
+        </InfoCard>
+    )
+}
 
 const JaNeiStor = ({ sporsmal }: SpmProps) => {
     const {
@@ -144,19 +153,13 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
                 )}
 
                 {sporsmal.tag === 'FRAVAR_FOR_SYKMELDINGEN_V2' && watchJaNei === 'JA' && (
-                    <Alert variant="info" className="mt-8">
-                        Det kan være vi trenger flere opplysninger om fraværet ditt. Da vil en saksbehandler ta kontakt.
-                    </Alert>
+                    <MerInfoAlert info="Det kan være vi trenger flere opplysninger om fraværet ditt. Da vil en saksbehandler ta kontakt."/>
                 )}
                 {sporsmal.tag === 'NARINGSDRIVENDE_OPPRETTHOLDT_INNTEKT' && watchJaNei === 'JA' && (
-                    <Alert variant="info" className="mt-8">
-                        Vi trenger mer informasjon om denne inntekten. En saksbehandler vil derfor ta kontakt med deg.
-                    </Alert>
+                    <MerInfoAlert info="Vi trenger mer informasjon om denne inntekten. En saksbehandler vil derfor ta kontakt med deg." />
                 )}
                 {sporsmal.tag === 'NARINGSDRIVENDE_OPPRETTHOLDT_INNTEKT_GRADERT' && watchJaNei === 'JA' && (
-                    <Alert variant="info" className="mt-8">
-                        Vi trenger mer informasjon om denne inntekten. En saksbehandler vil derfor ta kontakt med deg.
-                    </Alert>
+                    <MerInfoAlert info="Vi trenger mer informasjon om denne inntekten. En saksbehandler vil derfor ta kontakt med deg." />
                 )}
             </div>
 
