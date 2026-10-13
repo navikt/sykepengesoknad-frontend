@@ -1,4 +1,4 @@
-import { Alert, BodyLong, InfoCard, Radio, RadioGroup } from '@navikt/ds-react'
+import { BodyLong, Radio, RadioGroup } from '@navikt/ds-react'
 import { Controller, useFormContext } from 'react-hook-form'
 import React from 'react'
 
@@ -26,15 +26,7 @@ import { NaringsdrivendeYrkesaktivInfo } from '../../hjelpetekster/yrkesaktiv-in
 import { VarigEndringInfo } from '../../hjelpetekster/varig-endring-info'
 
 import { jaNeiStorStyle, JaNeiStyle } from './ja-nei-stor-style'
-import { InformationSquareIcon } from '@navikt/aksel-icons'
-
-function MerInfoAlert({ info }: { info: string }) {
-    return (
-        <InfoCard data-color="info" className="mt-8">
-            <InfoCard.Message icon={<InformationSquareIcon aria-hidden />}>{info}</InfoCard.Message>
-        </InfoCard>
-    )
-}
+import MerInfoAlert from '../../generelle-komponenter/MerInfoAlert'
 
 const JaNeiStor = ({ sporsmal }: SpmProps) => {
     const {
@@ -153,7 +145,7 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
                 )}
 
                 {sporsmal.tag === 'FRAVAR_FOR_SYKMELDINGEN_V2' && watchJaNei === 'JA' && (
-                    <MerInfoAlert info="Det kan være vi trenger flere opplysninger om fraværet ditt. Da vil en saksbehandler ta kontakt."/>
+                    <MerInfoAlert info="Det kan være vi trenger flere opplysninger om fraværet ditt. Da vil en saksbehandler ta kontakt." />
                 )}
                 {sporsmal.tag === 'NARINGSDRIVENDE_OPPRETTHOLDT_INNTEKT' && watchJaNei === 'JA' && (
                     <MerInfoAlert info="Vi trenger mer informasjon om denne inntekten. En saksbehandler vil derfor ta kontakt med deg." />
@@ -175,10 +167,10 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
                         {valgtSoknad?.status === RSSoknadstatus.UTKAST_TIL_KORRIGERING &&
                             sporsmal.tag === 'FERIE_V2' &&
                             watchJaNei === 'JA' && (
-                                <Alert className="mt-8" variant="info">
-                                    Du kan dra på ferie mens du er sykmeldt, men du får ikke utbetalt sykepenger når du
-                                    har ferie.
-                                </Alert>
+                                <MerInfoAlert
+                                    info="Du kan dra på ferie mens du er sykmeldt, men du får ikke utbetalt sykepenger når du
+                                    har ferie."
+                                />
                             )}
                         <YrkesskadeInfo sporsmal={sporsmal} jaNeiSvar={watchJaNei} />
                         <PaskeferieInfo sporsmal={sporsmal} jaNeiSvar={watchJaNei} />
@@ -186,10 +178,10 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
                         <VarigEndringInfo sporsmal={sporsmal} jaNeiSvar={watchJaNei} />
 
                         {erOppholdUtenforEUEOS && (
-                            <Alert variant="info" className="mt-4">
-                                Nav oppretter en egen søknad som du må sende inn. Du får varsel når den er klar, og
-                                finner den under Ditt sykefravær etter at du har sendt inn denne søknaden.
-                            </Alert>
+                            <MerInfoAlert
+                                info="Nav oppretter en egen søknad som du må sende inn. Du får varsel når den er klar, og
+                                finner den under Ditt sykefravær etter at du har sendt inn denne søknaden."
+                            />
                         )}
                     </>
                 </AnimateOnMount>
