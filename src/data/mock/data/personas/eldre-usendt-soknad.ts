@@ -2,22 +2,44 @@ import { RSSoknad } from '../../../../types/rs-types/rs-soknad'
 import { deepcopyMedNyId } from '../../deepcopyMedNyId'
 import { sykmeldinger } from '../sykmeldinger'
 import { kortArbeidstakerSoknad } from '../soknad/arbeidstaker-kort'
+import { tilbakeIArbeid } from '../sporsmal/tilbake-i-arbeid'
 
 import { Persona } from './personas'
+
+const byggSporsmalMedNyeDatoer = (soknad: RSSoknad, fom: string, tom: string): void => {
+    soknad.sporsmal = soknad.sporsmal.map((sporsmal) => {
+        if (sporsmal.tag !== 'TILBAKE_I_ARBEID') return sporsmal
+        return tilbakeIArbeid({
+            fom,
+            tom,
+            arbeidsgiver: soknad.arbeidsgiver?.navn ?? undefined,
+            id: sporsmal.id,
+            svar: sporsmal.svar,
+            tilbakeNarId: sporsmal.undersporsmal[0].id,
+            tilbakeNarSvar: sporsmal.undersporsmal[0].svar,
+        })
+    })
+}
 
 const nySoknadSomIkkeKanFyllesUt: RSSoknad = deepcopyMedNyId(
     kortArbeidstakerSoknad,
     'e6e53c43-3b64-48be-b9d1-39d95198e521',
 )
-nySoknadSomIkkeKanFyllesUt.fom = '2022-04-25'
-nySoknadSomIkkeKanFyllesUt.tom = '2022-04-30'
+const nySoknadFom = '2022-04-25'
+const nySoknadTom = '2022-04-30'
+nySoknadSomIkkeKanFyllesUt.fom = nySoknadFom
+nySoknadSomIkkeKanFyllesUt.tom = nySoknadTom
+byggSporsmalMedNyeDatoer(nySoknadSomIkkeKanFyllesUt, nySoknadFom, nySoknadTom)
 
 const endaEnNySoknadSomIkkeKanFyllesUt: RSSoknad = deepcopyMedNyId(
     kortArbeidstakerSoknad,
     'e6e53c43-3b64-48be-b9d1-39d95198e522',
 )
-endaEnNySoknadSomIkkeKanFyllesUt.fom = '2022-04-23'
-endaEnNySoknadSomIkkeKanFyllesUt.tom = '2022-04-30'
+const endaEnNySoknadFom = '2022-04-23'
+const endaEnNySoknadTom = '2022-04-30'
+endaEnNySoknadSomIkkeKanFyllesUt.fom = endaEnNySoknadFom
+endaEnNySoknadSomIkkeKanFyllesUt.tom = endaEnNySoknadTom
+byggSporsmalMedNyeDatoer(endaEnNySoknadSomIkkeKanFyllesUt, endaEnNySoknadFom, endaEnNySoknadTom)
 
 export const flereEldreUsendteSoknader: Persona = {
     soknader: [

@@ -9,7 +9,7 @@ export const soknadTilUtenlandskSykmelding = deepcopyMedNyId(brukertestSoknad, '
 soknadTilUtenlandskSykmelding.utenlandskSykmelding = true
 const sporsmalene: RSSporsmal[] = []
 sporsmalene.push(soknadTilUtenlandskSykmelding.sporsmal[0])
-sporsmalene.push(...utenlandskSykmeldingSporsmalene)
+sporsmalene.push(...utenlandskSykmeldingSporsmalene())
 sporsmalene.push(...soknadTilUtenlandskSykmelding.sporsmal.slice(1))
 
 soknadTilUtenlandskSykmelding.sporsmal = sporsmalene

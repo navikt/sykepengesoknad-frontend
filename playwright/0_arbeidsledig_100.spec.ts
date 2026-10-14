@@ -68,7 +68,7 @@ test.describe('Tester arbeidsledigsøknad', () => {
 
             // Test spørsmål
             await expect(
-                page.getByText('Har du hatt inntekt mens du har vært sykmeldt i perioden 1. - 24. april 2020?'),
+                page.getByText('Har du hatt inntekt mens du har vært sykmeldt i perioden 1. – 24. april 2020?'),
             ).toBeVisible()
 
             // Velg 'JA' på hovedspørsmål
@@ -99,7 +99,7 @@ test.describe('Tester arbeidsledigsøknad', () => {
 
             // Test spørsmål
             await expect(
-                page.getByText('Var du på reise utenfor EU/EØS mens du var sykmeldt 1. - 24. april 2020?'),
+                page.getByText('Var du på reise utenfor EU/EØS mens du var sykmeldt 1. – 24. april 2020?'),
             ).toBeVisible()
 
             await apneReadmore(page, 'Spørsmålet forklart', [
@@ -140,11 +140,11 @@ test.describe('Tester arbeidsledigsøknad', () => {
 
             await sporsmalOgSvar(
                 oppsummering,
-                'Har du hatt inntekt mens du har vært sykmeldt i perioden 1. - 24. april 2020?',
+                'Har du hatt inntekt mens du har vært sykmeldt i perioden 1. – 24. april 2020?',
                 'Ja',
             )
             const inntektSvar = oppsummering
-                .getByText('Har du hatt inntekt mens du har vært sykmeldt i perioden 1. - 24. april 2020?')
+                .getByText('Har du hatt inntekt mens du har vært sykmeldt i perioden 1. – 24. april 2020?')
                 .locator('..')
             await sporsmalOgSvar(inntektSvar, 'Hvilke inntektskilder har du hatt?', 'andre arbeidsforhold')
             const underInntektSvar = inntektSvar.getByText('Hvilke inntektskilder har du hatt?').locator('..')

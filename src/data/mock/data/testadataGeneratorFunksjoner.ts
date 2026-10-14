@@ -1,9 +1,14 @@
 import { Sykmelding } from '../../../types/sykmelding'
 import { RSSoknad } from '../../../types/rs-types/rs-soknad'
-import { tilLesbarPeriodeMedArstall } from '../../../utils/dato-utils'
-
 import { oppsummering } from './sporsmal/oppsummering'
-import { andreInntektskilderV2 } from './sporsmal/andre-inntektskilde-v2'
+import { andreInntektskilderV2 } from './sporsmal/andre-inntektskilder-v2'
+import { ansvarserklaring } from './sporsmal/ansvarserklaring'
+import { tilbakeIArbeid } from './sporsmal/tilbake-i-arbeid'
+import { ferieV2 } from './sporsmal/ferie-v2'
+import { permisjonV2 } from './sporsmal/permisjon-v2'
+import { arbeidUnderveis100Prosent } from './sporsmal/arbeid-underveis-100-prosent'
+import { arbeidUtenforNorge } from './sporsmal/arbeid-utenfor-norge'
+import { oppholdUtenforEos } from './sporsmal/opphold-utenfor-eos'
 
 export function skapSykmelding(opts: { fom: string; tom: string; hovedjobb: string; id: string }) {
     const { fom, tom, hovedjobb, id } = opts
@@ -143,7 +148,6 @@ export function skapSoknad(opts: {
 }): RSSoknad {
     const { fom, tom, hovedjobb, sykmeldingId, soknadId, opprettetDato } = opts
 
-    const periodeTekst = tilLesbarPeriodeMedArstall(fom, tom)
     return {
         id: soknadId,
         sykmeldingId: sykmeldingId,
@@ -170,232 +174,14 @@ export function skapSoknad(opts: {
             },
         ],
         sporsmal: [
-            {
-                id: '1623807',
-                tag: 'ANSVARSERKLARING',
-                sporsmalstekst: 'Jeg bekrefter at jeg vil svare så riktig som jeg kan.',
-                undertekst: null,
-                svartype: 'CHECKBOX_PANEL',
-                min: null,
-                max: null,
-                kriterieForVisningAvUndersporsmal: null,
-                svar: [],
-                undersporsmal: [],
-            },
-            {
-                id: '1623808',
-                tag: 'TILBAKE_I_ARBEID',
-                sporsmalstekst: `Var du tilbake i fullt arbeid hos ${hovedjobb} i løpet av perioden ${periodeTekst}?`,
-                undertekst: null,
-                svartype: 'JA_NEI',
-                min: null,
-                max: null,
-                kriterieForVisningAvUndersporsmal: 'JA',
-                svar: [],
-                undersporsmal: [
-                    {
-                        id: '1623809',
-                        tag: 'TILBAKE_NAR',
-                        sporsmalstekst: 'Når begynte du å jobbe igjen?',
-                        undertekst: null,
-                        svartype: 'DATO',
-                        min: fom,
-                        max: tom,
-                        kriterieForVisningAvUndersporsmal: null,
-                        svar: [],
-                        undersporsmal: [],
-                    },
-                ],
-            },
-            {
-                id: '1623810',
-                tag: 'FERIE_V2',
-                sporsmalstekst: `Tok du ut feriedager i tidsrommet ${periodeTekst}?`,
-                undertekst: null,
-                svartype: 'JA_NEI',
-                min: null,
-                max: null,
-                kriterieForVisningAvUndersporsmal: 'JA',
-                svar: [],
-                undersporsmal: [
-                    {
-                        id: '1623811',
-                        tag: 'FERIE_NAR_V2',
-                        sporsmalstekst: 'Når tok du ut feriedager?',
-                        undertekst: null,
-                        svartype: 'PERIODER',
-                        min: fom,
-                        max: tom,
-                        kriterieForVisningAvUndersporsmal: null,
-                        svar: [],
-                        undersporsmal: [],
-                    },
-                ],
-            },
-            {
-                id: '1623812',
-                tag: 'PERMISJON_V2',
-                sporsmalstekst: `Tok du permisjon mens du var sykmeldt ${periodeTekst}?`,
-                undertekst: null,
-                svartype: 'JA_NEI',
-                min: null,
-                max: null,
-                kriterieForVisningAvUndersporsmal: 'JA',
-                svar: [],
-                undersporsmal: [
-                    {
-                        id: '1623813',
-                        tag: 'PERMISJON_NAR_V2',
-                        sporsmalstekst: 'Når tok du permisjon?',
-                        undertekst: null,
-                        svartype: 'PERIODER',
-                        min: fom,
-                        max: tom,
-                        kriterieForVisningAvUndersporsmal: null,
-                        svar: [],
-                        undersporsmal: [],
-                    },
-                ],
-            },
-            {
-                id: '63448066-fa24-3d9b-bf38-fb2ea23a353f',
-                tag: 'ARBEID_UNDERVEIS_100_PROSENT_0',
-                sporsmalstekst: `I perioden ${periodeTekst} var du 100 % sykmeldt fra ${hovedjobb}. Jobbet du noe hos ${hovedjobb} i denne perioden?`,
-                undertekst: null,
-                svartype: 'JA_NEI',
-                min: null,
-                max: null,
-                kriterieForVisningAvUndersporsmal: 'JA',
-                svar: [],
-                undersporsmal: [
-                    {
-                        id: '9f5b48c7-f461-359d-a27c-a0ad42ab6c22',
-                        tag: 'HVOR_MYE_HAR_DU_JOBBET_0',
-                        sporsmalstekst: 'Oppgi arbeidsmengde i timer eller prosent:',
-                        undertekst: null,
-                        svartype: 'RADIO_GRUPPE_TIMER_PROSENT',
-                        min: null,
-                        max: null,
-                        kriterieForVisningAvUndersporsmal: null,
-                        svar: [],
-                        undersporsmal: [
-                            {
-                                id: '8ba29062-f412-30ad-8851-33577d8034ab',
-                                tag: 'HVOR_MYE_PROSENT_0',
-                                sporsmalstekst: 'Prosent',
-                                undertekst: null,
-                                svartype: 'RADIO',
-                                min: null,
-                                max: null,
-                                kriterieForVisningAvUndersporsmal: 'CHECKED',
-                                svar: [],
-                                undersporsmal: [
-                                    {
-                                        id: '796cf7ed-8a7e-39de-9cbc-6e789aa5af3f',
-                                        tag: 'HVOR_MYE_PROSENT_VERDI_0',
-                                        sporsmalstekst: `Oppgi hvor mange prosent av din normale arbeidstid du jobbet hos ${hovedjobb} i perioden ${periodeTekst}?`,
-                                        undertekst: 'Oppgi i prosent. Eksempel: 40',
-                                        svartype: 'PROSENT',
-                                        min: '1',
-                                        max: '99',
-                                        kriterieForVisningAvUndersporsmal: null,
-                                        svar: [],
-                                        undersporsmal: [],
-                                    },
-                                ],
-                            },
-                            {
-                                id: '27d3d9f1-d31f-3c0e-a1ec-3246c3b48b0a',
-                                tag: 'HVOR_MYE_TIMER_0',
-                                sporsmalstekst: 'Timer',
-                                undertekst: null,
-                                svartype: 'RADIO',
-                                min: null,
-                                max: null,
-                                kriterieForVisningAvUndersporsmal: 'CHECKED',
-                                svar: [],
-                                undersporsmal: [
-                                    {
-                                        id: '6cc620d8-d4b0-3e82-a038-2757df6fc311',
-                                        tag: 'HVOR_MYE_TIMER_VERDI_0',
-                                        sporsmalstekst: `Oppgi totalt antall timer du jobbet i perioden ${periodeTekst} hos ${hovedjobb}`,
-                                        undertekst: 'Oppgi i timer. Eksempel: 12',
-                                        svartype: 'TIMER',
-                                        min: '1',
-                                        max: '364',
-                                        kriterieForVisningAvUndersporsmal: null,
-                                        svar: [],
-                                        undersporsmal: [],
-                                    },
-                                ],
-                            },
-                        ],
-                    },
-                    {
-                        id: 'af302d17-f35d-38a6-ac23-ccde5db369cb',
-                        tag: 'JOBBER_DU_NORMAL_ARBEIDSUKE_0',
-                        sporsmalstekst: `Jobber du vanligvis 37,5 timer i uka hos ${hovedjobb}?`,
-                        undertekst: null,
-                        svartype: 'JA_NEI',
-                        min: null,
-                        max: null,
-                        kriterieForVisningAvUndersporsmal: 'NEI',
-                        svar: [],
-                        undersporsmal: [
-                            {
-                                id: 'ecc14b80-402a-32e6-9f93-e832ff0560d6',
-                                tag: 'HVOR_MANGE_TIMER_PER_UKE_0',
-                                sporsmalstekst: 'Oppgi timer per uke',
-                                undertekst: null,
-                                svartype: 'TIMER',
-                                min: '1',
-                                max: '150',
-                                kriterieForVisningAvUndersporsmal: null,
-                                svar: [],
-                                undersporsmal: [],
-                            },
-                        ],
-                    },
-                ],
-            },
-            {
-                id: '1623836',
-                tag: 'ARBEID_UTENFOR_NORGE',
-                sporsmalstekst: 'Har du arbeidet i utlandet i løpet av de siste 12 månedene?',
-                undertekst: null,
-                svartype: 'JA_NEI',
-                min: null,
-                max: null,
-                kriterieForVisningAvUndersporsmal: null,
-                svar: [],
-                undersporsmal: [],
-            },
+            ansvarserklaring({ id: '1623807' }),
+            tilbakeIArbeid({ fom, tom, arbeidsgiver: hovedjobb, id: '1623808', tilbakeNarId: '1623809' }),
+            ferieV2({ fom, tom, id: '1623810', ferieNarId: '1623811' }),
+            permisjonV2({ fom, tom, id: '1623812', permisjonNarId: '1623813' }),
+            arbeidUnderveis100Prosent({ fom, tom, arbeidsgiver: hovedjobb }),
+            arbeidUtenforNorge({ id: '1623836' }),
             andreInntektskilderV2(),
-            {
-                id: '1623814',
-                tag: 'OPPHOLD_UTENFOR_EOS',
-                sporsmalstekst: `Var du på reise utenfor EU/EØS mens du var sykmeldt ${periodeTekst}?`,
-                undertekst: null,
-                svartype: 'JA_NEI',
-                min: null,
-                max: null,
-                kriterieForVisningAvUndersporsmal: 'JA',
-                svar: [],
-                undersporsmal: [
-                    {
-                        id: '1623815',
-                        tag: 'OPPHOLD_UTENFOR_EOS_NAR',
-                        sporsmalstekst: 'Når var du utenfor EU/EØS?',
-                        undertekst: null,
-                        svartype: 'PERIODER',
-                        min: fom,
-                        max: tom,
-                        kriterieForVisningAvUndersporsmal: null,
-                        svar: [],
-                        undersporsmal: [],
-                    },
-                ],
-            },
+            oppholdUtenforEos({ fom, tom, id: '1623814', oppholdNarId: '1623815' }),
             oppsummering(),
         ],
         egenmeldtSykmelding: false,

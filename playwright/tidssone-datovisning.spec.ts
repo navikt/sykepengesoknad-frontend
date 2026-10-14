@@ -40,7 +40,7 @@ test.describe('Tidssone: periodevisning', () => {
             await harSoknaderlisteHeading(page)
 
             const soknadLink = page.locator(`a[href*="${arbeidstakerId}"]`)
-            await expect(soknadLink).toContainText('1. april – 24. mai 2020')
+            await expect(soknadLink).toContainText('1. – 24. april 2020')
         })
 
         test('Manuell dato-input viser riktig periode', async ({ page }) => {
@@ -71,7 +71,7 @@ test.describe('Tidssone: periodevisning', () => {
             await harSoknaderlisteHeading(page)
 
             const soknadLink = page.locator(`a[href*="${arbeidstakerId}"]`)
-            await expect(soknadLink).toContainText('1. april – 24. mai 2020')
+            await expect(soknadLink).toContainText('1. – 24. april 2020')
         })
     })
 
@@ -83,7 +83,7 @@ test.describe('Tidssone: periodevisning', () => {
             await harSoknaderlisteHeading(page)
 
             const soknadLink = page.locator(`a[href*="${arbeidstakerId}"]`)
-            await expect(soknadLink).toContainText('1. april – 24. mai 2020')
+            await expect(soknadLink).toContainText('1. – 24. april 2020')
         })
     })
 })
@@ -169,16 +169,16 @@ test.describe('Tidssone: DATOER-kalender persistering', () => {
 
             await svarJaHovedsporsmal(page)
 
-            await page.getByRole('button', { name: 'mandag 4' }).click()
-            await expect(page.locator(forventDagValgt('mandag 4'))).toBeVisible()
-            await page.getByRole('button', { name: 'tirsdag 5' }).click()
-            await expect(page.locator(forventDagValgt('tirsdag 5'))).toBeVisible()
-            await page.getByRole('button', { name: 'onsdag 6' }).click()
-            await expect(page.locator(forventDagValgt('onsdag 6'))).toBeVisible()
+            await page.getByRole('button', { name: 'mandag 6' }).click()
+            await expect(page.locator(forventDagValgt('mandag 6'))).toBeVisible()
+            await page.getByRole('button', { name: 'tirsdag 7' }).click()
+            await expect(page.locator(forventDagValgt('tirsdag 7'))).toBeVisible()
+            await page.getByRole('button', { name: 'onsdag 8' }).click()
+            await expect(page.locator(forventDagValgt('onsdag 8'))).toBeVisible()
 
-            await expect(page.locator(forventDagValgt('mandag 4'))).toBeVisible()
-            await expect(page.locator(forventDagValgt('tirsdag 5'))).toBeVisible()
-            await expect(page.locator(forventDagValgt('onsdag 6'))).toBeVisible()
+            await expect(page.locator(forventDagValgt('mandag 6'))).toBeVisible()
+            await expect(page.locator(forventDagValgt('tirsdag 7'))).toBeVisible()
+            await expect(page.locator(forventDagValgt('onsdag 8'))).toBeVisible()
 
             await svarRadioGruppe(page, /bompenger/i, 'Nei')
             await svarFritekst(page, 'kilometer', '10')
@@ -186,9 +186,9 @@ test.describe('Tidssone: DATOER-kalender persistering', () => {
             await klikkGaVidere(page)
             await klikkTilbake(page)
 
-            await expect(page.locator(forventDagValgt('mandag 4'))).toBeVisible()
-            await expect(page.locator(forventDagValgt('tirsdag 5'))).toBeVisible()
-            await expect(page.locator(forventDagValgt('onsdag 6'))).toBeVisible()
+            await expect(page.locator(forventDagValgt('mandag 6'))).toBeVisible()
+            await expect(page.locator(forventDagValgt('tirsdag 7'))).toBeVisible()
+            await expect(page.locator(forventDagValgt('onsdag 8'))).toBeVisible()
         })
     })
 
@@ -200,16 +200,16 @@ test.describe('Tidssone: DATOER-kalender persistering', () => {
 
             await svarJaHovedsporsmal(page)
 
-            await page.getByRole('button', { name: 'mandag 4' }).click()
-            await expect(page.locator(forventDagValgt('mandag 4'))).toBeVisible()
-            await page.getByRole('button', { name: 'tirsdag 5' }).click()
-            await expect(page.locator(forventDagValgt('tirsdag 5'))).toBeVisible()
-            await page.getByRole('button', { name: 'onsdag 6' }).click()
-            await expect(page.locator(forventDagValgt('onsdag 6'))).toBeVisible()
+            await page.getByRole('button', { name: 'mandag 6' }).click()
+            await expect(page.locator(forventDagValgt('mandag 6'))).toBeVisible()
+            await page.getByRole('button', { name: 'tirsdag 7' }).click()
+            await expect(page.locator(forventDagValgt('tirsdag 7'))).toBeVisible()
+            await page.getByRole('button', { name: 'onsdag 8' }).click()
+            await expect(page.locator(forventDagValgt('onsdag 8'))).toBeVisible()
 
-            await expect(page.locator(forventDagValgt('mandag 4'))).toBeVisible()
-            await expect(page.locator(forventDagValgt('tirsdag 5'))).toBeVisible()
-            await expect(page.locator(forventDagValgt('onsdag 6'))).toBeVisible()
+            await expect(page.locator(forventDagValgt('mandag 6'))).toBeVisible()
+            await expect(page.locator(forventDagValgt('tirsdag 7'))).toBeVisible()
+            await expect(page.locator(forventDagValgt('onsdag 8'))).toBeVisible()
 
             await svarRadioGruppe(page, /bompenger/i, 'Nei')
             await svarFritekst(page, 'kilometer', '10')
@@ -217,9 +217,9 @@ test.describe('Tidssone: DATOER-kalender persistering', () => {
             await klikkGaVidere(page)
             await klikkTilbake(page)
 
-            await expect(page.locator(forventDagValgt('mandag 4'))).toBeVisible()
-            await expect(page.locator(forventDagValgt('tirsdag 5'))).toBeVisible()
-            await expect(page.locator(forventDagValgt('onsdag 6'))).toBeVisible()
+            await expect(page.locator(forventDagValgt('mandag 6'))).toBeVisible()
+            await expect(page.locator(forventDagValgt('tirsdag 7'))).toBeVisible()
+            await expect(page.locator(forventDagValgt('onsdag 8'))).toBeVisible()
         })
     })
 
@@ -231,16 +231,16 @@ test.describe('Tidssone: DATOER-kalender persistering', () => {
 
             await svarJaHovedsporsmal(page)
 
-            await page.getByRole('button', { name: 'mandag 4' }).click()
-            await expect(page.locator(forventDagValgt('mandag 4'))).toBeVisible()
-            await page.getByRole('button', { name: 'tirsdag 5' }).click()
-            await expect(page.locator(forventDagValgt('tirsdag 5'))).toBeVisible()
-            await page.getByRole('button', { name: 'onsdag 6' }).click()
-            await expect(page.locator(forventDagValgt('onsdag 6'))).toBeVisible()
+            await page.getByRole('button', { name: 'mandag 6' }).click()
+            await expect(page.locator(forventDagValgt('mandag 6'))).toBeVisible()
+            await page.getByRole('button', { name: 'tirsdag 7' }).click()
+            await expect(page.locator(forventDagValgt('tirsdag 7'))).toBeVisible()
+            await page.getByRole('button', { name: 'onsdag 8' }).click()
+            await expect(page.locator(forventDagValgt('onsdag 8'))).toBeVisible()
 
-            await expect(page.locator(forventDagValgt('mandag 4'))).toBeVisible()
-            await expect(page.locator(forventDagValgt('tirsdag 5'))).toBeVisible()
-            await expect(page.locator(forventDagValgt('onsdag 6'))).toBeVisible()
+            await expect(page.locator(forventDagValgt('mandag 6'))).toBeVisible()
+            await expect(page.locator(forventDagValgt('tirsdag 7'))).toBeVisible()
+            await expect(page.locator(forventDagValgt('onsdag 8'))).toBeVisible()
 
             await svarRadioGruppe(page, /bompenger/i, 'Nei')
             await svarFritekst(page, 'kilometer', '10')
@@ -248,9 +248,9 @@ test.describe('Tidssone: DATOER-kalender persistering', () => {
             await klikkGaVidere(page)
             await klikkTilbake(page)
 
-            await expect(page.locator(forventDagValgt('mandag 4'))).toBeVisible()
-            await expect(page.locator(forventDagValgt('tirsdag 5'))).toBeVisible()
-            await expect(page.locator(forventDagValgt('onsdag 6'))).toBeVisible()
+            await expect(page.locator(forventDagValgt('mandag 6'))).toBeVisible()
+            await expect(page.locator(forventDagValgt('tirsdag 7'))).toBeVisible()
+            await expect(page.locator(forventDagValgt('onsdag 8'))).toBeVisible()
         })
     })
 })

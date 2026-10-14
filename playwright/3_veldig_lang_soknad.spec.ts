@@ -393,7 +393,7 @@ test.describe('Tester støtte for gamle spørsmål', () => {
         await svarRadio(page, 'Oppgi arbeidsmengde i timer eller prosent:', 'Timer')
         await velgTall(
             page,
-            'Oppgi totalt antall timer du jobbet i perioden 1. - 24. april 2020 hos Posten Norge AS, Bærum',
+            'Oppgi totalt antall timer du jobbet i perioden 1. – 24. april 2020 hos Posten Norge AS, Bærum',
             '12',
         )
         await svarRadio(page, 'Jobber du vanligvis 37,5 timer i uka hos Posten Norge AS, Bærum?', 'JA')

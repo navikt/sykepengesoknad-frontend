@@ -53,7 +53,7 @@ test.describe('Tester frilansersøknad', () => {
             await page.getByRole('radio', { name: 'Prosent' }).click()
             await expect(
                 page.getByText(
-                    'Oppgi hvor mange prosent av din normale arbeidstid du jobbet i perioden 1. - 24. april 2020?',
+                    'Oppgi hvor mange prosent av din normale arbeidstid du jobbet i perioden 1. – 24. april 2020?',
                 ),
             ).toBeVisible()
             await page.getByRole('textbox', { name: 'Oppgi hvor mange prosent av' }).fill('21')
@@ -79,7 +79,7 @@ test.describe('Tester frilansersøknad', () => {
         await test.step('Søknad OPPHOLD_UTENFOR_EOS - steg 5', async () => {
             await expect(page).toHaveURL(new RegExp(`${soknad.id}/5`))
             await expect(
-                page.getByText('Har du vært utenfor EU/EØS mens du var sykmeldt 1. - 24. april 2020?'),
+                page.getByText('Har du vært utenfor EU/EØS mens du var sykmeldt 1. – 24. april 2020?'),
             ).toBeVisible()
 
             await apneReadmore(page, 'Spørsmålet forklart', [

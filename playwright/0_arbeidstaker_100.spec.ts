@@ -44,7 +44,7 @@ test.describe('Tester arbeidstakersøknad - 100%', () => {
                 page.getByText(
                     'Siden sykemeldingen går over 31 dager, har vi delt opp søknaden, slik at du kan søke om sykepenger før hele perioden er ferdig. På den måten slipper du å vente lenge på sykepengene dine.',
                 ),
-            ).toBeVisible()
+            ).toBeHidden()
 
             await page.getByText('Slik behandler NAV personopplysningene dine').click()
 
@@ -131,7 +131,7 @@ test.describe('Tester arbeidstakersøknad - 100%', () => {
 
             await expect(
                 page.getByText(
-                    'I perioden 1. - 24. april 2020 var du 100 % sykmeldt fra Posten Norge AS, Bærum. Jobbet du noe hos Posten Norge AS, Bærum i denne perioden?',
+                    'I perioden 1. – 24. april 2020 var du 100 % sykmeldt fra Posten Norge AS, Bærum. Jobbet du noe hos Posten Norge AS, Bærum i denne perioden?',
                 ),
             ).toBeVisible()
 
@@ -147,21 +147,21 @@ test.describe('Tester arbeidstakersøknad - 100%', () => {
             await page.locator('.undersporsmal input[value="Prosent"]').click()
             await expect(
                 page.getByText(
-                    'Oppgi hvor mange prosent av din normale arbeidstid du jobbet hos Posten Norge AS, Bærum i perioden 1. - 24. april 2020?',
+                    'Oppgi hvor mange prosent av din normale arbeidstid du jobbet hos Posten Norge AS, Bærum i perioden 1. – 24. april 2020?',
                 ),
             ).toBeVisible()
 
             await page.locator('.undersporsmal input[value="Timer"]').click()
             await expect(
                 page.getByText(
-                    'Oppgi totalt antall timer du jobbet i perioden 1. - 24. april 2020 hos Posten Norge AS, Bærum',
+                    'Oppgi totalt antall timer du jobbet i perioden 1. – 24. april 2020 hos Posten Norge AS, Bærum',
                 ),
             ).toBeVisible()
             await expect(page.getByText('Antall timer du skrev inn, betyr at du har jobbet')).toBeHidden()
 
             await svarFritekst(
                 page,
-                'Oppgi totalt antall timer du jobbet i perioden 1. - 24. april 2020 hos Posten Norge AS, Bærum',
+                'Oppgi totalt antall timer du jobbet i perioden 1. – 24. april 2020 hos Posten Norge AS, Bærum',
                 '21',
             )
             await expect(page.getByText('Er prosenten lavere enn du forventet?')).toBeHidden()
@@ -235,7 +235,7 @@ test.describe('Tester arbeidstakersøknad - 100%', () => {
             await sporsmalOgSvar(oppsummering, 'Oppgi arbeidsmengde i timer eller prosent:', 'Timer')
             await sporsmalOgSvar(
                 oppsummering,
-                'Oppgi totalt antall timer du jobbet i perioden 1. - 24. april 2020 hos Posten Norge AS, Bærum',
+                'Oppgi totalt antall timer du jobbet i perioden 1. – 24. april 2020 hos Posten Norge AS, Bærum',
                 '21 timer',
             )
             await sporsmalOgSvar(oppsummering, 'Jobber du vanligvis 37,5 timer i uka', 'Ja')

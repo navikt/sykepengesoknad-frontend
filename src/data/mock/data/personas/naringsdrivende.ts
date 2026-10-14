@@ -13,7 +13,7 @@ import {
 import { Persona } from './personas'
 const naringsdrivendeSoknadMedVirksomhetsSporsmal = lagNaringsdrivendeSoknadMedVirksomhetsSporsmal(
     'ffa7c5d2-4766-4450-a521-3ecc5842d015',
-    [naringsdrivendeVirksomhetenAvviklet, naringsdrivendeNyIArbeidslivet, naringsdrivendeVarigEndring],
+    [naringsdrivendeVirksomhetenAvviklet(), naringsdrivendeNyIArbeidslivet(), naringsdrivendeVarigEndring()],
 )
 
 const sendtSoknadMedGammelKvittering = deepcopyMedNyId(naringsdrivendeSoknad, '3708c4de-d16c-4835-841b-a6716b688888')

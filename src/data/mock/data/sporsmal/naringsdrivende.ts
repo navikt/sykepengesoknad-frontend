@@ -2,7 +2,7 @@ import { v4 } from 'uuid'
 
 import { RSSporsmal } from '../../../../types/rs-types/rs-sporsmal'
 
-export const naringsdrivendeOpprettholdtInntekt: RSSporsmal = {
+export const naringsdrivendeOpprettholdtInntekt = (): RSSporsmal => ({
     id: v4().toString(),
     tag: 'NARINGSDRIVENDE_OPPRETTHOLDT_INNTEKT',
     sporsmalstekst: 'Hadde du inntekt i virksomheten din selv om du var 100 % sykmeldt og ikke jobbet selv?',
@@ -13,9 +13,9 @@ export const naringsdrivendeOpprettholdtInntekt: RSSporsmal = {
     kriterieForVisningAvUndersporsmal: null,
     svar: [],
     undersporsmal: [],
-}
+})
 
-export const naringsdrivendeOpprettholdtInntektGradert: RSSporsmal = {
+export const naringsdrivendeOpprettholdtInntektGradert = (): RSSporsmal => ({
     id: v4().toString(),
     tag: 'NARINGSDRIVENDE_OPPRETTHOLDT_INNTEKT_GRADERT',
     sporsmalstekst:
@@ -27,9 +27,9 @@ export const naringsdrivendeOpprettholdtInntektGradert: RSSporsmal = {
     kriterieForVisningAvUndersporsmal: null,
     svar: [],
     undersporsmal: [],
-}
+})
 
-export const naringsdrivendeOppholdIUtlandet: RSSporsmal = {
+export const naringsdrivendeOppholdIUtlandet = (): RSSporsmal => ({
     id: v4().toString(),
     tag: 'NARINGSDRIVENDE_OPPHOLD_I_UTLANDET',
     sporsmalstekst: 'Har du vært i utlandet i løpet av de siste 12 månedene før du ble sykmeldt 1.mai 2025?',
@@ -40,9 +40,9 @@ export const naringsdrivendeOppholdIUtlandet: RSSporsmal = {
     kriterieForVisningAvUndersporsmal: null,
     svar: [],
     undersporsmal: [],
-}
+})
 
-export const naringsdrivendeVirksomhetenAvviklet: RSSporsmal = {
+export const naringsdrivendeVirksomhetenAvviklet = (): RSSporsmal => ({
     id: v4().toString(),
     tag: 'NARINGSDRIVENDE_VIRKSOMHETEN_AVVIKLET',
     sporsmalstekst: 'Avviklet du virksomheten din før du ble sykmeldt 1.mai 2025?',
@@ -66,9 +66,9 @@ export const naringsdrivendeVirksomhetenAvviklet: RSSporsmal = {
             undersporsmal: [],
         },
     ],
-}
+})
 
-export const naringsdrivendeNyIArbeidslivet: RSSporsmal = {
+export const naringsdrivendeNyIArbeidslivet = (): RSSporsmal => ({
     id: v4().toString(),
     tag: 'NARINGSDRIVENDE_NY_I_ARBEIDSLIVET',
     sporsmalstekst: 'Har du blitt yrkesaktiv mellom 1.januar 2020 og frem til du ble sykmeldt 1.mai 2025?',
@@ -92,9 +92,9 @@ export const naringsdrivendeNyIArbeidslivet: RSSporsmal = {
             undersporsmal: [],
         },
     ],
-}
+})
 
-export const naringsdrivendeVarigEndring: RSSporsmal = {
+export const naringsdrivendeVarigEndring = (): RSSporsmal => ({
     id: v4().toString(),
     tag: 'NARINGSDRIVENDE_VARIG_ENDRING',
     sporsmalstekst:
@@ -216,4 +216,4 @@ export const naringsdrivendeVarigEndring: RSSporsmal = {
             undersporsmal: [],
         },
     ],
-}
+})

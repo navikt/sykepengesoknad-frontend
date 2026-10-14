@@ -10,14 +10,14 @@ import { yrkesskadeV1Sporsmal } from './sporsmal/yrkesskade-v1'
 export function medYrkesskadeV1Sporsmal(soknad: RSSoknad): RSSoknad {
     return {
         ...soknad,
-        sporsmal: [...soknad.sporsmal.slice(0, 8), jsonDeepCopy(yrkesskadeV1Sporsmal), ...soknad.sporsmal.slice(8)],
+        sporsmal: [...soknad.sporsmal.slice(0, 8), jsonDeepCopy(yrkesskadeV1Sporsmal()), ...soknad.sporsmal.slice(8)],
     }
 }
 
 export function medYrkesskadeV2Sporsmal(soknad: RSSoknad): RSSoknad {
     return {
         ...soknad,
-        sporsmal: [...soknad.sporsmal.slice(0, 8), jsonDeepCopy(yrkesskadeV2Sporsmal), ...soknad.sporsmal.slice(8)],
+        sporsmal: [...soknad.sporsmal.slice(0, 8), jsonDeepCopy(yrkesskadeV2Sporsmal()), ...soknad.sporsmal.slice(8)],
     }
 }
 

@@ -1,6 +1,6 @@
 import { RSSporsmal } from '../../../../types/rs-types/rs-sporsmal'
 
-export const utenlandskSykmeldingSporsmalene: RSSporsmal[] = [
+export const utenlandskSykmeldingSporsmalene = (): RSSporsmal[] => [
     {
         id: '78c70268-b618-4b4c-b2d5-3e460d4edb69',
         tag: 'UTENLANDSK_SYKMELDING_BOSTED',

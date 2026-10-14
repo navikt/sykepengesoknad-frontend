@@ -31,11 +31,11 @@ if (splittSted === -1) {
 }
 medlemskapOriginalOppholdstillatelse.sporsmal = [
     ...medlemskapOriginalOppholdstillatelse.sporsmal.slice(0, splittSted + 1),
-    medlemskapUtførtArbeidUtenforNorgeSporsmal,
-    medlemskapOppholdUtenforNorgeSporsmal,
-    medlemskapOppholdUtenforEøsSporsmal,
+    medlemskapUtførtArbeidUtenforNorgeSporsmal(),
+    medlemskapOppholdUtenforNorgeSporsmal(),
+    medlemskapOppholdUtenforEøsSporsmal(),
     oppholdUtlandSpm,
-    medlemskapOppholdstillatelseSporsmal,
+    medlemskapOppholdstillatelseSporsmal(),
     ...medlemskapOriginalOppholdstillatelse.sporsmal.slice(splittSted + 1),
 ]
 
@@ -55,7 +55,7 @@ medlemskapOppholdstillatelsePermanent.sporsmal = medlemskapOppholdstillatelsePer
 // Setter inn nytt spørsmål om oppholdstllatelse der hvor det gamle var.
 medlemskapOppholdstillatelsePermanent.sporsmal = [
     ...medlemskapOppholdstillatelsePermanent.sporsmal.slice(0, oppholdstillatelseIndex),
-    medlemskapOppholdstillatelseV2Sporsmal,
+    medlemskapOppholdstillatelseV2Sporsmal(),
     ...medlemskapOppholdstillatelsePermanent.sporsmal.slice(oppholdstillatelseIndex),
 ]
 
