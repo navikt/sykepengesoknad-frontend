@@ -1,7 +1,6 @@
 import { BodyLong, Box, Heading, VStack } from '@navikt/ds-react'
 import React from 'react'
 
-import { RSArbeidssituasjon } from '../../../types/rs-types/rs-arbeidssituasjon'
 import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype'
 import { sendtForMerEnn30DagerSiden } from '../../../utils/dato-utils'
 import { tekst } from '../../../utils/tekster'
@@ -22,12 +21,7 @@ const KvitteringVidere = () => {
     const dato = valgtSoknad.sendtTilNAVDato
     const visKvittering = !sendtForMerEnn30DagerSiden(valgtSoknad.sendtTilArbeidsgiverDato, dato)
 
-    const naringsdrivendeForstegangssoknad =
-        valgtSoknad.arbeidssituasjon &&
-        [RSArbeidssituasjon.NAERINGSDRIVENDE, RSArbeidssituasjon.FISKER, RSArbeidssituasjon.JORDBRUKER].includes(
-            valgtSoknad.arbeidssituasjon,
-        ) &&
-        valgtSoknad.forstegangssoknad
+    const naringsdrivendeForstegangssoknad = valgtSoknad.erTilsvarendeSelvstendig() && valgtSoknad.forstegangssoknad
 
     return (
         <KvitteringPanel className="p-4 pb-8">

@@ -15,6 +15,7 @@ const arbeidssituasjonTekst: Record<RSArbeidssituasjon, string> = {
     [RSArbeidssituasjon.FISKER]: 'fisker',
     [RSArbeidssituasjon.JORDBRUKER]: 'jordbruker',
     [RSArbeidssituasjon.ANNET]: 'annet',
+    [RSArbeidssituasjon.BARNEPASSER]: 'barnepasser',
 }
 
 const periodeTekst = (periode: RSSoknadsperiode): string =>

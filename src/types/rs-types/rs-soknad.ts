@@ -9,6 +9,8 @@ import { RSSporsmal } from './rs-sporsmal'
 import { ArbeidsforholdFraInntektskomponenten } from './rs-arbeidsforholdfrainntektskomponenten'
 import { RSKjentOppholdstillatelse } from './rs-kjentoppholdstillatelse'
 import { RSKjentInntektskilde } from './rs-kjenteinntektskilder'
+import { RSFiskerBladType } from './rs-fiskerblad'
+import { RSFiskerLottOgHyreType } from './rs-fiskerlottoghyre'
 
 export interface RSSoknad {
     id: string
@@ -46,4 +48,6 @@ export interface RSSoknad {
     ventetidSykmeldingUuid?: string
     ghostInntekter?: RSKjentInntektskilde[]
     demoinfo?: string
+    fiskerBlad?: RSFiskerBladType
+    fiskerLottOgHyre?: RSFiskerLottOgHyreType
 }
