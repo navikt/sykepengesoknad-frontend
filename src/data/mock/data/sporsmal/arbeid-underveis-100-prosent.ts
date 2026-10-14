@@ -1,0 +1,186 @@
+import type { RSSporsmal } from '../../../../types/rs-types/rs-sporsmal'
+import type { RSSvar } from '../../../../types/rs-types/rs-svar'
+import { tilLesbarPeriodeMedArstall } from '../../../../utils/dato-utils'
+
+type ArbeidUnderveisSvar = {
+    readonly hoved?: RSSvar[]
+    readonly arbeidsmengde?: RSSvar[]
+    readonly prosent?: RSSvar[]
+    readonly prosentVerdi?: RSSvar[]
+    readonly timer?: RSSvar[]
+    readonly timerVerdi?: RSSvar[]
+    readonly normalArbeidsuke?: RSSvar[]
+    readonly timerPerUke?: RSSvar[]
+}
+
+type ArbeidUnderveisId = {
+    readonly hoved?: string
+    readonly arbeidsmengde?: string
+    readonly prosent?: string
+    readonly prosentVerdi?: string
+    readonly timer?: string
+    readonly timerVerdi?: string
+    readonly normalArbeidsuke?: string
+    readonly timerPerUke?: string
+}
+
+type ArbeidUnderveis100ProsentValg = {
+    readonly fom: string
+    readonly tom: string
+    readonly arbeidsgiver?: string
+    readonly index?: number
+    readonly id?: string
+    readonly svar?: ArbeidUnderveisSvar
+    readonly ids?: ArbeidUnderveisId
+    readonly timerMaks?: string
+    readonly prosentUndertekst?: string | null
+    readonly timerUndertekst?: string | null
+    readonly timerTekstSporsmalstegn?: boolean
+    readonly normalArbeidsukeTekst?: string
+    readonly timerPerUkeTekst?: string | null
+    readonly arbeidsgiverFormulering?: 'hos' | 'uten'
+    readonly tekstvariant?: 'arbeidstaker' | 'frilanser' | 'selvstendigNaeringsdrivende'
+    readonly hovedtekstvariant?: 'standard' | 'uten-arbeidsgiver-i-andre-setning'
+    readonly prosentVerdiTekstvariant?: 'normal-arbeidstid' | 'totalt-prosent'
+}
+
+export const arbeidUnderveis100Prosent = ({
+    fom,
+    tom,
+    arbeidsgiver,
+    index = 0,
+    id = '63448066-fa24-3d9b-bf38-fb2ea23a353f',
+    svar = {},
+    ids = {},
+    timerMaks = '364',
+    prosentUndertekst = 'Oppgi i prosent. Eksempel: 40',
+    timerUndertekst = 'Oppgi i timer. Eksempel: 12',
+    timerTekstSporsmalstegn = false,
+    normalArbeidsukeTekst = `Jobber du vanligvis 37,5 timer i uka hos ${arbeidsgiver}?`,
+    timerPerUkeTekst = 'Oppgi timer per uke',
+    arbeidsgiverFormulering = 'hos',
+    tekstvariant = 'arbeidstaker',
+    hovedtekstvariant = 'standard',
+    prosentVerdiTekstvariant = 'normal-arbeidstid',
+}: ArbeidUnderveis100ProsentValg): RSSporsmal => {
+    const periode = tilLesbarPeriodeMedArstall(fom, tom)
+    const arbeidHos =
+        arbeidsgiverFormulering === 'hos' && hovedtekstvariant === 'standard' ? `hos ${arbeidsgiver} ` : ''
+    const rolle = tekstvariant === 'frilanser' ? 'frilanser' : 'selvstendig næringsdrivende'
+    const sporsmalstekst =
+        tekstvariant === 'arbeidstaker'
+            ? `I perioden ${periode} var du 100 % sykmeldt fra ${arbeidsgiver}. Jobbet du noe ${arbeidHos}i denne perioden?`
+            : `I perioden ${periode} var du 100% sykmeldt som ${rolle}. Jobbet du noe i denne perioden?`
+    const prosentTekst =
+        prosentVerdiTekstvariant === 'totalt-prosent'
+            ? `Oppgi totalt prosent du jobbet i perioden ${periode} hos ${arbeidsgiver}?`
+            : tekstvariant === 'arbeidstaker'
+              ? `Oppgi hvor mange prosent av din normale arbeidstid du jobbet hos ${arbeidsgiver} i perioden ${periode}?`
+              : `Oppgi hvor mange prosent av din normale arbeidstid du jobbet i perioden ${periode}?`
+    const timerTekst =
+        tekstvariant === 'arbeidstaker'
+            ? `Oppgi totalt antall timer du jobbet i perioden ${periode} hos ${arbeidsgiver}${timerTekstSporsmalstegn ? '?' : ''}`
+            : `Oppgi totalt antall timer du jobbet i perioden ${periode}`
+
+    return {
+        id,
+        tag: `ARBEID_UNDERVEIS_100_PROSENT_${index}`,
+        sporsmalstekst,
+        undertekst: null,
+        svartype: 'JA_NEI',
+        min: null,
+        max: null,
+        kriterieForVisningAvUndersporsmal: 'JA',
+        svar: svar.hoved ?? [],
+        undersporsmal: [
+            {
+                id: ids.arbeidsmengde ?? '9f5b48c7-f461-359d-a27c-a0ad42ab6c22',
+                tag: `HVOR_MYE_HAR_DU_JOBBET_${index}`,
+                sporsmalstekst: 'Oppgi arbeidsmengde i timer eller prosent:',
+                undertekst: null,
+                svartype: 'RADIO_GRUPPE_TIMER_PROSENT',
+                min: null,
+                max: null,
+                kriterieForVisningAvUndersporsmal: null,
+                svar: svar.arbeidsmengde ?? [],
+                undersporsmal: [
+                    {
+                        id: ids.prosent ?? '8ba29062-f412-30ad-8851-33577d8034ab',
+                        tag: `HVOR_MYE_PROSENT_${index}`,
+                        sporsmalstekst: 'Prosent',
+                        undertekst: null,
+                        svartype: 'RADIO',
+                        min: null,
+                        max: null,
+                        kriterieForVisningAvUndersporsmal: 'CHECKED',
+                        svar: svar.prosent ?? [],
+                        undersporsmal: [
+                            {
+                                id: ids.prosentVerdi ?? '796cf7ed-8a7e-39de-9cbc-6e789aa5af3f',
+                                tag: `HVOR_MYE_PROSENT_VERDI_${index}`,
+                                sporsmalstekst: prosentTekst,
+                                undertekst: prosentUndertekst,
+                                svartype: 'PROSENT',
+                                min: '1',
+                                max: '99',
+                                kriterieForVisningAvUndersporsmal: null,
+                                svar: svar.prosentVerdi ?? [],
+                                undersporsmal: [],
+                            },
+                        ],
+                    },
+                    {
+                        id: ids.timer ?? '27d3d9f1-d31f-3c0e-a1ec-3246c3b48b0a',
+                        tag: `HVOR_MYE_TIMER_${index}`,
+                        sporsmalstekst: 'Timer',
+                        undertekst: null,
+                        svartype: 'RADIO',
+                        min: null,
+                        max: null,
+                        kriterieForVisningAvUndersporsmal: 'CHECKED',
+                        svar: svar.timer ?? [],
+                        undersporsmal: [
+                            {
+                                id: ids.timerVerdi ?? '6cc620d8-d4b0-3e82-a038-2757df6fc311',
+                                tag: `HVOR_MYE_TIMER_VERDI_${index}`,
+                                sporsmalstekst: timerTekst,
+                                undertekst: timerUndertekst,
+                                svartype: 'TIMER',
+                                min: '1',
+                                max: timerMaks,
+                                kriterieForVisningAvUndersporsmal: null,
+                                svar: svar.timerVerdi ?? [],
+                                undersporsmal: [],
+                            },
+                        ],
+                    },
+                ],
+            },
+            {
+                id: ids.normalArbeidsuke ?? 'af302d17-f35d-38a6-ac23-ccde5db369cb',
+                tag: `JOBBER_DU_NORMAL_ARBEIDSUKE_${index}`,
+                sporsmalstekst: normalArbeidsukeTekst,
+                undertekst: null,
+                svartype: 'JA_NEI',
+                min: null,
+                max: null,
+                kriterieForVisningAvUndersporsmal: 'NEI',
+                svar: svar.normalArbeidsuke ?? [],
+                undersporsmal: [
+                    {
+                        id: ids.timerPerUke ?? 'ecc14b80-402a-32e6-9f93-e832ff0560d6',
+                        tag: `HVOR_MANGE_TIMER_PER_UKE_${index}`,
+                        sporsmalstekst: timerPerUkeTekst,
+                        undertekst: null,
+                        svartype: 'TIMER',
+                        min: '1',
+                        max: '150',
+                        kriterieForVisningAvUndersporsmal: null,
+                        svar: svar.timerPerUke ?? [],
+                        undersporsmal: [],
+                    },
+                ],
+            },
+        ],
+    }
+}
