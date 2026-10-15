@@ -5,8 +5,16 @@ export enum RSArbeidssituasjon {
     ARBEIDSLEDIG = 'ARBEIDSLEDIG',
     FISKER = 'FISKER',
     JORDBRUKER = 'JORDBRUKER',
+    BARNEPASSER = 'BARNEPASSER',
     ANNET = 'ANNET',
 }
 
 export type RSArbeidssituasjonType =
-    'NAERINGSDRIVENDE' | 'FRILANSER' | 'ARBEIDSTAKER' | 'ARBEIDSLEDIG' | 'ANNET' | 'FISKER' | 'JORDBRUKER'
+    | 'NAERINGSDRIVENDE'
+    | 'FRILANSER'
+    | 'ARBEIDSTAKER'
+    | 'ARBEIDSLEDIG'
+    | 'ANNET'
+    | 'FISKER'
+    | 'JORDBRUKER'
+    | 'BARNEPASSER'

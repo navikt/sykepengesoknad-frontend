@@ -1,4 +1,6 @@
 import { RSArbeidssituasjon } from './rs-types/rs-arbeidssituasjon'
+import { RSFiskerBladType } from './rs-types/rs-fiskerblad'
+import { RSFiskerLottOgHyre, RSFiskerLottOgHyreType } from './rs-types/rs-fiskerlottoghyre'
 import { RSMerknad } from './rs-types/rs-merknad'
 import { RSSoknadsperiode } from './rs-types/rs-soknadsperiode'
 import { RSSoknadstatus } from './rs-types/rs-soknadstatus'
@@ -57,8 +59,38 @@ export class Soknad extends ObjectCopier {
         readonly friskTilArbeidVedtakId?: string,
         readonly ventetidSykmeldingUuid?: string,
         readonly ghostInntekter?: ReadonlyArray<RSKjentInntektskilde>,
+        readonly fiskerBlad?: RSFiskerBladType,
+        readonly fiskerLottOgHyre?: RSFiskerLottOgHyreType,
     ) {
         super()
+    }
+
+    erTilsvarendeSelvstendig(): boolean {
+        switch (this.arbeidssituasjon) {
+            case RSArbeidssituasjon.FISKER:
+                return (
+                    this.fiskerLottOgHyre === undefined ||
+                    this.fiskerLottOgHyre === RSFiskerLottOgHyre.LOTT ||
+                    this.fiskerLottOgHyre === RSFiskerLottOgHyre.BEGGE
+                )
+            case RSArbeidssituasjon.NAERINGSDRIVENDE:
+            case RSArbeidssituasjon.JORDBRUKER:
+            case RSArbeidssituasjon.BARNEPASSER:
+                return true
+            default:
+                return false
+        }
+    }
+
+    erTilsvarendeArbeidstaker(): boolean {
+        switch (this.arbeidssituasjon) {
+            case RSArbeidssituasjon.FISKER:
+                return this.fiskerLottOgHyre === RSFiskerLottOgHyre.HYRE
+            case RSArbeidssituasjon.ARBEIDSTAKER:
+                return true
+            default:
+                return false
+        }
     }
 }
 
