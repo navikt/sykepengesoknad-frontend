@@ -54,8 +54,8 @@ export const arbeidstakersoknadMedUtenlandsoppholdSoktSykepenger: RSSoknad = {
     arbeidssituasjon: 'ARBEIDSTAKER',
     soknadPerioder: [
         {
-            fom: '2020-05-23',
-            tom: '2020-06-07',
+            fom: arbeidstakersoknadMedUtenlandsoppholdSoktSykepengerFom,
+            tom: arbeidstakersoknadMedUtenlandsoppholdSoktSykepengerTom,
             grad: 100,
             sykmeldingstype: 'AKTIVITET_IKKE_MULIG',
         },
@@ -88,8 +88,8 @@ export const arbeidsledigKvittering: RSSoknad = {
     arbeidssituasjon: 'ARBEIDSLEDIG',
     soknadPerioder: [
         {
-            fom: '2020-06-07',
-            tom: '2020-06-22',
+            fom: arbeidsledigKvitteringFom,
+            tom: arbeidsledigKvitteringTom,
             grad: 100,
             sykmeldingstype: 'AKTIVITET_IKKE_MULIG',
         },
@@ -126,8 +126,8 @@ export const sendtArbeidsledigKvittering: RSSoknad = {
     arbeidssituasjon: 'ARBEIDSLEDIG',
     soknadPerioder: [
         {
-            fom: '2020-01-01',
-            tom: '2020-01-10',
+            fom: sendtArbeidsledigKvitteringFom,
+            tom: sendtArbeidsledigKvitteringTom,
             grad: 100,
             sykmeldingstype: 'AKTIVITET_IKKE_MULIG',
         },
@@ -195,8 +195,8 @@ export const delvisUtfylltArbeidsledig: RSSoknad = {
     arbeidssituasjon: 'ARBEIDSLEDIG',
     soknadPerioder: [
         {
-            fom: '2020-01-01',
-            tom: '2020-01-10',
+            fom: delvisUtfylltArbeidsledigFom,
+            tom: delvisUtfylltArbeidsledigTom,
             grad: 100,
             sykmeldingstype: 'AKTIVITET_IKKE_MULIG',
         },
@@ -268,8 +268,8 @@ export const selvstendigKvittering: RSSoknad = {
     arbeidssituasjon: 'NAERINGSDRIVENDE',
     soknadPerioder: [
         {
-            fom: '2020-06-01',
-            tom: '2020-06-22',
+            fom: selvstendigKvitteringFom,
+            tom: selvstendigKvitteringTom,
             grad: 100,
             sykmeldingstype: 'AKTIVITET_IKKE_MULIG',
         },
@@ -304,7 +304,7 @@ selvstendigKvittering.sporsmal = selvstendigKvittering.sporsmal.map((sporsmal) =
 })
 
 const arbeidstakerInnenforArbeidsgiverperiodeKvitteringFom = '2020-04-01'
-const arbeidstakerInnenforArbeidsgiverperiodeKvitteringTom = '2020-04-24'
+const arbeidstakerInnenforArbeidsgiverperiodeKvitteringTom = '2020-04-05'
 const arbeidstakerInnenforArbeidsgiverperiodeKvitteringArbeidsgiver = 'arb1'
 
 export const arbeidstakerInnenforArbeidsgiverperiodeKvittering: RSSoknad = {
@@ -329,8 +329,8 @@ export const arbeidstakerInnenforArbeidsgiverperiodeKvittering: RSSoknad = {
     arbeidssituasjon: 'ARBEIDSTAKER',
     soknadPerioder: [
         {
-            fom: '2020-01-01',
-            tom: '2020-01-05',
+            fom: arbeidstakerInnenforArbeidsgiverperiodeKvitteringFom,
+            tom: arbeidstakerInnenforArbeidsgiverperiodeKvitteringTom,
             grad: 100,
             sykmeldingstype: 'AKTIVITET_IKKE_MULIG',
         },
@@ -351,7 +351,7 @@ export const arbeidstakerInnenforArbeidsgiverperiodeKvittering: RSSoknad = {
     klippet: false,
 }
 const arbeidstakerUtenforArbeidsgiverperiodeKvitteringFom = '2020-04-01'
-const arbeidstakerUtenforArbeidsgiverperiodeKvitteringTom = '2020-04-24'
+const arbeidstakerUtenforArbeidsgiverperiodeKvitteringTom = '2020-04-20'
 const arbeidstakerUtenforArbeidsgiverperiodeKvitteringArbeidsgiver = 'arb2'
 
 export const arbeidstakerUtenforArbeidsgiverperiodeKvittering: RSSoknad = {
@@ -376,8 +376,8 @@ export const arbeidstakerUtenforArbeidsgiverperiodeKvittering: RSSoknad = {
     arbeidssituasjon: 'ARBEIDSTAKER',
     soknadPerioder: [
         {
-            fom: '2020-01-01',
-            tom: '2020-01-20',
+            fom: arbeidstakerUtenforArbeidsgiverperiodeKvitteringFom,
+            tom: arbeidstakerUtenforArbeidsgiverperiodeKvitteringTom,
             grad: 100,
             sykmeldingstype: 'AKTIVITET_IKKE_MULIG',
         },
@@ -470,8 +470,8 @@ export const arbeidstakerUtenOppholdForsteUtenforArbeidsgiverperiodeKvittering: 
     arbeidssituasjon: 'ARBEIDSTAKER',
     soknadPerioder: [
         {
-            fom: '2020-01-06',
-            tom: '2020-01-20',
+            fom: arbeidstakerUtenOppholdForsteUtenforArbeidsgiverperiodeKvitteringFom,
+            tom: arbeidstakerUtenOppholdForsteUtenforArbeidsgiverperiodeKvitteringTom,
             grad: 100,
             sykmeldingstype: 'AKTIVITET_IKKE_MULIG',
         },
@@ -492,7 +492,7 @@ export const arbeidstakerUtenOppholdForsteUtenforArbeidsgiverperiodeKvittering: 
     klippet: false,
 }
 const arbeidstakerUtenOppholdKvitteringFom = '2020-04-01'
-const arbeidstakerUtenOppholdKvitteringTom = '2020-04-24'
+const arbeidstakerUtenOppholdKvitteringTom = '2020-04-05'
 const arbeidstakerUtenOppholdKvitteringArbeidsgiver = 'arb1'
 
 export const arbeidstakerUtenOppholdKvittering: RSSoknad = {
@@ -517,8 +517,8 @@ export const arbeidstakerUtenOppholdKvittering: RSSoknad = {
     arbeidssituasjon: 'ARBEIDSTAKER',
     soknadPerioder: [
         {
-            fom: '2020-01-21',
-            tom: '2020-01-25',
+            fom: arbeidstakerUtenOppholdKvitteringFom,
+            tom: arbeidstakerUtenOppholdKvitteringTom,
             grad: 100,
             sykmeldingstype: 'AKTIVITET_IKKE_MULIG',
         },
@@ -564,8 +564,8 @@ export const sok6: RSSoknad = {
     arbeidssituasjon: 'ARBEIDSTAKER',
     soknadPerioder: [
         {
-            fom: '2020-01-01',
-            tom: '2020-01-05',
+            fom: sok6Fom,
+            tom: sok6Tom,
             grad: 100,
             sykmeldingstype: 'AKTIVITET_IKKE_MULIG',
         },
@@ -601,8 +601,8 @@ export const arbeidstakerMedOppholdForsteUtenforArbeidsgiverperiodeKvittering: R
     arbeidssituasjon: 'ARBEIDSTAKER',
     soknadPerioder: [
         {
-            fom: '2020-01-10',
-            tom: '2020-01-25',
+            fom: arbeidstakerMedOppholdForsteUtenforArbeidsgiverperiodeKvitteringFom,
+            tom: arbeidstakerMedOppholdForsteUtenforArbeidsgiverperiodeKvitteringTom,
             grad: 100,
             sykmeldingstype: 'AKTIVITET_IKKE_MULIG',
         },
@@ -677,6 +677,8 @@ const foranArbeidstakerMedOppholdKvitteringFom = '2020-03-25'
 const foranArbeidstakerMedOppholdKvitteringTom = '2020-03-27'
 foranArbeidstakerMedOppholdKvittering.fom = foranArbeidstakerMedOppholdKvitteringFom
 foranArbeidstakerMedOppholdKvittering.tom = foranArbeidstakerMedOppholdKvitteringTom
+foranArbeidstakerMedOppholdKvittering.soknadPerioder[0].fom = foranArbeidstakerMedOppholdKvitteringFom
+foranArbeidstakerMedOppholdKvittering.soknadPerioder[0].tom = foranArbeidstakerMedOppholdKvitteringTom
 foranArbeidstakerMedOppholdKvittering.sporsmal = foranArbeidstakerMedOppholdKvittering.sporsmal.map((sporsmal) => {
     if (sporsmal.tag !== 'TILBAKE_I_ARBEID') return sporsmal
     return tilbakeIArbeid({

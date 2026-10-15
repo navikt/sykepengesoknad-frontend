@@ -29,6 +29,8 @@ const nySoknadFom = '2022-04-25'
 const nySoknadTom = '2022-04-30'
 nySoknadSomIkkeKanFyllesUt.fom = nySoknadFom
 nySoknadSomIkkeKanFyllesUt.tom = nySoknadTom
+nySoknadSomIkkeKanFyllesUt.soknadPerioder[0].fom = nySoknadFom
+nySoknadSomIkkeKanFyllesUt.soknadPerioder[0].tom = nySoknadTom
 byggSporsmalMedNyeDatoer(nySoknadSomIkkeKanFyllesUt, nySoknadFom, nySoknadTom)
 
 const endaEnNySoknadSomIkkeKanFyllesUt: RSSoknad = deepcopyMedNyId(
@@ -39,6 +41,8 @@ const endaEnNySoknadFom = '2022-04-23'
 const endaEnNySoknadTom = '2022-04-30'
 endaEnNySoknadSomIkkeKanFyllesUt.fom = endaEnNySoknadFom
 endaEnNySoknadSomIkkeKanFyllesUt.tom = endaEnNySoknadTom
+endaEnNySoknadSomIkkeKanFyllesUt.soknadPerioder[0].fom = endaEnNySoknadFom
+endaEnNySoknadSomIkkeKanFyllesUt.soknadPerioder[0].tom = endaEnNySoknadTom
 byggSporsmalMedNyeDatoer(endaEnNySoknadSomIkkeKanFyllesUt, endaEnNySoknadFom, endaEnNySoknadTom)
 
 export const flereEldreUsendteSoknader: Persona = {

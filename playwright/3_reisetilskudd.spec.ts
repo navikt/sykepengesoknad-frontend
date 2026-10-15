@@ -14,6 +14,7 @@ import {
     svarJaHovedsporsmal,
     harSynligTittel,
     harSynligTekst,
+    velgDato,
 } from './utils/utilities'
 import { validerAxeUtilityWrapper } from './uuvalidering'
 
@@ -94,9 +95,9 @@ test.describe('Teste førsteside i reisetilskuddsøknaden', () => {
             await klikkGaVidere(page, true)
             await expect(page.getByText('Du må oppgi minst en dag')).toContainText('Du må oppgi minst en dag')
 
-            await page.locator('[aria-label="mandag 6"]').click()
-            await page.locator('[aria-label="tirsdag 7"]').click()
-            await page.locator('[aria-label="onsdag 8"]').click()
+            await velgDato(page, 6)
+            await velgDato(page, 7)
+            await velgDato(page, 8)
 
             await expect(page.locator('[aria-label="mandag 6"]')).toHaveAttribute('aria-pressed', 'true')
             await expect(page.locator('[aria-label="tirsdag 7"]')).toHaveAttribute('aria-pressed', 'true')

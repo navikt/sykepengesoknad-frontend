@@ -35,7 +35,7 @@ export const avbruttSoknad: RSSoknad = {
     korrigerer: null,
     korrigertAv: null,
     arbeidssituasjon: 'ARBEIDSTAKER',
-    soknadPerioder: [{ fom: '2020-05-20', tom: '2020-06-05', grad: 80, sykmeldingstype: 'AKTIVITET_IKKE_MULIG' }],
+    soknadPerioder: [{ fom, tom, grad: 80, sykmeldingstype: 'AKTIVITET_IKKE_MULIG' }],
     sporsmal: [
         ansvarserklaring({ id: '84' }),
         egenmeldinger({

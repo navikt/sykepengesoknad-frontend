@@ -14,6 +14,8 @@ import {
     svarFritekst,
     svarJaHovedsporsmal,
     harSynligTekst,
+    velgDato,
+    setPeriodeFraTil,
 } from './utils/utilities'
 
 /**
@@ -169,11 +171,11 @@ test.describe('Tidssone: DATOER-kalender persistering', () => {
 
             await svarJaHovedsporsmal(page)
 
-            await page.getByRole('button', { name: 'mandag 6' }).click()
+            await velgDato(page, 6)
             await expect(page.locator(forventDagValgt('mandag 6'))).toBeVisible()
-            await page.getByRole('button', { name: 'tirsdag 7' }).click()
+            await velgDato(page, 7)
             await expect(page.locator(forventDagValgt('tirsdag 7'))).toBeVisible()
-            await page.getByRole('button', { name: 'onsdag 8' }).click()
+            await velgDato(page, 8)
             await expect(page.locator(forventDagValgt('onsdag 8'))).toBeVisible()
 
             await expect(page.locator(forventDagValgt('mandag 6'))).toBeVisible()
@@ -200,11 +202,11 @@ test.describe('Tidssone: DATOER-kalender persistering', () => {
 
             await svarJaHovedsporsmal(page)
 
-            await page.getByRole('button', { name: 'mandag 6' }).click()
+            await velgDato(page, 6)
             await expect(page.locator(forventDagValgt('mandag 6'))).toBeVisible()
-            await page.getByRole('button', { name: 'tirsdag 7' }).click()
+            await velgDato(page, 7)
             await expect(page.locator(forventDagValgt('tirsdag 7'))).toBeVisible()
-            await page.getByRole('button', { name: 'onsdag 8' }).click()
+            await velgDato(page, 8)
             await expect(page.locator(forventDagValgt('onsdag 8'))).toBeVisible()
 
             await expect(page.locator(forventDagValgt('mandag 6'))).toBeVisible()
@@ -231,11 +233,11 @@ test.describe('Tidssone: DATOER-kalender persistering', () => {
 
             await svarJaHovedsporsmal(page)
 
-            await page.getByRole('button', { name: 'mandag 6' }).click()
+            await velgDato(page, 6)
             await expect(page.locator(forventDagValgt('mandag 6'))).toBeVisible()
-            await page.getByRole('button', { name: 'tirsdag 7' }).click()
+            await velgDato(page, 7)
             await expect(page.locator(forventDagValgt('tirsdag 7'))).toBeVisible()
-            await page.getByRole('button', { name: 'onsdag 8' }).click()
+            await velgDato(page, 8)
             await expect(page.locator(forventDagValgt('onsdag 8'))).toBeVisible()
 
             await expect(page.locator(forventDagValgt('mandag 6'))).toBeVisible()
@@ -302,13 +304,7 @@ test.describe('Tidssone: periode-komp datoer persistering', () => {
     const velgPeriodeOgNavigerTilbake = async (page: import('@playwright/test').Page) => {
         await page.goto(`/syk/sykepengesoknad/soknader/${arbeidstaker.id}/3`)
         await svarJaHovedsporsmal(page)
-        const periodeLocator = page.getByRole('group', { name: /Tidsperiode/ }).first()
-        await periodeLocator
-            .getByRole('button', { name: /Åpne datovelger/i })
-            .first()
-            .click()
-        await periodeLocator.locator('[data-day="2020-04-05"]').click()
-        await periodeLocator.locator('[data-day="2020-04-10"]').click()
+        await setPeriodeFraTil(page, 5, 10)
         await klikkGaVidere(page)
         await klikkTilbake(page)
     }

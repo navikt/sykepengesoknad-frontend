@@ -12,7 +12,8 @@ import { tilbakeIArbeid } from '../sporsmal/tilbake-i-arbeid'
 import { arbeidstaker50Syk } from '../sykmeldinger'
 
 const fom = '2020-04-01'
-const tom = '2020-04-24'
+const tom = '2020-05-10'
+const gradertTom = '2020-04-24'
 const arbeidsgiverNavn = 'Posten Norge AS, Bærum'
 
 const ghostInntekter: RSKjentInntektskilde[] = [
@@ -43,15 +44,15 @@ export const arbeidstakerGradert: RSSoknad = {
     korrigertAv: null,
     arbeidssituasjon: 'ARBEIDSTAKER',
     soknadPerioder: [
-        { fom, tom, grad: 50, sykmeldingstype: 'GRADERT' },
-        { fom: '2020-04-25', tom: '2020-05-10', grad: 100, sykmeldingstype: 'AKTIVITET_IKKE_MULIG' },
+        { fom, tom: gradertTom, grad: 50, sykmeldingstype: 'GRADERT' },
+        { fom: '2020-04-25', tom, grad: 100, sykmeldingstype: 'AKTIVITET_IKKE_MULIG' },
     ],
     sporsmal: [
         ansvarserklaring({ id: '687291' }),
         tilbakeIArbeid({ fom, tom, arbeidsgiver: arbeidsgiverNavn, id: '687302', tilbakeNarId: '687303' }),
         ferieV2({ fom, tom, id: '687304', ferieNarId: '687305' }),
         permisjonV2({ fom, tom, id: '687306', permisjonNarId: '687307' }),
-        jobbetDuGradert({ fom, tom, arbeidsgiver: arbeidsgiverNavn, grad: 50 }),
+        jobbetDuGradert({ fom, tom: gradertTom, arbeidsgiver: arbeidsgiverNavn, grad: 50 }),
         arbeidUtenforNorge({ id: '687310' }),
         andreInntektskilderV2(),
         oppholdUtenforEos({ fom, tom, id: '687308', oppholdNarId: '687309' }),
