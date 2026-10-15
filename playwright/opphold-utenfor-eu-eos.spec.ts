@@ -76,7 +76,11 @@ test.describe('Opphold utenfor EU/EØS', () => {
             })
             await expect(landVelger).toBeVisible()
 
-            const valgteLand = landVelger.locator('..').locator('..').getByRole('listitem')
+            const valgteLand = landVelger
+                .locator('..')
+                .locator('..')
+                .getByRole('listitem')
+                .filter({ hasNot: landVelger })
 
             await landVelger.click() // Midlertidig fix for mobile webkit og combobox
             await landVelger.fill('Belgia')
@@ -88,12 +92,29 @@ test.describe('Opphold utenfor EU/EØS', () => {
                 page.getByText('Du har ikke reist utenfor EU/EØS. Svar nei på dette spørsmålet.'),
             ).toBeVisible()
 
+            const britiskeLand = ['England', 'Nord-Irland', 'Skottland', 'Storbritannia', 'Wales']
+
+            for (const [indeks, land] of britiskeLand.entries()) {
+                await landVelger.fill(land)
+                await page.getByRole('option', { name: land, exact: true }).click()
+                await landVelger.press('Escape')
+
+                await expect(valgteLand).toHaveText(['Belgia', ...britiskeLand.slice(0, indeks + 1)])
+                await expect(
+                    page.getByText('Du har ikke reist utenfor EU/EØS. Svar nei på dette spørsmålet.'),
+                ).toBeVisible()
+                await expect(page.getByText('Du har reist utenfor EU/EØS.', { exact: true })).not.toBeVisible()
+            }
+
             await landVelger.fill('Afghanistan')
             await page.getByRole('option', { name: 'Afghanistan' }).click()
-            await expect(valgteLand.nth(1)).toHaveText('Afghanistan')
-
             await landVelger.press('Escape')
+
+            await expect(valgteLand).toHaveText(['Belgia', ...britiskeLand, 'Afghanistan'])
             await harSynligTekst(page, 'Du har reist utenfor EU/EØS.')
+            await expect(
+                page.getByText('Du har ikke reist utenfor EU/EØS. Svar nei på dette spørsmålet.'),
+            ).not.toBeVisible()
         })
 
         await test.step('Viser info om opprettelse av egen søknad', async () => {

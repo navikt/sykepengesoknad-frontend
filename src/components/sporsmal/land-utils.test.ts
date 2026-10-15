@@ -17,8 +17,15 @@ describe('land-utils', () => {
     it('gjenkjenner EU/EØS-land', () => {
         expect(erLandIEuEos('Danmark')).toBe(true)
         expect(erLandIEuEos('Sverige')).toBe(true)
-        expect(erLandIEuEos('England')).toBe(false)
+        expect(erLandIEuEos('USA')).toBe(false)
     })
+
+    it.each(['England', 'Nord-Irland', 'Skottland', 'Storbritannia', 'Wales'])(
+        'behandler %s som innenfor EU/EØS',
+        (land) => {
+            expect(erLandIEuEos(land)).toBe(true)
+        },
+    )
 
     it('gjenkjenner EU/EØS eller Storbritannia', () => {
         expect(erLandIEuEosEllerStorbritannia('Danmark')).toBe(true)
