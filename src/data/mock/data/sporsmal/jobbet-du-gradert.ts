@@ -27,10 +27,6 @@ type JobbetDuGradertValg = {
         readonly timerVerdi?: string
     }
     readonly prosentMin?: string
-    readonly tekstvariant?: 'sykmeldingen' | 'normaleArbeid'
-    readonly arbeidsmengdeTekstvariant?: 'tilsammen' | 'totalt-hos-arbeidsgiver'
-    readonly arbeidsmengdeUndertekst?: string | null
-    readonly alternativTekstvariant?: 'stor-forbokstav' | 'liten-forbokstav'
     readonly verdiSvartype?: 'domene' | 'tall'
 }
 
@@ -45,22 +41,14 @@ export const jobbetDuGradert = ({
     svarBarn = {},
     ids = {},
     prosentMin = String(grad + 1),
-    tekstvariant = 'sykmeldingen',
-    arbeidsmengdeTekstvariant = 'tilsammen',
-    arbeidsmengdeUndertekst = 'Velg timer eller prosent',
-    alternativTekstvariant = 'stor-forbokstav',
     verdiSvartype = 'domene',
 }: JobbetDuGradertValg): RSSporsmal => {
     const periode = tilLesbarPeriodeMedArstall(fom, tom)
-    const sporsmalstekst =
-        tekstvariant === 'sykmeldingen'
-            ? `I perioden ${periode} sier sykmeldingen at du kunne jobbe ${grad} % i jobben din hos ${arbeidsgiver}. Jobbet du mer enn det?`
-            : `I perioden ${periode} skulle du jobbe ${grad} % av ditt normale arbeid hos ${arbeidsgiver}. Jobbet du mer enn dette?`
 
     return {
         id,
         tag: `JOBBET_DU_GRADERT_${index}`,
-        sporsmalstekst,
+        sporsmalstekst: `I perioden ${periode} sier sykmeldingen at du kunne jobbe ${grad} % i jobben din hos ${arbeidsgiver}. Jobbet du mer enn det?`,
         undertekst: null,
         svartype: 'JA_NEI',
         min: null,
@@ -84,11 +72,8 @@ export const jobbetDuGradert = ({
             {
                 id: ids.arbeidsmengde ?? 'e3a6bd7d-8f10-381c-8cd3-cdab3e410c95',
                 tag: `HVOR_MYE_HAR_DU_JOBBET_${index}`,
-                sporsmalstekst:
-                    arbeidsmengdeTekstvariant === 'totalt-hos-arbeidsgiver'
-                        ? `Hvor mye jobbet du totalt ${periode} hos ${arbeidsgiver}?`
-                        : `Hvor mye jobbet du tilsammen ${periode}?`,
-                undertekst: arbeidsmengdeUndertekst,
+                sporsmalstekst: `Hvor mye jobbet du tilsammen ${periode} ?`,
+                undertekst: 'Velg timer eller prosent',
                 svartype: 'RADIO_GRUPPE_TIMER_PROSENT',
                 min: null,
                 max: null,
@@ -98,7 +83,7 @@ export const jobbetDuGradert = ({
                     {
                         id: ids.prosent ?? '0e368ffc-1840-35e5-bbb5-b994cbaa8ef1',
                         tag: `HVOR_MYE_PROSENT_${index}`,
-                        sporsmalstekst: alternativTekstvariant === 'liten-forbokstav' ? 'prosent' : 'Prosent',
+                        sporsmalstekst: 'Prosent',
                         undertekst: null,
                         svartype: 'RADIO',
                         min: null,
@@ -123,7 +108,7 @@ export const jobbetDuGradert = ({
                     {
                         id: ids.timer ?? '348f75cd-a87d-397b-8428-cbcb9e50a5d7',
                         tag: `HVOR_MYE_TIMER_${index}`,
-                        sporsmalstekst: alternativTekstvariant === 'liten-forbokstav' ? 'timer' : 'Timer',
+                        sporsmalstekst: 'Timer',
                         undertekst: null,
                         svartype: 'RADIO',
                         min: null,

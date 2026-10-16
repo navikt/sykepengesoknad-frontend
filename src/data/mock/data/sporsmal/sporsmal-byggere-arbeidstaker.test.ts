@@ -131,19 +131,24 @@ describe('Spørsmålsbyggere for arbeidstaker', () => {
         expect(sporsmal.undersporsmal[0].undersporsmal[1].undersporsmal[0].undertekst).toBe('Eksempel 12 timer')
     })
 
-    it('beholder arbeidsgivertekst i gradert arbeidsmengde', () => {
+    it('bruker backendtekst for gradert arbeid', () => {
         const sporsmal = jobbetDuGradert({
             fom: '2020-05-20',
             tom: '2020-06-05',
             arbeidsgiver: '995816598 sitt orgnavn :)',
             grad: 20,
-            arbeidsmengdeTekstvariant: 'totalt-hos-arbeidsgiver',
-            arbeidsmengdeUndertekst: null,
         })
 
+        expect(sporsmal.sporsmalstekst).toBe(
+            'I perioden 20. mai – 5. juni 2020 sier sykmeldingen at du kunne jobbe 20 % i jobben din hos 995816598 sitt orgnavn :). Jobbet du mer enn det?',
+        )
         expect(sporsmal.undersporsmal[1]).toMatchObject({
-            sporsmalstekst: 'Hvor mye jobbet du totalt 20. mai – 5. juni 2020 hos 995816598 sitt orgnavn :)?',
-            undertekst: null,
+            sporsmalstekst: 'Hvor mye jobbet du tilsammen 20. mai – 5. juni 2020 ?',
+            undertekst: 'Velg timer eller prosent',
         })
+        expect(sporsmal.undersporsmal[1].undersporsmal.map((undersporsmal) => undersporsmal.sporsmalstekst)).toEqual([
+            'Prosent',
+            'Timer',
+        ])
     })
 })
