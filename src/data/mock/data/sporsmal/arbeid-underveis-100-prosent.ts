@@ -24,10 +24,9 @@ type ArbeidUnderveisId = {
     readonly timerPerUke?: string
 }
 
-type ArbeidUnderveis100ProsentValg = {
+type ArbeidUnderveis100ProsentValgFelles = {
     readonly fom: string
     readonly tom: string
-    readonly arbeidsgiver?: string
     readonly index?: number
     readonly id?: string
     readonly svar?: ArbeidUnderveisSvar
@@ -39,30 +38,41 @@ type ArbeidUnderveis100ProsentValg = {
     readonly normalArbeidsukeTekst?: string
     readonly timerPerUkeTekst?: string | null
     readonly arbeidsgiverFormulering?: 'hos' | 'uten'
-    readonly tekstvariant?: 'arbeidstaker' | 'frilanser' | 'selvstendigNaeringsdrivende'
     readonly hovedtekstvariant?: 'standard' | 'uten-arbeidsgiver-i-andre-setning'
     readonly prosentVerdiTekstvariant?: 'normal-arbeidstid' | 'totalt-prosent'
 }
 
-export const arbeidUnderveis100Prosent = ({
-    fom,
-    tom,
-    arbeidsgiver,
-    index = 0,
-    id = '63448066-fa24-3d9b-bf38-fb2ea23a353f',
-    svar = {},
-    ids = {},
-    timerMaks = '364',
-    prosentUndertekst = 'Oppgi i prosent. Eksempel: 40',
-    timerUndertekst = 'Oppgi i timer. Eksempel: 12',
-    timerTekstSporsmalstegn = false,
-    normalArbeidsukeTekst = `Jobber du vanligvis 37,5 timer i uka hos ${arbeidsgiver}?`,
-    timerPerUkeTekst = 'Oppgi timer per uke',
-    arbeidsgiverFormulering = 'hos',
-    tekstvariant = 'arbeidstaker',
-    hovedtekstvariant = 'standard',
-    prosentVerdiTekstvariant = 'normal-arbeidstid',
-}: ArbeidUnderveis100ProsentValg): RSSporsmal => {
+type ArbeidUnderveis100ProsentValg =
+    | (ArbeidUnderveis100ProsentValgFelles & {
+          readonly arbeidsgiver: string
+          readonly tekstvariant?: 'arbeidstaker'
+      })
+    | (ArbeidUnderveis100ProsentValgFelles & {
+          readonly arbeidsgiver?: never
+          readonly tekstvariant: 'frilanser' | 'selvstendigNaeringsdrivende'
+      })
+
+export const arbeidUnderveis100Prosent = (valg: ArbeidUnderveis100ProsentValg): RSSporsmal => {
+    const {
+        fom,
+        tom,
+        index = 0,
+        id = '63448066-fa24-3d9b-bf38-fb2ea23a353f',
+        svar = {},
+        ids = {},
+        timerMaks = '364',
+        prosentUndertekst = 'Oppgi i prosent. Eksempel: 40',
+        timerUndertekst = 'Oppgi i timer. Eksempel: 12',
+        timerTekstSporsmalstegn = false,
+        timerPerUkeTekst = 'Oppgi timer per uke',
+        arbeidsgiverFormulering = 'hos',
+        hovedtekstvariant = 'standard',
+        prosentVerdiTekstvariant = 'normal-arbeidstid',
+    } = valg
+    const arbeidsgiver = valg.arbeidsgiver
+    const tekstvariant = valg.tekstvariant ?? 'arbeidstaker'
+    const normalArbeidsukeTekst =
+        valg.normalArbeidsukeTekst ?? `Jobber du vanligvis 37,5 timer i uka hos ${arbeidsgiver}?`
     const periode = tilLesbarPeriodeMedArstall(fom, tom)
     const arbeidHos =
         arbeidsgiverFormulering === 'hos' && hovedtekstvariant === 'standard' ? `hos ${arbeidsgiver} ` : ''

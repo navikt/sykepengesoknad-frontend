@@ -680,11 +680,11 @@ foranArbeidstakerMedOppholdKvittering.tom = foranArbeidstakerMedOppholdKvitterin
 foranArbeidstakerMedOppholdKvittering.soknadPerioder[0].fom = foranArbeidstakerMedOppholdKvitteringFom
 foranArbeidstakerMedOppholdKvittering.soknadPerioder[0].tom = foranArbeidstakerMedOppholdKvitteringTom
 foranArbeidstakerMedOppholdKvittering.sporsmal = foranArbeidstakerMedOppholdKvittering.sporsmal.map((sporsmal) => {
-    if (sporsmal.tag !== 'TILBAKE_I_ARBEID') return sporsmal
+    if (sporsmal.tag !== 'TILBAKE_I_ARBEID' || !foranArbeidstakerMedOppholdKvittering.arbeidsgiver) return sporsmal
     return tilbakeIArbeid({
         fom: foranArbeidstakerMedOppholdKvitteringFom,
         tom: foranArbeidstakerMedOppholdKvitteringTom,
-        arbeidsgiver: foranArbeidstakerMedOppholdKvittering.arbeidsgiver?.navn ?? undefined,
+        arbeidsgiver: foranArbeidstakerMedOppholdKvittering.arbeidsgiver.navn,
         id: sporsmal.id,
         svar: sporsmal.svar,
         tilbakeNarId: sporsmal.undersporsmal[0].id,

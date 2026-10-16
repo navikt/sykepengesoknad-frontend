@@ -8,11 +8,11 @@ import { Persona } from './personas'
 
 const byggSporsmalMedNyeDatoer = (soknad: RSSoknad, fom: string, tom: string): void => {
     soknad.sporsmal = soknad.sporsmal.map((sporsmal) => {
-        if (sporsmal.tag !== 'TILBAKE_I_ARBEID') return sporsmal
+        if (sporsmal.tag !== 'TILBAKE_I_ARBEID' || !soknad.arbeidsgiver) return sporsmal
         return tilbakeIArbeid({
             fom,
             tom,
-            arbeidsgiver: soknad.arbeidsgiver?.navn ?? undefined,
+            arbeidsgiver: soknad.arbeidsgiver.navn,
             id: sporsmal.id,
             svar: sporsmal.svar,
             tilbakeNarId: sporsmal.undersporsmal[0].id,

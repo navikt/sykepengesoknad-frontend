@@ -2,11 +2,9 @@ import type { RSSporsmal } from '../../../../types/rs-types/rs-sporsmal'
 import type { RSSvar } from '../../../../types/rs-types/rs-svar'
 import { tilLesbarDatoMedArstall, tilLesbarPeriodeMedArstall } from '../../../../utils/dato-utils'
 
-type TilbakeIArbeidValg = {
+type TilbakeIArbeidValgFelles = {
     readonly fom: string
     readonly tom: string
-    readonly arbeidsgiver?: string
-    readonly tekstvariant?: 'arbeidstaker' | 'frilanser' | 'selvstendigNaeringsdrivende'
     readonly id?: string
     readonly svar?: RSSvar[]
     readonly tilbakeNarId?: string
@@ -15,28 +13,39 @@ type TilbakeIArbeidValg = {
     readonly tilbakeNarTekst?: string
 }
 
-export const tilbakeIArbeid = ({
-    fom,
-    tom,
-    arbeidsgiver,
-    tekstvariant = 'arbeidstaker',
-    id = '687341',
-    svar = [],
-    tilbakeNarId = '687342',
-    tilbakeNarSvar = [],
-    sporsmalstekst,
-    tilbakeNarTekst = 'Når begynte du å jobbe igjen?',
-}: TilbakeIArbeidValg): RSSporsmal => {
-    const sporsmalstekster = {
-        arbeidstaker: `Var du tilbake i fullt arbeid hos ${arbeidsgiver} i løpet av perioden ${tilLesbarPeriodeMedArstall(fom, tom)}?`,
-        frilanser: `Var du tilbake i fullt arbeid som frilanser før sykmeldingsperioden utløp ${tilLesbarDatoMedArstall(tom)}?`,
-        selvstendigNaeringsdrivende: `Var du tilbake i fullt arbeid som selvstendig næringsdrivende før sykmeldingsperioden utløp ${tilLesbarDatoMedArstall(tom)}?`,
-    } as const
+type TilbakeIArbeidValg =
+    | (TilbakeIArbeidValgFelles & {
+          readonly arbeidsgiver: string
+          readonly tekstvariant?: 'arbeidstaker'
+      })
+    | (TilbakeIArbeidValgFelles & {
+          readonly arbeidsgiver?: never
+          readonly tekstvariant: 'frilanser' | 'selvstendigNaeringsdrivende'
+      })
+
+export const tilbakeIArbeid = (valg: TilbakeIArbeidValg): RSSporsmal => {
+    const {
+        fom,
+        tom,
+        id = '687341',
+        svar = [],
+        tilbakeNarId = '687342',
+        tilbakeNarSvar = [],
+        sporsmalstekst,
+        tilbakeNarTekst = 'Når begynte du å jobbe igjen?',
+    } = valg
+    const tekstvariant = valg.tekstvariant ?? 'arbeidstaker'
+    const standardSporsmalstekst =
+        tekstvariant === 'arbeidstaker'
+            ? `Var du tilbake i fullt arbeid hos ${valg.arbeidsgiver} i løpet av perioden ${tilLesbarPeriodeMedArstall(fom, tom)}?`
+            : tekstvariant === 'frilanser'
+              ? `Var du tilbake i fullt arbeid som frilanser før sykmeldingsperioden utløp ${tilLesbarDatoMedArstall(tom)}?`
+              : `Var du tilbake i fullt arbeid som selvstendig næringsdrivende før sykmeldingsperioden utløp ${tilLesbarDatoMedArstall(tom)}?`
 
     return {
         id,
         tag: 'TILBAKE_I_ARBEID',
-        sporsmalstekst: sporsmalstekst ?? sporsmalstekster[tekstvariant],
+        sporsmalstekst: sporsmalstekst ?? standardSporsmalstekst,
         undertekst: null,
         svartype: 'JA_NEI',
         min: null,
