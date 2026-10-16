@@ -23,7 +23,7 @@ export const hentAlertTekst = ({
     }
 
     const harKunStorbritannia = valgtLand.every(erStorbritanniaLand)
-    const harKunEøs = valgtLand.every(erLandIEuEos)
+    const harKunEøs = valgtLand.every((land) => erLandIEuEos(land) && !erStorbritanniaLand(land))
     const harKunStorbritanniaEllerEøs = valgtLand.every(erLandIEuEosEllerStorbritannia)
 
     if (harKunStorbritannia) {
