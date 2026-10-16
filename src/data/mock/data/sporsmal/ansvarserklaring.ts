@@ -1,8 +1,12 @@
-import { RSSporsmal } from '../../../../types/rs-types/rs-sporsmal'
+import type { RSSporsmal } from '../../../../types/rs-types/rs-sporsmal'
+import type { RSSvar } from '../../../../types/rs-types/rs-svar'
 
-export const ansvarserklaring = (): RSSporsmal => {
+export const ansvarserklaring = ({
+    id = '1623807',
+    svar = [],
+}: { readonly id?: string; readonly svar?: RSSvar[] } = {}): RSSporsmal => {
     return {
-        id: '1623807',
+        id,
         tag: 'ANSVARSERKLARING',
         sporsmalstekst: 'Jeg bekrefter at jeg vil svare så riktig som jeg kan.',
         undertekst: null,
@@ -10,7 +14,7 @@ export const ansvarserklaring = (): RSSporsmal => {
         min: null,
         max: null,
         kriterieForVisningAvUndersporsmal: null,
-        svar: [],
+        svar,
         undersporsmal: [],
     }
 }

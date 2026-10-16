@@ -2,6 +2,7 @@ import { logger } from '@navikt/next-logger'
 
 import { jsonDeepCopy } from '../../utils/json-deep-copy'
 
+import { validerSoknadsperiode } from './valider-soknadsperiode'
 import { brukertestPerosn } from './data/personas/brukertestPerosn'
 import { eldreUsendtSoknad, flereEldreUsendteSoknader } from './data/personas/eldre-usendt-soknad'
 import { reisetilskuddTestPerson } from './data/personas/reisetilskuddTestPerson'
@@ -138,6 +139,7 @@ export function testpersoner(): PersonaData {
                 throw Error(message)
             }
             soknadsIder.add(soknad.id)
+            validerSoknadsperiode(soknad)
         })
     })
 

@@ -1,7 +1,7 @@
 import { v4 } from 'uuid'
 
 import { RSSporsmal } from '../../../../types/rs-types/rs-sporsmal'
-import { tilLesbarPeriodeMedArstall } from '../../../../utils/dato-utils'
+import { formatterPeriode } from './backend-datoformat'
 
 export const nyttArbeidsforholdSporsmal = ({
     arbeidsstedNavn,
@@ -14,7 +14,7 @@ export const nyttArbeidsforholdSporsmal = ({
     tom: string
     fom: string
 }): RSSporsmal => {
-    const periodeTekst = tilLesbarPeriodeMedArstall(fom, tom)
+    const periodeTekst = formatterPeriode(fom, tom)
 
     return {
         id: v4().toString(),

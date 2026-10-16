@@ -161,13 +161,17 @@ export async function klikkTilbake(page: Page) {
     await sjekkMainContentFokus(page)
 }
 
-export async function setPeriodeFraTil(page: Page, fom: number, tom: number, periodeIndex = 0) {
+export async function setPeriodeFraTil(page: Page, fom: number, tom: number, periodeIndex = 0, manederTilbake = 0) {
     const periodeLocator = page.getByRole('group', { name: /Tidsperiode/ }).nth(periodeIndex)
 
     await periodeLocator
         .getByRole('button', { name: /Åpne datovelger/i })
         .nth(0)
         .click()
+
+    for (let måned = 0; måned < manederTilbake; måned++) {
+        await periodeLocator.getByRole('button', { name: /Forrige måned|Go to previous month/i }).click()
+    }
 
     await periodeLocator
         .getByRole('grid')
@@ -317,7 +321,11 @@ export async function harFlereFeilISkjemaet(page: Page, antall: number, feilmeld
     }
 }
 
-export async function velgDato(page: Page, dag?: number) {
+export async function velgDato(page: Page, dag?: number, manederTilbake = 0) {
+    for (let måned = 0; måned < manederTilbake; måned++) {
+        await page.getByRole('button', { name: /Forrige måned|Go to previous month/i }).click()
+    }
+
     if (dag) {
         await page
             .getByRole('grid')

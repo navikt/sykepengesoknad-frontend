@@ -122,8 +122,8 @@ test.describe('Tester feilmeldinger', () => {
             await klikkGaVidere(page, true)
             await verifiserFeilmelding(
                 page,
-                'Datoen kan ikke være etter 24.04.2020',
-                'Datoen kan ikke være etter 24.04.2020',
+                'Datoen kan ikke være etter 10.05.2020',
+                'Datoen kan ikke være etter 10.05.2020',
                 sporsmalId,
             )
             await validerAxeUtilityWrapper(page, test.info())
@@ -186,8 +186,8 @@ test.describe('Tester feilmeldinger', () => {
             await klikkGaVidere(page, true)
             await verifiserFeilmelding(
                 page,
-                'Til og med kan ikke være etter 24.04.2020',
-                'Til og med kan ikke være etter 24.04.2020',
+                'Til og med kan ikke være etter 10.05.2020',
+                'Til og med kan ikke være etter 10.05.2020',
                 `${sporsmalId}_0_tom`,
             )
             await validerAxeUtilityWrapper(page, test.info())

@@ -11,6 +11,8 @@ import {
     svarRadio,
     klikkGaVidere,
     svarCheckboxSporsmal,
+    setPeriodeFraTil,
+    velgDato,
 } from './utils/utilities'
 import { validerAxeUtilityWrapper } from './uuvalidering'
 const fillTextFieldByLabel = async (page: Page, labelText: string, value: string, fallbackSelector?: string) => {
@@ -23,27 +25,6 @@ const fillTextFieldByLabel = async (page: Page, labelText: string, value: string
             throw error
         }
     }
-}
-
-const setPeriodeFraTil = async (page: Page, fom: number, tom: number, periodeIndex = 0) => {
-    const periodeComponent = page.getByRole('group', { name: /Tidsperiode/ }).nth(periodeIndex)
-
-    await periodeComponent
-        .getByRole('button', { name: /Åpne datovelger/i })
-        .first()
-        .click()
-
-    await periodeComponent
-        .getByRole('grid')
-        .getByRole('button')
-        .filter({ hasText: new RegExp(`^${fom}$`) })
-        .click()
-
-    await periodeComponent
-        .getByRole('grid')
-        .getByRole('button')
-        .filter({ hasText: new RegExp(`^${tom}$`) })
-        .click()
 }
 
 test.describe('Tester arbeidstakersøknad - gradert 50%', () => {
@@ -97,7 +78,7 @@ test.describe('Tester arbeidstakersøknad - gradert 50%', () => {
             await svarJaHovedsporsmal(page)
             await harSynligTekst(page, 'Når begynte du å jobbe igjen?')
             await page.getByRole('button', { name: /Åpne datovelger/i }).click()
-            await page.getByRole('grid').getByRole('button').filter({ hasText: /^20$/ }).click()
+            await velgDato(page, 20, 1)
             await validerAxeUtilityWrapper(page, test.info())
             await page.getByRole('button', { name: /Gå videre/i }).click()
         })
@@ -106,7 +87,7 @@ test.describe('Tester arbeidstakersøknad - gradert 50%', () => {
             await expect(page).toHaveURL(new RegExp(`.*${soknadId}\/3`))
             await svarJaHovedsporsmal(page)
             await harSynligTekst(page, 'Når tok du ut feriedager?')
-            await setPeriodeFraTil(page, 16, 23)
+            await setPeriodeFraTil(page, 16, 23, 0, 1)
             await validerAxeUtilityWrapper(page, test.info())
             await page.getByRole('button', { name: /Gå videre/i }).click()
         })
@@ -115,7 +96,7 @@ test.describe('Tester arbeidstakersøknad - gradert 50%', () => {
             await expect(page).toHaveURL(new RegExp(`.*${soknadId}\/4`))
             await svarJaHovedsporsmal(page)
             await harSynligTekst(page, 'Når tok du permisjon?')
-            await setPeriodeFraTil(page, 14, 22)
+            await setPeriodeFraTil(page, 14, 22, 0, 1)
             await validerAxeUtilityWrapper(page, test.info())
             await page.getByRole('button', { name: /Gå videre/i }).click()
         })
@@ -142,7 +123,7 @@ test.describe('Tester arbeidstakersøknad - gradert 50%', () => {
                 '12',
             )
 
-            await harSynligTekst(page, 'Hvor mye jobbet du tilsammen 1. - 24. april 2020?')
+            await harSynligTekst(page, 'Hvor mye jobbet du tilsammen 1. - 24. april 2020 ?')
             await harSynligTekst(page, 'Velg timer eller prosent')
 
             await page.locator('.undersporsmal input[value="Prosent"]').click()
@@ -198,7 +179,7 @@ test.describe('Tester arbeidstakersøknad - gradert 50%', () => {
             await expect(page).toHaveURL(new RegExp(`.*${soknadId}\/8`))
             await svarJaHovedsporsmal(page)
             await harSynligTekst(page, 'Når var du utenfor EU/EØS?')
-            await setPeriodeFraTil(page, 14, 22)
+            await setPeriodeFraTil(page, 14, 22, 0, 1)
             await validerAxeUtilityWrapper(page, test.info())
             await page.getByRole('button', { name: /Gå videre/i }).click()
         })

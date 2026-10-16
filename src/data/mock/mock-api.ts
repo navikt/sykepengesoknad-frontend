@@ -420,14 +420,14 @@ export async function mockApi(req: NextApiRequest, res: NextApiResponse) {
                 if (body.svar[0].verdi == 'JA') {
                     soknaden.sporsmal = soknaden.sporsmal.map((spm) =>
                         ['NARINGSDRIVENDE_OPPRETTHOLDT_INNTEKT'].includes(spm.tag)
-                            ? naringsdrivendeOpprettholdtInntektGradert
+                            ? naringsdrivendeOpprettholdtInntektGradert()
                             : spm,
                     )
                     json.mutertSoknad = soknaden
                 } else if (body.svar[0].verdi == 'NEI') {
                     soknaden.sporsmal = soknaden.sporsmal.map((spm) =>
                         ['NARINGSDRIVENDE_OPPRETTHOLDT_INNTEKT_GRADERT'].includes(spm.tag)
-                            ? naringsdrivendeOpprettholdtInntekt
+                            ? naringsdrivendeOpprettholdtInntekt()
                             : spm,
                     )
                     json.mutertSoknad = soknaden
