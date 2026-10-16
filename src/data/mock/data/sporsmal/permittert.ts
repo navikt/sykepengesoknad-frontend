@@ -1,6 +1,6 @@
 import type { RSSvar } from '../../../../types/rs-types/rs-svar'
 import type { RSSporsmal } from '../../../../types/rs-types/rs-sporsmal'
-import { tilLesbarDatoMedArstall, tilLesbarPeriodeMedArstall } from '../../../../utils/dato-utils'
+import { formatterDato, formatterPeriode } from './backend-datoformat'
 
 type PermitertNaaValg = {
     readonly sykmeldtFom: string
@@ -20,7 +20,7 @@ export const permittertNaa = ({
 }: PermitertNaaValg): RSSporsmal => ({
     id,
     tag: 'PERMITTERT_NAA',
-    sporsmalstekst: `Var du permittert av arbeidsgiveren din da du ble sykmeldt ${tilLesbarDatoMedArstall(sykmeldtFom)}?`,
+    sporsmalstekst: `Var du permittert av arbeidsgiveren din da du ble sykmeldt ${formatterDato(sykmeldtFom)}?`,
     undertekst: null,
     svartype: 'JA_NEI',
     min: null,
@@ -59,7 +59,7 @@ export const permittertPeriode = ({
 }: PermitertPeriodeValg): RSSporsmal => ({
     id,
     tag: 'PERMITTERT_PERIODE',
-    sporsmalstekst: `Har du vært permittert av arbeidsgiveren din i mer enn 14 sammenhengende dager mellom ${tilLesbarPeriodeMedArstall(fom, tom)}?`,
+    sporsmalstekst: `Har du vært permittert av arbeidsgiveren din i mer enn 14 sammenhengende dager mellom ${formatterPeriode(fom, tom)}?`,
     undertekst: null,
     svartype: 'JA_NEI',
     min: null,

@@ -133,7 +133,7 @@ test.describe('Tester behandlingsdagersøknad', () => {
             await expect(
                 page.getByText(
                     'Hvilke dager måtte du være helt borte fra jobben på grunn av behandling ' +
-                        'mellom 1. – 24. april 2020?',
+                        'mellom 1. - 24. april 2020?',
                 ),
             ).toBeVisible()
             await page.getByRole('button', { name: 'onsdag 1' }).nth(0).click()

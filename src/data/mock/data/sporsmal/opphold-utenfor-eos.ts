@@ -1,6 +1,6 @@
 import type { RSSporsmal } from '../../../../types/rs-types/rs-sporsmal'
 import type { RSSvar } from '../../../../types/rs-types/rs-svar'
-import { tilLesbarPeriodeMedArstall } from '../../../../utils/dato-utils'
+import { formatterPeriode } from './backend-datoformat'
 
 type OppholdUtenforEosValg = {
     readonly fom: string
@@ -29,7 +29,7 @@ export const oppholdUtenforEos = ({
     tag: 'OPPHOLD_UTENFOR_EOS',
     sporsmalstekst:
         sporsmalstekst ??
-        `Var du på reise utenfor ${tekstvariant === 'eos' ? 'EØS' : 'EU/EØS'} mens du var sykmeldt ${tilLesbarPeriodeMedArstall(fom, tom)}?`,
+        `Var du på reise utenfor ${tekstvariant === 'eos' ? 'EØS' : 'EU/EØS'} mens du var sykmeldt ${formatterPeriode(fom, tom)}?`,
     undertekst: null,
     svartype: 'JA_NEI',
     min: null,

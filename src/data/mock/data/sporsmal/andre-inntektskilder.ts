@@ -1,6 +1,6 @@
 import type { RSSvar } from '../../../../types/rs-types/rs-svar'
 import type { RSSporsmal } from '../../../../types/rs-types/rs-sporsmal'
-import { tilLesbarPeriodeMedArstall } from '../../../../utils/dato-utils'
+import { formatterPeriode } from './backend-datoformat'
 
 export const inntektskildeTagger = [
     'INNTEKTSKILDE_ANDRE_ARBEIDSFORHOLD',
@@ -64,7 +64,7 @@ export const andreInntektskilder = ({
     id = '687402',
     gruppeId = '687403',
     kilder = standardKilder,
-    sporsmalstekst = `Har du hatt inntekt mens du har vært sykmeldt i perioden ${tilLesbarPeriodeMedArstall(fom, tom)}?`,
+    sporsmalstekst = `Har du hatt inntekt mens du har vært sykmeldt i perioden ${formatterPeriode(fom, tom)}?`,
     gruppeTekst = 'Hvilke inntektskilder har du hatt?',
     svar = [],
     gruppeSvar = [],

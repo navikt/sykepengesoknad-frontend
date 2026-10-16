@@ -43,7 +43,7 @@ test.describe('Tester nytt arbeidsforhold', () => {
 
         await test.step('Svarer ja og verifiserer hjelpetekst', async () => {
             await svarJaHovedsporsmal(page)
-            await harSynligTekst(page, 'Hvor mye har du tjent i perioden 8. – 21. september 2022?')
+            await harSynligTekst(page, 'Hvor mye har du tjent i perioden 8. - 21. september 2022?')
         })
     })
 

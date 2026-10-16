@@ -1,6 +1,6 @@
 import type { RSSvar } from '../../../../types/rs-types/rs-svar'
 import type { RSSporsmal } from '../../../../types/rs-types/rs-sporsmal'
-import { tilLesbarPeriodeMedArstall } from '../../../../utils/dato-utils'
+import { formatterPeriode } from './backend-datoformat'
 
 export const utdanning = ({
     fom,
@@ -19,7 +19,7 @@ export const utdanning = ({
 }): RSSporsmal => ({
     id,
     tag: 'UTDANNING',
-    sporsmalstekst: `Har du vært under utdanning i løpet av perioden ${tilLesbarPeriodeMedArstall(fom, tom)}?`,
+    sporsmalstekst: `Har du vært under utdanning i løpet av perioden ${formatterPeriode(fom, tom)}?`,
     undertekst: null,
     svartype: 'JA_NEI',
     min: null,

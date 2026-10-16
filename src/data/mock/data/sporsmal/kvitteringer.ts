@@ -1,6 +1,6 @@
 import { RSSporsmal } from '../../../../types/rs-types/rs-sporsmal'
 import { RSSvar } from '../../../../types/rs-types/rs-svar'
-import { tilLesbarPeriodeMedArstall } from '../../../../utils/dato-utils'
+import { formatterPeriode } from './backend-datoformat'
 
 export const kvitteringer = ({
     fom,
@@ -15,7 +15,7 @@ export const kvitteringer = ({
     svar?: RSSvar[]
     tekstvariant?: 'reiseutgifter' | 'reiser-til-og-fra'
 }): RSSporsmal => {
-    const periode = tilLesbarPeriodeMedArstall(fom, tom)
+    const periode = formatterPeriode(fom, tom)
     return {
         id,
         tag: 'KVITTERINGER',

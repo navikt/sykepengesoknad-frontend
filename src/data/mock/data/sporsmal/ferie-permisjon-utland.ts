@@ -1,6 +1,6 @@
 import type { RSSvar } from '../../../../types/rs-types/rs-svar'
 import type { RSSporsmal } from '../../../../types/rs-types/rs-sporsmal'
-import { tilLesbarPeriodeMedArstall } from '../../../../utils/dato-utils'
+import { formatterPeriode } from './backend-datoformat'
 
 export const feriePermisjonUtland = ({
     fom,
@@ -15,7 +15,7 @@ export const feriePermisjonUtland = ({
 }): RSSporsmal => ({
     id,
     tag: 'FERIE_PERMISJON_UTLAND',
-    sporsmalstekst: `Har du hatt ferie, permisjon eller vært utenfor EØS mens du var sykmeldt ${tilLesbarPeriodeMedArstall(fom, tom)}?`,
+    sporsmalstekst: `Har du hatt ferie, permisjon eller vært utenfor EØS mens du var sykmeldt ${formatterPeriode(fom, tom)}?`,
     undertekst: null,
     svartype: 'JA_NEI',
     min: null,

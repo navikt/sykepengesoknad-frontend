@@ -1,6 +1,6 @@
 import type { RSSvar } from '../../../../types/rs-types/rs-svar'
 import type { RSSporsmal } from '../../../../types/rs-types/rs-sporsmal'
-import { tilLesbarPeriodeMedArstall } from '../../../../utils/dato-utils'
+import { formatterPeriode } from './backend-datoformat'
 
 type UtlandValg = {
     readonly fom: string
@@ -44,8 +44,8 @@ export const utland = ({
     tag: 'UTLAND',
     sporsmalstekst:
         tekstvariant === 'utenforEuEos'
-            ? `Har du vært utenfor EU/EØS mens du var sykmeldt ${tilLesbarPeriodeMedArstall(fom, tom)}?`
-            : `Har du vært utenfor EØS mens du var sykmeldt ${tilLesbarPeriodeMedArstall(fom, tom)}?`,
+            ? `Har du vært utenfor EU/EØS mens du var sykmeldt ${formatterPeriode(fom, tom)}?`
+            : `Har du vært utenfor EØS mens du var sykmeldt ${formatterPeriode(fom, tom)}?`,
     undertekst: null,
     svartype: 'JA_NEI',
     min: null,

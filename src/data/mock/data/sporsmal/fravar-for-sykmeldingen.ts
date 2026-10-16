@@ -1,6 +1,6 @@
 import type { RSSvar } from '../../../../types/rs-types/rs-svar'
 import type { RSSporsmal } from '../../../../types/rs-types/rs-sporsmal'
-import { tilLesbarDatoMedArstall, tilLesbarPeriodeMedArstall } from '../../../../utils/dato-utils'
+import { formatterDato, formatterPeriode } from './backend-datoformat'
 
 type FravarValg = {
     readonly fom: string
@@ -29,7 +29,7 @@ export const fravarForSykmeldingen = ({
 }: FravarValg): RSSporsmal => ({
     id,
     tag: 'FRAVAR_FOR_SYKMELDINGEN',
-    sporsmalstekst: `Var du syk og borte fra jobb før du ble sykmeldt, i perioden ${tilLesbarPeriodeMedArstall(tekstFom, tekstTom)}?`,
+    sporsmalstekst: `Var du syk og borte fra jobb før du ble sykmeldt, i perioden ${formatterPeriode(tekstFom, tekstTom)}?`,
     undertekst: null,
     svartype: 'JA_NEI',
     min: null,
@@ -40,7 +40,7 @@ export const fravarForSykmeldingen = ({
         {
             id: narId,
             tag: 'FRAVAR_FOR_SYKMELDINGEN_NAR',
-            sporsmalstekst: `Hvilke dager var du syk og borte fra jobb, før du ble sykmeldt? Du trenger bare oppgi dager før ${tilLesbarDatoMedArstall(fom)}.`,
+            sporsmalstekst: `Hvilke dager var du syk og borte fra jobb, før du ble sykmeldt? Du trenger bare oppgi dager før ${formatterDato(fom)}.`,
             undertekst: null,
             svartype: 'PERIODER',
             min: narMin,
@@ -59,7 +59,7 @@ export const fravarForSykmeldingenV2 = ({
 }: Pick<FravarValg, 'fom' | 'id' | 'svar'>): RSSporsmal => ({
     id,
     tag: 'FRAVAR_FOR_SYKMELDINGEN_V2',
-    sporsmalstekst: `Var du borte fra jobb i fire uker eller mer rett før du ble sykmeldt ${tilLesbarDatoMedArstall(fom)}?`,
+    sporsmalstekst: `Var du borte fra jobb i fire uker eller mer rett før du ble sykmeldt ${formatterDato(fom)}?`,
     undertekst: 'Gjelder sammenhengende fravær gjennom alle fire ukene.',
     svartype: 'JA_NEI',
     min: null,

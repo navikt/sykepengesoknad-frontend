@@ -1,6 +1,6 @@
 import type { RSSporsmal } from '../../../../types/rs-types/rs-sporsmal'
 import type { RSSvar } from '../../../../types/rs-types/rs-svar'
-import { tilLesbarDatoMedArstall, tilLesbarPeriodeMedArstall } from '../../../../utils/dato-utils'
+import { formatterDato, formatterPeriode } from './backend-datoformat'
 
 type EgenmeldingerSvar = {
     readonly hoved?: RSSvar[]
@@ -30,12 +30,12 @@ export const egenmeldinger = ({
     id = '89',
     svar = {},
 }: EgenmeldingerValg): RSSporsmal => {
-    const sykmeldtDatoTekst = tilLesbarDatoMedArstall(sykmeldtDato)
+    const sykmeldtDatoTekst = formatterDato(sykmeldtDato)
 
     return {
         id,
         tag: 'EGENMELDINGER',
-        sporsmalstekst: `Vi har registrert at du ble sykmeldt onsdag ${sykmeldtDatoTekst}. Var du syk og borte fra jobb i perioden ${tilLesbarPeriodeMedArstall(fom, tom)}?`,
+        sporsmalstekst: `Vi har registrert at du ble sykmeldt onsdag ${sykmeldtDatoTekst}. Var du syk og borte fra jobb i perioden ${formatterPeriode(fom, tom)}?`,
         undertekst: null,
         svartype: 'JA_NEI',
         min: null,

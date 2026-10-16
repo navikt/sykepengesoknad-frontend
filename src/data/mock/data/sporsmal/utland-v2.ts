@@ -1,6 +1,6 @@
 import type { RSSporsmal } from '../../../../types/rs-types/rs-sporsmal'
 import type { RSSvar } from '../../../../types/rs-types/rs-svar'
-import { tilLesbarPeriodeMedArstall } from '../../../../utils/dato-utils'
+import { formatterPeriode } from './backend-datoformat'
 
 type UtlandV2Valg = {
     readonly fom: string
@@ -23,7 +23,7 @@ export const utlandV2 = ({
 }: UtlandV2Valg): RSSporsmal => ({
     id,
     tag: 'UTLAND_V2',
-    sporsmalstekst: `Var du på reise utenfor ${tekstvariant === 'eos' ? 'EØS' : 'EU/EØS'} mens du var sykmeldt ${tilLesbarPeriodeMedArstall(fom, tom)}?`,
+    sporsmalstekst: `Var du på reise utenfor ${tekstvariant === 'eos' ? 'EØS' : 'EU/EØS'} mens du var sykmeldt ${formatterPeriode(fom, tom)}?`,
     undertekst: null,
     svartype: 'JA_NEI',
     min: null,

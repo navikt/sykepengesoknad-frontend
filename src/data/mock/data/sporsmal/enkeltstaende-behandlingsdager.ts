@@ -1,6 +1,6 @@
 import type { RSSvar } from '../../../../types/rs-types/rs-svar'
 import type { RSSporsmal } from '../../../../types/rs-types/rs-sporsmal'
-import { tilLesbarPeriodeMedArstall } from '../../../../utils/dato-utils'
+import { formatterPeriode } from './backend-datoformat'
 
 type Uke = {
     readonly id?: string
@@ -33,7 +33,7 @@ export const enkeltstaendeBehandlingsdager = ({
 }: BehandlingsdagerValg): RSSporsmal => ({
     id,
     tag: `ENKELTSTAENDE_BEHANDLINGSDAGER_${index}`,
-    sporsmalstekst: `Hvilke dager måtte du være helt borte fra jobben på grunn av behandling mellom ${tilLesbarPeriodeMedArstall(fom, tom)}?`,
+    sporsmalstekst: `Hvilke dager måtte du være helt borte fra jobben på grunn av behandling mellom ${formatterPeriode(fom, tom)}?`,
     undertekst: null,
     svartype: 'INFO_BEHANDLINGSDAGER',
     min: null,

@@ -1,6 +1,6 @@
 import type { RSSvar } from '../../../../types/rs-types/rs-svar'
 import type { RSSporsmal } from '../../../../types/rs-types/rs-sporsmal'
-import { tilLesbarDatoMedArstall, tilLesbarPeriodeMedArstall } from '../../../../utils/dato-utils'
+import { formatterDato, formatterPeriode } from './backend-datoformat'
 
 type FraverForBehandlingValg = {
     readonly fom: string
@@ -49,7 +49,7 @@ export const fraverForBehandling = ({
                 {
                     id: index === 0 ? '546' : '7645',
                     tag: `${type}_NAR`,
-                    sporsmalstekst: `Hvilke dager var du syk med ${index === 0 ? 'egenmelding' : 'papirsykmelding'}? Du trenger bare oppgi dager før ${tilLesbarDatoMedArstall(fom)}.`,
+                    sporsmalstekst: `Hvilke dager var du syk med ${index === 0 ? 'egenmelding' : 'papirsykmelding'}? Du trenger bare oppgi dager før ${formatterDato(fom)}.`,
                     undertekst: null,
                     svartype: 'PERIODER',
                     min: fravarFom,
@@ -64,7 +64,7 @@ export const fraverForBehandling = ({
     return {
         id,
         tag: 'FRAVER_FOR_BEHANDLING',
-        sporsmalstekst: `Vi ser at sykmeldingen inneholder behandlingsdager mellom ${tilLesbarPeriodeMedArstall(fom, tom)}. Var du syk og borte fra jobb før dette, nærmere bestemt ${tilLesbarPeriodeMedArstall(fravarTekstFom, fravarTekstTom)}?`,
+        sporsmalstekst: `Vi ser at sykmeldingen inneholder behandlingsdager mellom ${formatterPeriode(fom, tom)}. Var du syk og borte fra jobb før dette, nærmere bestemt ${formatterPeriode(fravarTekstFom, fravarTekstTom)}?`,
         undertekst: null,
         svartype: 'JA_NEI',
         min: null,

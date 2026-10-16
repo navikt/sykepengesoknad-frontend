@@ -5,7 +5,7 @@ import { RSSoknadstatusType } from '../../../../types/rs-types/rs-soknadstatus'
 import { RSSporsmal } from '../../../../types/rs-types/rs-sporsmal'
 import { ansvarserklaring } from '../sporsmal/ansvarserklaring'
 import { oppsummering } from '../sporsmal/oppsummering'
-import { tilLesbarPeriodeMedArstall } from '../../../../utils/dato-utils'
+import { formatterPeriode } from '../sporsmal/backend-datoformat'
 
 function skapfriskmeldtTilArbeidsformidling({
     fom,
@@ -135,7 +135,7 @@ function fortsattArbeidssoker({
 export function jobbsituasjonenDin(opts: { fom: string; tom: string; sisteSoknad: boolean }): RSSporsmal {
     const { fom, tom } = opts
 
-    const periodeTekst = tilLesbarPeriodeMedArstall(fom, tom)
+    const periodeTekst = formatterPeriode(fom, tom)
 
     const ja: RSSporsmal = {
         id: v4().toString(),
@@ -211,7 +211,7 @@ export function jobbsituasjonenDin(opts: { fom: string; tom: string; sisteSoknad
 export function inntektUnderveis(opts: { fom: string; tom: string }): RSSporsmal {
     const { fom, tom } = opts
 
-    const periodeTekst = tilLesbarPeriodeMedArstall(fom, tom)
+    const periodeTekst = formatterPeriode(fom, tom)
 
     return {
         id: v4().toString(),
@@ -243,7 +243,7 @@ export function inntektUnderveis(opts: { fom: string; tom: string }): RSSporsmal
 export function reiseTilUtlandet(opts: { fom: string; tom: string }): RSSporsmal {
     const { fom, tom } = opts
 
-    const periodeTekst = tilLesbarPeriodeMedArstall(fom, tom)
+    const periodeTekst = formatterPeriode(fom, tom)
 
     return {
         id: v4().toString(),

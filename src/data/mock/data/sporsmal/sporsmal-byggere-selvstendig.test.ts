@@ -26,11 +26,11 @@ describe('Spørsmålsbyggere for arbeidsledig og selvstendige', () => {
 
     test('formaterer perioder i samme måned, på tvers av måneder og på tvers av år', () => {
         expect(enkeltstaendeBehandlingsdager({ fom: '2020-04-01', tom: '2020-04-24' }).sporsmalstekst).toContain(
-            '1. – 24. april 2020',
+            '1. - 24. april 2020',
         )
-        expect(utdanning({ fom: '2020-04-28', tom: '2020-05-03' }).sporsmalstekst).toContain('28. april – 3. mai 2020')
+        expect(utdanning({ fom: '2020-04-28', tom: '2020-05-03' }).sporsmalstekst).toContain('28. april - 3. mai 2020')
         expect(feriePermisjonUtland({ fom: '2020-12-28', tom: '2021-01-03' }).sporsmalstekst).toContain(
-            '28. desember 2020 – 3. januar 2021',
+            '28. desember 2020 - 3. januar 2021',
         )
     })
 
@@ -109,10 +109,10 @@ describe('Spørsmålsbyggere for arbeidsledig og selvstendige', () => {
         })
 
         expect(sporsmal.sporsmalstekst).toBe(
-            'I perioden 1. – 24. april 2020 var du 100% sykmeldt som selvstendig næringsdrivende. Jobbet du noe i denne perioden?',
+            'I perioden 1. - 24. april 2020 var du 100% sykmeldt som selvstendig næringsdrivende. Jobbet du noe i denne perioden?',
         )
         expect(sporsmal.undersporsmal[0].undersporsmal[0].undersporsmal[0].sporsmalstekst).toBe(
-            'Oppgi hvor mange prosent av din normale arbeidstid du jobbet i perioden 1. – 24. april 2020?',
+            'Oppgi hvor mange prosent av din normale arbeidstid du jobbet i perioden 1. - 24. april 2020?',
         )
     })
 

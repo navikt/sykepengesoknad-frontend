@@ -1,6 +1,6 @@
 import type { RSSporsmal } from '../../../../types/rs-types/rs-sporsmal'
 import type { RSSvar } from '../../../../types/rs-types/rs-svar'
-import { tilLesbarPeriodeMedArstall } from '../../../../utils/dato-utils'
+import { formatterPeriode } from './backend-datoformat'
 
 type ArbeidUnderveisSvar = {
     readonly hoved?: RSSvar[]
@@ -73,7 +73,7 @@ export const arbeidUnderveis100Prosent = (valg: ArbeidUnderveis100ProsentValg): 
     const tekstvariant = valg.tekstvariant ?? 'arbeidstaker'
     const normalArbeidsukeTekst =
         valg.normalArbeidsukeTekst ?? `Jobber du vanligvis 37,5 timer i uka hos ${arbeidsgiver}?`
-    const periode = tilLesbarPeriodeMedArstall(fom, tom)
+    const periode = formatterPeriode(fom, tom)
     const arbeidHos =
         arbeidsgiverFormulering === 'hos' && hovedtekstvariant === 'standard' ? `hos ${arbeidsgiver} ` : ''
     const rolle = tekstvariant === 'frilanser' ? 'frilanser' : 'selvstendig næringsdrivende'

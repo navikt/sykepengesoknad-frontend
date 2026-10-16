@@ -123,7 +123,7 @@ test.describe('Tester arbeidstakersøknad - gradert 50%', () => {
                 '12',
             )
 
-            await harSynligTekst(page, 'Hvor mye jobbet du tilsammen 1. – 24. april 2020 ?')
+            await harSynligTekst(page, 'Hvor mye jobbet du tilsammen 1. - 24. april 2020 ?')
             await harSynligTekst(page, 'Velg timer eller prosent')
 
             await page.locator('.undersporsmal input[value="Prosent"]').click()

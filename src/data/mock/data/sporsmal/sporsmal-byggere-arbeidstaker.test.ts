@@ -18,7 +18,7 @@ describe('Spørsmålsbyggere for arbeidstaker', () => {
         })
 
         expect(sporsmal.sporsmalstekst).toBe(
-            'Var du tilbake i fullt arbeid hos Posten Norge AS, Bærum i løpet av perioden 1. – 24. april 2020?',
+            'Var du tilbake i fullt arbeid hos Posten Norge AS, Bærum i løpet av perioden 1. - 24. april 2020?',
         )
         expect(sporsmal.undersporsmal[0]).toMatchObject({
             id: '687342',
@@ -31,9 +31,9 @@ describe('Spørsmålsbyggere for arbeidstaker', () => {
         const ferie = ferieV2({ fom: '2020-04-01', tom: '2020-05-03' })
         const permisjon = permisjonV2({ fom: '2020-12-31', tom: '2021-01-02' })
 
-        expect(ferie.sporsmalstekst).toBe('Tok du ut feriedager i tidsrommet 1. april – 3. mai 2020?')
+        expect(ferie.sporsmalstekst).toBe('Tok du ut feriedager i tidsrommet 1. april - 3. mai 2020?')
         expect(permisjon.sporsmalstekst).toBe(
-            'Tok du permisjon mens du var sykmeldt 31. desember 2020 – 2. januar 2021?',
+            'Tok du permisjon mens du var sykmeldt 31. desember 2020 - 2. januar 2021?',
         )
         expect(permisjon.undersporsmal[0]).toMatchObject({ min: '2020-12-31', max: '2021-01-02' })
     })
@@ -106,7 +106,7 @@ describe('Spørsmålsbyggere for arbeidstaker', () => {
             tekstvariant: 'utenforEuEos',
         })
 
-        expect(sporsmal.sporsmalstekst).toBe('Har du vært utenfor EU/EØS mens du var sykmeldt 1. – 24. april 2020?')
+        expect(sporsmal.sporsmalstekst).toBe('Har du vært utenfor EU/EØS mens du var sykmeldt 1. - 24. april 2020?')
     })
 
     it('beholder avvikende tekster i arbeid underveis', () => {
@@ -122,10 +122,10 @@ describe('Spørsmålsbyggere for arbeidstaker', () => {
         })
 
         expect(sporsmal.sporsmalstekst).toBe(
-            'I perioden 12. – 29. august 2021 var du 100 % sykmeldt fra Butikken. Jobbet du noe i denne perioden?',
+            'I perioden 12. - 29. august 2021 var du 100 % sykmeldt fra Butikken. Jobbet du noe i denne perioden?',
         )
         expect(sporsmal.undersporsmal[0].undersporsmal[0].undersporsmal[0]).toMatchObject({
-            sporsmalstekst: 'Oppgi totalt prosent du jobbet i perioden 12. – 29. august 2021 hos Butikken?',
+            sporsmalstekst: 'Oppgi totalt prosent du jobbet i perioden 12. - 29. august 2021 hos Butikken?',
             undertekst: 'Eksempel 40%',
         })
         expect(sporsmal.undersporsmal[0].undersporsmal[1].undersporsmal[0].undertekst).toBe('Eksempel 12 timer')
@@ -140,10 +140,10 @@ describe('Spørsmålsbyggere for arbeidstaker', () => {
         })
 
         expect(sporsmal.sporsmalstekst).toBe(
-            'I perioden 20. mai – 5. juni 2020 sier sykmeldingen at du kunne jobbe 20 % i jobben din hos 995816598 sitt orgnavn :). Jobbet du mer enn det?',
+            'I perioden 20. mai - 5. juni 2020 sier sykmeldingen at du kunne jobbe 20 % i jobben din hos 995816598 sitt orgnavn :). Jobbet du mer enn det?',
         )
         expect(sporsmal.undersporsmal[1]).toMatchObject({
-            sporsmalstekst: 'Hvor mye jobbet du tilsammen 20. mai – 5. juni 2020 ?',
+            sporsmalstekst: 'Hvor mye jobbet du tilsammen 20. mai - 5. juni 2020 ?',
             undertekst: 'Velg timer eller prosent',
         })
         expect(sporsmal.undersporsmal[1].undersporsmal.map((undersporsmal) => undersporsmal.sporsmalstekst)).toEqual([

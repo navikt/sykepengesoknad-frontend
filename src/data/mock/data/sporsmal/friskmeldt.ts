@@ -1,6 +1,6 @@
 import type { RSSvar } from '../../../../types/rs-types/rs-svar'
 import type { RSSporsmal } from '../../../../types/rs-types/rs-sporsmal'
-import { tilLesbarDatoMedArstall } from '../../../../utils/dato-utils'
+import { formatterDato } from './backend-datoformat'
 
 type FriskmeldtValg = {
     readonly fom: string
@@ -21,7 +21,7 @@ export const friskmeldt = ({
 }: FriskmeldtValg): RSSporsmal => ({
     id,
     tag: 'FRISKMELDT',
-    sporsmalstekst: `Brukte du hele sykmeldingen fram til ${tilLesbarDatoMedArstall(tom)}?`,
+    sporsmalstekst: `Brukte du hele sykmeldingen fram til ${formatterDato(tom)}?`,
     undertekst: null,
     svartype: 'JA_NEI',
     min: null,

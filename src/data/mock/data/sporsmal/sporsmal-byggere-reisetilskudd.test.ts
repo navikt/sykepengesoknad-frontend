@@ -18,12 +18,12 @@ describe('Spørsmålsbyggere for reisetilskudd og opphold i utlandet', () => {
         const sporsmal = reiseMedBil({ fom: '2020-04-01', tom: '2020-04-24' })
 
         expect(sporsmal.sporsmalstekst).toBe(
-            'Reiste du med egen bil, leiebil eller kollega til jobben mellom 1. – 24. april 2020?',
+            'Reiste du med egen bil, leiebil eller kollega til jobben mellom 1. - 24. april 2020?',
         )
         expect(sporsmal.undersporsmal[0]).toMatchObject({
             min: '2020-04-01',
             max: '2020-04-24',
-            sporsmalstekst: 'Hvilke dager reiste du med bil i perioden 1. – 24. april 2020?',
+            sporsmalstekst: 'Hvilke dager reiste du med bil i perioden 1. - 24. april 2020?',
         })
     })
 
@@ -31,7 +31,7 @@ describe('Spørsmålsbyggere for reisetilskudd og opphold i utlandet', () => {
         const sporsmal = kvitteringer({ fom: '2020-04-28', tom: '2020-05-03' })
 
         expect(sporsmal.sporsmalstekst).toBe(
-            'Last opp kvitteringer for reiser til og fra jobben mellom 28. april – 3. mai 2020.',
+            'Last opp kvitteringer for reiser til og fra jobben mellom 28. april - 3. mai 2020.',
         )
     })
 
@@ -39,7 +39,7 @@ describe('Spørsmålsbyggere for reisetilskudd og opphold i utlandet', () => {
         const sporsmal = reiseMedBil({ fom: '2020-12-23', tom: '2021-01-07' })
 
         expect(sporsmal.sporsmalstekst).toBe(
-            'Reiste du med egen bil, leiebil eller kollega til jobben mellom 23. desember 2020 – 7. januar 2021?',
+            'Reiste du med egen bil, leiebil eller kollega til jobben mellom 23. desember 2020 - 7. januar 2021?',
         )
         expect(sporsmal.undersporsmal[0]).toMatchObject({ min: '2020-12-23', max: '2021-01-07' })
     })
@@ -102,12 +102,12 @@ describe('Spørsmålsbyggere for reisetilskudd og opphold i utlandet', () => {
         )
     })
 
-    it('lager samme innhold som første reisetilskudd-forekomst med tankestrek', () => {
+    it('lager samme innhold som første reisetilskudd-forekomst med bindestrek', () => {
         expect(reiseMedBil({ fom: '2020-12-23', tom: '2021-01-07' })).toEqual({
             id: '1566444',
             tag: 'REISE_MED_BIL',
             sporsmalstekst:
-                'Reiste du med egen bil, leiebil eller kollega til jobben mellom 23. desember 2020 – 7. januar 2021?',
+                'Reiste du med egen bil, leiebil eller kollega til jobben mellom 23. desember 2020 - 7. januar 2021?',
             undertekst: null,
             svartype: 'JA_NEI',
             min: null,
@@ -118,7 +118,7 @@ describe('Spørsmålsbyggere for reisetilskudd og opphold i utlandet', () => {
                 {
                     id: '1566445',
                     tag: 'BIL_DATOER',
-                    sporsmalstekst: 'Hvilke dager reiste du med bil i perioden 23. desember 2020 – 7. januar 2021?',
+                    sporsmalstekst: 'Hvilke dager reiste du med bil i perioden 23. desember 2020 - 7. januar 2021?',
                     undertekst: null,
                     svartype: 'DATOER',
                     min: '2020-12-23',

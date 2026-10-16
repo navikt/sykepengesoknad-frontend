@@ -1,5 +1,5 @@
 import type { RSSoknad } from '../../../../types/rs-types/rs-soknad'
-import { tilLesbarPeriodeMedArstall } from '../../../../utils/dato-utils'
+import { formatterPeriode } from '../sporsmal/backend-datoformat'
 import { frilanser100Syk } from '../sykmeldinger'
 import { andreInntektskilder } from '../sporsmal/andre-inntektskilder'
 import { ansvarserklaring } from '../sporsmal/ansvarserklaring'
@@ -59,7 +59,7 @@ const sporsmal = (brukNyttUtlandssporsmal: boolean) => [
                   tom,
                   id: '687447',
                   oppholdNarId: '687448',
-                  sporsmalstekst: `Har du vært utenfor EU/EØS mens du var sykmeldt ${tilLesbarPeriodeMedArstall(fom, tom)}?`,
+                  sporsmalstekst: `Har du vært utenfor EU/EØS mens du var sykmeldt ${formatterPeriode(fom, tom)}?`,
               }),
           ]),
     arbeidUtenforNorge({ id: '687451' }),

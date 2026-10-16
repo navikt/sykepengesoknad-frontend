@@ -1,6 +1,6 @@
 import { Sykmelding } from '../../../../types/sykmelding'
 import { RSSoknad } from '../../../../types/rs-types/rs-soknad'
-import { tilLesbarPeriodeMedArstall } from '../../../../utils/dato-utils'
+import { formatterPeriode } from '../sporsmal/backend-datoformat'
 import {
     naringsdrivendeVirksomhetenAvviklet,
     naringsdrivendeNyIArbeidslivet,
@@ -77,7 +77,7 @@ const fiskerSporsmal = () => [
         id: '58f48c4f-3bc2-3f17-a642-a24383db8e6c',
         oppholdNarId: 'c03398c6-55ac-3e90-a809-79a63f106260',
         oppholdNarTag: 'PERIODER',
-        sporsmalstekst: `Har du vært utenfor EU/EØS mens du var sykmeldt ${tilLesbarPeriodeMedArstall(fom, tom)}?`,
+        sporsmalstekst: `Har du vært utenfor EU/EØS mens du var sykmeldt ${formatterPeriode(fom, tom)}?`,
     }),
     naringsdrivendeVirksomhetenAvviklet(),
     naringsdrivendeNyIArbeidslivet(),

@@ -1,6 +1,6 @@
 import type { RSSporsmal } from '../../../../types/rs-types/rs-sporsmal'
 import type { RSSvar } from '../../../../types/rs-types/rs-svar'
-import { tilLesbarDatoMedArstall, tilLesbarPeriodeMedArstall } from '../../../../utils/dato-utils'
+import { formatterDato, formatterPeriode } from './backend-datoformat'
 
 type TilbakeIArbeidValgFelles = {
     readonly fom: string
@@ -37,10 +37,10 @@ export const tilbakeIArbeid = (valg: TilbakeIArbeidValg): RSSporsmal => {
     const tekstvariant = valg.tekstvariant ?? 'arbeidstaker'
     const standardSporsmalstekst =
         tekstvariant === 'arbeidstaker'
-            ? `Var du tilbake i fullt arbeid hos ${valg.arbeidsgiver} i løpet av perioden ${tilLesbarPeriodeMedArstall(fom, tom)}?`
+            ? `Var du tilbake i fullt arbeid hos ${valg.arbeidsgiver} i løpet av perioden ${formatterPeriode(fom, tom)}?`
             : tekstvariant === 'frilanser'
-              ? `Var du tilbake i fullt arbeid som frilanser før sykmeldingsperioden utløp ${tilLesbarDatoMedArstall(tom)}?`
-              : `Var du tilbake i fullt arbeid som selvstendig næringsdrivende før sykmeldingsperioden utløp ${tilLesbarDatoMedArstall(tom)}?`
+              ? `Var du tilbake i fullt arbeid som frilanser før sykmeldingsperioden utløp ${formatterDato(tom)}?`
+              : `Var du tilbake i fullt arbeid som selvstendig næringsdrivende før sykmeldingsperioden utløp ${formatterDato(tom)}?`
 
     return {
         id,

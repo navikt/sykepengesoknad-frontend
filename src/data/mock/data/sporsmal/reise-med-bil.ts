@@ -1,6 +1,6 @@
 import { RSSporsmal } from '../../../../types/rs-types/rs-sporsmal'
 import { RSSvar } from '../../../../types/rs-types/rs-svar'
-import { tilLesbarPeriodeMedArstall } from '../../../../utils/dato-utils'
+import { formatterPeriode } from './backend-datoformat'
 
 export const bilDatoer = ({
     fom,
@@ -15,7 +15,7 @@ export const bilDatoer = ({
 }): RSSporsmal => ({
     id,
     tag: 'BIL_DATOER',
-    sporsmalstekst: `Hvilke dager reiste du med bil i perioden ${tilLesbarPeriodeMedArstall(fom, tom)}?`,
+    sporsmalstekst: `Hvilke dager reiste du med bil i perioden ${formatterPeriode(fom, tom)}?`,
     undertekst: null,
     svartype: 'DATOER',
     min: fom,
@@ -89,7 +89,7 @@ export const reiseMedBil = ({
     bompengerSporsmal?: RSSporsmal
     kmHjemJobbSporsmal?: RSSporsmal
 }): RSSporsmal => {
-    const periode = tilLesbarPeriodeMedArstall(fom, tom)
+    const periode = formatterPeriode(fom, tom)
     const tekst =
         tekstvariant === 'fra'
             ? `Reiste du med egen bil, leiebil eller en kollega til jobben fra ${periode}?`

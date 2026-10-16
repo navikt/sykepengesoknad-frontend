@@ -1,6 +1,6 @@
 import type { RSSporsmal } from '../../../../types/rs-types/rs-sporsmal'
 import type { RSSvar } from '../../../../types/rs-types/rs-svar'
-import { tilLesbarPeriodeMedArstall } from '../../../../utils/dato-utils'
+import { formatterPeriode } from './backend-datoformat'
 
 type FerieV2Valg = {
     readonly fom: string
@@ -21,7 +21,7 @@ export const ferieV2 = ({
 }: FerieV2Valg): RSSporsmal => ({
     id,
     tag: 'FERIE_V2',
-    sporsmalstekst: `Tok du ut feriedager i tidsrommet ${tilLesbarPeriodeMedArstall(fom, tom)}?`,
+    sporsmalstekst: `Tok du ut feriedager i tidsrommet ${formatterPeriode(fom, tom)}?`,
     undertekst: null,
     svartype: 'JA_NEI',
     min: null,

@@ -1,6 +1,6 @@
 import type { RSSporsmal } from '../../../../types/rs-types/rs-sporsmal'
 import type { RSSvar } from '../../../../types/rs-types/rs-svar'
-import { tilLesbarPeriodeMedArstall } from '../../../../utils/dato-utils'
+import { formatterPeriode } from './backend-datoformat'
 
 type JobbetDuGradertValg = {
     readonly fom: string
@@ -43,7 +43,7 @@ export const jobbetDuGradert = ({
     prosentMin = String(grad + 1),
     verdiSvartype = 'domene',
 }: JobbetDuGradertValg): RSSporsmal => {
-    const periode = tilLesbarPeriodeMedArstall(fom, tom)
+    const periode = formatterPeriode(fom, tom)
 
     return {
         id,
