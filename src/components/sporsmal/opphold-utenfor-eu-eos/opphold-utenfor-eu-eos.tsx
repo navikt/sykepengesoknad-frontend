@@ -2,23 +2,19 @@ import { Accordion, BodyLong, ReadMore } from '@navikt/ds-react'
 import React from 'react'
 
 import { LenkeMedIkon } from '../../lenke-med-ikon/LenkeMedIkon'
-import { RSSoknadstypeType } from '../../../types/rs-types/rs-soknadstype'
-
 import { SjekkLandEuEos } from './sjekk-land-eu-eos'
 
 interface OppholdUtenforEUEOSProps {
-    soknadstype: RSSoknadstypeType
+    erSelvstendig?: boolean
 }
 
-export const OppholdUtenforEUEOS = ({ soknadstype }: OppholdUtenforEUEOSProps) => {
-    const erSelvstendigNaringsdrivende = soknadstype === 'SELVSTENDIGE_OG_FRILANSERE'
-
+export const OppholdUtenforEUEOS = ({ erSelvstendig }: OppholdUtenforEUEOSProps) => {
     return (
         <>
             <BodyLong spacing>
                 Reiste du til et land utenfor EU/EØS mens du var sykmeldt, må du søke om å beholde sykepengene.
             </BodyLong>
-            {erSelvstendigNaringsdrivende ? (
+            {erSelvstendig ? (
                 <ReadMore header="Var reisen en behandlingsreise i regi av Oslo Universitetssykehus?">
                     <BodyLong spacing>
                         Reiste du til utlandet i forbindelse med behandlingsreise i regi av Oslo Universitetssykehus

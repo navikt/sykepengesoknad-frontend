@@ -54,6 +54,8 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
 
     const erOppholdUtenforEUEOS = sporsmal.tag === 'OPPHOLD_UTENFOR_EOS' || sporsmal.tag === 'FTA_REISE_TIL_UTLANDET'
 
+    const erSelvstendig = valgtSoknad.erTilsvarendeSelvstendig()
+
     return (
         <>
             <div>
@@ -66,7 +68,7 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
                 {sporsmal.tag === 'NYTT_ARBEIDSFORHOLD_UNDERVEIS' && (
                     <NyttArbeidsforhold key="nytt-arbeidsforhold" spm={sporsmal} />
                 )}
-                {erOppholdUtenforEUEOS && <OppholdUtenforEUEOS soknadstype={valgtSoknad.soknadstype} />}
+                {erOppholdUtenforEUEOS && <OppholdUtenforEUEOS erSelvstendig={erSelvstendig} />}
 
                 <Controller
                     name={sporsmal.id}
