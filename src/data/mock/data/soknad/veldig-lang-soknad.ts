@@ -210,7 +210,7 @@ export const veldigLangSoknad: RSSoknad = {
         jobbetDuGradert({
             fom: '2020-05-20',
             tom: '2020-06-05',
-            arbeidsgiver: '995816598 sitt orgnavn :)',
+            arbeidsgiver: 'Nordlys Regnskap AS',
             grad: 20,
             id: '104',
             ids: {

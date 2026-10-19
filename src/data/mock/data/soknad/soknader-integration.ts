@@ -33,7 +33,7 @@ import { veldigLangSoknad } from './veldig-lang-soknad'
 
 const arbeidstakersoknadMedUtenlandsoppholdSoktSykepengerFom = '2020-04-01'
 const arbeidstakersoknadMedUtenlandsoppholdSoktSykepengerTom = '2020-04-24'
-const arbeidstakersoknadMedUtenlandsoppholdSoktSykepengerArbeidsgiver = '995816598 sitt orgnavn :)'
+const arbeidstakersoknadMedUtenlandsoppholdSoktSykepengerArbeidsgiver = 'Nordlys Regnskap AS'
 
 export const arbeidstakersoknadMedUtenlandsoppholdSoktSykepenger: RSSoknad = {
     id: '5b74f271-5b94-455a-b79f-428f593f2b98',
@@ -305,7 +305,7 @@ selvstendigKvittering.sporsmal = selvstendigKvittering.sporsmal.map((sporsmal) =
 
 const arbeidstakerInnenforArbeidsgiverperiodeKvitteringFom = '2020-04-01'
 const arbeidstakerInnenforArbeidsgiverperiodeKvitteringTom = '2020-04-05'
-const arbeidstakerInnenforArbeidsgiverperiodeKvitteringArbeidsgiver = 'arb1'
+const arbeidstakerInnenforArbeidsgiverperiodeKvitteringArbeidsgiver = 'Matbutikken AS, Grünerløkka'
 
 export const arbeidstakerInnenforArbeidsgiverperiodeKvittering: RSSoknad = {
     id: '08a516f1-62be-45ee-8ce3-4ba0294728b0',
@@ -352,7 +352,7 @@ export const arbeidstakerInnenforArbeidsgiverperiodeKvittering: RSSoknad = {
 }
 const arbeidstakerUtenforArbeidsgiverperiodeKvitteringFom = '2020-04-01'
 const arbeidstakerUtenforArbeidsgiverperiodeKvitteringTom = '2020-04-20'
-const arbeidstakerUtenforArbeidsgiverperiodeKvitteringArbeidsgiver = 'arb2'
+const arbeidstakerUtenforArbeidsgiverperiodeKvitteringArbeidsgiver = 'Bygg og Anlegg AS'
 
 export const arbeidstakerUtenforArbeidsgiverperiodeKvittering: RSSoknad = {
     id: '08a516f1-62be-45ee-8ce3-4ba0294728b1',
@@ -399,7 +399,7 @@ export const arbeidstakerUtenforArbeidsgiverperiodeKvittering: RSSoknad = {
 }
 const arbeidstakerDeltPeriodeForsteUtenforArbeidsgiverperiodeKvitteringFom = '2020-04-01'
 const arbeidstakerDeltPeriodeForsteUtenforArbeidsgiverperiodeKvitteringTom = '2020-04-10'
-const arbeidstakerDeltPeriodeForsteUtenforArbeidsgiverperiodeKvitteringArbeidsgiver = 'arb3'
+const arbeidstakerDeltPeriodeForsteUtenforArbeidsgiverperiodeKvitteringArbeidsgiver = 'Fjordline Transport AS'
 
 export const arbeidstakerDeltPeriodeForsteUtenforArbeidsgiverperiodeKvittering: RSSoknad = {
     id: '08a516f1-62be-45ee-8ce3-4ba0294728b2',
@@ -446,7 +446,7 @@ export const arbeidstakerDeltPeriodeForsteUtenforArbeidsgiverperiodeKvittering: 
 }
 const arbeidstakerUtenOppholdForsteUtenforArbeidsgiverperiodeKvitteringFom = '2020-04-01'
 const arbeidstakerUtenOppholdForsteUtenforArbeidsgiverperiodeKvitteringTom = '2020-04-16'
-const arbeidstakerUtenOppholdForsteUtenforArbeidsgiverperiodeKvitteringArbeidsgiver = 'arb1'
+const arbeidstakerUtenOppholdForsteUtenforArbeidsgiverperiodeKvitteringArbeidsgiver = 'Matbutikken AS, Grünerløkka'
 
 export const arbeidstakerUtenOppholdForsteUtenforArbeidsgiverperiodeKvittering: RSSoknad = {
     id: '08a516f1-62be-45ee-8ce3-4ba0294728b3',
@@ -493,7 +493,7 @@ export const arbeidstakerUtenOppholdForsteUtenforArbeidsgiverperiodeKvittering: 
 }
 const arbeidstakerUtenOppholdKvitteringFom = '2020-04-01'
 const arbeidstakerUtenOppholdKvitteringTom = '2020-04-05'
-const arbeidstakerUtenOppholdKvitteringArbeidsgiver = 'arb1'
+const arbeidstakerUtenOppholdKvitteringArbeidsgiver = 'Matbutikken AS, Grünerløkka'
 
 export const arbeidstakerUtenOppholdKvittering: RSSoknad = {
     id: '08a516f1-62be-45ee-8ce3-4ba0294728b4',
@@ -540,7 +540,7 @@ export const arbeidstakerUtenOppholdKvittering: RSSoknad = {
 }
 const sok6Fom = '2020-03-01'
 const sok6Tom = '2020-03-05'
-const sok6Arbeidsgiver = 'arb4'
+const sok6Arbeidsgiver = 'Snekker Hansen AS'
 
 export const sok6: RSSoknad = {
     id: '08a516f1-62be-45ee-8ce3-4ba0294728b5',
@@ -577,7 +577,7 @@ export const sok6: RSSoknad = {
 }
 const arbeidstakerMedOppholdForsteUtenforArbeidsgiverperiodeKvitteringFom = '2020-04-01'
 const arbeidstakerMedOppholdForsteUtenforArbeidsgiverperiodeKvitteringTom = '2020-04-16'
-const arbeidstakerMedOppholdForsteUtenforArbeidsgiverperiodeKvitteringArbeidsgiver = 'arb4'
+const arbeidstakerMedOppholdForsteUtenforArbeidsgiverperiodeKvitteringArbeidsgiver = 'Snekker Hansen AS'
 
 export const arbeidstakerMedOppholdForsteUtenforArbeidsgiverperiodeKvittering: RSSoknad = {
     id: '08a516f1-62be-45ee-8ce3-4ba0294728b6',
@@ -624,7 +624,7 @@ export const arbeidstakerMedOppholdForsteUtenforArbeidsgiverperiodeKvittering: R
 }
 const arbeidstakerMedOppholdKvitteringFom = '2020-04-01'
 const arbeidstakerMedOppholdKvitteringTom = '2020-04-05'
-const arbeidstakerMedOppholdKvitteringArbeidsgiver = 'arb5'
+const arbeidstakerMedOppholdKvitteringArbeidsgiver = 'Bakeriet i Byen AS'
 
 export const arbeidstakerMedOppholdKvittering: RSSoknad = {
     id: '08a516f1-62be-45ee-8ce3-4ba0294728b7',

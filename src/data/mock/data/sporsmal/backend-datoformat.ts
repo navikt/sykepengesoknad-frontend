@@ -34,6 +34,8 @@ export const formatterDato = (dato: string): string => {
 export const formatterPeriode = (fom: string, tom: string): string => {
     const fomDato = splittDato(fom)
     const tomDato = splittDato(tom)
-    const fomTekst = `${fomDato.dag}.${fomDato.maned === tomDato.maned ? '' : ` ${maaned(fomDato)}`}${fomDato.ar === tomDato.ar ? '' : ` ${fomDato.ar}`}`
+    const sammeAr = fomDato.ar === tomDato.ar
+    const sammeManed = sammeAr && fomDato.maned === tomDato.maned
+    const fomTekst = `${fomDato.dag}.${sammeManed ? '' : ` ${maaned(fomDato)}`}${sammeAr ? '' : ` ${fomDato.ar}`}`
     return `${fomTekst} - ${formatterDato(tom)}`
 }

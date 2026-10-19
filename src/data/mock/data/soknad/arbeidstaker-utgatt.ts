@@ -6,7 +6,7 @@ import { arbeidstaker100Syk } from '../sykmeldinger'
 
 const fom = '2020-05-23'
 const tom = '2020-06-07'
-const arbeidsgiverNavn = '995816598 sitt orgnavn :)'
+const arbeidsgiverNavn = 'Nordlys Regnskap AS'
 
 export const utgattSoknad: RSSoknad = {
     id: '5b74f271-5b94-455a-b79f-428f593f2b90',

@@ -18,4 +18,8 @@ describe('backend-datoformat', () => {
     it('formaterer perioder på tvers av år som backend', () => {
         expect(formatterPeriode('2020-04-01', '2021-05-24')).toBe('1. april 2020 - 24. mai 2021')
     })
+
+    it('tar med måned når perioden går over år i samme måned', () => {
+        expect(formatterPeriode('2020-12-01', '2021-12-05')).toBe('1. desember 2020 - 5. desember 2021')
+    })
 })

@@ -135,15 +135,15 @@ describe('Spørsmålsbyggere for arbeidstaker', () => {
         const sporsmal = jobbetDuGradert({
             fom: '2020-05-20',
             tom: '2020-06-05',
-            arbeidsgiver: '995816598 sitt orgnavn :)',
+            arbeidsgiver: 'Nordlys Regnskap AS',
             grad: 20,
         })
 
         expect(sporsmal.sporsmalstekst).toBe(
-            'I perioden 20. mai - 5. juni 2020 sier sykmeldingen at du kunne jobbe 20 % i jobben din hos 995816598 sitt orgnavn :). Jobbet du mer enn det?',
+            'I perioden 20. mai - 5. juni 2020 sier sykmeldingen at du kunne jobbe 20 % i jobben din hos Nordlys Regnskap AS. Jobbet du mer enn det?',
         )
         expect(sporsmal.undersporsmal[1]).toMatchObject({
-            sporsmalstekst: 'Hvor mye jobbet du tilsammen 20. mai - 5. juni 2020 ?',
+            sporsmalstekst: 'Hvor mye jobbet du tilsammen 20. mai - 5. juni 2020?',
             undertekst: 'Velg timer eller prosent',
         })
         expect(sporsmal.undersporsmal[1].undersporsmal.map((undersporsmal) => undersporsmal.sporsmalstekst)).toEqual([

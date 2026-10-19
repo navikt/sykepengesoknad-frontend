@@ -72,7 +72,7 @@ export const jobbetDuGradert = ({
             {
                 id: ids.arbeidsmengde ?? 'e3a6bd7d-8f10-381c-8cd3-cdab3e410c95',
                 tag: `HVOR_MYE_HAR_DU_JOBBET_${index}`,
-                sporsmalstekst: `Hvor mye jobbet du tilsammen ${periode} ?`,
+                sporsmalstekst: `Hvor mye jobbet du tilsammen ${periode}?`,
                 undertekst: 'Velg timer eller prosent',
                 svartype: 'RADIO_GRUPPE_TIMER_PROSENT',
                 min: null,
