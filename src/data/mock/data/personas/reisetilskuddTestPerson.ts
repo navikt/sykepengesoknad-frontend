@@ -34,7 +34,7 @@ export const delvisUtfyltReisetilskudd: RSSoknad = {
     arbeidssituasjon: 'ARBEIDSTAKER',
     soknadPerioder: [{ fom, tom, grad: 0, sykmeldingstype: 'REISETILSKUDD' }],
     sporsmal: [
-        ansvarserklaring({ id: '1566421', svar: [{ verdi: 'CHECKED' }] }),
+        ansvarserklaring({ svar: [{ verdi: 'CHECKED' }] }),
         transportTilDaglig({ svar: [{ verdi: 'NEI' }] }),
         reiseMedBil({ fom, tom, svar: [{ verdi: 'NEI' }] }),
         kvitteringer({ fom, tom }),

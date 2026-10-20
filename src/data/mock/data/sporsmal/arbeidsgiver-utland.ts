@@ -2,7 +2,6 @@ import { RSSporsmal } from '../../../../types/rs-types/rs-sporsmal'
 import { RSSvar } from '../../../../types/rs-types/rs-svar'
 
 export const arbeidsgiverUtland = ({
-    id = 'acd5a489-2624-40c3-8dd1-a651b41b25aa',
     svar = [],
     undersporsmal = [
         {
@@ -20,12 +19,11 @@ export const arbeidsgiverUtland = ({
     ],
     variant = 'ferie',
 }: {
-    id?: string
     svar?: RSSvar[]
     undersporsmal?: RSSporsmal[]
     variant?: 'ferie' | 'sykmeldingsgrad-og-ferie'
 } = {}): RSSporsmal => ({
-    id,
+    id: 'acd5a489-2624-40c3-8dd1-a651b41b25aa',
     tag: 'ARBEIDSGIVER',
     sporsmalstekst: 'Har du én eller flere arbeidsgivere?',
     undertekst: null,

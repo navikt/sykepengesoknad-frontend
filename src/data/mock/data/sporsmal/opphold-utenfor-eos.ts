@@ -5,9 +5,7 @@ import { formatterPeriode } from './backend-datoformat'
 type OppholdUtenforEosValg = {
     readonly fom: string
     readonly tom: string
-    readonly id?: string
     readonly svar?: RSSvar[]
-    readonly oppholdNarId?: string
     readonly oppholdNarSvar?: RSSvar[]
     readonly oppholdNarTag?: 'OPPHOLD_UTENFOR_EOS_NAR' | 'PERIODER'
     readonly tekstvariant?: 'eos' | 'eu-eos'
@@ -17,15 +15,13 @@ type OppholdUtenforEosValg = {
 export const oppholdUtenforEos = ({
     fom,
     tom,
-    id = '687347',
     svar = [],
-    oppholdNarId = '687348',
     oppholdNarSvar = [],
     oppholdNarTag = 'OPPHOLD_UTENFOR_EOS_NAR',
     tekstvariant = 'eu-eos',
     sporsmalstekst,
 }: OppholdUtenforEosValg): RSSporsmal => ({
-    id,
+    id: '687347',
     tag: 'OPPHOLD_UTENFOR_EOS',
     sporsmalstekst:
         sporsmalstekst ??
@@ -38,7 +34,7 @@ export const oppholdUtenforEos = ({
     svar,
     undersporsmal: [
         {
-            id: oppholdNarId,
+            id: '687348',
             tag: oppholdNarTag,
             sporsmalstekst: `Når var du utenfor ${tekstvariant === 'eos' ? 'EØS' : 'EU/EØS'}?`,
             undertekst: null,

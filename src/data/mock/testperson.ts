@@ -3,6 +3,7 @@ import { logger } from '@navikt/next-logger'
 import { jsonDeepCopy } from '../../utils/json-deep-copy'
 
 import { validerSoknadsperiode } from './valider-soknadsperiode'
+import { validerSporsmalIder } from './valider-sporsmal-ider'
 import { brukertestPerosn } from './data/personas/brukertestPerosn'
 import { eldreUsendtSoknad, flereEldreUsendteSoknader } from './data/personas/eldre-usendt-soknad'
 import { reisetilskuddTestPerson } from './data/personas/reisetilskuddTestPerson'
@@ -140,6 +141,7 @@ export function testpersoner(): PersonaData {
             }
             soknadsIder.add(soknad.id)
             validerSoknadsperiode(soknad)
+            validerSporsmalIder(soknad)
         })
     })
 

@@ -2,11 +2,10 @@ import type { RSSvar } from '../../../../types/rs-types/rs-svar'
 import type { RSSporsmal } from '../../../../types/rs-types/rs-sporsmal'
 
 export const tilSlutt = ({
-    id = '1623832',
     svar = [],
     sporsmalstekst = null,
-}: { readonly id?: string; readonly svar?: RSSvar[]; readonly sporsmalstekst?: string | null } = {}): RSSporsmal => ({
-    id,
+}: { readonly svar?: RSSvar[]; readonly sporsmalstekst?: string | null } = {}): RSSporsmal => ({
+    id: '1623832',
     tag: 'TIL_SLUTT',
     sporsmalstekst,
     undertekst: null,

@@ -9,7 +9,6 @@ type FraverForBehandlingValg = {
     readonly fravarTom: string
     readonly fravarTekstFom?: string
     readonly fravarTekstTom?: string
-    readonly id?: string
     readonly svar?: RSSvar[]
     readonly tidligereEgenmeldingTag?: 'TIDLIGERE_EGENMELDING' | 'TIDLIGERE_EGENMELDINGER'
 }
@@ -21,7 +20,6 @@ export const fraverForBehandling = ({
     fravarTom,
     fravarTekstFom = fravarFom,
     fravarTekstTom = fravarTom,
-    id = '243',
     svar = [],
     tidligereEgenmeldingTag = 'TIDLIGERE_EGENMELDINGER',
 }: FraverForBehandlingValg): RSSporsmal => {
@@ -62,7 +60,7 @@ export const fraverForBehandling = ({
         })),
     }
     return {
-        id,
+        id: '243',
         tag: 'FRAVER_FOR_BEHANDLING',
         sporsmalstekst: `Vi ser at sykmeldingen inneholder behandlingsdager mellom ${formatterPeriode(fom, tom)}. Var du syk og borte fra jobb før dette, nærmere bestemt ${formatterPeriode(fravarTekstFom, fravarTekstTom)}?`,
         undertekst: null,

@@ -36,11 +36,7 @@ export const kortArbeidstakerSoknad: RSSoknad = {
             sykmeldingstype: 'AKTIVITET_IKKE_MULIG',
         },
     ],
-    sporsmal: [
-        ansvarserklaring({ id: '687336' }),
-        tilbakeIArbeid({ fom, tom, arbeidsgiver: arbeidsgiverNavn, id: '900', tilbakeNarId: '96' }),
-        oppsummering(),
-    ],
+    sporsmal: [ansvarserklaring({}), tilbakeIArbeid({ fom, tom, arbeidsgiver: arbeidsgiverNavn }), oppsummering()],
     egenmeldtSykmelding: false,
     opprettetAvInntektsmelding: false,
     klippet: false,

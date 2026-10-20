@@ -2,18 +2,8 @@ import { RSSporsmal } from '../../../../types/rs-types/rs-sporsmal'
 import { RSSvar } from '../../../../types/rs-types/rs-svar'
 import { formatterPeriode } from './backend-datoformat'
 
-export const bilDatoer = ({
-    fom,
-    tom,
-    id = '1566445',
-    svar = [],
-}: {
-    fom: string
-    tom: string
-    id?: string
-    svar?: RSSvar[]
-}): RSSporsmal => ({
-    id,
+export const bilDatoer = ({ fom, tom, svar = [] }: { fom: string; tom: string; svar?: RSSvar[] }): RSSporsmal => ({
+    id: '1566445',
     tag: 'BIL_DATOER',
     sporsmalstekst: `Hvilke dager reiste du med bil i perioden ${formatterPeriode(fom, tom)}?`,
     undertekst: null,
@@ -28,7 +18,6 @@ export const bilDatoer = ({
 export const reiseMedBil = ({
     fom,
     tom,
-    id = '1566444',
     svar = [],
     bilDatoerSvar = [],
     bompengerSvar = [],
@@ -77,7 +66,6 @@ export const reiseMedBil = ({
 }: {
     fom: string
     tom: string
-    id?: string
     svar?: RSSvar[]
     bilDatoerSvar?: RSSvar[]
     bompengerSvar?: RSSvar[]
@@ -96,7 +84,7 @@ export const reiseMedBil = ({
             : `Reiste du med egen bil, leiebil eller kollega til jobben mellom ${periode}?`
 
     return {
-        id,
+        id: '1566444',
         tag: 'REISE_MED_BIL',
         sporsmalstekst: tekst,
         undertekst: null,

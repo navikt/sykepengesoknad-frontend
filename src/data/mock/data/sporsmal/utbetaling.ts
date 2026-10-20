@@ -2,13 +2,11 @@ import { RSSporsmal } from '../../../../types/rs-types/rs-sporsmal'
 import { RSSvar } from '../../../../types/rs-types/rs-svar'
 
 export const utbetaling = ({
-    id = '1566435',
     svar = [],
 }: {
-    id?: string
     svar?: RSSvar[]
 } = {}): RSSporsmal => ({
-    id,
+    id: '1566435',
     tag: 'UTBETALING',
     sporsmalstekst: 'Legger arbeidsgiveren din ut for reisene?',
     undertekst: null,

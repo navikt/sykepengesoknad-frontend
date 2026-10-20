@@ -19,70 +19,48 @@ import { Persona } from './personas'
 const fom = '2024-01-16'
 const tom = '2024-01-22'
 const fiskerSporsmal = () => [
-    ansvarserklaring({ id: '43f3c0c5-65cb-3d4e-b31f-c02c2599ee95' }),
+    ansvarserklaring({}),
     tilbakeIArbeid({
         fom,
         tom,
-        id: '79c730fc-155e-3088-97cd-8817df252068',
-        tilbakeNarId: 'e9a48ebc-3ce0-3e37-9e70-f670c299ba23',
         tekstvariant: 'selvstendigNaeringsdrivende',
     }),
     arbeidUnderveis100Prosent({
         fom,
         tom,
-        id: 'e753746d-b9d5-34b8-a1cf-2820230349e7',
         tekstvariant: 'selvstendigNaeringsdrivende',
         timerMaks: '150',
         normalArbeidsukeTekst: 'Jobber du vanligvis 37,5 timer i uka?',
-        ids: {
-            arbeidsmengde: '44205b66-543f-3c16-aa33-6a3409fb5c29',
-            prosent: '743a28f0-49ef-3afe-9c9f-10fa36900863',
-            prosentVerdi: 'e07582c1-d467-396d-a23c-5c3341755137',
-            timer: 'fc08b217-339f-3cad-9042-74cdc3b847b1',
-            timerVerdi: 'f68a1f4b-1f6e-3492-9135-64a558b3f41f',
-            normalArbeidsuke: '10c77174-b2a5-3af9-88d9-fc4a68b8c5a1',
-            timerPerUke: '30741b9d-ea65-3a74-81c9-cb53ee2e50f5',
-        },
     }),
-    arbeidUtenforNorge({ id: '1e68ef44-be0f-3238-ac37-3c75127040aa' }),
+    arbeidUtenforNorge({}),
     andreInntektskilder({
         fom,
         tom,
-        id: '9b7bb2ac-fb1f-3a81-8050-c115b1c34fab',
-        gruppeId: '5dd63529-a2d6-3f1d-bd4d-c30e44ed56b5',
         sporsmalstekst: 'Har du annen inntekt?',
         gruppeTekst: 'Hvilke inntektskilder har du?',
         kilder: [
             {
                 tag: 'INNTEKTSKILDE_ARBEIDSFORHOLD',
-                id: 'ce35ceb6-faf5-3d25-a84c-03fd1203cc3d',
-                erDuSykmeldtId: '4fdece55-db3d-3ead-a13f-a8248beddc79',
             },
             {
                 tag: 'INNTEKTSKILDE_JORDBRUKER',
-                id: '29737553-f79e-3ada-b7d5-144b27708d68',
-                erDuSykmeldtId: '579801e4-fda2-3f02-905b-dfd977b64b2a',
             },
             {
                 tag: 'INNTEKTSKILDE_FRILANSER_SELVSTENDIG',
-                id: '9c5312f2-95ab-3c5e-9f32-cc0ceec1ac6f',
-                erDuSykmeldtId: 'cb41b700-b2e2-36a2-a38b-568ca5442b76',
             },
-            { tag: 'INNTEKTSKILDE_ANNET', id: '50bd58f9-2b59-3090-a72e-72e2eb4de935' },
+            { tag: 'INNTEKTSKILDE_ANNET' },
         ],
     }),
     oppholdUtenforEos({
         fom,
         tom,
-        id: '58f48c4f-3bc2-3f17-a642-a24383db8e6c',
-        oppholdNarId: 'c03398c6-55ac-3e90-a809-79a63f106260',
         oppholdNarTag: 'PERIODER',
         sporsmalstekst: `Har du vært utenfor EU/EØS mens du var sykmeldt ${formatterPeriode(fom, tom)}?`,
     }),
     naringsdrivendeVirksomhetenAvviklet(),
     naringsdrivendeNyIArbeidslivet(),
     naringsdrivendeVarigEndring(),
-    tilSlutt({ id: '2c102d54-1d2a-3929-be27-09bfbb7ee7cb', sporsmalstekst: 'Viktig å være klar over:' }),
+    tilSlutt({ sporsmalstekst: 'Viktig å være klar over:' }),
 ]
 
 const soknad: RSSoknad = {

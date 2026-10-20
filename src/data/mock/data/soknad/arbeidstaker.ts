@@ -16,7 +16,7 @@ const tom = '2020-04-24'
 const arbeidsgiverNavn = 'Posten Norge AS, Bærum'
 
 const standardSporsmal = [
-    ansvarserklaring({ id: '687336' }),
+    ansvarserklaring({}),
     tilbakeIArbeid({ fom, tom, arbeidsgiver: arbeidsgiverNavn }),
     ferieV2({ fom, tom }),
     permisjonV2({ fom, tom }),
@@ -50,18 +50,14 @@ const soknadData = {
 export const arbeidstakerMedGammelEOSSporsmal: RSSoknad = {
     id: 'faba11f5-c4f2-4647-8c8a-58b28ce2f3ef',
     ...soknadData,
-    sporsmal: [...standardSporsmal, utlandV2({ fom, tom, id: '687347', utlandNarId: '687348' }), oppsummering()],
+    sporsmal: [...standardSporsmal, utlandV2({ fom, tom }), oppsummering()],
 }
 
 export const arbeidstaker: RSSoknad = {
     id: 'd9ac193d-9b67-4a51-80c2-fe4289214878',
     ...soknadData,
     opprettetDato: '2020-06-13',
-    sporsmal: [
-        ...standardSporsmal,
-        oppholdUtenforEos({ fom, tom, id: '687347', oppholdNarId: '687348' }),
-        oppsummering(),
-    ],
+    sporsmal: [...standardSporsmal, oppholdUtenforEos({ fom, tom }), oppsummering()],
 }
 
 export const arbeidtakerMedGammelOppsummering = (): RSSoknad => {

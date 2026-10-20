@@ -43,7 +43,7 @@ export const arbeidstakerFlereInntektskilderGhost: RSSoknad = {
     arbeidssituasjon: 'ARBEIDSTAKER',
     soknadPerioder: [{ fom, tom, grad: 100, sykmeldingstype: 'AKTIVITET_IKKE_MULIG' }],
     sporsmal: [
-        ansvarserklaring({ id: '687336' }),
+        ansvarserklaring({}),
         tilbakeIArbeid({ fom, tom, arbeidsgiver: arbeidsgiverNavn }),
         ferieV2({ fom, tom }),
         permisjonV2({ fom, tom }),

@@ -5,21 +5,12 @@ import { formatterPeriode } from './backend-datoformat'
 type PermisjonV2Valg = {
     readonly fom: string
     readonly tom: string
-    readonly id?: string
     readonly svar?: RSSvar[]
-    readonly permisjonNarId?: string
     readonly permisjonNarSvar?: RSSvar[]
 }
 
-export const permisjonV2 = ({
-    fom,
-    tom,
-    id = '687345',
-    svar = [],
-    permisjonNarId = '687346',
-    permisjonNarSvar = [],
-}: PermisjonV2Valg): RSSporsmal => ({
-    id,
+export const permisjonV2 = ({ fom, tom, svar = [], permisjonNarSvar = [] }: PermisjonV2Valg): RSSporsmal => ({
+    id: '687345',
     tag: 'PERMISJON_V2',
     sporsmalstekst: `Tok du permisjon mens du var sykmeldt ${formatterPeriode(fom, tom)}?`,
     undertekst: null,
@@ -30,7 +21,7 @@ export const permisjonV2 = ({
     svar,
     undersporsmal: [
         {
-            id: permisjonNarId,
+            id: '687346',
             tag: 'PERMISJON_NAR_V2',
             sporsmalstekst: 'Når tok du permisjon?',
             undertekst: null,

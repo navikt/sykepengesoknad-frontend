@@ -1,6 +1,7 @@
 import type { RSSporsmal } from '../../../../types/rs-types/rs-sporsmal'
 import type { RSSvar } from '../../../../types/rs-types/rs-svar'
 import { formatterPeriode } from './backend-datoformat'
+import { idMedIndeks } from './id-med-indeks'
 
 type ArbeidUnderveisSvar = {
     readonly hoved?: RSSvar[]
@@ -13,24 +14,11 @@ type ArbeidUnderveisSvar = {
     readonly timerPerUke?: RSSvar[]
 }
 
-type ArbeidUnderveisId = {
-    readonly hoved?: string
-    readonly arbeidsmengde?: string
-    readonly prosent?: string
-    readonly prosentVerdi?: string
-    readonly timer?: string
-    readonly timerVerdi?: string
-    readonly normalArbeidsuke?: string
-    readonly timerPerUke?: string
-}
-
 type ArbeidUnderveis100ProsentValgFelles = {
     readonly fom: string
     readonly tom: string
     readonly index?: number
-    readonly id?: string
     readonly svar?: ArbeidUnderveisSvar
-    readonly ids?: ArbeidUnderveisId
     readonly timerMaks?: string
     readonly prosentUndertekst?: string | null
     readonly timerUndertekst?: string | null
@@ -57,9 +45,7 @@ export const arbeidUnderveis100Prosent = (valg: ArbeidUnderveis100ProsentValg): 
         fom,
         tom,
         index = 0,
-        id = '63448066-fa24-3d9b-bf38-fb2ea23a353f',
         svar = {},
-        ids = {},
         timerMaks = '364',
         prosentUndertekst = 'Oppgi i prosent. Eksempel: 40',
         timerUndertekst = 'Oppgi i timer. Eksempel: 12',
@@ -93,7 +79,7 @@ export const arbeidUnderveis100Prosent = (valg: ArbeidUnderveis100ProsentValg): 
             : `Oppgi totalt antall timer du jobbet i perioden ${periode}`
 
     return {
-        id,
+        id: idMedIndeks('63448066-fa24-3d9b-bf38-fb2ea23a353f', index),
         tag: `ARBEID_UNDERVEIS_100_PROSENT_${index}`,
         sporsmalstekst,
         undertekst: null,
@@ -104,7 +90,7 @@ export const arbeidUnderveis100Prosent = (valg: ArbeidUnderveis100ProsentValg): 
         svar: svar.hoved ?? [],
         undersporsmal: [
             {
-                id: ids.arbeidsmengde ?? '9f5b48c7-f461-359d-a27c-a0ad42ab6c22',
+                id: idMedIndeks('9f5b48c7-f461-359d-a27c-a0ad42ab6c22', index),
                 tag: `HVOR_MYE_HAR_DU_JOBBET_${index}`,
                 sporsmalstekst: 'Oppgi arbeidsmengde i timer eller prosent:',
                 undertekst: null,
@@ -115,7 +101,7 @@ export const arbeidUnderveis100Prosent = (valg: ArbeidUnderveis100ProsentValg): 
                 svar: svar.arbeidsmengde ?? [],
                 undersporsmal: [
                     {
-                        id: ids.prosent ?? '8ba29062-f412-30ad-8851-33577d8034ab',
+                        id: idMedIndeks('8ba29062-f412-30ad-8851-33577d8034ab', index),
                         tag: `HVOR_MYE_PROSENT_${index}`,
                         sporsmalstekst: 'Prosent',
                         undertekst: null,
@@ -126,7 +112,7 @@ export const arbeidUnderveis100Prosent = (valg: ArbeidUnderveis100ProsentValg): 
                         svar: svar.prosent ?? [],
                         undersporsmal: [
                             {
-                                id: ids.prosentVerdi ?? '796cf7ed-8a7e-39de-9cbc-6e789aa5af3f',
+                                id: idMedIndeks('796cf7ed-8a7e-39de-9cbc-6e789aa5af3f', index),
                                 tag: `HVOR_MYE_PROSENT_VERDI_${index}`,
                                 sporsmalstekst: prosentTekst,
                                 undertekst: prosentUndertekst,
@@ -140,7 +126,7 @@ export const arbeidUnderveis100Prosent = (valg: ArbeidUnderveis100ProsentValg): 
                         ],
                     },
                     {
-                        id: ids.timer ?? '27d3d9f1-d31f-3c0e-a1ec-3246c3b48b0a',
+                        id: idMedIndeks('27d3d9f1-d31f-3c0e-a1ec-3246c3b48b0a', index),
                         tag: `HVOR_MYE_TIMER_${index}`,
                         sporsmalstekst: 'Timer',
                         undertekst: null,
@@ -151,7 +137,7 @@ export const arbeidUnderveis100Prosent = (valg: ArbeidUnderveis100ProsentValg): 
                         svar: svar.timer ?? [],
                         undersporsmal: [
                             {
-                                id: ids.timerVerdi ?? '6cc620d8-d4b0-3e82-a038-2757df6fc311',
+                                id: idMedIndeks('6cc620d8-d4b0-3e82-a038-2757df6fc311', index),
                                 tag: `HVOR_MYE_TIMER_VERDI_${index}`,
                                 sporsmalstekst: timerTekst,
                                 undertekst: timerUndertekst,
@@ -167,7 +153,7 @@ export const arbeidUnderveis100Prosent = (valg: ArbeidUnderveis100ProsentValg): 
                 ],
             },
             {
-                id: ids.normalArbeidsuke ?? 'af302d17-f35d-38a6-ac23-ccde5db369cb',
+                id: idMedIndeks('af302d17-f35d-38a6-ac23-ccde5db369cb', index),
                 tag: `JOBBER_DU_NORMAL_ARBEIDSUKE_${index}`,
                 sporsmalstekst: normalArbeidsukeTekst,
                 undertekst: null,
@@ -178,7 +164,7 @@ export const arbeidUnderveis100Prosent = (valg: ArbeidUnderveis100ProsentValg): 
                 svar: svar.normalArbeidsuke ?? [],
                 undersporsmal: [
                     {
-                        id: ids.timerPerUke ?? 'ecc14b80-402a-32e6-9f93-e832ff0560d6',
+                        id: idMedIndeks('ecc14b80-402a-32e6-9f93-e832ff0560d6', index),
                         tag: `HVOR_MANGE_TIMER_PER_UKE_${index}`,
                         sporsmalstekst: timerPerUkeTekst,
                         undertekst: null,

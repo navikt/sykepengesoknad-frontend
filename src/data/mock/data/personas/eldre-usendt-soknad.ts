@@ -13,9 +13,7 @@ const byggSporsmalMedNyeDatoer = (soknad: RSSoknad, fom: string, tom: string): v
             fom,
             tom,
             arbeidsgiver: soknad.arbeidsgiver.navn,
-            id: sporsmal.id,
             svar: sporsmal.svar,
-            tilbakeNarId: sporsmal.undersporsmal[0].id,
             tilbakeNarSvar: sporsmal.undersporsmal[0].svar,
         })
     })

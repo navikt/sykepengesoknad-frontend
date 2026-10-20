@@ -37,7 +37,7 @@ export const avbruttSoknad: RSSoknad = {
     arbeidssituasjon: 'ARBEIDSTAKER',
     soknadPerioder: [{ fom, tom, grad: 80, sykmeldingstype: 'AKTIVITET_IKKE_MULIG' }],
     sporsmal: [
-        ansvarserklaring({ id: '84' }),
+        ansvarserklaring({}),
         egenmeldinger({
             fom: '2020-05-04',
             tom: '2020-05-19',
@@ -45,9 +45,9 @@ export const avbruttSoknad: RSSoknad = {
             min: '2019-11-20',
             max: '2020-05-19',
         }),
-        tilbakeIArbeid({ fom, tom, arbeidsgiver: arbeidsgiverNavn, id: '95', tilbakeNarId: '96' }),
-        ferieV2({ fom, tom, id: '97', ferieNarId: '98' }),
-        permisjonV2({ fom, tom, id: '99', permisjonNarId: '100' }),
+        tilbakeIArbeid({ fom, tom, arbeidsgiver: arbeidsgiverNavn }),
+        ferieV2({ fom, tom }),
+        permisjonV2({ fom, tom }),
         jobbetDuGradert({
             fom,
             tom,
@@ -55,9 +55,9 @@ export const avbruttSoknad: RSSoknad = {
             grad: 20,
             prosentMin: '21',
         }),
-        arbeidUtenforNorge({ id: '103' }),
+        arbeidUtenforNorge({}),
         andreInntektskilderV2(),
-        oppholdUtenforEos({ fom, tom, id: '101', oppholdNarId: '102' }),
+        oppholdUtenforEos({ fom, tom }),
         oppsummering(),
     ],
     egenmeldtSykmelding: false,

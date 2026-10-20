@@ -2,7 +2,6 @@ import { RSSporsmal } from '../../../../types/rs-types/rs-sporsmal'
 import { RSSvar } from '../../../../types/rs-types/rs-svar'
 
 export const transportTilDaglig = ({
-    id = '1566424',
     svar = [],
     typeTransportSporsmal = {
         id: '1566425',
@@ -55,11 +54,10 @@ export const transportTilDaglig = ({
         ],
     },
 }: {
-    id?: string
     svar?: RSSvar[]
     typeTransportSporsmal?: RSSporsmal
 } = {}): RSSporsmal => ({
-    id,
+    id: '1566424',
     tag: 'TRANSPORT_TIL_DAGLIG',
     sporsmalstekst: 'Brukte du bil eller offentlig transport til og fra jobben før du ble sykmeldt?',
     undertekst: null,

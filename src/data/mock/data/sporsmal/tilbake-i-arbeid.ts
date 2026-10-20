@@ -5,9 +5,7 @@ import { formatterDato, formatterPeriode } from './backend-datoformat'
 type TilbakeIArbeidValgFelles = {
     readonly fom: string
     readonly tom: string
-    readonly id?: string
     readonly svar?: RSSvar[]
-    readonly tilbakeNarId?: string
     readonly tilbakeNarSvar?: RSSvar[]
     readonly sporsmalstekst?: string
     readonly tilbakeNarTekst?: string
@@ -27,9 +25,7 @@ export const tilbakeIArbeid = (valg: TilbakeIArbeidValg): RSSporsmal => {
     const {
         fom,
         tom,
-        id = '687341',
         svar = [],
-        tilbakeNarId = '687342',
         tilbakeNarSvar = [],
         sporsmalstekst,
         tilbakeNarTekst = 'Når begynte du å jobbe igjen?',
@@ -43,7 +39,7 @@ export const tilbakeIArbeid = (valg: TilbakeIArbeidValg): RSSporsmal => {
               : `Var du tilbake i fullt arbeid som selvstendig næringsdrivende før sykmeldingsperioden utløp ${formatterDato(tom)}?`
 
     return {
-        id,
+        id: '687341',
         tag: 'TILBAKE_I_ARBEID',
         sporsmalstekst: sporsmalstekst ?? standardSporsmalstekst,
         undertekst: null,
@@ -54,7 +50,7 @@ export const tilbakeIArbeid = (valg: TilbakeIArbeidValg): RSSporsmal => {
         svar,
         undersporsmal: [
             {
-                id: tilbakeNarId,
+                id: '687342',
                 tag: 'TILBAKE_NAR',
                 sporsmalstekst: tilbakeNarTekst,
                 undertekst: null,

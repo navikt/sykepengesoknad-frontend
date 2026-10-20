@@ -5,9 +5,7 @@ import { formatterPeriode } from './backend-datoformat'
 type UtlandV2Valg = {
     readonly fom: string
     readonly tom: string
-    readonly id?: string
     readonly svar?: RSSvar[]
-    readonly utlandNarId?: string
     readonly utlandNarSvar?: RSSvar[]
     readonly tekstvariant?: 'eos' | 'eu-eos'
 }
@@ -15,13 +13,11 @@ type UtlandV2Valg = {
 export const utlandV2 = ({
     fom,
     tom,
-    id = '687347',
     svar = [],
-    utlandNarId = '687348',
     utlandNarSvar = [],
     tekstvariant = 'eu-eos',
 }: UtlandV2Valg): RSSporsmal => ({
-    id,
+    id: '687347',
     tag: 'UTLAND_V2',
     sporsmalstekst: `Var du på reise utenfor ${tekstvariant === 'eos' ? 'EØS' : 'EU/EØS'} mens du var sykmeldt ${formatterPeriode(fom, tom)}?`,
     undertekst: null,
@@ -32,7 +28,7 @@ export const utlandV2 = ({
     svar,
     undersporsmal: [
         {
-            id: utlandNarId,
+            id: '687348',
             tag: 'UTLAND_NAR_V2',
             sporsmalstekst: `Når var du utenfor ${tekstvariant === 'eos' ? 'EØS' : 'EU/EØS'}?`,
             undertekst: null,

@@ -5,23 +5,11 @@ import { formatterPeriode } from './backend-datoformat'
 type ArbeidsledigUtlandValg = {
     readonly fom: string
     readonly tom: string
-    readonly id?: string
-    readonly narId?: string
-    readonly soktId?: string
-    readonly informasjonId?: string
     readonly svar?: RSSvar[]
 }
 
-export const arbeidsledigUtland = ({
-    fom,
-    tom,
-    id = '687422',
-    narId = '687423',
-    soktId = '687424',
-    informasjonId = '687425',
-    svar = [],
-}: ArbeidsledigUtlandValg): RSSporsmal => ({
-    id,
+export const arbeidsledigUtland = ({ fom, tom, svar = [] }: ArbeidsledigUtlandValg): RSSporsmal => ({
+    id: '687422',
     tag: 'ARBEIDSLEDIG_UTLAND',
     sporsmalstekst: `Var du på reise utenfor EU/EØS mens du var sykmeldt ${formatterPeriode(fom, tom)}?`,
     undertekst: null,
@@ -32,7 +20,7 @@ export const arbeidsledigUtland = ({
     svar,
     undersporsmal: [
         {
-            id: narId,
+            id: '687423',
             tag: 'UTLAND_NAR',
             sporsmalstekst: 'Når var du utenfor EU/EØS?',
             undertekst: null,
@@ -44,7 +32,7 @@ export const arbeidsledigUtland = ({
             undersporsmal: [],
         },
         {
-            id: soktId,
+            id: '687424',
             tag: 'UTLANDSOPPHOLD_SOKT_SYKEPENGER',
             sporsmalstekst: 'Har du søkt om å beholde sykepengene for disse dagene?',
             undertekst: null,
@@ -55,7 +43,7 @@ export const arbeidsledigUtland = ({
             svar: [],
             undersporsmal: [
                 {
-                    id: informasjonId,
+                    id: '687425',
                     tag: 'IKKE_SOKT_UTENLANDSOPPHOLD_INFORMASJON',
                     sporsmalstekst: null,
                     undertekst:

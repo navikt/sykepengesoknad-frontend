@@ -2,17 +2,15 @@ import { RSSporsmal } from '../../../../types/rs-types/rs-sporsmal'
 import { RSSvar } from '../../../../types/rs-types/rs-svar'
 
 export const bilTilDaglig = ({
-    id = '1566428',
     svar = [],
     undersporsmal = [],
     kriterieForVisningAvUndersporsmal = null,
 }: {
-    id?: string
     svar?: RSSvar[]
     undersporsmal?: RSSporsmal[]
     kriterieForVisningAvUndersporsmal?: 'CHECKED' | null
 } = {}): RSSporsmal => ({
-    id,
+    id: '1566428',
     tag: 'BIL_TIL_DAGLIG',
     sporsmalstekst: 'Bil',
     undertekst: null,
@@ -25,15 +23,13 @@ export const bilTilDaglig = ({
 })
 
 export const kmHjemJobb = ({
-    id = '1566448',
     svar = [],
     tekstvariant = 'lang',
 }: {
-    id?: string
     svar?: RSSvar[]
     tekstvariant?: 'kort' | 'lang'
 } = {}): RSSporsmal => ({
-    id,
+    id: '1566448',
     tag: 'KM_HJEM_JOBB',
     sporsmalstekst:
         tekstvariant === 'kort'
@@ -49,15 +45,13 @@ export const kmHjemJobb = ({
 })
 
 export const bilBompenger = ({
-    id = '1566446',
     svar = [],
     belop = bilBompengerBelop(),
 }: {
-    id?: string
     svar?: RSSvar[]
     belop?: RSSporsmal
 } = {}): RSSporsmal => ({
-    id,
+    id: '1566446',
     tag: 'BIL_BOMPENGER',
     sporsmalstekst: 'Hadde du utgifter til bompenger?',
     undertekst: null,
@@ -70,15 +64,13 @@ export const bilBompenger = ({
 })
 
 export const bilBompengerBelop = ({
-    id = '1566447',
     svar = [],
     tekstvariant = 'mellom-hjem-og-jobb',
 }: {
-    id?: string
     svar?: RSSvar[]
     tekstvariant?: 'mellom-hjem-og-jobb' | 'i-perioden'
 } = {}): RSSporsmal => ({
-    id,
+    id: '1566447',
     tag: 'BIL_BOMPENGER_BELOP',
     sporsmalstekst:
         tekstvariant === 'i-perioden'

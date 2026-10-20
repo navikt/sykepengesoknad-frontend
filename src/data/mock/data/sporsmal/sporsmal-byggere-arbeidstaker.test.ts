@@ -38,18 +38,17 @@ describe('Spørsmålsbyggere for arbeidstaker', () => {
         expect(permisjon.undersporsmal[0]).toMatchObject({ min: '2020-12-31', max: '2021-01-02' })
     })
 
-    it('bruker indeks, overstyrt id og svar på hele arbeidstreet', () => {
+    it('bruker indeks i tagg og id, og svar på hele arbeidstreet', () => {
         const sporsmal = arbeidUnderveis100Prosent({
             fom: '2020-04-01',
             tom: '2020-04-24',
             arbeidsgiver: 'Posten Norge AS, Bærum',
             index: 2,
-            id: 'tilpasset-id',
             svar: { hoved: [{ verdi: 'JA' }], timerVerdi: [{ verdi: '12' }] },
         })
 
         expect(sporsmal).toMatchObject({
-            id: 'tilpasset-id',
+            id: '63448066-fa24-3d9b-bf38-fb2ea23a3531',
             tag: 'ARBEID_UNDERVEIS_100_PROSENT_2',
             svar: [{ verdi: 'JA' }],
         })

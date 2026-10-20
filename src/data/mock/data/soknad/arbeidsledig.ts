@@ -9,10 +9,10 @@ import { oppsummering } from '../sporsmal/oppsummering'
 const fom = '2020-04-01'
 const tom = '2020-04-24'
 const sporsmal = () => [
-    ansvarserklaring({ id: '687395' }),
-    friskmeldt({ fom, tom, id: '687400', startId: '687401' }),
-    andreInntektskilder({ fom, tom, id: '687402', gruppeId: '687403' }),
-    oppholdUtenforEos({ fom, tom, id: '687422', oppholdNarId: '687423' }),
+    ansvarserklaring({}),
+    friskmeldt({ fom, tom }),
+    andreInntektskilder({ fom, tom }),
+    oppholdUtenforEos({ fom, tom }),
     oppsummering(),
 ]
 const lagArbeidsledigSoknad = (id: string): RSSoknad => ({

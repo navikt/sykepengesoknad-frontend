@@ -334,7 +334,7 @@ export async function mockApi(req: NextApiRequest, res: NextApiResponse) {
                     400,
                 )
             }
-            if (soknadId === '3fa85f64-5717-4562-b3fc-2c963f66afa6' && sporsmalId === '900') {
+            if (soknadId === '3fa85f64-5717-4562-b3fc-2c963f66afa6' && spm.tag === 'TILBAKE_I_ARBEID') {
                 return sendJson({}, 404)
             }
             if (soknadId === soknadSomTrigger401ForOppdaterSporsmal.id) {

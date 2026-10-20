@@ -5,21 +5,12 @@ import { formatterDato } from './backend-datoformat'
 type FriskmeldtValg = {
     readonly fom: string
     readonly tom: string
-    readonly id?: string
-    readonly startId?: string
     readonly svar?: RSSvar[]
     readonly startSvar?: RSSvar[]
 }
 
-export const friskmeldt = ({
-    fom,
-    tom,
-    id = '687400',
-    startId = '687401',
-    svar = [],
-    startSvar = [],
-}: FriskmeldtValg): RSSporsmal => ({
-    id,
+export const friskmeldt = ({ fom, tom, svar = [], startSvar = [] }: FriskmeldtValg): RSSporsmal => ({
+    id: '687400',
     tag: 'FRISKMELDT',
     sporsmalstekst: `Brukte du hele sykmeldingen fram til ${formatterDato(tom)}?`,
     undertekst: null,
@@ -30,7 +21,7 @@ export const friskmeldt = ({
     svar,
     undersporsmal: [
         {
-            id: startId,
+            id: '687401',
             tag: 'FRISKMELDT_START',
             sporsmalstekst: 'Fra hvilken dato trengte du ikke lenger sykmeldingen?',
             undertekst: null,

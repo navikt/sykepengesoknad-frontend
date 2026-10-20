@@ -1,13 +1,13 @@
 import type { RSSporsmal } from '../../../../types/rs-types/rs-sporsmal'
 import type { RSSvar } from '../../../../types/rs-types/rs-svar'
 import { formatterPeriode } from './backend-datoformat'
+import { idMedIndeks } from './id-med-indeks'
 
 type JobbetDu100ProsentValg = {
     readonly fom: string
     readonly tom: string
     readonly arbeidsgiver: string
     readonly index?: number
-    readonly id?: string
     readonly svar?: RSSvar[]
     readonly svarBarn?: {
         readonly timerPerUke?: RSSvar[]
@@ -17,14 +17,6 @@ type JobbetDu100ProsentValg = {
         readonly timer?: RSSvar[]
         readonly timerVerdi?: RSSvar[]
     }
-    readonly ids?: {
-        readonly timerPerUke?: string
-        readonly arbeidsmengde?: string
-        readonly prosent?: string
-        readonly prosentVerdi?: string
-        readonly timer?: string
-        readonly timerVerdi?: string
-    }
 }
 
 export const jobbetDu100Prosent = ({
@@ -32,15 +24,13 @@ export const jobbetDu100Prosent = ({
     tom,
     arbeidsgiver,
     index = 0,
-    id = '687349',
     svar = [],
     svarBarn = {},
-    ids = {},
 }: JobbetDu100ProsentValg): RSSporsmal => {
     const periode = formatterPeriode(fom, tom)
 
     return {
-        id,
+        id: idMedIndeks('687349', index),
         tag: `JOBBET_DU_100_PROSENT_${index}`,
         sporsmalstekst: `I perioden ${periode} var du 100 % sykmeldt fra ${arbeidsgiver}. Jobbet du noe i denne perioden?`,
         undertekst: null,
@@ -51,7 +41,7 @@ export const jobbetDu100Prosent = ({
         svar,
         undersporsmal: [
             {
-                id: ids.timerPerUke ?? '687350',
+                id: idMedIndeks('687350', index),
                 tag: `HVOR_MANGE_TIMER_PER_UKE_${index}`,
                 sporsmalstekst:
                     'Hvor mange timer i uken jobber du vanligvis når du er frisk? Varierer det, kan du oppgi gjennomsnittet.',
@@ -64,7 +54,7 @@ export const jobbetDu100Prosent = ({
                 undersporsmal: [],
             },
             {
-                id: ids.arbeidsmengde ?? '687351',
+                id: idMedIndeks('687351', index),
                 tag: `HVOR_MYE_HAR_DU_JOBBET_${index}`,
                 sporsmalstekst: `Hvor mye jobbet du totalt ${periode} hos ${arbeidsgiver}?`,
                 undertekst: null,
@@ -75,7 +65,7 @@ export const jobbetDu100Prosent = ({
                 svar: svarBarn.arbeidsmengde ?? [],
                 undersporsmal: [
                     {
-                        id: ids.prosent ?? '687352',
+                        id: idMedIndeks('687352', index),
                         tag: `HVOR_MYE_PROSENT_${index}`,
                         sporsmalstekst: 'prosent',
                         undertekst: null,
@@ -86,7 +76,7 @@ export const jobbetDu100Prosent = ({
                         svar: svarBarn.prosent ?? [],
                         undersporsmal: [
                             {
-                                id: ids.prosentVerdi ?? '687353',
+                                id: idMedIndeks('687353', index),
                                 tag: `HVOR_MYE_PROSENT_VERDI_${index}`,
                                 sporsmalstekst: null,
                                 undertekst: null,
@@ -100,7 +90,7 @@ export const jobbetDu100Prosent = ({
                         ],
                     },
                     {
-                        id: ids.timer ?? '687354',
+                        id: idMedIndeks('687354', index),
                         tag: `HVOR_MYE_TIMER_${index}`,
                         sporsmalstekst: 'timer',
                         undertekst: null,
@@ -111,7 +101,7 @@ export const jobbetDu100Prosent = ({
                         svar: svarBarn.timer ?? [],
                         undersporsmal: [
                             {
-                                id: ids.timerVerdi ?? '687355',
+                                id: idMedIndeks('687355', index),
                                 tag: `HVOR_MYE_TIMER_VERDI_${index}`,
                                 sporsmalstekst: null,
                                 undertekst: null,

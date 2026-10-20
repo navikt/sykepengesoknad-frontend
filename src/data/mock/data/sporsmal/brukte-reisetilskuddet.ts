@@ -2,15 +2,13 @@ import { RSSporsmal } from '../../../../types/rs-types/rs-sporsmal'
 import { RSSvar } from '../../../../types/rs-types/rs-svar'
 
 export const brukteReisetilskuddet = ({
-    id = '1563341',
     svar = [],
     tekstvariant = 'ekstra-reiseutgifter',
 }: {
-    id?: string
     svar?: RSSvar[]
     tekstvariant?: 'ekstra-reiseutgifter' | 'brukt-reisetilskuddet'
 } = {}): RSSporsmal => ({
-    id,
+    id: '1563341',
     tag: 'BRUKTE_REISETILSKUDDET',
     sporsmalstekst:
         tekstvariant === 'ekstra-reiseutgifter'

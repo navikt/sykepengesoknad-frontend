@@ -5,21 +5,12 @@ import { formatterPeriode } from './backend-datoformat'
 type FerieV2Valg = {
     readonly fom: string
     readonly tom: string
-    readonly id?: string
     readonly svar?: RSSvar[]
-    readonly ferieNarId?: string
     readonly ferieNarSvar?: RSSvar[]
 }
 
-export const ferieV2 = ({
-    fom,
-    tom,
-    id = '687343',
-    svar = [],
-    ferieNarId = '687344',
-    ferieNarSvar = [],
-}: FerieV2Valg): RSSporsmal => ({
-    id,
+export const ferieV2 = ({ fom, tom, svar = [], ferieNarSvar = [] }: FerieV2Valg): RSSporsmal => ({
+    id: '687343',
     tag: 'FERIE_V2',
     sporsmalstekst: `Tok du ut feriedager i tidsrommet ${formatterPeriode(fom, tom)}?`,
     undertekst: null,
@@ -30,7 +21,7 @@ export const ferieV2 = ({
     svar,
     undersporsmal: [
         {
-            id: ferieNarId,
+            id: '687344',
             tag: 'FERIE_NAR_V2',
             sporsmalstekst: 'Når tok du ut feriedager?',
             undertekst: null,

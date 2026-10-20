@@ -5,15 +5,13 @@ import { formatterPeriode } from './backend-datoformat'
 export const feriePermisjonUtland = ({
     fom,
     tom,
-    id = '4935',
     svar = [],
 }: {
     readonly fom: string
     readonly tom: string
-    readonly id?: string
     readonly svar?: RSSvar[]
 }): RSSporsmal => ({
-    id,
+    id: '4935',
     tag: 'FERIE_PERMISJON_UTLAND',
     sporsmalstekst: `Har du hatt ferie, permisjon eller vært utenfor EØS mens du var sykmeldt ${formatterPeriode(fom, tom)}?`,
     undertekst: null,

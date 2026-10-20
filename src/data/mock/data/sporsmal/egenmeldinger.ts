@@ -17,23 +17,14 @@ type EgenmeldingerValg = {
     readonly sykmeldtDato: string
     readonly min: string
     readonly max: string
-    readonly id?: string
     readonly svar?: EgenmeldingerSvar
 }
 
-export const egenmeldinger = ({
-    fom,
-    tom,
-    sykmeldtDato,
-    min,
-    max,
-    id = '89',
-    svar = {},
-}: EgenmeldingerValg): RSSporsmal => {
+export const egenmeldinger = ({ fom, tom, sykmeldtDato, min, max, svar = {} }: EgenmeldingerValg): RSSporsmal => {
     const sykmeldtDatoTekst = formatterDato(sykmeldtDato)
 
     return {
-        id,
+        id: '89',
         tag: 'EGENMELDINGER',
         sporsmalstekst: `Vi har registrert at du ble sykmeldt onsdag ${sykmeldtDatoTekst}. Var du syk og borte fra jobb i perioden ${formatterPeriode(fom, tom)}?`,
         undertekst: null,

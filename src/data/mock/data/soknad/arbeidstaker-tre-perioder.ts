@@ -44,17 +44,15 @@ arbeidstakerTrePerioder.sporsmal = arbeidstakerTrePerioder.sporsmal.map((sporsma
                 fom,
                 tom,
                 arbeidsgiver,
-                id: sporsmal.id,
-                tilbakeNarId: sporsmal.undersporsmal[0].id,
             })
         case 'FERIE_V2':
-            return ferieV2({ fom, tom, id: sporsmal.id, ferieNarId: sporsmal.undersporsmal[0].id })
+            return ferieV2({ fom, tom })
         case 'PERMISJON_V2':
-            return permisjonV2({ fom, tom, id: sporsmal.id, permisjonNarId: sporsmal.undersporsmal[0].id })
+            return permisjonV2({ fom, tom })
         case 'ARBEID_UNDERVEIS_100_PROSENT_0':
-            return arbeidUnderveis100Prosent({ fom, tom: forstePeriodeTom, arbeidsgiver, id: sporsmal.id })
+            return arbeidUnderveis100Prosent({ fom, tom: forstePeriodeTom, arbeidsgiver })
         case 'OPPHOLD_UTENFOR_EOS':
-            return oppholdUtenforEos({ fom, tom, id: sporsmal.id, oppholdNarId: sporsmal.undersporsmal[0].id })
+            return oppholdUtenforEos({ fom, tom })
         default:
             return sporsmal
     }

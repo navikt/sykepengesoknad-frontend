@@ -44,11 +44,10 @@ describe('Spørsmålsbyggere for reisetilskudd og opphold i utlandet', () => {
         expect(sporsmal.undersporsmal[0]).toMatchObject({ min: '2020-12-23', max: '2021-01-07' })
     })
 
-    it('bevarer id-overstyringer og svar for reisetilskudd', () => {
+    it('bevarer svar for reisetilskudd', () => {
         const svar = [{ id: 'svar-1', verdi: 'NEI' }]
-        const sporsmal = utbetaling({ id: 'egen-id', svar })
+        const sporsmal = utbetaling({ svar })
 
-        expect(sporsmal.id).toBe('egen-id')
         expect(sporsmal.svar).toBe(svar)
     })
 
@@ -74,12 +73,10 @@ describe('Spørsmålsbyggere for reisetilskudd og opphold i utlandet', () => {
         const sporsmal = periodeUtland({
             fom: '2020-03-03',
             tom: '2020-12-31',
-            id: 'periode-id',
             svar,
         })
 
         expect(sporsmal).toMatchObject({
-            id: 'periode-id',
             min: '2020-03-03',
             max: '2020-12-31',
             svar,
@@ -91,8 +88,7 @@ describe('Spørsmålsbyggere for reisetilskudd og opphold i utlandet', () => {
         expect(brukteReisetilskuddet({ tekstvariant: 'brukt-reisetilskuddet' }).sporsmalstekst).toBe(
             'Har du brukt reisetilskuddet mens du var sykmeldt?',
         )
-        expect(land({ id: 'land-id', undertekst: null, svartype: 'LAND' })).toMatchObject({
-            id: 'land-id',
+        expect(land({ undertekst: null, svartype: 'LAND' })).toMatchObject({
             undertekst: null,
             svartype: 'LAND',
         })
@@ -168,23 +164,19 @@ describe('Spørsmålsbyggere for reisetilskudd og opphold i utlandet', () => {
         })
     })
 
-    it('bevarer spesialtekst og id-er for tilbake i arbeid', () => {
+    it('bevarer spesialtekst for tilbake i arbeid', () => {
         const sporsmal = tilbakeIArbeid({
             fom: '2020-04-01',
             tom: '2020-04-24',
             arbeidsgiver: 'SNILL TORPEDO',
-            id: '1547216',
-            tilbakeNarId: '1547217',
             sporsmalstekst: 'Var du tilbake i ditt vanlige arbeid uten ekstra reiseutgifter før 25. april?',
             tilbakeNarTekst: 'Når var du tilbake?',
         })
 
         expect(sporsmal).toMatchObject({
-            id: '1547216',
             sporsmalstekst: 'Var du tilbake i ditt vanlige arbeid uten ekstra reiseutgifter før 25. april?',
         })
         expect(sporsmal.undersporsmal[0]).toMatchObject({
-            id: '1547217',
             sporsmalstekst: 'Når var du tilbake?',
             min: '2020-04-01',
             max: '2020-04-24',

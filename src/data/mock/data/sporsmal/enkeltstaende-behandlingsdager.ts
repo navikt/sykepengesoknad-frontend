@@ -1,9 +1,9 @@
 import type { RSSvar } from '../../../../types/rs-types/rs-svar'
 import type { RSSporsmal } from '../../../../types/rs-types/rs-sporsmal'
 import { formatterPeriode } from './backend-datoformat'
+import { idMedIndeks } from './id-med-indeks'
 
 type Uke = {
-    readonly id?: string
     readonly fom: string
     readonly tom: string
     readonly sporsmalstekst?: string
@@ -13,25 +13,23 @@ type BehandlingsdagerValg = {
     readonly fom: string
     readonly tom: string
     readonly index?: number
-    readonly id?: string
     readonly svar?: RSSvar[]
     readonly uker?: readonly Uke[]
 }
 const standardUker: readonly Uke[] = [
-    { id: '687376', fom: '2020-04-01', tom: '2020-04-03', sporsmalstekst: '2020-03-31 - 2020-04-03' },
-    { id: '687377', fom: '2020-04-06', tom: '2020-04-10' },
-    { id: '687378', fom: '2020-04-13', tom: '2020-04-17' },
-    { id: '687379', fom: '2020-04-20', tom: '2020-04-24' },
+    { fom: '2020-04-01', tom: '2020-04-03', sporsmalstekst: '2020-03-31 - 2020-04-03' },
+    { fom: '2020-04-06', tom: '2020-04-10' },
+    { fom: '2020-04-13', tom: '2020-04-17' },
+    { fom: '2020-04-20', tom: '2020-04-24' },
 ]
 export const enkeltstaendeBehandlingsdager = ({
     fom,
     tom,
     index = 0,
-    id = '687375',
     svar = [],
     uker = standardUker,
 }: BehandlingsdagerValg): RSSporsmal => ({
-    id,
+    id: idMedIndeks('687375', index),
     tag: `ENKELTSTAENDE_BEHANDLINGSDAGER_${index}`,
     sporsmalstekst: `Hvilke dager måtte du være helt borte fra jobben på grunn av behandling mellom ${formatterPeriode(fom, tom)}?`,
     undertekst: null,
@@ -41,7 +39,7 @@ export const enkeltstaendeBehandlingsdager = ({
     kriterieForVisningAvUndersporsmal: null,
     svar,
     undersporsmal: uker.map((uke, ukeIndex) => ({
-        id: uke.id ?? `68737${ukeIndex + 6}`,
+        id: idMedIndeks(String(687376 + ukeIndex), index),
         tag: `ENKELTSTAENDE_BEHANDLINGSDAGER_UKE_${ukeIndex}`,
         sporsmalstekst: uke.sporsmalstekst ?? `${uke.fom} - ${uke.tom}`,
         undertekst: null,

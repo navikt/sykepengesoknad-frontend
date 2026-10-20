@@ -2,7 +2,6 @@ import { RSSporsmal } from '../../../../types/rs-types/rs-sporsmal'
 import { RSSvar } from '../../../../types/rs-types/rs-svar'
 
 export const typeTransport = ({
-    id = '1566425',
     svar = [],
     undersporsmal = [
         {
@@ -44,11 +43,10 @@ export const typeTransport = ({
         },
     ],
 }: {
-    id?: string
     svar?: RSSvar[]
     undersporsmal?: RSSporsmal[]
 } = {}): RSSporsmal => ({
-    id,
+    id: '1566425',
     tag: 'TYPE_TRANSPORT',
     sporsmalstekst: 'Hva slags type transport brukte du?',
     undertekst: null,

@@ -5,19 +5,17 @@ import { formatterPeriode } from './backend-datoformat'
 export const kvitteringer = ({
     fom,
     tom,
-    id = '1566434',
     svar = [],
     tekstvariant = 'reiser-til-og-fra',
 }: {
     fom: string
     tom: string
-    id?: string
     svar?: RSSvar[]
     tekstvariant?: 'reiseutgifter' | 'reiser-til-og-fra'
 }): RSSporsmal => {
     const periode = formatterPeriode(fom, tom)
     return {
-        id,
+        id: '1566434',
         tag: 'KVITTERINGER',
         sporsmalstekst:
             tekstvariant === 'reiseutgifter'

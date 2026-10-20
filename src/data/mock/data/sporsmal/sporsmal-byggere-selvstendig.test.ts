@@ -13,11 +13,10 @@ import { tilSlutt } from './til-slutt'
 import { utdanning } from './utdanning'
 
 describe('Spørsmålsbyggere for arbeidsledig og selvstendige', () => {
-    test('lager friskmeldt med periodegrenser, svar og overstyrt id', () => {
-        const sporsmal = friskmeldt({ fom: '2020-04-01', tom: '2020-04-24', id: 'annen-id', svar: [{ verdi: 'JA' }] })
+    test('lager friskmeldt med periodegrenser og svar', () => {
+        const sporsmal = friskmeldt({ fom: '2020-04-01', tom: '2020-04-24', svar: [{ verdi: 'JA' }] })
 
         expect(sporsmal).toMatchObject({
-            id: 'annen-id',
             sporsmalstekst: 'Brukte du hele sykmeldingen fram til 24. april 2020?',
             svar: [{ verdi: 'JA' }],
         })
@@ -55,10 +54,7 @@ describe('Spørsmålsbyggere for arbeidsledig og selvstendige', () => {
             fom: '2020-04-01',
             tom: '2020-04-24',
             svar: [{ verdi: 'NEI' }],
-            kilder: [
-                { tag: 'INNTEKTSKILDE_ANNET', id: 'annet-id' },
-                { tag: 'INNTEKTSKILDE_ARBEIDSFORHOLD', id: 'arbeidsforhold-id', erDuSykmeldtId: 'sykmeldt-id' },
-            ],
+            kilder: [{ tag: 'INNTEKTSKILDE_ANNET' }, { tag: 'INNTEKTSKILDE_ARBEIDSFORHOLD' }],
         })
         const kilder = sporsmal.undersporsmal[0].undersporsmal
 
@@ -138,14 +134,10 @@ describe('Spørsmålsbyggere for arbeidsledig og selvstendige', () => {
         })
     })
 
-    test('lager fireårsvarianten av andre inntektskilder med overstyrt id', () => {
-        const sporsmal = andreInntektskilderV2({
-            id: 'aa6a8e85-07c2-30c3-99d0-2aad85124890',
-            variant: 'fire-aar',
-        })
+    test('lager fireårsvarianten av andre inntektskilder', () => {
+        const sporsmal = andreInntektskilderV2({ variant: 'fire-aar' })
         const selvstendig = sporsmal.undersporsmal[0].undersporsmal[1]
 
-        expect(sporsmal.id).toBe('aa6a8e85-07c2-30c3-99d0-2aad85124890')
         expect(selvstendig.undersporsmal[0]).toMatchObject({
             tag: 'INNTEKTSKILDE_SELVSTENDIG_4_AR',
             sporsmalstekst: 'Har du vært næringsdrivende i mer enn 4 år?',

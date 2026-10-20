@@ -14,6 +14,7 @@ import {
 } from '../sykmeldinger'
 import { oppsummering } from '../sporsmal/oppsummering'
 import { ansvarserklaring } from '../sporsmal/ansvarserklaring'
+import { medUnikeIder } from '../sporsmal/id-med-indeks'
 import { friskmeldt } from '../sporsmal/friskmeldt'
 import { andreInntektskilder } from '../sporsmal/andre-inntektskilder'
 import { oppholdUtenforEos } from '../sporsmal/opphold-utenfor-eos'
@@ -60,7 +61,7 @@ export const arbeidstakersoknadMedUtenlandsoppholdSoktSykepenger: RSSoknad = {
             sykmeldingstype: 'AKTIVITET_IKKE_MULIG',
         },
     ],
-    sporsmal: [ansvarserklaring({ id: '636' }), oppsummering()],
+    sporsmal: [ansvarserklaring({}), oppsummering()],
     egenmeldtSykmelding: false,
     opprettetAvInntektsmelding: false,
     klippet: false,
@@ -95,8 +96,8 @@ export const arbeidsledigKvittering: RSSoknad = {
         },
     ],
     sporsmal: [
-        ansvarserklaring({ id: '127' }),
-        friskmeldt({ fom: arbeidsledigKvitteringFom, tom: arbeidsledigKvitteringTom, id: '98', startId: '99' }),
+        ansvarserklaring({}),
+        friskmeldt({ fom: arbeidsledigKvitteringFom, tom: arbeidsledigKvitteringTom }),
         oppsummering(),
     ],
     egenmeldtSykmelding: false,
@@ -133,39 +134,33 @@ export const sendtArbeidsledigKvittering: RSSoknad = {
         },
     ],
     sporsmal: [
-        ansvarserklaring({ id: '93', svar: [{ verdi: 'CHECKED' }] }),
+        ansvarserklaring({ svar: [{ verdi: 'CHECKED' }] }),
         friskmeldt({
             fom: sendtArbeidsledigKvitteringFom,
             tom: sendtArbeidsledigKvitteringTom,
-            id: '98',
-            startId: '99',
             svar: [{ verdi: 'JA' }],
         }),
         andreInntektskilder({
             fom: sendtArbeidsledigKvitteringFom,
             tom: sendtArbeidsledigKvitteringTom,
-            id: '100',
-            gruppeId: '101',
             svar: [{ verdi: 'NEI' }],
             kilder: [
-                { tag: 'INNTEKTSKILDE_ANDRE_ARBEIDSFORHOLD', id: '102', erDuSykmeldtId: '103' },
-                { tag: 'INNTEKTSKILDE_SELVSTENDIG', id: '104', erDuSykmeldtId: '105' },
-                { tag: 'INNTEKTSKILDE_SELVSTENDIG_DAGMAMMA', id: '106', erDuSykmeldtId: '107' },
-                { tag: 'INNTEKTSKILDE_JORDBRUKER', id: '108', erDuSykmeldtId: '109' },
-                { tag: 'INNTEKTSKILDE_FRILANSER', id: '110', erDuSykmeldtId: '111' },
-                { tag: 'INNTEKTSKILDE_OMSORGSLONN', id: '112', erDuSykmeldtId: '113' },
-                { tag: 'INNTEKTSKILDE_FOSTERHJEM', id: '114', erDuSykmeldtId: '115' },
-                { tag: 'INNTEKTSKILDE_ANNET', id: '116' },
+                { tag: 'INNTEKTSKILDE_ANDRE_ARBEIDSFORHOLD' },
+                { tag: 'INNTEKTSKILDE_SELVSTENDIG' },
+                { tag: 'INNTEKTSKILDE_SELVSTENDIG_DAGMAMMA' },
+                { tag: 'INNTEKTSKILDE_JORDBRUKER' },
+                { tag: 'INNTEKTSKILDE_FRILANSER' },
+                { tag: 'INNTEKTSKILDE_OMSORGSLONN' },
+                { tag: 'INNTEKTSKILDE_FOSTERHJEM' },
+                { tag: 'INNTEKTSKILDE_ANNET' },
             ],
         }),
         oppholdUtenforEos({
             fom: sendtArbeidsledigKvitteringFom,
             tom: sendtArbeidsledigKvitteringTom,
-            id: '120',
-            oppholdNarId: '121',
             svar: [{ verdi: 'NEI' }],
         }),
-        arbeidUtenforNorge({ id: '124', svar: [{ verdi: 'NEI' }] }),
+        arbeidUtenforNorge({ svar: [{ verdi: 'NEI' }] }),
         tilSlutt({ svar: [{ verdi: 'true' }] }),
     ],
     egenmeldtSykmelding: false,
@@ -201,12 +196,12 @@ export const delvisUtfylltArbeidsledig: RSSoknad = {
             sykmeldingstype: 'AKTIVITET_IKKE_MULIG',
         },
     ],
-    sporsmal: [
-        ansvarserklaring({ id: '93', svar: [{ verdi: 'CHECKED' }] }),
-        arbeidUtenforNorge({ id: '1243', svar: [{ verdi: 'NEI' }] }),
-        arbeidUtenforNorge({ id: '1334' }),
+    sporsmal: medUnikeIder([
+        ansvarserklaring({ svar: [{ verdi: 'CHECKED' }] }),
+        arbeidUtenforNorge({ svar: [{ verdi: 'NEI' }] }),
+        arbeidUtenforNorge({}),
         oppsummering(),
-    ],
+    ]),
     egenmeldtSykmelding: false,
     opprettetAvInntektsmelding: false,
     klippet: false,
@@ -234,9 +229,9 @@ export const oppholdUtlandKvittering: RSSoknad = {
     arbeidssituasjon: null,
     soknadPerioder: [],
     sporsmal: [
-        land({ id: '2' }),
-        periodeUtland({ id: '1', fom: '2020-03-03', tom: '2020-12-31' }),
-        arbeidsgiverUtland({ id: '3', undersporsmal: [ferieUtland({ id: '5' })] }),
+        land({}),
+        periodeUtland({ fom: '2020-03-03', tom: '2020-12-31' }),
+        arbeidsgiverUtland({ undersporsmal: [ferieUtland({})] }),
         oppsummering(),
     ],
     egenmeldtSykmelding: null,
@@ -275,13 +270,11 @@ export const selvstendigKvittering: RSSoknad = {
         },
     ],
     sporsmal: [
-        ansvarserklaring({ id: '161' }),
+        ansvarserklaring({}),
         tilbakeIArbeid({
             fom: selvstendigKvitteringTilbakeFom,
             tom: selvstendigKvitteringTilbakeTom,
             tekstvariant: 'selvstendigNaeringsdrivende',
-            id: '79c730fc-155e-3088-97cd-8817df252068',
-            tilbakeNarId: 'e9a48ebc-3ce0-3e37-9e70-f670c299ba23',
         }),
         oppsummering(),
     ],
@@ -296,9 +289,7 @@ selvstendigKvittering.sporsmal = selvstendigKvittering.sporsmal.map((sporsmal) =
         fom: selvstendigKvitteringFom,
         tom: selvstendigKvitteringTom,
         tekstvariant: 'selvstendigNaeringsdrivende',
-        id: sporsmal.id,
         svar: sporsmal.svar,
-        tilbakeNarId: sporsmal.undersporsmal[0].id,
         tilbakeNarSvar: sporsmal.undersporsmal[0].svar,
     })
 })
@@ -336,13 +327,11 @@ export const arbeidstakerInnenforArbeidsgiverperiodeKvittering: RSSoknad = {
         },
     ],
     sporsmal: [
-        ansvarserklaring({ id: '318' }),
+        ansvarserklaring({}),
         tilbakeIArbeid({
             fom: arbeidstakerInnenforArbeidsgiverperiodeKvitteringFom,
             tom: arbeidstakerInnenforArbeidsgiverperiodeKvitteringTom,
             arbeidsgiver: arbeidstakerInnenforArbeidsgiverperiodeKvitteringArbeidsgiver,
-            id: '900',
-            tilbakeNarId: '96',
         }),
         oppsummering(),
     ],
@@ -383,13 +372,11 @@ export const arbeidstakerUtenforArbeidsgiverperiodeKvittering: RSSoknad = {
         },
     ],
     sporsmal: [
-        ansvarserklaring({ id: '318' }),
+        ansvarserklaring({}),
         tilbakeIArbeid({
             fom: arbeidstakerUtenforArbeidsgiverperiodeKvitteringFom,
             tom: arbeidstakerUtenforArbeidsgiverperiodeKvitteringTom,
             arbeidsgiver: arbeidstakerUtenforArbeidsgiverperiodeKvitteringArbeidsgiver,
-            id: '900',
-            tilbakeNarId: '96',
         }),
         oppsummering(),
     ],
@@ -430,13 +417,11 @@ export const arbeidstakerDeltPeriodeForsteUtenforArbeidsgiverperiodeKvittering: 
         },
     ],
     sporsmal: [
-        ansvarserklaring({ id: '318' }),
+        ansvarserklaring({}),
         tilbakeIArbeid({
             fom: arbeidstakerDeltPeriodeForsteUtenforArbeidsgiverperiodeKvitteringFom,
             tom: arbeidstakerDeltPeriodeForsteUtenforArbeidsgiverperiodeKvitteringTom,
             arbeidsgiver: arbeidstakerDeltPeriodeForsteUtenforArbeidsgiverperiodeKvitteringArbeidsgiver,
-            id: '900',
-            tilbakeNarId: '96',
         }),
         oppsummering(),
     ],
@@ -477,13 +462,11 @@ export const arbeidstakerUtenOppholdForsteUtenforArbeidsgiverperiodeKvittering: 
         },
     ],
     sporsmal: [
-        ansvarserklaring({ id: '318' }),
+        ansvarserklaring({}),
         tilbakeIArbeid({
             fom: arbeidstakerUtenOppholdForsteUtenforArbeidsgiverperiodeKvitteringFom,
             tom: arbeidstakerUtenOppholdForsteUtenforArbeidsgiverperiodeKvitteringTom,
             arbeidsgiver: arbeidstakerUtenOppholdForsteUtenforArbeidsgiverperiodeKvitteringArbeidsgiver,
-            id: '900',
-            tilbakeNarId: '96',
         }),
         oppsummering(),
     ],
@@ -524,13 +507,11 @@ export const arbeidstakerUtenOppholdKvittering: RSSoknad = {
         },
     ],
     sporsmal: [
-        ansvarserklaring({ id: '318' }),
+        ansvarserklaring({}),
         tilbakeIArbeid({
             fom: arbeidstakerUtenOppholdKvitteringFom,
             tom: arbeidstakerUtenOppholdKvitteringTom,
             arbeidsgiver: arbeidstakerUtenOppholdKvitteringArbeidsgiver,
-            id: '900',
-            tilbakeNarId: '96',
         }),
         oppsummering(),
     ],
@@ -570,7 +551,7 @@ export const sok6: RSSoknad = {
             sykmeldingstype: 'AKTIVITET_IKKE_MULIG',
         },
     ],
-    sporsmal: [ansvarserklaring({ id: '318' }), oppsummering()],
+    sporsmal: [ansvarserklaring({}), oppsummering()],
     egenmeldtSykmelding: false,
     opprettetAvInntektsmelding: false,
     klippet: false,
@@ -608,13 +589,11 @@ export const arbeidstakerMedOppholdForsteUtenforArbeidsgiverperiodeKvittering: R
         },
     ],
     sporsmal: [
-        ansvarserklaring({ id: '318' }),
+        ansvarserklaring({}),
         tilbakeIArbeid({
             fom: arbeidstakerMedOppholdForsteUtenforArbeidsgiverperiodeKvitteringFom,
             tom: arbeidstakerMedOppholdForsteUtenforArbeidsgiverperiodeKvitteringTom,
             arbeidsgiver: arbeidstakerMedOppholdForsteUtenforArbeidsgiverperiodeKvitteringArbeidsgiver,
-            id: '900',
-            tilbakeNarId: '96',
         }),
         oppsummering(),
     ],
@@ -655,13 +634,11 @@ export const arbeidstakerMedOppholdKvittering: RSSoknad = {
         },
     ],
     sporsmal: [
-        ansvarserklaring({ id: '318' }),
+        ansvarserklaring({}),
         tilbakeIArbeid({
             fom: arbeidstakerMedOppholdKvitteringFom,
             tom: arbeidstakerMedOppholdKvitteringTom,
             arbeidsgiver: arbeidstakerMedOppholdKvitteringArbeidsgiver,
-            id: '900',
-            tilbakeNarId: '96',
         }),
         oppsummering(),
     ],
@@ -685,9 +662,7 @@ foranArbeidstakerMedOppholdKvittering.sporsmal = foranArbeidstakerMedOppholdKvit
         fom: foranArbeidstakerMedOppholdKvitteringFom,
         tom: foranArbeidstakerMedOppholdKvitteringTom,
         arbeidsgiver: foranArbeidstakerMedOppholdKvittering.arbeidsgiver.navn,
-        id: sporsmal.id,
         svar: sporsmal.svar,
-        tilbakeNarId: sporsmal.undersporsmal[0].id,
         tilbakeNarSvar: sporsmal.undersporsmal[0].svar,
     })
 })

@@ -5,19 +5,13 @@ import { formatterPeriode } from './backend-datoformat'
 export const utdanning = ({
     fom,
     tom,
-    id = '687369',
-    startId = '687370',
-    fulltidsstudiumId = '687371',
     svar = [],
 }: {
     readonly fom: string
     readonly tom: string
-    readonly id?: string
-    readonly startId?: string
-    readonly fulltidsstudiumId?: string
     readonly svar?: RSSvar[]
 }): RSSporsmal => ({
-    id,
+    id: '687369',
     tag: 'UTDANNING',
     sporsmalstekst: `Har du vært under utdanning i løpet av perioden ${formatterPeriode(fom, tom)}?`,
     undertekst: null,
@@ -28,7 +22,7 @@ export const utdanning = ({
     svar,
     undersporsmal: [
         {
-            id: startId,
+            id: '687370',
             tag: 'UTDANNING_START',
             sporsmalstekst: 'Når startet du på utdanningen?',
             undertekst: null,
@@ -40,7 +34,7 @@ export const utdanning = ({
             undersporsmal: [],
         },
         {
-            id: fulltidsstudiumId,
+            id: '687371',
             tag: 'FULLTIDSSTUDIUM',
             sporsmalstekst: 'Er utdanningen et fulltidsstudium?',
             undertekst: null,

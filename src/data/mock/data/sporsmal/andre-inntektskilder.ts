@@ -17,8 +17,6 @@ export const inntektskildeTagger = [
 export type InntektskildeTag = (typeof inntektskildeTagger)[number]
 type Kilde = {
     readonly tag: InntektskildeTag
-    readonly id?: string
-    readonly erDuSykmeldtId?: string
     readonly sporsmalstekst?: string
     readonly svar?: RSSvar[]
     readonly erDuSykmeldtSvar?: RSSvar[]
@@ -27,8 +25,6 @@ type Kilde = {
 type AndreInntektskilderValg = {
     readonly fom: string
     readonly tom: string
-    readonly id?: string
-    readonly gruppeId?: string
     readonly kilder?: readonly Kilde[]
     readonly sporsmalstekst?: string
     readonly gruppeTekst?: string
@@ -37,14 +33,14 @@ type AndreInntektskilderValg = {
 }
 
 const standardKilder: readonly Kilde[] = [
-    { tag: 'INNTEKTSKILDE_ANDRE_ARBEIDSFORHOLD', id: '687404', erDuSykmeldtId: '687405' },
-    { tag: 'INNTEKTSKILDE_SELVSTENDIG', id: '687406', erDuSykmeldtId: '687407' },
-    { tag: 'INNTEKTSKILDE_SELVSTENDIG_DAGMAMMA', id: '687408', erDuSykmeldtId: '687409' },
-    { tag: 'INNTEKTSKILDE_JORDBRUKER', id: '687410', erDuSykmeldtId: '687411' },
-    { tag: 'INNTEKTSKILDE_FRILANSER', id: '687412', erDuSykmeldtId: '687413' },
-    { tag: 'INNTEKTSKILDE_OMSORGSLONN', id: '687414', erDuSykmeldtId: '687415' },
-    { tag: 'INNTEKTSKILDE_FOSTERHJEM', id: '687416', erDuSykmeldtId: '687417' },
-    { tag: 'INNTEKTSKILDE_ANNET', id: '687418' },
+    { tag: 'INNTEKTSKILDE_ANDRE_ARBEIDSFORHOLD' },
+    { tag: 'INNTEKTSKILDE_SELVSTENDIG' },
+    { tag: 'INNTEKTSKILDE_SELVSTENDIG_DAGMAMMA' },
+    { tag: 'INNTEKTSKILDE_JORDBRUKER' },
+    { tag: 'INNTEKTSKILDE_FRILANSER' },
+    { tag: 'INNTEKTSKILDE_OMSORGSLONN' },
+    { tag: 'INNTEKTSKILDE_FOSTERHJEM' },
+    { tag: 'INNTEKTSKILDE_ANNET' },
 ]
 const tekster: Record<InntektskildeTag, string> = {
     INNTEKTSKILDE_ANDRE_ARBEIDSFORHOLD: 'andre arbeidsforhold',
@@ -61,15 +57,13 @@ const tekster: Record<InntektskildeTag, string> = {
 export const andreInntektskilder = ({
     fom,
     tom,
-    id = '687402',
-    gruppeId = '687403',
     kilder = standardKilder,
     sporsmalstekst = `Har du hatt inntekt mens du har vært sykmeldt i perioden ${formatterPeriode(fom, tom)}?`,
     gruppeTekst = 'Hvilke inntektskilder har du hatt?',
     svar = [],
     gruppeSvar = [],
 }: AndreInntektskilderValg): RSSporsmal => ({
-    id,
+    id: '687402',
     tag: 'ANDRE_INNTEKTSKILDER',
     sporsmalstekst,
     undertekst: null,
@@ -80,7 +74,7 @@ export const andreInntektskilder = ({
     svar,
     undersporsmal: [
         {
-            id: gruppeId,
+            id: '687403',
             tag: 'HVILKE_ANDRE_INNTEKTSKILDER',
             sporsmalstekst: gruppeTekst,
             undertekst: null,
@@ -93,7 +87,7 @@ export const andreInntektskilder = ({
                 const harOppfolging = kilde.harOppfolging ?? kilde.tag !== 'INNTEKTSKILDE_ANNET'
                 const oppfolgingsTagg = `${kilde.tag}_ER_DU_SYKMELDT`
                 return {
-                    id: kilde.id ?? `6874${index + 4}`,
+                    id: String(687404 + index * 2),
                     tag: kilde.tag,
                     sporsmalstekst: kilde.sporsmalstekst ?? tekster[kilde.tag],
                     undertekst: null,
@@ -105,7 +99,7 @@ export const andreInntektskilder = ({
                     undersporsmal: harOppfolging
                         ? [
                               {
-                                  id: kilde.erDuSykmeldtId ?? `6875${index}`,
+                                  id: String(687405 + index * 2),
                                   tag: oppfolgingsTagg,
                                   sporsmalstekst: 'Er du sykmeldt fra dette?',
                                   undertekst: null,

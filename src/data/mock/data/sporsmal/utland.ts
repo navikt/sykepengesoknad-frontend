@@ -5,8 +5,6 @@ import { formatterPeriode } from './backend-datoformat'
 type UtlandValg = {
     readonly fom: string
     readonly tom: string
-    readonly id?: string
-    readonly periodeId?: string
     readonly periodeTag?: 'PERIODER' | 'UTLAND_NAR'
     readonly periodeTekst?: string | null
     readonly sporsmalstekst?: string
@@ -15,9 +13,7 @@ type UtlandValg = {
     readonly ekstraUndersporsmal?: RSSporsmal[]
     readonly inkluderSoktSykepenger?: boolean
     readonly tekstvariant?: 'utenforEos' | 'utenforEuEos'
-    readonly soktId?: string
     readonly soktSvar?: RSSvar[]
-    readonly informasjonId?: string
     readonly informasjonSporsmalstekst?: string | null
     readonly informasjonUndertekst?: string | null
 }
@@ -25,8 +21,6 @@ type UtlandValg = {
 export const utland = ({
     fom,
     tom,
-    id = '687447',
-    periodeId = '687448',
     periodeTag = 'PERIODER',
     periodeTekst = 'Når var du utenfor EU/EØS?',
     tekstvariant = 'utenforEos',
@@ -34,13 +28,11 @@ export const utland = ({
     periodeSvar = [],
     ekstraUndersporsmal = [],
     inkluderSoktSykepenger = false,
-    soktId = '687449',
     soktSvar = [],
-    informasjonId = '687450',
     informasjonSporsmalstekst = null,
     informasjonUndertekst = "<p>DENNE SKAL IKKE VISES  I! utgangspunktet kan du bare få sykepenger mens du er i et land innenfor EU/EØS. Du kan likevel <a target='_blank' href='https://tjenester.nav.no/sykefravaer/sykepengesoknad-utland'>søke NAV om å få reise ut av EU/EØS</a> og beholde sykepengene i en begrenset periode.</p>",
 }: UtlandValg): RSSporsmal => ({
-    id,
+    id: '687447',
     tag: 'UTLAND',
     sporsmalstekst:
         tekstvariant === 'utenforEuEos'
@@ -54,7 +46,7 @@ export const utland = ({
     svar,
     undersporsmal: [
         {
-            id: periodeId,
+            id: '687448',
             tag: periodeTag,
             sporsmalstekst: periodeTekst,
             undertekst: null,
@@ -69,7 +61,7 @@ export const utland = ({
         ...(inkluderSoktSykepenger
             ? [
                   {
-                      id: soktId,
+                      id: '687449',
                       tag: 'UTLANDSOPPHOLD_SOKT_SYKEPENGER',
                       sporsmalstekst: 'Har du søkt om å beholde sykepengene for disse dagene?',
                       undertekst: null,
@@ -80,7 +72,7 @@ export const utland = ({
                       svar: soktSvar,
                       undersporsmal: [
                           {
-                              id: informasjonId,
+                              id: '687450',
                               tag: 'IKKE_SOKT_UTENLANDSOPPHOLD_INFORMASJON',
                               sporsmalstekst: informasjonSporsmalstekst,
                               undertekst: informasjonUndertekst,

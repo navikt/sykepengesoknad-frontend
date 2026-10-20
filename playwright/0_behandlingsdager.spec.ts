@@ -163,10 +163,12 @@ test.describe('Tester behandlingsdagersøknad', () => {
             await svarJaHovedsporsmal(page)
 
             await harSynligTekst(page, 'Hvilke andre inntektskilder har du?')
-            await expect(page.getByRole('checkbox', { name: /andre arbeidsforhold/ })).toBeVisible()
-            await page.locator('input[type=checkbox]#\\36 87382').check()
+            await page.getByRole('checkbox', { name: /andre arbeidsforhold/ }).check()
 
-            await page.locator('input[type=radio]#\\36 87383_0 ').check()
+            await page
+                .getByRole('radiogroup', { name: 'Er du sykmeldt fra dette?' })
+                .getByRole('radio', { name: 'Ja' })
+                .check()
             await expect(
                 page.getByText(
                     'Du må sende egen sykepengesøknad for dette. ' +

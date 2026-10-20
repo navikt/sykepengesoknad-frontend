@@ -7,8 +7,6 @@ type FravarValg = {
     readonly tom: string
     readonly narMin: string
     readonly narMax: string
-    readonly id?: string
-    readonly narId?: string
     readonly svar?: RSSvar[]
     readonly narSvar?: RSSvar[]
     readonly tekstFom?: string
@@ -20,14 +18,12 @@ export const fravarForSykmeldingen = ({
     tom,
     narMin,
     narMax,
-    id = '12345678',
-    narId = '1234567899',
     svar = [],
     narSvar = [],
     tekstFom = fom,
     tekstTom = tom,
 }: FravarValg): RSSporsmal => ({
-    id,
+    id: '12345678',
     tag: 'FRAVAR_FOR_SYKMELDINGEN',
     sporsmalstekst: `Var du syk og borte fra jobb før du ble sykmeldt, i perioden ${formatterPeriode(tekstFom, tekstTom)}?`,
     undertekst: null,
@@ -38,7 +34,7 @@ export const fravarForSykmeldingen = ({
     svar,
     undersporsmal: [
         {
-            id: narId,
+            id: '1234567899',
             tag: 'FRAVAR_FOR_SYKMELDINGEN_NAR',
             sporsmalstekst: `Hvilke dager var du syk og borte fra jobb, før du ble sykmeldt? Du trenger bare oppgi dager før ${formatterDato(fom)}.`,
             undertekst: null,
@@ -52,12 +48,8 @@ export const fravarForSykmeldingen = ({
     ],
 })
 
-export const fravarForSykmeldingenV2 = ({
-    fom,
-    id = '687452',
-    svar = [],
-}: Pick<FravarValg, 'fom' | 'id' | 'svar'>): RSSporsmal => ({
-    id,
+export const fravarForSykmeldingenV2 = ({ fom, svar = [] }: Pick<FravarValg, 'fom' | 'svar'>): RSSporsmal => ({
+    id: '687452',
     tag: 'FRAVAR_FOR_SYKMELDINGEN_V2',
     sporsmalstekst: `Var du borte fra jobb i fire uker eller mer rett før du ble sykmeldt ${formatterDato(fom)}?`,
     undertekst: 'Gjelder sammenhengende fravær gjennom alle fire ukene.',
