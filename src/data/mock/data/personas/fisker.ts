@@ -19,7 +19,7 @@ import { Persona } from './personas'
 const fom = '2024-01-16'
 const tom = '2024-01-22'
 const fiskerSporsmal = () => [
-    ansvarserklaring({}),
+    ansvarserklaring(),
     tilbakeIArbeid({
         fom,
         tom,
@@ -32,7 +32,7 @@ const fiskerSporsmal = () => [
         timerMaks: '150',
         normalArbeidsukeTekst: 'Jobber du vanligvis 37,5 timer i uka?',
     }),
-    arbeidUtenforNorge({}),
+    arbeidUtenforNorge(),
     andreInntektskilder({
         fom,
         tom,

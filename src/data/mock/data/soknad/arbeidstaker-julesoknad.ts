@@ -20,7 +20,7 @@ arbeidstakerJulesoknad.startSykeforlop = fom
 arbeidstakerJulesoknad.soknadPerioder.at(0)!.fom = fom
 arbeidstakerJulesoknad.soknadPerioder.at(0)!.tom = tom
 arbeidstakerJulesoknad.sporsmal = [
-    ansvarserklaring({}),
+    ansvarserklaring(),
     tilbakeIArbeid({ fom, tom, arbeidsgiver: arbeidsgiverNavn }),
     oppsummering(),
 ]

@@ -6,10 +6,9 @@ type PermisjonV2Valg = {
     readonly fom: string
     readonly tom: string
     readonly svar?: RSSvar[]
-    readonly permisjonNarSvar?: RSSvar[]
 }
 
-export const permisjonV2 = ({ fom, tom, svar = [], permisjonNarSvar = [] }: PermisjonV2Valg): RSSporsmal => ({
+export const permisjonV2 = ({ fom, tom, svar = [] }: PermisjonV2Valg): RSSporsmal => ({
     id: '687345',
     tag: 'PERMISJON_V2',
     sporsmalstekst: `Tok du permisjon mens du var sykmeldt ${formatterPeriode(fom, tom)}?`,
@@ -29,7 +28,7 @@ export const permisjonV2 = ({ fom, tom, svar = [], permisjonNarSvar = [] }: Perm
             min: fom,
             max: tom,
             kriterieForVisningAvUndersporsmal: null,
-            svar: permisjonNarSvar,
+            svar: [],
             undersporsmal: [],
         },
     ],

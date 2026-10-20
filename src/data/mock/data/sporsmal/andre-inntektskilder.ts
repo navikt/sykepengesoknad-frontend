@@ -14,7 +14,7 @@ export const inntektskildeTagger = [
     'INNTEKTSKILDE_ARBEIDSFORHOLD',
     'INNTEKTSKILDE_FRILANSER_SELVSTENDIG',
 ] as const
-export type InntektskildeTag = (typeof inntektskildeTagger)[number]
+type InntektskildeTag = (typeof inntektskildeTagger)[number]
 type Kilde = {
     readonly tag: InntektskildeTag
     readonly sporsmalstekst?: string
@@ -29,7 +29,6 @@ type AndreInntektskilderValg = {
     readonly sporsmalstekst?: string
     readonly gruppeTekst?: string
     readonly svar?: RSSvar[]
-    readonly gruppeSvar?: RSSvar[]
 }
 
 const standardKilder: readonly Kilde[] = [
@@ -61,7 +60,6 @@ export const andreInntektskilder = ({
     sporsmalstekst = `Har du hatt inntekt mens du har vært sykmeldt i perioden ${formatterPeriode(fom, tom)}?`,
     gruppeTekst = 'Hvilke inntektskilder har du hatt?',
     svar = [],
-    gruppeSvar = [],
 }: AndreInntektskilderValg): RSSporsmal => ({
     id: '687402',
     tag: 'ANDRE_INNTEKTSKILDER',
@@ -82,7 +80,7 @@ export const andreInntektskilder = ({
             min: null,
             max: null,
             kriterieForVisningAvUndersporsmal: null,
-            svar: gruppeSvar,
+            svar: [],
             undersporsmal: kilder.map((kilde, index) => {
                 const harOppfolging = kilde.harOppfolging ?? kilde.tag !== 'INNTEKTSKILDE_ANNET'
                 const oppfolgingsTagg = `${kilde.tag}_ER_DU_SYKMELDT`

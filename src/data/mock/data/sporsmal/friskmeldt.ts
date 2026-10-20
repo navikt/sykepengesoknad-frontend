@@ -6,10 +6,9 @@ type FriskmeldtValg = {
     readonly fom: string
     readonly tom: string
     readonly svar?: RSSvar[]
-    readonly startSvar?: RSSvar[]
 }
 
-export const friskmeldt = ({ fom, tom, svar = [], startSvar = [] }: FriskmeldtValg): RSSporsmal => ({
+export const friskmeldt = ({ fom, tom, svar = [] }: FriskmeldtValg): RSSporsmal => ({
     id: '687400',
     tag: 'FRISKMELDT',
     sporsmalstekst: `Brukte du hele sykmeldingen fram til ${formatterDato(tom)}?`,
@@ -29,7 +28,7 @@ export const friskmeldt = ({ fom, tom, svar = [], startSvar = [] }: FriskmeldtVa
             min: fom,
             max: tom,
             kriterieForVisningAvUndersporsmal: null,
-            svar: startSvar,
+            svar: [],
             undersporsmal: [],
         },
     ],

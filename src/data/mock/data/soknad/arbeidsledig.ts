@@ -9,7 +9,7 @@ import { oppsummering } from '../sporsmal/oppsummering'
 const fom = '2020-04-01'
 const tom = '2020-04-24'
 const sporsmal = () => [
-    ansvarserklaring({}),
+    ansvarserklaring(),
     friskmeldt({ fom, tom }),
     andreInntektskilder({ fom, tom }),
     oppholdUtenforEos({ fom, tom }),

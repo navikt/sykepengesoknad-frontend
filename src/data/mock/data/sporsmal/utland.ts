@@ -9,11 +9,8 @@ type UtlandValg = {
     readonly periodeTekst?: string | null
     readonly sporsmalstekst?: string
     readonly svar?: RSSvar[]
-    readonly periodeSvar?: RSSvar[]
-    readonly ekstraUndersporsmal?: RSSporsmal[]
     readonly inkluderSoktSykepenger?: boolean
     readonly tekstvariant?: 'utenforEos' | 'utenforEuEos'
-    readonly soktSvar?: RSSvar[]
     readonly informasjonSporsmalstekst?: string | null
     readonly informasjonUndertekst?: string | null
 }
@@ -25,10 +22,7 @@ export const utland = ({
     periodeTekst = 'Når var du utenfor EU/EØS?',
     tekstvariant = 'utenforEos',
     svar = [],
-    periodeSvar = [],
-    ekstraUndersporsmal = [],
     inkluderSoktSykepenger = false,
-    soktSvar = [],
     informasjonSporsmalstekst = null,
     informasjonUndertekst = "<p>DENNE SKAL IKKE VISES  I! utgangspunktet kan du bare få sykepenger mens du er i et land innenfor EU/EØS. Du kan likevel <a target='_blank' href='https://tjenester.nav.no/sykefravaer/sykepengesoknad-utland'>søke NAV om å få reise ut av EU/EØS</a> og beholde sykepengene i en begrenset periode.</p>",
 }: UtlandValg): RSSporsmal => ({
@@ -54,10 +48,9 @@ export const utland = ({
             min: fom,
             max: tom,
             kriterieForVisningAvUndersporsmal: null,
-            svar: periodeSvar,
+            svar: [],
             undersporsmal: [],
         },
-        ...ekstraUndersporsmal,
         ...(inkluderSoktSykepenger
             ? [
                   {
@@ -69,7 +62,7 @@ export const utland = ({
                       min: null,
                       max: null,
                       kriterieForVisningAvUndersporsmal: 'NEI' as const,
-                      svar: soktSvar,
+                      svar: [],
                       undersporsmal: [
                           {
                               id: '687450',

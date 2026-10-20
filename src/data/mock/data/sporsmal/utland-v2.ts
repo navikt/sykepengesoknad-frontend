@@ -6,17 +6,10 @@ type UtlandV2Valg = {
     readonly fom: string
     readonly tom: string
     readonly svar?: RSSvar[]
-    readonly utlandNarSvar?: RSSvar[]
     readonly tekstvariant?: 'eos' | 'eu-eos'
 }
 
-export const utlandV2 = ({
-    fom,
-    tom,
-    svar = [],
-    utlandNarSvar = [],
-    tekstvariant = 'eu-eos',
-}: UtlandV2Valg): RSSporsmal => ({
+export const utlandV2 = ({ fom, tom, svar = [], tekstvariant = 'eu-eos' }: UtlandV2Valg): RSSporsmal => ({
     id: '687347',
     tag: 'UTLAND_V2',
     sporsmalstekst: `Var du på reise utenfor ${tekstvariant === 'eos' ? 'EØS' : 'EU/EØS'} mens du var sykmeldt ${formatterPeriode(fom, tom)}?`,
@@ -36,7 +29,7 @@ export const utlandV2 = ({
             min: fom,
             max: tom,
             kriterieForVisningAvUndersporsmal: null,
-            svar: utlandNarSvar,
+            svar: [],
             undersporsmal: [],
         },
     ],

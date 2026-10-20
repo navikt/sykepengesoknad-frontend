@@ -92,7 +92,7 @@ export const veldigLangSoknad: RSSoknad = {
         },
     ],
     sporsmal: medUnikeIder([
-        ansvarserklaring({}),
+        ansvarserklaring(),
         yrkesskadeV1Sporsmal(),
         yrkesskadeV2Sporsmal(),
         medlemskapOppholdstillatelseSporsmal(),
@@ -149,7 +149,7 @@ export const veldigLangSoknad: RSSoknad = {
         andreInntektskilderV2(),
         andreInntektskilderV2({ variant: 'fem-aar' }),
         andreInntektskilderV2({ variant: 'fire-aar' }),
-        arbeidUtenforNorge({}),
+        arbeidUtenforNorge(),
         arbeidsgiverUtland({ variant: 'sykmeldingsgrad-og-ferie' }),
         arbeidsledigUtland({ fom, tom }),
         egenmeldinger({
@@ -227,7 +227,7 @@ export const veldigLangSoknad: RSSoknad = {
                         undersporsmal: [kmHjemJobb({ tekstvariant: 'kort' })],
                     }),
                     offentligTransportTilDaglig({
-                        belop: offentligTransportBelop({}),
+                        belop: offentligTransportBelop(),
                     }),
                 ],
             }),
@@ -245,7 +245,7 @@ export const veldigLangSoknad: RSSoknad = {
             }),
         }),
         kvitteringer({ fom, tom, tekstvariant: 'reiseutgifter' }),
-        utbetaling({}),
+        utbetaling(),
         arbeidUnderveis100Prosent({ fom, tom, arbeidsgiver }),
         ...utenlandskSykmeldingSporsmalene(),
         kjenteInntektskilder(['Rema']),

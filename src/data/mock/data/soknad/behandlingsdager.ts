@@ -28,7 +28,7 @@ export const behandlingsdager: RSSoknad = {
     arbeidssituasjon: 'ARBEIDSTAKER',
     soknadPerioder: [{ fom, tom, grad: 0, sykmeldingstype: 'BEHANDLINGSDAGER' }],
     sporsmal: [
-        ansvarserklaring({}),
+        ansvarserklaring(),
         enkeltstaendeBehandlingsdager({
             fom,
             tom,

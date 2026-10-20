@@ -19,13 +19,9 @@ export const reiseMedBil = ({
     fom,
     tom,
     svar = [],
-    bilDatoerSvar = [],
-    bompengerSvar = [],
-    bompengerBelopSvar = [],
-    kmHjemJobbSvar = [],
     inkluderKmHjemJobb = true,
     tekstvariant = 'mellom',
-    bilDatoerSporsmal = bilDatoer({ fom, tom, svar: bilDatoerSvar }),
+    bilDatoerSporsmal = bilDatoer({ fom, tom }),
     bompengerSporsmal = {
         id: '1566446',
         tag: 'BIL_BOMPENGER',
@@ -35,7 +31,7 @@ export const reiseMedBil = ({
         min: null,
         max: null,
         kriterieForVisningAvUndersporsmal: 'JA',
-        svar: bompengerSvar,
+        svar: [],
         undersporsmal: [
             {
                 id: '1566447',
@@ -46,7 +42,7 @@ export const reiseMedBil = ({
                 min: '0',
                 max: null,
                 kriterieForVisningAvUndersporsmal: null,
-                svar: bompengerBelopSvar,
+                svar: [],
                 undersporsmal: [],
             },
         ],
@@ -60,17 +56,13 @@ export const reiseMedBil = ({
         min: '0',
         max: null,
         kriterieForVisningAvUndersporsmal: null,
-        svar: kmHjemJobbSvar,
+        svar: [],
         undersporsmal: [],
     },
 }: {
     fom: string
     tom: string
     svar?: RSSvar[]
-    bilDatoerSvar?: RSSvar[]
-    bompengerSvar?: RSSvar[]
-    bompengerBelopSvar?: RSSvar[]
-    kmHjemJobbSvar?: RSSvar[]
     inkluderKmHjemJobb?: boolean
     tekstvariant?: 'fra' | 'mellom'
     bilDatoerSporsmal?: RSSporsmal

@@ -41,7 +41,7 @@ export const gradertReisetilskudd: RSSoknad = {
     arbeidssituasjon: 'ARBEIDSTAKER',
     soknadPerioder: [{ fom, tom, grad: 60, sykmeldingstype: 'GRADERT' }],
     sporsmal: [
-        ansvarserklaring({}),
+        ansvarserklaring(),
         tilbakeIArbeid({
             fom,
             tom,
@@ -57,24 +57,24 @@ export const gradertReisetilskudd: RSSoknad = {
             arbeidsgiver: arbeidsgiver.navn,
             grad: 40,
         }),
-        arbeidUtenforNorge({}),
+        arbeidUtenforNorge(),
         andreInntektskilderV2(),
         oppholdUtenforEos({ fom, tom }),
         brukteReisetilskuddet(),
         transportTilDaglig({
             typeTransportSporsmal: typeTransport({
-                undersporsmal: [offentligTransportTilDaglig({ belop: offentligTransportBelop({}) }), bilTilDaglig({})],
+                undersporsmal: [offentligTransportTilDaglig({ belop: offentligTransportBelop() }), bilTilDaglig()],
             }),
         }),
         reiseMedBil({
             fom,
             tom,
             bilDatoerSporsmal: bilDatoer({ fom, tom }),
-            bompengerSporsmal: bilBompenger({ belop: bilBompengerBelop({}) }),
-            kmHjemJobbSporsmal: kmHjemJobb({}),
+            bompengerSporsmal: bilBompenger({ belop: bilBompengerBelop() }),
+            kmHjemJobbSporsmal: kmHjemJobb(),
         }),
         kvitteringer({ fom, tom }),
-        utbetaling({}),
+        utbetaling(),
         oppsummering(),
     ],
     egenmeldtSykmelding: false,

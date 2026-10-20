@@ -34,7 +34,7 @@ export const naringsdrivendeSoknad: RSSoknad = {
     merknaderFraSykmelding: [],
     soknadPerioder: [{ fom, tom, grad: 100, sykmeldingstype: 'AKTIVITET_IKKE_MULIG' }],
     sporsmal: [
-        ansvarserklaring({}),
+        ansvarserklaring(),
         fravarForSykmeldingenV2({ fom }),
         tilbakeIArbeid({ fom, tom, tekstvariant: 'selvstendigNaeringsdrivende' }),
         arbeidUnderveis100Prosent({

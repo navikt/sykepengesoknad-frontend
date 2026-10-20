@@ -8,7 +8,6 @@ type FravarValg = {
     readonly narMin: string
     readonly narMax: string
     readonly svar?: RSSvar[]
-    readonly narSvar?: RSSvar[]
     readonly tekstFom?: string
     readonly tekstTom?: string
 }
@@ -19,7 +18,6 @@ export const fravarForSykmeldingen = ({
     narMin,
     narMax,
     svar = [],
-    narSvar = [],
     tekstFom = fom,
     tekstTom = tom,
 }: FravarValg): RSSporsmal => ({
@@ -42,7 +40,7 @@ export const fravarForSykmeldingen = ({
             min: narMin,
             max: narMax,
             kriterieForVisningAvUndersporsmal: null,
-            svar: narSvar,
+            svar: [],
             undersporsmal: [],
         },
     ],

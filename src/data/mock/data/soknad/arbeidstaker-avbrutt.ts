@@ -37,7 +37,7 @@ export const avbruttSoknad: RSSoknad = {
     arbeidssituasjon: 'ARBEIDSTAKER',
     soknadPerioder: [{ fom, tom, grad: 80, sykmeldingstype: 'AKTIVITET_IKKE_MULIG' }],
     sporsmal: [
-        ansvarserklaring({}),
+        ansvarserklaring(),
         egenmeldinger({
             fom: '2020-05-04',
             tom: '2020-05-19',
@@ -55,7 +55,7 @@ export const avbruttSoknad: RSSoknad = {
             grad: 20,
             prosentMin: '21',
         }),
-        arbeidUtenforNorge({}),
+        arbeidUtenforNorge(),
         andreInntektskilderV2(),
         oppholdUtenforEos({ fom, tom }),
         oppsummering(),

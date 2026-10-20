@@ -35,7 +35,7 @@ export const soknadUtenEgenmeldingSporsmal: RSSoknad = {
     arbeidssituasjon: 'ARBEIDSTAKER',
     soknadPerioder: [{ fom, tom, grad: 100, sykmeldingstype: 'AKTIVITET_IKKE_MULIG' }],
     sporsmal: [
-        ansvarserklaring({}),
+        ansvarserklaring(),
         tilbakeIArbeid({
             fom,
             tom,
@@ -55,7 +55,7 @@ export const soknadUtenEgenmeldingSporsmal: RSSoknad = {
             arbeidsgiver: arbeidsgiverNavn,
             timerMaks: '150',
         }),
-        arbeidUtenforNorge({}),
+        arbeidUtenforNorge(),
         andreInntektskilderV2(),
         oppholdUtenforEos({
             fom,

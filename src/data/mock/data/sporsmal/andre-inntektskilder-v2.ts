@@ -1,10 +1,8 @@
 import type { RSSporsmal } from '../../../../types/rs-types/rs-sporsmal'
 
 export const andreInntektskilderV2 = ({
-    undersporsmal,
     variant = 'standard',
 }: {
-    readonly undersporsmal?: RSSporsmal[]
     readonly variant?: 'standard' | 'fire-aar' | 'fem-aar'
 } = {}): RSSporsmal => {
     const eldreUndersporsmal: RSSporsmal[] = [
@@ -123,8 +121,7 @@ export const andreInntektskilderV2 = ({
         kriterieForVisningAvUndersporsmal: 'JA',
         svar: [],
         undersporsmal:
-            undersporsmal ??
-            (variant === 'standard'
+            variant === 'standard'
                 ? [
                       {
                           id: 'c074d0dd-849d-3357-9c43-af930017d62c',
@@ -236,6 +233,6 @@ export const andreInntektskilderV2 = ({
                           ],
                       },
                   ]
-                : eldreUndersporsmal),
+                : eldreUndersporsmal,
     }
 }

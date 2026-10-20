@@ -61,7 +61,7 @@ export const arbeidstakersoknadMedUtenlandsoppholdSoktSykepenger: RSSoknad = {
             sykmeldingstype: 'AKTIVITET_IKKE_MULIG',
         },
     ],
-    sporsmal: [ansvarserklaring({}), oppsummering()],
+    sporsmal: [ansvarserklaring(), oppsummering()],
     egenmeldtSykmelding: false,
     opprettetAvInntektsmelding: false,
     klippet: false,
@@ -96,7 +96,7 @@ export const arbeidsledigKvittering: RSSoknad = {
         },
     ],
     sporsmal: [
-        ansvarserklaring({}),
+        ansvarserklaring(),
         friskmeldt({ fom: arbeidsledigKvitteringFom, tom: arbeidsledigKvitteringTom }),
         oppsummering(),
     ],
@@ -199,7 +199,7 @@ export const delvisUtfylltArbeidsledig: RSSoknad = {
     sporsmal: medUnikeIder([
         ansvarserklaring({ svar: [{ verdi: 'CHECKED' }] }),
         arbeidUtenforNorge({ svar: [{ verdi: 'NEI' }] }),
-        arbeidUtenforNorge({}),
+        arbeidUtenforNorge(),
         oppsummering(),
     ]),
     egenmeldtSykmelding: false,
@@ -229,9 +229,9 @@ export const oppholdUtlandKvittering: RSSoknad = {
     arbeidssituasjon: null,
     soknadPerioder: [],
     sporsmal: [
-        land({}),
+        land(),
         periodeUtland({ fom: '2020-03-03', tom: '2020-12-31' }),
-        arbeidsgiverUtland({ undersporsmal: [ferieUtland({})] }),
+        arbeidsgiverUtland({ undersporsmal: [ferieUtland()] }),
         oppsummering(),
     ],
     egenmeldtSykmelding: null,
@@ -270,7 +270,7 @@ export const selvstendigKvittering: RSSoknad = {
         },
     ],
     sporsmal: [
-        ansvarserklaring({}),
+        ansvarserklaring(),
         tilbakeIArbeid({
             fom: selvstendigKvitteringTilbakeFom,
             tom: selvstendigKvitteringTilbakeTom,
@@ -327,7 +327,7 @@ export const arbeidstakerInnenforArbeidsgiverperiodeKvittering: RSSoknad = {
         },
     ],
     sporsmal: [
-        ansvarserklaring({}),
+        ansvarserklaring(),
         tilbakeIArbeid({
             fom: arbeidstakerInnenforArbeidsgiverperiodeKvitteringFom,
             tom: arbeidstakerInnenforArbeidsgiverperiodeKvitteringTom,
@@ -372,7 +372,7 @@ export const arbeidstakerUtenforArbeidsgiverperiodeKvittering: RSSoknad = {
         },
     ],
     sporsmal: [
-        ansvarserklaring({}),
+        ansvarserklaring(),
         tilbakeIArbeid({
             fom: arbeidstakerUtenforArbeidsgiverperiodeKvitteringFom,
             tom: arbeidstakerUtenforArbeidsgiverperiodeKvitteringTom,
@@ -417,7 +417,7 @@ export const arbeidstakerDeltPeriodeForsteUtenforArbeidsgiverperiodeKvittering: 
         },
     ],
     sporsmal: [
-        ansvarserklaring({}),
+        ansvarserklaring(),
         tilbakeIArbeid({
             fom: arbeidstakerDeltPeriodeForsteUtenforArbeidsgiverperiodeKvitteringFom,
             tom: arbeidstakerDeltPeriodeForsteUtenforArbeidsgiverperiodeKvitteringTom,
@@ -462,7 +462,7 @@ export const arbeidstakerUtenOppholdForsteUtenforArbeidsgiverperiodeKvittering: 
         },
     ],
     sporsmal: [
-        ansvarserklaring({}),
+        ansvarserklaring(),
         tilbakeIArbeid({
             fom: arbeidstakerUtenOppholdForsteUtenforArbeidsgiverperiodeKvitteringFom,
             tom: arbeidstakerUtenOppholdForsteUtenforArbeidsgiverperiodeKvitteringTom,
@@ -507,7 +507,7 @@ export const arbeidstakerUtenOppholdKvittering: RSSoknad = {
         },
     ],
     sporsmal: [
-        ansvarserklaring({}),
+        ansvarserklaring(),
         tilbakeIArbeid({
             fom: arbeidstakerUtenOppholdKvitteringFom,
             tom: arbeidstakerUtenOppholdKvitteringTom,
@@ -551,7 +551,7 @@ export const sok6: RSSoknad = {
             sykmeldingstype: 'AKTIVITET_IKKE_MULIG',
         },
     ],
-    sporsmal: [ansvarserklaring({}), oppsummering()],
+    sporsmal: [ansvarserklaring(), oppsummering()],
     egenmeldtSykmelding: false,
     opprettetAvInntektsmelding: false,
     klippet: false,
@@ -589,7 +589,7 @@ export const arbeidstakerMedOppholdForsteUtenforArbeidsgiverperiodeKvittering: R
         },
     ],
     sporsmal: [
-        ansvarserklaring({}),
+        ansvarserklaring(),
         tilbakeIArbeid({
             fom: arbeidstakerMedOppholdForsteUtenforArbeidsgiverperiodeKvitteringFom,
             tom: arbeidstakerMedOppholdForsteUtenforArbeidsgiverperiodeKvitteringTom,
@@ -634,7 +634,7 @@ export const arbeidstakerMedOppholdKvittering: RSSoknad = {
         },
     ],
     sporsmal: [
-        ansvarserklaring({}),
+        ansvarserklaring(),
         tilbakeIArbeid({
             fom: arbeidstakerMedOppholdKvitteringFom,
             tom: arbeidstakerMedOppholdKvitteringTom,

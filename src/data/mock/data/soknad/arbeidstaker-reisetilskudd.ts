@@ -30,7 +30,7 @@ export const nyttReisetilskudd: RSSoknad = {
     arbeidssituasjon: 'ARBEIDSTAKER',
     soknadPerioder: [{ fom, tom, grad: 0, sykmeldingstype: 'REISETILSKUDD' }],
     sporsmal: [
-        ansvarserklaring({}),
+        ansvarserklaring(),
         transportTilDaglig(),
         reiseMedBil({ fom, tom }),
         kvitteringer({ fom, tom }),

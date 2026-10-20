@@ -13,7 +13,7 @@ import { utland } from '../sporsmal/utland'
 const fom = '2020-04-01'
 const tom = '2020-04-24'
 const sporsmal = (brukNyttUtlandssporsmal: boolean) => [
-    ansvarserklaring({}),
+    ansvarserklaring(),
     tilbakeIArbeid({ fom, tom, tekstvariant: 'frilanser' }),
     arbeidUnderveis100Prosent({
         fom,
@@ -46,7 +46,7 @@ const sporsmal = (brukNyttUtlandssporsmal: boolean) => [
                   sporsmalstekst: `Har du vært utenfor EU/EØS mens du var sykmeldt ${formatterPeriode(fom, tom)}?`,
               }),
           ]),
-    arbeidUtenforNorge({}),
+    arbeidUtenforNorge(),
     oppsummering(),
 ]
 const lagFrilanser = (id: string, brukNyttUtlandssporsmal = false): RSSoknad => ({

@@ -6,10 +6,9 @@ type FerieV2Valg = {
     readonly fom: string
     readonly tom: string
     readonly svar?: RSSvar[]
-    readonly ferieNarSvar?: RSSvar[]
 }
 
-export const ferieV2 = ({ fom, tom, svar = [], ferieNarSvar = [] }: FerieV2Valg): RSSporsmal => ({
+export const ferieV2 = ({ fom, tom, svar = [] }: FerieV2Valg): RSSporsmal => ({
     id: '687343',
     tag: 'FERIE_V2',
     sporsmalstekst: `Tok du ut feriedager i tidsrommet ${formatterPeriode(fom, tom)}?`,
@@ -29,7 +28,7 @@ export const ferieV2 = ({ fom, tom, svar = [], ferieNarSvar = [] }: FerieV2Valg)
             min: fom,
             max: tom,
             kriterieForVisningAvUndersporsmal: null,
-            svar: ferieNarSvar,
+            svar: [],
             undersporsmal: [],
         },
     ],

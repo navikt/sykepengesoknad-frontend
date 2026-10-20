@@ -16,7 +16,7 @@ const tom = '2020-04-24'
 const arbeidsgiverNavn = 'Posten Norge AS, Bærum'
 
 const standardSporsmal = [
-    ansvarserklaring({}),
+    ansvarserklaring(),
     tilbakeIArbeid({ fom, tom, arbeidsgiver: arbeidsgiverNavn }),
     ferieV2({ fom, tom }),
     permisjonV2({ fom, tom }),
