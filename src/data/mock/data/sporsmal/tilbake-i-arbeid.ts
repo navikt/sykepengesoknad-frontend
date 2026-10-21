@@ -1,6 +1,6 @@
 import type { RSSporsmal } from '../../../../types/rs-types/rs-sporsmal'
 import type { RSSvar } from '../../../../types/rs-types/rs-svar'
-import { formatterDato, formatterPeriode } from './backend-datoformat'
+import { formatterDato, formatterPeriode } from './utils/backend-datoformat'
 
 type TilbakeIArbeidValgFelles = {
     readonly fom: string

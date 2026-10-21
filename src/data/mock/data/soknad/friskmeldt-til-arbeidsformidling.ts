@@ -3,7 +3,7 @@ import { RSSoknadstatusType } from '../../../../types/rs-types/rs-soknadstatus'
 import { RSSporsmal } from '../../../../types/rs-types/rs-sporsmal'
 import { ansvarserklaring } from '../sporsmal/ansvarserklaring'
 import { oppsummering } from '../sporsmal/oppsummering'
-import { formatterPeriode } from '../sporsmal/backend-datoformat'
+import { formatterPeriode } from '../sporsmal/utils/backend-datoformat'
 
 function skapfriskmeldtTilArbeidsformidling({
     fom,

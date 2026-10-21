@@ -1,4 +1,4 @@
-import type { RSSporsmal } from '../../../../types/rs-types/rs-sporsmal'
+import type { RSSporsmal } from '../../../../../types/rs-types/rs-sporsmal'
 
 // Spørsmål som kan gjentas i samme søknad (tagg med _0, _1 osv.) må få unike id-er.
 // Indeks 0 beholder den faste id-en. Tall-id-er får indeksen lagt til, siden de ofte ligger i sekvens.

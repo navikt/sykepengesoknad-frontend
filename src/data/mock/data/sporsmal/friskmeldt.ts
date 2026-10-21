@@ -1,6 +1,6 @@
 import type { RSSvar } from '../../../../types/rs-types/rs-svar'
 import type { RSSporsmal } from '../../../../types/rs-types/rs-sporsmal'
-import { formatterDato } from './backend-datoformat'
+import { formatterDato } from './utils/backend-datoformat'
 
 type FriskmeldtValg = {
     readonly fom: string

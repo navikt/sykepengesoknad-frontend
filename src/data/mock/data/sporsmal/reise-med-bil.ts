@@ -1,6 +1,6 @@
 import { RSSporsmal } from '../../../../types/rs-types/rs-sporsmal'
 import { RSSvar } from '../../../../types/rs-types/rs-svar'
-import { formatterPeriode } from './backend-datoformat'
+import { formatterPeriode } from './utils/backend-datoformat'
 
 export const bilDatoer = ({ fom, tom, svar = [] }: { fom: string; tom: string; svar?: RSSvar[] }): RSSporsmal => ({
     id: '1566445',

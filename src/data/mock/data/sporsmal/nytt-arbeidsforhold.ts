@@ -1,5 +1,5 @@
 import { RSSporsmal } from '../../../../types/rs-types/rs-sporsmal'
-import { formatterPeriode } from './backend-datoformat'
+import { formatterPeriode } from './utils/backend-datoformat'
 
 export const nyttArbeidsforholdSporsmal = ({
     arbeidsstedNavn,

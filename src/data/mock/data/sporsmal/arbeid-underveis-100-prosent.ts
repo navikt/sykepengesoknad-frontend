@@ -1,7 +1,7 @@
 import type { RSSporsmal } from '../../../../types/rs-types/rs-sporsmal'
 import type { RSSvar } from '../../../../types/rs-types/rs-svar'
-import { formatterPeriode } from './backend-datoformat'
-import { idMedIndeks } from './id-med-indeks'
+import { formatterPeriode } from './utils/backend-datoformat'
+import { idMedIndeks } from './utils/id-med-indeks'
 
 type ArbeidUnderveisSvar = {
     readonly hoved?: RSSvar[]

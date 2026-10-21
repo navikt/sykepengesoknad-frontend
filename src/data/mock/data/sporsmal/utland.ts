@@ -1,6 +1,6 @@
 import type { RSSvar } from '../../../../types/rs-types/rs-svar'
 import type { RSSporsmal } from '../../../../types/rs-types/rs-sporsmal'
-import { formatterPeriode } from './backend-datoformat'
+import { formatterPeriode } from './utils/backend-datoformat'
 
 type UtlandValg = {
     readonly fom: string

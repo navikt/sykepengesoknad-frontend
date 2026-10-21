@@ -57,7 +57,7 @@ import { bilDatoer, reiseMedBil } from '../sporsmal/reise-med-bil'
 import { kvitteringer } from '../sporsmal/kvitteringer'
 import { utbetaling } from '../sporsmal/utbetaling'
 import { inntektUnderveis, jobbsituasjonenDin, reiseTilUtlandet } from './friskmeldt-til-arbeidsformidling'
-import { medUnikeIder } from '../sporsmal/id-med-indeks'
+import { medUnikeIder } from '../sporsmal/utils/id-med-indeks'
 
 const fom = '2020-04-01'
 const tom = '2020-04-24'

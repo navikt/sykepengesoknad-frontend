@@ -1,5 +1,5 @@
 import type { RSSoknad } from '../../../../types/rs-types/rs-soknad'
-import { formatterPeriode } from '../sporsmal/backend-datoformat'
+import { formatterPeriode } from '../sporsmal/utils/backend-datoformat'
 import { frilanser100Syk } from '../sykmeldinger'
 import { andreInntektskilder } from '../sporsmal/andre-inntektskilder'
 import { ansvarserklaring } from '../sporsmal/ansvarserklaring'

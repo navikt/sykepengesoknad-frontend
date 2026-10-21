@@ -1,6 +1,6 @@
 import { Sykmelding } from '../../../../types/sykmelding'
 import { RSSoknad } from '../../../../types/rs-types/rs-soknad'
-import { formatterPeriode } from '../sporsmal/backend-datoformat'
+import { formatterPeriode } from '../sporsmal/utils/backend-datoformat'
 import {
     naringsdrivendeVirksomhetenAvviklet,
     naringsdrivendeNyIArbeidslivet,

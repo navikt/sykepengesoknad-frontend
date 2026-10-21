@@ -14,7 +14,7 @@ import {
 } from '../sykmeldinger'
 import { oppsummering } from '../sporsmal/oppsummering'
 import { ansvarserklaring } from '../sporsmal/ansvarserklaring'
-import { medUnikeIder } from '../sporsmal/id-med-indeks'
+import { medUnikeIder } from '../sporsmal/utils/id-med-indeks'
 import { friskmeldt } from '../sporsmal/friskmeldt'
 import { andreInntektskilder } from '../sporsmal/andre-inntektskilder'
 import { oppholdUtenforEos } from '../sporsmal/opphold-utenfor-eos'

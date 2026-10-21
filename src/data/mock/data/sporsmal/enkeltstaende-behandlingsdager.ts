@@ -1,7 +1,7 @@
 import type { RSSvar } from '../../../../types/rs-types/rs-svar'
 import type { RSSporsmal } from '../../../../types/rs-types/rs-sporsmal'
-import { formatterPeriode } from './backend-datoformat'
-import { idMedIndeks } from './id-med-indeks'
+import { formatterPeriode } from './utils/backend-datoformat'
+import { idMedIndeks } from './utils/id-med-indeks'
 
 type Uke = {
     readonly fom: string
