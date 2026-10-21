@@ -7,7 +7,6 @@ import { oppholdUtenforEos } from '../sporsmal/opphold-utenfor-eos'
 import { oppsummering } from '../sporsmal/oppsummering'
 import { permisjonV2 } from '../sporsmal/permisjon-v2'
 import { tilbakeIArbeid } from '../sporsmal/tilbake-i-arbeid'
-import { arbeidstaker100Syk } from '../sykmeldinger'
 import {
     naringsdrivendeNyIArbeidslivet,
     naringsdrivendeVarigEndring,
@@ -33,7 +32,7 @@ const standardSporsmal = [
 ]
 
 const soknadData = {
-    sykmeldingId: arbeidstaker100Syk.id,
+    sykmeldingId: '7cbdefcc-0969-4da1-97b3-5989fbf89c68',
     soknadstype: 'FISKERE' as const,
     status: 'NY' as const,
     fom,

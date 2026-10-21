@@ -97,7 +97,7 @@ const soknad: RSSoknad = {
     forstegangssoknad: true,
 }
 
-export const sykmelding = new Sykmelding({
+export const fiskerLottOgHyreSykmelding = new Sykmelding({
     id: '7cbdefcc-0969-4da1-97b3-5989fbf89c68',
     pasient: {
         fnr: '23909698111',
@@ -287,6 +287,6 @@ export const fiskePerson: Persona = {
         { ...soknad, demoinfo: 'Fisker på lott' },
         { ...fiskerLottOgHyre, demoinfo: '100 % sykmeldt fisker med lott og hyre' },
     ],
-    sykmeldinger: [sykmelding],
+    sykmeldinger: [fiskerLottOgHyreSykmelding],
     beskrivelse: 'Fisker',
 }
