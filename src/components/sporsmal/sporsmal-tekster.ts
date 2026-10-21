@@ -320,6 +320,9 @@ const SporsmalTekster = {
         'Du må svare på om du har fått endret kundegrunnlag',
     'soknad.feilmelding.NARINGSDRIVENDE_VARIG_ENDRING_TYPE_ANNET': 'Du må svare på om det har skjedd andre endringer',
     'soknad.feilmelding.NARINGSDRIVENDE_VARIG_ENDRING_DATO': 'Du må oppgi når endringen skjedde',
+    'soknad.feilmelding.FISKER_LOTT_OPPRETTHOLDT_INNTEKT': 'Du må svare på om du har hatt inntekt mens du var sykmeldt',
+    'soknad.feilmelding.FISKER_LOTT_OPPRETTHOLDT_INNTEKT_GRADERT':
+        'Du må svare på om du har hatt inntekt mens du var sykmeldt',
 }
 
 export default SporsmalTekster
