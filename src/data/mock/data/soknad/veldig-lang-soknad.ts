@@ -21,7 +21,7 @@ import {
     naringsdrivendeOpprettholdtInntektGradert,
 } from '../sporsmal/naringsdrivende'
 import { nyttArbeidsforholdSporsmal } from '../sporsmal/nytt-arbeidsforhold'
-import { avklaringIfbmReise } from '../sporsmal/avklaringIfbmReise'
+import { avklaringIfbmReise } from '../sporsmal/avklaring-ifbm-reise'
 import { flereInntektskilderGhost } from '../sporsmal/flere-inntektskilder-ghost'
 import { andreInntektskilderV2 } from '../sporsmal/andre-inntektskilder-v2'
 import { ansvarserklaring } from '../sporsmal/ansvarserklaring'
@@ -35,7 +35,7 @@ import { fravarForSykmeldingen, fravarForSykmeldingenV2 } from '../sporsmal/frav
 import { enkeltstaendeBehandlingsdager } from '../sporsmal/enkeltstaende-behandlingsdager'
 import { ferieV2 } from '../sporsmal/ferie-v2'
 import { feriePermisjonUtland } from '../sporsmal/ferie-permisjon-utland'
-import { fraverForBehandling } from '../sporsmal/fraver-for-behandling'
+import { fravarForBehandling } from '../sporsmal/fravar-for-behandling'
 import { friskmeldt } from '../sporsmal/friskmeldt'
 import { jobbetDu100Prosent } from '../sporsmal/jobbet-du-100-prosent'
 import { jobbetDuGradert } from '../sporsmal/jobbet-du-gradert'
@@ -56,7 +56,7 @@ import { offentligTransportBelop, offentligTransportTilDaglig } from '../sporsma
 import { bilDatoer, reiseMedBil } from '../sporsmal/reise-med-bil'
 import { kvitteringer } from '../sporsmal/kvitteringer'
 import { utbetaling } from '../sporsmal/utbetaling'
-import { inntektUnderveis, jobbsituasjonenDin, reiseTilUtlandet } from './friskmeldt-til-arbeidsformidling'
+import { inntektUnderveis, jobbsituasjonenDin, reiseTilUtlandet } from '../sporsmal/friskmeldt-til-arbeidsformidling'
 import { medUnikeIder } from '../sporsmal/utils/id-med-indeks'
 
 const fom = '2020-04-01'
@@ -179,7 +179,7 @@ export const veldigLangSoknad: RSSoknad = {
         }),
         ferieV2({ fom, tom }),
         feriePermisjonUtland({ fom, tom }),
-        fraverForBehandling({
+        fravarForBehandling({
             fom,
             tom,
             fravarFom: '2019-10-01',

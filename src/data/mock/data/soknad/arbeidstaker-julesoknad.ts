@@ -1,7 +1,7 @@
 import { ansvarserklaring } from '../sporsmal/ansvarserklaring'
 import { oppsummering } from '../sporsmal/oppsummering'
 import { tilbakeIArbeid } from '../sporsmal/tilbake-i-arbeid'
-import { deepcopyMedNyId } from '../../deepcopyMedNyId'
+import { deepcopyMedNyId } from '../../utils/deepcopy-med-ny-id'
 
 import { arbeidstaker } from './arbeidstaker'
 

@@ -1,5 +1,5 @@
 import { RSSoknad } from '../../../../types/rs-types/rs-soknad'
-import { deepcopyMedNyId } from '../../deepcopyMedNyId'
+import { deepcopyMedNyId } from '../../utils/deepcopy-med-ny-id'
 import { sykmeldinger } from '../sykmeldinger'
 import { kortArbeidstakerSoknad } from '../soknad/arbeidstaker-kort'
 import { tilbakeIArbeid } from '../sporsmal/tilbake-i-arbeid'

@@ -36,14 +36,14 @@ import {
     soknadSomTriggerFeilStatusForOppdaterSporsmal,
     soknadSomTriggerSporsmalFinnesIkkeISoknad,
 } from './data/soknad/soknader-integration'
-import { feilVedSlettingAvKvittering } from './data/personas/reisetilskuddTestPerson'
+import { feilVedSlettingAvKvittering } from './data/personas/reisetilskudd-test'
 import { arbeidstaker, arbeidtakerMedGammelOppsummering } from './data/soknad/arbeidstaker'
 import { arbeidstakerGradert } from './data/soknad/arbeidstaker-gradert'
 import { oppholdUtland } from './data/soknad/opphold-utland'
-import { mockApiValiderSporsmal } from './mockApiValiderSporsmal'
+import { mockApiValiderSporsmal } from './utils/mock-api-valider-sporsmal'
 import { soknadInnenforArbeidsgiverperioden } from './data/personas/innenfor-ag-periode'
-import { deepcopyMedNyId } from './deepcopyMedNyId'
-import { inntektUnderveis, reiseTilUtlandet } from './data/soknad/friskmeldt-til-arbeidsformidling'
+import { deepcopyMedNyId } from './utils/deepcopy-med-ny-id'
+import { inntektUnderveis, reiseTilUtlandet } from './data/sporsmal/friskmeldt-til-arbeidsformidling'
 import {
     naringsdrivendeOpprettholdtInntekt,
     naringsdrivendeOpprettholdtInntektGradert,

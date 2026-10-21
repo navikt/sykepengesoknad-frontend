@@ -1,10 +1,10 @@
-import { deepcopyMedNyId } from '../../deepcopyMedNyId'
+import { deepcopyMedNyId } from '../../utils/deepcopy-med-ny-id'
 import { nyttArbeidsforholdSporsmal } from '../sporsmal/nytt-arbeidsforhold'
 import { jsonDeepCopy } from '../../../../utils/json-deep-copy'
 import type { RSSoknad } from '../../../../types/rs-types/rs-soknad'
 
 import type { Persona } from './personas'
-import { brukertestSoknad, brukertestSykmelding } from './brukertestPerosn'
+import { brukertestSoknad, brukertestSykmelding } from './brukertest'
 
 export function medNyttArbeidsforholdSporsmal(soknad: RSSoknad): RSSoknad {
     const kopi = jsonDeepCopy(soknad)

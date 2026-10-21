@@ -1,5 +1,5 @@
 import { RSSoknad } from '../../../../types/rs-types/rs-soknad'
-import { deepcopyMedNyId } from '../../deepcopyMedNyId'
+import { deepcopyMedNyId } from '../../utils/deepcopy-med-ny-id'
 import { andreInntektskilderV2 } from '../sporsmal/andre-inntektskilder-v2'
 import { ansvarserklaring } from '../sporsmal/ansvarserklaring'
 import { arbeidUnderveis100Prosent } from '../sporsmal/arbeid-underveis-100-prosent'

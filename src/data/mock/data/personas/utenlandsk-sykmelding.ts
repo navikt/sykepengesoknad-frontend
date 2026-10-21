@@ -1,9 +1,9 @@
-import { RSSporsmal } from '../../../types/rs-types/rs-sporsmal'
-import { deepcopyMedNyId } from '../deepcopyMedNyId'
+import { RSSporsmal } from '../../../../types/rs-types/rs-sporsmal'
+import { deepcopyMedNyId } from '../../utils/deepcopy-med-ny-id'
 
-import { Persona } from './personas/personas'
-import { brukertestSoknad, brukertestSykmelding } from './personas/brukertestPerosn'
-import { utenlandskSykmeldingSporsmalene } from './sporsmal/utenlandsk-sykmelding-sporsmalene'
+import { Persona } from './personas'
+import { brukertestSoknad, brukertestSykmelding } from './brukertest'
+import { utenlandskSykmeldingSporsmalene } from '../sporsmal/utenlandsk-sykmelding-sporsmalene'
 
 export const soknadTilUtenlandskSykmelding = deepcopyMedNyId(brukertestSoknad, '3708c4de-d16c-4835-841b-a6716b6d39e9')
 soknadTilUtenlandskSykmelding.utenlandskSykmelding = true

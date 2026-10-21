@@ -1,6 +1,6 @@
-import { jsonDeepCopy } from '../../utils/json-deep-copy'
+import { jsonDeepCopy } from '../../../utils/json-deep-copy'
 
-import { arbeidstakerMedOppholdForsteUtenforArbeidsgiverperiodeKvittering } from './data/soknad/soknader-integration'
+import { arbeidstakerMedOppholdForsteUtenforArbeidsgiverperiodeKvittering } from '../data/soknad/soknader-integration'
 
 export const kortSoknadMedID = (id: string) => {
     const soknad = jsonDeepCopy(arbeidstakerMedOppholdForsteUtenforArbeidsgiverperiodeKvittering)

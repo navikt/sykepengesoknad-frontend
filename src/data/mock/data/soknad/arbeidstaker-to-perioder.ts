@@ -1,4 +1,4 @@
-import { deepcopyMedNyId } from '../../deepcopyMedNyId'
+import { deepcopyMedNyId } from '../../utils/deepcopy-med-ny-id'
 import { arbeidUnderveis100Prosent } from '../sporsmal/arbeid-underveis-100-prosent'
 import { ferieV2 } from '../sporsmal/ferie-v2'
 import { oppholdUtenforEos } from '../sporsmal/opphold-utenfor-eos'

@@ -1,11 +1,11 @@
-import type { RSSoknad } from '../../../types/rs-types/rs-soknad'
-import { deepcopyMedNyId } from '../deepcopyMedNyId'
-import { jsonDeepCopy } from '../../../utils/json-deep-copy'
+import type { RSSoknad } from '../../../../types/rs-types/rs-soknad'
+import { deepcopyMedNyId } from '../../utils/deepcopy-med-ny-id'
+import { jsonDeepCopy } from '../../../../utils/json-deep-copy'
 
-import type { Persona } from './personas/personas'
-import { brukertestSoknad, brukertestSykmelding } from './personas/brukertestPerosn'
-import { yrkesskadeV2Sporsmal } from './sporsmal/yrkesskade-v2'
-import { yrkesskadeV1Sporsmal } from './sporsmal/yrkesskade-v1'
+import type { Persona } from './personas'
+import { brukertestSoknad, brukertestSykmelding } from './brukertest'
+import { yrkesskadeV2Sporsmal } from '../sporsmal/yrkesskade-v2'
+import { yrkesskadeV1Sporsmal } from '../sporsmal/yrkesskade-v1'
 
 export function medYrkesskadeV1Sporsmal(soknad: RSSoknad): RSSoknad {
     return {

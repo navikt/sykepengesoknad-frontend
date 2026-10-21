@@ -1,4 +1,4 @@
-import { RSSoknad } from '../../types/rs-types/rs-soknad'
+import { RSSoknad } from '../../../types/rs-types/rs-soknad'
 
 export function validerSoknadsperiode(soknad: RSSoknad): void {
     if (!soknad.fom || !soknad.tom || !soknad.soknadPerioder || soknad.soknadPerioder.length === 0) {

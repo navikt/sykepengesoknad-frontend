@@ -1,5 +1,5 @@
-import { RSSoknad } from '../../types/rs-types/rs-soknad'
-import { RSSporsmal } from '../../types/rs-types/rs-sporsmal'
+import { RSSoknad } from '../../../types/rs-types/rs-soknad'
+import { RSSporsmal } from '../../../types/rs-types/rs-sporsmal'
 
 const alleSporsmal = (sporsmal: RSSporsmal[]): RSSporsmal[] =>
     sporsmal.flatMap((spm) => [spm, ...alleSporsmal(spm.undersporsmal)])

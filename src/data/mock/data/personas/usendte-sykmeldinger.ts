@@ -1,10 +1,10 @@
-import { jsonDeepCopy } from '../../../utils/json-deep-copy'
-import { deepcopyMedNyId } from '../deepcopyMedNyId'
-import { now } from '../../../utils/dato-utils'
+import { jsonDeepCopy } from '../../../../utils/json-deep-copy'
+import { deepcopyMedNyId } from '../../utils/deepcopy-med-ny-id'
+import { now } from '../../../../utils/dato-utils'
 
-import { Persona } from './personas/personas'
-import { arbeidstaker100Syk } from './sykmeldinger'
-import { arbeidstaker } from './soknad/arbeidstaker'
+import { Persona } from './personas'
+import { arbeidstaker100Syk } from '../sykmeldinger'
+import { arbeidstaker } from '../soknad/arbeidstaker'
 
 const enUsendt = jsonDeepCopy(arbeidstaker100Syk)
 enUsendt.sykmeldingStatus.statusEvent = 'APEN'

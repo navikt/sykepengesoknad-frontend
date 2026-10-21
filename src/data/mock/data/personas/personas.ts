@@ -16,9 +16,9 @@ import {
     syk7,
     sykmeldinger,
 } from '../sykmeldinger'
-import { deepcopyMedNyId } from '../../deepcopyMedNyId'
+import { deepcopyMedNyId } from '../../utils/deepcopy-med-ny-id'
 import { oppholdUtland } from '../soknad/opphold-utland'
-import { kortSoknadMedID } from '../../kort-soknad-med-id'
+import { kortSoknadMedID } from '../../utils/kort-soknad-med-id'
 import { arbeidstakerGradert } from '../soknad/arbeidstaker-gradert'
 import { arbeidstakerMangePerioder } from '../soknad/arbeidstaker-mange-perioder'
 import { arbeidstakerToPerioder } from '../soknad/arbeidstaker-to-perioder'
@@ -33,17 +33,12 @@ import { fremtidigSoknad } from '../soknad/arbeidstaker-fremtidig'
 import { jsonDeepCopy } from '../../../../utils/json-deep-copy'
 import { utgattSoknad } from '../soknad/arbeidstaker-utgatt'
 import arbeidstakerJulesoknad from '../soknad/arbeidstaker-julesoknad'
-import { medYrkesskadeV1Sporsmal, medYrkesskadeV2Sporsmal } from '../yrkesskade'
+import { medYrkesskadeV1Sporsmal, medYrkesskadeV2Sporsmal } from './yrkesskade'
 
 import { medNyttArbeidsforholdSporsmal } from './nytt-arbeidsforhold'
 import { lagInnenforArbeidsgiverperiodenSoknad, lagInnenforArbeidsgiverperiodenSykmelding } from './innenfor-ag-periode'
 
-import {
-    brukertestSoknad,
-    brukertestSykmelding,
-    lagBrukertestSoknad,
-    lagBrukertestSykmelding,
-} from './brukertestPerosn'
+import { brukertestSoknad, brukertestSykmelding, lagBrukertestSoknad, lagBrukertestSykmelding } from './brukertest'
 import { arbeidstakerFlereInntektskilderGhost } from '../soknad/arbeidstaker-flere-inntektskilder-ghost'
 
 export interface Persona {

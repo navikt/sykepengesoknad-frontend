@@ -1,5 +1,5 @@
 import { naringsdrivende100syk } from '../sykmeldinger'
-import { deepcopyMedNyId } from '../../deepcopyMedNyId'
+import { deepcopyMedNyId } from '../../utils/deepcopy-med-ny-id'
 import { naringsdrivendeSoknad } from '../soknad/naringsdrivende'
 import { RSSporsmal } from '../../../../types/rs-types/rs-sporsmal'
 import { RSSoknad } from '../../../../types/rs-types/rs-soknad'

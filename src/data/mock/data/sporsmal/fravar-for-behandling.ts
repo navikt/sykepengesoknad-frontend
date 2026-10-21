@@ -13,7 +13,7 @@ type FraverForBehandlingValg = {
     readonly tidligereEgenmeldingTag?: 'TIDLIGERE_EGENMELDING' | 'TIDLIGERE_EGENMELDINGER'
 }
 
-export const fraverForBehandling = ({
+export const fravarForBehandling = ({
     fom,
     tom,
     fravarFom,

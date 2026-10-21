@@ -1,6 +1,6 @@
 import { RSSoknad } from '../../../../types/rs-types/rs-soknad'
 import { arbeidsgiverUtland } from '../sporsmal/arbeidsgiver-utland'
-import { avklaringIfbmReise } from '../sporsmal/avklaringIfbmReise'
+import { avklaringIfbmReise } from '../sporsmal/avklaring-ifbm-reise'
 import { ferieUtland } from '../sporsmal/ferie-utland'
 import { land } from '../sporsmal/land'
 import { oppsummering } from '../sporsmal/oppsummering'
