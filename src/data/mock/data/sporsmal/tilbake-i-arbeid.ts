@@ -20,6 +20,10 @@ type TilbakeIArbeidValg =
           readonly arbeidsgiver?: never
           readonly tekstvariant: 'frilanser' | 'selvstendigNaeringsdrivende'
       })
+    | (TilbakeIArbeidValgFelles & {
+          readonly arbeidsgiver?: string | undefined
+          readonly tekstvariant: 'fisker'
+      })
 
 export const tilbakeIArbeid = (valg: TilbakeIArbeidValg): RSSporsmal => {
     const {
