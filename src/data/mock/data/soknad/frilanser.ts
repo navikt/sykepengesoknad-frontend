@@ -8,11 +8,10 @@ import { arbeidUtenforNorge } from '../sporsmal/arbeid-utenfor-norge'
 import { oppholdUtenforEos } from '../sporsmal/opphold-utenfor-eos'
 import { oppsummering } from '../sporsmal/oppsummering'
 import { tilbakeIArbeid } from '../sporsmal/tilbake-i-arbeid'
-import { utland } from '../sporsmal/utland'
 
 const fom = '2020-04-01'
 const tom = '2020-04-24'
-const sporsmal = (brukNyttUtlandssporsmal: boolean) => [
+const sporsmal = () => [
     ansvarserklaring(),
     tilbakeIArbeid({ fom, tom, tekstvariant: 'frilanser' }),
     arbeidUnderveis100Prosent({
@@ -37,20 +36,16 @@ const sporsmal = (brukNyttUtlandssporsmal: boolean) => [
             { tag: 'INNTEKTSKILDE_ANNET' },
         ],
     }),
-    ...(brukNyttUtlandssporsmal
-        ? [utland({ fom, tom, tekstvariant: 'utenforEuEos' })]
-        : [
-              oppholdUtenforEos({
-                  fom,
-                  tom,
-                  sporsmalstekst: `Har du vært utenfor EU/EØS mens du var sykmeldt ${formatterPeriode(fom, tom)}?`,
-              }),
-          ]),
+    oppholdUtenforEos({
+        fom,
+        tom,
+        sporsmalstekst: `Har du vært utenfor EU/EØS mens du var sykmeldt ${formatterPeriode(fom, tom)}?`,
+    }),
     arbeidUtenforNorge(),
     oppsummering(),
 ]
-const lagFrilanser = (id: string, brukNyttUtlandssporsmal = false): RSSoknad => ({
-    id,
+export const frilanser: RSSoknad = {
+    id: 'a8e40508-682b-4a04-bfda-b7768af2ae13',
     sykmeldingId: frilanser100Syk.id,
     soknadstype: 'SELVSTENDIGE_OG_FRILANSERE',
     status: 'NY',
@@ -67,11 +62,8 @@ const lagFrilanser = (id: string, brukNyttUtlandssporsmal = false): RSSoknad => 
     korrigertAv: null,
     arbeidssituasjon: 'FRILANSER',
     soknadPerioder: [{ fom, tom, grad: 100, sykmeldingstype: 'AKTIVITET_IKKE_MULIG' }],
-    sporsmal: sporsmal(brukNyttUtlandssporsmal),
+    sporsmal: sporsmal(),
     egenmeldtSykmelding: false,
     opprettetAvInntektsmelding: false,
     klippet: false,
-})
-
-export const frilanserMedNyOppholdUtenfoeEOSSporsmal = lagFrilanser('a8e40578-682b-4a04-bfda-b7768af2ae13', true)
-export const frilanser = lagFrilanser('a8e40508-682b-4a04-bfda-b7768af2ae13')
+}
