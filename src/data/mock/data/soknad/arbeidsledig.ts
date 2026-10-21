@@ -39,5 +39,4 @@ const lagArbeidsledigSoknad = (id: string): RSSoknad => ({
     klippet: false,
 })
 
-export const arbeidsledigMedNyOppholdUtenforESSporsmal = lagArbeidsledigSoknad('934f39f4-cb47-459f-8209-0dbef6d36059')
 export const arbeidsledig = lagArbeidsledigSoknad('934f39f4-cb47-459f-8209-0dbef6d30059')
