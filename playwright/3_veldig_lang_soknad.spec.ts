@@ -237,6 +237,10 @@ test.describe('Tester støtte for gamle spørsmål', () => {
 
     test('Side 26 - JOBBET_DU_GRADERT', async ({ page }) => {
         await page.goto(`/syk/sykepengesoknad/soknader/${soknad.id}/26?testperson=integrasjon-soknader`)
+        await harSynligTekst(
+            page,
+            'I perioden 20. mai - 5. juni 2020 sier sykmeldingen at du kunne jobbe 20 % i jobben din hos Nordlys Regnskap AS. Jobbet du mer enn det?',
+        )
         await svarJaHovedsporsmal(page)
         await velgTall(
             page,
@@ -444,7 +448,7 @@ test.describe('Tester støtte for gamle spørsmål', () => {
     test('Side 48 - Tilkommen inntekt', async ({ page }) => {
         await page.goto(`/syk/sykepengesoknad/soknader/${soknad.id}/48?testperson=integrasjon-soknader`)
         await svarJaHovedsporsmal(page)
-        await svarFritekst(page, 'Hvor mye har du tjent i perioden 20. – 24. april 2020?', '25000')
+        await svarFritekst(page, 'Hvor mye har du tjent i perioden 20. - 24. april 2020?', '25000')
 
         await klikkGaVidere(page)
     })

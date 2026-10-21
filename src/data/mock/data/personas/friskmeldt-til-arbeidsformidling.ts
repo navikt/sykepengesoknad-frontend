@@ -3,7 +3,7 @@ import {
     fremtidigFriskmeldtTilArbeidsformidling2,
     nyFriskmeldtTilArbeidsformidling,
 } from '../soknad/friskmeldt-til-arbeidsformidling'
-import { deepcopyMedNyId } from '../../deepcopyMedNyId'
+import { deepcopyMedNyId } from '../../utils/deepcopy-med-ny-id'
 
 import { Persona } from './personas'
 

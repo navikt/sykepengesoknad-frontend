@@ -3,12 +3,12 @@ import {
     checkViStolerPaDeg,
     svarJaHovedsporsmal,
     svarNeiHovedsporsmal,
-    setPeriodeFraTil,
     klikkGaVidere,
     harSynligTittel,
     neiOgVidere,
     harSynligTekst,
     svarRadioSporsmal,
+    setPeriodeFraTil,
 } from './utils/utilities'
 
 test.describe('Tester korrigering av ferie', () => {
@@ -30,7 +30,7 @@ test.describe('Tester korrigering av ferie', () => {
             await harSynligTittel(page, 'Ferie', 2)
             await svarNeiHovedsporsmal(page)
             await svarJaHovedsporsmal(page)
-            await setPeriodeFraTil(page, 12, 15)
+            await setPeriodeFraTil(page, 12, 15, 0, 1)
             await harSynligTekst(page, 'Når tok du ut feriedager?')
             //TODO Forstå denne:
             // await expect(page.locator('.aksel-alert').filter({ hasText: 'ferie' })).toBeHidden()

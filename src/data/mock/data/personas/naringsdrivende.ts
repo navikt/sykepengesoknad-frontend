@@ -1,5 +1,5 @@
 import { naringsdrivende100syk } from '../sykmeldinger'
-import { deepcopyMedNyId } from '../../deepcopyMedNyId'
+import { deepcopyMedNyId } from '../../utils/deepcopy-med-ny-id'
 import { naringsdrivendeSoknad } from '../soknad/naringsdrivende'
 import { RSSporsmal } from '../../../../types/rs-types/rs-sporsmal'
 import { RSSoknad } from '../../../../types/rs-types/rs-soknad'
@@ -13,7 +13,7 @@ import {
 import { Persona } from './personas'
 const naringsdrivendeSoknadMedVirksomhetsSporsmal = lagNaringsdrivendeSoknadMedVirksomhetsSporsmal(
     'ffa7c5d2-4766-4450-a521-3ecc5842d015',
-    [naringsdrivendeVirksomhetenAvviklet, naringsdrivendeNyIArbeidslivet, naringsdrivendeVarigEndring],
+    [naringsdrivendeVirksomhetenAvviklet(), naringsdrivendeNyIArbeidslivet(), naringsdrivendeVarigEndring()],
 )
 
 const sendtSoknadMedGammelKvittering = deepcopyMedNyId(naringsdrivendeSoknad, '3708c4de-d16c-4835-841b-a6716b688888')

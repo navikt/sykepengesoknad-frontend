@@ -1,281 +1,65 @@
-import { RSSoknad } from '../../../../types/rs-types/rs-soknad'
-import { arbeidstaker50Syk } from '../sykmeldinger'
-import { oppsummering } from '../sporsmal/oppsummering'
 import { RSKilde, RSKjentInntektskilde } from '../../../../types/rs-types/rs-kjenteinntektskilder'
-import { andreInntektskilderV2 } from '../sporsmal/andre-inntektskilde-v2'
+import { RSSoknad } from '../../../../types/rs-types/rs-soknad'
+import { andreInntektskilderV2 } from '../sporsmal/andre-inntektskilder-v2'
+import { ansvarserklaring } from '../sporsmal/ansvarserklaring'
+import { arbeidUtenforNorge } from '../sporsmal/arbeid-utenfor-norge'
+import { ferieV2 } from '../sporsmal/ferie-v2'
+import { jobbetDuGradert } from '../sporsmal/jobbet-du-gradert'
+import { oppholdUtenforEos } from '../sporsmal/opphold-utenfor-eos'
+import { oppsummering } from '../sporsmal/oppsummering'
+import { permisjonV2 } from '../sporsmal/permisjon-v2'
+import { tilbakeIArbeid } from '../sporsmal/tilbake-i-arbeid'
+import { arbeidstaker50Syk } from '../sykmeldinger'
+
+const fom = '2020-04-01'
+const tom = '2020-05-10'
+const gradertTom = '2020-04-24'
+const arbeidsgiverNavn = 'Posten Norge AS, Bærum'
 
 const ghostInntekter: RSKjentInntektskilde[] = [
-    {
-        navn: 'Ruter',
-        orgnummer: '222',
-        kilde: RSKilde.INNTEKTSKOMPONENTEN,
-    },
-    {
-        navn: 'Blomsterbutikken',
-        orgnummer: '111',
-        kilde: RSKilde.INNTEKTSKOMPONENTEN,
-    },
+    { navn: 'Ruter', orgnummer: '222', kilde: RSKilde.INNTEKTSKOMPONENTEN },
+    { navn: 'Blomsterbutikken', orgnummer: '111', kilde: RSKilde.INNTEKTSKOMPONENTEN },
     {
         navn: 'Bensinstasjonen med det veldig lange navnet, Stavanger (ved det røde huset som ligger ved Shell)',
         orgnummer: '333',
         kilde: RSKilde.INNTEKTSKOMPONENTEN,
     },
 ]
+
 export const arbeidstakerGradert: RSSoknad = {
     id: '5b769c04-e171-47c9-b79b-23ab8fce331e',
     sykmeldingId: arbeidstaker50Syk.id,
     soknadstype: 'ARBEIDSTAKERE',
     status: 'NY',
-    fom: '2020-04-01',
-    tom: '2020-04-24',
+    fom,
+    tom,
     opprettetDato: '2020-05-13',
     sendtTilNAVDato: null,
     sendtTilArbeidsgiverDato: null,
     avbruttDato: null,
-    startSykeforlop: '2020-04-01',
+    startSykeforlop: fom,
     sykmeldingUtskrevet: '2020-03-31',
-    arbeidsgiver: {
-        navn: 'Posten Norge AS, Bærum',
-        orgnummer: '974654458',
-    },
+    arbeidsgiver: { navn: arbeidsgiverNavn, orgnummer: '974654458' },
     korrigerer: null,
     korrigertAv: null,
     arbeidssituasjon: 'ARBEIDSTAKER',
     soknadPerioder: [
-        {
-            fom: '2020-04-01',
-            tom: '2020-04-24',
-            grad: 50,
-            sykmeldingstype: 'GRADERT',
-        },
-        {
-            fom: '2020-04-25',
-            tom: '2020-05-10',
-            grad: 100,
-            sykmeldingstype: 'AKTIVITET_IKKE_MULIG',
-        },
+        { fom, tom: gradertTom, grad: 50, sykmeldingstype: 'GRADERT' },
+        { fom: '2020-04-25', tom, grad: 100, sykmeldingstype: 'AKTIVITET_IKKE_MULIG' },
     ],
     sporsmal: [
-        {
-            id: '687291',
-            tag: 'ANSVARSERKLARING',
-            sporsmalstekst: 'Jeg bekrefter at jeg vil svare så riktig som jeg kan.',
-            undertekst: null,
-            svartype: 'CHECKBOX_PANEL',
-            min: null,
-            max: null,
-            kriterieForVisningAvUndersporsmal: null,
-            svar: [],
-            undersporsmal: [],
-        },
-        {
-            id: '687302',
-            tag: 'TILBAKE_I_ARBEID',
-            sporsmalstekst:
-                'Var du tilbake i fullt arbeid hos Posten Norge AS, Bærum i løpet av perioden 1. - 24. april 2020?',
-            undertekst: null,
-            svartype: 'JA_NEI',
-            min: null,
-            max: null,
-            kriterieForVisningAvUndersporsmal: 'JA',
-            svar: [],
-            undersporsmal: [
-                {
-                    id: '687303',
-                    tag: 'TILBAKE_NAR',
-                    sporsmalstekst: 'Når begynte du å jobbe igjen?',
-                    undertekst: null,
-                    svartype: 'DATO',
-                    min: '2020-04-01',
-                    max: '2020-04-24',
-                    kriterieForVisningAvUndersporsmal: null,
-                    svar: [],
-                    undersporsmal: [],
-                },
-            ],
-        },
-        {
-            id: '687304',
-            tag: 'FERIE_V2',
-            sporsmalstekst: 'Tok du ut feriedager i tidsrommet 1. - 24. april 2020?',
-            undertekst: null,
-            svartype: 'JA_NEI',
-            min: null,
-            max: null,
-            kriterieForVisningAvUndersporsmal: 'JA',
-            svar: [],
-            undersporsmal: [
-                {
-                    id: '687305',
-                    tag: 'FERIE_NAR_V2',
-                    sporsmalstekst: 'Når tok du ut feriedager?',
-                    undertekst: null,
-                    svartype: 'PERIODER',
-                    min: '2020-04-01',
-                    max: '2020-04-24',
-                    kriterieForVisningAvUndersporsmal: null,
-                    svar: [],
-                    undersporsmal: [],
-                },
-            ],
-        },
-        {
-            id: '687306',
-            tag: 'PERMISJON_V2',
-            sporsmalstekst: 'Tok du permisjon mens du var sykmeldt 1. - 24. april 2020?',
-            undertekst: null,
-            svartype: 'JA_NEI',
-            min: null,
-            max: null,
-            kriterieForVisningAvUndersporsmal: 'JA',
-            svar: [],
-            undersporsmal: [
-                {
-                    id: '687307',
-                    tag: 'PERMISJON_NAR_V2',
-                    sporsmalstekst: 'Når tok du permisjon?',
-                    undertekst: null,
-                    svartype: 'PERIODER',
-                    min: '2020-04-01',
-                    max: '2020-04-24',
-                    kriterieForVisningAvUndersporsmal: null,
-                    svar: [],
-                    undersporsmal: [],
-                },
-            ],
-        },
-        {
-            id: 'd146b1c5-661f-35ed-b72f-172fc17ead5d',
-            tag: 'JOBBET_DU_GRADERT_0',
-            sporsmalstekst:
-                'I perioden 1. - 24. april 2020 sier sykmeldingen at du kunne jobbe 50 % i jobben din hos Posten Norge AS, Bærum. Jobbet du mer enn det?',
-            undertekst: null,
-            svartype: 'JA_NEI',
-            min: null,
-            max: null,
-            kriterieForVisningAvUndersporsmal: 'JA',
-            svar: [],
-            undersporsmal: [
-                {
-                    id: '495730df-717d-3774-bd19-e6bcf76e3ba2',
-                    tag: 'HVOR_MANGE_TIMER_PER_UKE_0',
-                    sporsmalstekst:
-                        'Hvor mange timer i uken jobber du vanligvis når du er frisk? Varierer det, kan du oppgi gjennomsnittet.',
-                    undertekst: null,
-                    svartype: 'TALL',
-                    min: '1',
-                    max: '150',
-                    kriterieForVisningAvUndersporsmal: null,
-                    svar: [],
-                    undersporsmal: [],
-                },
-                {
-                    id: 'e3a6bd7d-8f10-381c-8cd3-cdab3e410c95',
-                    tag: 'HVOR_MYE_HAR_DU_JOBBET_0',
-                    sporsmalstekst: 'Hvor mye jobbet du tilsammen 1. - 24. april 2020?',
-                    undertekst: 'Velg timer eller prosent',
-                    svartype: 'RADIO_GRUPPE_TIMER_PROSENT',
-                    min: null,
-                    max: null,
-                    kriterieForVisningAvUndersporsmal: null,
-                    svar: [],
-                    undersporsmal: [
-                        {
-                            id: '0e368ffc-1840-35e5-bbb5-b994cbaa8ef1',
-                            tag: 'HVOR_MYE_PROSENT_0',
-                            sporsmalstekst: 'Prosent',
-                            undertekst: null,
-                            svartype: 'RADIO',
-                            min: null,
-                            max: null,
-                            kriterieForVisningAvUndersporsmal: 'CHECKED',
-                            svar: [],
-                            undersporsmal: [
-                                {
-                                    id: '13acfccb-3f39-3893-8054-058270add6ab',
-                                    tag: 'HVOR_MYE_PROSENT_VERDI_0',
-                                    sporsmalstekst: null,
-                                    undertekst: null,
-                                    svartype: 'PROSENT',
-                                    min: '51',
-                                    max: '99',
-                                    kriterieForVisningAvUndersporsmal: null,
-                                    svar: [],
-                                    undersporsmal: [],
-                                },
-                            ],
-                        },
-                        {
-                            id: '348f75cd-a87d-397b-8428-cbcb9e50a5d7',
-                            tag: 'HVOR_MYE_TIMER_0',
-                            sporsmalstekst: 'Timer',
-                            undertekst: null,
-                            svartype: 'RADIO',
-                            min: null,
-                            max: null,
-                            kriterieForVisningAvUndersporsmal: 'CHECKED',
-                            svar: [],
-                            undersporsmal: [
-                                {
-                                    id: '34c3cb3f-1aeb-3095-9ac6-d8f4f4c9e539',
-                                    tag: 'HVOR_MYE_TIMER_VERDI_0',
-                                    sporsmalstekst: null,
-                                    undertekst: null,
-                                    svartype: 'TIMER',
-                                    min: '1',
-                                    max: '364',
-                                    kriterieForVisningAvUndersporsmal: null,
-                                    svar: [],
-                                    undersporsmal: [],
-                                },
-                            ],
-                        },
-                    ],
-                },
-            ],
-        },
-        {
-            id: '687310',
-            tag: 'ARBEID_UTENFOR_NORGE',
-            sporsmalstekst: 'Har du arbeidet i utlandet i løpet av de siste 12 månedene?',
-            undertekst: null,
-            svartype: 'JA_NEI',
-            min: null,
-            max: null,
-            kriterieForVisningAvUndersporsmal: null,
-            svar: [],
-            undersporsmal: [],
-        },
+        ansvarserklaring(),
+        tilbakeIArbeid({ fom, tom, arbeidsgiver: arbeidsgiverNavn }),
+        ferieV2({ fom, tom }),
+        permisjonV2({ fom, tom }),
+        jobbetDuGradert({ fom, tom: gradertTom, arbeidsgiver: arbeidsgiverNavn, grad: 50 }),
+        arbeidUtenforNorge(),
         andreInntektskilderV2(),
-        {
-            id: '687308',
-            tag: 'OPPHOLD_UTENFOR_EOS',
-            sporsmalstekst: 'Var du på reise utenfor EU/EØS mens du var sykmeldt 1. - 24. april 2020?',
-            undertekst: null,
-            svartype: 'JA_NEI',
-            min: null,
-            max: null,
-            kriterieForVisningAvUndersporsmal: 'JA',
-            svar: [],
-            undersporsmal: [
-                {
-                    id: '687309',
-                    tag: 'OPPHOLD_UTENFOR_EOS_NAR',
-                    sporsmalstekst: 'Når var du utenfor EU/EØS?',
-                    undertekst: null,
-                    svartype: 'PERIODER',
-                    min: '2020-04-01',
-                    max: '2020-04-24',
-                    kriterieForVisningAvUndersporsmal: null,
-                    svar: [],
-                    undersporsmal: [],
-                },
-            ],
-        },
+        oppholdUtenforEos({ fom, tom }),
         oppsummering(),
     ],
     egenmeldtSykmelding: false,
     opprettetAvInntektsmelding: false,
     klippet: false,
-    ghostInntekter: ghostInntekter,
+    ghostInntekter,
 }

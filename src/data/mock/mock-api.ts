@@ -36,14 +36,14 @@ import {
     soknadSomTriggerFeilStatusForOppdaterSporsmal,
     soknadSomTriggerSporsmalFinnesIkkeISoknad,
 } from './data/soknad/soknader-integration'
-import { feilVedSlettingAvKvittering } from './data/personas/reisetilskuddTestPerson'
+import { feilVedSlettingAvKvittering } from './data/personas/reisetilskudd-test'
 import { arbeidstaker, arbeidtakerMedGammelOppsummering } from './data/soknad/arbeidstaker'
 import { arbeidstakerGradert } from './data/soknad/arbeidstaker-gradert'
 import { oppholdUtland } from './data/soknad/opphold-utland'
-import { mockApiValiderSporsmal } from './mockApiValiderSporsmal'
+import { mockApiValiderSporsmal } from './utils/mock-api-valider-sporsmal'
 import { soknadInnenforArbeidsgiverperioden } from './data/personas/innenfor-ag-periode'
-import { deepcopyMedNyId } from './deepcopyMedNyId'
-import { inntektUnderveis, reiseTilUtlandet } from './data/soknad/friskmeldt-til-arbeidsformidling'
+import { deepcopyMedNyId } from './utils/deepcopy-med-ny-id'
+import { inntektUnderveis, reiseTilUtlandet } from './data/sporsmal/friskmeldt-til-arbeidsformidling'
 import {
     naringsdrivendeOpprettholdtInntekt,
     naringsdrivendeOpprettholdtInntektGradert,
@@ -334,7 +334,7 @@ export async function mockApi(req: NextApiRequest, res: NextApiResponse) {
                     400,
                 )
             }
-            if (soknadId === '3fa85f64-5717-4562-b3fc-2c963f66afa6' && sporsmalId === '900') {
+            if (soknadId === '3fa85f64-5717-4562-b3fc-2c963f66afa6' && spm.tag === 'TILBAKE_I_ARBEID') {
                 return sendJson({}, 404)
             }
             if (soknadId === soknadSomTrigger401ForOppdaterSporsmal.id) {
@@ -420,14 +420,14 @@ export async function mockApi(req: NextApiRequest, res: NextApiResponse) {
                 if (body.svar[0].verdi == 'JA') {
                     soknaden.sporsmal = soknaden.sporsmal.map((spm) =>
                         ['NARINGSDRIVENDE_OPPRETTHOLDT_INNTEKT'].includes(spm.tag)
-                            ? naringsdrivendeOpprettholdtInntektGradert
+                            ? naringsdrivendeOpprettholdtInntektGradert()
                             : spm,
                     )
                     json.mutertSoknad = soknaden
                 } else if (body.svar[0].verdi == 'NEI') {
                     soknaden.sporsmal = soknaden.sporsmal.map((spm) =>
                         ['NARINGSDRIVENDE_OPPRETTHOLDT_INNTEKT_GRADERT'].includes(spm.tag)
-                            ? naringsdrivendeOpprettholdtInntekt
+                            ? naringsdrivendeOpprettholdtInntekt()
                             : spm,
                     )
                     json.mutertSoknad = soknaden

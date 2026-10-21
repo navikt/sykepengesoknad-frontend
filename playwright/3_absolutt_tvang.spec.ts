@@ -1,4 +1,4 @@
-import { enUsendtSykmelding, toUsendteSykmeldinger } from '../src/data/mock/data/usendte-sykmeldinger'
+import { enUsendtSykmelding, toUsendteSykmeldinger } from '../src/data/mock/data/personas/usendte-sykmeldinger'
 
 import { test, expect } from './utils/fixtures'
 import { trykkPaSoknadMedId, harSynligTekst } from './utils/utilities'

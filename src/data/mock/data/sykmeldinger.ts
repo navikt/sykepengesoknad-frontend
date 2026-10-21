@@ -2,7 +2,7 @@ import { Sykmelding } from '../../../types/sykmelding'
 import { jsonDeepCopy } from '../../../utils/json-deep-copy'
 import { toDate } from '../../../utils/dato-utils'
 
-import { brukertestSykmelding } from './personas/brukertestPerosn'
+import { brukertestSykmelding } from './personas/brukertest'
 
 export const arbeidstaker100Syk = new Sykmelding({
     id: '61e04c94-a4be-45f5-8dbd-5c0b7a8707ea',

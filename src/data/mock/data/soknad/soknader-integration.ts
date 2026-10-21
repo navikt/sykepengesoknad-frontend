@@ -13,6 +13,18 @@ import {
     syk8,
 } from '../sykmeldinger'
 import { oppsummering } from '../sporsmal/oppsummering'
+import { ansvarserklaring } from '../sporsmal/ansvarserklaring'
+import { medUnikeIder } from '../sporsmal/utils/id-med-indeks'
+import { friskmeldt } from '../sporsmal/friskmeldt'
+import { andreInntektskilder } from '../sporsmal/andre-inntektskilder'
+import { oppholdUtenforEos } from '../sporsmal/opphold-utenfor-eos'
+import { arbeidUtenforNorge } from '../sporsmal/arbeid-utenfor-norge'
+import { tilSlutt } from '../sporsmal/til-slutt'
+import { land } from '../sporsmal/land'
+import { periodeUtland } from '../sporsmal/periodeutland'
+import { arbeidsgiverUtland } from '../sporsmal/arbeidsgiver-utland'
+import { ferieUtland } from '../sporsmal/ferie-utland'
+import { tilbakeIArbeid } from '../sporsmal/tilbake-i-arbeid'
 
 import { arbeidstaker } from './arbeidstaker'
 import { utgattSoknad } from './arbeidstaker-utgatt'
@@ -20,687 +32,250 @@ import { sendtArbeidsledig } from './arbeidsledig-sendt'
 import { avbruttSoknad } from './arbeidstaker-avbrutt'
 import { veldigLangSoknad } from './veldig-lang-soknad'
 
+const arbeidstakersoknadMedUtenlandsoppholdSoktSykepengerFom = '2020-04-01'
+const arbeidstakersoknadMedUtenlandsoppholdSoktSykepengerTom = '2020-04-24'
+const arbeidstakersoknadMedUtenlandsoppholdSoktSykepengerArbeidsgiver = 'Nordlys Regnskap AS'
+
 export const arbeidstakersoknadMedUtenlandsoppholdSoktSykepenger: RSSoknad = {
     id: '5b74f271-5b94-455a-b79f-428f593f2b98',
     sykmeldingId: arbeidstaker100Syk.id,
     soknadstype: 'ARBEIDSTAKERE',
     status: 'NY',
-    fom: '2020-04-01',
-    tom: '2020-04-24',
+    fom: arbeidstakersoknadMedUtenlandsoppholdSoktSykepengerFom,
+    tom: arbeidstakersoknadMedUtenlandsoppholdSoktSykepengerTom,
     opprettetDato: '2020-06-08',
     sendtTilNAVDato: null,
     sendtTilArbeidsgiverDato: null,
     avbruttDato: null,
     startSykeforlop: '2020-05-23',
     sykmeldingUtskrevet: '2020-05-23',
-    arbeidsgiver: { navn: '995816598 sitt orgnavn :)', orgnummer: '995816598' },
+    arbeidsgiver: { navn: arbeidstakersoknadMedUtenlandsoppholdSoktSykepengerArbeidsgiver, orgnummer: '995816598' },
     korrigerer: null,
     korrigertAv: null,
     arbeidssituasjon: 'ARBEIDSTAKER',
     soknadPerioder: [
         {
-            fom: '2020-05-23',
-            tom: '2020-06-07',
+            fom: arbeidstakersoknadMedUtenlandsoppholdSoktSykepengerFom,
+            tom: arbeidstakersoknadMedUtenlandsoppholdSoktSykepengerTom,
             grad: 100,
             sykmeldingstype: 'AKTIVITET_IKKE_MULIG',
         },
     ],
-    sporsmal: [
-        {
-            id: '636',
-            tag: 'ANSVARSERKLARING',
-            sporsmalstekst: 'Jeg bekrefter at jeg vil svare så riktig som jeg kan.',
-            undertekst: null,
-            svartype: 'CHECKBOX_PANEL',
-            min: null,
-            max: null,
-            kriterieForVisningAvUndersporsmal: null,
-            svar: [],
-            undersporsmal: [],
-        },
-        oppsummering(),
-    ],
+    sporsmal: [ansvarserklaring(), oppsummering()],
     egenmeldtSykmelding: false,
     opprettetAvInntektsmelding: false,
     klippet: false,
 }
+const arbeidsledigKvitteringFom = '2020-04-01'
+const arbeidsledigKvitteringTom = '2020-04-24'
+const arbeidsledigKvitteringArbeidsgiver = null
+
 export const arbeidsledigKvittering: RSSoknad = {
     id: 'd3756302-4488-4f15-837b-38d51bc9b773',
     sykmeldingId: arbeidsledig100Syk.id,
     soknadstype: 'ARBEIDSLEDIG',
     status: 'NY',
-    fom: '2020-04-01',
-    tom: '2020-04-24',
+    fom: arbeidsledigKvitteringFom,
+    tom: arbeidsledigKvitteringTom,
     opprettetDato: '2020-06-23',
     sendtTilNAVDato: null,
     sendtTilArbeidsgiverDato: null,
     avbruttDato: null,
     startSykeforlop: '2020-06-07',
     sykmeldingUtskrevet: '2020-06-07',
-    arbeidsgiver: null,
+    arbeidsgiver: arbeidsledigKvitteringArbeidsgiver,
     korrigerer: null,
     korrigertAv: null,
     arbeidssituasjon: 'ARBEIDSLEDIG',
     soknadPerioder: [
         {
-            fom: '2020-06-07',
-            tom: '2020-06-22',
+            fom: arbeidsledigKvitteringFom,
+            tom: arbeidsledigKvitteringTom,
             grad: 100,
             sykmeldingstype: 'AKTIVITET_IKKE_MULIG',
         },
     ],
     sporsmal: [
-        {
-            id: '127',
-            tag: 'ANSVARSERKLARING',
-            sporsmalstekst: 'Jeg bekrefter at jeg vil svare så riktig som jeg kan.',
-            undertekst: null,
-            svartype: 'CHECKBOX_PANEL',
-            min: null,
-            max: null,
-            kriterieForVisningAvUndersporsmal: null,
-            svar: [],
-            undersporsmal: [],
-        },
-        {
-            id: '98',
-            tag: 'FRISKMELDT',
-            sporsmalstekst: 'Brukte du hele sykmeldingen fram til 10. januar 2020?',
-            undertekst: null,
-            svartype: 'JA_NEI',
-            min: null,
-            max: null,
-            kriterieForVisningAvUndersporsmal: 'NEI',
-            svar: [],
-            undersporsmal: [
-                {
-                    id: '99',
-                    tag: 'FRISKMELDT_START',
-                    sporsmalstekst: 'Fra hvilken dato trengte du ikke lenger sykmeldingen?',
-                    undertekst: null,
-                    svartype: 'DATO',
-                    min: '2020-01-01',
-                    max: '2020-01-10',
-                    kriterieForVisningAvUndersporsmal: null,
-                    svar: [],
-                    undersporsmal: [],
-                },
-            ],
-        },
+        ansvarserklaring(),
+        friskmeldt({ fom: arbeidsledigKvitteringFom, tom: arbeidsledigKvitteringTom }),
         oppsummering(),
     ],
     egenmeldtSykmelding: false,
     opprettetAvInntektsmelding: false,
     klippet: false,
 }
+const sendtArbeidsledigKvitteringFom = '2020-01-01'
+const sendtArbeidsledigKvitteringTom = '2020-01-10'
+const sendtArbeidsledigKvitteringArbeidsgiver = null
+
 export const sendtArbeidsledigKvittering: RSSoknad = {
     id: '162b42d7-2600-44ea-905e-d3bae7f23404',
     sykmeldingId: arbeidsledig100Syk.id,
     soknadstype: 'ARBEIDSLEDIG',
     status: 'SENDT',
-    fom: '2020-01-01',
-    tom: '2020-01-10',
+    fom: sendtArbeidsledigKvitteringFom,
+    tom: sendtArbeidsledigKvitteringTom,
     opprettetDato: '2020-06-23',
     sendtTilNAVDato: '2020-04-23T09:56:10.624Z',
     sendtTilArbeidsgiverDato: null,
     avbruttDato: null,
     startSykeforlop: '2020-01-01',
     sykmeldingUtskrevet: '2020-06-07',
-    arbeidsgiver: null,
+    arbeidsgiver: sendtArbeidsledigKvitteringArbeidsgiver,
     korrigerer: null,
     korrigertAv: null,
     arbeidssituasjon: 'ARBEIDSLEDIG',
     soknadPerioder: [
         {
-            fom: '2020-01-01',
-            tom: '2020-01-10',
+            fom: sendtArbeidsledigKvitteringFom,
+            tom: sendtArbeidsledigKvitteringTom,
             grad: 100,
             sykmeldingstype: 'AKTIVITET_IKKE_MULIG',
         },
     ],
     sporsmal: [
-        {
-            id: '93',
-            tag: 'ANSVARSERKLARING',
-            sporsmalstekst: 'Jeg bekrefter at jeg vil svare så riktig som jeg kan.',
-            undertekst: null,
-            svartype: 'CHECKBOX_PANEL',
-            min: null,
-            max: null,
-            kriterieForVisningAvUndersporsmal: null,
-            svar: [
-                {
-                    verdi: 'CHECKED',
-                },
+        ansvarserklaring({ svar: [{ verdi: 'CHECKED' }] }),
+        friskmeldt({
+            fom: sendtArbeidsledigKvitteringFom,
+            tom: sendtArbeidsledigKvitteringTom,
+            svar: [{ verdi: 'JA' }],
+        }),
+        andreInntektskilder({
+            fom: sendtArbeidsledigKvitteringFom,
+            tom: sendtArbeidsledigKvitteringTom,
+            svar: [{ verdi: 'NEI' }],
+            kilder: [
+                { tag: 'INNTEKTSKILDE_ANDRE_ARBEIDSFORHOLD' },
+                { tag: 'INNTEKTSKILDE_SELVSTENDIG' },
+                { tag: 'INNTEKTSKILDE_SELVSTENDIG_DAGMAMMA' },
+                { tag: 'INNTEKTSKILDE_JORDBRUKER' },
+                { tag: 'INNTEKTSKILDE_FRILANSER' },
+                { tag: 'INNTEKTSKILDE_OMSORGSLONN' },
+                { tag: 'INNTEKTSKILDE_FOSTERHJEM' },
+                { tag: 'INNTEKTSKILDE_ANNET' },
             ],
-            undersporsmal: [],
-        },
-        {
-            id: '98',
-            tag: 'FRISKMELDT',
-            sporsmalstekst: 'Brukte du hele sykmeldingen fram til 10. januar 2020?',
-            undertekst: null,
-            svartype: 'JA_NEI',
-            min: null,
-            max: null,
-            kriterieForVisningAvUndersporsmal: 'NEI',
-            svar: [
-                {
-                    verdi: 'JA',
-                },
-            ],
-            undersporsmal: [
-                {
-                    id: '99',
-                    tag: 'FRISKMELDT_START',
-                    sporsmalstekst: 'Fra hvilken dato trengte du ikke lenger sykmeldingen?',
-                    undertekst: null,
-                    svartype: 'DATO',
-                    min: '2020-01-01',
-                    max: '2020-01-10',
-                    kriterieForVisningAvUndersporsmal: null,
-                    svar: [],
-                    undersporsmal: [],
-                },
-            ],
-        },
-        {
-            id: '100',
-            tag: 'ANDRE_INNTEKTSKILDER',
-            sporsmalstekst: 'Har du hatt inntekt mens du har vært sykmeldt i perioden 1. - 10. januar 2020?',
-            undertekst: null,
-            svartype: 'JA_NEI',
-            min: null,
-            max: null,
-            kriterieForVisningAvUndersporsmal: 'JA',
-            svar: [
-                {
-                    verdi: 'NEI',
-                },
-            ],
-            undersporsmal: [
-                {
-                    id: '101',
-                    tag: 'HVILKE_ANDRE_INNTEKTSKILDER',
-                    sporsmalstekst: 'Hvilke inntektskilder har du hatt?',
-                    undertekst: null,
-                    svartype: 'CHECKBOX_GRUPPE',
-                    min: null,
-                    max: null,
-                    kriterieForVisningAvUndersporsmal: null,
-                    svar: [],
-                    undersporsmal: [
-                        {
-                            id: '102',
-                            tag: 'INNTEKTSKILDE_ANDRE_ARBEIDSFORHOLD',
-                            sporsmalstekst: 'andre arbeidsforhold',
-                            undertekst: null,
-                            svartype: 'CHECKBOX',
-                            min: null,
-                            max: null,
-                            kriterieForVisningAvUndersporsmal: 'CHECKED',
-                            svar: [],
-                            undersporsmal: [
-                                {
-                                    id: '103',
-                                    tag: 'INNTEKTSKILDE_ANDRE_ARBEIDSFORHOLD_ER_DU_SYKMELDT',
-                                    sporsmalstekst: 'Er du sykmeldt fra dette?',
-                                    undertekst: null,
-                                    svartype: 'JA_NEI',
-                                    min: null,
-                                    max: null,
-                                    kriterieForVisningAvUndersporsmal: null,
-                                    svar: [],
-                                    undersporsmal: [],
-                                },
-                            ],
-                        },
-                        {
-                            id: '104',
-                            tag: 'INNTEKTSKILDE_SELVSTENDIG',
-                            sporsmalstekst: 'selvstendig næringsdrivende',
-                            undertekst: null,
-                            svartype: 'CHECKBOX',
-                            min: null,
-                            max: null,
-                            kriterieForVisningAvUndersporsmal: 'CHECKED',
-                            svar: [],
-                            undersporsmal: [
-                                {
-                                    id: '105',
-                                    tag: 'INNTEKTSKILDE_SELVSTENDIG_ER_DU_SYKMELDT',
-                                    sporsmalstekst: 'Er du sykmeldt fra dette?',
-                                    undertekst: null,
-                                    svartype: 'JA_NEI',
-                                    min: null,
-                                    max: null,
-                                    kriterieForVisningAvUndersporsmal: null,
-                                    svar: [],
-                                    undersporsmal: [],
-                                },
-                            ],
-                        },
-                        {
-                            id: '106',
-                            tag: 'INNTEKTSKILDE_SELVSTENDIG_DAGMAMMA',
-                            sporsmalstekst: 'dagmamma',
-                            undertekst: null,
-                            svartype: 'CHECKBOX',
-                            min: null,
-                            max: null,
-                            kriterieForVisningAvUndersporsmal: 'CHECKED',
-                            svar: [],
-                            undersporsmal: [
-                                {
-                                    id: '107',
-                                    tag: 'INNTEKTSKILDE_SELVSTENDIG_DAGMAMMA_ER_DU_SYKMELDT',
-                                    sporsmalstekst: 'Er du sykmeldt fra dette?',
-                                    undertekst: null,
-                                    svartype: 'JA_NEI',
-                                    min: null,
-                                    max: null,
-                                    kriterieForVisningAvUndersporsmal: null,
-                                    svar: [],
-                                    undersporsmal: [],
-                                },
-                            ],
-                        },
-                        {
-                            id: '108',
-                            tag: 'INNTEKTSKILDE_JORDBRUKER',
-                            sporsmalstekst: 'jordbruk / fiske / reindrift',
-                            undertekst: null,
-                            svartype: 'CHECKBOX',
-                            min: null,
-                            max: null,
-                            kriterieForVisningAvUndersporsmal: 'CHECKED',
-                            svar: [],
-                            undersporsmal: [
-                                {
-                                    id: '109',
-                                    tag: 'INNTEKTSKILDE_JORDBRUKER_ER_DU_SYKMELDT',
-                                    sporsmalstekst: 'Er du sykmeldt fra dette?',
-                                    undertekst: null,
-                                    svartype: 'JA_NEI',
-                                    min: null,
-                                    max: null,
-                                    kriterieForVisningAvUndersporsmal: null,
-                                    svar: [],
-                                    undersporsmal: [],
-                                },
-                            ],
-                        },
-                        {
-                            id: '110',
-                            tag: 'INNTEKTSKILDE_FRILANSER',
-                            sporsmalstekst: 'frilanser',
-                            undertekst: null,
-                            svartype: 'CHECKBOX',
-                            min: null,
-                            max: null,
-                            kriterieForVisningAvUndersporsmal: 'CHECKED',
-                            svar: [],
-                            undersporsmal: [
-                                {
-                                    id: '111',
-                                    tag: 'INNTEKTSKILDE_FRILANSER_ER_DU_SYKMELDT',
-                                    sporsmalstekst: 'Er du sykmeldt fra dette?',
-                                    undertekst: null,
-                                    svartype: 'JA_NEI',
-                                    min: null,
-                                    max: null,
-                                    kriterieForVisningAvUndersporsmal: null,
-                                    svar: [],
-                                    undersporsmal: [],
-                                },
-                            ],
-                        },
-                        {
-                            id: '112',
-                            tag: 'INNTEKTSKILDE_OMSORGSLONN',
-                            sporsmalstekst: 'kommunal omsorgstønad',
-                            undertekst: null,
-                            svartype: 'CHECKBOX',
-                            min: null,
-                            max: null,
-                            kriterieForVisningAvUndersporsmal: 'CHECKED',
-                            svar: [],
-                            undersporsmal: [
-                                {
-                                    id: '113',
-                                    tag: 'INNTEKTSKILDE_OMSORGSLONN_ER_DU_SYKMELDT',
-                                    sporsmalstekst: 'Er du sykmeldt fra dette?',
-                                    undertekst: null,
-                                    svartype: 'JA_NEI',
-                                    min: null,
-                                    max: null,
-                                    kriterieForVisningAvUndersporsmal: null,
-                                    svar: [],
-                                    undersporsmal: [],
-                                },
-                            ],
-                        },
-                        {
-                            id: '114',
-                            tag: 'INNTEKTSKILDE_FOSTERHJEM',
-                            sporsmalstekst: 'fosterhjemgodtgjørelse',
-                            undertekst: null,
-                            svartype: 'CHECKBOX',
-                            min: null,
-                            max: null,
-                            kriterieForVisningAvUndersporsmal: 'CHECKED',
-                            svar: [],
-                            undersporsmal: [
-                                {
-                                    id: '115',
-                                    tag: 'INNTEKTSKILDE_FOSTERHJEM_ER_DU_SYKMELDT',
-                                    sporsmalstekst: 'Er du sykmeldt fra dette?',
-                                    undertekst: null,
-                                    svartype: 'JA_NEI',
-                                    min: null,
-                                    max: null,
-                                    kriterieForVisningAvUndersporsmal: null,
-                                    svar: [],
-                                    undersporsmal: [],
-                                },
-                            ],
-                        },
-                        {
-                            id: '116',
-                            tag: 'INNTEKTSKILDE_ANNET',
-                            sporsmalstekst: 'annet',
-                            undertekst: null,
-                            svartype: 'CHECKBOX',
-                            min: null,
-                            max: null,
-                            kriterieForVisningAvUndersporsmal: null,
-                            svar: [],
-                            undersporsmal: [],
-                        },
-                    ],
-                },
-            ],
-        },
-        {
-            id: '120',
-            tag: 'OPPHOLD_UTENFOR_EOS',
-            sporsmalstekst: 'Var du på reise utenfor EU/EØS mens du var sykmeldt 1. - 10. januar 2020?',
-            undertekst: null,
-            svartype: 'JA_NEI',
-            min: null,
-            max: null,
-            kriterieForVisningAvUndersporsmal: 'JA',
-            svar: [
-                {
-                    verdi: 'NEI',
-                },
-            ],
-            undersporsmal: [
-                {
-                    id: '121',
-                    tag: 'OPPHOLD_UTENFOR_EOS_NAR',
-                    sporsmalstekst: 'Når var du utenfor EU/EØS?',
-                    undertekst: null,
-                    svartype: 'PERIODER',
-                    min: '2020-01-01',
-                    max: '2020-01-10',
-                    kriterieForVisningAvUndersporsmal: null,
-                    svar: [],
-                    undersporsmal: [],
-                },
-            ],
-        },
-        {
-            id: '124',
-            tag: 'ARBEID_UTENFOR_NORGE',
-            sporsmalstekst: 'Har du arbeidet i utlandet i løpet av de siste 12 månedene?',
-            undertekst: null,
-            svartype: 'JA_NEI',
-            min: null,
-            max: null,
-            kriterieForVisningAvUndersporsmal: null,
-            svar: [
-                {
-                    verdi: 'NEI',
-                },
-            ],
-            undersporsmal: [],
-        },
-        {
-            id: '1623832',
-            tag: 'TIL_SLUTT',
-            sporsmalstekst: null,
-            undertekst: null,
-            svartype: 'OPPSUMMERING',
-            min: null,
-            max: null,
-            kriterieForVisningAvUndersporsmal: null,
-            svar: [
-                {
-                    verdi: 'true',
-                },
-            ],
-            undersporsmal: [],
-        },
+        }),
+        oppholdUtenforEos({
+            fom: sendtArbeidsledigKvitteringFom,
+            tom: sendtArbeidsledigKvitteringTom,
+            svar: [{ verdi: 'NEI' }],
+        }),
+        arbeidUtenforNorge({ svar: [{ verdi: 'NEI' }] }),
+        tilSlutt({ svar: [{ verdi: 'true' }] }),
     ],
     egenmeldtSykmelding: false,
     opprettetAvInntektsmelding: false,
     klippet: false,
 }
+const delvisUtfylltArbeidsledigFom = '2020-04-01'
+const delvisUtfylltArbeidsledigTom = '2020-04-24'
+const delvisUtfylltArbeidsledigArbeidsgiver = null
+
 export const delvisUtfylltArbeidsledig: RSSoknad = {
     id: '99c14afb-f654-4df5-8612-085fe235536f',
     sykmeldingId: arbeidsledig100Syk.id,
     soknadstype: 'ARBEIDSLEDIG',
     status: 'NY',
-    fom: '2020-04-01',
-    tom: '2020-04-24',
+    fom: delvisUtfylltArbeidsledigFom,
+    tom: delvisUtfylltArbeidsledigTom,
     opprettetDato: '2019-07-23',
     sendtTilNAVDato: null,
     sendtTilArbeidsgiverDato: null,
     avbruttDato: null,
     startSykeforlop: '2020-01-01',
     sykmeldingUtskrevet: '2020-06-07',
-    arbeidsgiver: null,
+    arbeidsgiver: delvisUtfylltArbeidsledigArbeidsgiver,
     korrigerer: null,
     korrigertAv: null,
     arbeidssituasjon: 'ARBEIDSLEDIG',
     soknadPerioder: [
         {
-            fom: '2020-01-01',
-            tom: '2020-01-10',
+            fom: delvisUtfylltArbeidsledigFom,
+            tom: delvisUtfylltArbeidsledigTom,
             grad: 100,
             sykmeldingstype: 'AKTIVITET_IKKE_MULIG',
         },
     ],
-    sporsmal: [
-        {
-            id: '93',
-            tag: 'ANSVARSERKLARING',
-            sporsmalstekst: 'Jeg bekrefter at jeg vil svare så riktig som jeg kan.',
-            undertekst: null,
-            svartype: 'CHECKBOX_PANEL',
-            min: null,
-            max: null,
-            kriterieForVisningAvUndersporsmal: null,
-            svar: [
-                {
-                    verdi: 'CHECKED',
-                },
-            ],
-            undersporsmal: [],
-        },
-        {
-            id: '1243',
-            tag: 'ARBEID_UTENFOR_NORGE',
-            sporsmalstekst: 'Har du arbeidet i utlandet i løpet av de siste 12 månedene?',
-            undertekst: null,
-            svartype: 'JA_NEI',
-            min: null,
-            max: null,
-            kriterieForVisningAvUndersporsmal: null,
-            svar: [
-                {
-                    verdi: 'NEI',
-                },
-            ],
-            undersporsmal: [],
-        },
-        {
-            id: '1334',
-            tag: 'ARBEID_UTENFOR_NORGE',
-            sporsmalstekst: 'Har du arbeidet i utlandet i løpet av de siste 12 månedene?',
-            undertekst: null,
-            svartype: 'JA_NEI',
-            min: null,
-            max: null,
-            kriterieForVisningAvUndersporsmal: null,
-            svar: [],
-            undersporsmal: [],
-        },
+    sporsmal: medUnikeIder([
+        ansvarserklaring({ svar: [{ verdi: 'CHECKED' }] }),
+        arbeidUtenforNorge({ svar: [{ verdi: 'NEI' }] }),
+        arbeidUtenforNorge(),
         oppsummering(),
-    ],
+    ]),
     egenmeldtSykmelding: false,
     opprettetAvInntektsmelding: false,
     klippet: false,
 }
+const oppholdUtlandKvitteringFom = null
+const oppholdUtlandKvitteringTom = null
+const oppholdUtlandKvitteringArbeidsgiver = null
+
 export const oppholdUtlandKvittering: RSSoknad = {
     id: 'f01cbf75-c7e6-4733-bee3-ecb8396ba1f1',
     sykmeldingId: null,
     soknadstype: 'OPPHOLD_UTLAND',
     status: 'NY',
-    fom: null,
-    tom: null,
+    fom: oppholdUtlandKvitteringFom,
+    tom: oppholdUtlandKvitteringTom,
     opprettetDato: '2020-06-03',
     sendtTilNAVDato: null,
     sendtTilArbeidsgiverDato: null,
     avbruttDato: null,
     startSykeforlop: null,
     sykmeldingUtskrevet: null,
-    arbeidsgiver: null,
+    arbeidsgiver: oppholdUtlandKvitteringArbeidsgiver,
     korrigerer: null,
     korrigertAv: null,
     arbeidssituasjon: null,
     soknadPerioder: [],
     sporsmal: [
-        {
-            id: '2',
-            tag: 'LAND',
-            sporsmalstekst: 'Hvor skal du reise?',
-            undertekst: 'Du kan velge flere land.',
-            svartype: 'COMBOBOX_MULTI',
-            min: null,
-            max: '50',
-            kriterieForVisningAvUndersporsmal: null,
-            svar: [],
-            undersporsmal: [],
-        },
-        {
-            id: '1',
-            tag: 'PERIODEUTLAND',
-            sporsmalstekst: 'Når skal du reise?',
-            undertekst: null,
-            svartype: 'PERIODER',
-            min: '2020-03-03',
-            max: '2020-12-31',
-            kriterieForVisningAvUndersporsmal: null,
-            svar: [],
-            undersporsmal: [],
-        },
-        {
-            id: '3',
-            tag: 'ARBEIDSGIVER',
-            sporsmalstekst: 'Har du én eller flere arbeidsgivere?',
-            undertekst: null,
-            svartype: 'JA_NEI',
-            min: null,
-            max: null,
-            kriterieForVisningAvUndersporsmal: 'JA',
-            svar: [],
-            undersporsmal: [
-                {
-                    id: '5',
-                    tag: 'FERIE',
-                    sporsmalstekst: 'Har du avtalt med arbeidsgiveren din at du skal ta ut feriedager i hele perioden?',
-                    undertekst: null,
-                    svartype: 'JA_NEI',
-                    min: null,
-                    max: null,
-                    kriterieForVisningAvUndersporsmal: null,
-                    svar: [],
-                    undersporsmal: [],
-                },
-            ],
-        },
+        land(),
+        periodeUtland({ fom: '2020-03-03', tom: '2020-12-31' }),
+        arbeidsgiverUtland({ undersporsmal: [ferieUtland()] }),
         oppsummering(),
     ],
     egenmeldtSykmelding: null,
     opprettetAvInntektsmelding: false,
     klippet: false,
 }
+const selvstendigKvitteringFom = '2020-04-01'
+const selvstendigKvitteringTom = '2020-04-24'
+const selvstendigKvitteringArbeidsgiver = null
+const selvstendigKvitteringTilbakeFom = '2024-01-16'
+const selvstendigKvitteringTilbakeTom = '2024-01-22'
+
 export const selvstendigKvittering: RSSoknad = {
     id: '8e267bc7-b213-4f19-a423-1543e09e0dc1',
     sykmeldingId: frilanser100Syk.id,
     soknadstype: 'SELVSTENDIGE_OG_FRILANSERE',
     status: 'NY',
-    fom: '2020-04-01',
-    tom: '2020-04-24',
+    fom: selvstendigKvitteringFom,
+    tom: selvstendigKvitteringTom,
     opprettetDato: '2020-06-23',
     sendtTilNAVDato: null,
     sendtTilArbeidsgiverDato: null,
     avbruttDato: null,
     startSykeforlop: '2020-06-01',
     sykmeldingUtskrevet: '2020-06-01',
-    arbeidsgiver: null,
+    arbeidsgiver: selvstendigKvitteringArbeidsgiver,
     korrigerer: null,
     korrigertAv: null,
     arbeidssituasjon: 'NAERINGSDRIVENDE',
     soknadPerioder: [
         {
-            fom: '2020-06-01',
-            tom: '2020-06-22',
+            fom: selvstendigKvitteringFom,
+            tom: selvstendigKvitteringTom,
             grad: 100,
             sykmeldingstype: 'AKTIVITET_IKKE_MULIG',
         },
     ],
     sporsmal: [
-        {
-            id: '161',
-            tag: 'ANSVARSERKLARING',
-            sporsmalstekst: 'Jeg bekrefter at jeg vil svare så riktig som jeg kan.',
-            undertekst: null,
-            svartype: 'CHECKBOX_PANEL',
-            min: null,
-            max: null,
-            kriterieForVisningAvUndersporsmal: null,
-            svar: [],
-            undersporsmal: [],
-        },
-        {
-            id: '79c730fc-155e-3088-97cd-8817df252068',
-            tag: 'TILBAKE_I_ARBEID',
-            sporsmalstekst:
-                'Var du tilbake i fullt arbeid som selvstendig næringsdrivende før sykmeldingsperioden utløp 22. januar 2024?',
-            undertekst: null,
-            svartype: 'JA_NEI',
-            min: null,
-            max: null,
-            kriterieForVisningAvUndersporsmal: 'JA',
-            svar: [],
-            undersporsmal: [
-                {
-                    id: 'e9a48ebc-3ce0-3e37-9e70-f670c299ba23',
-                    tag: 'TILBAKE_NAR',
-                    sporsmalstekst: 'Når begynte du å jobbe igjen?',
-                    undertekst: null,
-                    svartype: 'DATO',
-                    min: '2024-01-16',
-                    max: '2024-01-22',
-                    kriterieForVisningAvUndersporsmal: null,
-                    svar: [],
-                    undersporsmal: [],
-                },
-            ],
-        },
+        ansvarserklaring(),
+        tilbakeIArbeid({
+            fom: selvstendigKvitteringTilbakeFom,
+            tom: selvstendigKvitteringTilbakeTom,
+            tekstvariant: 'selvstendigNaeringsdrivende',
+        }),
         oppsummering(),
     ],
     egenmeldtSykmelding: false,
@@ -708,13 +283,28 @@ export const selvstendigKvittering: RSSoknad = {
     klippet: false,
 }
 
+selvstendigKvittering.sporsmal = selvstendigKvittering.sporsmal.map((sporsmal) => {
+    if (sporsmal.tag !== 'TILBAKE_I_ARBEID') return sporsmal
+    return tilbakeIArbeid({
+        fom: selvstendigKvitteringFom,
+        tom: selvstendigKvitteringTom,
+        tekstvariant: 'selvstendigNaeringsdrivende',
+        svar: sporsmal.svar,
+        tilbakeNarSvar: sporsmal.undersporsmal[0].svar,
+    })
+})
+
+const arbeidstakerInnenforArbeidsgiverperiodeKvitteringFom = '2020-04-01'
+const arbeidstakerInnenforArbeidsgiverperiodeKvitteringTom = '2020-04-05'
+const arbeidstakerInnenforArbeidsgiverperiodeKvitteringArbeidsgiver = 'Matbutikken AS, Grünerløkka'
+
 export const arbeidstakerInnenforArbeidsgiverperiodeKvittering: RSSoknad = {
     id: '08a516f1-62be-45ee-8ce3-4ba0294728b0',
     sykmeldingId: syk1.id,
     soknadstype: 'ARBEIDSTAKERE',
     status: 'NY',
-    fom: '2020-04-01',
-    tom: '2020-04-24',
+    fom: arbeidstakerInnenforArbeidsgiverperiodeKvitteringFom,
+    tom: arbeidstakerInnenforArbeidsgiverperiodeKvitteringTom,
     opprettetDato: '2020-01-01',
     sendtTilNAVDato: null,
     sendtTilArbeidsgiverDato: null,
@@ -722,7 +312,7 @@ export const arbeidstakerInnenforArbeidsgiverperiodeKvittering: RSSoknad = {
     startSykeforlop: '2020-01-01',
     sykmeldingUtskrevet: '2020-01-01',
     arbeidsgiver: {
-        navn: 'arb1',
+        navn: arbeidstakerInnenforArbeidsgiverperiodeKvitteringArbeidsgiver,
         orgnummer: '1',
     },
     korrigerer: null,
@@ -730,64 +320,36 @@ export const arbeidstakerInnenforArbeidsgiverperiodeKvittering: RSSoknad = {
     arbeidssituasjon: 'ARBEIDSTAKER',
     soknadPerioder: [
         {
-            fom: '2020-01-01',
-            tom: '2020-01-05',
+            fom: arbeidstakerInnenforArbeidsgiverperiodeKvitteringFom,
+            tom: arbeidstakerInnenforArbeidsgiverperiodeKvitteringTom,
             grad: 100,
             sykmeldingstype: 'AKTIVITET_IKKE_MULIG',
         },
     ],
     sporsmal: [
-        {
-            id: '318',
-            tag: 'ANSVARSERKLARING',
-            sporsmalstekst: 'Jeg bekrefter at jeg vil svare så riktig som jeg kan.',
-            undertekst: null,
-            svartype: 'CHECKBOX_PANEL',
-            min: null,
-            max: null,
-            kriterieForVisningAvUndersporsmal: null,
-            svar: [],
-            undersporsmal: [],
-        },
-        {
-            id: '900',
-            tag: 'TILBAKE_I_ARBEID',
-            sporsmalstekst:
-                'Var du tilbake i fullt arbeid hos Posten Norge AS, Bærum i løpet av perioden 20. mai - 5. juni 2020?',
-            undertekst: null,
-            svartype: 'JA_NEI',
-            min: null,
-            max: null,
-            kriterieForVisningAvUndersporsmal: 'JA',
-            svar: [],
-            undersporsmal: [
-                {
-                    id: '96',
-                    tag: 'TILBAKE_NAR',
-                    sporsmalstekst: 'Når begynte du å jobbe igjen?',
-                    undertekst: null,
-                    svartype: 'DATO',
-                    min: '2020-05-20',
-                    max: '2020-06-05',
-                    kriterieForVisningAvUndersporsmal: null,
-                    svar: [],
-                    undersporsmal: [],
-                },
-            ],
-        },
+        ansvarserklaring(),
+        tilbakeIArbeid({
+            fom: arbeidstakerInnenforArbeidsgiverperiodeKvitteringFom,
+            tom: arbeidstakerInnenforArbeidsgiverperiodeKvitteringTom,
+            arbeidsgiver: arbeidstakerInnenforArbeidsgiverperiodeKvitteringArbeidsgiver,
+        }),
         oppsummering(),
     ],
     egenmeldtSykmelding: false,
     opprettetAvInntektsmelding: false,
     klippet: false,
 }
+const arbeidstakerUtenforArbeidsgiverperiodeKvitteringFom = '2020-04-01'
+const arbeidstakerUtenforArbeidsgiverperiodeKvitteringTom = '2020-04-20'
+const arbeidstakerUtenforArbeidsgiverperiodeKvitteringArbeidsgiver = 'Bygg og Anlegg AS'
+
 export const arbeidstakerUtenforArbeidsgiverperiodeKvittering: RSSoknad = {
     id: '08a516f1-62be-45ee-8ce3-4ba0294728b1',
     sykmeldingId: syk2.id,
     soknadstype: 'ARBEIDSTAKERE',
     status: 'NY',
-    fom: '2020-04-01',
-    tom: '2020-04-24',
+    fom: arbeidstakerUtenforArbeidsgiverperiodeKvitteringFom,
+    tom: arbeidstakerUtenforArbeidsgiverperiodeKvitteringTom,
     opprettetDato: '2020-01-01',
     sendtTilNAVDato: null,
     sendtTilArbeidsgiverDato: null,
@@ -795,7 +357,7 @@ export const arbeidstakerUtenforArbeidsgiverperiodeKvittering: RSSoknad = {
     startSykeforlop: '2020-01-01',
     sykmeldingUtskrevet: '2020-01-01',
     arbeidsgiver: {
-        navn: 'arb2',
+        navn: arbeidstakerUtenforArbeidsgiverperiodeKvitteringArbeidsgiver,
         orgnummer: '2',
     },
     korrigerer: null,
@@ -803,64 +365,36 @@ export const arbeidstakerUtenforArbeidsgiverperiodeKvittering: RSSoknad = {
     arbeidssituasjon: 'ARBEIDSTAKER',
     soknadPerioder: [
         {
-            fom: '2020-01-01',
-            tom: '2020-01-20',
+            fom: arbeidstakerUtenforArbeidsgiverperiodeKvitteringFom,
+            tom: arbeidstakerUtenforArbeidsgiverperiodeKvitteringTom,
             grad: 100,
             sykmeldingstype: 'AKTIVITET_IKKE_MULIG',
         },
     ],
     sporsmal: [
-        {
-            id: '318',
-            tag: 'ANSVARSERKLARING',
-            sporsmalstekst: 'Jeg bekrefter at jeg vil svare så riktig som jeg kan.',
-            undertekst: null,
-            svartype: 'CHECKBOX_PANEL',
-            min: null,
-            max: null,
-            kriterieForVisningAvUndersporsmal: null,
-            svar: [],
-            undersporsmal: [],
-        },
-        {
-            id: '900',
-            tag: 'TILBAKE_I_ARBEID',
-            sporsmalstekst:
-                'Var du tilbake i fullt arbeid hos Posten Norge AS, Bærum i løpet av perioden 20. mai - 5. juni 2020?',
-            undertekst: null,
-            svartype: 'JA_NEI',
-            min: null,
-            max: null,
-            kriterieForVisningAvUndersporsmal: 'JA',
-            svar: [],
-            undersporsmal: [
-                {
-                    id: '96',
-                    tag: 'TILBAKE_NAR',
-                    sporsmalstekst: 'Når begynte du å jobbe igjen?',
-                    undertekst: null,
-                    svartype: 'DATO',
-                    min: '2020-05-20',
-                    max: '2020-06-05',
-                    kriterieForVisningAvUndersporsmal: null,
-                    svar: [],
-                    undersporsmal: [],
-                },
-            ],
-        },
+        ansvarserklaring(),
+        tilbakeIArbeid({
+            fom: arbeidstakerUtenforArbeidsgiverperiodeKvitteringFom,
+            tom: arbeidstakerUtenforArbeidsgiverperiodeKvitteringTom,
+            arbeidsgiver: arbeidstakerUtenforArbeidsgiverperiodeKvitteringArbeidsgiver,
+        }),
         oppsummering(),
     ],
     egenmeldtSykmelding: false,
     opprettetAvInntektsmelding: false,
     klippet: false,
 }
+const arbeidstakerDeltPeriodeForsteUtenforArbeidsgiverperiodeKvitteringFom = '2020-04-01'
+const arbeidstakerDeltPeriodeForsteUtenforArbeidsgiverperiodeKvitteringTom = '2020-04-10'
+const arbeidstakerDeltPeriodeForsteUtenforArbeidsgiverperiodeKvitteringArbeidsgiver = 'Fjordline Transport AS'
+
 export const arbeidstakerDeltPeriodeForsteUtenforArbeidsgiverperiodeKvittering: RSSoknad = {
     id: '08a516f1-62be-45ee-8ce3-4ba0294728b2',
     sykmeldingId: syk3.id,
     soknadstype: 'ARBEIDSTAKERE',
     status: 'NY',
-    fom: '2020-04-01',
-    tom: '2020-04-10',
+    fom: arbeidstakerDeltPeriodeForsteUtenforArbeidsgiverperiodeKvitteringFom,
+    tom: arbeidstakerDeltPeriodeForsteUtenforArbeidsgiverperiodeKvitteringTom,
     opprettetDato: '2020-01-10',
     sendtTilNAVDato: null,
     sendtTilArbeidsgiverDato: null,
@@ -868,7 +402,7 @@ export const arbeidstakerDeltPeriodeForsteUtenforArbeidsgiverperiodeKvittering: 
     startSykeforlop: '2020-01-01',
     sykmeldingUtskrevet: '2020-01-10',
     arbeidsgiver: {
-        navn: 'arb3',
+        navn: arbeidstakerDeltPeriodeForsteUtenforArbeidsgiverperiodeKvitteringArbeidsgiver,
         orgnummer: '3',
     },
     korrigerer: null,
@@ -883,57 +417,29 @@ export const arbeidstakerDeltPeriodeForsteUtenforArbeidsgiverperiodeKvittering: 
         },
     ],
     sporsmal: [
-        {
-            id: '318',
-            tag: 'ANSVARSERKLARING',
-            sporsmalstekst: 'Jeg bekrefter at jeg vil svare så riktig som jeg kan.',
-            undertekst: null,
-            svartype: 'CHECKBOX_PANEL',
-            min: null,
-            max: null,
-            kriterieForVisningAvUndersporsmal: null,
-            svar: [],
-            undersporsmal: [],
-        },
-        {
-            id: '900',
-            tag: 'TILBAKE_I_ARBEID',
-            sporsmalstekst:
-                'Var du tilbake i fullt arbeid hos Posten Norge AS, Bærum i løpet av perioden 20. mai - 5. juni 2020?',
-            undertekst: null,
-            svartype: 'JA_NEI',
-            min: null,
-            max: null,
-            kriterieForVisningAvUndersporsmal: 'JA',
-            svar: [],
-            undersporsmal: [
-                {
-                    id: '96',
-                    tag: 'TILBAKE_NAR',
-                    sporsmalstekst: 'Når begynte du å jobbe igjen?',
-                    undertekst: null,
-                    svartype: 'DATO',
-                    min: '2020-05-20',
-                    max: '2020-06-05',
-                    kriterieForVisningAvUndersporsmal: null,
-                    svar: [],
-                    undersporsmal: [],
-                },
-            ],
-        },
+        ansvarserklaring(),
+        tilbakeIArbeid({
+            fom: arbeidstakerDeltPeriodeForsteUtenforArbeidsgiverperiodeKvitteringFom,
+            tom: arbeidstakerDeltPeriodeForsteUtenforArbeidsgiverperiodeKvitteringTom,
+            arbeidsgiver: arbeidstakerDeltPeriodeForsteUtenforArbeidsgiverperiodeKvitteringArbeidsgiver,
+        }),
         oppsummering(),
     ],
     egenmeldtSykmelding: false,
     opprettetAvInntektsmelding: false,
     klippet: false,
 }
+const arbeidstakerUtenOppholdForsteUtenforArbeidsgiverperiodeKvitteringFom = '2020-04-01'
+const arbeidstakerUtenOppholdForsteUtenforArbeidsgiverperiodeKvitteringTom = '2020-04-16'
+const arbeidstakerUtenOppholdForsteUtenforArbeidsgiverperiodeKvitteringArbeidsgiver = 'Matbutikken AS, Grünerløkka'
+
 export const arbeidstakerUtenOppholdForsteUtenforArbeidsgiverperiodeKvittering: RSSoknad = {
     id: '08a516f1-62be-45ee-8ce3-4ba0294728b3',
     sykmeldingId: syk4.id,
     soknadstype: 'ARBEIDSTAKERE',
     status: 'NY',
-    fom: '2020-04-01',
-    tom: '2020-04-16',
+    fom: arbeidstakerUtenOppholdForsteUtenforArbeidsgiverperiodeKvitteringFom,
+    tom: arbeidstakerUtenOppholdForsteUtenforArbeidsgiverperiodeKvitteringTom,
     opprettetDato: '2020-01-06',
     sendtTilNAVDato: null,
     sendtTilArbeidsgiverDato: null,
@@ -941,7 +447,7 @@ export const arbeidstakerUtenOppholdForsteUtenforArbeidsgiverperiodeKvittering: 
     startSykeforlop: '2020-01-01',
     sykmeldingUtskrevet: '2020-01-06',
     arbeidsgiver: {
-        navn: 'arb1',
+        navn: arbeidstakerUtenOppholdForsteUtenforArbeidsgiverperiodeKvitteringArbeidsgiver,
         orgnummer: '1',
     },
     korrigerer: null,
@@ -949,64 +455,36 @@ export const arbeidstakerUtenOppholdForsteUtenforArbeidsgiverperiodeKvittering: 
     arbeidssituasjon: 'ARBEIDSTAKER',
     soknadPerioder: [
         {
-            fom: '2020-01-06',
-            tom: '2020-01-20',
+            fom: arbeidstakerUtenOppholdForsteUtenforArbeidsgiverperiodeKvitteringFom,
+            tom: arbeidstakerUtenOppholdForsteUtenforArbeidsgiverperiodeKvitteringTom,
             grad: 100,
             sykmeldingstype: 'AKTIVITET_IKKE_MULIG',
         },
     ],
     sporsmal: [
-        {
-            id: '318',
-            tag: 'ANSVARSERKLARING',
-            sporsmalstekst: 'Jeg bekrefter at jeg vil svare så riktig som jeg kan.',
-            undertekst: null,
-            svartype: 'CHECKBOX_PANEL',
-            min: null,
-            max: null,
-            kriterieForVisningAvUndersporsmal: null,
-            svar: [],
-            undersporsmal: [],
-        },
-        {
-            id: '900',
-            tag: 'TILBAKE_I_ARBEID',
-            sporsmalstekst:
-                'Var du tilbake i fullt arbeid hos Posten Norge AS, Bærum i løpet av perioden 20. mai - 5. juni 2020?',
-            undertekst: null,
-            svartype: 'JA_NEI',
-            min: null,
-            max: null,
-            kriterieForVisningAvUndersporsmal: 'JA',
-            svar: [],
-            undersporsmal: [
-                {
-                    id: '96',
-                    tag: 'TILBAKE_NAR',
-                    sporsmalstekst: 'Når begynte du å jobbe igjen?',
-                    undertekst: null,
-                    svartype: 'DATO',
-                    min: '2020-05-20',
-                    max: '2020-06-05',
-                    kriterieForVisningAvUndersporsmal: null,
-                    svar: [],
-                    undersporsmal: [],
-                },
-            ],
-        },
+        ansvarserklaring(),
+        tilbakeIArbeid({
+            fom: arbeidstakerUtenOppholdForsteUtenforArbeidsgiverperiodeKvitteringFom,
+            tom: arbeidstakerUtenOppholdForsteUtenforArbeidsgiverperiodeKvitteringTom,
+            arbeidsgiver: arbeidstakerUtenOppholdForsteUtenforArbeidsgiverperiodeKvitteringArbeidsgiver,
+        }),
         oppsummering(),
     ],
     egenmeldtSykmelding: false,
     opprettetAvInntektsmelding: false,
     klippet: false,
 }
+const arbeidstakerUtenOppholdKvitteringFom = '2020-04-01'
+const arbeidstakerUtenOppholdKvitteringTom = '2020-04-05'
+const arbeidstakerUtenOppholdKvitteringArbeidsgiver = 'Matbutikken AS, Grünerløkka'
+
 export const arbeidstakerUtenOppholdKvittering: RSSoknad = {
     id: '08a516f1-62be-45ee-8ce3-4ba0294728b4',
     sykmeldingId: syk5.id,
     soknadstype: 'ARBEIDSTAKERE',
     status: 'NY',
-    fom: '2020-04-01',
-    tom: '2020-04-24',
+    fom: arbeidstakerUtenOppholdKvitteringFom,
+    tom: arbeidstakerUtenOppholdKvitteringTom,
     opprettetDato: '2020-01-21',
     sendtTilNAVDato: null,
     sendtTilArbeidsgiverDato: null,
@@ -1014,7 +492,7 @@ export const arbeidstakerUtenOppholdKvittering: RSSoknad = {
     startSykeforlop: '2020-01-21',
     sykmeldingUtskrevet: '2020-01-21',
     arbeidsgiver: {
-        navn: 'arb1',
+        navn: arbeidstakerUtenOppholdKvitteringArbeidsgiver,
         orgnummer: '1',
     },
     korrigerer: null,
@@ -1022,64 +500,36 @@ export const arbeidstakerUtenOppholdKvittering: RSSoknad = {
     arbeidssituasjon: 'ARBEIDSTAKER',
     soknadPerioder: [
         {
-            fom: '2020-01-21',
-            tom: '2020-01-25',
+            fom: arbeidstakerUtenOppholdKvitteringFom,
+            tom: arbeidstakerUtenOppholdKvitteringTom,
             grad: 100,
             sykmeldingstype: 'AKTIVITET_IKKE_MULIG',
         },
     ],
     sporsmal: [
-        {
-            id: '318',
-            tag: 'ANSVARSERKLARING',
-            sporsmalstekst: 'Jeg bekrefter at jeg vil svare så riktig som jeg kan.',
-            undertekst: null,
-            svartype: 'CHECKBOX_PANEL',
-            min: null,
-            max: null,
-            kriterieForVisningAvUndersporsmal: null,
-            svar: [],
-            undersporsmal: [],
-        },
-        {
-            id: '900',
-            tag: 'TILBAKE_I_ARBEID',
-            sporsmalstekst:
-                'Var du tilbake i fullt arbeid hos Posten Norge AS, Bærum i løpet av perioden 20. mai - 5. juni 2020?',
-            undertekst: null,
-            svartype: 'JA_NEI',
-            min: null,
-            max: null,
-            kriterieForVisningAvUndersporsmal: 'JA',
-            svar: [],
-            undersporsmal: [
-                {
-                    id: '96',
-                    tag: 'TILBAKE_NAR',
-                    sporsmalstekst: 'Når begynte du å jobbe igjen?',
-                    undertekst: null,
-                    svartype: 'DATO',
-                    min: '2020-05-20',
-                    max: '2020-06-05',
-                    kriterieForVisningAvUndersporsmal: null,
-                    svar: [],
-                    undersporsmal: [],
-                },
-            ],
-        },
+        ansvarserklaring(),
+        tilbakeIArbeid({
+            fom: arbeidstakerUtenOppholdKvitteringFom,
+            tom: arbeidstakerUtenOppholdKvitteringTom,
+            arbeidsgiver: arbeidstakerUtenOppholdKvitteringArbeidsgiver,
+        }),
         oppsummering(),
     ],
     egenmeldtSykmelding: false,
     opprettetAvInntektsmelding: false,
     klippet: false,
 }
+const sok6Fom = '2020-03-01'
+const sok6Tom = '2020-03-05'
+const sok6Arbeidsgiver = 'Snekker Hansen AS'
+
 export const sok6: RSSoknad = {
     id: '08a516f1-62be-45ee-8ce3-4ba0294728b5',
     sykmeldingId: 'trengs for sok7',
     soknadstype: 'ARBEIDSTAKERE',
     status: 'SENDT',
-    fom: '2020-03-01',
-    tom: '2020-03-05',
+    fom: sok6Fom,
+    tom: sok6Tom,
     opprettetDato: '2020-01-01',
     sendtTilNAVDato: null,
     sendtTilArbeidsgiverDato: null,
@@ -1087,7 +537,7 @@ export const sok6: RSSoknad = {
     startSykeforlop: '2020-01-01',
     sykmeldingUtskrevet: '2020-01-01',
     arbeidsgiver: {
-        navn: 'arb4',
+        navn: sok6Arbeidsgiver,
         orgnummer: '4',
     },
     korrigerer: null,
@@ -1095,38 +545,28 @@ export const sok6: RSSoknad = {
     arbeidssituasjon: 'ARBEIDSTAKER',
     soknadPerioder: [
         {
-            fom: '2020-01-01',
-            tom: '2020-01-05',
+            fom: sok6Fom,
+            tom: sok6Tom,
             grad: 100,
             sykmeldingstype: 'AKTIVITET_IKKE_MULIG',
         },
     ],
-    sporsmal: [
-        {
-            id: '318',
-            tag: 'ANSVARSERKLARING',
-            sporsmalstekst: 'Jeg bekrefter at jeg vil svare så riktig som jeg kan.',
-            undertekst: null,
-            svartype: 'CHECKBOX_PANEL',
-            min: null,
-            max: null,
-            kriterieForVisningAvUndersporsmal: null,
-            svar: [],
-            undersporsmal: [],
-        },
-        oppsummering(),
-    ],
+    sporsmal: [ansvarserklaring(), oppsummering()],
     egenmeldtSykmelding: false,
     opprettetAvInntektsmelding: false,
     klippet: false,
 }
+const arbeidstakerMedOppholdForsteUtenforArbeidsgiverperiodeKvitteringFom = '2020-04-01'
+const arbeidstakerMedOppholdForsteUtenforArbeidsgiverperiodeKvitteringTom = '2020-04-16'
+const arbeidstakerMedOppholdForsteUtenforArbeidsgiverperiodeKvitteringArbeidsgiver = 'Snekker Hansen AS'
+
 export const arbeidstakerMedOppholdForsteUtenforArbeidsgiverperiodeKvittering: RSSoknad = {
     id: '08a516f1-62be-45ee-8ce3-4ba0294728b6',
     sykmeldingId: syk7.id,
     soknadstype: 'ARBEIDSTAKERE',
     status: 'NY',
-    fom: '2020-04-01',
-    tom: '2020-04-16',
+    fom: arbeidstakerMedOppholdForsteUtenforArbeidsgiverperiodeKvitteringFom,
+    tom: arbeidstakerMedOppholdForsteUtenforArbeidsgiverperiodeKvitteringTom,
     opprettetDato: '2020-01-10',
     sendtTilNAVDato: null,
     sendtTilArbeidsgiverDato: null,
@@ -1134,7 +574,7 @@ export const arbeidstakerMedOppholdForsteUtenforArbeidsgiverperiodeKvittering: R
     startSykeforlop: '2020-01-01',
     sykmeldingUtskrevet: '2020-01-10',
     arbeidsgiver: {
-        navn: 'arb4',
+        navn: arbeidstakerMedOppholdForsteUtenforArbeidsgiverperiodeKvitteringArbeidsgiver,
         orgnummer: '4',
     },
     korrigerer: null,
@@ -1142,64 +582,36 @@ export const arbeidstakerMedOppholdForsteUtenforArbeidsgiverperiodeKvittering: R
     arbeidssituasjon: 'ARBEIDSTAKER',
     soknadPerioder: [
         {
-            fom: '2020-01-10',
-            tom: '2020-01-25',
+            fom: arbeidstakerMedOppholdForsteUtenforArbeidsgiverperiodeKvitteringFom,
+            tom: arbeidstakerMedOppholdForsteUtenforArbeidsgiverperiodeKvitteringTom,
             grad: 100,
             sykmeldingstype: 'AKTIVITET_IKKE_MULIG',
         },
     ],
     sporsmal: [
-        {
-            id: '318',
-            tag: 'ANSVARSERKLARING',
-            sporsmalstekst: 'Jeg bekrefter at jeg vil svare så riktig som jeg kan.',
-            undertekst: null,
-            svartype: 'CHECKBOX_PANEL',
-            min: null,
-            max: null,
-            kriterieForVisningAvUndersporsmal: null,
-            svar: [],
-            undersporsmal: [],
-        },
-        {
-            id: '900',
-            tag: 'TILBAKE_I_ARBEID',
-            sporsmalstekst:
-                'Var du tilbake i fullt arbeid hos Posten Norge AS, Bærum i løpet av perioden 20. mai - 5. juni 2020?',
-            undertekst: null,
-            svartype: 'JA_NEI',
-            min: null,
-            max: null,
-            kriterieForVisningAvUndersporsmal: 'JA',
-            svar: [],
-            undersporsmal: [
-                {
-                    id: '96',
-                    tag: 'TILBAKE_NAR',
-                    sporsmalstekst: 'Når begynte du å jobbe igjen?',
-                    undertekst: null,
-                    svartype: 'DATO',
-                    min: '2020-05-20',
-                    max: '2020-06-05',
-                    kriterieForVisningAvUndersporsmal: null,
-                    svar: [],
-                    undersporsmal: [],
-                },
-            ],
-        },
+        ansvarserklaring(),
+        tilbakeIArbeid({
+            fom: arbeidstakerMedOppholdForsteUtenforArbeidsgiverperiodeKvitteringFom,
+            tom: arbeidstakerMedOppholdForsteUtenforArbeidsgiverperiodeKvitteringTom,
+            arbeidsgiver: arbeidstakerMedOppholdForsteUtenforArbeidsgiverperiodeKvitteringArbeidsgiver,
+        }),
         oppsummering(),
     ],
     egenmeldtSykmelding: false,
     opprettetAvInntektsmelding: false,
     klippet: false,
 }
+const arbeidstakerMedOppholdKvitteringFom = '2020-04-01'
+const arbeidstakerMedOppholdKvitteringTom = '2020-04-05'
+const arbeidstakerMedOppholdKvitteringArbeidsgiver = 'Bakeriet i Byen AS'
+
 export const arbeidstakerMedOppholdKvittering: RSSoknad = {
     id: '08a516f1-62be-45ee-8ce3-4ba0294728b7',
     sykmeldingId: syk8.id,
     soknadstype: 'ARBEIDSTAKERE',
     status: 'NY',
-    fom: '2020-04-01',
-    tom: '2020-04-05',
+    fom: arbeidstakerMedOppholdKvitteringFom,
+    tom: arbeidstakerMedOppholdKvitteringTom,
     opprettetDato: '2020-02-05',
     sendtTilNAVDato: null,
     sendtTilArbeidsgiverDato: null,
@@ -1207,7 +619,7 @@ export const arbeidstakerMedOppholdKvittering: RSSoknad = {
     startSykeforlop: '2020-01-01',
     sykmeldingUtskrevet: '2020-02-01',
     arbeidsgiver: {
-        navn: 'arb5',
+        navn: arbeidstakerMedOppholdKvitteringArbeidsgiver,
         orgnummer: '5',
     },
     korrigerer: null,
@@ -1222,44 +634,12 @@ export const arbeidstakerMedOppholdKvittering: RSSoknad = {
         },
     ],
     sporsmal: [
-        {
-            id: '318',
-            tag: 'ANSVARSERKLARING',
-            sporsmalstekst: 'Jeg bekrefter at jeg vil svare så riktig som jeg kan.',
-            undertekst: null,
-            svartype: 'CHECKBOX_PANEL',
-            min: null,
-            max: null,
-            kriterieForVisningAvUndersporsmal: null,
-            svar: [],
-            undersporsmal: [],
-        },
-        {
-            id: '900',
-            tag: 'TILBAKE_I_ARBEID',
-            sporsmalstekst:
-                'Var du tilbake i fullt arbeid hos Posten Norge AS, Bærum i løpet av perioden 20. mai - 5. juni 2020?',
-            undertekst: null,
-            svartype: 'JA_NEI',
-            min: null,
-            max: null,
-            kriterieForVisningAvUndersporsmal: 'JA',
-            svar: [],
-            undersporsmal: [
-                {
-                    id: '96',
-                    tag: 'TILBAKE_NAR',
-                    sporsmalstekst: 'Når begynte du å jobbe igjen?',
-                    undertekst: null,
-                    svartype: 'DATO',
-                    min: '2020-05-20',
-                    max: '2020-06-05',
-                    kriterieForVisningAvUndersporsmal: null,
-                    svar: [],
-                    undersporsmal: [],
-                },
-            ],
-        },
+        ansvarserklaring(),
+        tilbakeIArbeid({
+            fom: arbeidstakerMedOppholdKvitteringFom,
+            tom: arbeidstakerMedOppholdKvitteringTom,
+            arbeidsgiver: arbeidstakerMedOppholdKvitteringArbeidsgiver,
+        }),
         oppsummering(),
     ],
     egenmeldtSykmelding: false,
@@ -1270,8 +650,22 @@ export const foranArbeidstakerMedOppholdKvittering: RSSoknad = jsonDeepCopy(arbe
 foranArbeidstakerMedOppholdKvittering.id = '35dc9bfb-e935-4f02-931f-9fa5306bbceb'
 foranArbeidstakerMedOppholdKvittering.status = 'SENDT'
 foranArbeidstakerMedOppholdKvittering.sendtTilArbeidsgiverDato = new Date(Date.now() - 86400000).toISOString()
-foranArbeidstakerMedOppholdKvittering.fom = '2020-03-25'
-foranArbeidstakerMedOppholdKvittering.tom = '2020-03-27'
+const foranArbeidstakerMedOppholdKvitteringFom = '2020-03-25'
+const foranArbeidstakerMedOppholdKvitteringTom = '2020-03-27'
+foranArbeidstakerMedOppholdKvittering.fom = foranArbeidstakerMedOppholdKvitteringFom
+foranArbeidstakerMedOppholdKvittering.tom = foranArbeidstakerMedOppholdKvitteringTom
+foranArbeidstakerMedOppholdKvittering.soknadPerioder[0].fom = foranArbeidstakerMedOppholdKvitteringFom
+foranArbeidstakerMedOppholdKvittering.soknadPerioder[0].tom = foranArbeidstakerMedOppholdKvitteringTom
+foranArbeidstakerMedOppholdKvittering.sporsmal = foranArbeidstakerMedOppholdKvittering.sporsmal.map((sporsmal) => {
+    if (sporsmal.tag !== 'TILBAKE_I_ARBEID' || !foranArbeidstakerMedOppholdKvittering.arbeidsgiver) return sporsmal
+    return tilbakeIArbeid({
+        fom: foranArbeidstakerMedOppholdKvitteringFom,
+        tom: foranArbeidstakerMedOppholdKvitteringTom,
+        arbeidsgiver: foranArbeidstakerMedOppholdKvittering.arbeidsgiver.navn,
+        svar: sporsmal.svar,
+        tilbakeNarSvar: sporsmal.undersporsmal[0].svar,
+    })
+})
 
 export const soknadSomTriggerSporsmalFinnesIkkeISoknad: RSSoknad = jsonDeepCopy(arbeidstaker)
 soknadSomTriggerSporsmalFinnesIkkeISoknad.id = '2c45e5b3-1e0b-486a-ab6c-555b1ea02ed1'

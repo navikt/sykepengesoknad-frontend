@@ -1,6 +1,6 @@
 import { RSSporsmal } from '../../../../types/rs-types/rs-sporsmal'
 
-export const yrkesskadeV2Sporsmal: RSSporsmal = {
+export const yrkesskadeV2Sporsmal = (): RSSporsmal => ({
     id: '123123654612312',
     tag: 'YRKESSKADE_V2',
     sporsmalstekst: `Skyldes dette sykefraværet en yrkesskade?`,
@@ -61,4 +61,4 @@ export const yrkesskadeV2Sporsmal: RSSporsmal = {
             ],
         },
     ],
-}
+})

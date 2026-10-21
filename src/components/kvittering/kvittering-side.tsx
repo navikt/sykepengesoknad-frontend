@@ -3,7 +3,7 @@ import React, { useEffect } from 'react'
 import { logger } from '@navikt/next-logger'
 import { useRouter } from 'next/router'
 
-import Endreknapp from '../../components/endreknapp/endreknapp'
+import Endreknapp from '../endreknapp/endreknapp'
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 import { sykefravaerUrl } from '../../utils/environment'

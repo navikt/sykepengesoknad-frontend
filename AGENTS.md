@@ -42,7 +42,7 @@ Kjør i rekkefølge via `execute_run_configuration`:
 - UI: `src/components/`
 - Datahenting/server state: `src/hooks/` (React Query + egne hooks)
 - Hjelpefunksjoner: `src/utils/`
-- Mock-data i dev: `src/data/testdata/`
+- Mock-data i dev: `src/data/mock/` (søknader i `data/soknad/`, spørsmålsbyggere i `data/sporsmal/`, testpersoner i `data/personas/`)
 
 Ved nytt backend-endepunkt:
 1. Opprett rute i `src/pages/api/{backend}/[[...path]].api.ts`

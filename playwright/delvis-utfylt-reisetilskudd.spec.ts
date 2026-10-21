@@ -1,4 +1,4 @@
-import { delvisUtfyltReisetilskudd } from '../src/data/mock/data/personas/reisetilskuddTestPerson'
+import { delvisUtfyltReisetilskudd } from '../src/data/mock/data/personas/reisetilskudd-test'
 
 import { test, expect } from './utils/fixtures'
 import { harSoknaderlisteHeading, klikkTilbake, trykkPaSoknadMedId } from './utils/utilities'

@@ -1,4 +1,4 @@
-import { skapSoknad, skapSykmelding } from '../testadataGeneratorFunksjoner'
+import { skapSoknad, skapSykmelding } from '../lag-sykmelding-og-soknad'
 
 import type { Persona } from './personas'
 

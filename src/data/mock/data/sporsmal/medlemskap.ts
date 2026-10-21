@@ -1,6 +1,6 @@
 import { RSSporsmal } from '../../../../types/rs-types/rs-sporsmal'
 
-export const medlemskapOppholdUtenforNorgeSporsmal: RSSporsmal = {
+export const medlemskapOppholdUtenforNorgeSporsmal = (): RSSporsmal => ({
     id: '8eea7bec-97c2-3921-bf14-83a2e82d1e46',
     tag: 'MEDLEMSKAP_OPPHOLD_UTENFOR_NORGE',
     sporsmalstekst: 'Har du oppholdt deg i utlandet i løpet av de siste 12 månedene før du ble syk?',
@@ -135,9 +135,9 @@ export const medlemskapOppholdUtenforNorgeSporsmal: RSSporsmal = {
             ],
         },
     ],
-}
+})
 
-export const medlemskapUtførtArbeidUtenforNorgeSporsmal: RSSporsmal = {
+export const medlemskapUtførtArbeidUtenforNorgeSporsmal = (): RSSporsmal => ({
     id: '0c74b7c2-4e89-366a-9f2d-0b6a28f84ff8',
     tag: 'MEDLEMSKAP_UTFORT_ARBEID_UTENFOR_NORGE',
     sporsmalstekst: 'Har du arbeidet utenfor Norge i løpet av de siste 12 månedene før du ble syk?',
@@ -198,9 +198,9 @@ export const medlemskapUtførtArbeidUtenforNorgeSporsmal: RSSporsmal = {
             ],
         },
     ],
-}
+})
 
-export const medlemskapOppholdUtenforEøsSporsmal: RSSporsmal = {
+export const medlemskapOppholdUtenforEøsSporsmal = (): RSSporsmal => ({
     id: '57bd4bc9-cae6-3f82-91d5-4f25296729de',
     tag: 'MEDLEMSKAP_OPPHOLD_UTENFOR_EOS',
     sporsmalstekst: 'Har du oppholdt deg utenfor EU/EØS eller Sveits i løpet av de siste 12 månedene før du ble syk?',
@@ -335,9 +335,9 @@ export const medlemskapOppholdUtenforEøsSporsmal: RSSporsmal = {
             ],
         },
     ],
-}
+})
 
-export const medlemskapOppholdstillatelseSporsmal: RSSporsmal = {
+export const medlemskapOppholdstillatelseSporsmal = (): RSSporsmal => ({
     id: '17e3eda5-3895-3258-b2ee-6cb44510c7fb',
     tag: 'MEDLEMSKAP_OPPHOLDSTILLATELSE',
     sporsmalstekst: 'Har du oppholdstillatelse fra Utlendingsdirektoratet?',
@@ -424,9 +424,9 @@ export const medlemskapOppholdstillatelseSporsmal: RSSporsmal = {
             ],
         },
     ],
-}
+})
 
-export const medlemskapOppholdstillatelseV2Sporsmal: RSSporsmal = {
+export const medlemskapOppholdstillatelseV2Sporsmal = (): RSSporsmal => ({
     id: '17e3eda5-3895-3258-b2ee-6cb44510c7fb',
     tag: 'MEDLEMSKAP_OPPHOLDSTILLATELSE_V2',
     sporsmalstekst: 'Har Utlendingsdirektoratet gitt deg en oppholdstillatelse før 1. mai 2024?',
@@ -462,4 +462,4 @@ export const medlemskapOppholdstillatelseV2Sporsmal: RSSporsmal = {
             undersporsmal: [],
         },
     ],
-}
+})

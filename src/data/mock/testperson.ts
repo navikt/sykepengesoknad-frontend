@@ -2,10 +2,12 @@ import { logger } from '@navikt/next-logger'
 
 import { jsonDeepCopy } from '../../utils/json-deep-copy'
 
-import { brukertestPerosn } from './data/personas/brukertestPerosn'
+import { validerSoknadsperiode } from './utils/valider-soknadsperiode'
+import { validerSporsmalIder } from './utils/valider-sporsmal-ider'
+import { brukertestPerson } from './data/personas/brukertest'
 import { eldreUsendtSoknad, flereEldreUsendteSoknader } from './data/personas/eldre-usendt-soknad'
-import { reisetilskuddTestPerson } from './data/personas/reisetilskuddTestPerson'
-import { enUsendtSykmelding, toUsendteSykmeldinger } from './data/usendte-sykmeldinger'
+import { reisetilskuddTestPerson } from './data/personas/reisetilskudd-test'
+import { enUsendtSykmelding, toUsendteSykmeldinger } from './data/personas/usendte-sykmeldinger'
 import {
     arbeidsledigPerson,
     arbeidstakerGradertPerson,
@@ -32,8 +34,8 @@ import {
     utenDataPerson,
     utlandPerson,
 } from './data/personas/personas'
-import { utenlandskSykmeldingPerson } from './data/utenlandsk-sykmelding-person'
-import { yrkesskadePerson, yrkesskadeV2Person } from './data/yrkesskade'
+import { utenlandskSykmeldingPerson } from './data/personas/utenlandsk-sykmelding'
+import { yrkesskadePerson, yrkesskadeV2Person } from './data/personas/yrkesskade'
 import { egenmeldingSykmeldingaPerson } from './data/personas/egenmeldingsdager-i-sykmeldingen'
 import { selvstendigNaringsdrivende } from './data/personas/naringsdrivende'
 import { korrigeringsfristUtloptPerson } from './data/personas/korrigeringsfrist-utlopt'
@@ -41,7 +43,7 @@ import { medlemskapPerson } from './data/personas/medlemskap'
 import { fiskePerson } from './data/personas/fisker'
 import { kjenteInntektskilderPerson } from './data/personas/kjente-inntektskilder'
 import { innenforArbeidsgiverPeriodenPerson } from './data/personas/innenfor-ag-periode'
-import { oppholdUtenforEosPerson } from './data/personas/opphold-utenfor-eos-person'
+import { oppholdUtenforEosPerson } from './data/personas/opphold-utenfor-eos'
 import { nyttArbeidsforholdPerson } from './data/personas/nytt-arbeidsforhold'
 import {
     fremtidigeFriskTilArbeidPerson,
@@ -138,6 +140,8 @@ export function testpersoner(): PersonaData {
                 throw Error(message)
             }
             soknadsIder.add(soknad.id)
+            validerSoknadsperiode(soknad)
+            validerSporsmalIder(soknad)
         })
     })
 
@@ -184,7 +188,7 @@ function skjultePersoner(): PersonaData {
         ['fta-to-fremtidige']: jsonDeepCopy(fremtidigeFriskTilArbeidPerson),
         ['fta-siste']: jsonDeepCopy(sisteSoknadFriskTilArbeidPerson),
         ['julesoknad']: jsonDeepCopy(julesoknadPerson),
-        ['brukertest']: jsonDeepCopy(brukertestPerosn),
+        ['brukertest']: jsonDeepCopy(brukertestPerson),
         ['har-kontonummer']: jsonDeepCopy(harKontonummerPerson),
         ['har-ikke-kontonummer']: jsonDeepCopy(harIkkeKontonummerPerson),
         ['tilbakedateringer']: jsonDeepCopy(tilbakedateringer()),

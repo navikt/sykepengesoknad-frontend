@@ -1,75 +1,39 @@
 import { RSSoknad } from '../../../../types/rs-types/rs-soknad'
+import { arbeidsgiverUtland } from '../sporsmal/arbeidsgiver-utland'
+import { avklaringIfbmReise } from '../sporsmal/avklaring-ifbm-reise'
+import { ferieUtland } from '../sporsmal/ferie-utland'
+import { land } from '../sporsmal/land'
 import { oppsummering } from '../sporsmal/oppsummering'
-import { avklaringIfbmReise } from '../sporsmal/avklaringIfbmReise'
+import { periodeUtland } from '../sporsmal/periodeutland'
+
+const fom = null
+const tom = null
+const arbeidsgiver = null
+const oppholdFom = '2020-03-03'
+const oppholdTom = '2020-12-31'
 
 export const oppholdUtland: RSSoknad = {
     id: 'b9d67b0d-b1f8-44a5-bcbd-6010b60b90ce',
     sykmeldingId: null,
     soknadstype: 'OPPHOLD_UTLAND',
     status: 'NY',
-    fom: null,
-    tom: null,
+    fom,
+    tom,
     opprettetDato: '2020-06-03',
     sendtTilNAVDato: null,
     sendtTilArbeidsgiverDato: null,
     avbruttDato: null,
     startSykeforlop: null,
     sykmeldingUtskrevet: null,
-    arbeidsgiver: null,
+    arbeidsgiver,
     korrigerer: null,
     korrigertAv: null,
     arbeidssituasjon: null,
     soknadPerioder: [],
     sporsmal: [
-        {
-            id: 'eafa7256-2486-419c-96d9-d077418fa8a2',
-            tag: 'LAND',
-            sporsmalstekst: 'Hvor skal du reise?',
-            undertekst: 'Du kan velge flere land.',
-            svartype: 'COMBOBOX_MULTI',
-            min: null,
-            max: '50',
-            kriterieForVisningAvUndersporsmal: null,
-            svar: [],
-            undersporsmal: [],
-        },
-        {
-            id: 'f1a37307-c8e9-4370-9de1-98845088919c',
-            tag: 'PERIODEUTLAND',
-            sporsmalstekst: 'Når skal du reise?',
-            undertekst: null,
-            svartype: 'PERIODER',
-            min: '2020-03-03',
-            max: '2020-12-31',
-            kriterieForVisningAvUndersporsmal: null,
-            svar: [],
-            undersporsmal: [],
-        },
-        {
-            id: 'acd5a489-2624-40c3-8dd1-a651b41b25aa',
-            tag: 'ARBEIDSGIVER',
-            sporsmalstekst: 'Har du én eller flere arbeidsgivere?',
-            undertekst: null,
-            svartype: 'JA_NEI',
-            min: null,
-            max: null,
-            kriterieForVisningAvUndersporsmal: 'JA',
-            svar: [],
-            undersporsmal: [
-                {
-                    id: '43389c36-d107-4ad2-a06b-26831bd84bdc',
-                    tag: 'FERIE',
-                    sporsmalstekst: 'Har du avtalt med arbeidsgiveren din at du skal ta ut feriedager i hele perioden?',
-                    undertekst: null,
-                    svartype: 'JA_NEI',
-                    min: null,
-                    max: null,
-                    kriterieForVisningAvUndersporsmal: null,
-                    svar: [],
-                    undersporsmal: [],
-                },
-            ],
-        },
+        land(),
+        periodeUtland({ fom: oppholdFom, tom: oppholdTom }),
+        arbeidsgiverUtland({ undersporsmal: [ferieUtland()] }),
         avklaringIfbmReise(),
         oppsummering(),
     ],

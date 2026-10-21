@@ -44,7 +44,7 @@ test.describe('Tester arbeidstakersøknad - 100%', () => {
                 page.getByText(
                     'Siden sykemeldingen går over 31 dager, har vi delt opp søknaden, slik at du kan søke om sykepenger før hele perioden er ferdig. På den måten slipper du å vente lenge på sykepengene dine.',
                 ),
-            ).toBeVisible()
+            ).toBeHidden()
 
             await page.getByText('Slik behandler NAV personopplysningene dine').click()
 

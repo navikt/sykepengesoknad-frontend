@@ -1,4 +1,4 @@
-import { deepcopyMedNyId } from '../../deepcopyMedNyId'
+import { deepcopyMedNyId } from '../../utils/deepcopy-med-ny-id'
 import {
     medlemskapOppholdstillatelseSporsmal,
     medlemskapOppholdstillatelseV2Sporsmal,
@@ -8,7 +8,7 @@ import {
 } from '../sporsmal/medlemskap'
 
 import { Persona } from './personas'
-import { brukertestSoknad, brukertestSykmelding } from './brukertestPerosn'
+import { brukertestSoknad, brukertestSykmelding } from './brukertest'
 
 const medlemskapOriginalOppholdstillatelse = deepcopyMedNyId(brukertestSoknad, '7fdc72b9-30a9-435c-9eb1-f7cc68a8b429')
 const oppholdUtlandSpm = medlemskapOriginalOppholdstillatelse.sporsmal.find(
@@ -31,11 +31,11 @@ if (splittSted === -1) {
 }
 medlemskapOriginalOppholdstillatelse.sporsmal = [
     ...medlemskapOriginalOppholdstillatelse.sporsmal.slice(0, splittSted + 1),
-    medlemskapUtførtArbeidUtenforNorgeSporsmal,
-    medlemskapOppholdUtenforNorgeSporsmal,
-    medlemskapOppholdUtenforEøsSporsmal,
+    medlemskapUtførtArbeidUtenforNorgeSporsmal(),
+    medlemskapOppholdUtenforNorgeSporsmal(),
+    medlemskapOppholdUtenforEøsSporsmal(),
     oppholdUtlandSpm,
-    medlemskapOppholdstillatelseSporsmal,
+    medlemskapOppholdstillatelseSporsmal(),
     ...medlemskapOriginalOppholdstillatelse.sporsmal.slice(splittSted + 1),
 ]
 
@@ -55,7 +55,7 @@ medlemskapOppholdstillatelsePermanent.sporsmal = medlemskapOppholdstillatelsePer
 // Setter inn nytt spørsmål om oppholdstllatelse der hvor det gamle var.
 medlemskapOppholdstillatelsePermanent.sporsmal = [
     ...medlemskapOppholdstillatelsePermanent.sporsmal.slice(0, oppholdstillatelseIndex),
-    medlemskapOppholdstillatelseV2Sporsmal,
+    medlemskapOppholdstillatelseV2Sporsmal(),
     ...medlemskapOppholdstillatelsePermanent.sporsmal.slice(oppholdstillatelseIndex),
 ]
 

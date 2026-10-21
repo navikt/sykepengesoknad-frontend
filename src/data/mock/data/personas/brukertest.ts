@@ -1,4 +1,4 @@
-import { skapSoknad, skapSykmelding } from '../testadataGeneratorFunksjoner'
+import { skapSoknad, skapSykmelding } from '../lag-sykmelding-og-soknad'
 
 import { Persona } from './personas'
 
@@ -45,7 +45,7 @@ export const brukertestSoknad = lagBrukertestSoknad({
     soknadId: '963e816f-7b3c-4513-818b-95595d84dd91',
 })
 
-export const brukertestPerosn: Persona = {
+export const brukertestPerson: Persona = {
     soknader: [brukertestSoknad],
     sykmeldinger: [brukertestSykmelding],
     kontonummer: '12340000000',

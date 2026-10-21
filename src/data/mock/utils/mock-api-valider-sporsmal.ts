@@ -1,7 +1,7 @@
 import { logger } from '@navikt/next-logger'
 
-import { RSSporsmal } from '../../types/rs-types/rs-sporsmal'
-import { RSSvar } from '../../types/rs-types/rs-svar'
+import { RSSporsmal } from '../../../types/rs-types/rs-sporsmal'
+import { RSSvar } from '../../../types/rs-types/rs-svar'
 
 export function mockApiValiderSporsmal(sporsmal: RSSporsmal): boolean {
     try {

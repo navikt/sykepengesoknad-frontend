@@ -1,9 +1,7 @@
-import { v4 } from 'uuid'
-
 import { RSSporsmal } from '../../../../types/rs-types/rs-sporsmal'
 
-export const naringsdrivendeOpprettholdtInntekt: RSSporsmal = {
-    id: v4().toString(),
+export const naringsdrivendeOpprettholdtInntekt = (): RSSporsmal => ({
+    id: '5aa03428-93d2-4f4b-bd4c-a39c0166328c',
     tag: 'NARINGSDRIVENDE_OPPRETTHOLDT_INNTEKT',
     sporsmalstekst: 'Hadde du inntekt i virksomheten din selv om du var 100 % sykmeldt og ikke jobbet selv?',
     undertekst: 'For eksempel inntekter fra utleie eller arbeid utført av en vikar.',
@@ -13,10 +11,10 @@ export const naringsdrivendeOpprettholdtInntekt: RSSporsmal = {
     kriterieForVisningAvUndersporsmal: null,
     svar: [],
     undersporsmal: [],
-}
+})
 
-export const naringsdrivendeOpprettholdtInntektGradert: RSSporsmal = {
-    id: v4().toString(),
+export const naringsdrivendeOpprettholdtInntektGradert = (): RSSporsmal => ({
+    id: '259421e1-17d4-49ea-bd41-be13f124873d',
     tag: 'NARINGSDRIVENDE_OPPRETTHOLDT_INNTEKT_GRADERT',
     sporsmalstekst:
         'Hadde du inntekt i virksomheten din mens du var sykmeldt 8.–15. april 2024, som ikke var et resultat av at du selv jobbet?',
@@ -27,10 +25,10 @@ export const naringsdrivendeOpprettholdtInntektGradert: RSSporsmal = {
     kriterieForVisningAvUndersporsmal: null,
     svar: [],
     undersporsmal: [],
-}
+})
 
-export const naringsdrivendeOppholdIUtlandet: RSSporsmal = {
-    id: v4().toString(),
+export const naringsdrivendeOppholdIUtlandet = (): RSSporsmal => ({
+    id: '81769d4c-990e-4016-b363-497125c837bb',
     tag: 'NARINGSDRIVENDE_OPPHOLD_I_UTLANDET',
     sporsmalstekst: 'Har du vært i utlandet i løpet av de siste 12 månedene før du ble sykmeldt 1.mai 2025?',
     undertekst: 'Du kan se bort ifra opphold som varte kortere enn 5 uker.',
@@ -40,10 +38,10 @@ export const naringsdrivendeOppholdIUtlandet: RSSporsmal = {
     kriterieForVisningAvUndersporsmal: null,
     svar: [],
     undersporsmal: [],
-}
+})
 
-export const naringsdrivendeVirksomhetenAvviklet: RSSporsmal = {
-    id: v4().toString(),
+export const naringsdrivendeVirksomhetenAvviklet = (): RSSporsmal => ({
+    id: '56e94bc1-d914-4f39-9151-d3e00cf795e0',
     tag: 'NARINGSDRIVENDE_VIRKSOMHETEN_AVVIKLET',
     sporsmalstekst: 'Avviklet du virksomheten din før du ble sykmeldt 1.mai 2025?',
     undertekst: null,
@@ -54,7 +52,7 @@ export const naringsdrivendeVirksomhetenAvviklet: RSSporsmal = {
     svar: [],
     undersporsmal: [
         {
-            id: v4().toString(),
+            id: 'b86450cb-67dc-46a0-a00a-2d21afc7aa45',
             tag: 'NARINGSDRIVENDE_VIRKSOMHETEN_AVVIKLET_DATO',
             sporsmalstekst: 'Når avviklet du virksomheten din?',
             undertekst: null,
@@ -66,10 +64,10 @@ export const naringsdrivendeVirksomhetenAvviklet: RSSporsmal = {
             undersporsmal: [],
         },
     ],
-}
+})
 
-export const naringsdrivendeNyIArbeidslivet: RSSporsmal = {
-    id: v4().toString(),
+export const naringsdrivendeNyIArbeidslivet = (): RSSporsmal => ({
+    id: '20fb077c-2b2b-4219-9ecb-8857cddcc3af',
     tag: 'NARINGSDRIVENDE_NY_I_ARBEIDSLIVET',
     sporsmalstekst: 'Har du blitt yrkesaktiv mellom 1.januar 2020 og frem til du ble sykmeldt 1.mai 2025?',
     undertekst: null,
@@ -80,7 +78,7 @@ export const naringsdrivendeNyIArbeidslivet: RSSporsmal = {
     svar: [],
     undersporsmal: [
         {
-            id: v4().toString(),
+            id: 'cb5c9a31-ff8b-4790-901a-529f3f7a8f8e',
             tag: 'NARINGSDRIVENDE_NY_I_ARBEIDSLIVET_DATO',
             sporsmalstekst: 'Når ble du yrkesaktiv?',
             undertekst: null,
@@ -92,10 +90,10 @@ export const naringsdrivendeNyIArbeidslivet: RSSporsmal = {
             undersporsmal: [],
         },
     ],
-}
+})
 
-export const naringsdrivendeVarigEndring: RSSporsmal = {
-    id: v4().toString(),
+export const naringsdrivendeVarigEndring = (): RSSporsmal => ({
+    id: '4329a0f1-4c23-425c-9b41-54de293355de',
     tag: 'NARINGSDRIVENDE_VARIG_ENDRING',
     sporsmalstekst:
         'Har det skjedd en varig endring i arbeidssituasjonen din mellom 1.januar 2020 og frem til du ble sykmeldt 1.mai 2025?',
@@ -107,7 +105,7 @@ export const naringsdrivendeVarigEndring: RSSporsmal = {
     svar: [],
     undersporsmal: [
         {
-            id: v4().toString(),
+            id: 'da8abd16-6672-4441-ba0e-5a7175c0be84',
             tag: 'NARINGSDRIVENDE_VARIG_ENDRING_TYPE',
             sporsmalstekst: 'Hvilken varig endring har skjedd?',
             undertekst: 'Du kan velge et eller flere alternativer',
@@ -118,7 +116,7 @@ export const naringsdrivendeVarigEndring: RSSporsmal = {
             svar: [],
             undersporsmal: [
                 {
-                    id: v4().toString(),
+                    id: 'e6da15e7-5348-464a-823b-43a28e9b9402',
                     tag: 'NARINGSDRIVENDE_VARIG_ENDRING_TYPE_NY_VIRKSOMHET',
                     sporsmalstekst: 'Opprettet en ny virksomhet',
                     undertekst: null,
@@ -130,7 +128,7 @@ export const naringsdrivendeVarigEndring: RSSporsmal = {
                     undersporsmal: [],
                 },
                 {
-                    id: v4().toString(),
+                    id: 'd8fe9455-6a86-4422-9908-e09955b76de6',
                     tag: 'NARINGSDRIVENDE_VARIG_ENDRING_TYPE_AVVIKLET_VIRKSOMHET',
                     sporsmalstekst: 'Avviklet en virksomhet',
                     undertekst: null,
@@ -142,7 +140,7 @@ export const naringsdrivendeVarigEndring: RSSporsmal = {
                     undersporsmal: [],
                 },
                 {
-                    id: v4().toString(),
+                    id: '617b6796-b981-4b1a-b394-dde7412ffca3',
                     tag: 'NARINGSDRIVENDE_VARIG_ENDRING_TYPE_JOBBET_MINDRE',
                     sporsmalstekst: 'Jobbet mindre i en virksomhet',
                     undertekst: null,
@@ -154,7 +152,7 @@ export const naringsdrivendeVarigEndring: RSSporsmal = {
                     undersporsmal: [],
                 },
                 {
-                    id: v4().toString(),
+                    id: '20c6827a-baa1-414b-93ad-24f039c8e6a7',
                     tag: 'NARINGSDRIVENDE_VARIG_ENDRING_TYPE_JOBBET_MER',
                     sporsmalstekst: 'Jobbet mer i en virksomhet',
                     undertekst: null,
@@ -166,7 +164,7 @@ export const naringsdrivendeVarigEndring: RSSporsmal = {
                     undersporsmal: [],
                 },
                 {
-                    id: v4().toString(),
+                    id: '904da26c-53e8-46fc-8e75-ed5d6e24eb54',
                     tag: 'NARINGSDRIVENDE_VARIG_ENDRING_TYPE_LAGT_OM',
                     sporsmalstekst: 'Lagt om en virksomhet',
                     undertekst: null,
@@ -178,7 +176,7 @@ export const naringsdrivendeVarigEndring: RSSporsmal = {
                     undersporsmal: [],
                 },
                 {
-                    id: v4().toString(),
+                    id: '10f39575-87c6-44be-af84-a7ae9822c27b',
                     tag: 'NARINGSDRIVENDE_VARIG_ENDRING_TYPE_KUNDEGRUNNLAG',
                     sporsmalstekst: 'Endret kundegrunnlag',
                     undertekst: null,
@@ -190,7 +188,7 @@ export const naringsdrivendeVarigEndring: RSSporsmal = {
                     undersporsmal: [],
                 },
                 {
-                    id: v4().toString(),
+                    id: '23ff1a62-dde9-450a-a8b4-f567f0074938',
                     tag: 'NARINGSDRIVENDE_VARIG_ENDRING_TYPE_ANNET',
                     sporsmalstekst: 'Annen endring',
                     undertekst: null,
@@ -204,7 +202,7 @@ export const naringsdrivendeVarigEndring: RSSporsmal = {
             ],
         },
         {
-            id: v4().toString(),
+            id: '420ddca4-b22f-4106-9a2e-bc8f819a3611',
             tag: 'NARINGSDRIVENDE_VARIG_ENDRING_DATO',
             sporsmalstekst: 'Når skjedde endringen?',
             undertekst: 'Vi skjønner at det kan være vanskelig å svare nøyaktig, men svar så godt du kan.',
@@ -216,4 +214,4 @@ export const naringsdrivendeVarigEndring: RSSporsmal = {
             undersporsmal: [],
         },
     ],
-}
+})
