@@ -14,7 +14,8 @@ import {
     naringsdrivendeVirksomhetenAvviklet,
 } from '../sporsmal/naringsdrivende'
 import { fiskerLottOpprettholdtInntekt } from '../sporsmal/fisker-lott-opprettholdt-inntekt'
-import { oppholdUtland } from './opphold-utland'
+import { RSFiskerBlad } from '../../../../types/rs-types/rs-fiskerblad'
+import { RSFiskerLottOgHyre } from '../../../../types/rs-types/rs-fiskerlottoghyre'
 
 const fom = '2020-04-01'
 const tom = '2020-04-24'
@@ -55,6 +56,8 @@ const soknadData = {
     egenmeldtSykmelding: false,
     opprettetAvInntektsmelding: false,
     klippet: false,
+    fiskerBlad: RSFiskerBlad.B,
+    fiskerLottOgHyre: RSFiskerLottOgHyre.BEGGE,
 }
 
 export const fiskerLottOgHyre: RSSoknad = {
