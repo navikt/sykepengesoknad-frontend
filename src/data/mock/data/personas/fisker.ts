@@ -15,6 +15,7 @@ import { tilbakeIArbeid } from '../sporsmal/tilbake-i-arbeid'
 import { tilSlutt } from '../sporsmal/til-slutt'
 
 import { Persona } from './personas'
+import { fiskerLottOgHyre } from '../soknad/fisker-lott-og-hyre'
 
 const fom = '2024-01-16'
 const tom = '2024-01-22'
@@ -96,7 +97,7 @@ const soknad: RSSoknad = {
     forstegangssoknad: true,
 }
 
-const sykmelding = new Sykmelding({
+export const fiskerLottOgHyreSykmelding = new Sykmelding({
     id: '7cbdefcc-0969-4da1-97b3-5989fbf89c68',
     pasient: {
         fnr: '23909698111',
@@ -282,7 +283,10 @@ const sykmelding = new Sykmelding({
 })
 
 export const fiskePerson: Persona = {
-    soknader: [{ ...soknad, demoinfo: 'Fisker på hyre og lott' }],
-    sykmeldinger: [sykmelding],
+    soknader: [
+        { ...soknad, demoinfo: 'Fisker på lott' },
+        { ...fiskerLottOgHyre, demoinfo: '100 % sykmeldt fisker med lott og hyre' },
+    ],
+    sykmeldinger: [fiskerLottOgHyreSykmelding],
     beskrivelse: 'Fisker',
 }

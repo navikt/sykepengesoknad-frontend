@@ -14,6 +14,7 @@ import { medlemskapMapping } from './medlemskap/mapping'
 import { fellesMapping } from './felles/mapping'
 import { ftaMapping } from './friskmeldt-til-arbeidsformidling/mapping'
 import { reisetilskuddMapping } from './reisetilskudd/mapping'
+import { fiskereMapping } from './fiskere/mapping'
 
 export interface ReadmoreTittelOgKomponent {
     tittel: string
@@ -51,6 +52,7 @@ export const EkspanderbarHjelp = ({ sporsmal, mb }: { sporsmal: Sporsmal; mb?: s
 
     const sporsmalTagTilReadmoreMapping: Record<string, ReadmoreTittelOgKomponent> = {
         ...fellesMapping(),
+        ...fiskereMapping(),
         ...arbeidstakerMapping(),
         ...naringsdrivendeMapping(),
         ...medlemskapMapping(),

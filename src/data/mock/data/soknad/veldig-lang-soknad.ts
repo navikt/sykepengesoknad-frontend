@@ -22,6 +22,8 @@ import {
 } from '../sporsmal/naringsdrivende'
 import { nyttArbeidsforholdSporsmal } from '../sporsmal/nytt-arbeidsforhold'
 import { avklaringIfbmReise } from '../sporsmal/avklaring-ifbm-reise'
+import { fiskerLottOpprettholdtInntekt } from '../sporsmal/fisker-lott-opprettholdt-inntekt'
+import { fiskerLottOpprettholdtInntektGradert } from '../sporsmal/fisker-lott-opprettholdt-inntekt-gradert'
 import { flereInntektskilderGhost } from '../sporsmal/flere-inntektskilder-ghost'
 import { andreInntektskilderV2 } from '../sporsmal/andre-inntektskilder-v2'
 import { ansvarserklaring } from '../sporsmal/ansvarserklaring'
@@ -276,6 +278,8 @@ export const veldigLangSoknad: RSSoknad = {
             tom: '2025-04-28',
         }),
         fravarForSykmeldingenV2({ fom }),
+        fiskerLottOpprettholdtInntekt(),
+        fiskerLottOpprettholdtInntektGradert(),
         flereInntektskilderGhost(),
         oppsummering(),
     ]),

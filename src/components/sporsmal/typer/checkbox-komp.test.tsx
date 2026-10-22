@@ -6,7 +6,8 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import React from 'react'
 
 import { flereInntektskilderGhost } from '../../../data/mock/data/sporsmal/flere-inntektskilder-ghost'
-import { skapSporsmal } from '../../../types/mapping'
+import { rsToSoknad, skapSporsmal } from '../../../types/mapping'
+import { arbeidstakerFlereInntektskilderGhost } from '../../../data/mock/data/soknad/arbeidstaker-flere-inntektskilder-ghost'
 import { Sporsmal } from '../../../types/types'
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
 import SporsmalSwitch from '../sporsmal-switch'
@@ -17,12 +18,10 @@ import CheckboxKomp from './checkbox-komp'
 // Vi mocker den slik at hele spørsmålstreet kan rendres uten en ekte QueryClientProvider/router-oppsett.
 vi.mock('../../../hooks/useSoknadMedDetaljer', () => ({
     useSoknadMedDetaljer: () => ({
-        valgtSoknad: {
-            soknadstype: 'ARBEIDSTAKERE',
-            status: 'NY',
-            inntektskilderDataFraInntektskomponenten: undefined,
-            kjentOppholdstillatelse: undefined,
-        },
+        valgtSoknad: rsToSoknad({
+            ...arbeidstakerFlereInntektskilderGhost,
+            ghostInntekter: undefined,
+        }),
     }),
 }))
 

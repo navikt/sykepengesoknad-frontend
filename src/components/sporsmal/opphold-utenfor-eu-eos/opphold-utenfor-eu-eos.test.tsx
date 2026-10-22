@@ -1,13 +1,7 @@
 import { render, screen } from '@testing-library/react'
 import { describe, expect, it } from 'vitest'
 import { FormProvider, useForm } from 'react-hook-form'
-
-import { RSSoknadstypeType } from '../../../types/rs-types/rs-soknadstype'
-
 import { OppholdUtenforEUEOS } from './opphold-utenfor-eu-eos'
-
-const selvstendigType: RSSoknadstypeType = 'SELVSTENDIGE_OG_FRILANSERE'
-const arbeidstakerType: RSSoknadstypeType = 'ARBEIDSTAKERE'
 
 function Wrapper({ children }: { children: React.ReactNode }) {
     const methods = useForm()
@@ -16,7 +10,7 @@ function Wrapper({ children }: { children: React.ReactNode }) {
 
 describe('OppholdUtenforEUEOS', () => {
     it('viser ReadMore for selvstendig næringsdrivende', () => {
-        render(<OppholdUtenforEUEOS soknadstype={selvstendigType} />, { wrapper: Wrapper })
+        render(<OppholdUtenforEUEOS erSelvstendig={true} />, { wrapper: Wrapper })
         expect(
             screen.getByText(/Var reisen en behandlingsreise i regi av Oslo Universitetssykehus/),
         ).toBeInTheDocument()
@@ -24,7 +18,7 @@ describe('OppholdUtenforEUEOS', () => {
     })
 
     it('viser Accordion for arbeidstaker', () => {
-        render(<OppholdUtenforEUEOS soknadstype={arbeidstakerType} />, { wrapper: Wrapper })
+        render(<OppholdUtenforEUEOS erSelvstendig={false} />, { wrapper: Wrapper })
         expect(screen.getByText(/Var reisen i forbindelse med ferie/)).toBeInTheDocument()
         expect(
             screen.getByText(/Var reisen en behandlingsreise i regi av Oslo Universitetssykehus/),

@@ -538,16 +538,30 @@ test.describe('Tester støtte for gamle spørsmål', () => {
         await klikkGaVidere(page)
     })
 
-    test('Side 60 - FLERE_INNTEKTSKILDER_GHOST', async ({ page }) => {
+    test('Side 60 - FISKER_LOTT_OPPRETTHOLDT_INNTEKT', async ({ page }) => {
         await page.goto(`/syk/sykepengesoknad/soknader/${soknad.id}/60?testperson=integrasjon-soknader`)
+        await svarNeiHovedsporsmal(page)
+
+        await klikkGaVidere(page)
+    })
+
+    test('Side 61 - FISKER_LOTT_OPPRETTHOLDT_INNTEKT_GRADERT', async ({ page }) => {
+        await page.goto(`/syk/sykepengesoknad/soknader/${soknad.id}/61?testperson=integrasjon-soknader`)
+        await svarNeiHovedsporsmal(page)
+
+        await klikkGaVidere(page)
+    })
+
+    test('Side 62 - FLERE_INNTEKTSKILDER_GHOST', async ({ page }) => {
+        await page.goto(`/syk/sykepengesoknad/soknader/${soknad.id}/62?testperson=integrasjon-soknader`)
         await svarJaHovedsporsmal(page)
         await velgCheckbox(page, 'Blomsterbutikken AS')
         await svarRadio(page, 'Har du hatt annen inntekt eller oppdrag?', 'NEI')
         await klikkGaVidere(page)
     })
 
-    test('Side 61 - Oppsummering, innnsendig og kvittering', async ({ page }) => {
-        await page.goto(`/syk/sykepengesoknad/soknader/${soknad.id}/61?testperson=integrasjon-soknader`)
+    test('Side 63 - Oppsummering, innnsendig og kvittering', async ({ page }) => {
+        await page.goto(`/syk/sykepengesoknad/soknader/${soknad.id}/63?testperson=integrasjon-soknader`)
         await harSynligTittel(page, 'Oppsummering', 1)
         await validerAxeUtilityWrapper(page, test.info())
 
