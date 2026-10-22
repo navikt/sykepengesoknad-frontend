@@ -16,6 +16,7 @@ import { tilSlutt } from '../sporsmal/til-slutt'
 
 import { Persona } from './personas'
 import { fiskerLottOgHyre } from '../soknad/fisker-lott-og-hyre'
+import { fiskerHyre } from '../soknad/fisker-hyre'
 import { RSFiskerBlad } from '../../../../types/rs-types/rs-fiskerblad'
 import { RSFiskerLottOgHyre } from '../../../../types/rs-types/rs-fiskerlottoghyre'
 
@@ -289,7 +290,8 @@ export const fiskerLottOgHyreSykmelding = new Sykmelding({
 export const fiskePerson: Persona = {
     soknader: [
         { ...soknad, demoinfo: 'Fisker på lott' },
-        { ...fiskerLottOgHyre, demoinfo: '100 % sykmeldt fisker med lott og hyre' },
+        { ...fiskerLottOgHyre, demoinfo: 'Fisker med lott og hyre uten arbeidsgiver' },
+        { ...fiskerHyre, demoinfo: 'Fisker med hyre uten arbeidsgiver' },
     ],
     sykmeldinger: [fiskerLottOgHyreSykmelding],
     beskrivelse: 'Fisker',
