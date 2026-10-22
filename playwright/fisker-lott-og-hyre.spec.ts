@@ -36,6 +36,7 @@ test.describe('Fisker med lott og hyre', () => {
         await neiOgVidere(page, [
             'Andre inntektskilder',
             'Reise utenfor EU/EØS',
+            'Opphold i utlandet',
             'Virksomheten din',
             'Ny i arbeidslivet',
             'Endringer i arbeidsituasjonen din',

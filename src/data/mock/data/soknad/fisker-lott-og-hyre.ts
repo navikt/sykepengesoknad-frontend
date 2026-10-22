@@ -9,10 +9,12 @@ import { permisjonV2 } from '../sporsmal/permisjon-v2'
 import { tilbakeIArbeid } from '../sporsmal/tilbake-i-arbeid'
 import {
     naringsdrivendeNyIArbeidslivet,
+    naringsdrivendeOppholdIUtlandet,
     naringsdrivendeVarigEndring,
     naringsdrivendeVirksomhetenAvviklet,
 } from '../sporsmal/naringsdrivende'
 import { fiskerLottOpprettholdtInntekt } from '../sporsmal/fisker-lott-opprettholdt-inntekt'
+import { oppholdUtland } from './opphold-utland'
 
 const fom = '2020-04-01'
 const tom = '2020-04-24'
@@ -26,6 +28,7 @@ const standardSporsmal = [
     fiskerLottOpprettholdtInntekt(),
     andreInntektskilderV2(),
     oppholdUtenforEos({ fom, tom }),
+    naringsdrivendeOppholdIUtlandet(),
     naringsdrivendeVirksomhetenAvviklet(),
     naringsdrivendeNyIArbeidslivet(),
     naringsdrivendeVarigEndring(),
