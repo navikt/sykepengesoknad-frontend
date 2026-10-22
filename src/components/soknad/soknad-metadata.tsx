@@ -5,7 +5,7 @@ import { Soknad } from '../../types/types'
 import { RSSoknadsperiode } from '../../types/rs-types/rs-soknadsperiode'
 import { tilLesbarPeriodeMedArstall } from '../../utils/dato-utils'
 import { RSArbeidssituasjon } from '../../types/rs-types/rs-arbeidssituasjon'
-import useSykmelding from '../../hooks/useSykmelding'
+import { RSFiskerLottOgHyre } from '../../types/rs-types/rs-fiskerlottoghyre'
 
 const arbeidssituasjonTekst: Record<RSArbeidssituasjon, string> = {
     [RSArbeidssituasjon.NAERINGSDRIVENDE]: 'selvstendig næringsdrivende',
@@ -32,8 +32,6 @@ const PeriodeListe = ({ perioder }: { perioder: ReadonlyArray<RSSoknadsperiode> 
 )
 
 export const SoknadMetadata = ({ soknad }: { soknad: Soknad }) => {
-    const { data: sykmelding } = useSykmelding(soknad.sykmeldingId)
-
     const metadataLabel = (): string => (soknad.arbeidsgiver?.navn ? 'Sykmeldt fra' : 'Sykmeldt som')
 
     const metadataVerdi = (): string => {
@@ -41,10 +39,14 @@ export const SoknadMetadata = ({ soknad }: { soknad: Soknad }) => {
             return soknad.arbeidsgiver.navn
         }
         if (soknad.arbeidssituasjon === RSArbeidssituasjon.FISKER) {
-            const lottOgHyre = sykmelding?.sykmeldingStatus.brukerSvar?.fisker?.lottOgHyre.svar
-            if (lottOgHyre === 'LOTT') return 'fisker med lott'
-            if (lottOgHyre === 'HYRE') return 'fisker med hyre'
-            if (lottOgHyre === 'BEGGE') return 'fisker med lott og hyre'
+            switch (soknad.fiskerLottOgHyre) {
+                case RSFiskerLottOgHyre.LOTT:
+                    return 'fisker med lott'
+                case RSFiskerLottOgHyre.HYRE:
+                    return 'fisker med hyre'
+                case RSFiskerLottOgHyre.BEGGE:
+                    return 'fisker med lott og hyre'
+            }
         }
         return soknad.arbeidssituasjon ? arbeidssituasjonTekst[soknad.arbeidssituasjon] : ''
     }

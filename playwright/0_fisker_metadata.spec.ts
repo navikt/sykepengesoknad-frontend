@@ -1,7 +1,7 @@
 import { test } from '@playwright/test'
 
 import { harSynligTekst } from './utils/utilities'
-import { fiskerLottOgHyre } from '../src/data/mock/data/soknad/fisker-lott-og-hyre.ts'
+import { fiskerLottOgHyre } from '../src/data/mock/data/soknad/fisker-lott-og-hyre'
 
 const soknadId = fiskerLottOgHyre.id
 

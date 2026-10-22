@@ -16,6 +16,8 @@ import { tilSlutt } from '../sporsmal/til-slutt'
 
 import { Persona } from './personas'
 import { fiskerLottOgHyre } from '../soknad/fisker-lott-og-hyre'
+import { RSFiskerBlad } from '../../../../types/rs-types/rs-fiskerblad'
+import { RSFiskerLottOgHyre } from '../../../../types/rs-types/rs-fiskerlottoghyre'
 
 const fom = '2024-01-16'
 const tom = '2024-01-22'
@@ -95,6 +97,8 @@ const soknad: RSSoknad = {
     utenlandskSykmelding: false,
     klippet: false,
     forstegangssoknad: true,
+    fiskerBlad: RSFiskerBlad.B,
+    fiskerLottOgHyre: RSFiskerLottOgHyre.LOTT,
 }
 
 export const fiskerLottOgHyreSykmelding = new Sykmelding({
