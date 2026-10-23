@@ -1,4 +1,4 @@
-import { Alert, BodyLong } from '@navikt/ds-react'
+import { BodyLong } from '@navikt/ds-react'
 import React from 'react'
 
 import { JulesoknadTekstIntroside } from '../julesoknad/julesoknad-infotekst'
@@ -13,6 +13,7 @@ import { IntroAccordion } from './intro-accordion'
 import { InfoOmTilbakedatering } from './info-om-tilbakedatering'
 import { Over70Aar } from './over-70'
 import { IntrosideFta } from './friskmeldt-til-arbeidsformidling/introside-fta'
+import NyAlertGammeltDesign, { Funksjon } from '../generelle-komponenter/NyAlertGammeltDesign'
 
 export function Introside() {
     const { valgtSoknad, valgtSykmelding } = useSoknadMedDetaljer()
@@ -40,9 +41,7 @@ export function Introside() {
             <IntroAccordion />
             {erJulesoknad && <JulesoknadTekstIntroside />}
             {oppdeltSoknadTekst !== '' && (
-                <Alert variant="info" className="mb-8">
-                    {oppdeltSoknadTekst}
-                </Alert>
+                <NyAlertGammeltDesign funksjon={Funksjon.info} className="mt-8" info={oppdeltSoknadTekst} />
             )}
             <InfoOmTilbakedatering />
             {valgtSykmelding?.pasient?.overSyttiAar && <Over70Aar />}

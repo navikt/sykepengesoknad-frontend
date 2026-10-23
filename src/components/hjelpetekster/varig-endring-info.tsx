@@ -1,16 +1,21 @@
-import { Alert, BodyShort } from '@navikt/ds-react'
+import { BodyShort } from '@navikt/ds-react'
 import React from 'react'
+import NyAlertGammeltDesign, { Funksjon } from '../generelle-komponenter/NyAlertGammeltDesign'
 
 import { Sporsmal } from '../../types/types'
 
 export function VarigEndringInfo({ sporsmal, jaNeiSvar }: { sporsmal: Sporsmal; jaNeiSvar: any }) {
     if (sporsmal.tag === 'NARINGSDRIVENDE_VARIG_ENDRING' && jaNeiSvar === 'JA') {
         return (
-            <Alert variant="info" className="mt-8">
-                <BodyShort spacing>
-                    Det kan være vi trenger mer dokumentasjon på dette. Da vil en saksbehandler ta kontakt med deg.
-                </BodyShort>
-            </Alert>
+            <NyAlertGammeltDesign
+                funksjon={Funksjon.info}
+                className="mt-8"
+                info={
+                    <BodyShort spacing>
+                        Det kan være vi trenger mer dokumentasjon på dette. Da vil en saksbehandler ta kontakt med deg.
+                    </BodyShort>
+                }
+            />
         )
     }
 

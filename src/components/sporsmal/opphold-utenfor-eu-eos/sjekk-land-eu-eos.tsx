@@ -1,6 +1,7 @@
 import { Controller } from 'react-hook-form'
-import { Alert, UNSAFE_Combobox } from '@navikt/ds-react'
+import { UNSAFE_Combobox } from '@navikt/ds-react'
 import React, { useMemo, useState } from 'react'
+import NyAlertGammeltDesign, { Funksjon } from '../../generelle-komponenter/NyAlertGammeltDesign'
 
 import { landlisteEøs, landlisteUtenforEøs } from '../landliste'
 
@@ -52,15 +53,19 @@ export const SjekkLandEuEos = () => {
                             />
 
                             {valgtLandIEOS.length > 0 && valgtLandUtenforEOS.length === 0 && (
-                                <Alert inline className="mt-8 bg-ax-bg-default" variant="info">
-                                    Du har ikke reist utenfor EU/EØS. Svar nei på dette spørsmålet.
-                                </Alert>
+                                <NyAlertGammeltDesign
+                                    funksjon={Funksjon.info}
+                                    className="mt-8 bg-ax-bg-default"
+                                    info="Du har ikke reist utenfor EU/EØS. Svar nei på dette spørsmålet."
+                                />
                             )}
 
                             {valgtLandUtenforEOS.length > 0 && (
-                                <Alert inline className="mt-8 bg-ax-bg-default" variant="info">
-                                    Du har reist utenfor EU/EØS.
-                                </Alert>
+                                <NyAlertGammeltDesign
+                                    funksjon={Funksjon.info}
+                                    className="mt-8 bg-ax-bg-default"
+                                    info="Du har reist utenfor EU/EØS."
+                                />
                             )}
                         </>
                     )

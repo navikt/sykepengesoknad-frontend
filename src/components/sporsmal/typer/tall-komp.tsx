@@ -1,4 +1,4 @@
-import { Alert, BodyShort, TextField } from '@navikt/ds-react'
+import { BodyShort, TextField } from '@navikt/ds-react'
 import React from 'react'
 import { useFormContext } from 'react-hook-form'
 
@@ -9,6 +9,7 @@ import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { hentFeilmelding } from '../sporsmal-utils'
 import { useSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
 import { Soknad } from '../../../types/types'
+import NyAlertGammeltDesign, { Funksjon } from '../../generelle-komponenter/NyAlertGammeltDesign'
 
 function removeCharacters(value: string) {
     return value.replace(/[^0-9.,]/g, '')
@@ -76,9 +77,11 @@ const TallKomp = ({ sporsmal }: SpmProps) => {
                 return (
                     <>
                         <BodyShort>{tekstDescription}</BodyShort>
-                        <Alert variant="warning" className="mt-2 bg-ax-bg-default border-0 p-0">
-                            {`Ikke ta med det du eventuelt tjente de dagene du hadde ${feriePermisjonTekst()} fra ${valgtSoknad?.arbeidsgiver?.navn}.`}
-                        </Alert>
+                        <NyAlertGammeltDesign
+                            funksjon={Funksjon.warning}
+                            className="mt-2 bg-ax-bg-default border-0 p-0"
+                            info={`Ikke ta med det du eventuelt tjente de dagene du hadde ${feriePermisjonTekst()} fra ${valgtSoknad?.arbeidsgiver?.navn}.`}
+                        />
                     </>
                 )
             }

@@ -1,5 +1,6 @@
-import { Alert, BodyLong, BodyShort, Heading } from '@navikt/ds-react'
+import { BodyLong, BodyShort, Heading } from '@navikt/ds-react'
 import React from 'react'
+import NyAlertGammeltDesign, { Funksjon } from '../generelle-komponenter/NyAlertGammeltDesign'
 
 import { useSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
 
@@ -51,11 +52,17 @@ export const InfoOmTilbakedatering = () => {
     if (!infotekst()) return null
 
     return (
-        <Alert variant="warning" className="mb-8">
-            <Heading level="3" spacing size="medium">
-                Viktig informasjon
-            </Heading>
-            {infotekst()}
-        </Alert>
+        <NyAlertGammeltDesign
+            funksjon={Funksjon.warning}
+            className="mt-8"
+            info={
+                <>
+                    <Heading level="3" spacing size="medium">
+                        Viktig informasjon
+                    </Heading>
+                    {infotekst()}
+                </>
+            }
+        />
     )
 }

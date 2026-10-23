@@ -6,6 +6,7 @@ import useSoknader from '../../../hooks/useSoknader'
 import { logEvent } from '../../umami/umami'
 import { useAvbryt } from '../../../hooks/useAvbryt'
 import { useSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
+import NyAlertGammeltDesign, { Funksjon } from '../../generelle-komponenter/NyAlertGammeltDesign'
 
 interface EndringUtenEndringModalProps {
     aapen: boolean
@@ -54,9 +55,11 @@ export const EndringUtenEndringModal = (props: EndringUtenEndringModalProps) => 
                         {tekst('endring-uten-endring.popup.ok')}
                     </Button>
                     {avbrytError && (
-                        <Alert variant="error" className="mt-4">
-                            {tekst('avbryt.feilet')}
-                        </Alert>
+                        <NyAlertGammeltDesign
+                            funksjon={Funksjon.danger}
+                            className="mt-8 bg-ax-bg-default"
+                            info={tekst('avbryt.feilet')}
+                        />
                     )}
                 </Modal.Body>
             </Modal>

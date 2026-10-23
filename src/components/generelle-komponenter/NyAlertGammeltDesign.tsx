@@ -12,7 +12,15 @@ export enum Funksjon {
     danger = 'danger',
 }
 
-export default function nyAlertGammeltDesign({ info, funksjon }: { info: ReactNode; funksjon: Funksjon }) {
+export default function nyAlertGammeltDesign({
+    info,
+    funksjon,
+    className = 'mt-4',
+}: {
+    info: ReactNode
+    funksjon: Funksjon
+    className?: string
+}) {
     type funksjonsdesign = {
         farge: InfoCardProps['data-color']
         ikon: ReactNode
@@ -37,7 +45,7 @@ export default function nyAlertGammeltDesign({ info, funksjon }: { info: ReactNo
     }
 
     return (
-        <InfoCard data-color={funksjonsutforming[funksjon].farge} className="mt-4">
+        <InfoCard data-color={funksjonsutforming[funksjon].farge} className={className}>
             <InfoCard.Message icon={funksjonsutforming[funksjon].ikon}>{info}</InfoCard.Message>
         </InfoCard>
     )

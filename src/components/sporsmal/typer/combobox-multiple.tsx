@@ -1,11 +1,12 @@
 import { Controller } from 'react-hook-form'
-import { Alert, UNSAFE_Combobox } from '@navikt/ds-react'
+import { UNSAFE_Combobox } from '@navikt/ds-react'
 import React, { useMemo } from 'react'
 
 import { landlisteEøs, landlisteUtenforEøs } from '../landliste'
 import { erLandIEuEos, erLandIEuEosEllerStorbritannia, erStorbritanniaLand } from '../land-utils'
 import { hentFeilmelding } from '../sporsmal-utils'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
+import NyAlertGammeltDesign, { Funksjon } from '../../generelle-komponenter/NyAlertGammeltDesign'
 
 export const hentAlertTekst = ({
     valgtLand,
@@ -39,6 +40,7 @@ export const hentAlertTekst = ({
     return undefined
 }
 
+//TODO: Alerten i denne hadde tidligere closebutton=true?
 const ComboboxMultiple = ({ sporsmal }: SpmProps) => {
     const feilmelding = hentFeilmelding(sporsmal)
     const utlandskSykmeldingTrygd = sporsmal.tag == 'UTENLANDSK_SYKMELDING_TRYGD_HVILKET_LAND'
@@ -101,9 +103,7 @@ const ComboboxMultiple = ({ sporsmal }: SpmProps) => {
                                 }}
                             />
                             {alertTekst && (
-                                <Alert className="mt-8" variant="info" closeButton={true}>
-                                    {alertTekst}
-                                </Alert>
+                                <NyAlertGammeltDesign funksjon={Funksjon.info} className="mt-8" info={alertTekst} />
                             )}
                         </>
                     )
