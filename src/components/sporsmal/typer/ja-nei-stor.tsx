@@ -24,9 +24,8 @@ import { logEvent } from '../../umami/umami'
 import { OppholdUtenforEUEOS } from '../opphold-utenfor-eu-eos/opphold-utenfor-eu-eos'
 import { NaringsdrivendeYrkesaktivInfo } from '../../hjelpetekster/yrkesaktiv-info'
 import { VarigEndringInfo } from '../../hjelpetekster/varig-endring-info'
-
 import { jaNeiStorStyle, JaNeiStyle } from './ja-nei-stor-style'
-import MerInfoAlert from '../../generelle-komponenter/MerInfoAlert'
+import NyAlertGammeltDesign, { Funksjon } from '../../generelle-komponenter/NyAlertGammeltDesign'
 
 const JaNeiStor = ({ sporsmal }: SpmProps) => {
     const {
@@ -145,13 +144,22 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
                 )}
 
                 {sporsmal.tag === 'FRAVAR_FOR_SYKMELDINGEN_V2' && watchJaNei === 'JA' && (
-                    <MerInfoAlert info="Det kan være vi trenger flere opplysninger om fraværet ditt. Da vil en saksbehandler ta kontakt." />
+                    <NyAlertGammeltDesign
+                        funksjon={Funksjon.info}
+                        info="Det kan være vi trenger flere opplysninger om fraværet ditt. Da vil en saksbehandler ta kontakt."
+                    />
                 )}
                 {sporsmal.tag === 'NARINGSDRIVENDE_OPPRETTHOLDT_INNTEKT' && watchJaNei === 'JA' && (
-                    <MerInfoAlert info="Vi trenger mer informasjon om denne inntekten. En saksbehandler vil derfor ta kontakt med deg." />
+                    <NyAlertGammeltDesign
+                        funksjon={Funksjon.info}
+                        info="Vi trenger mer informasjon om denne inntekten. En saksbehandler vil derfor ta kontakt med deg."
+                    />
                 )}
                 {sporsmal.tag === 'NARINGSDRIVENDE_OPPRETTHOLDT_INNTEKT_GRADERT' && watchJaNei === 'JA' && (
-                    <MerInfoAlert info="Vi trenger mer informasjon om denne inntekten. En saksbehandler vil derfor ta kontakt med deg." />
+                    <NyAlertGammeltDesign
+                        funksjon={Funksjon.info}
+                        info="Vi trenger mer informasjon om denne inntekten. En saksbehandler vil derfor ta kontakt med deg."
+                    />
                 )}
             </div>
 
@@ -167,7 +175,8 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
                         {valgtSoknad?.status === RSSoknadstatus.UTKAST_TIL_KORRIGERING &&
                             sporsmal.tag === 'FERIE_V2' &&
                             watchJaNei === 'JA' && (
-                                <MerInfoAlert
+                                <NyAlertGammeltDesign
+                                    funksjon={Funksjon.info}
                                     info="Du kan dra på ferie mens du er sykmeldt, men du får ikke utbetalt sykepenger når du
                                     har ferie."
                                 />
@@ -178,7 +187,8 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
                         <VarigEndringInfo sporsmal={sporsmal} jaNeiSvar={watchJaNei} />
 
                         {erOppholdUtenforEUEOS && (
-                            <MerInfoAlert
+                            <NyAlertGammeltDesign
+                                funksjon={Funksjon.info}
                                 info="Nav oppretter en egen søknad som du må sende inn. Du får varsel når den er klar, og
                                 finner den under Ditt sykefravær etter at du har sendt inn denne søknaden."
                             />

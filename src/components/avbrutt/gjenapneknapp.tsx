@@ -17,7 +17,7 @@ const GjenapneSoknad = () => {
         <>
             {gjenapneError && (
                 <InfoCard data-color="danger">
-                    <InfoCard.Message icon=<XMarkOctagonIcon/>>
+                    <InfoCard.Message icon=<XMarkOctagonIcon />>
                         Beklager, klarte ikke gjenåpne søknaden din
                     </InfoCard.Message>
                 </InfoCard>

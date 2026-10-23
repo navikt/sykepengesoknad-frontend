@@ -13,10 +13,9 @@ test.describe('Tester påskeferiehjelpetekst', () => {
         await svarJaHovedsporsmal(page)
         await harSynligTekst(page, 'Når tok du ut feriedager?')
 
-        const paskeferiehjelp = page.locator('.aksel-alert').filter({ hasText: 'påsken' })
-        await expect(paskeferiehjelp).toBeVisible()
-        await expect(paskeferiehjelp).toContainText('Jeg var syk på de røde dagene i påsken. Er det ferie?')
-        await expect(paskeferiehjelp).toContainText(
+        await harSynligTekst(page, 'Jeg var syk på de røde dagene i påsken. Er det ferie?')
+        await harSynligTekst(
+            page,
             'En offentlig helligdag ("rød dag") regnes ikke som en feriedag, med mindre du har avtalt med arbeidsgiveren din at du skal ta ut ferie på en rød dag.',
         )
 

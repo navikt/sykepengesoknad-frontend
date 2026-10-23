@@ -1,4 +1,4 @@
-import { Alert, BodyShort, Button, Modal } from '@navikt/ds-react'
+import { BodyShort, Button, Modal } from '@navikt/ds-react'
 import React from 'react'
 
 import { logEvent } from '../umami/umami'
@@ -8,6 +8,7 @@ import { useSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
 import { useKorriger } from '../../hooks/useKorriger'
 
 import { EndreknappTekster } from './endreknapp-tekster'
+import NyAlertGammeltDesign, { Funksjon } from '../generelle-komponenter/NyAlertGammeltDesign'
 
 const EndreModal = ({ aapen, setAapen }: { aapen: boolean; setAapen: (p: boolean) => void }) => {
     const { valgtSoknad } = useSoknadMedDetaljer()
@@ -45,7 +46,10 @@ const EndreModal = ({ aapen, setAapen }: { aapen: boolean; setAapen: (p: boolean
                             <BodyShort spacing>{EndreknappTekster['endre.modal.info']}</BodyShort>
 
                             {korrigeringError && (
-                                <Alert variant="error">Beklager, klarte ikke endre søknaden din</Alert>
+                                <NyAlertGammeltDesign
+                                    funksjon={Funksjon.danger}
+                                    info="Beklager, klarte ikke endre søknaden din"
+                                />
                             )}
                         </>
                     )}

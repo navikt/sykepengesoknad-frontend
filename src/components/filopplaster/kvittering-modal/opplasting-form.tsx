@@ -1,4 +1,4 @@
-import { Alert, BodyLong, BodyShort, Button, FileObject, ReadMore, Select, TextField } from '@navikt/ds-react'
+import { BodyLong, BodyShort, Button, FileObject, ReadMore, Select, TextField } from '@navikt/ds-react'
 import { logger } from '@navikt/next-logger'
 import React, { useEffect, useState } from 'react'
 import { Controller, FormProvider, useForm } from 'react-hook-form'
@@ -13,6 +13,7 @@ import { useTestpersonQuery } from '../../../hooks/useTestpersonQuery'
 import { useSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
 import { now } from '../../../utils/dato-utils'
 import FilOpplaster from '../fil-opplaster/fil-opplaster'
+import NyAlertGammeltDesign, { Funksjon } from '../../generelle-komponenter/NyAlertGammeltDesign'
 
 import OpplastingTekster from './opplasting-tekster'
 
@@ -251,9 +252,12 @@ const OpplastingForm = ({ valgtSoknad, setOpenModal, openModal }: OpplastingFrom
                     <FilOpplaster valgtFil={valgtFil} setValgtFil={setValgtFil} />
                 </div>
                 {feilmelding && (
-                    <Alert variant="warning" className="mt-8">
-                        <BodyShort>{feilmelding}</BodyShort>
-                    </Alert>
+                    <NyAlertGammeltDesign
+                        funksjon={Funksjon.warning}
+                        info={
+                            <BodyShort>{feilmelding}</BodyShort>
+                        }
+                    />
                 )}
 
                 <div className="mt-8 flex gap-4">

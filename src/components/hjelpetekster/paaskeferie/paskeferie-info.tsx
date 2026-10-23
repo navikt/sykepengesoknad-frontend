@@ -1,9 +1,10 @@
-import { Alert, BodyShort, Label } from '@navikt/ds-react'
+import { BodyShort, Label } from '@navikt/ds-react'
 import React from 'react'
 
 import { fraBackendTilDate } from '../../../utils/dato-utils'
 import { Sporsmal } from '../../../types/types'
 import { innenforPaske } from '../../../utils/helligdager-utils'
+import NyAlertGammeltDesign, { Funksjon } from '../../generelle-komponenter/NyAlertGammeltDesign'
 
 import { PaskeferieInfoTekster } from './paskeferie-info-tekster'
 
@@ -25,10 +26,15 @@ export function PaskeferieInfo({ sporsmal, jaNeiSvar }: { sporsmal: Sporsmal; ja
         )
     ) {
         return (
-            <Alert variant="info" className="mt-8">
-                <Label as="h2">{PaskeferieInfoTekster.label}</Label>
-                <BodyShort className="mt-2">{PaskeferieInfoTekster.tekst}</BodyShort>
-            </Alert>
+            <NyAlertGammeltDesign
+                funksjon={Funksjon.info}
+                info={
+                    <>
+                        <Label as="h2">{PaskeferieInfoTekster.label}</Label>
+                        <BodyShort className="mt-2">{PaskeferieInfoTekster.tekst}</BodyShort>
+                    </>
+                }
+            />
         )
     }
     return null

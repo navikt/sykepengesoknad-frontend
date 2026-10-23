@@ -1,4 +1,4 @@
-import { Alert, Button, Modal } from '@navikt/ds-react'
+import { Button, Modal } from '@navikt/ds-react'
 import { TrashIcon } from '@navikt/aksel-icons'
 import React, { useState } from 'react'
 
@@ -6,6 +6,7 @@ import { Kvittering, Sporsmal, svarverdiToKvittering } from '../../types/types'
 import { tekst } from '../../utils/tekster'
 import { useSlettKvittering } from '../../hooks/useSlettKvittering'
 import { useSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
+import NyAlertGammeltDesign, { Funksjon } from '../generelle-komponenter/NyAlertGammeltDesign'
 
 interface SlettknappProps {
     sporsmal: Sporsmal
@@ -63,9 +64,10 @@ const Slettknapp = ({ sporsmal, kvittering }: SlettknappProps) => {
                 <Modal.Body>
                     <div aria-live="polite">
                         {slettingError && (
-                            <Alert className="mt-4" variant="error">
-                                {tekst('opplasting_modal.slett.feilmelding')}
-                            </Alert>
+                            <NyAlertGammeltDesign
+                                funksjon={Funksjon.danger}
+                                info={tekst('opplasting_modal.slett.feilmelding')}
+                            />
                         )}
                     </div>
                 </Modal.Body>

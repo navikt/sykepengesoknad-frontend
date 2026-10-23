@@ -1,4 +1,4 @@
-import { Alert, BodyShort, Radio, RadioGroup } from '@navikt/ds-react'
+import { BodyShort, Radio, RadioGroup } from '@navikt/ds-react'
 import React, { Fragment } from 'react'
 import { Controller, useFormContext } from 'react-hook-form'
 
@@ -16,6 +16,7 @@ import { EkspanderbarHjelp } from '../../hjelpetekster/ekspanderbar-hjelp/ekspan
 import { logEvent } from '../../umami/umami'
 import { useSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
 import { FortsattArbeidssoker } from '../../hjelpetekster/friskmeldt-til-arbeidsformidling/fortsatt-arbeidssoker'
+import NyAlertGammeltDesign, { Funksjon } from '../../generelle-komponenter/NyAlertGammeltDesign'
 
 const JaNeiLiten = ({ sporsmal }: SpmProps) => {
     const { watch, getValues } = useFormContext()
@@ -36,27 +37,30 @@ const JaNeiLiten = ({ sporsmal }: SpmProps) => {
                         ? 'soknad.infotekst.utlandsopphold_sokt_sykepenger.ja'
                         : 'soknad.infotekst.utlandsopphold_sokt_sykepenger.nei'
                 return (
-                    <Alert variant="info">
-                        {tekstMedHtml(
-                            getLedetekst(tekst(utenlandsopphold), {
-                                '%URL%': utlandssoknadUrl,
-                            }),
-                        )}
-                    </Alert>
+                    <NyAlertGammeltDesign
+                        funksjon={Funksjon.info}
+                        info={tekstMedHtml(getLedetekst(tekst(utenlandsopphold), { '%URL%': utlandssoknadUrl }))}
+                    />
                 )
             }
             if (spm.tag.endsWith('_ER_DU_SYKMELDT') && watchJaNei === 'JA') {
-                return <Alert variant="info">{tekst(('soknad.presisering.' + spm.tag) as any)}</Alert>
+                return (
+                    <NyAlertGammeltDesign
+                        funksjon={Funksjon.info}
+                        info={tekst(('soknad.presisering.' + spm.tag) as any)}
+                    />
+                )
             }
             if (spm.tag === 'INNTEKTSKILDE_SELVSTENDIG_ER_DU_SYKMELDT' && watchJaNei === 'NEI') {
                 return (
-                    <Alert variant="info">
-                        {tekstMedHtml(
+                    <NyAlertGammeltDesign
+                        funksjon={Funksjon.info}
+                        info={tekstMedHtml(
                             getLedetekst(tekst(('soknad.presisering.' + spm.tag + '_NEI') as any), {
                                 '%URL%': tekst('soknad.presisering.INNTEKTSKILDE_SELVSTENDIG_ER_DU_SYKMELDT_NEI.url'),
                             }),
                         )}
-                    </Alert>
+                    />
                 )
             }
         } else return <></>
@@ -126,20 +130,20 @@ const JaNeiLiten = ({ sporsmal }: SpmProps) => {
                 </>
             )}
             {sporsmal.tag == 'AVKLART_MED_SYKMELDER' && watchJaNei === 'NEI' && (
-                <Alert variant="warning" className="mt-4">
-                    Du må avklare reisen med sykmelder før du reiser. Uten godkjenning risikerer du at sykepengene blir
-                    stanset mens du er på reise. Når du kommer tilbake, kan sykepengene bli beregnet på nytt ut fra et
-                    lavere grunnlag. Ved reiser på fire uker eller mer kan dette også føre til avslag på videre
-                    sykepenger.
-                </Alert>
+                <NyAlertGammeltDesign
+                    funksjon={Funksjon.warning}
+                    info="Du må avklare reisen med sykemelder før du reiser. Uten godkjenning risikerer du at sykepengene
+                    stanses under reisen og beregnes på nytt etter et lavere grunnlag når du er tilbake. Ved reiser på
+                    fire uker eller mer kan dette også føre til avslag på videre sykepenger."
+                />
             )}
             {sporsmal.tag == 'AVKLART_MED_ARBEIDSGIVER_ELLER_NAV' && watchJaNei === 'NEI' && (
-                <Alert variant="warning" className="mt-4">
-                    Du må avklare reisen med arbeidsgiveren din eller Nav før du reiser. Uten godkjenning risikerer du
-                    at sykepengene blir stanset mens du er på reise. Når du kommer tilbake, kan sykepengene bli beregnet
-                    på nytt ut fra et lavere grunnlag. Ved reiser på fire uker eller mer kan dette også føre til avslag
-                    på videre sykepenger.
-                </Alert>
+                <NyAlertGammeltDesign
+                    funksjon={Funksjon.warning}
+                    info="Du må avklare reisen med arbeidsgiver/NAV før du reiser. Uten godkjenning risikerer du at
+                    sykepengene stanses under reisen og beregnes på nytt etter et lavere grunnlag når du er tilbake. Ved
+                    reiser på fire uker eller mer kan dette også føre til avslag på videre sykepenger."
+                />
             )}
 
             <div aria-live="assertive">

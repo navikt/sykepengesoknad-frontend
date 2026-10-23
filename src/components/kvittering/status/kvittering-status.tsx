@@ -1,9 +1,10 @@
-import { Alert, BodyShort, Heading } from '@navikt/ds-react'
+import { BodyShort, Heading } from '@navikt/ds-react'
 import React from 'react'
 
 import { tekst } from '../../../utils/tekster'
 import { tilLesbarDatoOgTid } from '../../../utils/dato-utils'
 import { useSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
+import NyAlertGammeltDesign, { Funksjon } from '../../generelle-komponenter/NyAlertGammeltDesign'
 
 export enum Mottaker {
     NAV = 'NAV',
@@ -18,14 +19,19 @@ const KvitteringStatus = () => {
     return (
         <>
             {valgtSoknad.sendtTilNAVDato && (
-                <Alert variant="success" aria-label="Sendt til NAV">
-                    <Heading size="small" level="2">
-                        {tekst('kvittering.soknaden-er-sendt-til')} {Mottaker.NAV}
-                    </Heading>
-                    <BodyShort>
-                        {tekst('kvittering.mottatt')}: {tilLesbarDatoOgTid(valgtSoknad.sendtTilNAVDato)}
-                    </BodyShort>
-                </Alert>
+                <NyAlertGammeltDesign
+                    funksjon={Funksjon.success}
+                    info={
+                        <>
+                            <Heading size="small" level="2">
+                                {tekst('kvittering.soknaden-er-sendt-til')} {Mottaker.NAV}
+                            </Heading>
+                            <BodyShort>
+                                {tekst('kvittering.mottatt')}: {tilLesbarDatoOgTid(valgtSoknad.sendtTilNAVDato)}
+                            </BodyShort>
+                        </>
+                    }
+                />
             )}
         </>
     )

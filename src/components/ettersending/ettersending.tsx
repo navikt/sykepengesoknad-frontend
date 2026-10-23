@@ -5,6 +5,7 @@ import { tekst } from '../../utils/tekster'
 import { tekstMedHtml } from '../../utils/html-react-parser-utils'
 import { useEttersendArbeidsgiver } from '../../hooks/useEttersendArbeidsgiver'
 import { useSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
+import NyAlertGammeltDesign, { Funksjon } from '../generelle-komponenter/NyAlertGammeltDesign'
 
 interface EttersendingProps {
     gjelder: 'arbeidsgiver'
@@ -61,7 +62,10 @@ const Ettersending = ({ gjelder }: EttersendingProps) => {
                 <Modal.Body>
                     <BodyShort spacing>{tekstMedHtml(tekst('kvittering.info.send-til-arbeidsgiver'))}</BodyShort>
                     {ettersendArbeidsgiverError && (
-                        <Alert variant="error">Beklager, klarte ikke ettersende søknaden din</Alert>
+                        <NyAlertGammeltDesign
+                            funksjon={Funksjon.danger}
+                            info="Beklager, klarte ikke ettersende søknaden din"
+                        />
                     )}
                     <Button
                         type="button"
