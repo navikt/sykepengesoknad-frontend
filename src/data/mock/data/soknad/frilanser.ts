@@ -1,7 +1,7 @@
 import type { RSSoknad } from '../../../../types/rs-types/rs-soknad'
 import { formatterPeriode } from '../sporsmal/utils/backend-datoformat'
 import { frilanser100Syk } from '../sykmeldinger'
-import { andreInntektskilder } from '../sporsmal/andre-inntektskilder'
+import { andreInntektskilderV2 } from '../sporsmal/andre-inntektskilder-v2'
 import { ansvarserklaring } from '../sporsmal/ansvarserklaring'
 import { arbeidUnderveis100Prosent } from '../sporsmal/arbeid-underveis-100-prosent'
 import { arbeidUtenforNorge } from '../sporsmal/arbeid-utenfor-norge'
@@ -21,21 +21,7 @@ const sporsmal = () => [
         timerMaks: '214',
         normalArbeidsukeTekst: 'Jobber du vanligvis 37,5 timer i uka?',
     }),
-    andreInntektskilder({
-        fom,
-        tom,
-        sporsmalstekst: 'Har du annen inntekt? Du trenger ikke oppgi penger fra NAV.',
-        gruppeTekst: 'Hvilke inntektskilder har du?',
-        kilder: [
-            { tag: 'INNTEKTSKILDE_ARBEIDSFORHOLD' },
-            { tag: 'INNTEKTSKILDE_JORDBRUKER' },
-            {
-                tag: 'INNTEKTSKILDE_FRILANSER_SELVSTENDIG',
-                sporsmalstekst: 'selvstendig næringsdrivende',
-            },
-            { tag: 'INNTEKTSKILDE_ANNET' },
-        ],
-    }),
+    andreInntektskilderV2(),
     oppholdUtenforEos({
         fom,
         tom,
