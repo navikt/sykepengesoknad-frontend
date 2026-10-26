@@ -207,7 +207,7 @@ export function FlexjarFelles({
                                             size="medium"
                                             variant="secondary"
                                             disabled={lagrer}
-                                            icon={<PaperplaneIcon title="a11y-title" fontSize="1.5rem" />}
+                                            icon={<PaperplaneIcon aria-hidden fontSize="1.5rem" />}
                                             iconPosition="right"
                                             onClick={async (e) => {
                                                 e.preventDefault()
