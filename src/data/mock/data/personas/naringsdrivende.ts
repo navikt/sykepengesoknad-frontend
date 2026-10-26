@@ -16,19 +16,21 @@ const naringsdrivendeSoknadMedVirksomhetsSporsmal = lagNaringsdrivendeSoknadMedV
     [naringsdrivendeVirksomhetenAvviklet(), naringsdrivendeNyIArbeidslivet(), naringsdrivendeVarigEndring()],
 )
 
-const sendtSoknadMedGammelKvittering = deepcopyMedNyId(naringsdrivendeSoknad, '3708c4de-d16c-4835-841b-a6716b688888')
+const sendtSoknadUtenInntektsopplysninger = deepcopyMedNyId(
+    naringsdrivendeSoknad,
+    '3708c4de-d16c-4835-841b-a6716b688888',
+)
 
-sendtSoknadMedGammelKvittering.status = 'SENDT'
-sendtSoknadMedGammelKvittering.sendtTilNAVDato = now().toISOString()
-sendtSoknadMedGammelKvittering.sporsmal.forEach((sporsmal) => {
+sendtSoknadUtenInntektsopplysninger.status = 'SENDT'
+sendtSoknadUtenInntektsopplysninger.sendtTilNAVDato = now().toISOString()
+sendtSoknadUtenInntektsopplysninger.sporsmal.forEach((sporsmal) => {
     sporsmal.svar = [{ verdi: 'NEI' }]
 })
 const sendtSoknadMedNyKvitteringMedDokumenter = deepcopyMedNyId(
-    sendtSoknadMedGammelKvittering,
+    sendtSoknadUtenInntektsopplysninger,
     '3708c4de-d16c-4835-841b-a6716b688999',
 )
 
-sendtSoknadMedNyKvitteringMedDokumenter.inntektsopplysningerNyKvittering = true
 sendtSoknadMedNyKvitteringMedDokumenter.inntektsopplysningerInnsendingId = '1234'
 sendtSoknadMedNyKvitteringMedDokumenter.inntektsopplysningerInnsendingDokumenter = [
     'Skattemelding/Næringsspesifikasjon hvis den er klar',
@@ -44,8 +46,8 @@ function lagNaringsdrivendeSoknadMedVirksomhetsSporsmal(id: string, ekstraSporsm
 export const selvstendigNaringsdrivende: Persona = {
     soknader: [
         { ...naringsdrivendeSoknadMedVirksomhetsSporsmal, demoinfo: 'Spørsmål om virksomheten din' },
-        { ...sendtSoknadMedGammelKvittering, demoinfo: 'Søknad med gammel kvittering' },
-        { ...sendtSoknadMedNyKvitteringMedDokumenter, demoinfo: 'Sendt søknad med ny kvittering og dokumenter' },
+        { ...sendtSoknadUtenInntektsopplysninger, demoinfo: 'Sendt uten innsending av inntektsopplysninger' },
+        { ...sendtSoknadMedNyKvitteringMedDokumenter, demoinfo: 'Sendt med innsending av inntektsopplysninger' },
     ],
     sykmeldinger: [naringsdrivende100syk],
     beskrivelse: 'Selvstendig Næringsdrivende',

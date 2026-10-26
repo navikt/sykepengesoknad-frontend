@@ -9,7 +9,6 @@ import { LenkeMedIkon } from '../../lenke-med-ikon/LenkeMedIkon'
 import { useSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
 import { KvitteringPanel } from '../kvittering-panel'
 
-import { SendInntektsopplysningerForSelvstendigNæringsdrivende } from './SendInntektsopplysningerForSelvstendigNaringsdrivende'
 import { EttersendDokumenterForSelvstendigNaringsdrivende } from './EttersendDokumenterForSelvstendigNaringsdrivende'
 import { FriskmeldtTilArbeidsformidlingKvitteringInfo } from './FriskmeldtTilArbeidsformidlingKvitteringInfo'
 
@@ -27,16 +26,8 @@ const KvitteringVidere = () => {
         <KvitteringPanel className="p-4 pb-8">
             {visKvittering && (
                 <VStack gap="space-16">
-                    {naringsdrivendeForstegangssoknad && (
-                        <>
-                            {!valgtSoknad.inntektsopplysningerNyKvittering && (
-                                <SendInntektsopplysningerForSelvstendigNæringsdrivende />
-                            )}
-                            {valgtSoknad.inntektsopplysningerNyKvittering &&
-                                valgtSoknad.inntektsopplysningerInnsendingId && (
-                                    <EttersendDokumenterForSelvstendigNaringsdrivende soknad={valgtSoknad} />
-                                )}
-                        </>
+                    {naringsdrivendeForstegangssoknad && valgtSoknad.inntektsopplysningerInnsendingId && (
+                        <EttersendDokumenterForSelvstendigNaringsdrivende soknad={valgtSoknad} />
                     )}
                     <Box>
                         <Heading size="small" level="2" className="my-4">

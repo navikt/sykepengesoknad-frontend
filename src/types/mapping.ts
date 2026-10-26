@@ -123,7 +123,6 @@ export function rsToSoknad(soknad: RSSoknad): Soknad {
         soknad.inntektskilderDataFraInntektskomponenten,
         soknad.korrigeringsfristUtlopt,
         soknad.forstegangssoknad,
-        soknad.inntektsopplysningerNyKvittering,
         soknad.inntektsopplysningerInnsendingId,
         soknad.inntektsopplysningerInnsendingDokumenter,
         kjentOppholdstillatelse,
