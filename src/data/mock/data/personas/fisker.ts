@@ -15,8 +15,8 @@ import { tilbakeIArbeid } from '../sporsmal/tilbake-i-arbeid'
 import { tilSlutt } from '../sporsmal/til-slutt'
 
 import { Persona } from './personas'
-import { fiskerLottOgHyre } from '../soknad/fisker-lott-og-hyre'
-import { fiskerHyre } from '../soknad/fisker-hyre'
+import { fiskerLottOgHyre, fiskerLottOgHyreMedArbeidsgiver } from '../soknad/fisker-lott-og-hyre'
+import { fiskerHyre, fiskerHyreMedArbeidsgiver } from '../soknad/fisker-hyre'
 import { RSFiskerBlad } from '../../../../types/rs-types/rs-fiskerblad'
 import { RSFiskerLottOgHyre } from '../../../../types/rs-types/rs-fiskerlottoghyre'
 
@@ -290,8 +290,10 @@ export const fiskerLottOgHyreSykmelding = new Sykmelding({
 export const fiskePerson: Persona = {
     soknader: [
         { ...soknad, demoinfo: 'Fisker på lott' },
-        { ...fiskerLottOgHyre, demoinfo: 'Fisker med lott og hyre uten arbeidsgiver' },
-        { ...fiskerHyre, demoinfo: 'Fisker med hyre uten arbeidsgiver' },
+        { ...fiskerLottOgHyre, demoinfo: 'Fisker lott og hyre uten arbeidsgiver' },
+        { ...fiskerLottOgHyreMedArbeidsgiver, demoinfo: 'Fisker lott og hyre med arbeidsgiver' },
+        { ...fiskerHyre, demoinfo: 'Fisker hyre uten arbeidsgiver' },
+        { ...fiskerHyreMedArbeidsgiver, demoinfo: 'Fisker hyre med arbeidsgiver' },
     ],
     sykmeldinger: [fiskerLottOgHyreSykmelding],
     beskrivelse: 'Fisker',

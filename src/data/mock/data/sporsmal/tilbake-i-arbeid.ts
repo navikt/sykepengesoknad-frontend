@@ -13,16 +13,12 @@ type TilbakeIArbeidValgFelles = {
 
 type TilbakeIArbeidValg =
     | (TilbakeIArbeidValgFelles & {
-          readonly arbeidsgiver: string
+          readonly arbeidsgiver?: string
           readonly tekstvariant?: 'arbeidstaker'
       })
     | (TilbakeIArbeidValgFelles & {
           readonly arbeidsgiver?: never
           readonly tekstvariant: 'frilanser' | 'selvstendigNaeringsdrivende'
-      })
-    | (TilbakeIArbeidValgFelles & {
-          readonly arbeidsgiver?: string | undefined
-          readonly tekstvariant: 'fisker'
       })
 
 export const tilbakeIArbeid = (valg: TilbakeIArbeidValg): RSSporsmal => {
@@ -37,7 +33,7 @@ export const tilbakeIArbeid = (valg: TilbakeIArbeidValg): RSSporsmal => {
     const tekstvariant = valg.tekstvariant ?? 'arbeidstaker'
     const standardSporsmalstekst =
         tekstvariant === 'arbeidstaker'
-            ? `Var du tilbake i fullt arbeid hos ${valg.arbeidsgiver} i løpet av perioden ${formatterPeriode(fom, tom)}?`
+            ? `Var du tilbake i fullt arbeid ${valg.arbeidsgiver ? `hos ${valg.arbeidsgiver}` : ''} i løpet av perioden ${formatterPeriode(fom, tom)}?`
             : tekstvariant === 'frilanser'
               ? `Var du tilbake i fullt arbeid som frilanser før sykmeldingsperioden utløp ${formatterDato(tom)}?`
               : `Var du tilbake i fullt arbeid som selvstendig næringsdrivende før sykmeldingsperioden utløp ${formatterDato(tom)}?`
