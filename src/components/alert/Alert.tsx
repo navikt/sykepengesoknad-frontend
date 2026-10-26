@@ -23,19 +23,19 @@ export default function Alert({
     const variantutforming: Record<Variant, Variantdesign> = {
         success: {
             farge: 'success',
-            ikon: <CheckmarkCircleIcon title="a11y-title" fontSize="1.5rem" />,
+            ikon: <CheckmarkCircleIcon aria-hidden fontSize="1.5rem" />,
         },
         info: {
             farge: 'info',
-            ikon: <InformationSquareIcon title="a11y-title" fontSize="1.5rem" />,
+            ikon: <InformationSquareIcon aria-hidden fontSize="1.5rem" />,
         },
         warning: {
             farge: 'warning',
-            ikon: <ExclamationmarkTriangleIcon title="a11y-title" fontSize="1.5rem" />,
+            ikon: <ExclamationmarkTriangleIcon aria-hidden fontSize="1.5rem" />,
         },
         error: {
             farge: 'danger',
-            ikon: <XMarkOctagonIcon title="a11y-title" fontSize="1.5rem" />,
+            ikon: <XMarkOctagonIcon aria-hidden fontSize="1.5rem" />,
         },
     }
 
