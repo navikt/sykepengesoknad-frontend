@@ -1,4 +1,5 @@
-import { Alert, BodyLong, BodyShort, Button, FileObject, ReadMore, Select, TextField } from '@navikt/ds-react'
+import { BodyLong, BodyShort, Button, FileObject, ReadMore, Select, TextField } from '@navikt/ds-react'
+import Alert from '../../alert/Alert'
 import { logger } from '@navikt/next-logger'
 import React, { useEffect, useState } from 'react'
 import { Controller, FormProvider, useForm } from 'react-hook-form'

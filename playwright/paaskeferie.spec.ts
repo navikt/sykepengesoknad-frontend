@@ -9,19 +9,22 @@ test.describe('Tester påskeferiehjelpetekst', () => {
 
         await harSynligTittel(page, 'Ferie', 2)
 
-        await expect(page.locator('.aksel-alert').filter({ hasText: 'påsken' })).toHaveCount(0)
+        const paskeferieOverskrift = page.getByRole('heading', {
+            name: 'Jeg var syk på de røde dagene i påsken. Er det ferie?',
+        })
+        await expect(paskeferieOverskrift).toHaveCount(0)
         await svarJaHovedsporsmal(page)
         await harSynligTekst(page, 'Når tok du ut feriedager?')
 
-        const paskeferiehjelp = page.locator('.aksel-alert').filter({ hasText: 'påsken' })
-        await expect(paskeferiehjelp).toBeVisible()
-        await expect(paskeferiehjelp).toContainText('Jeg var syk på de røde dagene i påsken. Er det ferie?')
-        await expect(paskeferiehjelp).toContainText(
-            'En offentlig helligdag ("rød dag") regnes ikke som en feriedag, med mindre du har avtalt med arbeidsgiveren din at du skal ta ut ferie på en rød dag.',
-        )
+        await expect(paskeferieOverskrift).toBeVisible()
+        await expect(
+            page.getByText(
+                'En offentlig helligdag ("rød dag") regnes ikke som en feriedag, med mindre du har avtalt med arbeidsgiveren din at du skal ta ut ferie på en rød dag.',
+            ),
+        ).toBeVisible()
 
         await svarNeiHovedsporsmal(page)
-        await expect(page.locator('.aksel-alert').filter({ hasText: 'påsken' })).toHaveCount(0)
+        await expect(paskeferieOverskrift).toHaveCount(0)
     })
 
     test('Søknaden går ikke over påskeferien', async ({ page }) => {
@@ -31,6 +34,8 @@ test.describe('Tester påskeferiehjelpetekst', () => {
 
         await svarJaHovedsporsmal(page)
         await harSynligTekst(page, 'Når tok du ut feriedager?')
-        await expect(page.locator('.aksel-alert').filter({ hasText: 'påsken' })).toHaveCount(0)
+        await expect(
+            page.getByRole('heading', { name: 'Jeg var syk på de røde dagene i påsken. Er det ferie?' }),
+        ).toHaveCount(0)
     })
 })

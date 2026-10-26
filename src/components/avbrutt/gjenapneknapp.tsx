@@ -1,4 +1,5 @@
-import { Alert, Button } from '@navikt/ds-react'
+import { Button } from '@navikt/ds-react'
+import Alert from '../alert/Alert'
 import React from 'react'
 
 import { logEvent } from '../umami/umami'

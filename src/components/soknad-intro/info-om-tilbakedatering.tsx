@@ -1,4 +1,5 @@
-import { Alert, BodyLong, BodyShort, Heading } from '@navikt/ds-react'
+import { BodyLong, BodyShort, Heading } from '@navikt/ds-react'
+import Alert from '../alert/Alert'
 import React from 'react'
 
 import { useSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'

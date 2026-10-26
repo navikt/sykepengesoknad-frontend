@@ -1,4 +1,5 @@
-import { Alert, BodyLong, BodyShort } from '@navikt/ds-react'
+import { BodyLong, BodyShort } from '@navikt/ds-react'
+import Alert from '../alert/Alert'
 import { isAfter, subSeconds } from 'date-fns'
 import React, { useEffect } from 'react'
 import { useRouter } from 'next/router'
@@ -52,7 +53,7 @@ const AvbruttSoknad = () => {
     return (
         <>
             <SoknadHeader />
-            <Alert variant="warning" style={{ marginBottom: '1rem' }}>
+            <Alert variant="warning" className="mb-4">
                 <BodyShort>
                     {tekst('sykepengesoknad.avbrutt.tidspunkt')} {tilLesbarDatoMedArstall(valgtSoknad.avbruttDato)}.
                 </BodyShort>

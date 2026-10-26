@@ -1,4 +1,5 @@
-import { Alert, BodyShort, Heading } from '@navikt/ds-react'
+import { BodyShort, Heading } from '@navikt/ds-react'
+import Alert from '../../alert/Alert'
 import React from 'react'
 
 import { tekst } from '../../../utils/tekster'
@@ -18,7 +19,7 @@ const KvitteringStatus = () => {
     return (
         <>
             {valgtSoknad.sendtTilNAVDato && (
-                <Alert variant="success" aria-label="Sendt til NAV">
+                <Alert variant="success">
                     <Heading size="small" level="2">
                         {tekst('kvittering.soknaden-er-sendt-til')} {Mottaker.NAV}
                     </Heading>

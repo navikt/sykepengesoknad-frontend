@@ -1,6 +1,7 @@
 import { Controller } from 'react-hook-form'
-import { Alert, UNSAFE_Combobox } from '@navikt/ds-react'
+import { UNSAFE_Combobox } from '@navikt/ds-react'
 import React, { useMemo } from 'react'
+import Alert from '../../alert/Alert'
 
 import { landlisteEøs, landlisteUtenforEøs } from '../landliste'
 import { erLandIEuEos, erLandIEuEosEllerStorbritannia, erStorbritanniaLand } from '../land-utils'
@@ -101,7 +102,7 @@ const ComboboxMultiple = ({ sporsmal }: SpmProps) => {
                                 }}
                             />
                             {alertTekst && (
-                                <Alert className="mt-8" variant="info" closeButton={true}>
+                                <Alert className="mt-8" variant="info">
                                     {alertTekst}
                                 </Alert>
                             )}

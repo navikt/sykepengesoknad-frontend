@@ -1,4 +1,5 @@
-import { Alert, BodyLong, BodyShort, Radio, RadioGroup, ReadMore } from '@navikt/ds-react'
+import { BodyLong, BodyShort, Radio, RadioGroup, ReadMore } from '@navikt/ds-react'
+import Alert from '../../alert/Alert'
 import React from 'react'
 import { Controller, useFormContext, useWatch } from 'react-hook-form'
 
@@ -53,7 +54,7 @@ const TimerProsentAlert = ({ valgtSoknad, beregnGradNy }: TimerProsentAlertProps
     return (
         <div>
             {beregnetGrad !== undefined && !(valgtSoknad.julesoknad !== undefined && valgtSoknad.julesoknad) && (
-                <Alert variant="info" style={{ marginTop: '1rem' }}>
+                <Alert variant="info" className="mt-4">
                     <BodyShort>
                         {getLedetekst(tekst('sykepengesoknad.jobb-underveis-timer-i-prosent'), {
                             '%PROSENT%': Math.floor(beregnetGrad * 100),

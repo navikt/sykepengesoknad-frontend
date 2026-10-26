@@ -1,4 +1,5 @@
-import { Alert, BodyShort, Label } from '@navikt/ds-react'
+import { BodyShort, Label } from '@navikt/ds-react'
+import Alert from '../../alert/Alert'
 import React from 'react'
 
 import { fraBackendTilDate } from '../../../utils/dato-utils'

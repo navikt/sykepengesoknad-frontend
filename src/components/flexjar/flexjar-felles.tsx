@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react'
-import { Alert, BodyShort, Button, Label, Radio, RadioGroup, Textarea } from '@navikt/ds-react'
+import { BodyShort, Button, Label, Radio, RadioGroup, Textarea } from '@navikt/ds-react'
+import Alert from '../alert/Alert'
 import { MagnifyingGlassIcon, PaperplaneIcon } from '@navikt/aksel-icons'
 
 import { cn } from '../../utils/tw-utils'

@@ -1,4 +1,5 @@
-import { Alert, BodyLong, Radio, RadioGroup } from '@navikt/ds-react'
+import { BodyLong, Radio, RadioGroup } from '@navikt/ds-react'
+import Alert from '../../alert/Alert'
 import { Controller, useFormContext } from 'react-hook-form'
 import React from 'react'
 

@@ -1,4 +1,5 @@
-import { Alert, BodyLong, Button, ExpansionCard, Heading, List } from '@navikt/ds-react'
+import { BodyLong, Button, ExpansionCard, Heading, List } from '@navikt/ds-react'
+import Alert from '../alert/Alert'
 import { logger } from '@navikt/next-logger'
 import React, { useState } from 'react'
 
