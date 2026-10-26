@@ -1,4 +1,4 @@
-import { Alert, BodyLong, Button, Modal, Skeleton } from '@navikt/ds-react'
+import { BodyLong, Button, Modal, Skeleton } from '@navikt/ds-react'
 import React, { useState } from 'react'
 
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
@@ -9,6 +9,7 @@ import { useAvbryt } from '../../hooks/useAvbryt'
 import { useSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
 import { cn } from '../../utils/tw-utils'
 import { tekstMedHtml } from '../../utils/html-react-parser-utils'
+import NyAlertGammeltDesign, { Funksjon } from '../generelle-komponenter/NyAlertGammeltDesign'
 
 const AvbrytKorrigering = () => {
     const { valgtSoknad, stegId } = useSoknadMedDetaljer()
@@ -116,11 +117,7 @@ const AvbrytSoknadModal = ({ euEøsSpecialCase = false }: AvbrytSoknadModalProps
                     <BodyLong spacing size="medium">
                         {tekstMedHtml(tekst('avbryt.popup.sporsmal.del2'))}
                     </BodyLong>
-                    {avbrytError && (
-                        <Alert variant="error" className="mt-4">
-                            {tekst('avbryt.feilet')}
-                        </Alert>
-                    )}
+                    {avbrytError && <NyAlertGammeltDesign funksjon={Funksjon.danger} info={tekst('avbryt.feilet')} />}
                 </Modal.Body>
                 <Modal.Footer>
                     <Button

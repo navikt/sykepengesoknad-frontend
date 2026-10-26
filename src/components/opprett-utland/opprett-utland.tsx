@@ -1,4 +1,4 @@
-import { Alert, BodyLong, Button, ExpansionCard, Heading, List } from '@navikt/ds-react'
+import { BodyLong, BodyShort, Button, ExpansionCard, Heading, List } from '@navikt/ds-react'
 import { logger } from '@navikt/next-logger'
 import React, { useState } from 'react'
 
@@ -14,6 +14,7 @@ import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
 import useSoknad from '../../hooks/useSoknad'
 import AvbrytOppholdUtlandSoknadModal from '../avbryt-soknad-modal/avbryt-opphold-utland-soknad-modal'
+import NyAlertGammeltDesign, { Funksjon } from '../generelle-komponenter/NyAlertGammeltDesign'
 
 const OpprettUtland = () => {
     const [feilmeldingTekst, setFeilmeldingTekst] = useState<string>()
@@ -89,16 +90,22 @@ const OpprettUtland = () => {
                     />
                 </List.Item>
             </List>
-
-            <Alert variant="warning">
-                <Heading spacing size="small" level="2">
-                    Søk før du reiser
-                </Heading>
-                Reiser du uten godkjent søknad og er borte i mer enn 14 dager, kan det påvirke sykepengene dine også
-                etter at du er kommet hjem. Du kan miste dem, eller få mindre i sykepenger resten av perioden du er
-                sykmeldt. Det samme kan skje hvis du blir borte lenger enn perioden du har fått godkjenning til.
-            </Alert>
-
+            <NyAlertGammeltDesign
+                funksjon={Funksjon.warning}
+                info={
+                    <>
+                        <Heading spacing size="small" level="2">
+                            Søk før du reiser
+                        </Heading>
+                        <BodyShort>
+                            Reiser du uten godkjent søknad og er borte i mer enn 14 dager, kan det påvirke sykepengene
+                            dine dine også etter at du er kommet hjem. Du kan miste dem, eller få mindre i sykepenger
+                            resten perioden du er sykmeldt. Det samme kan skje hvis du blir borte lenger enn perioden du
+                            har fått godkjenning til.
+                        </BodyShort>
+                    </>
+                }
+            />
             <ExpansionCard
                 aria-label="Informasjon om reise og søknadskrav for statsborgere utenfor EU/EØS"
                 className="mt-16"
@@ -124,7 +131,9 @@ const OpprettUtland = () => {
                 {tekst('opprett-utland.fortsett')}
             </Button>
 
-            <div aria-live="polite">{feilmeldingTekst && <Alert variant="error">{feilmeldingTekst}</Alert>}</div>
+            <div aria-live="polite">
+                {feilmeldingTekst && <NyAlertGammeltDesign funksjon={Funksjon.danger} info={feilmeldingTekst} />}
+            </div>
             <AvbrytOppholdUtlandSoknadModal soknad={soknad} />
             <LenkeMedIkon
                 className="mt-8"

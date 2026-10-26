@@ -1,4 +1,4 @@
-import { Alert, BodyLong, BodyShort, Radio, RadioGroup, ReadMore } from '@navikt/ds-react'
+import { BodyLong, BodyShort, Radio, RadioGroup, ReadMore } from '@navikt/ds-react'
 import React from 'react'
 import { Controller, useFormContext, useWatch } from 'react-hook-form'
 
@@ -12,6 +12,7 @@ import { hentFeilmelding } from '../sporsmal-utils'
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
 import { useSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
 import { logEvent } from '../../umami/umami'
+import NyAlertGammeltDesign, { Funksjon } from '../../generelle-komponenter/NyAlertGammeltDesign'
 
 interface TimerProsentAlertProps {
     valgtSoknad: Soknad
@@ -53,13 +54,16 @@ const TimerProsentAlert = ({ valgtSoknad, beregnGradNy }: TimerProsentAlertProps
     return (
         <div>
             {beregnetGrad !== undefined && !(valgtSoknad.julesoknad !== undefined && valgtSoknad.julesoknad) && (
-                <Alert variant="info" style={{ marginTop: '1rem' }}>
-                    <BodyShort>
-                        {getLedetekst(tekst('sykepengesoknad.jobb-underveis-timer-i-prosent'), {
-                            '%PROSENT%': Math.floor(beregnetGrad * 100),
-                        })}
-                    </BodyShort>
-                </Alert>
+                <NyAlertGammeltDesign
+                    funksjon={Funksjon.info}
+                    info={
+                        <BodyShort>
+                            {getLedetekst(tekst('sykepengesoknad.jobb-underveis-timer-i-prosent'), {
+                                '%PROSENT%': Math.floor(beregnetGrad * 100),
+                            })}
+                        </BodyShort>
+                    }
+                />
             )}
         </div>
     )

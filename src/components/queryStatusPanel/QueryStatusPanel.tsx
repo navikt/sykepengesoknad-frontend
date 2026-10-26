@@ -1,4 +1,4 @@
-import { Alert, Button } from '@navikt/ds-react'
+import { Button } from '@navikt/ds-react'
 import React from 'react'
 import { UseQueryResult } from '@tanstack/react-query'
 

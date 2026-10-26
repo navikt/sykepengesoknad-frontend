@@ -1,6 +1,7 @@
-import { Alert, BodyLong } from '@navikt/ds-react'
+import { BodyLong } from '@navikt/ds-react'
 import React from 'react'
 import { useFormContext } from 'react-hook-form'
+import NyAlertGammeltDesign, { Funksjon } from '../../generelle-komponenter/NyAlertGammeltDesign'
 
 import { Sporsmal } from '../../../types/types'
 import { useSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
@@ -31,12 +32,17 @@ export function FortsattArbeidssoker({ sporsmal, fieldValue }: { sporsmal: Spors
         const formattertDato = dato()
         if (!formattertDato) return null
         return (
-            <Alert variant="info" className="mt-4">
-                <BodyLong spacing>
-                    {`Du har svart at du har begynt i ny jobb og dermed ikke vil være friskmeldt til arbeidsformidling fra og med ${formattertDato}`}
-                </BodyLong>
-                <BodyLong>Da stanser vi sykepengene dine fra og med denne datoen.</BodyLong>
-            </Alert>
+            <NyAlertGammeltDesign
+                funksjon={Funksjon.info}
+                info={
+                    <>
+                        <BodyLong spacing>
+                            {`Du har svart at du har begynt i ny jobb og dermed ikke vil være friskmeldt til arbeidsformidling fra og med ${formattertDato}`}
+                        </BodyLong>
+                        <BodyLong>Da stanser vi sykepengene dine fra og med denne datoen.</BodyLong>
+                    </>
+                }
+            />
         )
     }
     if (sporsmal.tag == 'FTA_JOBBSITUASJONEN_DIN_FORTSATT_FRISKMELDT' && fieldValue === 'NEI') {
@@ -56,12 +62,17 @@ export function FortsattArbeidssoker({ sporsmal, fieldValue }: { sporsmal: Spors
         const formattertDato = dato()
         if (!formattertDato) return null
         return (
-            <Alert variant="warning" className="mt-4">
-                <BodyLong spacing>
-                    {`Du har svart at du ikke vil være friskmeldt til arbeidsformidling fra og med ${formattertDato}.`}
-                </BodyLong>
-                <BodyLong>Da stanser vi sykepengene dine fra og med denne datoen.</BodyLong>
-            </Alert>
+            <NyAlertGammeltDesign
+                funksjon={Funksjon.warning}
+                info={
+                    <>
+                        <BodyLong spacing>
+                            {`Du har svart at du ikke vil være friskmeldt til arbeidsformidling fra og med ${formattertDato}.`}
+                        </BodyLong>
+                        <BodyLong>Da stanser vi sykepengene dine fra og med denne datoen.</BodyLong>
+                    </>
+                }
+            />
         )
     }
     return null

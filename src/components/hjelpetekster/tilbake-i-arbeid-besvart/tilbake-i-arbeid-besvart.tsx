@@ -1,5 +1,5 @@
-import { Alert } from '@navikt/ds-react'
 import React from 'react'
+import NyAlertGammeltDesign, { Funksjon } from '../../generelle-komponenter/NyAlertGammeltDesign'
 
 import { tilLesbarPeriodeMedArstall } from '../../../utils/dato-utils'
 import { Sporsmal } from '../../../types/types'
@@ -11,11 +11,18 @@ export function TilbakeIArbeidBesvart({ sporsmal, fieldValue }: { sporsmal: Spor
         return null
     }
     return (
-        <Alert variant="info" className="mt-4">
-            {TilbakeIArbeidBesvartHjeletekstTekster.del1}
-            {tilLesbarPeriodeMedArstall(fieldValue, sporsmal.max)}
-            {TilbakeIArbeidBesvartHjeletekstTekster.del2}
-            <span className="mt-4 block text-ax-text-subtle">{TilbakeIArbeidBesvartHjeletekstTekster.span}</span>
-        </Alert>
+        <NyAlertGammeltDesign
+            funksjon={Funksjon.info}
+            info={
+                <>
+                    {TilbakeIArbeidBesvartHjeletekstTekster.del1}
+                    {tilLesbarPeriodeMedArstall(fieldValue, sporsmal.max)}
+                    {TilbakeIArbeidBesvartHjeletekstTekster.del2}
+                    <span className="mt-4 block text-ax-text-subtle">
+                        {TilbakeIArbeidBesvartHjeletekstTekster.span}
+                    </span>
+                </>
+            }
+        />
     )
 }

@@ -1,4 +1,4 @@
-import { Alert, BodyLong, Button, Modal } from '@navikt/ds-react'
+import { BodyLong, Button, Modal } from '@navikt/ds-react'
 import React, { useState } from 'react'
 
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
@@ -9,6 +9,7 @@ import { useAvbryt } from '../../hooks/useAvbryt'
 import { Soknad } from '../../types/types'
 import { sykefravaerUrl } from '../../utils/environment'
 import { tekstMedHtml } from '../../utils/html-react-parser-utils'
+import NyAlertGammeltDesign, { Funksjon } from '../generelle-komponenter/NyAlertGammeltDesign'
 
 interface SoknadProps {
     soknad?: Soknad
@@ -86,11 +87,7 @@ const AvbrytOppholdUtlandSoknadModal = ({ soknad }: SoknadProps) => {
                     <BodyLong spacing size="medium">
                         {tekstMedHtml(tekst('avbryt.popup.sporsmal.del2'))}
                     </BodyLong>
-                    {avbrytError && (
-                        <Alert variant="error" className="mt-4">
-                            {tekst('avbryt.feilet')}
-                        </Alert>
-                    )}
+                    {avbrytError && <NyAlertGammeltDesign funksjon={Funksjon.danger} info={tekst('avbryt.feilet')} />}
                 </Modal.Body>
                 <Modal.Footer>
                     <Button
