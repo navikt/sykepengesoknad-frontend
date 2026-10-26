@@ -162,9 +162,7 @@ function handterNaringsdrivendeOpplysninger(soknaden: RSSoknad) {
     if (!soknaden.forstegangssoknad) {
         return
     }
-    const erNyKvittering = soknaden.sporsmal.some((spm) => spm.tag === 'NARINGSDRIVENDE_NY_I_ARBEIDSLIVET')
     const maaDokumentere = maaDokumentereInntektsopplysninger(soknaden)
-    soknaden.inntektsopplysningerNyKvittering = erNyKvittering
     soknaden.inntektsopplysningerInnsendingId = maaDokumentere ? uuid.v4() : undefined
     soknaden.inntektsopplysningerInnsendingDokumenter = maaDokumentere
         ? ['Skattemelding/Næringsspesifikasjon hvis den er klar']

@@ -51,7 +51,6 @@ export class Soknad extends ObjectCopier {
         readonly inntektskilderDataFraInntektskomponenten?: ReadonlyArray<ArbeidsforholdFraInntektskomponenten>,
         readonly korrigeringsfristUtlopt?: boolean,
         readonly forstegangssoknad?: boolean,
-        readonly inntektsopplysningerNyKvittering?: boolean,
         readonly inntektsopplysningerInnsendingId?: string,
         readonly inntektsopplysningerInnsendingDokumenter?: string[],
         readonly kjentOppholdstillatelse?: KjentOppholdstillatelse,

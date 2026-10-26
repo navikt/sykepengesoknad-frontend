@@ -39,7 +39,6 @@ export interface RSSoknad {
     inntektskilderDataFraInntektskomponenten?: ArbeidsforholdFraInntektskomponenten[]
     korrigeringsfristUtlopt?: boolean
     forstegangssoknad?: boolean
-    inntektsopplysningerNyKvittering?: boolean
     inntektsopplysningerInnsendingId?: string
     inntektsopplysningerInnsendingDokumenter?: string[]
     kjentOppholdstillatelse?: RSKjentOppholdstillatelse
