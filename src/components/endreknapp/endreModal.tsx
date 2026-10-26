@@ -1,4 +1,5 @@
-import { Alert, BodyShort, Button, Modal } from '@navikt/ds-react'
+import { BodyShort, Button, Modal } from '@navikt/ds-react'
+import Alert from '../alert/Alert'
 import React from 'react'
 
 import { logEvent } from '../umami/umami'

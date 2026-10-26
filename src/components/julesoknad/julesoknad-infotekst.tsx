@@ -1,4 +1,5 @@
-import { Alert, BodyShort } from '@navikt/ds-react'
+import { BodyShort } from '@navikt/ds-react'
+import Alert from '../alert/Alert'
 import React from 'react'
 
 export const JulesoknadTekstIntroside = () => {

@@ -1,7 +1,8 @@
-import { Alert, BodyShort, Radio, RadioGroup } from '@navikt/ds-react'
+import { BodyShort, Radio, RadioGroup } from '@navikt/ds-react'
 import React, { Fragment } from 'react'
 import { Controller, useFormContext } from 'react-hook-form'
 
+import Alert from '../../alert/Alert'
 import { SvarEnums } from '../../../types/enums'
 import { getLedetekst, tekst } from '../../../utils/tekster'
 import AnimateOnMount from '../../animate-on-mount'

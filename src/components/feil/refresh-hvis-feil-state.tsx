@@ -1,4 +1,5 @@
-import { Alert, Button, Heading } from '@navikt/ds-react'
+import { Button, Heading } from '@navikt/ds-react'
+import Alert from '../alert/Alert'
 import React from 'react'
 
 import { tekst } from '../../utils/tekster'

@@ -1,5 +1,5 @@
 import { Controller } from 'react-hook-form'
-import { Alert, UNSAFE_Combobox } from '@navikt/ds-react'
+import { InlineMessage, UNSAFE_Combobox } from '@navikt/ds-react'
 import React, { useMemo, useState } from 'react'
 
 import { landlisteEøs, landlisteUtenforEøs } from '../landliste'
@@ -52,15 +52,15 @@ export const SjekkLandEuEos = () => {
                             />
 
                             {valgtLandIEOS.length > 0 && valgtLandUtenforEOS.length === 0 && (
-                                <Alert inline className="mt-8 bg-ax-bg-default" variant="info">
+                                <InlineMessage status="info" className="mt-8">
                                     Du har ikke reist utenfor EU/EØS. Svar nei på dette spørsmålet.
-                                </Alert>
+                                </InlineMessage>
                             )}
 
                             {valgtLandUtenforEOS.length > 0 && (
-                                <Alert inline className="mt-8 bg-ax-bg-default" variant="info">
+                                <InlineMessage status="info" className="mt-8">
                                     Du har reist utenfor EU/EØS.
-                                </Alert>
+                                </InlineMessage>
                             )}
                         </>
                     )

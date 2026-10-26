@@ -1,4 +1,5 @@
-import { Alert, BodyShort, TextField } from '@navikt/ds-react'
+import { BodyShort, TextField } from '@navikt/ds-react'
+import Alert from '../../alert/Alert'
 import React from 'react'
 import { useFormContext } from 'react-hook-form'
 

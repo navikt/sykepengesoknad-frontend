@@ -1,4 +1,5 @@
-import { Alert, BodyLong, Button, Modal } from '@navikt/ds-react'
+import { BodyLong, Button, Modal } from '@navikt/ds-react'
+import Alert from '../alert/Alert'
 import React, { useState } from 'react'
 
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'

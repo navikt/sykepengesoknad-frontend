@@ -1,4 +1,5 @@
-import { Alert, Button, Modal } from '@navikt/ds-react'
+import { Button, Modal } from '@navikt/ds-react'
+import Alert from '../alert/Alert'
 import { TrashIcon } from '@navikt/aksel-icons'
 import React, { useState } from 'react'
 

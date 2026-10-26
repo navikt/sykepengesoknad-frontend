@@ -1,4 +1,5 @@
-import { Alert, BodyLong } from '@navikt/ds-react'
+import { BodyLong } from '@navikt/ds-react'
+import Alert from '../alert/Alert'
 import React from 'react'
 
 import { JulesoknadTekstIntroside } from '../julesoknad/julesoknad-infotekst'
