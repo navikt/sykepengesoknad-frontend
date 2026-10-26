@@ -32,16 +32,12 @@ type ArbeidUnderveis100ProsentValgFelles = {
 
 type ArbeidUnderveis100ProsentValg =
     | (ArbeidUnderveis100ProsentValgFelles & {
-          readonly arbeidsgiver: string
+          readonly arbeidsgiver?: string
           readonly tekstvariant?: 'arbeidstaker'
       })
     | (ArbeidUnderveis100ProsentValgFelles & {
           readonly arbeidsgiver?: never
           readonly tekstvariant: 'frilanser' | 'selvstendigNaeringsdrivende'
-      })
-    | (ArbeidUnderveis100ProsentValgFelles & {
-          readonly arbeidsgiver?: string | undefined
-          readonly tekstvariant: 'fisker'
       })
 
 export const arbeidUnderveis100Prosent = (valg: ArbeidUnderveis100ProsentValg): RSSporsmal => {

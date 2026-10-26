@@ -12,13 +12,14 @@ import { RSFiskerLottOgHyre } from '../../../../types/rs-types/rs-fiskerlottoghy
 
 const fom = '2020-04-01'
 const tom = '2020-04-24'
+const arbeidsgiverNavn = 'Rederiet AS'
 
-const standardSporsmal = [
+const standardSporsmal = (arbeidsgiver?: string) => [
     ansvarserklaring(),
-    tilbakeIArbeid({ fom, tom, tekstvariant: 'fisker' }),
+    tilbakeIArbeid({ fom, tom, tekstvariant: 'arbeidstaker', arbeidsgiver }),
     ferieV2({ fom, tom }),
     permisjonV2({ fom, tom }),
-    arbeidUnderveis100Prosent({ fom, tom, tekstvariant: 'fisker' }),
+    arbeidUnderveis100Prosent({ fom, tom, tekstvariant: 'arbeidstaker', arbeidsgiver }),
     andreInntektskilderV2(),
     oppholdUtenforEos({ fom, tom }),
 ]
@@ -52,5 +53,13 @@ export const fiskerHyre: RSSoknad = {
     id: 'e641fcab-723d-4393-b8e8-5da340d65421',
     ...soknadData,
     opprettetDato: '2020-06-13',
-    sporsmal: [...standardSporsmal, oppsummering()],
+    sporsmal: [...standardSporsmal(), oppsummering()],
+}
+
+export const fiskerHyreMedArbeidsgiver: RSSoknad = {
+    id: 'e641fcab-723d-4393-b8e8-5da340d65422',
+    ...soknadData,
+    arbeidsgiver: { navn: arbeidsgiverNavn, orgnummer: '974654450' },
+    opprettetDato: '2020-06-13',
+    sporsmal: [...standardSporsmal(arbeidsgiverNavn), oppsummering()],
 }
