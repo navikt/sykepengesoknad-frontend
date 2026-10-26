@@ -28,6 +28,7 @@ export function PaskeferieInfo({ sporsmal, jaNeiSvar }: { sporsmal: Sporsmal; ja
         return (
             <NyAlertGammeltDesign
                 funksjon={Funksjon.info}
+                className="mt-8"
                 info={
                     <>
                         <Label as="h2">{PaskeferieInfoTekster.label}</Label>

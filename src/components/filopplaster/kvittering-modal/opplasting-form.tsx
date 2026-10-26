@@ -252,7 +252,11 @@ const OpplastingForm = ({ valgtSoknad, setOpenModal, openModal }: OpplastingFrom
                     <FilOpplaster valgtFil={valgtFil} setValgtFil={setValgtFil} />
                 </div>
                 {feilmelding && (
-                    <NyAlertGammeltDesign funksjon={Funksjon.warning} info={<BodyShort>{feilmelding}</BodyShort>} />
+                    <NyAlertGammeltDesign
+                        funksjon={Funksjon.warning}
+                        className="mt-8"
+                        info={<BodyShort>{feilmelding}</BodyShort>}
+                    />
                 )}
 
                 <div className="mt-8 flex gap-4">

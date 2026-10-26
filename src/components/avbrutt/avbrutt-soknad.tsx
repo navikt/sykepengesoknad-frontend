@@ -1,8 +1,7 @@
-import { BodyLong, InfoCard } from '@navikt/ds-react'
+import { BodyLong, BodyShort } from '@navikt/ds-react'
 import { isAfter, subSeconds } from 'date-fns'
 import React, { useEffect } from 'react'
 import { useRouter } from 'next/router'
-
 import { RSSoknadstatus } from '../../types/rs-types/rs-soknadstatus'
 import { now, tilLesbarDatoMedArstall } from '../../utils/dato-utils'
 import { tekst } from '../../utils/tekster'
@@ -18,9 +17,8 @@ import { SoknadHeader } from '../soknad/soknad-header'
 import { useSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
 import { tekstMedHtml } from '../../utils/html-react-parser-utils'
 import { RSSoknadstype } from '../../types/rs-types/rs-soknadstype'
-
+import NyAlertGammeltDesign, { Funksjon } from '../generelle-komponenter/NyAlertGammeltDesign'
 import GjenapneSoknad from './gjenapneknapp'
-import { ExclamationmarkTriangleIcon } from '@navikt/aksel-icons'
 
 const AvbruttSoknad = () => {
     const router = useRouter()
@@ -53,11 +51,17 @@ const AvbruttSoknad = () => {
     return (
         <>
             <SoknadHeader />
-            <InfoCard data-color="warning" style={{ marginBottom: '1rem' }}>
-                <InfoCard.Message icon={<ExclamationmarkTriangleIcon aria-hidden />}>
-                    {tekst('sykepengesoknad.avbrutt.tidspunkt')} {tilLesbarDatoMedArstall(valgtSoknad.avbruttDato)}.
-                </InfoCard.Message>
-            </InfoCard>
+            <NyAlertGammeltDesign
+                funksjon={Funksjon.warning}
+                info={
+                    <>
+                        <BodyShort>
+                            {tekst('sykepengesoknad.avbrutt.tidspunkt')}{' '}
+                            {tilLesbarDatoMedArstall(valgtSoknad.avbruttDato)}.
+                        </BodyShort>
+                    </>
+                }
+            />
             <BodyLong size="large" spacing weight="semibold">
                 {tekstMedHtml(tekst('sykepengesoknad.avbrutt.informasjon-innhold-1'))}
             </BodyLong>

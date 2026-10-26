@@ -1,4 +1,4 @@
-import { Alert, BodyShort, Button, Modal } from '@navikt/ds-react'
+import { BodyShort, Button, Modal } from '@navikt/ds-react'
 import React from 'react'
 
 import { tekst } from '../../../utils/tekster'
@@ -54,13 +54,7 @@ export const EndringUtenEndringModal = (props: EndringUtenEndringModalProps) => 
                     >
                         {tekst('endring-uten-endring.popup.ok')}
                     </Button>
-                    {avbrytError && (
-                        <NyAlertGammeltDesign
-                            funksjon={Funksjon.danger}
-                            className="mt-8 bg-ax-bg-default"
-                            info={tekst('avbryt.feilet')}
-                        />
-                    )}
+                    {avbrytError && <NyAlertGammeltDesign funksjon={Funksjon.danger} info={tekst('avbryt.feilet')} />}
                 </Modal.Body>
             </Modal>
         </>

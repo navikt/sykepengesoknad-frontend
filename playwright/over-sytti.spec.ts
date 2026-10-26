@@ -1,4 +1,5 @@
-import { test, expect } from './utils/fixtures'
+import { test } from './utils/fixtures'
+import { harSynligTekst, harSynligTittel } from './utils/utilities'
 
 test.describe('Tester søknader tilhørende person over 70', () => {
     const testpersonQuery = '?testperson=over-70'
@@ -6,11 +7,10 @@ test.describe('Tester søknader tilhørende person over 70', () => {
 
     test('Person over 70', async ({ page }) => {
         await page.goto(`/syk/sykepengesoknad/soknader/${soknadId}/1${testpersonQuery}`)
-        const alert = page.locator('.aksel-alert').filter({ hasText: 'Viktig informasjon' })
-        await expect(alert).toBeVisible()
-        await expect(alert).toContainText('Viktig informasjon')
-        await expect(alert).toContainText('Når du har passert 70 år, har du ikke lenger rett til sykepenger.')
-        await expect(alert).toContainText(
+        await harSynligTittel(page, 'Viktig informasjon', 1)
+        await harSynligTekst(page, 'Når du har passert 70 år, har du ikke lenger rett til sykepenger.')
+        await harSynligTekst(
+            page,
             'Hvis du ikke skal søke om sykepenger, kan du avbryte søknaden. Hvis du likevel ønsker å søke, kan vi ikke hindre deg i dette.',
         )
     })

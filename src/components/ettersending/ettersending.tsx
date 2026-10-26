@@ -1,4 +1,4 @@
-import { Alert, BodyShort, Button, Modal } from '@navikt/ds-react'
+import { BodyShort, Button, Modal } from '@navikt/ds-react'
 import React, { useState } from 'react'
 
 import { tekst } from '../../utils/tekster'

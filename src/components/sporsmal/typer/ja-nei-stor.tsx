@@ -142,22 +142,24 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
                         )}
                     </BodyLong>
                 )}
-
                 {sporsmal.tag === 'FRAVAR_FOR_SYKMELDINGEN_V2' && watchJaNei === 'JA' && (
                     <NyAlertGammeltDesign
                         funksjon={Funksjon.info}
+                        className="mt-8"
                         info="Det kan være vi trenger flere opplysninger om fraværet ditt. Da vil en saksbehandler ta kontakt."
                     />
                 )}
                 {sporsmal.tag === 'NARINGSDRIVENDE_OPPRETTHOLDT_INNTEKT' && watchJaNei === 'JA' && (
                     <NyAlertGammeltDesign
                         funksjon={Funksjon.info}
+                        className="mt-8"
                         info="Vi trenger mer informasjon om denne inntekten. En saksbehandler vil derfor ta kontakt med deg."
                     />
                 )}
                 {sporsmal.tag === 'NARINGSDRIVENDE_OPPRETTHOLDT_INNTEKT_GRADERT' && watchJaNei === 'JA' && (
                     <NyAlertGammeltDesign
                         funksjon={Funksjon.info}
+                        className="mt-8"
                         info="Vi trenger mer informasjon om denne inntekten. En saksbehandler vil derfor ta kontakt med deg."
                     />
                 )}

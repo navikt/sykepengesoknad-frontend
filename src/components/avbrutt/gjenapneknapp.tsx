@@ -1,10 +1,10 @@
-import { Button, InfoCard } from '@navikt/ds-react'
-import { XMarkOctagonIcon } from '@navikt/aksel-icons'
+import { Button } from '@navikt/ds-react'
 import React from 'react'
 
 import { logEvent } from '../umami/umami'
 import { useGjenapne } from '../../hooks/useGjenapne'
 import { useSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
+import NyAlertGammeltDesign, { Funksjon } from '../generelle-komponenter/NyAlertGammeltDesign'
 
 const GjenapneSoknad = () => {
     const { valgtSoknad } = useSoknadMedDetaljer()
@@ -16,11 +16,7 @@ const GjenapneSoknad = () => {
     return (
         <>
             {gjenapneError && (
-                <InfoCard data-color="danger">
-                    <InfoCard.Message icon=<XMarkOctagonIcon />>
-                        Beklager, klarte ikke gjenåpne søknaden din
-                    </InfoCard.Message>
-                </InfoCard>
+                <NyAlertGammeltDesign funksjon={Funksjon.danger} info="Beklager, klarte ikke gjenåpne søknaden din" />
             )}
             <Button
                 variant="tertiary"
