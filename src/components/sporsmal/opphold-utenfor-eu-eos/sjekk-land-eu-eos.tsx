@@ -40,8 +40,8 @@ export const SjekkLandEuEos = () => {
                         <>
                             <UNSAFE_Combobox
                                 id="land-i-eu-eos-combobox"
-                                label="Sjekk om landet er utenfor EU/EØS"
-                                description="Legg inn alle landene du har vært i, i perioden."
+                                label="Sjekk om du må søke"
+                                description="Legg inn alle landene du har reist til i perioden."
                                 isMultiSelect
                                 options={alleLand}
                                 filteredOptions={filteredOptions}
@@ -53,7 +53,8 @@ export const SjekkLandEuEos = () => {
 
                             {valgtLandIEOS.length > 0 && valgtLandUtenforEOS.length === 0 && (
                                 <InlineMessage status="info" className="mt-8">
-                                    Du har ikke reist utenfor EU/EØS. Svar nei på dette spørsmålet.
+                                    Ved reiser til EU-/EØS-land og Storbritannia trenger du ikke å søke. Svar nei på
+                                    dette spørsmålet.
                                 </InlineMessage>
                             )}
 

@@ -103,7 +103,7 @@ test.describe('Tester arbeidsledigsøknad', () => {
             ).toBeVisible()
 
             await apneReadmore(page, 'Spørsmålet forklart', [
-                'Svar ja, dersom du har oppholdt deg utenfor EU/EØS i løpet av perioden du var sykmeldt',
+                'Svar ja hvis du har vært i et land utenfor EU/EØS og Storbritannia mens du var sykmeldt.',
                 'Da oppretter vi en egen søknad som du må sende inn',
             ])
 

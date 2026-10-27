@@ -65,7 +65,7 @@ test.describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
 
         await svarCombobox(page, 'Hvor skal du reise?', 'Eng', 'England', true)
         await expect(
-            page.getByText('Ved reiser til Storbritannia og EU-/EØS-land trenger du ikke å søke.'),
+            page.getByText('Ved reiser til EU-/EØS-land og Storbritannia trenger du ikke å søke.'),
         ).toBeVisible()
 
         await expect(page.getByRole('button', { name: 'Avbryt søknad' })).toBeVisible()
