@@ -6,6 +6,17 @@ import {
     erStorbritanniaLand,
     harAlleLandIEuEosEllerStorbritannia,
 } from './land-utils'
+import { landlisteUtenforEøsMedlemskap } from './landliste'
+
+describe('landlisteUtenforEøsMedlemskap', () => {
+    it.each(['Storbritannia', 'Færøyene', 'Grønland', 'Åland', 'Gibraltar', 'USA'])('inneholder %s', (land) => {
+        expect(landlisteUtenforEøsMedlemskap).toContain(land)
+    })
+
+    it.each(['Danmark', 'Sveits', 'Réunion', 'Mayotte'])('inneholder ikke %s', (land) => {
+        expect(landlisteUtenforEøsMedlemskap).not.toContain(land)
+    })
+})
 
 describe('land-utils', () => {
     it('gjenkjenner Storbritannia-land', () => {
@@ -19,6 +30,20 @@ describe('land-utils', () => {
         expect(erLandIEuEos('Sverige')).toBe(true)
         expect(erLandIEuEos('USA')).toBe(false)
     })
+
+    it.each(['Mayotte', 'Réunion', 'Saint-Martin (Fransk del)', 'Færøyene', 'Grønland', 'Åland', 'Sveits'])(
+        'behandler %s som innenfor EU/EØS',
+        (land) => {
+            expect(erLandIEuEos(land)).toBe(true)
+        },
+    )
+
+    it.each(['Gibraltar', 'Jersey', 'Man', 'Saint-Barthélemy', 'Bouvetøya', 'Nord-Kypros'])(
+        'behandler %s som utenfor EU/EØS',
+        (land) => {
+            expect(erLandIEuEos(land)).toBe(false)
+        },
+    )
 
     it.each(['England', 'Nord-Irland', 'Skottland', 'Storbritannia', 'Wales'])(
         'behandler %s som innenfor EU/EØS',

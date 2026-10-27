@@ -1,15 +1,96 @@
-export const landlisteUtenforEøs = [
+// Dokumentasjon for ikke-tekniske: dokumentasjon/landlister-eos.md
+// Oppdater dokumentasjonen og endringstabellen når listene endres.
+//
+// Kilder:
+// - Rundskriv Hovednr. 45 kap. 1 pkt. 3 (EØS-avtalens geografiske virkeområde)
+// - Rundskriv Hovednr. 41 pkt. 0.1 og 1.1.1 (Nordisk konvensjon om trygd)
+// - Rundskriv om avtaler mellom Norge og Storbritannia pkt. 1.4 og 3.1.5
+// Svalbard og Jan Mayen regnes som Norge og er ikke med.
+
+// EU-landene
+const euLand = [
+    'Belgia',
+    'Bulgaria',
+    'Danmark',
+    'Estland',
+    'Finland',
+    'Frankrike',
+    'Hellas',
+    'Irland',
+    'Italia',
+    'Kroatia',
+    'Kypros',
+    'Latvia',
+    'Litauen',
+    'Luxembourg',
+    'Malta',
+    'Nederland',
+    'Polen',
+    'Portugal',
+    'Romania',
+    'Slovakia',
+    'Slovenia',
+    'Spania',
+    'Sverige',
+    'Tsjekkia',
+    'Tyskland',
+    'Ungarn',
+    'Østerrike',
+]
+
+// EFTA/EØS-landene (unntatt Norge)
+const efta = ['Island', 'Liechtenstein']
+
+// Ikke EØS, men trygdeforordningen gjelder (Hovednr. 45 pkt. 10.2)
+const sveits = ['Sveits']
+
+// Ikke EØS etter Brexit, men omfattet av konvensjonen med EØS/EFTA-landene fra 2024.
+// Gibraltar, Jersey, Guernsey og Man er ikke med, se landlisteUtenforEøs.
+const storbritannia = ['Storbritannia', 'England', 'Nord-Irland', 'Skottland', 'Wales']
+
+// EUs ytterste regioner, en del av EØS-området (Hovednr. 45 pkt. 3.1)
+const ytterstRegioner = ['Fransk Guyana', 'Guadeloupe', 'Martinique', 'Mayotte', 'Réunion', 'Saint-Martin (Fransk del)']
+
+// Ikke EØS, men omfattet av Nordisk konvensjon om trygd (Hovednr. 41 pkt. 0.1)
+const nordiskKonvensjon = ['Færøyene', 'Grønland', 'Åland']
+
+export const landlisteEøs = [...euLand, ...efta, ...sveits, ...storbritannia, ...ytterstRegioner, ...nordiskKonvensjon]
+
+// Europeiske småstater, ikke EØS (Hovednr. 45 pkt. 3.1)
+const europeiskeSmastater = ['Andorra', 'Monaco', 'San Marino', 'Vatikanstaten']
+
+// Britiske områder utenfor konvensjonen med Storbritannia (rundskriv om Storbritannia pkt. 3.1.5).
+// Avtalen fra 1990 dekker Jersey og Man, men krever søknad (art. 12 nr. 3).
+const britiskeOmrader = ['Gibraltar', 'Guernsey', 'Jersey', 'Man']
+
+// Oversjøiske områder som hører til EØS-land, men er utenfor EØS (Hovednr. 45 pkt. 3.1)
+const oversjoiskeOmrader = [
+    'Aruba',
+    'Curaçao',
+    'Fransk Polynesia',
+    'Karibisk Nederland',
+    'Ny-Caledonia',
+    'Saint-Barthélemy',
+    'Saint-Pierre-et-Miquelon',
+    'Sint Maarten (Nederlandsk del)',
+    'Søre franske territorier',
+    'Wallis- og Futunaøyene',
+]
+
+// Norsk biland, ikke norsk territorium (Hovednr. 45 pkt. 3.3.3)
+const norskeBiland = ['Bouvetøya']
+
+// Øvrige land og områder utenfor EØS
+const ovrigeLand = [
     'Afghanistan',
     'Albania',
     'Algerie',
     'Amerikansk Samoa',
-    'Andorra',
     'Angola',
     'Anguilla',
     'Antigua og Barbuda',
     'Argentina',
     'Armenia',
-    'Aruba',
     'Aserbajdsjan',
     'Australia',
     'Bahamas',
@@ -23,7 +104,6 @@ export const landlisteUtenforEøs = [
     'Bolivia',
     'Bosnia-Hercegovina',
     'Botswana',
-    'Bouvetøya',
     'Brasil',
     'Britisk territorium i Indiahavet',
     'Brunei',
@@ -38,7 +118,6 @@ export const landlisteUtenforEøs = [
     'Cookøyene',
     'Costa Rica',
     'Cuba',
-    'Curaçao',
     'De forente arabiske emirater',
     'De okkuperte palestinske områdene',
     'Den dominikanske republikk',
@@ -56,8 +135,6 @@ export const landlisteUtenforEøs = [
     'Falklandsøyene',
     'Fiji',
     'Filippinene',
-    'Fransk Polynesia',
-    'Færøyene',
     'Gabon',
     'Gambia',
     'Georgia',
@@ -65,7 +142,6 @@ export const landlisteUtenforEøs = [
     'Grenada',
     'Guam',
     'Guatemala',
-    'Guernsey',
     'Guinea',
     'Guinea-Bissau',
     'Guyana',
@@ -82,14 +158,12 @@ export const landlisteUtenforEøs = [
     'Jamaica',
     'Japan',
     'Jemen',
-    'Jersey',
     'Jomfruøyene (Britisk)',
     'Jomfruøyene (USA)',
     'Jordan',
     'Kambodsja',
     'Kamerun',
     'Kapp Verde',
-    'Karibisk Nederland',
     'Kasakhstan',
     'Kenya',
     'Kina',
@@ -112,16 +186,13 @@ export const landlisteUtenforEøs = [
     'Malaysia',
     'Maldivene',
     'Mali',
-    'Man',
     'Marokko',
     'Marshalløyene',
     'Mauritania',
     'Mauritius',
-    'Mayotte',
     'Mexico',
     'Mikronesiaføderasjonen',
     'Moldova',
-    'Monaco',
     'Mongolia',
     'Montenegro',
     'Montserrat',
@@ -135,11 +206,10 @@ export const landlisteUtenforEøs = [
     'Nigeria',
     'Niue',
     'Nord-Korea',
-    'Nord-Kypros',
+    'Nord-Kypros', // Ikke anerkjent som eget land, men brukes av brukere og er utenfor EØS i praksis
     'Nord-Makedonia',
     'Nord-Marianene',
     'Norfolk Island',
-    'Ny-Caledonia',
     'Oman',
     'Pakistan',
     'Palau',
@@ -155,12 +225,8 @@ export const landlisteUtenforEøs = [
     'Saint Kitts og Nevis',
     'Saint Lucia',
     'Saint Vincent og Grenadinene',
-    'Saint-Barthélemy',
-    'Saint-Martin',
-    'Saint-Pierre-et-Miquelon',
     'Salomonøyene',
     'Samoa',
-    'San Marino',
     'São Tomé og Príncipe',
     'Saudi-Arabia',
     'Senegal',
@@ -168,7 +234,6 @@ export const landlisteUtenforEøs = [
     'Seychellene',
     'Sierra Leone',
     'Singapore',
-    'Sint Maarten (Nederlandsk del)',
     'Somalia',
     'Sri Lanka',
     'St. Helena',
@@ -179,7 +244,6 @@ export const landlisteUtenforEøs = [
     'Sør-Georgia og de søre Sandwichøyene',
     'Sør-Korea',
     'Sør-Sudan',
-    'Søre franske territorier',
     'Tadsjikistan',
     'Taiwan',
     'Tanzania',
@@ -201,50 +265,22 @@ export const landlisteUtenforEøs = [
     'USA, mindre, utenforliggende øyer',
     'Usbekistan',
     'Vanuatu',
-    'Vatikanstaten',
     'Venezuela',
     'Vest-Sahara',
     'Vietnam',
-    'Wallis- og Futunaøyene',
     'Zambia',
     'Zimbabwe',
     'Øst-Timor',
 ]
 
-export const landlisteEøs = [
-    'Belgia',
-    'Bulgaria',
-    'Danmark',
-    'England',
-    'Estland',
-    'Finland',
-    'Frankrike',
-    'Hellas',
-    'Irland',
-    'Island',
-    'Italia',
-    'Kroatia',
-    'Kypros',
-    'Latvia',
-    'Liechtenstein',
-    'Litauen',
-    'Luxembourg',
-    'Malta',
-    'Nederland',
-    'Nord-Irland',
-    'Polen',
-    'Portugal',
-    'Romania',
-    'Sveits',
-    'Sverige',
-    'Skottland',
-    'Slovakia',
-    'Slovenia',
-    'Storbritannia',
-    'Spania',
-    'Tsjekkia',
-    'Tyskland',
-    'Ungarn',
-    'Wales',
-    'Østerrike',
+export const landlisteUtenforEøs = [
+    ...europeiskeSmastater,
+    ...britiskeOmrader,
+    ...oversjoiskeOmrader,
+    ...norskeBiland,
+    ...ovrigeLand,
 ]
+
+// Medlemskap: spørsmålet gjelder opphold utenfor EU/EØS eller Sveits, uten unntakene som gjelder for reise.
+// Storbritannia og områdene med Nordisk konvensjon er utenfor EØS (LovMe regner dem heller ikke som EØS).
+export const landlisteUtenforEøsMedlemskap = [...landlisteUtenforEøs, ...storbritannia, ...nordiskKonvensjon]

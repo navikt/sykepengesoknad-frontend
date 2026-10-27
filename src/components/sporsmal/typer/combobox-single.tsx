@@ -3,7 +3,7 @@ import { UNSAFE_Combobox } from '@navikt/ds-react'
 import { useMemo } from 'react'
 
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
-import { landlisteEøs, landlisteUtenforEøs } from '../landliste'
+import { landlisteEøs, landlisteUtenforEøs, landlisteUtenforEøsMedlemskap } from '../landliste'
 import { hentFeilmelding } from '../sporsmal-utils'
 
 const ComboboxSingle = ({ sporsmal }: SpmProps) => {
@@ -11,7 +11,7 @@ const ComboboxSingle = ({ sporsmal }: SpmProps) => {
 
     const options = useMemo(() => {
         if (sporsmal.tag === 'MEDLEMSKAP_OPPHOLD_UTENFOR_EOS_HVOR') {
-            return landlisteUtenforEøs.sort()
+            return [...landlisteUtenforEøsMedlemskap].sort()
         } else {
             return landlisteUtenforEøs.concat(landlisteEøs).sort()
         }

@@ -49,7 +49,7 @@ const ComboboxMultiple = ({ sporsmal }: SpmProps) => {
             return landlisteUtenforEøs.concat(landlisteEøs).sort()
         }
         if (utlandskSykmeldingTrygd) {
-            return landlisteEøs
+            return [...landlisteEøs].sort()
         }
         throw new Error('Ugyldig tag for landvelger: ' + sporsmal.tag)
     }, [sporsmal.tag, utlandskSykmeldingTrygd])
