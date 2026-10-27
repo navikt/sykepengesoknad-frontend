@@ -35,6 +35,7 @@ Brukeren må søke ved reise til alle andre land. Noen områder kan se ut som de
 | Britiske områder | Gibraltar, Jersey, Guernsey og Man | Ikke med i avtalen med Storbritannia |
 | Oversjøiske områder | For eksempel Fransk Polynesia, Ny-Caledonia, Saint-Barthélemy, Aruba og Curaçao | Hører til et EU-land, men er ikke en del av EU |
 | Norske områder i Antarktis | Bouvetøya | Ikke norsk territorium |
+| Nord-Kypros | Nord-Kypros | Ikke anerkjent som eget land, men EU-reglene gjelder ikke der i praksis |
 
 Svalbard og Jan Mayen regnes som Norge og står ikke i listene.
 
@@ -65,3 +66,19 @@ Listene ligger i `src/components/sporsmal/landliste.ts`.
 - [Navs rundskriv til Nordisk konvensjon om trygd](https://lovdata.no/nav/rundskriv/r41-00) (Færøyene, Grønland, Åland, Svalbard og Jan Mayen)
 - [Navs rundskriv om avtaler mellom Norge og Storbritannia](https://lovdata.no/nav/rundskriv/r20201127-131) (Storbritannia, Gibraltar, Jersey og Man)
 - [Landkode.kt i medlemskap-oppslag](https://github.com/navikt/medlemskap-oppslag/blob/main/src/main/kotlin/no/nav/medlemskap/domene/Landkode.kt) (hvordan LovMe behandler EØS-land)
+
+## Endringer i landvelgeren
+
+| Dato | Endring |
+|---|---|
+| 10.06.2020 | Landvelgeren ble laget |
+| 11.01.2021 | Storbritannia lagt til etter Brexit |
+| 31.08.2022 | Storbritannia fjernet |
+| 04.10.2022 | Storbritannia lagt til igjen |
+| 16.07.2024 | Færøyene lagt til som utenfor EØS |
+| 29.08.2024 | England, Skottland, Wales og Nord-Irland lagt til |
+| 13.05.2026 | Makedonia endret til Nord-Makedonia |
+| 18.08.2026 | Nord-Kypros lagt til som utenfor EØS |
+| 24.08.2026 | Swaziland endret til Eswatini |
+| 16.10.2026 | Storbritannia med delene regnes som innenfor EØS |
+| 27.10.2026 | Færøyene, Mayotte og Saint-Martin (Fransk del) flyttet til innenfor EØS. Grønland, Åland, Réunion, Guadeloupe, Martinique og Fransk Guyana lagt til som innenfor EØS. Gibraltar lagt til som utenfor EØS. Egen liste for medlemskap |
