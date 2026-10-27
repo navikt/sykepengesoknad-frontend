@@ -1,5 +1,4 @@
 import type { RSSoknad } from '../../../../types/rs-types/rs-soknad'
-import { formatterPeriode } from '../sporsmal/utils/backend-datoformat'
 import { frilanser100Syk } from '../sykmeldinger'
 import { andreInntektskilder } from '../sporsmal/andre-inntektskilder'
 import { ansvarserklaring } from '../sporsmal/ansvarserklaring'
@@ -39,7 +38,6 @@ const sporsmal = () => [
     oppholdUtenforEos({
         fom,
         tom,
-        sporsmalstekst: `Har du vært utenfor EU/EØS mens du var sykmeldt ${formatterPeriode(fom, tom)}?`,
     }),
     arbeidUtenforNorge(),
     oppsummering(),

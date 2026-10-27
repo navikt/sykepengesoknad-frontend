@@ -62,8 +62,8 @@ Disse håndteres fortsatt i prosessering/mapping/mutering for eldre søknader:
 | `FERIE_NAR_V2` | «Når tok du ut feriedager?» |
 | `PERMISJON_V2` | «Tok du permisjon mens du var sykmeldt …?» |
 | `PERMISJON_NAR_V2` | «Når tok du permisjon?» |
-| `OPPHOLD_UTENFOR_EOS` | «Var du på reise utenfor EU/EØS mens du var sykmeldt …?» |
-| `OPPHOLD_UTENFOR_EOS_NAR` | «Når var du utenfor EU/EØS?» |
+| `OPPHOLD_UTENFOR_EOS` | «Var du på reise utenfor EU/EØS og Storbritannia mens du var sykmeldt …?» |
+| `OPPHOLD_UTENFOR_EOS_NAR` | «Når var du på reise?» |
 | `TIL_SLUTT` | Ingen eksplisitt spørsmålstekst (oppsummeringssteg). |
 | `ANDRE_INNTEKTSKILDER_V2` | «Har du andre inntektskilder enn …?» |
 | `ANDRE_INNTEKTSKILDER` | Variant av «Har du annen/andre inntektskilder …?» (avhenger av arbeidssituasjon) |

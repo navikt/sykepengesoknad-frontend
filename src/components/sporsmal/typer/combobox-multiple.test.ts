@@ -38,7 +38,7 @@ describe('hentAlertTekst', () => {
                 valgtLand: [land, 'Danmark'],
                 utlandskSykmeldingTrygd: false,
             }),
-        ).toBe('Ved reiser til Storbritannia og EU-/EØS-land trenger du ikke å søke.')
+        ).toBe('Ved reiser til EU-/EØS-land og Storbritannia trenger du ikke å søke.')
     })
 
     it('returnerer Storbritannia + EØS-teksten for alle fem britiske land sammen med Danmark', () => {
@@ -47,7 +47,7 @@ describe('hentAlertTekst', () => {
                 valgtLand: [...britiskeLand, 'Danmark'],
                 utlandskSykmeldingTrygd: false,
             }),
-        ).toBe('Ved reiser til Storbritannia og EU-/EØS-land trenger du ikke å søke.')
+        ).toBe('Ved reiser til EU-/EØS-land og Storbritannia trenger du ikke å søke.')
     })
 
     it.each([

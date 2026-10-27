@@ -185,7 +185,7 @@ test.describe('Sjekker at søknader med gammel oppsummering ser ok ut', () => {
             await expect(page).toHaveURL(/\/soknader\/.*\/7/)
 
             await svarJaHovedsporsmal(page)
-            await harSynligTekst(page, 'Når var du utenfor EU/EØS?')
+            await harSynligTekst(page, 'Når var du på reise?')
 
             await setPeriodeFraTil(page, 14, 22)
 

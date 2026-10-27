@@ -34,7 +34,7 @@ export const hentAlertTekst = ({
         return 'Du har valgt land innenfor EU/EØS og trenger derfor ikke å søke.'
     }
     if (harKunStorbritanniaEllerEøs) {
-        return 'Ved reiser til Storbritannia og EU-/EØS-land trenger du ikke å søke.'
+        return 'Ved reiser til EU-/EØS-land og Storbritannia trenger du ikke å søke.'
     }
 
     return undefined

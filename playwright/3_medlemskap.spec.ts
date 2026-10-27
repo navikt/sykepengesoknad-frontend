@@ -120,8 +120,8 @@ test.describe('Søknad med alle opprinnelige spørsmål om medlemskap', () => {
             await klikkGaVidere(page)
         })
 
-        await test.step('Var du på reise utenfor EU/EØS mens du var sykmeldt', async () => {
-            await harSynligTekst(page, 'Var du på reise utenfor EU/EØS mens du var sykmeldt')
+        await test.step('Var du på reise utenfor EU/EØS og Storbritannia mens du var sykmeldt', async () => {
+            await harSynligTekst(page, 'Var du på reise utenfor EU/EØS og Storbritannia mens du var sykmeldt')
             await svarNeiHovedsporsmal(page)
             // todo put this back later await validerAxeUtilityWrapper(page, test.info())
 

@@ -178,7 +178,7 @@ test.describe('Tester arbeidstakersøknad - gradert 50%', () => {
         await test.step('Søknad OPPHOLD_UTENFOR_EOS', async () => {
             await expect(page).toHaveURL(new RegExp(`.*${soknadId}\/8`))
             await svarJaHovedsporsmal(page)
-            await harSynligTekst(page, 'Når var du utenfor EU/EØS?')
+            await harSynligTekst(page, 'Når var du på reise?')
             await setPeriodeFraTil(page, 14, 22, 0, 1)
             await validerAxeUtilityWrapper(page, test.info())
             await page.getByRole('button', { name: /Gå videre/i }).click()

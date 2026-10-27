@@ -68,11 +68,11 @@ test.describe('Opphold utenfor EU/EØS', () => {
         })
 
         await test.step('Kan velge land for opphold utenfor EU/EØS', async () => {
-            const landVelgerOverskrift = page.getByText('Sjekk om landet er utenfor EU/EØS')
+            const landVelgerOverskrift = page.getByText('Sjekk om du må søke')
             await expect(landVelgerOverskrift).toBeVisible()
 
             const landVelger = page.getByRole('combobox', {
-                name: 'Sjekk om landet er utenfor EU/EØS',
+                name: 'Sjekk om du må søke',
             })
             await expect(landVelger).toBeVisible()
 
@@ -89,7 +89,9 @@ test.describe('Opphold utenfor EU/EØS', () => {
 
             await landVelger.press('Escape')
             await expect(
-                page.getByText('Du har ikke reist utenfor EU/EØS. Svar nei på dette spørsmålet.'),
+                page.getByText(
+                    'Ved reiser til EU-/EØS-land og Storbritannia trenger du ikke å søke. Svar nei på dette spørsmålet.',
+                ),
             ).toBeVisible()
 
             const britiskeLand = ['England', 'Nord-Irland', 'Skottland', 'Storbritannia', 'Wales']
@@ -101,7 +103,9 @@ test.describe('Opphold utenfor EU/EØS', () => {
 
                 await expect(valgteLand).toHaveText(['Belgia', ...britiskeLand.slice(0, indeks + 1)])
                 await expect(
-                    page.getByText('Du har ikke reist utenfor EU/EØS. Svar nei på dette spørsmålet.'),
+                    page.getByText(
+                        'Ved reiser til EU-/EØS-land og Storbritannia trenger du ikke å søke. Svar nei på dette spørsmålet.',
+                    ),
                 ).toBeVisible()
                 await expect(page.getByText('Du har reist utenfor EU/EØS.', { exact: true })).not.toBeVisible()
             }
@@ -113,7 +117,9 @@ test.describe('Opphold utenfor EU/EØS', () => {
             await expect(valgteLand).toHaveText(['Belgia', ...britiskeLand, 'Afghanistan'])
             await harSynligTekst(page, 'Du har reist utenfor EU/EØS.')
             await expect(
-                page.getByText('Du har ikke reist utenfor EU/EØS. Svar nei på dette spørsmålet.'),
+                page.getByText(
+                    'Ved reiser til EU-/EØS-land og Storbritannia trenger du ikke å søke. Svar nei på dette spørsmålet.',
+                ),
             ).not.toBeVisible()
         })
 

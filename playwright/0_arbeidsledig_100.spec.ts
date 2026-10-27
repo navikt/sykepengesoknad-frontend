@@ -99,11 +99,13 @@ test.describe('Tester arbeidsledigsøknad', () => {
 
             // Test spørsmål
             await expect(
-                page.getByText('Var du på reise utenfor EU/EØS mens du var sykmeldt 1. - 24. april 2020?'),
+                page.getByText(
+                    'Var du på reise utenfor EU/EØS og Storbritannia mens du var sykmeldt 1. - 24. april 2020?',
+                ),
             ).toBeVisible()
 
             await apneReadmore(page, 'Spørsmålet forklart', [
-                'Svar ja, dersom du har oppholdt deg utenfor EU/EØS i løpet av perioden du var sykmeldt',
+                'Svar ja hvis du har vært i et land utenfor EU/EØS og Storbritannia mens du var sykmeldt.',
                 'Da oppretter vi en egen søknad som du må sende inn',
             ])
 
@@ -111,7 +113,7 @@ test.describe('Tester arbeidsledigsøknad', () => {
             await svarJaHovedsporsmal(page)
 
             // Underspørsmål 1: Sett periode
-            await harSynligTekst(page, 'Når var du utenfor EU/EØS?')
+            await harSynligTekst(page, 'Når var du på reise?')
             await setPeriodeFraTil(page, 17, 24) // Bruk utility for å sette periode
 
             await validerAxeUtilityWrapper(page, test.info())
