@@ -58,7 +58,7 @@ Nav har et felles register over land (kodeverket). Det inneholder bare de vanlig
 
 Listene oppdateres ikke av seg selv. Hvis et land blir med i eller går ut av EU/EØS, eller reglene endres, må listene oppdateres for hånd. Juristen på teamet bør bekrefte endringer.
 
-Listene ligger i `src/components/sporsmal/landliste.ts`.
+Listene ligger i [landliste.ts](../src/components/sporsmal/landliste.ts). Legg inn endringer i tabellen nederst når listene endres.
 
 ## Kilder
 

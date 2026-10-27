@@ -1,3 +1,6 @@
+// Dokumentasjon for ikke-tekniske: dokumentasjon/landlister-eos.md
+// Oppdater dokumentasjonen og endringstabellen når listene endres.
+//
 // Kilder:
 // - Rundskriv Hovednr. 45 kap. 1 pkt. 3 (EØS-avtalens geografiske virkeområde)
 // - Rundskriv Hovednr. 41 pkt. 0.1 og 1.1.1 (Nordisk konvensjon om trygd)
