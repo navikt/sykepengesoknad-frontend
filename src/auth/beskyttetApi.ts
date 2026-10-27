@@ -23,7 +23,7 @@ export function beskyttetApi(handler: ApiHandler): ApiHandler {
         }
 
         if (isLocalBackend()) {
-            return handler(req, res)
+            return req.url?.includes('/api/sykepengesoknad-backend') ? handler(req, res) : mockApi(req, res)
         }
 
         const bearerToken: string | null | undefined = req.headers['authorization']

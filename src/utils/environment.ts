@@ -14,7 +14,7 @@ export function isIntegrationtest() {
 }
 
 export function isMockBackend() {
-    return bundledEnv.NEXT_PUBLIC_MOCK_BACKEND
+    return bundledEnv.NEXT_PUBLIC_MOCK_BACKEND && !isLocalBackend()
 }
 
 export function isOpplaering() {
