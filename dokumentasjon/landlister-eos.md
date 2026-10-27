@@ -34,7 +34,7 @@ Brukeren må søke ved reise til alle andre land. Noen områder kan se ut som de
 | Europeiske småstater | Andorra, Monaco, San Marino og Vatikanstaten | Ikke med i EØS |
 | Britiske områder | Gibraltar, Jersey, Guernsey og Man | Ikke med i avtalen med Storbritannia |
 | Oversjøiske områder | For eksempel Fransk Polynesia, Ny-Caledonia, Saint-Barthélemy, Aruba og Curaçao | Hører til et EU-land, men er ikke en del av EU |
-| Norske områder i Antarktis | Bouvetøya | Ikke norsk territorium |
+| Norske biland | Bouvetøya | Ikke norsk territorium |
 | Nord-Kypros | Nord-Kypros | Ikke anerkjent som eget land, men EU-reglene gjelder ikke der i praksis |
 
 Svalbard og Jan Mayen regnes som Norge og står ikke i listene.

@@ -11,7 +11,7 @@ const ComboboxSingle = ({ sporsmal }: SpmProps) => {
 
     const options = useMemo(() => {
         if (sporsmal.tag === 'MEDLEMSKAP_OPPHOLD_UTENFOR_EOS_HVOR') {
-            return landlisteUtenforEøsMedlemskap.sort()
+            return [...landlisteUtenforEøsMedlemskap].sort()
         } else {
             return landlisteUtenforEøs.concat(landlisteEøs).sort()
         }
