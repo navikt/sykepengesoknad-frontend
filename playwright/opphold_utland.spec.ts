@@ -89,7 +89,7 @@ test.describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
         await expect(page.getByRole('button', { name: 'Jeg vil slette denne søknaden' })).toHaveCount(1)
 
         // Velger Fransk Polynesia, lukker med chip
-        await svarCombobox(page, 'Hvor skal du reise?', 'Fransk', 'Fransk Polynesia')
+        await svarCombobox(page, 'Hvor skal du reise?', 'Fransk P', 'Fransk Polynesia')
         await page.getByRole('button', { name: 'Fransk Polynesia' }).click()
 
         // Velger Sør-Korea med musepeker
