@@ -8,8 +8,6 @@ type OppholdUtenforEosValg = {
     readonly svar?: RSSvar[]
     readonly oppholdNarSvar?: RSSvar[]
     readonly oppholdNarTag?: 'OPPHOLD_UTENFOR_EOS_NAR' | 'PERIODER'
-    readonly tekstvariant?: 'eos' | 'eu-eos'
-    readonly sporsmalstekst?: string
 }
 
 export const oppholdUtenforEos = ({
@@ -18,14 +16,10 @@ export const oppholdUtenforEos = ({
     svar = [],
     oppholdNarSvar = [],
     oppholdNarTag = 'OPPHOLD_UTENFOR_EOS_NAR',
-    tekstvariant = 'eu-eos',
-    sporsmalstekst,
 }: OppholdUtenforEosValg): RSSporsmal => ({
     id: '687347',
     tag: 'OPPHOLD_UTENFOR_EOS',
-    sporsmalstekst:
-        sporsmalstekst ??
-        `Var du på reise utenfor ${tekstvariant === 'eos' ? 'EØS' : 'EU/EØS'} mens du var sykmeldt ${formatterPeriode(fom, tom)}?`,
+    sporsmalstekst: `Var du på reise utenfor EU/EØS og Storbritannia mens du var sykmeldt ${formatterPeriode(fom, tom)}?`,
     undertekst: null,
     svartype: 'JA_NEI',
     min: null,
@@ -36,7 +30,7 @@ export const oppholdUtenforEos = ({
         {
             id: '687348',
             tag: oppholdNarTag,
-            sporsmalstekst: `Når var du utenfor ${tekstvariant === 'eos' ? 'EØS' : 'EU/EØS'}?`,
+            sporsmalstekst: 'Når var du på reise?',
             undertekst: null,
             svartype: 'PERIODER',
             min: fom,

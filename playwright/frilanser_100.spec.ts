@@ -79,7 +79,9 @@ test.describe('Tester frilansersøknad', () => {
         await test.step('Søknad OPPHOLD_UTENFOR_EOS - steg 5', async () => {
             await expect(page).toHaveURL(new RegExp(`${soknad.id}/5`))
             await expect(
-                page.getByText('Har du vært utenfor EU/EØS mens du var sykmeldt 1. - 24. april 2020?'),
+                page.getByText(
+                    'Var du på reise utenfor EU/EØS og Storbritannia mens du var sykmeldt 1. - 24. april 2020?',
+                ),
             ).toBeVisible()
 
             await apneReadmore(page, 'Spørsmålet forklart', [
@@ -88,7 +90,7 @@ test.describe('Tester frilansersøknad', () => {
             ])
 
             await svarJaHovedsporsmal(page)
-            await harSynligTekst(page, 'Når var du utenfor EU/EØS?')
+            await harSynligTekst(page, 'Når var du på reise?')
             await setPeriodeFraTil(page, 14, 22)
             await klikkGaVidere(page)
         })

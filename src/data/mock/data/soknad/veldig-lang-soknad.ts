@@ -208,7 +208,7 @@ export const veldigLangSoknad: RSSoknad = {
         permittertPeriode({ fom: '2020-10-22', tom: '2020-11-22' }),
         tilbakeIArbeid({ fom, tom, arbeidsgiver }),
         utdanning({ fom, tom }),
-        oppholdUtenforEos({ fom, tom, tekstvariant: 'eos' }),
+        oppholdUtenforEos({ fom, tom }),
         utland({
             fom,
             tom,

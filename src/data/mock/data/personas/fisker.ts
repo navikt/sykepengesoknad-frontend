@@ -1,6 +1,5 @@
 import { Sykmelding } from '../../../../types/sykmelding'
 import { RSSoknad } from '../../../../types/rs-types/rs-soknad'
-import { formatterPeriode } from '../sporsmal/utils/backend-datoformat'
 import {
     naringsdrivendeVirksomhetenAvviklet,
     naringsdrivendeNyIArbeidslivet,
@@ -59,7 +58,6 @@ const fiskerSporsmal = () => [
         fom,
         tom,
         oppholdNarTag: 'PERIODER',
-        sporsmalstekst: `Har du vært utenfor EU/EØS mens du var sykmeldt ${formatterPeriode(fom, tom)}?`,
     }),
     naringsdrivendeVirksomhetenAvviklet(),
     naringsdrivendeNyIArbeidslivet(),

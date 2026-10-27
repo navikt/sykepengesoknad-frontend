@@ -210,7 +210,7 @@ test.describe('Tester arbeidstakersøknad - 100%', () => {
             ])
 
             await svarJaHovedsporsmal(page)
-            await harSynligTekst(page, 'Når var du utenfor EU/EØS?')
+            await harSynligTekst(page, 'Når var du på reise?')
 
             await setPeriodeFraTil(page, 14, 22)
 
