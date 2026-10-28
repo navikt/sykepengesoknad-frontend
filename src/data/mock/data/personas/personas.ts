@@ -26,6 +26,7 @@ import { arbeidstakerTrePerioder } from '../soknad/arbeidstaker-tre-perioder'
 import { arbeidstaker, arbeidtakerMedGammelOppsummering } from '../soknad/arbeidstaker'
 import { arbeidsledig } from '../soknad/arbeidsledig'
 import { frilanser } from '../soknad/frilanser'
+import { frilanserFlereInntektskilderGhost } from '../soknad/frilanser-flere-inntektskilder-ghost'
 import { behandlingsdager } from '../soknad/behandlingsdager'
 import { nyttReisetilskudd } from '../soknad/arbeidstaker-reisetilskudd'
 import { gradertReisetilskudd } from '../soknad/arbeidstaker-reisetilskudd-gradert'
@@ -225,7 +226,10 @@ export const arbeidsledigPerson: Persona = {
 }
 
 export const frilanserPerson: Persona = {
-    soknader: [{ ...frilanser, demoinfo: '100 % sykmeldt frilanser' }],
+    soknader: [
+        { ...frilanser, demoinfo: '100 % sykmeldt frilanser' },
+        { ...frilanserFlereInntektskilderGhost, demoinfo: 'Frilanser med flere inntektskilder' },
+    ],
     sykmeldinger: [frilanser100Syk],
     beskrivelse: 'Frilanser',
 }
