@@ -20,6 +20,7 @@ import { FlexjarKvittering } from '../flexjar/flexjar-kvittering'
 import { useSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
 import { useToggle } from '../../toggles/context'
 import { JulesoknadTekstKvittering } from '../julesoknad/julesoknad-infotekst'
+import { skalViseSendTilArbeidsgiver } from '../../utils/ettersending-utils'
 
 import Kvittering from './kvittering'
 
@@ -52,15 +53,8 @@ const KvitteringSide = () => {
 
     if (!valgtSoknad || !soknader) return <QueryStatusPanel valgSoknadId={soknadId} />
 
-    const erSendtTilArbeidsgiver = valgtSoknad.sendtTilArbeidsgiverDato !== undefined
-
     const skalViseEndre =
         valgtSoknad.status !== RSSoknadstatus.KORRIGERT && valgtSoknad.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND
-    const skalViseSendTilArbeidsgiver =
-        valgtSoknad.arbeidsgiver !== undefined &&
-        !erSendtTilArbeidsgiver &&
-        valgtSoknad.soknadstype !== RSSoknadstype.REISETILSKUDD &&
-        valgtSoknad.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND
 
     const gjenstaendeSoknader = hentGjenstaendeSoknader(soknader, valgtSoknad)
 
@@ -95,7 +89,7 @@ const KvitteringSide = () => {
                 </Button>
             )}
             {skalViseEndre && <Endreknapp />}
-            {skalViseSendTilArbeidsgiver && <Ettersending gjelder="arbeidsgiver" />}
+            {skalViseSendTilArbeidsgiver(valgtSoknad) && <Ettersending gjelder="arbeidsgiver" />}
             {skalViseFlexjar && <FlexjarKvittering />}
         </>
     )
