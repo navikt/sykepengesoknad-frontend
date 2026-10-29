@@ -12,6 +12,7 @@ import { kvitteringBreadcrumb, useUpdateBreadcrumbs } from '../../hooks/useBread
 import { SoknadHeader } from '../soknad/soknad-header'
 import { useSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
 import { urlTilSoknad } from '../soknad/soknad-link'
+import { skalViseSendTilArbeidsgiver } from '../../utils/ettersending-utils'
 
 const SendtSide = () => {
     const { valgtSoknad, soknadId } = useSoknadMedDetaljer()
@@ -38,16 +39,12 @@ const SendtSide = () => {
     if (!valgtSoknad) return <QueryStatusPanel valgSoknadId={soknadId} />
 
     const erSendtTilNav = valgtSoknad.sendtTilNAVDato !== undefined
-    const erSendtTilArbeidsgiver = valgtSoknad.sendtTilArbeidsgiverDato !== undefined
 
     const skalViseEndre = valgtSoknad.status !== RSSoknadstatus.KORRIGERT
-    const skalViseSendTilArbeidsgiver =
-        valgtSoknad.arbeidsgiver !== undefined &&
-        !erSendtTilArbeidsgiver &&
-        valgtSoknad.soknadstype !== RSSoknadstype.REISETILSKUDD
+    const skalViseEttersending = skalViseSendTilArbeidsgiver(valgtSoknad)
     const skalViseKnapperad =
         valgtSoknad.soknadstype !== RSSoknadstype.OPPHOLD_UTLAND &&
-        (skalViseEndre || !erSendtTilNav || skalViseSendTilArbeidsgiver)
+        (skalViseEndre || !erSendtTilNav || skalViseEttersending)
 
     return (
         <>
@@ -59,7 +56,7 @@ const SendtSide = () => {
                 <>
                     {skalViseEndre && <Endreknapp />}
 
-                    {skalViseSendTilArbeidsgiver && <Ettersending gjelder="arbeidsgiver" />}
+                    {skalViseEttersending && <Ettersending gjelder="arbeidsgiver" />}
                 </>
             )}
         </>

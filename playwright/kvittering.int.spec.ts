@@ -10,10 +10,12 @@ import {
     selvstendigKvittering,
     sendtArbeidsledigKvittering,
 } from '../src/data/mock/data/soknad/soknader-integration'
+import { fiskerHyreMedArbeidsgiver } from '../src/data/mock/data/soknad/fisker-hyre'
 
 import { test, expect } from './utils/fixtures'
 import {
     checkViStolerPaDeg,
+    neiOgVidere,
     svarJaHovedsporsmal,
     svarNeiHovedsporsmal,
     klikkGaVidere,
@@ -286,6 +288,28 @@ test.describe('Kvittering integrasjon', () => {
             await expect(panel).toContainText('Når blir pengene utbetalt')
             await expect(page.getByRole('button', { name: 'Jeg vil endre svarene i søknaden' })).toBeVisible()
             await expect(page.getByRole('button', { name: 'Jeg vil sende en kopi av søknaden' })).toBeVisible()
+        })
+    })
+
+    test('Fisker med arbeidsgiver - kan ikke ettersende til arbeidsgiver', async ({ page }) => {
+        await test.step('Sender søknad', async () => {
+            await page.goto(`/syk/sykepengesoknad/soknader/${fiskerHyreMedArbeidsgiver.id}/1?testperson=fisker`)
+            await checkViStolerPaDeg(page)
+            await neiOgVidere(page, [
+                'Tilbake i fullt arbeid',
+                'Ferie',
+                'Permisjon',
+                'Arbeid mens du var syk',
+                'Andre inntektskilder',
+                'Reise utenfor EU/EØS',
+            ])
+            await page.getByRole('button', { name: 'Send søknaden' }).click()
+        })
+
+        await test.step('Verifiserer kvittering', async () => {
+            await harSynligTittel(page, 'Søknaden er sendt', 2)
+            await expect(page.getByRole('button', { name: 'Jeg vil endre svarene i søknaden' })).toBeVisible()
+            await expect(page.getByRole('button', { name: 'Jeg vil sende en kopi av søknaden' })).toHaveCount(0)
         })
     })
 })
