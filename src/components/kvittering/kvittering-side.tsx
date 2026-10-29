@@ -68,7 +68,8 @@ const KvitteringSide = () => {
     const skalViseFlexjar =
         flexjarToggle.enabled ||
         erJulesoknad ||
-        valgtSoknad?.soknadstype == RSSoknadstype.FRISKMELDT_TIL_ARBEIDSFORMIDLING
+        valgtSoknad?.soknadstype == RSSoknadstype.FRISKMELDT_TIL_ARBEIDSFORMIDLING ||
+        valgtSoknad?.soknadstype == RSSoknadstype.FISKERE
 
     return (
         <>
