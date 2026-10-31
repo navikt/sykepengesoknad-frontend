@@ -96,6 +96,7 @@ export const Soknaden = () => {
         }
     }, [router, stegId, valgtSoknad, hasLoggedSkjemaApnet, spmIndex, stegNo, hasLoggedSkjemaSporsmalApnet])
     const flexjarToggle = useToggle('flexjar-sykepengesoknad-frontend-sporsmal')
+    const flexjarEnabled = useToggle('flexjar-sykepengesoknad-frontend-enabled')
 
     const erReisetilskuddsoknad = valgtSoknad?.soknadstype === RSSoknadstype.REISETILSKUDD
     const erGradertReisetilskuddsoknad = valgtSoknad?.soknadstype === RSSoknadstype.GRADERT_REISETILSKUDD
@@ -143,7 +144,8 @@ export const Soknaden = () => {
                     Slik behandler NAV personopplysningene dine
                 </Button>
             )}
-            {!skalViseNyFlexjar &&
+            {flexjarEnabled.enabled &&
+                !skalViseNyFlexjar &&
                 (flexjarToggle.enabled ||
                     valgtSoknad?.julesoknad ||
                     valgtSoknad?.soknadstype == RSSoknadstype.FRISKMELDT_TIL_ARBEIDSFORMIDLING ||
@@ -153,7 +155,9 @@ export const Soknaden = () => {
                     sporsmal?.tag == 'ARBEID_UNDERVEIS_100_PROSENT') && (
                     <FlexjarSporsmal soknad={valgtSoknad} sporsmal={sporsmal} steg={stegNo} />
                 )}
-            {skalViseNyFlexjar && <FlexjarSporsmalV2 soknad={valgtSoknad} sporsmal={sporsmal} steg={stegNo} />}
+            {flexjarEnabled.enabled && skalViseNyFlexjar && (
+                <FlexjarSporsmalV2 soknad={valgtSoknad} sporsmal={sporsmal} steg={stegNo} />
+            )}
         </>
     )
 }

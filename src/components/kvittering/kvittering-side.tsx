@@ -50,6 +50,7 @@ const KvitteringSide = () => {
         // eslint-disable-next-line
     }, [valgtSoknad])
     const flexjarToggle = useToggle('flexjar-sykepengesoknad-frontend-kvittering')
+    const flexjarEnabled = useToggle('flexjar-sykepengesoknad-frontend-enabled')
 
     if (!valgtSoknad || !soknader) return <QueryStatusPanel valgSoknadId={soknadId} />
 
@@ -60,10 +61,11 @@ const KvitteringSide = () => {
 
     const erJulesoknad = !!valgtSoknad?.julesoknad
     const skalViseFlexjar =
-        flexjarToggle.enabled ||
-        erJulesoknad ||
-        valgtSoknad?.soknadstype == RSSoknadstype.FRISKMELDT_TIL_ARBEIDSFORMIDLING ||
-        valgtSoknad?.soknadstype == RSSoknadstype.FISKERE
+        flexjarEnabled.enabled &&
+        (flexjarToggle.enabled ||
+            erJulesoknad ||
+            valgtSoknad?.soknadstype == RSSoknadstype.FRISKMELDT_TIL_ARBEIDSFORMIDLING ||
+            valgtSoknad?.soknadstype == RSSoknadstype.FISKERE)
 
     return (
         <>
