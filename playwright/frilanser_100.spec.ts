@@ -62,17 +62,12 @@ test.describe('Tester frilansersøknad', () => {
             await klikkGaVidere(page)
         })
 
-        await test.step('Søknad ANDRE_INNTEKTSKILDER - steg 4', async () => {
+        await test.step('Søknad ANDRE_INNTEKTSKILDER_V2 - steg 4', async () => {
             await expect(page).toHaveURL(new RegExp(`${soknad.id}/4`))
+            await harSynligTekst(page, 'Har du hatt annen inntekt eller oppdrag?')
             await svarJaHovedsporsmal(page)
-            await harSynligTekst(page, 'Hvilke inntektskilder har du?')
-            await page.getByRole('checkbox', { name: 'arbeidsforhold' }).click()
-            await svarRadioGruppe(page, 'Er du sykmeldt fra dette?', 'Ja')
-            await expect(
-                page.getByText(
-                    'Du må sende egen sykepengesøknad for dette. Det betyr også at legen må skrive en sykmelding for hvert arbeidsforhold du er sykmeldt fra.',
-                ),
-            ).toBeVisible()
+            await harSynligTekst(page, 'Hva slags arbeid eller inntekt gjelder dette?')
+            await page.getByRole('checkbox', { name: 'Ansatt andre steder' }).click()
             await klikkGaVidere(page)
         })
 

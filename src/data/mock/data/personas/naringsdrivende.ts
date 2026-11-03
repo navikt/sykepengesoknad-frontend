@@ -1,6 +1,7 @@
 import { naringsdrivende100syk } from '../sykmeldinger'
 import { deepcopyMedNyId } from '../../utils/deepcopy-med-ny-id'
 import { naringsdrivendeSoknad } from '../soknad/naringsdrivende'
+import { naringsdrivendeFlereInntektskilderGhost } from '../soknad/naringsdrivende-flere-inntektskilder-ghost'
 import { RSSporsmal } from '../../../../types/rs-types/rs-sporsmal'
 import { RSSoknad } from '../../../../types/rs-types/rs-soknad'
 import { now } from '../../../../utils/dato-utils'
@@ -48,6 +49,7 @@ export const selvstendigNaringsdrivende: Persona = {
         { ...naringsdrivendeSoknadMedVirksomhetsSporsmal, demoinfo: 'Spørsmål om virksomheten din' },
         { ...sendtSoknadUtenInntektsopplysninger, demoinfo: 'Sendt uten innsending av inntektsopplysninger' },
         { ...sendtSoknadMedNyKvitteringMedDokumenter, demoinfo: 'Sendt med innsending av inntektsopplysninger' },
+        { ...naringsdrivendeFlereInntektskilderGhost, demoinfo: 'Søknad med flere inntektskilder' },
     ],
     sykmeldinger: [naringsdrivende100syk],
     beskrivelse: 'Selvstendig Næringsdrivende',
