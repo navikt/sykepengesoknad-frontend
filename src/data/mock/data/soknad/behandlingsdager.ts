@@ -1,10 +1,10 @@
 import type { RSSoknad } from '../../../../types/rs-types/rs-soknad'
 import { arbeidstakerBehandlingsdagSyk } from '../sykmeldinger'
-import { andreInntektskilder } from '../sporsmal/andre-inntektskilder'
 import { ansvarserklaring } from '../sporsmal/ansvarserklaring'
 import { enkeltstaendeBehandlingsdager } from '../sporsmal/enkeltstaende-behandlingsdager'
 import { ferieV2 } from '../sporsmal/ferie-v2'
 import { oppsummering } from '../sporsmal/oppsummering'
+import andreInntektskilderV2 from '../sporsmal/andre-inntektskilder-v2'
 
 const fom = '2020-04-01'
 const tom = '2020-04-24'
@@ -40,20 +40,7 @@ export const behandlingsdager: RSSoknad = {
             ],
         }),
         ferieV2({ fom, tom }),
-        andreInntektskilder({
-            fom,
-            tom,
-            sporsmalstekst: 'Har du andre inntektskilder enn nevnt over?',
-            gruppeTekst: 'Hvilke andre inntektskilder har du?',
-            kilder: [
-                { tag: 'INNTEKTSKILDE_ANDRE_ARBEIDSFORHOLD' },
-                { tag: 'INNTEKTSKILDE_SELVSTENDIG' },
-                { tag: 'INNTEKTSKILDE_SELVSTENDIG_DAGMAMMA' },
-                { tag: 'INNTEKTSKILDE_JORDBRUKER' },
-                { tag: 'INNTEKTSKILDE_FRILANSER' },
-                { tag: 'INNTEKTSKILDE_ANNET' },
-            ],
-        }),
+        andreInntektskilderV2(),
         oppsummering(),
     ],
     egenmeldtSykmelding: false,

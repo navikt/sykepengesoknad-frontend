@@ -1,10 +1,10 @@
 import type { RSSoknad } from '../../../../types/rs-types/rs-soknad'
 import { arbeidsledig100Syk } from '../sykmeldinger'
-import { andreInntektskilder } from '../sporsmal/andre-inntektskilder'
 import { ansvarserklaring } from '../sporsmal/ansvarserklaring'
 import { friskmeldt } from '../sporsmal/friskmeldt'
 import { oppholdUtenforEos } from '../sporsmal/opphold-utenfor-eos'
 import { oppsummering } from '../sporsmal/oppsummering'
+import andreInntektskilderV2 from '../sporsmal/andre-inntektskilder-v2'
 
 const fom = '2020-04-01'
 const tom = '2020-04-24'
@@ -29,7 +29,7 @@ export const arbeidsledig: RSSoknad = {
     sporsmal: [
         ansvarserklaring(),
         friskmeldt({ fom, tom }),
-        andreInntektskilder({ fom, tom }),
+        andreInntektskilderV2(),
         oppholdUtenforEos({ fom, tom }),
         oppsummering(),
     ],

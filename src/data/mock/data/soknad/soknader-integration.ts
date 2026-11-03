@@ -16,7 +16,6 @@ import { oppsummering } from '../sporsmal/oppsummering'
 import { ansvarserklaring } from '../sporsmal/ansvarserklaring'
 import { medUnikeIder } from '../sporsmal/utils/id-med-indeks'
 import { friskmeldt } from '../sporsmal/friskmeldt'
-import { andreInntektskilder } from '../sporsmal/andre-inntektskilder'
 import { oppholdUtenforEos } from '../sporsmal/opphold-utenfor-eos'
 import { arbeidUtenforNorge } from '../sporsmal/arbeid-utenfor-norge'
 import { tilSlutt } from '../sporsmal/til-slutt'
@@ -31,6 +30,7 @@ import { utgattSoknad } from './arbeidstaker-utgatt'
 import { sendtArbeidsledig } from './arbeidsledig-sendt'
 import { avbruttSoknad } from './arbeidstaker-avbrutt'
 import { veldigLangSoknad } from './veldig-lang-soknad'
+import andreInntektskilderV2 from '../sporsmal/andre-inntektskilder-v2'
 
 const arbeidstakersoknadMedUtenlandsoppholdSoktSykepengerFom = '2020-04-01'
 const arbeidstakersoknadMedUtenlandsoppholdSoktSykepengerTom = '2020-04-24'
@@ -140,21 +140,7 @@ export const sendtArbeidsledigKvittering: RSSoknad = {
             tom: sendtArbeidsledigKvitteringTom,
             svar: [{ verdi: 'JA' }],
         }),
-        andreInntektskilder({
-            fom: sendtArbeidsledigKvitteringFom,
-            tom: sendtArbeidsledigKvitteringTom,
-            svar: [{ verdi: 'NEI' }],
-            kilder: [
-                { tag: 'INNTEKTSKILDE_ANDRE_ARBEIDSFORHOLD' },
-                { tag: 'INNTEKTSKILDE_SELVSTENDIG' },
-                { tag: 'INNTEKTSKILDE_SELVSTENDIG_DAGMAMMA' },
-                { tag: 'INNTEKTSKILDE_JORDBRUKER' },
-                { tag: 'INNTEKTSKILDE_FRILANSER' },
-                { tag: 'INNTEKTSKILDE_OMSORGSLONN' },
-                { tag: 'INNTEKTSKILDE_FOSTERHJEM' },
-                { tag: 'INNTEKTSKILDE_ANNET' },
-            ],
-        }),
+        andreInntektskilderV2(),
         oppholdUtenforEos({
             fom: sendtArbeidsledigKvitteringFom,
             tom: sendtArbeidsledigKvitteringTom,

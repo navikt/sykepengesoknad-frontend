@@ -25,10 +25,9 @@ import { avklaringIfbmReise } from '../sporsmal/avklaring-ifbm-reise'
 import { fiskerLottOpprettholdtInntekt } from '../sporsmal/fisker-lott-opprettholdt-inntekt'
 import { fiskerLottOpprettholdtInntektGradert } from '../sporsmal/fisker-lott-opprettholdt-inntekt-gradert'
 import { flereInntektskilderGhost } from '../sporsmal/flere-inntektskilder-ghost'
-import { andreInntektskilderV2 } from '../sporsmal/andre-inntektskilder-v2'
+import andreInntektskilderV2 from '../sporsmal/andre-inntektskilder-v2'
 import { ansvarserklaring } from '../sporsmal/ansvarserklaring'
 import { arbeidUnderveis100Prosent } from '../sporsmal/arbeid-underveis-100-prosent'
-import { andreInntektskilder, inntektskildeTagger } from '../sporsmal/andre-inntektskilder'
 import { arbeidUtenforNorge } from '../sporsmal/arbeid-utenfor-norge'
 import { arbeidsgiverUtland } from '../sporsmal/arbeidsgiver-utland'
 import { arbeidsledigUtland } from '../sporsmal/arbeidsledig-utland'
@@ -115,42 +114,7 @@ export const veldigLangSoknad: RSSoknad = {
             hovedtekstvariant: 'uten-arbeidsgiver-i-andre-setning',
             prosentVerdiTekstvariant: 'totalt-prosent',
         }),
-        andreInntektskilder({
-            fom,
-            tom,
-            sporsmalstekst: `Har du andre inntektskilder enn ${arbeidsgiver}?`,
-            gruppeTekst: 'Hvilke andre inntektskilder har du?',
-            kilder: [
-                { tag: 'INNTEKTSKILDE_ANDRE_ARBEIDSFORHOLD' },
-                { tag: 'INNTEKTSKILDE_SELVSTENDIG' },
-                { tag: 'INNTEKTSKILDE_SELVSTENDIG_DAGMAMMA' },
-                { tag: 'INNTEKTSKILDE_JORDBRUKER' },
-                { tag: 'INNTEKTSKILDE_FRILANSER' },
-                { tag: 'INNTEKTSKILDE_ANNET' },
-            ],
-        }),
-        andreInntektskilder({
-            fom: '2020-05-27',
-            tom: '2020-06-11',
-            kilder: [
-                { tag: 'INNTEKTSKILDE_ANDRE_ARBEIDSFORHOLD' },
-                { tag: 'INNTEKTSKILDE_SELVSTENDIG' },
-                { tag: 'INNTEKTSKILDE_SELVSTENDIG_DAGMAMMA' },
-                { tag: 'INNTEKTSKILDE_JORDBRUKER' },
-                { tag: 'INNTEKTSKILDE_FRILANSER' },
-                { tag: 'INNTEKTSKILDE_OMSORGSLONN' },
-                { tag: 'INNTEKTSKILDE_FOSTERHJEM' },
-                { tag: 'INNTEKTSKILDE_ANNET' },
-                { tag: 'INNTEKTSKILDE_ARBEIDSFORHOLD' },
-                {
-                    tag: inntektskildeTagger[9],
-                    sporsmalstekst: 'selvstendig næringsdrivende',
-                },
-            ],
-        }),
         andreInntektskilderV2(),
-        andreInntektskilderV2({ variant: 'fem-aar' }),
-        andreInntektskilderV2({ variant: 'fire-aar' }),
         arbeidUtenforNorge(),
         arbeidsgiverUtland({ variant: 'sykmeldingsgrad-og-ferie' }),
         arbeidsledigUtland({ fom, tom }),

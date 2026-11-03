@@ -4,10 +4,6 @@ import { ReadmoreTittelOgKomponent } from '../ekspanderbar-hjelp'
 
 import { AndreInntektskilderHjelpBody, andreInntektskilderTittel } from './andre-inntektskilder-hjelp-body'
 import {
-    AndreInntektskilderGammelHjelpBody,
-    andreInntektskilderGammelTittel,
-} from './utdatert/andre-inntektskilder-gammel-hjelp-body'
-import {
     DeprecatedYrkesskadeHjelpBody,
     deprecatedYrkesskadeTittel,
     YrkesskadeHjelpBody,
@@ -23,10 +19,6 @@ export const fellesMapping = (): Record<string, ReadmoreTittelOgKomponent> => ({
     YRKESSKADE: { tittel: deprecatedYrkesskadeTittel, komponent: <DeprecatedYrkesskadeHjelpBody /> },
     YRKESSKADE_V2: { tittel: yrkesskadeTittel, komponent: <YrkesskadeHjelpBody /> },
     FERIE_V2: { tittel: ferieTittel, komponent: <FerieHjelpBody /> },
-    ANDRE_INNTEKTSKILDER: {
-        tittel: andreInntektskilderGammelTittel,
-        komponent: <AndreInntektskilderGammelHjelpBody />,
-    },
     ANDRE_INNTEKTSKILDER_V2: { tittel: andreInntektskilderTittel, komponent: <AndreInntektskilderHjelpBody /> },
     UTLAND_V2: { tittel: utlandTittel, komponent: <UtlandHjelpBody medNei={true} /> },
     OPPHOLD_UTENFOR_EOS: { tittel: utlandTittel, komponent: <UtlandHjelpBody medNei={true} /> },
