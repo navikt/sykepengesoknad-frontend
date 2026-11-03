@@ -25,7 +25,7 @@ test.describe('Tester andre inntektskilder bulletpoints', () => {
     test('Viser ikke liste dersom vi kun har arbeidsgiver fra søknad', async ({ page }) => {
         await page.goto('/syk/sykepengesoknad/soknader/d9ac193d-9b67-4a51-80c2-fe4289214878/6')
 
-        await harSynligTekst(page, 'Har du hatt annen inntekt eller oppdrag?')
+        await harSynligTekst(page, 'Har du annen inntekt eller oppdrag?')
         const list = page.getByRole('list').filter({ hasText: 'Blomsterbutikken' })
         await expect(list).toHaveCount(0)
         await validerAxeUtilityWrapper(page, test.info())
@@ -36,7 +36,7 @@ test.describe('Tester andre inntektskilder bulletpoints', () => {
             '/syk/sykepengesoknad/soknader/214f6e73-8150-4261-8ce5-e2b41907fa58/10?testperson=integrasjon-soknader',
         )
 
-        await harSynligTekst(page, 'Har du andre inntektskilder enn Posten Norge AS, Bærum?')
+        await harSynligTekst(page, 'Har du annen inntekt eller oppdrag?')
         const list = page.getByRole('list').filter({ hasText: 'Blomsterbutikken' })
         await expect(list).toHaveCount(0)
         await validerAxeUtilityWrapper(page, test.info())

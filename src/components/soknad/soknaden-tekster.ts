@@ -70,7 +70,6 @@ const SoknadenTekster = {
     'sykepengesoknad.kvitteringer.tittel': 'Kvitteringer',
     'sykepengesoknad.utbetaling.tittel': 'Utbetaling',
 
-    'sykepengesoknad.andre_inntektskilder.tittel': 'Andre inntektskilder',
     'sykepengesoknad.andre_inntektskilder_v2.tittel': 'Andre inntektskilder',
     'sykepengesoknad.flere_inntektskilder_gruppe.tittel': 'Andre inntektskilder',
     'sykepengesoknad.flere_inntektskilder_ghost.tittel': 'Andre inntektskilder',

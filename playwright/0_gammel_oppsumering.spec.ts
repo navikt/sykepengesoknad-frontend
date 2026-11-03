@@ -165,7 +165,7 @@ test.describe('Sjekker at søknader med gammel oppsummering ser ok ut', () => {
         await test.step('Søknad ANDRE_INNTEKTSKILDER_V2', async () => {
             await expect(page).toHaveURL(/\/soknader\/.*\/6/)
 
-            await harSynligTekst(page, 'Har du hatt annen inntekt eller oppdrag?')
+            await harSynligTekst(page, 'Har du annen inntekt eller oppdrag?')
 
             await svarJaHovedsporsmal(page)
 
@@ -214,7 +214,7 @@ test.describe('Sjekker at søknader med gammel oppsummering ser ok ut', () => {
             )
             await sporsmalOgSvar(oppsummering, 'Jobber du vanligvis 37,5 timer i uka', 'Ja')
 
-            await sporsmalOgSvar(oppsummering, 'Har du hatt annen inntekt eller oppdrag?', 'Ja')
+            await sporsmalOgSvar(oppsummering, 'Har du annen inntekt eller oppdrag?', 'Ja')
             await sporsmalOgSvar(oppsummering, 'Hva slags arbeid eller inntekt gjelder dette?', 'Ansatt andre steder')
             await sporsmalOgSvar(
                 oppsummering,

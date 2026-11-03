@@ -178,7 +178,7 @@ test.describe('Tester arbeidstakersøknad - 100%', () => {
         await test.step('Søknad ANDRE_INNTEKTSKILDER_V2', async () => {
             await expect(page).toHaveURL(new RegExp(`.*${soknadId}\\/6`))
 
-            await harSynligTekst(page, 'Har du hatt annen inntekt eller oppdrag?')
+            await harSynligTekst(page, 'Har du annen inntekt eller oppdrag?')
 
             await apneReadmore(page, 'Spørsmålet forklart', [
                 'andre stønader fra Nav (uføretrygd, foreldrepenger, AAP, pleiepenger osv.)',
@@ -240,7 +240,7 @@ test.describe('Tester arbeidstakersøknad - 100%', () => {
             )
             await sporsmalOgSvar(oppsummering, 'Jobber du vanligvis 37,5 timer i uka', 'Ja')
 
-            await sporsmalOgSvar(oppsummering, 'Har du hatt annen inntekt eller oppdrag?', 'Ja')
+            await sporsmalOgSvar(oppsummering, 'Har du annen inntekt eller oppdrag?', 'Ja')
             await sporsmalOgSvar(oppsummering, 'Hva slags arbeid eller inntekt gjelder dette?', 'Ansatt andre steder')
             await sporsmalOgSvar(
                 oppsummering,

@@ -157,24 +157,13 @@ test.describe('Tester behandlingsdagersøknad', () => {
             await klikkGaVidere(page)
         })
 
-        await test.step('Søknad ANDRE_INNTEKTSKILDER - steg 4', async () => {
+        await test.step('Søknad ANDRE_INNTEKTSKILDER_V2 - steg 4', async () => {
             await expect(page).toHaveURL(new RegExp(`${soknad.id}/4`))
 
             await svarJaHovedsporsmal(page)
 
-            await harSynligTekst(page, 'Hvilke andre inntektskilder har du?')
-            await page.getByRole('checkbox', { name: /andre arbeidsforhold/ }).check()
-
-            await page
-                .getByRole('radiogroup', { name: 'Er du sykmeldt fra dette?' })
-                .getByRole('radio', { name: 'Ja' })
-                .check()
-            await expect(
-                page.getByText(
-                    'Du må sende egen sykepengesøknad for dette. ' +
-                        'Det betyr også at legen må skrive en sykmelding for hvert arbeidsforhold du er sykmeldt fra.',
-                ),
-            ).toBeVisible()
+            await harSynligTekst(page, 'Hva slags arbeid eller inntekt gjelder dette?')
+            await page.getByRole('checkbox', { name: /Ansatt andre steder/ }).check()
 
             await validerAxeUtilityWrapper(page, test.info())
             await klikkGaVidere(page)

@@ -38,7 +38,7 @@ test.describe('Tester ettersending og korrigering', () => {
             ])
         })
 
-        await svarRadioSporsmal(page, 'Har du hatt annen inntekt eller oppdrag?', 'Nei')
+        await svarRadioSporsmal(page, 'Har du annen inntekt eller oppdrag?', 'Nei')
         await neiOgVidere(page, ['Andre inntektskilder', 'Reise utenfor EU/EØS'])
 
         await test.step('Sender søknaden', async () => {

@@ -103,7 +103,7 @@ function GhostWrapper({ children }: { children: React.ReactNode }) {
 const hentGhostSporsmal = (): Sporsmal => skapSporsmal(flereInntektskilderGhost(), null, true)
 
 const feilmeldingAndreInntektskilderLokal = 'Du må velge et alternativ'
-const andreInntektskilderNavn = /Har du hatt annen inntekt eller oppdrag/
+const andreInntektskilderNavn = /Har du annen inntekt eller oppdrag/
 
 const checkboxGruppe = () => screen.getByRole('group', { name: /Hvilke jobbet du mer i/ })
 const andreInntektskilderGruppe = () => screen.getByRole('radiogroup', { name: andreInntektskilderNavn })
@@ -179,7 +179,7 @@ describe('FLERE_INNTEKTSKILDER_GHOST - hele spørsmålsvisningen', () => {
         await userEvent.click(within(hovedSporsmal).getByRole('radio', { name: 'Ja' }))
 
         expect(await screen.findByText('Hvilke jobbet du mer i?')).toBeInTheDocument()
-        expect(screen.getByText('Har du hatt annen inntekt eller oppdrag?')).toBeInTheDocument()
+        expect(screen.getByText('Har du annen inntekt eller oppdrag?')).toBeInTheDocument()
 
         await userEvent.click(screen.getByRole('button', { name: 'Send' }))
 

@@ -140,7 +140,7 @@ export const sendtArbeidsledigKvittering: RSSoknad = {
             tom: sendtArbeidsledigKvitteringTom,
             svar: [{ verdi: 'JA' }],
         }),
-        andreInntektskilderV2(),
+        { ...andreInntektskilderV2(), svar: [{ verdi: 'NEI' }] },
         oppholdUtenforEos({
             fom: sendtArbeidsledigKvitteringFom,
             tom: sendtArbeidsledigKvitteringTom,
