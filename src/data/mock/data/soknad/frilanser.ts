@@ -1,12 +1,12 @@
 import type { RSSoknad } from '../../../../types/rs-types/rs-soknad'
 import { frilanser100Syk } from '../sykmeldinger'
-import { andreInntektskilder } from '../sporsmal/andre-inntektskilder'
 import { ansvarserklaring } from '../sporsmal/ansvarserklaring'
 import { arbeidUnderveis100Prosent } from '../sporsmal/arbeid-underveis-100-prosent'
 import { arbeidUtenforNorge } from '../sporsmal/arbeid-utenfor-norge'
 import { oppholdUtenforEos } from '../sporsmal/opphold-utenfor-eos'
 import { oppsummering } from '../sporsmal/oppsummering'
 import { tilbakeIArbeid } from '../sporsmal/tilbake-i-arbeid'
+import andreInntektskilderV2 from '../sporsmal/andre-inntektskilder-v2'
 
 const fom = '2020-04-01'
 const tom = '2020-04-24'
@@ -20,21 +20,7 @@ const sporsmal = () => [
         timerMaks: '214',
         normalArbeidsukeTekst: 'Jobber du vanligvis 37,5 timer i uka?',
     }),
-    andreInntektskilder({
-        fom,
-        tom,
-        sporsmalstekst: 'Har du annen inntekt? Du trenger ikke oppgi penger fra NAV.',
-        gruppeTekst: 'Hvilke inntektskilder har du?',
-        kilder: [
-            { tag: 'INNTEKTSKILDE_ARBEIDSFORHOLD' },
-            { tag: 'INNTEKTSKILDE_JORDBRUKER' },
-            {
-                tag: 'INNTEKTSKILDE_FRILANSER_SELVSTENDIG',
-                sporsmalstekst: 'selvstendig næringsdrivende',
-            },
-            { tag: 'INNTEKTSKILDE_ANNET' },
-        ],
-    }),
+    andreInntektskilderV2(),
     oppholdUtenforEos({
         fom,
         tom,

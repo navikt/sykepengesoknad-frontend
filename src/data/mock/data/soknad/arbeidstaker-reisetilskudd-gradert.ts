@@ -1,6 +1,6 @@
 import { RSSoknad } from '../../../../types/rs-types/rs-soknad'
 import { gradertReisetilskuddSm } from '../sykmeldinger'
-import { andreInntektskilderV2 } from '../sporsmal/andre-inntektskilder-v2'
+import andreInntektskilderV2 from '../sporsmal/andre-inntektskilder-v2'
 import { ansvarserklaring } from '../sporsmal/ansvarserklaring'
 import { arbeidUtenforNorge } from '../sporsmal/arbeid-utenfor-norge'
 import { bilBompenger, bilBompengerBelop, bilTilDaglig, kmHjemJobb } from '../sporsmal/bil-til-daglig'

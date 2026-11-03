@@ -167,8 +167,8 @@ test.describe('Tester arbeidstakersøknad - gradert 50%', () => {
 
         await test.step('Søknad ANDRE_INNTEKTSKILDER_V2', async () => {
             await expect(page).toHaveURL(new RegExp(`.*${soknadId}\/7`))
-            await harSynligTekst(page, 'Har du hatt annen inntekt eller oppdrag?')
-            await svarRadio(page, 'Har du hatt annen inntekt eller oppdrag?', 'JA')
+            await harSynligTekst(page, 'Har du annen inntekt eller oppdrag?')
+            await svarRadio(page, 'Har du annen inntekt eller oppdrag?', 'JA')
             await harSynligTekst(page, 'Hva slags arbeid eller inntekt gjelder dette?')
             await svarCheckboxSporsmal(page, 'Hva slags arbeid eller', 'Dagmamma')
             await validerAxeUtilityWrapper(page, test.info())

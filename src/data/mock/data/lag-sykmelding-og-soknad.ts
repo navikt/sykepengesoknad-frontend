@@ -1,7 +1,7 @@
 import { Sykmelding } from '../../../types/sykmelding'
 import { RSSoknad } from '../../../types/rs-types/rs-soknad'
 import { oppsummering } from './sporsmal/oppsummering'
-import { andreInntektskilderV2 } from './sporsmal/andre-inntektskilder-v2'
+import andreInntektskilderV2 from './sporsmal/andre-inntektskilder-v2'
 import { ansvarserklaring } from './sporsmal/ansvarserklaring'
 import { tilbakeIArbeid } from './sporsmal/tilbake-i-arbeid'
 import { ferieV2 } from './sporsmal/ferie-v2'

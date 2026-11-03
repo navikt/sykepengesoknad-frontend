@@ -1,7 +1,6 @@
 import { ReadMore } from '@navikt/ds-react'
 import React, { useEffect, useState } from 'react'
 
-import { RSArbeidssituasjon } from '../../../types/rs-types/rs-arbeidssituasjon'
 import { RSSoknadstype } from '../../../types/rs-types/rs-soknadstype'
 import { logEvent } from '../../umami/umami'
 import { useSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
@@ -32,11 +31,6 @@ export const EkspanderbarHjelp = ({ sporsmal, mb }: { sporsmal: Sporsmal; mb?: s
     }, [sporsmal.tag])
 
     if (!valgtSoknad) return null
-
-    if (sporsmal.tag == 'ANDRE_INNTEKTSKILDER' && valgtSoknad.arbeidssituasjon == RSArbeidssituasjon.FRILANSER) {
-        // Hjelpeteksten er ikke kompatibel med svaralternativene for frilanser
-        return null
-    }
 
     const sporsmalTagMedSoknadstypeEllerArbeidssituasjon = (): string => {
         if (sporsmal.tag == 'TILBAKE_I_ARBEID' && valgtSoknad.soknadstype == RSSoknadstype.GRADERT_REISETILSKUDD) {

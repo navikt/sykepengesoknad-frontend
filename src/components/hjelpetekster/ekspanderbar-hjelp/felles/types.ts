@@ -1,5 +1,4 @@
 export type FellesSporsmalTag =
-    | 'ANDRE_INNTEKTSKILDER'
     | 'ANDRE_INNTEKTSKILDER_V2'
     | 'FERIE_V2'
     | 'FTA_REISE_TIL_UTLANDET'

@@ -1,6 +1,5 @@
 import type { RSSoknad } from '../../../../types/rs-types/rs-soknad'
 import { naringsdrivende100syk } from '../sykmeldinger'
-import { andreInntektskilder } from '../sporsmal/andre-inntektskilder'
 import { ansvarserklaring } from '../sporsmal/ansvarserklaring'
 import { arbeidUnderveis100Prosent } from '../sporsmal/arbeid-underveis-100-prosent'
 import { fravarForSykmeldingenV2 } from '../sporsmal/fravar-for-sykmeldingen'
@@ -8,6 +7,7 @@ import { naringsdrivendeOppholdIUtlandet, naringsdrivendeOpprettholdtInntekt } f
 import { oppholdUtenforEos } from '../sporsmal/opphold-utenfor-eos'
 import { oppsummering } from '../sporsmal/oppsummering'
 import { tilbakeIArbeid } from '../sporsmal/tilbake-i-arbeid'
+import andreInntektskilderV2 from '../sporsmal/andre-inntektskilder-v2'
 
 const fom = '2020-04-01'
 const tom = '2020-04-24'
@@ -44,18 +44,7 @@ export const naringsdrivendeSoknad: RSSoknad = {
             normalArbeidsukeTekst: 'Jobber du vanligvis 37,5 timer i uka?',
         }),
         naringsdrivendeOpprettholdtInntekt(),
-        andreInntektskilder({
-            fom,
-            tom,
-            sporsmalstekst: 'Har du annen inntekt? Du trenger ikke oppgi penger fra NAV.',
-            gruppeTekst: 'Hvilke inntektskilder har du?',
-            kilder: [
-                { tag: 'INNTEKTSKILDE_ARBEIDSFORHOLD' },
-                { tag: 'INNTEKTSKILDE_JORDBRUKER' },
-                { tag: 'INNTEKTSKILDE_FRILANSER_SELVSTENDIG' },
-                { tag: 'INNTEKTSKILDE_ANNET' },
-            ],
-        }),
+        andreInntektskilderV2(),
         oppholdUtenforEos({
             fom,
             tom,

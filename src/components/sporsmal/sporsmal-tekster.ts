@@ -7,7 +7,6 @@ const SporsmalTekster = {
     'soknad.feilmelding.periode.lokal': 'Du må oppgi periode',
 
     'soknad.feilmelding.ANSVARSERKLARING': 'Du må bekrefte at du vil svare så riktig du kan',
-    'soknad.feilmelding.ANDRE_INNTEKTSKILDER': 'Du må svare på om du har andre inntektskilder eller arbeidsforhold',
     'soknad.feilmelding.FLERE_INNTEKTSKILDER_GRUPPE':
         'Du må svare på om du har andre inntektskilder eller arbeidsforhold',
     'soknad.feilmelding.FLERE_INNTEKTSKILDER_GHOST':

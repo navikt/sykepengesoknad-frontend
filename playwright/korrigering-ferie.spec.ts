@@ -39,7 +39,7 @@ test.describe('Tester korrigering av ferie', () => {
 
         await test.step('Besvarer resten av søknaden med nei', async () => {
             await neiOgVidere(page, ['Permisjon', 'Arbeid mens du var syk', 'Arbeid utenfor Norge'])
-            await svarRadioSporsmal(page, 'Har du hatt annen inntekt eller oppdrag?', 'Nei')
+            await svarRadioSporsmal(page, 'Har du annen inntekt eller oppdrag?', 'Nei')
             await neiOgVidere(page, ['Andre inntektskilder', 'Reise utenfor EU/EØS'])
             await harSynligTittel(page, 'Oppsummering fra søknaden', 2)
             await page.getByRole('button', { name: 'Send søknaden' }).click()

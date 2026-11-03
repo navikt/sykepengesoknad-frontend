@@ -2,7 +2,7 @@ import { format, subDays } from 'date-fns'
 
 import { RSSoknad } from '../../../../types/rs-types/rs-soknad'
 import { now } from '../../../../utils/dato-utils'
-import { andreInntektskilderV2 } from '../sporsmal/andre-inntektskilder-v2'
+import andreInntektskilderV2 from '../sporsmal/andre-inntektskilder-v2'
 import { ansvarserklaring } from '../sporsmal/ansvarserklaring'
 import { arbeidUtenforNorge } from '../sporsmal/arbeid-utenfor-norge'
 import { egenmeldinger } from '../sporsmal/egenmeldinger'

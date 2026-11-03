@@ -5,7 +5,6 @@ import {
     naringsdrivendeNyIArbeidslivet,
     naringsdrivendeVarigEndring,
 } from '../sporsmal/naringsdrivende'
-import { andreInntektskilder } from '../sporsmal/andre-inntektskilder'
 import { ansvarserklaring } from '../sporsmal/ansvarserklaring'
 import { arbeidUnderveis100Prosent } from '../sporsmal/arbeid-underveis-100-prosent'
 import { arbeidUtenforNorge } from '../sporsmal/arbeid-utenfor-norge'
@@ -18,6 +17,7 @@ import { fiskerLottOgHyre, fiskerLottOgHyreMedArbeidsgiver } from '../soknad/fis
 import { fiskerHyre, fiskerHyreMedArbeidsgiver } from '../soknad/fisker-hyre'
 import { RSFiskerBlad } from '../../../../types/rs-types/rs-fiskerblad'
 import { RSFiskerLottOgHyre } from '../../../../types/rs-types/rs-fiskerlottoghyre'
+import andreInntektskilderV2 from '../sporsmal/andre-inntektskilder-v2'
 
 const fom = '2024-01-16'
 const tom = '2024-01-22'
@@ -36,24 +36,7 @@ const fiskerSporsmal = () => [
         normalArbeidsukeTekst: 'Jobber du vanligvis 37,5 timer i uka?',
     }),
     arbeidUtenforNorge(),
-    andreInntektskilder({
-        fom,
-        tom,
-        sporsmalstekst: 'Har du annen inntekt?',
-        gruppeTekst: 'Hvilke inntektskilder har du?',
-        kilder: [
-            {
-                tag: 'INNTEKTSKILDE_ARBEIDSFORHOLD',
-            },
-            {
-                tag: 'INNTEKTSKILDE_JORDBRUKER',
-            },
-            {
-                tag: 'INNTEKTSKILDE_FRILANSER_SELVSTENDIG',
-            },
-            { tag: 'INNTEKTSKILDE_ANNET' },
-        ],
-    }),
+    andreInntektskilderV2(),
     oppholdUtenforEos({
         fom,
         tom,

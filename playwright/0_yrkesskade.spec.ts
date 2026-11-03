@@ -32,7 +32,7 @@ test.describe('Tester yrkesskadesspørsmål', () => {
             'Arbeid mens du var syk',
             'Arbeid utenfor Norge',
         ])
-        await svarRadioSporsmal(page, 'Har du hatt annen inntekt eller oppdrag?', 'Nei')
+        await svarRadioSporsmal(page, 'Har du annen inntekt eller oppdrag?', 'Nei')
 
         await neiOgVidere(page, ['Andre inntektskilder', 'Reise utenfor EU/EØS'])
 

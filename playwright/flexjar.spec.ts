@@ -102,7 +102,7 @@ async function navigerTilOppsummeringSide(page: Page) {
     await svarNeiHovedsporsmal(page)
     await klikkGaVidere(page)
 
-    await svarRadioSporsmal(page, 'Har du hatt annen inntekt eller oppdrag?', 'Nei')
+    await svarRadioSporsmal(page, 'Har du annen inntekt eller oppdrag?', 'Nei')
     await svarNeiHovedsporsmal(page)
     await klikkGaVidere(page)
 

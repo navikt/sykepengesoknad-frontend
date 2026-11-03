@@ -68,7 +68,7 @@ test.describe('Arbeidsledigsøknad med tastaturnavigasjon', () => {
         await sjekkMainContentFokus(page)
 
         await harSynligTittel(page, 'Andre inntektskilder', 2)
-        await harSynligTekst(page, 'Hva mener vi med andre inntektskilder?')
+        await harSynligTekst(page, 'Har du annen inntekt eller oppdrag?')
         await validerAxeUtilityWrapper(page, test.info())
 
         await tabUntilFocusedLocator(browserName, page, page.getByRole('radio', { name: 'Ja' }))

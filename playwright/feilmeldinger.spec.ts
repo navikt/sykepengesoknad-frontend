@@ -322,7 +322,7 @@ test.describe('Tester feilmeldinger', () => {
         })
 
         await test.step('Feilmelding går bort', async () => {
-            await svarRadioSporsmal(page, 'Har du hatt annen inntekt eller oppdrag?', 'Nei')
+            await svarRadioSporsmal(page, 'Har du annen inntekt eller oppdrag?', 'Nei')
             await verifiserIngenFeilmeldinger(page)
             await validerAxeUtilityWrapper(page, test.info())
         })

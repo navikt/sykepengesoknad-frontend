@@ -63,13 +63,11 @@ test.describe('Tester arbeidsledigsøknad', () => {
             await klikkGaVidere(page) // Gå videre uten å forvente feil
         })
 
-        await test.step('Søknad ANDRE_INNTEKTSKILDER', async () => {
+        await test.step('Søknad ANDRE_INNTEKTSKILDER_V2', async () => {
             await expect(page).toHaveURL(new RegExp(`${arbeidsledig.id}/3`))
 
             // Test spørsmål
-            await expect(
-                page.getByText('Har du hatt inntekt mens du har vært sykmeldt i perioden 1. - 24. april 2020?'),
-            ).toBeVisible()
+            await expect(page.getByText('Har du annen inntekt eller oppdrag?')).toBeVisible()
 
             // Velg 'JA' på hovedspørsmål
             await svarJaHovedsporsmal(page)
@@ -81,14 +79,8 @@ test.describe('Tester arbeidsledigsøknad', () => {
             await harSynligTekst(page, 'Det er 1 feil i skjemaet')
             await harSynligTekst(page, 'Du må oppgi hvilke inntektskilder du har')
 
-            const checkbox = page.getByLabel('andre arbeidsforhold')
+            const checkbox = page.getByLabel('Ansatt andre steder')
             await checkbox.click()
-
-            await page
-                .getByText('Er du sykmeldt fra dette?')
-                .locator('xpath=..')
-                .getByRole('radio', { name: 'Ja' })
-                .click()
             await validerAxeUtilityWrapper(page, test.info())
 
             await klikkGaVidere(page) // Gå videre
@@ -140,17 +132,9 @@ test.describe('Tester arbeidsledigsøknad', () => {
                 .locator('..')
             await sporsmalOgSvar(friskmeldtSvar, 'Fra hvilken dato trengte du ikke lenger sykmeldingen?', '10.04.2020')
 
-            await sporsmalOgSvar(
-                oppsummering,
-                'Har du hatt inntekt mens du har vært sykmeldt i perioden 1. - 24. april 2020?',
-                'Ja',
-            )
-            const inntektSvar = oppsummering
-                .getByText('Har du hatt inntekt mens du har vært sykmeldt i perioden 1. - 24. april 2020?')
-                .locator('..')
-            await sporsmalOgSvar(inntektSvar, 'Hvilke inntektskilder har du hatt?', 'andre arbeidsforhold')
-            const underInntektSvar = inntektSvar.getByText('Hvilke inntektskilder har du hatt?').locator('..')
-            await sporsmalOgSvar(underInntektSvar, 'Er du sykmeldt fra dette?', 'Ja')
+            await sporsmalOgSvar(oppsummering, 'Har du annen inntekt eller oppdrag?', 'Ja')
+            const inntektSvar = oppsummering.getByText('Har du annen inntekt eller oppdrag?').locator('..')
+            await sporsmalOgSvar(inntektSvar, 'Hva slags arbeid eller inntekt gjelder dette?', 'Ansatt andre steder')
 
             await validerAxeUtilityWrapper(page, test.info())
 
