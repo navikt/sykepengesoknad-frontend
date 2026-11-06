@@ -3,10 +3,8 @@ import React, { Fragment } from 'react'
 import { Controller, useFormContext } from 'react-hook-form'
 
 import Alert from '../../alert/Alert'
-import { SvarEnums } from '../../../types/enums'
 import { getLedetekst, tekst } from '../../../utils/tekster'
 import AnimateOnMount from '../../animate-on-mount'
-import { utlandssoknadUrl } from '../../soknad/soknad-link'
 import KnapperadAvbryt from '../sporsmal-form/knapperad-avbryt'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
 import { hentFeilmelding } from '../sporsmal-utils'
@@ -31,21 +29,6 @@ const JaNeiLiten = ({ sporsmal }: SpmProps) => {
     const presisering = (valgt: boolean) => {
         const spm = sporsmal
         if (spm.tag && valgt) {
-            if (spm.tag === 'UTLANDSOPPHOLD_SOKT_SYKEPENGER') {
-                const utenlandsopphold =
-                    watchJaNei === SvarEnums.JA
-                        ? 'soknad.infotekst.utlandsopphold_sokt_sykepenger.ja'
-                        : 'soknad.infotekst.utlandsopphold_sokt_sykepenger.nei'
-                return (
-                    <Alert variant="info">
-                        {tekstMedHtml(
-                            getLedetekst(tekst(utenlandsopphold), {
-                                '%URL%': utlandssoknadUrl,
-                            }),
-                        )}
-                    </Alert>
-                )
-            }
             if (spm.tag.endsWith('_ER_DU_SYKMELDT') && watchJaNei === 'JA') {
                 return <Alert variant="info">{tekst(('soknad.presisering.' + spm.tag) as any)}</Alert>
             }
@@ -145,10 +128,7 @@ const JaNeiLiten = ({ sporsmal }: SpmProps) => {
 
             <div aria-live="assertive">
                 <AnimateOnMount
-                    mounted={
-                        watchJaNei === sporsmal.kriterieForVisningAvUndersporsmal &&
-                        sporsmal.tag !== 'UTLANDSOPPHOLD_SOKT_SYKEPENGER'
-                    }
+                    mounted={watchJaNei === sporsmal.kriterieForVisningAvUndersporsmal}
                     enter="undersporsmal--vis"
                     leave="undersporsmal--skjul"
                     start="undersporsmal"

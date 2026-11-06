@@ -8,7 +8,6 @@ import { oppholdUtenforEos } from '../sporsmal/opphold-utenfor-eos'
 import { gammelOppsummering, oppsummering } from '../sporsmal/oppsummering'
 import { permisjonV2 } from '../sporsmal/permisjon-v2'
 import { tilbakeIArbeid } from '../sporsmal/tilbake-i-arbeid'
-import { utlandV2 } from '../sporsmal/utland-v2'
 import { arbeidstaker100Syk } from '../sykmeldinger'
 
 const fom = '2020-04-01'
@@ -45,12 +44,6 @@ const soknadData = {
     egenmeldtSykmelding: false,
     opprettetAvInntektsmelding: false,
     klippet: false,
-}
-
-export const arbeidstakerMedGammelEOSSporsmal: RSSoknad = {
-    id: 'faba11f5-c4f2-4647-8c8a-58b28ce2f3ef',
-    ...soknadData,
-    sporsmal: [...standardSporsmal, utlandV2({ fom, tom }), oppsummering()],
 }
 
 export const arbeidstaker: RSSoknad = {

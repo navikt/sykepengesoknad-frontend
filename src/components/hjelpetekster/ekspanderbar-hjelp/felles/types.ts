@@ -6,6 +6,5 @@ export type FellesSporsmalTag =
     | 'PERMITTERT_NAA'
     | 'PERMITTERT_PERIODE'
     | 'UTDANNING'
-    | 'UTLAND_V2'
     | 'YRKESSKADE'
     | 'YRKESSKADE_V2'

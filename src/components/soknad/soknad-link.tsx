@@ -72,7 +72,6 @@ const SoknadLink = ({ soknad, children, className }: SoknadLinkProps) => {
 }
 
 export const utlandsoknadPath = '/sykepengesoknad-utland'
-export const utlandssoknadUrl = `/syk/sykepengesoknad${utlandsoknadPath}`
 
 export const oversiktside = '/'
 

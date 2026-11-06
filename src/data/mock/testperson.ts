@@ -43,7 +43,6 @@ import { medlemskapPerson } from './data/personas/medlemskap'
 import { fiskePerson } from './data/personas/fisker'
 import { kjenteInntektskilderPerson } from './data/personas/kjente-inntektskilder'
 import { innenforArbeidsgiverPeriodenPerson } from './data/personas/innenfor-ag-periode'
-import { oppholdUtenforEosPerson } from './data/personas/opphold-utenfor-eos'
 import { nyttArbeidsforholdPerson } from './data/personas/nytt-arbeidsforhold'
 import {
     fremtidigeFriskTilArbeidPerson,
@@ -68,7 +67,6 @@ type PersonaKey =
     | 'yrkesskade'
     | 'yrkesskade-v2'
     | 'medlemskap'
-    | 'opphold-utenfor-eos'
     | 'over-70'
     | 'integrasjon-soknader'
     | 'en-usendt-sykmelding'
@@ -160,7 +158,6 @@ export function testpersonerGruppert(): PersonaGroup {
         ['andre-soknader']: {
             ['behandlingsdager']: jsonDeepCopy(behandlingsdagerPerson),
             ['reisetilskudd']: jsonDeepCopy(reisetilskuddPerson),
-            ['opphold-utenfor-eos']: jsonDeepCopy(oppholdUtenforEosPerson),
             ['bare-utland']: jsonDeepCopy(utlandPerson),
             ['friskmeldt-til-arbeidsformidling']: jsonDeepCopy(friskmeldtTilArbeidsformidlingPerson),
             ['utenlandsk-sykmelding']: jsonDeepCopy(utenlandskSykmeldingPerson),

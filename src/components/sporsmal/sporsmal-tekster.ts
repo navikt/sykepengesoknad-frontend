@@ -35,16 +35,12 @@ const SporsmalTekster = {
     'soknad.feilmelding.FRAVAR_FOR_SYKMELDINGEN_NAR': 'Du må svare på når du var syk og borte fra jobb',
     'soknad.feilmelding.PAPIRSYKMELDING_NAR': 'Du må svare på om du var sykmeldt i denne perioden',
     'soknad.feilmelding.FERIE': 'Du må svare på om du skal ha ferie i hele perioden',
-    'soknad.feilmelding.FERIE_NAR': 'Du må oppgi hvilke dager du hadde ferie',
     'soknad.feilmelding.FERIE_V2': 'Du må svare på om du skal ha ferie i hele perioden',
     'soknad.feilmelding.FERIE_NAR_V2': 'Du må oppgi hvilke dager du hadde ferie',
     'soknad.feilmelding.PERMISJON': 'Du må svare på om du skal ha permisjon i hele perioden',
     'soknad.feilmelding.PERMISJON_NAR': 'Du må oppgi hvilke dager du hadde permisjon',
     'soknad.feilmelding.PERMISJON_V2': 'Du må svare på om du har hatt permisjon i denne perioden',
     'soknad.feilmelding.PERMISJON_NAR_V2': 'Du må oppgi hvilke dager du hadde permisjon',
-    'soknad.feilmelding.FERIE_PERMISJON_UTLAND':
-        'Du må svare på om har hatt ferie, permisjon eller oppholdt deg utenfor Norge i denne perioden',
-    'soknad.feilmelding.FERIE_PERMISJON_UTLAND_HVA': 'Du må krysse av det som gjelder deg',
     'soknad.feilmelding.FULLTIDSSTUDIUM': 'Du må svare på om utdanningen er et fulltidsstudium',
     'soknad.feilmelding.HVILKE_ANDRE_INNTEKTSKILDER': 'Du må oppgi hvilke inntektskilder du har',
     'soknad.feilmelding.HVILKE_ANDRE_INNTEKTSKILDER.lokal': 'Du må velge minst et alternativ',
@@ -129,17 +125,10 @@ const SporsmalTekster = {
     'soknad.feilmelding.TILBAKE_NAR': 'Du må svare på når du var tilbake i arbeid.',
     'soknad.feilmelding.UTDANNING': 'Du må svare på om du har vært under utdanning i denne perioden',
     'soknad.feilmelding.UTDANNING_START': 'Du må svare på når du startet på utdanningen',
-    'soknad.feilmelding.UTLAND': 'Du må svare på om du har oppholdt deg i utlandet i denne perioden',
-    'soknad.feilmelding.UTLAND_V2': 'Du må svare på om du har vært utenfor EU/EØS i denne perioden',
     'soknad.feilmelding.OPPHOLD_UTENFOR_EOS': 'Du må svare på om du har vært utenfor EU/EØS i denne perioden',
     'soknad.feilmelding.OPPHOLD_UTENFOR_EOS_NAR': 'Du må svare på om du har vært utenfor EU/EØS i denne perioden',
-    'soknad.feilmelding.UTLAND_NAR': 'Du må svare på om du har oppholdt deg i utlandet i denne perioden',
-    'soknad.feilmelding.UTLAND_NAR_V2': 'Du må svare på om du har vært utenfor EU/EØS i denne perioden',
     'soknad.feilmelding.PERIODER': 'Du må svare på om du har vært utenfor EU/EØS i denne perioden',
     'soknad.feilmelding.PERIODEUTLAND': 'Du må oppgi når du skal reise',
-    'soknad.feilmelding.ARBEIDSLEDIG_UTLAND': 'Du må svare på om du har vært utenfor EU/EØS i denne perioden',
-    'soknad.feilmelding.UTLANDSOPPHOLD_SOKT_SYKEPENGER':
-        'Du må svare på om du har søkt om å beholde sykepenger under dette oppholdet utenfor Norge',
     'soknad.feilmelding.ENKELTSTAENDE_BEHANDLINGSDAGER_UKE': 'Du må oppgi hvilke dager du var til behandling',
     'soknad.feilmelding.ENKELTSTAENDE_BEHANDLINGSDAGER_DAG_NAR': 'Du må oppgi hvilke dager du var til behandling',
 
@@ -223,10 +212,6 @@ const SporsmalTekster = {
     'soknad.feilmelding.MEDLEMSKAP_UTFORT_ARBEID_UTENFOR_NORGE_HVOR': 'Du må oppgi i hvilket land du har jobbet',
     'soknad.feilmelding.MEDLEMSKAP_UTFORT_ARBEID_UTENFOR_NORGE_NAAR':
         'Du må oppgi perioden du har jobbet utenfor Norge',
-    'soknad.infotekst.utlandsopphold_sokt_sykepenger.ja':
-        'Du må ha sendt en egen <a target="_blank" href="%URL%">utenlandssøknad</a> for å svare ja på dette spørsmålet. Husk at du også må fullføre denne søknaden om sykepenger.',
-    'soknad.infotekst.utlandsopphold_sokt_sykepenger.nei':
-        'I utgangspunktet kan du bare få sykepenger mens du er i et land innenfor EU/EØS. Du kan likevel <a href="%URL%" target="_blank">søke NAV om å få reise ut av EU/EØS</a> og beholde sykepengene i en begrenset periode.',
 
     'soknad.presisering.INNTEKTSKILDE_ARBEIDSFORHOLD_ER_DU_SYKMELDT':
         'Du må sende egen sykepengesøknad for dette. Det betyr også at legen må skrive en sykmelding for hvert arbeidsforhold du er sykmeldt fra.',
