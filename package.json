@@ -67,7 +67,7 @@
         "postcss": "^8.5.32",
         "prettier": "^3.9.10",
         "start-server-and-test": "^3.0.13",
-        "tailwindcss": "^4.1.16",
+        "tailwindcss": "^4.3.4",
         "ts-loader": "^9.5.7",
         "typescript": "^6.0.3",
         "vitest": "^5.0.5"
