@@ -29,14 +29,10 @@ const SoknadenTekster = {
         'Du skal bare oppgi feriedager som du har brukt. Hvis du har avtalt å utsette ferien, skriver du ikke noe her.\n\nJobber du vanligvis bare noen dager i uken? Da gjelder ferien likevel hele uker, ikke bare de enkeltdagene du skulle vært på jobb.',
     'sykepengesoknad.ferie.hjelpetekst.tittel': 'Ferie',
     'sykepengesoknad.ferie_v2.tittel': 'Ferie',
-    'sykepengesoknad.ferie_permisjon_utland.tittel': 'Ferie, permisjon eller opphold i utlandet',
 
     'sykepengesoknad.permisjon.tittel': 'Permisjon',
     'sykepengesoknad.permisjon_v2.tittel': 'Permisjon',
-    'sykepengesoknad.utland.tittel': 'Utenlandsopphold',
-    'sykepengesoknad.utland_v2.tittel': 'Opphold i utlandet',
     'sykepengesoknad.opphold_utenfor_eos.tittel': 'Reise utenfor EU/EØS',
-    'sykepengesoknad.utlandsopphold_sokt_sykepenger.tittel': 'Sykepenger utenfor EU/EØS',
     'sykepengesoknad.egenmeldinger.tittel': 'Fravær før sykmeldingen',
     'sykepengesoknad.fravar_for_sykmeldingen.tittel': 'Fravær før sykmeldingen',
     'sykepengesoknad.tilbake_i_arbeid.tittel': 'Tilbake i fullt arbeid',
@@ -62,7 +58,6 @@ const SoknadenTekster = {
     'sykepengesoknad.utdanning.ja-nei.sporsmal-2': 'Har du vært under utdanning i løpet av perioden %PERIODE%?',
     'sykepengesoknad.utdanning.startdato.sporsmal': 'Når startet du på utdanningen?',
     'sykepengesoknad.utdanning.tittel': 'Utdanning',
-    'sykepengesoknad.arbeidsledig_utland.tittel': 'Reise',
 
     'sykepengesoknad.brukte_reisetilskuddet.tittel': 'Reisetilskudd',
     'sykepengesoknad.transport_til_daglig.tittel': 'Før du fikk sykmelding',

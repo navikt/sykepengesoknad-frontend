@@ -30,12 +30,10 @@ import { ansvarserklaring } from '../sporsmal/ansvarserklaring'
 import { arbeidUnderveis100Prosent } from '../sporsmal/arbeid-underveis-100-prosent'
 import { arbeidUtenforNorge } from '../sporsmal/arbeid-utenfor-norge'
 import { arbeidsgiverUtland } from '../sporsmal/arbeidsgiver-utland'
-import { arbeidsledigUtland } from '../sporsmal/arbeidsledig-utland'
 import { egenmeldinger } from '../sporsmal/egenmeldinger'
 import { fravarForSykmeldingen, fravarForSykmeldingenV2 } from '../sporsmal/fravar-for-sykmeldingen'
 import { enkeltstaendeBehandlingsdager } from '../sporsmal/enkeltstaende-behandlingsdager'
 import { ferieV2 } from '../sporsmal/ferie-v2'
-import { feriePermisjonUtland } from '../sporsmal/ferie-permisjon-utland'
 import { fravarForBehandling } from '../sporsmal/fravar-for-behandling'
 import { friskmeldt } from '../sporsmal/friskmeldt'
 import { jobbetDu100Prosent } from '../sporsmal/jobbet-du-100-prosent'
@@ -47,8 +45,6 @@ import { permittertNaa, permittertPeriode } from '../sporsmal/permittert'
 import { tilbakeIArbeid } from '../sporsmal/tilbake-i-arbeid'
 import { utdanning } from '../sporsmal/utdanning'
 import { oppholdUtenforEos } from '../sporsmal/opphold-utenfor-eos'
-import { utland } from '../sporsmal/utland'
-import { utlandV2 } from '../sporsmal/utland-v2'
 import { brukteReisetilskuddet } from '../sporsmal/brukte-reisetilskuddet'
 import { transportTilDaglig } from '../sporsmal/transport-til-daglig'
 import { typeTransport } from '../sporsmal/type-transport'
@@ -117,7 +113,6 @@ export const veldigLangSoknad: RSSoknad = {
         andreInntektskilderV2(),
         arbeidUtenforNorge(),
         arbeidsgiverUtland({ variant: 'sykmeldingsgrad-og-ferie' }),
-        arbeidsledigUtland({ fom, tom }),
         egenmeldinger({
             fom: '2020-05-04',
             tom: '2020-05-19',
@@ -144,7 +139,6 @@ export const veldigLangSoknad: RSSoknad = {
             ],
         }),
         ferieV2({ fom, tom }),
-        feriePermisjonUtland({ fom, tom }),
         fravarForBehandling({
             fom,
             tom,
@@ -173,17 +167,7 @@ export const veldigLangSoknad: RSSoknad = {
         tilbakeIArbeid({ fom, tom, arbeidsgiver }),
         utdanning({ fom, tom }),
         oppholdUtenforEos({ fom, tom }),
-        utland({
-            fom,
-            tom,
-            periodeTag: 'PERIODER',
-            periodeTekst: 'Når var du utenfor EØS?',
-            inkluderSoktSykepenger: true,
-            informasjonSporsmalstekst:
-                '<p>I utgangspunktet kan du bare få sykepenger mens du er i et land innenfor EØS. Du kan likevel <a target="_blank" href="https://tjenester.nav.no/sykefravaer/sykepengesoknad-utland">søke NAV om å få reise ut av EØS</a> og beholde sykepengene i en begrenset periode.</p>',
-            informasjonUndertekst: null,
-        }),
-        utlandV2({ fom, tom, tekstvariant: 'eos' }),
+        oppholdUtenforEos({ fom, tom, oppholdNarTag: 'PERIODER' }),
         brukteReisetilskuddet({ tekstvariant: 'brukt-reisetilskuddet' }),
         transportTilDaglig({
             typeTransportSporsmal: typeTransport({

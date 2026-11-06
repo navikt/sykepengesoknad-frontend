@@ -1,17 +1,14 @@
-import { BodyLong, Radio, RadioGroup } from '@navikt/ds-react'
+import { Radio, RadioGroup } from '@navikt/ds-react'
 import Alert from '../../alert/Alert'
 import { Controller, useFormContext } from 'react-hook-form'
 import React from 'react'
 
-import { getLedetekst, tekst } from '../../../utils/tekster'
 import AnimateOnMount from '../../animate-on-mount'
-import { utlandssoknadUrl } from '../../soknad/soknad-link'
 import GuidepanelUnderSporsmalstekst from '../guidepanel/GuidepanelUnderSporsmalstekst'
 import { EkspanderbarHjelp } from '../../hjelpetekster/ekspanderbar-hjelp/ekspanderbar-hjelp'
 import { hentFeilmelding, sporsmalIdListe } from '../sporsmal-utils'
 import UndersporsmalListe from '../undersporsmal/undersporsmal-liste'
 import { SpmProps } from '../sporsmal-form/sporsmal-form'
-import { tekstMedHtml } from '../../../utils/html-react-parser-utils'
 import { PaskeferieInfo } from '../../hjelpetekster/paaskeferie/paskeferie-info'
 import { RSSoknadstatus } from '../../../types/rs-types/rs-soknadstatus'
 import { YrkesskadeInfo } from '../../hjelpetekster/yrkesskade-info'
@@ -129,20 +126,6 @@ const JaNeiStor = ({ sporsmal }: SpmProps) => {
                         </RadioGroup>
                     )}
                 />
-
-                {sporsmal?.tag === 'UTLANDSOPPHOLD_SOKT_SYKEPENGER' && watchJaNei && (
-                    <BodyLong spacing className="utland_infotekst">
-                        {tekstMedHtml(
-                            getLedetekst(
-                                tekst(
-                                    ('soknad.infotekst.utlandsopphold_sokt_sykepenger.' +
-                                        watchJaNei?.toLowerCase()) as any,
-                                ),
-                                { '%URL%': utlandssoknadUrl },
-                            ),
-                        )}
-                    </BodyLong>
-                )}
 
                 {sporsmal.tag === 'FRAVAR_FOR_SYKMELDINGEN_V2' && watchJaNei === 'JA' && (
                     <Alert variant="info" className="mt-8">

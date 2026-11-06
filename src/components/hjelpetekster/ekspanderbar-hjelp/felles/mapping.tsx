@@ -20,7 +20,6 @@ export const fellesMapping = (): Record<string, ReadmoreTittelOgKomponent> => ({
     YRKESSKADE_V2: { tittel: yrkesskadeTittel, komponent: <YrkesskadeHjelpBody /> },
     FERIE_V2: { tittel: ferieTittel, komponent: <FerieHjelpBody /> },
     ANDRE_INNTEKTSKILDER_V2: { tittel: andreInntektskilderTittel, komponent: <AndreInntektskilderHjelpBody /> },
-    UTLAND_V2: { tittel: utlandTittel, komponent: <UtlandHjelpBody medNei={true} /> },
     OPPHOLD_UTENFOR_EOS: { tittel: utlandTittel, komponent: <UtlandHjelpBody medNei={true} /> },
     FTA_REISE_TIL_UTLANDET: { tittel: utlandTittel, komponent: <UtlandHjelpBody medNei={false} /> },
     PERMITTERT_NAA: { tittel: permittertNaaTittel, komponent: <PermittertNaaHjelpBody /> },

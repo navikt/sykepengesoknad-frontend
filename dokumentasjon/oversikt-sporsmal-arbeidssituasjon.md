@@ -46,7 +46,7 @@ flowchart TB
 
 Disse håndteres fortsatt i prosessering/mapping/mutering for eldre søknader:
 
-1. `FERIE`, `FERIE_NAR`, `PERMISJON`, `PERMISJON_NAR`, `UTLAND`, `UTLAND_NAR` (eldre V1-varianter, erstattet av V2-tagene i nye søknader).
+1. `FERIE`, `PERMISJON`, `PERMISJON_NAR` (eldre V1-varianter, erstattet av V2-tagene i nye søknader).
 2. `FRAVAR_FOR_SYKMELDINGEN`, `FRAVAR_FOR_SYKMELDINGEN_NAR` (eldre variant, erstattet av `FRAVAR_FOR_SYKMELDINGEN_V2`).
 3. `YRKESSKADE` (eldre variant, nye søknader bruker `YRKESSKADE_V2`).
 4. Eldre næringsdrivende-tagserie `INNTEKTSOPPLYSNINGER_*` (eksisterende søknader støttes fortsatt, og gamle spørsmål kan muteres over til nyere tagger).

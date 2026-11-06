@@ -356,7 +356,6 @@ export async function mockApi(req: NextApiRequest, res: NextApiResponse) {
                             const tagsSomForsvinner = [
                                 'FERIE_V2',
                                 'PERMISJON_V2',
-                                'UTLAND_V2',
                                 'OPPHOLD_UTENFOR_EOS',
                                 'JOBBET_DU_GRADERT',
                                 'JOBBET_DU_100_PROSENT',
