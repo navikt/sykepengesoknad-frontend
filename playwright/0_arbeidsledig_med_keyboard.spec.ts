@@ -26,7 +26,7 @@ test.describe('Arbeidsledigsøknad med tastaturnavigasjon', () => {
         await expect(page).toHaveURL(new RegExp(`${soknad.id}/1`))
         await tabUntilFocusedContainsText(browserName, page, 'Hvordan behandler vi personopplysninger')
         await page.keyboard.press('Space')
-        await harSynligTekst(page, 'Les mer om hvordan NAV behandler personopplysningene dine')
+        await harSynligTekst(page, 'Les mer om hvordan Nav behandler personopplysningene dine')
         await tabUntilFocusedContainsText(browserName, page, 'Vi lagrer svarene underveis')
         await page.keyboard.press('Space')
         await expect(

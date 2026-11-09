@@ -11,7 +11,7 @@ export const IntroAccordion = () => {
                 <Accordion.Content>
                     <LenkeMedIkon
                         href="https://www.nav.no/sykepenger-og-personopplysninger"
-                        text="Les mer om hvordan NAV behandler personopplysningene dine"
+                        text="Les mer om hvordan Nav behandler personopplysningene dine"
                     />
                 </Accordion.Content>
             </Accordion.Item>

@@ -7,7 +7,7 @@ export const ProsentenLavereHjelpBody = () => {
         <>
             <BodyShort spacing>
                 Grunnen kan være at helligdager eller røde dager som havner på mandag-fredag regnes som sykepengedager
-                hos NAV. Derfor fordeles timene dine også på disse dagene selv om du hadde fri.
+                hos Nav. Derfor fordeles timene dine også på disse dagene selv om du hadde fri.
             </BodyShort>
             <BodyShort spacing>
                 Hvis du har fylt inn riktig antall timer, og likevel får beskjed om at timene utgjør mindre enn

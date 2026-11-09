@@ -259,7 +259,7 @@ const SporsmalTekster = {
     'soknad.feilmelding.AVKLART_MED_SYKMELDER':
         'Du må svare på om utenlandsoppholdet er avklart med den som sykmeldte deg',
     'soknad.feilmelding.AVKLART_MED_ARBEIDSGIVER_ELLER_NAV':
-        'Du må svare på om utenlandsoppholdet er avklart med arbeidsgiver eller NAV',
+        'Du må svare på om utenlandsoppholdet er avklart med arbeidsgiver eller Nav',
 
     'sykepengesoknad.fta_jobbsituasjonen_din.tittel': 'Jobbsituasjonen din',
     'sykepengesoknad.fta_inntekt_underveis.tittel': 'Inntekt underveis',

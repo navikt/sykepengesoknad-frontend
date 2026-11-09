@@ -4,7 +4,7 @@ const OmSykepengerTekster = {
         'Den siste dagen i sykmeldingsperioden får du en melding. Da er søknaden om sykepenger klar, og du kan fylle den ut.',
     'om.sykepenger.hvorfor': 'Hvorfor må jeg søke om sykepenger?',
     'om.sykepenger.tekst3':
-        'I søknaden svarer du på noen spørsmål om hva som skjedde de dagene du var sykmeldt. Vi bruker svarene til å avgjøre hva du har krav på, og om det er NAV eller arbeidsgiveren din som skal betale. Disse opplysningene får vi foreløpig ikke innhentet automatisk.',
+        'I søknaden svarer du på noen spørsmål om hva som skjedde de dagene du var sykmeldt. Vi bruker svarene til å avgjøre hva du har krav på, og om det er Nav eller arbeidsgiveren din som skal betale. Disse opplysningene får vi foreløpig ikke innhentet automatisk.',
     'om.sykepenger.tittel2': 'Skal du ut og reise?',
     'om.sykepenger.lenke1': 'Les om hva du må gjøre for å beholde sykepengene.',
     'om.sykepenger.lenke1.url': 'https://www.nav.no/sykepenger#utland',

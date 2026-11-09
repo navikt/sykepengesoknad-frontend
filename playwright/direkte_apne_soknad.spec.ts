@@ -22,7 +22,7 @@ test.describe('Tester å åpne søknaden direkte fra sykefravaer', () => {
                 new RegExp(`/syk/sykepengesoknad/kvittering/${sendtArbeidsledig.id}\\?testperson=integrasjon-soknader`),
             )
             await harSynligTittel(page, 'Søknad om sykepenger', 1)
-            await harSynligTekst(page, 'NAV behandler søknaden din')
+            await harSynligTekst(page, 'Nav behandler søknaden din')
         })
 
         await test.step('Forsøker å åpne en spesifikk side i sendt søknad', async () => {
@@ -31,7 +31,7 @@ test.describe('Tester å åpne søknaden direkte fra sykefravaer', () => {
                 new RegExp(`/syk/sykepengesoknad/kvittering/${sendtArbeidsledig.id}\\?testperson=integrasjon-soknader`),
             )
             await harSynligTittel(page, 'Søknad om sykepenger', 1)
-            await harSynligTekst(page, 'NAV behandler søknaden din')
+            await harSynligTekst(page, 'Nav behandler søknaden din')
         })
     })
 

@@ -6,7 +6,7 @@ export const TilbakeIArbeidHjelpBody = () => {
     return (
         <>
             <BodyShort spacing>
-                Du kan begynne å jobbe fullt igjen før sykmeldingen er slutt. NAV trenger opplysninger om du var tilbake
+                Du kan begynne å jobbe fullt igjen før sykmeldingen er slutt. Nav trenger opplysninger om du var tilbake
                 i fullt arbeid for å beregne hvor mye du skal få utbetalt i sykepenger.
             </BodyShort>
             <BodyShort spacing>

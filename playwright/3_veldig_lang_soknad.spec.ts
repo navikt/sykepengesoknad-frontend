@@ -259,7 +259,7 @@ test.describe('Tester støtte for gamle spørsmål', () => {
     test('Side 28 - UTDANNING', async ({ page }) => {
         await page.goto(`/syk/sykepengesoknad/soknader/${soknad.id}/28?testperson=integrasjon-soknader`)
         await apneReadmore(page, 'Sykepenger under utdanning', [
-            'I noen tilfeller kan du ha rett til sykepenger fra NAV mens du studerer',
+            'I noen tilfeller kan du ha rett til sykepenger fra Nav mens du studerer',
             'Les om hvilken type utdanning det gjelder',
         ])
 
@@ -512,7 +512,7 @@ test.describe('Tester støtte for gamle spørsmål', () => {
             await harSynligTekst(page, 'Hva skjer videre?')
             await harSynligTekst(page, 'Nav ber arbeidsgiveren din om inntektsmelding')
             await harSynligTekst(page, 'For å behandle søknaden trenger vi en inntektsmelding fra arbeidsgiveren din')
-            await harSynligTekst(page, 'NAV behandler søknaden')
+            await harSynligTekst(page, 'Nav behandler søknaden')
             await harSynligTekst(page, 'Når blir pengene utbetalt')
         })
     })

@@ -31,7 +31,7 @@ Krever browsere installert. Kjør: `npx playwright install`
 | Åpne/lukke "For selvstendig næringsdrivende og frilansere" |            |             |               |              |   x   |              |       x       |
 | Åpne/lukke "Opplysninger fra sykmeldingen"                 |            |             |               |      x       |       |              |       x       |
 | Åpne hjelpetekst i alle spørsmål untatt noen få            |            |             |               |      x       |       |              |       x       |
-| Åpne/lukke "Slik behandler NAV personopplysningene dine"   |            |      x      |               |              |   x   |              |       x       |
+| Åpne/lukke "Slik behandler Nav personopplysningene dine"   |            |      x      |               |              |   x   |              |       x       |
 | Åpne/lukke "Avslutt og fortsett senere"               |            |      x      |               |              |       |              |       x       |
 | Åpne/lukke "Jeg vil slette denne søknaden"         |            |      x      |               |              |       |              |       x       |
 | Åpne/lukke "Jeg vil endre svarene i søknaden"              |            |             |               |              |   x   |              |               |
@@ -53,6 +53,6 @@ Krever browsere installert. Kjør: `npx playwright install`
 
 Spørsmål knyttet til koden eller prosjektet kan stilles til flex@nav.no
 
-## For NAV-ansatte
+## For Nav-ansatte
 
 Interne henvendelser kan sendes via Slack i kanalen #flex.

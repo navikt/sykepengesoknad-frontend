@@ -14,7 +14,7 @@ const OpplysningerTekster = {
     'sykepengesoknad.avbrutt.informasjon-innhold-1':
         'Du har fjernet søknaden, som betyr at du ikke vil få sykepenger basert på denne søknaden.',
     'sykepengesoknad.avbrutt.informasjon-innhold-2':
-        'For å få sykepenger fra NAV, må du søke. Så hvis du ikke har sendt inn søknad som gjelder samme periode og samme arbeidsgiver på papir, vil du ikke få sykepenger fra NAV for denne perioden.',
+        'For å få sykepenger fra Nav, må du søke. Så hvis du ikke har sendt inn søknad som gjelder samme periode og samme arbeidsgiver på papir, vil du ikke få sykepenger fra Nav for denne perioden.',
     'sykepengesoknad.avbrutt.informasjon-innhold-3':
         'Hvis du er sykmeldt fra flere arbeidsgivere, må du sende én søknad for hver arbeidsgiver.',
     'sykepengesoknad.avbrutt.informasjon-innhold-4':

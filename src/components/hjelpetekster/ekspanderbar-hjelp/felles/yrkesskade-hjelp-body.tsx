@@ -21,7 +21,7 @@ export const DeprecatedYrkesskadeHjelpBody = () => {
             <BodyShort spacing>
                 Svar ja, hvis du er sykmeldt på grunn av en godkjent yrkesskade eller yrkessykdom.
             </BodyShort>
-            <BodyShort spacing>Svar ja, hvis det er påbegynt eller sendt inn en skademelding til NAV.</BodyShort>
+            <BodyShort spacing>Svar ja, hvis det er påbegynt eller sendt inn en skademelding til Nav.</BodyShort>
             <LenkeMedIkon
                 href="https://www.nav.no/yrkesskade"
                 text="Du kan lese mer om yrkesskade og sykepenger her."

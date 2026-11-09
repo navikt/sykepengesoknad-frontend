@@ -18,7 +18,7 @@ test.describe('Teste gradert reisetilskudd med ReadMore-hjelpetekster', () => {
 
             await apneReadmore(page, 'Spørsmålet forklart', [
                 'Du kan begynne å jobbe fullt igjen før sykmeldingen er slutt.',
-                'NAV trenger opplysninger om du var tilbake i fullt arbeid',
+                'Nav trenger opplysninger om du var tilbake i fullt arbeid',
                 'Svar ja, hvis du var fullt tilbake på jobb i løpet av perioden',
                 'Svar nei, dersom du kun var delvis tilbake på jobb',
             ])

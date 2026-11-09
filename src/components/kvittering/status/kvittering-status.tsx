@@ -7,7 +7,7 @@ import { tilLesbarDatoOgTid } from '../../../utils/dato-utils'
 import { useSoknadMedDetaljer } from '../../../hooks/useSoknadMedDetaljer'
 
 export enum Mottaker {
-    NAV = 'NAV',
+    NAV = 'Nav',
     ARBEIDSGIVER = 'ARBEIDSGIVER',
 }
 

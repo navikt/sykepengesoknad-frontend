@@ -60,7 +60,7 @@ async function sjekkIntroside(page: Page) {
     const sykepengerLink = page.getByRole('link', { name: 'nav.no/sykepenger' })
     await expect(sykepengerLink).toHaveAttribute('href', 'https://www.nav.no/sykepenger')
     await harSynligTekst(page, 'Før du søker')
-    await expect(page.getByRole('link', { name: 'Meld fra til NAV her' })).toHaveAttribute(
+    await expect(page.getByRole('link', { name: 'Meld fra til Nav her' })).toHaveAttribute(
         'href',
         'https://innboks.nav.no/s/beskjed-til-oss?category=Beskjed-sykepenger',
     )
@@ -70,7 +70,7 @@ async function sjekkIntroside(page: Page) {
     )
     await page.getByText('Hvordan behandler vi personopplysninger').click()
     await expect(
-        page.getByRole('link', { name: 'Les mer om hvordan NAV behandler personopplysningene dine' }),
+        page.getByRole('link', { name: 'Les mer om hvordan Nav behandler personopplysningene dine' }),
     ).toHaveAttribute('href', 'https://www.nav.no/sykepenger-og-personopplysninger')
     await page.getByText('Vi lagrer svarene underveis').click()
     await expect(
@@ -191,7 +191,7 @@ test.describe('Tester behandlingsdagersøknad', () => {
             ).toBeVisible()
 
             await harSynligTittel(page, 'Oppsummering fra søknaden', 2, true)
-            await sporsmalOgSvar(page, 'Søknaden sendes til', 'NAV')
+            await sporsmalOgSvar(page, 'Søknaden sendes til', 'Nav')
             await sporsmalOgSvar(page, '1. – 3. april', 'Ikke til behandling')
             await sporsmalOgSvar(page, '6. – 10. april', '10. april')
             await sporsmalOgSvar(page, '13. – 17. april', '15. april')

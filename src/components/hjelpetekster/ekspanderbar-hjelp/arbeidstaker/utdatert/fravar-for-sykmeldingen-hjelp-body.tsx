@@ -11,7 +11,7 @@ export const FravarForSykmeldingenHjelpBody = () => {
             </BodyShort>
 
             <BodyShort>
-                NAV trenger å vite om du var syk og borte fra jobb med egenmelding noen av disse dagene før du ble
+                Nav trenger å vite om du var syk og borte fra jobb med egenmelding noen av disse dagene før du ble
                 sykmeldt for å beregne riktig utbetaling av sykepenger.
             </BodyShort>
         </>

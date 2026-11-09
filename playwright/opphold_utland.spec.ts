@@ -160,7 +160,7 @@ test.describe('Tester søknad om å beholde sykepenger utenfor EØS', () => {
             page.getByText('Du må svare på om utenlandsoppholdet er avklart med den som sykmeldte deg'),
         ).toBeVisible()
         await expect(
-            page.getByText('Du må svare på om utenlandsoppholdet er avklart med arbeidsgiver eller NAV'),
+            page.getByText('Du må svare på om utenlandsoppholdet er avklart med arbeidsgiver eller Nav'),
         ).toBeVisible()
 
         await validerAxeUtilityWrapper(page, test.info())

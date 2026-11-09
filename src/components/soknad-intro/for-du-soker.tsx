@@ -21,10 +21,10 @@ export const ForDuSoker = () => {
                 </List.Item>
                 <List.Item>{huskAaSokeTekst}</List.Item>
                 <List.Item>
-                    <BodyShort>Husk å melde fra til NAV hvis du i sykmeldingsperioden:</BodyShort>
+                    <BodyShort>Husk å melde fra til Nav hvis du i sykmeldingsperioden:</BodyShort>
                     <List>
                         <List.Item className="mb-0! -mt-2!" icon={<StrekPunkt />}>
-                            har startet i studier som ikke er avklart med NAV
+                            har startet i studier som ikke er avklart med Nav
                         </List.Item>
                         <List.Item className="my-0!" icon={<StrekPunkt />}>
                             begynner å studere mer enn du gjorde før du ble sykmeldt
@@ -35,7 +35,7 @@ export const ForDuSoker = () => {
                         <List.Item className="-ml-3!" icon={<IngenPunkt />}>
                             <LenkeMedIkon
                                 href="https://innboks.nav.no/s/beskjed-til-oss?category=Beskjed-sykepenger"
-                                text="Meld fra til NAV her"
+                                text="Meld fra til Nav her"
                             />{' '}
                         </List.Item>
                     </List>
