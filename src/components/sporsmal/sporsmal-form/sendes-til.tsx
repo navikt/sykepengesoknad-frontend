@@ -15,10 +15,10 @@ export default function SendesTil({ soknad }: { soknad: Soknad }) {
             sendTil = [soknad.arbeidsgiver.navn]
             break
         case RSMottaker.NAV:
-            sendTil = ['NAV']
+            sendTil = ['Nav']
             break
         case RSMottaker.ARBEIDSGIVER_OG_NAV:
-            sendTil = ['NAV', soknad.arbeidsgiver.navn]
+            sendTil = ['Nav', soknad.arbeidsgiver.navn]
             break
         default:
             sendTil = []

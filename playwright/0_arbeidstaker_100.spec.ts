@@ -46,7 +46,7 @@ test.describe('Tester arbeidstakersøknad - 100%', () => {
                 ),
             ).toBeHidden()
 
-            await page.getByText('Slik behandler NAV personopplysningene dine').click()
+            await page.getByText('Slik behandler Nav personopplysningene dine').click()
 
             await page.getByRole('button', { name: 'Jeg vil slette denne søknaden' }).click()
             await page.getByRole('button', { name: 'Nei, jeg har behov for søknaden' }).click()
@@ -229,7 +229,7 @@ test.describe('Tester arbeidstakersøknad - 100%', () => {
 
             const oppsummering = page.locator('[role="region"][aria-label="Oppsummering fra søknaden"]')
 
-            await sporsmalOgSvar(oppsummering, 'Søknaden sendes til', 'NAV')
+            await sporsmalOgSvar(oppsummering, 'Søknaden sendes til', 'Nav')
             await expect(oppsummering.getByText('Posten Norge AS, Bærum', { exact: true })).toBeVisible()
 
             await sporsmalOgSvar(oppsummering, 'Oppgi arbeidsmengde i timer eller prosent:', 'Timer')

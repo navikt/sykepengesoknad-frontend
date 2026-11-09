@@ -35,7 +35,7 @@ const ArbeidstakerStatus = () => {
                 </div>
             )}
             {valgtSoknad.sendtTilNAVDato && (
-                <div aria-label="Sendt til NAV">
+                <div aria-label="Sendt til Nav">
                     <Avkrysset tekst={Mottaker.NAV} />
                     <Detail className="pl-6">{tilLesbarDatoOgTid(valgtSoknad.sendtTilNAVDato)}</Detail>
                 </div>

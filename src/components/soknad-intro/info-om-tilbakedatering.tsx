@@ -23,7 +23,7 @@ export const InfoOmTilbakedatering = () => {
             return (
                 <BodyLong>
                     Vanligvis starter sykemeldingen den dagen du besøker legen, men i ditt tilfelle har legen angitt en
-                    tidligere startdato. NAV må vurdere om det er en gyldig grunn for at sykemeldingen din starter før
+                    tidligere startdato. Nav må vurdere om det er en gyldig grunn for at sykemeldingen din starter før
                     du var i kontakt med legen, og vil ta med dette i vurderingen når de går igjennom søknaden din.
                 </BodyLong>
             )
@@ -33,7 +33,7 @@ export const InfoOmTilbakedatering = () => {
                 <>
                     <BodyLong spacing>
                         Vanligvis starter sykemeldingen den dagen du besøker legen, men i ditt tilfelle har legen angitt
-                        en tidligere startdato. NAV har kommet til at det ikke er noen gyldig grunn til at sykmeldingen
+                        en tidligere startdato. Nav har kommet til at det ikke er noen gyldig grunn til at sykmeldingen
                         startet før dere hadde kontakt.
                     </BodyLong>
                     <BodyShort spacing weight="semibold">

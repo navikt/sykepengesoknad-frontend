@@ -140,7 +140,7 @@ export const Soknaden = () => {
                     href="https://www.nav.no/sykepenger-og-personopplysninger"
                     className="-ml-5 text-left"
                 >
-                    Slik behandler NAV personopplysningene dine
+                    Slik behandler Nav personopplysningene dine
                 </Button>
             )}
             {!skalViseNyFlexjar &&

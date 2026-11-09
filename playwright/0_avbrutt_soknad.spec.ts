@@ -40,7 +40,7 @@ test.describe('Tester avbryting av søknad', () => {
             )
             await harSynligTekst(
                 page,
-                'For å få sykepenger fra NAV, må du søke. Så hvis du ikke har sendt inn søknad som gjelder samme periode og samme arbeidsgiver på papir, vil du ikke få sykepenger fra NAV for denne perioden.',
+                'For å få sykepenger fra Nav, må du søke. Så hvis du ikke har sendt inn søknad som gjelder samme periode og samme arbeidsgiver på papir, vil du ikke få sykepenger fra Nav for denne perioden.',
             )
             await harSynligTekst(
                 page,

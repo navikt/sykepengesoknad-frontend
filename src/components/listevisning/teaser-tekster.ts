@@ -1,9 +1,9 @@
 const TeaserTekster = {
     'soknad.teaser.status.AVBRUTT': 'Avbrutt av deg',
     'soknad.teaser.status.FREMTIDIG': 'Aktiveres %DATO%',
-    'soknad.teaser.status.SENDT.til-arbeidsgiver-og-nav': 'Sendt til arbeidsgiver og NAV',
+    'soknad.teaser.status.SENDT.til-arbeidsgiver-og-nav': 'Sendt til arbeidsgiver og Nav',
     'soknad.teaser.status.SENDT.til-arbeidsgiver': 'Sendt til arbeidsgiver',
-    'soknad.teaser.status.SENDT.til-nav': 'Sendt til NAV',
+    'soknad.teaser.status.SENDT.til-nav': 'Sendt til Nav',
     'soknad.teaser.status.UTGAATT': 'Utgått',
     'soknad.teaser.delvis-utfylt.tekst': 'Påbegynt av deg',
     'soknad.teaser.utkast-korrigering.tekst': 'Utkast til endring',

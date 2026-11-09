@@ -30,8 +30,8 @@ const UtgaattSoknaderTeaser = ({ soknad }: SykepengesoknadTeaserProps) => {
                         Du får ikke åpnet denne søknaden fordi den ikke ble sendt innen fristen.
                     </BodyShort>
                     <BodyShort spacing>
-                        Det kan gjøres unntak fra fristen dersom du ikke har vært i stand til å søke, eller dersom NAV
-                        har gitt misvisende opplysninger. Hvis du mener dette gjelder deg, ber vi deg kontakte NAV.
+                        Det kan gjøres unntak fra fristen dersom du ikke har vært i stand til å søke, eller dersom Nav
+                        har gitt misvisende opplysninger. Hvis du mener dette gjelder deg, ber vi deg kontakte Nav.
                     </BodyShort>
                 </Modal.Body>
                 <ModalFooterMedLukk setOpen={setAapen} />

@@ -149,7 +149,7 @@ test.describe('Tester arbeidsledigsøknad', () => {
             await expect(page).toHaveURL(new RegExp(`/kvittering/${arbeidsledig.id}`))
             await harSynligTittel(page, 'Søknaden er sendt', 2)
             await harSynligTittel(page, 'Hva skjer videre?', 2, true)
-            await harSynligTittel(page, 'NAV behandler søknaden din', 3)
+            await harSynligTittel(page, 'Nav behandler søknaden din', 3)
             await harSynligTittel(page, 'Når blir pengene utbetalt?', 3)
             await harSynligTittel(page, 'Kontonummer for utbetaling', 2)
             await validerAxeUtilityWrapper(page, test.info())

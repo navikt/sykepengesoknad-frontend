@@ -36,7 +36,7 @@ test.describe('Sjekker at søknader med gammel oppsummering ser ok ut', () => {
                 page.getByText('Det du fyller ut brukes til å vurdere om du har rett til sykepenger'),
             ).toBeHidden()
 
-            await page.getByText('Slik behandler NAV personopplysningene dine').click()
+            await page.getByText('Slik behandler Nav personopplysningene dine').click()
 
             await page
                 .getByRole('button', {
@@ -203,7 +203,7 @@ test.describe('Sjekker at søknader med gammel oppsummering ser ok ut', () => {
             ).toBeVisible()
 
             const oppsummering = page.locator('[role="region"][aria-label="Oppsummering fra søknaden"]')
-            await sporsmalOgSvar(oppsummering, 'Søknaden sendes til', 'NAV')
+            await sporsmalOgSvar(oppsummering, 'Søknaden sendes til', 'Nav')
             await expect(oppsummering).toContainText('Posten Norge AS, Bærum')
 
             await sporsmalOgSvar(oppsummering, 'Oppgi arbeidsmengde i timer eller prosent:', 'Timer')
@@ -231,7 +231,7 @@ test.describe('Sjekker at søknader med gammel oppsummering ser ok ut', () => {
             await expect(page.getByRole('button', { name: 'Gå videre' })).toBeVisible()
             await page.getByRole('button', { name: 'Gå videre' }).click()
 
-            await page.getByText('Søknaden sendes til NAV').isVisible()
+            await page.getByText('Søknaden sendes til Nav').isVisible()
             await page.getByRole('link', { name: 'Endre svar' }).click()
 
             await (await harSynligTittel(page, 'Tilbake i fullt arbeid', 2)).click()

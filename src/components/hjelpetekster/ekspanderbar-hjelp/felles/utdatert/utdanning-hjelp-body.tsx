@@ -6,7 +6,7 @@ export const UtdanningHjelpBody = () => {
     return (
         <>
             <BodyShort spacing>
-                I noen tilfeller kan du ha rett til sykepenger fra NAV mens du studerer.{' '}
+                I noen tilfeller kan du ha rett til sykepenger fra Nav mens du studerer.{' '}
                 <a target="_blank" href="https://www.nav.no/sykepenger#situasjoner">
                     Les om hvilken type utdanning det gjelder.
                 </a>
