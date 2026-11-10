@@ -470,38 +470,30 @@ test.describe('Tester støtte for gamle spørsmål', () => {
         await klikkGaVidere(page)
     })
 
-    test('Side 52 - Fravær før sykmeldingen', async ({ page }) => {
+    test('Side 52 - FISKER_LOTT_OPPRETTHOLDT_INNTEKT', async ({ page }) => {
         await page.goto(`/syk/sykepengesoknad/soknader/${soknad.id}/52?testperson=integrasjon-soknader`)
-        await harSynligTittel(page, 'Fravær før du ble sykmeldt', 2)
         await svarNeiHovedsporsmal(page)
 
         await klikkGaVidere(page)
     })
 
-    test('Side 53 - FISKER_LOTT_OPPRETTHOLDT_INNTEKT', async ({ page }) => {
+    test('Side 53 - FISKER_LOTT_OPPRETTHOLDT_INNTEKT_GRADERT', async ({ page }) => {
         await page.goto(`/syk/sykepengesoknad/soknader/${soknad.id}/53?testperson=integrasjon-soknader`)
         await svarNeiHovedsporsmal(page)
 
         await klikkGaVidere(page)
     })
 
-    test('Side 54 - FISKER_LOTT_OPPRETTHOLDT_INNTEKT_GRADERT', async ({ page }) => {
+    test('Side 54 - FLERE_INNTEKTSKILDER_GHOST', async ({ page }) => {
         await page.goto(`/syk/sykepengesoknad/soknader/${soknad.id}/54?testperson=integrasjon-soknader`)
-        await svarNeiHovedsporsmal(page)
-
-        await klikkGaVidere(page)
-    })
-
-    test('Side 55 - FLERE_INNTEKTSKILDER_GHOST', async ({ page }) => {
-        await page.goto(`/syk/sykepengesoknad/soknader/${soknad.id}/55?testperson=integrasjon-soknader`)
         await svarJaHovedsporsmal(page)
         await velgCheckbox(page, 'Blomsterbutikken AS')
         await svarRadio(page, 'Har du annen inntekt eller oppdrag?', 'NEI')
         await klikkGaVidere(page)
     })
 
-    test('Side 56 - Oppsummering, innnsedig og kvittering', async ({ page }) => {
-        await page.goto(`/syk/sykepengesoknad/soknader/${soknad.id}/56?testperson=integrasjon-soknader`)
+    test('Side 55 - Oppsummering, innnsedig og kvittering', async ({ page }) => {
+        await page.goto(`/syk/sykepengesoknad/soknader/${soknad.id}/55?testperson=integrasjon-soknader`)
         await harSynligTittel(page, 'Oppsummering', 1)
         await validerAxeUtilityWrapper(page, test.info())
 

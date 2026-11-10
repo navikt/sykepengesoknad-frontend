@@ -11,10 +11,6 @@ import {
 } from './utdatert/fravar-for-sykmeldingen-hjelp-body'
 import { KjenteInntektkilderHjelpBody, kjenteInntektkilderTittel } from './utdatert/kjente-inntektkilder-hjelp-body'
 import { TilkommenInntektHjelpBody, tilkommenInntektTittel } from './tilkommen-inntekt-hjelp-body'
-import {
-    FravarForSykmeldingenV2HjelpBody,
-    fravarForSykmeldingenV2Tittel,
-} from './fravar-for-sykmeldingen-v2-hjelp-body'
 import { ProsentenLavereHjelpBody, prosentenLavereTittel } from './prosenten-lavere-hjelp-body'
 
 export const arbeidstakerMapping = (): Record<string, ReadmoreTittelOgKomponent> => ({
@@ -31,10 +27,6 @@ export const arbeidstakerMapping = (): Record<string, ReadmoreTittelOgKomponent>
     FRAVAR_FOR_SYKMELDINGEN: {
         tittel: fravarForSykmeldingenTittel,
         komponent: <FravarForSykmeldingenHjelpBody />,
-    },
-    FRAVAR_FOR_SYKMELDINGEN_V2: {
-        tittel: fravarForSykmeldingenV2Tittel,
-        komponent: <FravarForSykmeldingenV2HjelpBody />,
     },
     KJENTE_INNTEKTSKILDER: { tittel: kjenteInntektkilderTittel, komponent: <KjenteInntektkilderHjelpBody /> },
     NYTT_ARBEIDSFORHOLD_UNDERVEIS: { tittel: tilkommenInntektTittel, komponent: <TilkommenInntektHjelpBody /> },

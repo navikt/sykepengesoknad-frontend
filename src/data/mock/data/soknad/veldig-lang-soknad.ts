@@ -31,7 +31,7 @@ import { arbeidUnderveis100Prosent } from '../sporsmal/arbeid-underveis-100-pros
 import { arbeidUtenforNorge } from '../sporsmal/arbeid-utenfor-norge'
 import { arbeidsgiverUtland } from '../sporsmal/arbeidsgiver-utland'
 import { egenmeldinger } from '../sporsmal/egenmeldinger'
-import { fravarForSykmeldingen, fravarForSykmeldingenV2 } from '../sporsmal/fravar-for-sykmeldingen'
+import { fravarForSykmeldingen } from '../sporsmal/fravar-for-sykmeldingen'
 import { enkeltstaendeBehandlingsdager } from '../sporsmal/enkeltstaende-behandlingsdager'
 import { ferieV2 } from '../sporsmal/ferie-v2'
 import { fravarForBehandling } from '../sporsmal/fravar-for-behandling'
@@ -225,7 +225,6 @@ export const veldigLangSoknad: RSSoknad = {
             fom: '2025-04-15',
             tom: '2025-04-28',
         }),
-        fravarForSykmeldingenV2({ fom }),
         fiskerLottOpprettholdtInntekt(),
         fiskerLottOpprettholdtInntektGradert(),
         flereInntektskilderGhost(),

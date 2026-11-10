@@ -45,16 +45,3 @@ export const fravarForSykmeldingen = ({
         },
     ],
 })
-
-export const fravarForSykmeldingenV2 = ({ fom, svar = [] }: Pick<FravarValg, 'fom' | 'svar'>): RSSporsmal => ({
-    id: '687452',
-    tag: 'FRAVAR_FOR_SYKMELDINGEN_V2',
-    sporsmalstekst: `Var du borte fra jobb i fire uker eller mer rett før du ble sykmeldt ${formatterDato(fom)}?`,
-    undertekst: 'Gjelder sammenhengende fravær gjennom alle fire ukene.',
-    svartype: 'JA_NEI',
-    min: null,
-    max: null,
-    kriterieForVisningAvUndersporsmal: null,
-    svar,
-    undersporsmal: [],
-})
