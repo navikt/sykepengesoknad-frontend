@@ -252,7 +252,8 @@ const SporsmalTekster = {
     'soknad.feilmelding.KJENTE_INNTEKTSKILDER_DATO_SLUTTET': 'Du må oppgi når du sluttet',
 
     'soknad.feilmelding.NYTT_ARBEIDSFORHOLD_UNDERVEIS': 'Du må svare på om du har startet å jobbe',
-    'soknad.feilmelding.NYTT_ARBEIDSFORHOLD_UNDERVEIS_BRUTTO': 'Du må oppgi hvor mye du har tjent',
+    'soknad.feilmelding.NYTT_ARBEIDSFORHOLD_UNDERVEIS_BRUTTO':
+        'Oppgi hva du har tjent eller skal tjene. Beløpet kan ikke være 0 kroner.',
 
     'soknad.feilmelding.AVKLARING_I_FORBINDELSE_MED_REISE': '',
     'soknad.feilmelding.AVKLART_MED_SYKMELDER':

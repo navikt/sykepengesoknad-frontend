@@ -36,7 +36,7 @@ export const nyttArbeidsforholdSporsmal = ({
                 undertekst:
                     'Oppgi det du har tjent før skatt. Se på lønnslippen eller kontrakten hvor mye du har tjent eller skal tjene.',
                 svartype: 'BELOP',
-                min: null,
+                min: '1',
                 max: null,
                 kriterieForVisningAvUndersporsmal: null,
                 svar: [],
