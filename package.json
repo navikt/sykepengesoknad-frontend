@@ -22,7 +22,7 @@
         "@types/smoothscroll-polyfill": "^0.3.4",
         "@unleash/nextjs": "^1.6.7",
         "classnames": "^2.5.1",
-        "cookie": "^2.0.1",
+        "cookie": "^2.0.2",
         "date-fns": "^4.4.0",
         "html-react-parser": "^6.1.9",
         "jose": "^6.2.12",
