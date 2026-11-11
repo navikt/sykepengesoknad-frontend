@@ -41,7 +41,6 @@ const SoknadenTekster = {
     'sykepengesoknad.jobbet_du_gradert.tittel': 'Arbeid mens du var syk',
     'sykepengesoknad.arbeid_underveis_gradert.tittel': 'Arbeid mens du var syk',
     'sykepengesoknad.fraver_for_behandling.tittel': 'Fravær før behandlingsdager',
-    'sykepengesoknad.fravar_for_sykmeldingen_v2.tittel': 'Fravær før du ble sykmeldt',
 
     'sykepengesoknad.jobbet_du_100_prosent.tittel': 'Arbeid mens du var syk',
     'sykepengesoknad.arbeid_underveis_100_prosent.tittel': 'Arbeid mens du var syk',

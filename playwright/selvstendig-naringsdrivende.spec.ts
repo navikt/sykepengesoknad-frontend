@@ -35,7 +35,6 @@ test.describe('Selvstendig næringsdrivende', () => {
 
     test('Rekkefølge på spørsmål i søknaden', async ({ page }) => {
         await checkViStolerPaDeg(page)
-        await neiOgVidere(page, ['Fravær før du ble sykmeldt'])
         await neiOgVidere(page, ['Tilbake i fullt arbeid'])
         await neiOgVidere(page, ['Arbeid mens du var syk'])
         await neiOgVidere(page, ['Inntekt mens du var sykmeldt'])
@@ -49,7 +48,7 @@ test.describe('Selvstendig næringsdrivende', () => {
     })
 
     test('Arbeid mens du var syk 100%', async ({ page }) => {
-        await goToPage(page, 4)
+        await goToPage(page, 3)
         await harSynligTittel(page, 'Arbeid mens du var syk', 2)
 
         await apneReadmore(page, 'Spørsmålet forklart', [
@@ -59,7 +58,7 @@ test.describe('Selvstendig næringsdrivende', () => {
     })
 
     test('Opprettholdt inntekt', async ({ page }) => {
-        await goToPage(page, 5)
+        await goToPage(page, 4)
         await harSynligTittel(page, 'Inntekt mens du var sykmeldt', 2)
 
         await apneReadmore(page, 'Spørsmålet forklart', [
@@ -92,7 +91,7 @@ test.describe('Selvstendig næringsdrivende', () => {
     })
 
     test('Opphold i utlandet', async ({ page }) => {
-        await goToPage(page, 8)
+        await goToPage(page, 7)
         await harSynligTittel(page, 'Opphold i utlandet', 2)
 
         await apneReadmore(page, 'Spørsmålet forklart', [
@@ -117,7 +116,7 @@ test.describe('Selvstendig næringsdrivende', () => {
     })
 
     test('Virksomheten din avviklet ja svar', async ({ page }) => {
-        await goToPage(page, 9)
+        await goToPage(page, 8)
         await harSynligTittel(page, 'Virksomheten din', 2)
 
         await apneReadmore(page, 'Spørsmålet forklart', [
@@ -146,7 +145,7 @@ test.describe('Selvstendig næringsdrivende', () => {
     })
 
     test('Virksomheten din avviklet nei svar', async ({ page }) => {
-        await goToPage(page, 9)
+        await goToPage(page, 8)
         await harSynligTittel(page, 'Virksomheten din', 2)
 
         await apneReadmore(page, 'Spørsmålet forklart', [
@@ -165,7 +164,7 @@ test.describe('Selvstendig næringsdrivende', () => {
     })
 
     test('Ny i arbeidslivet ja svar', async ({ page }) => {
-        await goToPage(page, 10)
+        await goToPage(page, 9)
         await harSynligTittel(page, 'Ny i arbeidslivet', 2)
 
         await apneReadmore(page, 'Spørsmålet forklart', [
@@ -192,7 +191,7 @@ test.describe('Selvstendig næringsdrivende', () => {
     })
 
     test('Ny i arbeidslivet nei svar', async ({ page }) => {
-        await goToPage(page, 10)
+        await goToPage(page, 9)
         await harSynligTittel(page, 'Ny i arbeidslivet', 2)
 
         await apneReadmore(page, 'Spørsmålet forklart', [
@@ -210,7 +209,7 @@ test.describe('Selvstendig næringsdrivende', () => {
     })
 
     test('Endringer i arbeidssituasjonen din', async ({ page }) => {
-        await goToPage(page, 11)
+        await goToPage(page, 10)
         await harSynligTittel(page, 'Endringer i arbeidsituasjonen din', 2)
 
         await apneReadmore(page, 'Spørsmålet forklart', [

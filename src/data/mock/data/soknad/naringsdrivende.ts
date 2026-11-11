@@ -2,7 +2,6 @@ import type { RSSoknad } from '../../../../types/rs-types/rs-soknad'
 import { naringsdrivende100syk } from '../sykmeldinger'
 import { ansvarserklaring } from '../sporsmal/ansvarserklaring'
 import { arbeidUnderveis100Prosent } from '../sporsmal/arbeid-underveis-100-prosent'
-import { fravarForSykmeldingenV2 } from '../sporsmal/fravar-for-sykmeldingen'
 import { naringsdrivendeOppholdIUtlandet, naringsdrivendeOpprettholdtInntekt } from '../sporsmal/naringsdrivende'
 import { oppholdUtenforEos } from '../sporsmal/opphold-utenfor-eos'
 import { oppsummering } from '../sporsmal/oppsummering'
@@ -34,7 +33,6 @@ export const naringsdrivendeSoknad: RSSoknad = {
     soknadPerioder: [{ fom, tom, grad: 100, sykmeldingstype: 'AKTIVITET_IKKE_MULIG' }],
     sporsmal: [
         ansvarserklaring(),
-        fravarForSykmeldingenV2({ fom }),
         tilbakeIArbeid({ fom, tom, tekstvariant: 'selvstendigNaeringsdrivende' }),
         arbeidUnderveis100Prosent({
             fom,

@@ -388,7 +388,7 @@ test.describe('Tidssone: aar-maaned-komp persistering', () => {
     const testperson = 'selvstendig-naringsdrivende'
 
     const velgMaanedOgNavigerTilbake = async (page: import('@playwright/test').Page) => {
-        await page.goto(`/syk/sykepengesoknad/soknader/${selvstendigId}/11?testperson=${testperson}`)
+        await page.goto(`/syk/sykepengesoknad/soknader/${selvstendigId}/10?testperson=${testperson}`)
         await page.getByRole('radio', { name: 'Ja' }).click()
         await page.getByRole('checkbox', { name: 'Jobbet mindre i en virksomhet' }).click()
         const monthInput = page.getByLabel('Når skjedde endringen?')

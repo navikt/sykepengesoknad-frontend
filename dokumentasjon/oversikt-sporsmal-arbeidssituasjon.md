@@ -20,7 +20,7 @@ flowchart TB
     FR --> FRB["Betinget<br/>ARBEID_UTENFOR_NORGE forste soknad i forlop<br/>UTENLANDSK_SYKMELDING_prefix<br/>BRUKTE_REISETILSKUDDET"]
 
     ND --> NDG["Grunn<br/>Som FRILANSER<br/>pluss NARINGSDRIVENDE_OPPRETTHOLDT_INNTEKT eller NARINGSDRIVENDE_OPPRETTHOLDT_INNTEKT_GRADERT"]
-    ND --> NDB["Forste soknad i forlop<br/>NARINGSDRIVENDE_OPPHOLD_I_UTLANDET<br/>FRAVAR_FOR_SYKMELDINGEN_V2<br/>NARINGSDRIVENDE_VIRKSOMHETEN_AVVIKLET<br/>NARINGSDRIVENDE_NY_I_ARBEIDSLIVET<br/>NARINGSDRIVENDE_VARIG_ENDRING"]
+    ND --> NDB["Forste soknad i forlop<br/>NARINGSDRIVENDE_OPPHOLD_I_UTLANDET<br/>NARINGSDRIVENDE_VIRKSOMHETEN_AVVIKLET<br/>NARINGSDRIVENDE_NY_I_ARBEIDSLIVET<br/>NARINGSDRIVENDE_VARIG_ENDRING"]
 
     AL --> ALG["Grunn<br/>ANSVARSERKLARING<br/>ANDRE_INNTEKTSKILDER<br/>FRISKMELDT og FRISKMELDT_START<br/>OPPHOLD_UTENFOR_EOS<br/>TIL_SLUTT"]
     AL --> ALB["Betinget<br/>ARBEID_UTENFOR_NORGE forste soknad i forlop<br/>YRKESSKADE_V2<br/>UTENLANDSK_SYKMELDING_prefix<br/>BRUKTE_REISETILSKUDDET"]
@@ -36,7 +36,7 @@ flowchart TB
 | `FRILANSER` | `ANSVARSERKLARING`, `TILBAKE_I_ARBEID` (+ `TILBAKE_NAR`), `ANDRE_INNTEKTSKILDER`, `OPPHOLD_UTENFOR_EOS`, `TIL_SLUTT`, arbeid-underveis-spørsmål (`ARBEID_UNDERVEIS_100_PROSENT_*` / `JOBBET_DU_GRADERT_*`). |
 | `FRILANSER` (betinget) | På første søknad i sykeforløpet: `ARBEID_UTENFOR_NORGE`. Ved behov: `UTENLANDSK_SYKMELDING_*`. For `GRADERT_REISETILSKUDD`: `BRUKTE_REISETILSKUDDET`. |
 | `NAERINGSDRIVENDE`, `FISKER`, `JORDBRUKER`, `BARNEPASSER` | Samme grunnspørsmål som `FRILANSER`, pluss `NARINGSDRIVENDE_OPPRETTHOLDT_INNTEKT` eller `NARINGSDRIVENDE_OPPRETTHOLDT_INNTEKT_GRADERT`. |
-| `NAERINGSDRIVENDE`, `FISKER`, `JORDBRUKER`, `BARNEPASSER` (første søknad i forløpet) | `NARINGSDRIVENDE_OPPHOLD_I_UTLANDET`, `FRAVAR_FOR_SYKMELDINGEN_V2`, `NARINGSDRIVENDE_VIRKSOMHETEN_AVVIKLET` (+ dato), ev. `NARINGSDRIVENDE_NY_I_ARBEIDSLIVET` (+ dato), `NARINGSDRIVENDE_VARIG_ENDRING` (+ detaljer). |
+| `NAERINGSDRIVENDE`, `FISKER`, `JORDBRUKER`, `BARNEPASSER` (første søknad i forløpet) | `NARINGSDRIVENDE_OPPHOLD_I_UTLANDET`, `NARINGSDRIVENDE_VIRKSOMHETEN_AVVIKLET` (+ dato), ev. `NARINGSDRIVENDE_NY_I_ARBEIDSLIVET` (+ dato), `NARINGSDRIVENDE_VARIG_ENDRING` (+ detaljer). |
 | `ARBEIDSLEDIG` | `ANSVARSERKLARING`, `ANDRE_INNTEKTSKILDER`, `FRISKMELDT` (+ `FRISKMELDT_START`), `OPPHOLD_UTENFOR_EOS`, `TIL_SLUTT`. |
 | `ARBEIDSLEDIG` (betinget) | På første søknad i sykeforløpet: `ARBEID_UTENFOR_NORGE`. Ved behov: `YRKESSKADE_V2`, `UTENLANDSK_SYKMELDING_*`. For `GRADERT_REISETILSKUDD`: `BRUKTE_REISETILSKUDDET`. |
 | `ANNET` | `ANSVARSERKLARING`, `ANDRE_INNTEKTSKILDER`, `FRISKMELDT` (+ `FRISKMELDT_START`), `PERMISJON_V2` (+ `PERMISJON_NAR_V2`), `OPPHOLD_UTENFOR_EOS`, `TIL_SLUTT`. |
@@ -47,7 +47,7 @@ flowchart TB
 Disse håndteres fortsatt i prosessering/mapping/mutering for eldre søknader:
 
 1. `FERIE`, `PERMISJON`, `PERMISJON_NAR` (eldre V1-varianter, erstattet av V2-tagene i nye søknader).
-2. `FRAVAR_FOR_SYKMELDINGEN`, `FRAVAR_FOR_SYKMELDINGEN_NAR` (eldre variant, erstattet av `FRAVAR_FOR_SYKMELDINGEN_V2`).
+2. `FRAVAR_FOR_SYKMELDINGEN`, `FRAVAR_FOR_SYKMELDINGEN_NAR`.
 3. `YRKESSKADE` (eldre variant, nye søknader bruker `YRKESSKADE_V2`).
 4. Eldre næringsdrivende-tagserie `INNTEKTSOPPLYSNINGER_*` (eksisterende søknader støttes fortsatt, og gamle spørsmål kan muteres over til nyere tagger).
 
@@ -79,7 +79,6 @@ Disse håndteres fortsatt i prosessering/mapping/mutering for eldre søknader:
 | `NARINGSDRIVENDE_OPPRETTHOLDT_INNTEKT` | «Hadde du inntekt i virksomheten din selv om du var 100 % sykmeldt og ikke jobbet selv?» |
 | `NARINGSDRIVENDE_OPPRETTHOLDT_INNTEKT_GRADERT` | «Hadde du inntekt i virksomheten din mens du var sykmeldt …, som ikke var et resultat av at du selv jobbet?» |
 | `NARINGSDRIVENDE_OPPHOLD_I_UTLANDET` | «Har du vært i utlandet i løpet av de siste 12 månedene før du ble sykmeldt …?» |
-| `FRAVAR_FOR_SYKMELDINGEN_V2` | «Var du borte fra jobb i fire uker eller mer rett før du ble sykmeldt …?» |
 | `NARINGSDRIVENDE_VIRKSOMHETEN_AVVIKLET` | «Avviklet du virksomheten din før du ble sykmeldt …?» |
 | `NARINGSDRIVENDE_VIRKSOMHETEN_AVVIKLET_DATO` | «Når avviklet du virksomheten din?» |
 | `NARINGSDRIVENDE_NY_I_ARBEIDSLIVET` | «Har du blitt yrkesaktiv mellom … og frem til du ble sykmeldt …?» |
