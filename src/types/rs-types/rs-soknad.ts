@@ -42,7 +42,6 @@ export interface RSSoknad {
     inntektsopplysningerInnsendingId?: string
     inntektsopplysningerInnsendingDokumenter?: string[]
     kjentOppholdstillatelse?: RSKjentOppholdstillatelse
-    julesoknad?: boolean
     friskTilArbeidVedtakId?: string
     ventetidSykmeldingUuid?: string
     ghostInntekter?: RSKjentInntektskilde[]

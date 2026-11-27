@@ -144,7 +144,6 @@ export const Soknaden = () => {
             )}
             {!skalViseNyFlexjar &&
                 (flexjarToggle.enabled ||
-                    valgtSoknad?.julesoknad ||
                     valgtSoknad?.soknadstype == RSSoknadstype.FRISKMELDT_TIL_ARBEIDSFORMIDLING ||
                     sporsmal?.tag == 'MEDLEMSKAP_OPPHOLDSTILLATELSE_V2' ||
                     sporsmal?.tag == 'NYTT_ARBEIDSFORHOLD_UNDERVEIS' ||

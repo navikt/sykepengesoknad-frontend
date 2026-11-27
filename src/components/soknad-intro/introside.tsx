@@ -2,7 +2,6 @@ import { BodyLong } from '@navikt/ds-react'
 import Alert from '../alert/Alert'
 import React from 'react'
 
-import { JulesoknadTekstIntroside } from '../julesoknad/julesoknad-infotekst'
 import { LenkeMedIkon } from '../lenke-med-ikon/LenkeMedIkon'
 import { useSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
 import { erOppdelt } from '../../utils/periode-utils'
@@ -27,8 +26,6 @@ export function Introside() {
         )
     }
 
-    const erJulesoknad = !!valgtSoknad?.julesoknad
-
     const oppdeltSoknadTekst =
         valgtSoknad && valgtSykmelding && erOppdelt(valgtSoknad, valgtSykmelding)
             ? 'Siden sykemeldingen går over 31 dager, har vi delt opp søknaden, slik at du kan søke om sykepenger før hele perioden er ferdig. På den måten slipper du å vente lenge på sykepengene dine.'
@@ -39,7 +36,6 @@ export function Introside() {
             <IntroGuide />
             <ForDuSoker />
             <IntroAccordion />
-            {erJulesoknad && <JulesoknadTekstIntroside />}
             {oppdeltSoknadTekst !== '' && (
                 <Alert variant="info" className="mb-8">
                     {oppdeltSoknadTekst}

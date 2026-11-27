@@ -126,7 +126,6 @@ export function rsToSoknad(soknad: RSSoknad): Soknad {
         soknad.inntektsopplysningerInnsendingId,
         soknad.inntektsopplysningerInnsendingDokumenter,
         kjentOppholdstillatelse,
-        soknad.julesoknad,
         soknad.friskTilArbeidVedtakId,
         soknad.ventetidSykmeldingUuid,
         soknad.ghostInntekter,

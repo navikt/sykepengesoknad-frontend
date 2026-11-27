@@ -76,10 +76,6 @@ export const FlexjarSporsmalV2 = ({ soknad, sporsmal, steg }: FlexjarSporsmalPro
         aarsak: aarsak?.toString(),
     }
 
-    if (soknad?.julesoknad) {
-        feedbackProps['julesøknad'] = true
-    }
-
     return (
         <FlexjarFelles
             feedbackId={feedbackId}
