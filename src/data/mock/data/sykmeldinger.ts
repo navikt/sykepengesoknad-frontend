@@ -1,6 +1,5 @@
 import { Sykmelding } from '../../../types/sykmelding'
 import { jsonDeepCopy } from '../../../utils/json-deep-copy'
-import { toDate } from '../../../utils/dato-utils'
 
 import { brukertestSykmelding } from './personas/brukertest'
 
@@ -1224,15 +1223,6 @@ export const sykmeldingMedEgenmeldingsdager = new Sykmelding({
     utenlandskSykmelding: null,
 })
 
-export const julesoknadSykmelding = jsonDeepCopy(arbeidstaker100Syk)
-julesoknadSykmelding.id = '61e04c94-a4be-45f5-8dbd-5c0b7a8707ea'
-julesoknadSykmelding.mottattTidspunkt = toDate('2024-11-01T12:00:00Z')!
-julesoknadSykmelding.sykmeldingsperioder.at(0)!.fom = toDate('2024-12-01')!
-julesoknadSykmelding.sykmeldingsperioder.at(0)!.tom = toDate('2024-12-31')!
-julesoknadSykmelding.sykmeldingStatus.timestamp = toDate('2024-11-30T09:00:00.123456Z')!
-julesoknadSykmelding.behandletTidspunkt = toDate('2024-11-30T00:00:00Z')!
-julesoknadSykmelding.syketilfelleStartDato = toDate('2024-12-01')!
-
 export const sykmeldinger: Sykmelding[] = [
     arbeidstaker100Syk,
     arbeidstaker50Syk,
@@ -1249,5 +1239,4 @@ export const sykmeldinger: Sykmelding[] = [
     syk7,
     syk8,
     brukertestSykmelding,
-    julesoknadSykmelding,
 ]

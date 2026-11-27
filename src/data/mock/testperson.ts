@@ -25,7 +25,6 @@ import {
     harIkkeKontonummerPerson,
     harKontonummerPerson,
     integrasjonstestPerson,
-    julesoknadPerson,
     kunUtgattSoknadPerson,
     over70,
     Persona,
@@ -93,7 +92,6 @@ type PersonaKey =
     | 'innenfor-arbeidsgiver-perioden'
     | 'gammel-oppsummering'
     | 'utgatt'
-    | 'julesoknad'
     | 'fta-to-fremtidige'
     | 'fta-en-ny'
     | 'fta-siste'
@@ -184,7 +182,6 @@ function skjultePersoner(): PersonaData {
         ['fta-en-ny']: jsonDeepCopy(friskTilArbeidPerson),
         ['fta-to-fremtidige']: jsonDeepCopy(fremtidigeFriskTilArbeidPerson),
         ['fta-siste']: jsonDeepCopy(sisteSoknadFriskTilArbeidPerson),
-        ['julesoknad']: jsonDeepCopy(julesoknadPerson),
         ['brukertest']: jsonDeepCopy(brukertestPerson),
         ['har-kontonummer']: jsonDeepCopy(harKontonummerPerson),
         ['har-ikke-kontonummer']: jsonDeepCopy(harIkkeKontonummerPerson),

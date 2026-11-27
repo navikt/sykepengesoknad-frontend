@@ -53,7 +53,7 @@ const TimerProsentAlert = ({ valgtSoknad, beregnGradNy }: TimerProsentAlertProps
 
     return (
         <div>
-            {beregnetGrad !== undefined && !(valgtSoknad.julesoknad !== undefined && valgtSoknad.julesoknad) && (
+            {beregnetGrad !== undefined && (
                 <Alert variant="info" className="mt-4">
                     <BodyShort>
                         {getLedetekst(tekst('sykepengesoknad.jobb-underveis-timer-i-prosent'), {

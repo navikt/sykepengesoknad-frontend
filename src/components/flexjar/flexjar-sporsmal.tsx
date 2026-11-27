@@ -52,9 +52,6 @@ export const FlexjarSporsmal = ({ soknad, sporsmal, steg }: FlexjarSporsmalProps
         sporsmal: sporsmal?.tag.toString(),
         ventetidsSøknad: !!soknad?.ventetidSykmeldingUuid,
     }
-    if (soknad?.julesoknad) {
-        feedbackProps['julesøknad'] = true
-    }
     return (
         <FlexjarFelles
             feedbackId={feedbackId}

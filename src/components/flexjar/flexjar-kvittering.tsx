@@ -14,9 +14,6 @@ export const FlexjarKvittering = () => {
         soknadstype: valgtSoknad?.soknadstype.toString(),
         ventetidsSøknad: !!valgtSoknad?.ventetidSykmeldingUuid,
     }
-    if (valgtSoknad?.julesoknad) {
-        feedbackProps['julesøknad'] = true
-    }
     return (
         <EmojiFlexjar
             feedbackId={feedbackId}

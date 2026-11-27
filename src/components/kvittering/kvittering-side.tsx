@@ -19,7 +19,6 @@ import { SoknadHeader } from '../soknad/soknad-header'
 import { FlexjarKvittering } from '../flexjar/flexjar-kvittering'
 import { useSoknadMedDetaljer } from '../../hooks/useSoknadMedDetaljer'
 import { useToggle } from '../../toggles/context'
-import { JulesoknadTekstKvittering } from '../julesoknad/julesoknad-infotekst'
 import { skalViseSendTilArbeidsgiver } from '../../utils/ettersending-utils'
 
 import Kvittering from './kvittering'
@@ -58,10 +57,8 @@ const KvitteringSide = () => {
 
     const gjenstaendeSoknader = hentGjenstaendeSoknader(soknader, valgtSoknad)
 
-    const erJulesoknad = !!valgtSoknad?.julesoknad
     const skalViseFlexjar =
         flexjarToggle.enabled ||
-        erJulesoknad ||
         valgtSoknad?.soknadstype == RSSoknadstype.FRISKMELDT_TIL_ARBEIDSFORMIDLING ||
         valgtSoknad?.soknadstype == RSSoknadstype.FISKERE
 
@@ -70,7 +67,6 @@ const KvitteringSide = () => {
             <SoknadHeader />
 
             <Kvittering />
-            {erJulesoknad && <JulesoknadTekstKvittering />}
             <GjenstaendeSoknader soknader={gjenstaendeSoknader} />
 
             {gjenstaendeSoknader.length === 0 && (

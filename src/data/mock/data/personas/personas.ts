@@ -12,7 +12,6 @@ import {
     arbeidstakerReisetilskuddSyk,
     frilanser100Syk,
     gradertReisetilskuddSm,
-    julesoknadSykmelding,
     syk7,
     sykmeldinger,
 } from '../sykmeldinger'
@@ -32,7 +31,6 @@ import { gradertReisetilskudd } from '../soknad/arbeidstaker-reisetilskudd-grade
 import { fremtidigSoknad } from '../soknad/arbeidstaker-fremtidig'
 import { jsonDeepCopy } from '../../../../utils/json-deep-copy'
 import { utgattSoknad } from '../soknad/arbeidstaker-utgatt'
-import arbeidstakerJulesoknad from '../soknad/arbeidstaker-julesoknad'
 import { medYrkesskadeV1Sporsmal, medYrkesskadeV2Sporsmal } from './yrkesskade'
 
 import { medNyttArbeidsforholdSporsmal } from './nytt-arbeidsforhold'
@@ -309,10 +307,4 @@ export function tilbakedateringer(): Persona {
         sykmeldinger: sykmeldinger,
         beskrivelse: 'Søknader fra tilbakedaterte sykmeldinger. En under behandling og en ikke godkjent',
     }
-}
-
-export const julesoknadPerson: Persona = {
-    soknader: [deepcopyMedNyId(arbeidstakerJulesoknad, '343a0419-5d44-4ce8-afad-015c151a2382')],
-    sykmeldinger: [julesoknadSykmelding],
-    beskrivelse: 'Testing av Julesøknad',
 }
